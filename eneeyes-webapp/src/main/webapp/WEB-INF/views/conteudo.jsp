@@ -1,0 +1,1 @@
+<div id="content" bind-unsafe-html="ajaxcontent"></div>

@@ -36,7 +36,7 @@ if(document.getElementById('frm-inscricao') != null) {
     });
 }
 
-app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin, DetalheVenda, Password) {
+app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin) {
 	$scope.$root.mensagensIntegracao = [];
 	
 	$scope.verificaMensagemIntegracao = function() {

@@ -50,6 +50,9 @@
             <input type="password" class="form-control" placeholder="Password" ng-model="forms.signin.credential">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
+          <div id="signin-error" class="alert alert-danger" style="display:none">
+				{{errorMessage | translate}}
+			</div>
           <div class="row">
             <div class="col-xs-8">
               <div class="checkbox icheck">

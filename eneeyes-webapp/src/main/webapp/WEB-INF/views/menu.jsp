@@ -2,98 +2,167 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sec:csrfMetaTags />
         <!-- MENU SECTION -->
-       <div id="left" >
-            <div class="media user-media well-small">
-                <div class="media-body">
-                    <h5 class="media-heading">Ol&aacute;, <sec:authentication property="principal.displayName" /></h5>
-                </div>
+       <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="/assets/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
-
-            <ul id="menu" class="collapse">
-                <li class="panel" ng-show="showUserMenu == false">
-                    <a href="#" ng-click="LoadAjaxContent('dashboard.html'); verificaMensagemIntegracao()">
-                        <i class="icon-dashboard"></i> Resumo
-                    </a>                   
+            <div class="pull-left info">
+              <p>Alexander Pierce</p>
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+          <!-- search form -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <li class="active treeview">
+              <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-files-o"></i>
+                <span>Layout Options</span>
+                <span class="label label-primary pull-right">4</span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
+                <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
+                <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="pages/widgets.html">
+                <i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-right bg-green">new</small>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-pie-chart"></i>
+                <span>Charts</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
+                <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
+                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
+                <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-laptop"></i>
+                <span>UI Elements</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
+                <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
+                <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
+                <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
+                <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
+                <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-edit"></i> <span>Forms</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#" ng-click="LoadAjaxContent('dashboard.html')"><i class="fa fa-circle-o"></i> General Elements</a></li>
+                <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                <li><a href="#" ng-click="LoadAjaxContent('novo_link.html')"><i class="fa fa-circle-o"></i> Editors</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-table"></i> <span>Tables</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
+                <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="pages/calendar.html">
+                <i class="fa fa-calendar"></i> <span>Calendar</span>
+                <small class="label pull-right bg-red">3</small>
+              </a>
+            </li>
+            <li>
+              <a href="pages/mailbox/mailbox.html">
+                <i class="fa fa-envelope"></i> <span>Mailbox</span>
+                <small class="label pull-right bg-yellow">12</small>
+              </a>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-folder"></i> <span>Examples</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
+                <li><a href="pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
+                <li><a href="pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
+                <li><a href="pages/examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
+                <li><a href="pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
+                <li><a href="pages/examples/404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
+                <li><a href="pages/examples/500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
+                <li><a href="pages/examples/blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-share"></i> <span>Multilevel</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                <li>
+                  <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
+                  <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                    <li>
+                      <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
+                      <ul class="treeview-menu">
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                      </ul>
+                    </li>
+                  </ul>
                 </li>
-				<li class="panel" ng-show="showUserMenu == false" ng-controller="UserTypeController">
-                    <a href="#" ng-click="LoadAjaxContent('conta-corrente.html');getListaCnpjFromUser();">
-                        <i class="icon-usd"></i> Conta Corrente
-                    </a>
-                </li>
-                <li class="panel" ng-show="showUserMenu == false">
-                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#component-nav">
-                        <i class="icon-legal"> </i> Concilia&ccedil;&atilde;o     
-                        <span class="pull-right">
-                          <i class="icon-angle-down"></i>
-                        </span>
-                    </a>
-                    <ul class="collapse" id="component-nav" ng-controller="UserTypeController">
-						<li class=""><a href="#" ng-click="LoadAjaxContent('conciliacao.html');getListaCnpjFromUser();"><i class="icon-search"></i> Pesquisa </a></li>
-						<li class=""><a href="#" ng-click="LoadAjaxContent('integracao-adquirente.html');"><i class="icon-cloud-upload"></i> Importa&ccedil;&atilde;o Adquirente </a></li>
-                    </ul>
-                </li>
-                <li class="panel" ng-show="showUserMenu == false">
-                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle collapsed" data-target="#form-nav">
-                        <i class="icon-shopping-cart"></i> Vendas
-                        <span class="pull-right">
-                            <i class="icon-angle-down"></i>
-                        </span>
-                    </a>
-                    <ul class="collapse" id="form-nav" ng-controller="UserTypeController">
-                    	<li class=""><a href="#" ng-click="LoadAjaxContent('vendas-resumo.html')"><i class="icon-bar-chart"></i> Resumo </a></li>
-                    	<li class=""><a href="#" ng-click="LoadAjaxContent('inclusao-venda.html');getListaCnpjFromUser();">
-                    		<i class="icon-plus"></i> Inclus&atilde;o manual </a>
-                    	</li>
-                        <li class=""><a href="#" ng-click="LoadAjaxContent('vendas.html');getListaCnpjFromUser()">
-                        	<i class="icon-search"></i> Pesquisa </a>
-                        </li>
-                        <li class=""><a href="#" ng-click="LoadAjaxContent('integracao-tef.html')"><i class="icon-cloud-upload"></i> Importa&ccedil;&atilde;o TEF </a></li>
-                    </ul>
-                </li>
-                <li class="panel" ng-show="showUserMenu == false" ng-controller="UserTypeController">
-                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#pagesr-nav" 
-                    	ng-click="LoadAjaxContent('pagamentos.html');getListaCnpjFromUser();">
-                        <i class="icon-money"></i> Pagamentos
-                    </a>
-                </li>
-                <li class="panel" ng-show="showUserMenu == false" ng-controller="UserTypeController">
-                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#chart-nav" ng-click="LoadAjaxContent('inconsistencia.html');getListaCnpjFromUser();">
-                        <i class="icon-warning-sign"></i> Inconsist&ecirc;ncias
-                    </a>
-                </li>
-				<li class="panel" ng-controller="UserTypeController" ng-show="userLogado.isContractor && showUserMenu == true">
-					<a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#manager-nav">
-						<i class="icon-user"></i> Usuários e Filiais
-						<span class="pull-right">
-							<i class="icon-angle-down"></i>
-						</span>
-					</a>
-					<ul class="collapse" id="manager-nav">
-						<li class=""><a href="#" ng-click="LoadAjaxContent('user-filial-pesquisa.html')"><i class="icon-search"></i> Gerenciamento e Pesquisa </a></li>
-					</ul>
-				</li>
-				<li class="panel" ng-controller="UserTypeController" ng-show="userLogado.isContractor && showUserMenu == true">
-					<a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#group-nav">
-						<i class="icon-user"></i> Grupos
-						<span class="pull-right">
-							<i class="icon-angle-down"></i>
-						</span>
-					</a>
-					<ul class="collapse" id="group-nav">
-						<li class=""><a href="#" ng-click="LoadAjaxContent('grupo-pesquisa.html')"><i class="icon-search"></i> Gerenciamento e Pesquisa </a></li>
-						<li class=""><a href="#" ng-click="LoadAjaxContent('user-filial-relacionamento.html')"><i class="icon-check"></i> Relacionamentos </a></li>
-					</ul>
-				</li>				
-				<li class="panel" ng-controller="UserTypeController" ng-show="userLogado.isContractor && showUserMenu == true">
-                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" ng-click="LoadAjaxContent('taxa-pesquisa.html');getListaCnpjFromUser();">
-                        <i class="icon-money"></i> Taxas
-                    </a>
-                </li>				
-				<li class="panel" ng-controller="UserTypeController" ng-show="userLogado.isContractor && showUserMenu == true">
-                    <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#chart-nav" ng-click="showMenuUser(false, 'dashboard.html')">
-                        <i class="icon-arrow-left"></i> Voltar
-                    </a>
-                </li>              
-            </ul>
-        </div>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+              </ul>
+            </li>
+            <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+            <li class="header">LABELS</li>
+            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
         <!--END MENU SECTION -->

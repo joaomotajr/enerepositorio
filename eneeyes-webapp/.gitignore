@@ -1,1 +1,14 @@
+.idea
+*.iml
+*.lock
+target/*
+webapps/*
+.classpath
+.project
+.settings
+.settings/*
+activemq-data/*
 /target/
+/bin
+
+hs_err_pid21144.log

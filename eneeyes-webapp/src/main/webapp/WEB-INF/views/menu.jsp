@@ -91,7 +91,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="#" ng-click="LoadAjaxContent('dashboard.html')"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
+                <li><a href="#" ng-click="LoadAjaxContent('/Contents/cadastro_equipamentos.html')"><i class="fa fa-circle-o"></i> Cadastro de Equipamentos</a></li>
                 <li><a href="#" ng-click="LoadAjaxContent('novo_link.html')"><i class="fa fa-circle-o"></i> Editors</a></li>
               </ul>
             </li>

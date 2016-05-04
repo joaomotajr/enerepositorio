@@ -7,7 +7,8 @@ insert into aln_id_role values (NULL, 'CUSTOMER', 'ACTIVE', 'CST');
 insert into aln_id_role values (NULL, 'EXPERT', 'ACTIVE', 'EXT');
 
 * INCLUIR USUARIO INICIAL
-INSERT INTO `conciliador`.`aln_id_user`(`ID_`, `ACCESS_TOKEN_`, `CREATE_DATE_`, `DISPLAYNAME_`, `EXPIRE_TIME_`, `HASH_`, `IMAGE_URL_`, `LOGIN_`, `NICKNAME_`, `PROFILE_URL_`, `PROVIDER_ID_`, `PROVIDER_USER_ID_`, `REFRESH_TOKEN_`, `SECRET_`, `STATUS_`, `CNPJ_`) VALUES (null,null,'2015-09-18','CK Medic',null,sha1('123456'),null,'user@ckmedic.com.br','CK Medic',null,null,null,null,null,'ACTIVE', '00788361000144');
+INSERT INTO `conciliador`.`aln_id_user`(`ID_`, `ACCESS_TOKEN_`, `CREATE_DATE_`, `DISPLAYNAME_`, `EXPIRE_TIME_`, `HASH_`, `IMAGE_URL_`, `LOGIN_`, `NICKNAME_`, `PROFILE_URL_`, `PROVIDER_ID_`, `PROVIDER_USER_ID_`, `REFRESH_TOKEN_`, `SECRET_`, `STATUS_`, `CNPJ_`) VALUES (null,null,'2015-09-18','CK Medic',null,sha1('123456'),null,'joaomotajunior@gmail.com','CK Medic',null,null,null,null,null,'ACTIVE', '13210102813');
+
 INSERT INTO `conciliador`.`taxa` (`CREDITO_`, `CREDITO_2_6_`, `CREDITO_7_12_`, `DT_INICIO_`, `DEBITO_`) VALUES ('4', '4.5', '4.9', '2015-11-25', '2.9');
 INSERT INTO `conciliador`.`adquirente` (`DESCRICAO_`, `TAXA_ID_`) VALUES ('Cielo', '1');
 UPDATE `conciliador`.`aln_id_user` SET `ADQUIRENTE_ID_`='1' WHERE `ID_`='1';

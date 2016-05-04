@@ -2,6 +2,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ attribute name="context" required="false" type="java.lang.String" %>
 <c:set var="context" value="${(empty context) ? 'default' : context}"/>
+
 <html lang="en" ng-app="formobili">
 	
 	<!-- HEADER - INI-->
@@ -25,14 +26,15 @@
 		        <c:if test="${context == 'authenticated'}">
 		            <jsp:include page="menu.jsp"/>
 			       	<jsp:include page="conteudo.jsp"/>
+			       	
 		        </c:if>
 	        </span>
 	        <jsp:doBody/>
 		</div>
 		
-		<jsp:include page="footer.jsp"/>
+		<jsp:include page="footer.jsp" />
         <c:if test="${context == 'authenticated'}">
-			<jsp:include page="footer-user.jsp"/>
+			<jsp:include page="footer-user.jsp" />
 		</c:if>
 
     </body>

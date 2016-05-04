@@ -5,15 +5,13 @@
     <c:set var="authenticated" value="true"/>
 </sec:authorize>
     <!-- GLOBAL SCRIPTS -->
-    <script src="/assets/js/angular.min.js"></script>
-	<script src="/assets/js/angular-route.js"></script>
-	<script src="/assets/js/angular-resource.js"></script>
-	<script src="/assets/js/angular-jquery-maskedinput.js"></script>
-	<script src="/assets/js/angular-locale_pt-br.js"></script>
-	
-	
-	<script src="/assets/js/angular-translate.min.js"></script>
-	<script src="/assets/js/angular-options-disabled.js"></script>
+    <script src="/assets/plugins/angular/angular.min.js"></script>
+	<script src="/assets/plugins/angular/angular-route.js"></script>
+	<script src="/assets/plugins/angular/angular-resource.js"></script>
+	<script src="/assets/plugins/angular/angular-jquery-maskedinput.js"></script>
+	<script src="/assets/plugins/angular/angular-locale_pt-br.js"></script>	
+	<script src="/assets/plugins/angular/angular-translate.min.js"></script>
+	<script src="/assets/plugins/angular/angular-options-disabled.js"></script>
 
     <!-- jQuery 2.1.4 -->
     <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>

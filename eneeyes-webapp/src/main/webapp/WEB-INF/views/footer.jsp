@@ -23,6 +23,8 @@
     </script>
     <!-- Bootstrap 3.3.5 -->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>
+    
     <!-- Sparkline -->
     <script src="/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
     <!-- jvectormap -->
@@ -56,4 +58,7 @@
 	<script src="/assets/js/4m-services.js"></script>
 	<script src="/assets/js/4m-site-controller.js"></script>
 	<script src="/assets/js/message-translate.js"></script>
+	<!-- 
+	<script src="/assets/js/menu-navegacao.js"></script>
+	-->
     <!-- END PAGE LEVEL SCRIPTS -->

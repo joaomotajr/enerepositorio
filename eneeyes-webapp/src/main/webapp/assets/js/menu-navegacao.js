@@ -76,7 +76,3 @@ var tree = [
 
  $('#btn-search').on('click', search);
  $('#input-search').on('keyup', search);
-
- search(null);
- 
- 

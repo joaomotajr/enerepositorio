@@ -59,5 +59,9 @@
 	<script src="/assets/js/4m-site-controller.js"></script>
 	<script src="/assets/js/message-translate.js"></script>	 
 	<script src="/assets/js/menu-navegacao.js"></script>
+	<script src="/assets/js/navegacao-controller.js"></script>
 	
+	<!-- 
+	<script src="/assets/js/menu-navegacao.js"></script>
+	-->
     <!-- END PAGE LEVEL SCRIPTS -->

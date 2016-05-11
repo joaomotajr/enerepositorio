@@ -1,8 +1,6 @@
 /**
  * 
  */
-
-
 app.controller('navegacaoController', function ($scope, $timeout, $filter) {
 		
 	$('#treeview-searchable').treeview({

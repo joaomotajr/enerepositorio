@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import br.com.eneeyes.controllers.api.dto.TipoJustificativaDto;
+import br.com.eneeyes.archetype.dto.TipoJustificativaDto;
 
 @Entity
 @Table(name="tipo_justificativa")

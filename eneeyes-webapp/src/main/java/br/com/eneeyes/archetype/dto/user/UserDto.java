@@ -1,156 +1,79 @@
-package br.com.eneeyes.archetype.model.acl;
+package br.com.eneeyes.archetype.dto.user;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Iterator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hibernate.validator.constraints.NotBlank;
+import br.com.eneeyes.archetype.model.acl.Role;
+import br.com.eneeyes.archetype.model.acl.User;
+import br.com.eneeyes.archetype.model.acl.UserStatus;
+import br.com.eneeyes.archetype.utils.MessageDigester;
 
-import br.com.eneeyes.archetype.dto.user.UserDto;
-
-@Entity
-@Table(name="aln_id_user")
-public class User implements Serializable {
-
+@XmlRootElement
+public class UserDto implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID_")
 	private Long id;
-	
-	@Column(name="CPF_")
 	private String cpf;
-	
-	@Column(name="CNPJ_")
 	private String cnpj;
-	
-	@Column(name="DISPLAYNAME_")
 	private String displayName;
-	
-	@Column(name="NICKNAME_", length=100)
 	private String nickname;
-	
-	@Column(name="FONE_")
 	private String fone;
-	
-	@Column(name="CELL_")
 	private String cell;
-	
-	@Column(name="EMAIL_")
 	private String email;
-	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="aln_id_user_roles", 
-	joinColumns= @JoinColumn(name="USER_ID_", referencedColumnName="ID_"), 
-	inverseJoinColumns= @JoinColumn(name="ROLE_ID_", referencedColumnName="ID_"))
-	private Set<Role> roles = new HashSet<Role>();
-	
-	@Column(name="LOGIN_", unique=true, nullable=false, length=100)
-	@NotBlank
+	private Long role;
 	private String login;
-	
-	@Column(name="HASH_", nullable=false, length=40)
-	@Pattern(regexp="[a-z0-9\\-]{30,40}")
 	private String hash;
-	
-	@Column(name="STATUS_", nullable=false)
-	@Enumerated(EnumType.STRING)
 	private UserStatus status;
-	
-	@Column(name="CREATE_DATE_", nullable=false)
-	@Temporal(TemporalType.TIMESTAMP)
 	private Date createDate;
-	
-	@Column(name="PROVIDER_ID_")
+	private Long filialId;
 	private String providerId;
-	
-	@Column(name="PROVIDER_USER_ID_", unique=true, length=100)
 	private String providerUserId;
-	
-	@Column(name="PROFILE_URL_")
 	private String profileUrl;
-	
-	@Column(name="IMAGE_URL_")
 	private String imageUrl;
-	
-	@Column(name="ACCESS_TOKEN_")
 	private String accessToken;
-	
-	@Column(name="SECRET_")
 	private String secret;
-	
-	@Column(name="REFRESH_TOKEN_")
 	private String refreshToken;
-	
-	@Column(name="EXPIRE_TIME_")
 	private Long expireTime;
-
-	public User() {
-		super();
-	}
 	
-	public User(String login, String hash, String nickname, UserStatus status) {
-		super();
-		this.login = login;
-		this.hash = hash;
-		this.nickname = nickname;
-		this.status = status;
-		this.createDate = new Date();
+	public UserDto() {
 	}
 
-	public User(UserDto userDto) {
-		this.id = userDto.getId();
-		this.cpf = userDto.getCpf();
-		this.cnpj = userDto.getCnpj();
-		this.displayName = userDto.getDisplayName();
-		this.nickname = userDto.getNickname();
-		this.fone = userDto.getFone();
-		this.cell = userDto.getCell();
-		this.email = userDto.getEmail();
-		this.roles = setHoles(userDto.getRole());
-		this.login = userDto.getLogin();
-		this.hash = userDto.getHash();
-		this.status = userDto.getStatus();
-		this.createDate = userDto.getCreateDate();		
-		this.providerId = userDto.getProviderId();
-		this.providerUserId = userDto.getProviderUserId();
-		this.profileUrl = userDto.getProfileUrl();
-		this.imageUrl = userDto.getImageUrl();
-		this.accessToken = userDto.getAccessToken();
-		this.secret = userDto.getSecret();
-		this.refreshToken = userDto.getRefreshToken();
-		this.expireTime = userDto.getExpireTime();
+	public UserDto(User user) {
+		this.id = user.getId();
+		this.cpf = user.getCpf();
+		this.cnpj = user.getCnpj();
+		this.displayName = user.getDisplayName();
+		this.nickname = user.getNickname();
+		this.fone = user.getFone();
+		this.cell = user.getCell();
+		this.email = user.getEmail();
+		if(user.getRoles() != null) {
+			Iterator<Role> iter = user.getRoles().iterator();
+			Role role = (Role) iter.next();
+			this.role = role.getId();
+		}
+		this.login = user.getLogin();
+		this.hash = user.getHash();
+		this.status = user.getStatus();
+		this.createDate = user.getCreateDate();
+		this.providerId = user.getProviderId();
+		this.providerUserId = user.getProviderUserId();
+		this.profileUrl = user.getProfileUrl();
+		this.imageUrl = user.getImageUrl();
+		this.accessToken = user.getAccessToken();
+		this.secret = user.getSecret();
+		this.refreshToken = user.getRefreshToken();
+		this.expireTime = user.getExpireTime();
 	}
 
-	private Set<Role> setHoles(Long roleType) {
-		Set<Role> roles = new HashSet<Role>();
-		Role role = new Role();
-		role.setId(roleType);
-		roles.add(role);
-		return roles;
-	}
-	
 	/**
 	 * @return the id
 	 */
+	@XmlElement
 	public Long getId() {
 		return id;
 	}
@@ -165,6 +88,7 @@ public class User implements Serializable {
 	/**
 	 * @return the cpf
 	 */
+	@XmlElement
 	public String getCpf() {
 		return cpf;
 	}
@@ -175,10 +99,11 @@ public class User implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
+	
 	/**
 	 * @return the cnpj
 	 */
+	@XmlElement
 	public String getCnpj() {
 		return cnpj;
 	}
@@ -189,10 +114,11 @@ public class User implements Serializable {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-
+	
 	/**
 	 * @return the displayName
 	 */
+	@XmlElement
 	public String getDisplayName() {
 		return displayName;
 	}
@@ -203,10 +129,11 @@ public class User implements Serializable {
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
-
+	
 	/**
 	 * @return the nickname
 	 */
+	@XmlElement
 	public String getNickname() {
 		return nickname;
 	}
@@ -217,10 +144,11 @@ public class User implements Serializable {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-
+	
 	/**
 	 * @return the fone
 	 */
+	@XmlElement
 	public String getFone() {
 		return fone;
 	}
@@ -235,6 +163,7 @@ public class User implements Serializable {
 	/**
 	 * @return the cell
 	 */
+	@XmlElement
 	public String getCell() {
 		return cell;
 	}
@@ -249,6 +178,7 @@ public class User implements Serializable {
 	/**
 	 * @return the email
 	 */
+	@XmlElement
 	public String getEmail() {
 		return email;
 	}
@@ -259,24 +189,26 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	/**
-	 * @return the roles
+	 * @return the role
 	 */
-	public Set<Role> getRoles() {
-		return roles;
+	@XmlElement
+	public Long getRole() {
+		return role;
 	}
 
 	/**
-	 * @param roles the roles to set
+	 * @param role the role to set
 	 */
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public void setRole(Long role) {
+		this.role = role;
 	}
-
+	
 	/**
 	 * @return the login
 	 */
+	@XmlElement
 	public String getLogin() {
 		return login;
 	}
@@ -291,6 +223,7 @@ public class User implements Serializable {
 	/**
 	 * @return the hash
 	 */
+	@XmlElement
 	public String getHash() {
 		return hash;
 	}
@@ -301,10 +234,22 @@ public class User implements Serializable {
 	public void setHash(String hash) {
 		this.hash = hash;
 	}
-
+	
+	/**
+	 * @param hash the hash to set
+	 */
+	public void setHashDigestSha1() {
+		try {
+			setHash(MessageDigester.digestSha1(getHash()));
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * @return the status
 	 */
+	@XmlElement
 	public UserStatus getStatus() {
 		return status;
 	}
@@ -315,10 +260,11 @@ public class User implements Serializable {
 	public void setStatus(UserStatus status) {
 		this.status = status;
 	}
-
+	
 	/**
 	 * @return the createDate
 	 */
+	@XmlElement
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -329,10 +275,26 @@ public class User implements Serializable {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+	
+	/**
+	 * @return the filialId
+	 */
+	@XmlElement
+	public Long getFilialId() {
+		return filialId;
+	}
 
+	/**
+	 * @param filialId the filialId to set
+	 */
+	public void setFilialId(Long filialId) {
+		this.filialId = filialId;
+	}
+	
 	/**
 	 * @return the providerId
 	 */
+	@XmlElement
 	public String getProviderId() {
 		return providerId;
 	}
@@ -347,6 +309,7 @@ public class User implements Serializable {
 	/**
 	 * @return the providerUserId
 	 */
+	@XmlElement
 	public String getProviderUserId() {
 		return providerUserId;
 	}
@@ -361,6 +324,7 @@ public class User implements Serializable {
 	/**
 	 * @return the profileUrl
 	 */
+	@XmlElement
 	public String getProfileUrl() {
 		return profileUrl;
 	}
@@ -375,6 +339,7 @@ public class User implements Serializable {
 	/**
 	 * @return the imageUrl
 	 */
+	@XmlElement
 	public String getImageUrl() {
 		return imageUrl;
 	}
@@ -389,6 +354,7 @@ public class User implements Serializable {
 	/**
 	 * @return the accessToken
 	 */
+	@XmlElement
 	public String getAccessToken() {
 		return accessToken;
 	}
@@ -403,6 +369,7 @@ public class User implements Serializable {
 	/**
 	 * @return the secret
 	 */
+	@XmlElement
 	public String getSecret() {
 		return secret;
 	}
@@ -417,6 +384,7 @@ public class User implements Serializable {
 	/**
 	 * @return the refreshToken
 	 */
+	@XmlElement
 	public String getRefreshToken() {
 		return refreshToken;
 	}
@@ -431,6 +399,7 @@ public class User implements Serializable {
 	/**
 	 * @return the expireTime
 	 */
+	@XmlElement
 	public Long getExpireTime() {
 		return expireTime;
 	}
@@ -440,13 +409,6 @@ public class User implements Serializable {
 	 */
 	public void setExpireTime(Long expireTime) {
 		this.expireTime = expireTime;
-	}
-
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", login=" + login + ", hash=" + hash
-				+ ", nickname=" + nickname + ", roles=" + roles + ", statusSendMessage="
-				+ status + ", createDate=" + createDate + "]";
 	}
 
 }

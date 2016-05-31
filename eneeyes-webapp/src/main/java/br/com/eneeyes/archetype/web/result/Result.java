@@ -4,7 +4,11 @@ package br.com.eneeyes.archetype.web.result;
  * Created by Alan on 18/05/2014.
  */
 public abstract class Result<T> extends ResultBase<T> {
-    private T value;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private T value;
 
     public T getValue() {
         return value;

@@ -21,7 +21,7 @@ import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.twitter.api.Twitter;
 
 import br.com.eneeyes.archetype.model.acl.User;
-import br.com.eneeyes.archetype.service.identity.IdentityService;
+import br.com.eneeyes.archetype.services.identity.IdentityService;
 
 @Configuration
 @PropertySource("classpath:spring/social.properties")

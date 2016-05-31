@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import br.com.eneeyes.archetype.model.acl.Role;
 import br.com.eneeyes.archetype.model.acl.User;
 import br.com.eneeyes.archetype.model.acl.UserStatus;
-import br.com.eneeyes.archetype.service.identity.IdentityService;
+import br.com.eneeyes.archetype.services.identity.IdentityService;
 import br.com.eneeyes.archetype.utils.MessageDigester;
 
 @Component

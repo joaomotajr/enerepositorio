@@ -8,7 +8,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class ResultCollection<T> extends ResultBase<T> {
-    private long page;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private long page;
 
     private long offset;
 

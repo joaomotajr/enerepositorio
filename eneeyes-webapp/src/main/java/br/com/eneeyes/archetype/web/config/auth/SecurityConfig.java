@@ -17,11 +17,11 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
+import br.com.eneeyes.archetype.filter.CsrfHeaderFilter;
 import br.com.eneeyes.archetype.web.config.EnvDevelopment;
 import br.com.eneeyes.archetype.web.config.EnvDevelopmentForward;
 import br.com.eneeyes.archetype.web.config.EnvHomologation;
 import br.com.eneeyes.archetype.web.config.EnvProduction;
-import br.com.eneeyes.controllers.filter.CsrfHeaderFilter;
 
 @Configuration
 @EnableWebSecurity

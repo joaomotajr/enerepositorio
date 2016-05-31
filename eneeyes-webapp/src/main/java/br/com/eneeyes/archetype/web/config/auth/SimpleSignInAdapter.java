@@ -33,8 +33,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import br.com.eneeyes.archetype.model.acl.Role;
 import br.com.eneeyes.archetype.model.acl.User;
 import br.com.eneeyes.archetype.model.acl.UserStatus;
-import br.com.eneeyes.archetype.model.acl.result.UserResult;
-import br.com.eneeyes.archetype.service.identity.IdentityService;
+import br.com.eneeyes.archetype.result.UserResult;
+import br.com.eneeyes.archetype.services.identity.IdentityService;
 
 public final class SimpleSignInAdapter implements SignInAdapter {
 

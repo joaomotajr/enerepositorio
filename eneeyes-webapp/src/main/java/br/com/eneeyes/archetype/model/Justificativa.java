@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.eneeyes.controllers.api.dto.JustificativaDto;
+import br.com.eneeyes.archetype.dto.JustificativaDto;
 
 @Entity
 @Table(name="justificativa")

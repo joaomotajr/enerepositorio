@@ -23,7 +23,7 @@ import org.springframework.social.connect.ConnectionKey;
 import org.springframework.social.connect.ConnectionSignUp;
 
 import br.com.eneeyes.archetype.model.acl.User;
-import br.com.eneeyes.archetype.service.identity.IdentityService;
+import br.com.eneeyes.archetype.services.identity.IdentityService;
 
 /**
  * Simple little {@link org.springframework.social.connect.ConnectionSignUp} command that allocates new userIds in memory.

@@ -1,6 +1,5 @@
 package br.com.eneeyes.archetype.web;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.eneeyes.archetype.model.acl.Role;
@@ -25,10 +23,7 @@ public class SecurityController {
 
     Log log = LogFactory.getLog(getClass());
 
-    @Inject
-    private RestTemplate restTemplate;
-
-	private boolean hasRole(String roleName) {
+    private boolean hasRole(String roleName) {
 		boolean hasRole = false;
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		for(Role role : user.getRoles()) {

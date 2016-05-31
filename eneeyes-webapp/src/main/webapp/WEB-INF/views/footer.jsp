@@ -47,17 +47,30 @@
     <script src="/assets/js/app.min.js"></script>
     <!-- iCheck -->
     <script src="/assets/plugins/iCheck/icheck.min.js"></script>
-
     <!-- END GLOBAL SCRIPTS -->
 
-    <!-- PAGE LEVEL SCRIPTS -->
-    
+    <!-- PAGE LEVEL SCRIPTS -->    
     <script src="/assets/js/4m.js"></script>
 	<script src="/assets/js/4m-translate.js"></script>
 	<script src="/assets/js/4m-filters.js"></script>
 	<script src="/assets/js/4m-services.js"></script>
 	<script src="/assets/js/4m-site-controller.js"></script>
-	<script src="/assets/js/message-translate.js"></script>
+	<script src="/assets/js/message-translate.js"></script>	 
+	<script src="/assets/js/menu-navegacao.js"></script>
+	<script src="/assets/js/navegacao-controller.js"></script>
+		
+	<!-- 
+	<script src="/assets/js/menu-navegacao.js"></script>
+	-->
+	<!-- 
+	<script src="/assets/js/menu-navegacao.js"></script>
+	-->
+	<!-- 
+	<script src="/assets/js/menu-navegacao.js"></script>
+	-->
+	<!-- 
+	<script src="/assets/js/menu-navegacao.js"></script>
+	-->
 	<!-- 
 	<script src="/assets/js/menu-navegacao.js"></script>
 	-->

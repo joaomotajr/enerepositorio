@@ -11,7 +11,7 @@
            -->          
         </section>
 
-        <!-- Main content -->
+        <!-- Main content - Modificado -->
         <section class="content" style="padding: 0px;">
           <div class="row">
             <div class="col-md-12">           

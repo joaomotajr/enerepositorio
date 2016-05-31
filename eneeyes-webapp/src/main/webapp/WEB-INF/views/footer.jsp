@@ -4,7 +4,7 @@
 <sec:authorize access="hasRole('CST')">
     <c:set var="authenticated" value="true"/>
 </sec:authorize>
-    <!-- GLOBAL SCRIPTS -->
+    <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>
 	<script src="/assets/plugins/angular/angular-route.js"></script>
 	<script src="/assets/plugins/angular/angular-resource.js"></script>

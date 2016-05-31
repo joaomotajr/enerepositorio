@@ -7,7 +7,7 @@
         container: "body"
     })
 
-    // popover demo
+    // popover demo  - Modificado 
     $("[data-toggle=popover]")
         .popover()
 };

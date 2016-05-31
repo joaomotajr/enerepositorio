@@ -1,7 +1,7 @@
 ﻿
 $(function () {
 
-    // global setting override
+    // global setting override  - Modificado 
     /*
     $.extend($.gritter.options, {
         class_name: 'gritter-light', // for light notifications (can be added directly to $.gritter.add too)

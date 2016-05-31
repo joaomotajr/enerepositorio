@@ -6,7 +6,7 @@ Author: http://binarytheme.com
  Share Us if You Like our work 
  Enjoy Our Codes For Free always.
 ======================================*/
-//horizontal wizrd code section
+//horizontal wizrd code section  - Modificado 
 $(function () {
     $("#wizard").steps({
         headerTag: "h2",

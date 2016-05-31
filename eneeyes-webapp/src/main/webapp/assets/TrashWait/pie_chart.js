@@ -556,7 +556,7 @@
 
 });
 
-// A custom label formatter used by several of the plots
+// A custom label formatter used by several of the plots  - Modificado 
 
 function labelFormatter(label, series) {
     return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";

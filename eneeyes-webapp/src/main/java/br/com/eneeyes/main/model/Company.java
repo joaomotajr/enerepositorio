@@ -97,11 +97,11 @@ public class Company {
 	    
     @OneToMany(mappedBy="parent")
     private Set<Company> childs = new HashSet<Company>();	
-    
-    @OneToMany(mappedBy = "area", fetch=FetchType.EAGER)
+        
+    @OneToMany(mappedBy = "company", targetEntity = Area.class, fetch = FetchType.LAZY)
     @Cascade(value = CascadeType.ALL)
     private List<Area> areas;
-	
+    	
 	public final Long getUid() {
 		return uid;
 	}

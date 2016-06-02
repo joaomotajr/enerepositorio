@@ -40,7 +40,7 @@ public class Area {
 	private Boolean Classified;
 	
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="uid")
+    @JoinColumn(name="uid")    
     private Company company;
     
 	public Long getUid() {

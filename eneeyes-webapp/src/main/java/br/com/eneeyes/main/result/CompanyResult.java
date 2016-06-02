@@ -2,40 +2,49 @@ package br.com.eneeyes.main.result;
 
 import java.util.List;
 
-import br.com.eneeyes.main.result.MainBaseResult;
-import br.com.eneeyes.main.model.Company;
+import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDto;
 
-public class CompanyResult extends MainBaseResult<Company> {
-		
-	private Company company;
-	private List<CompanyDto> listCompany;
+public class CompanyResult extends BasicResult {
+			
+	private List<CompanyDto> list;
+	private CompanyDto companyDto;
+	
+	public List<CompanyDto> getList() {
+		return list;
+	}
 
-	public CompanyResult() {
+	public void setList(List<CompanyDto> list) {
+		this.list = list;
+	}
+
+	public CompanyDto getCompany() {
+		return companyDto;
+	}
+
+	public void setCompany(CompanyDto company) {
+		this.companyDto = company;
 	}
 	
-	public Company getUser() {
-		return company;
-	}
-
-	public void setUser(Company company) {
-		this.company = company;
-	}
-
-	public List<CompanyDto> getListCompany() {
-		return listCompany;
-	}
-
-	public void setListCompany(List<CompanyDto> listCompany) {
-		this.listCompany = listCompany;
-	}
 	
 	@Override
 	public String toString() {
 		return "UserResult{" +
-				"Company=" + company + "," +
+				"Company=" + companyDto + "," +
 				"resultType=" + getResultType() + "," +
 				'}';
+	}
+
+	@Override
+	public ResultMessageType getResultType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setResultType(ResultMessageType resultType) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

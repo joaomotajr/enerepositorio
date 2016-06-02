@@ -1,5 +1,8 @@
 package br.com.eneeyes.main.model;
 
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,7 +31,7 @@ public class Area {
 	private String description;
 	
 	@Column(name = "LOCAL", nullable = true)		
-	private Double Local;
+	private String Local;
 	
 	@Column(name = "LATITUDE", nullable = true)		
 	private Double Latitude;
@@ -37,11 +40,14 @@ public class Area {
 	private Double Longitude;
 	
 	@Column(name = "CLASSIFIED", nullable = true)
-	private Boolean Classified;
+	private Boolean Classified;	
 	
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="uid")    
+    @JoinColumn(name="company_uid")    
     private Company company;
+    
+    @Column(name = "DATE", nullable = true)
+	private Date date;
     
 	public Long getUid() {
 		return uid;
@@ -67,11 +73,11 @@ public class Area {
 		this.description = description;
 	}
 
-	public Double getLocal() {
+	public String getLocal() {
 		return Local;
 	}
 
-	public void setLocal(Double local) {
+	public void setLocal(String local) {
 		Local = local;
 	}
 
@@ -117,7 +123,14 @@ public class Area {
 		area.setLocal(dto.getLocal());
 		area.setLatitude(dto.getLatitude());
 		area.setLongitude(dto.getLongitude());
-		area.setClassified(dto.getClassified());			
+		area.setClassified(dto.getClassified());	
+		
+
+		if (area.getCompany() != null) {
+			
+			Company company = Company.fromDtoToCompany(dto.getCompany());
+			area.setCompany(company);
+		}
 		
 		return area;
 	}

@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.eneeyes.main.model.Area;
-import br.com.eneeyes.main.model.Company;
+
 
 public class AreaDto {
 
 	private Long uid;
 	private String name;
 	private String description;		
-	private Double Local;		
+	private String Local;		
 	private Double Latitude;		
 	private Double Longitude;
 	private Boolean Classified;
-    private Company company;
+    private CompanyDto companyDto;
     
 	public final Long getUid() {
 		return uid;
@@ -29,10 +29,10 @@ public class AreaDto {
 	public final void setName(String name) {
 		this.name = name;
 	}	
-	public final Double getLocal() {
+	public final String getLocal() {
 		return Local;
 	}
-	public final void setLocal(Double local) {
+	public final void setLocal(String local) {
 		Local = local;
 	}
 	public final Double getLatitude() {
@@ -59,11 +59,11 @@ public class AreaDto {
 	public void setClassified(Boolean classified) {
 		Classified = classified;
 	}
-	public final Company getCompany() {
-		return company;
+	public final CompanyDto getCompany() {
+		return companyDto;
 	}
-	public final void setCompany(Company company) {
-		this.company = company;
+	public final void setCompany(CompanyDto company) {
+		this.companyDto = company;
 	}	
     
 	public static AreaDto fromAreaToDto(Area area) {
@@ -81,7 +81,7 @@ public class AreaDto {
 		return dto;
 	}
 	
-	public static List<AreaDto> fromSiappToListDto(List<Area> list) {
+	public static List<AreaDto> fromAreaToListDto(List<Area> list) {
 		
 		List<AreaDto> returnList = new ArrayList<AreaDto>();
 		

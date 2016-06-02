@@ -14,8 +14,7 @@ import br.com.eneeyes.archetype.web.result.ResultMessageType;
 
 @XmlRootElement
 public class UserResult extends ResultBase<User> {
-	
-	private static final long serialVersionUID = -5617762922526451645L;	
+			
 	private User user;
 	private List<UserDto> listUser;
 

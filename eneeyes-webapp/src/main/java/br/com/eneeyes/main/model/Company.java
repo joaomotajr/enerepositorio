@@ -23,6 +23,7 @@ import org.hibernate.annotations.CascadeType;
 
 import br.com.eneeyes.main.dto.CompanyDto;
 
+
 @Entity
 @Table(name = "company")
 public class Company {
@@ -62,9 +63,6 @@ public class Company {
 	@Column(name = "UNIT_TYPE", columnDefinition = "int default 0")
 	private UnitType unitType;	
 	
-	@Column(name = "DATE", nullable = true)
-	private Date date;
-	
 	@Column(name = "LATITUDE", nullable = true)		
 	private Double Latitude;
 	
@@ -75,6 +73,9 @@ public class Company {
 	private UnitType UnitType() { 
 	    return unitType; 
 	}
+	
+	@Column(name = "DATE", nullable = true)
+	private Date date;
 	
 	public UnitType getUnitType() {
 		return unitType;

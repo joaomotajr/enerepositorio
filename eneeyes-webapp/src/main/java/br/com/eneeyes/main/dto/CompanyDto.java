@@ -7,6 +7,7 @@ import java.util.List;
 import br.com.eneeyes.main.model.Company;
 import br.com.eneeyes.main.model.UnitType;
 
+
 public class CompanyDto {
 	
 	private Long uid;

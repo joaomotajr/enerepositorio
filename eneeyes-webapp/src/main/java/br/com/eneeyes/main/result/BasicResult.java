@@ -21,5 +21,4 @@ public abstract class BasicResult<T> implements IResult {
 	public void setIsError(Boolean isError) {
 		this.isError = isError;
 	}
-
 }

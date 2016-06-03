@@ -10,9 +10,9 @@ public interface ICompanyService {
 	public CompanyResult findAll(CompanyDto dto);
 	
 	public CompanyResult findOne(Long uid);
-			
+
 	public CompanyResult findByFilialId(Long filialID);
-	
+		
 	public CompanyResult update(CompanyDto dto);
 			
 	public CompanyResult delete(long uid);

@@ -22,7 +22,7 @@ import br.com.eneeyes.archetype.web.result.ResultErrorMessage;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 
 /**
- * Created by Alan on 17/05/2014.
+ * Created by Junior on 03/06/2014.
  */
 @RestController
 public class SigninController {

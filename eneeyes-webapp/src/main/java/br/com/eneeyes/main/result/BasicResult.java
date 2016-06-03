@@ -2,7 +2,6 @@ package br.com.eneeyes.main.result;
 
 public abstract class BasicResult<T> implements IResult {	
 	
-	
 	private String message;
 	private Boolean isError = false;	
 

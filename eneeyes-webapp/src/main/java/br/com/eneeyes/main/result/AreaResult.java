@@ -5,7 +5,6 @@ import java.util.List;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.AreaDto;
 
-
 public class AreaResult extends BasicResult<AreaDto> {
 	
 	private List<AreaDto> list;

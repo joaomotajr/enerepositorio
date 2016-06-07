@@ -13,7 +13,9 @@ import javax.persistence.Table;
 
 /**
  * Created by Junior on 06/06/2016.
- * Define tipos de dipositivos aceitos para Cadastro
+ * Cadastro de Transmissores
+ * Obs: Sensores e transmissores são componentes do detector e não entram 
+ * como Dispositivos, por tanto, tem uma tabela própria
  */
 
 @Entity

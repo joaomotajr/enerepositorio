@@ -15,6 +15,11 @@ import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.AreaDto;
 
+/**
+ * Created by Junior on 06/06/2016.
+ * Cadastro das Areas das Empresas
+ */
+
 @Entity
 @Table(name = "area")
 public class Area {

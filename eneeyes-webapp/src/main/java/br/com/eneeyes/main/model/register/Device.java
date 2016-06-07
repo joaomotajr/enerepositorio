@@ -13,21 +13,22 @@ import javax.persistence.Table;
 
 /**
  * Created by Junior on 06/06/2016.
- * Define tipos de dipositivos aceitos para Cadastro
+ * Cadastro de Todos os dipositivos existentes e tipificação
  */
 
 @Entity
 @Table(name = "device")
-public class Device {
+public class Device extends BaseDevice {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UID")
 	private Long uid;
-
+	
 	@OneToOne(cascade=CascadeType.DETACH, optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name="DEVICE_TYPE_ID")
 	private DeviceType deviceType;
+
 	
 	public final Long getUid() {
 		return uid;
@@ -37,6 +38,7 @@ public class Device {
 		this.uid = uid;
 	}
 
+	
 	public final DeviceType getDeviceType() {
 		return deviceType;
 	}

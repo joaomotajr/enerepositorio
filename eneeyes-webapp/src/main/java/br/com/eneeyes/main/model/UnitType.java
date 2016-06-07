@@ -1,5 +1,10 @@
 package br.com.eneeyes.main.model;
 
+/**
+ * Created by Junior on 06/06/2016.
+ * Cadastro dos Tipos de Unidades das Empresas 
+ */
+
 public enum UnitType {
 	UNICA(0), MATRIZ(1), FILIAL(2);
 	

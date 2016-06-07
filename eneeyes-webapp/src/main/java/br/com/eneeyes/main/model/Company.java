@@ -22,6 +22,11 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import br.com.eneeyes.main.dto.CompanyDto;
+ 
+ /**
+ * Created by Junior on 06/06/2016.
+ * Cadastro das Empresas a serem monitoradas
+ */
 
 
 @Entity

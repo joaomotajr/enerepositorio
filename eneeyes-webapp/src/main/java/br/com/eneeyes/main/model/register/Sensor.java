@@ -10,9 +10,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 
+/**
+ * Created by Junior on 06/06/2016.
+ * Cadastro dos Sensores que serão atribuídos ao Detectores.
+ * Obs: Sensores e transmissores são componentes do detector e 
+ * não entram como Dispositivos, por tanto, tem uma tabela própria
+ */
+
 @Entity
 @Table(name = "sensor")
-public class Sensor {
+public class Sensor extends BaseDevice {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -18,12 +18,13 @@ import javax.persistence.Table;
 
 /**
  * Created by Junior on 06/06/2016.
- * Define tipos de dipositivos aceitos para Cadastro
+ * Cadastro de Detectores
+ * Será Ponto forte da relação com sensores através de Tabelas associativa 
  */
 
 @Entity
 @Table(name = "detector")
-public class Detector {
+public class Detector extends BaseDevice {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,29 +41,7 @@ public class Detector {
 	@OneToMany(fetch = FetchType.EAGER)	
 	@JoinTable(name = "detector_sensors", joinColumns = @JoinColumn(name = "DETECTOR_ID", referencedColumnName = "UID"), 
 								inverseJoinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"))
-	private List<Sensor> funcionarios = new ArrayList<Sensor>();	
-	
-	public final Long getUid() {
-		return uid;
-	}
+	private List<Sensor> sensores = new ArrayList<Sensor>();
 
-	public final void setUid(Long uid) {
-		this.uid = uid;
-	}	
-	public Transmitter getTransmitter() {
-		return transmitter;
-	}
-
-	public void setTransmitter(Transmitter transmitter) {
-		this.transmitter = transmitter;
-	}
-
-	public List<Sensor> getFuncionarios() {
-		return funcionarios;
-	}
-
-	public void setFuncionarios(List<Sensor> funcionarios) {
-		this.funcionarios = funcionarios;
-	}
 
 }

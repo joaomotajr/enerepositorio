@@ -17,17 +17,17 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "device")
-public class Device {
+@Table(name = "transmitter")
+public class Transmitter {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UID")
 	private Long uid;
-
-	@OneToOne(cascade=CascadeType.DETACH, optional = false, fetch = FetchType.EAGER)
-	@JoinColumn(name="DEVICE_TYPE_ID")
-	private DeviceType deviceType;
+	
+	@OneToOne(cascade=CascadeType.ALL, optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name="DETECTOR_ID")
+	private Detector detector;
 	
 	public final Long getUid() {
 		return uid;
@@ -36,14 +36,4 @@ public class Device {
 	public final void setUid(Long uid) {
 		this.uid = uid;
 	}
-
-	public final DeviceType getDeviceType() {
-		return deviceType;
-	}
-
-	public final void setDeviceType(DeviceType deviceType) {
-		this.deviceType = deviceType;
-	}
-
-
 }

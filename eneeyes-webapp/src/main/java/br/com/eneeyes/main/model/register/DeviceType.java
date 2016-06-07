@@ -1,4 +1,4 @@
-package br.com.eneeyes.main.model;
+package br.com.eneeyes.main.model.register;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

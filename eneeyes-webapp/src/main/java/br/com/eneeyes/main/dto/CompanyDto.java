@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.eneeyes.main.model.Company;
-import br.com.eneeyes.main.model.UnitType;
+import br.com.eneeyes.main.model.enums.UnitType;
 
 
 public class CompanyDto {

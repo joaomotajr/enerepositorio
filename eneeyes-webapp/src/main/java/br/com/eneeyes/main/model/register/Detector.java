@@ -24,7 +24,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "detector")
-public class Detector extends BaseDevice {
+public class Detector {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,4 @@
-package br.com.eneeyes.main.model;
+package br.com.eneeyes.main.model.enums;
 
 /**
  * Created by Junior on 06/06/2016.
@@ -8,15 +8,15 @@ package br.com.eneeyes.main.model;
 public enum UnitType {
 	UNICA(0), MATRIZ(1), FILIAL(2);
 	
-	private final int codigo;
+	private final int code;
 	
-	UnitType(int codigo) { this.codigo = codigo; }
+	UnitType(int code) { this.code = code; }
 
-    int codigo() { return codigo; }
+    int code() { return code; }
 
-    public static UnitType porCodigo(int codigo) {
+    public static UnitType byCode(int code) {
         for (UnitType unitType: UnitType.values()) {
-            if (codigo == unitType.codigo()) return unitType;
+            if (code == unitType.code()) return unitType;
         }
         throw new IllegalArgumentException("tipo invalido");
     }    

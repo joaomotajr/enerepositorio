@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "controller")
-public class Controller extends BaseDevice {
+public class Controller {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

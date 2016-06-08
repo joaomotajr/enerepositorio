@@ -22,6 +22,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import br.com.eneeyes.main.dto.CompanyDto;
+import br.com.eneeyes.main.model.enums.UnitType;
  
  /**
  * Created by Junior on 06/06/2016.

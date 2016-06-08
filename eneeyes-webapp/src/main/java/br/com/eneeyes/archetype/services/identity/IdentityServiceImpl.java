@@ -265,8 +265,8 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
 			String key = UUID.randomUUID().toString();
 			String urlTemplate = this.getClass().getClassLoader().getResource("/templates/recover-password.html").toString().replace("file:", "");
 			String message = FileUtils.readFileToString(new File(urlTemplate)).replace("{{KEY}}",key);
-			String subject = "Inovarvm - Recuperação de senha";
-			String from = "inovarvm@4fuse.com.br";
+			String subject = "Eneneyes - Recuperação de senha";
+			String from = "joaomotajr@hotmail.com.br";
 			siteService.sendMessage(to, from, subject, message);
 
 			Calendar calendar = Calendar.getInstance();
@@ -338,8 +338,8 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
             String to = user.getLogin();
             String urlTemplate = this.getClass().getClassLoader().getResource("/templates/change-password-mail.html").toString().replace("file:","");
             String message = FileUtils.readFileToString(new File(urlTemplate)).replace("{{REFRESH_TOKEN}}",refreshToken);
-            String subject = "Inovarvm - Sua senha foi alterada";
-            String from = "inovarvm@4fuse.com.br";
+            String subject = "Eneneyes - Sua senha foi alterada";
+            String from = "joaomotajr@hotmail.com.br";
             siteService.sendMessage(to, from, subject, message);
 
             result.addMessage(new ResultSuccessMessage("form.success.site.changePassword"));

@@ -52,27 +52,27 @@ var tree = [
   ];
 
 
-// function getTree() {
-//     // Some logic to retrieve, or generate tree structure
-//     return tree;
-// }
-//
-//
-// var $searchableTree = $('#treeview-searchable').treeview({
-//     data: getTree(),
-// });
-//
-// var search = function (e) {
-//     var pattern = $('#input-search').val();
-//     var options = {
-//         ignoreCase: true,
-//         exactMatch: false,
-//         revealResults: true
-//     };
-//
-//     var results = $searchableTree.treeview('search', [pattern, options]);
-//    
-// }
+ function getTree() {
+     // Some logic to retrieve, or generate tree structure
+     return tree;
+ }
+
+
+ var $searchableTree = $('#treeview-searchable').treeview({
+     data: getTree(),
+ });
+
+ var search = function (e) {
+     var pattern = $('#input-search').val();
+     var options = {
+         ignoreCase: true,
+         exactMatch: false,
+         revealResults: true
+     };
+
+     var results = $searchableTree.treeview('search', [pattern, options]);
+    
+ }
 
  $('#btn-search').on('click', search);
  $('#input-search').on('keyup', search);

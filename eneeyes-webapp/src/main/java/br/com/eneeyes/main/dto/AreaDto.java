@@ -1,6 +1,7 @@
 package br.com.eneeyes.main.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.com.eneeyes.main.model.Area;
@@ -11,10 +12,11 @@ public class AreaDto {
 	private Long uid;
 	private String name;
 	private String description;		
-	private String Local;		
-	private Double Latitude;		
-	private Double Longitude;
-	private Boolean Classified;
+	private String local;		
+	private Double latitude;		
+	private Double longitude;
+	private Boolean classified;
+	private Date date;
     private CompanyDto companyDto;
     
 	public final Long getUid() {
@@ -30,22 +32,22 @@ public class AreaDto {
 		this.name = name;
 	}	
 	public final String getLocal() {
-		return Local;
+		return local;
 	}
 	public final void setLocal(String local) {
-		Local = local;
+		this.local = local;
 	}
 	public final Double getLatitude() {
-		return Latitude;
+		return latitude;
 	}
 	public final void setLatitude(Double latitude) {
-		Latitude = latitude;
+		this.latitude = latitude;
 	}
 	public final Double getLongitude() {
-		return Longitude;
+		return longitude;
 	}
 	public final void setLongitude(Double longitude) {
-		Longitude = longitude;
+		this.longitude = longitude;
 	}
 	public String getDescription() {
 		return description;
@@ -54,10 +56,16 @@ public class AreaDto {
 		this.description = description;
 	}
 	public Boolean getClassified() {
-		return Classified;
+		return classified;
 	}
 	public void setClassified(Boolean classified) {
-		Classified = classified;
+		this.classified = classified;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	public final CompanyDto getCompany() {
 		return companyDto;
@@ -100,8 +108,6 @@ public class AreaDto {
 		}
 		
 		return returnList;
-	}
-
-	
+	}	
 	
 }

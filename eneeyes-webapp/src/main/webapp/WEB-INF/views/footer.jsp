@@ -1,9 +1,17 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <c:set var="authenticated" value="false"/>
 <sec:authorize access="hasRole('CST')">
     <c:set var="authenticated" value="true"/>
 </sec:authorize>
+
+    <!-- jQuery 2.1.4 -->
+    <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+
     <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>
 	<script src="/assets/plugins/angular/angular-route.js"></script>
@@ -13,10 +21,6 @@
 	<script src="/assets/plugins/angular/angular-translate.min.js"></script>
 	<script src="/assets/plugins/angular/angular-options-disabled.js"></script>
 
-    <!-- jQuery 2.1.4 -->
-    <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
       $.widget.bridge('uibutton', $.ui.button);
@@ -57,21 +61,6 @@
 	<script src="/assets/js/4m-site-controller.js"></script>
 	<script src="/assets/js/message-translate.js"></script>	 
 	<script src="/assets/js/menu-navegacao.js"></script>
-	<script src="/assets/js/navegacao-controller.js"></script>
-		
-	<!-- 
-	<script src="/assets/js/menu-navegacao.js"></script>
-	-->
-	<!-- 
-	<script src="/assets/js/menu-navegacao.js"></script>
-	-->
-	<!-- 
-	<script src="/assets/js/menu-navegacao.js"></script>
-	-->
-	<!-- 
-	<script src="/assets/js/menu-navegacao.js"></script>
-	-->
-	<!-- 
-	<script src="/assets/js/menu-navegacao.js"></script>
-	-->
+	<script src="/assets/js/navegacao-controller.js"></script>		
+
     <!-- END PAGE LEVEL SCRIPTS -->

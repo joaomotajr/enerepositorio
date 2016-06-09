@@ -21,7 +21,7 @@ public class CompanyDto {
 	private String state;
 	private String zip;
 	private UnitType unitType;
-	private Date date;		
+	private Date date;
 	private Double Latitude;		
 	private Double Longitude;
 	private CompanyDto parent;

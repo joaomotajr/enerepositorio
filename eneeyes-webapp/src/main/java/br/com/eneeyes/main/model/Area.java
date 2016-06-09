@@ -45,7 +45,7 @@ public class Area {
 	private Double Longitude;
 	
 	@Column(name = "CLASSIFIED", nullable = true)
-	private Boolean Classified;	
+	private Boolean classified;	
 	
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="company_uid")    
@@ -103,11 +103,11 @@ public class Area {
 	}
 
 	public Boolean getClassified() {
-		return Classified;
+		return classified;
 	}
 
 	public void setClassified(Boolean classified) {
-		Classified = classified;
+		this.classified = classified;
 	}
 
 	public Company getCompany() {

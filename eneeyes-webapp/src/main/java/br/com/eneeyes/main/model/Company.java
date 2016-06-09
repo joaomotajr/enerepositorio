@@ -70,10 +70,10 @@ public class Company {
 	private UnitType unitType;	
 	
 	@Column(name = "LATITUDE", nullable = true)		
-	private Double Latitude;
+	private Double latitude;
 	
 	@Column(name = "LONGITUDE", nullable = true)		
-	private Double Longitude;
+	private Double longitude;
 
 	@Enumerated(EnumType.ORDINAL) 
 	private UnitType UnitType() { 
@@ -198,19 +198,19 @@ public class Company {
 	}
 
 	public final Double getLatitude() {
-		return Latitude;
+		return latitude;
 	}
 
 	public final void setLatitude(Double latitude) {
-		Latitude = latitude;
+		this.latitude = latitude;
 	}
 
 	public final Double getLongitude() {
-		return Longitude;
+		return longitude;
 	}
 
 	public final void setLongitude(Double longitude) {
-		Longitude = longitude;
+		this.longitude = longitude;
 	}
 
 	public final Company getParent() {

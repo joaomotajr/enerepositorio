@@ -21,31 +21,30 @@ public class AreaController {
 	@Inject
 	AreaService service;	
 	
-	@RequestMapping(value="/api/area/save", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@RequestMapping(value="/security/api/area/save", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public AreaResult save(@RequestBody AreaDto ativoDto) {
 		
 		return (AreaResult) service.save(ativoDto);
 	}
 	
-	@RequestMapping(value="/api/area/delete/{coordenacaoUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/area/delete/{coordenacaoUid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public AreaResult listLogsPorCoordenacao(@PathVariable Long uid) {
 		
 		return (AreaResult) service.delete(uid);
 	}
 	
-	@RequestMapping(value = "/api/area/all", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/security/api/area/all", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public AreaResult listAll() {
 		return service.listAll();
 	}
 	
-	@RequestMapping(value = "/api/area/alls", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/security/api/area/alls", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public GenericResult<?> listAlls() {
 		return service.listAlls();
 	}
-
 
 }

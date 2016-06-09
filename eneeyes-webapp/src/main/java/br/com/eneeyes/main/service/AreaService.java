@@ -54,29 +54,29 @@ public class AreaService implements IService<AreaDto> {
 		return result;		
 	}
 
-	public AreaResult listAll() {
-		
-		AreaResult result = new AreaResult();
-		
-		try {
-			List<Area> lista = repository.findAll();
+//	public AreaResult listAll() {
+//		
+//		AreaResult result = new AreaResult();
+//		
+//		try {
+//			List<Area> lista = repository.findAll();
+//
+//			if (lista != null) {
+//				result.setList(AreaDto.fromAreaToListDto(lista));
+//				result.setMessage("Executado com sucesso.");
+//			} else {
+//				result.setIsError(true);
+//				result.setMessage("Nenhuma area.");
+//			}
+//		} catch (Exception e) {
+//			result.setIsError(true);
+//			result.setMessage(e.getMessage());
+//		}
+//		
+//		return result;
+//	}
 
-			if (lista != null) {
-				result.setList(AreaDto.fromAreaToListDto(lista));
-				result.setMessage("Executado com sucesso.");
-			} else {
-				result.setIsError(true);
-				result.setMessage("Nenhuma area.");
-			}
-		} catch (Exception e) {
-			result.setIsError(true);
-			result.setMessage(e.getMessage());
-		}
-		
-		return result;
-	}
-
-	public GenericResult<?> listAlls() {
+	public GenericResult<?> listAll() {
 		
 		GenericResult<AreaDto> result = new GenericResult<AreaDto>();
 		
@@ -99,5 +99,29 @@ public class AreaService implements IService<AreaDto> {
 		
 		return result;	
 
+	}
+
+	public GenericResult<AreaDto> listById(Long uid) {
+		// 
+		GenericResult<AreaDto> result = new GenericResult<AreaDto>();
+		
+		try {
+			List<Area> lista = repository.findByCompanyID(uid);
+
+			if (lista != null) {
+				result.setList(AreaDto.fromAreaToListDto(lista));
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhuma area.");
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;	
 	}
 }

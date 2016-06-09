@@ -237,27 +237,27 @@ public class Company {
 		this.areas = areas;
 	}	
 	
-	public static Company fromDtoToCompany(CompanyDto companyDto) {
+	public static Company fromDtoToCompany(CompanyDto dto) {
 		
 		Company company = new Company();
 		
-		company.setUid(companyDto.getUid());
-		company.setName(companyDto.getName());		
-		company.setEmail(companyDto.getEmail());
-		company.setUrl(companyDto.getUrl());
-		company.setPhone(companyDto.getPhone());
-		company.setMobile(companyDto.getMobile());
-		company.setAddress(companyDto.getAddress());		
-		company.setCity(companyDto.getCity());
-		company.setState(companyDto.getState());
-		company.setZip(companyDto.getZip());
-		company.setUnitType(companyDto.getUnitType());		
-		company.setDate(companyDto.getDate());
-		company.setLatitude(companyDto.getLatitude());
-		company.setLongitude(companyDto.getLongitude());			
+		company.setUid(dto.getUid());
+		company.setName(dto.getName());		
+		company.setEmail(dto.getEmail());
+		company.setUrl(dto.getUrl());
+		company.setPhone(dto.getPhone());
+		company.setMobile(dto.getMobile());
+		company.setAddress(dto.getAddress());		
+		company.setCity(dto.getCity());
+		company.setState(dto.getState());
+		company.setZip(dto.getZip());
+		company.setUnitType(dto.getUnitType());		
+		company.setDate(dto.getDate());
+		company.setLatitude(dto.getLatitude());
+		company.setLongitude(dto.getLongitude());			
 		
-		if (companyDto.getParent() != null) {
-			Company parent = fromDtoToCompany(companyDto.getParent());
+		if (dto.getParent() != null) {
+			Company parent = fromDtoToCompany(dto.getParent());
 			company.setParent(parent);
 		}	
 

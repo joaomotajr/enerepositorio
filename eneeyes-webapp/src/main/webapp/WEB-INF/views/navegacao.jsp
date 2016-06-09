@@ -16,6 +16,7 @@
         	<div class="row">        		
         		<button type="button" class="btn btn-primary" ng-click="save()">Save</button>
         		<button type="button" class="btn btn-primary" ng-click="get()">Get</button>
+        		<button type="button" class="btn btn-primary" ng-click="getOne()">GetOne</button>
        		</div>
 	         <div class="row">
 	            <div class="col-md-12">           

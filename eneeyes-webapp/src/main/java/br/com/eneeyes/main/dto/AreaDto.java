@@ -66,13 +66,14 @@ public class AreaDto {
 	}
 	public void setDate(Date date) {
 		this.date = date;
-	}
-	public final CompanyDto getCompany() {
+	}	
+	public CompanyDto getCompanyDto() {
 		return companyDto;
 	}
-	public final void setCompany(CompanyDto company) {
-		this.companyDto = company;
-	}	
+	public void setCompanyDto(CompanyDto companyDto) {
+		this.companyDto = companyDto;
+	}
+
     
 	public static AreaDto fromAreaToDto(Area area) {
 		
@@ -85,6 +86,11 @@ public class AreaDto {
 		dto.setLongitude(area.getLongitude());
 		dto.setDescription(area.getDescription());
 		dto.setClassified(area.getClassified());
+		
+		if(area.getCompany() != null){
+			CompanyDto companyDto = CompanyDto.fromCompanyToDto(area.getCompany());
+			dto.setCompanyDto(companyDto);
+		}
 			
 		return dto;
 	}
@@ -103,6 +109,11 @@ public class AreaDto {
 			dto.setLongitude(area.getLongitude());
 			dto.setDescription(area.getDescription());
 			dto.setClassified(area.getClassified());
+			
+			if(area.getCompany() != null){
+				CompanyDto companyDto = CompanyDto.fromCompanyToDto(area.getCompany());
+				dto.setCompanyDto(companyDto);
+			}
 			
 			returnList.add(dto);
 		}

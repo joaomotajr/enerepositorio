@@ -28,23 +28,30 @@ public class AreaController {
 		return (AreaResult) service.save(ativoDto);
 	}
 	
-	@RequestMapping(value="/security/api/area/delete/{coordenacaoUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/area/delete/{companyUid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public AreaResult listLogsPorCoordenacao(@PathVariable Long uid) {
+	public AreaResult delete(@PathVariable Long uid) {
 		
 		return (AreaResult) service.delete(uid);
 	}
 	
+//	@RequestMapping(value = "/security/api/area/all", method = RequestMethod.GET, produces = "application/json")
+//	@ResponseStatus(HttpStatus.OK)
+//	public AreaResult listAll() {
+//		return service.listAll();
+//	}
+	
 	@RequestMapping(value = "/security/api/area/all", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public AreaResult listAll() {
+	public GenericResult<?> listAll() {
 		return service.listAll();
 	}
 	
-	@RequestMapping(value = "/security/api/area/alls", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/area/obtemPorId/{companyUid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public GenericResult<?> listAlls() {
-		return service.listAlls();
+	public GenericResult<?> listById(@PathVariable Long uid) {
+		
+		return service.listById(uid);
 	}
 
 }

@@ -8,6 +8,9 @@ app.factory('AreaService', function($resource){
         listAll : $resource('/security/api/area/all',{},{
             area : {method : 'GET'}
         }),
+        listOne : $resource('/security/api/area/obtemPorId',{},{
+            area : {method : 'GET'}
+        }),
         save : $resource('/security/api/area/save',{},{
             area : {method : 'POST'}
         }),
@@ -54,7 +57,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		 $scope.inclusao = new AreaService.save($scope.area);
 		 
 		 $scope.inclusao.$area({_csrf : angular.element('#_csrf').val()}, function(){         	
-         	console.log("ererer");
+         	console.log($scope.inclusao);
          	
          });
 		 
@@ -62,13 +65,24 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 
 	 $scope.get = function() {
 		 
-		 $scope.listAll = new AreaService.listAll($scope.area2);
+		 $scope.listAll = new AreaService.listAll();
 		 
 		 $scope.listAll.$area({_csrf : angular.element('#_csrf').val()}, function(){
-			 console.log($scope.listAll);
-			 
-         	console.log("ererer");
-         	
+			
+			 console.log($scope.listAll);		
+         	         	
+         });
+		 
+	 }
+	 
+	 $scope.getOne = function() {
+		 
+		 $scope.listOne = new AreaService.listOne("1");
+		 
+		 $scope.listOne.$area({_csrf : angular.element('#_csrf').val()}, function(){
+			
+			 console.log($scope.listAll);		
+         	         	
          });
 		 
 	 }

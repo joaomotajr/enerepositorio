@@ -129,11 +129,10 @@ public class Area {
 		area.setLatitude(dto.getLatitude());
 		area.setLongitude(dto.getLongitude());
 		area.setClassified(dto.getClassified());	
-		
 
-		if (area.getCompany() != null) {
+		if (dto.getCompanyDto() != null) {
 			
-			Company company = Company.fromDtoToCompany(dto.getCompany());
+			Company company = Company.fromDtoToCompany(dto.getCompanyDto());
 			area.setCompany(company);
 		}
 		

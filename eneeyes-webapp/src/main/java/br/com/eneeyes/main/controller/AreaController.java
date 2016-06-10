@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eneeyes.main.dto.AreaDto;
 import br.com.eneeyes.main.result.AreaResult;
-import br.com.eneeyes.main.result.GenericResult;
+import br.com.eneeyes.main.result.Result;
 import br.com.eneeyes.main.service.AreaService;
 
 @RestController
@@ -23,9 +23,9 @@ public class AreaController {
 	
 	@RequestMapping(value="/security/api/area/save", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public AreaResult save(@RequestBody AreaDto ativoDto) {
+	public AreaResult save(@RequestBody AreaDto areaDto) {
 		
-		return (AreaResult) service.save(ativoDto);
+		return (AreaResult) service.save(areaDto);
 	}
 	
 	@RequestMapping(value="/security/api/area/delete/{companyUid}", method=RequestMethod.GET, produces = "application/json")
@@ -43,13 +43,13 @@ public class AreaController {
 	
 	@RequestMapping(value = "/security/api/area/all", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public GenericResult<?> listAll() {
+	public Result<?> listAll() {
 		return service.listAll();
 	}
 	
 	@RequestMapping(value="/security/api/area/obtemPorId/{companyUid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public GenericResult<?> listById(@PathVariable Long uid) {
+	public Result<?> listById(@PathVariable Long uid) {
 		
 		return service.listById(uid);
 	}

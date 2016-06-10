@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 
-public class GenericResult<T> extends BasicResult<T> {
+public class Result<T> extends BasicResult<T> {
 	
 	private List<T> list;
 	private T dto;
@@ -22,7 +22,7 @@ public class GenericResult<T> extends BasicResult<T> {
 		return dto;
 	}
 
-	public void setArea(T dto) {
+	public void setEntity(T dto) {
 		this.dto = dto;
 	}	
 	

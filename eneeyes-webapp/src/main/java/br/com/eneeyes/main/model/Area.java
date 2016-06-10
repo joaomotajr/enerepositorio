@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -47,9 +48,15 @@ public class Area {
 	@Column(name = "CLASSIFIED", nullable = true)
 	private Boolean classified;	
 	
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="company_uid")    
-    private Company company;
+//    @ManyToOne(fetch=FetchType.LAZY)
+//    @JoinColumn(name="company_uid")    
+//    private Company company;
+	
+	@ManyToOne	
+	@JoinTable(name = "company_areas", 
+	joinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID") , 
+	inverseJoinColumns = @JoinColumn(name = "COMPANY_ID", referencedColumnName = "UID"))
+	private Company company;
     
     @Column(name = "DATE", nullable = true)
 	private Date date;

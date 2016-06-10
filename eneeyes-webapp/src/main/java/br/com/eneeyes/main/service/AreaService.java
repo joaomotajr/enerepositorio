@@ -10,7 +10,7 @@ import br.com.eneeyes.main.dto.AreaDto;
 import br.com.eneeyes.main.model.Area;
 import br.com.eneeyes.main.repository.AreaRepository;
 import br.com.eneeyes.main.result.BasicResult;
-import br.com.eneeyes.main.result.GenericResult;
+import br.com.eneeyes.main.result.Result;
 import br.com.eneeyes.main.result.AreaResult;
 
 
@@ -54,31 +54,9 @@ public class AreaService implements IService<AreaDto> {
 		return result;		
 	}
 
-//	public AreaResult listAll() {
-//		
-//		AreaResult result = new AreaResult();
-//		
-//		try {
-//			List<Area> lista = repository.findAll();
-//
-//			if (lista != null) {
-//				result.setList(AreaDto.fromAreaToListDto(lista));
-//				result.setMessage("Executado com sucesso.");
-//			} else {
-//				result.setIsError(true);
-//				result.setMessage("Nenhuma area.");
-//			}
-//		} catch (Exception e) {
-//			result.setIsError(true);
-//			result.setMessage(e.getMessage());
-//		}
-//		
-//		return result;
-//	}
-
-	public GenericResult<?> listAll() {
+	public Result<?> listAll() {
 		
-		GenericResult<AreaDto> result = new GenericResult<AreaDto>();
+		Result<AreaDto> result = new Result<AreaDto>(); 	
 		
 		try {
 			List<Area> lista = repository.findAll();
@@ -101,9 +79,9 @@ public class AreaService implements IService<AreaDto> {
 
 	}
 
-	public GenericResult<AreaDto> listById(Long uid) {
-		// 
-		GenericResult<AreaDto> result = new GenericResult<AreaDto>();
+	public Result<AreaDto> listById(Long uid) {
+		
+		Result<AreaDto> result = new Result<AreaDto>();
 		
 		try {
 			List<Area> lista = repository.findByCompanyID(uid);

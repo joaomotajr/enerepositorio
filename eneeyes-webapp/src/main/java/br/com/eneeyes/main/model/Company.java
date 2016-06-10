@@ -1,5 +1,6 @@
 package br.com.eneeyes.main.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -105,9 +107,19 @@ public class Company {
     @OneToMany(mappedBy="parent")
     private Set<Company> childs = new HashSet<Company>();	
         
-    @OneToMany(mappedBy = "company", targetEntity = Area.class, fetch = FetchType.LAZY)
-    @Cascade(value = CascadeType.ALL)
-    private List<Area> areas;
+//    @OneToMany(mappedBy = "company", targetEntity = Area.class, fetch = FetchType.LAZY)
+//    @Cascade(value = CascadeType.ALL)
+//    private List<Area> areas;
+    
+    
+//    @OneToMany(fetch=FetchType.LAZY, mappedBy="company")
+//    @Cascade(value = CascadeType.ALL)
+//    private List<Area> areas;
+    
+    @OneToMany(fetch = FetchType.EAGER)	
+	@JoinTable(name = "company_areas", joinColumns = @JoinColumn(name = "COMPANY_ID", referencedColumnName = "UID"), 
+								inverseJoinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID"))
+	private List<Area> areas = new ArrayList<Area>();
     	
 	public final Long getUid() {
 		return uid;

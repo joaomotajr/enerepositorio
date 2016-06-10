@@ -1,5 +1,7 @@
 package br.com.eneeyes.main.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -7,46 +9,39 @@ import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDto;
 import br.com.eneeyes.main.model.Company;
 import br.com.eneeyes.main.repository.CompanyRepository;
-import br.com.eneeyes.main.result.CompanyResult;
+import br.com.eneeyes.main.result.BasicResult;
+import br.com.eneeyes.main.result.Result;
 
 
 @Named
-public class CompanyService implements ICompanyService {
+public class CompanyService implements IService<CompanyDto> {
 	
 	@Inject
 	private CompanyRepository repository;
-
-	@Override
-	public CompanyResult save(CompanyDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public BasicResult<?> save(CompanyDto dto) {
+		Result<CompanyDto> result = new Result<CompanyDto>(); 	
+		
+		Company company = Company.fromDtoToCompany(dto);
+		
+		company = repository.save(company);
+		dto.setUid(company.getUid());
+		
+		result.setEntity(CompanyDto.fromCompanyToDto(company));
+		result.setResultType( ResultMessageType.SUCCESS );
+		result.setMessage("Executado com sucesso.");					
+		
+		return result;
 	}
 
-	@Override
-	public CompanyResult findAll(CompanyDto dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CompanyResult findByFilialId(Long dto) {
-		return null;
-	}
-
-	@Override
-	public CompanyResult update(CompanyDto dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CompanyResult delete(long uid) {
-		CompanyResult result = new CompanyResult();
+	public BasicResult<?> delete(Long uid) {
+				
+		Result<CompanyDto> result = new Result<CompanyDto>(); 	
 		
 		try {			
 			repository.delete(uid);
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Funcionário Excluído.");
+			result.setMessage("Área Excluída.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
@@ -54,19 +49,31 @@ public class CompanyService implements ICompanyService {
 			result.setMessage(e.getMessage());
 		}		
 		
-		return result; 
+		return result;		
 	}
 
-	@Override
-	public CompanyResult findOne(Long uid) {
+	public Result<?> listAll() {
 		
-		Company company = (repository.findOne(uid));
-		CompanyResult result = new CompanyResult();
+		Result<CompanyDto> result = new Result<CompanyDto>(); 	
 		
-		result.setCompany(CompanyDto.fromCompanyToDto(company));
-		result.setMessage("Executado com sucesso.");
+		try {
+			List<Company> lista = repository.findAll();
+
+			if (lista != null) {
+				result.setList(CompanyDto.fromCompanyToListDto(lista));
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhuma Compania.");
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
 		
-		return result;
+		return result;	
 
 	}
 		

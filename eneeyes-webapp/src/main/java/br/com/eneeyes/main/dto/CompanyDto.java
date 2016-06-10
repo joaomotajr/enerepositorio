@@ -147,7 +147,7 @@ public class CompanyDto {
 		return dto;
 	}		
 	
-	public static List<CompanyDto> fromCompanyToDto(List<Company> list) {
+	public static List<CompanyDto> fromCompanyToListDto(List<Company> list) {
 		
 		List<CompanyDto> returnList = new ArrayList<CompanyDto>();
 		

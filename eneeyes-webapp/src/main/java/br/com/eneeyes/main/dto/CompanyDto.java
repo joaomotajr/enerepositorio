@@ -119,10 +119,8 @@ public class CompanyDto {
 	
 	public static CompanyDto fromCompanyToDto(Company company) {
 		
-		CompanyDto dto = new CompanyDto();
-		
-		dto.setUid(company.getUid());
-		
+		CompanyDto dto = new CompanyDto();		
+	
 		dto.setUid(company.getUid());
 		dto.setName(company.getName());		
 		dto.setEmail(company.getEmail());
@@ -136,8 +134,7 @@ public class CompanyDto {
 		dto.setUnitType(company.getUnitType());		
 		dto.setDate(company.getDate());
 		dto.setLatitude(company.getLatitude());
-		dto.setLongitude(company.getLongitude());	
-		
+		dto.setLongitude(company.getLongitude());			
 				
 		if(company.getParent() != null){
 			CompanyDto parent = fromCompanyToDto(company.getParent());
@@ -154,8 +151,7 @@ public class CompanyDto {
 		for (Company company : list) {
 			
 			CompanyDto dto = new CompanyDto();
-			
-			dto.setUid(company.getUid());		
+								
 			dto.setUid(company.getUid());
 			dto.setName(company.getName());		
 			dto.setEmail(company.getEmail());

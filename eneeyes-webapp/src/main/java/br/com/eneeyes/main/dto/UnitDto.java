@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import br.com.eneeyes.main.model.Company;
+import br.com.eneeyes.main.model.Unit;
 import br.com.eneeyes.main.model.enums.UnitType;
 
 
-public class CompanyDto {
+public class UnitDto {
 	
 	private Long uid;
 	private String name;	
@@ -24,7 +24,7 @@ public class CompanyDto {
 	private Date date;
 	private Double Latitude;		
 	private Double Longitude;
-	private CompanyDto parent;
+	private UnitDto parent;
 
 	public final Long getUid() {
 		return uid;
@@ -110,65 +110,65 @@ public class CompanyDto {
 	public final void setLongitude(Double longitude) {
 		Longitude = longitude;
 	}
-	public final CompanyDto getParent() {
+	public final UnitDto getParent() {
 		return parent;
 	}
-	public final void setParent(CompanyDto parent) {
+	public final void setParent(UnitDto parent) {
 		this.parent = parent;
 	}
 	
-	public static CompanyDto fromCompanyToDto(Company company) {
+	public static UnitDto fromUnitToDto(Unit unit) {
 		
-		CompanyDto dto = new CompanyDto();		
+		UnitDto dto = new UnitDto();		
 	
-		dto.setUid(company.getUid());
-		dto.setName(company.getName());		
-		dto.setEmail(company.getEmail());
-		dto.setUrl(company.getUrl());
-		dto.setPhone(company.getPhone());
-		dto.setMobile(company.getMobile());
-		dto.setAddress(company.getAddress());		
-		dto.setCity(company.getCity());
-		dto.setState(company.getState());
-		dto.setZip(company.getZip());
-		dto.setUnitType(company.getUnitType());		
-		dto.setDate(company.getDate());
-		dto.setLatitude(company.getLatitude());
-		dto.setLongitude(company.getLongitude());			
+		dto.setUid(unit.getUid());
+		dto.setName(unit.getName());		
+		dto.setEmail(unit.getEmail());
+		dto.setUrl(unit.getUrl());
+		dto.setPhone(unit.getPhone());
+		dto.setMobile(unit.getMobile());
+		dto.setAddress(unit.getAddress());		
+		dto.setCity(unit.getCity());
+		dto.setState(unit.getState());
+		dto.setZip(unit.getZip());
+		dto.setUnitType(unit.getUnitType());		
+		dto.setDate(unit.getDate());
+		dto.setLatitude(unit.getLatitude());
+		dto.setLongitude(unit.getLongitude());			
 				
-		if(company.getParent() != null){
-			CompanyDto parent = fromCompanyToDto(company.getParent());
+		if(unit.getParent() != null){
+			UnitDto parent = fromUnitToDto(unit.getParent());
 			dto.setParent(parent);
 		}		
 		
 		return dto;
 	}		
 	
-	public static List<CompanyDto> fromCompanyToListDto(List<Company> list) {
+	public static List<UnitDto> fromUnitToListDto(List<Unit> list) {
 		
-		List<CompanyDto> returnList = new ArrayList<CompanyDto>();
+		List<UnitDto> returnList = new ArrayList<UnitDto>();
 		
-		for (Company company : list) {
+		for (Unit unit : list) {
 			
-			CompanyDto dto = new CompanyDto();
+			UnitDto dto = new UnitDto();
 								
-			dto.setUid(company.getUid());
-			dto.setName(company.getName());		
-			dto.setEmail(company.getEmail());
-			dto.setUrl(company.getUrl());
-			dto.setPhone(company.getPhone());
-			dto.setMobile(company.getMobile());
-			dto.setAddress(company.getAddress());		
-			dto.setCity(company.getCity());
-			dto.setState(company.getState());
-			dto.setZip(company.getZip());
-			dto.setUnitType(company.getUnitType());		
-			dto.setDate(company.getDate());
-			dto.setLatitude(company.getLatitude());
-			dto.setLongitude(company.getLongitude());			
+			dto.setUid(unit.getUid());
+			dto.setName(unit.getName());		
+			dto.setEmail(unit.getEmail());
+			dto.setUrl(unit.getUrl());
+			dto.setPhone(unit.getPhone());
+			dto.setMobile(unit.getMobile());
+			dto.setAddress(unit.getAddress());		
+			dto.setCity(unit.getCity());
+			dto.setState(unit.getState());
+			dto.setZip(unit.getZip());
+			dto.setUnitType(unit.getUnitType());		
+			dto.setDate(unit.getDate());
+			dto.setLatitude(unit.getLatitude());
+			dto.setLongitude(unit.getLongitude());			
 					
-			if(company.getParent() != null){
-				CompanyDto parent = fromCompanyToDto(company.getParent());
+			if(unit.getParent() != null){
+				UnitDto parent = fromUnitToDto(unit.getParent());
 				dto.setParent(parent);
 			}		
 		}

@@ -17,7 +17,7 @@ public class AreaDto {
 	private Double longitude;
 	private Boolean classified;
 	private Date date;
-    private CompanyDto companyDto;
+    private UnitDto unitDto;
     
 	public final Long getUid() {
 		return uid;
@@ -67,11 +67,11 @@ public class AreaDto {
 	public void setDate(Date date) {
 		this.date = date;
 	}	
-	public CompanyDto getCompanyDto() {
-		return companyDto;
+	public UnitDto getUnitDto() {
+		return unitDto;
 	}
-	public void setCompanyDto(CompanyDto companyDto) {
-		this.companyDto = companyDto;
+	public void setUnitDto(UnitDto unitDto) {
+		this.unitDto = unitDto;
 	}
 
     
@@ -87,9 +87,9 @@ public class AreaDto {
 		dto.setDescription(area.getDescription());
 		dto.setClassified(area.getClassified());
 		
-		if(area.getCompany() != null){
-			CompanyDto companyDto = CompanyDto.fromCompanyToDto(area.getCompany());
-			dto.setCompanyDto(companyDto);
+		if(area.getUnit() != null){
+			UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
+			dto.setUnitDto(unitDto);
 		}
 			
 		return dto;
@@ -110,9 +110,9 @@ public class AreaDto {
 			dto.setDescription(area.getDescription());
 			dto.setClassified(area.getClassified());
 			
-			if(area.getCompany() != null){
-				CompanyDto companyDto = CompanyDto.fromCompanyToDto(area.getCompany());
-				dto.setCompanyDto(companyDto);
+			if(area.getUnit() != null){
+				UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
+				dto.setUnitDto(unitDto);
 			}
 			
 			returnList.add(dto);

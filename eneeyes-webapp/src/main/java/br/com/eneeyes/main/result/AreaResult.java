@@ -32,7 +32,7 @@ public class AreaResult extends BasicResult<AreaDto> {
 	@Override
 	public String toString() {
 		return "UserResult{" +
-				"Company=" + areaDto + "," +
+				"Unity=" + areaDto + "," +
 				"resultType=" + getResultType() + "," +
 				'}';
 	}

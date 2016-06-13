@@ -447,7 +447,7 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 	
 	$scope.getFiliaisContratante = function() {
    		$scope.filiaisContratante = [];
-		$scope.modelo = {id: '',cnpj: '',tradeName: '',companyName: '',cep: '',address: '',number: '',complement: '',district: '',
+		$scope.modelo = {id: '',cnpj: '',tradeName: '',unitName: '',cep: '',address: '',number: '',complement: '',district: '',
 						 city: '',state: '',fone1: '',fone2: '',fax: '',email: '',status: undefined,userId: ''};
     	$scope.contrato = new FilialService.pesquisa($scope.modelo);
         $scope.contrato.$filiais({_csrf : angular.element('#_csrf').val()}, function(){

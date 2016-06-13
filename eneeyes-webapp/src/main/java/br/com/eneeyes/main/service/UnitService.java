@@ -6,28 +6,28 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
-import br.com.eneeyes.main.dto.CompanyDto;
-import br.com.eneeyes.main.model.Company;
-import br.com.eneeyes.main.repository.CompanyRepository;
+import br.com.eneeyes.main.dto.UnitDto;
+import br.com.eneeyes.main.model.Unit;
+import br.com.eneeyes.main.repository.UnitRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
 
 @Named
-public class CompanyService implements IService<CompanyDto> {
+public class UnitService implements IService<UnitDto> {
 	
 	@Inject
-	private CompanyRepository repository;
+	private UnitRepository repository;
 	
-	public BasicResult<?> save(CompanyDto dto) {
-		Result<CompanyDto> result = new Result<CompanyDto>(); 	
+	public BasicResult<?> save(UnitDto dto) {
+		Result<UnitDto> result = new Result<UnitDto>(); 	
 		
-		Company company = Company.fromDtoToCompany(dto);
+		Unit unit = Unit.fromDtoToUnit(dto);
 		
-		company = repository.save(company);
-		dto.setUid(company.getUid());
+		unit = repository.save(unit);
+		dto.setUid(unit.getUid());
 		
-		result.setEntity(CompanyDto.fromCompanyToDto(company));
+		result.setEntity(UnitDto.fromUnitToDto(unit));
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Executado com sucesso.");					
 		
@@ -36,7 +36,7 @@ public class CompanyService implements IService<CompanyDto> {
 
 	public BasicResult<?> delete(Long uid) {
 				
-		Result<CompanyDto> result = new Result<CompanyDto>(); 	
+		Result<UnitDto> result = new Result<UnitDto>(); 	
 		
 		try {			
 			repository.delete(uid);
@@ -54,13 +54,13 @@ public class CompanyService implements IService<CompanyDto> {
 
 	public Result<?> listAll() {
 		
-		Result<CompanyDto> result = new Result<CompanyDto>(); 	
+		Result<UnitDto> result = new Result<UnitDto>(); 	
 		
 		try {
-			List<Company> lista = repository.findAll();
+			List<Unit> lista = repository.findAll();
 
 			if (lista != null) {
-				result.setList(CompanyDto.fromCompanyToListDto(lista));
+				result.setList(UnitDto.fromUnitToListDto(lista));
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
@@ -75,6 +75,12 @@ public class CompanyService implements IService<CompanyDto> {
 		
 		return result;	
 
+	}
+
+	public int setParent(Long uid, Long parentUid) {
+		
+		return repository.setParentFor(parentUid, uid);
+		
 	}
 		
 	

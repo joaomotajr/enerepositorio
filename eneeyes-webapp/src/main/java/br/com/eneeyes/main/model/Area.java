@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.AreaDto;
+import br.com.eneeyes.main.model.Unit;
 
 /**
  * Created by Junior on 06/06/2016.
@@ -48,14 +49,14 @@ public class Area {
 	private Boolean classified;	
 	
 //    @ManyToOne(fetch=FetchType.LAZY)
-//    @JoinColumn(name="company_uid")    
-//    private Company company;
+//    @JoinColumn(name="unit_uid")    
+//    private Unit unit;
 	
 	@ManyToOne	
-	@JoinTable(name = "company_areas", 
+	@JoinTable(name = "unit_areas", 
 	joinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID") , 
-	inverseJoinColumns = @JoinColumn(name = "COMPANY_ID", referencedColumnName = "UID"))
-	private Company company;
+	inverseJoinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"))
+	private Unit unit;
     
     @Column(name = "DATE", nullable = true)
 	private Date date;
@@ -116,12 +117,12 @@ public class Area {
 		this.classified = classified;
 	}
 
-	public Company getCompany() {
-		return company;
+	public Unit getUnit() {
+		return unit;
 	}
 
-	public void setCompany(Company company) {
-		this.company = company;
+	public void setUnit(Unit unit) {
+		this.unit = unit;
 	}
 	
 	public static Area fromDtoToArea(AreaDto dto) {
@@ -136,10 +137,10 @@ public class Area {
 		area.setLongitude(dto.getLongitude());
 		area.setClassified(dto.getClassified());	
 
-		if (dto.getCompanyDto() != null) {
+		if (dto.getUnitDto() != null) {
 			
-			Company company = Company.fromDtoToCompany(dto.getCompanyDto());
-			area.setCompany(company);
+			Unit unit = Unit.fromDtoToUnit(dto.getUnitDto());
+			area.setUnit(unit);
 		}
 		
 		return area;

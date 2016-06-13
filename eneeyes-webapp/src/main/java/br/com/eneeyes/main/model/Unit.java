@@ -23,7 +23,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import br.com.eneeyes.main.dto.CompanyDto;
+import br.com.eneeyes.main.dto.UnitDto;
 import br.com.eneeyes.main.model.enums.UnitType;
  
  /**
@@ -33,8 +33,8 @@ import br.com.eneeyes.main.model.enums.UnitType;
 
 
 @Entity
-@Table(name = "company")
-public class Company {
+@Table(name = "unit")
+public class Unit {
 		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -102,22 +102,14 @@ public class Company {
 	@ManyToOne
     @Cascade(value = CascadeType.ALL)
     @JoinColumn(name="parent_id")
-    private Company parent;
+    private Unit parent;
 	    
     @OneToMany(mappedBy="parent")
-    private Set<Company> childs = new HashSet<Company>();	
-        
-//    @OneToMany(mappedBy = "company", targetEntity = Area.class, fetch = FetchType.LAZY)
-//    @Cascade(value = CascadeType.ALL)
-//    private List<Area> areas;
-    
-    
-//    @OneToMany(fetch=FetchType.LAZY, mappedBy="company")
-//    @Cascade(value = CascadeType.ALL)
-//    private List<Area> areas;
+    private Set<Unit> childs = new HashSet<Unit>();       
+
     
     @OneToMany(fetch = FetchType.EAGER)	
-	@JoinTable(name = "company_areas", joinColumns = @JoinColumn(name = "COMPANY_ID", referencedColumnName = "UID"), 
+	@JoinTable(name = "unit_areas", joinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"), 
 								inverseJoinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID"))
 	private List<Area> areas = new ArrayList<Area>();
     	
@@ -225,19 +217,19 @@ public class Company {
 		this.longitude = longitude;
 	}
 
-	public final Company getParent() {
+	public final Unit getParent() {
 		return parent;
 	}
 
-	public final void setParent(Company parent) {
+	public final void setParent(Unit parent) {
 		this.parent = parent;
 	}
 
-	public final Set<Company> getChilds() {
+	public final Set<Unit> getChilds() {
 		return childs;
 	}
 
-	public final void setChilds(Set<Company> childs) {
+	public final void setChilds(Set<Unit> childs) {
 		this.childs = childs;
 	}
 
@@ -249,31 +241,31 @@ public class Company {
 		this.areas = areas;
 	}	
 	
-	public static Company fromDtoToCompany(CompanyDto dto) {
+	public static Unit fromDtoToUnit(UnitDto dto) {
 		
-		Company company = new Company();
+		Unit unit = new Unit();
 		
-		company.setUid(dto.getUid());
-		company.setName(dto.getName());		
-		company.setEmail(dto.getEmail());
-		company.setUrl(dto.getUrl());
-		company.setPhone(dto.getPhone());
-		company.setMobile(dto.getMobile());
-		company.setAddress(dto.getAddress());		
-		company.setCity(dto.getCity());
-		company.setState(dto.getState());
-		company.setZip(dto.getZip());
-		company.setUnitType(dto.getUnitType());		
-		company.setDate(dto.getDate());
-		company.setLatitude(dto.getLatitude());
-		company.setLongitude(dto.getLongitude());			
+		unit.setUid(dto.getUid());
+		unit.setName(dto.getName());		
+		unit.setEmail(dto.getEmail());
+		unit.setUrl(dto.getUrl());
+		unit.setPhone(dto.getPhone());
+		unit.setMobile(dto.getMobile());
+		unit.setAddress(dto.getAddress());		
+		unit.setCity(dto.getCity());
+		unit.setState(dto.getState());
+		unit.setZip(dto.getZip());
+		unit.setUnitType(dto.getUnitType());		
+		unit.setDate(dto.getDate());
+		unit.setLatitude(dto.getLatitude());
+		unit.setLongitude(dto.getLongitude());			
 		
 		if (dto.getParent() != null) {
-			Company parent = fromDtoToCompany(dto.getParent());
-			company.setParent(parent);
+			Unit parent = fromDtoToUnit(dto.getParent());
+			unit.setParent(parent);
 		}	
 
-		return company;
+		return unit;
 	}
 	
 }

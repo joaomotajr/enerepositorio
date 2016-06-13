@@ -17,7 +17,8 @@
         		<button type="button" class="btn btn-primary" ng-click="save()">Save Area</button>
         		<button type="button" class="btn btn-primary" ng-click="get()">Get Area</button>
         		<button type="button" class="btn btn-primary" ng-click="getOne()">Get One Area</button>
-        		<button type="button" class="btn btn-primary" ng-click="saveCompany()">Save Company</button>
+        		<button type="button" class="btn btn-primary" ng-click="saveUnit()">Save Unit</button>
+        		<button type="button" class="btn btn-primary" ng-click="setUnit2()">Set Unit</button>
        		</div>
 	         <div class="row">
 	            <div class="col-md-12">           

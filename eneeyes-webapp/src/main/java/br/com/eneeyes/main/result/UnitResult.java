@@ -3,34 +3,34 @@ package br.com.eneeyes.main.result;
 import java.util.List;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
-import br.com.eneeyes.main.dto.CompanyDto;
+import br.com.eneeyes.main.dto.UnitDto;
 
-public class CompanyResult extends BasicResult<CompanyDto> {
+public class UnitResult extends BasicResult<UnitDto> {
 			
-	private List<CompanyDto> list;
-	private CompanyDto companyDto;
+	private List<UnitDto> list;
+	private UnitDto unitDto;
 	
-	public List<CompanyDto> getList() {
+	public List<UnitDto> getList() {
 		return list;
 	}
 
-	public void setList(List<CompanyDto> list) {
+	public void setList(List<UnitDto> list) {
 		this.list = list;
 	}
 
-	public CompanyDto getCompany() {
-		return companyDto;
+	public UnitDto getUnit() {
+		return unitDto;
 	}
 
-	public void setCompany(CompanyDto company) {
-		this.companyDto = company;
+	public void setUnit(UnitDto unit) {
+		this.unitDto = unit;
 	}
 	
 	
 	@Override
 	public String toString() {
 		return "UserResult{" +
-				"Company=" + companyDto + "," +
+				"UnitUnit=" + unitDto + "," +
 				"resultType=" + getResultType() + "," +
 				'}';
 	}

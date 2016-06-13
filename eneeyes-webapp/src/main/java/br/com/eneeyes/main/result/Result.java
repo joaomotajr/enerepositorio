@@ -29,7 +29,7 @@ public class Result<T> extends BasicResult<T> {
 	@Override
 	public String toString() {
 		return "UserResult{" +
-				"Company=" + dto + "," +
+				"DTO Result=" + dto + "," +
 				"resultType=" + getResultType() + "," +
 				'}';
 	}

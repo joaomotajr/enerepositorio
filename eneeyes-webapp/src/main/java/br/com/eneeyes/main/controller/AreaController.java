@@ -28,7 +28,7 @@ public class AreaController {
 		return (AreaResult) service.save(areaDto);
 	}
 	
-	@RequestMapping(value="/security/api/area/delete/{companyUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/area/delete/{unitUid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public AreaResult delete(@PathVariable Long uid) {
 		
@@ -47,7 +47,7 @@ public class AreaController {
 		return service.listAll();
 	}
 	
-	@RequestMapping(value="/security/api/area/obtemPorId/{companyUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/area/obtemPorId/{unitUid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public Result<?> listById(@PathVariable Long uid) {
 		

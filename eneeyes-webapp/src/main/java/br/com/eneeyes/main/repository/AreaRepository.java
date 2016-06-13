@@ -6,13 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import br.com.eneeyes.main.model.Area;
-import br.com.eneeyes.main.model.Company;
+import br.com.eneeyes.main.model.Unit;
 
 public interface AreaRepository extends JpaRepository<Area, Long> {
 
-	@Query("select a from Area a where a.company.uid = ?1")
-	public List<Area> findByCompanyID(Long idCompany);
+	@Query("select a from Area a where a.unit.uid = ?1")
+	public List<Area> findByUnitID(Long idUnit);
 	
-	public List<Area> findByCompany(Company company);
+	public List<Area> findByUnit(Unit unit);
 	
 }

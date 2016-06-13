@@ -16,32 +16,32 @@ import br.com.eneeyes.main.result.Result;
 import br.com.eneeyes.main.service.AreaService;
 
 @RestController
-public class AreaController {
+public class CompanyController {
 	
 	@Inject
 	AreaService service;	
 	
-	@RequestMapping(value="/security/api/area/save", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@RequestMapping(value="/security/api/company/save", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> save(@RequestBody AreaDto areaDto) {
+	public BasicResult<?> save(@RequestBody AreaDto companyDto) {
 		
-		return service.save(areaDto);
+		return service.save(companyDto);
 	}
 	
-	@RequestMapping(value="/security/api/area/delete/{areaUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/company/delete/{companyUid}", method=RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> delete(@PathVariable Long uid) {
 		
 		return service.delete(uid);
 	}
 	
-	@RequestMapping(value = "/security/api/area/all", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/security/api/company/all", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public Result<?> listAll() {
 		return service.listAll();
 	}
 	
-	@RequestMapping(value="/security/api/area/obtemPorId/{areaUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/company/obtemPorId/{companyUid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public Result<?> listById(@PathVariable Long uid) {
 		

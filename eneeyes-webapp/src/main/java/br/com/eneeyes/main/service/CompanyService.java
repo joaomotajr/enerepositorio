@@ -6,28 +6,28 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
-import br.com.eneeyes.main.dto.AreaDto;
-import br.com.eneeyes.main.model.Area;
-import br.com.eneeyes.main.repository.AreaRepository;
+import br.com.eneeyes.main.dto.CompanyDto;
+import br.com.eneeyes.main.model.Company;
+import br.com.eneeyes.main.repository.CompanyRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
 
 @Named
-public class AreaService implements IService<AreaDto> {
+public class CompanyService implements IService<CompanyDto> {
 
 	@Inject
-	private AreaRepository repository;
+	private CompanyRepository repository;
 	
-	public BasicResult<?> save(AreaDto dto) {
-		Result<AreaDto> result = new Result<AreaDto>(); 	
+	public BasicResult<?> save(CompanyDto dto) {
+		Result<CompanyDto> result = new Result<CompanyDto>(); 	
 		
-		Area area = Area.fromDtoToArea(dto);
+		Company company = Company.fromDtoToCompany(dto);
 		
-		area = repository.save(area);
-		dto.setUid(area.getUid());
+		company = repository.save(company);
+		dto.setUid(company.getUid());
 				
-		result.setEntity(AreaDto.fromAreaToDto(area));
+		result.setEntity(CompanyDto.fromCompanyToDto(company));
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Executado com sucesso.");	
 		
@@ -36,7 +36,7 @@ public class AreaService implements IService<AreaDto> {
 
 	public BasicResult<?> delete(Long uid) {
 				
-		Result<AreaDto> result = new Result<AreaDto>(); 	
+		Result<CompanyDto> result = new Result<CompanyDto>(); 	
 		
 		try {			
 			repository.delete(uid);
@@ -54,19 +54,19 @@ public class AreaService implements IService<AreaDto> {
 
 	public Result<?> listAll() {
 		
-		Result<AreaDto> result = new Result<AreaDto>(); 	
+		Result<CompanyDto> result = new Result<CompanyDto>(); 	
 		
 		try {
-			List<Area> lista = repository.findAll();
+			List<Company> lista = repository.findAll();
 
 			if (lista != null) {
-				result.setList(AreaDto.fromAreaToListDto(lista));
+				result.setList(CompanyDto.fromCompanyToListDto(lista));
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma area.");
+				result.setMessage("Nenhuma company.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);
@@ -77,21 +77,21 @@ public class AreaService implements IService<AreaDto> {
 
 	}
 
-	public Result<AreaDto> listById(Long uid) {
+	public Result<CompanyDto> listById(Long uid) {
 		
-		Result<AreaDto> result = new Result<AreaDto>();
+		Result<CompanyDto> result = new Result<CompanyDto>();
 		
 		try {
-			List<Area> lista = repository.findByUnitID(uid);
+			List<Company> lista = repository.findByCompanyID(uid);
 
 			if (lista != null) {
-				result.setList(AreaDto.fromAreaToListDto(lista));
+				result.setList(CompanyDto.fromCompanyToListDto(lista));
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma area.");
+				result.setMessage("Nenhuma company.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

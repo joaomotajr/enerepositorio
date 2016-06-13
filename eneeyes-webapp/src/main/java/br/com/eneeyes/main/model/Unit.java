@@ -2,9 +2,7 @@ package br.com.eneeyes.main.model;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,13 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
+import br.com.eneeyes.main.dto.AreaDto;
 import br.com.eneeyes.main.dto.UnitDto;
 import br.com.eneeyes.main.model.enums.UnitType;
  
@@ -97,16 +92,7 @@ public class Unit {
 		else { 
 			this.unitType = unitType;
 		}
-	}	
-	
-	@ManyToOne
-    @Cascade(value = CascadeType.ALL)
-    @JoinColumn(name="parent_id")
-    private Unit parent;
-	    
-    @OneToMany(mappedBy="parent")
-    private Set<Unit> childs = new HashSet<Unit>();       
-
+	}
     
     @OneToMany(fetch = FetchType.EAGER)	
 	@JoinTable(name = "unit_areas", joinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"), 
@@ -217,22 +203,6 @@ public class Unit {
 		this.longitude = longitude;
 	}
 
-	public final Unit getParent() {
-		return parent;
-	}
-
-	public final void setParent(Unit parent) {
-		this.parent = parent;
-	}
-
-	public final Set<Unit> getChilds() {
-		return childs;
-	}
-
-	public final void setChilds(Set<Unit> childs) {
-		this.childs = childs;
-	}
-
 	public final List<Area> getAreas() {
 		return areas;
 	}
@@ -258,13 +228,20 @@ public class Unit {
 		unit.setUnitType(dto.getUnitType());		
 		unit.setDate(dto.getDate());
 		unit.setLatitude(dto.getLatitude());
-		unit.setLongitude(dto.getLongitude());			
+		unit.setLongitude(dto.getLongitude());
 		
-		if (dto.getParent() != null) {
-			Unit parent = fromDtoToUnit(dto.getParent());
-			unit.setParent(parent);
-		}	
-
+		if(dto.getAreas() != null) {
+			
+			List<Area> areas = new ArrayList<Area>();
+			
+			for (AreaDto areaDto : dto.getAreas() ) {
+				Area area = Area.fromDtoToArea(areaDto);
+				areas.add(area);
+			}
+			
+			unit.setAreas(areas);
+		}
+		
 		return unit;
 	}
 	

@@ -40,6 +40,7 @@ public class UnitService implements IService<UnitDto> {
 		
 		try {			
 			repository.delete(uid);
+			
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Área Excluída.");
 			
@@ -77,11 +78,11 @@ public class UnitService implements IService<UnitDto> {
 
 	}
 
-	public int setParent(Long uid, Long parentUid) {
-		
-		return repository.setParentFor(parentUid, uid);
-		
-	}
+//	public int setParent(Long uid, Long parentUid) {
+//		
+//		return repository.setParentFor(parentUid, uid);
+//		
+//	}
 		
 	
 }

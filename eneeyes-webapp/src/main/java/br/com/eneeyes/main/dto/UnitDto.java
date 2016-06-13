@@ -24,7 +24,8 @@ public class UnitDto {
 	private Date date;
 	private Double Latitude;		
 	private Double Longitude;
-	private UnitDto parent;
+	
+	private List<AreaDto> areas;
 
 	public final Long getUid() {
 		return uid;
@@ -110,13 +111,14 @@ public class UnitDto {
 	public final void setLongitude(Double longitude) {
 		Longitude = longitude;
 	}
-	public final UnitDto getParent() {
-		return parent;
-	}
-	public final void setParent(UnitDto parent) {
-		this.parent = parent;
-	}
 	
+	public final List<AreaDto> getAreas() {
+		return areas;
+	}
+	public final void setAreas(List<AreaDto> areas) {
+		this.areas = areas;
+	}
+
 	public static UnitDto fromUnitToDto(Unit unit) {
 		
 		UnitDto dto = new UnitDto();		
@@ -134,12 +136,12 @@ public class UnitDto {
 		dto.setUnitType(unit.getUnitType());		
 		dto.setDate(unit.getDate());
 		dto.setLatitude(unit.getLatitude());
-		dto.setLongitude(unit.getLongitude());			
-				
-		if(unit.getParent() != null){
-			UnitDto parent = fromUnitToDto(unit.getParent());
-			dto.setParent(parent);
-		}		
+		dto.setLongitude(unit.getLongitude());
+		
+		if(unit.getAreas() != null){
+			List<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
+			dto.setAreas(areas);
+		}
 		
 		return dto;
 	}		
@@ -166,11 +168,12 @@ public class UnitDto {
 			dto.setDate(unit.getDate());
 			dto.setLatitude(unit.getLatitude());
 			dto.setLongitude(unit.getLongitude());			
-					
-			if(unit.getParent() != null){
-				UnitDto parent = fromUnitToDto(unit.getParent());
-				dto.setParent(parent);
-			}		
+			
+			if(unit.getAreas() != null){
+				List<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
+				dto.setAreas(areas);
+			}
+		
 		}
 		
 		return returnList;

@@ -23,7 +23,7 @@ import br.com.eneeyes.main.model.enums.UnitType;
  
  /**
  * Created by Junior on 06/06/2016.
- * Cadastro das Empresas a serem monitoradas
+ * Cadastro das Unidades das Empresas (Matriz e Filiais)
  */
 
 

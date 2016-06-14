@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import br.com.eneeyes.main.dto.UnitDto;
 import br.com.eneeyes.main.dto.CompanyDto;
 
+
+
 @Entity
 @Table(name = "company")
 public class Company {

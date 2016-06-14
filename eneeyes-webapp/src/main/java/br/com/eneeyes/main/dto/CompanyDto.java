@@ -5,6 +5,10 @@ import java.util.List;
 
 import br.com.eneeyes.main.model.Company;
 
+/**
+* Created by Junior on 06/06/2016.
+*/
+
 public class CompanyDto {
 	
 	private Long uid;

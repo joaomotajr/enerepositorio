@@ -14,7 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.eneeyes.main.dto.AreaDto;
+import br.com.eneeyes.main.dto.UnitDto;
 import br.com.eneeyes.main.dto.CompanyDto;
 
 @Entity
@@ -67,14 +67,14 @@ public class Company {
 		
 		if(dto.getUnits() != null) {
 			
-			List<Area> areas = new ArrayList<Area>();
+			List<Unit> units = new ArrayList<Unit>();
 			
-			for (AreaDto areaDto : dto.getAreas() ) {
-				Area area = Area.fromDtoToArea(areaDto);
-				areas.add(area);
+			for (UnitDto unitDto : dto.getUnits() ) {
+				Unit unit = Unit.fromDtoToUnit(unitDto);
+				units.add(unit);
 			}
 			
-			unit.setAreas(areas);
+			company.setUnits(units);
 		}
 
 		return company;

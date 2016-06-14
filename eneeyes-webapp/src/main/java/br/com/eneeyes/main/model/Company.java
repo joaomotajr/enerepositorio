@@ -66,7 +66,7 @@ public class Company {
 		company.setName(dto.getName());		
 		
 		if(dto.getUnits() != null) {
-			
+
 			List<Unit> units = new ArrayList<Unit>();
 			
 			for (UnitDto unitDto : dto.getUnits() ) {
@@ -74,7 +74,8 @@ public class Company {
 				units.add(unit);
 			}
 			
-			company.setUnits(units);
+			company.setUnits(units);		
+
 		}
 
 		return company;

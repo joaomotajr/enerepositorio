@@ -64,8 +64,7 @@ public class CompanyDto {
 			if(company.getUnits() != null){
 				List<UnitDto> units = UnitDto.fromUnitToListDto(company.getUnits());
 				dto.setUnits(units);
-			}
-		
+			}		
 		}
 		
 		return returnList;

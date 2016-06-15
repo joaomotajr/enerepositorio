@@ -17,5 +17,13 @@ public class teste {
 	@Column(name = "UID")
 	private Long uid;
 
+	public final Long getUid() {
+		return uid;
+	}
+
+	public final void setUid(Long uid) {
+		this.uid = uid;
+	}
+
 
 }

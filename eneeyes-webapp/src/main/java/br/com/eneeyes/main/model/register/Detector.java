@@ -31,10 +31,6 @@ public class Detector {
 	@Column(name = "UID")
 	private Long uid;
 	
-//	@OneToOne(cascade=CascadeType.ALL, optional = true, fetch = FetchType.EAGER)
-//	@JoinColumn(name="TRANSMITTER_ID")
-//	private Transmitter transmitter;
-	
 	@OneToOne(mappedBy="detector", cascade=CascadeType.ALL, fetch = FetchType.EAGER)	
 	private Transmitter transmitter;
 	

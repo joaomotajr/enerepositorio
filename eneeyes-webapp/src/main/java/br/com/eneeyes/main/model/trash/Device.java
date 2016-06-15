@@ -1,15 +1,15 @@
-package br.com.eneeyes.main.model.register;
+package br.com.eneeyes.main.model.trash;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import br.com.eneeyes.main.model.enums.DeviceType;
 
 /**
  * Created by Junior on 06/06/2016.
@@ -25,11 +25,6 @@ public class Device {
 	@Column(name = "UID")
 	private Long uid;
 	
-	@OneToOne(cascade=CascadeType.DETACH, optional = false, fetch = FetchType.EAGER)
-	@JoinColumn(name="DEVICE_TYPE_ID")
-	private DeviceType deviceType;
-
-	
 	public final Long getUid() {
 		return uid;
 	}
@@ -37,15 +32,25 @@ public class Device {
 	public final void setUid(Long uid) {
 		this.uid = uid;
 	}
-
 	
-	public final DeviceType getDeviceType() {
+	@Column(name = "DEVICE_TYPE", columnDefinition = "int default 0")
+	private DeviceType deviceType;
+
+	@Enumerated(EnumType.ORDINAL) 
+	private DeviceType DeviceType() { 
+	    return deviceType; 
+	}
+	
+	public DeviceType getDeviceType() {
 		return deviceType;
 	}
 
-	public final void setDeviceType(DeviceType deviceType) {
-		this.deviceType = deviceType;
-	}
-
-
+	public void setDeviceType(DeviceType deviceType) {		
+		if (deviceType == null ) {			
+			this.deviceType = DeviceType.OUTROS;
+		}	
+		else { 
+			this.deviceType = deviceType;
+		}
+	}	
 }

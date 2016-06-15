@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -96,8 +97,14 @@ public class Unit {
     
     @OneToMany(fetch = FetchType.EAGER)	
 	@JoinTable(name = "unit_areas", joinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"), 
-								inverseJoinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID"))
-	private List<Area> areas = new ArrayList<Area>();
+						     inverseJoinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID"))
+	private List<Area> areas = new ArrayList<Area>();    
+    
+    @ManyToOne	
+	@JoinTable(name = "company_units", 
+	       joinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID") , 
+    inverseJoinColumns = @JoinColumn(name = "COMPANY_ID", referencedColumnName = "UID"))
+	private Company company;
     	
 	public final Long getUid() {
 		return uid;

@@ -46,11 +46,7 @@ public class Area {
 	private Double Longitude;
 	
 	@Column(name = "CLASSIFIED", nullable = true)
-	private Boolean classified;	
-	
-//    @ManyToOne(fetch=FetchType.LAZY)
-//    @JoinColumn(name="unit_uid")    
-//    private Unit unit;
+	private Boolean classified;
 	
 	@ManyToOne	
 	@JoinTable(name = "unit_areas", 

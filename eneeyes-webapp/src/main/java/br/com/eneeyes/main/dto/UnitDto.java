@@ -93,6 +93,14 @@ public class UnitDto {
 	}
 	public final void setUnitType(UnitType unitType) {
 		this.unitType = unitType;
+		
+		if (unitType == null ) {			
+			this.unitType = UnitType.UNICA;
+		}	
+		else { 
+			this.unitType = unitType;
+		}
+		
 	}
 	public final Date getDate() {
 		return date;

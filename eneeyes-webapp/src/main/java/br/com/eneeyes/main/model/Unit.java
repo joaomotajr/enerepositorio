@@ -90,12 +90,12 @@ public class Unit {
 
 	public void setUnitType(UnitType unitType) {
 		this.unitType = unitType;
-//		if (unitType == null ) {			
-//			this.unitType = UnitType.UNICA;
-//		}	
-//		else { 
-//			this.unitType = unitType;
-//		}
+		if (unitType == null ) {			
+			this.unitType = UnitType.UNICA;
+		}	
+		else { 
+			this.unitType = unitType;
+		}
 	}
 	
 	@ManyToOne(fetch=FetchType.LAZY)

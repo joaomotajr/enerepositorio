@@ -95,7 +95,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		longitude: 9.232323,
 		classified: true,
 		date: null,
-		unitDto: {uid: 1}
+		unitDto: {uid: 1, unitType: 1}
 	 } 
 	 
 	 $scope.saveArea = function() {

@@ -8,13 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.AreaDto;
-import br.com.eneeyes.main.model.Unit;
 
 /**
  * Created by Junior on 06/06/2016.
@@ -48,11 +44,11 @@ public class Area {
 	@Column(name = "CLASSIFIED", nullable = true)
 	private Boolean classified;
 	
-	@ManyToOne	
-	@JoinTable(name = "unit_areas", 
-	joinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID") , 
-	inverseJoinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"))
-	private Unit unit;
+//	@ManyToOne	
+//	@JoinTable(name = "unit_areas", 
+//	joinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID") , 
+//	inverseJoinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"))
+//	private Unit unit;
     
     @Column(name = "DATE", nullable = true)
 	private Date date;
@@ -113,14 +109,14 @@ public class Area {
 		this.classified = classified;
 	}
 
-	public Unit getUnit() {
-		return unit;
-	}
-
-	public void setUnit(Unit unit) {
-		this.unit = unit;
-	}
-	
+//	public Unit getUnit() {
+//		return unit;
+//	}
+//
+//	public void setUnit(Unit unit) {
+//		this.unit = unit;
+//	}
+//	
 	public static Area fromDtoToArea(AreaDto dto) {
 		
 		Area area = new Area();
@@ -133,11 +129,11 @@ public class Area {
 		area.setLongitude(dto.getLongitude());
 		area.setClassified(dto.getClassified());	
 
-		if (dto.getUnitDto() != null) {
-			
-			Unit unit = Unit.fromDtoToUnit(dto.getUnitDto());
-			area.setUnit(unit);
-		}
+//		if (dto.getUnitDto() != null) {
+//			
+//			Unit unit = Unit.fromDtoToUnit(dto.getUnitDto());
+//			area.setUnit(unit);
+//		}
 		
 		return area;
 	}

@@ -26,7 +26,8 @@ public class UnitDto {
 	private Double Longitude;
 	
 	private List<AreaDto> areas;
-
+	//private Set<AreaDto> areas;	
+	
 	public final Long getUid() {
 		return uid;
 	}
@@ -118,7 +119,14 @@ public class UnitDto {
 	public final void setAreas(List<AreaDto> areas) {
 		this.areas = areas;
 	}
-
+	
+//	public final Set<AreaDto> getAreas() {
+//		return areas;
+//	}
+//	public final void setAreas(Set<AreaDto> areas) {
+//		this.areas = areas;
+//	}
+	
 	public static UnitDto fromUnitToDto(Unit unit) {
 		
 		UnitDto dto = new UnitDto();		
@@ -140,6 +148,8 @@ public class UnitDto {
 		
 		if(unit.getAreas() != null){
 			List<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
+			//Set<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
+			
 			dto.setAreas(areas);
 		}
 		
@@ -148,8 +158,8 @@ public class UnitDto {
 	
 	public static List<UnitDto> fromUnitToListDto(List<Unit> list) {
 		
-		List<UnitDto> returnList = new ArrayList<UnitDto>();
-		
+		List<UnitDto> returnList = new ArrayList<UnitDto>();		
+				
 		for (Unit unit : list) {
 			
 			UnitDto dto = new UnitDto();
@@ -171,6 +181,7 @@ public class UnitDto {
 			
 			if(unit.getAreas() != null){
 				List<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
+				//Set<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
 				dto.setAreas(areas);
 			}
 		

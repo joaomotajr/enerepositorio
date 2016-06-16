@@ -45,7 +45,7 @@ public class AreaController {
 	@ResponseStatus(HttpStatus.OK)
 	public Result<?> listById(@PathVariable Long uid) {
 		
-		return service.listById(uid);
+		return service.listById(uid);		
 	}
 
 }

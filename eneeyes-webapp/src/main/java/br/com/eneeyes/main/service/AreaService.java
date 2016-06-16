@@ -82,7 +82,7 @@ public class AreaService implements IService<AreaDto> {
 		Result<AreaDto> result = new Result<AreaDto>();
 		
 		try {
-			List<Area> lista = repository.findByUnitID(uid);
+			List<Area> lista = repository.findByAreaID(uid);
 
 			if (lista != null) {
 				result.setList(AreaDto.fromAreaToListDto(lista));
@@ -100,4 +100,5 @@ public class AreaService implements IService<AreaDto> {
 		
 		return result;	
 	}
+
 }

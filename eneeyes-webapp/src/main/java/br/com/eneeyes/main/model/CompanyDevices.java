@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import br.com.eneeyes.main.model.enums.DeviceType;
 
 @Entity
-@Table(name = "CompanyDevices")
+@Table(name = "company_devices")
 public class CompanyDevices {
 
 	@Id

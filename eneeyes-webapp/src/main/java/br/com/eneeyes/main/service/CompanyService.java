@@ -77,6 +77,7 @@ public class CompanyService implements IService<CompanyDto> {
 
 	}
 
+
 	public Result<CompanyDto> listById(Long uid) {
 		
 		Result<CompanyDto> result = new Result<CompanyDto>();

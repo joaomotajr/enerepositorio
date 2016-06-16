@@ -11,19 +11,21 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eneeyes.main.dto.AreaDto;
+import br.com.eneeyes.main.dto.CompanyDto;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 import br.com.eneeyes.main.service.AreaService;
+import br.com.eneeyes.main.service.CompanyService;
 
 @RestController
 public class CompanyController {
 	
 	@Inject
-	AreaService service;	
+	CompanyService service;	
 	
 	@RequestMapping(value="/security/api/company/save", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> save(@RequestBody AreaDto companyDto) {
+	public BasicResult<?> save(@RequestBody CompanyDto companyDto) {
 		
 		return service.save(companyDto);
 	}

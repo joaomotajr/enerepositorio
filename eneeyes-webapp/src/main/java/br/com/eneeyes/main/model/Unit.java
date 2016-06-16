@@ -14,9 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import br.com.eneeyes.main.dto.AreaDto;
 import br.com.eneeyes.main.dto.UnitDto;
@@ -95,17 +97,23 @@ public class Unit {
 		}
 	}
     
-    @OneToMany(fetch = FetchType.EAGER)	
+    @OneToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SUBSELECT)
 	@JoinTable(name = "unit_areas", joinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"), 
 						     inverseJoinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID"))
-	private List<Area> areas = new ArrayList<Area>();    
+    private List<Area> areas = new ArrayList<Area>();
+    //private Set<Area> areas = new HashSet<Area>();    
     
-    @ManyToOne	
-	@JoinTable(name = "company_units", 
-	       joinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID") , 
-    inverseJoinColumns = @JoinColumn(name = "COMPANY_ID", referencedColumnName = "UID"))
-	private Company company;
-    	
+//    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//	@JoinColumn(name="UNIT_ID")	
+//    private Set<Area> areas = new HashSet<Area>();
+    
+//    @ManyToOne	
+//	@JoinTable(name = "company_units", 
+//	       joinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID") , 
+//    inverseJoinColumns = @JoinColumn(name = "COMPANY_ID", referencedColumnName = "UID"))
+//	private Company company;    
+
 	public final Long getUid() {
 		return uid;
 	}
@@ -216,7 +224,15 @@ public class Unit {
 
 	public final void setAreas(List<Area> areas) {
 		this.areas = areas;
-	}	
+	}
+	
+//	public final Set<Area> getAreas() {
+//		return areas;
+//	}
+//
+//	public final void setAreas(Set<Area> areas) {
+//		this.areas = areas;
+//	}
 	
 	public static Unit fromDtoToUnit(UnitDto dto) {
 		
@@ -231,7 +247,7 @@ public class Unit {
 		unit.setAddress(dto.getAddress());		
 		unit.setCity(dto.getCity());
 		unit.setState(dto.getState());
-		unit.setZip(dto.getZip());
+		unit.setZip(dto.getZip()); 
 		unit.setUnitType(dto.getUnitType());		
 		unit.setDate(dto.getDate());
 		unit.setLatitude(dto.getLatitude());
@@ -239,6 +255,7 @@ public class Unit {
 		
 		if(dto.getAreas() != null) {
 			
+			//Set<Area> areas = new HashSet<Area>(); 
 			List<Area> areas = new ArrayList<Area>();
 			
 			for (AreaDto areaDto : dto.getAreas() ) {

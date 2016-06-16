@@ -17,7 +17,7 @@ public class AreaDto {
 	private Double longitude;
 	private Boolean classified;
 	private Date date;
-    private UnitDto unitDto;
+    //private UnitDto unitDto;
     
 	public final Long getUid() {
 		return uid;
@@ -67,12 +67,12 @@ public class AreaDto {
 	public void setDate(Date date) {
 		this.date = date;
 	}	
-	public UnitDto getUnitDto() {
-		return unitDto;
-	}
-	public void setUnitDto(UnitDto unitDto) {
-		this.unitDto = unitDto;
-	}
+//	public UnitDto getUnitDto() {
+//		return unitDto;
+//	}
+//	public void setUnitDto(UnitDto unitDto) {
+//		this.unitDto = unitDto;
+//	}
 
     
 	public static AreaDto fromAreaToDto(Area area) {
@@ -87,17 +87,17 @@ public class AreaDto {
 		dto.setDescription(area.getDescription());
 		dto.setClassified(area.getClassified());
 		
-		if(area.getUnit() != null){
-			UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
-			dto.setUnitDto(unitDto);
-		}
-			
+//		if(area.getUnit() != null){
+//			UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
+//			dto.setUnitDto(unitDto);
+//		}
+//			
 		return dto;
 	}
 	
 	public static List<AreaDto> fromAreaToListDto(List<Area> list) {
 		
-		List<AreaDto> returnList = new ArrayList<AreaDto>();
+		List<AreaDto> returnList = new ArrayList<AreaDto>(); 
 		
 		for (Area area   : list) {
 			AreaDto dto = new AreaDto();
@@ -110,13 +110,13 @@ public class AreaDto {
 			dto.setDescription(area.getDescription());
 			dto.setClassified(area.getClassified());
 			
-			if(area.getUnit() != null){
-				UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
-				dto.setUnitDto(unitDto);
-			}
-			
+//			if(area.getUnit() != null){
+//				UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
+//				dto.setUnitDto(unitDto);
+//			}
+//			
 			returnList.add(dto);
-		}
+		}				
 		
 		return returnList;
 	}	

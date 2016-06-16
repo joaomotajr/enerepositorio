@@ -14,8 +14,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.eneeyes.main.dto.UnitDto;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import br.com.eneeyes.main.dto.CompanyDto;
+import br.com.eneeyes.main.dto.UnitDto;
 
 
 
@@ -31,9 +34,11 @@ public class Company {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 	
-	@OneToMany(fetch = FetchType.EAGER)	
+	@OneToMany(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
 	@JoinTable(name = "company_units", joinColumns = @JoinColumn(name = "COMPANY_ID", referencedColumnName = "UID"), 
-								inverseJoinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"))
+								inverseJoinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"))	
+	//private Set<Unit> units = new HashSet<Unit>();
 	private List<Unit> units = new ArrayList<Unit>();
 	
 	public final Long getUid() {
@@ -59,16 +64,25 @@ public class Company {
 	public final void setUnits(List<Unit> units) {
 		this.units = units;
 	}
+	
+//	public final Set<Unit> getUnits() {
+//		return units;
+//	}
+//
+//	public final void setUnits(Set<Unit> units) {
+//		this.units = units;
+//	}
 
 	public static Company fromDtoToCompany(CompanyDto dto) {
 		
 		Company company = new Company();
-		
+				
 		company.setUid(dto.getUid());
 		company.setName(dto.getName());		
 		
 		if(dto.getUnits() != null) {
 
+			//Set<Unit> units = new HashSet<Unit>(); 
 			List<Unit> units = new ArrayList<Unit>();
 			
 			for (UnitDto unitDto : dto.getUnits() ) {

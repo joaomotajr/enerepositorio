@@ -17,8 +17,8 @@ public class AreaDto {
 	private Double longitude;
 	private Boolean classified;
 	private Date date;
-    //private UnitDto unitDto;
-    
+    private UnitDto unitDto;
+    	
 	public final Long getUid() {
 		return uid;
 	}
@@ -73,7 +73,13 @@ public class AreaDto {
 //	public void setUnitDto(UnitDto unitDto) {
 //		this.unitDto = unitDto;
 //	}
-
+	
+	public final UnitDto getUnitDto() {
+		return unitDto;
+	}
+	public final void setUnitDto(UnitDto unitDto) {
+		this.unitDto = unitDto;
+	}
     
 	public static AreaDto fromAreaToDto(Area area) {
 		
@@ -86,12 +92,13 @@ public class AreaDto {
 		dto.setLongitude(area.getLongitude());
 		dto.setDescription(area.getDescription());
 		dto.setClassified(area.getClassified());
+		dto.setDate(area.getDate());
 		
-//		if(area.getUnit() != null){
-//			UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
-//			dto.setUnitDto(unitDto);
-//		}
-//			
+		if(area.getUnit() != null){
+			UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
+			dto.setUnitDto(unitDto);
+		}
+			
 		return dto;
 	}
 	
@@ -109,16 +116,18 @@ public class AreaDto {
 			dto.setLongitude(area.getLongitude());
 			dto.setDescription(area.getDescription());
 			dto.setClassified(area.getClassified());
+			dto.setDate(area.getDate());
 			
-//			if(area.getUnit() != null){
-//				UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
-//				dto.setUnitDto(unitDto);
-//			}
-//			
+			if(area.getUnit() != null){
+				UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
+				dto.setUnitDto(unitDto);
+			}
+			
 			returnList.add(dto);
 		}				
 		
 		return returnList;
-	}	
+	}
+		
 	
 }

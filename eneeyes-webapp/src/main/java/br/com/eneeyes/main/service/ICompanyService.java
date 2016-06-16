@@ -1,20 +1,19 @@
 package br.com.eneeyes.main.service;
 
-import javax.inject.Named;
-
 import br.com.eneeyes.archetype.dto.Result;
-import br.com.eneeyes.main.dto.UnitDto;
+import br.com.eneeyes.main.dto.CompanyDto;
 
-@Named
 public interface ICompanyService {
 
-	public Result<?> save(UnitDto dto);
+	public Result<?> save(CompanyDto dto);
 	
-	public Result<?> findAll(UnitDto dto);
+	public Result<?> findAll(CompanyDto dto);
 	
 	public Result<?> findOne(Long uid);	
 		
-	public Result<?> update(UnitDto dto);
+	public Result<?> update(CompanyDto dto);
 			
 	public Result<?> delete(long uid);
+	
+	
 }

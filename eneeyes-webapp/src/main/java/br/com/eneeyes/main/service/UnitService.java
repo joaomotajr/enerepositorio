@@ -78,6 +78,11 @@ public class UnitService implements IService<UnitDto> {
 
 	}
 
+	public int setParent(Long id, Long parentId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 //	public int setParent(Long uid, Long parentUid) {
 //		
 //		return repository.setParentFor(parentUid, uid);

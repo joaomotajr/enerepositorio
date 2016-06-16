@@ -13,6 +13,13 @@ INSERT INTO `conciliador`.`taxa` (`CREDITO_`, `CREDITO_2_6_`, `CREDITO_7_12_`, `
 INSERT INTO `conciliador`.`adquirente` (`DESCRICAO_`, `TAXA_ID_`) VALUES ('Cielo', '1');
 UPDATE `conciliador`.`aln_id_user` SET `ADQUIRENTE_ID_`='1' WHERE `ID_`='1';
 
+/* LIMPAR TABELAS */
+drop table detector_sensors;
+drop table unit;
+drop table area;
+drop table company;
+drop table detector;
+
 
 
 /* INCLUIR CODE DATA TIPO OPCAO EXTRATO */

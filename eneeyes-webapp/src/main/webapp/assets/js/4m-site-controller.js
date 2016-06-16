@@ -216,6 +216,10 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
     $scope.errorMessage = '';
 
     $scope.signin = function() {
+    	
+    	$scope.forms.signin.login = "joaomotajunior@gmail.com"
+    	$scope.forms.signin.credential = "123456";
+    		
         angular.element('html').addClass('loading');
         angular.element('#signin-error').css('display','none');
         angular.element('#signin-user').removeClass('has-error');

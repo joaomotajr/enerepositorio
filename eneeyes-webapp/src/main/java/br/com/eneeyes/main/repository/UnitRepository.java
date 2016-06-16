@@ -1,15 +1,19 @@
 package br.com.eneeyes.main.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import br.com.eneeyes.main.model.Company;
 import br.com.eneeyes.main.model.Unit;
 
 
 public interface UnitRepository extends JpaRepository<Unit, Long> {
 
-//	@Modifying
-//	@Transactional
-//	@Query("update Unit c set c.parent.uid = ?1 where c.uid = ?2")
-//	int setParentFor(Long parent, Long uid);
-
+	public List<Unit> findByCompany(Company company);
+	
+	@Query("select a from Unit a where a.company.uid = ?1")
+	public List<Company> findByCompanyID(Long idCompany);
+	
 }

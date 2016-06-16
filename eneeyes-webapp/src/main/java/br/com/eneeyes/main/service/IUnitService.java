@@ -9,9 +9,7 @@ public interface IUnitService {
 	
 	public Result<?> findAll(UnitDto dto);
 	
-	public Result<?> findOne(Long uid);
-
-	public Result<?> findByFilialId(Long filialID);
+	public Result<?> findOne(Long uid);	
 		
 	public Result<?> update(UnitDto dto);
 			

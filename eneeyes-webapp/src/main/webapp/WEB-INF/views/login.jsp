@@ -44,17 +44,21 @@
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
         <form>
+          
           <div class="form-group has-feedback">
             <input type="email" class="form-control" placeholder="Email" ng-model="forms.signin.login">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
+          
           <div class="form-group has-feedback">
             <input type="password" class="form-control" placeholder="Password" ng-model="forms.signin.credential">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
+          
           <div id="signin-error" class="alert alert-danger" style="display:none">
 				{{errorMessage | translate}}
-			</div>
+		  </div>
+		  
           <div class="row">
             <div class="col-xs-8">
               <div class="checkbox icheck">
@@ -63,9 +67,11 @@
                 </label>
               </div>
             </div><!-- /.col -->
+            
             <div class="col-xs-4">
               <button type="button" ng-click="signin()" class="btn btn-primary btn-block btn-flat">Sign In</button>
             </div><!-- /.col -->
+            
           </div>
         </form>
 

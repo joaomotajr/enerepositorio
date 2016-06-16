@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,7 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -89,26 +90,34 @@ public class Unit {
 
 	public void setUnitType(UnitType unitType) {
 		this.unitType = unitType;
-		if (unitType == null ) {			
-			this.unitType = UnitType.UNICA;
-		}	
-		else { 
-			this.unitType = unitType;
-		}
+//		if (unitType == null ) {			
+//			this.unitType = UnitType.UNICA;
+//		}	
+//		else { 
+//			this.unitType = unitType;
+//		}
 	}
-    
-    @OneToMany(fetch = FetchType.EAGER)
-    @Fetch(FetchMode.SUBSELECT)
-	@JoinTable(name = "unit_areas", joinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"), 
-						     inverseJoinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID"))
-    private List<Area> areas = new ArrayList<Area>();
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="COMPANY_ID", nullable=false)
+    private Company company;
+//    @OneToMany(fetch = FetchType.EAGER)
+//    @Fetch(FetchMode.SUBSELECT)
+//	@JoinTable(name = "unit_areas", joinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"), 
+//						     inverseJoinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID"))
+
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "unit", cascade = CascadeType.ALL)
+	@Fetch(FetchMode.SUBSELECT)
+	private List<Area> areas = new ArrayList<Area>();
+	
     //private Set<Area> areas = new HashSet<Area>();    
     
-//    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//  @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 //	@JoinColumn(name="UNIT_ID")	
-//    private Set<Area> areas = new HashSet<Area>();
+//  private Set<Area> areas = new HashSet<Area>();
     
-//    @ManyToOne	
+//  @ManyToOne	
 //	@JoinTable(name = "company_units", 
 //	       joinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID") , 
 //    inverseJoinColumns = @JoinColumn(name = "COMPANY_ID", referencedColumnName = "UID"))
@@ -234,6 +243,14 @@ public class Unit {
 //		this.areas = areas;
 //	}
 	
+	public final Company getCompany() {
+		return company;
+	}
+
+	public final void setCompany(Company company) {
+		this.company = company;
+	}
+	
 	public static Unit fromDtoToUnit(UnitDto dto) {
 		
 		Unit unit = new Unit();
@@ -251,10 +268,15 @@ public class Unit {
 		unit.setUnitType(dto.getUnitType());		
 		unit.setDate(dto.getDate());
 		unit.setLatitude(dto.getLatitude());
-		unit.setLongitude(dto.getLongitude());
+		unit.setLongitude(dto.getLongitude());		
 		
-		if(dto.getAreas() != null) {
-			
+		if (dto.getCompanyDto() != null) {			
+			Company company = new Company();
+			company.setUid(dto.getCompanyDto().getUid());
+			unit.setCompany(company);			
+		}		
+		
+		if(dto.getAreas() != null) {			
 			//Set<Area> areas = new HashSet<Area>(); 
 			List<Area> areas = new ArrayList<Area>();
 			

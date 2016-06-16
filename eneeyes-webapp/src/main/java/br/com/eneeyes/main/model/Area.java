@@ -5,9 +5,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.AreaDto;
@@ -43,16 +46,14 @@ public class Area {
 	
 	@Column(name = "CLASSIFIED", nullable = true)
 	private Boolean classified;
-	
-//	@ManyToOne	
-//	@JoinTable(name = "unit_areas", 
-//	joinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID") , 
-//	inverseJoinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"))
-//	private Unit unit;
     
     @Column(name = "DATE", nullable = true)
 	private Date date;
     
+    @ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="UNIT_ID", nullable=false)
+    private Unit unit;
+	
 	public Long getUid() {
 		return uid;
 	}
@@ -108,6 +109,23 @@ public class Area {
 	public void setClassified(Boolean classified) {
 		this.classified = classified;
 	}
+	
+	public final Date getDate() {
+		return date;
+	}
+
+	public final void setDate(Date date) {
+		this.date = date;
+	}
+
+	public final Unit getUnit() {
+		return unit;
+	}
+
+	public final void setUnit(Unit unit) {
+		this.unit = unit;
+	}
+
 
 //	public Unit getUnit() {
 //		return unit;
@@ -127,13 +145,14 @@ public class Area {
 		area.setLocal(dto.getLocal());
 		area.setLatitude(dto.getLatitude());
 		area.setLongitude(dto.getLongitude());
-		area.setClassified(dto.getClassified());	
+		area.setClassified(dto.getClassified());		
+		area.setDate(dto.getDate());		
 
-//		if (dto.getUnitDto() != null) {
-//			
-//			Unit unit = Unit.fromDtoToUnit(dto.getUnitDto());
-//			area.setUnit(unit);
-//		}
+		if (dto.getUnitDto() != null) {
+			
+			Unit unit = Unit.fromDtoToUnit(dto.getUnitDto());
+			area.setUnit(unit);
+		}
 		
 		return area;
 	}

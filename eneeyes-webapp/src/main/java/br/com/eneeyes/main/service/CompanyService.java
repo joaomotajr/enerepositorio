@@ -83,7 +83,7 @@ public class CompanyService implements IService<CompanyDto> {
 		Result<CompanyDto> result = new Result<CompanyDto>();
 		
 		try {
-			List<Company> lista = repository.findByCompanyID(uid);
+			List<Company> lista = repository.findByUid(uid);
 
 			if (lista != null) {
 				result.setList(CompanyDto.fromCompanyToListDto(lista));

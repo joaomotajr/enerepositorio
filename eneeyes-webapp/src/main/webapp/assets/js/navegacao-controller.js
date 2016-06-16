@@ -8,7 +8,7 @@ app.factory('AreaService', function($resource){
         listAll : $resource('/security/api/area/all',{},{
             area : {method : 'GET'}
         }),
-        listOne : $resource('/security/api/area/obtemPorId',{},{
+        listOne : $resource('/security/api/area/obtemPorId/:id', {id: '@id'},{
             area : {method : 'GET'}
         }),
         save : $resource('/security/api/area/save',{},{
@@ -41,14 +41,34 @@ app.factory('UnitService', function($resource){
      };
 });
 
-app.factory('SetParentService', function($resource){
-    return {	        
-    setParent :  $resource('/security/api/unit/setparent/:id/:parentid/',  {id: '@id', parentid: '@parentid'}, {},
-    		{query: {method: 'GET', isArray:true}})	    
-    };
+
+app.factory('CompanyService', function($resource){    
+    
+    return {
+    	deletar : $resource('/security/api/company/delete',{},{
+    		company : {method : 'DELETE'}
+        }),        
+        listAll : $resource('/security/api/company/all',{},{
+        	company : {method : 'GET'}
+        }),
+        listOne : $resource('/security/api/company/obtemPorId/:id', {id: '@id'},{
+        	company : {method : 'GET'}
+        }),
+        save : $resource('/security/api/company/save',{},{
+        	company : {method : 'POST'}
+        }),
+     };
 });
 
-app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, SetParentService) {
+
+//app.factory('SetParentService', function($resource){
+//    return {	        
+//    setParent :  $resource('/security/api/unit/setparent/:id/:parentid/',  {id: '@id', parentid: '@parentid'}, {},
+//    		{query: {method: 'GET', isArray:true}})	    
+//    };
+//});
+
+app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService) {
 		
 	$('#treeview-searchable').treeview({
 	     data: getTree(),
@@ -76,7 +96,35 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		classified: true,
 		date: null,
 		unitDto: {uid: 1}
+	 } 
+	 
+	 $scope.saveArea = function() {
+		 
+		 $scope.inclusao = new AreaService.save($scope.area);		 
+		 $scope.inclusao.$area({_csrf : angular.element('#_csrf').val()}, function(){         	
+         	console.log($scope.inclusao);         	
+         });
+		 
 	 }
+	 
+	 $scope.getArea = function() {
+		 
+		 $scope.listAll = new AreaService.listAll();		 
+		 $scope.listAll.$area({_csrf : angular.element('#_csrf').val()}, function(){			
+			 console.log($scope.listAll);		         	         	
+         });		 
+	 }
+	 
+	 $scope.getOneArea = function() {
+		 
+		 $scope.listOne = new AreaService.listOne();		 
+		 $scope.listOne.$area({_csrf : angular.element('#_csrf').val()}, {id : 1}, function(){			
+			 console.log($scope.listAll);
+         	         	
+         });
+		 
+	 }
+	 /*-----------------------------------------------------------------------------------------------------------------*/
 	 
 	 $scope.unit = {
 		uid: 0,
@@ -92,37 +140,11 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		unitType: 1,
 		date: null,
 		latitude: 12.2345545,		
-		longitude: 9.232323
-		//, parent : {uid: 1, name: "Teste" }				
+		longitude: 9.232323,
+		companyDto: {uid : 1}				
 	 }	 
 	 
-	 $scope.save = function() {
-		 
-		 $scope.inclusao = new AreaService.save($scope.area);		 
-		 $scope.inclusao.$area({_csrf : angular.element('#_csrf').val()}, function(){         	
-         	console.log($scope.inclusao);         	
-         });
-		 
-	 }
-	 
-	 $scope.get = function() {
-		 
-		 $scope.listAll = new AreaService.listAll();		 
-		 $scope.listAll.$area({_csrf : angular.element('#_csrf').val()}, function(){			
-			 console.log($scope.listAll);		         	         	
-         });		 
-	 }
-	 
-	 $scope.getOne = function() {
-		 
-		 $scope.listOne = new AreaService.listOne("1");		 
-		 $scope.listOne.$area({_csrf : angular.element('#_csrf').val()}, function(){			
-			 console.log($scope.listAll);
-         	         	
-         });
-		 
-	 }
-	 
+
 	 $scope.saveUnit = function() {
 		 
 		 $scope.inclusaoUnit = new UnitService.save($scope.unit);
@@ -132,7 +154,24 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		 
 	 }
 	 
-	 $scope.setUnit2 = function() {
+	 $scope.getUnit = function() {
+		 
+		 $scope.listAll = new UnitService.listAll();		 
+		 $scope.listAll.$unit({_csrf : angular.element('#_csrf').val()}, function(){			
+			 console.log($scope.listAll);		         	         	
+         });		 
+	 }
+	 
+	 $scope.getOneUnit = function() {
+		 
+		 $scope.listOne = new UnitService.listOne();		 
+		 $scope.listOne.$unit({_csrf : angular.element('#_csrf').val()}, {id : 1}, function(){			
+			 console.log($scope.listAll);
+         	         	
+         });		 
+	 }
+	 
+	 $scope.setUnit = function() {
 		 
 		 $scope.setParent = new UnitService.setParent($scope.unit);
 		 $scope.setParent.$unit({_csrf : angular.element('#_csrf').val(), id : 2, parentid: 1} , function(){         	
@@ -141,18 +180,50 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		 
 	 }
 	 
-	 $scope.setUnit = function () {
+	 $scope.company = {
+		uid: 0,
+		name: "Teste"						
+	 }	 
+	 
+
+	 $scope.saveCompany = function() {
 		 
-		$scope.val = SetParentService.setParent.query({_csrf : angular.element('#_csrf').val()}, {id : 2, parentid: 1}, function(result) {
-			if(result.resultType == "SUCCESS"){
-				window.location.href='/';
-			}
-			console.log(result);
-	    }, function(data) {
-			 if (data.status >= 400 && data.status <= 505 ) {
-				 
-			 }
-		 });
-	}	 
+		 $scope.inclusaoUnit = new CompanyService.save($scope.company);
+		 $scope.inclusaoUnit.$company({_csrf : angular.element('#_csrf').val()}, function(){         	
+         	console.log($scope.inclusaoUnit);         	
+         });
+		 
+	 }
+	 
+	 $scope.getCompany = function() {
+		 
+		 $scope.listAll = new CompanyService.listAll();		 
+		 $scope.listAll.$company({_csrf : angular.element('#_csrf').val()}, function(){			
+			 console.log($scope.listAll);		         	         	
+         });		 
+	 }
+	 
+	 $scope.getOneCompany = function() {
+		 
+		 $scope.listOne = new CompanyService.listOne();		 
+		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val()}, {id : 1}, function(){			
+				 console.log($scope.listAll);
+	         	         	
+	         });		 
+		 }
+ 
+//	 $scope.setUnit = function () {
+//		 
+//		$scope.val = SetParentService.setParent.query({_csrf : angular.element('#_csrf').val()}, {id : 2, parentid: 1}, function(result) {
+//			if(result.resultType == "SUCCESS"){
+//				window.location.href='/';
+//			}
+//			console.log(result);
+//	    }, function(data) {
+//			 if (data.status >= 400 && data.status <= 505 ) {
+//				 
+//			 }
+//		 });
+//	}	 
 	
 });

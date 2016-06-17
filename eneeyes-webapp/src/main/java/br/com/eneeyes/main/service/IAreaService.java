@@ -1,6 +1,6 @@
 package br.com.eneeyes.main.service;
 
-import br.com.eneeyes.archetype.dto.Result;
+import br.com.eneeyes.main.result.Result;
 import br.com.eneeyes.main.dto.UnitDto;
 
 public interface IAreaService {

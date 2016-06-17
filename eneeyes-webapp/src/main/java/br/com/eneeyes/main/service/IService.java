@@ -6,6 +6,6 @@ public interface IService<T> {
 
 	public BasicResult<?> save(T dto);
 	public BasicResult<?> delete(Long uid);
-	
+	public BasicResult<?> findOne(Long uid);	
 
 }

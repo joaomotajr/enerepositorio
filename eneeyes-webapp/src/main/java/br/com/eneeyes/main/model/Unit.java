@@ -18,9 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.IndexColumn;
-
-import br.com.eneeyes.main.dto.AreaDto;
 import br.com.eneeyes.main.dto.UnitDto;
 import br.com.eneeyes.main.model.enums.UnitType;
  
@@ -106,8 +103,7 @@ public class Unit {
 //						     inverseJoinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID"))
 
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "unit", cascade = CascadeType.ALL)
-	@IndexColumn(name = "area")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "unit", cascade = CascadeType.ALL)	
 	private List<Area> areas = new ArrayList<Area>();
 	
     //private Set<Area> areas = new HashSet<Area>();    
@@ -267,25 +263,24 @@ public class Unit {
 		unit.setUnitType(dto.getUnitType());		
 		unit.setDate(dto.getDate());
 		unit.setLatitude(dto.getLatitude());
-		unit.setLongitude(dto.getLongitude());		
+		unit.setLongitude(dto.getLongitude());
 		
 		if (dto.getCompanyDto() != null) {			
-			Company company = new Company();
-			company.setUid(dto.getCompanyDto().getUid());
+			Company company = Company.fromDtoToCompany(dto.getCompanyDto());			
 			unit.setCompany(company);			
 		}		
 		
-		if(dto.getAreasDto() != null) {			
-			//Set<Area> areas = new HashSet<Area>(); 
-			List<Area> areas = new ArrayList<Area>();
-			
-			for (AreaDto areaDto : dto.getAreasDto() ) {
-				Area area = Area.fromDtoToArea(areaDto);
-				areas.add(area);
-			}
-			
-			unit.setAreas(areas);
-		}
+//		if(dto.getAreasDto() != null) {			
+//			//Set<Area> areas = new HashSet<Area>(); 
+//			List<Area> areas = new ArrayList<Area>();
+//			
+//			for (AreaDto areaDto : dto.getAreasDto() ) {
+//				Area area = Area.fromDtoToArea(areaDto);
+//				areas.add(area);
+//			}
+//			
+//			unit.setAreas(areas);
+//		}
 		
 		return unit;
 	}

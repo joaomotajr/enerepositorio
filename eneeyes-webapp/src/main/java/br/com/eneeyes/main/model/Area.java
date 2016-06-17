@@ -50,7 +50,7 @@ public class Area {
     @Column(name = "DATE", nullable = true)
 	private Date date;
     
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="UNIT_ID", nullable=false)
     private Unit unit;
 	

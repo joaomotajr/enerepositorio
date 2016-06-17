@@ -25,9 +25,9 @@ public class UnitService implements IService<UnitDto> {
 		Unit unit = Unit.fromDtoToUnit(dto);
 		
 		unit = repository.save(unit);
-		dto.setUid(unit.getUid());
+		dto.setUid(unit.getUid());		
+		result.setEntity(dto);
 		
-		result.setEntity(UnitDto.fromUnitToDto(unit));
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Executado com sucesso.");					
 		
@@ -86,7 +86,10 @@ public class UnitService implements IService<UnitDto> {
 			Unit item = repository.findOne(uid);
 
 			if (item != null) {
-				result.setEntity(UnitDto.fromUnitToDto(item));
+				
+				
+				
+				result.setEntity(UnitDto.fromUnitToDto(item));				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {

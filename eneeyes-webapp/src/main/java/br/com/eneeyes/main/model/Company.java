@@ -13,10 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.IndexColumn;
-
 import br.com.eneeyes.main.dto.CompanyDto;
-import br.com.eneeyes.main.dto.UnitDto;
 
 
 
@@ -37,8 +34,7 @@ public class Company {
 //	@JoinTable(name = "company_units", joinColumns = @JoinColumn(name = "COMPANY_ID", referencedColumnName = "UID"), 
 //								inverseJoinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"))	
 	//private Set<Unit> units = new HashSet<Unit>();
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "company", cascade = CascadeType.ALL)	
-	@IndexColumn(name = "unit")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "company", cascade = CascadeType.ALL)	
 	private List<Unit> units = new ArrayList<Unit>();
 	
 	public final Long getUid() {
@@ -56,14 +52,14 @@ public class Company {
 	public final void setName(String name) {
 		this.name = name;
 	}
-	
-	public final List<Unit> getUnits() {
-		return units;
-	}
-
-	public final void setUnits(List<Unit> units) {
-		this.units = units;
-	}
+//	
+//	public final List<Unit> getUnits() {
+//		return units;
+//	}
+//
+//	public final void setUnits(List<Unit> units) {
+//		this.units = units;
+//	}
 	
 //	public final Set<Unit> getUnits() {
 //		return units;
@@ -80,19 +76,19 @@ public class Company {
 		company.setUid(dto.getUid());
 		company.setName(dto.getName());		
 		
-		if(dto.getUnits() != null) {
-
-			//Set<Unit> units = new HashSet<Unit>(); 
-			List<Unit> units = new ArrayList<Unit>();
-			
-			for (UnitDto unitDto : dto.getUnits() ) {
-				Unit unit = Unit.fromDtoToUnit(unitDto);
-				units.add(unit);
-			}
-			
-			company.setUnits(units);		
-
-		}
+//		if(dto.getUnits() != null) {
+//
+//			//Set<Unit> units = new HashSet<Unit>(); 
+//			List<Unit> units = new ArrayList<Unit>();
+//			
+//			for (UnitDto unitDto : dto.getUnits() ) {
+//				Unit unit = Unit.fromDtoToUnit(unitDto);
+//				units.add(unit);
+//			}
+//			
+//			company.setUnits(units);		
+//
+//		}
 
 		return company;
 	}

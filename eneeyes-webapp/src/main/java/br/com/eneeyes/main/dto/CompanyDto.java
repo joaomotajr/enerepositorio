@@ -13,7 +13,7 @@ public class CompanyDto {
 	
 	private Long uid;
 	private String name;
-	private List<UnitDto> units;
+//	private List<UnitDto> units;
 	
 	public final Long getUid() {
 		return uid;
@@ -27,12 +27,12 @@ public class CompanyDto {
 	public final void setName(String name) {
 		this.name = name;
 	}	
-	public List<UnitDto> getUnits() {
-		return units;
-	}
-	public void setUnits(List<UnitDto> units) {
-		this.units = units;
-	}
+//	public List<UnitDto> getUnits() {
+//		return units;
+//	}
+//	public void setUnits(List<UnitDto> units) {
+//		this.units = units;
+//	}
 	
 	public static CompanyDto fromCompanyToDto(Company company) {
 		
@@ -41,10 +41,10 @@ public class CompanyDto {
 		dto.setUid(company.getUid());
 		dto.setName(company.getName());	
 		
-		if(company.getUnits() != null){
-			List<UnitDto> units = UnitDto.fromUnitToListDto(company.getUnits());
-			dto.setUnits(units);
-		}
+//		if(company.getUnits() != null){
+//			List<UnitDto> units = UnitDto.fromUnitToListDto(company.getUnits());
+//			dto.setUnits(units);
+//		}
 		
 		
 		return dto;
@@ -61,10 +61,10 @@ public class CompanyDto {
 			dto.setUid(company.getUid());
 			dto.setName(company.getName());	
 			
-			if(company.getUnits() != null){
-				List<UnitDto> units = UnitDto.fromUnitToListDto(company.getUnits());
-				dto.setUnits(units);
-			}		
+//			if(company.getUnits() != null){
+//				List<UnitDto> units = UnitDto.fromUnitToListDto(company.getUnits());
+//				dto.setUnits(units);
+//			}		
 			
 			returnList.add(dto);
 		}

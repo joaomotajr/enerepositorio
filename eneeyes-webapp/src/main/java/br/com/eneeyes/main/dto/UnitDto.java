@@ -25,7 +25,7 @@ public class UnitDto {
 	private Double Latitude;		
 	private Double Longitude;
 	private CompanyDto companyDto;
-	private List<AreaDto> areasDto;
+	//private List<AreaDto> areasDto;
 	//private Set<AreaDto> areas;	
 	
 	public final Long getUid() {
@@ -121,13 +121,13 @@ public class UnitDto {
 		Longitude = longitude;
 	}
 	
-	public final List<AreaDto> getAreasDto() {
-		return areasDto;
-	}
-	public final void setAreasDto(List<AreaDto> areasDto) {
-		this.areasDto = areasDto;
-	}
-	
+//	public final List<AreaDto> getAreasDto() {
+//		return areasDto;
+//	}
+//	public final void setAreasDto(List<AreaDto> areasDto) {
+//		this.areasDto = areasDto;
+//	}
+//	
 	public CompanyDto getCompanyDto() {
 		return companyDto;
 	}
@@ -166,12 +166,12 @@ public class UnitDto {
 			dto.setCompanyDto(companyDto);				
 		}	
 		
-		if(unit.getAreas() != null){
-			List<AreaDto> areasDto = AreaDto.fromAreaToListDto(unit.getAreas());
-			//Set<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
-			
-			dto.setAreasDto(areasDto);
-		}
+//		if(unit.getAreas() != null){
+//			List<AreaDto> areasDto = AreaDto.fromAreaToListDto(unit.getAreas());
+//			//Set<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
+//			
+//			dto.setAreasDto(areasDto);
+//		}
 		
 		return dto;
 	}		
@@ -203,12 +203,12 @@ public class UnitDto {
 				CompanyDto companyDto = CompanyDto.fromCompanyToDto(unit.getCompany()) ;			
 				dto.setCompanyDto(companyDto);				
 			}	
-			
-			if(unit.getAreas() != null){
-				List<AreaDto> areasDto = AreaDto.fromAreaToListDto(unit.getAreas());
-				//Set<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
-				dto.setAreasDto(areasDto);
-			}
+//			
+//			if(unit.getAreas() != null){
+//				List<AreaDto> areasDto = AreaDto.fromAreaToListDto(unit.getAreas());
+//				//Set<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
+//				dto.setAreasDto(areasDto);
+//			}
 			
 			returnList.add(dto);
 		

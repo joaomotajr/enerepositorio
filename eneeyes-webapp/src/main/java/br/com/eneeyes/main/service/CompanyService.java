@@ -25,9 +25,9 @@ public class CompanyService implements IService<CompanyDto> {
 		Company company = Company.fromDtoToCompany(dto);
 		
 		company = repository.save(company);
-		dto.setUid(company.getUid());
-				
-		result.setEntity(CompanyDto.fromCompanyToDto(company));
+		dto.setUid(company.getUid());				
+		result.setEntity(dto);
+		
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Executado com sucesso.");	
 		

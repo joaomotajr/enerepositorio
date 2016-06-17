@@ -27,7 +27,7 @@ public class AreaService implements IService<AreaDto> {
 		area = repository.save(area);
 		dto.setUid(area.getUid());
 				
-		result.setEntity(AreaDto.fromAreaToDto(area));
+		result.setEntity(dto);
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Executado com sucesso.");	
 		

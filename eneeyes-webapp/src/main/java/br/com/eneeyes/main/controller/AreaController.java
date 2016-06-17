@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eneeyes.main.dto.AreaDto;
 import br.com.eneeyes.main.result.BasicResult;
-import br.com.eneeyes.main.result.Result;
 import br.com.eneeyes.main.service.AreaService;
 
 @RestController
@@ -37,15 +36,15 @@ public class AreaController {
 	
 	@RequestMapping(value = "/security/api/area/all", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public Result<?> listAll() {
+	public BasicResult<?> listAll() {
 		return service.listAll();
 	}
 	
-	@RequestMapping(value="/security/api/area/obtemPorId/{areaUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/area/obtemPorId/{uid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public Result<?> listById(@PathVariable Long uid) {
+	public BasicResult<?> listById(@PathVariable Long uid) {
 		
-		return service.listById(uid);		
+		return service.findOne(uid);		
 	}
 
 }

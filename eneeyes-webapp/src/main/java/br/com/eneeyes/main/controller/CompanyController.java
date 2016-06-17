@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eneeyes.main.dto.CompanyDto;
 import br.com.eneeyes.main.result.BasicResult;
-import br.com.eneeyes.main.result.Result;
 import br.com.eneeyes.main.service.CompanyService;
 
 @RestController
@@ -37,15 +36,15 @@ public class CompanyController {
 	
 	@RequestMapping(value = "/security/api/company/all", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public Result<?> listAll() {
+	public BasicResult<?> listAll() {
 		return service.listAll();
 	}
 	
-	@RequestMapping(value="/security/api/company/obtemPorId/{companyUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/company/obtemPorId/{uid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public Result<?> listById(@PathVariable Long uid) {
+	public BasicResult<?> listById(@PathVariable Long uid) {
 		
-		return service.listById(uid);
+		return service.findOne(uid);
 	}
 
 }

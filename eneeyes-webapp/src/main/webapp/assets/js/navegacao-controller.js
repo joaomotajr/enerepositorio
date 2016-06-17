@@ -28,7 +28,7 @@ app.factory('UnitService', function($resource){
         listAll : $resource('/security/api/unit/all',{},{
         	unit : {method : 'GET'}
         }),
-        listOne : $resource('/security/api/unit/obtemPorId',{},{
+        listOne : $resource('/security/api/unit/obtemPorId/:id', {id: '@id'},{
         	unit : {method : 'GET'}
         }),
         save : $resource('/security/api/unit/save',{},{
@@ -95,7 +95,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		longitude: 9.232323,
 		classified: true,
 		date: null,
-		unitDto: {uid: 1, unitType: 1}
+		unitDto: {uid: 1}
 	 } 
 	 
 	 $scope.saveArea = function() {
@@ -118,8 +118,8 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 $scope.getOneArea = function() {
 		 
 		 $scope.listOne = new AreaService.listOne();		 
-		 $scope.listOne.$area({_csrf : angular.element('#_csrf').val()}, {id : 1}, function(){			
-			 console.log($scope.listAll);
+		 $scope.listOne.$area({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+			 console.log($scope.listOne);
          	         	
          });
 		 
@@ -164,12 +164,13 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 
 	 $scope.getOneUnit = function() {
 		 
-		 $scope.listOne = new UnitService.listOne();		 
-		 $scope.listOne.$unit({_csrf : angular.element('#_csrf').val()}, {id : 1}, function(){			
-			 console.log($scope.listAll);
+		 $scope.listOne = new UnitService.listOne();	 
+		 
+		 $scope.listOne.$unit({_csrf : angular.element('#_csrf').val(), id : 1}, function(){
+			 console.log($scope.listOne);
          	         	
          });		 
-	 }
+	 }	  
 	 
 	 $scope.setUnit = function() {
 		 
@@ -206,8 +207,8 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 $scope.getOneCompany = function() {
 		 
 		 $scope.listOne = new CompanyService.listOne();		 
-		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val()}, {id : 1}, function(){			
-				 console.log($scope.listAll);
+		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+				 console.log($scope.listOne);
 	         	         	
 	         });		 
 		 }

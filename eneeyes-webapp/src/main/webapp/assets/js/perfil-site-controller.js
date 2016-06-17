@@ -17,6 +17,7 @@ app.controller('PerfilController', function ($scope, $filter, Perfil) {
 
 	$scope.carregarMeusDocumentos = function() {
 		$scope.meusDocumentos = new Perfil.documentos();
+		
 		$scope.meusDocumentos.$lista({_csrf : angular.element('#_csrf').val()},function(){}, function(data) {
 			 if (data.status >= 400 && data.status <= 505 ) {
 				 angular.element('body').removeClass('loading');
@@ -163,9 +164,11 @@ app.controller('PerfilController', function ($scope, $filter, Perfil) {
         });
 
         $scope.result.$salvar({_csrf : angular.element('#_csrf').val()}, function(){
+        	
         	if($scope.result.resultType != 'ERROR'){
         		$scope.forms.perfil.email = $scope.result.value.email;
         		$scope.forms.perfil.successMessages = true;
+        		
         		if($scope.forms.perfil.autenticado == true){
                 	window.location.href = "/result-search.html";
                 }else{

@@ -26,7 +26,7 @@
        		<div class="row">        		
         		<button type="button" class="btn btn-primary" ng-click="saveCompany()">Save Company</button>
         		<button type="button" class="btn btn-primary" ng-click="getCompany()">Get Company</button>
-        		<button type="button" class="btn btn-primary" ng-click="getCompanyOne()">Get One Company</button>        		
+        		<button type="button" class="btn btn-primary" ng-click="getOneCompany()">Get One Company</button>        		
        		</div>
 	         <div class="row">
 	            <div class="col-md-12">           

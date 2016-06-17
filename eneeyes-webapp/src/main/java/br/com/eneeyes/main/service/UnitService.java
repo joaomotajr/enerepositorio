@@ -77,17 +77,35 @@ public class UnitService implements IService<UnitDto> {
 		return result;	
 
 	}
+	
+	public Result<UnitDto> findOne(Long uid) {
+		
+		Result<UnitDto> result = new Result<UnitDto>();
+		
+		try {
+			Unit item = repository.findOne(uid);
+
+			if (item != null) {
+				result.setEntity(UnitDto.fromUnitToDto(item));
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhuma area.");
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;	
+	}
 
 	public int setParent(Long id, Long parentId) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-//	public int setParent(Long uid, Long parentUid) {
-//		
-//		return repository.setParentFor(parentUid, uid);
-//		
-//	}
 		
-	
 }

@@ -78,15 +78,15 @@ public class CompanyService implements IService<CompanyDto> {
 	}
 
 
-	public Result<CompanyDto> listById(Long uid) {
+	public Result<CompanyDto> findOne(Long uid) {
 		
 		Result<CompanyDto> result = new Result<CompanyDto>();
 		
 		try {
-			List<Company> lista = repository.findByUid(uid);
+			Company item = repository.findOne(uid);
 
-			if (lista != null) {
-				result.setList(CompanyDto.fromCompanyToListDto(lista));
+			if (item != null) {
+				result.setEntity(CompanyDto.fromCompanyToDto(item));
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {

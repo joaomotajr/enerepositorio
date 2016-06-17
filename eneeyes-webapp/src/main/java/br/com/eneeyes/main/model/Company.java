@@ -13,8 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.IndexColumn;
 
 import br.com.eneeyes.main.dto.CompanyDto;
 import br.com.eneeyes.main.dto.UnitDto;
@@ -39,7 +38,7 @@ public class Company {
 //								inverseJoinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"))	
 	//private Set<Unit> units = new HashSet<Unit>();
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "company", cascade = CascadeType.ALL)	
-	@Fetch(FetchMode.SUBSELECT)
+	@IndexColumn(name = "unit")
 	private List<Unit> units = new ArrayList<Unit>();
 	
 	public final Long getUid() {

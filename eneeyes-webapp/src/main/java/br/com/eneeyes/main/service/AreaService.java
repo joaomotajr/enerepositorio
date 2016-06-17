@@ -77,15 +77,15 @@ public class AreaService implements IService<AreaDto> {
 
 	}
 
-	public Result<AreaDto> listById(Long uid) {
+	public Result<AreaDto> findOne(Long uid) {
 		
 		Result<AreaDto> result = new Result<AreaDto>();
 		
 		try {
-			List<Area> lista = repository.findByUid(uid);
+			Area item = repository.findOne(uid);
 
-			if (lista != null) {
-				result.setList(AreaDto.fromAreaToListDto(lista));
+			if (item != null) {
+				result.setEntity(AreaDto.fromAreaToDto(item));
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
@@ -100,5 +100,4 @@ public class AreaService implements IService<AreaDto> {
 		
 		return result;	
 	}
-
 }

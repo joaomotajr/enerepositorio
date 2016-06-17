@@ -18,8 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.IndexColumn;
 
 import br.com.eneeyes.main.dto.AreaDto;
 import br.com.eneeyes.main.dto.UnitDto;
@@ -108,7 +107,7 @@ public class Unit {
 
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "unit", cascade = CascadeType.ALL)
-	@Fetch(FetchMode.SUBSELECT)
+	@IndexColumn(name = "area")
 	private List<Area> areas = new ArrayList<Area>();
 	
     //private Set<Area> areas = new HashSet<Area>();    
@@ -276,11 +275,11 @@ public class Unit {
 			unit.setCompany(company);			
 		}		
 		
-		if(dto.getAreas() != null) {			
+		if(dto.getAreasDto() != null) {			
 			//Set<Area> areas = new HashSet<Area>(); 
 			List<Area> areas = new ArrayList<Area>();
 			
-			for (AreaDto areaDto : dto.getAreas() ) {
+			for (AreaDto areaDto : dto.getAreasDto() ) {
 				Area area = Area.fromDtoToArea(areaDto);
 				areas.add(area);
 			}

@@ -14,6 +14,8 @@ public interface UnitRepository extends JpaRepository<Unit, Long> {
 	public List<Unit> findByCompany(Company company);
 	
 	@Query("select a from Unit a where a.company.uid = ?1")
-	public List<Company> findByCompanyID(Long idCompany);
+	public List<Unit> findByCompanyID(Long idCompany);
+	
+	public List<Unit> findByUid(Long uid);
 	
 }

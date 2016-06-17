@@ -25,7 +25,7 @@ public class UnitDto {
 	private Double Latitude;		
 	private Double Longitude;
 	private CompanyDto companyDto;
-	private List<AreaDto> areas;
+	private List<AreaDto> areasDto;
 	//private Set<AreaDto> areas;	
 	
 	public final Long getUid() {
@@ -121,11 +121,11 @@ public class UnitDto {
 		Longitude = longitude;
 	}
 	
-	public final List<AreaDto> getAreas() {
-		return areas;
+	public final List<AreaDto> getAreasDto() {
+		return areasDto;
 	}
-	public final void setAreas(List<AreaDto> areas) {
-		this.areas = areas;
+	public final void setAreasDto(List<AreaDto> areasDto) {
+		this.areasDto = areasDto;
 	}
 	
 	public CompanyDto getCompanyDto() {
@@ -161,17 +161,16 @@ public class UnitDto {
 		dto.setLatitude(unit.getLatitude());
 		dto.setLongitude(unit.getLongitude());
 		
-		if (unit.getCompany() != null) {			
-			CompanyDto companyDto = new CompanyDto();
-			companyDto.setUid(unit.getCompany().getUid());
-			dto.setCompanyDto(companyDto);			
+		if (unit.getCompany() != null) {				
+			CompanyDto companyDto = CompanyDto.fromCompanyToDto(unit.getCompany()) ;			
+			dto.setCompanyDto(companyDto);				
 		}	
 		
 		if(unit.getAreas() != null){
-			List<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
+			List<AreaDto> areasDto = AreaDto.fromAreaToListDto(unit.getAreas());
 			//Set<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
 			
-			dto.setAreas(areas);
+			dto.setAreasDto(areasDto);
 		}
 		
 		return dto;
@@ -198,18 +197,17 @@ public class UnitDto {
 			dto.setUnitType(unit.getUnitType());		
 			dto.setDate(unit.getDate());
 			dto.setLatitude(unit.getLatitude());
-			dto.setLongitude(unit.getLongitude());		
-			
-			if (unit.getCompany() != null) {			
-				CompanyDto companyDto = new CompanyDto();
-				companyDto.setUid(unit.getCompany().getUid());
-				dto.setCompanyDto(companyDto);			
+			dto.setLongitude(unit.getLongitude());			
+						
+			if (unit.getCompany() != null) {				
+				CompanyDto companyDto = CompanyDto.fromCompanyToDto(unit.getCompany()) ;			
+				dto.setCompanyDto(companyDto);				
 			}	
 			
 			if(unit.getAreas() != null){
-				List<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
+				List<AreaDto> areasDto = AreaDto.fromAreaToListDto(unit.getAreas());
 				//Set<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
-				dto.setAreas(areas);
+				dto.setAreasDto(areasDto);
 			}
 			
 			returnList.add(dto);

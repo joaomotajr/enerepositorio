@@ -140,8 +140,8 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		unitType: 1,
 		date: null,
 		latitude: 12.2345545,		
-		longitude: 9.232323,
-		companyDto: {uid : 1}				
+		longitude: 9.232323
+		, companyDto: {uid : 1}				
 	 }	 
 	 
 

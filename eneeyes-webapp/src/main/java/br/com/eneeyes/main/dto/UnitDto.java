@@ -2,8 +2,11 @@ package br.com.eneeyes.main.dto;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
+import br.com.eneeyes.main.model.Area;
 import br.com.eneeyes.main.model.Unit;
 import br.com.eneeyes.main.model.enums.UnitType;
 
@@ -22,10 +25,12 @@ public class UnitDto {
 	private String zip;
 	private UnitType unitType;
 	private Date date;
-	private Double Latitude;		
-	private Double Longitude;
+	private Double latitude;		
+	private Double longitude;
+	
 	private CompanyDto companyDto;
-	//private List<AreaDto> areasDto;
+	
+	private List<AreaDto> areasDto = new ArrayList<AreaDto>();
 	//private Set<AreaDto> areas;	
 	
 	public final Long getUid() {
@@ -109,111 +114,68 @@ public class UnitDto {
 		this.date = date;
 	}
 	public final Double getLatitude() {
-		return Latitude;
+		return latitude;
 	}
 	public final void setLatitude(Double latitude) {
-		Latitude = latitude;
+		this.latitude = latitude;
 	}
 	public final Double getLongitude() {
-		return Longitude;
+		return longitude;
 	}
 	public final void setLongitude(Double longitude) {
-		Longitude = longitude;
+		this.longitude = longitude;
+	}	
+	
+	public UnitDto() {}
+	
+	public UnitDto(Unit unit) {
+		
+		this.uid = unit.getUid();
+		this.name = unit.getName();		
+		this.email = unit.getEmail();
+		this.url = unit.getUrl();
+		this.phone = unit.getPhone();
+		this.mobile = unit.getMobile();
+		this.address = unit.getAddress();		
+		this.city = unit.getCity();
+		this.state = unit.getState();
+		this.zip = unit.getZip(); 
+		this.unitType = unit.getUnitType();		
+		this.date = unit.getDate();
+		this.latitude = unit.getLatitude();
+		this.longitude = unit.getLongitude();
+		
+		if(unit.getAreas() != null) {
+		
+			this.areasDto = setAreasDto(unit.getAreas());
+		
+		}
 	}
 	
-//	public final List<AreaDto> getAreasDto() {
-//		return areasDto;
-//	}
-//	public final void setAreasDto(List<AreaDto> areasDto) {
-//		this.areasDto = areasDto;
-//	}
-//	
+	private List<AreaDto> setAreasDto(Set<Area> areas) {
+		List<AreaDto> lista = new ArrayList<AreaDto>();
+		
+		if(areas != null && !areas.isEmpty()) {
+		
+			Iterator<Area> itr = areas.iterator();
+			
+			while (itr.hasNext()) {
+				AreaDto dto = new AreaDto(itr.next());
+				lista.add(dto);
+			}
+		}
+		
+		return lista;
+	}
+
+	public final List<AreaDto> getAreasDto() {
+		return areasDto;
+	}
+	
 	public CompanyDto getCompanyDto() {
 		return companyDto;
 	}
 	public void setCompanyDto(CompanyDto companyDto) {
 		this.companyDto = companyDto;
-	}
-	
-//	public final Set<AreaDto> getAreas() {
-//		return areas;
-//	}
-//	public final void setAreas(Set<AreaDto> areas) {
-//		this.areas = areas;
-//	}
-	
-	public static UnitDto fromUnitToDto(Unit unit) {
-		
-		UnitDto dto = new UnitDto();		
-	
-		dto.setUid(unit.getUid());
-		dto.setName(unit.getName());		
-		dto.setEmail(unit.getEmail());
-		dto.setUrl(unit.getUrl());
-		dto.setPhone(unit.getPhone());
-		dto.setMobile(unit.getMobile());
-		dto.setAddress(unit.getAddress());		
-		dto.setCity(unit.getCity());
-		dto.setState(unit.getState());
-		dto.setZip(unit.getZip());
-		dto.setUnitType(unit.getUnitType());		
-		dto.setDate(unit.getDate());
-		dto.setLatitude(unit.getLatitude());
-		dto.setLongitude(unit.getLongitude());
-		
-		if (unit.getCompany() != null) {				
-			CompanyDto companyDto = CompanyDto.fromCompanyToDto(unit.getCompany()) ;			
-			dto.setCompanyDto(companyDto);				
-		}	
-		
-//		if(unit.getAreas() != null){
-//			List<AreaDto> areasDto = AreaDto.fromAreaToListDto(unit.getAreas());
-//			//Set<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
-//			
-//			dto.setAreasDto(areasDto);
-//		}
-		
-		return dto;
-	}		
-	
-	public static List<UnitDto> fromUnitToListDto(List<Unit> list) {
-		
-		List<UnitDto> returnList = new ArrayList<UnitDto>();		
-				
-		for (Unit unit : list) {
-			
-			UnitDto dto = new UnitDto();
-								
-			dto.setUid(unit.getUid());
-			dto.setName(unit.getName());		
-			dto.setEmail(unit.getEmail());
-			dto.setUrl(unit.getUrl());
-			dto.setPhone(unit.getPhone());
-			dto.setMobile(unit.getMobile());
-			dto.setAddress(unit.getAddress());		
-			dto.setCity(unit.getCity());
-			dto.setState(unit.getState());
-			dto.setZip(unit.getZip());
-			dto.setUnitType(unit.getUnitType());		
-			dto.setDate(unit.getDate());
-			dto.setLatitude(unit.getLatitude());
-			dto.setLongitude(unit.getLongitude());			
-						
-			if (unit.getCompany() != null) {				
-				CompanyDto companyDto = CompanyDto.fromCompanyToDto(unit.getCompany()) ;			
-				dto.setCompanyDto(companyDto);				
-			}	
-//			
-//			if(unit.getAreas() != null){
-//				List<AreaDto> areasDto = AreaDto.fromAreaToListDto(unit.getAreas());
-//				//Set<AreaDto> areas = AreaDto.fromAreaToListDto(unit.getAreas());
-//				dto.setAreasDto(areasDto);
-//			}
-			
-			returnList.add(dto);
-		
-		}
-		
-		return returnList;
 	}
 }

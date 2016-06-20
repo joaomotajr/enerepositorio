@@ -1,7 +1,7 @@
 package br.com.eneeyes.main.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,11 +15,18 @@ import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.CompanyDto;
 
-
-
 @Entity
 @Table(name = "company")
 public class Company {
+	
+	public Company() {
+		
+	}
+	
+	public Company(CompanyDto dto) {
+		this.uid = dto.getUid();
+		this.name = dto.getName();		
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,15 +34,10 @@ public class Company {
 	private Long uid;
 	
 	@Column(name = "NAME", nullable = false)
-	private String name;
-	
-//	@OneToMany(fetch = FetchType.EAGER)
-//	@Fetch(FetchMode.SUBSELECT)
-//	@JoinTable(name = "company_units", joinColumns = @JoinColumn(name = "COMPANY_ID", referencedColumnName = "UID"), 
-//								inverseJoinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"))	
-	//private Set<Unit> units = new HashSet<Unit>();
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "company", cascade = CascadeType.ALL)	
-	private List<Unit> units = new ArrayList<Unit>();
+	private String name;	
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "company", cascade = CascadeType.ALL)
+	private Set<Unit> units = new HashSet<Unit>();	
 	
 	public final Long getUid() {
 		return uid;
@@ -52,46 +54,12 @@ public class Company {
 	public final void setName(String name) {
 		this.name = name;
 	}
-//	
-//	public final List<Unit> getUnits() {
-//		return units;
-//	}
-//
-//	public final void setUnits(List<Unit> units) {
-//		this.units = units;
-//	}
 	
-//	public final Set<Unit> getUnits() {
-//		return units;
-//	}
-//
-//	public final void setUnits(Set<Unit> units) {
-//		this.units = units;
-//	}
-
-	public static Company fromDtoToCompany(CompanyDto dto) {
-		
-		Company company = new Company();
-				
-		company.setUid(dto.getUid());
-		company.setName(dto.getName());		
-		
-//		if(dto.getUnits() != null) {
-//
-//			//Set<Unit> units = new HashSet<Unit>(); 
-//			List<Unit> units = new ArrayList<Unit>();
-//			
-//			for (UnitDto unitDto : dto.getUnits() ) {
-//				Unit unit = Unit.fromDtoToUnit(unitDto);
-//				units.add(unit);
-//			}
-//			
-//			company.setUnits(units);		
-//
-//		}
-
-		return company;
+	public final Set<Unit> getUnits() {
+		return units;
 	}
 
-
+	public final void setUnits(Set<Unit> units) {
+		this.units = units;
+	}
 }

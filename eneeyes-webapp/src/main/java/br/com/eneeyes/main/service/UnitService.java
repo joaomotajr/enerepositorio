@@ -1,5 +1,6 @@
 package br.com.eneeyes.main.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,7 +8,9 @@ import javax.inject.Named;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.UnitDto;
+import br.com.eneeyes.main.model.Company;
 import br.com.eneeyes.main.model.Unit;
+import br.com.eneeyes.main.repository.CompanyRepository;
 import br.com.eneeyes.main.repository.UnitRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -19,12 +22,18 @@ public class UnitService implements IService<UnitDto> {
 	@Inject
 	private UnitRepository repository;
 	
+	@Inject
+	private CompanyRepository companyRepository;
+	
 	public BasicResult<?> save(UnitDto dto) {
-		Result<UnitDto> result = new Result<UnitDto>(); 	
+		Result<UnitDto> result = new Result<UnitDto>();
 		
-		Unit unit = Unit.fromDtoToUnit(dto);
+		Company company = companyRepository.findByUid(dto.getCompanyDto().getUid());
 		
+		Unit unit = new Unit(dto);
+		unit.setCompany(company);		
 		unit = repository.save(unit);
+		
 		dto.setUid(unit.getUid());		
 		result.setEntity(dto);
 		
@@ -60,14 +69,22 @@ public class UnitService implements IService<UnitDto> {
 		try {
 			List<Unit> lista = repository.findAll();
 
-			if (lista != null) {
-				result.setList(UnitDto.fromUnitToListDto(lista));
+			if (lista != null) {				
+				
+				List<UnitDto> dto = new ArrayList<UnitDto>();
+				
+				for (Unit unit   : lista) {					
+					dto.add(new UnitDto(unit) );
+				}
+				
+				result.setList(dto);
+				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Compania.");
+				result.setMessage("Nenhuma Unidade.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);
@@ -78,7 +95,7 @@ public class UnitService implements IService<UnitDto> {
 
 	}
 	
-	public Result<UnitDto> findOne(Long uid) {
+	public Result<?> findOne(Long uid) {
 		
 		Result<UnitDto> result = new Result<UnitDto>();
 		
@@ -87,15 +104,14 @@ public class UnitService implements IService<UnitDto> {
 
 			if (item != null) {
 				
+				result.setEntity(new UnitDto(item));
 				
-				
-				result.setEntity(UnitDto.fromUnitToDto(item));				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma area.");
+				result.setMessage("Nenhuma Unidade.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

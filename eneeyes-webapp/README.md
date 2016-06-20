@@ -15,10 +15,17 @@ UPDATE `conciliador`.`aln_id_user` SET `ADQUIRENTE_ID_`='1' WHERE `ID_`='1';
 
 /* LIMPAR TABELAS */
 drop table detector_sensors;
-drop table unit;
 drop table area;
+drop table unit;
 drop table company;
+drop table controller;
+drop table gases;
+drop table sensor;
+drop table transmitter;
 drop table detector;
+drop table device;
+drop table device_type;
+drop table company_devices;
 
 
 

@@ -1,8 +1,6 @@
 package br.com.eneeyes.main.dto;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import br.com.eneeyes.main.model.Area;
 
@@ -80,54 +78,71 @@ public class AreaDto {
 	public final void setUnitDto(UnitDto unitDto) {
 		this.unitDto = unitDto;
 	}
-    
-	public static AreaDto fromAreaToDto(Area area) {
-		
-		AreaDto dto = new AreaDto();
-		
-		dto.setUid(area.getUid());
-		dto.setName(area.getName());
-		dto.setLocal(area.getLocal());
-		dto.setLatitude(area.getLatitude());
-		dto.setLongitude(area.getLongitude());
-		dto.setDescription(area.getDescription());
-		dto.setClassified(area.getClassified());
-		dto.setDate(area.getDate());
-		
-		if(area.getUnit() != null){
-			UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
-			dto.setUnitDto(unitDto);
-		}
-			
-		return dto;
+	
+	public AreaDto() {
+		super();
 	}
 	
-	public static List<AreaDto> fromAreaToListDto(List<Area> list) {
-		
-		List<AreaDto> returnList = new ArrayList<AreaDto>(); 
-		
-		for (Area area   : list) {
-			AreaDto dto = new AreaDto();
-			
-			dto.setUid(area.getUid());
-			dto.setName(area.getName());
-			dto.setLocal(area.getLocal());
-			dto.setLatitude(area.getLatitude());
-			dto.setLongitude(area.getLongitude());
-			dto.setDescription(area.getDescription());
-			dto.setClassified(area.getClassified());
-			dto.setDate(area.getDate());
-			
-			if(area.getUnit() != null){
-				UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
-				dto.setUnitDto(unitDto);
-			}
-			
-			returnList.add(dto);
-		}				
-		
-		return returnList;
+	public AreaDto(Area area) {
+		super();
+    	this.uid = area.getUid();		
+    	this.name = area.getName();
+    	this.description = area.getDescription();
+    	this.local = area.getLocal();
+    	this.latitude = area.getLatitude();
+    	this.longitude = area.getLongitude();
+    	this.classified= area.getClassified();		
+    	this.date = area.getDate();
+    	
 	}
+    
+//	public static AreaDto fromAreaToDto(Area area) {
+//		
+//		AreaDto dto = new AreaDto();
+//		
+//		dto.setUid(area.getUid());
+//		dto.setName(area.getName());
+//		dto.setLocal(area.getLocal());
+//		dto.setLatitude(area.getLatitude());
+//		dto.setLongitude(area.getLongitude());
+//		dto.setDescription(area.getDescription());
+//		dto.setClassified(area.getClassified());
+//		dto.setDate(area.getDate());
+//		
+//		if(area.getUnit() != null){
+//			UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
+//			dto.setUnitDto(unitDto);
+//		}
+//			
+//		return dto;
+//	}
+//	
+//	public static List<AreaDto> fromAreaToListDto(List<Area> list) {
+//		
+//		List<AreaDto> returnList = new ArrayList<AreaDto>(); 
+//		
+//		for (Area area   : list) {
+//			AreaDto dto = new AreaDto();
+//			
+//			dto.setUid(area.getUid());
+//			dto.setName(area.getName());
+//			dto.setLocal(area.getLocal());
+//			dto.setLatitude(area.getLatitude());
+//			dto.setLongitude(area.getLongitude());
+//			dto.setDescription(area.getDescription());
+//			dto.setClassified(area.getClassified());
+//			dto.setDate(area.getDate());
+//			
+//			if(area.getUnit() != null){
+//				UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
+//				dto.setUnitDto(unitDto);
+//			}
+//			
+//			returnList.add(dto);
+//		}				
+//		
+//		return returnList;
+//	}
 		
 	
 }

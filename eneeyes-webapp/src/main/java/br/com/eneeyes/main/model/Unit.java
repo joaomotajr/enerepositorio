@@ -1,8 +1,8 @@
 package br.com.eneeyes.main.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,6 +30,28 @@ import br.com.eneeyes.main.model.enums.UnitType;
 @Entity
 @Table(name = "unit")
 public class Unit {
+	
+	public Unit() {
+		
+	} 
+	
+	public Unit(UnitDto dto) {
+		
+		this.uid = dto.getUid();
+		this.name = dto.getName();		
+		this.email = dto.getEmail();
+		this.url = dto.getUrl();
+		this.phone = dto.getPhone();
+		this.mobile = dto.getMobile();
+		this.address = dto.getAddress();		
+		this.city = dto.getCity();
+		this.state = dto.getState();
+		this.zip = dto.getZip(); 
+		this.unitType = dto.getUnitType();		
+		this.date = dto.getDate();
+		this.latitude = dto.getLatitude();
+		this.longitude = dto.getLongitude();
+	}
 		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,43 +102,20 @@ public class Unit {
 	@Column(name = "DATE", nullable = true)
 	private Date date;
 	
-	public UnitType getUnitType() {
-		return unitType;
-	}
-
-	public void setUnitType(UnitType unitType) {
-		this.unitType = unitType;
-		if (unitType == null ) {			
-			this.unitType = UnitType.UNICA;
-		}	
-		else { 
-			this.unitType = unitType;
-		}
-	}
-	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="COMPANY_ID", nullable=false)
     private Company company;
-//    @OneToMany(fetch = FetchType.EAGER)
-//    @Fetch(FetchMode.SUBSELECT)
-//	@JoinTable(name = "unit_areas", joinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID"), 
-//						     inverseJoinColumns = @JoinColumn(name = "AREA_ID", referencedColumnName = "UID"))
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "unit", cascade = CascadeType.ALL)
+	private Set<Area> areas = new HashSet<Area>();
+			
+	public final Company getCompany() {
+		return company;
+	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "unit", cascade = CascadeType.ALL)	
-	private List<Area> areas = new ArrayList<Area>();
-	
-    //private Set<Area> areas = new HashSet<Area>();    
-    
-//  @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-//	@JoinColumn(name="UNIT_ID")	
-//  private Set<Area> areas = new HashSet<Area>();
-    
-//  @ManyToOne	
-//	@JoinTable(name = "company_units", 
-//	       joinColumns = @JoinColumn(name = "UNIT_ID", referencedColumnName = "UID") , 
-//    inverseJoinColumns = @JoinColumn(name = "COMPANY_ID", referencedColumnName = "UID"))
-//	private Company company;    
+	public final void setCompany(Company company) {
+		this.company = company;
+	}	
 
 	public final Long getUid() {
 		return uid;
@@ -197,6 +196,20 @@ public class Unit {
 	public final void setZip(String zip) {
 		this.zip = zip;
 	}
+	
+	public UnitType getUnitType() {
+		return unitType;
+	}
+
+	public void setUnitType(UnitType unitType) {
+		this.unitType = unitType;
+		if (unitType == null ) {			
+			this.unitType = UnitType.UNICA;
+		}	
+		else { 
+			this.unitType = unitType;
+		}
+	}		
 
 	public final Date getDate() {
 		return date;
@@ -222,67 +235,12 @@ public class Unit {
 		this.longitude = longitude;
 	}
 
-	public final List<Area> getAreas() {
+	public final Set<Area> getAreas() {
 		return areas;
 	}
 
-	public final void setAreas(List<Area> areas) {
+	public final void setAreas(Set<Area> areas) {
 		this.areas = areas;
-	}
-	
-//	public final Set<Area> getAreas() {
-//		return areas;
-//	}
-//
-//	public final void setAreas(Set<Area> areas) {
-//		this.areas = areas;
-//	}
-	
-	public final Company getCompany() {
-		return company;
-	}
-
-	public final void setCompany(Company company) {
-		this.company = company;
-	}
-	
-	public static Unit fromDtoToUnit(UnitDto dto) {
-		
-		Unit unit = new Unit();
-		
-		unit.setUid(dto.getUid());
-		unit.setName(dto.getName());		
-		unit.setEmail(dto.getEmail());
-		unit.setUrl(dto.getUrl());
-		unit.setPhone(dto.getPhone());
-		unit.setMobile(dto.getMobile());
-		unit.setAddress(dto.getAddress());		
-		unit.setCity(dto.getCity());
-		unit.setState(dto.getState());
-		unit.setZip(dto.getZip()); 
-		unit.setUnitType(dto.getUnitType());		
-		unit.setDate(dto.getDate());
-		unit.setLatitude(dto.getLatitude());
-		unit.setLongitude(dto.getLongitude());
-		
-		if (dto.getCompanyDto() != null) {			
-			Company company = Company.fromDtoToCompany(dto.getCompanyDto());			
-			unit.setCompany(company);			
-		}		
-		
-//		if(dto.getAreasDto() != null) {			
-//			//Set<Area> areas = new HashSet<Area>(); 
-//			List<Area> areas = new ArrayList<Area>();
-//			
-//			for (AreaDto areaDto : dto.getAreasDto() ) {
-//				Area area = Area.fromDtoToArea(areaDto);
-//				areas.add(area);
-//			}
-//			
-//			unit.setAreas(areas);
-//		}
-		
-		return unit;
-	}
+	}	
 	
 }

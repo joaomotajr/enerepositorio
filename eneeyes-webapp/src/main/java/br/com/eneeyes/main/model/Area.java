@@ -23,6 +23,23 @@ import br.com.eneeyes.main.dto.AreaDto;
 @Entity
 @Table(name = "area")
 public class Area {
+	
+    public Area() {
+    	
+    }
+    
+    public Area(AreaDto dto) {
+    	
+    	this.uid = dto.getUid();		
+    	this.name = dto.getName();
+    	this.description = dto.getDescription();
+    	this.local = dto.getLocal();
+    	this.latitude = dto.getLatitude();
+    	this.longitude = dto.getLongitude();
+    	this.classified= dto.getClassified();		
+    	this.date = dto.getDate();	
+    	
+    }	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,13 +53,13 @@ public class Area {
 	private String description;
 	
 	@Column(name = "LOCAL", nullable = true)		
-	private String Local;
+	private String local;
 	
 	@Column(name = "LATITUDE", nullable = true)		
-	private Double Latitude;
+	private Double latitude;
 	
 	@Column(name = "LONGITUDE", nullable = true)		
-	private Double Longitude;
+	private Double longitude;
 	
 	@Column(name = "CLASSIFIED", nullable = true)
 	private Boolean classified;
@@ -50,10 +67,10 @@ public class Area {
     @Column(name = "DATE", nullable = true)
 	private Date date;
     
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="UNIT_ID", nullable=false)
     private Unit unit;
-	
+
 	public Long getUid() {
 		return uid;
 	}
@@ -79,27 +96,27 @@ public class Area {
 	}
 
 	public String getLocal() {
-		return Local;
+		return local;
 	}
 
 	public void setLocal(String local) {
-		Local = local;
+		this.local = local;
 	}
 
 	public Double getLatitude() {
-		return Latitude;
+		return latitude;
 	}
 
 	public void setLatitude(Double latitude) {
-		Latitude = latitude;
+		this.latitude = latitude;
 	}
 
 	public Double getLongitude() {
-		return Longitude;
+		return longitude;
 	}
 
 	public void setLongitude(Double longitude) {
-		Longitude = longitude;
+		this.longitude = longitude;
 	}
 
 	public Boolean getClassified() {
@@ -124,36 +141,5 @@ public class Area {
 
 	public final void setUnit(Unit unit) {
 		this.unit = unit;
-	}
-
-
-//	public Unit getUnit() {
-//		return unit;
-//	}
-//
-//	public void setUnit(Unit unit) {
-//		this.unit = unit;
-//	}
-//	
-	public static Area fromDtoToArea(AreaDto dto) {
-		
-		Area area = new Area();
-		
-		area.setUid(dto.getUid());		
-		area.setName(dto.getName());
-		area.setDescription(dto.getDescription());
-		area.setLocal(dto.getLocal());
-		area.setLatitude(dto.getLatitude());
-		area.setLongitude(dto.getLongitude());
-		area.setClassified(dto.getClassified());		
-		area.setDate(dto.getDate());		
-
-		if (dto.getUnitDto() != null) {
-			
-			Unit unit = Unit.fromDtoToUnit(dto.getUnitDto());
-			area.setUnit(unit);
-		}
-		
-		return area;
 	}
 }

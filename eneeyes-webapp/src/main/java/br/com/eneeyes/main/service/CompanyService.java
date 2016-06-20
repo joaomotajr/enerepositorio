@@ -1,5 +1,6 @@
 package br.com.eneeyes.main.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,11 +21,12 @@ public class CompanyService implements IService<CompanyDto> {
 	private CompanyRepository repository;
 	
 	public BasicResult<?> save(CompanyDto dto) {
+		
 		Result<CompanyDto> result = new Result<CompanyDto>(); 	
 		
-		Company company = Company.fromDtoToCompany(dto);
-		
+		Company company = new Company(dto);		
 		company = repository.save(company);
+		
 		dto.setUid(company.getUid());				
 		result.setEntity(dto);
 		
@@ -60,13 +62,21 @@ public class CompanyService implements IService<CompanyDto> {
 			List<Company> lista = repository.findAll();
 
 			if (lista != null) {
-				result.setList(CompanyDto.fromCompanyToListDto(lista));
+				
+				List<CompanyDto> dto = new ArrayList<CompanyDto>();
+				
+				for (Company company   : lista) {					
+					dto.add(new CompanyDto(company) );
+				}
+				
+				result.setList(dto);
+				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma company.");
+				result.setMessage("Nenhuma Compania.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);
@@ -78,7 +88,7 @@ public class CompanyService implements IService<CompanyDto> {
 	}
 
 
-	public Result<CompanyDto> findOne(Long uid) {
+	public Result<?> findOne(Long uid) {
 		
 		Result<CompanyDto> result = new Result<CompanyDto>();
 		
@@ -86,13 +96,15 @@ public class CompanyService implements IService<CompanyDto> {
 			Company item = repository.findOne(uid);
 
 			if (item != null) {
-				result.setEntity(CompanyDto.fromCompanyToDto(item));
+				
+				result.setEntity(new CompanyDto(item));
+				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma company.");
+				result.setMessage("Nenhuma Compania.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

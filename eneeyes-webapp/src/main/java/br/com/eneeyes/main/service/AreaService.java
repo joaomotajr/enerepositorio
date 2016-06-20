@@ -1,5 +1,6 @@
 package br.com.eneeyes.main.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,7 +9,9 @@ import javax.inject.Named;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.AreaDto;
 import br.com.eneeyes.main.model.Area;
+import br.com.eneeyes.main.model.Unit;
 import br.com.eneeyes.main.repository.AreaRepository;
+import br.com.eneeyes.main.repository.UnitRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
@@ -19,10 +22,16 @@ public class AreaService implements IService<AreaDto> {
 	@Inject
 	private AreaRepository repository;
 	
+	@Inject
+	private UnitRepository unitRepository;
+	
 	public BasicResult<?> save(AreaDto dto) {
-		Result<AreaDto> result = new Result<AreaDto>(); 	
+		Result<AreaDto> result = new Result<AreaDto>();		
 		
-		Area area = Area.fromDtoToArea(dto);
+		Unit unit = unitRepository.findByUid(dto.getUnitDto().getUid());
+		
+		Area area = new Area(dto);
+		area.setUnit(unit);
 		
 		area = repository.save(area);
 		dto.setUid(area.getUid());
@@ -60,7 +69,14 @@ public class AreaService implements IService<AreaDto> {
 			List<Area> lista = repository.findAll();
 
 			if (lista != null) {
-				result.setList(AreaDto.fromAreaToListDto(lista));
+				
+				List<AreaDto> dto = new ArrayList<AreaDto>();
+				
+				for (Area area   : lista) {					
+					dto.add(new AreaDto(area) );
+				}
+								
+				result.setList(dto);
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
@@ -77,7 +93,7 @@ public class AreaService implements IService<AreaDto> {
 
 	}
 
-	public Result<AreaDto> findOne(Long uid) {
+	public Result<?> findOne(Long uid) {
 		
 		Result<AreaDto> result = new Result<AreaDto>();
 		
@@ -85,7 +101,8 @@ public class AreaService implements IService<AreaDto> {
 			Area item = repository.findOne(uid);
 
 			if (item != null) {
-				result.setEntity(AreaDto.fromAreaToDto(item));
+				result.setEntity(new AreaDto(item));
+				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {

@@ -1,4 +1,23 @@
 
+app.factory('CompanyDeviceService', function($resource){    
+    
+    return {
+    	deletar : $resource('/security/api/companyDevice/delete',{},{
+    		companyDevice : {method : 'DELETE'}
+        }),        
+        listAll : $resource('/security/api/companyDevice/all',{},{
+        	companyDevice : {method : 'GET'}
+        }),
+        listOne : $resource('/security/api/companyDevice/obtemPorId/:id', {id: '@id'},{
+        	companyDevice : {method : 'GET'}
+        }),
+        save : $resource('/security/api/companyDevice/save',{},{
+        	companyDevice : {method : 'POST'}
+        }),
+     };
+});
+
+
 app.factory('AreaService', function($resource){    
     
     return {
@@ -68,13 +87,13 @@ app.factory('CompanyService', function($resource){
 //    };
 //});
 
-app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService) {
+app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService) {
 		
 	$('#treeview-searchable').treeview({
 	     data: getTree(),
 	 });
 	
-	 search = function (e) {
+	search = function (e) {
 	     var pattern = $('#input-search').val();
 	     var options = {
 	         ignoreCase: true,
@@ -85,6 +104,41 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	     var results = $searchableTree.treeview('search', [pattern, options]);
 	    
 	 }
+	 
+	$scope.companyDevice = {
+		uid: 0,
+		deviceType: 1,
+		areaDto: {uid : 1}
+		
+	 } 
+	 
+	 $scope.saveCompanyDevice = function() {
+		 
+		 $scope.inclusao = new CompanyDeviceService.save($scope.companyDevice);		 
+		 $scope.inclusao.$companyDevice({_csrf : angular.element('#_csrf').val()}, function(){         	
+         	console.log($scope.inclusao);         	
+         });
+		 
+	 }
+	 
+	 $scope.getCompanyDevice = function() {
+		 
+		 $scope.listAll = new CompanyDeviceService.listAll();		 
+		 $scope.listAll.$companyDevice({_csrf : angular.element('#_csrf').val()}, function(){			
+			 console.log($scope.listAll);		         	         	
+         });		 
+	 }
+	 
+	 $scope.getOneCompanyDevice = function() {
+		 
+		 $scope.listOne = new CompanyDeviceService.listOne();		 
+		 $scope.listOne.$companyDevice({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+			 console.log($scope.listOne);
+         	         	
+         });
+		 
+	 }
+	 /*-----------------------------------------------------------------------------------------------------------------*/
 	 
 	 $scope.area = {
 		uid: 0,

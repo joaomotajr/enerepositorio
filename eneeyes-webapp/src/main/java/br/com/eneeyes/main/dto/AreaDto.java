@@ -1,8 +1,13 @@
 package br.com.eneeyes.main.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import br.com.eneeyes.main.model.Area;
+import br.com.eneeyes.main.model.CompanyDevice;
 
 
 public class AreaDto {
@@ -16,6 +21,47 @@ public class AreaDto {
 	private Boolean classified;
 	private Date date;
     private UnitDto unitDto;
+    private List<CompanyDeviceDto> companyDevicesDto = new ArrayList<CompanyDeviceDto>();
+    
+    public AreaDto() {
+		super();
+	}
+	
+	public AreaDto(Area area) {
+		super();
+    	this.uid = area.getUid();		
+    	this.name = area.getName();
+    	this.description = area.getDescription();
+    	this.local = area.getLocal();
+    	this.latitude = area.getLatitude();
+    	this.longitude = area.getLongitude();
+    	this.classified= area.getClassified();		
+    	this.date = area.getDate(); 
+    	
+    	if(area.getCompanyDevices() != null) {		
+			this.companyDevicesDto = setCompanyDevicesDto(area.getCompanyDevices());		
+		}
+	}
+	
+	private List<CompanyDeviceDto> setCompanyDevicesDto(Set<CompanyDevice> companyDevices) {
+		List<CompanyDeviceDto> lista = new ArrayList<CompanyDeviceDto>();
+		
+		if(companyDevices != null && !companyDevices.isEmpty()) {
+		
+			Iterator<CompanyDevice> itr = companyDevices.iterator();
+			
+			while (itr.hasNext()) {
+				CompanyDeviceDto dto = new CompanyDeviceDto(itr.next());
+				lista.add(dto);
+			}
+		}
+		
+		return lista;
+	}
+	
+	public final List<CompanyDeviceDto> getCompanyDevicesDto() {
+		return companyDevicesDto;
+	}
     	
 	public final Long getUid() {
 		return uid;
@@ -64,85 +110,11 @@ public class AreaDto {
 	}
 	public void setDate(Date date) {
 		this.date = date;
-	}	
-//	public UnitDto getUnitDto() {
-//		return unitDto;
-//	}
-//	public void setUnitDto(UnitDto unitDto) {
-//		this.unitDto = unitDto;
-//	}
-	
+	}
 	public final UnitDto getUnitDto() {
 		return unitDto;
 	}
 	public final void setUnitDto(UnitDto unitDto) {
 		this.unitDto = unitDto;
-	}
-	
-	public AreaDto() {
-		super();
-	}
-	
-	public AreaDto(Area area) {
-		super();
-    	this.uid = area.getUid();		
-    	this.name = area.getName();
-    	this.description = area.getDescription();
-    	this.local = area.getLocal();
-    	this.latitude = area.getLatitude();
-    	this.longitude = area.getLongitude();
-    	this.classified= area.getClassified();		
-    	this.date = area.getDate();
-    	
-	}
-    
-//	public static AreaDto fromAreaToDto(Area area) {
-//		
-//		AreaDto dto = new AreaDto();
-//		
-//		dto.setUid(area.getUid());
-//		dto.setName(area.getName());
-//		dto.setLocal(area.getLocal());
-//		dto.setLatitude(area.getLatitude());
-//		dto.setLongitude(area.getLongitude());
-//		dto.setDescription(area.getDescription());
-//		dto.setClassified(area.getClassified());
-//		dto.setDate(area.getDate());
-//		
-//		if(area.getUnit() != null){
-//			UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
-//			dto.setUnitDto(unitDto);
-//		}
-//			
-//		return dto;
-//	}
-//	
-//	public static List<AreaDto> fromAreaToListDto(List<Area> list) {
-//		
-//		List<AreaDto> returnList = new ArrayList<AreaDto>(); 
-//		
-//		for (Area area   : list) {
-//			AreaDto dto = new AreaDto();
-//			
-//			dto.setUid(area.getUid());
-//			dto.setName(area.getName());
-//			dto.setLocal(area.getLocal());
-//			dto.setLatitude(area.getLatitude());
-//			dto.setLongitude(area.getLongitude());
-//			dto.setDescription(area.getDescription());
-//			dto.setClassified(area.getClassified());
-//			dto.setDate(area.getDate());
-//			
-//			if(area.getUnit() != null){
-//				UnitDto unitDto = UnitDto.fromUnitToDto(area.getUnit());
-//				dto.setUnitDto(unitDto);
-//			}
-//			
-//			returnList.add(dto);
-//		}				
-//		
-//		return returnList;
-//	}
-		
-	
+	}		
 }

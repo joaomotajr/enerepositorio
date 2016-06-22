@@ -16,27 +16,7 @@ public class CompanyDto {
 	
 	private Long uid;
 	private String name;
-//	private List<UnitDto> units;
-	private List<UnitDto> unitsDto = new ArrayList<UnitDto>();	
-	
-	public final Long getUid() {
-		return uid;
-	}
-	public final void setUid(Long uid) {
-		this.uid = uid;
-	}
-	public final String getName() {
-		return name;
-	}
-	public final void setName(String name) {
-		this.name = name;
-	}	
-//	public List<UnitDto> getUnits() {
-//		return units;
-//	}
-//	public void setUnits(List<UnitDto> units) {
-//		this.units = units;
-//	}
+	private List<UnitDto> unitsDto = new ArrayList<UnitDto>();
 	
 	public CompanyDto() {
 		
@@ -52,6 +32,19 @@ public class CompanyDto {
 		
 		}
 	}
+	
+	public final Long getUid() {
+		return uid;
+	}
+	public final void setUid(Long uid) {
+		this.uid = uid;
+	}
+	public final String getName() {
+		return name;
+	}
+	public final void setName(String name) {
+		this.name = name;
+	}	
 	
 	private List<UnitDto> setUnitsDto(Set<Unit> units) {
 		
@@ -73,43 +66,4 @@ public class CompanyDto {
 	public final List<UnitDto> getUnitsDto() {
 		return unitsDto;
 	}
-	
-	
-//	public static CompanyDto fromCompanyToDto(Company company) {
-//		
-//		CompanyDto dto = new CompanyDto();		
-//	
-//		dto.setUid(company.getUid());
-//		dto.setName(company.getName());	
-//		
-////		if(company.getUnits() != null){
-////			List<UnitDto> units = UnitDto.fromUnitToListDto(company.getUnits());
-////			dto.setUnits(units);
-////		}
-//		
-//		
-//		return dto;
-//	}		
-//	
-//	public static List<CompanyDto> fromCompanyToListDto(List<Company> list) {
-//		
-//		List<CompanyDto> returnList = new ArrayList<CompanyDto>();
-//		
-//		for (Company company : list) {
-//			
-//			CompanyDto dto = new CompanyDto();
-//								
-//			dto.setUid(company.getUid());
-//			dto.setName(company.getName());	
-//			
-////			if(company.getUnits() != null){
-////				List<UnitDto> units = UnitDto.fromUnitToListDto(company.getUnits());
-////				dto.setUnits(units);
-////			}		
-//			
-//			returnList.add(dto);
-//		}
-//		
-//		return returnList;
-//	}
 }

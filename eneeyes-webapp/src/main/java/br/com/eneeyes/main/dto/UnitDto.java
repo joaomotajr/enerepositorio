@@ -26,12 +26,53 @@ public class UnitDto {
 	private UnitType unitType;
 	private Date date;
 	private Double latitude;		
-	private Double longitude;
-	
-	private CompanyDto companyDto;
-	
+	private Double longitude;	
+	private CompanyDto companyDto;	
 	private List<AreaDto> areasDto = new ArrayList<AreaDto>();
-	//private Set<AreaDto> areas;	
+	
+	public UnitDto() {}
+	
+	public UnitDto(Unit unit) {
+		
+		this.uid = unit.getUid();
+		this.name = unit.getName();		
+		this.email = unit.getEmail();
+		this.url = unit.getUrl();
+		this.phone = unit.getPhone();
+		this.mobile = unit.getMobile();
+		this.address = unit.getAddress();		
+		this.city = unit.getCity();
+		this.state = unit.getState();
+		this.zip = unit.getZip(); 
+		this.unitType = unit.getUnitType();		
+		this.date = unit.getDate();
+		this.latitude = unit.getLatitude();
+		this.longitude = unit.getLongitude();
+		
+		if(unit.getAreas() != null) {		
+			this.areasDto = setAreasDto(unit.getAreas());		
+		}
+	}
+	
+	private List<AreaDto> setAreasDto(Set<Area> areas) {
+		List<AreaDto> lista = new ArrayList<AreaDto>();
+		
+		if(areas != null && !areas.isEmpty()) {
+		
+			Iterator<Area> itr = areas.iterator();
+			
+			while (itr.hasNext()) {
+				AreaDto dto = new AreaDto(itr.next());
+				lista.add(dto);
+			}
+		}
+		
+		return lista;
+	}
+
+	public final List<AreaDto> getAreasDto() {
+		return areasDto;
+	}
 	
 	public final Long getUid() {
 		return uid;
@@ -125,53 +166,6 @@ public class UnitDto {
 	public final void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}	
-	
-	public UnitDto() {}
-	
-	public UnitDto(Unit unit) {
-		
-		this.uid = unit.getUid();
-		this.name = unit.getName();		
-		this.email = unit.getEmail();
-		this.url = unit.getUrl();
-		this.phone = unit.getPhone();
-		this.mobile = unit.getMobile();
-		this.address = unit.getAddress();		
-		this.city = unit.getCity();
-		this.state = unit.getState();
-		this.zip = unit.getZip(); 
-		this.unitType = unit.getUnitType();		
-		this.date = unit.getDate();
-		this.latitude = unit.getLatitude();
-		this.longitude = unit.getLongitude();
-		
-		if(unit.getAreas() != null) {
-		
-			this.areasDto = setAreasDto(unit.getAreas());
-		
-		}
-	}
-	
-	private List<AreaDto> setAreasDto(Set<Area> areas) {
-		List<AreaDto> lista = new ArrayList<AreaDto>();
-		
-		if(areas != null && !areas.isEmpty()) {
-		
-			Iterator<Area> itr = areas.iterator();
-			
-			while (itr.hasNext()) {
-				AreaDto dto = new AreaDto(itr.next());
-				lista.add(dto);
-			}
-		}
-		
-		return lista;
-	}
-
-	public final List<AreaDto> getAreasDto() {
-		return areasDto;
-	}
-	
 	public CompanyDto getCompanyDto() {
 		return companyDto;
 	}

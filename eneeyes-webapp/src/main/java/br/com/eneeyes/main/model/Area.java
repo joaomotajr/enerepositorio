@@ -2,7 +2,10 @@ package br.com.eneeyes.main.model;
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.AreaDto;
@@ -70,6 +74,9 @@ public class Area {
     @ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="UNIT_ID", nullable=false)
     private Unit unit;
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "area", cascade = CascadeType.ALL)
+	private Set<CompanyDevice> companyDevices = new HashSet<CompanyDevice>();
 
 	public Long getUid() {
 		return uid;
@@ -142,4 +149,13 @@ public class Area {
 	public final void setUnit(Unit unit) {
 		this.unit = unit;
 	}
+	
+	public final Set<CompanyDevice> getCompanyDevices() {
+		return companyDevices;
+	}
+
+	public final void setCompanyDevices(Set<CompanyDevice> companyDevices) {
+		this.companyDevices = companyDevices;
+	}
+
 }

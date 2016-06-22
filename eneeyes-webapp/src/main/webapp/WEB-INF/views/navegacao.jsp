@@ -14,6 +14,11 @@
         <!-- Main content - Modificado -->
         <section class="content" style="padding: 0px;">
         	<div class="row">        		
+        		<button type="button" class="btn btn-primary" ng-click="saveCompanyDevice()">Save CompanyDevice</button>
+        		<button type="button" class="btn btn-primary" ng-click="getCompanyDevice()">Get CompanyDevice</button>
+        		<button type="button" class="btn btn-primary" ng-click="getOneCompanyDevice()">Get One CompanyDevice</button>        		
+       		</div>
+        	<div class="row">        		
         		<button type="button" class="btn btn-primary" ng-click="saveArea()">Save Area</button>
         		<button type="button" class="btn btn-primary" ng-click="getArea()">Get Area</button>
         		<button type="button" class="btn btn-primary" ng-click="getOneArea()">Get One Area</button>        		
@@ -28,6 +33,7 @@
         		<button type="button" class="btn btn-primary" ng-click="getCompany()">Get Company</button>
         		<button type="button" class="btn btn-primary" ng-click="getOneCompany()">Get One Company</button>        		
        		</div>
+       		
 	         <div class="row">
 	            <div class="col-md-12">           
 					<div class="col-sm-3">					

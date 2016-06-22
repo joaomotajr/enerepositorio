@@ -92,6 +92,38 @@ public class AreaService implements IService<AreaDto> {
 		return result;	
 
 	}
+	
+//	public Result<?> listAllFilter() {
+//		
+//		Result<AreaDto> result = new Result<AreaDto>(); 	
+//		
+//		try {
+//			List<Area> lista = repository.findAll("from Area a inner join fetch a.CompanyDevices as c where a.uid = 1");
+//
+//			if (lista != null) {
+//				
+//				List<AreaDto> dto = new ArrayList<AreaDto>();
+//				
+//				for (Area area   : lista) {					
+//					dto.add(new AreaDto(area) );
+//				}
+//								
+//				result.setList(dto);
+//				result.setResultType( ResultMessageType.SUCCESS );
+//				result.setMessage("Executado com sucesso.");
+//			} else {
+//				result.setIsError(true);
+//				result.setResultType( ResultMessageType.ERROR );
+//				result.setMessage("Nenhuma area.");
+//			}
+//		} catch (Exception e) {
+//			result.setIsError(true);
+//			result.setMessage(e.getMessage());
+//		}
+//		
+//		return result;	
+//
+//	}
 
 	public Result<?> findOne(Long uid) {
 		

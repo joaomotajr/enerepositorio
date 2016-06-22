@@ -12,6 +12,6 @@ public interface AreaRepository extends JpaRepository<Area, Long> {
 	@Query("select a from Area a where a.unit.uid = ?1")
 	public List<Area> findByUnitID(Long idUnit);		
 
-	public Area findByUid(Long uid);
+	public Area findByUid(Long uid);	
 	
 }

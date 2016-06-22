@@ -55,7 +55,10 @@ app.factory('UnitService', function($resource){
         }),
         setParent : $resource('/security/api/unit/setparent/:id/:parentid/', {id: '@id', parentid: '@parentid'}, {
         	unit : {method : 'GET'}
-        })
+        }),
+        listAllFilter : $resource('/security/api/unit/allFilter',{},{
+        	unit : {method : 'GET'}
+        }),
         
      };
 });
@@ -213,6 +216,14 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		 $scope.listAll = new UnitService.listAll();		 
 		 $scope.listAll.$unit({_csrf : angular.element('#_csrf').val()}, function(){			
 			 console.log($scope.listAll);		         	         	
+         });		 
+	 }
+	 
+	 $scope.getUnitFilter = function() {
+		 
+		 $scope.listAllFilter = new UnitService.listAllFilter();		 
+		 $scope.listAllFilter.$unit({_csrf : angular.element('#_csrf').val()}, function(){			
+			 console.log($scope.listAllFilter);		         	         	
          });		 
 	 }
 	 

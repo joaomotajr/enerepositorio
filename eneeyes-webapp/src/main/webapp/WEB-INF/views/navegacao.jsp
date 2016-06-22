@@ -12,7 +12,7 @@
         </section>
 
         <!-- Main content - Modificado -->
-        <section class="content" style="padding: 0px;">
+        <section class="content" style="padding: 0px;margin-left:50px">
         	<div class="row">        		
         		<button type="button" class="btn btn-primary" ng-click="saveCompanyDevice()">Save CompanyDevice</button>
         		<button type="button" class="btn btn-primary" ng-click="getCompanyDevice()">Get CompanyDevice</button>
@@ -33,6 +33,13 @@
         		<button type="button" class="btn btn-primary" ng-click="saveCompany()">Save Company</button>
         		<button type="button" class="btn btn-primary" ng-click="getCompany()">Get Company</button>
         		<button type="button" class="btn btn-primary" ng-click="getOneCompany()">Get One Company</button>        		
+       		</div>
+       		<hr />
+       		
+       		<div class="row">        		
+        		<button type="button" class="btn btn-primary" ng-click="saveController()">Save Controller</button>
+        		<button type="button" class="btn btn-primary" ng-click="getController()">Get Controller</button>
+        		<button type="button" class="btn btn-primary" ng-click="getOneController()">Get One Controller</button>        		
        		</div>
        		
 	         <div class="row">

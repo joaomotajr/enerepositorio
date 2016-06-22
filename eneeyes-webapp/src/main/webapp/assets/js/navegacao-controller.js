@@ -1,4 +1,23 @@
 
+app.factory('ControllerService', function($resource){    
+    
+    return {
+    	deletar : $resource('/security/api/Controller/delete',{},{
+    		controller : {method : 'DELETE'}
+        }),        
+        listAll : $resource('/security/api/Controller/all',{},{
+        	controller : {method : 'GET'}
+        }),
+        listOne : $resource('/security/api/Controller/obtemPorId/:id', {id: '@id'},{
+        	controller : {method : 'GET'}
+        }),
+        save : $resource('/security/api/Controller/save',{},{
+        	controller : {method : 'POST'}
+        }),
+     };
+});
+
+
 app.factory('CompanyDeviceService', function($resource){    
     
     return {
@@ -90,7 +109,7 @@ app.factory('CompanyService', function($resource){
 //    };
 //});
 
-app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService) {
+app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService, ControllerService) {
 		
 	$('#treeview-searchable').treeview({
 	     data: getTree(),
@@ -107,6 +126,42 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	     var results = $searchableTree.treeview('search', [pattern, options]);
 	    
 	 }
+	
+	$scope.controllerDevice = {
+		uid: 0,
+		deviceType: 1,
+		name: 'Controller',
+		manufacturer: '"Manufacturer1',
+		modelo: ""
+	 } 
+	 
+	 $scope.saveController = function() {
+		 
+		 $scope.inclusao = new ControllerService.save($scope.controller);		 
+		 $scope.inclusao.$controller({_csrf : angular.element('#_csrf').val()}, function(){         	
+         	console.log($scope.inclusao);         	
+         });
+		 
+	 }
+	 
+	 $scope.getController = function() {
+		 
+		 $scope.listAll = new ControllerService.listAll();		 
+		 $scope.listAll.$controller({_csrf : angular.element('#_csrf').val()}, function(){			
+			 console.log($scope.listAll);		         	         	
+         });		 
+	 }
+	 
+	 $scope.getOneController = function() {
+		 
+		 $scope.listOne = new ControllerService.listOne();		 
+		 $scope.listOne.$controller({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+			 console.log($scope.listOne);
+         	         	
+         });
+		 
+	 }
+	 /*-----------------------------------------------------------------------------------------------------------------*/
 	 
 	$scope.companyDevice = {
 		uid: 0,

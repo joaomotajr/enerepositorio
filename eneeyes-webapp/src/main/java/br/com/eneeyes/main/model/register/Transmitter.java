@@ -1,18 +1,15 @@
 package br.com.eneeyes.main.model.register;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.eneeyes.main.dto.register.TransmitterDto;
 import br.com.eneeyes.main.model.enums.CommProtocol;
 
 /**
@@ -24,16 +21,25 @@ import br.com.eneeyes.main.model.enums.CommProtocol;
 
 @Entity
 @Table(name = "transmitter")
-public class Transmitter {
+public class Transmitter extends BaseDevice {
+	
+	public Transmitter() {
+		
+	}
+	
+	public Transmitter(TransmitterDto dto) {
+	
+		this.uid = dto.getUid();
+		this.name = dto.getName();
+		this.manufacturer = dto.getManufacturer();
+		this.model = dto.getModel();
+		this.commProtocol = dto.getCommProtocol();		 
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UID")
 	private Long uid;
-	
-	@OneToOne(cascade=CascadeType.ALL, optional = false, fetch = FetchType.EAGER)
-	@JoinColumn(name="DETECTOR_ID")
-	private Detector detector;
 	
 	@Column(name = "COMM_PROTOCOL", columnDefinition = "int default 0")
 	private CommProtocol commProtocol;	
@@ -49,14 +55,6 @@ public class Transmitter {
 
 	public final void setUid(Long uid) {
 		this.uid = uid;
-	}
-	
-	public final Detector getDetector() {
-		return detector;
-	}
-
-	public final void setDetector(Detector detector) {
-		this.detector = detector;
 	}
 	
 	public final CommProtocol getCommProtocol() {

@@ -1,7 +1,7 @@
 package br.com.eneeyes.main.model.register;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.eneeyes.main.dto.register.DetectorDto;
+
 /**
  * Created by Junior on 06/06/2016.
  * Cadastro de Detectores
@@ -24,20 +26,55 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "detector")
-public class Detector {
+public class Detector extends BaseDevice {
+	
+	public Detector() {
+		
+	}
+	
+	public Detector(DetectorDto dto) {
+		this.uid = dto.getUid();
+		this.name = dto.getName();
+		this.manufacturer = dto.getManufacturer();
+		this.model = dto.getModel();
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UID")
 	private Long uid;
 	
-	@OneToOne(mappedBy="detector", cascade=CascadeType.ALL, fetch = FetchType.EAGER)	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="TRANSMITTER_ID", nullable = false)
 	private Transmitter transmitter;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	@JoinTable(name = "detector_sensors",	 
+	joinColumns = @JoinColumn(name = "DETECTOR_ID", referencedColumnName = "UID"), 
+	inverseJoinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"))	
+	private Set<Sensor> sensors = new HashSet<Sensor>();
 	
-	@OneToMany(fetch = FetchType.EAGER)	
-	@JoinTable(name = "detector_sensors", joinColumns = @JoinColumn(name = "DETECTOR_ID", referencedColumnName = "UID"), 
-								inverseJoinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"))
-	private List<Sensor> sensores = new ArrayList<Sensor>();
+	public final Long getUid() {
+		return uid;
+	}
 
+	public final void setUid(Long uid) {
+		this.uid = uid;
+	}
 
+	public final Transmitter getTransmitter() {
+		return transmitter;
+	}
+
+	public final void setTransmitter(Transmitter transmitter) {
+		this.transmitter = transmitter;
+	}
+
+	public final Set<Sensor> getSensors() {
+		return sensors;
+	}
+
+	public final void setSensores(Set<Sensor> sensors) {
+		this.sensors = sensors;
+	}
 }

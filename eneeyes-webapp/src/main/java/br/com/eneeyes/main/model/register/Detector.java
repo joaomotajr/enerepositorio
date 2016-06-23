@@ -26,7 +26,7 @@ import br.com.eneeyes.main.dto.register.DetectorDto;
 
 @Entity
 @Table(name = "detector")
-public class Detector extends BaseDevice {
+public class Detector {
 	
 	public Detector() {
 		
@@ -54,6 +54,15 @@ public class Detector extends BaseDevice {
 	inverseJoinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"))	
 	private Set<Sensor> sensors = new HashSet<Sensor>();
 	
+	@Column(name = "NAME", nullable = true)
+	String name;
+
+	@Column(name = "MANUFACTURER", nullable = true)
+	String manufacturer;
+	
+	@Column(name = "MODEL", nullable = true)
+	String model;
+	
 	public final Long getUid() {
 		return uid;
 	}
@@ -76,5 +85,29 @@ public class Detector extends BaseDevice {
 
 	public final void setSensores(Set<Sensor> sensors) {
 		this.sensors = sensors;
+	}
+	
+	public final String getName() {
+		return name;
+	}
+
+	public final void setName(String name) {
+		this.name = name;
+	}
+
+	public final String getManufacturer() {
+		return manufacturer;
+	}
+
+	public final void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+	
+	public final String getModel() {
+		return model;
+	}
+
+	public final void setModel(String model) {
+		this.model = model;
 	}
 }

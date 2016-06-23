@@ -16,7 +16,7 @@ import br.com.eneeyes.main.dto.register.ControllerDto;
 
 @Entity
 @Table(name = "controller")
-public class Controller extends BaseDevice {
+public class Controller {
 	
 	public Controller() {
 		
@@ -34,12 +34,45 @@ public class Controller extends BaseDevice {
 	@Column(name = "UID")
 	private Long uid;
 	
+	@Column(name = "NAME", nullable = true)
+	String name;
+
+	@Column(name = "MANUFACTURER", nullable = true)
+	String manufacturer;
+	
+	@Column(name = "MODEL", nullable = true)
+	String model;
+	
 	public final Long getUid() {
 		return uid;
 	}
 
 	public final void setUid(Long uid) {
 		this.uid = uid;
+	}
+	
+	public final String getName() {
+		return name;
+	}
+
+	public final void setName(String name) {
+		this.name = name;
+	}
+
+	public final String getManufacturer() {
+		return manufacturer;
+	}
+
+	public final void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+	
+	public final String getModel() {
+		return model;
+	}
+
+	public final void setModel(String model) {
+		this.model = model;
 	}
 
 

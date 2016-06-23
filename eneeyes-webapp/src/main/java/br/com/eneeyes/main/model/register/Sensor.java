@@ -1,9 +1,9 @@
 package br.com.eneeyes.main.model.register;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,6 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.eneeyes.main.dto.register.GasDto;
 import br.com.eneeyes.main.dto.register.SensorDto;
 import br.com.eneeyes.main.model.enums.DetectionType;
 
@@ -29,7 +30,7 @@ import br.com.eneeyes.main.model.enums.DetectionType;
 
 @Entity
 @Table(name = "sensor")
-public class Sensor extends BaseDevice {
+public class Sensor {
 	
 	public Sensor() {
 		
@@ -41,6 +42,18 @@ public class Sensor extends BaseDevice {
 		this.name = dto.getName();
 		this.manufacturer = dto.getManufacturer();
 		this.model = dto.getModel();
+		
+		if(dto.getGasesDto() != null)
+			this.gases = parseGases(dto.getGasesDto());
+	}	
+	
+	private final Set<Gas> parseGases(List<GasDto> gases) {		
+		Set<Gas> lista = new HashSet<Gas>();		
+		
+		for (GasDto item   : gases) {			
+			lista.add(new Gas(item));			
+		}		
+		return lista;		
 	}
 
 	@Id
@@ -56,11 +69,20 @@ public class Sensor extends BaseDevice {
 	    return detectionType; 
 	}
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "sensor_gases",	 
 	joinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"), 
 	inverseJoinColumns = @JoinColumn(name = "GASES_ID", referencedColumnName = "UID"))	
 	private Set<Gas> gases = new HashSet<Gas>();
+	
+	@Column(name = "NAME", nullable = true)
+	String name;
+
+	@Column(name = "MANUFACTURER", nullable = true)
+	String manufacturer;
+	
+	@Column(name = "MODEL", nullable = true)
+	String model;
 	
 	public final Long getUid() {
 		return uid;
@@ -84,5 +106,29 @@ public class Sensor extends BaseDevice {
 
 	public final void setGases(Set<Gas> gases) {
 		this.gases = gases;
+	}
+	
+	public final String getName() {
+		return name;
+	}
+
+	public final void setName(String name) {
+		this.name = name;
+	}
+
+	public final String getManufacturer() {
+		return manufacturer;
+	}
+
+	public final void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+	
+	public final String getModel() {
+		return model;
+	}
+
+	public final void setModel(String model) {
+		this.model = model;
 	}
 }

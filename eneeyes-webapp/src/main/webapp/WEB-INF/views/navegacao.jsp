@@ -42,6 +42,18 @@
         		<button type="button" class="btn btn-primary" ng-click="getOneController()">Get One Controller</button>        		
        		</div>
        		
+       		<div class="row">        		
+        		<button type="button" class="btn btn-primary" ng-click="saveGas()">Save Gas</button>
+        		<button type="button" class="btn btn-primary" ng-click="getGas()">Get Gas</button>
+        		<button type="button" class="btn btn-primary" ng-click="getOneGas()">Get One Gas</button>        		
+       		</div>
+       		
+       		<div class="row">        		
+        		<button type="button" class="btn btn-primary" ng-click="saveSensor()">Save Sensor</button>
+        		<button type="button" class="btn btn-primary" ng-click="getSensor()">Get Sensor</button>
+        		<button type="button" class="btn btn-primary" ng-click="getOneSensor()">Get One Sensor</button>        		
+       		</div>
+       		
 	         <div class="row">
 	            <div class="col-md-12">           
 					<div class="col-sm-3">					

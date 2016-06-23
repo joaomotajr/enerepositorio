@@ -15,6 +15,10 @@ public class SensorDto extends BaseDeviceDto {
 	private DetectionType detectionType;
 	private List<GasDto> gasesDto = new ArrayList<GasDto>();
 	
+	public final void setGasesDto(List<GasDto> gasesDto) {
+		this.gasesDto = gasesDto;
+	}
+
 	public SensorDto() {
 		super();
 	}
@@ -29,10 +33,10 @@ public class SensorDto extends BaseDeviceDto {
 		this.detectionType = sensor.getDetectionType();
 		
 		if(sensor.getGases() != null)		
-			this.gasesDto = setGasesDto(sensor.getGases());
+			this.gasesDto = parseGasesDto(sensor.getGases());
 	}
 	
-	private final List<GasDto> setGasesDto(Set<Gas> gases) {
+	private final List<GasDto> parseGasesDto(Set<Gas> gases) {
 		List<GasDto> lista = new ArrayList<GasDto>();
 		
 		if(gases != null && !gases.isEmpty()) {

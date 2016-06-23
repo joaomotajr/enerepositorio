@@ -1,3 +1,39 @@
+app.factory('SensorService', function($resource){    
+    
+    return {
+    	deletar : $resource('/security/api/sensor/delete',{},{
+    		sensor : {method : 'DELETE'}
+        }),        
+        listAll : $resource('/security/api/sensor/all',{},{
+        	sensor : {method : 'GET'}
+        }),
+        listOne : $resource('/security/api/sensor/obtemPorId/:id', {id: '@id'},{
+        	sensor : {method : 'GET'}
+        }),
+        save : $resource('/security/api/sensor/save',{},{
+        	sensor : {method : 'POST'}
+        }),
+     };
+});
+
+app.factory('GasService', function($resource){    
+    
+    return {
+    	deletar : $resource('/security/api/gas/delete',{},{
+    		gas : {method : 'DELETE'}
+        }),        
+        listAll : $resource('/security/api/gas/all',{},{
+        	gas : {method : 'GET'}
+        }),
+        listOne : $resource('/security/api/gas/obtemPorId/:id', {id: '@id'},{
+        	gas : {method : 'GET'}
+        }),
+        save : $resource('/security/api/gas/save',{},{
+        	gas : {method : 'POST'}
+        }),
+     };
+});
+
 
 app.factory('ControllerService', function($resource){    
     
@@ -109,7 +145,7 @@ app.factory('CompanyService', function($resource){
 //    };
 //});
 
-app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService, ControllerService) {
+app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService, ControllerService, GasService, SensorService) {
 		
 	$('#treeview-searchable').treeview({
 	     data: getTree(),
@@ -126,6 +162,97 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	     var results = $searchableTree.treeview('search', [pattern, options]);
 	    
 	 }
+	
+	
+/*-----------------------------------------------------------------------------------------------------------------*/
+	
+		$scope.gas1 = {
+			uid: 1			
+		 } ;
+		$scope.gas2 = {
+				uid: 2			
+			 } ;
+		
+		$scope.gas3 = {
+				uid: 3			
+			 } ;
+	
+	$scope.sensor = {
+		uid: 1,		
+		detectionType: 0,
+		name: 'Sensor',
+		manufacturer: 'manufacturer',
+		model: 'modelo',
+		gasesDto: []
+	 }
+		
+	 $scope.sensor.gasesDto.push($scope.gas1);
+	 $scope.sensor.gasesDto.push($scope.gas2);
+	 $scope.sensor.gasesDto.push($scope.gas3);
+	 
+	 $scope.saveSensor = function() {
+		 
+		 $scope.inclusao = new SensorService.save($scope.sensor);		 
+		 $scope.inclusao.$sensor({_csrf : angular.element('#_csrf').val()}, function(){         	
+         	console.log($scope.inclusao);         	
+         });
+		 
+	 }
+	 
+	 $scope.getSensor = function() {
+		 
+		 $scope.listAll = new SensorService.listAll();		 
+		 $scope.listAll.$sensor({_csrf : angular.element('#_csrf').val()}, function(){			
+			 console.log($scope.listAll);		         	         	
+         });		 
+	 }
+	 
+	 $scope.getOneSensor = function() {
+		 
+		 $scope.listOne = new SensorService.listOne();		 
+		 $scope.listOne.$sensor({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+			 console.log($scope.listOne);
+         	         	
+         });
+		 
+	 }
+	 /*-----------------------------------------------------------------------------------------------------------------*/
+	
+	$scope.gas = {
+		uid: 0,		
+		name: 'Controller',
+		formula: "H2O",
+		cas: 'cas',
+		unitMeterGases: 0
+	 } 
+	 
+	 $scope.saveGas = function() {
+		 
+		 $scope.inclusao = new GasService.save($scope.gas);		 
+		 $scope.inclusao.$gas({_csrf : angular.element('#_csrf').val()}, function(){         	
+         	console.log($scope.inclusao);         	
+         });
+		 
+	 }
+	 
+	 $scope.getGas = function() {
+		 
+		 $scope.listAll = new GasService.listAll();		 
+		 $scope.listAll.$gas({_csrf : angular.element('#_csrf').val()}, function(){			
+			 console.log($scope.listAll);		         	         	
+         });		 
+	 }
+	 
+	 $scope.getOneGas = function() {
+		 
+		 $scope.listOne = new GasService.listOne();		 
+		 $scope.listOne.$gas({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+			 console.log($scope.listOne);
+         	         	
+         });
+		 
+	 }
+	 /*-----------------------------------------------------------------------------------------------------------------*/
 	
 	$scope.controller = {
 		uid: 0,		

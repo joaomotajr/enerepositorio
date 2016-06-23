@@ -5,13 +5,13 @@ import javax.persistence.Column;
 public abstract class BaseDevice {
 	
 	@Column(name = "NAME", nullable = true)
-	protected String name;
+	String name;
 
 	@Column(name = "MANUFACTURER", nullable = true)
-	protected String manufacturer;
+	String manufacturer;
 	
 	@Column(name = "MODEL", nullable = true)
-	protected String model;
+	String model;
 	
 	public final String getName() {
 		return name;

@@ -2,9 +2,9 @@ package br.com.eneeyes.main.dto.register;
 
 public abstract class BaseDeviceDto {
 	
-	protected String name;
-	protected String manufacturer;
-	protected String model;
+	String name;
+	String manufacturer;
+	String model;
 	
 	public final String getName() {
 		return name;

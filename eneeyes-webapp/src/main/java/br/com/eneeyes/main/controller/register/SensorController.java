@@ -28,7 +28,7 @@ public class SensorController {
 		return service.save(sensorDto);
 	}
 	
-	@RequestMapping(value="/security/api/sensor/delete/{sensorUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/sensor/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> delete(@PathVariable Long uid) {
 		

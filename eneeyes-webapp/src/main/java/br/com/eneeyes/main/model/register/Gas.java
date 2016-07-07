@@ -4,13 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.register.GasDto;
@@ -37,20 +33,6 @@ public class Gas {
 		this.formula = dto.getFormula();
 		this.unitMeterGases = dto.getUnitMeterGases();		
 	}
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinTable(name = "sensor_gases",	 
-	joinColumns = @JoinColumn(name = "GASES_ID", referencedColumnName = "UID"), 
-	inverseJoinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"))	
-	private Sensor sensor;
-	
-	public final Sensor getSensor() {
-		return sensor;
-	}
-
-	public final void setSensor(Sensor sensor) {
-		this.sensor = sensor;
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,7 +55,7 @@ public class Gas {
 	private UnitMeterGases UnitMeterGases() { 
 	    return unitMeterGases; 
 	}
-	
+			
 	public final Long getUid() {
 		return uid;
 	}

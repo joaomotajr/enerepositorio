@@ -27,7 +27,7 @@ public class AreaController {
 		return service.save(areaDto);
 	}
 	
-	@RequestMapping(value="/security/api/area/delete/{areaUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/area/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> delete(@PathVariable Long uid) {
 		

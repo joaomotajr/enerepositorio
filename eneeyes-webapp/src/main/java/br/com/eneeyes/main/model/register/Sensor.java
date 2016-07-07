@@ -14,7 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.register.GasDto;
@@ -69,7 +69,7 @@ public class Sensor {
 	    return detectionType; 
 	}
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "sensor_gases",	 
 	joinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"), 
 	inverseJoinColumns = @JoinColumn(name = "GASES_ID", referencedColumnName = "UID"))	

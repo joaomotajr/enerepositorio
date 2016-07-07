@@ -28,7 +28,7 @@ public class UnitController {
 		return service.save(unitDto);
 	}
 	
-	@RequestMapping(value="/security/api/unit/delete/{unitUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/unit/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> delete(@PathVariable Long uid) {
 		

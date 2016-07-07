@@ -27,7 +27,7 @@ public class CompanyDeviceController {
 		return service.save(companyDeviceDto);
 	}
 	
-	@RequestMapping(value="/security/api/companyDevice/delete/{companyDeviceUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/companyDevice/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> delete(@PathVariable Long uid) {
 		

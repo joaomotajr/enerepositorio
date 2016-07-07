@@ -28,7 +28,7 @@ public class DetectorController {
 		return service.save(detectorDto);
 	}
 	
-	@RequestMapping(value="/security/api/detector/delete/{detectorUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/detector/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> delete(@PathVariable Long uid) {
 		

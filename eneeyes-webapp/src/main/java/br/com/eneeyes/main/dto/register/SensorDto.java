@@ -13,11 +13,7 @@ public class SensorDto extends BaseDeviceDto {
 	
 	private Long uid;
 	private DetectionType detectionType;
-	private List<GasDto> gasesDto = new ArrayList<GasDto>();
-	
-	public final void setGasesDto(List<GasDto> gasesDto) {
-		this.gasesDto = gasesDto;
-	}
+	private List<GasDto> gasesDto = new ArrayList<GasDto>();	
 
 	public SensorDto() {
 		super();
@@ -56,6 +52,10 @@ public class SensorDto extends BaseDeviceDto {
 		return gasesDto;
 	}
 
+	public final void setGasesDto(List<GasDto> gasesDto) {
+		this.gasesDto = gasesDto;
+	}
+	
 	public final Long getUid() {
 		return uid;
 	}

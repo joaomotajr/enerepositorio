@@ -27,7 +27,7 @@ public class GasController {
 		return service.save(gasDto);
 	}
 	
-	@RequestMapping(value="/security/api/gas/delete/{gasUid}", method=RequestMethod.DELETE, produces = "application/json")
+	@RequestMapping(value="/security/api/gas/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> delete(@PathVariable Long uid) {
 		

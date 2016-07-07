@@ -1,7 +1,7 @@
 app.factory('DetectorService', function($resource){    
     
     return {
-    	deletar : $resource('/security/api/detector/delete',{},{
+    	deletar : $resource('/security/api/detector/delete/:id', {id: '@id'},{
     		detector : {method : 'DELETE'}
         }),        
         listAll : $resource('/security/api/detector/all',{},{
@@ -20,7 +20,7 @@ app.factory('DetectorService', function($resource){
 app.factory('TransmitterService', function($resource){    
     
     return {
-    	deletar : $resource('/security/api/transmitter/delete',{},{
+    	deletar : $resource('/security/api/transmitter/delete/:id', {id: '@id'},{
     		transmitter : {method : 'DELETE'}
         }),        
         listAll : $resource('/security/api/transmitter/all',{},{
@@ -38,7 +38,7 @@ app.factory('TransmitterService', function($resource){
 app.factory('SensorService', function($resource){    
     
     return {
-    	deletar : $resource('/security/api/sensor/delete',{},{
+    	deletar : $resource('/security/api/sensor/delete/:id', {id: '@id'},{
     		sensor : {method : 'DELETE'}
         }),        
         listAll : $resource('/security/api/sensor/all',{},{
@@ -56,7 +56,7 @@ app.factory('SensorService', function($resource){
 app.factory('GasService', function($resource){    
     
     return {
-    	deletar : $resource('/security/api/gas/delete',{},{
+    	deletar : $resource('/security/api/gas/delete/:id', {id: '@id'},{
     		gas : {method : 'DELETE'}
         }),        
         listAll : $resource('/security/api/gas/all',{},{
@@ -75,7 +75,7 @@ app.factory('GasService', function($resource){
 app.factory('ControllerService', function($resource){    
     
     return {
-    	deletar : $resource('/security/api/controller/delete',{},{
+    	deletar : $resource('/security/api/controller/delete/:id', {id: '@id'},{
     		controller : {method : 'DELETE'}
         }),        
         listAll : $resource('/security/api/controller/all',{},{
@@ -94,7 +94,7 @@ app.factory('ControllerService', function($resource){
 app.factory('CompanyDeviceService', function($resource){    
     
     return {
-    	deletar : $resource('/security/api/companyDevice/delete',{},{
+    	deletar : $resource('/security/api/companyDevice/delete/:id', {id: '@id'},{
     		companyDevice : {method : 'DELETE'}
         }),        
         listAll : $resource('/security/api/companyDevice/all',{},{
@@ -113,7 +113,7 @@ app.factory('CompanyDeviceService', function($resource){
 app.factory('AreaService', function($resource){    
     
     return {
-    	deletar : $resource('/security/api/area/delete',{},{
+    	deletar : $resource('/security/api/area/delete/:id', {id: '@id'},{
             area : {method : 'DELETE'}
         }),        
         listAll : $resource('/security/api/area/all',{},{
@@ -133,7 +133,7 @@ app.factory('AreaService', function($resource){
 app.factory('UnitService', function($resource){    
     
     return {
-    	deletar : $resource('/security/api/unit/delete',{},{
+    	deletar : $resource('/security/api/unit/delete/:id', {id: '@id'},{
     		unit : {method : 'DELETE'}
         }),        
         listAll : $resource('/security/api/unit/all',{},{
@@ -159,7 +159,7 @@ app.factory('UnitService', function($resource){
 app.factory('CompanyService', function($resource){    
     
     return {
-    	deletar : $resource('/security/api/company/delete',{},{
+    	deletar : $resource('/security/api/company/delete/:id', {id: '@id'},{
     		company : {method : 'DELETE'}
         }),        
         listAll : $resource('/security/api/company/all',{},{
@@ -207,25 +207,25 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 } ;
 	$scope.det2 = {
 			uid: 2
-		};
+		}; 
 	
 	$scope.det3 = {
 			uid: 3
 		 } ;
 		
 	$scope.detector = {
-		uid: 2,		
+		uid: 0,		
 		name: 'Detector',
 		manufacturer: 'manufacturer',
 		model: 'modelo',
-		transmitter : {uid: 4}
+		transmitter : {uid: 1}
 		, sensorsDto: []
 	 }
 		
 		
-		$scope.detector.sensorsDto.push($scope.det1);
+		//$scope.detector.sensorsDto.push($scope.det1);
 	 	$scope.detector.sensorsDto.push($scope.det2);
-	 	$scope.detector.sensorsDto.push($scope.det3);
+	 	//$scope.detector.sensorsDto.push($scope.det3);
 		 
 		$scope.saveDetector = function() {
 			 
@@ -249,6 +249,16 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 			 $scope.listOne = new DetectorService.listOne();		 
 			 $scope.listOne.$detector({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
 				 console.log($scope.listOne);
+	         	         	
+	         });
+			 
+		 }
+		 
+		 $scope.deletarDetector = function() {
+			 
+			 $scope.deletar = new DetectorService.deletar();		 
+			 $scope.deletar.$detector({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+				 console.log($scope.deletar);
 	         	         	
 	         });
 			 
@@ -291,6 +301,16 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 			 
 		 }
 		 
+		 $scope.deletarTransmitter = function() {
+			 
+			 $scope.deletar = new TransmitterService.deletar();		 
+			 $scope.deletar.$transmitter({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+				 console.log($scope.deletar);
+	         	         	
+	         });
+			 
+		 }
+		 
 	
 	
 /*-----------------------------------------------------------------------------------------------------------------*/
@@ -305,9 +325,13 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		$scope.gas3 = {
 				uid: 3			
 			 } ;
+		
+		$scope.gas4 = {
+				uid: 4			
+			 } ;
 	
 	$scope.sensor = {
-		uid: 1,		
+		uid: 0,		
 		detectionType: 0,
 		name: 'Sensor',
 		manufacturer: 'manufacturer',
@@ -318,6 +342,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 $scope.sensor.gasesDto.push($scope.gas1);
 	 $scope.sensor.gasesDto.push($scope.gas2);
 	 $scope.sensor.gasesDto.push($scope.gas3);
+	 $scope.sensor.gasesDto.push($scope.gas4);
 	 
 	 $scope.saveSensor = function() {
 		 
@@ -341,6 +366,17 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		 $scope.listOne = new SensorService.listOne();		 
 		 $scope.listOne.$sensor({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
 			 console.log($scope.listOne);
+         	         	
+         });
+		 
+	 }
+	 
+	 
+	 $scope.deletarSensor = function() {
+		 
+		 $scope.deletar = new SensorService.deletar();		 
+		 $scope.deletar.$sensor({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+			 console.log($scope.deletar);
          	         	
          });
 		 
@@ -381,6 +417,16 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
          });
 		 
 	 }
+	 
+	 $scope.deletarGas = function() {
+		 
+		 $scope.deletar = new GasService.deletar();		 
+		 $scope.deletar.$gas({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+			 console.log($scope.deletar);
+         	         	
+         });
+		 
+	 }
 	 /*-----------------------------------------------------------------------------------------------------------------*/
 	
 	$scope.controller = {
@@ -416,12 +462,22 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
          });
 		 
 	 }
+	 
+	 $scope.deletarController = function() {
+		 
+		 $scope.deletar = new ControllerService.deletar();		 
+		 $scope.deletar.$controller({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+			 console.log($scope.deletar);
+         	         	
+         });
+		 
+	 }
 	 /*-----------------------------------------------------------------------------------------------------------------*/
 	 
 	$scope.companyDevice = {
 		uid: 0,
 		deviceType: 1,
-		areaDto: {uid : 1}
+		areaDto: {uid : 2}
 		
 	 } 
 	 
@@ -451,6 +507,16 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
          });
 		 
 	 }
+	 
+	 $scope.deletarCompanyDevice = function() {
+		 
+		 $scope.deletar = new CompanyDeviceService.deletar();		 
+		 $scope.deletar.$companyDevice({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+			 console.log($scope.deletar);
+         	         	
+         });
+		 
+	 }
 	 /*-----------------------------------------------------------------------------------------------------------------*/
 	 
 	 $scope.area = {
@@ -462,7 +528,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		longitude: 9.232323,
 		classified: true,
 		date: null,
-		unitDto: {uid: 1}
+		unitDto: {uid: 3}
 	 } 
 	 
 	 $scope.saveArea = function() {
@@ -491,6 +557,13 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
          });
 		 
 	 }
+	 
+	 $scope.deletarArea = function() {		 
+		 $scope.deletar = new AreaService.deletar();		 
+		 $scope.deletar.$area({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+			 console.log($scope.deletar);         	         	
+         });		 
+	 }
 	 /*-----------------------------------------------------------------------------------------------------------------*/
 	 
 	 $scope.unit = {
@@ -508,7 +581,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		date: null,
 		latitude: 12.2345545,		
 		longitude: 9.232323
-		, companyDto: {uid : 1}				
+		, companyDto: {uid : 2}				
 	 }	 
 	 
 
@@ -556,6 +629,15 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		 
 	 }
 	 
+	 $scope.deletarUnit = function() {		 
+		 $scope.deletar = new UnitService.deletar();		 
+		 $scope.deletar.$unit({_csrf : angular.element('#_csrf').val(), id : 2}, function(){			
+			 console.log($scope.deletar);         	         	
+         });		 
+	 }
+	 
+	 /*-----------------------------------------------------------------------------------------------------------------*/
+	 
 	 $scope.company = {
 		uid: 0,
 		name: "Teste"						
@@ -587,6 +669,13 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	         	         	
 	         });		 
 		 }
+	 
+	 $scope.deletarCompany = function() {		 
+		 $scope.deletar = new CompanyService.deletar();		 
+		 $scope.deletar.$company({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+			 console.log($scope.deletar);         	         	
+         });		 
+	 }
  
 //	 $scope.setUnit = function () {
 //		 

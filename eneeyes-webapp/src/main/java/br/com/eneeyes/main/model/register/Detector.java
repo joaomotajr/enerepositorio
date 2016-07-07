@@ -1,6 +1,7 @@
 package br.com.eneeyes.main.model.register;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,11 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.register.DetectorDto;
+import br.com.eneeyes.main.dto.register.SensorDto;
 
 /**
  * Created by Junior on 06/06/2016.
@@ -36,7 +38,20 @@ public class Detector {
 		this.uid = dto.getUid();
 		this.name = dto.getName();
 		this.manufacturer = dto.getManufacturer();
-		this.model = dto.getModel();
+		this.model = dto.getModel();		
+		this.transmitter = dto.getTransmitter();
+		
+		if(dto.getSensorsDto() != null)
+			this.sensors = parseSensors(dto.getSensorsDto());
+	}
+	
+	private final Set<Sensor> parseSensors(List<SensorDto> sensors) {		
+		Set<Sensor> lista = new HashSet<Sensor>();		
+		
+		for (SensorDto item   : sensors) {			
+			lista.add(new Sensor(item));			
+		}		
+		return lista;		
 	}
 	
 	@Id
@@ -48,7 +63,7 @@ public class Detector {
 	@JoinColumn(name="TRANSMITTER_ID", nullable = false)
 	private Transmitter transmitter;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	@JoinTable(name = "detector_sensors",	 
 	joinColumns = @JoinColumn(name = "DETECTOR_ID", referencedColumnName = "UID"), 
 	inverseJoinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"))	

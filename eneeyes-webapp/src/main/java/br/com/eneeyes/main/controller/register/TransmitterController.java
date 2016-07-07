@@ -28,7 +28,7 @@ public class TransmitterController {
 		return service.save(transmitterDto);
 	}
 	
-	@RequestMapping(value="/security/api/transmitter/delete/{transmitterUid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/transmitter/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> delete(@PathVariable Long uid) {
 		

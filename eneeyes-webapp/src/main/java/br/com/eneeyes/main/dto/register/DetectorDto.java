@@ -29,11 +29,11 @@ public class DetectorDto extends BaseDeviceDto {
 			this.transmitter = detector.getTransmitter();		
 				
 		if(detector.getSensors() != null)		
-			this.sensorsDto = setSensorsDto(detector.getSensors());		
+			this.sensorsDto = parseSensorsDto(detector.getSensors());		
 		
 	}
 	
-	private final List<SensorDto> setSensorsDto(Set<Sensor> sensors) {
+	private final List<SensorDto> parseSensorsDto(Set<Sensor> sensors) {
 		List<SensorDto> lista = new ArrayList<SensorDto>();
 		
 		if(sensors != null && !sensors.isEmpty()) {
@@ -51,6 +51,10 @@ public class DetectorDto extends BaseDeviceDto {
 	
 	public final List<SensorDto> getSensorsDto() {
 		return sensorsDto;
+	}
+	
+	public final void setSensorsDto(List<SensorDto> sensorsDto) {
+		this.sensorsDto = sensorsDto;
 	}
 
 	public final Long getUid() {

@@ -214,7 +214,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		 } ;
 		
 	$scope.detector = {
-		uid: 2,		
+		uid: 1,		
 		name: 'Detector',
 		manufacturer: 'manufacturer',
 		model: 'modelo',
@@ -307,7 +307,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 			 } ;
 	
 	$scope.sensor = {
-		uid: 1,		
+		uid: 2,		
 		detectionType: 0,
 		name: 'Sensor',
 		manufacturer: 'manufacturer',

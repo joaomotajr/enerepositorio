@@ -24,14 +24,10 @@ public class DetectorService implements IService<DetectorDto> {
 	public BasicResult<?> save(DetectorDto dto) {
 		Result<DetectorDto> result = new Result<DetectorDto>();
 		
-//		Company company = companyRepository.findByUid(dto.getCompanyDto().getUid());
-//		
-//		Detector detector = new Detector(dto);
-//		detector.setCompany(company);		
-//		detector = repository.save(detector);
-//		
-//		dto.setUid(detector.getUid());	
+		Detector detector = new Detector(dto);
+		detector = repository.save(detector);
 		
+		dto.setUid(detector.getUid());
 		result.setEntity(dto);
 		
 		result.setResultType( ResultMessageType.SUCCESS );
@@ -48,7 +44,7 @@ public class DetectorService implements IService<DetectorDto> {
 			repository.delete(uid);
 			
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Área Excluída.");
+			result.setMessage("Detector Excluído.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
@@ -81,7 +77,7 @@ public class DetectorService implements IService<DetectorDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Unidade.");
+				result.setMessage("Nenhum Detector.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);
@@ -108,7 +104,7 @@ public class DetectorService implements IService<DetectorDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Unidade.");
+				result.setMessage("Nenhum Detector.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

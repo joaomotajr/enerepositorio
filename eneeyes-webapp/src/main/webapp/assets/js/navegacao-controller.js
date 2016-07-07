@@ -1,3 +1,40 @@
+app.factory('DetectorService', function($resource){    
+    
+    return {
+    	deletar : $resource('/security/api/detector/delete',{},{
+    		detector : {method : 'DELETE'}
+        }),        
+        listAll : $resource('/security/api/detector/all',{},{
+        	detector : {method : 'GET'}
+        }),
+        listOne : $resource('/security/api/detector/obtemPorId/:id', {id: '@id'},{
+        	detector : {method : 'GET'}
+        }),
+        save : $resource('/security/api/detector/save',{},{
+        	detector : {method : 'POST'}
+        }),
+     };
+});
+
+
+app.factory('TransmitterService', function($resource){    
+    
+    return {
+    	deletar : $resource('/security/api/transmitter/delete',{},{
+    		transmitter : {method : 'DELETE'}
+        }),        
+        listAll : $resource('/security/api/transmitter/all',{},{
+        	transmitter : {method : 'GET'}
+        }),
+        listOne : $resource('/security/api/transmitter/obtemPorId/:id', {id: '@id'},{
+        	transmitter : {method : 'GET'}
+        }),
+        save : $resource('/security/api/transmitter/save',{},{
+        	transmitter : {method : 'POST'}
+        }),
+     };
+});
+
 app.factory('SensorService', function($resource){    
     
     return {
@@ -145,7 +182,7 @@ app.factory('CompanyService', function($resource){
 //    };
 //});
 
-app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService, ControllerService, GasService, SensorService) {
+app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService, ControllerService, GasService, SensorService, TransmitterService, DetectorService) {
 		
 	$('#treeview-searchable').treeview({
 	     data: getTree(),
@@ -162,6 +199,98 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	     var results = $searchableTree.treeview('search', [pattern, options]);
 	    
 	 }
+	
+/*-----------------------------------------------------------------------------------------------------------------*/
+	
+	$scope.det1 = {
+		uid: 1
+	 } ;
+	$scope.det2 = {
+			uid: 2
+		};
+	
+	$scope.det3 = {
+			uid: 3
+		 } ;
+		
+	$scope.detector = {
+		uid: 2,		
+		name: 'Detector',
+		manufacturer: 'manufacturer',
+		model: 'modelo',
+		transmitter : {uid: 4}
+		, sensorsDto: []
+	 }
+		
+		
+		$scope.detector.sensorsDto.push($scope.det1);
+	 	$scope.detector.sensorsDto.push($scope.det2);
+	 	$scope.detector.sensorsDto.push($scope.det3);
+		 
+		$scope.saveDetector = function() {
+			 
+			 $scope.inclusao = new DetectorService.save($scope.detector);		 
+			 $scope.inclusao.$detector({_csrf : angular.element('#_csrf').val()}, function(){         	
+	         	console.log($scope.inclusao);         	
+	         });
+			 
+		 }
+		 
+		 $scope.getDetector = function() {
+			 
+			 $scope.listAll = new DetectorService.listAll();		 
+			 $scope.listAll.$detector({_csrf : angular.element('#_csrf').val()}, function(){			
+				 console.log($scope.listAll);		         	         	
+	         });		 
+		 }
+		 
+		 $scope.getOneDetector = function() {
+			 
+			 $scope.listOne = new DetectorService.listOne();		 
+			 $scope.listOne.$detector({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+				 console.log($scope.listOne);
+	         	         	
+	         });
+			 
+		 }
+	
+	/*-----------------------------------------------------------------------------------------------------------------*/
+	
+	$scope.transmitter = {
+			uid: 0,		
+			name: 'Transmitter',
+			manufacturer: 'Manufacturer1',
+			model: "werwerwere",
+			commProtocol : 5
+		 } 
+		 
+		 $scope.saveTransmitter = function() {
+			 
+			 $scope.inclusao = new TransmitterService.save($scope.transmitter);		 
+			 $scope.inclusao.$transmitter({_csrf : angular.element('#_csrf').val()}, function(){         	
+	         	console.log($scope.inclusao);         	
+	         });
+			 
+		 }
+		 
+		 $scope.getTransmitter = function() {
+			 
+			 $scope.listAll = new TransmitterService.listAll();		 
+			 $scope.listAll.$transmitter({_csrf : angular.element('#_csrf').val()}, function(){			
+				 console.log($scope.listAll);		         	         	
+	         });		 
+		 }
+		 
+		 $scope.getOneTransmitter = function() {
+			 
+			 $scope.listOne = new TransmitterService.listOne();		 
+			 $scope.listOne.$transmitter({_csrf : angular.element('#_csrf').val(), id : 3}, function(){			
+				 console.log($scope.listOne);
+	         	         	
+	         });
+			 
+		 }
+		 
 	
 	
 /*-----------------------------------------------------------------------------------------------------------------*/

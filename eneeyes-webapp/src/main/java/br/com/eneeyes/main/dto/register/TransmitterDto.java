@@ -17,6 +17,7 @@ public class TransmitterDto extends BaseDeviceDto {
 		this.name = transmitter.getName();
 		this.manufacturer = transmitter.getManufacturer();
 		this.model = transmitter.getModel();
+		this.commProtocol = transmitter.getCommProtocol();
 	}
 
 	public final Long getUid() {

@@ -54,6 +54,18 @@
         		<button type="button" class="btn btn-primary" ng-click="getOneSensor()">Get One Sensor</button>        		
        		</div>
        		
+       		<div class="row">        		
+        		<button type="button" class="btn btn-primary" ng-click="saveTransmitter()">Save Transmitter</button>
+        		<button type="button" class="btn btn-primary" ng-click="getTransmitter()">Get Transmitter</button>
+        		<button type="button" class="btn btn-primary" ng-click="getOneTransmitter()">Get One Transmitter</button>        		
+       		</div>
+       		<br />
+       		<div class="row">        		
+        		<button type="button" class="btn btn-primary" ng-click="saveDetector()">Save Detector</button>
+        		<button type="button" class="btn btn-primary" ng-click="getDetector()">Get Detector</button>
+        		<button type="button" class="btn btn-primary" ng-click="getOneDetector()">Get One Detector</button>        		
+       		</div>
+       		
 	         <div class="row">
 	            <div class="col-md-12">           
 					<div class="col-sm-3">					

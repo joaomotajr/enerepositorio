@@ -105,7 +105,7 @@ public class TransmitterService implements IService<TransmitterDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Compania.");
+				result.setMessage("Nenhum Transmissor.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

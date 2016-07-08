@@ -335,11 +335,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 			 } ;
 	
 	$scope.sensor = {
-<<<<<<< HEAD
-		uid: 0,		
-=======
-		uid: 2,		
->>>>>>> branch 'master' of https://mota_junior@bitbucket.org/enesens/enerepositorio.git
+		uid: 0,			
 		detectionType: 0,
 		name: 'Sensor',
 		manufacturer: 'manufacturer',

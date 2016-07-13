@@ -4,7 +4,7 @@
 
 <c:set var="context" value="${(empty context) ? 'default' : context}"/>
 
-<html lang="en" ng-app="formobili">
+<html lang="en" ng-app="eneeyes">
 	
 	<!-- HEADER - INI-->
 	<header>

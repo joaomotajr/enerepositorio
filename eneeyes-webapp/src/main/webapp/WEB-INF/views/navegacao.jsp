@@ -1,5 +1,5 @@
 	
-	<div class="content-wrapper" ng-controller="navegacaoController">
+	<div ng-controller="navegacaoController">
         <!-- Content Header (Page header) -->
         <section class="content-header">        
           <!-- 
@@ -12,7 +12,7 @@
         </section>
 
         <!-- Main content - Modificado -->
-        <section class="content" style="padding: 0px;margin-left:50px">
+        <section class="content">
         	<div class="row">        		
         		<button type="button" class="btn btn-primary" ng-click="saveCompanyDevice()">Save CompanyDevice</button>
         		<button type="button" class="btn btn-primary" ng-click="getCompanyDevice()">Get CompanyDevice</button>
@@ -30,7 +30,7 @@
         		<button type="button" class="btn btn-primary" ng-click="getUnit()">Get Unit</button>
         		<button type="button" class="btn btn-primary" ng-click="getOneUnit()">Get One Unit</button>        		
         		<button type="button" class="btn btn-primary" ng-click="getUnitFilter()">Get One Unit Filter</button>
-        		<button type="button" class="btn btn-primary" ng-click="deletarUnit()">Deletar Filter</button>        		
+        		<button type="button" class="btn btn-primary" ng-click="deletarUnit()">Deletar Unit</button>        		
        		</div>
        		<div class="row">        		
         		<button type="button" class="btn btn-primary" ng-click="saveCompany()">Save Company</button>

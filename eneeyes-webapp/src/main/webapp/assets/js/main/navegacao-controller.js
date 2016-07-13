@@ -1,3 +1,5 @@
+
+
 app.factory('DetectorService', function($resource){    
     
     return {
@@ -214,11 +216,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		 } ;
 		
 	$scope.detector = {
-<<<<<<< HEAD
-		uid: 0,		
-=======
-		uid: 1,		
->>>>>>> branch 'master' of https://mota_junior@bitbucket.org/enesens/enerepositorio.git
+		uid: 0,
 		name: 'Detector',
 		manufacturer: 'manufacturer',
 		model: 'modelo',
@@ -481,7 +479,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	$scope.companyDevice = {
 		uid: 0,
 		deviceType: 1,
-		areaDto: {uid : 2}
+		areaDto: {uid : 4}
 		
 	 } 
 	 
@@ -532,7 +530,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		longitude: 9.232323,
 		classified: true,
 		date: null,
-		unitDto: {uid: 3}
+		unitDto: {uid: 1}
 	 } 
 	 
 	 $scope.saveArea = function() {
@@ -564,7 +562,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 
 	 $scope.deletarArea = function() {		 
 		 $scope.deletar = new AreaService.deletar();		 
-		 $scope.deletar.$area({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+		 $scope.deletar.$area({_csrf : angular.element('#_csrf').val(), id : 2}, function(){			
 			 console.log($scope.deletar);         	         	
          });		 
 	 }
@@ -585,7 +583,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		date: null,
 		latitude: 12.2345545,		
 		longitude: 9.232323
-		, companyDto: {uid : 2}				
+		, companyDto: {uid : 1}				
 	 }	 
 	 
 
@@ -635,7 +633,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 
 	 $scope.deletarUnit = function() {		 
 		 $scope.deletar = new UnitService.deletar();		 
-		 $scope.deletar.$unit({_csrf : angular.element('#_csrf').val(), id : 2}, function(){			
+		 $scope.deletar.$unit({_csrf : angular.element('#_csrf').val(), id : 3}, function(){			
 			 console.log($scope.deletar);         	         	
          });		 
 	 }
@@ -676,10 +674,18 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 
 	 $scope.deletarCompany = function() {		 
 		 $scope.deletar = new CompanyService.deletar();		 
-		 $scope.deletar.$company({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+		 $scope.deletar.$company({_csrf : angular.element('#_csrf').val(), id : 2}, function(){			
 			 console.log($scope.deletar);         	         	
          });		 
 	 }
+	 
+//	$scope.closeTab = function() {
+//		alert(url);
+//	}
+	
+	function closeTab() {
+		alert(url);
+	}
  
 //	 $scope.setUnit = function () {
 //		 

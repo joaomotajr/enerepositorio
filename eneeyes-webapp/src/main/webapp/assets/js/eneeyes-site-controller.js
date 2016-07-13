@@ -36,43 +36,43 @@ if(document.getElementById('frm-inscricao') != null) {
     });
 }
 
-app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin) {
+app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin,  $sce) {
 	$scope.$root.mensagensIntegracao = [];
 	
-	$scope.verificaMensagemIntegracao = function() {
-		var tipoUsuario = $('#tipoUsuario').val();
-		if(tipoUsuario != 'administrator') {
-			var today = new Date();
-			$scope.yesterday = new Date();
-			$scope.yesterday.setDate(today.getDate()-1);
-			$scope.yesterday.setHours(0);
-			$scope.yesterday.setMinutes(0);
-			$scope.yesterday.setSeconds(0);
-			$scope.eventDates = {};
-			$scope.datas = new DetalheVenda.historico();
-			$scope.datas.$datasIntegracao({_csrf : angular.element('#_csrf').val()}, function(){
-				if ($scope.datas.listaDatasIntegracao != undefined && $scope.datas.listaDatasIntegracao.length > 0) {
-					for (i = 0; i < $scope.datas.listaDatasIntegracao.length; i++) {
-						$scope.eventDates[new Date($scope.datas.listaDatasIntegracao[i])] = new Date($scope.datas.listaDatasIntegracao[i]);
-					}
-				}
-				$timeout(function(){
-					if (!$scope.eventDates[$scope.yesterday]) {
-						if ($.inArray($scope.yesterday.toDateString(), $scope.$root.mensagensIntegracao) == -1) {
-							$scope.showMessage('N\u00e3o foi efetuado a integra\u00e7\u00e3o do TEF para o dia ' + $filter('date')($scope.yesterday, 'dd/MM/yyyy') + 
-							'.<br><a href="#" style="color:red" onclick="callPaginaAjax(\'integracao-tef.html\')">Clique aqui</a> para integrar o arquivo.');
-							$scope.$root.mensagensIntegracao.push($scope.yesterday.toDateString());
-						}
-					} else {
-						$timeout(function(){
-							$scope.$root.mensagensIntegracao = {};
-							$.gritter.removeAll();
-						},2000);
-					}
-				},1500);
-			});
-		}
-	};
+//	$scope.verificaMensagemIntegracao = function() {
+//		var tipoUsuario = $('#tipoUsuario').val();
+//		if(tipoUsuario != 'administrator') {
+//			var today = new Date();
+//			$scope.yesterday = new Date();
+//			$scope.yesterday.setDate(today.getDate()-1);
+//			$scope.yesterday.setHours(0);
+//			$scope.yesterday.setMinutes(0);
+//			$scope.yesterday.setSeconds(0);
+//			$scope.eventDates = {};
+//			$scope.datas = new DetalheVenda.historico();
+//			$scope.datas.$datasIntegracao({_csrf : angular.element('#_csrf').val()}, function(){
+//				if ($scope.datas.listaDatasIntegracao != undefined && $scope.datas.listaDatasIntegracao.length > 0) {
+//					for (i = 0; i < $scope.datas.listaDatasIntegracao.length; i++) {
+//						$scope.eventDates[new Date($scope.datas.listaDatasIntegracao[i])] = new Date($scope.datas.listaDatasIntegracao[i]);
+//					}
+//				}
+//				$timeout(function(){
+//					if (!$scope.eventDates[$scope.yesterday]) {
+//						if ($.inArray($scope.yesterday.toDateString(), $scope.$root.mensagensIntegracao) == -1) {
+//							$scope.showMessage('N\u00e3o foi efetuado a integra\u00e7\u00e3o do TEF para o dia ' + $filter('date')($scope.yesterday, 'dd/MM/yyyy') + 
+//							'.<br><a href="#" style="color:red" onclick="callPaginaAjax(\'integracao-tef.html\')">Clique aqui</a> para integrar o arquivo.');
+//							$scope.$root.mensagensIntegracao.push($scope.yesterday.toDateString());
+//						}
+//					} else {
+//						$timeout(function(){
+//							$scope.$root.mensagensIntegracao = {};
+//							$.gritter.removeAll();
+//						},2000);
+//					}
+//				},1500);
+//			});
+//		}
+//	};
 		
 	$scope.showMessage = function(msg) {
 		$.gritter.add({
@@ -85,32 +85,68 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         });
 	};
 	
-	$scope.LoadAjaxContent = function(url){
+//	$scope.LoadAjaxContent = function(url){
+//		$http.get(url)
+//        .success(function (data) {
+//        	$scope.ajaxcontent = data;
+//        })
+//        .error(function (data, status, headers, config) {
+//        	alert(errorThrown);
+//        });
+//	}
+//	
+	
+	$scope.tabsShow = [];
+	
+	$scope.LoadAjaxContent = function(url, title) {
 		$http.get(url)
         .success(function (data) {
-        	$scope.ajaxcontent = data;
+        	
+        	var num_tabs = $("div#tabs ul li").length + 1;
+        	
+        	var sBody = {
+        		name : "tab_" + num_tabs,
+        		link : title,
+        		body : data
+        	};
+        	
+        	$scope.tabsShow.push(sBody);     	
+           
+        	$timeout(function(){
+				$("#id_tab_" + num_tabs).trigger("click");				
+			},300);
+            
         })
         .error(function (data, status, headers, config) {
         	alert(errorThrown);
         });
 	}
 	
-	$scope.$root.listaPeloGrafico = [];
-	$scope.$root.listaContaCorrentePeloGrafico = [];
-	$scope.$root.listaPagamentosPeloGrafico = [];
-	$scope.$root.listaConciliacaoPeloGrafico = [];
-	$scope.$root.listaInconsistenciaPeloGrafico = [];
-	$scope.$root.inconsistenciaFiltro = {
-			dataInicial: '',
-			dataFinal : '',
-			cnpj : '',
-			razaoSocial : '',
-			adquirente : '',
-			tipoVenda : '',
-			status : [],
-			valor : '',
-			nsu: ''
-    };
+	 $scope.removeTab = function (index) {
+		 $scope.tabsShow.splice(index, 1);
+	 };
+	
+	 $scope.teste = function (index) {
+		var a = 1;
+	 };
+	
+	
+//	$scope.$root.listaPeloGrafico = [];
+//	$scope.$root.listaContaCorrentePeloGrafico = [];
+//	$scope.$root.listaPagamentosPeloGrafico = [];
+//	$scope.$root.listaConciliacaoPeloGrafico = [];
+//	$scope.$root.listaInconsistenciaPeloGrafico = [];
+//	$scope.$root.inconsistenciaFiltro = {
+//			dataInicial: '',
+//			dataFinal : '',
+//			cnpj : '',
+//			razaoSocial : '',
+//			adquirente : '',
+//			tipoVenda : '',
+//			status : [],
+//			valor : '',
+//			nsu: ''
+//    };
 	
 	$scope.query = '';
 
@@ -495,5 +531,5 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 			}
         });
     };
-    $scope.LoadAjaxContent("dashboard.html");
+    //$scope.LoadAjaxContent("dashboard.html");
 });

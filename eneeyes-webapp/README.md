@@ -1,3 +1,12 @@
+
+Terminei CRUD para todas as entidades, proximas tarefas:
+
+1) Deleção em cascata: company -> Unit -> Area -> devices -> OK
+1.5) Criado abertura de forms em Tabs-> OK
+2) Formulários CRUD;
+3) Three view Companys;
+ 
+ 
 * COMANDO PARA EXECUCAO DA APLICACAO
 mvn jetty:run -Dspring.profiles.active="dev" -P local
 

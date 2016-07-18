@@ -85,7 +85,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         });
 	};
 	
-//	$scope.LoadAjaxContent = function(url){
+//	$scope.LoadAjaxContent = function(url, title){
 //		$http.get(url)
 //        .success(function (data) {
 //        	$scope.ajaxcontent = data;
@@ -94,7 +94,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 //        	alert(errorThrown);
 //        });
 //	}
-//	
+	
 	
 	$scope.tabsShow = [];
 	
@@ -531,5 +531,6 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 			}
         });
     };
-    //$scope.LoadAjaxContent("dashboard.html");
+       
+    $scope.LoadAjaxContent('controllers.html', 'Controladoras');
 });

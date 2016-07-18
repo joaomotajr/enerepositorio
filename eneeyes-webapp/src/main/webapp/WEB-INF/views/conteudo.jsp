@@ -1,14 +1,15 @@
-  
-<div id="content" bind-unsafe-html="ajaxcontent"></div>
+<!-- <div id="content" bind-unsafe-html="ajaxcontent"></div>  -->
 
-<div id="content">
+
+<div id="contentTab">
 	<div class="content-wrapper">
 	
 		<section class="content-header">			
 		</section>	
-	
+			
 		<section class="content">		
-				
+			<div id="content" bind-unsafe-html="ajaxcontent"></div>
+						
 			<div class="nav-tabs-custom" id='tabs' ng-show="tabsShow.length > 0">
 			    <ul class="nav nav-tabs">
 			    	<li ng-repeat="item in tabsShow">

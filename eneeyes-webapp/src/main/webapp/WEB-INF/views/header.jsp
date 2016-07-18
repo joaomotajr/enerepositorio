@@ -8,6 +8,9 @@
 	    <title>Eneeyes | Principal**</title>
 	    <!-- Tell the browser to be responsive to screen width -->
 	    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	    
+	    <link rel="stylesheet" href="/assets/plugins/select2/select2.min.css">
+	    	    
 	    <!-- Bootstrap 3.3.5 -->
 	    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap-treeview.css">
@@ -16,6 +19,7 @@
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	    <!-- Ionicons -->
 	    <link rel="stylesheet" href="/assets/css/ionicons/ionicons.min.css">
+	    	    
 	    <!-- Theme style -->
 	    <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
 	    <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -33,6 +37,7 @@
 	    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker-bs3.css">
 	    <!-- bootstrap wysihtml5 - text editor -->
 	    <link rel="stylesheet" href="/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+	        
 	    
 	</head>
 

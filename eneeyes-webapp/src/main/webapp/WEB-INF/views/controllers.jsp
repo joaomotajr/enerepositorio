@@ -1,10 +1,9 @@
-<!-- Content Wrapper. Contains page     content -->
+<!--	 Content Wrapper. Contains page     content -->
+ 
 	 
 <div ng-controller="controllerController">
-	<section class="content-header"></section>
-
-	<section class="content">
-		<div class="row content-container">	
+					
+		<div class="row">	
 					                                                    
 			<div class="col-md-6">                                                        
 				<div class="box box-primary" ng-class="(controllerNome || controllerDescricao) ? 'box-default' : 'box-primary'">
@@ -22,16 +21,14 @@
 						</tr>
 					</thead>
 					<tbody>                                                        
-						<tr ng-repeat="item in controllers.list">
+						<tr ng-repeat="item in controllers">
 							<td>{{item.name}}</td>
 							<td>{{item.model}}</td>															        
 							<td>
-								<button type="button" class="btn btn-info btn-xs" ng-click="editarController($index)" 
-									style="margin-top: -7px; margin-bottom: -7px">editar</button>
+								<button type="button" class="btn btn-info btn-xs" ng-click="editController($index)">editar</button>
 							</td>
 							<td>
-								<button type="button" class="btn btn-danger btn-xs" ng-click="deletarController($index)" 
-									style="margin-top: -7px; margin-bottom: -7px">excluir</button>
+								<button type="button" class="btn btn-danger btn-xs" ng-click="deleteController($index)">excluir</button>
 							</td>						
 						</tr>                                                               
 					</tbody>
@@ -46,8 +43,25 @@
 						<h3 class="box-title">Cadastro / Edição</h3>
 					</div>
 					<div class="box-body">
-						<form class="form-horizontal">
-						<div class="box-body">                                                                                                                                    
+						<form class="form">		
+						
+							<div class="box box-default box-solid">
+			                    <div class="box-header with-border"><strong>Fabricante</strong>
+			                        <a href="#" popover> [Incluir Novo]</a>                        
+				                </div>
+			                
+			                    <div class="box-body">
+			                        <select id="selMatriculaFuncionario" class="form-control select2 select2-hidden-accessible" 
+			                            style="width: 100%;" 
+			                            tabindex="-1" 
+			                            aria-hidden="true">                              
+			                                <option ng-repeat="manufacturer in manufacturers">
+			                                    {{manufacturer.nome}}
+			                                </option>                    
+			                        </select>    
+			                    </div>        
+			                </div>
+			                 							                                                                                                                                    
 							<div class="form-group">
 								<label class="control-label">Nome</label>                                                                        
 								<input id="idControllerNome" class="form-control inputProfile" placeholder="Nome da PLC/Controladora" ng-model="controllerName">                                                                        
@@ -55,27 +69,23 @@
 		
 							<div class="form-group">
 								<label class="control-label">Modelo</label>                                                       
-								<input class="form-control inputProfile" placeholder="Modelo do PLC/Controladora"" ng-model="controllerModel">                                                
+								<input class="form-control inputProfile" placeholder="Modelo do PLC/Controladora" ng-model="controllerModel">                                                
 							</div>                                                                    
-							
-							<div class="form-group">
-								<label class="control-label">Fabricante</label>                                                       
-								<input class="form-control inputProfile" placeholder="Fabrincate da PLC/Controladora" ng-model="controllerManufacturer">                                                
-							</div>
-						</div><!-- /.box-body -->
-		
-						<div class="box-footer">                                                                
-							<button type="button" ng-click="saveController();" class="btn btn-info" 
-								ng-disabled="(controllerName && controllerModel && controllerManufacturer) ? false : true">OK</button>                                                                
+			                 
+			            </form>						
+						
+						<div class="box-footer">
 							<button type="button" ng-click="clearFormController()" class="btn btn-default">Cancelar</button>                                                                
-						</div><!-- /.box-footer -->
-						</form>
+							<button type="button" ng-click="saveController();" class="btn btn-primary" 
+								ng-disabled="(controllerName && controllerModel && controllerManufacturer) ? false : true">Salvar</button>								                                                                
+						</div>                           
+						
 					</div>
 				</div>
 			</div>
 			
 		</div>	  
-	</section>	
+		
 </div>
 
     

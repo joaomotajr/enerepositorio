@@ -4,11 +4,11 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	
 	<persistence-unit name="eneeyes.db.production" transaction-type="RESOURCE_LOCAL">
-    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<provider>org.hibernate.ejb.HibernatePersistence	</provider>
 		<properties>
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/alanaran_inovarvm_db01?autoReconnect=true"></property>
-			<property name="hibernate.connection.username" value="alanaran_pTHQFEu"></property>
-			<property name="hibernate.connection.password" value="Gu9ti?PVv.az"></property>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property>
+			<property name="hibernate.connection.username" value="root"></property>
+			<property name="hibernate.connection.password" value="pass"></property>
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.show_sql" value="true" />
@@ -24,9 +24,9 @@
 	<persistence-unit name="eneeyes.db.homologation" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<properties>
-			<property name="hibernate.connection.url" value="jdbc:mysql://dbdev.cmgc1if2lmgh.sa-east-1.rds.amazonaws.com:3306/eneeyes?autoReconnect=true"></property>
-			<property name="hibernate.connection.username" value="admin"></property>
-			<property name="hibernate.connection.password" value="rootdbinov"></property>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property>
+			<property name="hibernate.connection.username" value="root"></property>
+			<property name="hibernate.connection.password" value="pass"></property>
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.show_sql" value="false" />

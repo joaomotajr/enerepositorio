@@ -28,6 +28,7 @@
     <!-- Bootstrap 3.3.5 -->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>
+       
           
     <!-- jQuery Knob Chart -->
     <script src="/assets/plugins/knob/jquery.knob.js"></script>
@@ -52,7 +53,8 @@
     <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>    
     <script src="/assets/plugins/chartjs/Chart.min.js"></script>
     
-    
+    <script src="/assets/plugins/select2/select2.full.min.js"></script>
+        
     <!-- iCheck -->
     <script src="/assets/plugins/iCheck/icheck.min.js"></script>
     <!-- END GLOBAL SCRIPTS -->

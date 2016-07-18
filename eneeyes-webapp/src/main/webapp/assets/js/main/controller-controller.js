@@ -19,7 +19,7 @@ app.factory('ControllerService', function($resource){
 
 
 app.controller('controllerController', function ($scope, $timeout, $filter, ControllerService) {
-	
+	    
 	
 	$scope.saveController = function() {
 		
@@ -52,33 +52,40 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 	 
 	 $scope.getControllers = function() {
 		 
-		 $scope.controllers = new ControllerService.listAll();		 
-		 $scope.controllers.$controller({_csrf : angular.element('#_csrf').val()}, function(){			
-			 console.log($scope.listAll);		 			 
+		 $scope.result = new ControllerService.listAll();		 
+		 $scope.result.$controller({_csrf : angular.element('#_csrf').val()}, function(){			
+			 $scope.controllers = $scope.result.list; 		 			 
          });		 
 	 }
 	 
-	 $scope.getOneController = function() {
-		 
-		 $scope.listOne = new ControllerService.listOne();		 
-		 $scope.listOne.$controller({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
-			 console.log($scope.listOne);
-         	         	
-         });
-		 
+	 $scope.saveManufacturer = function() {
+		 $(".popover").popover('hide');
 	 }
 	 
-	 $scope.deletarController = function() {
+	 $scope.editController = function (index) {
+	        $scope.controllerUid = $scope.controllers[index].uid;
+	        
+		    $scope.controllerName = $scope.controllers[index].name;
+		    $scope.controllerModel = $scope.controllers[index].model;
+		    $scope.controllerManufacturer = $scope.controllers[index].manufacturer;	
+	        
+	        $('#idControllerNome').focus();
+	    }
+	 
+	 $scope.deleteController = function(index) {
+		 
+		 var uid = $scope.controllers[index].uid;		  
 		 
 		 $scope.deletar = new ControllerService.deletar();		 
-		 $scope.deletar.$controller({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
-			 console.log($scope.deletar);
+		 $scope.deletar.$controller({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
+			 
+			 $scope.controllers.splice(index, 1);
          	         	
          });
 		 
-	 }
-	
+	 }	
 	 
 	 $scope.getControllers();
+	 $(".select2").select2();
 	
 });

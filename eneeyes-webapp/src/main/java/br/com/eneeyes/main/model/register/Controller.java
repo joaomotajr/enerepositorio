@@ -1,10 +1,14 @@
 package br.com.eneeyes.main.model.register;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.register.ControllerDto;
@@ -37,9 +41,13 @@ public class Controller {
 	@Column(name = "NAME", nullable = true)
 	String name;
 
-	@Column(name = "MANUFACTURER", nullable = true)
-	String manufacturer;
+//	@Column(name = "MANUFACTURER", nullable = true)
+//	String manufacturer;
 	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="MANUFACTURER_ID", nullable = false)
+	private Manufacturer manufacturer;	
+
 	@Column(name = "MODEL", nullable = true)
 	String model;
 	
@@ -59,11 +67,19 @@ public class Controller {
 		this.name = name;
 	}
 
-	public final String getManufacturer() {
+//	public final String getManufacturer() {
+//		return manufacturer;
+//	}
+//
+//	public final void setManufacturer(String manufacturer) {
+//		this.manufacturer = manufacturer;
+//	}
+	
+	public final Manufacturer getManufacturer() {
 		return manufacturer;
 	}
 
-	public final void setManufacturer(String manufacturer) {
+	public final void setManufacturer(Manufacturer manufacturer) {
 		this.manufacturer = manufacturer;
 	}
 	

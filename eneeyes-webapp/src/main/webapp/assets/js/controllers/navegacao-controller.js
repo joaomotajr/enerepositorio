@@ -218,7 +218,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	$scope.detector = {
 		uid: 0,
 		name: 'Detector',
-		manufacturer: 'manufacturer',
+		manufacturer: {uid: 1},
 		model: 'modelo',
 		transmitter : {uid: 1}
 		, sensorsDto: []
@@ -271,9 +271,9 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	$scope.transmitter = {
 			uid: 0,		
 			name: 'Transmitter',
-			manufacturer: 'Manufacturer1',
+			manufacturer: {uid: 1},
 			model: "werwerwere",
-			commProtocol : 5
+			commProtocol : 'MODBUS'
 		 } 
 		 
 		 $scope.saveTransmitter = function() {
@@ -336,7 +336,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		uid: 0,			
 		detectionType: 0,
 		name: 'Sensor',
-		manufacturer: 'manufacturer',
+		manufacturer: {uid: 1},
 		model: 'modelo',
 		gasesDto: []
 	 }
@@ -431,12 +431,19 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 }
 	 /*-----------------------------------------------------------------------------------------------------------------*/
 	
+//	$scope.controller = {
+//		uid: 0,		
+//		name: 'Controller',
+//		manufacturer: 'Manufacturer1',
+//		model: "werwerwere"
+//	 } 
+	
 	$scope.controller = {
-		uid: 0,		
-		name: 'Controller',
-		manufacturer: 'Manufacturer1',
-		model: "werwerwere"
-	 } 
+			uid: 0,		
+			name: 'Controller',
+			manufacturer: {uid: 1},
+			model: "werwerwere"
+		 } 
 	 
 	 $scope.saveController = function() {
 		 

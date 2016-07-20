@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.register.GasDto;
@@ -78,8 +80,12 @@ public class Sensor {
 	@Column(name = "NAME", nullable = true)
 	String name;
 
-	@Column(name = "MANUFACTURER", nullable = true)
-	String manufacturer;
+//	@Column(name = "MANUFACTURER", nullable = true)
+//	String manufacturer;
+	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="MANUFACTURER_ID", nullable = false)
+	private Manufacturer manufacturer;
 	
 	@Column(name = "MODEL", nullable = true)
 	String model;
@@ -116,11 +122,19 @@ public class Sensor {
 		this.name = name;
 	}
 
-	public final String getManufacturer() {
+//	public final String getManufacturer() {
+//		return manufacturer;
+//	}
+//
+//	public final void setManufacturer(String manufacturer) {
+//		this.manufacturer = manufacturer;
+//	}
+	
+	public final Manufacturer getManufacturer() {
 		return manufacturer;
 	}
 
-	public final void setManufacturer(String manufacturer) {
+	public final void setManufacturer(Manufacturer manufacturer) {
 		this.manufacturer = manufacturer;
 	}
 	

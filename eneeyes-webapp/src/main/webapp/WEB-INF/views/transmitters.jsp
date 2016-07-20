@@ -1,14 +1,14 @@
 <!--	 Content Wrapper. Contains page     content -->
  
 	 
-<div ng-controller="controllerController">
+<div ng-controller="transmitterController">
 					
 		<div class="row">	
 					                                                    
 			<div class="col-md-6">                                                        
-				<div class="box box-primary" ng-class="(controllerName || controllerModel || controllerManufacturer) ? 'box-default' : 'box-primary'">
+				<div class="box box-primary" ng-class="(transmitterName || transmitterModel || transmitterManufacturer) ? 'box-default' : 'box-primary'">
 					<div class="box-header">
-					  <h3 class="box-title">Cadastro de: PLCs / Controladoras</h3>
+					  <h3 class="box-title">Cadastro de Transmissores</h3>
 					</div>
 					<div class="box-body">
 					<table class="table table-hover">
@@ -21,14 +21,14 @@
 						</tr>
 					</thead>
 					<tbody>                                                        
-						<tr ng-repeat="item in controllers">
+						<tr ng-repeat="item in transmitters">
 							<td>{{item.name}}</td>
 							<td>{{item.model}}</td>															        
 							<td>
-								<button type="button" class="btn btn-info btn-xs" ng-click="editController($index)">editar</button>
+								<button type="button" class="btn btn-info btn-xs" ng-click="editTransmitter($index)">editar</button>
 							</td>
 							<td>
-								<button type="button" class="btn btn-danger btn-xs" ng-click="deleteController($index)">excluir</button>
+								<button type="button" class="btn btn-danger btn-xs" ng-click="deleteTransmitter($index)">excluir</button>
 							</td>						
 						</tr>                                                               
 					</tbody>
@@ -38,7 +38,7 @@
 			</div>                                                      
 																
 			<div class="col-sm-6">
-				<div class="box box-primary" ng-class="(controllerName || controllerModel || controllerManufacturer) ? 'box-primary' : 'box-default'">
+				<div class="box box-primary" ng-class="(transmitterName || transmitterModel || transmitterManufacturer) ? 'box-primary' : 'box-default'">
 					<div class="box-header">
 						<h3 class="box-title">Cadastro / Edição</h3>
 					</div>
@@ -54,7 +54,7 @@
 			                        <select class="form-control" data-live-search="true" 
 			                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 			                                ng-options="item as item.name for item in manufacturers | orderBy: 'name' track by item.uid" 
-                                            ng-model="controllerManufacturer">
+                                            ng-model="transmitterManufacturer">
                                             <option value="">Selecione</option> 
 			                        </select>    
 			                    </div>
@@ -63,21 +63,31 @@
 			                 							                                                                                                                                    
 							<div class="form-group">
 								<label class="control-label">Nome</label>                                                                        
-								<input id="idControllerName" class="form-control inputProfile" placeholder="Nome da PLC/Controladora" ng-model="controllerName">                                                                        
+								<input id="idTransmitterName" class="form-control inputProfile" placeholder="Nome do Transmissor" ng-model="transmitterName">                                                                        
 							</div>
 		
 							<div class="form-group">
 								<label class="control-label">Modelo</label>                                                       
-								<input class="form-control inputProfile" placeholder="Modelo do PLC/Controladora" ng-model="controllerModel">                                                
-							</div>                                                                    
-			                 
-			            </form>						
+								<input class="form-control inputProfile" placeholder="Modelo do Transmissor" ng-model="transmitterModel">                                                
+							</div>
+							
+							<div class="form-group">
+					            <label class="control-label">Procotolo de Comunicação</label>
+								<select class="form-control" data-live-search="true" 
+		                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+		                                ng-options="item as item.name for item in commProtocols | orderBy: 'name' track by item.uid" 
+		                                         ng-model="transmitterCommProtocol">
+		                                         <option value="">Selecione</option> 
+		                        </select>               
+	                        </div>										                 
+			            </form>			            				
 						
 						<div class="box-footer">
-							<button type="button" ng-click="clearFormController()" class="btn btn-default">Cancelar</button>                                                                
-							<button type="button" ng-click="saveController();" class="btn btn-primary" 
-								ng-disabled="(controllerName && controllerModel && controllerManufacturer) ? false : true">Salvar</button>								                                                                
-						</div>                           
+							<button type="button" ng-click="clearFormTransmitter()" class="btn btn-default">Cancelar</button>                                                                
+							<button type="button" ng-click="saveTransmitter();" class="btn btn-primary" 
+								ng-disabled="(transmitterName && transmitterModel && transmitterManufacturer) ? false : true">Salvar</button>								                                                                
+						</div>
+						      
 						
 					</div>
 				</div>

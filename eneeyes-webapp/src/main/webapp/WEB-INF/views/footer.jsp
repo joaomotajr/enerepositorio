@@ -9,8 +9,8 @@
     <!-- jQuery 2.1.4 -->
     <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
+    <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>
+    
 
     <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>
@@ -37,8 +37,10 @@
     <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- datepicker -->
     <script src="/assets/plugins/datepicker/bootstrap-datepicker.js"></script>
+    
     <!-- Bootstrap WYSIHTML5 -->
     <script src="/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    
     <!-- Slimscroll -->
     <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
@@ -52,8 +54,7 @@
     <script src="/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>    
     <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>    
     <script src="/assets/plugins/chartjs/Chart.min.js"></script>
-    
-    <script src="/assets/plugins/select2/select2.full.min.js"></script>
+            
         
     <!-- iCheck -->
     <script src="/assets/plugins/iCheck/icheck.min.js"></script>
@@ -66,11 +67,20 @@
 	<script src="/assets/js/eneeyes-services.js"></script>
 	<script src="/assets/js/eneeyes-site-controller.js"></script>
 	<script src="/assets/js/message-translate.js"></script>	 
-	<script src="/assets/js/main/menu-navegacao.js"></script>
-	<script src="/assets/js/main/navegacao-controller.js"></script>
-	<script src="/assets/js/main/controller-controller.js"></script>
+	<script src="/assets/js/controllers/menu-navegacao.js"></script>
+	<script src="/assets/js/controllers/navegacao-controller.js"></script>
+	<script src="/assets/js/controllers/controller-controller.js"></script>
+	<script src="/assets/js/controllers/transmitter-controller.js"></script>
+	<script src="/assets/js/controllers/sensor-controller.js"></script>
+	<script src="/assets/js/controllers/gas-controller.js"></script>
 	
-			
+	<!-- PAGE LEVEL SERVICES -->
+	<script src="/assets/js/services/controller-service.js"></script>
+	<script src="/assets/js/services/transmitter-service.js"></script>					
+	<script src="/assets/js/services/manufacturer-service.js"></script>
+	<script src="/assets/js/services/sensor-service.js"></script>
+	<script src="/assets/js/services/gas-service.js"></script>
+	
 
 
 

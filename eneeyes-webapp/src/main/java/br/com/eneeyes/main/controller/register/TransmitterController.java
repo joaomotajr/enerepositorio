@@ -14,7 +14,6 @@ import br.com.eneeyes.main.dto.register.TransmitterDto;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.service.register.TransmitterService;
 
-
 @RestController
 public class TransmitterController {
 	

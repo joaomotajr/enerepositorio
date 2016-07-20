@@ -44,7 +44,7 @@ public class TransmitterService implements IService<TransmitterDto> {
 		try {			
 			repository.delete(uid);
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Área Excluída.");
+			result.setMessage("Transmissor Excluída.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			

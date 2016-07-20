@@ -1,3 +1,27 @@
+1) Estrutura do Sistema:
+	a) Definição do Projeto: 
+		i- Server: (Java Rest Services com anotações JPA, Spring JPA e Hibernate);
+		ii - Client: Java Server Pages, HTML5, Angular e Jquery / Template AdminLTE e Boostrap;  
+	b) Criação do projeto Server: J2EE Web Module / IDE Eclipse utilizando Maven;		 
+	c) Criação do projeto Cliente: J2EE Web Module / IDE Eclipse;
+
+2) Criação de Masterpage: Usando o Tempalte AdminLTE:
+	a) Menu Superior;
+	b) Menu Lateral Esquerdo;
+	c) Menu Lateral Direito (não implementado);
+	d) Conteúdo da Página;
+	
+3) Criação mecanismo de tabulação de todas as páginas (Será Opcional);
+
+4) Tela login Simples;
+
+5) Implementação de Token de segurança de acesso as URL's;
+
+6) Criação dos Servicos:
+	a) Controllers;
+	b) Models;
+	c) Dto;
+	d) Repository
 
 Terminei CRUD para todas as entidades, proximas tarefas:
 
@@ -24,17 +48,21 @@ UPDATE `conciliador`.`aln_id_user` SET `ADQUIRENTE_ID_`='1' WHERE `ID_`='1';
 
 /* LIMPAR TABELAS */
 drop table detector_sensors;
+
+drop table company_device;
 drop table area;
 drop table unit;
 drop table company;
+
 drop table controller;
-drop table gases;
+drop table sensor_gases;
+drop table gas cascade;
 drop table sensor;
-drop table transmitter;
+
 drop table detector;
-drop table device;
-drop table device_type;
-drop table company_devices;
+drop table transmitter;
+drop table manufacturer;
+
 
 
 

@@ -47,7 +47,7 @@
 	              	</a>
 	            	<ul class="treeview-menu">
 	                    <li class="active"><a href="#" ng-click="LoadAjaxContent('controllers.html', 'Controladoras')"><i class="fa fa-tasks"></i> Controladoras</a></li>
-	                    <li class="active"><a href="#" ng-click="LoadAjaxContent('transmissors.html','Tranmissores')"><i class="fa fa-expand"></i> Transmissores</a></li>
+	                    <li class="active"><a href="#" ng-click="LoadAjaxContent('transmitters.html','Transmissores')"><i class="fa fa-expand"></i> Transmissores</a></li>
 	                    <li class="active"><a href="#" ng-click="LoadAjaxContent('sensors.html','Sensores')"><i class="fa fa-feed"></i> Sensores</a></li>
 	                    <li class="active"><a href="#" ng-click="LoadAjaxContent('detectors.html','Detectores')"><i class="fa fa-th-large"></i> Detectores</a></li>
 	                    <li class="active"><a href="#" ng-click="LoadAjaxContent('gases.html', 'Gases')"><i class="fa fa-yelp"></i> Gases</a></li>

@@ -204,5 +204,5 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 	 $scope.getSensors();
 	 $scope.getManufacturers();
 	 $scope.getGases();
-	 	
+
 });

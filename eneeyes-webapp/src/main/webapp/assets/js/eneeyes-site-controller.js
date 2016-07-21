@@ -479,5 +479,9 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         });
     };
        
+<<<<<<< HEAD
     $scope.LoadAjaxContent('sensors.html', 'Sensores');
+=======
+    $scope.LoadAjaxContent('gases.html', 'Gases');
+>>>>>>> branch 'master' of https://mota_junior@bitbucket.org/enesens/enerepositorio.git
 });

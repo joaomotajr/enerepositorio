@@ -21,10 +21,6 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
          });		 
 	 }
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> branch 'master' of https://mota_junior@bitbucket.org/enesens/enerepositorio.git
 	$scope.saveManufacturer = function() {
 		
 		var manufacturer = {

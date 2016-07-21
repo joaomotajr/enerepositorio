@@ -9,12 +9,8 @@
     <!-- jQuery 2.1.4 -->
     <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
-<<<<<<< HEAD
     <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>
     
-=======
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
->>>>>>> branch 'master' of https://mota_junior@bitbucket.org/enesens/enerepositorio.git
 
     <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>

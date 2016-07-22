@@ -13,8 +13,7 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 		$scope.inclusaoController = new ControllerService.save(controller);		 
 		$scope.inclusaoController.$controller({_csrf : angular.element('#_csrf').val()}, function()
 		{         	
-         	console.log($scope.inclusao);   
-         	
+         	         	
          	$scope.clearFormController();
             $scope.getControllers();
                      	

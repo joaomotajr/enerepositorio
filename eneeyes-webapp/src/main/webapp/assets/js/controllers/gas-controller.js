@@ -15,7 +15,6 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 		$scope.inclusaoGas = new GasService.save(gas);		 
 		$scope.inclusaoGas.$gas({_csrf : angular.element('#_csrf').val()}, function()
 		{         	
-         	console.log($scope.inclusao);   
          	
          	$scope.clearFormGas();
             $scope.getGases();

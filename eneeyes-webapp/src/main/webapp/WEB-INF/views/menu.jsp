@@ -60,12 +60,12 @@
 	                <i class="fa fa-edit"></i> <span>Cadastro Clientes</span>
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
-	            	<ul class="treeview-menu">
-	                    <li class="active"><a href="#" ng-click="LoadAjaxContent('dashboard.html')"><i class="fa fa-circle-o"></i> Dashboard</a></li>
-			            <li><a href="#" ng-click="LoadAjaxContent('navegacao.html')"><i class="fa fa-circle-o"></i> Navegação</a></li>		        
+	            	<ul class="treeview-menu">	                    
+			            <li><a href="#" ng-click="LoadAjaxContent('navegacao.html', 'Navegação')"><i class="fa fa-circle-o"></i> Navegação</a></li>		        
+			            <li><a href="#" ng-click="LoadAjaxContent('companies.html', 'Empresa')"><i class="fa fa-circle-o"></i> Empresa</a></li>
 	              	</ul>
 	            </li>
-	            
+	            <!-- 
 	            <li class="treeview">
 	            	<a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
 	              
@@ -73,7 +73,8 @@
 						<li><a href="#">Link in level 2</a></li>
 						<li><a href="#">Link in level 2</a></li>
 					</ul>
-	            </li>	            
+	            </li>	 
+	             -->           
 	        </ul>
         </section>        
 	</aside>

@@ -45,7 +45,7 @@
 					<div class="box-body">
 						<form class="form">		
 						
-							<div class="box box-default box-solid">
+							<div class="box box-primary box-solid">
 			                    <div class="box-header with-border"><strong>Fabricante</strong>
 			                        <a href="#" popover> [Incluir Novo]</a>                        
 				                </div>

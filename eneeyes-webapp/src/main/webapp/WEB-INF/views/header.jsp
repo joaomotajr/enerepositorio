@@ -14,6 +14,8 @@
 	    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap-treeview.css">	    
 	    <link rel="stylesheet" href="/assets/plugins/bootstrap-select/bootstrap-select.min.css">	        
 	    	    
+		<link rel="stylesheet" href="/assets/plugins/select2/select2.min.css">
+			   
 	    <!-- Font Awesome -->
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	    <!-- Ionicons -->
@@ -21,6 +23,7 @@
 	    	    
 	    <!-- Theme style -->
 	    <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
+	     
 	    <!-- AdminLTE Skins. Choose a skin from the css/skins
 	         folder instead of downloading all of them to reduce the load. -->
 	    <link rel="stylesheet" href="/assets/css/skins/_all-skins.min.css">

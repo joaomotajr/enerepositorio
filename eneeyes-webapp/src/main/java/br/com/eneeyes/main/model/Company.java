@@ -25,7 +25,8 @@ public class Company {
 	
 	public Company(CompanyDto dto) {
 		this.uid = dto.getUid();
-		this.name = dto.getName();		
+		this.name = dto.getName();
+		this.description = dto.getDescription();
 	}
 	
 	@Id
@@ -35,6 +36,9 @@ public class Company {
 	
 	@Column(name = "NAME", nullable = false)
 	private String name;	
+	
+	@Column(name = "DESCRIPTION", nullable = false)
+	private String description;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "company", cascade = CascadeType.ALL)
 	private Set<Unit> units = new HashSet<Unit>();	
@@ -53,6 +57,14 @@ public class Company {
 
 	public final void setName(String name) {
 		this.name = name;
+	}
+	
+	public final String getDescription() {
+		return description;
+	}
+
+	public final void setDescription(String description) {
+		this.description = description;
 	}
 	
 	public final Set<Unit> getUnits() {

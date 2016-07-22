@@ -16,6 +16,7 @@ public class CompanyDto {
 	
 	private Long uid;
 	private String name;
+	private String description;	
 	private List<UnitDto> unitsDto = new ArrayList<UnitDto>();
 	
 	public CompanyDto() {
@@ -25,6 +26,7 @@ public class CompanyDto {
 	public CompanyDto(Company company) {
 		this.uid = company.getUid();
 		this.name = company.getName();
+		this.description = company.getDescription();
 		
 		if(company.getUnits() != null) {
 			
@@ -45,6 +47,14 @@ public class CompanyDto {
 	public final void setName(String name) {
 		this.name = name;
 	}	
+	
+	public final String getDescription() {
+		return description;
+	}
+
+	public final void setDescription(String description) {
+		this.description = description;
+	}
 	
 	private List<UnitDto> setUnitsDto(Set<Unit> units) {
 		

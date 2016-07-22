@@ -479,6 +479,6 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         });
     };     
 
-    $scope.LoadAjaxContent('sensors.html', 'Sensores');
+    $scope.LoadAjaxContent('companies.html', 'Empresas');
 
 });

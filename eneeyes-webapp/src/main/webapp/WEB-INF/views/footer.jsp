@@ -54,8 +54,9 @@
     <script src="/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>    
     <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>    
     <script src="/assets/plugins/chartjs/Chart.min.js"></script>
+    
+    <script src="/assets/plugins/select2/select2.min.js"></script>
             
-        
     <!-- iCheck -->
     <script src="/assets/plugins/iCheck/icheck.min.js"></script>
     <!-- END GLOBAL SCRIPTS -->
@@ -73,6 +74,8 @@
 	<script src="/assets/js/controllers/transmitter-controller.js"></script>
 	<script src="/assets/js/controllers/sensor-controller.js"></script>
 	<script src="/assets/js/controllers/gas-controller.js"></script>
+	<script src="/assets/js/controllers/detector-controller.js"></script>
+	<script src="/assets/js/controllers/company-controller.js"></script>
 	
 	<!-- PAGE LEVEL SERVICES -->
 	<script src="/assets/js/services/controller-service.js"></script>
@@ -80,8 +83,8 @@
 	<script src="/assets/js/services/manufacturer-service.js"></script>
 	<script src="/assets/js/services/sensor-service.js"></script>
 	<script src="/assets/js/services/gas-service.js"></script>
-	
-
+	<script src="/assets/js/services/detector-service.js"></script>
+	<script src="/assets/js/services/company-service.js"></script>
 
 
     <!-- END PAGE LEVEL SCRIPTS -->

@@ -21,7 +21,6 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		$scope.inclusaoSensor = new SensorService.save(sensor);		 
 		$scope.inclusaoSensor.$sensor({_csrf : angular.element('#_csrf').val()}, function()
 		{         	
-         	console.log($scope.inclusao);   
          	
          	$scope.clearFormSensor();
             $scope.getSensors();

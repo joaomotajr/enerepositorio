@@ -2,7 +2,7 @@
  * Modificado 
  */
 
-var tree = [
+var tree2 = [
    {
        text: "<img src='/assets/img/ic_domain_black_18dp.png' alt='img04'> Empresa Número Um",
        nodes: [
@@ -52,14 +52,14 @@ var tree = [
   ];
 
 
- function getTree() {
+ function getTree2() {
      // Some logic to retrieve, or generate tree structure
-     return tree;
+     return tree2;
  }
 
 
  var $searchableTree = $('#treeview-searchable').treeview({
-     data: getTree(),
+     data: getTree2(),
  });
 
  var search = function (e) {

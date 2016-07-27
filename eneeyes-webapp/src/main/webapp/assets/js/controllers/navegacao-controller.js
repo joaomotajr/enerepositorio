@@ -486,12 +486,13 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	$scope.companyDevice = {
 		uid: 0,
 		deviceType: 1,
-		areaDto: {uid : 4}
+		areaDto: {uid : 1}
 		
 	 } 
-	 
+	
+	
 	 $scope.saveCompanyDevice = function() {
-		 
+				 
 		 $scope.inclusao = new CompanyDeviceService.save($scope.companyDevice);		 
 		 $scope.inclusao.$companyDevice({_csrf : angular.element('#_csrf').val()}, function(){         	
          	console.log($scope.inclusao);         	
@@ -530,14 +531,14 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 
 	 $scope.area = {
 		uid: 0,
-		name: "Teste",
-		description: "Teste",
-		local: "Teste",	
+		name: "Area Tres",
+		description: "Area Tres",
+		local: "Area Tres",	
 		latitude: 12.2345545,		
 		longitude: 9.232323,
 		classified: true,
 		date: null,
-		unitDto: {uid: 1}
+		unitDto: {uid: 4}
 	 } 
 	 
 	 $scope.saveArea = function() {
@@ -577,7 +578,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 
 	 $scope.unit = {
 		uid: 0,
-		name: "Teste",
+		name: "Unit Quatro",
 		email: null,
 		url: null,
 		phone: null,

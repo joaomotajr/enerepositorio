@@ -14,10 +14,13 @@
         <!-- Main content - Modificado -->
         <section class="content">
         	<div class="row">        		
-        		<button type="button" class="btn btn-primary" ng-click="saveCompanyDevice()">Save CompanyDevice</button>
+        		<button type="button" class="btn btn-primary" ng-click="saveCompanyDevice()">Save CompanyDevice</button>        		
+        		<button type="button" class="btn btn-primary" ng-click="saveCompanyDevices()">Save CompanyDevices</button>        		
         		<button type="button" class="btn btn-primary" ng-click="getCompanyDevice()">Get CompanyDevice</button>
         		<button type="button" class="btn btn-primary" ng-click="getOneCompanyDevice()">Get One CompanyDevice</button>
-        		<button type="button" class="btn btn-primary" ng-click="deletarCompanyDevice()">Deletar CompanyDevice</button>        		
+        		<button type="button" class="btn btn-primary" ng-click="deletarCompanyDevice()">Deletar CompanyDevice</button>
+        		
+        		        		
        		</div>
         	<div class="row">        		
         		<button type="button" class="btn btn-primary" ng-click="saveArea()">Save Area</button>

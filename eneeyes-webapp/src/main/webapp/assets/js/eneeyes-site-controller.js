@@ -61,6 +61,17 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 //	}
 	
 	
+	$scope.LoadAjaxContentCompany = function(url){
+		$http.get(url)
+	    .success(function (data) {
+	    	$scope.ajaxcontentCompany = data;
+	    })
+	    .error(function (data, status, headers, config) {
+	    	alert(errorThrown);
+	    });
+	}
+	
+	
 	$scope.tabsShow = [];
 	
 	$scope.LoadAjaxContent = function(url, title) {

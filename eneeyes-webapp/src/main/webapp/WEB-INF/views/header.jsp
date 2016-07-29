@@ -20,6 +20,9 @@
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	    <!-- Ionicons -->
 	    <link rel="stylesheet" href="/assets/css/ionicons/ionicons.min.css">
+	    
+	    <!-- iCheck for checkboxes and radio inputs -->
+    	<link rel="stylesheet" href="/assets/plugins/iCheck/all.css">
 	    	    
 	    <!-- Theme style -->
 	    <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
@@ -27,8 +30,7 @@
 	    <!-- AdminLTE Skins. Choose a skin from the css/skins
 	         folder instead of downloading all of them to reduce the load. -->
 	    <link rel="stylesheet" href="/assets/css/skins/_all-skins.min.css">
-	    <!-- iCheck -->
-	    <link rel="stylesheet" href="/assets/plugins/iCheck/flat/blue.css">
+	    
 	    <!-- Morris chart -->
 	    <link rel="stylesheet" href="/assets/plugins/morris/morris.css">
 	    <!-- jvectormap -->
@@ -39,7 +41,30 @@
 	    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker-bs3.css">
 	    <!-- bootstrap wysihtml5 - text editor -->
 	    <link rel="stylesheet" href="/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-	        
+	    	    
+	    	    
+	    <style>
+	    
+	     	body.loading {
+				overflow: hidden;
+			}
+			
+			body.loading .ajax-loader {
+				display: block;
+			}  
+			
+			.ajax-loader {
+				display: none;
+				position: fixed;
+				z-index: 2000;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 100%; 	
+				background: rgba(255, 255, 255, .5) url('/assets/img/loader.gif') 50% 50% no-repeat;
+			}
+			  
+	    </style>
 	    
 	</head>
 

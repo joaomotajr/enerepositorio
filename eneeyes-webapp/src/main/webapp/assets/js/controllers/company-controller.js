@@ -1,4 +1,21 @@
-app.controller('companyController', function ($scope, $timeout, $filter, CompanyService, UnitService) {
+app.controller('companyController', function ($scope, $timeout, $filter, CompanyService, UnitService, AreaService) {
+	
+	$scope.saveAreaInit = function() {
+		
+		var area = {
+			uid: 0,
+			name: $scope.unitAreaInit,				
+			unitDto: {uid : $scope.selectedUnit.uid}				
+		};
+		 
+		$scope.inclusaoArea = new AreaService.save(area);
+		$scope.inclusaoArea.$area({_csrf : angular.element('#_csrf').val()}, function(){         	
+			
+			$scope.getOneCompany($scope.companyUid);
+		
+        });
+		 
+	 }
 
 	$scope.saveUnitInit = function() {
 		
@@ -17,8 +34,75 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 
 	 }
 	
+	$scope.saveUnit = function() {
+		angular.element('body').addClass('loading');
+		
+		var unit = {
+			uid: $scope.selectedUnit.uid = undefined ? 0 : $scope.selectedUnit.uid,
+			name: $scope.selectedUnit.name,
+			email: $scope.selectedUnit.email,
+			address: $scope.selectedUnit.address,
+			city: $scope.selectedUnit.city,
+			state: $scope.selectedUnit.state,
+			zip: $scope.selectedUnit.zip,
+			phone: $scope.selectedUnit.phone,
+			mobile: $scope.selectedUnit.mobile,
+			url: $scope.selectedUnit.url,
+			unitType: $scope.selectedUnit.unitType,
+			companyDto: {uid : $scope.selectedCompany.uid}				
+		};
+		 
+		$scope.inclusaoUnit = new UnitService.save(unit);
+		$scope.inclusaoUnit.$unit({_csrf : angular.element('#_csrf').val()}, function(){         	
+			
+			$scope.getOneCompany($scope.companyUid);
+			
+			angular.element('body').removeClass('loading');
+			$scope.msgInfo = "Unidade Gravada!" ;
+            $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+		
+        });
+		 
+	 }
+	
+	$scope.deleteUnit = function() 
+	{		 
+		 $scope.deletar = new UnitService.deletar();		 
+		 $scope.deletar.$unit({_csrf : angular.element('#_csrf').val(), id : $scope.selectedUnit.uid}, function(){			
+			 $scope.msgDanger = "Unidade Excluída!!" ;
+	         $('#resultDanger').hide().show('slow').delay(1000).hide('slow');         	         	
+        }, function(data) {
+			 if (data.status >= 400 && data.status <= 505 ) {
+				 alert("Sessão");				 			 
+			 }
+			 else
+				 {
+				 	alert("Erro " & data);
+				 }
+		 });		 
+	}
+	
+	$scope.deletarCompany = function() {		 
+		 $scope.deletar = new CompanyService.deletar();		 
+		 $scope.deletar.$company({_csrf : angular.element('#_csrf').val(), id : $scope.companyUid}, function(){			
+			 
+			 $scope.msgDanger = "Companhia Excluída!!" ;
+	         $('#resultDanger').hide().show('slow').delay(1000).hide('slow');         	         	
+        }, function(data) {
+        	
+			 if (data.status >= 400 && data.status <= 505 ) {
+				 alert("Sessão");				 			 
+			 }
+			 else
+				 {
+				 	alert("Erro " & data);
+				 }
+		 });		 
+	}
+	
 	$scope.saveCompany = function() {
 		
+		angular.element('body').addClass('loading');		
 		var company = {
 			uid: $scope.companyUid != undefined ? $scope.companyUid : 0,
 			name: $scope.companyName,
@@ -30,11 +114,16 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		{            
 			
          	$scope.clearFormCompany();
-            $scope.getCompanys();
+            $scope.getCompanys();   
             
             $timeout(function () {                    
             	$('#selCompany').select2();
-            }, 100);
+            }, 200);
+            
+            angular.element('body').removeClass('loading');
+            
+            $scope.msgInfo = "Companhia Gravada!" ;
+            $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
                                              	
          });		 
 	 }	
@@ -67,6 +156,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		else 
 		{
 			$scope.clearFormCompany();
+			$scope.selectedUnit = undefined;
+						
 			$scope.getCompanys();
 			
 			$timeout(function () {                    
@@ -135,8 +226,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 					 expandIcon: 'glyphicon glyphicon-chevron-right',
 			         collapseIcon: 'glyphicon glyphicon-chevron-down',			          
 				     onNodeSelected: function(event, node) {
-				    	 $('#selectable-output').prepend('<p>' + node.text + ' was selected</p>');
-				    	 	
+				    	 				    	 	
 				    	 if(node.type == 0 && $scope.selectedCompany.unitsDto.length <= 0) {				    		 
 				    		 $scope.LoadAjaxContentCompany('companyInit.html');
 				    	 }
@@ -152,6 +242,10 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				    		 $scope.selectedArea = node.companyDevice;
 					    	 $scope.LoadAjaxContentCompany('companyDevices.html');
 				    	 }
+				    	 
+				    	 $timeout(function () {
+				    		 $scope.loadIchecks();
+				    	 }, 500);
 				     }
 			     });
 			};
@@ -203,11 +297,29 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		}		 
 		
 		return itens;
-	}	 
+	}
+	 
+	$scope.loadIchecks = function ()
+	{
+
+	    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+	      checkboxClass: 'icheckbox_minimal-blue',
+	      radioClass: 'iradio_minimal-blue'
+	    });	    
+	    
+	    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+	      checkboxClass: 'icheckbox_minimal-red',
+	      radioClass: 'iradio_minimal-red'
+	    });	    
+	    
+	    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+	      checkboxClass: 'icheckbox_flat-green',
+	      radioClass: 'iradio_flat-green'
+	    });
+	}
 	 
 	$scope.getCompanys();
-	$(".select2").select2();
-	
-	 	
-
+	$(".select2").select2();	
+		
+	$scope.loadIchecks();
 });

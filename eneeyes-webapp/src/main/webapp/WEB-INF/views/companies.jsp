@@ -1,5 +1,9 @@
 <div ng-controller="companyController">
 
+	<style>
+	
+	
+	</style>
    
 	<script type="text/ng-template" id="categoryTree">
         {{ node.text }}
@@ -67,10 +71,12 @@
 						</div><!-- /.box-body -->
 						
 						<div class="box-footer">							
-							<div class="col-md-12">																											
-								<button type="button" ng-click="saveCompany();" class="btn btn-success pull-right" ng-disabled="(companyName) ? false : true">   Salvar   </button>
+							<div class="col-md-12">
+								<button type="button" ng-click="selCompany();" class="btn btn-success pull-right" ng-disabled="!companyUid">Selecionar</button>								
 								<span class="pull-right">   </span>
-								<button type="button" ng-click="selCompany();" class="btn btn-primary pull-right" ng-disabled="!companyUid">Selecionar</button>												
+								<button type="button" ng-click="saveCompany();" class="btn btn-primary pull-right" ng-disabled="(companyName) ? false : true">   Salvar   </button>
+								<span class="pull-right">   </span>												
+								<button type="button" ng-click="deleteCompany();" class="btn btn-danger pull-right" ng-disabled="(companyName) ? false : true">   Excluir   </button>
 							</div>
 						</div><!-- /.box-footer-->
 					</div><!--/.direct-chat -->
@@ -103,7 +109,20 @@
 			 	
 			</div>			
 			
-			<div class="clearfix"></div>	    
+			<div id="resultErro" class="alert alert-warning col-sm-6" role="alert" ng-show="msgErro" >
+	            <button type="button" class="close" ><span ng-click="msgErro='';">&times;</span></button>
+	            <strong>Alerta! </strong>{{msgErro}} 
+	        </div>  
+	        
+	        <div id="resultInfo" class="alert alert-info alert-dismissible col-sm-6" role="alert" ng-show="msgInfo" >
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                 <strong>Atenção! </strong>{{msgInfo}} <span id="msgComplemento"></span>
+             </div>                     
+             
+             <div id="resultDanger" class="alert alert-danger alert-dismissible col-sm-6" role="alert" ng-show="msgDanger" >
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>                 
+             </div>
+				    
 		</div>
 	</div>
       

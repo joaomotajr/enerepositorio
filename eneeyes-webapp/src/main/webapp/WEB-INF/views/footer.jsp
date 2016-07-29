@@ -5,7 +5,7 @@
 <sec:authorize access="hasRole('CST')">
     <c:set var="authenticated" value="true"/>
 </sec:authorize>
-
+	<div class="ajax-loader"></div> 
     <!-- jQuery 2.1.4 -->
     <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -27,8 +27,7 @@
     </script>
     <!-- Bootstrap 3.3.5 -->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>
-       
+    <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>       
           
     <!-- jQuery Knob Chart -->
     <script src="/assets/plugins/knob/jquery.knob.js"></script>
@@ -45,6 +44,9 @@
     <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
     <script src="/assets/plugins/fastclick/fastclick.min.js"></script>
+    
+    <!-- iCheck -->
+    <script src="/assets/plugins/iCheck/icheck.min.js"></script>
 
     <!-- AdminLTE App -->
     <script src="/assets/js/app.min.js"></script>
@@ -55,10 +57,9 @@
     <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>    
     <script src="/assets/plugins/chartjs/Chart.min.js"></script>
     
-    <script src="/assets/plugins/select2/select2.min.js"></script>
-            
-    <!-- iCheck -->
-    <script src="/assets/plugins/iCheck/icheck.min.js"></script>
+    <!-- Select2 -->
+    <script src="/assets/plugins/select2/select2.min.js"></script>            
+    
     <!-- END GLOBAL SCRIPTS -->
 
     <!-- PAGE LEVEL SCRIPTS -->    

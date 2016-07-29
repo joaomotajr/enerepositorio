@@ -38,6 +38,7 @@
 	            <li class="header">SELECIONE</li>	            
 	            <li>
 	            	<a href="#" ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fa fa-th"></i> <span>Dashboard</span></a>
+	            	<a href="#" ng-click="LoadAjaxContent('navegacao.html', 'Navegação')"><i class="fa fa-circle-o"></i> Navegação</a>
 	            </li>	                                    
 	            
 	          	<li class="treeview">
@@ -60,8 +61,7 @@
 	                <i class="fa fa-edit"></i> <span>Cadastro Clientes</span>
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
-	            	<ul class="treeview-menu">	                    
-			            <li><a href="#" ng-click="LoadAjaxContent('navegacao.html', 'Navegação')"><i class="fa fa-circle-o"></i> Navegação</a></li>		        
+	            	<ul class="treeview-menu">			            		        
 			            <li><a href="#" ng-click="LoadAjaxContent('companies.html', 'Empresa')"><i class="fa fa-circle-o"></i> Empresa</a></li>
 	              	</ul>
 	            </li>

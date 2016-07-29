@@ -89,7 +89,5 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 	 
 	 $scope.getControllers();
 	 $scope.getManufacturers();
-	 
-	// $(".select2").select2();
 	
 });

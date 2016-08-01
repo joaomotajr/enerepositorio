@@ -2,7 +2,7 @@
 <div class="col-md-9">
 	<div class="box box-primary">
 					
-		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-map-o'></i> {{selectedArea.name}}</strong></div>
+		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-map-o'></i> {{selectedCompanyDevice.deviceType}}</strong></div>
 		
 		<div class="box-body">
 						
@@ -42,12 +42,10 @@
 					        </div>
 					
 					        <div class="col-md-4">
-					        	<label class="control-label">Area Classificada</label>
-				                <div class="form-group">				                 	
-      									<label><input type="radio" ng-model="selectedUnit.classified" value="true" />&nbsp; Sim</label>        
-				                 	<label><input type="radio" ng-model="selectedUnit.classified" value="false" />&nbsp;	Não</label>						                
-				                </div>
-					        						            
+					        	<div class="form-group">
+					                <label class="control-label">Longitude</label>
+					                <input class="form-control" placeholder="CEP" ng-model="selectedArea.latitude">
+					            </div>					            
 					        </div>
 					    </div>
 						
@@ -59,15 +57,15 @@
 					            </div>
 					        </div>
 					
-					        <div class="col-md-4">
-					        	<div class="form-group">
-					                <label class="control-label">Longitude</label>
-					                <input class="form-control" placeholder="CEP" ng-model="selectedArea.latitude">
-					            </div>					            
+					        <div class="col-md-4">					            
 					        </div>
 					
-					        <div class="col-md-4">			            
-				                					            
+					        <div class="col-md-4">					            
+				                <label class="control-label">Area Classificada</label>
+				                <div class="form-group">				                 	
+      									<label><input type="radio" ng-model="selectedUnit.classified" value="true" />&nbsp; Sim</label>        
+				                 	<label><input type="radio" ng-model="selectedUnit.classified" value="false" />&nbsp;	Não</label>						                
+				                </div>					            
 					        </div>
 						</div>				
 			       		
@@ -81,19 +79,11 @@
 							</div>
 						</div>
 												
-					<!-- <div class="row" ng-show="selectedArea.companyDevicesDto.length <= 0">  -->												
-						<div class="row">
+						<div class="row" ng-show="selectedArea.companyDevicesDto.length <= 0">
 							<div class="col-md-6">
 								<label>Incluir Dispositivo</label>						
 								<div class="entry input-group">					
-							        
-							        <select class="form-control" data-live-search="true" 
-			                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-			                                ng-options="item as item.name for item in deviceTypes | orderBy: 'name' track by item.uid" 
-			                                         ng-model="sensorDetectionType">
-			                                         <option value="">Selecione</option> 
-			                        </select>
-			                                       
+							        <input type="text" class="form-control" placeholder="Digite o Nome da Area" ng-model="companyDeviceInit">
 							        <span class="input-group-btn">
 							        <button class="btn btn-info btn-flat" type="button" ng-click="saveCompanyDeviceInit();">OK</button>
 							        </span>

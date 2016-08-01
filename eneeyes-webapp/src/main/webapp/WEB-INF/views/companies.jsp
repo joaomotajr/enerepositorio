@@ -120,7 +120,8 @@
              </div>                     
              
              <div id="resultDanger" class="alert alert-danger alert-dismissible col-sm-6" role="alert" ng-show="msgDanger" >
-                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>                 
+                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                 <strong>Atenção! </strong>{{msgDanger}}                  
              </div>
 				    
 		</div>

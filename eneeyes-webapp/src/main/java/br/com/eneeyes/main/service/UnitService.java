@@ -51,7 +51,7 @@ public class UnitService implements IService<UnitDto> {
 			repository.delete(uid);
 			
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Área Excluída.");
+			result.setMessage("Unidade Excluída.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			

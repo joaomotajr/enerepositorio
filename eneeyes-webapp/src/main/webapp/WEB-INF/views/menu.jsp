@@ -15,7 +15,7 @@
 					<img src="/assets/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 				</div>
 				<div class="pull-left info">
-					<p>Alexander Pierce</p>
+					<p><sec:authentication property="principal.displayName" /></p>					
 				  	<!-- Status -->
 				  	<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 				</div>
@@ -39,6 +39,7 @@
 	            <li>
 	            	<a href="#" ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fa fa-th"></i> <span>Dashboard</span></a>
 	            	<a href="#" ng-click="LoadAjaxContent('navegacao.html', 'Navegação')"><i class="fa fa-circle-o"></i> Navegação</a>
+	            	<a href="#" ng-click="LoadAjaxContent('cadastro.html', 'Cadastro')"><i class="fa fa-circle-o"></i> User</a>
 	            </li>	                                    
 	            
 	          	<li class="treeview">

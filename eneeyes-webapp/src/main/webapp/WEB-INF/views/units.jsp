@@ -2,9 +2,9 @@
 
     
 <div class="col-md-9">
-	<div class="box box-primary" ng-show="selectedUnit.uid">
+	<div class="box box-primary" ng-show="selectedCompany.unitsDto.length > 0">
 					
-		<div class="box-header with-border"><strong style="font-size:1.4em">{{selectedUnit.name}}</strong></div>
+		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-building'></i> {{selectedUnit.name}}</strong></div>
 		
 		<div class="box-body">
 						
@@ -19,7 +19,7 @@
 				<div class="tab-content">		    	
 					       	
 			       	<div class="tab-pane active" id="tabUnit_1">	    
-			       		    <div class="row">
+			       		<div class="row">
 						        <div class="col-md-6">
 						            <div class="form-group">
 						                <label class="control-label">Nome</label>
@@ -35,7 +35,7 @@
 						        </div>
 						    </div>
 						
-						    <div class="row">
+						<div class="row">
 						        <div class="col-md-8">
 						            <div class="form-group">
 						                <label class="control-label">Endereço</label>
@@ -51,7 +51,7 @@
 						        </div>
 						    </div>
 						
-						    <div class="row">
+						<div class="row">
 						        <div class="col-md-4">
 						            <div class="form-group">
 						                <label class="control-label">Estado</label>
@@ -78,7 +78,7 @@
 						        </div>
 						    </div>
 						
-						    <div class="row">
+						<div class="row">
 						        <div class="col-md-4">
 						            <div class="form-group">
 						                <label class="control-label">Contato(s)</label>
@@ -100,11 +100,14 @@
 						            </div>
 						        </div>
 						    </div>
+			       		
 			       		<div class="row">
 			       			<div class="col-md-12">
-			       				<button type="button" ng-click="saveUnit();" class="btn btn-primary pull-right" ng-disabled="(selectedUnit.name) ? false : true">   Salvar   </button>		       				
+			       				<button type="button" ng-click="newUnit();" ng-show="btnNewUnit" class="btn btn-success pull-right">    Nova    </button>								
+								<span class="pull-right">   </span>
+			       				<button type="button" ng-click="saveUnit();" ng-model="btnSaveUnit" class="btn btn-primary pull-right" ng-disabled="(selectedUnit.name) ? false : true">   Salvar   </button>		       				
 			       				<span class="pull-right">   </span>
-			       				<button type="button" ng-click="deleteUnit();" class="btn btn-danger pull-right" ng-disabled="(selectedUnit.name) ? false : true">   Excluir   </button>								
+			       				<button type="button" ng-click="deleteUnit();" class="btn btn-danger pull-right" ng-disabled="(selectedUnit.uid) ? false : true">   Excluir   </button>								
 							</div>
 						</div>
 												

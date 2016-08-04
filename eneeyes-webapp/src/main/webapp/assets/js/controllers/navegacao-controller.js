@@ -11,7 +11,7 @@ app.factory('DetectorService', function($resource){
         }),
         listOne : $resource('/security/api/detector/obtemPorId/:id', {id: '@id'},{
         	detector : {method : 'GET'}
-        }),
+        }),       
         save : $resource('/security/api/detector/save',{},{
         	detector : {method : 'POST'}
         }),
@@ -88,6 +88,30 @@ app.factory('ControllerService', function($resource){
         }),
         save : $resource('/security/api/controller/save',{},{
         	controller : {method : 'POST'}
+        }),
+     };
+});
+
+app.factory('CompanyDetectorService', function($resource){    
+    
+    return {
+    	deletar : $resource('/security/api/companyDetector/delete/:id', {id: '@id'},{
+    		companyDetector : {method : 'DELETE'}
+        }),        
+        listAll : $resource('/security/api/companyDetector/all',{},{
+        	companyDetector : {method : 'GET'}
+        }),
+        listOne : $resource('/security/api/companyDetector/obtemPorId/:id', {id: '@id'},{
+        	companyDetector : {method : 'GET'}
+        }),   
+	    listPorIdDeviceType : $resource('/security/api/companyDetector/obtemPorIdDeviceType/:id', {id: '@id'},{
+	    	companyDetector : {method : 'GET'}
+	    }),    
+	    listPorIdArea : $resource('/security/api/companyDetector/obtemPorIdArea/:id', {id: '@id'},{
+	    	companyDetector : {method : 'GET'}
+	    }),
+        save : $resource('/security/api/companyDetector/save',{},{
+        	companyDetector : {method : 'POST'}
         }),
      };
 });
@@ -184,24 +208,9 @@ app.factory('CompanyService', function($resource){
 //    };
 //});
 
-app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService, ControllerService, GasService, SensorService, TransmitterService, DetectorService) {
+app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService, ControllerService, GasService, SensorService, TransmitterService, DetectorService, CompanyDetectorService) {
 		
-	$('#treeview-searchable').treeview({
-	     data: getTree(),
-	 });
-	
-	search = function (e) {
-	     var pattern = $('#input-search').val();
-	     var options = {
-	         ignoreCase: true,
-	         exactMatch: false,
-	         revealResults: true
-	     };
-
-	     var results = $searchableTree.treeview('search', [pattern, options]);
-	    
-	 }
-	
+		
 /*-----------------------------------------------------------------------------------------------------------------*/
 	
 	$scope.det1 = {
@@ -252,9 +261,20 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 			 $scope.listOne.$detector({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
 				 console.log($scope.listOne);
 	         	         	
+	         });			 
+		 }
+		 
+		 $scope.getOneCompanyDetectorDevice = function() {
+			 
+			 $scope.listOne = new DetectorService.listOne();		 
+			 $scope.listOne.$detector({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+				 console.log($scope.listOne);
+	         	         	
 	         });
 			 
 		 }
+		 
+		 
 		 
 		 $scope.deletarDetector = function() {
 			 
@@ -481,6 +501,59 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
          });
 		 
 	 }
+
+/*-----------------------------------------------------------------------------------------------------------------*/		 
+	 $scope.companyDetector = {
+		uid: 0,
+		name: 'eewrerewrew',
+		companyDevice: {uid : 1},
+		detector: {uid : 1}
+		
+	 } 
+	
+	 $scope.saveCompanyDetector = function() {
+				 
+		 $scope.inclusao = new CompanyDetectorService.save($scope.companyDetector);		 
+		 $scope.inclusao.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){         	
+         	console.log($scope.inclusao);         	
+         });
+		 
+	 }
+	 
+	 $scope.getCompanyDetector = function() {
+		 
+		 $scope.listAll = new CompanyDetectorService.listAll();		 
+		 $scope.listAll.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){			
+			 console.log($scope.listAll);		         	         	
+         });		 
+	 }
+	 
+	 $scope.getOneCompanyDetector = function() {
+		 
+		 $scope.listOne = new CompanyDetectorService.listOne();		 
+		 $scope.listOne.$companyDetector({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+			 console.log($scope.listOne);         	         	
+         });		 
+	 }
+	 
+	 $scope.getOneCompanyDetectorDeviceByArea = function() {
+		 
+		 $scope.listPorIdArea = new CompanyDetectorService.listPorIdArea();		 
+		 $scope.listPorIdArea.$companyDetector({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
+			 console.log($scope.listPorIdArea);         	         	
+         });		 
+	 }
+	 
+	 $scope.getOneCompanyDetectorDevice = function() {
+		 
+		 $scope.listPorIdDeviceType = new CompanyDetectorService.listPorIdDeviceType();		 
+		 $scope.listPorIdDeviceType.$companyDetector({_csrf : angular.element('#_csrf').val(), id : 3}, function(){			
+			 console.log($scope.listPorIdDeviceType);         	         	
+         });
+		 
+	 }
+			
+			
 	 /*-----------------------------------------------------------------------------------------------------------------*/
 	 
 	$scope.companyDevice = {
@@ -538,7 +611,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		longitude: 9.232323,
 		classified: true,
 		date: null,
-		unitDto: {uid: 4}
+		unitDto: {uid: 1}
 	 } 
 	 
 	 $scope.saveArea = function() {
@@ -650,7 +723,8 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 
 	 $scope.company = {
 		uid: 0,
-		name: "Teste"						
+		name: "Teste",
+		description : "teste"
 	 }	 
 	 
 

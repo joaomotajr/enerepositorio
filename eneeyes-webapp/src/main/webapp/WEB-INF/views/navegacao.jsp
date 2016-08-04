@@ -14,6 +14,17 @@
         <!-- Main content - Modificado -->
         <section class="content">
         	<div class="row">        		
+        		<button type="button" class="btn btn-primary" ng-click="saveCompanyDetector()">Save CompanyDetector</button>        	        		
+        		<button type="button" class="btn btn-primary" ng-click="getCompanyDetector()">Get CompanyDetector</button>
+        		<button type="button" class="btn btn-primary" ng-click="getOneCompanyDetector()">Get One CompanyDetector</button>
+        		<button type="button" class="btn btn-primary" ng-click="getOneCompanyDetectorDevice()">Get Device CompanyDetector </button>
+        		<button type="button" class="btn btn-primary" ng-click="getOneCompanyDetectorDeviceByArea()">Get Area CompanyDetector  </button>
+        		<button type="button" class="btn btn-primary" ng-click="deletarCompanyDetector()">Deletar CompanyDetector</button>
+        		
+        		        		
+       		</div>
+        
+        	<div class="row">        		
         		<button type="button" class="btn btn-primary" ng-click="saveCompanyDevice()">Save CompanyDevice</button>        		
         		<button type="button" class="btn btn-primary" ng-click="saveCompanyDevices()">Save CompanyDevices</button>        		
         		<button type="button" class="btn btn-primary" ng-click="getCompanyDevice()">Get CompanyDevice</button>

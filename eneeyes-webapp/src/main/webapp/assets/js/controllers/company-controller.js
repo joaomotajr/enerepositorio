@@ -24,7 +24,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	$scope.deviceTypes = 
 		[
 		 	{ name : 'OUTROS', uid : 0 },
-		 	{ name : 'SENSOR', uid :  1 },
+		 	{ name : 'DETECTOR', uid :  1 },
 		 	{ name : 'PLC', uid : 2 },
 		 	{ name : 'CONTROLADORA', uid : 3 },
 		 	{ name : 'ALARME', uid : 4 } 			  	

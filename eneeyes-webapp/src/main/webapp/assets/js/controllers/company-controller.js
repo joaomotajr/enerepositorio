@@ -24,7 +24,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	$scope.deviceTypes = 
 		[
 		 	{ name : 'OUTROS', uid : 0 },
-		 	{ name : 'DETECTOR', uid :  1 },
+		 	{ name : 'SENSOR', uid :  1 },
 		 	{ name : 'PLC', uid : 2 },
 		 	{ name : 'CONTROLADORA', uid : 3 },
 		 	{ name : 'ALARME', uid : 4 } 			  	
@@ -315,7 +315,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 					 expandIcon: 'glyphicon glyphicon-chevron-right',
 			         collapseIcon: 'glyphicon glyphicon-chevron-down',			          
 				     onNodeSelected: function(event, node) {
-				    	 				    	 	
+				    	 
 				    	 if(node.type == 0 && $scope.selectedCompany.unitsDto.length <= 0) {				    		 
 				    		 $scope.LoadAjaxContentCompany('companyInit.html');
 				    	 }
@@ -326,28 +326,35 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				    	 	$scope.LoadAjaxContentCompany('units.html');
 				    	 }
 				    	 else if(node.type == 2) {
+				    		//Se não foi clicado no Node da Unidade
+					    	 if($scope.selectedUnit == undefined)
+					    		 $scope.selectedUnit = $scope.selectedCompany.unitsDto[node.unitIndex];
+					    	 
 				    		 $scope.btnNewArea = true;
 				    		 $scope.selectedArea = node.area;
 				    		 $scope.selectedAreaIndex = node.index;
 					    	 $scope.LoadAjaxContentCompany('areas.html');
 					    	 
-					    	 //Se não foi clicado no Node da Unidade
-					    	 if($scope.selectedUnit == undefined)
-					    		 $scope.selectedUnit = $scope.selectedCompany.unitsDto[node.unitIndex] ;
+					    	 
 					    	 
 				    	 }
 				    	 else if(node.type == 3) {				    		 
-				    		 $scope.selectedCompanyDevice = node.companyDevice;
-				    		 $scope.selectedCompanyDeviceIndex = node.index;
-					    	 $scope.LoadAjaxContentCompany('companyDevices.html');
-					    	 
-					    	//Se não foi clicado no Node da Unidade
+				    		 //Se não foi clicado no Node da Unidade
 					    	 if($scope.selectedUnit == undefined)
 					    		 $scope.selectedUnit = $scope.selectedCompany.unitsDto[node.unitIndex];
 					    	 
 					    	//Se não foi clicado no Node da Área
 					    	 if($scope.selectedArea == undefined)
-					    		 $scope.selectedArea = $scope.selectedCompany.unitsDto[node.unitIndex].areasDto[node.areaIndex];					    	 
+					    		 $scope.selectedArea = $scope.selectedCompany.unitsDto[node.unitIndex].areasDto[node.areaIndex];
+					    	 
+				    		 $scope.selectedCompanyDevice = node.companyDevice;
+				    		 $scope.selectedCompanyDeviceIndex = node.index;
+				    		 
+				    		 if (node.companyDevice.deviceType == "DETECTOR")
+					    		 $scope.LoadAjaxContentCompany('companyDetectors.html');
+				    		 else if (node.companyDevice.deviceType == "PLC" || node.CompanyDevice.deviceType == "CONTROLADORA") 
+				    			 $scope.LoadAjaxContentCompany('companyPlcs.html');
+					    						    	 
 					    		 
 				    	 }
 				     }
@@ -390,8 +397,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			   for (var k = 0; k < $scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length; k++) {
 				   
 				   //Dispositivos
-				   if($scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType == "SENSOR")
-					   var device = "<i class='fa fa-map-signs' style='font-size:1.2em;'></i> " + $scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
+				   if($scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType == "DETECTOR")
+					   var device = "<i class='fa fa fa-rss' style='font-size:1.2em;'></i> " + $scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
 				   else
 					   var device = "<i class='fa  fa-keyboard-o' style='font-size:1.2em;'></i> " + $scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
 				   

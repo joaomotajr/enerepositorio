@@ -38,8 +38,8 @@
 	            <li class="header">SELECIONE</li>	            
 	            <li>
 	            	<a href="#" ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fa fa-th"></i> <span>Dashboard</span></a>
-	            	<a href="#" ng-click="LoadAjaxContent('navegacao.html', 'Navegação')"><i class="fa fa-circle-o"></i> Navegação</a>
-	            	<a href="#" ng-click="LoadAjaxContent('cadastro.html', 'Cadastro')"><i class="fa fa-circle-o"></i> User</a>
+	            	<a href="#" ng-click="LoadAjaxContent('navegacao.html', 'Navegação')"><i class="fa fa-circle-o"></i><span>Navegação</span></a>
+	            	<a href="#" ng-click="LoadAjaxContent('cadastro.html', 'Cadastro')"><i class="fa fa-circle-o"></i><span>User</span></a>
 	            </li>	                                    
 	            
 	          	<li class="treeview">

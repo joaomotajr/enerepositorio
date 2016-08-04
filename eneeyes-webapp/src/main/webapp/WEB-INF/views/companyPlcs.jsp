@@ -2,7 +2,7 @@
 <div class="col-md-9">
 	<div class="box box-primary">
 					
-		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-map-o'></i> {{selectedCompanyDevice.deviceType}}</strong></div>
+		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-keyboard-o'></i> {{selectedCompanyDevice.deviceType}}</strong></div>
 		
 		<div class="box-body">
 						

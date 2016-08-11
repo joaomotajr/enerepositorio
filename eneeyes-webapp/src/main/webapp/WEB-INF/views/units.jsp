@@ -4,7 +4,7 @@
 <div class="col-md-9">
 	<div class="box box-primary" ng-show="selectedCompany.unitsDto.length > 0">
 					
-		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-building'></i> {{selectedUnit.name}}</strong></div>
+		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-building'></i> Unidade: {{selectedUnit.name}}</strong></div>
 		
 		<div class="box-body">
 						
@@ -18,7 +18,7 @@
 				
 				<div class="tab-content">		    	
 					       	
-			       	<div class="tab-pane active" id="tabUnit_1">	    
+			       	<div class="tab-pane active" id="tabUnit_1" data-toggle="tab">	    
 			       		<div class="row">
 						        <div class="col-md-6">
 						            <div class="form-group">
@@ -124,11 +124,14 @@
 						</div>     
 			       	</div><!-- /.tab-pane -->
 			       	
-			       	<div class="tab-pane" id="tabUnit_2">	    
-			       		Em Construção Mapa ...     
+			        <div class="tab-pane" id="tabUnit_2" data-toggle="tab">	    
+			       		Em Construção Mapa ...
+			       							
+						<div id="map" style="height:200px; width: 530px"></div>
+			       		     
 			       	</div><!-- /.tab-pane -->
 			       	
-			       	<div class="tab-pane" id="tabUnit_3">
+			       	<div class="tab-pane" id="tabUnit_3" data-toggle="tab">
 			       		Em Construção Detalhes ...	        
 			     	</div><!-- /.tab-pane -->
 			     				     	

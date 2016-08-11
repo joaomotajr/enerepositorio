@@ -37,7 +37,8 @@ public class CompanyDetector {
     	this.name = dto.getName();
     	this.description = dto.getDescription();    			
     	this.date = dto.getDate();    	  
-    	this.detector = dto.getDetector();
+    	this.local = dto.getLocal();
+    	this.detector = dto.getDetector();    	
     }	
 
 	@Id
@@ -53,6 +54,9 @@ public class CompanyDetector {
 	
 	@Column(name = "DATE", nullable = true)
 	private Date date;  
+	
+	@Column(name = "LOCAL", nullable = true)		
+	private String local;
   
 	@ManyToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_DEVICE_ID", nullable = false)
@@ -92,6 +96,14 @@ public class CompanyDetector {
 
 	public final void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public final String getLocal() {
+		return local;
+	}
+
+	public final void setLocal(String local) {
+		this.local = local;
 	}
 	
 	public CompanyDevice getCompanyDevice() {

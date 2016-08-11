@@ -58,7 +58,10 @@
     <script src="/assets/plugins/chartjs/Chart.min.js"></script>
     
     <!-- Select2 -->
-    <script src="/assets/plugins/select2/select2.min.js"></script>            
+    <script src="/assets/plugins/select2/select2.min.js"></script>    
+    
+    <!-- Google Maps API v3 -->	  
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdD8N8oojiMT-FKYc92jTS4XCCLccyBzg"  type="text/javascript"></script>      
     
     <!-- END GLOBAL SCRIPTS -->
 
@@ -86,6 +89,7 @@
 	<script src="/assets/js/services/gas-service.js"></script>
 	<script src="/assets/js/services/detector-service.js"></script>
 	<script src="/assets/js/services/company-service.js"></script>
+	<script src="/assets/js/services/companyDetector-service.js"></script>
 	
 
     <!-- END PAGE LEVEL SCRIPTS -->

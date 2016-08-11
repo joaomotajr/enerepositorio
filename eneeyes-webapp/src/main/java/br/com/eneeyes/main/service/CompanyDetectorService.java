@@ -117,28 +117,20 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		
 		return result;	
 	}
-
-	public BasicResult<?> findByIdDeviceType(Long uid) {
+	
+	public Result<?> findByCompanyDevice(Long uid) {
 		
-		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>(); 	
+		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();
 		
 		try {
+			CompanyDevice companyDevice = new CompanyDevice();
+			companyDevice.setUid(uid);
 			
-			CompanyDevice companyDevice = companyDeviceRepository.findOne(uid);
-			
-			
-			
-			List<CompanyDetector> lista = repository.findByCompanyDevice(companyDevice);
+			CompanyDetector item = repository.findByCompanyDevice(companyDevice);
 
-			if (lista != null) {
+			if (item != null) {
+				result.setEntity(new CompanyDetectorDto(item));
 				
-				List<CompanyDetectorDto> dto = new ArrayList<CompanyDetectorDto>();
-				
-				for (CompanyDetector companyDetector   : lista) {					
-					dto.add(new CompanyDetectorDto(companyDetector));
-				}
-								
-				result.setList(dto);
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
@@ -151,8 +143,42 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 			result.setMessage(e.getMessage());
 		}
 		
-		return result;
+		return result;	
 	}
+
+
+//	public BasicResult<?> findByIdDeviceType(Long uid) {
+//		
+//		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>(); 	
+//		
+//		try {
+//			
+//			CompanyDevice companyDevice = companyDeviceRepository.findOne(uid);			
+//			List<CompanyDetector> lista = repository.findByCompanyDevice(companyDevice);
+//
+//			if (lista != null) {
+//				
+//				List<CompanyDetectorDto> dto = new ArrayList<CompanyDetectorDto>();
+//				
+//				for (CompanyDetector companyDetector   : lista) {					
+//					dto.add(new CompanyDetectorDto(companyDetector));
+//				}
+//								
+//				result.setList(dto);
+//				result.setResultType( ResultMessageType.SUCCESS );
+//				result.setMessage("Executado com sucesso.");
+//			} else {
+//				result.setIsError(true);
+//				result.setResultType( ResultMessageType.ERROR );
+//				result.setMessage("Nenhum Detector Cadastrado.");
+//			}
+//		} catch (Exception e) {
+//			result.setIsError(true);
+//			result.setMessage(e.getMessage());
+//		}
+//		
+//		return result;
+//	}
 	
 	public BasicResult<?> findByArea(Long uid) {
 		

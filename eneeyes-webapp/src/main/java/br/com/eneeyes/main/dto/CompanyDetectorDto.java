@@ -12,9 +12,9 @@ public class CompanyDetectorDto {
 	private String name;
 	private String description;		
 	private Date date;
+	private String local;
 	private CompanyDevice companyDevice;	
 	private Detector detector;
-
 
 	public CompanyDetectorDto() {
 		
@@ -25,7 +25,8 @@ public class CompanyDetectorDto {
 		this.uid = companyDetector.getUid();		
     	this.name = companyDetector.getName();
     	this.description = companyDetector.getDescription();
-       	this.date = companyDetector.getDate(); 
+       	this.date = companyDetector.getDate();
+       	this.setLocal(companyDetector.getLocal());
        	this.detector = companyDetector.getDetector();
     	
 	}
@@ -60,6 +61,15 @@ public class CompanyDetectorDto {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	public String getLocal() {
+		return local;
+	}
+
+	public void setLocal(String local) {
+		this.local = local;
+	}
+
 
 	public Detector getDetector() {
 		return detector;
@@ -76,5 +86,4 @@ public class CompanyDetectorDto {
 	public void setCompanyDevice(CompanyDevice companyDevice) {
 		this.companyDevice = companyDevice;
 	}
-
 }

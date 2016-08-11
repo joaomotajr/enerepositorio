@@ -73,23 +73,11 @@
 			       			<div class="col-md-12">
 			       				<button type="button" ng-click="newArea();" ng-show="btnNewArea" class="btn btn-success pull-right">    Nova    </button>								
 								<span class="pull-right">   </span>
-			       				<button type="button" ng-click="saveArea();" ng-model="btnSaveArea" class="btn btn-primary pull-right" ng-disabled="(selectedArea.name) ? false : true">   Salvar   </button>		       				
+			       				<button type="button" ng-click="saveArea();" class="btn btn-primary pull-right" ng-disabled="(selectedArea.name) ? false : true">   Salvar   </button>		       				
 			       				<span class="pull-right">   </span>
 			       				<button type="button" ng-click="deleteArea();" class="btn btn-danger pull-right" ng-disabled="(selectedArea.uid) ? false : true">   Excluir   </button>								
 							</div>
-						</div>
-												
-						<div class="row" ng-show="selectedArea.companyDevicesDto.length <= 0">
-							<div class="col-md-6">
-								<label>Incluir Dispositivo</label>						
-								<div class="entry input-group">					
-							        <input type="text" class="form-control" placeholder="Digite o Nome da Area" ng-model="companyDeviceInit">
-							        <span class="input-group-btn">
-							        <button class="btn btn-info btn-flat" type="button" ng-click="saveCompanyDeviceInit();">OK</button>
-							        </span>
-								</div>
-							</div>
-						</div>
+						</div>						
 			    	         
 			       	</div><!-- /.tab-pane -->
 			       	

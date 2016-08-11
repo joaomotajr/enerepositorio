@@ -16,19 +16,40 @@
 				
 				<div class="tab-content">
 			    	
-			    	<div class="tab-pane active" id="tab_1">
+			    	<div class="tab-pane active" id="tab_1" data-toggle="tab">
+			    	
+			    		<div class="row">
+					    	<div class="col-md-6">
+					    	
+					    		<div class="box box-primary box-solid">
+				                    <div class="box-header with-border"><strong>Detector</strong></div>
+				                	 
+				                    <div class="box-body">
+				                        <select class="form-control" data-live-search="true" 
+				                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+				                                ng-options="item as item.name for item in detectors | orderBy: 'name' track by item.uid" 
+		                                           ng-model="selectedCompanyDetector.detector">
+		                                           <option value="">Selecione</option> 
+				                        </select>    
+				                    </div>			                    			                            
+				                </div>  	
+					    	
+					    	</div>
+					    </div>
+			    	
+			    	
 			    		<div class="row">
 					        <div class="col-md-6">
 					            <div class="form-group">
 					                <label class="control-label">Nome</label>
-					                <input id="idAreaName" class="form-control" placeholder="Nome da Area / Matriz" ng-model="selectedArea.name">
+					                <input id="idAreaName" class="form-control" placeholder="Nome da Area / Matriz" ng-model="selectedCompanyDetector.name">
 					            </div>
 					        </div>
 					
 					        <div class="col-md-6">
 					            <div class="form-group">
 					                <label class="control-label">Descrição</label>
-					                <input class="form-control" placeholder="E-mail" ng-model="selectedArea.description">
+					                <input class="form-control" placeholder="E-mail" ng-model="selectedCompanyDetector.description">
 					            </div>
 					        </div>
 					    </div>
@@ -37,66 +58,50 @@
 					        <div class="col-md-8">
 					            <div class="form-group">
 					                <label class="control-label">Local</label>
-					                <input id="idUnitName" class="form-control" placeholder="Endereço e Número" ng-model="selectedArea.local">
+					                <input id="idUnitName" class="form-control" placeholder="Local" ng-model="selectedCompanyDetector.local">
 					            </div>
-					        </div>
-					
-					        <div class="col-md-4">
-					        	<div class="form-group">
-					                <label class="control-label">Longitude</label>
-					                <input class="form-control" placeholder="CEP" ng-model="selectedArea.latitude">
-					            </div>					            
-					        </div>
+					        </div>					
+					        
 					    </div>
 						
 						<div class="row">							
 					        <div class="col-md-4">
 					            <div class="form-group">
 					                <label class="control-label">Latitude</label>
-					                <input id="idUnitName" class="form-control" placeholder="Estado" ng-model="selectedArea.longitude">
+					                <input id="idUnitName" class="form-control" placeholder="Latitude" ng-model="selectedCompanyDetector.longitude">
 					            </div>
 					        </div>
 					
-					        <div class="col-md-4">					            
+					        <div class="col-md-4">						        
+					        	<div class="form-group">
+					                <label class="control-label">Longitude</label>
+					                <input class="form-control" placeholder="Longitude" ng-model="selectedCompanyDetector.latitude">
+					            </div>						        					            
 					        </div>
 					
-					        <div class="col-md-4">					            
-				                <label class="control-label">Area Classificada</label>
-				                <div class="form-group">				                 	
-      									<label><input type="radio" ng-model="selectedUnit.classified" value="true" />&nbsp; Sim</label>        
-				                 	<label><input type="radio" ng-model="selectedUnit.classified" value="false" />&nbsp;	Não</label>						                
-				                </div>					            
+					        <div class="col-md-4">            
 					        </div>
 						</div>				
 			       		
 			       		<div class="row">
 			       			<div class="col-md-12">
-			       				<button type="button" ng-click="newArea();" ng-show="btnNewArea" class="btn btn-success pull-right">    Nova    </button>								
+			       				<button type="button" ng-click="newCompanyDetector();" class="btn btn-success pull-right">    Nova    </button>								
 								<span class="pull-right">   </span>
-			       				<button type="button" ng-click="saveArea();" ng-model="btnSaveArea" class="btn btn-primary pull-right" ng-disabled="(selectedArea.name) ? false : true">   Salvar   </button>		       				
+			       				<button type="button" ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" ng-disabled="selectedCompanyDetector.name ? false : true">   Salvar   </button>		       				
 			       				<span class="pull-right">   </span>
-			       				<button type="button" ng-click="deleteArea();" class="btn btn-danger pull-right" ng-disabled="(selectedArea.uid) ? false : true">   Excluir   </button>								
+			       				<button type="button" ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" ng-disabled="(selectedCompanyDetector.uid) ? false : true">   Excluir   </button>								
 							</div>
-						</div>
-												
-						<div class="row" ng-show="selectedArea.companyDevicesDto.length <= 0">
-							<div class="col-md-6">
-								<label>Incluir Dispositivo</label>						
-								<div class="entry input-group">					
-							        <input type="text" class="form-control" placeholder="Digite o Nome da Area" ng-model="companyDeviceInit">
-							        <span class="input-group-btn">
-							        <button class="btn btn-info btn-flat" type="button" ng-click="saveCompanyDeviceInit();">OK</button>
-							        </span>
-								</div>
-							</div>
-						</div>
+						</div>												
+						
 			    	         
 			       	</div><!-- /.tab-pane -->
 			       	
-			       	<div class="tab-pane" id="tab_2">	         
+			       	<div class="tab-pane" id="tab_2" data-toggle="tab">	 
+			       			       		
+			       	        
 			       	</div><!-- /.tab-pane -->
 			       	
-			       	<div class="tab-pane" id="tab_3">	        
+			       	<div class="tab-pane" id="tab_3" data-toggle="tab">	        
 			     	</div><!-- /.tab-content -->			     	
 			   </div>			   						
 			</div>

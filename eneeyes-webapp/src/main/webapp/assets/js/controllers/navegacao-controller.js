@@ -506,7 +506,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 $scope.companyDetector = {
 		uid: 0,
 		name: 'eewrerewrew',
-		companyDevice: {uid : 1},
+		companyDevice: {uid : 39},
 		detector: {uid : 1}
 		
 	 } 
@@ -559,7 +559,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	$scope.companyDevice = {
 		uid: 0,
 		deviceType: 1,
-		areaDto: {uid : 1}
+		areaDto: {uid : 16}
 		
 	 } 
 	
@@ -611,7 +611,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		longitude: 9.232323,
 		classified: true,
 		date: null,
-		unitDto: {uid: 1}
+		unitDto: {uid: 5}
 	 } 
 	 
 	 $scope.saveArea = function() {

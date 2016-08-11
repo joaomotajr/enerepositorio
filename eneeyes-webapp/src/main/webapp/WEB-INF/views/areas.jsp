@@ -2,7 +2,7 @@
 <div class="col-md-9">
 	<div class="box box-primary">
 					
-		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-map-o'></i> {{selectedArea.name}}</strong></div>
+		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-map-o'></i> Área: {{selectedArea.name}}</strong></div>
 		
 		<div class="box-body">
 						
@@ -28,7 +28,7 @@
 					        <div class="col-md-6">
 					            <div class="form-group">
 					                <label class="control-label">Descrição</label>
-					                <input class="form-control" placeholder="E-mail" ng-model="selectedArea.description">
+					                <input class="form-control" placeholder="Descrição" ng-model="selectedArea.description">
 					            </div>
 					        </div>
 					    </div>
@@ -37,7 +37,7 @@
 					        <div class="col-md-8">
 					            <div class="form-group">
 					                <label class="control-label">Local</label>
-					                <input id="idUnitName" class="form-control" placeholder="Endereço e Número" ng-model="selectedArea.local">
+					                <input id="idUnitName" class="form-control" placeholder="Local" ng-model="selectedArea.local">
 					            </div>
 					        </div>
 					
@@ -55,14 +55,14 @@
 					        <div class="col-md-4">
 					            <div class="form-group">
 					                <label class="control-label">Latitude:</label>
-					                <input id="idUnitName" class="form-control" placeholder="Estado" ng-model="selectedArea.longitude">
+					                <input id="idUnitName" class="form-control" placeholder="Latitude" ng-model="selectedArea.longitude">
 					            </div>
 					        </div>
 					
 					        <div class="col-md-4">
 					        	<div class="form-group">
 					                <label class="control-label">Longitude:</label>
-					                <input class="form-control" placeholder="CEP" ng-model="selectedArea.latitude">
+					                <input class="form-control" placeholder="Longitude" ng-model="selectedArea.latitude">
 					            </div>					            
 					        </div>
 					
@@ -75,7 +75,7 @@
 			       			<div class="col-md-12">
 			       				<button type="button" ng-click="newArea();" ng-show="btnNewArea" class="btn btn-success pull-right">    Nova    </button>								
 								<span class="pull-right">   </span>
-			       				<button type="button" ng-click="saveArea();" ng-model="btnSaveArea" class="btn btn-primary pull-right" ng-disabled="(selectedArea.name) ? false : true">   Salvar   </button>		       				
+			       				<button type="button" ng-click="saveArea();" class="btn btn-primary pull-right" ng-disabled="(selectedArea.name) ? false : true">   Salvar   </button>		       				
 			       				<span class="pull-right">   </span>
 			       				<button type="button" ng-click="deleteArea();" class="btn btn-danger pull-right" ng-disabled="(selectedArea.uid) ? false : true">   Excluir   </button>								
 							</div>

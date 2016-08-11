@@ -249,7 +249,7 @@ app.directive('popover', function($compile) {
     var content =
     	"<div>" +
     	"<label> Fabricante </label>" +
-    	"<input type='text' class='input-small' ng-model='newManufacturer' />&nbsp&nbsp"  +
+    	"<input type='text' class='input-small' ng-model='newManufacturer' style='color:navy ! important;' />&nbsp&nbsp"  +
     	"<button type='button' data-dismiss='popover-content' data-toggle='popover' ng-click='saveManufacturer();' class='btn btn-info btn-xs' ng-disabled='(newManufacturer) ? false : true'> OK</button>" +
     	"</div>";
     

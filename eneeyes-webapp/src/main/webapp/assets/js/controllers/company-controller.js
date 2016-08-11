@@ -1,5 +1,50 @@
-app.controller('companyController', function ($scope, $timeout, $filter, CompanyService, UnitService, AreaService, CompanyDeviceService) {
-
+app.controller('companyController', function ($scope, $timeout, $filter, CompanyService, UnitService, AreaService, CompanyDeviceService, CompanyDetectorService, DetectorService) {
+	
+	$scope.saveCompanyDetector = function() {
+		angular.element('body').addClass('loading');
+		
+		var companyDetector = {
+			uid: $scope.selectedCompanyDetector.uid == undefined ? 0 : $scope.selectedCompanyDetector.uid,
+			name: $scope.selectedCompanyDetector.name,
+			date: $scope.date = null,
+			description: $scope.selectedCompanyDetector.description,
+			local: $scope.selectedCompanyDetector.local,			
+			companyDevice: {uid : $scope.selectedCompanyDevice.uid},
+			detector: $scope.selectedCompanyDetector.detector
+		};
+		 
+		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
+		$scope.inclusaoCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){		
+			
+			angular.element('body').removeClass('loading');
+			$scope.msgInfo = "Detector Gravado!" ;
+           $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+		
+		}, function(data) {
+			angular.element('body').removeClass('loading');
+			$scope.msgErro = "Erro: " + data.statusText;
+		});			 
+	}
+	
+	$scope.getDetectors = function() {
+		 
+		 $scope.resultDetectors = new DetectorService.listAll();		 
+		 $scope.resultDetectors.$detector({_csrf : angular.element('#_csrf').val()}, function(){			
+			 $scope.detectors = $scope.resultDetectors.list; 			 
+        });		 
+	 }
+	
+			
+	$scope.getOneCompanyDetector = function() {
+		
+		$scope.getDetectors();
+		
+		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
+		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
+			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;          	         	
+        });		 
+	}
+	
 	$scope.saveCompanyDeviceInit = function() {
 		angular.element('body').addClass('loading');
 		
@@ -24,7 +69,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	$scope.deviceTypes = 
 		[
 		 	{ name : 'OUTROS', uid : 0 },
-		 	{ name : 'SENSOR', uid :  1 },
+		 	{ name : 'DETECTOR', uid :  1 },
 		 	{ name : 'PLC', uid : 2 },
 		 	{ name : 'CONTROLADORA', uid : 3 },
 		 	{ name : 'ALARME', uid : 4 } 			  	
@@ -68,7 +113,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		angular.element('body').addClass('loading');
 		
 		var area = {
-			uid: $scope.selectedArea.uid = undefined ? 0 : $scope.selectedArea.uid,
+			uid: $scope.selectedArea.uid == undefined ? 0 : $scope.selectedArea.uid,
 			name: $scope.selectedArea.name,
 			date: $scope.date = null,
 			description: $scope.selectedArea.description,
@@ -170,7 +215,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		angular.element('body').addClass('loading');
 		
 		var unit = {
-			uid: $scope.selectedUnit.uid = undefined ? 0 : $scope.selectedUnit.uid,
+			uid: $scope.selectedUnit.uid == undefined ? 0 : $scope.selectedUnit.uid,
 			name: $scope.selectedUnit.name,
 			email: $scope.selectedUnit.email,
 			address: $scope.selectedUnit.address,
@@ -294,9 +339,9 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.companies = $scope.resultCompanies.list;
          });		 
-	 } 	        
+	} 	        
 	 
-	 $scope.getOneCompany = function(companyId) {
+	$scope.getOneCompany = function(companyId) {
 		 
 		 $scope.listOne = new CompanyService.listOne();		 
 		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
@@ -311,53 +356,68 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 
 		 var initSelectableTree = function() {
 			 return $('#treeview-company').treeview({
-					 data: data,		
-					 expandIcon: 'glyphicon glyphicon-chevron-right',
-			         collapseIcon: 'glyphicon glyphicon-chevron-down',			          
-				     onNodeSelected: function(event, node) {
-				    	 
-				    	 if(node.type == 0 && $scope.selectedCompany.unitsDto.length <= 0) {				    		 
+					data: data,		
+					expandIcon: 'glyphicon glyphicon-chevron-right',
+			        collapseIcon: 'glyphicon glyphicon-chevron-down',			          
+				    onNodeSelected: function(event, node) {
+				    
+				    	if(node.type == 0 && $scope.selectedCompany.unitsDto.length <= 0) {				    		 
 				    		 $scope.LoadAjaxContentCompany('companyInit.html');
-				    	 }
-				    	 else if(node.type == 1) {
+				    	}
+				    	else if(node.type == 1) {
 				    		$scope.btnNewUnit = true;
 				    		$scope.selectedUnit = node.unit;
-				    		$scope.selectedUnitIndex = node.index;
+				    		$scope.selectedUnitIndex = node.index;			    		
 				    	 	$scope.LoadAjaxContentCompany('units.html');
-				    	 }
-				    	 else if(node.type == 2) {
+				    	 	
+				    	 	$timeout(function () {                    
+				    	 		var geocoder;
+					    		var map;
+					    		
+				    		    geocoder = new google.maps.Geocoder();
+				    		    map = new google.maps.Map(document.getElementById("map"),
+				    		    {
+				    		        zoom: 8,
+				    		        center: new google.maps.LatLng(-23.5505199,-46.63330940000003),
+				    		        mapTypeId: google.maps.MapTypeId.ROADMAP
+				    		    });
+				    		    
+				            }, 1000);
+			    	 	
+				    	 	
+				    	}
+				    	else if(node.type == 2) {
 				    		//Se não foi clicado no Node da Unidade
-					    	 if($scope.selectedUnit == undefined)
-					    		 $scope.selectedUnit = $scope.selectedCompany.unitsDto[node.unitIndex];
+					    	if($scope.selectedUnit == undefined)
+					    		$scope.selectedUnit = $scope.selectedCompany.unitsDto[node.unitIndex];
+					    						    	
+				    		$scope.btnNewArea = true;
+				    		$scope.selectedArea = node.area;
+				    		$scope.selectedAreaIndex = node.index;
+					    	$scope.LoadAjaxContentCompany('areas.html');				    	 
 					    	 
-				    		 $scope.btnNewArea = true;
-				    		 $scope.selectedArea = node.area;
-				    		 $scope.selectedAreaIndex = node.index;
-					    	 $scope.LoadAjaxContentCompany('areas.html');
-					    	 
-					    	 
-					    	 
-				    	 }
-				    	 else if(node.type == 3) {				    		 
+				    	}
+				    	else if(node.type == 3) {
+				    	
 				    		 //Se não foi clicado no Node da Unidade
-					    	 if($scope.selectedUnit == undefined)
-					    		 $scope.selectedUnit = $scope.selectedCompany.unitsDto[node.unitIndex];
+					    	if($scope.selectedUnit == undefined)
+					    		$scope.selectedUnit = $scope.selectedCompany.unitsDto[node.unitIndex];
 					    	 
 					    	//Se não foi clicado no Node da Área
-					    	 if($scope.selectedArea == undefined)
-					    		 $scope.selectedArea = $scope.selectedCompany.unitsDto[node.unitIndex].areasDto[node.areaIndex];
+					    	if($scope.selectedArea == undefined)
+					    		$scope.selectedArea = $scope.selectedCompany.unitsDto[node.unitIndex].areasDto[node.areaIndex];
 					    	 
-				    		 $scope.selectedCompanyDevice = node.companyDevice;
-				    		 $scope.selectedCompanyDeviceIndex = node.index;
+				    		$scope.selectedCompanyDevice = node.companyDevice;
+				    		$scope.selectedCompanyDeviceIndex = node.index;
 				    		 
-				    		 if (node.companyDevice.deviceType == "DETECTOR")
-					    		 $scope.LoadAjaxContentCompany('companyDetectors.html');
-				    		 else if (node.companyDevice.deviceType == "PLC" || node.CompanyDevice.deviceType == "CONTROLADORA") 
-				    			 $scope.LoadAjaxContentCompany('companyPlcs.html');
-					    						    	 
-					    		 
-				    	 }
-				     }
+				    		if (node.companyDevice.deviceType == "DETECTOR") {
+				    			$scope.getOneCompanyDetector();				    			 
+					    		$scope.LoadAjaxContentCompany('companyDetectors.html');
+				    	 	}
+				    		else if (node.companyDevice.deviceType == "PLC" || node.companyDevice.deviceType == "CONTROLADORA") 
+				    			$scope.LoadAjaxContentCompany('companyPlcs.html');					    		 
+				    	}
+				    }
 			     });
 			};
 			
@@ -408,7 +468,9 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		}		 
 		
 		return itens;
-	}
+	 }
+	 
+	
 	 
 //	$scope.loadIchecks = function ()
 //	{
@@ -430,7 +492,9 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 //	}
 	 
 	$scope.getCompanys();
-	$(".select2").select2();	
-		
+	$(".select2").select2();
+	
+
+			
 //	$scope.loadIchecks();
 });

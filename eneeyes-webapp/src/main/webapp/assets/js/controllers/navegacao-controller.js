@@ -505,9 +505,11 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 /*-----------------------------------------------------------------------------------------------------------------*/		 
 	 $scope.companyDetector = {
 		uid: 0,
-		name: 'eewrerewrew',
-		companyDevice: {uid : 39},
-		detector: {uid : 1}
+		name: 'Navegação',
+		companyDevice: {uid : 2},
+		detector: {uid : 1},
+		local: "ererererererer",
+		description: "dfdfdfdsfsdd"
 		
 	 } 
 	

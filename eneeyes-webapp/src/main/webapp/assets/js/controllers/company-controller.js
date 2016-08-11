@@ -6,12 +6,11 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		var companyDetector = {
 			uid: $scope.selectedCompanyDetector.uid == undefined ? 0 : $scope.selectedCompanyDetector.uid,
 			name: $scope.selectedCompanyDetector.name,
-			date: $scope.date = null,
-			description: $scope.selectedCompanyDetector.description,
-			local: $scope.selectedCompanyDetector.local,			
 			companyDevice: {uid : $scope.selectedCompanyDevice.uid},
-			detector: $scope.selectedCompanyDetector.detector
-		};
+			detector: {uid: $scope.selectedCompanyDetector.detector.uid},
+			local: $scope.selectedCompanyDetector.local,
+			description: $scope.selectedCompanyDetector.description			
+		 }
 		 
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
 		$scope.inclusaoCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){		
@@ -382,7 +381,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				    		        mapTypeId: google.maps.MapTypeId.ROADMAP
 				    		    });
 				    		    
-				            }, 1000);
+				            }, 1500);
 			    	 	
 				    	 	
 				    	}

@@ -1,5 +1,13 @@
 
-
+<style>
+   .mapOK {
+       color: green;
+   }
+   
+   .mapNOK {
+   	color: red;
+   }
+</style>
     
 <div class="col-md-9">
 	<div class="box box-primary" ng-show="selectedCompany.unitsDto.length > 0">
@@ -13,7 +21,7 @@
    					<li><a href="#tabUnit_1" data-toggle="tab">Cadastro</a></li>
 			       	<li><a href="#tabUnit_2" data-toggle="tab">Mapa</a></li>
 			       	<li><a href="#tabUnit_3" data-toggle="tab">Detalhes</a></li>
-			    	<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+			    	<li class="pull-right"><a href="#" class="text-muted" ng-click="getCoordinatesUnit();" title="Validar Endereço."><i class="fa fa-map" ng-class="(mapUnitOK) ? 'mapOK' : 'mapNOK'"></i></a></li>
 			    </ul>
 				
 				<div class="tab-content">		    	
@@ -125,9 +133,12 @@
 			       	</div><!-- /.tab-pane -->
 			       	
 			        <div class="tab-pane" id="tabUnit_2" data-toggle="tab">	    
-			       		Em Construção Mapa ...
-			       							
-						<div id="map" style="height:200px; width: 530px"></div>
+			       					       			
+			     		latitude: <input name="latitude"  id='latUnit' ng-model="selectedUnit.latitude" type="text" placeholder="Latitude"  disabled>
+            			longitude:<input name="longitude" id='lngUnit' ng-model="selectedUnit.longitude"  type="text" placeholder="Longitude" disabled>				
+						
+						<div align="center"  id="mapUnit" style="height: 300px; width: 650px"></div>
+						
 			       		     
 			       	</div><!-- /.tab-pane -->
 			       	

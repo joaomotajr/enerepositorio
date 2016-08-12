@@ -1,4 +1,9 @@
 app.controller('companyController', function ($scope, $timeout, $filter, CompanyService, UnitService, AreaService, CompanyDeviceService, CompanyDetectorService, DetectorService) {
+
+	var geocoder;
+    var map;
+
+	/*----------------------------------------------------------------- C O M P A N Y   D E V I C E----------------------------------------------------------------------*/
 	
 	$scope.saveCompanyDetector = function() {
 		angular.element('body').addClass('loading');
@@ -74,22 +79,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 	{ name : 'ALARME', uid : 4 } 			  	
 		];
 	
-	$scope.deleteArea = function() 
-	{		 
-		angular.element('body').addClass('loading');		
-		$scope.deletar = new AreaService.deletar();	
+	/*-------------------------------------------------------------------------- A R E A -------------------------------------------------------------------------------*/
 		
-		$scope.deletar.$area({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid}, function(){
-			$scope.getOneCompany($scope.companyUid);					
-			angular.element('body').removeClass('loading');
-			
-			$scope.msgDanger = "Área Excluída!!" ;
-	        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');         	         	
-        }, function(data) {
-        	$scope.msgErro = "Erro: " + statusText;
-		});		 
-	}
-	
 	$scope.saveAreaInit = function() {
 		angular.element('body').addClass('loading');
 		
@@ -156,6 +147,24 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		$('#idAreaName').select();
 	}
 	
+	$scope.deleteArea = function() 
+	{		 
+		angular.element('body').addClass('loading');		
+		$scope.deletar = new AreaService.deletar();	
+		
+		$scope.deletar.$area({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid}, function(){
+			$scope.getOneCompany($scope.companyUid);					
+			angular.element('body').removeClass('loading');
+			
+			$scope.msgDanger = "Área Excluída!!" ;
+	        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');         	         	
+        }, function(data) {
+        	$scope.msgErro = "Erro: " + statusText;
+		});		 
+	}
+	
+	/*-------------------------------------------------------------------------- U N I T -------------------------------------------------------------------------------*/
+	
 	$scope.newUnit = function () {
 		$scope.btnNewUnit = false;
 		$scope.clearFormUnit();
@@ -189,7 +198,9 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		$scope.selectedUnit.phone  = '';
 		$scope.selectedUnit.mobile  = '';
 		$scope.selectedUnit.url  = '';
-		$scope.selectedUnit.unitType  = '';	
+		$scope.selectedUnit.unitType  = '';
+		$scope.selectedUnit.latitude = null;	
+		$scope.selectedUnit.longitude = null;
 	 
 		$('#idUnitName').select();
 	}
@@ -211,7 +222,9 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	 }
 	
 	$scope.saveUnit = function() {
-		angular.element('body').addClass('loading');
+		angular.element('body').addClass('loading');				 
+		
+		validMapUnit();
 		
 		var unit = {
 			uid: $scope.selectedUnit.uid == undefined ? 0 : $scope.selectedUnit.uid,
@@ -225,8 +238,10 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			mobile: $scope.selectedUnit.mobile,
 			url: $scope.selectedUnit.url,
 			unitType: $scope.selectedUnit.unitType,
+			latitude: $scope.selectedUnit.latitude,
+			longitude: $scope.selectedUnit.longitude,
 			companyDto: {uid : $scope.selectedCompany.uid}				
-		};
+		};		 
 		 
 		$scope.inclusaoUnit = new UnitService.save(unit);
 		$scope.inclusaoUnit.$unit({_csrf : angular.element('#_csrf').val()}, function(){         	
@@ -237,8 +252,48 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			$scope.msgInfo = "Unidade Gravada!" ;
            $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
 		
-       });		 
+       });       
 	}
+	
+	$scope.getUnitAddressValid = function() {
+	
+		if($scope.selectedUnit.address != null && $scope.selectedUnit.state != null && $scope.selectedUnit.city != null) {
+					    	 		
+	 		return ($scope.selectedUnit.address == null ? "" : $scope.selectedUnit.address) + ", " + ($scope.selectedUnit.state == null ? "" : $scope.selectedUnit.state) + ", " + ($scope.selectedUnit.city == null ? "" : $scope.selectedUnit.city);				    	 		
+	 		
+	 	}
+	 	else if ( $scope.selectedUnit.zip != null) {
+	 		
+	 		return ($scope.selectedUnit.zip == null ? "" : $scope.selectedUnit.zip);
+	 	}
+	 	else {
+	 		return "";
+	 	}
+	}
+	
+	showResultUnitCoordinates = function (result) {		
+		$scope.selectedUnit.latitude = result.geometry.location.lat();
+		$scope.selectedUnit.longitude = result.geometry.location.lng();	
+		validMapUnit();	
+		$scope.$apply();		
+	}	 
+	
+	$scope.getCoordinatesUnit = function () {
+	
+		getCoordinates(showResultUnitCoordinates,  $scope.getUnitAddressValid() );	
+		
+	}
+	validMapUnit = function() {
+		$scope.mapUnitOK = ( ($scope.selectedUnit.latitude != null && $scope.selectedUnit.latitude != 0)  && ($scope.selectedUnit.longitude != null && $scope.selectedUnit.longitude != 0) );
+		
+		if($scope.mapUnitOK)
+		{
+			$timeout(function () {           
+				mapUnit($scope.selectedUnit.latitude, $scope.selectedUnit.longitude );
+			}, 1000);
+		}
+	}
+	/*-------------------------------------------------------------------------- C O M P A N Y -----------------------------------------------------------------------------*/
 	
 	$scope.deleteCompany = function() {
 		
@@ -363,27 +418,22 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				    	if(node.type == 0 && $scope.selectedCompany.unitsDto.length <= 0) {				    		 
 				    		 $scope.LoadAjaxContentCompany('companyInit.html');
 				    	}
+				    	else if(node.type == 0 ) {				    		 
+				    		 $scope.LoadAjaxContentCompany('company.html');
+				    		 initialize2();
+				    		 
+				    		 $timeout(function () {
+				    		 	mapas();
+				    		 }, 500);
+				    	}
 				    	else if(node.type == 1) {
 				    		$scope.btnNewUnit = true;
 				    		$scope.selectedUnit = node.unit;
 				    		$scope.selectedUnitIndex = node.index;			    		
 				    	 	$scope.LoadAjaxContentCompany('units.html');
 				    	 	
-				    	 	$timeout(function () {                    
-				    	 		var geocoder;
-					    		var map;
-					    		
-				    		    geocoder = new google.maps.Geocoder();
-				    		    map = new google.maps.Map(document.getElementById("map"),
-				    		    {
-				    		        zoom: 8,
-				    		        center: new google.maps.LatLng(-23.5505199,-46.63330940000003),
-				    		        mapTypeId: google.maps.MapTypeId.ROADMAP
-				    		    });
-				    		    
-				            }, 1500);
-			    	 	
-				    	 	
+				    	 	initialize();
+				    	 	validMapUnit();			    	 				    	 	
 				    	}
 				    	else if(node.type == 2) {
 				    		//Se não foi clicado no Node da Unidade
@@ -469,8 +519,134 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		return itens;
 	 }
 	 
-	
 	 
+	 /*--------------------------------------------------------------------------   M A P S ---------------------------------------------------------------------------*/
+	 
+	 function initialize()
+	 {	
+	 	if (!geocoder) {
+			 $timeout(function () {                    
+				 geocoder = new google.maps.Geocoder();
+				 map = new google.maps.Map(document.getElementById("mapUnit"),
+				{				 
+					 zoom: 12,
+					 center: new google.maps.LatLng(-23.5505199,-46.63330940000003),
+					 mapTypeId: google.maps.MapTypeId.ROADMAP
+				});		
+			 }, 500);
+		 }
+	}
+	
+	function initialize2()
+	 {	
+	 	if (!geocoder) {
+			 $timeout(function () {                    
+				 geocoder = new google.maps.Geocoder();
+				 map = new google.maps.Map(document.getElementById("mapCompany"),
+				{				 
+					 zoom: 12,
+					 center: new google.maps.LatLng(-23.5505199,-46.63330940000003),
+					 mapTypeId: google.maps.MapTypeId.ROADMAP
+				});		
+			 }, 500);
+		 }
+	}	       
+	 
+	 function getLatitudeLongitude(address) {
+		 
+		 address = address || 'Sao Paulo, Brasil';
+
+		 $timeout(function () {    
+			 if (geocoder) {
+				 geocoder.geocode({
+			        'address': address
+				 }, function (results, status) {
+					 if (status == google.maps.GeocoderStatus.OK) {
+						 $timeout(function () {
+							 mapa(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+						 }, 1000);
+					 }
+				 });
+			 }
+		 }, 500);
+	 }	 
+	     
+	 getCoordinates = function (callBack, address) {
+		 
+		 var resp = {lat: 0, lng: 0};		 
+		 address = address || 'Sao Paulo, Brasil';
+		 
+		 if (geocoder) {
+			 geocoder.geocode({
+		        'address': address
+			 }, function (results, status) {
+				 if (status == google.maps.GeocoderStatus.OK) {		
+				 			 
+					callBack(results[0]);			 
+				 }
+			 });
+		 }
+	 }
+	 
+	 
+	 mapUnit = function (lat, lng) {
+	    
+	    var myOptions = {
+	        zoom: 12,
+	        center: new google.maps.LatLng(lat, lng),
+	        mapTypeId: google.maps.MapTypeId.ROADMAP
+	    };	    
+	    
+	    map = new google.maps.Map(document.getElementById("mapUnit"), myOptions);
+        
+        var latlng = new google.maps.LatLng(lat, lng);
+        
+        new google.maps.Marker({
+            position: latlng,
+            map: map
+       });         
+		    
+	}
+	
+	 mapas = function () {
+	    
+	    var myOptions = {
+	        zoom: 8,
+	        center: new google.maps.LatLng(-23.5345239, -46.75677889999997),
+	        mapTypeId: google.maps.MapTypeId.ROADMAP
+	    };	    
+	    
+	    map = new google.maps.Map(document.getElementById("mapCompany"), myOptions);       
+             
+        latlng = new google.maps.LatLng(-23.5345239, -46.75677889999997);
+        new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: "Um"
+       });
+        
+   
+       
+       latlng = new google.maps.LatLng(-23.5239623, -46.84112429999999);
+        new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: "Tres"
+       }); 
+       
+          latlng = new google.maps.LatLng(-23.5492651, -46.9331962);
+        new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: "Dois"
+       });
+            
+		    
+	}
+	
+	
+	
+
 //	$scope.loadIchecks = function ()
 //	{
 //
@@ -492,8 +668,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	 
 	$scope.getCompanys();
 	$(".select2").select2();
-	
-
+		
+    
 			
 //	$scope.loadIchecks();
 });

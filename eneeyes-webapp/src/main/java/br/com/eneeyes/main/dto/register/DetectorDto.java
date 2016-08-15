@@ -14,9 +14,11 @@ public class DetectorDto extends BaseDeviceDto {
 	private Long uid;	
 	private Transmitter transmitter;
 	private List<SensorDto> sensorsDto = new ArrayList<SensorDto>();
+	//private byte[] image;	
 	
-	public DetectorDto() {
-		
+	private String image;
+
+	public DetectorDto() {		
 	}
 	
 	public DetectorDto(Detector detector) {
@@ -24,6 +26,7 @@ public class DetectorDto extends BaseDeviceDto {
 		this.name = detector.getName();
 		this.manufacturer = detector.getManufacturer();
 		this.model = detector.getModel();
+		//this.image = detector.getImage();
 		
 		if (detector.getTransmitter()  != null) 
 			this.transmitter = detector.getTransmitter();		
@@ -71,6 +74,22 @@ public class DetectorDto extends BaseDeviceDto {
 
 	public final void setTransmitter(Transmitter transmitter) {
 		this.transmitter = transmitter;
+	}
+	
+//	public final byte[] getImage() {
+//		return image;
+//	}
+//
+//	public final void setImage(byte[] image) {
+//		this.image = image;
+//	}
+	
+	public final String getImage() {
+		return image;
+	}
+
+	public final void setImage(String image) {
+		this.image = image;
 	}
 
 }

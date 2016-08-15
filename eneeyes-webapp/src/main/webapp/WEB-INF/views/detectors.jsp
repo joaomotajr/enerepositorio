@@ -7,6 +7,16 @@
 	    padding: 4px;
 	}
 	
+	img {
+	  float: left;
+	  width: 150px;
+	  height: 100px;
+	  border: 1px solid #000;
+	  margin-right: 1em;
+	}
+	.fill {
+  		object-fit: fill;
+	
 	</style>				        											
 	<div class="row">	
 				                                                    
@@ -49,46 +59,70 @@
 				</div>
 				
 				<div class="box-body">
-					<form class="form">		
-					
-						<div class="box box-primary box-solid">
-		                    <div class="box-header with-border"><strong>Fabricante</strong>
-		                        <a href="#" popover> [Incluir Novo]</a>                        
+					<form class="form">	
+						<div class="row">
+							
+							<div class="col-md-8">
+								<h2>Imagem do Dispositivo</h2>  
+								<div class="input-group" id="img2b64">
+								    <input id="inputFileToLoad" type="file" />
+								</div>
+							</div>
+							<div class="col-md-4">	
+								<div class="output">							    		    
+								    <img ng-src="{{detectorImage}}" onError="this.src='/assets/img/cover.jpg'">
+								</div>							
+							</div>							
+						</div>
+							<hr>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="box box-primary box-solid">
+				                    <div class="box-header with-border"><strong>Fabricante</strong>
+				                        <a href="#" popover> [Incluir Novo]</a>                        
+					                </div>
+				                	 
+				                    <div class="box-body">
+				                        <select class="form-control" data-live-search="true" 
+				                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+				                                ng-options="item as item.name for item in manufacturers | orderBy: 'name' track by item.uid" 
+		                                           ng-model="detectorManufacturer">
+		                                           <option value="">Selecione</option> 
+				                        </select>    
+				                    </div>			                    			                            
+				                </div>
 			                </div>
-		                	 
-		                    <div class="box-body">
-		                        <select class="form-control" data-live-search="true" 
-		                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-		                                ng-options="item as item.name for item in manufacturers | orderBy: 'name' track by item.uid" 
-                                           ng-model="detectorManufacturer">
-                                           <option value="">Selecione</option> 
-		                        </select>    
-		                    </div>			                    			                            
+			                
+			                <div class="col-md-6">
+				                <div class="box box-primary box-solid">
+				                    <div class="box-header with-border"><strong>Transmissor</strong></div>
+				                	 
+				                    <div class="box-body">
+				                        <select class="form-control" data-live-search="true" 
+				                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+				                                ng-options="item as item.name for item in transmitters | orderBy: 'name' track by item.uid" 
+		                                           ng-model="detectorTransmitter">
+		                                           <option value="">Selecione</option> 
+				                        </select>    
+				                    </div>			                    			                            
+				                </div>		     
+			                </div>
 		                </div>
-		                
-		                <div class="box box-primary box-solid">
-		                    <div class="box-header with-border"><strong>Transmissor</strong></div>
-		                	 
-		                    <div class="box-body">
-		                        <select class="form-control" data-live-search="true" 
-		                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-		                                ng-options="item as item.name for item in transmitters | orderBy: 'name' track by item.uid" 
-                                           ng-model="detectorTransmitter">
-                                           <option value="">Selecione</option> 
-		                        </select>    
-		                    </div>			                    			                            
-		                </div>		                
-		                 	                                                                                                                                    
-						<div class="form-group">
-							<label class="control-label">Nome</label>                                                                        
-							<input id="idDetectorName" class="form-control inputProfile" placeholder="Nome do Detector" ng-model="detectorName">                                                                        
-						</div>							
-	
-						<div class="form-group">
-							<label class="control-label">Modelo</label>                                                       
-							<input class="form-control inputProfile" placeholder="Modelo do Detector" ng-model="detectorModel">                                                
-						</div>							
-						
+		                           
+		                <div class="row">
+		                 	<div class="col-md-6">                                                                                                                                    
+							<div class="form-group">
+								<label class="control-label">Nome</label>                                                                        
+								<input id="idDetectorName" class="form-control inputProfile" placeholder="Nome do Detector" ng-model="detectorName">                                                                        
+							</div>							
+							</div>
+							<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Modelo</label>                                                       
+								<input class="form-control inputProfile" placeholder="Modelo do Detector" ng-model="detectorModel">                                                
+							</div>
+							</div>							
+						</div>
 						<!-- 
 						<div class="form-group">
 				            <label class="control-label">Tipo de Detecção</label>

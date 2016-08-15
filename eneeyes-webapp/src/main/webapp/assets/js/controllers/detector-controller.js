@@ -1,6 +1,5 @@
 
 app.controller('detectorController', function ($scope, $timeout, $filter, DetectorService, ManufacturerService, SensorService, TransmitterService) {
-	    
 	
 	$scope.saveDetector = function() {
 		
@@ -15,6 +14,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 			manufacturer: $scope.detectorManufacturer,
 			transmitter: $scope.detectorTransmitter,
 			model: $scope.detectorModel,
+			image: $scope.detectorImage,
 			//detectionType: $scope.detectorDetectionType.uid,
 			sensorsDto: $scope.detectorSensors
     	}; 
@@ -71,7 +71,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 			 $scope.clearFormDetector();			 
 			 
 			 $timeout(function () {                    
-				 $scope.inicializaLDragDrop();
+				 $scope.inicializaLDragDrop();				 
 	         }, 1000);
          });		 
 	 }
@@ -188,18 +188,37 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
         });
 
         return className;
-	 }
+	 }	 
+	 
+		 	 
+	function encodeImageFileAsURL(cb) {
+	    return function(){
+	        var file = this.files[0];
+	        var reader  = new FileReader();
+	        reader.onloadend = function () {
+	            cb(reader.result);
+	        }
+	        reader.readAsDataURL(file);
+	    }		    
+	}
+	 
+	$('#inputFileToLoad').change( encodeImageFileAsURL( function(base64Img) {			
+		    
+	    $scope.detectorImage =  base64Img;
+		$scope.$apply();
+		    
+	}));
+
 	 
 	 $scope.addSensorDetector = function (idSensor) {
 
 	        sensor = {
 	            uid: idSensor	            
 	        }
-
 	        $scope.newSensors.push(sensor);
-
 	        $scope.$apply();
-	    }
+	 }	 
+	 
 	 
 //	 $scope.detectionTypes = 
 //		 [
@@ -216,5 +235,6 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	 $scope.getManufacturers();
 	 $scope.getTransmitters();
 	 $scope.getSensors();
+	 $scope.detectorImage = "/assets/img/cover.jpg";
 
 });

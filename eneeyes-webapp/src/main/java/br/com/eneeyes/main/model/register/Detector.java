@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -82,6 +83,10 @@ public class Detector {
 	@Column(name = "MODEL", nullable = true)
 	String model;
 	
+	@Lob
+	@Column(name = "IMAGE", nullable = true)
+	byte[] image;	
+
 	public final Long getUid() {
 		return uid;
 	}
@@ -136,5 +141,13 @@ public class Detector {
 
 	public final void setModel(String model) {
 		this.model = model;
+	}
+	
+	public final byte[] getImage() {
+		return image;
+	}
+
+	public final void setImage(byte[] image) {
+		this.image = image;
 	}
 }

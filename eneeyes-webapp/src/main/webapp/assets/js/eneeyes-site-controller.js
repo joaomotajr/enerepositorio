@@ -488,7 +488,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 				},2500);
 			}
         });
-    };     
+    };
 
     $scope.LoadAjaxContent('companies.html', 'Empresas');
 

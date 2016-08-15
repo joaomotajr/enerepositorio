@@ -463,7 +463,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				    			$scope.getOneCompanyDetector();				    			 
 					    		$scope.LoadAjaxContentCompany('companyDetectors.html');
 				    	 	}
-				    		else if (node.companyDevice.deviceType == "PLC" || node.companyDevice.deviceType == "CONTROLADORA") 
+				    		else if (node.companyDevice.deviceType == "PLC" || node.companyDevice.deviceType == "CONTROLLER") 
 				    			$scope.LoadAjaxContentCompany('companyPlcs.html');					    		 
 				    	}
 				    }

@@ -198,7 +198,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		$scope.selectedUnit.phone  = '';
 		$scope.selectedUnit.mobile  = '';
 		$scope.selectedUnit.url  = '';
-		$scope.selectedUnit.unitType  = '';
+		$scope.selectedUnit.unitType  = undefined;
 		$scope.selectedUnit.latitude = null;	
 		$scope.selectedUnit.longitude = null;
 	 
@@ -283,6 +283,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		getCoordinates(showResultUnitCoordinates,  $scope.getUnitAddressValid() );	
 		
 	}
+	
 	validMapUnit = function() {
 		$scope.mapUnitOK = ( ($scope.selectedUnit.latitude != null && $scope.selectedUnit.latitude != 0)  && ($scope.selectedUnit.longitude != null && $scope.selectedUnit.longitude != 0) );
 		
@@ -290,7 +291,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		{
 			$timeout(function () {           
 				mapUnit($scope.selectedUnit.latitude, $scope.selectedUnit.longitude );
-			}, 1000);
+			}, 500);		
 		}
 	}
 	/*-------------------------------------------------------------------------- C O M P A N Y -----------------------------------------------------------------------------*/
@@ -406,6 +407,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
          });		 
 	 }
 
+	/*-------------------------------------------------------------------------- T R E E V I E W -----------------------------------------------------------------------------*/
 	 $scope.loadTreview = function(data) {
 		 
 		 var initSelectableTree = function() {
@@ -423,7 +425,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				    		 initialize2();
 				    		 
 				    		 $timeout(function () {
-				    		 	mapas();
+				    			 mapsCompany();
 				    		 }, 500);
 				    	}
 				    	else if(node.type == 1) {
@@ -432,8 +434,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				    		$scope.selectedUnitIndex = node.index;			    		
 				    	 	$scope.LoadAjaxContentCompany('units.html');
 				    	 	
-				    	 	initialize();
-				    	 	validMapUnit();			    	 				    	 	
+				    	 	initialize();				    	 					    	 	
+				    	 	validMapUnit();				    	 	
 				    	}
 				    	else if(node.type == 2) {
 				    		//Se não foi clicado no Node da Unidade
@@ -540,7 +542,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 					 center: new google.maps.LatLng(-23.5505199,-46.63330940000003),
 					 mapTypeId: google.maps.MapTypeId.ROADMAP
 				});		
-			 }, 500);
+			 }, 400);
+			 
 		 }
 	}
 	
@@ -558,25 +561,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			 }, 500);
 		 }
 	}	       
-	 
-//	 function getLatitudeLongitude(address) {
-//		 
-//		 address = address || 'Sao Paulo, Brasil';
-//
-//		 $timeout(function () {    
-//			 if (geocoder) {
-//				 geocoder.geocode({
-//			        'address': address
-//				 }, function (results, status) {
-//					 if (status == google.maps.GeocoderStatus.OK) {
-//						 $timeout(function () {
-//							 mapa(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-//						 }, 1000);
-//					 }
-//				 });
-//			 }
-//		 }, 500);
-//	 }	 
+
 	     
 	 getCoordinates = function (callBack, address) {
 		 
@@ -593,8 +578,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				 }
 			 });
 		 }
-	 }
-	 
+	 }	 
 	 
 	 mapUnit = function (lat, lng) {
 	    
@@ -604,18 +588,17 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	        mapTypeId: google.maps.MapTypeId.ROADMAP
 	    };	    
 	    
-	    map = new google.maps.Map(document.getElementById("mapUnit"), myOptions);
-        
+	    map = new google.maps.Map(document.getElementById("mapUnit"), myOptions);        
         var latlng = new google.maps.LatLng(lat, lng);
         
         new google.maps.Marker({
             position: latlng,
             map: map,
             title : $scope.selectedUnit.name
-       });		    
+       });       
 	}
 	
-	 mapas = function () {
+	 mapsCompany = function () {
 	    
 	    var myOptions = {
 	        zoom: 8,

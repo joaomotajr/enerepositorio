@@ -75,27 +75,34 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	$scope.tabsShow = [];
 	
 	$scope.LoadAjaxContent = function(url, title) {
-		$http.get(url)
-        .success(function (data) {
-        	
-        	var num_tabs = $("div#tabs ul li").length + 1;
-        	
-        	var sBody = {
-        		name : "tab_" + num_tabs,
-        		link : title,
-        		body : data
-        	};
-        	
-        	$scope.tabsShow.push(sBody);     	
-           
-        	$timeout(function(){
-				$("#id_tab_" + num_tabs).trigger("click");				
-			},300);
-            
-        })
-        .error(function (data, status, headers, config) {
-        	alert(errorThrown);
-        });
+		
+		tabIsOpened = $(".nav-tabs").find("." + title ).attr('id');
+					
+		if (tabIsOpened)
+			$("#" + tabIsOpened).trigger("click");
+		else {
+			$http.get(url)
+	        .success(function (data) {
+	        	
+	        	var num_tabs = $("div#tabs ul li").length + 1;
+	        	
+	        	var sBody = {
+	        		name : "tab_" + num_tabs,
+	        		link : title,
+	        		body : data
+	        	};
+	        	
+	        	$scope.tabsShow.push(sBody);     	
+	           
+	        	$timeout(function(){
+					$("#id_tab_" + num_tabs).trigger("click");				
+				},300);
+	            
+	        })
+	        .error(function (data, status, headers, config) {
+	        	alert(errorThrown);
+	        });
+		}
 	}
 	
 	 $scope.removeTab = function (index) {

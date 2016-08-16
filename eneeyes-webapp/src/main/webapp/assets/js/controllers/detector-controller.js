@@ -97,7 +97,9 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		    $scope.detectorName = $scope.detectors[index].name;
 		    $scope.detectorModel = $scope.detectors[index].model;
 		    //$scope.detectorDetectionType = $scope.getDetectionTypes($scope.detectors[index].detectionType);
-		    $scope.detectorImage = $scope.detectors[index].image;
+		    		    
+		    $scope.detectorImage = ($scope.detectors[index].image == null ? "/assets/img/cover.jpg" :  $scope.detectors[index].image);
+		    
 		    $scope.detectorTransmitter = $scope.detectors[index].transmitter;
 		    $scope.detectorSensors = $scope.detectors[index].sensorsDto;
 		    		    		    

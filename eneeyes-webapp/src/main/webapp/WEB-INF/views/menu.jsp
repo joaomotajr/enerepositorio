@@ -63,19 +63,9 @@
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">			            		        
-			            <li><a href="#" ng-click="LoadAjaxContent('companies.html', 'Empresa')"><i class="fa fa-circle-o"></i> Empresa</a></li>
+			            <li><a href="#" ng-click="LoadAjaxContent('companies.html', 'Empresas')"><i class="fa fa-circle-o"></i> Empresa</a></li>
 	              	</ul>
-	            </li>
-	            <!-- 
-	            <li class="treeview">
-	            	<a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
-	              
-					<ul class="treeview-menu">
-						<li><a href="#">Link in level 2</a></li>
-						<li><a href="#">Link in level 2</a></li>
-					</ul>
-	            </li>	 
-	             -->           
+	            </li>	                  
 	        </ul>
         </section>        
 	</aside>

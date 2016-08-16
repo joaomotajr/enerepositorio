@@ -13,7 +13,7 @@
 			<div class="nav-tabs-custom" id='tabs' ng-show="tabsShow.length > 0">
 			    <ul class="nav nav-tabs">
 			    	<li ng-repeat="item in tabsShow">
-				    	<a href="{{'#'+ item.name}}" id="{{'id_' + item.name}}"  data-toggle='tab'>{{item.link}}
+				    	<a href="{{'#'+ item.name}}" id="{{'id_' + item.name}}" class="{{item.link}}"  data-toggle='tab'>{{item.link}}
 				    		<button type='button' class='close' aria-label='Close' ng-click="removeTab($index)"><span aria-hidden='true'>  &times; </span></button>
 				    	</a>
 			    	</li>		        

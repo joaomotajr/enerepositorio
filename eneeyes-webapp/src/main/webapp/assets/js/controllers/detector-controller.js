@@ -1,8 +1,7 @@
 
 app.controller('detectorController', function ($scope, $timeout, $filter, DetectorService, ManufacturerService, SensorService, TransmitterService) {
 	
-	$scope.saveDetector = function() {
-		
+	$scope.saveDetector = function() {		
 		
 		for (var i = 0; i < $scope.newSensors.length; i++) {
 			$scope.detectorSensors.push($scope.newSensors[i]);	            	             
@@ -21,8 +20,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		 
 		$scope.inclusaoDetector = new DetectorService.save(detector);		 
 		$scope.inclusaoDetector.$detector({_csrf : angular.element('#_csrf').val()}, function()
-		{         	
-         	
+		{         	         	
          	$scope.clearFormDetector();
             $scope.getDetectors();
                      	

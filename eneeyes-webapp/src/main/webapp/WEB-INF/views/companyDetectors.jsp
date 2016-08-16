@@ -11,8 +11,7 @@
 	  margin-right: 1em;
 	}
 	.fill {
-  		object-fit: fill;
-	
+  		object-fit: fill;	
 </style>
 
 <div class="col-md-9">

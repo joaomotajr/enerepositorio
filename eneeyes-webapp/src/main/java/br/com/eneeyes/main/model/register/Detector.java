@@ -48,7 +48,6 @@ public class Detector {
 			image = dto.getImage().getBytes("US-ASCII");
 			this.setImage(image);
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 		

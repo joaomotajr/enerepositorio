@@ -20,7 +20,7 @@ import br.com.eneeyes.main.model.register.Detector;
 
 /**
  * Created by Junior on 06/06/2016.
- * Cadastro dos Detectores das Empresas
+ * Cadastro dos Detectores das Empresas.
  */
 
 @Entity

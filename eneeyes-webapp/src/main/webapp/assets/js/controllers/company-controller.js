@@ -489,18 +489,26 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		var itens = [];
 		
 		//Empresa
-		itens.push({text:  $scope.selectedCompany.name, type : 0, nodes: [] });
+		var empresa = $scope.selectedCompany.name + "<small class='label label-default pull-right'></i>" + $scope.selectedCompany.unitsDto.length + "" + "</small>";
+		
+		itens.push({text: empresa , type : 0, nodes: [] });
 		
 		for (var i = 0; i < $scope.selectedCompany.unitsDto.length; i++) {
 			
 			//Unidades
-	   		var unidade = "<i class='fa fa-building' style='font-size:1.2em;'></i> " + $scope.selectedCompany.unitsDto[i].name;	   		
-			itens[0].nodes.push({text: unidade, nodes: [], type : 1, index: i , unit : $scope.selectedCompany.unitsDto[i]});
+	   		var unidade = "<i class='fa fa-building' style='font-size:1.2em;'></i> " + 
+	   			$scope.selectedCompany.unitsDto[i].name + "<small class='label label-default pull-right'></i>" + 
+	   			$scope.selectedCompany.unitsDto[i].areasDto.length + "" +  "</small>";	   		
+			
+	   		itens[0].nodes.push({text: unidade, nodes: [], type : 1, index: i , unit : $scope.selectedCompany.unitsDto[i]});
 	
 		   for (var j = 0; j < $scope.selectedCompany.unitsDto[i].areasDto.length; j++) {			  			   
 			   
 			   //Áreas
-			   var area = "<i class='fa fa-map-o' style='font-size:1.2em;'></i> " + $scope.selectedCompany.unitsDto[i].areasDto[j].name;
+			   var area = "<i class='fa fa-map-o' style='font-size:1.2em;'></i> " + 
+			   		$scope.selectedCompany.unitsDto[i].areasDto[j].name + "<small class='label label-default pull-right'></i>" + 
+			   		$scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length + "" + "</small>";
+			   
 			   itens[0].nodes[i].nodes.push({text: area, nodes: [], type : 2, index: j, unitIndex: i , area: $scope.selectedCompany.unitsDto[i].areasDto[j] });
 	
 			   for (var k = 0; k < $scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length; k++) {
@@ -517,8 +525,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		}		 
 		
 		return itens;
-	 }
-	 
+	 }	 
 	 
 	 /*--------------------------------------------------------------------------   M A P S ---------------------------------------------------------------------------*/
 	 
@@ -552,24 +559,24 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 }
 	}	       
 	 
-	 function getLatitudeLongitude(address) {
-		 
-		 address = address || 'Sao Paulo, Brasil';
-
-		 $timeout(function () {    
-			 if (geocoder) {
-				 geocoder.geocode({
-			        'address': address
-				 }, function (results, status) {
-					 if (status == google.maps.GeocoderStatus.OK) {
-						 $timeout(function () {
-							 mapa(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-						 }, 1000);
-					 }
-				 });
-			 }
-		 }, 500);
-	 }	 
+//	 function getLatitudeLongitude(address) {
+//		 
+//		 address = address || 'Sao Paulo, Brasil';
+//
+//		 $timeout(function () {    
+//			 if (geocoder) {
+//				 geocoder.geocode({
+//			        'address': address
+//				 }, function (results, status) {
+//					 if (status == google.maps.GeocoderStatus.OK) {
+//						 $timeout(function () {
+//							 mapa(results[0].geometry.location.lat(), results[0].geometry.location.lng());
+//						 }, 1000);
+//					 }
+//				 });
+//			 }
+//		 }, 500);
+//	 }	 
 	     
 	 getCoordinates = function (callBack, address) {
 		 
@@ -603,9 +610,9 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
         
         new google.maps.Marker({
             position: latlng,
-            map: map
-       });         
-		    
+            map: map,
+            title : $scope.selectedUnit.name
+       });		    
 	}
 	
 	 mapas = function () {
@@ -616,36 +623,18 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	        mapTypeId: google.maps.MapTypeId.ROADMAP
 	    };	    
 	    
-	    map = new google.maps.Map(document.getElementById("mapCompany"), myOptions);       
-             
-        latlng = new google.maps.LatLng(-23.5345239, -46.75677889999997);
-        new google.maps.Marker({
-            position: latlng,
-            map: map,
-            title: "Um"
-       });
-        
-   
-       
-       latlng = new google.maps.LatLng(-23.5239623, -46.84112429999999);
-        new google.maps.Marker({
-            position: latlng,
-            map: map,
-            title: "Tres"
-       }); 
-       
-          latlng = new google.maps.LatLng(-23.5492651, -46.9331962);
-        new google.maps.Marker({
-            position: latlng,
-            map: map,
-            title: "Dois"
-       });
-            
-		    
-	}
-	
-	
-	
+	    map = new google.maps.Map(document.getElementById("mapCompany"), myOptions);
+	    
+	    for (var i = 0; i < $scope.selectedCompany.unitsDto.length; i++) {
+	    	
+	        latlng = new google.maps.LatLng($scope.selectedCompany.unitsDto[i].latitude, $scope.selectedCompany.unitsDto[i].longitude);
+	        new google.maps.Marker({
+	            position: latlng,
+	            map: map,
+	            title: $scope.selectedCompany.unitsDto[i].name
+	        }); 
+	    }	    
+	}	
 
 //	$scope.loadIchecks = function ()
 //	{

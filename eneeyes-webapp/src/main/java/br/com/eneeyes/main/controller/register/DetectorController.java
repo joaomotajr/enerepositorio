@@ -14,7 +14,6 @@ import br.com.eneeyes.main.dto.register.DetectorDto;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.service.register.DetectorService;
 
-
 @RestController
 public class DetectorController {
 	

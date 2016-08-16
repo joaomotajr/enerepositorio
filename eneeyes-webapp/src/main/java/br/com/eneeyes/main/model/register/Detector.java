@@ -1,5 +1,6 @@
 package br.com.eneeyes.main.model.register;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,6 +42,15 @@ public class Detector {
 		this.manufacturer = dto.getManufacturer();
 		this.model = dto.getModel();		
 		this.transmitter = dto.getTransmitter();
+			
+		try {
+			byte[] image = null;
+			image = dto.getImage().getBytes("US-ASCII");
+			this.setImage(image);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 		
 		if(dto.getSensorsDto() != null)
 			this.sensors = parseSensors(dto.getSensorsDto());

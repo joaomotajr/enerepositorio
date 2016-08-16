@@ -1,4 +1,20 @@
-   
+ <style>
+	.todo-list>li {
+	    padding: 4px;
+	}
+	
+	img {
+	  float: left;
+	  width: 150px;
+	  height: 100px;
+	  border: 1px solid #000;
+	  margin-right: 1em;
+	}
+	.fill {
+  		object-fit: fill;
+	
+</style>
+
 <div class="col-md-9">
 	<div class="box box-primary">
 					
@@ -35,6 +51,11 @@
 				                </div>  	
 					    	
 					    	</div>
+					    	<div class="col-md-4">	
+								<div class="output">							    		    
+								    <img ng-src="{{selectedCompanyDetector.detector.image}}" onError="this.src='/assets/img/cover.jpg'">
+								</div>							
+							</div>	
 					    </div>
 			    	
 			    	
@@ -64,6 +85,7 @@
 					        
 					    </div>
 						
+						<!--
 						<div class="row">							
 					        <div class="col-md-4">
 					            <div class="form-group">
@@ -82,6 +104,7 @@
 					        <div class="col-md-4">            
 					        </div>
 						</div>				
+			       		-->
 			       		
 			       		<div class="row">
 			       			<div class="col-md-12">

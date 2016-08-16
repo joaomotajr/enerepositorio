@@ -26,7 +26,11 @@ public class DetectorDto extends BaseDeviceDto {
 		this.name = detector.getName();
 		this.manufacturer = detector.getManufacturer();
 		this.model = detector.getModel();
-		//this.image = detector.getImage();
+		
+		if (detector.getImage() != null) {
+			byte[] image = detector.getImage();
+			this.image = new String(image);
+		}		
 		
 		if (detector.getTransmitter()  != null) 
 			this.transmitter = detector.getTransmitter();		

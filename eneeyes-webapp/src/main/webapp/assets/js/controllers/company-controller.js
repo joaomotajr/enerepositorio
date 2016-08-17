@@ -12,7 +12,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			uid: $scope.selectedCompanyDetector.uid == undefined ? 0 : $scope.selectedCompanyDetector.uid,
 			name: $scope.selectedCompanyDetector.name,
 			companyDevice: {uid : $scope.selectedCompanyDevice.uid},
-			detector: {uid: $scope.selectedCompanyDetector.detector.uid},
+			detectorDto: {uid: $scope.selectedCompanyDetector.detector.uid},
 			local: $scope.selectedCompanyDetector.local,
 			description: $scope.selectedCompanyDetector.description			
 		 }

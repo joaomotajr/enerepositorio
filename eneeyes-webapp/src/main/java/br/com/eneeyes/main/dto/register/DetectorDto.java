@@ -7,14 +7,12 @@ import java.util.Set;
 
 import br.com.eneeyes.main.model.register.Detector;
 import br.com.eneeyes.main.model.register.Sensor;
-import br.com.eneeyes.main.model.register.Transmitter;
 
 public class DetectorDto extends BaseDeviceDto {
 		
 	private Long uid;	
-	private Transmitter transmitter;
+	private TransmitterDto transmitterDto;
 	private List<SensorDto> sensorsDto = new ArrayList<SensorDto>();
-
 	private String image;
 
 	public DetectorDto() {		
@@ -32,7 +30,7 @@ public class DetectorDto extends BaseDeviceDto {
 		}		
 		
 		if (detector.getTransmitter()  != null) 
-			this.transmitter = detector.getTransmitter();		
+			this.transmitterDto = new TransmitterDto(detector.getTransmitter());		
 				
 		if(detector.getSensors() != null)		
 			this.sensorsDto = parseSensorsDto(detector.getSensors());		
@@ -71,12 +69,12 @@ public class DetectorDto extends BaseDeviceDto {
 		this.uid = uid;
 	}
 	
-	public final Transmitter getTransmitter() {
-		return transmitter;
+	public TransmitterDto getTransmitterDto() {
+		return transmitterDto;
 	}
 
-	public final void setTransmitter(Transmitter transmitter) {
-		this.transmitter = transmitter;
+	public void setTransmitterDto(TransmitterDto transmitterDto) {
+		this.transmitterDto = transmitterDto;
 	}
 	
 	public final String getImage() {

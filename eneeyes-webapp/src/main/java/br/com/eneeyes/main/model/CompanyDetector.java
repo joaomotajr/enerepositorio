@@ -38,8 +38,8 @@ public class CompanyDetector {
     	this.description = dto.getDescription();    			
     	this.date = dto.getDate();    	  
     	this.local = dto.getLocal();
-    	this.detector = dto.getDetector();    	
-    }	
+    	this.detector = new Detector(dto.getDetectorDto());
+    }   
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

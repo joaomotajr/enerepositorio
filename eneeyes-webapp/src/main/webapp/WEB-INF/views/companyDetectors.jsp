@@ -43,7 +43,7 @@
 				                        <select class="form-control" data-live-search="true" 
 				                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 				                                ng-options="item as item.name for item in detectors | orderBy: 'name' track by item.uid" 
-		                                           ng-model="selectedCompanyDetector.detector">
+		                                           ng-model="selectedCompanyDetector.detectorDto">
 		                                           <option value="">Selecione</option> 
 				                        </select>    
 				                    </div>			                    			                            
@@ -52,7 +52,7 @@
 					    	</div>
 					    	<div class="col-md-4">	
 								<div class="output">							    		    
-								    <img ng-src="{{selectedCompanyDetector.detector.image}}" onError="this.src='/assets/img/cover.jpg'">
+								    <img ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
 								</div>							
 							</div>	
 					    </div>

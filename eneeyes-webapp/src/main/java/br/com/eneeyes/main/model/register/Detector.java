@@ -41,7 +41,7 @@ public class Detector {
 		this.name = dto.getName();
 		this.manufacturer = dto.getManufacturer();
 		this.model = dto.getModel();		
-		this.transmitter = dto.getTransmitter();
+		this.transmitter = new Transmitter(dto.getTransmitterDto());
 			
 		try {
 			byte[] image = null;
@@ -81,9 +81,6 @@ public class Detector {
 	
 	@Column(name = "NAME", nullable = true)
 	String name;
-
-//	@Column(name = "MANUFACTURER", nullable = true)
-//	String manufacturer;
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="MANUFACTURER_ID", nullable = false)
@@ -127,14 +124,6 @@ public class Detector {
 	public final void setName(String name) {
 		this.name = name;
 	}
-
-//	public final String getManufacturer() {
-//		return manufacturer;
-//	}
-//
-//	public final void setManufacturer(String manufacturer) {
-//		this.manufacturer = manufacturer;
-//	}
 	
 	public final Manufacturer getManufacturer() {
 		return manufacturer;

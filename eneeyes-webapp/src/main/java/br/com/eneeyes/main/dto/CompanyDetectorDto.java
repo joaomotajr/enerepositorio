@@ -2,9 +2,8 @@ package br.com.eneeyes.main.dto;
 
 import java.util.Date;
 
+import br.com.eneeyes.main.dto.register.DetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
-import br.com.eneeyes.main.model.CompanyDevice;
-import br.com.eneeyes.main.model.register.Detector;
 
 public class CompanyDetectorDto {
 
@@ -13,8 +12,8 @@ public class CompanyDetectorDto {
 	private String description;		
 	private Date date;
 	private String local;
-	private CompanyDevice companyDevice;	
-	private Detector detector;
+	private CompanyDeviceDto companyDeviceDto;	
+	private DetectorDto detectorDto;
 
 	public CompanyDetectorDto() {
 		
@@ -27,10 +26,9 @@ public class CompanyDetectorDto {
     	this.description = companyDetector.getDescription();
        	this.date = companyDetector.getDate();
        	this.setLocal(companyDetector.getLocal());
-       	this.detector = companyDetector.getDetector();
-    	
+       	this.detectorDto = new DetectorDto(companyDetector.getDetector()) ;
 	}
-	
+		
 	public final Long getUid() {
 		return uid;
 	}
@@ -69,21 +67,20 @@ public class CompanyDetectorDto {
 	public void setLocal(String local) {
 		this.local = local;
 	}
-
-
-	public Detector getDetector() {
-		return detector;
+	
+	public DetectorDto getDetectorDto() {
+		return detectorDto;
 	}
 
-	public void setDetector(Detector detector) {
-		this.detector = detector;
+	public void setDetectorDto(DetectorDto detectorDto) {
+		this.detectorDto = detectorDto;
 	}
 	
-	public CompanyDevice getCompanyDevice() {
-		return companyDevice;
+	public CompanyDeviceDto getCompanyDeviceDto() {
+		return companyDeviceDto;
 	}
 
-	public void setCompanyDevice(CompanyDevice companyDevice) {
-		this.companyDevice = companyDevice;
+	public void setCompanyDeviceDto(CompanyDeviceDto companyDeviceDto) {
+		this.companyDeviceDto = companyDeviceDto;
 	}
 }

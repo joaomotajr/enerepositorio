@@ -4,8 +4,8 @@
    }
    
    .mapNOK {
-   	color: red;
-   }
+   		color: red;
+   	}
 </style>
 
 <div class="col-md-9">
@@ -18,7 +18,7 @@
 			<div class="nav-tabs-custom">
 				<ul class="nav nav-tabs">
    					<li><a href="#tabUnit_1" data-toggle="tab">Cadastro</a></li>
-			       	<li><a href="#tabUnit_2" data-toggle="tab">Mapa</a></li>
+			       	<li><a href="#tabUnit_2" data-toggle="tab">Localização</a></li>
 			       	<li><a href="#tabUnit_3" data-toggle="tab">Detalhes</a></li>
 			    	<li class="pull-right"><a href="#" class="text-muted" ng-click="getCoordinatesUnit();" title="Validar Local."><i class="fa fa-map" ng-class="(mapUnitOK) ? 'mapOK' : 'mapNOK'"></i></a></li>
 			    </ul>
@@ -141,10 +141,11 @@
 						
 			       	</div><!-- /.tab-pane -->
 			       	
-			       	<div class="tab-pane" id="tabUnit_3">
-			       		Em Construção Detalhes ...	        
-			     	</div><!-- /.tab-pane -->
-			     				     	
+			       	<div class="tab-pane" id="tabUnit_3">			       			
+			       		
+			       		Em Construção....
+					            
+			     	</div><!-- /.tab-pane -->			     				     	
 			   	</div>	<!-- /.tab-content -->		   						
 			</div>						
 		</div>		

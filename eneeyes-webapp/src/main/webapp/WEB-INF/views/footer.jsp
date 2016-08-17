@@ -72,6 +72,7 @@
 	<script src="/assets/js/eneeyes-services.js"></script>
 	<script src="/assets/js/eneeyes-site-controller.js"></script>
 	<script src="/assets/js/message-translate.js"></script>	 
+	<script src="/assets/js/jsFunctions.js"></script>
 	<script src="/assets/js/controllers/menu-navegacao.js"></script>
 	<script src="/assets/js/controllers/navegacao-controller.js"></script>
 	<script src="/assets/js/controllers/controller-controller.js"></script>

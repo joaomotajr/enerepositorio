@@ -1,3 +1,16 @@
+<style>
+	img {
+		float: left;
+		width: 650px;
+		height: 300px;
+		border: 1px solid #000;
+		margin-right: 1em;
+	}
+	
+	.fill {
+		object-fit: fill;
+	}
+</style>
    
 <div class="col-md-9">
 	<div class="box box-primary">
@@ -8,15 +21,15 @@
 						
 			<div class="nav-tabs-custom">
 				<ul class="nav nav-tabs">
-			       	<li class="active"><a href="#tab_1" data-toggle="tab">Cadastro</a></li>
-			       	<li><a href="#tab_2" data-toggle="tab">Mapa</a></li>
-			       	<li><a href="#tab_3" data-toggle="tab">Detalhes</a></li>
+			       	<li class="active"><a href="#tabArea_1" data-toggle="tab">Cadastro</a></li>
+			       	<li><a href="#tabArea_2" data-toggle="tab">Local</a></li>
+			       	<li><a href="#tabArea_3" data-toggle="tab">Dispositivos</a></li>
 			    	<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
 			    </ul>
 				
 				<div class="tab-content">
 			    	
-			    	<div class="tab-pane active" id="tab_1">
+			    	<div class="tab-pane active" id="tabArea_1">
 			    		<div class="row">
 					        <div class="col-md-6">
 					            <div class="form-group">
@@ -79,9 +92,8 @@
 			       				<span class="pull-right">   </span>
 			       				<button type="button" ng-click="deleteArea();" class="btn btn-danger pull-right" ng-disabled="(selectedArea.uid) ? false : true">   Excluir   </button>								
 							</div>
-						</div>
-												
-					<!-- <div class="row" ng-show="selectedArea.companyDevicesDto.length <= 0">  -->												
+						</div>												
+																	
 						<div class="row">
 							<div class="col-md-6">
 								<label>Incluir Dispositivo</label>						
@@ -103,10 +115,32 @@
 			    	         
 			       	</div><!-- /.tab-pane -->
 			       	
-			       	<div class="tab-pane" id="tab_2">	         
+			       	<div class="tab-pane" id="tabArea_2">
+			       	
+			       	<div class="row">
+						<div class="col-md-3">					            
+								<label class="control-label">Dispositivos</label>					            
+							</div>
+							<div class="col-md-9">
+								<form>
+									<input type="file" id="idInputImageArea" style='display:none'>
+									<button id="idBtnChooseFileArea" class="btn btn-sm"><i class="fa fa-file-image-o"></i> Background</button>							        
+								</form>						        
+							</div>				        
+						</div>
+						<div class="row">
+							<div class="col-md-3">				            					            
+							</div>
+							<div class="col-md-9">
+								<div class="output">							    		    
+									<img ng-src="{{unitImage}}" onError="this.src='/assets/img/cover.jpg'">
+								</div>
+							</div>					    	
+						</div>
+			       		         
 			       	</div><!-- /.tab-pane -->
 			       	
-			       	<div class="tab-pane" id="tab_3">	        
+			       	<div class="tab-pane" id="tabArea_3">	        
 			     	</div><!-- /.tab-content -->			     	
 			   </div>			   						
 			</div>

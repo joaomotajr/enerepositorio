@@ -422,7 +422,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				    	}
 				    	else if(node.type == 0 ) {				    		 
 				    		 $scope.LoadAjaxContentCompany('company.html');
-				    		 initialize2();
+				    		 initializeCompany();
 				    		 
 				    		 $timeout(function () {
 				    			 mapsCompany();
@@ -434,7 +434,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				    		$scope.selectedUnitIndex = node.index;			    		
 				    	 	$scope.LoadAjaxContentCompany('units.html');
 				    	 	
-				    	 	initialize();				    	 					    	 	
+				    	 	initializeUnit();				    	 					    	 	
 				    	 	validMapUnit();				    	 	
 				    	}
 				    	else if(node.type == 2) {
@@ -446,7 +446,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				    		$scope.selectedArea = node.area;
 				    		$scope.selectedAreaIndex = node.index;
 					    	$scope.LoadAjaxContentCompany('areas.html');				    	 
-					    	 
+					    	
+					    	initializeArea();
 				    	}
 				    	else if(node.type == 3) {
 				    	
@@ -486,11 +487,11 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
         });
 	 }
  
-	 function getTree() {
+	  getTree = function() {
 		 
 		var itens = [];
 		
-		//Empresa
+		//Company
 		var empresa = $scope.selectedCompany.name + "<small class='label label-default pull-right'></i>" + $scope.selectedCompany.unitsDto.length + "" + "</small>";
 		
 		itens.push({text: empresa , type : 0, nodes: [] });
@@ -529,9 +530,25 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		return itens;
 	 }	 
 	 
-	 /*--------------------------------------------------------------------------   M A P S ---------------------------------------------------------------------------*/
+	 /*--------------------------------------------------------------------------   M A P S  &  E V E N T S -----------------------------------------------------------------------*/
 	 
-	 function initialize()
+	 function initializeArea()
+	 {
+		$timeout(function () {
+			$('#idBtnChooseFileArea').click(function(event) {
+			    event.preventDefault();	    
+			    $('#idInputImageArea').trigger('click');			    
+			});
+			 
+			 $('#idInputImageArea').change( encodeImageFileAsURL( function(base64Img) {				
+				    $scope.unitImage =  base64Img;
+					$scope.$apply();					    
+				}));
+			 
+		}, 450);
+	 }	
+	 
+	 function initializeUnit()
 	 {	
 	 	if (!geocoder) {
 			 $timeout(function () {                    
@@ -542,12 +559,11 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 					 center: new google.maps.LatLng(-23.5505199,-46.63330940000003),
 					 mapTypeId: google.maps.MapTypeId.ROADMAP
 				});		
-			 }, 400);
-			 
+			 }, 400);			 
 		 }
 	}
 	
-	function initialize2()
+	function initializeCompany()
 	 {	
 	 	if (!geocoder) {
 			 $timeout(function () {                    
@@ -562,24 +578,6 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 }
 	}	       
 
-	     
-	 getCoordinates = function (callBack, address) {
-		 
-		 var resp = {lat: 0, lng: 0};		 
-		 address = address || 'Sao Paulo, Brasil';
-		 
-		 if (geocoder) {
-			 geocoder.geocode({
-		        'address': address
-			 }, function (results, status) {
-				 if (status == google.maps.GeocoderStatus.OK) {		
-				 			 
-					callBack(results[0]);			 
-				 }
-			 });
-		 }
-	 }	 
-	 
 	 mapUnit = function (lat, lng) {
 	    
 	    var myOptions = {
@@ -617,31 +615,9 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	            title: $scope.selectedCompany.unitsDto[i].name
 	        }); 
 	    }	    
-	}	
-
-//	$scope.loadIchecks = function ()
-//	{
-//
-//	    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-//	      checkboxClass: 'icheckbox_minimal-blue',
-//	      radioClass: 'iradio_minimal-blue'
-//	    });	    
-//	    
-//	    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
-//	      checkboxClass: 'icheckbox_minimal-red',
-//	      radioClass: 'iradio_minimal-red'
-//	    });	    
-//	    
-//	    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-//	      checkboxClass: 'icheckbox_flat-green',
-//	      radioClass: 'iradio_flat-green'
-//	    });
-//	}
+	}
 	 
 	$scope.getCompanys();
 	$(".select2").select2();
-		
-    
-			
-//	$scope.loadIchecks();
+	
 });

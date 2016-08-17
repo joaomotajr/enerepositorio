@@ -191,50 +191,52 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	 }	 
 	 
 		 	 
-	function encodeImageFileAsURL(cb) {
-	    return function(){
-	        var file = this.files[0];
-	        var reader  = new FileReader();
-	        reader.onloadend = function () {
-	            cb(reader.result);
-	        }
-	        reader.readAsDataURL(file);
-	    }		    
-	}
+//	function encodeImageFileAsURL(cb) {
+//	    return function(){
+//	        var file = this.files[0];
+//	        var reader  = new FileReader();
+//	        reader.onloadend = function () {
+//	            cb(reader.result);
+//	        }
+//	        reader.readAsDataURL(file);
+//	    }		    
+//	}
 	 
-	$('#inputFileToLoad').change( encodeImageFileAsURL( function(base64Img) {			
-		    
-	    $scope.detectorImage =  base64Img;
-		$scope.$apply();
-		    
-	}));
-
+	$scope.loadEvents = function() {
+		
+		$('#idInputImageDetector').change( encodeImageFileAsURL( function(base64Img) {		    
+		    $scope.detectorImage =  base64Img;
+			$scope.$apply();		    
+		}));
+		
+		 $('#idChooseFileDetector').click(function(event) {
+		    event.preventDefault();	    
+		    $('#idInputImageDetector').trigger('click');	    
+		});
+	}
 	 
 	 $scope.addSensorDetector = function (idSensor) {
 
-	        sensor = {
-	            uid: idSensor	            
-	        }
-	        $scope.newSensors.push(sensor);
-	        $scope.$apply();
+        sensor = {
+            uid: idSensor	            
+        }
+        $scope.newSensors.push(sensor);
+        $scope.$apply();
 	 }	 
 	 
-	 
-//	 $scope.detectionTypes = 
-//		 [
-//		  	{ name : 'OUTROS', uid : 0 },
-//		  	{ name : 'CAT', uid :  1 },
-//		  	{ name : 'FTA', uid : 2 },
-//		  	{ name : 'FID', uid : 3 },
-//		  	{ name : 'ECM', uid : 4 },
-//		  	{ name : 'IR', uid : 5 },
-//		  	{ name : 'BUT', uid : 6 }		  	
-//		 ]; 
-	 
+ 
 	 $scope.getDetectors();
 	 $scope.getManufacturers();
 	 $scope.getTransmitters();
 	 $scope.getSensors();
 	 $scope.detectorImage = "/assets/img/cover.jpg";
+	 
+	 $timeout(function () {                    
+		 $scope.loadEvents();
+	 }, 500);
+
+	 
+	 
+	 
 
 });

@@ -1,23 +1,24 @@
 <!--	 Content Wrapper. Contains page     content -->
-	 
-<div ng-controller="detectorController">
 
 	<style>
-	.todo-list>li {
-	    padding: 4px;
-	}
+		.todo-list>li {
+		    padding: 4px;
+		}
+		
+		img {
+		  float: left;
+		  width: 150px;
+		  height: 100px;
+		  border: 1px solid #000;
+		  margin-right: 1em;
+		}
+		.fill {
+	  		object-fit: fill;
 	
-	img {
-	  float: left;
-	  width: 150px;
-	  height: 100px;
-	  border: 1px solid #000;
-	  margin-right: 1em;
-	}
-	.fill {
-  		object-fit: fill;
-	
-	</style>				        											
+	</style>
+	 
+<div ng-controller="detectorController">
+					        											
 	<div class="row">	
 				                                                    
 		<div class="col-md-5">                                                        
@@ -63,10 +64,16 @@
 						<div class="row">
 							
 							<div class="col-md-8">
-								<h2>Imagem do Dispositivo</h2>  
+								<h2>Imagem do Dispositivo</h2>
+								<!--   
 								<div class="input-group" id="img2b64">
 								    <input id="inputFileToLoad" type="file" />
 								</div>
+								 -->    
+							    <div class="input-group" id="img2b64">
+			        	    		<input type="file" id="idInputImageDetector" style='display:none'>
+					        		<button id="idChooseFileDetector" class="btn btn-sm"><i class="fa fa-file-image-o"></i> Imagem</button>							        
+					        	</div>
 							</div>
 							<div class="col-md-4">	
 								<div class="output">							    		    

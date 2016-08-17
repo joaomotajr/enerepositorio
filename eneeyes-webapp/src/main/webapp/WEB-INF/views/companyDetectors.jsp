@@ -23,15 +23,15 @@
 						
 			<div class="nav-tabs-custom">
 				<ul class="nav nav-tabs">
-			       	<li class="active"><a href="#tab_1" data-toggle="tab">Cadastro</a></li>
-			       	<li><a href="#tab_2" data-toggle="tab">Mapa</a></li>
-			       	<li><a href="#tab_3" data-toggle="tab">Detalhes</a></li>
+			       	<li class="active"><a href="#tabCompanyDetector_1" data-toggle="tab">Cadastro</a></li>
+			       	<!-- <li><a href="#tabCompanyDetector_2" data-toggle="tab">Mapa</a></li> -->
+			       	<li><a href="#tabCompanyDetector_3" data-toggle="tab">Detalhes</a></li>
 			    	<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
 			    </ul>
 				
 				<div class="tab-content">
 			    	
-			    	<div class="tab-pane active" id="tab_1" data-toggle="tab">
+			    	<div class="tab-pane active" id="tabCompanyDetector_1">
 			    	
 			    		<div class="row">
 					    	<div class="col-md-6">
@@ -117,13 +117,12 @@
 						
 			    	         
 			       	</div><!-- /.tab-pane -->
-			       	
-			       	<div class="tab-pane" id="tab_2" data-toggle="tab">	 
-			       			       		
-			       	        
+			       	<!-- 
+			       	<div class="tab-pane" id="tabCompanyDetector_2">		       	        
 			       	</div><!-- /.tab-pane -->
-			       	
-			       	<div class="tab-pane" id="tab_3" data-toggle="tab">	        
+			       	 -->
+			       	 
+			       	<div class="tab-pane" id="tabCompanyDetector_3">	        
 			     	</div><!-- /.tab-content -->			     	
 			   </div>			   						
 			</div>

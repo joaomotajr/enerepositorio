@@ -1,10 +1,6 @@
 <div ng-controller="companyController">
 
-	<style>
-	
-	
-	</style>
-   
+	<!--    
 	<script type="text/ng-template" id="categoryTree">
         {{ node.text }}
         <ul class="list-group" ng-if="node.nodes">
@@ -14,7 +10,7 @@
             </li>
         </ul>
     </script>	
-    
+     -->
 				
 	<div class="row">
 	    <div class="col-md-12">

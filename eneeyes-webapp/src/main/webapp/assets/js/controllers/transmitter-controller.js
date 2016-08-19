@@ -7,7 +7,7 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 		var transmitter = {
 			uid: $scope.transmitterUid != undefined ? $scope.transmitterUid : 0,
 			name: $scope.transmitterName,
-			manufacturer: $scope.transmitterManufacturer,
+			manufacturerDto: $scope.transmitterManufacturer,
 			model: $scope.transmitterModel,
 			commProtocol : $scope.transmitterCommProtocol.uid
     	}; 
@@ -70,7 +70,7 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 	        
 		    $scope.transmitterName = $scope.transmitters[index].name;
 		    $scope.transmitterModel = $scope.transmitters[index].model;
-		    $scope.transmitterManufacturer = $scope.transmitters[index].manufacturer;	
+		    $scope.transmitterManufacturer = $scope.transmitters[index].manufacturerDto;	
 		    $scope.transmitterCommProtocol = $scope.getCommProtocols($scope.transmitters[index].commProtocol);
 		    
 		    	        

@@ -1,19 +1,3 @@
-	getCoordinates = function (callBack, address) {
-		 
-		 var resp = {lat: 0, lng: 0};		 
-		 address = address || 'Sao Paulo, Brasil';
-		 
-		 if (geocoder) {
-			 geocoder.geocode({
-		        'address': address
-			 }, function (results, status) {
-				 if (status == google.maps.GeocoderStatus.OK) {		
-				 			 
-					callBack(results[0]);			 
-				 }
-			 });
-		 }
-	 }
 
 	encodeImageFileAsURL = function (cb) {
 	    return function(){

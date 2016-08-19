@@ -3,6 +3,8 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	
 	$scope.saveDetector = function() {		
 		
+		angular.element('body').addClass('loading');
+		
 		for (var i = 0; i < $scope.newSensors.length; i++) {
 			$scope.detectorSensors.push($scope.newSensors[i]);	            	             
          } 		 
@@ -10,21 +12,28 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		var detector = {
 			uid: $scope.detectorUid != undefined ? $scope.detectorUid : 0,
 			name: $scope.detectorName,
-			manufacturer: $scope.detectorManufacturer,
-			transmitter: $scope.detectorTransmitter,
+			manufacturerDto: $scope.detectorManufacturer,
+			transmitterDto: $scope.detectorTransmitter,
 			model: $scope.detectorModel,
 			image: $scope.detectorImage,
-			//detectionType: $scope.detectorDetectionType.uid,
 			sensorsDto: $scope.detectorSensors
     	}; 
 		 
 		$scope.inclusaoDetector = new DetectorService.save(detector);		 
 		$scope.inclusaoDetector.$detector({_csrf : angular.element('#_csrf').val()}, function()
 		{         	         	
-         	$scope.clearFormDetector();
-            $scope.getDetectors();
-                     	
-         });		 
+			
+			$timeout(function () {                    
+				$scope.clearFormDetector();
+	            $scope.getDetectors();
+	                     	
+	            angular.element('body').removeClass('loading');				 
+	         }, 500);
+			           
+		}, function(data) {
+			angular.element('body').removeClass('loading');
+			$scope.msgErro = "Erro: " + data.statusText;
+		});			 
 	 }
 	
 	$scope.saveManufacturer = function() {
@@ -93,14 +102,11 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	 $scope.editDetector = function (index) {
 	        $scope.detectorUid = $scope.detectors[index].uid;
 	        
-	        $scope.detectorManufacturer = $scope.detectors[index].manufacturer;
+	        $scope.detectorManufacturer = $scope.detectors[index].manufacturerDto;
 		    $scope.detectorName = $scope.detectors[index].name;
-		    $scope.detectorModel = $scope.detectors[index].model;
-		    //$scope.detectorDetectionType = $scope.getDetectionTypes($scope.detectors[index].detectionType);
-		    		    
-		    $scope.detectorImage = ($scope.detectors[index].image == null ? "/assets/img/cover.jpg" :  $scope.detectors[index].image);
-		    
-		    $scope.detectorTransmitter = $scope.detectors[index].transmitter;
+		    $scope.detectorModel = $scope.detectors[index].model;		    		    
+		    $scope.detectorImage = ($scope.detectors[index].image == null ? "/assets/img/cover.jpg" :  $scope.detectors[index].image);		    
+		    $scope.detectorTransmitter = $scope.detectors[index].transmitterDto;
 		    $scope.detectorSensors = $scope.detectors[index].sensorsDto;
 		    		    		    
 		    $timeout(function () {                    
@@ -123,16 +129,6 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
          	         	
          });		 
 	 }	 
-	 
-//	 $scope.getDetectionTypes = function (name) {
-//		 
-//		 for (var i = 0; i < $scope.detectionTypes.length; i++) {
-//             if ($scope.detectionTypes[i].name == name) {
-//                 
-//            	 return $scope.detectionTypes[i];
-//             }
-//         } 		 
-//	 }
 	 
 	 $scope.getSensors = function() {
 		 
@@ -190,18 +186,6 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
         return className;
 	 }	 
 	 
-		 	 
-//	function encodeImageFileAsURL(cb) {
-//	    return function(){
-//	        var file = this.files[0];
-//	        var reader  = new FileReader();
-//	        reader.onloadend = function () {
-//	            cb(reader.result);
-//	        }
-//	        reader.readAsDataURL(file);
-//	    }		    
-//	}
-	 
 	$scope.loadEvents = function() {
 		
 		$('#idInputImageDetector').change( encodeImageFileAsURL( function(base64Img) {		    
@@ -217,10 +201,10 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	 
 	 $scope.addSensorDetector = function (idSensor) {
 
-        sensor = {
+        sensorDto = {
             uid: idSensor	            
         }
-        $scope.newSensors.push(sensor);
+        $scope.newSensors.push(sensorDto);
         $scope.$apply();
 	 }	 
 	 
@@ -234,9 +218,5 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	 $timeout(function () {                    
 		 $scope.loadEvents();
 	 }, 500);
-
-	 
-	 
-	 
 
 });

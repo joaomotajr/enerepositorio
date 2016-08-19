@@ -21,7 +21,7 @@ public class DetectorDto extends BaseDeviceDto {
 	public DetectorDto(Detector detector) {
 		this.uid = detector.getUid();
 		this.name = detector.getName();
-		this.manufacturer = detector.getManufacturer();
+		this.manufacturerDto = new ManufacturerDto(detector.getManufacturer());
 		this.model = detector.getModel();
 		
 		if (detector.getImage() != null) {

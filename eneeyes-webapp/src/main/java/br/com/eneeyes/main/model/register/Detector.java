@@ -39,17 +39,22 @@ public class Detector {
 	public Detector(DetectorDto dto) {
 		this.uid = dto.getUid();
 		this.name = dto.getName();
-		this.manufacturer = dto.getManufacturer();
+		this.manufacturer = new Manufacturer(dto.getManufacturerDto());
 		this.model = dto.getModel();		
-		this.transmitter = new Transmitter(dto.getTransmitterDto());
-			
-		try {
-			byte[] image = null;
-			image = dto.getImage().getBytes("US-ASCII");
-			this.setImage(image);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}	
+		
+		if (dto.getTransmitterDto() != null)
+			this.transmitter = new Transmitter(dto.getTransmitterDto());
+		
+		if (dto.getImage() != null) {
+			try {
+					
+				byte[] image = null;
+				image = dto.getImage().getBytes("US-ASCII");
+				this.setImage(image);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}	
+		}
 		
 		if(dto.getSensorsDto() != null)
 			this.sensors = parseSensors(dto.getSensorsDto());

@@ -12,7 +12,7 @@ public class ControllerDto extends BaseDeviceDto {
 		
 		this.uid = controller.getUid();
 		this.name = controller.getName();
-		this.manufacturer = controller.getManufacturer();
+		this.manufacturerDto = new ManufacturerDto(controller.getManufacturer());
 		this.model = controller.getModel();
 	}
 

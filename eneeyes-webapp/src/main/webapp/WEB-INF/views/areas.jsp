@@ -1,5 +1,4 @@
 <style>
-	img {
 		float: left;
 		width: 650px;
 		height: 300px;
@@ -20,7 +19,7 @@
 		<div class="box-body">
 						
 			<div class="nav-tabs-custom">
-				<ul class="nav nav-tabs">
+				<ul class="nav nav-tabs tabArea">
 			       	<li class="active"><a href="#tabArea_1" data-toggle="tab">Cadastro</a></li>
 			       	<li><a href="#tabArea_2" data-toggle="tab">Local</a></li>
 			       	<li><a href="#tabArea_3" data-toggle="tab">Dispositivos</a></li>
@@ -119,7 +118,7 @@
 			       	
 			       	<div class="row">
 						<div class="col-md-3">					            
-								<label class="control-label">Dispositivos</label>					            
+								<label class="control-label">Detectores</label>					            
 							</div>
 							<div class="col-md-9">
 								<form>
@@ -129,12 +128,30 @@
 							</div>				        
 						</div>
 						<div class="row">
-							<div class="col-md-3">				            					            
+							<div class="col-md-3">	
+							
+								<ul class="drag todo-list" style="padding: 1px !important" ng-repeat="item in selectedCompanyDetectorsArea">
+	                                 <li style="background: #d1ddf9;">                                                        
+	                                     <img class="img-circle img-sm" src="{{item.detectorDto.image}}" alt="user image">
+	                                     <span class="text">{{item.name}}</span>
+	                                 </li>                                
+	                             </ul>
+							
+								<!-- 
+								<div class="box-comment">
+									<div class="output" ng-repeat="item in selectedCompanyDetectorsArea">
+										<img class="img-circle img-sm" src="{{item.detectorDto.image}}" alt="user image">  
+										<div class="comment-text">
+											<span class="username">{{item.name}}</span>
+											<span>[{{getCompanyDetector(item.detectorDto.image)}}]</span>											
+                                		</div>
+                                	</div>
+                                </div>
+								-->
+								           					            
 							</div>
-							<div class="col-md-9">
-								<div class="output">							    		    
-									<img ng-src="{{unitImage}}" onError="this.src='/assets/img/cover.jpg'">
-								</div>
+							<div class="col-md-9">																					    		    
+								<img ng-src="{{selectedArea.image}}" onError="this.src='/assets/img/cover.jpg'">								
 							</div>					    	
 						</div>
 			       		         

@@ -16,7 +16,7 @@
 		<div class="box-body">
 						
 			<div class="nav-tabs-custom">
-				<ul class="nav nav-tabs">
+				<ul class="nav nav-tabs tabUnit">
    					<li><a href="#tabUnit_1" data-toggle="tab">Cadastro</a></li>
 			       	<li><a href="#tabUnit_2" data-toggle="tab">Localização</a></li>
 			       	<li><a href="#tabUnit_3" data-toggle="tab">Detalhes</a></li>
@@ -32,7 +32,8 @@
 						            <div class="form-group">
 						                <label class="control-label">Nome</label>
 						                <span class="text-red" ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
-						                <input id="idUnitName" class="form-control" placeholder="Nome do Unidade / Matriz" ng-model="selectedUnit.name" name="username" required>
+						                <span ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>
+						                <input id="idUnitName" class="form-control" placeholder="Nome do Unidade / Matriz" ng-model="selectedUnit.name" ng-maxlength="15" name="username" required>
 						            </div>
 						        </div>
 						

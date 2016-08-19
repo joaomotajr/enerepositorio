@@ -6,7 +6,7 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 		var controller = {
 			uid: $scope.controllerUid != undefined ? $scope.controllerUid : 0,
 			name: $scope.controllerName,
-			manufacturer: $scope.controllerManufacturer,
+			manufacturerDto: $scope.controllerManufacturer,
 			model: $scope.controllerModel
     	}; 
 		 
@@ -68,7 +68,7 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 	        
 		    $scope.controllerName = $scope.controllers[index].name;
 		    $scope.controllerModel = $scope.controllers[index].model;
-		    $scope.controllerManufacturer = $scope.controllers[index].manufacturer;	
+		    $scope.controllerManufacturer = $scope.controllers[index].manufacturerDto;	
 		    
 		    	        
 	        $('#idControllerName').focus();

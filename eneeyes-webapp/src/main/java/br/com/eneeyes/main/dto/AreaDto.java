@@ -20,6 +20,7 @@ public class AreaDto {
 	private Double longitude;
 	private Boolean classified;
 	private Date date;
+	private String image;
     private UnitDto unitDto;
     private List<CompanyDeviceDto> companyDevicesDto = new ArrayList<CompanyDeviceDto>();
     
@@ -37,6 +38,11 @@ public class AreaDto {
     	this.longitude = area.getLongitude();
     	this.classified= area.getClassified();		
     	this.date = area.getDate(); 
+    	
+    	if (area.getImage() != null) {
+			byte[] image = area.getImage();
+			this.image = new String(image);
+		}
     	
     	if(area.getCompanyDevices() != null) {		
 			this.companyDevicesDto = setCompanyDevicesDto(area.getCompanyDevices());		
@@ -110,6 +116,13 @@ public class AreaDto {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public final String getImage() {
+		return image;
+	}
+
+	public final void setImage(String image) {
+		this.image = image;
 	}
 	public final UnitDto getUnitDto() {
 		return unitDto;

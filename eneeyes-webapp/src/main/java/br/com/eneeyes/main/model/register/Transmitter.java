@@ -35,7 +35,7 @@ public class Transmitter {
 	
 		this.uid = dto.getUid();
 		this.name = dto.getName();
-		this.manufacturer = dto.getManufacturer();
+		this.manufacturer = new Manufacturer(dto.getManufacturerDto());
 		this.model = dto.getModel();
 		this.commProtocol = dto.getCommProtocol();		 
 	}

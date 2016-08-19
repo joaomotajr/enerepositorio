@@ -4,6 +4,7 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 	
 	$scope.saveSensor = function() {
 		
+		angular.element('body').addClass('loading');
 		
 		for (var i = 0; i < $scope.newGases.length; i++) {
 			$scope.sensorGases.push($scope.newGases[i]);	            	             
@@ -12,7 +13,7 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		var sensor = {
 			uid: $scope.sensorUid != undefined ? $scope.sensorUid : 0,
 			name: $scope.sensorName,
-			manufacturer: $scope.sensorManufacturer,
+			manufacturerDto: $scope.sensorManufacturer,
 			model: $scope.sensorModel,
 			detectionType: $scope.sensorDetectionType.uid,
 			gasesDto: $scope.sensorGases
@@ -21,11 +22,16 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		$scope.inclusaoSensor = new SensorService.save(sensor);		 
 		$scope.inclusaoSensor.$sensor({_csrf : angular.element('#_csrf').val()}, function()
 		{         	
-         	
-         	$scope.clearFormSensor();
-            $scope.getSensors();
-                     	
-         });		 
+			$timeout(function () {				
+				$scope.clearFormSensor();
+	            $scope.getSensors();                     	
+	            angular.element('body').removeClass('loading');				 
+	         }, 500);
+           
+		}, function(data) {
+			angular.element('body').removeClass('loading');
+			$scope.msgErro = "Erro: " + data.statusText;
+		});		 
 	 }
 	
 	$scope.saveManufacturer = function() {
@@ -85,7 +91,7 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 	 $scope.editSensor = function (index) {
 	        $scope.sensorUid = $scope.sensors[index].uid;
 	        
-	        $scope.sensorManufacturer = $scope.sensors[index].manufacturer;
+	        $scope.sensorManufacturer = $scope.sensors[index].manufacturerDto;
 		    $scope.sensorName = $scope.sensors[index].name;
 		    $scope.sensorModel = $scope.sensors[index].model;
 		    $scope.sensorDetectionType = $scope.getDetectionTypes($scope.sensors[index].detectionType);

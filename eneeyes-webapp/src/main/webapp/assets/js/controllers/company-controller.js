@@ -1,8 +1,7 @@
 app.controller('companyController', function ($scope, $timeout, $filter, CompanyService, UnitService, AreaService, CompanyDeviceService, CompanyDetectorService, DetectorService) {
 
-	var geocoder;
     var map;
-
+	var geocoder;
 	/*----------------------------------------------------------------- C O M P A N Y   D E V I C E----------------------------------------------------------------------*/
 	
 	$scope.saveCompanyDetector = function() {
@@ -11,8 +10,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		var companyDetector = {
 			uid: $scope.selectedCompanyDetector.uid == undefined ? 0 : $scope.selectedCompanyDetector.uid,
 			name: $scope.selectedCompanyDetector.name,
-			companyDevice: {uid : $scope.selectedCompanyDevice.uid},
-			detectorDto: {uid: $scope.selectedCompanyDetector.detector.uid},
+			companyDeviceDto: {uid : $scope.selectedCompanyDevice.uid},
+			detectorDto: {uid: $scope.selectedCompanyDetector.detectorDto.uid},
 			local: $scope.selectedCompanyDetector.local,
 			description: $scope.selectedCompanyDetector.description			
 		 }
@@ -47,6 +46,22 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;          	         	
         });		 
+	}
+	
+	$scope.getCompanyDetectorArea = function() {
+				
+		$scope.resultCompanyDetectorsArea = new CompanyDetectorService.listPorIdArea();		 
+		$scope.resultCompanyDetectorsArea.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid }, function(){			
+			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;          	         	
+        });		 
+	}
+	
+	$scope.getCompanyDetector = function(uid) {
+		var result = "";
+							
+		result =  uid + " Image ";          	         	
+        	 
+		return result;
 	}
 	
 	$scope.saveCompanyDeviceInit = function() {
@@ -110,6 +125,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			local: $scope.selectedArea.local,
 			latitude: $scope.selectedArea.latitude,
 			longitude: $scope.selectedArea.longitude,
+			image: $scope.selectedArea.image,
 			classified: $scope.selectedArea.classified,			
 			unitDto: {uid : $scope.selectedUnit.uid}				
 		};
@@ -239,7 +255,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			url: $scope.selectedUnit.url,
 			unitType: $scope.selectedUnit.unitType,
 			latitude: $scope.selectedUnit.latitude,
-			longitude: $scope.selectedUnit.longitude,
+			longitude: $scope.selectedUnit.longitude,			
 			companyDto: {uid : $scope.selectedCompany.uid}				
 		};		 
 		 
@@ -435,7 +451,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				    	 	$scope.LoadAjaxContentCompany('units.html');
 				    	 	
 				    	 	initializeUnit();				    	 					    	 	
-				    	 	validMapUnit();				    	 	
+				    	 	//validMapUnit();				    	 	
 				    	}
 				    	else if(node.type == 2) {
 				    		//Se não foi clicado no Node da Unidade
@@ -535,23 +551,43 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	 function initializeArea()
 	 {
 		$timeout(function () {
+			
+			$('.tabArea a').on('click', function (event) {
+			    event.preventDefault();  
+			    
+			    if ($(event.target).attr('href') == "#tabArea_2") {	
+			    	
+			    	$scope.getCompanyDetectorArea();			    	
+				}
+			   
+			});
+			
 			$('#idBtnChooseFileArea').click(function(event) {
 			    event.preventDefault();	    
 			    $('#idInputImageArea').trigger('click');			    
 			});
 			 
 			 $('#idInputImageArea').change( encodeImageFileAsURL( function(base64Img) {				
-				    $scope.unitImage =  base64Img;
+				    $scope.selectedArea.image =  base64Img;
 					$scope.$apply();					    
 				}));
 			 
 		}, 450);
+				
 	 }	
 	 
 	 function initializeUnit()
 	 {	
 	 	if (!geocoder) {
-			 $timeout(function () {                    
+	 		$timeout(function () {
+				$('.tabUnit a').on('click', function (event) {
+					event.preventDefault();
+					    
+					if ($(event.target).attr('href') == "#tabUnit_2") {
+						validMapUnit();
+					}
+				});
+				 
 				 geocoder = new google.maps.Geocoder();
 				 map = new google.maps.Map(document.getElementById("mapUnit"),
 				{				 
@@ -577,6 +613,24 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			 }, 500);
 		 }
 	}	       
+	
+	getCoordinates = function (callBack, address) {
+		 
+		 var resp = {lat: 0, lng: 0};		 
+		 address = address || 'Sao Paulo, Brasil';
+		 
+		 if (geocoder) {
+			 geocoder.geocode({
+		        'address': address
+			 }, function (results, status) {
+				 if (status == google.maps.GeocoderStatus.OK) {		
+				 			 
+					callBack(results[0]);			 
+				 }
+			 });
+		 }
+	 }
+
 
 	 mapUnit = function (lat, lng) {
 	    

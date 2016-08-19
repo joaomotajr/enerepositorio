@@ -24,7 +24,7 @@ public class SensorDto extends BaseDeviceDto {
 		
 		this.uid = sensor.getUid();
 		this.name = sensor.getName();
-		this.manufacturer = sensor.getManufacturer();
+		this.manufacturerDto = new ManufacturerDto(sensor.getManufacturer());
 		this.model = sensor.getModel();
 		this.detectionType = sensor.getDetectionType();
 		

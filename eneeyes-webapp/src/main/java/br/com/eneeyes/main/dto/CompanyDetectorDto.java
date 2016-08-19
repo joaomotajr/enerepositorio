@@ -12,6 +12,8 @@ public class CompanyDetectorDto {
 	private String description;		
 	private Date date;
 	private String local;
+	private Double latitude;		
+	private Double longitude;
 	private CompanyDeviceDto companyDeviceDto;	
 	private DetectorDto detectorDto;
 
@@ -67,6 +69,23 @@ public class CompanyDetectorDto {
 	public void setLocal(String local) {
 		this.local = local;
 	}
+	
+	public final Double getLatitude() {
+		return latitude;
+	}
+	
+	public final void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	
+	public final Double getLongitude() {
+		return longitude;
+	}
+
+	public final void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}	
+
 	
 	public DetectorDto getDetectorDto() {
 		return detectorDto;

@@ -42,7 +42,10 @@ public class Sensor {
 		this.uid = dto.getUid();		
 		this.detectionType = dto.getDetectionType();
 		this.name = dto.getName();
-		this.manufacturer = dto.getManufacturer();
+		
+		if(dto.getManufacturerDto() != null)
+			this.manufacturer = new Manufacturer(dto.getManufacturerDto());
+		
 		this.model = dto.getModel();
 		
 		if(dto.getGasesDto() != null)

@@ -1,3 +1,7 @@
+21-08-16
+Ajsutar o drag ao cancelar, verificar o evento drag pós gravar esta perdendo
+
+
 1) Estrutura do Sistema:
 	a) Definição do Projeto: 
 		i- Server: (Java Rest Services com anotações JPA, Spring JPA e Hibernate);

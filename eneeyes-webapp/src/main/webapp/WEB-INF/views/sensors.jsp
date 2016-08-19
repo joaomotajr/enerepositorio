@@ -47,7 +47,7 @@
 				</div>
 				
 				<div class="box-body">
-					<form class="form">		
+					<form class="form" name="userForm">		
 					
 						<div class="box box-primary box-solid">
 		                    <div class="box-header with-border"><strong>Fabricante</strong>
@@ -65,8 +65,10 @@
 		                </div>		                
 		                 	                                                                                                                                    
 						<div class="form-group">
-							<label class="control-label">Nome</label>                                                                        
-							<input id="idSensorName" class="form-control inputProfile" placeholder="Nome do Sensor" ng-model="sensorName">                                                                        
+							<label class="control-label">Nome</label>
+							<span class="text-red" ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
+						    <span class="text-red" ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
+							<input id="idSensorName" class="form-control inputProfile" placeholder="Nome do Sensor" ng-model="sensorName" ng-maxlength="15" name="username" required>                                                                        
 						</div>							
 	
 						<div class="form-group">
@@ -85,7 +87,9 @@
                         </div>
                         
                         <div class="box box-primary box-solid">
-		                    <div class="box-header with-border ui-sortable-handle "><strong>Gases Detectáveis</strong> [Arraste e solte para adicionar]</div>		                	 
+		                    <div class="box-header with-border ui-sortable-handle "><strong>Gases Detectáveis</strong>
+		                    	<span class="text-red" ng-show="sensorGases.length == 0 && newGases.length == 0">  [Adicionar ao Menos Um Sensor]</span> 
+		                    </div>		                	 
 		                    <div class="box-body">
 		                    
 			                    <div class="col-sm-6">
@@ -130,7 +134,7 @@
 					<div class="box-footer">
 						<button type="button" ng-click="clearFormSensor()" class="btn btn-default">Cancelar</button>                                                                
 						<button type="button" ng-click="saveSensor();" class="btn btn-primary" 
-							ng-disabled="(sensorName && sensorModel && sensorManufacturer && sensorDetectionType) ? false : true">Salvar
+							ng-disabled="(sensorName && sensorModel && sensorManufacturer && sensorDetectionType && (sensorGases.length != 0 || newGases.length > 0)) ? false : true">Salvar
 						</button>							                                                                
 
 					</div>
@@ -140,7 +144,10 @@
 			</div>
 		</div>
 		
-	</div>	  
+	</div>
+	
+		
+		  
 		
 </div>
 

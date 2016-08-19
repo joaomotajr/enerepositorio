@@ -60,16 +60,10 @@
 				</div>
 				
 				<div class="box-body">
-					<form class="form">	
-						<div class="row">
-							
+					<form class="form" name="userForm">					
+						<div class="row">							
 							<div class="col-md-8">
-								<h2>Imagem do Dispositivo</h2>
-								<!--   
-								<div class="input-group" id="img2b64">
-								    <input id="inputFileToLoad" type="file" />
-								</div>
-								 -->    
+								<h2>Imagem do Dispositivo</h2>								  
 							    <div class="input-group" id="img2b64">
 			        	    		<input type="file" id="idInputImageDetector" style='display:none'>
 					        		<button id="idChooseFileDetector" class="btn btn-sm"><i class="fa fa-file-image-o"></i> Imagem</button>							        
@@ -81,7 +75,7 @@
 								</div>							
 							</div>							
 						</div>
-							<hr>
+						<hr>
 						<div class="row">
 							<div class="col-md-6">
 								<div class="box box-primary box-solid">
@@ -119,8 +113,10 @@
 		                <div class="row">
 		                 	<div class="col-md-6">                                                                                                                                    
 							<div class="form-group">
-								<label class="control-label">Nome</label>                                                                        
-								<input id="idDetectorName" class="form-control inputProfile" placeholder="Nome do Detector" ng-model="detectorName">                                                                        
+								<label class="control-label">Nome</label>
+								<span class="text-red" ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
+						        <span class="text-red" ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
+								<input id="idDetectorName" class="form-control inputProfile" placeholder="Nome do Detector" ng-model="detectorName" ng-maxlength="15" name="username" required>                                                                        
 							</div>							
 							</div>
 							<div class="col-md-6">
@@ -130,26 +126,18 @@
 							</div>
 							</div>							
 						</div>
-						<!-- 
-						<div class="form-group">
-				            <label class="control-label">Tipo de Detecção</label>
-							<select class="form-control" data-live-search="true" 
-	                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-	                                ng-options="item as item.name for item in detectionTypes | orderBy: 'name' track by item.uid" 
-	                                         ng-model="detectorDetectionType">
-	                                         <option value="">Selecione</option> 
-	                        </select>               
-                        </div>
-                         -->
                          
                         <div class="box box-primary box-solid">
-		                    <div class="box-header with-border ui-sortable-handle "><strong>Sensores</strong></div>
+		                    <div class="box-header with-border ui-sortable-handle ">
+		                    	<strong>Sensores</strong>
+		                    	<span class="text-red" ng-show="detectorSensors.length == 0 && newSensors.length == 0">  [Adicionar ao Menos Um Sensor]</span>
+		                    </div>
 		                	 
 		                    <div class="box-body">
 		                    
 			                    <div class="col-sm-6">
 			                    
-			                    	<label class="control-label">Sensores</label>
+			                    	<label class="control-label">Sensores</label>			                    	
 				                    <div style="max-height: 250px; height:auto; overflow: auto">                                                                       
 	                                    <ul class="sort todo-list" style="padding: 1px !important" ng-repeat="sensor in detectorSensors">
 	                                         <li id="{{sensor.uid}}" class="{{'c' + sensor.uid}}" style="padding: 4px">
@@ -169,17 +157,16 @@
 			                    </div>				                    
 		                    
 			                    <div class="col-sm-6">
-			                    	<label class="control-label">Lista de Sensores</label>		                        
+			                    	<label class="control-label">Lista de Sensores</label>			                    	                        
 			                        <div style="max-height: 250px; height:auto; overflow: auto">				                        	                                                       
-                                            <ul class="drag todo-list" style="padding: 1px !important" ng-repeat="sensor in sensors">
-                                               <li id="{{sensor.uid}}" class="{{'c' + sensor.uid}}" style="background: #d1ddf9;">                                                        
-                                                   <span class="handle"><i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i></span>
-                                                   <span class="text">{{sensor.name}}</span>
-                                               </li>                                
-                                           </ul>
-                                       </div>
-			                    </div>
-			                            
+                                    	<ul class="drag todo-list" style="padding: 1px !important" ng-repeat="sensor in sensors">
+                                            <li id="{{sensor.uid}}" class="{{'c' + sensor.uid}}" style="background: #d1ddf9;">                                                        
+                                                <span class="handle"><i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i></span>
+                                                <span class="text">{{sensor.name}}</span>
+                                            </li>                                
+                                        </ul>
+                                    </div>
+			                    </div>			                            
 		                    </div>
 		                    			                            
 			            </div>	
@@ -189,7 +176,7 @@
 					<div class="box-footer">
 						<button type="button" ng-click="clearFormDetector()" class="btn btn-default">Cancelar</button>                                                                
 						<button type="button" ng-click="saveDetector();" class="btn btn-primary" 
-							ng-disabled="(detectorName && detectorModel && detectorManufacturer && detectorTransmitter) ? false : true">Salvar
+							ng-disabled="(detectorName && detectorModel && detectorManufacturer && detectorTransmitter && (detectorSensors.length != 0 || newSensors.length > 0)) ? false : true">Salvar
 						</button>							                                                                
 
 					</div>

@@ -56,6 +56,8 @@
     <script src="/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>    
     <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>    
     <script src="/assets/plugins/chartjs/Chart.min.js"></script>
+    <script src="/assets/plugins/jqueryEasypin/jquery.easypin.js"></script>
+    <script src="/assets/plugins/jqueryEasypin/jquery.easypin.min.js"></script>    
     
     <!-- Select2 -->
     <script src="/assets/plugins/select2/select2.min.js"></script>    

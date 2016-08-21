@@ -132,7 +132,7 @@
 							
 								<ul class="drag todo-list" style="padding: 1px !important" ng-repeat="item in selectedCompanyDetectorsArea">
 	                                 <li style="background: #d1ddf9;">                                                        
-	                                     <img class="img-circle img-sm" src="{{item.detectorDto.image}}" alt="user image">
+	                                     <img class="img-circle img-sm" src="{{item.detectorDto.image}}" alt="user image" class="pin" easypin-id="example_image1">
 	                                     <span class="text">{{item.name}}</span>
 	                                 </li>                                
 	                             </ul>

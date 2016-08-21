@@ -450,8 +450,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				    		$scope.selectedUnitIndex = node.index;			    		
 				    	 	$scope.LoadAjaxContentCompany('units.html');
 				    	 	
-				    	 	initializeUnit();				    	 					    	 	
-				    	 	//validMapUnit();				    	 	
+				    	 	initializeUnit();					    	 				    	 	
 				    	}
 				    	else if(node.type == 2) {
 				    		//Se não foi clicado no Node da Unidade
@@ -558,8 +557,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			    if ($(event.target).attr('href') == "#tabArea_2") {	
 			    	
 			    	$scope.getCompanyDetectorArea();			    	
-				}
-			   
+				}			   
 			});
 			
 			$('#idBtnChooseFileArea').click(function(event) {
@@ -567,14 +565,38 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			    $('#idInputImageArea').trigger('click');			    
 			});
 			 
-			 $('#idInputImageArea').change( encodeImageFileAsURL( function(base64Img) {				
-				    $scope.selectedArea.image =  base64Img;
-					$scope.$apply();					    
-				}));
+			$('#idInputImageArea').change( encodeImageFileAsURL( function(base64Img) {				
+				$scope.selectedArea.image =  base64Img;
+				initPin();
+				$scope.$apply();					    
+			}));
+			
+			initPin();
 			 
 		}, 450);
 				
 	 }	
+
+	 initPin = function() {
+		 var $easyInstance = $('.pin').easypin({
+	         init: '{"example_image1":{"0":{"content":"Captan America","undefined":"save pin!","coords":{"lat":"530","long":"179"}},"1":{"content":"Thor Odinson","undefined":"save pin!","coords":{"lat":"892","long":"109"}},"2":{"content":"Hulk","undefined":"save pin!","coords":{"lat":"56","long":"133"}},"3":{"content":"Black Widow","undefined":"save pin!","coords":{"lat":"717","long":"242"}},"4":{"content":"Hawkeye","undefined":"save pin!","coords":{"lat":"173","long":"221"}},"5":{"content":"Iron Man","undefined":"save pin!","coords":{"lat":"280","long":"161"}},"canvas":{"src":"https://i.ytimg.com/vi/48fKIXlxaXk/maxresdefault.jpg","width":"1000","height":"562"}}}',
+	         done: function(element) {
+	             return true;
+	         }
+	     });
+	
+	     $easyInstance.easypin.event( "get.coordinates", function($instance, data, params ) {
+	
+	         console.log( data, params);
+	
+	     });
+	
+	     $( ".coords" ).click(function( event ) {
+	         $easyInstance.easypin.fire( "get.coordinates", {param1: 1, param2: 2, param3: 3}, function(data) {
+	             return JSON.stringify(data);
+	         });
+	     });
+	 }
 	 
 	 function initializeUnit()
 	 {	

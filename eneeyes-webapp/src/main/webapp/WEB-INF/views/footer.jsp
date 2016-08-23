@@ -56,8 +56,12 @@
     <script src="/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>    
     <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>    
     <script src="/assets/plugins/chartjs/Chart.min.js"></script>
-    <script src="/assets/plugins/jqueryEasypin/jquery.easypin.js"></script>
-    <script src="/assets/plugins/jqueryEasypin/jquery.easypin.min.js"></script>    
+    
+    <script src="/assets/plugins/imageNotes/hammer.min.js"></script>
+    <script src="/assets/plugins/imageNotes/jquery.hammer.js"></script>
+    <script src="/assets/plugins/imageNotes/imgViewer.min.js"></script>
+    <script src="/assets/plugins/imageNotes/imgNotes.js"></script>
+    
     
     <!-- Select2 -->
     <script src="/assets/plugins/select2/select2.min.js"></script>    
@@ -83,6 +87,7 @@
 	<script src="/assets/js/controllers/gas-controller.js"></script>
 	<script src="/assets/js/controllers/detector-controller.js"></script>
 	<script src="/assets/js/controllers/company-controller.js"></script>
+	<script src="/assets/js/controllers/imageNotes-controller.js"></script>
 		
 	<!-- PAGE LEVEL SERVICES -->
 	<script src="/assets/js/services/controller-service.js"></script>
@@ -93,6 +98,5 @@
 	<script src="/assets/js/services/detector-service.js"></script>
 	<script src="/assets/js/services/company-service.js"></script>
 	<script src="/assets/js/services/companyDetector-service.js"></script>
-	
 
     <!-- END PAGE LEVEL SCRIPTS -->

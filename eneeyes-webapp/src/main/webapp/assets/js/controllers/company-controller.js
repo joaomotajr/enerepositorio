@@ -21,7 +21,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			
 			angular.element('body').removeClass('loading');
 			$scope.msgInfo = "Detector Gravado!" ;
-           $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+			$('#resultInfo').hide().show('slow').delay(1000).hide('slow');
 		
 		}, function(data) {
 			angular.element('body').removeClass('loading');

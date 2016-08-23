@@ -18,6 +18,7 @@
 			   
 	    <!-- Font Awesome -->
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	    
 	    <!-- Ionicons -->
 	    <link rel="stylesheet" href="/assets/css/ionicons/ionicons.min.css">
 	    
@@ -41,8 +42,11 @@
 	    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker-bs3.css">
 	    <!-- bootstrap wysihtml5 - text editor -->
 	    <link rel="stylesheet" href="/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-	    	    
-	    	    
+	   	
+	   	<!-- Image Notes -->
+		<style type="text/css" media="all">@import "/assets/plugins/imageNotes/css/marker.css";</style>		
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" media="screen">
+			    	    
 	    <style>
 	    
 	     	body.loading {

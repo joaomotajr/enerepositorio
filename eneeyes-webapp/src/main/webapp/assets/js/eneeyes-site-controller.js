@@ -497,6 +497,6 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         });
     };
 
-    $scope.LoadAjaxContent('imageNotes.html', 'imageNotes');
+    $scope.LoadAjaxContent('dashboard.html', 'Dashboard');
 
 });

@@ -68,7 +68,8 @@
     
     <!-- Google Maps API v3 -->	  
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdD8N8oojiMT-FKYc92jTS4XCCLccyBzg"  type="text/javascript"></script>      
-    
+    <!-- Google Gauge -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- END GLOBAL SCRIPTS -->
 
     <!-- PAGE LEVEL SCRIPTS -->    

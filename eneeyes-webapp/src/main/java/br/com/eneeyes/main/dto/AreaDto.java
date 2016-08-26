@@ -120,7 +120,6 @@ public class AreaDto {
 	public final String getImage() {
 		return image;
 	}
-
 	public final void setImage(String image) {
 		this.image = image;
 	}

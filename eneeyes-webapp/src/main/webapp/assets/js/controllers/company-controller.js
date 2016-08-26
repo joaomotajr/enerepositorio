@@ -557,7 +557,10 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			    if ($(event.target).attr('href') == "#tabArea_2") {	
 			    	
 			    	$scope.getCompanyDetectorArea();			    	
-				}			   
+				}
+			    else if ($(event.target).attr('href') == "#tabArea_3") {
+			    	initGauge();
+			    }
 			});
 			
 			$('#idBtnChooseFileArea').click(function(event) {
@@ -571,33 +574,16 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				$scope.$apply();					    
 			}));
 			
-			initPin();
+			initGauge = function() {
+				
+				google.charts.load('current', { 'packages': ['gauge'] });
+				google.charts.setOnLoadCallback(drawChart);
+			}
 			 
 		}, 450);
 				
 	 }	
-
-	 initPin = function() {
-		 var $easyInstance = $('.pin').easypin({
-	         init: '{"example_image1":{"0":{"content":"Captan America","undefined":"save pin!","coords":{"lat":"530","long":"179"}},"1":{"content":"Thor Odinson","undefined":"save pin!","coords":{"lat":"892","long":"109"}},"2":{"content":"Hulk","undefined":"save pin!","coords":{"lat":"56","long":"133"}},"3":{"content":"Black Widow","undefined":"save pin!","coords":{"lat":"717","long":"242"}},"4":{"content":"Hawkeye","undefined":"save pin!","coords":{"lat":"173","long":"221"}},"5":{"content":"Iron Man","undefined":"save pin!","coords":{"lat":"280","long":"161"}},"canvas":{"src":"https://i.ytimg.com/vi/48fKIXlxaXk/maxresdefault.jpg","width":"1000","height":"562"}}}',
-	         done: function(element) {
-	             return true;
-	         }
-	     });
-	
-	     $easyInstance.easypin.event( "get.coordinates", function($instance, data, params ) {
-	
-	         console.log( data, params);
-	
-	     });
-	
-	     $( ".coords" ).click(function( event ) {
-	         $easyInstance.easypin.fire( "get.coordinates", {param1: 1, param2: 2, param3: 3}, function(data) {
-	             return JSON.stringify(data);
-	         });
-	     });
-	 }
-	 
+	  
 	 function initializeUnit()
 	 {	
 	 	if (!geocoder) {
@@ -692,6 +678,42 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	        }); 
 	    }	    
 	}
+	
+	drawChart = function() {
+
+		 var data = google.visualization.arrayToDataTable([
+		   ['Label', 'Value'],
+		   ['Sensor 01', 80],
+		   ['Sensor 02', 55],
+		   ['Sensor 03', 68]
+		 ]);
+		
+		 var options = {
+		     width: 500, height: 120,
+		     redFrom: 90, redTo: 100,
+		     yellowFrom: 75, yellowTo: 90,
+		     minorTicks: 5
+		 };
+		
+		 var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+		
+		 chart.draw(data, options);
+		
+		 setInterval(function () {
+		     data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+		     chart.draw(data, options);
+		 }, 13000);
+		 setInterval(function () {
+		     data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
+		     chart.draw(data, options);
+		 }, 5000);
+		 setInterval(function () {
+		     data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+		     chart.draw(data, options);
+		 }, 26000);
+	}
+	
+	 
 	 
 	$scope.getCompanys();
 	$(".select2").select2();

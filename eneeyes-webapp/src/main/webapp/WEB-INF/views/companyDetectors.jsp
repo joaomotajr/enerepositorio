@@ -25,7 +25,7 @@
 				<ul class="nav nav-tabs">
 			       	<li class="active"><a href="#tabCompanyDetector_1" data-toggle="tab">Cadastro</a></li>
 			       	<!-- <li><a href="#tabCompanyDetector_2" data-toggle="tab">Mapa</a></li> -->
-			       	<li><a href="#tabCompanyDetector_3" data-toggle="tab">Detalhes</a></li>
+			       	<li><a href="#tabCompanyDetector_3" data-toggle="tab">Historico</a></li>
 			    	<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
 			    </ul>
 				

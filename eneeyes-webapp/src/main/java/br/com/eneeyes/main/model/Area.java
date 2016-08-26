@@ -51,8 +51,7 @@ public class Area {
 			this.setImage(image);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
-		}	
-    	
+		}    	
     }	
 
 	@Id

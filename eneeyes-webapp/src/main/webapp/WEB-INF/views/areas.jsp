@@ -157,7 +157,8 @@
 			       		         
 			       	</div><!-- /.tab-pane -->
 			       	
-			       	<div class="tab-pane" id="tabArea_3">	        
+			       	<div class="tab-pane" id="tabArea_3">
+			       		 <div id="chart_div" style="width: 400px; height: 120px;"></div>	        
 			     	</div><!-- /.tab-content -->			     	
 			   </div>			   						
 			</div>

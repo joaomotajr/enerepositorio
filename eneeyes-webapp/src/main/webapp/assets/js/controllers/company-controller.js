@@ -733,15 +733,16 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			 init: {
 			    	imgDipositivosArea
 			       }
-		    ,
-		    each: function(index, data) {
-                return data;
-            },
+		    ,		    
 		    done: function(element) {
                 return true;
             },            
             error: function(e) {
                 console.log(e);
+            },
+            limit: 4,
+            exceeded: function(type) {
+                // do samething...
             }
 		}); 	
 		
@@ -766,6 +767,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			if(item[i].latitude != null) {
 				var pinItem = ({
 						content: item[i].name,
+						uid: item[i].uid,
 						coords: {
 			                lat: item[i].latitude,
 			                long: item[i].longitude

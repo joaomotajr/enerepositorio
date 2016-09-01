@@ -14,22 +14,29 @@
 	<div class="easy-modal" style="display:none;" modal-position="free">
 	    <form>
 	        <h3>Selecione Dispositivo</h3>
-	        <input type="text" class="form-control" name="content" placeholder="type">
-	        <br>
+	        
+	        <input type="hidden" class="form-control" name="content" placeholder="type">	        
+	        	        -
+	        <select name="uid" class="form-control" id="selCompanyDetector">
+	        	<option value="" >Selecione</option>
+			    <option value={{item.uid}} ng-repeat="item in selectedCompanyDetectorsArea">{{item.name}}</option>			    
+			</select>
+			<hr>			        
 	        <button type="button" class="btn btn-primary easy-submit">Salvar</button>
 	    </form>
 	</div>        
-	
+	 	 
 	<div style="display:none;" width="130" shadow="true" popover>
 	    <div style="width:100%;text-align:center;">{[content]}</div>
 	</div>
-   
+
 <div class="col-md-9">
 	<div class="box box-primary">
 					
 		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-map-o'></i> Área: {{selectedArea.name}}</strong></div>
 		
 		<div class="box-body">
+		
 						
 			<div class="nav-tabs-custom">
 				<ul class="nav nav-tabs tabArea">
@@ -144,7 +151,7 @@
 							<div class="col-md-2">								
 								<div class="box box-primary direct-chat direct-chat-primary">
 									<div class="direct-chat-msg right" ng-repeat="item in selectedCompanyDetectorsArea">			                      
-			                      		<img class="direct-chat-img img-sm" src="{{item.detectorDto.image}}" style="width: 30px ! important; Height: 30px ! important"><!-- /.direct-chat-img -->
+			                      		<img class="direct-chat-img img-sm" ng-src="{{item.detectorDto.image}}" style="width: 30px ! important; Height: 30px ! important">
 			                      		<div class="direct-chat-text" style="font-size: 0.7em; margin-right: 30px;"  >
 			                        		{{item.name}}
 			                      		</div><!-- /.direct-chat-text -->

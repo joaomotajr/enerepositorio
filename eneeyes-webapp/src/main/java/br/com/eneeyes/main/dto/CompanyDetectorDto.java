@@ -27,7 +27,10 @@ public class CompanyDetectorDto {
     	this.name = companyDetector.getName();
     	this.description = companyDetector.getDescription();
        	this.date = companyDetector.getDate();
-       	this.setLocal(companyDetector.getLocal());
+       	this.local = companyDetector.getLocal();
+       	this.latitude = companyDetector.getLatitude();
+       	this.longitude = companyDetector.getLongitude();
+       	
        	this.detectorDto = new DetectorDto(companyDetector.getDetector()) ;
 	}
 		

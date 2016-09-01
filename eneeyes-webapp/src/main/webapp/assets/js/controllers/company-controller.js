@@ -557,10 +557,14 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			    if ($(event.target).attr('href') == "#tabArea_2") {	
 			    	
 			    	$scope.getCompanyDetectorArea();
-			    	$scope.getDetectorsCoordinates();
+			    	
+			    	var itens;
+			    	$timeout(function () {  
+			    		itens = getDetectorsCoordinates();
+			    	}, 200);
 			    	
 			    	$timeout(function () {           
-			    		easyPin();			    		
+			    		easyPin(itens);			    		
 			    		$('.pin').trigger("click")
 			    	}, 500);
 
@@ -722,25 +726,33 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	
 	/*--------------------------------------------------------------------------   JQuery EasyPIN -----------------------------------------------------------------------*/
 	getDetectorsCoordinates = function() {
-		pinItem = 
-		{   0: 
-			{
-				content: null,
-				coords: {
-	                lat: 0,
-	                long: 0
-	            }
-			}
-		}
 		
-		for (var i = 0; i < $scope.selectedCompanyDetectorsArea.length; i++) {
-	    	
-			
+		var pinItens = [];
+		var item = $scope.selectedCompanyDetectorsArea;
+		for (var i = 0; i < item.length; i++) {
+	    				
+			if(item[i].latitude != null) {
+				var pinItem = 
+				{ [i] : 
+					{
+						content: item[i].name,
+						coords: {
+			                lat: item[i].latitude,
+			                long: item[i].longitude
+			            }
+					}
+				}
+				
+				pinItens.push(pinItem);
+			}
 	         
 	    }
+		
+		return pinItens;
 	}
 	
-	easyPin = function() {
+	easyPin = function(itens) {
+		var teste = JSON.stringify(itens);
 		
 		var $easyInstance = $('.pin').easypin({
 		    init: {

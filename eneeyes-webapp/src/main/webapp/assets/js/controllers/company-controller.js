@@ -725,52 +725,23 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	
 	
 	/*--------------------------------------------------------------------------   JQuery EasyPIN -----------------------------------------------------------------------*/
-	getDetectorsCoordinates = function() {
-		
-		var pinItens = [];
-		var item = $scope.selectedCompanyDetectorsArea;
-		for (var i = 0; i < item.length; i++) {
-	    				
-			if(item[i].latitude != null) {
-				var pinItem = 
-				{ [i] : 
-					{
-						content: item[i].name,
-						coords: {
-			                lat: item[i].latitude,
-			                long: item[i].longitude
-			            }
-					}
-				}
-				
-				pinItens.push(pinItem);
-			}
-	         
-	    }
-		
-		return pinItens;
-	}
 	
-	easyPin = function(itens) {
-		var teste = JSON.stringify(itens);
+	easyPin = function(itens) {			
 		
+		var imgDipositivosArea = itens;
 		var $easyInstance = $('.pin').easypin({
-		    init: {
-		    	imgDipositivosArea : {
-		            0:{
-		                content: "Sensor Azul",
-		                coords: {
-		                    lat: 530,
-		                    long: 179
-		                }
-		            },
-		            canvas:{
-		                src:"example.jpg","width":1000,"height":562
-		            }
-		        }
-		    },
+			 init: {
+			    	imgDipositivosArea
+			       }
+		    ,
+		    each: function(index, data) {
+                return data;
+            },
 		    done: function(element) {
                 return true;
+            },            
+            error: function(e) {
+                console.log(e);
             }
 		}); 	
 		
@@ -783,7 +754,30 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
                 return JSON.stringify(data);
             });
         });
-    }
+    }	
+	
+	getDetectorsCoordinates = function() {
+				
+		var pinItensString = "";
+				
+		var item = $scope.selectedCompanyDetectorsArea;
+		for (var i = 0; i < item.length; i++) {
+	    				
+			if(item[i].latitude != null) {
+				var pinItem = ({
+						content: item[i].name,
+						coords: {
+			                lat: item[i].latitude,
+			                long: item[i].longitude
+			            }
+					})				
+								
+				pinItensString += (String.fromCharCode(34) + i + String.fromCharCode(34) + ":" + JSON.stringify(pinItem) + (i == item.length -1 ? ', "canvas":{}' : ', '));				
+			}   
+	    }
+		
+		return JSON.parse('{' + pinItensString + '}');;
+	}
 	 
 	$scope.getCompanys();	
 	$(".select2").select2();

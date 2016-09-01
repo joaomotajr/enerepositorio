@@ -8,9 +8,13 @@
 	<div class="ajax-loader"></div> 
     <!-- jQuery 2.1.4 -->
     <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>
     
+    <!-- Easy Pin -->    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.easing/1.3/jquery.easing.1.3.min.js"></script>
+    <script src="/assets/plugins/dist/jquery.easypin.js"></script>    
+    
+    <!-- jQuery UI 1.11.4 -->
+    <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>    
 
     <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>
@@ -35,16 +39,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
     <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- datepicker -->
-    <script src="/assets/plugins/datepicker/bootstrap-datepicker.js"></script>
-    
+    <script src="/assets/plugins/datepicker/bootstrap-datepicker.js"></script>    
     <!-- Bootstrap WYSIHTML5 -->
-    <script src="/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-    
+    <script src="/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>    
     <!-- Slimscroll -->
     <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
     <!-- FastClick -->
-    <script src="/assets/plugins/fastclick/fastclick.min.js"></script>
-    
+    <script src="/assets/plugins/fastclick/fastclick.min.js"></script>    
     <!-- iCheck -->
     <script src="/assets/plugins/iCheck/icheck.min.js"></script>
 
@@ -56,7 +57,9 @@
     <script src="/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>    
     <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>    
     <script src="/assets/plugins/chartjs/Chart.min.js"></script>
+   
     
+    <!-- Image Notes -->
     <script src="/assets/plugins/imageNotes/hammer.min.js"></script>
     <script src="/assets/plugins/imageNotes/jquery.hammer.js"></script>
     <script src="/assets/plugins/imageNotes/imgViewer.min.js"></script>
@@ -89,6 +92,7 @@
 	<script src="/assets/js/controllers/detector-controller.js"></script>
 	<script src="/assets/js/controllers/company-controller.js"></script>
 	<script src="/assets/js/controllers/imageNotes-controller.js"></script>
+	<script src="/assets/js/controllers/easyPin-controller.js"></script>
 		
 	<!-- PAGE LEVEL SERVICES -->
 	<script src="/assets/js/services/controller-service.js"></script>

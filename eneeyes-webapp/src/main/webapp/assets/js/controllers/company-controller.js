@@ -556,7 +556,15 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			    
 			    if ($(event.target).attr('href') == "#tabArea_2") {	
 			    	
-			    	$scope.getCompanyDetectorArea();			    	
+			    	$scope.getCompanyDetectorArea();
+			    	$scope.getDetectorsCoordinates();
+			    	
+			    	$timeout(function () {           
+			    		easyPin();			    		
+			    		$('.pin').trigger("click")
+			    	}, 500);
+
+			    	
 				}
 			    else if ($(event.target).attr('href') == "#tabArea_3") {
 			    	initGauge();
@@ -570,7 +578,6 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			 
 			$('#idInputImageArea').change( encodeImageFileAsURL( function(base64Img) {				
 				$scope.selectedArea.image =  base64Img;
-				initPin();
 				$scope.$apply();					    
 			}));
 			
@@ -579,7 +586,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				google.charts.load('current', { 'packages': ['gauge'] });
 				google.charts.setOnLoadCallback(drawChart);
 			}
-			 
+										 
 		}, 450);
 				
 	 }	
@@ -638,7 +645,6 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			 });
 		 }
 	 }
-
 
 	 mapUnit = function (lat, lng) {
 	    
@@ -713,9 +719,61 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 }, 26000);
 	}
 	
-	 
-	 
-	$scope.getCompanys();
-	$(".select2").select2();
 	
+	/*--------------------------------------------------------------------------   JQuery EasyPIN -----------------------------------------------------------------------*/
+	getDetectorsCoordinates = function() {
+		pinItem = 
+		{   0: 
+			{
+				content: null,
+				coords: {
+	                lat: 0,
+	                long: 0
+	            }
+			}
+		}
+		
+		for (var i = 0; i < $scope.selectedCompanyDetectorsArea.length; i++) {
+	    	
+			
+	         
+	    }
+	}
+	
+	easyPin = function() {
+		
+		var $easyInstance = $('.pin').easypin({
+		    init: {
+		    	imgDipositivosArea : {
+		            0:{
+		                content: "Sensor Azul",
+		                coords: {
+		                    lat: 530,
+		                    long: 179
+		                }
+		            },
+		            canvas:{
+		                src:"example.jpg","width":1000,"height":562
+		            }
+		        }
+		    },
+		    done: function(element) {
+                return true;
+            }
+		}); 	
+		
+	    $easyInstance.easypin.event( "get.coordinates", function($instance, data, params ) {
+            console.log( data, params);
+        });
+        
+	    $( ".coords" ).click(function( event ) {
+            $easyInstance.easypin.fire( "get.coordinates", {param1: 1, param2: 2, param3: 3}, function(data) {
+                return JSON.stringify(data);
+            });
+        });
+    }
+	 
+	$scope.getCompanys();	
+	$(".select2").select2();
+		
 });

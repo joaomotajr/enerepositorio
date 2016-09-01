@@ -497,6 +497,6 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         });
     };
 
-    $scope.LoadAjaxContent('dashboard.html', 'Dashboard');
-
+   //$scope.LoadAjaxContent('easyPin.html', 'EASYpIN');
+   $scope.LoadAjaxContent('companies.html', 'Empresas')
 });

@@ -52,7 +52,7 @@
 						    	</div>
 						    	<div class="col-md-4">	
 									<div class="output">							    		    
-									    <img ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
+									    <img ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'" class="img-responsive">
 									</div>							
 								</div>	
 						    </div>			    	

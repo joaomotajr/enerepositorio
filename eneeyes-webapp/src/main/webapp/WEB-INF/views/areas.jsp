@@ -10,6 +10,19 @@
 		object-fit: fill;
 	}
 </style>
+
+	<div class="easy-modal" style="display:none;" modal-position="free">
+	    <form>
+	        <h3>Selecione Dispositivo</h3>
+	        <input type="text" class="form-control" name="content" placeholder="type">
+	        <br>
+	        <button type="button" class="btn btn-primary easy-submit">Salvar</button>
+	    </form>
+	</div>        
+	
+	<div style="display:none;" width="130" shadow="true" popover>
+	    <div style="width:100%;text-align:center;">{[content]}</div>
+	</div>
    
 <div class="col-md-9">
 	<div class="box box-primary">
@@ -23,11 +36,11 @@
 			       	<li class="active"><a href="#tabArea_1" data-toggle="tab">Cadastro</a></li>
 			       	<li><a href="#tabArea_2" data-toggle="tab">Local</a></li>
 			       	<li><a href="#tabArea_3" data-toggle="tab">Dispositivos</a></li>
-			    	<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+			    	<li title="Trocar Imagem da Área" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
 			    </ul>
 				
 				<div class="tab-content">
-			    	
+							    	
 			    	<div class="tab-pane active" id="tabArea_1">
 			    		<div class="row">
 					        <div class="col-md-6">
@@ -117,41 +130,33 @@
 			       	<div class="tab-pane" id="tabArea_2">
 			       	
 			       	<div class="row">
-						<div class="col-md-3">					            
+						<div class="col-md-2">					            
 								<label class="control-label">Detectores</label>					            
 							</div>
-							<div class="col-md-9">
+							<div class="col-md-10">
 								<form>
-									<input type="file" id="idInputImageArea" style='display:none'>
-									<button id="idBtnChooseFileArea" class="btn btn-sm"><i class="fa fa-file-image-o"></i> Background</button>							        
+									<input type="file" id="idInputImageArea" style='display:none'>																        
 								</form>						        
 							</div>				        
 						</div>
+						
 						<div class="row">
-							<div class="col-md-3">	
-							
-								<ul class="drag todo-list" style="padding: 1px !important" ng-repeat="item in selectedCompanyDetectorsArea">
-	                                 <li style="background: #d1ddf9;">                                                        
-	                                     <img class="img-circle img-sm" src="{{item.detectorDto.image}}" alt="user image" class="pin" easypin-id="example_image1">
-	                                     <span class="text">{{item.name}}</span>
-	                                 </li>                                
-	                             </ul>
-							
-								<!-- 
-								<div class="box-comment">
-									<div class="output" ng-repeat="item in selectedCompanyDetectorsArea">
-										<img class="img-circle img-sm" src="{{item.detectorDto.image}}" alt="user image">  
-										<div class="comment-text">
-											<span class="username">{{item.name}}</span>
-											<span>[{{getCompanyDetector(item.detectorDto.image)}}]</span>											
-                                		</div>
-                                	</div>
-                                </div>
-								-->
-								           					            
+							<div class="col-md-2">								
+								<div class="box box-primary direct-chat direct-chat-primary">
+									<div class="direct-chat-msg right" ng-repeat="item in selectedCompanyDetectorsArea">			                      
+			                      		<img class="direct-chat-img img-sm" src="{{item.detectorDto.image}}" style="width: 30px ! important; Height: 30px ! important"><!-- /.direct-chat-img -->
+			                      		<div class="direct-chat-text" style="font-size: 0.7em; margin-right: 30px;"  >
+			                        		{{item.name}}
+			                      		</div><!-- /.direct-chat-text -->
+			                    	</div>
+								</div>														           					            
 							</div>
-							<div class="col-md-9">																					    		    
-								<img ng-src="{{selectedArea.image}}" onError="this.src='/assets/img/cover.jpg'">								
+							
+							<div class="col-md-10">
+								<div style="overflow: auto">																					    		    
+									<img src="{{selectedArea.image}}" width="1000" onError="this.src='/assets/img/cover.jpg'" class="pin" easypin-id="imgDipositivosArea" />									
+								</div>								
+								<input class="coords" type="button" value="Get coordinates!" />
 							</div>					    	
 						</div>
 			       		         

@@ -2,7 +2,41 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 
     var map;
 	var geocoder;
+	var loadGauge = false;
+	var loadEasyPin = false;	
+	
 	/*----------------------------------------------------------------- C O M P A N Y   D E V I C E----------------------------------------------------------------------*/
+	
+	$scope.saveCompanyDetectorCoords = function() {
+		
+		var detectorsCoords = JSON.parse(localStorage.getItem('easypin'));		
+		var item = $scope.selectedCompanyDetectorsArea;
+		
+		for (var i = 0; i < item.length; i++) {
+	    				
+			 $scope.selectedCompanyDetectorsArea[i].latitude = detectorsCoords.imgDipositivosArea[i].coords.lat;
+			 $scope.selectedCompanyDetectorsArea[i].longitude = detectorsCoords.imgDipositivosArea[i].coords.long;			 
+	    }		
+		
+		$scope.saveCompanyDetectorList($scope.selectedCompanyDetectorsArea);
+	}
+	
+	$scope.saveCompanyDetectorList = function(list) {
+		angular.element('body').addClass('loading');
+						 
+		$scope.saveCompanyDetectorList = new CompanyDetectorService.saveList(list);
+		$scope.saveCompanyDetectorList.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){		
+			
+			angular.element('body').removeClass('loading');
+			$scope.msgInfo = "Detector Gravado!" ;
+			$('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+		
+		}, function(data) {
+			angular.element('body').removeClass('loading');
+			$scope.msgErro = "Erro: " + data.statusText;
+		});			 
+	}
+	
 	
 	$scope.saveCompanyDetector = function() {
 		angular.element('body').addClass('loading');
@@ -96,6 +130,11 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	
 	/*-------------------------------------------------------------------------- A R E A -------------------------------------------------------------------------------*/
 		
+	$scope.lockImageArea = function() {		
+		
+		$("#idImageArea").toggleClass("disableDiv");		
+	}
+
 	$scope.saveAreaInit = function() {
 		angular.element('body').addClass('loading');
 		
@@ -116,6 +155,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	
 	$scope.saveArea = function() {
 		angular.element('body').addClass('loading');
+		
+		$scope.saveCompanyDetectorCoords();
 		
 		var area = {
 			uid: $scope.selectedArea.uid == undefined ? 0 : $scope.selectedArea.uid,
@@ -556,18 +597,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			    
 			    if ($(event.target).attr('href') == "#tabArea_2") {	
 			    	
-			    	$scope.getCompanyDetectorArea();
-			    	
-			    	var itens;
-			    	$timeout(function () {  
-			    		itens = getDetectorsCoordinates();
-			    	}, 200);
-			    	
-			    	$timeout(function () {           
-			    		easyPin(itens);			    		
-			    		$('.pin').trigger("click")
-			    	}, 500);
-
+			    	initializeEasyPin()
 			    	
 				}
 			    else if ($(event.target).attr('href') == "#tabArea_3") {
@@ -587,7 +617,11 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			
 			initGauge = function() {
 				
-				google.charts.load('current', { 'packages': ['gauge'] });
+				if(! loadGauge) {
+					google.charts.load('current', { 'packages': ['gauge'] });
+					loadGauge = true;
+				}
+				
 				google.charts.setOnLoadCallback(drawChart);
 			}
 										 
@@ -726,35 +760,53 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	
 	/*--------------------------------------------------------------------------   JQuery EasyPIN -----------------------------------------------------------------------*/
 	
-	easyPin = function(itens) {			
+	initializeEasyPin = function() {
+		
+		if (!loadEasyPin) {
+			$scope.getCompanyDetectorArea();
+	    	
+	    	var limit = 0;
+	    	var itens;
+	    	
+	    	$timeout(function () {			    		
+	    		itens = getDetectorsCoordinates();
+	    		limit = $scope.selectedCompanyDetectorsArea.length;
+	    	}, 200);
+	    	
+	    	$timeout(function () {           
+	    		easyPin(itens, limit);			    		
+	    		$('.pin').trigger("click")
+	    	}, 500);
+	    	
+	    	loadEasyPin = true;
+	    	$scope.lockImageArea();
+		}		
+	}
+	
+	easyPin = function(itens, limit) {			
 		
 		var imgDipositivosArea = itens;
 		var $easyInstance = $('.pin').easypin({
 			 init: {
 			    	imgDipositivosArea
 			       }
-		    ,		    
-		    done: function(element) {
-                return true;
-            },            
-            error: function(e) {
-                console.log(e);
-            },
-            limit: 4,
+		    ,           
+            limit: limit,
             exceeded: function(type) {
                 // do samething...
             }
 		}); 	
 		
-	    $easyInstance.easypin.event( "get.coordinates", function($instance, data, params ) {
-            console.log( data, params);
-        });
-        
-	    $( ".coords" ).click(function( event ) {
-            $easyInstance.easypin.fire( "get.coordinates", {param1: 1, param2: 2, param3: 3}, function(data) {
-                return JSON.stringify(data);
-            });
-        });
+		
+//	    $easyInstance.easypin.event( "get.coordinates", function($instance, data, params ) {
+//            console.log( data, params);
+//        });
+//        
+//	    $( ".coords" ).click(function( event ) {
+//            $easyInstance.easypin.fire( "get.coordinates", {param1: 1, param2: 2, param3: 3}, function(data) {
+//                return JSON.stringify(data);
+//            });
+//        });
     }	
 	
 	getDetectorsCoordinates = function() {

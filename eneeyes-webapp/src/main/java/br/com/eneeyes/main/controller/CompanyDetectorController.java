@@ -69,5 +69,11 @@ public class CompanyDetectorController {
 		
 		return service.findByArea(uid);		
 	}
+	
+	@RequestMapping(value="/security/api/companyDetector/updateLatitudeLongitude/{latitude}/{longitude}/{uid}", method=RequestMethod.POST, produces = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> updateLatitudeLongitude(@PathVariable Double latitude, Double longitude, Long uid) {		
+		return service.updateLatitudeLongitude(latitude, longitude, uid);
+	}
 
 }

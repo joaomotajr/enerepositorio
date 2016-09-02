@@ -21,11 +21,11 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		$scope.saveCompanyDetectorList($scope.selectedCompanyDetectorsArea);
 	}
 	
-	$scope.saveCompanyDetectorList = function(list) {
+	$scope.updateCompanyDetectorLatitudeLongitude = function(latitude, longitude, uid) {
 		angular.element('body').addClass('loading');
 						 
-		$scope.saveCompanyDetectorList = new CompanyDetectorService.saveList(list);
-		$scope.saveCompanyDetectorList.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){		
+		$scope.updateLatitudeLongitude = new CompanyDetectorService.updateLatitudeLongitude();
+		$scope.updateLatitudeLongitude.$companyDetector({_csrf : angular.element('#_csrf').val(), latitude: latitude, longitude: longitude, id : uid }, function(){		
 			
 			angular.element('body').removeClass('loading');
 			$scope.msgInfo = "Detector Gravado!" ;

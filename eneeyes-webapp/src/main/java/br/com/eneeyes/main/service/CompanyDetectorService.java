@@ -162,40 +162,17 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		
 		return result;	
 	}
-
-
-//	public BasicResult<?> findByIdDeviceType(Long uid) {
-//		
-//		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>(); 	
-//		
-//		try {
-//			
-//			CompanyDevice companyDevice = companyDeviceRepository.findOne(uid);			
-//			List<CompanyDetector> lista = repository.findByCompanyDevice(companyDevice);
-//
-//			if (lista != null) {
-//				
-//				List<CompanyDetectorDto> dto = new ArrayList<CompanyDetectorDto>();
-//				
-//				for (CompanyDetector companyDetector   : lista) {					
-//					dto.add(new CompanyDetectorDto(companyDetector));
-//				}
-//								
-//				result.setList(dto);
-//				result.setResultType( ResultMessageType.SUCCESS );
-//				result.setMessage("Executado com sucesso.");
-//			} else {
-//				result.setIsError(true);
-//				result.setResultType( ResultMessageType.ERROR );
-//				result.setMessage("Nenhum Detector Cadastrado.");
-//			}
-//		} catch (Exception e) {
-//			result.setIsError(true);
-//			result.setMessage(e.getMessage());
-//		}
-//		
-//		return result;
-//	}
+	
+	public BasicResult<?> updateLatitudeLongitude(Double latitude, Double longitude, Long uid) {
+		
+		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();
+		repository.setLatitudeLongitude(latitude, longitude, uid);
+		
+		result.setResultType( ResultMessageType.SUCCESS );
+		result.setMessage("Executado com sucesso.");
+		
+		return result;	
+	}
 	
 	public BasicResult<?> findByArea(Long uid) {
 		

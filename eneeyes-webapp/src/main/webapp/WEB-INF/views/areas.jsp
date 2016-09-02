@@ -1,9 +1,8 @@
 <style>
-		float: left;
-		width: 650px;
-		height: 300px;
-		border: 1px solid #000;
-		margin-right: 1em;
+	
+	.disableDiv {
+		pointer-events: none;
+		opacity: 0.8;
 	}
 	
 	.fill {
@@ -13,16 +12,20 @@
 
 	<div class="easy-modal" style="display:none;" modal-position="free">
 	    <form>
-	        <h3>Selecione Dispositivo</h3>
+	        <h3>Dispositivo</h3>
 	        
 	        <input type="hidden" class="form-control" name="content" placeholder="type">	        
-	        	        -
+	        <!-- 
 	        <select name="uid" class="form-control" id="selCompanyDetector">
 	        	<option value="" >Selecione</option>
 			    <option value={{item.uid}} ng-repeat="item in selectedCompanyDetectorsArea">{{item.name}}</option>			    
 			</select>
+			 -->
+			 <label>Detector</label>
+			 <label>Range</label>
+			 <label>Unidade</label>
 			<hr>			        
-	        <button type="button" class="btn btn-primary easy-submit">Salvar</button>
+	        <button type="button" class="btn btn-primary easy-submit">OK</button>
 	    </form>
 	</div>        
 	 	 
@@ -160,10 +163,13 @@
 							</div>
 							
 							<div class="col-md-10">
-								<div style="overflow: auto">																					    		    
-									<img src="{{selectedArea.image}}" width="800" height="562" onError="this.src='/assets/img/cover.jpg'" class="pin" easypin-id="imgDipositivosArea" />									
-								</div>								
-								<input class="coords" type="button" value="Get coordinates!" />
+								<div style="overflow: auto">
+									<div  id="idImageArea">																					    		    
+										<img src="{{selectedArea.image}}" width="1000" onError="this.src='/assets/img/cover.jpg'" class="pin" easypin-id="imgDipositivosArea" />
+									</div>									
+								</div>
+								
+								<button type="button" ng-click="lockImageArea();" class="btn btn-sm btn-primary">Lock / Unlock</button>								
 							</div>					    	
 						</div>
 			       		         

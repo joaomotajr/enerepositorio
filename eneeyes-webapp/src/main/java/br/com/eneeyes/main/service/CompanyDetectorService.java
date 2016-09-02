@@ -42,6 +42,23 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		
 		return result;
 	}
+	
+	public BasicResult<?> save(List<CompanyDetectorDto> listDto) {
+		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();		
+
+		List<CompanyDetector> list = new ArrayList<CompanyDetector>();
+		
+		for (CompanyDetectorDto companyDetectorDto   : listDto) {					
+			list.add(new CompanyDetector(companyDetectorDto));
+		}
+		
+		list = repository.save(list);					
+		
+		result.setResultType( ResultMessageType.SUCCESS );
+		result.setMessage("Executado com sucesso.");	
+		
+		return result;
+	}
 
 	public BasicResult<?> delete(Long uid) {
 				

@@ -1,5 +1,7 @@
 package br.com.eneeyes.main.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,13 @@ public class CompanyDetectorController {
 	public BasicResult<?> save(@RequestBody CompanyDetectorDto companyDetectorDto) {
 		
 		return service.save(companyDetectorDto);
+	}
+	
+	@RequestMapping(value="/security/api/companyDetector/saveList", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> saveList(@RequestBody List<CompanyDetectorDto> companyDetectorsDto) {
+		
+		return service.save(companyDetectorsDto);
 	}
 	
 	@RequestMapping(value="/security/api/companyDetector/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")

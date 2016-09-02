@@ -1228,6 +1228,11 @@
                 $(pinParent).unbind('mousemove');
             });
 
+		$('.easy-close', modalContext)
+			.click(function() {
+			closePopup(parentElement);
+		});
+
 		$('.easy-submit', modalContext)
 			.click(function() {
 

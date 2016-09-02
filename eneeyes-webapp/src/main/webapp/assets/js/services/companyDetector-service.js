@@ -23,5 +23,8 @@ app.factory('CompanyDetectorService', function($resource){
         save : $resource('/security/api/companyDetector/save',{},{
         	companyDetector : {method : 'POST'}
         }),
+        saveList : $resource('/security/api/companyDetector/saveList',{},{
+        	companyDetector : {method : 'POST'}
+        }),
      };
 });

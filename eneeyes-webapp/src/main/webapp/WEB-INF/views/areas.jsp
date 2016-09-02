@@ -161,7 +161,7 @@
 							
 							<div class="col-md-10">
 								<div style="overflow: auto">																					    		    
-									<img src="{{selectedArea.image}}" width="1000" onError="this.src='/assets/img/cover.jpg'" class="pin" easypin-id="imgDipositivosArea" />									
+									<img src="{{selectedArea.image}}" width="800" height="562" onError="this.src='/assets/img/cover.jpg'" class="pin" easypin-id="imgDipositivosArea" />									
 								</div>								
 								<input class="coords" type="button" value="Get coordinates!" />
 							</div>					    	

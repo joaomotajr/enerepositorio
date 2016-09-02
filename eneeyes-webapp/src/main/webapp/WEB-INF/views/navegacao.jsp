@@ -19,8 +19,7 @@
         		<button type="button" class="btn btn-primary" ng-click="getOneCompanyDetector()">Get One CompanyDetector</button>
         		<button type="button" class="btn btn-primary" ng-click="getOneCompanyDetectorDevice()">Get Device CompanyDetector </button>
         		<button type="button" class="btn btn-primary" ng-click="getOneCompanyDetectorDeviceByArea()">Get Area CompanyDetector  </button>
-        		<button type="button" class="btn btn-primary" ng-click="deletarCompanyDetector()">Deletar CompanyDetector</button>
-        		
+        		<button type="button" class="btn btn-primary" ng-click="deletarCompanyDetector()">Deletar CompanyDetector</button>        		
         		        		
        		</div>
         

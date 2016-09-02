@@ -764,18 +764,17 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		var item = $scope.selectedCompanyDetectorsArea;
 		for (var i = 0; i < item.length; i++) {
 	    				
-			if(item[i].latitude != null) {
-				var pinItem = ({
-						content: item[i].name,
-						uid: item[i].uid,
-						coords: {
-			                lat: item[i].latitude,
-			                long: item[i].longitude
-			            }
-					})				
-								
-				pinItensString += (String.fromCharCode(34) + i + String.fromCharCode(34) + ":" + JSON.stringify(pinItem) + (i == item.length -1 ? ', "canvas":{}' : ', '));				
-			}   
+			var pinItem = ({
+					content: item[i].name,
+					uid: item[i].uid,
+					coords: {
+		                lat: item[i].latitude == null ? 0 :  item[i].latitude,
+		                long: item[i].longitude == null ? 0 : item[i].longitude
+		            }
+				})				
+							
+			pinItensString += (String.fromCharCode(34) + i + String.fromCharCode(34) + ":" + JSON.stringify(pinItem) + (i == item.length -1 ? ', "canvas":{}' : ', '));				
+			 
 	    }
 		
 		return JSON.parse('{' + pinItensString + '}');;

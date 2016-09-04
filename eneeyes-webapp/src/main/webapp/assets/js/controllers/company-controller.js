@@ -740,6 +740,12 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		   ['Sensor 02', 55],
 		   ['Sensor 03', 68]
 		 ]);
+		 
+		 var data1 = google.visualization.arrayToDataTable([
+		   ['Label', 'Value'],
+		   ['Sensor Azul', 80],
+		   ['Sensor Verde', 55]
+		 ]);
 		
 		 var options = {
 		     width: 500, height: 120,
@@ -749,8 +755,10 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 };
 		
 		 var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+		 var chart1 = new google.visualization.Gauge(document.getElementById('chart_div1'));
 		
 		 chart.draw(data, options);
+		 chart1.draw(data1, options);
 		
 		 setInterval(function () {
 		     data.setValue(0, 1, 40 + Math.round(60 * Math.random()));

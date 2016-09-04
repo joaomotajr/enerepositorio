@@ -176,7 +176,51 @@
 			       	</div><!-- /.tab-pane -->
 			       	
 			       	<div class="tab-pane" id="tabArea_3">
-			       		 <div id="chart_div" style="width: 400px; height: 120px;"></div>	        
+			       		 <div id="chart_div" style="width: 400px; height: 120px;"></div>
+			       		 
+			       		 <div class="row">
+			       		 
+			       		 <div class="col-md-4">
+				              
+				              <!-- Widget: user widget style 1 -->
+				              <div class="box box-widget widget-user">
+				                
+				                <!-- Add the bg color to the header using any of the bg-* classes -->
+				                
+				                <div class="widget-user-header bg-aqua-active">
+				                  <h3 class="widget-user-username">Alexander Pierce</h3>
+				                  <h5 class="widget-user-desc">Founder &amp; CEO</h5>
+				                </div>
+				                
+				                <div class="widget-user-image" style="left: 30% ! important; margin-left: -30px ! important">
+				                  <div id="chart_div1" style="width: 600px; height: 120px;"></div>
+				                </div>
+				                <div class="box-footer">
+				                  <div class="row">
+				                    <br>
+				                    <div class="col-md-6">
+				                      <div class="description-block">
+				                        <h5 class="description-header">3,200</h5>
+				                        <span class="description-text">SALES</span>
+				                      </div><!-- /.description-block -->
+				                    </div><!-- /.col -->
+				                    
+				                    
+				                    <div class="col-md-6">
+				                      <div class="description-block">
+				                        <h5 class="description-header">35</h5>
+				                        <span class="description-text">PRODUCTS</span>
+				                      </div><!-- /.description-block -->
+				                    </div><!-- /.col -->
+				                  </div><!-- /.row -->
+				                </div>
+				              </div><!-- /.widget-user -->
+				            </div>
+							       		 
+			       		 </div>
+			       		 
+			       		  
+			       		 	        
 			     	</div><!-- /.tab-content -->			     	
 			   </div>			   						
 			</div>

@@ -13,19 +13,28 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		var item = $scope.selectedCompanyDetectorsArea;
 		
 		for (var i = 0; i < item.length; i++) {
-	    				
-			 $scope.selectedCompanyDetectorsArea[i].latitude = detectorsCoords.imgDipositivosArea[i].coords.lat;
-			 $scope.selectedCompanyDetectorsArea[i].longitude = detectorsCoords.imgDipositivosArea[i].coords.long;			 
+	    	
+			if($scope.selectedCompanyDetectorsArea[i].latitude != detectorsCoords.imgDipositivosArea[i].coords.lat ||
+					$scope.selectedCompanyDetectorsArea[i].longitude != detectorsCoords.imgDipositivosArea[i].coords.long) {
+			 
+				$scope.selectedCompanyDetectorsArea[i].latitude = detectorsCoords.imgDipositivosArea[i].coords.lat;
+			 	$scope.selectedCompanyDetectorsArea[i].longitude = detectorsCoords.imgDipositivosArea[i].coords.long;
+			 			 
+			 $scope.updateCompanyDetectorLatitudeLongitude($scope.selectedCompanyDetectorsArea[i].latitude, 
+					 $scope.selectedCompanyDetectorsArea[i].longitude, 
+					 $scope.selectedCompanyDetectorsArea[i].uid);
+			}
 	    }		
 		
-		$scope.saveCompanyDetectorList($scope.selectedCompanyDetectorsArea);
+		
+
 	}
 	
-	$scope.updateCompanyDetectorLatitudeLongitude = function(latitude, longitude, uid) {
+	$scope.updateCompanyDetectorLatitudeLongitude = function(latitude, longitude, id) {
 		angular.element('body').addClass('loading');
 						 
 		$scope.updateLatitudeLongitude = new CompanyDetectorService.updateLatitudeLongitude();
-		$scope.updateLatitudeLongitude.$companyDetector({_csrf : angular.element('#_csrf').val(), latitude: latitude, longitude: longitude, id : uid }, function(){		
+		$scope.updateLatitudeLongitude.$companyDetector({_csrf : angular.element('#_csrf').val(), latitude: latitude, longitude: longitude, id : id }, function(){		
 			
 			angular.element('body').removeClass('loading');
 			$scope.msgInfo = "Detector Gravado!" ;
@@ -771,7 +780,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	    	$timeout(function () {			    		
 	    		itens = getDetectorsCoordinates();
 	    		limit = $scope.selectedCompanyDetectorsArea.length;
-	    	}, 200);
+	    	}, 300);
 	    	
 	    	$timeout(function () {           
 	    		easyPin(itens, limit);			    		

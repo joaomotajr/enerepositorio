@@ -17,6 +17,6 @@ public interface CompanyDetectorRepository extends JpaRepository<CompanyDetector
 	
 	@Modifying
 	@Transactional
-	@Query("update CompanyDetector cd set cd.latitude = ?1, cd.longitude = ?2 where cd.uid = ?4")
+	@Query("update CompanyDetector cd set cd.latitude = ?1, cd.longitude = ?2 where cd.uid = ?3")
 	int setLatitudeLongitude(Double latitude, Double longitude, Long uid);
 }

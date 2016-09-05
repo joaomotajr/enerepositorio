@@ -4,6 +4,7 @@ import java.util.Date;
 
 import br.com.eneeyes.main.dto.register.DetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
+import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 public class CompanyDetectorDto {
 
@@ -14,6 +15,10 @@ public class CompanyDetectorDto {
 	private String local;
 	private Double latitude;		
 	private Double longitude;
+	private UnitMeterGases unitMeterGases;
+	private Double RangeMax;	
+	private Double RangeMin;			
+	private Double RangeUnit;	
 	private CompanyDeviceDto companyDeviceDto;	
 	private DetectorDto detectorDto;
 
@@ -30,6 +35,7 @@ public class CompanyDetectorDto {
        	this.local = companyDetector.getLocal();
        	this.latitude = companyDetector.getLatitude();
        	this.longitude = companyDetector.getLongitude();
+       	this.unitMeterGases = companyDetector.getUnitMeterGases();
        	
        	this.detectorDto = new DetectorDto(companyDetector.getDetector()) ;
 	}
@@ -89,6 +95,37 @@ public class CompanyDetectorDto {
 		this.longitude = longitude;
 	}	
 
+	public final UnitMeterGases getUnitMeterGases() {
+		return unitMeterGases;
+	}
+	
+	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
+		this.unitMeterGases = unitMeterGases;
+	}
+	
+	public final Double getRangeMax() {
+		return RangeMax;
+	}
+
+	public final void setRangeMax(Double rangeMax) {
+		RangeMax = rangeMax;
+	}
+
+	public final Double getRangeMin() {
+		return RangeMin;
+	}
+
+	public final void setRangeMin(Double rangeMin) {
+		RangeMin = rangeMin;
+	}
+
+	public final Double getRangeUnit() {
+		return RangeUnit;
+	}
+
+	public final void setRangeUnit(Double rangeUnit) {
+		RangeUnit = rangeUnit;
+	}
 	
 	public DetectorDto getDetectorDto() {
 		return detectorDto;

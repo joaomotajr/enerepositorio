@@ -733,19 +733,23 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	}
 	
 	drawChart = function() {
-
-		 var data = google.visualization.arrayToDataTable([
-		   ['Label', 'Value'],
-		   ['Sensor 01', 80],
-		   ['Sensor 02', 55],
-		   ['Sensor 03', 68]
-		 ]);
+//
+//		 var data = google.visualization.arrayToDataTable([
+//		   ['Label', 'Value'],
+//		   ['Sensor 01', 80],
+//		   ['Sensor 02', 55],
+//		   ['Sensor 03', 68]
+//		 ]);
 		 
 		 var data1 = google.visualization.arrayToDataTable([
 		   ['Label', 'Value'],
-		   ['Sensor Azul', 80],
-		   ['Sensor Verde', 55]
+		   ['Sensor Azul', 80]		   
 		 ]);
+		 
+		 var data2 = google.visualization.arrayToDataTable([
+		     ['Label', 'Value'],
+             ['Sensor Azul', 80]		   
+         ]);
 		
 		 var options = {
 		     width: 500, height: 120,
@@ -756,22 +760,25 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		
 		 var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
 		 var chart1 = new google.visualization.Gauge(document.getElementById('chart_div1'));
+		 var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
 		
-		 chart.draw(data, options);
+		 //chart.draw(data, options);
+		 
 		 chart1.draw(data1, options);
+		 chart2.draw(data2, options);
 		
-		 setInterval(function () {
-		     data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
-		     chart.draw(data, options);
-		 }, 13000);
-		 setInterval(function () {
-		     data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
-		     chart.draw(data, options);
-		 }, 5000);
-		 setInterval(function () {
-		     data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
-		     chart.draw(data, options);
-		 }, 26000);
+//		 setInterval(function () {
+//		     data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+//		     chart.draw(data, options);
+//		 }, 13000);
+//		 setInterval(function () {
+//		     data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
+//		     chart.draw(data, options);
+//		 }, 5000);
+//		 setInterval(function () {
+//		     data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+//		     chart.draw(data, options);
+//		 }, 26000);
 	}
 	
 	
@@ -812,18 +819,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
             exceeded: function(type) {
                 // do samething...
             }
-		}); 	
-		
-		
-//	    $easyInstance.easypin.event( "get.coordinates", function($instance, data, params ) {
-//            console.log( data, params);
-//        });
-//        
-//	    $( ".coords" ).click(function( event ) {
-//            $easyInstance.easypin.fire( "get.coordinates", {param1: 1, param2: 2, param3: 3}, function(data) {
-//                return JSON.stringify(data);
-//            });
-//        });
+		});	
+
     }	
 	
 	getDetectorsCoordinates = function() {

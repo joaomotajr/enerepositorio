@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.register.Detector;
@@ -39,7 +42,10 @@ public class CompanyDetector {
     	this.date = dto.getDate();    	  
     	this.local = dto.getLocal();
 		this.latitude = dto.getLatitude();
-		this.longitude = dto.getLongitude();    	
+		this.longitude = dto.getLongitude();
+		this.RangeMax = dto.getRangeMax();
+		this.RangeMin = dto.getRangeMin();
+		this.RangeUnit = dto.getRangeUnit();
     	
     	this.detector = new Detector(dto.getDetectorDto());
     }   
@@ -66,6 +72,23 @@ public class CompanyDetector {
 	
 	@Column(name = "LONGITUDE", nullable = true)		
 	private Double longitude;
+	
+	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
+	private UnitMeterGases unitMeterGases;
+
+	@Enumerated(EnumType.ORDINAL) 
+	private UnitMeterGases UnitMeterGases() { 
+	    return unitMeterGases; 
+	}
+	
+	@Column(name = "RANGE_MAX", nullable = true)		
+	private Double RangeMax;
+	
+	@Column(name = "RANGE_MIN", nullable = true)		
+	private Double RangeMin;
+	
+	@Column(name = "RANGE_UNIT", nullable = true)		
+	private Double RangeUnit;
   
 	@ManyToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_DEVICE_ID", nullable = false)
@@ -130,7 +153,6 @@ public class CompanyDetector {
 	public final void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-
 	
 	public CompanyDevice getCompanyDevice() {
 		return companyDevice;
@@ -138,6 +160,38 @@ public class CompanyDetector {
 
 	public void setCompanyDevice(CompanyDevice companyDevice) {
 		this.companyDevice = companyDevice;
+	}
+	
+	public final UnitMeterGases getUnitMeterGases() {
+		return unitMeterGases;
+	}
+	
+	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
+		this.unitMeterGases = unitMeterGases;
+	}
+	
+	public final Double getRangeMax() {
+		return RangeMax;
+	}
+
+	public final void setRangeMax(Double rangeMax) {
+		RangeMax = rangeMax;
+	}
+
+	public final Double getRangeMin() {
+		return RangeMin;
+	}
+
+	public final void setRangeMin(Double rangeMin) {
+		RangeMin = rangeMin;
+	}
+
+	public final Double getRangeUnit() {
+		return RangeUnit;
+	}
+
+	public final void setRangeUnit(Double rangeUnit) {
+		RangeUnit = rangeUnit;
 	}
 	
 	public Detector getDetector() {

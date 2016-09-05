@@ -191,13 +191,20 @@
 				                  <h3 class="widget-user-username">Alexander Pierce</h3>
 				                  <h5 class="widget-user-desc">Founder &amp; CEO</h5>
 				                </div>
+				                				                
+				                <div style="position:absolute; top: 65px ! important;">
+					                <div class="col-md-6">					            	    
+						            	<div id="chart_div1"></div>						                					                
+					                </div>
 				                
-				                <div class="widget-user-image" style="left: 30% ! important; margin-left: -30px ! important">
-				                  <div id="chart_div1" style="width: 600px; height: 120px;"></div>
+					                <div class="col-md-6">						                
+						            	<div id="chart_div2"></div>						            	    
+					                </div>				                
 				                </div>
 				                <div class="box-footer">
 				                  <div class="row">
 				                    <br>
+				                    
 				                    <div class="col-md-6">
 				                      <div class="description-block">
 				                        <h5 class="description-header">3,200</h5>
@@ -213,6 +220,7 @@
 				                      </div><!-- /.description-block -->
 				                    </div><!-- /.col -->
 				                  </div><!-- /.row -->
+				                  
 				                </div>
 				              </div><!-- /.widget-user -->
 				            </div>

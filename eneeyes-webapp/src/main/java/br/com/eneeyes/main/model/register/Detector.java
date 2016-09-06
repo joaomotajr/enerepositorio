@@ -39,7 +39,10 @@ public class Detector {
 	public Detector(DetectorDto dto) {
 		this.uid = dto.getUid();
 		this.name = dto.getName();
-		this.manufacturer = new Manufacturer(dto.getManufacturerDto());
+		
+		if (dto.getManufacturerDto() != null)
+			this.manufacturer = new Manufacturer(dto.getManufacturerDto());
+		
 		this.model = dto.getModel();		
 		
 		if (dto.getTransmitterDto() != null)

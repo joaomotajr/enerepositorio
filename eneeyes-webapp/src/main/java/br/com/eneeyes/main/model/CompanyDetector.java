@@ -43,6 +43,7 @@ public class CompanyDetector {
     	this.local = dto.getLocal();
 		this.latitude = dto.getLatitude();
 		this.longitude = dto.getLongitude();
+		this.unitMeterGases = dto.getUnitMeterGases();
 		this.RangeMax = dto.getRangeMax();
 		this.RangeMin = dto.getRangeMin();
 		this.RangeUnit = dto.getRangeUnit();

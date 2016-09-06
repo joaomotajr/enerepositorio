@@ -327,3 +327,58 @@ INSERT INTO `motivo_rejeicao`(`COD_`, `DESCRICAO_`) VALUES ('130','Transação d
 INSERT INTO `motivo_rejeicao`(`COD_`, `DESCRICAO_`) VALUES ('133','Transação de saque com cartão Electron inválida');
 INSERT INTO `motivo_rejeicao`(`COD_`, `DESCRICAO_`) VALUES ('134','Transação de saque com cartão Electron inválida');
 INSERT INTO `motivo_rejeicao`(`COD_`, `DESCRICAO_`) VALUES ('145','Estabelecimento inválido para distribuição');
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-md-4">				              
+				              
+  <div class="box box-widget widget-user">
+																	
+	<div class="widget-user-header bg-aqua-active">
+	  <h3 class="widget-user-username">Alexander Pierce</h3>
+	  <h5 class="widget-user-desc">Founder &amp; CEO</h5>
+	</div>				 
+												
+	<div style="position:absolute; top: 65px ! important; margin-left: 45px ! important">					                			            	    
+		<div id="chart_div3"></div>					                					                				                
+	</div>
+									
+	<div class="box-footer">
+	  <div class="row">
+		<br>
+										
+		<div class="description-block">
+			<h5 class="description-header">3,200</h5>
+			<span class="description-text">SALES</span>
+		</div>			                    
+		
+	  </div>
+	  
+	</div>
+  </div>
+</div>
+							
+							
+
+<div class="col-md-6">
+  <div class="description-block">
+	<h5 class="description-header">{{subItem.name}}</h5>
+	<span class="description-text">SALES</span>
+  </div>
+</div>				                    
+
+<div class="col-md-6">
+  <div class="description-block">
+	<h5 class="description-header">35</h5>
+	<span class="description-text">PRODUCTS</span>
+  </div>
+</div>

@@ -176,54 +176,45 @@
 			       	</div><!-- /.tab-pane -->
 			       	
 			       	<div class="tab-pane" id="tabArea_3">
+			       		<!--
 			       		 <div id="chart_div" style="width: 400px; height: 120px;"></div>
+			       		 -->
 			       		 
-			       		 <div class="row">
-			       		 
-			       		 <div class="col-md-4">
+			       		 <div class="row">			       		 
+			       		 	<div class="col-md-4" style="padding-left: 0px ! important;" ng-repeat="item in selectedCompanyDetectorsArea">				              
 				              
-				              <!-- Widget: user widget style 1 -->
 				              <div class="box box-widget widget-user">
-				                
-				                <!-- Add the bg color to the header using any of the bg-* classes -->
-				                
+				                				                				                
 				                <div class="widget-user-header bg-aqua-active">
-				                  <h3 class="widget-user-username">Alexander Pierce</h3>
-				                  <h5 class="widget-user-desc">Founder &amp; CEO</h5>
+				                  <h3 class="widget-user-username">{{item.name}}</h3>
+				                  <h5 class="widget-user-desc">Max: {{item.rangeMax}} | Min: {{item.rangeMin}}</h5>
 				                </div>
 				                				                
 				                <div style="position:absolute; top: 65px ! important;">
-					                <div class="col-md-6">					            	    
+					                <div class="col-md-6" style="padding-left: 0px ! important;">					            	    
 						            	<div id="chart_div1"></div>						                					                
-					                </div>
-				                
-					                <div class="col-md-6">						                
+					                </div>				                
+					                <div class="col-md-6" style="padding-left: 0px ! important;">						                
 						            	<div id="chart_div2"></div>						            	    
 					                </div>				                
 				                </div>
+				                
 				                <div class="box-footer">
 				                  <div class="row">
-				                    <br>
+				                    <br>				                    				                    
+				                    <div ng-repeat="subItem in item.detectorDto.sensorsDto">				                    			                    
+					                    <div class="col-md-6">
+					                      <div class="description-block">
+					                        <h5 class="description-header">{{subItem.name}}</h5>
+					                        <span class="description-text">{{subItem.detectionType}}</span>
+					                      </div>
+					                    </div>					                    
+				                    </div>
 				                    
-				                    <div class="col-md-6">
-				                      <div class="description-block">
-				                        <h5 class="description-header">3,200</h5>
-				                        <span class="description-text">SALES</span>
-				                      </div><!-- /.description-block -->
-				                    </div><!-- /.col -->
-				                    
-				                    
-				                    <div class="col-md-6">
-				                      <div class="description-block">
-				                        <h5 class="description-header">35</h5>
-				                        <span class="description-text">PRODUCTS</span>
-				                      </div><!-- /.description-block -->
-				                    </div><!-- /.col -->
-				                  </div><!-- /.row -->
-				                  
+				                  </div>				                  
 				                </div>
-				              </div><!-- /.widget-user -->
-				            </div>
+				              </div>
+				            </div>				            
 							       		 
 			       		 </div>
 			       		 

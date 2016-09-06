@@ -52,7 +52,7 @@
 						    	</div>
 						    	<div class="col-md-4">	
 									<div class="output">							    		    
-									    <img ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'" class="img-responsive">
+									    <img ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
 									</div>							
 								</div>	
 						    </div>			    	
@@ -76,19 +76,64 @@
 						    </div>
 							
 							<div class="row">
-						        <div class="col-md-8">
+						        <div class="col-md-6">
 						            <div class="form-group">
 						                <label class="control-label">Local</label>
 						                <input id="idUnitName" class="form-control" placeholder="Local" ng-model="selectedCompanyDetector.local">
 						            </div>
-						        </div>				        
-						    </div>					
+						        </div>
+						        <div class="col-md-6">
+						        	<div class="form-group">
+						                <label class="control-label">Qtde Sensores</label>
+						                <input id="idUnitName" class="form-control" placeholder="Sensors" value={{selectedCompanyDetector.detectorDto.sensorsDto.length}} disabled>
+						            </div>							        
+		                       	</div>		        
+						    </div>
+					    	<div class="box box-primary box-solid">
+					    		<div class="box-header with-border"><strong>Ranges</strong></div>					                	 
+				                    <div class="box-body">
+								    <div class="row">
+									    <div class="col-md-3">
+									    	<div class="form-group">
+								                <label class="control-label">Máx</label>
+								                <input class="form-control" placeholder="Max" ng-model="selectedCompanyDetector.rangeMax">
+								            </div>
+									    </div>									    
+									    <div class="col-md-3">
+									    	<div class="form-group">
+								                <label class="control-label">Min</label>
+								                <input class="form-control" placeholder="Max" ng-model="selectedCompanyDetector.rangeMin">
+								            </div>
+									    </div>
+									    
+									    <div class="col-md-3">
+									    	<div class="form-group">
+								                <label class="control-label">Unidade</label>
+								                <input class="form-control" placeholder="Max" ng-model="selectedCompanyDetector.rangeUnit">
+								            </div>
+									    </div>
+									    
+									    <div class="col-md-3">
+									    	<div class="form-group">
+									            <label class="control-label">Unidade de Medida</label>
+												<select class="form-control" data-live-search="true" 
+						                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+						                                ng-options="item as item.name for item in unitMetersGases | orderBy: 'name' track by item.uid" 
+						                                         ng-model="gasUnitMeterGases">
+						                                         <option value="">Selecione</option> 
+						                        </select>               
+					                        </div>
+									    </div>
+								    </div>
+							    </div>
+						    </div>
+									    					
 			       		</form>
 			       		<div class="row">
 			       			<div class="col-md-12">
 			       				<button type="button" ng-click="newCompanyDetector();" class="btn btn-success pull-right">    Nova    </button>								
 								<span class="pull-right">   </span>
-			       				<button type="button" ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" ng-disabled="selectedCompanyDetector.name ? false : true">   Salvar   </button>		       				
+			       				<button type="button" ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" ng-disabled="(selectedCompanyDetector.name && gasUnitMeterGases) ? false : true">   Salvar   </button>		       				
 			       				<span class="pull-right">   </span>
 			       				<button type="button" ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" ng-disabled="(selectedCompanyDetector.uid) ? false : true">   Excluir   </button>								
 							</div>

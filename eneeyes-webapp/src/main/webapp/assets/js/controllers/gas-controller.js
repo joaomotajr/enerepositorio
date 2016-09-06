@@ -58,7 +58,7 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 		 $scope.deletar = new GasService.deletar();		 
 		 $scope.deletar.$gas({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
 			 
-			 $scope.gass.splice(index, 1);
+			 $scope.gas.splice(index, 1);
          	         	
          });		 
 	 }	 

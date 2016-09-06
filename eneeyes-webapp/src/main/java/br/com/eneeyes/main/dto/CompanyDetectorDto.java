@@ -36,7 +36,10 @@ public class CompanyDetectorDto {
        	this.latitude = companyDetector.getLatitude();
        	this.longitude = companyDetector.getLongitude();
        	this.unitMeterGases = companyDetector.getUnitMeterGases();
-       	
+       	this.RangeMax = companyDetector.getRangeMax();
+       	this.RangeMin = companyDetector.getRangeMin();
+       	this.RangeUnit = companyDetector.getRangeUnit();
+       	       	       	
        	this.detectorDto = new DetectorDto(companyDetector.getDetector()) ;
 	}
 		

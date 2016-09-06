@@ -24,10 +24,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 					 $scope.selectedCompanyDetectorsArea[i].longitude, 
 					 $scope.selectedCompanyDetectorsArea[i].uid);
 			}
-	    }		
-		
-		
-
+	    }
 	}
 	
 	$scope.updateCompanyDetectorLatitudeLongitude = function(latitude, longitude, id) {
@@ -56,7 +53,11 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			companyDeviceDto: {uid : $scope.selectedCompanyDevice.uid},
 			detectorDto: {uid: $scope.selectedCompanyDetector.detectorDto.uid},
 			local: $scope.selectedCompanyDetector.local,
-			description: $scope.selectedCompanyDetector.description			
+			description: $scope.selectedCompanyDetector.description,	
+			unitMeterGases : $scope.gasUnitMeterGases.uid,
+			rangeMax : $scope.selectedCompanyDetector.rangeMax,
+			rangeMin : $scope.selectedCompanyDetector.rangeMin,
+			rangeUnit : $scope.selectedCompanyDetector.rangeUnit
 		 }
 		 
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
@@ -87,7 +88,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
-			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;          	         	
+			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
+			$scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.selectedCompanyDetector.unitMeterGases);
         });		 
 	}
 	
@@ -136,6 +138,26 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 	{ name : 'CONTROLADORA', uid : 3 },
 		 	{ name : 'ALARME', uid : 4 } 			  	
 		];
+	
+	$scope.getUnitMetersGases = function (name) {
+		 
+		 for (var i = 0; i < $scope.unitMetersGases.length; i++) {
+            if ($scope.unitMetersGases[i].name == name) {
+                
+           	 return $scope.unitMetersGases[i];
+            }
+        } 		 
+	 }
+	
+	 $scope.unitMetersGases = 
+		 [
+		  	{ name : 'DESCONHECIDO', uid : 0 },
+		  	{ name : 'PPM', uid :  1 },
+		  	{ name : 'PPB', uid : 2 },
+		  	{ name : 'LEL_PERCENT', uid : 3 },
+		  	{ name : 'LEL_PERCENT_METRO', uid : 4 },
+		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
+		 ]; 
 	
 	/*-------------------------------------------------------------------------- A R E A -------------------------------------------------------------------------------*/
 		
@@ -528,7 +550,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				    		$scope.selectedCompanyDeviceIndex = node.index;
 				    		 
 				    		if (node.companyDevice.deviceType == "DETECTOR") {
-				    			$scope.getOneCompanyDetector();				    			 
+				    			$scope.getOneCompanyDetector();				    			
 					    		$scope.LoadAjaxContentCompany('companyDetectors.html');
 				    	 	}
 				    		else if (node.companyDevice.deviceType == "PLC" || node.companyDevice.deviceType == "CONTROLLER") 
@@ -748,8 +770,13 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 
 		 var data2 = google.visualization.arrayToDataTable([
 		     ['Label', 'Value'],
-             ['Sensor Azul', 80]		   
+             ['Sensor Verde', 80]		   
          ]);
+		 
+		 var data3 = google.visualization.arrayToDataTable([
+   		     ['Label', 'Value'],
+                ['Sensor Rosa', 80]		   
+            ]);
 		
 		 var options = {
 		     width: 500, height: 120,
@@ -758,14 +785,16 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		     minorTicks: 5
 		 };
 		
-		 var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-		 var chart1 = new google.visualization.Gauge(document.getElementById('chart_div1'));
-		 var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
-		
-		 //chart.draw(data, options);
-		 
-		 chart1.draw(data1, options);
-		 chart2.draw(data2, options);
+//		 //var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+//		 var chart1 = new google.visualization.Gauge(document.getElementById('chart_div1'));
+//		 var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
+//		 var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
+//		
+//		 //chart.draw(data, options);
+//		 
+//		 chart1.draw(data1, options);
+//		 chart2.draw(data2, options);
+//		 chart3.draw(data3, options);
 		
 //		 setInterval(function () {
 //		     data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
@@ -787,6 +816,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	initializeEasyPin = function() {
 		
 		if (!loadEasyPin) {
+			///colocar na inicialização da Área?			
 			$scope.getCompanyDetectorArea();
 	    	
 	    	var limit = 0;
@@ -845,6 +875,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		
 		return JSON.parse('{' + pinItensString + '}');;
 	}
+	
 	 
 	$scope.getCompanys();	
 	$(".select2").select2();

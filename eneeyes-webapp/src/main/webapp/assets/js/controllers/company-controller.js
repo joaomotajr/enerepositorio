@@ -53,11 +53,11 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			companyDeviceDto: {uid : $scope.selectedCompanyDevice.uid},
 			detectorDto: {uid: $scope.selectedCompanyDetector.detectorDto.uid},
 			local: $scope.selectedCompanyDetector.local,
-			description: $scope.selectedCompanyDetector.description,	
-			unitMeterGases : $scope.gasUnitMeterGases.uid,
-			rangeMax : $scope.selectedCompanyDetector.rangeMax,
-			rangeMin : $scope.selectedCompanyDetector.rangeMin,
-			rangeUnit : $scope.selectedCompanyDetector.rangeUnit
+			description: $scope.selectedCompanyDetector.description
+//			, unitMeterGases : $scope.gasUnitMeterGases.uid,
+//			rangeMax : $scope.selectedCompanyDetector.rangeMax,
+//			rangeMin : $scope.selectedCompanyDetector.rangeMin,
+//			rangeUnit : $scope.selectedCompanyDetector.rangeUnit
 		 }
 		 
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
@@ -89,7 +89,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
-			$scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.selectedCompanyDetector.unitMeterGases);
+			//$scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.selectedCompanyDetector.unitMeterGases);
         });		 
 	}
 	
@@ -139,25 +139,25 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 	{ name : 'ALARME', uid : 4 } 			  	
 		];
 	
-	$scope.getUnitMetersGases = function (name) {
-		 
-		 for (var i = 0; i < $scope.unitMetersGases.length; i++) {
-            if ($scope.unitMetersGases[i].name == name) {
-                
-           	 return $scope.unitMetersGases[i];
-            }
-        } 		 
-	 }
-	
-	 $scope.unitMetersGases = 
-		 [
-		  	{ name : 'DESCONHECIDO', uid : 0 },
-		  	{ name : 'PPM', uid :  1 },
-		  	{ name : 'PPB', uid : 2 },
-		  	{ name : 'LEL_PERCENT', uid : 3 },
-		  	{ name : 'LEL_PERCENT_METRO', uid : 4 },
-		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
-		 ]; 
+//	$scope.getUnitMetersGases = function (name) {
+//		 
+//		 for (var i = 0; i < $scope.unitMetersGases.length; i++) {
+//            if ($scope.unitMetersGases[i].name == name) {
+//                
+//           	 return $scope.unitMetersGases[i];
+//            }
+//        } 		 
+//	 }
+//	
+//	 $scope.unitMetersGases = 
+//		 [
+//		  	{ name : 'DESCONHECIDO', uid : 0 },
+//		  	{ name : 'PPM', uid :  1 },
+//		  	{ name : 'PPB', uid : 2 },
+//		  	{ name : 'LEL_PERCENT', uid : 3 },
+//		  	{ name : 'LEL_PERCENT_METRO', uid : 4 },
+//		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
+//		 ]; 
 	
 	/*-------------------------------------------------------------------------- A R E A -------------------------------------------------------------------------------*/
 		
@@ -655,8 +655,10 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				
 				google.charts.setOnLoadCallback(drawChart);
 			}
+			
+			$scope.getCompanyDetectorArea();
 										 
-		}, 450);
+		}, 500);
 				
 	 }	
 	  
@@ -755,13 +757,15 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	}
 	
 	drawChart = function() {
-//
-//		 var data = google.visualization.arrayToDataTable([
-//		   ['Label', 'Value'],
-//		   ['Sensor 01', 80],
-//		   ['Sensor 02', 55],
-//		   ['Sensor 03', 68]
-//		 ]);
+		
+//		setDetectorsGauges();
+
+		 var data = google.visualization.arrayToDataTable([
+		   ['Label', 'Value'],
+		   ['Sensor 01', 80],
+		   ['Sensor 02', 55],
+		   ['Sensor 03', 68]
+		 ]);
 		 
 		 var data1 = google.visualization.arrayToDataTable([
 		   ['Label', 'Value'],
@@ -785,29 +789,43 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		     minorTicks: 5
 		 };
 		
-//		 //var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-//		 var chart1 = new google.visualization.Gauge(document.getElementById('chart_div1'));
+		 var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+//		 var chart1 = new google.visualization.Gauge(document.getElementById('sensor3'));
 //		 var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
 //		 var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
 //		
-//		 //chart.draw(data, options);
+		 chart.draw(data, options);
 //		 
 //		 chart1.draw(data1, options);
 //		 chart2.draw(data2, options);
 //		 chart3.draw(data3, options);
 		
-//		 setInterval(function () {
-//		     data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
-//		     chart.draw(data, options);
-//		 }, 13000);
-//		 setInterval(function () {
-//		     data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
-//		     chart.draw(data, options);
-//		 }, 5000);
-//		 setInterval(function () {
-//		     data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
-//		     chart.draw(data, options);
-//		 }, 26000);
+		 setInterval(function () {
+		     data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+		     chart.draw(data, options);
+		 }, 13000);
+		 setInterval(function () {
+		     data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
+		     chart.draw(data, options);
+		 }, 5000);
+		 setInterval(function () {
+		     data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+		     chart.draw(data, options);
+		 }, 26000);
+	}
+	
+	
+	setDetectorsGauges = function() {
+		
+		var detectors = $scope.selectedCompanyDetectorsArea;
+		for (var i = 0; i < detectors.length; i++) {
+			
+			var sensors = detectors[i].detectorDto.sensorsDto;						
+			for (var j = 0; j < sensors.length; j++) {
+				
+				
+			}
+	    }		
 	}
 	
 	
@@ -817,7 +835,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		
 		if (!loadEasyPin) {
 			///colocar na inicialização da Área?			
-			$scope.getCompanyDetectorArea();
+			//$scope.getCompanyDetectorArea();
 	    	
 	    	var limit = 0;
 	    	var itens;

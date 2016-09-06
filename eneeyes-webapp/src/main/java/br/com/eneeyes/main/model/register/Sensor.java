@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import br.com.eneeyes.main.dto.register.GasDto;
 import br.com.eneeyes.main.dto.register.SensorDto;
 import br.com.eneeyes.main.model.enums.DetectionType;
+import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 /**
  * Created by Junior on 06/06/2016.
@@ -50,6 +51,11 @@ public class Sensor {
 		
 		if(dto.getGasesDto() != null)
 			this.gases = parseGases(dto.getGasesDto());
+		
+		this.unitMeterGases = dto.getUnitMeterGases();
+		this.RangeMax = dto.getRangeMax();
+		this.RangeMin = dto.getRangeMin();
+		this.RangeUnit = dto.getRangeUnit();
 	}	
 	
 	private final Set<Gas> parseGases(List<GasDto> gases) {		
@@ -82,9 +88,6 @@ public class Sensor {
 	
 	@Column(name = "NAME", nullable = true)
 	String name;
-
-//	@Column(name = "MANUFACTURER", nullable = true)
-//	String manufacturer;
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="MANUFACTURER_ID", nullable = false)
@@ -92,6 +95,23 @@ public class Sensor {
 	
 	@Column(name = "MODEL", nullable = true)
 	String model;
+	
+	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
+	private UnitMeterGases unitMeterGases;
+
+	@Enumerated(EnumType.ORDINAL) 
+	private UnitMeterGases UnitMeterGases() { 
+	    return unitMeterGases; 
+	}
+	
+	@Column(name = "RANGE_MAX", nullable = true)		
+	private Double RangeMax;
+	
+	@Column(name = "RANGE_MIN", nullable = true)		
+	private Double RangeMin;
+	
+	@Column(name = "RANGE_UNIT", nullable = true)		
+	private Double RangeUnit;
 	
 	public final Long getUid() {
 		return uid;
@@ -124,14 +144,6 @@ public class Sensor {
 	public final void setName(String name) {
 		this.name = name;
 	}
-
-//	public final String getManufacturer() {
-//		return manufacturer;
-//	}
-//
-//	public final void setManufacturer(String manufacturer) {
-//		this.manufacturer = manufacturer;
-//	}
 	
 	public final Manufacturer getManufacturer() {
 		return manufacturer;
@@ -148,4 +160,36 @@ public class Sensor {
 	public final void setModel(String model) {
 		this.model = model;
 	}
+	
+	public final UnitMeterGases getUnitMeterGases() {
+		return unitMeterGases;
+	}
+	
+	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
+		this.unitMeterGases = unitMeterGases;
+	}
+	
+	public final Double getRangeMax() {
+		return RangeMax;
+	}
+
+	public final void setRangeMax(Double rangeMax) {
+		RangeMax = rangeMax;
+	}
+
+	public final Double getRangeMin() {
+		return RangeMin;
+	}
+
+	public final void setRangeMin(Double rangeMin) {
+		RangeMin = rangeMin;
+	}
+
+	public final Double getRangeUnit() {
+		return RangeUnit;
+	}
+
+	public final void setRangeUnit(Double rangeUnit) {
+		RangeUnit = rangeUnit;
+	}	
 }

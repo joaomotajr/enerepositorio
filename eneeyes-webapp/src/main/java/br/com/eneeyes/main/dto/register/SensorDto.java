@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import br.com.eneeyes.main.model.enums.DetectionType;
+import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Gas;
 import br.com.eneeyes.main.model.register.Sensor;
 
@@ -13,8 +14,12 @@ public class SensorDto extends BaseDeviceDto {
 	
 	private Long uid;
 	private DetectionType detectionType;
-	private List<GasDto> gasesDto = new ArrayList<GasDto>();	
-
+	private List<GasDto> gasesDto = new ArrayList<GasDto>();
+	private UnitMeterGases unitMeterGases;
+	private Double RangeMax;	
+	private Double RangeMin;			
+	private Double RangeUnit;	
+	
 	public SensorDto() {
 		super();
 	}
@@ -30,6 +35,11 @@ public class SensorDto extends BaseDeviceDto {
 		
 		if(sensor.getGases() != null)		
 			this.gasesDto = parseGasesDto(sensor.getGases());
+		
+		this.unitMeterGases = sensor.getUnitMeterGases();
+       	this.RangeMax = sensor.getRangeMax();
+       	this.RangeMin = sensor.getRangeMin();
+       	this.RangeUnit = sensor.getRangeUnit();
 	}
 	
 	private final List<GasDto> parseGasesDto(Set<Gas> gases) {
@@ -78,4 +88,37 @@ public class SensorDto extends BaseDeviceDto {
 			this.detectionType = detectionType;
 		}
 	}
+	
+	public final UnitMeterGases getUnitMeterGases() {
+		return unitMeterGases;
+	}
+	
+	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
+		this.unitMeterGases = unitMeterGases;
+	}
+	
+	public final Double getRangeMax() {
+		return RangeMax;
+	}
+
+	public final void setRangeMax(Double rangeMax) {
+		RangeMax = rangeMax;
+	}
+
+	public final Double getRangeMin() {
+		return RangeMin;
+	}
+
+	public final void setRangeMin(Double rangeMin) {
+		RangeMin = rangeMin;
+	}
+
+	public final Double getRangeUnit() {
+		return RangeUnit;
+	}
+
+	public final void setRangeUnit(Double rangeUnit) {
+		RangeUnit = rangeUnit;
+	}
+
 }

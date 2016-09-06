@@ -6,7 +6,7 @@ package br.com.eneeyes.main.model.enums;
  */
 
 public enum CommProtocol {
-	DESCONHECIDO(0), PROFIBUS(1), ETHERNET_IP(2), ETHERCAT(3), ASI(4), MODBUS(5), HART(6), HONEYWELL(7), DEVICENET(8) ;
+	DESCONHECIDO(0), PROFIBUS(1), ETHERNET_IP(2), ETHERCAT(3), ASI(4), MODBUS(5), HART(6), HONEYWELL(7), DEVICENET(8), _04_20mA(9) ;
 	
 	private final int code;
 	

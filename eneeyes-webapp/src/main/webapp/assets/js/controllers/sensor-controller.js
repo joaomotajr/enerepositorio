@@ -16,7 +16,12 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 			manufacturerDto: $scope.sensorManufacturer,
 			model: $scope.sensorModel,
 			detectionType: $scope.sensorDetectionType.uid,
-			gasesDto: $scope.sensorGases
+			gasesDto: $scope.sensorGases,
+			unitMeterGases : $scope.gasUnitMeterGases.uid,
+			rangeMax : $scope.sensorRangeMax,
+			rangeMin : $scope.sensorRangeMin,
+			rangeUnit : $scope.sensorRangeUnit
+	    
     	}; 
 		 
 		$scope.inclusaoSensor = new SensorService.save(sensor);		 
@@ -58,10 +63,13 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 	    $scope.sensorName = '';
 	    $scope.sensorModel = '';
 	    $scope.sensorManufacturer = '';
-	    $scope.sensorDetectionType = '';
-	    
+	    $scope.sensorDetectionType = '';	    
 	    $scope.sensorGases = [];
 	    $scope.newGases = [];
+	    $scope.gasUnitMeterGases = '';
+		$scope.sensorRangeMax = '';
+		$scope.sensorRangeMin = '';
+		$scope.sensorRangeUnit = '';
 	}
 
 	 
@@ -70,8 +78,7 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		 $scope.resultSensors = new SensorService.listAll();		 
 		 $scope.resultSensors.$sensor({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.sensors = $scope.resultSensors.list;
-			 
-			 
+			 			 
 			 $scope.clearFormSensor();			 
 			 
 			 $timeout(function () {                    
@@ -96,6 +103,10 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		    $scope.sensorModel = $scope.sensors[index].model;
 		    $scope.sensorDetectionType = $scope.getDetectionTypes($scope.sensors[index].detectionType);
 		    $scope.sensorGases = $scope.sensors[index].gasesDto;
+		    $scope.sensorRangeMax = $scope.sensors[index].rangeMax;
+		    $scope.sensorRangeMin = $scope.sensors[index].rangeMin;
+		    $scope.sensorRangeUnit = $scope.sensors[index].rangeUnit;
+		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.sensors[index].unitMeterGases);
 		    		    		    
 		    $timeout(function () {                    
                 $scope.inicializaLDragDrop();
@@ -204,6 +215,26 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		  	{ name : 'ECM', uid : 4 },
 		  	{ name : 'IR', uid : 5 },
 		  	{ name : 'BUT', uid : 6 }		  	
+		 ]; 
+	 
+	 $scope.getUnitMetersGases = function (name) {
+		 
+		 for (var i = 0; i < $scope.unitMetersGases.length; i++) {
+             if ($scope.unitMetersGases[i].name == name) {
+                 
+            	 return $scope.unitMetersGases[i];
+             }
+         } 		 
+	 }
+	 
+	 $scope.unitMetersGases = 
+		 [
+		  	{ name : 'DESCONHECIDO', uid : 0 },
+		  	{ name : 'PPM', uid :  1 },
+		  	{ name : 'PPB', uid : 2 },
+		  	{ name : 'LEL_PERCENT', uid : 3 },
+		  	{ name : 'LEL_PERCENT_METRO', uid : 4 },
+		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
 		 ]; 
 	 
 	 $scope.getSensors();

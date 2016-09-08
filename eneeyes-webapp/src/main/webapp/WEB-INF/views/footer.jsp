@@ -103,5 +103,6 @@
 	<script src="/assets/js/services/detector-service.js"></script>
 	<script src="/assets/js/services/company-service.js"></script>
 	<script src="/assets/js/services/companyDetector-service.js"></script>
+	
 
     <!-- END PAGE LEVEL SCRIPTS -->

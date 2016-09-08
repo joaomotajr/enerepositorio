@@ -176,84 +176,71 @@
 			       	</div><!-- /.tab-pane -->
 			       	
 			       	<div class="tab-pane" id="tabArea_3">
-			       		
-			       		 <div id="chart_div" style="width: 400px; height: 120px;"></div>
-			       					       		 
-			       		 <div class="row">			       		 
-			       		 	<div class="col-md-4" style="padding-left: 0px ! important;" ng-repeat="item in selectedCompanyDetectorsArea">				              
-				              
-				              <div class="box box-widget widget-user">
-				                				                				                
-				                <div class="widget-user-header bg-aqua-active">
-				                  	<h3 class="widget-user-username">Detector: {{item.name}}</h3>
-				                  	<h5 class="widget-user-desc">Comunicação: {{item.detectorDto.transmitterDto.commProtocol}}</h5>
-				                	<h5 class="widget-user-desc">Sensores: {{item.detectorDto.sensorsDto.length}}</h5>				                  
-				                </div>
-				                				       
-				                <div ng-if="item.detectorDto.sensorsDto.length > 1">
-				                	<!-- 				                
-					                <div style="position:absolute; top: 65px ! important;">
-						                <div class="col-md-6" style="padding-left: 0px ! important;">					            	    
-							            	<div id="chart_div1"></div>						                					                
-						                </div>				                
-						                <div class="col-md-6" style="padding-left: 0px ! important;">						                
-							            	<div id="chart_div2"></div>						            	    
-						                </div>				                
-					                </div>
-					                 -->
-					                 
-					                 <div style="position:absolute; top: 65px ! important;">		
-					                 	<div ng-repeat="subItem in item.detectorDto.sensorsDto">				                				                
-							                <div class="col-md-6" style="padding-left: 0px ! important;">						                
-								            	<div id="{{'sensor' + subItem.uid}}"></div>						            	    
-							                </div>				                
-							            </div>
-					                </div>
-				                </div>
-				                
-				                <div ng-if="item.detectorDto.sensorsDto.length == 1">
-				                	<div ng-repeat="subItem in item.detectorDto.sensorsDto">
-					                	<div style="position:absolute; top: 65px ! important; margin-left: 45px ! important">					                			            	    
-											<div id="{{'sensor' + subItem.uid}}"></div>					                					                				                
-										</div>
-									</div>
-				                </div>
-				                
-				                <div class="box-footer">				                
-				                	<div class="row">
-					                    <br>					                    
-					                    <div ng-if="item.detectorDto.sensorsDto.length > 1">				                    				                    
-						                    <div ng-repeat="subItem in item.detectorDto.sensorsDto">				                    			                    
-							                    <div class="col-md-6">
-							                    	<div class="description-block">
-							                      		<h5 class="description-header"> {{subItem.name}}</h5>
-							                      		<span class="description-text">{{subItem.detectionType}}</span>
-							                      		<span class="description-text">Max|Min: {{subItem.rangeMax}} | {{subItem.rangeMin}} </span>
-								                	</div>
-							                    </div>					                    
-						                    </div>
-					                    </div>
-					                    
-					                    <div ng-if="item.detectorDto.sensorsDto.length == 1">		
-					                    	<div ng-repeat="subItem in item.detectorDto.sensorsDto">			                    
-							                    <div class="description-block">
-													<h5 class="description-header"> {{subItem.name}}</h5>
-								                    <span class="description-text">{{subItem.detectionType}}</span>
-								                    <span class="description-text">Max|Min: {{subItem.rangeMax}} | {{subItem.rangeMin}} </span>											
-												</div>				                    
-											</div>
-					                    </div>
-					                    				                    
-				                  	</div>					                  			                  
-				                </div>
-				                
-				              </div>
-				            </div>				            
+			       					       					       		 
+			       		<div class="row">			       		 
+			       		 	<div ng-repeat="item in selectedCompanyDetectorsArea">				              
+				            	
+				            	<div ng-if="item.detectorDto.sensorsDto.length > 1">
+				            	  	<div class="col-md-6">
+						              	<div class="panel panel-success">				              
+							                
+							                <div class="panel-heading">
+										    	<h3 class="panel-title" style="text-align:center;">{{item.name}}</h3>							
+										   	</div>
+										   					               	
+							               	<div class="panel-body">							            					                 		
+							                	<div ng-repeat="subItem in item.detectorDto.sensorsDto">				                				                
+									            	<div class="col-md-6">						                
+										            	<div id="{{'sensor_' + subItem.$$hashKey}}"></div>						            	    
+									            	</div>				                
+									            </div>							                				                				                
+							                	<div class="row">							                    				                    				                    
+								                	<div ng-repeat="subItem in item.detectorDto.sensorsDto">				                    			                    
+									                	<div class="col-md-6">
+									                    	<div class="description-block">
+									                      		<h5 class="description-header">{{subItem.name}}</h5>
+									                      		<span class="description-text" style="font-size:0.7em">{{subItem.detectionType}} Max|Min: {{subItem.rangeMax}} | {{subItem.rangeMin}} </span>
+										                	</div>
+									                    </div>					                    
+								                    </div>						                    					                    					                					                  			                  
+								                </div>					                
+							              	</div> <!-- Panel Body -->				              	   
+						              	</div> <!-- Panel  -->
+					              	</div>  <!-- Col 06  -->
+				              	</div>
+				              	
+				              	<div ng-if="item.detectorDto.sensorsDto.length == 1">
+				            	  	<div class="col-md-3">
+						              	<div class="panel panel-success">				              
+							                
+							                <div class="panel-heading">
+										    	<h3 class="panel-title">{{item.name}}</h3>							
+										   	</div>
+										   					               	
+							               	<div class="panel-body">							            					                 		
+							                	<div ng-repeat="subItem in item.detectorDto.sensorsDto">									            							                
+										        	<div id="{{'sensor_' + subItem.$$hashKey}}"></div>									            					                
+									            </div>							                				                				                
+							                	<div class="row">							                    				                    				                    
+								                	<div ng-repeat="subItem in item.detectorDto.sensorsDto">									                	
+								                    	<div class="description-block">
+								                      		<h5 class="description-header"> {{subItem.name}}</h5>
+								                      		<span class="description-text" style="font-size:0.7em">{{subItem.detectionType}} Max|Min: {{subItem.rangeMax}} | {{subItem.rangeMin}} </span>
+									                	</div>									                    					                    
+								                    </div>						                    					                    					                					                  			                  
+								                </div>					                
+							              	</div> <!-- Panel Body -->				              	   
+						              	</div> <!-- Panel  -->
+					              	</div>  <!-- Col 06  -->
+				              	</div>
+				              	
+				              	
+				              	              				              
+				          	</div> <!-- Repeat Detectores -->		            
 							       		 
-			       		 </div>
-			       		  
+			       		 </div>  
 			       		 	        
-			     	</div><!-- /.tab-content -->			     	
+			     	</div> <!-- /.tab-content -->			     	
 			   </div>			   						
 			</div>
 						

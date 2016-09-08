@@ -758,71 +758,66 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	
 	drawChart = function() {
 		
-//		setDetectorsGauges();
-
-		 var data = google.visualization.arrayToDataTable([
-		   ['Label', 'Value'],
-		   ['Sensor 01', 80],
-		   ['Sensor 02', 55],
-		   ['Sensor 03', 68]
-		 ]);
-		 
-		 var data1 = google.visualization.arrayToDataTable([
-		   ['Label', 'Value'],
-		   ['Sensor Azul', 80]		   
-		 ]);
-		 
-		 var data2 = google.visualization.arrayToDataTable([
-		     ['Label', 'Value'],
-             ['Sensor Verde', 80]		   
-         ]);
-		 
-		 var data3 = google.visualization.arrayToDataTable([
-   		     ['Label', 'Value'],
-                ['Sensor Rosa', 80]		   
-            ]);
-		
-		 var options = {
-		     width: 500, height: 120,
-		     redFrom: 90, redTo: 100,
-		     yellowFrom: 75, yellowTo: 90,
-		     minorTicks: 5
-		 };
-		
-		 var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-//		 var chart1 = new google.visualization.Gauge(document.getElementById('sensor3'));
-//		 var chart2 = new google.visualization.Gauge(document.getElementById('chart_div2'));
-//		 var chart3 = new google.visualization.Gauge(document.getElementById('chart_div3'));
+		setDetectorsGauges();
+//
+//		 var data = google.visualization.arrayToDataTable([
+//		   ['Label', 'Value'],
+//		   ['Sensor 01', 80],
+//		   ['Sensor 02', 55],
+//		   ['Sensor 03', 68]
+//		 ]);
 //		
-		 chart.draw(data, options);
-//		 
-//		 chart1.draw(data1, options);
-//		 chart2.draw(data2, options);
-//		 chart3.draw(data3, options);
-		
-		 setInterval(function () {
-		     data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
-		     chart.draw(data, options);
-		 }, 13000);
-		 setInterval(function () {
-		     data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
-		     chart.draw(data, options);
-		 }, 5000);
-		 setInterval(function () {
-		     data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
-		     chart.draw(data, options);
-		 }, 26000);
+//		 var options = {
+//		     width: 500, height: 120,
+//		     redFrom: 90, redTo: 100,
+//		     yellowFrom: 75, yellowTo: 90,
+//		     minorTicks: 5
+//		 };
+//		
+//		 var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+//
+//		 chart.draw(data, options);
+//		
+//		 setInterval(function () {
+//		     data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+//		     chart.draw(data, options);
+//		 }, 13000);
+//		 setInterval(function () {
+//		     data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
+//		     chart.draw(data, options);
+//		 }, 5000);
+//		 setInterval(function () {
+//		     data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+//		     chart.draw(data, options);
+//		 }, 26000);
 	}
 	
 	
 	setDetectorsGauges = function() {
-		
+				
 		var detectors = $scope.selectedCompanyDetectorsArea;
 		for (var i = 0; i < detectors.length; i++) {
 			
-			var sensors = detectors[i].detectorDto.sensorsDto;						
+			var sensors = detectors[i].detectorDto.sensorsDto;		
+			
 			for (var j = 0; j < sensors.length; j++) {
 				
+				var gaugeOptions = {
+				     //width: 500, height: 120,
+				     redFrom: 90, redTo: 100,
+				     yellowFrom: 75, yellowTo: 90,
+				     minorTicks: 5
+				};
+				
+				var gaugeData = new google.visualization.DataTable();
+				
+				gaugeData.addColumn('number', sensors[j].name);
+			    gaugeData.addRows(1);
+			    gaugeData.setCell(0, 0, sensors[j].rangeMax);
+			    
+			    console.log('sensor_' + sensors[j].$$hashKey);			    
+			    gauge = new google.visualization.Gauge(document.getElementById('sensor_' + sensors[j].$$hashKey));
+			    gauge.draw(gaugeData, gaugeOptions);
 				
 			}
 	    }		
@@ -834,8 +829,6 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	initializeEasyPin = function() {
 		
 		if (!loadEasyPin) {
-			///colocar na inicialização da Área?			
-			//$scope.getCompanyDetectorArea();
 	    	
 	    	var limit = 0;
 	    	var itens;

@@ -2,12 +2,15 @@ package br.com.eneeyes.main.model.register;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.register.GasDto;
+import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 /**
  * Created by Junior on 06/06/2016.
@@ -28,7 +31,7 @@ public class Gas {
 		this.name = dto.getName();		
 		this.cas = dto.getCas();
 		this.formula = dto.getFormula();
-//		this.unitMeterGases = dto.getUnitMeterGases();		
+		this.unitMeterGases = dto.getUnitMeterGases();		
 	}
 
 	@Id
@@ -45,13 +48,13 @@ public class Gas {
 	@Column(name = "FORMULA", nullable = true)
 	private String formula;
 
-//	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
-//	private UnitMeterGases unitMeterGases;
+	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
+	private UnitMeterGases unitMeterGases;
 
-//	@Enumerated(EnumType.ORDINAL) 
-//	private UnitMeterGases UnitMeterGases() { 
-//	    return unitMeterGases; 
-//	}
+	@Enumerated(EnumType.ORDINAL) 
+	private UnitMeterGases UnitMeterGases() { 
+	    return unitMeterGases; 
+	}
 			
 	public final Long getUid() {
 		return uid;
@@ -85,11 +88,11 @@ public class Gas {
 		this.formula = formula;
 	}
 
-//	public final UnitMeterGases getUnitMeterGases() {
-//		return unitMeterGases;
-//	}
-//
-//	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-//		this.unitMeterGases = unitMeterGases;
-//	}
+	public final UnitMeterGases getUnitMeterGases() {
+		return unitMeterGases;
+	}
+
+	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
+		this.unitMeterGases = unitMeterGases;
+	}
 }

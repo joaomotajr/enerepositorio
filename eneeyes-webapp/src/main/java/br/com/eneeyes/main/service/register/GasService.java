@@ -44,12 +44,13 @@ public class GasService implements IService<GasDto> {
 		try {			
 			repository.delete(uid);
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Área Excluída.");
+			result.setMessage("Gás Excluído.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
 			result.setIsError(true);
-			result.setMessage(e.getMessage());
+			result.setSystemMessage(e.getMessage());
+			result.setMessage("Gás Não Pode Ser Excluído");
 		}		
 		
 		return result;		

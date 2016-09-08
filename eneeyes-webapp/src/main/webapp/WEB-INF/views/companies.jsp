@@ -1,17 +1,5 @@
 <div ng-controller="companyController">
 
-	<!--    
-	<script type="text/ng-template" id="categoryTree">
-        {{ node.text }}
-        <ul class="list-group" ng-if="node.nodes">
-            <li class="list-group-item node-treeview1" ng-repeat="node in node.nodes" ng-include="'categoryTree'">
-				<span class="icon expand-icon glyphicon glyphicon-minus"></span>
-				<span class="icon node-icon"></span>           
-            </li>
-        </ul>
-    </script>	
-     -->
-				
 	<div class="row">
 	    <div class="col-md-12">
 	    				

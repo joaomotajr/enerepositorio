@@ -1,40 +1,42 @@
-<!--	 Content Wrapper. Contains page     content -->
  
-	 
-<div ng-controller="transmitterController">
-					
-		<div class="row">	
-					                                                    
+	<div ng-controller="transmitterController">					
+		<div class="row">						                                                    
 			<div class="col-md-6">                                                        
 				<div class="box box-primary" ng-class="(transmitterName || transmitterModel || transmitterManufacturer) ? 'box-default' : 'box-primary'">
 					<div class="box-header">
 					  <h3 class="box-title">Cadastro de Transmissores</h3>
 					</div>
 					<div class="box-body">
-					<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Nome</th>
-							<th>Modelo</th>                                                            
-							<th>Editar</th>
-							<th>Excluir</th>						
-						</tr>
-					</thead>
-					<tbody>                                                        
-						<tr ng-repeat="item in transmitters">
-							<td>{{item.name}}</td>
-							<td>{{item.model}}</td>															        
-							<td>
-								<button type="button" class="btn btn-info btn-xs" ng-click="editTransmitter($index)">editar</button>
-							</td>
-							<td>
-								<button type="button" class="btn btn-danger btn-xs" ng-click="deleteTransmitter($index)">excluir</button>
-							</td>						
-						</tr>                                                               
-					</tbody>
-				</table>                                                       
+						<div style="height: 500px; overflow: auto">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Nome</th>
+										<th>Modelo</th>                                                            
+										<th>Editar</th>
+										<th>Excluir</th>						
+									</tr>
+								</thead>
+								<tbody>                                                        
+									<tr ng-repeat="item in transmitters">
+										<td>{{item.name}}</td>
+										<td>{{item.model}}</td>															        
+										<td>
+											<button type="button" class="btn btn-info btn-xs" ng-click="editTransmitter($index)">editar</button>
+										</td>
+										<td>
+											<button type="button" class="btn btn-danger btn-xs" ng-click="deleteTransmitter($index)">excluir</button>
+										</td>						
+									</tr>                                                               
+								</tbody>
+							</table>
+						</div>                                                       
+					</div>
 				</div>
-				</div>
+				<div id="resultErro" class="alert alert-warning" role="alert" ng-show="msgErro" >
+            		<button type="button" class="close" ><span ng-click="msgErro='';">&times;</span></button>
+            		<strong>Alerta! </strong>{{msgErro}} 
+        		</div>
 			</div>                                                      
 																
 			<div class="col-sm-6">
@@ -60,15 +62,20 @@
 			                    </div>
 			                    			                            
 			                </div>
-			                 							                                                                                                                                    
-							<div class="form-group">
-								<label class="control-label">Nome</label>                                                                        
-								<input id="idTransmitterName" class="form-control inputProfile" placeholder="Nome do Transmissor" ng-model="transmitterName">                                                                        
-							</div>
-		
-							<div class="form-group">
-								<label class="control-label">Modelo</label>                                                       
-								<input class="form-control inputProfile" placeholder="Modelo do Transmissor" ng-model="transmitterModel">                                                
+			                 							     
+			                <div class="row">
+		                 		<div class="col-md-6">                                                                                                                                 
+									<div class="form-group">
+										<label class="control-label">Nome</label>                                                                        
+										<input id="idTransmitterName" class="form-control inputProfile" placeholder="Nome do Transmissor" ng-model="transmitterName">                                                                        
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label">Modelo</label>                                                       
+										<input class="form-control inputProfile" placeholder="Modelo do Transmissor" ng-model="transmitterModel">                                                
+									</div>
+								</div>
 							</div>
 							
 							<div class="form-group">
@@ -85,17 +92,15 @@
 						<div class="box-footer">
 							<button type="button" ng-click="clearFormTransmitter()" class="btn btn-default">Cancelar</button>                                                                
 							<button type="button" ng-click="saveTransmitter();" class="btn btn-primary" 
-								ng-disabled="(transmitterName && transmitterModel && transmitterManufacturer) ? false : true">Salvar</button>								                                                                
+								ng-disabled="(transmitterName && transmitterModel && transmitterManufacturer && transmitterCommProtocol) ? false : true">Salvar</button>								                                                                
 						</div>
 						      
 						
 					</div>
 				</div>
-			</div>
-			
-		</div>	  
-		
-</div>
+			</div>		
+		</div>		
+	</div>
 
     
     

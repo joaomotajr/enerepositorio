@@ -856,6 +856,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			    	imgDipositivosArea
 			       }
 		    ,           
+		    responsive: true,
             limit: limit,
             exceeded: function(type) {
                 // do samething...

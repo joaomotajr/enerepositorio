@@ -44,12 +44,13 @@ public class ControllerService implements IService<ControllerDto> {
 		try {			
 			repository.delete(uid);
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Área Excluída.");
+			result.setMessage("Controladora/PLC Excluída.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
 			result.setIsError(true);
-			result.setMessage(e.getMessage());
+			result.setSystemMessage(e.getMessage());
+			result.setMessage("Controladora/PLC Não Pode Ser Excluída.");
 		}		
 		
 		return result;		

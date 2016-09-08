@@ -61,10 +61,13 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	    $scope.detectorModel = '';
 	    $scope.detectorManufacturer = '';
 	    $scope.detectorTransmitter = ''
-	    //$scope.detectorDetectionType = '';
 	    $scope.detectorImage = "/assets/img/cover.jpg"
 	    $scope.detectorSensors = [];
 	    $scope.newSensors = [];
+	    
+	    $('.sort .ui-draggable').remove();
+		
+		$scope.inicializaLDragDrop();
 	}
 
 	 
@@ -125,9 +128,16 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		 $scope.deletar = new DetectorService.deletar();		 
 		 $scope.deletar.$detector({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
 			 
-			 $scope.detectors.splice(index, 1);
+			 if (!$scope.deletar.isError)
+				 $scope.detectors.splice(index, 1);
+			 else {
+				 $scope.msgErro = "Erro: " + $scope.deletar.message;
+				 console.log($scope.deletar.systemMessage); 
+			 }
          	         	
-         });		 
+		 }, function(data) {		
+			 $scope.msgErro = "Erro: " + data.statusText;
+		});		 
 	 }	 
 	 
 	 $scope.getSensors = function() {
@@ -206,8 +216,11 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
         }
         $scope.newSensors.push(sensorDto);
         $scope.$apply();
-	 }	 
+	 }
 	 
+	 $scope.deleteSensor = function (index) {
+		 $scope.detectorSensors.splice(index, 1);		 
+	 }	 
  
 	 $scope.getDetectors();
 	 $scope.getManufacturers();

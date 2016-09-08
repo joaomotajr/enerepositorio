@@ -49,7 +49,8 @@ public class DetectorService implements IService<DetectorDto> {
 		} catch (Exception e) {
 			e.printStackTrace();			
 			result.setIsError(true);
-			result.setMessage(e.getMessage());
+			result.setSystemMessage(e.getMessage());
+			result.setMessage("Detector Não Pode Ser Excluído");
 		}		
 		
 		return result;		

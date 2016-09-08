@@ -11,30 +11,36 @@
 					  <h3 class="box-title">Cadastro de: PLCs / Controladoras</h3>
 					</div>
 					<div class="box-body">
-					<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Nome</th>
-							<th>Modelo</th>                                                            
-							<th>Editar</th>
-							<th>Excluir</th>						
-						</tr>
-					</thead>
-					<tbody>                                                        
-						<tr ng-repeat="item in controllers">
-							<td>{{item.name}}</td>
-							<td>{{item.model}}</td>															        
-							<td>
-								<button type="button" class="btn btn-info btn-xs" ng-click="editController($index)">editar</button>
-							</td>
-							<td>
-								<button type="button" class="btn btn-danger btn-xs" ng-click="deleteController($index)">excluir</button>
-							</td>						
-						</tr>                                                               
-					</tbody>
-				</table>                                                       
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Nome</th>
+									<th>Modelo</th>                                                            
+									<th>Editar</th>
+									<th>Excluir</th>						
+								</tr>
+							</thead>
+							<tbody>                                                        
+								<tr ng-repeat="item in controllers">
+									<td>{{item.name}}</td>
+									<td>{{item.model}}</td>															        
+									<td>
+										<button type="button" class="btn btn-info btn-xs" ng-click="editController($index)">editar</button>
+									</td>
+									<td>
+										<button type="button" class="btn btn-danger btn-xs" ng-click="deleteController($index)">excluir</button>
+									</td>						
+								</tr>                                                               
+							</tbody>
+						</table>                                                       
+					</div>
 				</div>
-				</div>
+				
+				<div id="resultErro" class="alert alert-warning" role="alert" ng-show="msgErro" >
+            		<button type="button" class="close" ><span ng-click="msgErro='';">&times;</span></button>
+            		<strong>Alerta! </strong>{{msgErro}} 
+        		</div>
+				
 			</div>                                                      
 																
 			<div class="col-sm-6">
@@ -60,16 +66,21 @@
 			                    </div>
 			                    			                            
 			                </div>
-			                 							                                                                                                                                    
-							<div class="form-group">
-								<label class="control-label">Nome</label>                                                                        
-								<input id="idControllerName" class="form-control inputProfile" placeholder="Nome da PLC/Controladora" ng-model="controllerName">                                                                        
+			                 							        
+			                <div class="row">
+			                 	<div class="col-md-6">                                                                                                                            
+									<div class="form-group">
+										<label class="control-label">Nome</label>                                                                        
+										<input id="idControllerName" class="form-control inputProfile" placeholder="Nome da PLC/Controladora" ng-model="controllerName">                                                                        
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label">Modelo</label>                                                       
+										<input class="form-control inputProfile" placeholder="Modelo do PLC/Controladora" ng-model="controllerModel">                                                
+									</div>                                                                    
+								</div>
 							</div>
-		
-							<div class="form-group">
-								<label class="control-label">Modelo</label>                                                       
-								<input class="form-control inputProfile" placeholder="Modelo do PLC/Controladora" ng-model="controllerModel">                                                
-							</div>                                                                    
 			                 
 			            </form>						
 						

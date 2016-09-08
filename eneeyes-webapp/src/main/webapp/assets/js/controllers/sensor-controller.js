@@ -70,6 +70,11 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		$scope.sensorRangeMax = '';
 		$scope.sensorRangeMin = '';
 		$scope.sensorRangeUnit = '';
+		
+		$('.sort .ui-draggable').remove();
+		
+		$scope.inicializaLDragDrop();
+					
 	}
 
 	 
@@ -123,10 +128,17 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		 
 		 $scope.deletar = new SensorService.deletar();		 
 		 $scope.deletar.$sensor({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
-			 
-			 $scope.sensors.splice(index, 1);
+			 			 
+			 if (!$scope.deletar.isError)
+				 $scope.sensors.splice(index, 1);
+			 else {
+				 $scope.msgErro = "Erro: " + $scope.deletar.message;
+				 console.log($scope.deletar.systemMessage); 
+			 }
          	         	
-         });		 
+		 }, function(data) {		
+			 $scope.msgErro = "Erro: " + data.statusText;
+		});	 
 	 }	 
 	 
 	 $scope.getDetectionTypes = function (name) {
@@ -158,7 +170,7 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		
 		        var clazz = getClassNameWithNumberSuffix(ui.item);
 		
-		        $('.drag .' + clazz).draggable("option", "revert", true)
+		        $('.drag .' + clazz).draggable("option", "revert", true);
 		
 		        if ($('.sort .' + clazz).length > 1) {
 		            $('.sort .' + clazz + ':not(:first)').remove();
@@ -197,14 +209,15 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 	 
 	 $scope.addGasSensor = function (idGas) {
 
-	        gas = {
-	            uid: idGas	            
-	        }
+	        gas = { uid: idGas }
 
 	        $scope.newGases.push(gas);
-
 	        $scope.$apply();
 	    }
+	 
+	 $scope.deleteGas = function (index) {
+		 $scope.sensorGases.splice(index, 1);		 
+	 }	 
 	 
 	 $scope.detectionTypes = 
 		 [

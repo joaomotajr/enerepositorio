@@ -45,12 +45,13 @@ public class SensorService implements IService<SensorDto> {
 			repository.delete(uid);
 			
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Área Excluída.");
+			result.setMessage("Sensor Excluído.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
 			result.setIsError(true);
-			result.setMessage(e.getMessage());
+			result.setSystemMessage(e.getMessage());
+			result.setMessage("Sensor Não Pode Ser Excluído");
 		}		
 		
 		return result;		

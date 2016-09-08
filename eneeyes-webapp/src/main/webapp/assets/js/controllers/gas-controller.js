@@ -4,6 +4,8 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 	
 	$scope.saveGas = function() {
 		
+		angular.element('body').addClass('loading');
+		
 		var gas = {
 			uid: $scope.gasUid != undefined ? $scope.gasUid : 0,
 			name: $scope.gasName,
@@ -15,11 +17,17 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 		$scope.inclusaoGas = new GasService.save(gas);		 
 		$scope.inclusaoGas.$gas({_csrf : angular.element('#_csrf').val()}, function()
 		{         	
-         	
-         	$scope.clearFormGas();
-            $scope.getGases();
-                     	
-         });		 
+			$timeout(function () {				
+				$scope.clearFormGas();
+	            $scope.getGases();
+	            
+	            angular.element('body').removeClass('loading');				 
+	         }, 500);	
+			
+		}, function(data) {
+			angular.element('body').removeClass('loading');
+			$scope.msgErro = "Erro: " + data.statusText;
+		});		 
 	 }
 		 
 	$scope.clearFormGas = function () {
@@ -52,15 +60,22 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 	    }
 	 
 	 $scope.deleteGas = function(index) {
-		 
+		 		 
 		 var uid = $scope.gases[index].uid;		  
 		 
 		 $scope.deletar = new GasService.deletar();		 
-		 $scope.deletar.$gas({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
+		 $scope.deletar.$gas({_csrf : angular.element('#_csrf').val(), id : uid}, function(){
 			 
-			 $scope.gas.splice(index, 1);
+			 if (!$scope.deletar.isError)
+				 $scope.gases.splice(index, 1);
+			 else {
+				 $scope.msgErro = "Erro: " + $scope.deletar.message;
+				 console.log($scope.deletar.systemMessage); 
+			 }
          	         	
-         });		 
+		 }, function(data) {		
+			 $scope.msgErro = "Erro: " + data.statusText;
+		});		 
 	 }	 
 	 
 	 $scope.getUnitMetersGases = function (name) {

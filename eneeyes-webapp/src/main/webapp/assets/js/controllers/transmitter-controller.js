@@ -4,6 +4,8 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 	
 	$scope.saveTransmitter = function() {
 		
+		angular.element('body').addClass('loading');
+		
 		var transmitter = {
 			uid: $scope.transmitterUid != undefined ? $scope.transmitterUid : 0,
 			name: $scope.transmitterName,
@@ -14,11 +16,18 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 		 
 		$scope.inclusaoTransmitter = new TransmitterService.save(transmitter);		 
 		$scope.inclusaoTransmitter.$transmitter({_csrf : angular.element('#_csrf').val()}, function()
-		{         	
-         	$scope.clearFormTransmitter();
-            $scope.getTransmitters();
+		{         	            
+            $timeout(function () {				
+            	$scope.clearFormTransmitter();
+                $scope.getTransmitters();
+	            
+	            angular.element('body').removeClass('loading');				 
+	         }, 500);
                      	
-         });		 
+		}, function(data) {
+			angular.element('body').removeClass('loading');
+			$scope.msgErro = "Erro: " + data.statusText;
+		});			 
 	 }
 	
 	$scope.saveManufacturer = function() {
@@ -83,10 +92,16 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 		 
 		 $scope.deletar = new TransmitterService.deletar();		 
 		 $scope.deletar.$transmitter({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
-			 
-			 $scope.transmitters.splice(index, 1);
+			 if (!$scope.deletar.isError)
+				 $scope.transmitters.splice(index, 1);
+			 else {
+				 $scope.msgErro = "Erro: " + $scope.deletar.message;
+				 console.log($scope.deletar.systemMessage);
+			 }
          	         	
-         });		 
+		 }, function(data) {		
+			 $scope.msgErro = "Erro: " + data.statusText;
+		});		 
 	 }	 
 	 
 	 $scope.getCommProtocols = function (name) {
@@ -110,7 +125,8 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 		  	{ name : 'MODBUS', uid : 5 },
 		  	{ name : 'HART', uid : 6 },
 		  	{ name : 'HONEYWELL', uid : 7 },
-		  	{ name : 'DEVICENET', uid : 8 }
+		  	{ name : 'DEVICENET', uid : 8 },
+		  	{ name : '_04_20mA', uid : 9 }
 		 ]; 
 	 
 	 $scope.getTransmitters();

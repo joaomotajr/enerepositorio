@@ -27,30 +27,37 @@
 				  <h3 class="box-title">Cadastro de Detectores</h3>
 				</div>
 				<div class="box-body">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>Nome</th>
-								<th>Modelo</th>                                                            
-								<th>Editar</th>
-								<th>Excluir</th>						
-							</tr>
-						</thead>
-						<tbody>                                                        
-							<tr ng-repeat="item in detectors">
-								<td>{{item.name}}</td>
-								<td>{{item.model}}</td>															        
-								<td>
-									<button type="button" class="btn btn-primary btn-xs" ng-click="editDetector($index)">editar</button>
-								</td>
-								<td>
-									<button type="button" class="btn btn-danger btn-xs" ng-click="deleteDetector($index)">excluir</button>
-								</td>						
-							</tr>                                                               
-						</tbody>
-					</table>                                                       
+					<div style="height: 500px; overflow: auto">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Nome</th>
+									<th>Modelo</th>                                                            
+									<th>Editar</th>
+									<th>Excluir</th>						
+								</tr>
+							</thead>
+							<tbody>                                                        
+								<tr ng-repeat="item in detectors">
+									<td>{{item.name}}</td>
+									<td>{{item.model}}</td>															        
+									<td>
+										<button type="button" class="btn btn-primary btn-xs" ng-click="editDetector($index)">editar</button>
+									</td>
+									<td>
+										<button type="button" class="btn btn-danger btn-xs" ng-click="deleteDetector($index)">excluir</button>
+									</td>						
+								</tr>                                                               
+							</tbody>
+						</table>
+					</div>                                                       
 				</div>
 			</div>
+			
+			<div id="resultErro" class="alert alert-warning" role="alert" ng-show="msgErro" >
+           		<button type="button" class="close" ><span ng-click="msgErro='';">&times;</span></button>
+           		<strong>Alerta! </strong>{{msgErro}} 
+       		</div>
 		</div>                                                      
 															
 		<div class="col-sm-7">
@@ -145,7 +152,7 @@
 	                                             <span class="text">{{sensor.name}} </span>
 	                                         
 	                                             <div class="tools">                                                        
-	                                                 <i class="fa fa-trash-o" ng-click="deletarSensor($index)"></i>
+	                                                 <i class="fa fa-trash-o" ng-click="deleteSensor($index)"></i>
 	                                             </div>
 	                                         </li>                                                                                                   
 	                                     </ul> 

@@ -3,6 +3,8 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 	
 	$scope.saveController = function() {
 		
+		angular.element('body').addClass('loading');
+		
 		var controller = {
 			uid: $scope.controllerUid != undefined ? $scope.controllerUid : 0,
 			name: $scope.controllerName,
@@ -13,11 +15,17 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 		$scope.inclusaoController = new ControllerService.save(controller);		 
 		$scope.inclusaoController.$controller({_csrf : angular.element('#_csrf').val()}, function()
 		{         	
-         	         	
-         	$scope.clearFormController();
-            $scope.getControllers();
+            $timeout(function () {                    
+            	$scope.clearFormController();
+                $scope.getControllers();
+	                     	
+	            angular.element('body').removeClass('loading');				 
+	         }, 500);
                      	
-         });		 
+		}, function(data) {
+			angular.element('body').removeClass('loading');
+			$scope.msgErro = "Erro: " + data.statusText;
+		});		 
 	 }
 	
 	$scope.saveManufacturer = function() {
@@ -80,10 +88,17 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 		 
 		 $scope.deletar = new ControllerService.deletar();		 
 		 $scope.deletar.$controller({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
-			 
-			 $scope.controllers.splice(index, 1);
+		 
+			 if (!$scope.deletar.isError)
+				 $scope.controllers.splice(index, 1);
+			 else {
+				 $scope.msgErro = "Erro: " + $scope.deletar.message;
+				 console.log($scope.deletar.systemMessage); 
+			 }
          	         	
-         });
+		 }, function(data) {		
+			 $scope.msgErro = "Erro: " + data.statusText;
+		});
 		 
 	 }	
 	 

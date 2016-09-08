@@ -49,7 +49,8 @@ public class TransmitterService implements IService<TransmitterDto> {
 		} catch (Exception e) {
 			e.printStackTrace();			
 			result.setIsError(true);
-			result.setMessage(e.getMessage());
+			result.setSystemMessage(e.getMessage());
+			result.setMessage("Transmissor Não Pode Ser Excluído");
 		}		
 		
 		return result;		

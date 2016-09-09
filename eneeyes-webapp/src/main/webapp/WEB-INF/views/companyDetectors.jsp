@@ -4,14 +4,16 @@
 	}
 	
 	img {
-	  float: left;
-	  width: 150px;
-	  height: 100px;
-	  border: 1px solid #000;
-	  margin-right: 1em;
+	  *	float: left;
+	  *	width: 150px;
+	  *	height: 100px;
+	  *	border: 1px solid #000;
+	  *	margin-right: 1em;
+	   	width: auto;
+    	max-height: 160px;
+    	height: 160px;
 	}
-	.fill {
-  		object-fit: fill;	
+		
 </style>
 
 <div class="col-md-9">
@@ -50,10 +52,8 @@
 					                </div>  	
 						    	
 						    	</div>
-						    	<div class="col-md-4">	
-									<div class="output">							    		    
-									    <img ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
-									</div>							
+						    	<div class="col-md-4">	    		    
+									<img ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
 								</div>	
 						    </div>			    	
 				    	
@@ -89,46 +89,7 @@
 						            </div>							        
 		                       	</div>		        
 						    </div>
-						    <!--
-					    	<div class="box box-primary box-solid">
-					    		<div class="box-header with-border"><strong>Ranges</strong></div>					                	 
-				                    <div class="box-body">
-								    <div class="row">
-									    <div class="col-md-3">
-									    	<div class="form-group">
-								                <label class="control-label">Máx</label>
-								                <input class="form-control" placeholder="Max" ng-model="selectedCompanyDetector.rangeMax">
-								            </div>
-									    </div>									    
-									    <div class="col-md-3">
-									    	<div class="form-group">
-								                <label class="control-label">Min</label>
-								                <input class="form-control" placeholder="Max" ng-model="selectedCompanyDetector.rangeMin">
-								            </div>
-									    </div>
-									    
-									    <div class="col-md-3">
-									    	<div class="form-group">
-								                <label class="control-label">Unidade</label>
-								                <input class="form-control" placeholder="Max" ng-model="selectedCompanyDetector.rangeUnit">
-								            </div>
-									    </div>
-									    
-									    <div class="col-md-3">
-									    	<div class="form-group">
-									            <label class="control-label">Unidade de Medida</label>
-												<select class="form-control" data-live-search="true" 
-						                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-						                                ng-options="item as item.name for item in unitMetersGases | orderBy: 'name' track by item.uid" 
-						                                         ng-model="gasUnitMeterGases">
-						                                         <option value="">Selecione</option> 
-						                        </select>               
-					                        </div>
-									    </div>
-								    </div>
-							    </div>
-						    </div>
-							-->		    					
+						    		    					
 			       		</form>
 			       		<div class="row">
 			       			<div class="col-md-12">

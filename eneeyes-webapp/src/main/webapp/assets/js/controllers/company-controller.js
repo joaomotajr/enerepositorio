@@ -138,27 +138,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 	{ name : 'CONTROLADORA', uid : 3 },
 		 	{ name : 'ALARME', uid : 4 } 			  	
 		];
-	
-//	$scope.getUnitMetersGases = function (name) {
-//		 
-//		 for (var i = 0; i < $scope.unitMetersGases.length; i++) {
-//            if ($scope.unitMetersGases[i].name == name) {
-//                
-//           	 return $scope.unitMetersGases[i];
-//            }
-//        } 		 
-//	 }
-//	
-//	 $scope.unitMetersGases = 
-//		 [
-//		  	{ name : 'DESCONHECIDO', uid : 0 },
-//		  	{ name : 'PPM', uid :  1 },
-//		  	{ name : 'PPB', uid : 2 },
-//		  	{ name : 'LEL_PERCENT', uid : 3 },
-//		  	{ name : 'LEL_PERCENT_METRO', uid : 4 },
-//		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
-//		 ]; 
-	
+
 	/*-------------------------------------------------------------------------- A R E A -------------------------------------------------------------------------------*/
 		
 	$scope.lockImageArea = function() {		
@@ -628,11 +608,11 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			    
 			    if ($(event.target).attr('href') == "#tabArea_2") {	
 			    	
-			    	initializeEasyPin()
+			    	//initializeEasyPin()
 			    	
 				}
 			    else if ($(event.target).attr('href') == "#tabArea_3") {
-			    	initGauge();
+			    	//initGauge();
 			    }
 			});
 			
@@ -656,6 +636,10 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				google.charts.setOnLoadCallback(drawChart);
 			}
 			
+			initializeEasyPin();
+			initGauge();
+			//loadEasyPin = false;			
+			//loadGauge = false;
 			$scope.getCompanyDetectorArea();
 										 
 		}, 500);
@@ -828,10 +812,10 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	
 	initializeEasyPin = function() {
 		
-		if (!loadEasyPin) {
+		//if (!loadEasyPin) {
 	    	
 	    	var limit = 0;
-	    	var itens;
+	    	var itens = 0;
 	    	
 	    	$timeout(function () {			    		
 	    		itens = getDetectorsCoordinates();
@@ -845,7 +829,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	    	
 	    	loadEasyPin = true;
 	    	$scope.lockImageArea();
-		}		
+		//}		
 	}
 	
 	easyPin = function(itens, limit) {			
@@ -862,7 +846,6 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
                 // do samething...
             }
 		});	
-
     }	
 	
 	getDetectorsCoordinates = function() {

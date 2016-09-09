@@ -9,11 +9,7 @@
 		object-fit: fill;
 	}
 	
-	img {	 
-	   	width: 1000px;
-    	max-height: 400px;
-    	height: 400px;
-	}
+	
 </style>
 
 	<div class="easy-modal" style="display:none;" modal-position="free">
@@ -35,8 +31,8 @@
 	    </form>
 	</div>        
 	 	 
-	<div style="display:none;" width="80" shadow="true" popover>
-	    <div style="width:100%;text-align:center; font-size: 0.8em;">{[content]}</div>
+	<div style="display:none;" width="130" shadow="true" popover>
+	    <div style="width:100%;text-align:center">{[content]}</div>
 	</div>
 
 <div class="col-md-9">
@@ -171,7 +167,7 @@
 							<div class="col-md-10">
 								<div style="overflow: auto">
 									<div  id="idImageArea">																					    		    
-										<img src="{{selectedArea.image}}" onError="this.src='/assets/img/cover.jpg'" class="pin" easypin-id="imgDipositivosArea" />
+										<img src="{{selectedArea.image}}" width="1000" onError="this.src='/assets/img/cover.jpg'" class="pin" easypin-id="imgDipositivosArea" />
 									</div>									
 								</div>
 								

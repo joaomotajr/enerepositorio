@@ -608,11 +608,11 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			    
 			    if ($(event.target).attr('href') == "#tabArea_2") {	
 			    	
-			    	//initializeEasyPin()
+			    	initializeEasyPin();
 			    	
 				}
 			    else if ($(event.target).attr('href') == "#tabArea_3") {
-			    	//initGauge();
+			    	initGauge();
 			    }
 			});
 			
@@ -636,10 +636,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				google.charts.setOnLoadCallback(drawChart);
 			}
 			
-			initializeEasyPin();
-			initGauge();
-			//loadEasyPin = false;			
-			//loadGauge = false;
+			//initializeEasyPin();
+			//initGauge();
 			$scope.getCompanyDetectorArea();
 										 
 		}, 500);

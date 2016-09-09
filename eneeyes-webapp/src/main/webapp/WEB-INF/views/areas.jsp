@@ -8,6 +8,12 @@
 	.fill {
 		object-fit: fill;
 	}
+	
+	img {	 
+	   	width: 1000px;
+    	max-height: 400px;
+    	height: 400px;
+	}
 </style>
 
 	<div class="easy-modal" style="display:none;" modal-position="free">
@@ -29,8 +35,8 @@
 	    </form>
 	</div>        
 	 	 
-	<div style="display:none;" width="130" shadow="true" popover>
-	    <div style="width:100%;text-align:center;">{[content]}</div>
+	<div style="display:none;" width="80" shadow="true" popover>
+	    <div style="width:100%;text-align:center; font-size: 0.8em;">{[content]}</div>
 	</div>
 
 <div class="col-md-9">
@@ -154,8 +160,8 @@
 							<div class="col-md-2">								
 								<div class="box box-primary direct-chat direct-chat-primary">
 									<div class="direct-chat-msg right" ng-repeat="item in selectedCompanyDetectorsArea">			                      
-			                      		<img class="direct-chat-img img-sm" ng-src="{{item.detectorDto.image}}" style="width: 30px ! important; Height: 30px ! important">
-			                      		<div class="direct-chat-text" style="font-size: 0.7em; margin-right: 30px;"  >
+			                      		<img class="direct-chat-img" ng-src="{{item.detectorDto.image}}" style="width: auto ! important; height: 30px ! important ; max-height: 30px ! important"">
+			                      		<div class="direct-chat-text" style="font-size: 0.7em; margin-right: 40px;"  >
 			                        		{{item.name}}
 			                      		</div><!-- /.direct-chat-text -->
 			                    	</div>
@@ -165,7 +171,7 @@
 							<div class="col-md-10">
 								<div style="overflow: auto">
 									<div  id="idImageArea">																					    		    
-										<img src="{{selectedArea.image}}" width="1000" onError="this.src='/assets/img/cover.jpg'" class="pin" easypin-id="imgDipositivosArea" />
+										<img src="{{selectedArea.image}}" onError="this.src='/assets/img/cover.jpg'" class="pin" easypin-id="imgDipositivosArea" />
 									</div>									
 								</div>
 								
@@ -199,7 +205,7 @@
 									                	<div class="col-md-6">
 									                    	<div class="description-block">
 									                      		<h5 class="description-header">{{subItem.name}}</h5>
-									                      		<span class="description-text" style="font-size:0.7em">{{subItem.detectionType}} Max|Min: {{subItem.rangeMax}} | {{subItem.rangeMin}} </span>
+									                      		<span class="description-text" style="font-size:0.7em">{{subItem.detectionType}} Min|Max: {{subItem.rangeMin}} | {{subItem.rangeMax}} </span>
 										                	</div>
 									                    </div>					                    
 								                    </div>						                    					                    					                					                  			                  
@@ -225,7 +231,7 @@
 								                	<div ng-repeat="subItem in item.detectorDto.sensorsDto">									                	
 								                    	<div class="description-block">
 								                      		<h5 class="description-header"> {{subItem.name}}</h5>
-								                      		<span class="description-text" style="font-size:0.7em">{{subItem.detectionType}} Max|Min: {{subItem.rangeMax}} | {{subItem.rangeMin}} </span>
+								                      		<span class="description-text" style="font-size:0.7em">{{subItem.detectionType}} Min|Man: {{subItem.rangeMin}} | {{subItem.rangeMax}} </span>
 									                	</div>									                    					                    
 								                    </div>						                    					                    					                					                  			                  
 								                </div>					                

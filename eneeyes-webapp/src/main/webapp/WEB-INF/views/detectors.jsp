@@ -6,15 +6,16 @@
 		}
 		
 		img {
-		  float: left;
-		  width: 150px;
-		  height: 100px;
-		  border: 1px solid #000;
-		  margin-right: 1em;
+		  *float: left;
+		  *width: 150px;
+		  *height: 150px;
+		  *border: 1px solid #000;
+		  *margin-right: 1em;
+		    width: auto;
+    		max-height: 160px;
+    		height: 160px;
 		}
-		.fill {
-	  		object-fit: fill;
-	
+			
 	</style>
 	 
 <div ng-controller="detectorController">
@@ -77,9 +78,9 @@
 					        	</div>
 							</div>
 							<div class="col-md-4">	
-								<div class="output">							    		    
+															    		    
 								    <img ng-src="{{detectorImage}}" onError="this.src='/assets/img/cover.jpg'">
-								</div>							
+															
 							</div>							
 						</div>
 						<hr>

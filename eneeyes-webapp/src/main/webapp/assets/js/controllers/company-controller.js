@@ -3,7 +3,6 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
     var map;
 	var geocoder;
 	var loadGauge = false;
-	var loadEasyPin = false;	
 	
 	/*----------------------------------------------------------------- C O M P A N Y   D E V I C E----------------------------------------------------------------------*/
 	
@@ -100,15 +99,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;          	         	
         });		 
 	}
-	
-	$scope.getCompanyDetector = function(uid) {
-		var result = "";
-							
-		result =  uid + " Image ";          	         	
-        	 
-		return result;
-	}
-	
+		
 	$scope.saveCompanyDeviceInit = function() {
 		angular.element('body').addClass('loading');
 		
@@ -438,7 +429,11 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		else 
 		{
 			$scope.clearFormCompany();
-			$scope.selectedUnit = undefined;
+			
+			$scope.clearFormUnit();
+			$scope.selectedUnit = undefined;			
+			$scope.clearFormArea();
+			$scope.selectedArea = undefined;			
 						
 			$scope.getCompanys();
 			
@@ -515,6 +510,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 					    	$scope.LoadAjaxContentCompany('areas.html');				    	 
 					    	
 					    	initializeArea();
+					    	
 				    	}
 				    	else if(node.type == 3) {
 				    	
@@ -601,15 +597,15 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	 
 	 function initializeArea()
 	 {
+		$scope.selectedCompanyDetectorsArea = [];
+		 
 		$timeout(function () {
 			
 			$('.tabArea a').on('click', function (event) {
 			    event.preventDefault();  
 			    
-			    if ($(event.target).attr('href') == "#tabArea_2") {	
-			    	
-			    	initializeEasyPin();
-			    	
+			    if ($(event.target).attr('href') == "#tabArea_2") {			    	
+			    	initializeEasyPin();			    	
 				}
 			    else if ($(event.target).attr('href') == "#tabArea_3") {
 			    	initGauge();
@@ -626,25 +622,22 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				$scope.$apply();					    
 			}));
 			
-			initGauge = function() {
-				
+			initGauge = function() {				
 				if(! loadGauge) {
 					google.charts.load('current', { 'packages': ['gauge'] });
 					loadGauge = true;
-				}
-				
+				}				
 				google.charts.setOnLoadCallback(drawChart);
 			}
 			
-			//initializeEasyPin();
-			//initGauge();
 			$scope.getCompanyDetectorArea();
-										 
+						
 		}, 500);
-				
+		
+		$("#stepTabArea_1").trigger("click");	
 	 }	
 	  
-	 function initializeUnit()
+	initializeUnit = function()
 	 {	
 	 	if (!geocoder) {
 	 		$timeout(function () {
@@ -665,11 +658,13 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				});		
 			 }, 400);			 
 		 }
+	 	
+	 	$("#stepTabUnit_1").trigger("click");
 	}
 	
-	function initializeCompany()
-	 {	
-	 	if (!geocoder) {
+	initializeCompany = function ()
+	{	
+		if (!geocoder) {
 			 $timeout(function () {                    
 				 geocoder = new google.maps.Geocoder();
 				 map = new google.maps.Map(document.getElementById("mapCompany"),
@@ -699,7 +694,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 }
 	 }
 
-	 mapUnit = function (lat, lng) {
+	mapUnit = function (lat, lng) {
 	    
 	    var myOptions = {
 	        zoom: 12,
@@ -717,7 +712,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
        });       
 	}
 	
-	 mapsCompany = function () {
+	
+	mapsCompany = function () {
 	    
 	    var myOptions = {
 	        zoom: 8,
@@ -740,7 +736,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	
 	drawChart = function() {
 		
-		setDetectorsGauges();
+		if($scope.selectedArea.companyDevicesDto.length > 0)
+			setDetectorsGauges();		
 //
 //		 var data = google.visualization.arrayToDataTable([
 //		   ['Label', 'Value'],
@@ -774,7 +771,6 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 //		 }, 26000);
 	}
 	
-	
 	setDetectorsGauges = function() {
 				
 		var detectors = $scope.selectedCompanyDetectorsArea;
@@ -805,44 +801,41 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	    }		
 	}
 	
-	
 	/*--------------------------------------------------------------------------   JQuery EasyPIN -----------------------------------------------------------------------*/
 	
+	
 	initializeEasyPin = function() {
+    	
+		var itens;
+		var limit = 0;
+		$('.easy-marker').remove();
 		
-		//if (!loadEasyPin) {
+		if($scope.selectedArea.companyDevicesDto.length > 0) {
+			
+	    	itens = getDetectorsCoordinates();
 	    	
-	    	var limit = 0;
-	    	var itens = 0;
-	    	
-	    	$timeout(function () {			    		
-	    		itens = getDetectorsCoordinates();
+	    	$timeout(function () {	    		
 	    		limit = $scope.selectedCompanyDetectorsArea.length;
 	    	}, 300);
 	    	
 	    	$timeout(function () {           
 	    		easyPin(itens, limit);			    		
 	    		$('.pin').trigger("click")
-	    	}, 500);
-	    	
-	    	loadEasyPin = true;
-	    	$scope.lockImageArea();
-		//}		
+	    	}, 600);	    	
+		}	
+    	    	
+    	$scope.lockImageArea();
+		
 	}
 	
 	easyPin = function(itens, limit) {			
 		
 		var imgDipositivosArea = itens;
+		
 		var $easyInstance = $('.pin').easypin({
-			 init: {
-			    	imgDipositivosArea
-			       }
-		    ,           
+			 init: { imgDipositivosArea },           
 		    responsive: true,
-            limit: limit,
-            exceeded: function(type) {
-                // do samething...
-            }
+            limit: limit
 		});	
     }	
 	

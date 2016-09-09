@@ -17,9 +17,9 @@
 						
 			<div class="nav-tabs-custom">
 				<ul class="nav nav-tabs tabUnit">
-   					<li><a href="#tabUnit_1" data-toggle="tab">Cadastro</a></li>
-			       	<li><a href="#tabUnit_2" data-toggle="tab">Localização</a></li>
-			       	<li><a href="#tabUnit_3" data-toggle="tab">Detalhes</a></li>
+   					<li><a href="#tabUnit_1" id="stepTabUnit_1" data-toggle="tab">Cadastro</a></li>
+			       	<li><a href="#tabUnit_2" id="stepTabUnit_2" data-toggle="tab">Localização</a></li>
+			       	<li><a href="#tabUnit_3" id="stepTabUnit_3" data-toggle="tab">Detalhes</a></li>
 			    	<li class="pull-right"><a href="#" class="text-muted" ng-click="getCoordinatesUnit();" title="Validar Local."><i class="fa fa-map" ng-class="(mapUnitOK) ? 'mapOK' : 'mapNOK'"></i></a></li>
 			    </ul>
 							
@@ -134,11 +134,14 @@
 						</div>     
 			       	</div><!-- /.tab-pane -->
 			       	
-			       	<div class="tab-pane" id="tabUnit_2">	    
-			       		latitude: <input name="latitude"  id='latUnit' ng-model="selectedUnit.latitude" type="text" placeholder="Latitude"  disabled>
-            			longitude:<input name="longitude" id='lngUnit' ng-model="selectedUnit.longitude"  type="text" placeholder="Longitude" disabled>				
-						<hr>
-						<div align="center"  id="mapUnit" style="height: 300px; width: 650px"></div>    
+			       	<div class="tab-pane" id="tabUnit_2">
+			       			    
+			       		<input name="latitude"  id='latUnit' ng-model="selectedUnit.latitude" type="hidden" placeholder="Latitude"  disabled>
+            			<input name="longitude" id='lngUnit' ng-model="selectedUnit.longitude"  type="hidden" placeholder="Longitude" disabled>				
+												
+						<div style="height: 400px; overflow: auto">
+							<div align="center"  id="mapUnit" style="height: 400px; width: 800px"></div>
+						</div>    
 						
 			       	</div><!-- /.tab-pane -->
 			       	

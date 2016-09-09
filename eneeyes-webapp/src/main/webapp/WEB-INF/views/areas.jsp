@@ -45,9 +45,9 @@
 						
 			<div class="nav-tabs-custom">
 				<ul class="nav nav-tabs tabArea">
-			       	<li class="active"><a href="#tabArea_1" data-toggle="tab">Cadastro</a></li>
-			       	<li><a href="#tabArea_2" data-toggle="tab">Local</a></li>
-			       	<li><a href="#tabArea_3" data-toggle="tab">Dispositivos</a></li>
+			       	<li class="active"><a href="#tabArea_1" id="stepTabArea_1" data-toggle="tab">Cadastro</a></li>
+			       	<li><a href="#tabArea_2" id="stepTabArea_2" data-toggle="tab">Local</a></li>
+			       	<li><a href="#tabArea_3" id="stepTabArea_1" data-toggle="tab">Dispositivos</a></li>
 			    	<li title="Trocar Imagem da Área" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
 			    </ul>
 				
@@ -156,7 +156,7 @@
 							<div class="col-md-2">								
 								<div class="box box-primary direct-chat direct-chat-primary">
 									<div class="direct-chat-msg right" ng-repeat="item in selectedCompanyDetectorsArea">			                      
-			                      		<img class="direct-chat-img" ng-src="{{item.detectorDto.image}}" style="width: auto ! important; height: 30px ! important ; max-height: 30px ! important"">
+			                      		<img class="direct-chat-img" ng-src="{{item.detectorDto.image}}" style="width: auto ! important; height: 30px ! important ; max-height: 30px ! important;">
 			                      		<div class="direct-chat-text" style="font-size: 0.7em; margin-right: 40px;"  >
 			                        		{{item.name}}
 			                      		</div><!-- /.direct-chat-text -->
@@ -165,9 +165,9 @@
 							</div>
 							
 							<div class="col-md-10">
-								<div style="overflow: auto">
+								<div style="height: 430px; overflow: auto">
 									<div  id="idImageArea">																					    		    
-										<img src="{{selectedArea.image}}" width="1000" onError="this.src='/assets/img/cover.jpg'" class="pin" easypin-id="imgDipositivosArea" />
+										<img src="{{selectedArea.image}}" style="width: 1000px; height: 400px; max-height: 400px;" onError="this.src='/assets/img/cover.jpg'" class="pin" easypin-id="imgDipositivosArea" />
 									</div>									
 								</div>
 								

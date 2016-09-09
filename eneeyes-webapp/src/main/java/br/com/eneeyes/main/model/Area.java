@@ -45,13 +45,15 @@ public class Area {
     	this.classified= dto.getClassified();		
     	this.date = dto.getDate();
     	
-    	try {
-			byte[] image = null;
-			image = dto.getImage().getBytes("US-ASCII");
-			this.setImage(image);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}    	
+    	if (dto.getImage() != null) {
+	    	try {
+				byte[] image = null;
+				image = dto.getImage().getBytes("US-ASCII");
+				this.setImage(image);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}    	
+    	}
     }	
 
 	@Id

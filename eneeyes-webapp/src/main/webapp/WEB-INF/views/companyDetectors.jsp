@@ -12,6 +12,8 @@
 	   	width: auto;
     	max-height: 160px;
     	height: 160px;
+    	 background-size: cover;
+    background-position: 50% 50%;
 	}
 		
 </style>
@@ -26,15 +28,16 @@
 			<div class="nav-tabs-custom">
 				<ul class="nav nav-tabs">
 			       	<li class="active"><a href="#tabCompanyDetector_1" data-toggle="tab">Cadastro</a></li>
-			       	<!-- <li><a href="#tabCompanyDetector_2" data-toggle="tab">Mapa</a></li> -->
-			       	<li><a href="#tabCompanyDetector_3" data-toggle="tab">Historico</a></li>
+			       	<li><a href="#tabCompanyDetector_2" data-toggle="tab">Configuração</a></li>
+			       	<li><a href="#tabCompanyDetector_3" data-toggle="tab">Histórico</a></li>
 			    	<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
 			    </ul>
 				
 				<div class="tab-content">
 			    	
 			    	<div class="tab-pane active" id="tabCompanyDetector_1">
-			    		<form name="userForm">	 
+			    		<form name="userForm">
+			    			<!-- 	 
 				    		<div class="row">
 						    	<div class="col-md-6">
 						    	
@@ -56,17 +59,61 @@
 									<img ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
 								</div>	
 						    </div>			    	
-				    	
-				    		<div class="row">
+				    		-->
+				    		
+				    		<div class="row">							
+								<div class="col-md-4">							    
+								    <input type="file" id="idInputImageDetector" style='display:none'>							    
+								    <div class="box box-primary">
+						                <div class="box-body box-profile">						                    
+						                    <img class="profile-user-img img-responsive img-circle" style="margin: 0 auto" ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
+						                    <p class="text-muted text-center ng-binding">{{selectedCompanyDetector.detectorDto.name}} - {{selectedCompanyDetector.detectorDto.model}}</p>						                    					                    	                
+						                </div>
+					                </div>
+					                															
+								</div>
+								<div class="col-md-2">
+					                	<label>
+					                	  
+					                	 </label>
+					                </div>
+															
+								<div class="row">
+				                 	<div class="col-md-6">						    	
+							    		<div class="box box-primary box-solid">
+						                    <div class="box-header with-border"><strong>Detector</strong></div>
+						                	 
+						                    <div class="box-body">
+						                        <select class="form-control" data-live-search="true" 
+						                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+						                                ng-options="item as item.name for item in detectors | orderBy: 'name' track by item.uid" 
+				                                           ng-model="selectedCompanyDetector.detectorDto">
+				                                           <option value="">Selecione</option> 
+						                        </select>    
+						                    </div>			                    			                            
+						                </div>							    	
+							    	</div>
+							    	<!-- 
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label">Modelo</label>                                                       
+											<input class="form-control inputProfile" placeholder="Modelo do Detector" ng-model="detectorModel">                                                
+										</div>
+									</div>
+									 -->							
+								</div>							
+							</div>
+							
+				    		<div class="row">				    			
 						        <div class="col-md-6">
 						            <div class="form-group">
 						                <label class="control-label">Nome</label>
 						                <span class="text-red" ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
 							            <span ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>
-						                <input id="idAreaName" class="form-control" placeholder="Nome da Area / Matriz" ng-model="selectedCompanyDetector.name" ng-maxlength="15" name="username" required>
+						                <input id="idAreaName" class="form-control" placeholder="Nome do Detector" ng-model="selectedCompanyDetector.name" ng-maxlength="15" name="username" required>
 						            </div>
 						        </div>
-						
+								
 						        <div class="col-md-6">
 						            <div class="form-group">
 						                <label class="control-label">Descrição</label>
@@ -103,9 +150,9 @@
 						
 			    	         
 			       	</div><!-- /.tab-pane -->
-			       	<!-- 
+			       	 
 			       	<div class="tab-pane" id="tabCompanyDetector_2">		       	        
-			       	</div><!-- /.tab-pane -->
+			       	</div>
 			       	
 			       	 
 			       	<div class="tab-pane" id="tabCompanyDetector_3">	        

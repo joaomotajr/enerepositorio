@@ -70,20 +70,35 @@
 				<div class="box-body">
 					<form class="form" name="userForm">					
 						<div class="row">							
-							<div class="col-md-8">
-								<h2>Imagem do Dispositivo</h2>								  
-							    <div class="input-group" id="img2b64">
-			        	    		<input type="file" id="idInputImageDetector" style='display:none'>
-					        		<button id="idChooseFileDetector" class="btn btn-sm"><i class="fa fa-file-image-o"></i> Imagem</button>							        
-					        	</div>
-							</div>
-							<div class="col-md-4">	
-															    		    
-								    <img ng-src="{{detectorImage}}" onError="this.src='/assets/img/cover.jpg'">
-															
+							<div class="col-md-6">							    
+							    <input type="file" id="idInputImageDetector" style='display:none'>							    
+							    <div class="box box-primary">
+					                <div class="box-body box-profile">                          
+					                    <img class="profile-user-img img-responsive img-circle" style="margin: 0 auto" alt="Imagem do Perfil" ng-src="{{detectorImage}}" onError="this.src='/assets/img/cover.jpg'">
+					                    <p class="text-muted text-center ng-binding">{{detectorName}} - {{detectorModel}} </p>                    
+					                    <a href="#" class="icon fa fa-photo fa-2.0x pull-right" ng-click="addPhoto();" title="Trocar foto"></a>
+					                    					                    	                
+					                </div>
+				                </div>															
+							</div>							
+							<div class="row">
+			                 	<div class="col-md-6">                                                                                                                                    
+									<div class="form-group">
+										<label class="control-label">Nome</label>
+										<span class="text-red" ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
+								        <span class="text-red" ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
+										<input id="idDetectorName" class="form-control inputProfile" placeholder="Nome do Detector" ng-model="detectorName" ng-maxlength="15" name="username" required>                                                                        
+									</div>							
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label">Modelo</label>                                                       
+										<input class="form-control inputProfile" placeholder="Modelo do Detector" ng-model="detectorModel">                                                
+									</div>
+								</div>							
 							</div>							
 						</div>
-						<hr>
+						
 						<div class="row">
 							<div class="col-md-6">
 								<div class="box box-primary box-solid">
@@ -117,7 +132,7 @@
 				                </div>		     
 			                </div>
 		                </div>
-		                           
+		                <!--      
 		                <div class="row">
 		                 	<div class="col-md-6">                                                                                                                                    
 							<div class="form-group">
@@ -134,7 +149,7 @@
 							</div>
 							</div>							
 						</div>
-                         
+                         -->
                         <div class="box box-primary box-solid">
 		                    <div class="box-header with-border ui-sortable-handle ">
 		                    	<strong>Sensores</strong>

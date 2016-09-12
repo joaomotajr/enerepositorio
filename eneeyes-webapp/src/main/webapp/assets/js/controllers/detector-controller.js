@@ -206,7 +206,13 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		 $('#idChooseFileDetector').click(function(event) {
 		    event.preventDefault();	    
 		    $('#idInputImageDetector').trigger('click');	    
-		});
+		 });		 
+		  
+		 $scope.addPhoto = function() {
+			 event.preventDefault();
+			$('#idInputImageDetector').trigger('click');
+		 }
+		
 	}
 	 
 	 $scope.addSensorDetector = function (idSensor) {

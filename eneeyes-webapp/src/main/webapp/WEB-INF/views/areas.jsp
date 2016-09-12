@@ -31,7 +31,7 @@
 	    </form>
 	</div>        
 	 	 
-	<div style="display:none;" width="130" shadow="true" popover>
+	<div style="display:none;" width="100" shadow="true" popover>
 	    <div style="width:100%;text-align:center">{[content]}</div>
 	</div>
 

@@ -53,10 +53,6 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			detectorDto: {uid: $scope.selectedCompanyDetector.detectorDto.uid},
 			local: $scope.selectedCompanyDetector.local,
 			description: $scope.selectedCompanyDetector.description
-//			, unitMeterGases : $scope.gasUnitMeterGases.uid,
-//			rangeMax : $scope.selectedCompanyDetector.rangeMax,
-//			rangeMin : $scope.selectedCompanyDetector.rangeMin,
-//			rangeUnit : $scope.selectedCompanyDetector.rangeUnit
 		 }
 		 
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
@@ -88,7 +84,6 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
-			//$scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.selectedCompanyDetector.unitMeterGases);
         });		 
 	}
 	

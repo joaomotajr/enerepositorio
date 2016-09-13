@@ -53,9 +53,9 @@ public class Sensor {
 			this.gases = parseGases(dto.getGasesDto());
 		
 		this.unitMeterGases = dto.getUnitMeterGases();
-		this.RangeMax = dto.getRangeMax();
-		this.RangeMin = dto.getRangeMin();
-		this.RangeUnit = dto.getRangeUnit();
+		this.rangeMax = dto.getRangeMax();
+		this.rangeMin = dto.getRangeMin();
+		this.rangeUnit = dto.getRangeUnit();
 	}	
 	
 	private final Set<Gas> parseGases(List<GasDto> gases) {		
@@ -105,13 +105,13 @@ public class Sensor {
 	}
 	
 	@Column(name = "RANGE_MAX", nullable = true)		
-	private Double RangeMax;
+	private Double rangeMax;
 	
 	@Column(name = "RANGE_MIN", nullable = true)		
-	private Double RangeMin;
+	private Double rangeMin;
 	
 	@Column(name = "RANGE_UNIT", nullable = true)		
-	private Double RangeUnit;
+	private Double rangeUnit;
 	
 	public final Long getUid() {
 		return uid;
@@ -170,26 +170,26 @@ public class Sensor {
 	}
 	
 	public final Double getRangeMax() {
-		return RangeMax;
+		return rangeMax;
 	}
 
 	public final void setRangeMax(Double rangeMax) {
-		RangeMax = rangeMax;
+		this.rangeMax = rangeMax;
 	}
 
 	public final Double getRangeMin() {
-		return RangeMin;
+		return rangeMin;
 	}
 
 	public final void setRangeMin(Double rangeMin) {
-		RangeMin = rangeMin;
+		this.rangeMin = rangeMin;
 	}
 
 	public final Double getRangeUnit() {
-		return RangeUnit;
+		return rangeUnit;
 	}
 
 	public final void setRangeUnit(Double rangeUnit) {
-		RangeUnit = rangeUnit;
+		this.rangeUnit = rangeUnit;
 	}	
 }

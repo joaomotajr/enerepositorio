@@ -1,6 +1,3 @@
-/**
- * 
- */
 
 app.factory('CompanyService', function($resource){    
     

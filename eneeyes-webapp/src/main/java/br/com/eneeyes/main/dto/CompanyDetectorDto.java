@@ -21,6 +21,7 @@ public class CompanyDetectorDto {
 	private Double RangeUnit;	
 	private CompanyDeviceDto companyDeviceDto;	
 	private DetectorDto detectorDto;
+	private AlarmDto alarmDto;
 
 	public CompanyDetectorDto() {
 		
@@ -41,6 +42,9 @@ public class CompanyDetectorDto {
        	this.RangeUnit = companyDetector.getRangeUnit();
        	       	       	
        	this.detectorDto = new DetectorDto(companyDetector.getDetector()) ;
+       	
+       	if(companyDetector.getAlarm() != null)
+       		this.alarmDto = new AlarmDto(companyDetector.getAlarm());
 	}
 		
 	public final Long getUid() {
@@ -145,4 +149,13 @@ public class CompanyDetectorDto {
 	public void setCompanyDeviceDto(CompanyDeviceDto companyDeviceDto) {
 		this.companyDeviceDto = companyDeviceDto;
 	}
+	
+	public final AlarmDto getAlarmDto() {
+		return alarmDto;
+	}
+
+	public final void setAlarmDto(AlarmDto alarmDto) {
+		this.alarmDto = alarmDto;
+	}
+
 }

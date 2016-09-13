@@ -49,6 +49,9 @@ public class CompanyDetector {
 		this.RangeUnit = dto.getRangeUnit();
     	
     	this.detector = new Detector(dto.getDetectorDto());
+    	
+    	if(dto.getAlarmDto() != null)
+    		this.alarm = new Alarm(dto.getAlarmDto());
     }   
 
 	@Id
@@ -98,7 +101,11 @@ public class CompanyDetector {
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="DETECTOR_ID", nullable = false)
 	private Detector detector;
-
+	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="ALARM_ID", nullable = true)
+	private Alarm alarm;
+	
 	public Long getUid() {
 		return uid;
 	}
@@ -201,5 +208,13 @@ public class CompanyDetector {
 
 	public void setDetector(Detector detector) {
 		this.detector = detector;
+	}
+	
+	public final Alarm getAlarm() {
+		return alarm;
+	}
+
+	public final void setAlarm(Alarm alarm) {
+		this.alarm = alarm;
 	}
 }

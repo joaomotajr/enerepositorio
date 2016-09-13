@@ -16,9 +16,9 @@ public class SensorDto extends BaseDeviceDto {
 	private DetectionType detectionType;
 	private List<GasDto> gasesDto = new ArrayList<GasDto>();
 	private UnitMeterGases unitMeterGases;
-	private Double RangeMax;	
-	private Double RangeMin;			
-	private Double RangeUnit;	
+	private Double rangeMax;	
+	private Double rangeMin;			
+	private Double rangeUnit;	
 	
 	public SensorDto() {
 		super();
@@ -37,9 +37,9 @@ public class SensorDto extends BaseDeviceDto {
 			this.gasesDto = parseGasesDto(sensor.getGases());
 		
 		this.unitMeterGases = sensor.getUnitMeterGases();
-       	this.RangeMax = sensor.getRangeMax();
-       	this.RangeMin = sensor.getRangeMin();
-       	this.RangeUnit = sensor.getRangeUnit();
+       	this.rangeMax = sensor.getRangeMax();
+       	this.rangeMin = sensor.getRangeMin();
+       	this.rangeUnit = sensor.getRangeUnit();
 	}
 	
 	private final List<GasDto> parseGasesDto(Set<Gas> gases) {
@@ -98,27 +98,27 @@ public class SensorDto extends BaseDeviceDto {
 	}
 	
 	public final Double getRangeMax() {
-		return RangeMax;
+		return rangeMax;
 	}
 
 	public final void setRangeMax(Double rangeMax) {
-		RangeMax = rangeMax;
+		this.rangeMax = rangeMax;
 	}
 
 	public final Double getRangeMin() {
-		return RangeMin;
+		return rangeMin;
 	}
 
 	public final void setRangeMin(Double rangeMin) {
-		RangeMin = rangeMin;
+		this.rangeMin = rangeMin;
 	}
 
 	public final Double getRangeUnit() {
-		return RangeUnit;
+		return rangeUnit;
 	}
 
 	public final void setRangeUnit(Double rangeUnit) {
-		RangeUnit = rangeUnit;
+		this.rangeUnit = rangeUnit;
 	}
 
 }

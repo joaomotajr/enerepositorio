@@ -59,11 +59,12 @@
 	            
 	            <li class="treeview">
 	            	<a href="#">
-	                <i class="fa fa-edit"></i> <span>Cadastro Clientes</span>
+	                <i class="fa fa-cube"></i> <span>Cadastro Clientes</span>
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">			            		        
-			            <li><a href="#" ng-click="LoadAjaxContent('companies.html', 'Empresas')"><i class="fa fa-circle-o"></i> Empresa</a></li>
+			            <li><a href="#" ng-click="LoadAjaxContent('companies.html', 'Empresas')"><i class="fa fa-industry"></i> Empresa</a></li>
+			            <li><a href="#" ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn"></i> Alarmes</a></li>
 	              	</ul>
 	            </li>	                  
 	        </ul>

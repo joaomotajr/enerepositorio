@@ -91,8 +91,8 @@
 	<script src="/assets/js/controllers/gas-controller.js"></script>
 	<script src="/assets/js/controllers/detector-controller.js"></script>
 	<script src="/assets/js/controllers/company-controller.js"></script>
-	<script src="/assets/js/controllers/imageNotes-controller.js"></script>
-	<script src="/assets/js/controllers/easyPin-controller.js"></script>
+	<script src="/assets/js/controllers/alarm-controller.js"></script>
+	
 		
 	<!-- PAGE LEVEL SERVICES -->
 	<script src="/assets/js/services/controller-service.js"></script>
@@ -103,6 +103,7 @@
 	<script src="/assets/js/services/detector-service.js"></script>
 	<script src="/assets/js/services/company-service.js"></script>
 	<script src="/assets/js/services/companyDetector-service.js"></script>
+	<script src="/assets/js/services/alarm-service.js"></script>
 	
 
     <!-- END PAGE LEVEL SCRIPTS -->

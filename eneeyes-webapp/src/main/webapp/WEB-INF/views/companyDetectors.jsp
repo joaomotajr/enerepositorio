@@ -151,7 +151,71 @@
 			    	         
 			       	</div><!-- /.tab-pane -->
 			       	 
-			       	<div class="tab-pane" id="tabCompanyDetector_2">		       	        
+			       	<div class="tab-pane" id="tabCompanyDetector_2">		     
+			       	
+			       		<div class="row">			       		 
+			       		 	<div>				              
+				            	
+				            	<div ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length > 1">
+				            	  	<div class="col-md-6">
+						              	<div class="panel panel-success">				              
+							                
+							                <div class="panel-heading">
+										    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
+										   	</div>
+										   					               	
+							               	<div class="panel-body">							            					                 		
+							                	<div ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">				                				                
+									            	<div class="col-md-6">						                
+										            	<div id="{{'sensor_' + subItem.$$hashKey}}"></div>						            	    
+									            	</div>				                
+									            </div>							                				                				                
+							                	<div class="row">							                    				                    				                    
+								                	<div ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">				                    			                    
+									                	<div class="col-md-6">
+									                    	<div class="description-block">
+									                      		<h5 class="description-header">{{subItem.name}}</h5>
+									                      		<span class="description-text" style="font-size:0.7em">{{subItem.detectionType}} Min|Max: {{subItem.rangeMin}} | {{subItem.rangeMax}} </span>
+										                	</div>
+									                    </div>					                    
+								                    </div>						                    					                    					                					                  			                  
+								                </div>					                
+							              	</div> <!-- Panel Body -->				              	   
+						              	</div> <!-- Panel  -->
+					              	</div>  <!-- Col 06  -->
+				              	</div>
+				              	
+				              	<div ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length == 1">
+				            	  	<div class="col-md-3">
+						              	<div class="panel panel-success">				              
+							                
+							                <div class="panel-heading">
+										    	<h3 class="panel-title">{{selectedCompanyDetector.name}}</h3>							
+										   	</div>
+										   					               	
+							               	<div class="panel-body">							            					                 		
+							                	<div ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">									            							                
+										        	<div id="{{'sensor_' + subItem.$$hashKey}}"></div>									            					                
+									            </div>							                				                				                
+							                	<div class="row">							                    				                    				                    
+								                	<div ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">									                	
+								                    	<div class="description-block">
+								                      		<h5 class="description-header"> {{subItem.name}}</h5>
+								                      		<span class="description-text" style="font-size:0.7em">{{subItem.detectionType}} Min|Man: {{subItem.rangeMin}} | {{subItem.rangeMax}} </span>
+									                	</div>									                    					                    
+								                    </div>						                    					                    					                					                  			                  
+								                </div>					                
+							              	</div> <!-- Panel Body -->				              	   
+						              	</div> <!-- Panel  -->
+					              	</div>  <!-- Col 06  -->
+				              	</div>
+				              	
+				              	
+				              	              				              
+				          	</div> <!-- Repeat Detectores -->		            
+							       		 
+			       		 </div>  
+			       	  	        
 			       	</div>
 			       	
 			       	 

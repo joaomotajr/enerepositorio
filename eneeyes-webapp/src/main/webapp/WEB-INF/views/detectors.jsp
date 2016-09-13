@@ -102,7 +102,7 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="box box-primary box-solid">
-				                    <div class="box-header with-border"><strong>Fabricante</strong>
+				                    <div class="box-header with-border"><strong></i> Fabricante</strong>
 				                        <a href="#" popover> [Incluir Novo]</a>                        
 					                </div>
 				                	 
@@ -119,7 +119,7 @@
 			                
 			                <div class="col-md-6">
 				                <div class="box box-primary box-solid">
-				                    <div class="box-header with-border"><strong>Transmissor</strong></div>
+				                    <div class="box-header with-border"><strong><i class="fa fa-expand"></i> Transmissor</strong></div>
 				                	 
 				                    <div class="box-body">
 				                        <select class="form-control" data-live-search="true" 
@@ -131,28 +131,10 @@
 				                    </div>			                    			                            
 				                </div>		     
 			                </div>
-		                </div>
-		                <!--      
-		                <div class="row">
-		                 	<div class="col-md-6">                                                                                                                                    
-							<div class="form-group">
-								<label class="control-label">Nome</label>
-								<span class="text-red" ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
-						        <span class="text-red" ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
-								<input id="idDetectorName" class="form-control inputProfile" placeholder="Nome do Detector" ng-model="detectorName" ng-maxlength="15" name="username" required>                                                                        
-							</div>							
-							</div>
-							<div class="col-md-6">
-							<div class="form-group">
-								<label class="control-label">Modelo</label>                                                       
-								<input class="form-control inputProfile" placeholder="Modelo do Detector" ng-model="detectorModel">                                                
-							</div>
-							</div>							
-						</div>
-                         -->
+		                </div>		     
                         <div class="box box-primary box-solid">
 		                    <div class="box-header with-border ui-sortable-handle ">
-		                    	<strong>Sensores</strong>
+		                    	<strong><i class="fa fa-feed"></i> Sensores </strong>
 		                    	<span class="text-red" ng-show="detectorSensors.length == 0 && newSensors.length == 0">  [Adicionar ao Menos Um Sensor]</span>
 		                    </div>
 		                	 

@@ -1,32 +1,27 @@
 
 app.controller('alarmController', function ($scope, $timeout, $filter, AlarmService, GasService) {
-	    
-	
+
 	$scope.saveAlarm = function() {
 		
 		angular.element('body').addClass('loading');
-		
-			
-		var sensor = {
-			uid: $scope.sensorUid != undefined ? $scope.sensorUid : 0,
-			name: $scope.sensorName,
-			manufacturerDto: $scope.sensorManufacturer,
-			model: $scope.sensorModel,
-			detectionType: $scope.sensorDetectionType.uid,
-			gasesDto: $scope.sensorGases,
+					
+		var alarm = {
+			uid: $scope.alarmUid != undefined ? $scope.alarmUid : 0,
+			name: $scope.alarmName,
+			gasDto: $scope.alarmGas,			
 			unitMeterGases : $scope.gasUnitMeterGases.uid,
-			rangeMax : $scope.sensorRangeMax,
-			rangeMin : $scope.sensorRangeMin,
-			rangeUnit : $scope.sensorRangeUnit
+			alarm1 : $scope.alarmAlarm1,
+			alarm2 : $scope.alarmAlarm2,
+			alarm3 : $scope.alarmAlarm3
 	    
     	}; 
 		 
-		$scope.inclusaoSensor = new SensorService.save(sensor);		 
-		$scope.inclusaoSensor.$sensor({_csrf : angular.element('#_csrf').val()}, function()
+		$scope.inclusaoAlarm = new AlarmService.save(alarm);		 
+		$scope.inclusaoAlarm.$alarm({_csrf : angular.element('#_csrf').val()}, function()
 		{         	
 			$timeout(function () {				
-				$scope.clearFormSensor();
-	            $scope.getSensors();                     	
+				$scope.clearFormAlarm();
+	            $scope.getAlarms();                     	
 	            angular.element('body').removeClass('loading');				 
 	         }, 500);
            
@@ -38,70 +33,46 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 
 	$scope.clearFormAlarm = function () {
 	
-	    $scope.sensorUid = undefined;  
-	    $scope.sensorName = '';
-	    $scope.sensorModel = '';
-	    $scope.sensorManufacturer = '';
-	    $scope.sensorDetectionType = '';	    
-	    $scope.sensorGases = [];
-	    $scope.newGases = [];
+	    $scope.alarmUid = undefined;  
+	    $scope.alarmName = '';	    
+	    $scope.alarmGas = '';
 	    $scope.gasUnitMeterGases = '';
-		$scope.sensorRangeMax = '';
-		$scope.sensorRangeMin = '';
-		$scope.sensorRangeUnit = '';
-		
-		$('.sort .ui-draggable').remove();
-		
-		$scope.inicializaLDragDrop();
+		$scope.alarmAlarm1 = '';
+		$scope.alarmAlarm2 = '';
+		$scope.alarmAlarm3 = '';
 					
 	}
 
 	 
 	$scope.getAlarms = function() {
 		 
-		 $scope.resultSensors = new SensorService.listAll();		 
-		 $scope.resultSensors.$sensor({_csrf : angular.element('#_csrf').val()}, function(){			
-			 $scope.sensors = $scope.resultSensors.list;
-			 			 
-			 $scope.clearFormSensor();			 
-			 
-			 $timeout(function () {                    
-				 $scope.inicializaLDragDrop();
-	         }, 1000);
+		 $scope.resultAlarms = new AlarmService.listAll();		 
+		 $scope.resultAlarms.$alarm({_csrf : angular.element('#_csrf').val()}, function(){			
+			 $scope.alarms = $scope.resultAlarms.list;			 
          });		 
 	 }	 
  
 	 $scope.editAlarm = function (index) {
-	        $scope.sensorUid = $scope.sensors[index].uid;
-	        
-	        $scope.sensorManufacturer = $scope.sensors[index].manufacturerDto;
-		    $scope.sensorName = $scope.sensors[index].name;
-		    $scope.sensorModel = $scope.sensors[index].model;
-		    $scope.sensorDetectionType = $scope.getDetectionTypes($scope.sensors[index].detectionType);
-		    $scope.sensorGases = $scope.sensors[index].gasesDto;
-		    $scope.sensorRangeMax = $scope.sensors[index].rangeMax;
-		    $scope.sensorRangeMin = $scope.sensors[index].rangeMin;
-		    $scope.sensorRangeUnit = $scope.sensors[index].rangeUnit;
-		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.sensors[index].unitMeterGases);
-		    		    		    
-		    $timeout(function () {                    
-                $scope.inicializaLDragDrop();
-            }, 1000);
-		    
-		    $scope.newGases = [];
-		    		    
-	        $('#idSensorName').focus();
+	        $scope.alarmUid = $scope.alarms[index].uid;
+	        $scope.alarmGas = $scope.alarms[index].gasDto;
+		    $scope.alarmName = $scope.alarms[index].name;		    
+		    $scope.alarmAlarm1 = $scope.alarms[index].alarm1;
+		    $scope.alarmAlarm2 = $scope.alarms[index].alarm2;
+		    $scope.alarmAlarm3 = $scope.alarms[index].alarm3;
+		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.alarms[index].unitMeterGases);
+		 		    		    
+	        $('#idAlarmName').focus();
 	    }
 	 
 	 $scope.deleteAlarm = function(index) {
 		 
-		 var uid = $scope.sensors[index].uid;		  
+		 var uid = $scope.alarms[index].uid;		  
 		 
 		 $scope.deletar = new SensorService.deletar();		 
-		 $scope.deletar.$sensor({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
+		 $scope.deletar.alarm({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
 			 			 
 			 if (!$scope.deletar.isError)
-				 $scope.sensors.splice(index, 1);
+				 $scope.alarms.splice(index, 1);
 			 else {
 				 $scope.msgErro = "Erro: " + $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
@@ -142,29 +113,6 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 
         return className;
 	 }
-	 
-	 $scope.addGasSensor = function (idGas) {
-
-	        gas = { uid: idGas }
-
-	        $scope.newGases.push(gas);
-	        $scope.$apply();
-	    }
-	 
-	 $scope.deleteGas = function (index) {
-		 $scope.sensorGases.splice(index, 1);		 
-	 }	 
-	 
-	 $scope.detectionTypes = 
-		 [
-		  	{ name : 'OUTROS', uid : 0 },
-		  	{ name : 'CAT', uid :  1 },
-		  	{ name : 'FTA', uid : 2 },
-		  	{ name : 'FID', uid : 3 },
-		  	{ name : 'ECM', uid : 4 },
-		  	{ name : 'IR', uid : 5 },
-		  	{ name : 'BUT', uid : 6 }		  	
-		 ]; 
 	 
 	 $scope.getUnitMetersGases = function (name) {
 		 

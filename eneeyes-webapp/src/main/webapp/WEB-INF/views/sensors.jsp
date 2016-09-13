@@ -56,7 +56,7 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="box box-primary box-solid">
-					                    <div class="box-header with-border"><strong>Fabricante</strong>
+					                    <div class="box-header with-border"><strong><i class="fa fa-industry"></i> Fabricante</strong>
 					                        <a href="#" popover> [Incluir Novo]</a>                        
 						                </div>
 					                	 
@@ -100,7 +100,7 @@
 							</div>
 	                        
 	                       	<div class="box box-primary box-solid">
-					    		<div class="box-header with-border"><strong>Range de Detecção</strong></div>					                	 
+					    		<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Range de Detecção</strong></div>					                	 
 				                    <div class="box-body">
 									    <div class="row">
 									    	<div class="col-md-3">
@@ -138,7 +138,7 @@
 						    </div>
 	                        
 	                        <div class="box box-primary box-solid">
-			                    <div class="box-header with-border ui-sortable-handle "><strong>Gases Detectáveis</strong>
+			                    <div class="box-header with-border ui-sortable-handle "><strong><i class="fa fa-yelp"></i> Gases </strong>
 			                    	<span class="text-red" ng-show="sensorGases.length == 0 && newGases.length == 0">  [Adicionar ao Menos Um Sensor]</span> 
 			                    </div>		                	 
 			                    <div class="box-body">		                    

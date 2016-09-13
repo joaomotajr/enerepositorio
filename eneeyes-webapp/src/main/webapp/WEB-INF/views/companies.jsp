@@ -75,7 +75,7 @@
 				 		ng-show="selectedCompanyName" 
 				 		style="padding: 5px 5px 5px 25px; margin:0 0 5px 0; background-color: #3c8dbc !important; border-color: #156fa3 !important">
 				 		<button type="button" class="close" ng-click="selCompany();" >×</button>
-						<h4>{{selectedCompanyName}}</h4>										
+						<h4><i class="fa fa-industry"></i> {{selectedCompanyName}}</h4>										
 					</div>				
 				</div>
 			</div>

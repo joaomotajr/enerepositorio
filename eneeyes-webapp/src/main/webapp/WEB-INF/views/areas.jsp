@@ -60,8 +60,7 @@
 					                <label class="control-label">Nome</label>
 					                <input id="idAreaName" class="form-control" placeholder="Nome da Area / Matriz" ng-model="selectedArea.name">
 					            </div>
-					        </div>
-					
+					        </div>					
 					        <div class="col-md-6">
 					            <div class="form-group">
 					                <label class="control-label">Descrição</label>

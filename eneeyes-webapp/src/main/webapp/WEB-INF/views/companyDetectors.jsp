@@ -26,41 +26,17 @@
 		<div class="box-body">
 						
 			<div class="nav-tabs-custom">
-				<ul class="nav nav-tabs">
-			       	<li class="active"><a href="#tabCompanyDetector_1" data-toggle="tab">Cadastro</a></li>
-			       	<li><a href="#tabCompanyDetector_2" data-toggle="tab">Configuração</a></li>
-			       	<li><a href="#tabCompanyDetector_3" data-toggle="tab">Histórico</a></li>
+				<ul class="nav nav-tabs tabDetector">
+			       	<li class="active"><a href="#tabCompanyDetector_1" id="stepTabDetector_1" data-toggle="tab">Cadastro</a></li>
+			       	<li><a href="#tabCompanyDetector_2" id="stepTabDetector_2" data-toggle="tab">Configuração</a></li>
+			       	<li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Histórico</a></li>
 			    	<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
 			    </ul>
 				
 				<div class="tab-content">
 			    	
 			    	<div class="tab-pane active" id="tabCompanyDetector_1">
-			    		<form name="userForm">
-			    			<!-- 	 
-				    		<div class="row">
-						    	<div class="col-md-6">
-						    	
-						    		<div class="box box-primary box-solid">
-					                    <div class="box-header with-border"><strong>Detector</strong></div>
-					                	 
-					                    <div class="box-body">
-					                        <select class="form-control" data-live-search="true" 
-					                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-					                                ng-options="item as item.name for item in detectors | orderBy: 'name' track by item.uid" 
-			                                           ng-model="selectedCompanyDetector.detectorDto">
-			                                           <option value="">Selecione</option> 
-					                        </select>    
-					                    </div>			                    			                            
-					                </div>  	
-						    	
-						    	</div>
-						    	<div class="col-md-4">	    		    
-									<img ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
-								</div>	
-						    </div>			    	
-				    		-->
-				    		
+			    		<form name="userForm">			    			
 				    		<div class="row">							
 								<div class="col-md-4">							    
 								    <input type="file" id="idInputImageDetector" style='display:none'>							    
@@ -69,14 +45,11 @@
 						                    <img class="profile-user-img img-responsive img-circle" style="margin: 0 auto" ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
 						                    <p class="text-muted text-center ng-binding">{{selectedCompanyDetector.detectorDto.name}} - {{selectedCompanyDetector.detectorDto.model}}</p>						                    					                    	                
 						                </div>
-					                </div>
-					                															
+					                </div>					                															
 								</div>
 								<div class="col-md-2">
-					                	<label>
-					                	  
-					                	 </label>
-					                </div>
+					            	<label></label>
+					            </div>
 															
 								<div class="row">
 				                 	<div class="col-md-6">						    	
@@ -92,15 +65,7 @@
 						                        </select>    
 						                    </div>			                    			                            
 						                </div>							    	
-							    	</div>
-							    	<!-- 
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="control-label">Modelo</label>                                                       
-											<input class="form-control inputProfile" placeholder="Modelo do Detector" ng-model="detectorModel">                                                
-										</div>
-									</div>
-									 -->							
+							    	</div>							    						
 								</div>							
 							</div>
 							

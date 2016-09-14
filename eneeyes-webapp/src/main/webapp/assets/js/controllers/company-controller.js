@@ -525,7 +525,9 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 					    		$scope.LoadAjaxContentCompany('companyDetectors.html');
 				    	 	}
 				    		else if (node.companyDevice.deviceType == "PLC" || node.companyDevice.deviceType == "CONTROLLER") 
-				    			$scope.LoadAjaxContentCompany('companyPlcs.html');					    		 
+				    			$scope.LoadAjaxContentCompany('companyPlcs.html');
+				    		
+				    		initializeDetector();
 				    	}
 				    }
 			     });
@@ -544,8 +546,8 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
         	$('.select-node').prop('disabled', !(selectableNodes.length >= 1));
         });
 	 }
- 
-	  getTree = function() {
+	 
+	 getTree = function() {
 		 
 		var itens = [];
 		
@@ -589,8 +591,37 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	 }	 
 	 
 	 /*--------------------------------------------------------------------------   M A P S  &  E V E N T S -----------------------------------------------------------------------*/
+
+	 initializeDetector =  function()
+		 {
+			 
+			$timeout(function () {
+				
+				$('.tabDetector a').on('click', function (event) {
+				    event.preventDefault();	
+				    
+				    if ($(event.target).attr('href') == "#tabCompanyDetector_2") {			    	
+				    	initGaugeDetector();
+					}
+				    else if ($(event.target).attr('href') == "#tabCompanyDetector_3") {
+				    	
+				    }			
+				});
+												
+				initGaugeDetector = function() {				
+					if(! loadGauge) {
+						google.charts.load('current', { 'packages': ['gauge'] });
+						loadGauge = true;
+					}				
+					google.charts.setOnLoadCallback(drawGaugesDetector);
+				}				
+							
+			}, 500);
+			
+			$("#stepTabDetector_1").trigger("click");	
+		 }
 	 
-	 function initializeArea()
+	 initializeArea =  function()
 	 {
 		$scope.selectedCompanyDetectorsArea = [];
 		 
@@ -603,7 +634,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			    	initializeEasyPin();			    	
 				}
 			    else if ($(event.target).attr('href') == "#tabArea_3") {
-			    	initGauge();
+			    	initGaugeAreas();
 			    }
 			});
 			
@@ -617,12 +648,12 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				$scope.$apply();					    
 			}));
 			
-			initGauge = function() {				
+			initGaugeAreas = function() {				
 				if(! loadGauge) {
 					google.charts.load('current', { 'packages': ['gauge'] });
 					loadGauge = true;
 				}				
-				google.charts.setOnLoadCallback(drawChart);
+				google.charts.setOnLoadCallback(drawGaugesArea);
 			}
 			
 			$scope.getCompanyDetectorArea();
@@ -689,6 +720,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 		 }
 	 }
 
+	
 	mapUnit = function (lat, lng) {
 	    
 	    var myOptions = {
@@ -707,7 +739,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
        });       
 	}
 	
-	
+		
 	mapsCompany = function () {
 	    
 	    var myOptions = {
@@ -729,45 +761,20 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	    }	    
 	}
 	
-	drawChart = function() {
+	
+	drawGaugesArea = function() {
 		
 		if($scope.selectedArea.companyDevicesDto.length > 0)
-			setDetectorsGauges();		
-//
-//		 var data = google.visualization.arrayToDataTable([
-//		   ['Label', 'Value'],
-//		   ['Sensor 01', 80],
-//		   ['Sensor 02', 55],
-//		   ['Sensor 03', 68]
-//		 ]);
-//		
-//		 var options = {
-//		     width: 500, height: 120,
-//		     redFrom: 90, redTo: 100,
-//		     yellowFrom: 75, yellowTo: 90,
-//		     minorTicks: 5
-//		 };
-//		
-//		 var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-//
-//		 chart.draw(data, options);
-//		
-//		 setInterval(function () {
-//		     data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
-//		     chart.draw(data, options);
-//		 }, 13000);
-//		 setInterval(function () {
-//		     data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
-//		     chart.draw(data, options);
-//		 }, 5000);
-//		 setInterval(function () {
-//		     data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
-//		     chart.draw(data, options);
-//		 }, 26000);
+			setDetectorsAreas();		
+
+		//	 setInterval(function () {
+		//   data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+		//	 chart.draw(data, options);
+		//	 }, 26000);
 	}
 	
-	setDetectorsGauges = function() {
-				
+	setDetectorsAreas = function() {
+		
 		var detectors = $scope.selectedCompanyDetectorsArea;
 		for (var i = 0; i < detectors.length; i++) {
 			
@@ -776,7 +783,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 			for (var j = 0; j < sensors.length; j++) {
 				
 				var gaugeOptions = {
-				     //width: 500, height: 120,
+				     width: 220, height: 120,
 				     redFrom: 90, redTo: 100,
 				     yellowFrom: 75, yellowTo: 90,
 				     minorTicks: 5
@@ -794,6 +801,31 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 				
 			}
 	    }		
+	}
+	
+	drawGaugesDetector = function() {
+					
+		var sensors = $scope.selectedCompanyDetector.detectorDto.sensorsDto;		
+		
+		for (var j = 0; j < sensors.length; j++) {
+			
+			var gaugeOptions = {
+			     width: 220, height: 120,
+			     redFrom: 90, redTo: 100,
+			     yellowFrom: 75, yellowTo: 90,
+			     minorTicks: 5
+			};
+			
+			var gaugeData = new google.visualization.DataTable();
+			
+			gaugeData.addColumn('number', sensors[j].name);
+		    gaugeData.addRows(1);
+		    gaugeData.setCell(0, 0, sensors[j].rangeMax);
+		    
+		    console.log('sensor_' + sensors[j].$$hashKey);			    
+		    gauge = new google.visualization.Gauge(document.getElementById('sensor_' + sensors[j].$$hashKey));
+		    gauge.draw(gaugeData, gaugeOptions);			
+		}	    		
 	}
 	
 	/*--------------------------------------------------------------------------   JQuery EasyPIN -----------------------------------------------------------------------*/

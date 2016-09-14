@@ -9,6 +9,7 @@
 </style>
 
 <div class="col-md-9">
+	<div ng-controller="unitController">
 	<div class="box box-primary" ng-show="selectedCompany.unitsDto.length > 0">
 					
 		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-building'></i> {{selectedUnit.name}}</strong></div>
@@ -153,5 +154,6 @@
 			   	</div>	<!-- /.tab-content -->		   						
 			</div>						
 		</div>		
+	</div>
 	</div>	
 </div> 

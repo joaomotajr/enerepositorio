@@ -91,6 +91,9 @@
 	<script src="/assets/js/controllers/gas-controller.js"></script>
 	<script src="/assets/js/controllers/detector-controller.js"></script>
 	<script src="/assets/js/controllers/company-controller.js"></script>
+	<script src="/assets/js/controllers/unit-controller.js"></script>
+	<script src="/assets/js/controllers/area-controller.js"></script>
+	<script src="/assets/js/controllers/companyDetector-controller.js"></script>	
 	<script src="/assets/js/controllers/alarm-controller.js"></script>
 	
 		

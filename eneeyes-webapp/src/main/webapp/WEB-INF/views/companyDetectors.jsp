@@ -12,17 +12,17 @@
 	   	width: auto;
     	max-height: 160px;
     	height: 160px;
-    	 background-size: cover;
-    background-position: 50% 50%;
+    	background-size: cover;
+    	background-position: 50% 50%;
 	}
 		
 </style>
 
 <div class="col-md-9">
-	<div class="box box-primary">
-					
-		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-rss'></i> {{selectedCompanyDevice.deviceType}}</strong></div>
-		
+
+	<div ng-controller="companyDetectorController">
+	<div class="box box-primary">					
+		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-rss'></i> {{selectedCompanyDevice.deviceType}}</strong></div>		
 		<div class="box-body">
 						
 			<div class="nav-tabs-custom">
@@ -190,5 +190,6 @@
 			</div>
 						
 		</div>		
+	</div>
 	</div>	
 </div>     

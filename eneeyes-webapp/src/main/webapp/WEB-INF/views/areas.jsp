@@ -36,12 +36,10 @@
 	</div>
 
 <div class="col-md-9">
-	<div class="box box-primary">
-					
-		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-map-o'></i> Área: {{selectedArea.name}}</strong></div>
-		
-		<div class="box-body">
-		
+	<div ng-controller="areaController">
+	<div class="box box-primary">					
+		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-map-o'></i> Área: {{selectedArea.name}}</strong></div>		
+		<div class="box-body">		
 						
 			<div class="nav-tabs-custom">
 				<ul class="nav nav-tabs tabArea">
@@ -245,6 +243,7 @@
 			   </div>			   						
 			</div>
 						
-		</div>		
+		</div>
+	</div>			
 	</div>	
 </div>     

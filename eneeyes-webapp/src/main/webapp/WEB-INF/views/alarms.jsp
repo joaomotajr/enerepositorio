@@ -48,8 +48,7 @@
 				<div class="box box-primary" ng-class="(alarmName || alarmGas || gasUnitMeterGases || alarmAlarm1 || alarmAlarm2 || alarmAlarm3) ? 'box-primary' : 'box-default'">
 					<div class="box-header">
 						<h3 class="box-title">Cadastro / Edição</h3>
-					</div>
-					
+					</div>					
 					<div class="box-body">
 						<form class="form" name="userForm">		
 						
@@ -89,7 +88,7 @@
 										<label class="control-label">Nome</label>
 										<span class="text-red" ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
 									    <span class="text-red" ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
-										<input id="idAlarmName" class="form-control inputProfile" placeholder="Nome do Sensor" ng-model="alarmName" ng-maxlength="15" name="username" required>                                                                        
+										<input id="idAlarmName" class="form-control inputProfile" placeholder="Nome do Alarme" ng-model="alarmName" ng-maxlength="15" name="username" required>                                                                        
 									</div>
 								</div>							
 								<div class="col-md-6">
@@ -111,13 +110,13 @@
 									    <div class="col-md-4">
 									    	<div class="form-group">
 								                <label class="control-label">Alarme 2</label>
-								                <input class="form-control" placeholder="Max" ng-model="alarmAlarm2">
+								                <input class="form-control" placeholder="Alarme 2" ng-model="alarmAlarm2">
 								            </div>
 									    </div>
 									    <div class="col-md-4">
 									    	<div class="form-group">
 								                <label class="control-label">Alarme 1</label>
-								                <input class="form-control" placeholder="Unit" ng-model="alarmAlarm3">
+								                <input class="form-control" placeholder="Alarme 3" ng-model="alarmAlarm3">
 								            </div>
 									    </div>									    
 								    </div>

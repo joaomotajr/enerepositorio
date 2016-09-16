@@ -1,4 +1,4 @@
-app.controller('unitController', function ($scope, $timeout, $filter, CompanyService, UnitService, AreaService, CompanyDeviceService, CompanyDetectorService, DetectorService) {
+app.controller('unitController', function ($scope, $timeout, $filter, UnitService) {
 
     var map;
 	var geocoder;
@@ -123,6 +123,23 @@ app.controller('unitController', function ($scope, $timeout, $filter, CompanySer
 		
 	}
 	
+	getCoordinates = function (callBack, address) {
+	 
+		 var resp = {lat: 0, lng: 0};		 
+		 address = address || 'Sao Paulo, Brasil';
+		 
+		 if (geocoder) {
+			 geocoder.geocode({
+		        'address': address
+			 }, function (results, status) {
+				 if (status == google.maps.GeocoderStatus.OK) {		
+				 			 
+					callBack(results[0]);			 
+				 }
+			 });
+		 }
+	}
+	
 	validMapUnit = function() {
 		$scope.mapUnitOK = ( ($scope.selectedUnit.latitude != null && $scope.selectedUnit.latitude != 0)  && ($scope.selectedUnit.longitude != null && $scope.selectedUnit.longitude != 0) );
 		
@@ -132,10 +149,7 @@ app.controller('unitController', function ($scope, $timeout, $filter, CompanySer
 				mapUnit($scope.selectedUnit.latitude, $scope.selectedUnit.longitude );
 			}, 500);		
 		}
-	}
-	
-	 
-	 /*--------------------------------------------------------------------------   M A P S  &  E V E N T S -----------------------------------------------------------------------*/
+	} 
 
 	$scope.initializeUnit = function()
 	 {	
@@ -161,25 +175,6 @@ app.controller('unitController', function ($scope, $timeout, $filter, CompanySer
 	 	
 	 	$("#stepTabUnit_1").trigger("click");
 	}
-	     
-	
-	getCoordinates = function (callBack, address) {
-		 
-		 var resp = {lat: 0, lng: 0};		 
-		 address = address || 'Sao Paulo, Brasil';
-		 
-		 if (geocoder) {
-			 geocoder.geocode({
-		        'address': address
-			 }, function (results, status) {
-				 if (status == google.maps.GeocoderStatus.OK) {		
-				 			 
-					callBack(results[0]);			 
-				 }
-			 });
-		 }
-	 }
-
 	
 	mapUnit = function (lat, lng) {
 	    

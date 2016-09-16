@@ -70,7 +70,9 @@
     <script src="/assets/plugins/select2/select2.min.js"></script>    
     
     <!-- Google Maps API v3 -->	  
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdD8N8oojiMT-FKYc92jTS4XCCLccyBzg"  type="text/javascript"></script>      
+	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdD8N8oojiMT-FKYc92jTS4XCCLccyBzg"  type="text/javascript"></script> -->
+	<script src="http://maps.google.com/maps/api/js?key=AIzaSyBdD8N8oojiMT-FKYc92jTS4XCCLccyBzg" type="text/javascript"></script>   
+	   
     <!-- Google Gauge -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- END GLOBAL SCRIPTS -->
@@ -90,6 +92,7 @@
 	<script src="/assets/js/controllers/sensor-controller.js"></script>
 	<script src="/assets/js/controllers/gas-controller.js"></script>
 	<script src="/assets/js/controllers/detector-controller.js"></script>
+	<script src="/assets/js/controllers/companies-controller.js"></script>
 	<script src="/assets/js/controllers/company-controller.js"></script>
 	<script src="/assets/js/controllers/unit-controller.js"></script>
 	<script src="/assets/js/controllers/area-controller.js"></script>

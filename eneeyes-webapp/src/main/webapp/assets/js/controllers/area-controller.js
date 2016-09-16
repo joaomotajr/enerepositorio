@@ -1,4 +1,4 @@
-app.controller('areaController', function ($scope, $timeout, $filter, CompanyService, UnitService, AreaService, CompanyDeviceService, CompanyDetectorService, DetectorService) {
+app.controller('areaController', function ($scope, $timeout, $filter, AreaService, CompanyDetectorService, DetectorService) {
 
 	var loadGauge = false;
 		

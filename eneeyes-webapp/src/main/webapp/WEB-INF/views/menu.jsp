@@ -65,6 +65,7 @@
 	            	<ul class="treeview-menu">			            		        
 			            <li><a href="#" ng-click="LoadAjaxContent('companies.html', 'Empresas')"><i class="fa fa-industry"></i> Empresa</a></li>
 			            <li><a href="#" ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn"></i> Alarmes</a></li>
+			            <li><a href="#" ng-click="LoadAjaxContent('cadastro.html', 'Cadastro')"><i class="fa fa-bullhorn"></i> Cadastro</a></li>
 	              	</ul>
 	            </li>	                  
 	        </ul>

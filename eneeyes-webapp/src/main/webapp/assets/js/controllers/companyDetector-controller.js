@@ -1,4 +1,4 @@
-app.controller('companyDetectorController', function ($scope, $timeout, $filter, CompanyService, UnitService, AreaService, CompanyDeviceService, CompanyDetectorService, DetectorService) {
+app.controller('companyDetectorController', function ($scope, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService) {
 
 	var loadGauge = false;
 	
@@ -78,6 +78,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	$scope.getOneCompanyDetector = function() {
 		
 		$scope.getDetectors();
+		$scope.getAlarms();
 		
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
@@ -159,23 +160,31 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		for (var j = 0; j < sensors.length; j++) {
 			
 			var gaugeOptions = {
-			     width: 220, height: 120,
-			     redFrom: 90, redTo: 100,
+			     //width: 350, height: 140,
+			     redFrom: 90, redTo: sensors[j].rangeMax,
 			     yellowFrom: 75, yellowTo: 90,
 			     minorTicks: 5
 			};
 			
 			var gaugeData = new google.visualization.DataTable();
 			
-			gaugeData.addColumn('number', sensors[j].name);
+			gaugeData.addColumn('number', 'Sensor ' + (j + 1) );
 		    gaugeData.addRows(1);
-		    gaugeData.setCell(0, 0, sensors[j].rangeMax);
+		    gaugeData.setCell(0, 0, 0);
 		    
 		    console.log('sensor_' + sensors[j].$$hashKey);			    
 		    gauge = new google.visualization.Gauge(document.getElementById('sensor_' + sensors[j].$$hashKey));
 		    gauge.draw(gaugeData, gaugeOptions);			
 		}	    		
 	}
+	
+	$scope.getAlarms = function() {
+		 
+		 $scope.resultAlarms = new AlarmService.listAll();		 
+		 $scope.resultAlarms.$alarm({_csrf : angular.element('#_csrf').val()}, function(){			
+			 $scope.alarms = $scope.resultAlarms.list;			 
+        });		 
+	 }
 	
 	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];
 	$scope.selectedArea = $scope.selectedUnit.areasDto[$scope.$root.selecteds.areaIndex];

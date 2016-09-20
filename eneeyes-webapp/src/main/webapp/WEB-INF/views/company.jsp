@@ -11,7 +11,7 @@
 				<div class="col-md-6">
 					<label>Mapas das Unidades</label>						
 					<div class="entry input-group">					
-				        <div align="center"  id="mapCompany" style="height: 500px; width: 700px"></div>
+				        <div align="center"  id="mapCompany" style="height: 500px; width: 800px"></div>
 					</div>
 				</div>		
 			</div>		

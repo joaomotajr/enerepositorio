@@ -66,12 +66,11 @@ public class AlarmService implements IService<AlarmDto> {
 				
 				List<AlarmDto> dto = new ArrayList<AlarmDto>();
 				
-				for (Alarm alarm   : lista) {					
+				for (Alarm alarm : lista) {					
 					dto.add(new AlarmDto(alarm) );
 				}
 				
-				result.setList(dto);
-				
+				result.setList(dto);				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {

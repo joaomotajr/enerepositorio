@@ -6,7 +6,7 @@
 			}	
 		</style>										
 		<div class="row">				                                                    
-			<div class="col-md-5">                                                        
+			<div class="col-md-6">                                                        
 				<div class="box box-primary" ng-class="(alarmName || alarmGas || gasUnitMeterGases || alarmAlarm1 || alarmAlarm2 || alarmAlarm3) ? 'box-default' : 'box-primary'">
 					<div class="box-header">
 					  <h3 class="box-title">Cadastro de Alarmes</h3>
@@ -17,7 +17,8 @@
 								<thead>
 									<tr>
 										<th>Nome</th>
-										<th>Gas</th>                                                            
+										<th>Gas</th>
+										<th>Unit</th>                                                            
 										<th>Editar</th>
 										<th>Excluir</th>						
 									</tr>
@@ -26,6 +27,7 @@
 									<tr ng-repeat="item in alarms">
 										<td>{{item.name}}</td>
 										<td>{{item.gasDto.name}}</td>															        
+										<td>{{item.unitMeterGases}}</td>
 										<td>
 											<button type="button" class="btn btn-primary btn-xs" ng-click="editAlarm($index)">editar</button>
 										</td>
@@ -44,7 +46,7 @@
         		</div>
 			</div>                                                      
 																
-			<div class="col-sm-7">
+			<div class="col-sm-6">
 				<div class="box box-primary" ng-class="(alarmName || alarmGas || gasUnitMeterGases || alarmAlarm1 || alarmAlarm2 || alarmAlarm3) ? 'box-primary' : 'box-default'">
 					<div class="box-header">
 						<h3 class="box-title">Cadastro / Edição</h3>

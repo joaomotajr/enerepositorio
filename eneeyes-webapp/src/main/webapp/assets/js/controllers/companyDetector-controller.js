@@ -1,8 +1,26 @@
+app.filter('gasFilter', function () {
+    return function (objects, criteria) {
+        var filterResult = new Array();
+
+        if (!criteria.unitMeterGases || !criteria.gas)
+            return objects;
+
+        for (index in objects) {
+            
+        	 if (objects[index].unitMeterGases == criteria.unitMeterGases && objects[index].gasDto.name == criteria.gas  ) {
+
+                 filterResult.push(objects[index]);
+             }   
+        }
+
+        return filterResult;
+    }
+});
+
+
 app.controller('companyDetectorController', function ($scope, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService) {
 
 	var loadGauge = false;
-	
-	/*----------------------------------------------------------------- C O M P A N Y   D E V I C E----------------------------------------------------------------------*/
 	
 	$scope.saveCompanyDetectorCoords = function() {
 		
@@ -78,21 +96,21 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	$scope.getOneCompanyDetector = function() {
 		
 		$scope.getDetectors();
-		$scope.getAlarms();
-		
+		$scope.search = { unitMeterGases: null, gas : null };
+				
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
         });		 
 	}
 	
-	$scope.getCompanyDetectorArea = function() {
-				
-		$scope.resultCompanyDetectorsArea = new CompanyDetectorService.listPorIdArea();		 
-		$scope.resultCompanyDetectorsArea.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid }, function(){			
-			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;          	         	
-        });		 
-	}
+//	$scope.getCompanyDetectorArea = function() {
+//				
+//		$scope.resultCompanyDetectorsArea = new CompanyDetectorService.listPorIdArea();		 
+//		$scope.resultCompanyDetectorsArea.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid }, function(){			
+//			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;          	         	
+//        });		 
+//	}
 		
 	$scope.saveCompanyDeviceInit = function() {
 		angular.element('body').addClass('loading');
@@ -181,15 +199,27 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	$scope.getAlarms = function() {
 		 
 		 $scope.resultAlarms = new AlarmService.listAll();		 
-		 $scope.resultAlarms.$alarm({_csrf : angular.element('#_csrf').val()}, function(){			
+		 $scope.resultAlarms.$alarm({_csrf : angular.element('#_csrf').val()}, function(){			 
 			 $scope.alarms = $scope.resultAlarms.list;			 
         });		 
-	 }
+	}
+	
+	$scope.configAlarm = function(index) {
+		
+		$scope.search = { unitMeterGases: $scope.selectedCompanyDetector.detectorDto.sensorsDto[index].unitMeterGases, gas : $scope.selectedCompanyDetector.detectorDto.sensorsDto[index].gasesDto[0].name };
+		$('#modalAlarm').modal({ show: 'false' });
+	}
+	
+	$scope.selecionarAlarm = function(index) {
+	
+	}
 	
 	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];
 	$scope.selectedArea = $scope.selectedUnit.areasDto[$scope.$root.selecteds.areaIndex];
 	$scope.selectedCompanyDevice = $scope.selectedArea.companyDevicesDto[$scope.$root.selecteds.CompanyDeviceIndex]
+	$scope.$root.masterName = "Junior";
 	
+	$scope.getAlarms();
 	$scope.getOneCompanyDetector();
 	$scope.initializeDetector();
 		

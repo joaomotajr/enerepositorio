@@ -11,7 +11,7 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 			name: $scope.gasName,
 			cas: $scope.gasCas,
 			formula: $scope.gasFormula,
-			unitMeterGases : $scope.gasUnitMeterGases.uid
+			//unitMeterGases : $scope.gasUnitMeterGases.uid
     	}; 
 		 
 		$scope.inclusaoGas = new GasService.save(gas);		 
@@ -36,7 +36,7 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 	    $scope.gasName = '';
 	    $scope.gasCas = '';
 	    $scope.gasFormula = '';	
-	    $scope.gasUnitMeterGases = '';
+	    //$scope.gasUnitMeterGases = '';
 	}
 	 
 	$scope.getGases = function() {
@@ -53,9 +53,9 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 		    $scope.gasName = $scope.gases[index].name;
 		    $scope.gasCas = $scope.gases[index].cas;
 		    $scope.gasFormula = $scope.gases[index].formula;		    	    
-		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.gases[index].unitMeterGases);
-		    
-		    	        
+		    //$scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.gases[index].unitMeterGases);		    
+		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases('DESCONHECIDO');
+		    		
 	        $('#idGasName').focus();
 	    }
 	 

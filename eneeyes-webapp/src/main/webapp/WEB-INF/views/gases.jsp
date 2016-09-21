@@ -12,7 +12,7 @@
 								<thead>
 									<tr>
 										<th>Nome</th>
-										<th>Modelo</th>                                                            
+										<th>Fórumla</th>                                                            
 										<th>Editar</th>
 										<th>Excluir</th>						
 									</tr>
@@ -62,6 +62,8 @@
 								<label class="control-label">Fórmula</label>                                                       
 								<input class="form-control inputProfile" placeholder="Fórmula do Gás" ng-model="gasFormula">                                                
 							</div>
+							
+							<!-- 
 							<div class="form-group">
 					            <label class="control-label">Unidade de Medida</label>
 								<select class="form-control" data-live-search="true" 
@@ -71,6 +73,7 @@
 		                                         <option value="">Selecione</option> 
 		                        </select>               
 	                        </div>
+	                         -->
 	                       			                 
 			            </form>	
 						

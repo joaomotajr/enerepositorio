@@ -2,6 +2,8 @@ package br.com.eneeyes.main.model;
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -105,6 +109,12 @@ public class CompanyDetector {
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="ALARM_ID", nullable = true)
 	private Alarm alarm;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="DETECTOR_ALARMS", 
+	joinColumns= @JoinColumn(name="DETECTOR_ID", referencedColumnName="UID_"), 
+	inverseJoinColumns= @JoinColumn(name="ALARM_ID", referencedColumnName="UID"))
+	private Set<Alarm> Alarms = new HashSet<Alarm>();
 	
 	public Long getUid() {
 		return uid;
@@ -217,4 +227,13 @@ public class CompanyDetector {
 	public final void setAlarm(Alarm alarm) {
 		this.alarm = alarm;
 	}
+	
+	public final Set<Alarm> getAlarms() {
+		return Alarms;
+	}
+
+	public final void setAlarms(Set<Alarm> alarms) {
+		Alarms = alarms;
+	}
+
 }

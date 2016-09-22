@@ -49,7 +49,7 @@
 						<h3 class="box-title">Cadastro / Edição</h3>
 					</div>
 					<div class="box-body">
-						<form class="form">		
+						<form name="controllerForm">		
 						
 							<div class="box box-primary box-solid">
 			                    <div class="box-header with-border"><strong> Fabricante</strong>
@@ -70,14 +70,18 @@
 			                <div class="row">
 			                 	<div class="col-md-6">                                                                                                                            
 									<div class="form-group">
-										<label class="control-label">Nome</label>                                                                        
-										<input id="idControllerName" class="form-control inputProfile" placeholder="Nome da PLC/Controladora" ng-model="controllerName">                                                                        
+										<label class="control-label">Nome</label>
+										<span class="text-red" ng-show="controllerForm.controllerName.$error.required && !controllerForm.controllerName.$pristine">  [Nome Obrigatorio]</span>
+								        <span ng-show="controllerForm.controllerName.$error.maxlength">Até Máximo 20 caracteres</span>                                                                        
+										<input id="idControllerName" class="form-control inputProfile" placeholder="Nome da PLC/Controladora" ng-model="controllerName" ng-maxlength="20" name="controllerName" required>                                                                        
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label class="control-label">Modelo</label>                                                       
-										<input class="form-control inputProfile" placeholder="Modelo do PLC/Controladora" ng-model="controllerModel">                                                
+										<label class="control-label">Modelo</label>
+										<span class="text-red" ng-show="controllerForm.controllerModel.$error.required && !controllerForm.controllerModel.$pristine">  [Modelo Obrigatorio]</span>
+								        <span ng-show="controllerForm.controllerModel.$error.maxlength">Até Máximo 20 caracteres</span>                                                       
+										<input class="form-control inputProfile" placeholder="Modelo do PLC/Controladora" ng-model="controllerModel" ng-maxlength="20" name="controllerModel" required>                                                
 									</div>                                                                    
 								</div>
 							</div>

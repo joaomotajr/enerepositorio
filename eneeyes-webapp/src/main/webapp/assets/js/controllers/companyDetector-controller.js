@@ -214,6 +214,18 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	
 	}
 	
+	$scope.addGasSensor = function (idAlarm) {
+
+        alarm = { uid: idAlarm }
+
+        $scope.newAlarms.push(alarm);
+        //$scope.$apply();
+    }
+ 
+	 $scope.deleteAlarm = function (index) {
+		 $scope.companyDetectorAlarms.splice(index, 1);		 
+	 }	 
+	
 	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];
 	$scope.selectedArea = $scope.selectedUnit.areasDto[$scope.$root.selecteds.areaIndex];
 	$scope.selectedCompanyDevice = $scope.selectedArea.companyDevicesDto[$scope.$root.selecteds.CompanyDeviceIndex]

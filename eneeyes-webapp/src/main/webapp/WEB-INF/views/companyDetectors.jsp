@@ -74,8 +74,8 @@
 							            <div class="form-group">
 							                <label class="control-label">Nome</label>
 							                <span class="text-red" ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
-								            <span ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>
-							                <input id="idAreaName" class="form-control" placeholder="Nome do Detector" ng-model="selectedCompanyDetector.name" ng-maxlength="15" name="username" required>
+								            <span ng-show="userForm.username.$error.maxlength">Tamanho Máximo 20 caracteres</span>
+							                <input id="idAreaName" class="form-control" placeholder="Nome do Detector" ng-model="selectedCompanyDetector.name" ng-maxlength="20" name="username" required>
 							            </div>
 							        </div>
 									

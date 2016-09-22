@@ -1,8 +1,13 @@
 package br.com.eneeyes.main.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import br.com.eneeyes.main.dto.register.DetectorDto;
+import br.com.eneeyes.main.model.Alarm;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
@@ -21,7 +26,8 @@ public class CompanyDetectorDto {
 	private Double RangeUnit;	
 	private CompanyDeviceDto companyDeviceDto;	
 	private DetectorDto detectorDto;
-	private AlarmDto alarmDto;
+	//private AlarmDto alarmDto;
+	private List<AlarmDto> alarmsDto = new ArrayList<AlarmDto>();
 
 	public CompanyDetectorDto() {
 		
@@ -43,8 +49,26 @@ public class CompanyDetectorDto {
        	       	       	
        	this.detectorDto = new DetectorDto(companyDetector.getDetector()) ;
        	
-       	if(companyDetector.getAlarm() != null)
-       		this.alarmDto = new AlarmDto(companyDetector.getAlarm());
+       	//if(companyDetector.getAlarm() != null)
+       	//	this.alarmDto = new AlarmDto(companyDetector.getAlarm());
+       	
+       	if(companyDetector.getAlarms() != null)		
+			this.alarmsDto = parseAlarmsDto(companyDetector.getAlarms());
+	}
+	
+	private final List<AlarmDto> parseAlarmsDto(Set<Alarm> alarms) {
+		List<AlarmDto> lista = new ArrayList<AlarmDto>();
+		
+		if(alarms != null && !alarms.isEmpty()) {
+		
+			Iterator<Alarm> itr = alarms.iterator();			
+			while (itr.hasNext()) {
+				AlarmDto dto = new AlarmDto(itr.next());
+				lista.add(dto);
+			}
+		}
+		
+		return lista;
 	}
 		
 	public final Long getUid() {
@@ -150,12 +174,20 @@ public class CompanyDetectorDto {
 		this.companyDeviceDto = companyDeviceDto;
 	}
 	
-	public final AlarmDto getAlarmDto() {
-		return alarmDto;
+//	public final AlarmDto getAlarmDto() {
+//		return alarmDto;
+//	}
+//
+//	public final void setAlarmDto(AlarmDto alarmDto) {
+//		this.alarmDto = alarmDto;
+//	}
+	
+	public final List<AlarmDto> getAlarmsDto() {
+		return alarmsDto;
 	}
 
-	public final void setAlarmDto(AlarmDto alarmDto) {
-		this.alarmDto = alarmDto;
+	public final void setAlarmsDto(List<AlarmDto> alarmsDto) {
+		this.alarmsDto = alarmsDto;
 	}
 
 }

@@ -51,7 +51,7 @@
 					</div>
 					
 					<div class="box-body">
-						<form class="form" name="userForm">		
+						<form class="form" name="sensorForm">		
 						
 							<div class="row">
 								<div class="col-md-6">
@@ -86,14 +86,16 @@
 			                	<div class="col-md-6">                                                                                                                
 									<div class="form-group">
 										<label class="control-label">Nome</label>
-										<span class="text-red" ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
-									    <span class="text-red" ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
+										<span class="text-red" ng-show="sensorForm.username.$error.required && !sensorForm.username.$pristine">  [Nome Obrigatorio]</span>
+									    <span class="text-red" ng-show="sensorForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
 										<input id="idSensorName" class="form-control inputProfile" placeholder="Nome do Sensor" ng-model="sensorName" ng-maxlength="15" name="username" required>                                                                        
 									</div>
 								</div>							
 								<div class="col-md-6">
 									<div class="form-group">
-										<label class="control-label">Modelo</label>                                                       
+										<label class="control-label">Modelo</label>
+										<span class="text-red" ng-show="sensorFormForm.controllerModel.$error.required && !sensorFormForm.controllerModel.$pristine">  [Modelo Obrigatorio]</span>
+								        <span ng-show="sensorFormForm.controllerModel.$error.maxlength">Até Máximo 20 caracteres</span>                                                       
 										<input class="form-control inputProfile" placeholder="Modelo do Sensor" ng-model="sensorModel">                                                
 									</div>
 								</div>														

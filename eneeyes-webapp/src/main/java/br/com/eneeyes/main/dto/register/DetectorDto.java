@@ -42,8 +42,7 @@ public class DetectorDto extends BaseDeviceDto {
 		
 		if(sensors != null && !sensors.isEmpty()) {
 		
-			Iterator<Sensor> itr = sensors.iterator();
-			
+			Iterator<Sensor> itr = sensors.iterator();			
 			while (itr.hasNext()) {
 				SensorDto dto = new SensorDto(itr.next());
 				lista.add(dto);

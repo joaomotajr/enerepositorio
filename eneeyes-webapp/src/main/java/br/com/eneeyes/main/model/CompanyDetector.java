@@ -3,6 +3,7 @@ package br.com.eneeyes.main.model;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,9 +21,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
+import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.dto.CompanyDetectorDto;
+import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Detector;
 
 /**
@@ -54,9 +56,22 @@ public class CompanyDetector {
     	
     	this.detector = new Detector(dto.getDetectorDto());
     	
-    	if(dto.getAlarmDto() != null)
-    		this.alarm = new Alarm(dto.getAlarmDto());
-    }   
+    	//if(dto.getAlarmDto() != null)
+    	//	this.alarm = new Alarm(dto.getAlarmDto());
+    	
+    	if(dto.getAlarmsDto() != null)
+			this.alarms = parseAlarms(dto.getAlarmsDto());
+    } 
+    
+    
+    private final Set<Alarm> parseAlarms(List<AlarmDto> alarms) {		
+		Set<Alarm> lista = new HashSet<Alarm>();		
+		
+		for (AlarmDto item   : alarms) {			
+			lista.add(new Alarm(item));			
+		}		
+		return lista;		
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -106,15 +121,15 @@ public class CompanyDetector {
 	@JoinColumn(name="DETECTOR_ID", nullable = false)
 	private Detector detector;
 	
-	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="ALARM_ID", nullable = true)
-	private Alarm alarm;
+//	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+//	@JoinColumn(name="ALARM_ID", nullable = true)
+//	private Alarm alarm;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="DETECTOR_ALARMS", 
-	joinColumns= @JoinColumn(name="DETECTOR_ID", referencedColumnName="UID_"), 
+	joinColumns= @JoinColumn(name="DETECTOR_ID", referencedColumnName="UID"), 
 	inverseJoinColumns= @JoinColumn(name="ALARM_ID", referencedColumnName="UID"))
-	private Set<Alarm> Alarms = new HashSet<Alarm>();
+	private Set<Alarm> alarms = new HashSet<Alarm>();
 	
 	public Long getUid() {
 		return uid;
@@ -220,20 +235,20 @@ public class CompanyDetector {
 		this.detector = detector;
 	}
 	
-	public final Alarm getAlarm() {
-		return alarm;
-	}
-
-	public final void setAlarm(Alarm alarm) {
-		this.alarm = alarm;
-	}
+//	public final Alarm getAlarm() {
+//		return alarm;
+//	}
+//
+//	public final void setAlarm(Alarm alarm) {
+//		this.alarm = alarm;
+//	}
 	
 	public final Set<Alarm> getAlarms() {
-		return Alarms;
+		return alarms;
 	}
 
 	public final void setAlarms(Set<Alarm> alarms) {
-		Alarms = alarms;
+		this.alarms = alarms;
 	}
 
 }

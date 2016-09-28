@@ -94,7 +94,7 @@
 								<div class="col-md-6">
 									<div class="form-group">
 										<label class="control-label">Modelo</label>
-										<span class="text-red" ng-show="sensorFormForm.controllerModel.$error.required && !sensorFormForm.controllerModel.$pristine">  [Modelo Obrigatorio]</span>
+										<span class="text-red" ng-show="sensorForm.controllerModel.$error.required && !sensorForm.controllerModel.$pristine">  [Modelo Obrigatorio]</span>
 								        <span ng-show="sensorFormForm.controllerModel.$error.maxlength">Até Máximo 20 caracteres</span>                                                       
 										<input class="form-control inputProfile" placeholder="Modelo do Sensor" ng-model="sensorModel">                                                
 									</div>

@@ -72,7 +72,7 @@ public class Alarm {
 	
 	@Column(name = "ALARM_OFF", nullable = true)		
 	private Boolean alarmOff;
-
+	
 	public final Long getUid() {
 		return uid;
 	}

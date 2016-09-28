@@ -2,9 +2,6 @@ package br.com.eneeyes.main.model;
 
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,13 +13,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Detector;
@@ -59,19 +53,21 @@ public class CompanyDetector {
     	//if(dto.getAlarmDto() != null)
     	//	this.alarm = new Alarm(dto.getAlarmDto());
     	
-    	if(dto.getAlarmsDto() != null)
-			this.alarms = parseAlarms(dto.getAlarmsDto());
+//    	if(dto.getAlarmsDto() != null)
+//			this.alarms = parseAlarms(dto.getAlarmsDto());
+    	
+
     } 
     
     
-    private final Set<Alarm> parseAlarms(List<AlarmDto> alarms) {		
-		Set<Alarm> lista = new HashSet<Alarm>();		
-		
-		for (AlarmDto item   : alarms) {			
-			lista.add(new Alarm(item));			
-		}		
-		return lista;		
-	}
+//    private final Set<Alarm> parseAlarms(List<AlarmDto> alarms) {		
+//		Set<Alarm> lista = new HashSet<Alarm>();		
+//		
+//		for (AlarmDto item   : alarms) {			
+//			lista.add(new Alarm(item));			
+//		}		
+//		return lista;		
+//	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -120,17 +116,20 @@ public class CompanyDetector {
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="DETECTOR_ID", nullable = false)
 	private Detector detector;
-	
+
+	//working one alarm, sem identificar qual sensor
 //	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 //	@JoinColumn(name="ALARM_ID", nullable = true)
 //	private Alarm alarm;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="DETECTOR_ALARMS", 
-	joinColumns= @JoinColumn(name="DETECTOR_ID", referencedColumnName="UID"), 
-	inverseJoinColumns= @JoinColumn(name="ALARM_ID", referencedColumnName="UID"))
-	private Set<Alarm> alarms = new HashSet<Alarm>();
 	
+	//working many alarms, sem identificar qual sensor 
+//	@ManyToMany(fetch=FetchType.EAGER)
+//	@JoinTable(name="COMPANY_DETECTOR_ALARMS", 
+//	joinColumns= @JoinColumn(name="COMPANYDETECTOR_ID", referencedColumnName="UID"), 
+//	inverseJoinColumns= @JoinColumn(name="ALARM_ID", referencedColumnName="UID"))
+//	private Set<Alarm> alarms = new HashSet<Alarm>();
+		
 	public Long getUid() {
 		return uid;
 	}
@@ -243,12 +242,12 @@ public class CompanyDetector {
 //		this.alarm = alarm;
 //	}
 	
-	public final Set<Alarm> getAlarms() {
-		return alarms;
-	}
-
-	public final void setAlarms(Set<Alarm> alarms) {
-		this.alarms = alarms;
-	}
+//	public final Set<Alarm> getAlarms() {
+//		return alarms;
+//	}
+//
+//	public final void setAlarms(Set<Alarm> alarms) {
+//		this.alarms = alarms;
+//	}	
 
 }

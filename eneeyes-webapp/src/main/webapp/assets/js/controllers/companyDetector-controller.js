@@ -103,14 +103,6 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
         });		 
 	}
-	
-//	$scope.getCompanyDetectorArea = function() {
-//				
-//		$scope.resultCompanyDetectorsArea = new CompanyDetectorService.listPorIdArea();		 
-//		$scope.resultCompanyDetectorsArea.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid }, function(){			
-//			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;          	         	
-//        });		 
-//	}
 		
 	$scope.saveCompanyDeviceInit = function() {
 		angular.element('body').addClass('loading');
@@ -214,15 +206,15 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	
 	}
 	
-	$scope.addGasSensor = function (idAlarm) {
+	$scope.addCompanyDetectorAlarm = function (idAlarm) {
 
         alarm = { uid: idAlarm }
 
         $scope.newAlarms.push(alarm);
-        //$scope.$apply();
+        $scope.$apply();
     }
  
-	 $scope.deleteAlarm = function (index) {
+	 $scope.deleteCompanyDetector = function (index) {
 		 $scope.companyDetectorAlarms.splice(index, 1);		 
 	 }	 
 	

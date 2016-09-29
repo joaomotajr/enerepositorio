@@ -2,6 +2,9 @@ package br.com.eneeyes.main.model;
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,10 +17,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.CompanyDetectorDto;
+import br.com.eneeyes.main.dto.DetectorCompanyAlarmDto;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Detector;
 
@@ -50,24 +55,19 @@ public class CompanyDetector {
     	
     	this.detector = new Detector(dto.getDetectorDto());
     	
-    	//if(dto.getAlarmDto() != null)
-    	//	this.alarm = new Alarm(dto.getAlarmDto());
-    	
-//    	if(dto.getAlarmsDto() != null)
-//			this.alarms = parseAlarms(dto.getAlarmsDto());
-    	
+    	if(dto.getDetectorCompanyAlarmDto() != null)
+			this.detectorCompanyAlarms = parseDetectorCompanyAlarm(dto.getDetectorCompanyAlarmDto());    	
 
-    } 
-    
-    
-//    private final Set<Alarm> parseAlarms(List<AlarmDto> alarms) {		
-//		Set<Alarm> lista = new HashSet<Alarm>();		
-//		
-//		for (AlarmDto item   : alarms) {			
-//			lista.add(new Alarm(item));			
-//		}		
-//		return lista;		
-//	}
+    }   
+
+    private final Set<DetectorCompanyAlarm> parseDetectorCompanyAlarm(List<DetectorCompanyAlarmDto> detectorCompanyAlarms) {		
+		Set<DetectorCompanyAlarm> lista = new HashSet<DetectorCompanyAlarm>();		
+		
+		for (DetectorCompanyAlarmDto item   : detectorCompanyAlarms) {			
+			lista.add(new DetectorCompanyAlarm(item));			
+		}		
+		return lista;		
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -116,19 +116,9 @@ public class CompanyDetector {
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="DETECTOR_ID", nullable = false)
 	private Detector detector;
-
-	//working one alarm, sem identificar qual sensor
-//	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-//	@JoinColumn(name="ALARM_ID", nullable = true)
-//	private Alarm alarm;
 	
-	
-	//working many alarms, sem identificar qual sensor 
-//	@ManyToMany(fetch=FetchType.EAGER)
-//	@JoinTable(name="COMPANY_DETECTOR_ALARMS", 
-//	joinColumns= @JoinColumn(name="COMPANYDETECTOR_ID", referencedColumnName="UID"), 
-//	inverseJoinColumns= @JoinColumn(name="ALARM_ID", referencedColumnName="UID"))
-//	private Set<Alarm> alarms = new HashSet<Alarm>();
+	@OneToMany(mappedBy="companyDetector", fetch = FetchType.EAGER)
+	private Set<DetectorCompanyAlarm> detectorCompanyAlarms;
 		
 	public Long getUid() {
 		return uid;
@@ -232,22 +222,27 @@ public class CompanyDetector {
 
 	public void setDetector(Detector detector) {
 		this.detector = detector;
+	}	
+	
+	public Set<DetectorCompanyAlarm> getDetectorCompanyAlarms() {
+		return this.detectorCompanyAlarms;
 	}
-	
-//	public final Alarm getAlarm() {
-//		return alarm;
-//	}
-//
-//	public final void setAlarm(Alarm alarm) {
-//		this.alarm = alarm;
-//	}
-	
-//	public final Set<Alarm> getAlarms() {
-//		return alarms;
-//	}
-//
-//	public final void setAlarms(Set<Alarm> alarms) {
-//		this.alarms = alarms;
-//	}	
 
+	public void setDetectorCompanyAlarms(Set<DetectorCompanyAlarm> detectorCompanyAlarms) {
+		this.detectorCompanyAlarms = detectorCompanyAlarms;
+	}
+
+	public DetectorCompanyAlarm addDetectorCompanyAlarm(DetectorCompanyAlarm detectorCompanyAlarm) {
+		getDetectorCompanyAlarms().add(detectorCompanyAlarm);
+		detectorCompanyAlarm.setCompanyDetector(this);
+
+		return detectorCompanyAlarm;
+	}
+
+	public DetectorCompanyAlarm removeDetectorCompanyAlarm(DetectorCompanyAlarm detectorCompanyAlarm) {
+		getDetectorCompanyAlarms().remove(detectorCompanyAlarm);
+		detectorCompanyAlarm.setCompanyDetector(null);
+
+		return detectorCompanyAlarm;
+	}
 }

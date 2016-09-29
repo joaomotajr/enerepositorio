@@ -1,9 +1,14 @@
 package br.com.eneeyes.main.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import br.com.eneeyes.main.dto.register.DetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
+import br.com.eneeyes.main.model.DetectorCompanyAlarm;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 public class CompanyDetectorDto {
@@ -22,7 +27,7 @@ public class CompanyDetectorDto {
 	private CompanyDeviceDto companyDeviceDto;	
 	private DetectorDto detectorDto;
 	//private AlarmDto alarmDto;
-	//private List<AlarmDto> alarmsDto = new ArrayList<AlarmDto>();
+	private List<DetectorCompanyAlarmDto> detectorCompanyAlarmDto = new ArrayList<DetectorCompanyAlarmDto>();
 	
 	public CompanyDetectorDto() {
 		
@@ -43,30 +48,26 @@ public class CompanyDetectorDto {
        	this.RangeUnit = companyDetector.getRangeUnit();
        	       	       	
        	this.detectorDto = new DetectorDto(companyDetector.getDetector()) ;
-       	
-       	//if(companyDetector.getAlarm() != null)
-       	//	this.alarmDto = new AlarmDto(companyDetector.getAlarm());
-       	
-       	//if(companyDetector.getAlarms() != null)		
-			//this.alarmsDto = parseAlarmsDto(companyDetector.getAlarms());
       
+ //      	if(companyDetector.getDetectorCompanyAlarms() != null && !companyDetector.getDetectorCompanyAlarms().isEmpty())		
+    	this.detectorCompanyAlarmDto = parseDetectorCompanyAlarmDto(companyDetector.getDetectorCompanyAlarms());
+
 	}
 	
+	private final List<DetectorCompanyAlarmDto> parseDetectorCompanyAlarmDto(Set<DetectorCompanyAlarm> detectorCompanyAlarms) {
+		List<DetectorCompanyAlarmDto> lista = new ArrayList<DetectorCompanyAlarmDto>();
 		
-//	private final List<AlarmDto> parseAlarmsDto(Set<Alarm> alarms) {
-//		List<AlarmDto> lista = new ArrayList<AlarmDto>();
-//		
-//		if(alarms != null && !alarms.isEmpty()) {
-//		
-//			Iterator<Alarm> itr = alarms.iterator();			
-//			while (itr.hasNext()) {
-//				AlarmDto dto = new AlarmDto(itr.next());
-//				lista.add(dto);
-//			}
-//		}
-//		
-//		return lista;
-//	}
+		if(detectorCompanyAlarms != null && !detectorCompanyAlarms.isEmpty()) {
+		
+			Iterator<DetectorCompanyAlarm> itr = detectorCompanyAlarms.iterator();			
+			while (itr.hasNext()) {
+				DetectorCompanyAlarmDto dto = new DetectorCompanyAlarmDto(itr.next());
+				lista.add(dto);
+			}
+		}
+		
+		return lista;
+	}
 		
 	public final Long getUid() {
 		return uid;
@@ -171,20 +172,13 @@ public class CompanyDetectorDto {
 		this.companyDeviceDto = companyDeviceDto;
 	}
 	
-//	public final AlarmDto getAlarmDto() {
-//		return alarmDto;
-//	}
-//
-//	public final void setAlarmDto(AlarmDto alarmDto) {
-//		this.alarmDto = alarmDto;
-//	}
-	
-//	public final List<AlarmDto> getAlarmsDto() {
-//		return alarmsDto;
-//	}
-//
-//	public final void setAlarmsDto(List<AlarmDto> alarmsDto) {
-//		this.alarmsDto = alarmsDto;
-//	}	
+	public final List<DetectorCompanyAlarmDto> getDetectorCompanyAlarmDto() {
+		return detectorCompanyAlarmDto;
+	}
+
+	public final void setDetectorCompanyAlarmDto(List<DetectorCompanyAlarmDto> detectorCompanyAlarmDto) {
+		this.detectorCompanyAlarmDto = detectorCompanyAlarmDto;
+	}
+
 
 }

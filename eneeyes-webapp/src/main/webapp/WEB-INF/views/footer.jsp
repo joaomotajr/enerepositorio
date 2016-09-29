@@ -79,7 +79,7 @@
 
     <!-- PAGE LEVEL SCRIPTS -->    
     <script src="/assets/js/eneeyes.js"></script>
-	<script src="/assets/js/eneeyes-translate.js"></script>
+	<!--<script src="/assets/js/eneeyes-translate.js"></script> -->
 	<script src="/assets/js/eneeyes-filters.js"></script>
 	<script src="/assets/js/eneeyes-services.js"></script>
 	<script src="/assets/js/eneeyes-site-controller.js"></script>

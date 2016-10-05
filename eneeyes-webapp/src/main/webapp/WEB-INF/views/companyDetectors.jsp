@@ -231,7 +231,8 @@
 												<td>{{item.alarm2}}</td>
 												<td>{{item.alarm3}}</td>
 												<td>
-													<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="selecionarAlarm($index)">Selecionar</button>
+													<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="selecionarAlarm($index)">Selecionar</button> 
+												<!-- <input type="radio" value="{{item.uid}}" ng-model="disciplinaFerramenta">  -->
 												</td>																		
 											</tr>                                                               
 										</tbody>
@@ -241,7 +242,7 @@
 						</div>				
 				  	</div>
 				  	<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>                                
+						<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="selecionarAlarm()">OK</button>                                
 				  	</div>
 			  	</div>
 			</div>		

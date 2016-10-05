@@ -68,7 +68,8 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 			companyDeviceDto: {uid : $scope.selectedCompanyDevice.uid},
 			detectorDto: {uid: $scope.selectedCompanyDetector.detectorDto.uid},
 			local: $scope.selectedCompanyDetector.local,
-			description: $scope.selectedCompanyDetector.description
+			description: $scope.selectedCompanyDetector.description,
+			detectorCompanyAlarmDto: $scope.selectedCompanyDetector.detectorCompanyAlarmDto
 		 }
 		 
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
@@ -198,25 +199,27 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	
 	$scope.configAlarm = function(index) {
 		
+		$scope.selectedSensor = $scope.selectedCompanyDetector.detectorDto.sensorsDto[index];
 		$scope.search = { unitMeterGases: $scope.selectedCompanyDetector.detectorDto.sensorsDto[index].unitMeterGases, gas : $scope.selectedCompanyDetector.detectorDto.sensorsDto[index].gasesDto[0].name };
-		$('#modalAlarm').modal({ show: 'false' });
+		
+		$timeout(function () {
+			$('#modalAlarm').modal({ show: 'false' });
+		}, 300);
 	}
 	
 	$scope.selecionarAlarm = function(index) {
-	
+		
+		/* Verifica se o Sensor em Questão já tinha Alarm, se nao add */
+		if($.grep($scope.selectedCompanyDetector.detectorCompanyAlarmDto, function (e) { return e.sensorId == $scope.selectedSensor.uid ; }).length == 0) {			
+			$scope.selectedCompanyDetector.detectorCompanyAlarmDto.push({alarmDto : $scope.alarms[index], sensorId : $scope.selectedSensor.uid})
+		}
+		/* Se sim seta para o Alarm selecionado */
+		else
+		{			
+			$scope.selectedCompanyDetector.detectorCompanyAlarmDto.sensorId = $scope.selectedSensor.uid;
+		}
+		
 	}
-	
-	$scope.addCompanyDetectorAlarm = function (idAlarm) {
-
-        alarm = { uid: idAlarm }
-
-        $scope.newAlarms.push(alarm);
-        $scope.$apply();
-    }
- 
-	 $scope.deleteCompanyDetector = function (index) {
-		 $scope.companyDetectorAlarms.splice(index, 1);		 
-	 }	 
 	
 	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];
 	$scope.selectedArea = $scope.selectedUnit.areasDto[$scope.$root.selecteds.areaIndex];
@@ -224,7 +227,12 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	$scope.$root.masterName = "Junior";
 	
 	$scope.getAlarms();
-	$scope.getOneCompanyDetector();
+	
+	if ($scope.selectedCompanyDevice != null)
+		$scope.getOneCompanyDetector();
+	else 
+		$scope.getDetectors();
+	
 	$scope.initializeDetector();
 		
 		

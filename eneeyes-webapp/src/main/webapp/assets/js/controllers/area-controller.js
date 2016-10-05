@@ -1,4 +1,4 @@
-app.controller('areaController', function ($scope, $timeout, $filter, AreaService, CompanyDetectorService, DetectorService) {
+app.controller('areaController', function ($scope, $timeout, $filter, AreaService, CompanyDetectorService, DetectorService, CompanyDeviceService) {
 
 	var loadGauge = false;
 		
@@ -6,6 +6,27 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		
 		$("#idImageArea").toggleClass("disableDiv");		
 	}
+	
+	$scope.saveCompanyDeviceInit = function() {
+		angular.element('body').addClass('loading');
+		
+		var companyDevice = {
+			uid: 0,
+			deviceType: $scope.sensorDetectionType.uid,
+			areaDto: {uid : $scope.selectedArea.uid}				
+		};
+		
+		$scope.inclusaoCompanyDevice = new CompanyDeviceService.save(companyDevice);
+		$scope.inclusaoCompanyDevice.$companyDevice({_csrf : angular.element('#_csrf').val()}, function(){         	
+			
+			$scope.getOneCompany($scope.companyUid);
+			angular.element('body').removeClass('loading');
+			
+		}, function(data) {
+			angular.element('body').removeClass('loading');
+			$scope.msgErro = "Erro: " + data.statusText;
+		});		 
+	 }
 
 	$scope.saveAreaInit = function() {
 		angular.element('body').addClass('loading');
@@ -296,6 +317,15 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		
 		return JSON.parse('{' + pinItensString + '}');;
 	}
+	
+	$scope.deviceTypes = 
+	[
+	 	{ name : 'OUTROS', uid : 0 },
+	 	{ name : 'DETECTOR', uid :  1 },
+	 	{ name : 'PLC', uid : 2 },
+	 	{ name : 'CONTROLADORA', uid : 3 },
+	 	{ name : 'ALARME', uid : 4 } 			  	
+	];	 	 
 	
 	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];
 	$scope.selectedArea = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex];			

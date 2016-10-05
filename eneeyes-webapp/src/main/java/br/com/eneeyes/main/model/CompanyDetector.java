@@ -52,11 +52,11 @@ public class CompanyDetector {
 		this.RangeMax = dto.getRangeMax();
 		this.RangeMin = dto.getRangeMin();
 		this.RangeUnit = dto.getRangeUnit();
-    	
+    			
     	this.detector = new Detector(dto.getDetectorDto());
     	
     	if(dto.getDetectorCompanyAlarmDto() != null)
-			this.detectorCompanyAlarms = parseDetectorCompanyAlarm(dto.getDetectorCompanyAlarmDto());    	
+			parseDetectorCompanyAlarm(dto.getDetectorCompanyAlarmDto());    	
 
     }   
 

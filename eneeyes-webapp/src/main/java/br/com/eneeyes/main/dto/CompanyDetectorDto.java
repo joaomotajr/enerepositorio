@@ -25,8 +25,7 @@ public class CompanyDetectorDto {
 	private Double RangeMin;			
 	private Double RangeUnit;	
 	private CompanyDeviceDto companyDeviceDto;	
-	private DetectorDto detectorDto;
-	//private AlarmDto alarmDto;
+	private DetectorDto detectorDto;	
 	private List<DetectorCompanyAlarmDto> detectorCompanyAlarmDto = new ArrayList<DetectorCompanyAlarmDto>();
 	
 	public CompanyDetectorDto() {
@@ -46,12 +45,9 @@ public class CompanyDetectorDto {
        	this.RangeMax = companyDetector.getRangeMax();
        	this.RangeMin = companyDetector.getRangeMin();
        	this.RangeUnit = companyDetector.getRangeUnit();
-       	       	       	
-       	this.detectorDto = new DetectorDto(companyDetector.getDetector()) ;
-      
- //      	if(companyDetector.getDetectorCompanyAlarms() != null && !companyDetector.getDetectorCompanyAlarms().isEmpty())		
+       	       	       	       	
+       	this.detectorDto = new DetectorDto(companyDetector.getDetector());
     	this.detectorCompanyAlarmDto = parseDetectorCompanyAlarmDto(companyDetector.getDetectorCompanyAlarms());
-
 	}
 	
 	private final List<DetectorCompanyAlarmDto> parseDetectorCompanyAlarmDto(Set<DetectorCompanyAlarm> detectorCompanyAlarms) {

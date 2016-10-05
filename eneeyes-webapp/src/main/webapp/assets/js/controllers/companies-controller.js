@@ -171,8 +171,10 @@ app.controller('companiesController', function ($scope, $timeout, $filter, Compa
 					    	
 					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;
 				    		 
-				    		if (node.companyDevice.deviceType == "DETECTOR") {				    							    			
-					    		$scope.LoadAjaxContentCompany('companyDetectors.html');
+				    		if (node.companyDevice.deviceType == "DETECTOR") {
+				    			$timeout(function () {
+				    				$scope.LoadAjaxContentCompany('companyDetectors.html');
+				    			}, 50);
 				    	 	}
 				    		else if (node.companyDevice.deviceType == "PLC" || node.companyDevice.deviceType == "CONTROLLER") 
 				    			$scope.LoadAjaxContentCompany('companyPlcs.html');

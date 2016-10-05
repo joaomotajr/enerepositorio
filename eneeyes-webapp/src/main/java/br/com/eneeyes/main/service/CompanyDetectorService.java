@@ -8,10 +8,13 @@ import javax.inject.Named;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDetectorDto;
+import br.com.eneeyes.main.dto.DetectorCompanyAlarmDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDevice;
+import br.com.eneeyes.main.model.DetectorCompanyAlarm;
 import br.com.eneeyes.main.repository.CompanyDetectorRepository;
 import br.com.eneeyes.main.repository.CompanyDeviceRepository;
+import br.com.eneeyes.main.repository.DetectorCompanyAlarmRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
@@ -25,6 +28,9 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	@Inject
 	private CompanyDeviceRepository companyDeviceRepository;
 	
+	@Inject
+	private DetectorCompanyAlarmRepository detectorCompanyAlarmRepository;
+	
 	public BasicResult<?> save(CompanyDetectorDto dto) {
 		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();		
 		
@@ -33,6 +39,15 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		CompanyDetector companyDetector = new CompanyDetector(dto);
 		companyDetector.setCompanyDevice(companyDevice);
 		
+		List<DetectorCompanyAlarm> list = new  ArrayList<DetectorCompanyAlarm>();
+		
+		for (DetectorCompanyAlarmDto detectorCompanyAlarmDto : dto.getDetectorCompanyAlarmDto() ) {
+			detectorCompanyAlarmDto.setCompanyDetectorDto(dto);
+			list.add(new DetectorCompanyAlarm(detectorCompanyAlarmDto));
+		}	
+		
+		detectorCompanyAlarmRepository.save(list);
+				
 		companyDetector = repository.save(companyDetector);
 		dto.setUid(companyDetector.getUid());
 				

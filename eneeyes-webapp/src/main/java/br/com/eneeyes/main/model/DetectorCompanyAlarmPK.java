@@ -12,24 +12,32 @@ public class DetectorCompanyAlarmPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="COMPANY_DETECTOR_ID", insertable=false, updatable=false, unique=true, nullable=false)
-	private String companyDetectorId;
+	@Column(name="COMPANY_DETECTOR_ID", insertable=false, updatable=false, nullable=false)
+	private Long companyDetectorId;
 
-	@Column(name="ALARM_ID", insertable=false, updatable=false, unique=true, nullable=false)
-	private String alarmId;
+	@Column(name="ALARM_ID", insertable=false, updatable=false, nullable=false)
+	private Long alarmId;
+	
+//	@Column(name="SENSOR_ID", insertable=false, updatable=false, unique=true, nullable=false)
+//	private String sensorId;
 
 	public DetectorCompanyAlarmPK() {
+		
 	}
-	public String getCompanyDetectorId() {
+	
+	public Long getCompanyDetectorId() {
 		return this.companyDetectorId;
 	}
-	public void setCompanyDetectorId(String companyDetectorId) {
+	
+	public void setCompanyDetectorId(Long companyDetectorId) {
 		this.companyDetectorId = companyDetectorId;
 	}
-	public String getAlarmId() {
+	
+	public Long getAlarmId() {
 		return this.alarmId;
 	}
-	public void setAlarmId(String alarmId) {
+	
+	public void setAlarmId(Long alarmId) {
 		this.alarmId = alarmId;
 	}
 

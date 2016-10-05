@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -29,31 +30,32 @@ public class DetectorCompanyAlarm implements Serializable {
 	}
 	
 	public DetectorCompanyAlarm(DetectorCompanyAlarmDto dto) {
-		
-		this.alarm = new Alarm( dto.getAlarmDto());		
+				
+		//this.alarm = new Alarm( dto.getAlarmDto());
+		//this.companyDetector = new CompanyDetector ( dto.getCompanyDetectorDto() );
 		this.sensorId = dto.getSensorId();		
 	}
 	
 	@EmbeddedId
-	private DetectorCompanyAlarmPK id;
+	private DetectorCompanyAlarmPK uid;
 
-	@Column(name="SENSOR_ID", nullable=false)
+	@Column(name="SENSOR_ID", nullable=true)
 	private BigInteger sensorId;
 
 	@ManyToOne
 	@JoinColumn(name="ALARM_ID", nullable=false, insertable=false, updatable=false)
 	private Alarm alarm;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable=false, insertable=false, updatable=false)
 	private CompanyDetector companyDetector;
 
 	public DetectorCompanyAlarmPK getId() {
-		return this.id;
+		return this.uid;
 	}
 
-	public void setId(DetectorCompanyAlarmPK id) {
-		this.id = id;
+	public void setId(DetectorCompanyAlarmPK uid) {
+		this.uid = uid;
 	}
 
 	public BigInteger getSensorId() {

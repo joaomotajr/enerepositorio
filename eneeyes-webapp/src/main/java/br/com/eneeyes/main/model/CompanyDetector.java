@@ -56,7 +56,7 @@ public class CompanyDetector {
     	this.detector = new Detector(dto.getDetectorDto());
     	
     	if(dto.getDetectorCompanyAlarmDto() != null)
-			parseDetectorCompanyAlarm(dto.getDetectorCompanyAlarmDto());    	
+    		this.detectorCompanyAlarms = parseDetectorCompanyAlarm(dto.getDetectorCompanyAlarmDto());    	
 
     }   
 
@@ -64,7 +64,16 @@ public class CompanyDetector {
 		Set<DetectorCompanyAlarm> lista = new HashSet<DetectorCompanyAlarm>();		
 		
 		for (DetectorCompanyAlarmDto item   : detectorCompanyAlarms) {			
-			lista.add(new DetectorCompanyAlarm(item));			
+						
+			DetectorCompanyAlarm detectorCompanyAlarm = new DetectorCompanyAlarm(item);
+			
+			detectorCompanyAlarm.setCompanyDetector(this);
+			
+			detectorCompanyAlarm.setId(new DetectorCompanyAlarmPK() );			
+			detectorCompanyAlarm.getId().setCompanyDetectorId(this.getUid());
+			detectorCompanyAlarm.getId().setAlarmId(item.getAlarmDto().getUid());
+			
+			lista.add(detectorCompanyAlarm);
 		}		
 		return lista;		
 	}
@@ -117,7 +126,7 @@ public class CompanyDetector {
 	@JoinColumn(name="DETECTOR_ID", nullable = false)
 	private Detector detector;
 	
-	@OneToMany(mappedBy="companyDetector", fetch = FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="companyDetector", fetch = FetchType.EAGER)
 	private Set<DetectorCompanyAlarm> detectorCompanyAlarms;
 		
 	public Long getUid() {

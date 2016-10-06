@@ -141,14 +141,13 @@
 									                      		<h5 class="description-header">{{subItem.name}}</h5>
 									                      		<span class="description-text">Min|Max: {{subItem.rangeMin}} | {{subItem.rangeMax}}</span>
 									                      		<h5>{{subItem.unitMeterGases}}</h5>
-								                      			<h5>{{subItem.gasesDto[0].name}}</h5>
-									                      		<!-- 								                      		
-									                      		 <select name="uid" class="form-control" id="selAlarmCompanyDetector">
-														        	<option value="" >Selecione</option>
-																    <option value={{item.uid}} ng-repeat="item in alarms">{{item.name}}</option>			    
-																</select>
-																 -->
-																<label>Alarmes </label> <a href="#" ng-click="configAlarm($index);"><i class="fa fa-bullhorn"></i></a>
+								                      			<h5>{{subItem.gasesDto[0].name}}</h5>									                      		
+																<label>Alarme </label> <a href="#" ng-click="configAlarm($index);" title="Troca/Selecionar Alarme"><i class="fa fa-bullhorn"></i></a>
+																<div ng-repeat="item in selectedCompanyDetector.detectorCompanyAlarmDto">
+																	<div ng-if="item.sensorId == subItem.uid">
+																		<label class="text-red">{{item.alarmDto.name}}</label>
+																	</div>
+																</div>
 										                	</div>
 									                    </div>					                    
 								                    </div>						                    					                    					                					                  			                  
@@ -178,6 +177,7 @@
 								                      		<h5>{{subItem.unitMeterGases}}</h5>
 								                      		<h5>{{subItem.gasesDto[0].name}}</h5>
 								                      		<label>Alarmes </label> <a href="#" ng-click="configAlarm($index);"><i class="fa fa-bullhorn"></i></a>
+								                      		<label class="text-red">selectedCompanyDetector.detectorCompanyAlarmDto[0].alarmDto.name</label>
 									                	</div>									                    					                    
 								                    </div>						                    					                    					                					                  			                  
 								                </div>					                
@@ -231,8 +231,14 @@
 												<td>{{item.alarm2}}</td>
 												<td>{{item.alarm3}}</td>
 												<td>
-													<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="selecionarAlarm($index)">Selecionar</button> 
-												<!-- <input type="radio" value="{{item.uid}}" ng-model="disciplinaFerramenta">  -->
+													<div ng-repeat="alarm in selectedCompanyDetector.detectorCompanyAlarmDto">													
+														<div ng-if="alarm.alarmDto.uid == item.uid">
+															<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="selecionarAlarm($index)">Selecionado</button>
+														</div>
+														<div ng-if="alarm.alarmDto.uid != item.uid">
+															<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="selecionarAlarm($index)">Selecionar</button>
+														</div>
+													</div>
 												</td>																		
 											</tr>                                                               
 										</tbody>
@@ -242,7 +248,7 @@
 						</div>				
 				  	</div>
 				  	<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="selecionarAlarm()">OK</button>                                
+						<button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>                                
 				  	</div>
 			  	</div>
 			</div>		

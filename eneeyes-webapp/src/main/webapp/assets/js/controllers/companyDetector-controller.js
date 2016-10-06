@@ -209,17 +209,21 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	
 	$scope.selecionarAlarm = function(index) {
 		
-		/* Verifica se o Sensor em Questão já tinha Alarm, se nao add */
-		if($.grep($scope.selectedCompanyDetector.detectorCompanyAlarmDto, function (e) { return e.sensorId == $scope.selectedSensor.uid ; }).length == 0) {			
+		//detectorAlarm = $.grep($scope.selectedCompanyDetector.detectorCompanyAlarmDto, function (e) { return e.sensorId == $scope.selectedSensor.uid ; });
+
+		/* Verifica se o Sensor poussi Alarm */
+		var detectorAlarmIndex = $scope.selectedCompanyDetector.detectorCompanyAlarmDto.findIndex(img => img.sensorId === $scope.selectedSensor.uid);
+		
+		/* Add  */
+		if (detectorAlarmIndex < 0) {			
 			$scope.selectedCompanyDetector.detectorCompanyAlarmDto.push({alarmDto : $scope.alarms[index], sensorId : $scope.selectedSensor.uid})
 		}
-		/* Se sim seta para o Alarm selecionado */
-		else
-		{			
-			$scope.selectedCompanyDetector.detectorCompanyAlarmDto.sensorId = $scope.selectedSensor.uid;
-		}
-		
+		/* UPD */
+		else {			
+			$scope.selectedCompanyDetector.detectorCompanyAlarmDto[detectorAlarmIndex] = {alarmDto : $scope.alarms[index], sensorId : $scope.selectedSensor.uid};
+		}		
 	}
+	
 	
 	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];
 	$scope.selectedArea = $scope.selectedUnit.areasDto[$scope.$root.selecteds.areaIndex];

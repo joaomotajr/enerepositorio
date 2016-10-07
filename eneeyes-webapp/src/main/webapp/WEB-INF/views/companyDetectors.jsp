@@ -143,13 +143,14 @@
 									                      		<h5>{{subItem.unitMeterGases}}</h5>
 								                      			<h5>{{subItem.gasesDto[0].name}}</h5>									                      		
 																<label>Alarme </label> <a href="#" ng-click="configAlarm($index);" title="Troca/Selecionar Alarme"><i class="fa fa-bullhorn"></i></a>
+																
 																<div ng-repeat="item in selectedCompanyDetector.detectorCompanyAlarmDto">
 																	<div ng-if="item.sensorId == subItem.uid">
 																		<label class="text-red">{{item.alarmDto.name}}</label>
 																	</div>
 																</div>
 										                	</div>
-									                    </div>					                    
+									                    </div>					                     
 								                    </div>						                    					                    					                					                  			                  
 							                	</div>		                
 							              	</div> 				              	   
@@ -231,14 +232,14 @@
 												<td>{{item.alarm2}}</td>
 												<td>{{item.alarm3}}</td>
 												<td>
-													<div ng-repeat="alarm in selectedCompanyDetector.detectorCompanyAlarmDto">													
-														<div ng-if="alarm.alarmDto.uid == item.uid">
-															<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="selecionarAlarm($index)">Selecionado</button>
-														</div>
-														<div ng-if="alarm.alarmDto.uid != item.uid">
-															<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="selecionarAlarm($index)">Selecionar</button>
-														</div>
+																										
+													<div ng-if="item.uid == selectedAlarm.uid">
+														<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" ng-click="removerAlarm($index)" disabled>Remover</button>
 													</div>
+													<div ng-if="item.uid != selectedAlarm.uid">
+														<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="selecionarAlarm($index, item.uid)">Selecionar</button>
+													</div>
+													
 												</td>																		
 											</tr>                                                               
 										</tbody>

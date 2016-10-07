@@ -200,6 +200,8 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	$scope.configAlarm = function(index) {
 		
 		$scope.selectedSensor = $scope.selectedCompanyDetector.detectorDto.sensorsDto[index];
+		$scope.selectedAlarm = $.grep($scope.selectedCompanyDetector.detectorCompanyAlarmDto, function (e) { return e.sensorId == $scope.selectedSensor.uid ; })[0].alarmDto ;
+		
 		$scope.search = { unitMeterGases: $scope.selectedCompanyDetector.detectorDto.sensorsDto[index].unitMeterGases, gas : $scope.selectedCompanyDetector.detectorDto.sensorsDto[index].gasesDto[0].name };
 		
 		$timeout(function () {
@@ -207,20 +209,22 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		}, 300);
 	}
 	
-	$scope.selecionarAlarm = function(index) {
+	$scope.selecionarAlarm = function(index, uid) {
 		
-		//detectorAlarm = $.grep($scope.selectedCompanyDetector.detectorCompanyAlarmDto, function (e) { return e.sensorId == $scope.selectedSensor.uid ; });
 
 		/* Verifica se o Sensor poussi Alarm */
 		var detectorAlarmIndex = $scope.selectedCompanyDetector.detectorCompanyAlarmDto.findIndex(img => img.sensorId === $scope.selectedSensor.uid);
 		
+		/* Obtem Alarm selecionado */
+		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; });
+		
 		/* Add  */
 		if (detectorAlarmIndex < 0) {			
-			$scope.selectedCompanyDetector.detectorCompanyAlarmDto.push({alarmDto : $scope.alarms[index], sensorId : $scope.selectedSensor.uid})
+			$scope.selectedCompanyDetector.detectorCompanyAlarmDto.push({alarmDto :  selectedAlarm[0], sensorId : $scope.selectedSensor.uid})
 		}
 		/* UPD */
 		else {			
-			$scope.selectedCompanyDetector.detectorCompanyAlarmDto[detectorAlarmIndex] = {alarmDto : $scope.alarms[index], sensorId : $scope.selectedSensor.uid};
+			$scope.selectedCompanyDetector.detectorCompanyAlarmDto[detectorAlarmIndex] = {alarmDto :  selectedAlarm[0], sensorId : $scope.selectedSensor.uid};
 		}		
 	}
 	

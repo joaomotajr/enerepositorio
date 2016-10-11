@@ -8,20 +8,20 @@ import javax.persistence.*;
  * 
  */
 @Embeddable
-public class DetectorCompanyAlarmPK implements Serializable {
+public class CompanyDetectorAlarmPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="COMPANY_DETECTOR_ID", insertable=false, updatable=false, nullable=false)
+	@Column(name="COMPANY_DETECTOR_ID", updatable=false, nullable=false)
 	private Long companyDetectorId;
 
-	@Column(name="ALARM_ID", insertable=false, updatable=false, nullable=false)
+	@Column(name="ALARM_ID", updatable=false, nullable=false)
 	private Long alarmId;
 	
-//	@Column(name="SENSOR_ID", insertable=false, updatable=false, unique=true, nullable=false)
-//	private String sensorId;
+	@Column(name="SENSOR_ID", updatable=false, nullable=false)
+	private Long sensorId;
 
-	public DetectorCompanyAlarmPK() {
+	public CompanyDetectorAlarmPK() {
 		
 	}
 	
@@ -40,15 +40,23 @@ public class DetectorCompanyAlarmPK implements Serializable {
 	public void setAlarmId(Long alarmId) {
 		this.alarmId = alarmId;
 	}
+	
+	public final Long getSensorId() {
+		return sensorId;
+	}
+
+	public final void setSensorId(Long sensorId) {
+		this.sensorId = sensorId;
+	}
 
 	public boolean equals(Object other) {
 		if (this == other) {
 			return true;
 		}
-		if (!(other instanceof DetectorCompanyAlarmPK)) {
+		if (!(other instanceof CompanyDetectorAlarmPK)) {
 			return false;
 		}
-		DetectorCompanyAlarmPK castOther = (DetectorCompanyAlarmPK)other;
+		CompanyDetectorAlarmPK castOther = (CompanyDetectorAlarmPK)other;
 		return 
 			this.companyDetectorId.equals(castOther.companyDetectorId)
 			&& this.alarmId.equals(castOther.alarmId);

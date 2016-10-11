@@ -144,7 +144,7 @@
 								                      			<h5>{{subItem.gasesDto[0].name}}</h5>									                      		
 																<label>Alarme </label> <a href="#" ng-click="configAlarm($index);" title="Troca/Selecionar Alarme"><i class="fa fa-bullhorn"></i></a>
 																
-																<div ng-repeat="item in selectedCompanyDetector.detectorCompanyAlarmDto">
+																<div ng-repeat="item in selectedCompanyDetectorAlarms">
 																	<div ng-if="item.sensorId == subItem.uid">
 																		<label class="text-red">{{item.alarmDto.name}}</label>
 																	</div>
@@ -178,7 +178,7 @@
 								                      		<h5>{{subItem.unitMeterGases}}</h5>
 								                      		<h5>{{subItem.gasesDto[0].name}}</h5>
 								                      		<label>Alarmes </label> <a href="#" ng-click="configAlarm($index);"><i class="fa fa-bullhorn"></i></a>
-								                      		<label class="text-red">selectedCompanyDetector.detectorCompanyAlarmDto[0].alarmDto.name</label>
+								                      		<label class="text-red">selectedCompanyDetectorAlarms[0].alarmDto.name</label>
 									                	</div>									                    					                    
 								                    </div>						                    					                    					                					                  			                  
 								                </div>					                

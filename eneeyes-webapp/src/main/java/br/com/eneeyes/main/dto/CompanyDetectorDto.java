@@ -1,14 +1,9 @@
 package br.com.eneeyes.main.dto;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 import br.com.eneeyes.main.dto.register.DetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
-import br.com.eneeyes.main.model.DetectorCompanyAlarm;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 public class CompanyDetectorDto {
@@ -26,7 +21,6 @@ public class CompanyDetectorDto {
 	private Double RangeUnit;	
 	private CompanyDeviceDto companyDeviceDto;	
 	private DetectorDto detectorDto;	
-	private List<DetectorCompanyAlarmDto> detectorCompanyAlarmDto = new ArrayList<DetectorCompanyAlarmDto>();
 	
 	public CompanyDetectorDto() {
 		
@@ -47,22 +41,6 @@ public class CompanyDetectorDto {
        	this.RangeUnit = companyDetector.getRangeUnit();
        	       	       	       	
        	this.detectorDto = new DetectorDto(companyDetector.getDetector());
-    	this.detectorCompanyAlarmDto = parseDetectorCompanyAlarmDto(companyDetector.getDetectorCompanyAlarms());
-	}
-	
-	private final List<DetectorCompanyAlarmDto> parseDetectorCompanyAlarmDto(Set<DetectorCompanyAlarm> detectorCompanyAlarms) {
-		List<DetectorCompanyAlarmDto> lista = new ArrayList<DetectorCompanyAlarmDto>();
-		
-		if(detectorCompanyAlarms != null && !detectorCompanyAlarms.isEmpty()) {
-		
-			Iterator<DetectorCompanyAlarm> itr = detectorCompanyAlarms.iterator();			
-			while (itr.hasNext()) {
-				DetectorCompanyAlarmDto dto = new DetectorCompanyAlarmDto(itr.next());
-				lista.add(dto);
-			}
-		}
-		
-		return lista;
 	}
 		
 	public final Long getUid() {
@@ -167,14 +145,4 @@ public class CompanyDetectorDto {
 	public void setCompanyDeviceDto(CompanyDeviceDto companyDeviceDto) {
 		this.companyDeviceDto = companyDeviceDto;
 	}
-	
-	public final List<DetectorCompanyAlarmDto> getDetectorCompanyAlarmDto() {
-		return detectorCompanyAlarmDto;
-	}
-
-	public final void setDetectorCompanyAlarmDto(List<DetectorCompanyAlarmDto> detectorCompanyAlarmDto) {
-		this.detectorCompanyAlarmDto = detectorCompanyAlarmDto;
-	}
-
-
 }

@@ -1,9 +1,7 @@
 package br.com.eneeyes.main.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import br.com.eneeyes.main.dto.DetectorCompanyAlarmDto;
+import br.com.eneeyes.main.dto.CompanyDetectorAlarmDto;
 
 
 /**
@@ -20,27 +18,29 @@ import br.com.eneeyes.main.dto.DetectorCompanyAlarmDto;
  * 
  */
 @Entity
-@Table(name="detector_company_alarms")
-@NamedQuery(name="DetectorCompanyAlarm.findAll", query="SELECT d FROM DetectorCompanyAlarm d")
-public class DetectorCompanyAlarm implements Serializable {
+@Table(name="company_detector_alarms")
+@NamedQuery(name="CompanyDetectorAlarm.findAll", query="SELECT d FROM CompanyDetectorAlarm d")
+public class CompanyDetectorAlarm implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	public DetectorCompanyAlarm() {
+	public CompanyDetectorAlarm() {
 		
 	}
 	
-	public DetectorCompanyAlarm(DetectorCompanyAlarmDto dto) {
+	public CompanyDetectorAlarm(CompanyDetectorAlarmDto dto) {
 				
-		//this.alarm = new Alarm( dto.getAlarmDto());
-		//this.companyDetector = new CompanyDetector ( dto.getCompanyDetectorDto() );
-		this.sensorId = dto.getSensorId();		
+		this.alarm = new Alarm( dto.getAlarmDto());
+		this.companyDetector = new CompanyDetector ( dto.getCompanyDetectorDto() );
+
+		this.uid = (new CompanyDetectorAlarmPK());
+		this.uid.setAlarmId(dto.getAlarmDto().getUid());
+		this.uid.setCompanyDetectorId(dto.getCompanyDetectorDto().getUid());
+		this.uid.setSensorId(dto.getSensorId());
+
 	}
 	
 	@EmbeddedId
-	private DetectorCompanyAlarmPK uid;
-
-	@Column(name="SENSOR_ID", nullable=true)
-	private BigInteger sensorId;
+	private CompanyDetectorAlarmPK uid;
 
 	@ManyToOne
 	@JoinColumn(name="ALARM_ID", nullable=false, insertable=false, updatable=false)
@@ -50,20 +50,12 @@ public class DetectorCompanyAlarm implements Serializable {
 	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable=false, insertable=false, updatable=false)
 	private CompanyDetector companyDetector;
 
-	public DetectorCompanyAlarmPK getId() {
+	public CompanyDetectorAlarmPK getId() {
 		return this.uid;
 	}
 
-	public void setId(DetectorCompanyAlarmPK uid) {
+	public void setId(CompanyDetectorAlarmPK uid) {
 		this.uid = uid;
-	}
-
-	public BigInteger getSensorId() {
-		return this.sensorId;
-	}
-
-	public void setSensorId(BigInteger sensorId) {
-		this.sensorId = sensorId;
 	}
 
 	public Alarm getAlarm() {

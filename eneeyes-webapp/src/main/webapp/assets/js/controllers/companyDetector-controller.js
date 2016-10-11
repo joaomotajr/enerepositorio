@@ -18,7 +18,7 @@ app.filter('gasFilter', function () {
 });
 
 
-app.controller('companyDetectorController', function ($scope, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService) {
+app.controller('companyDetectorController', function ($scope, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService ) {
 
 	var loadGauge = false;
 	
@@ -68,8 +68,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 			companyDeviceDto: {uid : $scope.selectedCompanyDevice.uid},
 			detectorDto: {uid: $scope.selectedCompanyDetector.detectorDto.uid},
 			local: $scope.selectedCompanyDetector.local,
-			description: $scope.selectedCompanyDetector.description,
-			detectorCompanyAlarmDto: $scope.selectedCompanyDetector.detectorCompanyAlarmDto
+			description: $scope.selectedCompanyDetector.description
 		 }
 		 
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
@@ -102,6 +101,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
+			$scope.getCompanyDetectorAlarms();
         });		 
 	}
 		
@@ -189,6 +189,14 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		}	    		
 	}
 	
+	$scope.getCompanyDetectorAlarms = function() {
+		
+		$scope.resultCompanyDetectorAlarm = new CompanyDetectorAlarmService.listPorCompanyDetectorAlarm();		 
+		$scope.resultCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){			
+			$scope.selectedCompanyDetectorAlarms = $scope.resultCompanyDetectorAlarm.list;
+        });		 
+	}
+	
 	$scope.getAlarms = function() {
 		 
 		 $scope.resultAlarms = new AlarmService.listAll();		 
@@ -200,9 +208,9 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	$scope.configAlarm = function(index) {
 		
 		$scope.selectedSensor = $scope.selectedCompanyDetector.detectorDto.sensorsDto[index];
-		$scope.selectedAlarm = $.grep($scope.selectedCompanyDetector.detectorCompanyAlarmDto, function (e) { return e.sensorId == $scope.selectedSensor.uid ; })[0].alarmDto ;
 		
-		$scope.search = { unitMeterGases: $scope.selectedCompanyDetector.detectorDto.sensorsDto[index].unitMeterGases, gas : $scope.selectedCompanyDetector.detectorDto.sensorsDto[index].gasesDto[0].name };
+		$scope.selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == $scope.selectedSensor.uid ; })[0].alarmDto ;		
+		$scope.search = { unitMeterGases: $scope.selectedSensor.unitMeterGases, gas : $scope.selectedCompanyDetector.detectorDto.sensorsDto[index].gasesDto[0].name };
 		
 		$timeout(function () {
 			$('#modalAlarm').modal({ show: 'false' });
@@ -211,21 +219,45 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	
 	$scope.selecionarAlarm = function(index, uid) {
 		
-
-		/* Verifica se o Sensor poussi Alarm */
-		var detectorAlarmIndex = $scope.selectedCompanyDetector.detectorCompanyAlarmDto.findIndex(img => img.sensorId === $scope.selectedSensor.uid);
+		/* Verifica se o Sensor possui Alarm */
+		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(img => img.sensorId === $scope.selectedSensor.uid);
 		
 		/* Obtem Alarm selecionado */
 		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; });
 		
 		/* Add  */
-		if (detectorAlarmIndex < 0) {			
-			$scope.selectedCompanyDetector.detectorCompanyAlarmDto.push({alarmDto :  selectedAlarm[0], sensorId : $scope.selectedSensor.uid})
+		if (detectorAlarmIndex < 0) {		
+			$scope.selectedCompanyDetectorAlarms.push({alarmDto :  selectedAlarm[0], sensorId : $scope.selectedSensor.uid})
+			detectorAlarmIndex = 0;
 		}
 		/* UPD */
 		else {			
-			$scope.selectedCompanyDetector.detectorCompanyAlarmDto[detectorAlarmIndex] = {alarmDto :  selectedAlarm[0], sensorId : $scope.selectedSensor.uid};
-		}		
+			$scope.selectedCompanyDetectorAlarms[detectorAlarmIndex] = {alarmDto :  selectedAlarm[0], sensorId : $scope.selectedSensor.uid};			
+		}
+		
+		$scope.saveCompanyDetectorAlarm($scope.selectedCompanyDetectorAlarms[detectorAlarmIndex]);	
+	}
+	
+	$scope.saveCompanyDetectorAlarm = function(companyDetectorAlarm) {
+		angular.element('body').addClass('loading');
+		
+		var alarm = {
+		 		alarmDto : companyDetectorAlarm.alarmDto, 
+		 		companyDetectorDto: $scope.selectedCompanyDetector, 
+		 		sensorId : companyDetectorAlarm.sensorId
+		 };
+	 
+		$scope.inclusaoCompanyDetectorAlarm = new CompanyDetectorAlarmService.save(alarm);
+		$scope.inclusaoCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
+			
+			angular.element('body').removeClass('loading');
+			$scope.msgInfo = "Alarm Gravado!" ;
+			$('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+		
+		}, function(data) {
+			angular.element('body').removeClass('loading');
+			$scope.msgErro = "Erro: " + data.statusText;
+		});			 
 	}
 	
 	

@@ -1,6 +1,18 @@
-app.controller('areaController', function ($scope, $timeout, $filter, AreaService, CompanyDetectorService, DetectorService, CompanyDeviceService) {
+app.controller('areaController', function ($scope, $timeout, $filter, AreaService, CompanyDetectorService, DetectorService, CompanyDeviceService, CompanyService) {
 
 	var loadGauge = false;
+	
+	
+	$scope.getOneCompany = function(companyId) {
+		 
+		 $scope.listOne = new CompanyService.listOne();		 
+		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
+			 
+			 $scope.$root.selectedCompany = $scope.listOne.t;
+			 $scope.itens = getTree();
+			 $scope.loadTreview($scope.itens);			 
+	    });		 
+	}
 		
 	$scope.lockImageArea = function() {		
 		
@@ -103,9 +115,13 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		$scope.deletar = new AreaService.deletar();	
 		
 		$scope.deletar.$area({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid}, function(){
-			$scope.getOneCompany($scope.companyUid);					
+			
 			angular.element('body').removeClass('loading');
 			
+			$scope.getOneCompany($scope.companyUid);					
+//			$('.node-selected').remove();			
+//			$scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto.splice($scope.$root.selecteds.areaIndex, 1);
+									
 			$scope.msgDanger = "Área Excluída!!" ;
 	        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');         	         	
         }, function(data) {

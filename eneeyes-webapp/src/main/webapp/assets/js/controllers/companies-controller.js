@@ -1,3 +1,7 @@
+app.service('testServices', function ($http, $q) {
+
+});
+
 app.controller('companiesController', function ($scope, $timeout, $filter, CompanyService) {
 	
 	$scope.deleteCompany = function() {
@@ -73,17 +77,10 @@ app.controller('companiesController', function ($scope, $timeout, $filter, Compa
 			$scope.selectedCompanyName = $scope.companyName;
 			$scope.itens = getTree();
 			$scope.loadTreview($scope.itens);
-
 		}		
 		else 
 		{
-			$scope.clearFormCompany();
-			
-//			$scope.clearFormUnit();
-//			$scope.selectedUnit = undefined;			
-//			$scope.clearFormArea();
-//			$scope.selectedArea = undefined;			
-						
+			$scope.clearFormCompany();					
 			$scope.getCompanys();
 			
 			$timeout(function () {                    
@@ -134,7 +131,7 @@ app.controller('companiesController', function ($scope, $timeout, $filter, Compa
 				    	$scope.$root.selecteds = [];
 				    	$scope.$root.selecteds.push({unitIndex: 0, areaIndex : 0, companyDetectorIndex: 0});
 				    	
-				    	if(node.type == 0 && $scope.selectedCompany.unitsDto.length <= 0) {				    		 
+				    	if(node.type == 0 && $scope.$root.selectedCompany.unitsDto.length <= 0) {				    		 
 				    		 $scope.LoadAjaxContentCompany('companyInit.html');
 				    	}
 				    	else if(node.type == 0 ) {				    		
@@ -203,37 +200,37 @@ app.controller('companiesController', function ($scope, $timeout, $filter, Compa
 		var itens = [];
 		
 		//Company
-		var empresa = $scope.selectedCompany.name + "<small class='label label-default pull-right'></i>" + $scope.selectedCompany.unitsDto.length + "" + "</small>";
+		var empresa = $scope.$root.selectedCompany.name + "<small class='label label-default pull-right'></i>" + $scope.$root.selectedCompany.unitsDto.length + "" + "</small>";
 		
 		itens.push({text: empresa , type : 0, nodes: [] });
 		
-		for (var i = 0; i < $scope.selectedCompany.unitsDto.length; i++) {
+		for (var i = 0; i < $scope.$root.selectedCompany.unitsDto.length; i++) {
 			
 			//Unidades
 	   		var unidade = "<i class='fa fa-building' style='font-size:1.2em;'></i> " + 
-	   			$scope.selectedCompany.unitsDto[i].name + "<small class='label label-default pull-right'></i>" + 
-	   			$scope.selectedCompany.unitsDto[i].areasDto.length + "" +  "</small>";	   		
+	   			$scope.$root.selectedCompany.unitsDto[i].name + "<small class='label label-default pull-right'></i>" + 
+	   			$scope.$root.selectedCompany.unitsDto[i].areasDto.length + "" +  "</small>";	   		
 			
-	   		itens[0].nodes.push({text: unidade, nodes: [], type : 1, index: i , unit : $scope.selectedCompany.unitsDto[i]});
+	   		itens[0].nodes.push({text: unidade, nodes: [], type : 1, index: i , unit : $scope.$root.selectedCompany.unitsDto[i]});
 	
-		   for (var j = 0; j < $scope.selectedCompany.unitsDto[i].areasDto.length; j++) {			  			   
+		   for (var j = 0; j < $scope.$root.selectedCompany.unitsDto[i].areasDto.length; j++) {			  			   
 			   
 			   //Áreas
 			   var area = "<i class='fa fa-map-o' style='font-size:1.2em;'></i> " + 
-			   		$scope.selectedCompany.unitsDto[i].areasDto[j].name + "<small class='label label-default pull-right'></i>" + 
-			   		$scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length + "" + "</small>";
+			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].name + "<small class='label label-default pull-right'></i>" + 
+			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length + "" + "</small>";
 			   
-			   itens[0].nodes[i].nodes.push({text: area, nodes: [], type : 2, index: j, unitIndex: i , area: $scope.selectedCompany.unitsDto[i].areasDto[j] });
+			   itens[0].nodes[i].nodes.push({text: area, nodes: [], type : 2, index: j, unitIndex: i , area: $scope.$root.selectedCompany.unitsDto[i].areasDto[j] });
 	
-			   for (var k = 0; k < $scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length; k++) {
+			   for (var k = 0; k < $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length; k++) {
 				   
 				   //Dispositivos
-				   if($scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType == "DETECTOR")
-					   var device = "<i class='fa fa fa-rss' style='font-size:1.2em;'></i> " + $scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
+				   if($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType == "DETECTOR")
+					   var device = "<i class='fa fa fa-rss' style='font-size:1.2em;'></i> " + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
 				   else
-					   var device = "<i class='fa  fa-keyboard-o' style='font-size:1.2em;'></i> " + $scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
+					   var device = "<i class='fa  fa-keyboard-o' style='font-size:1.2em;'></i> " + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
 				   
-				   itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : 3, index: k, areaIndex: j, unitIndex: i, companyDevice : $scope.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k] });
+				   itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : 3, index: k, areaIndex: j, unitIndex: i, companyDevice : $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k] });
 			   }
 		   }
 		}		 

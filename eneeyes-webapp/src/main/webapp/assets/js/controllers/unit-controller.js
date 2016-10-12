@@ -1,8 +1,38 @@
-app.controller('unitController', function ($scope, $timeout, $filter, UnitService) {
+app.controller('unitController', function ($scope, $timeout, $filter, UnitService, AreaService, CompanyService) {
 
     var map;
 	var geocoder;
 	var loadGauge = false;
+	
+	
+	$scope.getOneCompany = function(companyId) {
+		 
+		 $scope.listOne = new CompanyService.listOne();		 
+		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
+			 
+			 $scope.$root.selectedCompany = $scope.listOne.t;
+			 $scope.itens = getTree();
+			 $scope.loadTreview($scope.itens);			 
+	    });		 
+	}	
+	
+	$scope.saveAreaInit = function() {
+		angular.element('body').addClass('loading');
+		
+		var area = {
+			uid: 0,
+			name: $scope.areaNameInit,				
+			unitDto: {uid : $scope.selectedUnit.uid}				
+		};
+		 
+		$scope.inclusaoArea = new AreaService.save(area);
+		$scope.inclusaoArea.$area({_csrf : angular.element('#_csrf').val()}, function(){         	
+			
+			$scope.getOneCompany($scope.companyUid);			
+			angular.element('body').removeClass('loading');
+        });
+		 
+	 }
 	
 	$scope.newUnit = function () {
 		$scope.btnNewUnit = false;
@@ -15,7 +45,9 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 		$scope.deletar = new UnitService.deletar();	
 		
 		$scope.deletar.$unit({_csrf : angular.element('#_csrf').val(), id : $scope.selectedUnit.uid}, function(){
+			
 			$scope.getOneCompany($scope.companyUid);					
+			
 			angular.element('body').removeClass('loading');
 			
 			$scope.msgDanger = "Unidade Excluída!!" ;
@@ -43,22 +75,6 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 	 
 		$('#idUnitName').select();
 	}
-
-	$scope.saveUnitInit = function() {
-		
-		var unit = {
-			uid: 0,
-			name: $scope.unitNameInit,				
-			companyDto: {uid : $scope.selectedCompany.uid}				
-		};
-		 
-		$scope.inclusaoUnit = new UnitService.save(unit);
-		$scope.inclusaoUnit.$unit({_csrf : angular.element('#_csrf').val()}, function(){         	
-			
-			$scope.getOneCompany($scope.companyUid);		
-        });
-		 
-	 }
 	
 	$scope.saveUnit = function() {
 		angular.element('body').addClass('loading');				 
@@ -86,7 +102,7 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 		$scope.inclusaoUnit.$unit({_csrf : angular.element('#_csrf').val()}, function(){         	
 			
 			$scope.getOneCompany($scope.companyUid);
-			
+					
 			angular.element('body').removeClass('loading');
 			$scope.msgInfo = "Unidade Gravada!" ;
            $('#resultInfo').hide().show('slow').delay(1000).hide('slow');

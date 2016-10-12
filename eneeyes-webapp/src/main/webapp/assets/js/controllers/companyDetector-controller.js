@@ -18,9 +18,20 @@ app.filter('gasFilter', function () {
 });
 
 
-app.controller('companyDetectorController', function ($scope, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService ) {
+app.controller('companyDetectorController', function ($scope, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService ) {
 
 	var loadGauge = false;
+	
+	$scope.getOneCompany = function(companyId) {
+		 
+		 $scope.listOne = new CompanyService.listOne();		 
+		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
+			 
+			 $scope.$root.selectedCompany = $scope.listOne.t;
+			 $scope.itens = getTree();
+			 $scope.loadTreview($scope.itens);			 
+	    });		 
+	}
 	
 	$scope.saveCompanyDetectorCoords = function() {
 		
@@ -73,7 +84,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		 
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
 		$scope.inclusaoCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){		
-			
+								
 			angular.element('body').removeClass('loading');
 			$scope.msgInfo = "Detector Gravado!" ;
 			$('#resultInfo').hide().show('slow').delay(1000).hide('slow');
@@ -90,9 +101,11 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.deletar = new CompanyDetectorService.deletar();	
 		
 		$scope.deletar.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
-			$('.node-selected').remove();
+			
 			angular.element('body').removeClass('loading');
 			
+			$scope.getOneCompany($scope.companyUid);
+									
 			$scope.msgDanger = "Detector Excluída!!" ;
 	        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');         	         	
         }, function(data) {
@@ -106,8 +119,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		 $scope.resultDetectors.$detector({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.detectors = $scope.resultDetectors.list; 			 
         });		 
-	 }
-	
+	 }	
 			
 	$scope.getOneCompanyDetector = function() {
 		

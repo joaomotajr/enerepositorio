@@ -34,10 +34,7 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		CompanyDevice companyDevice = companyDeviceRepository.findOne(dto.getCompanyDeviceDto().getUid());
 		
 		CompanyDetector companyDetector = new CompanyDetector(dto);
-		companyDetector.setCompanyDevice(companyDevice);
-	
-		//detectorCompanyAlarmRepository.save(companyDetector.getDetectorCompanyAlarms());
-				
+		companyDetector.setCompanyDevice(companyDevice);				
 		companyDetector = repository.save(companyDetector);
 		dto.setUid(companyDetector.getUid());
 				

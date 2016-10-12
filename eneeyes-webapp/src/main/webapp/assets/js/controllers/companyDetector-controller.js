@@ -84,6 +84,22 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		});			 
 	}
 	
+	$scope.deleteCompanyDetector = function() 
+	{		 
+		angular.element('body').addClass('loading');		
+		$scope.deletar = new CompanyDetectorService.deletar();	
+		
+		$scope.deletar.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
+			$('.node-selected').remove();
+			angular.element('body').removeClass('loading');
+			
+			$scope.msgDanger = "Detector Excluída!!" ;
+	        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');         	         	
+        }, function(data) {
+        	$scope.msgErro = "Erro: " + statusText;
+		});		 
+	}
+	
 	$scope.getDetectors = function() {
 		 
 		 $scope.resultDetectors = new DetectorService.listAll();		 
@@ -209,7 +225,9 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		
 		$scope.selectedSensor = $scope.selectedCompanyDetector.detectorDto.sensorsDto[index];
 		
-		$scope.selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == $scope.selectedSensor.uid ; })[0].alarmDto ;		
+		if($.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == $scope.selectedSensor.uid ; }).length != 0 )			
+			$scope.selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == $scope.selectedSensor.uid ; })[0].alarmDto ;		
+		
 		$scope.search = { unitMeterGases: $scope.selectedSensor.unitMeterGases, gas : $scope.selectedCompanyDetector.detectorDto.sensorsDto[index].gasesDto[0].name };
 		
 		$timeout(function () {
@@ -264,7 +282,6 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];
 	$scope.selectedArea = $scope.selectedUnit.areasDto[$scope.$root.selecteds.areaIndex];
 	$scope.selectedCompanyDevice = $scope.selectedArea.companyDevicesDto[$scope.$root.selecteds.CompanyDeviceIndex]
-	$scope.$root.masterName = "Junior";
 	
 	$scope.getAlarms();
 	

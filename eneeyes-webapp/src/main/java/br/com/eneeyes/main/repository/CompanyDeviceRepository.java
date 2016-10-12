@@ -9,6 +9,7 @@ import br.com.eneeyes.main.model.CompanyDevice;
 
 public interface CompanyDeviceRepository  extends JpaRepository<CompanyDevice, Long> {
 	
+	//@OrderBy("uid")
 	@Query("select c from CompanyDevice c where c.area.uid = ?1")
 	public List<CompanyDevice> findCompanyDeviceByIdArea(Long uid);
 	

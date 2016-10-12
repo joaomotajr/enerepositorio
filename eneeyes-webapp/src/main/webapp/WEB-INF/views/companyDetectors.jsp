@@ -146,9 +146,10 @@
 																
 																<div ng-repeat="item in selectedCompanyDetectorAlarms">
 																	<div ng-if="item.sensorId == subItem.uid">
-																		<label class="text-red">{{item.alarmDto.name}}</label>
-																	</div>
+																		<label ng-model="hasAlarm1" class="text-red">{{item.alarmDto.name}}</label>
+																	</div>																	
 																</div>
+																<label ng-hide="hasAlarm1" class="text-gray">Alarme Indefinido</label>
 										                	</div>
 									                    </div>					                     
 								                    </div>						                    					                    					                					                  			                  
@@ -174,11 +175,12 @@
 								                	<div ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">									                	
 								                    	<div class="description-block">
 								                      		<h5 class="description-header"> {{subItem.name}}</h5>
-								                      		<span class="description-text">Min|Man: {{subItem.rangeMin}} | {{subItem.rangeMax}</span>
+								                      		<span class="description-text">Min|Man: {{subItem.rangeMin}} | {{subItem.rangeMax}}</span>
 								                      		<h5>{{subItem.unitMeterGases}}</h5>
 								                      		<h5>{{subItem.gasesDto[0].name}}</h5>
 								                      		<label>Alarmes </label> <a href="#" ng-click="configAlarm($index);"><i class="fa fa-bullhorn"></i></a>
-								                      		<label class="text-red">selectedCompanyDetectorAlarms[0].alarmDto.name</label>
+								                      		<label ng-model="hasAlarm" class="text-red">{{selectedCompanyDetectorAlarms[0].alarmDto.name}}</label>
+								                      		<label  ng-hide="selectedCompanyDetectorAlarms[0].alarmDto.name" class="text-gray">Alarme Indefinido</label>
 									                	</div>									                    					                    
 								                    </div>						                    					                    					                					                  			                  
 								                </div>					                

@@ -9,6 +9,7 @@ import br.com.eneeyes.main.model.Area;
 
 public interface AreaRepository extends JpaRepository<Area, Long> {
 
+	//@OrderBy("uid")
 	@Query("select a from Area a where a.unit.uid = ?1")
 	public List<Area> findByUnitID(Long idUnit);		
 

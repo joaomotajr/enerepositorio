@@ -259,27 +259,63 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	}
 	
 	$scope.selecionarAlarm = function(uid) {
+<<<<<<< HEAD
+=======
+		
+//		/* Verifica se o Sensor possui Alarm */
+//		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(img => img.sensorId === $scope.selectedSensor.uid);
+>>>>>>> branch 'master' of https://mota_junior@bitbucket.org/enesens/enerepositorio.git
 		
 		/* Obtem Alarm selecionado */
 		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; })[0];		
+<<<<<<< HEAD
 	
 		alarm = {
 		 		alarmDto : selectedAlarm, 
 		 		companyDetectorDto: $scope.selectedCompanyDetector, 
 		 		sensorId : $scope.selectedSensor.uid
 		 };
+=======
+		 
+//		if (detectorAlarmIndex < 0)  /* Add - TELA  */		
+//			$scope.selectedCompanyDetectorAlarms.push({alarmDto :  selectedAlarm[0], sensorId : $scope.selectedSensor.uid});		
+//		else /* UPD TELA */			
+//			$scope.selectedCompanyDetectorAlarms[detectorAlarmIndex] = {alarmDto :  selectedAlarm[0], sensorId : $scope.selectedSensor.uid};	
+>>>>>>> branch 'master' of https://mota_junior@bitbucket.org/enesens/enerepositorio.git
 		
+<<<<<<< HEAD
 		$scope.saveCompanyDetectorAlarm(alarm);		
 		$scope.mostrarAlarmTela(selectedAlarm);		
+=======
+		 alarm = {
+		 		alarmDto : selectedAlarm, 
+		 		companyDetectorDto: $scope.selectedCompanyDetector, 
+		 		sensorId : $scope.selectedSensor.uid
+		 };
+		
+		$scope.saveCompanyDetectorAlarm(alarm);		
+		$scope.mostrarAlarmTela(selectedAlarm);	
+		
+>>>>>>> branch 'master' of https://mota_junior@bitbucket.org/enesens/enerepositorio.git
 	}
 	
 	$scope.mostrarAlarmTela = function(selectedAlarm) {
+<<<<<<< HEAD
 
 		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(img => img.sensorId === $scope.selectedSensor.uid);
 	
 		if (detectorAlarmIndex < 0)		
 			$scope.selectedCompanyDetectorAlarms.push({alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid});		
 		else	
+=======
+	
+		/* Verifica se o Sensor possui Alarm */
+		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(img => img.sensorId === $scope.selectedSensor.uid);
+	
+		if (detectorAlarmIndex < 0)  /* Add - TELA  */		
+			$scope.selectedCompanyDetectorAlarms.push({alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid});		
+		else /* UPD TELA */			
+>>>>>>> branch 'master' of https://mota_junior@bitbucket.org/enesens/enerepositorio.git
 			$scope.selectedCompanyDetectorAlarms[detectorAlarmIndex] = {alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid};
 			
 	}

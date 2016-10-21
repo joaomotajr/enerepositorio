@@ -202,11 +202,11 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		
 		for (var j = 0; j < sensors.length; j++) {
 			
-			var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensors[j].uid ; });
+			var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensors[j].uid ; })[0].alarmDto;
 
-			var red = selectedAlarm.length == 0 || selectedAlarm == null ? sensors[j].rangeMax : selectedAlarm[0].alarmDto.alarm3 ;
-			var yellow = selectedAlarm.length == 0 || selectedAlarm == null ? sensors[j].rangeMax : selectedAlarm[0].alarmDto.alarm2 ;
-			var orange = selectedAlarm.length == 0 || selectedAlarm == null ? sensors[j].rangeMax : selectedAlarm[0].alarmDto.alarm1 ;
+			var red = selectedAlarm == null ? 0 : selectedAlarm.alarm3 ;
+			var yellow = selectedAlarm == null ? 0 : selectedAlarm.alarm2 ;
+			var orange = selectedAlarm == null ? 0 : selectedAlarm.alarm1 ;
 			
 			var gaugeOptions = {
 			     //width: 350, height: 140,

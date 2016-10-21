@@ -124,7 +124,7 @@
 				            	  	<div class="col-md-6">
 						              	<div class="panel panel-success">						                
 							                <div class="panel-heading">
-										    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}} - {{masterName}}</h3>							
+										    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
 										   	</div>									   					               	
 							               	<div class="panel-body">
 						               			<div class="row">							            					                 		
@@ -146,10 +146,9 @@
 																
 																<div ng-repeat="item in selectedCompanyDetectorAlarms">
 																	<div ng-if="item.sensorId == subItem.uid">
-																		<label ng-model="hasAlarm1" class="text-red">{{item.alarmDto.name}}</label>
-																	</div>																	
-																</div>
-																<label ng-hide="hasAlarm1" class="text-gray">Alarme Indefinido</label>
+																		<label class="text-red">{{item.alarmDto.name}}</label>
+																	</div>																																		
+																</div>																
 										                	</div>
 									                    </div>					                     
 								                    </div>						                    					                    					                					                  			                  
@@ -179,8 +178,7 @@
 								                      		<h5>{{subItem.unitMeterGases}}</h5>
 								                      		<h5>{{subItem.gasesDto[0].name}}</h5>
 								                      		<label>Alarmes </label> <a href="#" ng-click="configAlarm($index);"><i class="fa fa-bullhorn"></i></a>
-								                      		<label ng-model="hasAlarm" class="text-red">{{selectedCompanyDetectorAlarms[0].alarmDto.name}}</label>
-								                      		<label  ng-hide="selectedCompanyDetectorAlarms[0].alarmDto.name" class="text-gray">Alarme Indefinido</label>
+								                      		<label class="text-red">{{selectedCompanyDetectorAlarms[0].alarmDto.name}}</label>								                      		
 									                	</div>									                    					                    
 								                    </div>						                    					                    					                					                  			                  
 								                </div>					                
@@ -236,10 +234,10 @@
 												<td>
 																										
 													<div ng-if="item.uid == selectedAlarm.uid">
-														<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" ng-click="removerAlarm($index)" disabled>Remover</button>
+														<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" ng-click="removerAlarm(item.uid)">Remover</button>
 													</div>
 													<div ng-if="item.uid != selectedAlarm.uid">
-														<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="selecionarAlarm($index, item.uid)">Selecionar</button>
+														<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="selecionarAlarm(item.uid)">Selecionar</button>
 													</div>
 													
 												</td>																		

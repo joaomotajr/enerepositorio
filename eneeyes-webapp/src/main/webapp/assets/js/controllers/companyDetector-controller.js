@@ -183,11 +183,15 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 				if(! loadGauge) {
 					google.charts.load('current', { 'packages': ['gauge'] });
 					loadGauge = true;
-				}				
-				google.charts.setOnLoadCallback(drawGaugesDetector);
+				}
+				
+				$timeout(function () {	
+					google.charts.setOnLoadCallback(drawGaugesDetector);
+				}, 100);
+				
 			}				
 						
-		}, 500);
+		}, 300);
 		
 		$("#stepTabDetector_1").trigger("click");	
 	 }
@@ -198,18 +202,25 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		
 		for (var j = 0; j < sensors.length; j++) {
 			
+			var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensors[j].uid ; })[0].alarmDto;
+
+			var red = selectedAlarm == null ? 0 : selectedAlarm.alarm3 ;
+			var yellow = selectedAlarm == null ? 0 : selectedAlarm.alarm2 ;
+			var orange = selectedAlarm == null ? 0 : selectedAlarm.alarm1 ;
+			
 			var gaugeOptions = {
 			     //width: 350, height: 140,
-			     redFrom: 90, redTo: sensors[j].rangeMax,
-			     yellowFrom: 75, yellowTo: 90,
+			     min: sensors[j].rangeMin, max: sensors[j].rangeMax,			     
+			     redFrom: red, redTo: sensors[j].rangeMax,
+			     yellowFrom: yellow, yellowTo: red,
+			     greenFrom: orange, greenTo: yellow, 
 			     minorTicks: 5
 			};
-			
-			var gaugeData = new google.visualization.DataTable();
-			
-			gaugeData.addColumn('number', 'Sensor ' + (j + 1) );
-		    gaugeData.addRows(1);
-		    gaugeData.setCell(0, 0, 0);
+						
+			var gaugeData = google.visualization.arrayToDataTable([
+              	['Label', 'Value'],
+              	['Sensor ' + (j + 1), 0],
+              ]);
 		    
 		    console.log('sensor_' + sensors[j].$$hashKey);			    
 		    gauge = new google.visualization.Gauge(document.getElementById('sensor_' + sensors[j].$$hashKey));
@@ -247,36 +258,68 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		}, 300);
 	}
 	
-	$scope.selecionarAlarm = function(index, uid) {
-		
-		/* Verifica se o Sensor possui Alarm */
-		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(img => img.sensorId === $scope.selectedSensor.uid);
+	$scope.selecionarAlarm = function(uid) {
 		
 		/* Obtem Alarm selecionado */
-		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; });
+		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; })[0];		
+	
+		alarm = {
+		 		alarmDto : selectedAlarm, 
+		 		companyDetectorDto: $scope.selectedCompanyDetector, 
+		 		sensorId : $scope.selectedSensor.uid
+		 };
 		
-		/* Add  */
-		if (detectorAlarmIndex < 0) {		
-			$scope.selectedCompanyDetectorAlarms.push({alarmDto :  selectedAlarm[0], sensorId : $scope.selectedSensor.uid})
-			detectorAlarmIndex = 0;
-		}
-		/* UPD */
-		else {			
-			$scope.selectedCompanyDetectorAlarms[detectorAlarmIndex] = {alarmDto :  selectedAlarm[0], sensorId : $scope.selectedSensor.uid};			
-		}
-		
-		$scope.saveCompanyDetectorAlarm($scope.selectedCompanyDetectorAlarms[detectorAlarmIndex]);	
+		$scope.saveCompanyDetectorAlarm(alarm);		
+		$scope.mostrarAlarmTela(selectedAlarm);		
 	}
 	
-	$scope.saveCompanyDetectorAlarm = function(companyDetectorAlarm) {
-		angular.element('body').addClass('loading');
+	$scope.mostrarAlarmTela = function(selectedAlarm) {
+
+		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(img => img.sensorId === $scope.selectedSensor.uid);
+	
+		if (detectorAlarmIndex < 0)		
+			$scope.selectedCompanyDetectorAlarms.push({alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid});		
+		else	
+			$scope.selectedCompanyDetectorAlarms[detectorAlarmIndex] = {alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid};
+			
+	}
 		
-		var alarm = {
-		 		alarmDto : companyDetectorAlarm.alarmDto, 
+	$scope.removerAlarm = function(uid) {		
+
+		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; })[0];
+				
+		alarm = {
+		 		alarmDto : selectedAlarm, 
 		 		companyDetectorDto: $scope.selectedCompanyDetector, 
-		 		sensorId : companyDetectorAlarm.sensorId
+		 		sensorId : $scope.selectedSensor.uid
 		 };
-	 
+		
+		$scope.deleteCompanyDetectorAlarm = new CompanyDetectorAlarmService.deletar(alarm);
+		$scope.deleteCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
+			
+			angular.element('body').removeClass('loading');
+			$scope.msgInfo = "Alarm Excluído!" ;
+			$('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+		
+		}, function(data) {
+			angular.element('body').removeClass('loading');
+			$scope.msgErro = "Erro: " + data.statusText;
+		});
+		
+		$scope.removerAlarmTela(selectedAlarm);		
+	}
+	
+	$scope.removerAlarmTela = function(alarm) {
+				
+		var alarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(img => img.alarmDto.uid === alarm.uid);		 
+		$scope.selectedCompanyDetectorAlarms.splice( alarmIndex, 1);	
+		$scope.selectedAlarm = undefined;
+		
+	}
+	
+	$scope.saveCompanyDetectorAlarm = function(alarm) {
+		angular.element('body').addClass('loading');
+ 
 		$scope.inclusaoCompanyDetectorAlarm = new CompanyDetectorAlarmService.save(alarm);
 		$scope.inclusaoCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
 			

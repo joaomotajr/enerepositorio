@@ -117,7 +117,7 @@
 									    </div>
 									    <div class="col-md-4">
 									    	<div class="form-group">
-								                <label class="control-label">Alarme 1</label>
+								                <label class="control-label">Alarme 3</label>
 								                <input class="form-control" placeholder="Alarme 3" ng-model="alarmAlarm3">
 								            </div>
 									    </div>									    

@@ -25,18 +25,27 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 		
 		Result<CompanyDetectorAlarmDto> result = new Result<CompanyDetectorAlarmDto>();
 		CompanyDetectorAlarm companyDetectorAlarm = new CompanyDetectorAlarm(dto);
-		companyDetectorAlarm = companyDetectorAlarmRepository.save(companyDetectorAlarm);
+		
+		if (companyDetectorAlarmRepository.updateAlarm(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getCompanyDetector(), companyDetectorAlarm.getId().getSensorId()) <= 0)		
+			companyDetectorAlarm = companyDetectorAlarmRepository.save(companyDetectorAlarm);
 		
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Executado com sucesso.");
 		
 		return result;
 	}
-
-	@Override
-	public BasicResult<?> delete(Long uid) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public BasicResult<?> deletar(CompanyDetectorAlarmDto dto) {
+		
+		Result<CompanyDetectorAlarmDto> result = new Result<CompanyDetectorAlarmDto>();
+		CompanyDetectorAlarm companyDetectorAlarm = new CompanyDetectorAlarm(dto);
+		
+		companyDetectorAlarmRepository.deleteAlarm( companyDetectorAlarm.getCompanyDetector(), companyDetectorAlarm.getId().getSensorId());		
+		
+		result.setResultType( ResultMessageType.SUCCESS );
+		result.setMessage("Excluído com sucesso.");
+		
+		return result;
 	}
 	
 	@Override
@@ -72,6 +81,12 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 		}
 		
 		return result;
+	}
+
+	@Override
+	public BasicResult<?> delete(Long uid) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

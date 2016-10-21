@@ -2,6 +2,7 @@ package br.com.eneeyes.main.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -73,5 +74,4 @@ public class CompanyDetectorAlarm implements Serializable {
 	public void setCompanyDetector(CompanyDetector companyDetector) {
 		this.companyDetector = companyDetector;
 	}
-
 }

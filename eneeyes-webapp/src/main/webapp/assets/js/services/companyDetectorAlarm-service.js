@@ -5,9 +5,9 @@
 app.factory('CompanyDetectorAlarmService', function($resource){    
     
     return {
-    	deletar : $resource('/security/api/companyDetectorAlarm/delete/:id', {id: '@id'},{
-    		companyDetectorAlarm : {method : 'DELETE'}
-        }),        
+        deletar : $resource('/security/api/companyDetectorAlarm/delete',{},{
+    		companyDetectorAlarm : {method : 'POST'}
+        }), 
         listAll : $resource('/security/api/companyDetectorAlarm/all',{},{
         	companyDetectorAlarm : {method : 'GET'}
         }),

@@ -6,14 +6,13 @@
 			<div class="row">
 						
 				<div class="col-md-12">
-				
-					<!-- DIRECT CHAT PRIMARY -->
+
 					<div class="box box-primary" style="margin-bottom: 8px;" ng-class="{'collapsed-box' : selectedCompanyName}">
 					  
 						<div class="box-header with-border">
 							<h3 class="box-title">Cadastro</h3>
 							<div class="box-tools pull-right"></div>
-						</div><!-- /.box-header -->
+						</div>
 						
 						<div class="box-body">
 							
@@ -47,7 +46,7 @@
 									<input class="form-control" placeholder="Descrição" ng-model="companyDescription">                                                                        
 								</div>
 							</div>
-						</div><!-- /.box-body -->
+						</div>
 						
 						<div class="box-footer">							
 							<div class="col-md-12">
@@ -57,8 +56,8 @@
 								<span class="pull-right">   </span>												
 								<button type="button" ng-click="deleteCompany();" class="btn btn-danger pull-right" ng-disabled="(companyName) ? false : true">   Excluir   </button>
 							</div>
-						</div><!-- /.box-footer-->
-					</div><!--/.direct-chat -->
+						</div>
+					</div>
 				
 				</div>
 			</div>		

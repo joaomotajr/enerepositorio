@@ -26,7 +26,14 @@ public class CompanyDetectorAlarmController {
 		
 		return service.save(companyDetectorAlarmDto);
 	}	
+	
+	@RequestMapping(value="/security/api/companyDetectorAlarm/delete", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> delete(@RequestBody CompanyDetectorAlarmDto companyDetectorAlarmDto) {
 		
+		return service.deletar(companyDetectorAlarmDto);
+	}
+	
 	@RequestMapping(value="/security/api/companyDetectorAlarm/obtemPorCompanyDetector/{uid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listByCompanyDevice(@PathVariable Long uid) {

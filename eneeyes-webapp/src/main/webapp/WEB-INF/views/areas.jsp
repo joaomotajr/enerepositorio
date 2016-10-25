@@ -7,8 +7,7 @@
 	
 	.fill {
 		object-fit: fill;
-	}
-	
+	}	
 	
 </style>
 
@@ -78,8 +77,8 @@
 					        <div class="col-md-4">
 					        	<label class="control-label">Area Classificada</label>
 				                <div class="form-group">				                 	
-      									<label><input type="radio" ng-model="selectedUnit.classified" value="true" />&nbsp; Sim</label>        
-				                 	<label><input type="radio" ng-model="selectedUnit.classified" value="false" />&nbsp;	Não</label>						                
+      								<label><input type="radio" ng-model="selectedArea.classified" value="1" />&nbsp; Sim</label>        
+				                 	<label><input type="radio" ng-model="selectedArea.classified" value="0" />&nbsp;	Não</label>						                
 				                </div>
 					        						            
 					        </div>
@@ -231,9 +230,7 @@
 							              	</div> <!-- Panel Body -->				              	   
 						              	</div> <!-- Panel  -->
 					              	</div>  <!-- Col 06  -->
-				              	</div>
-				              	
-				              	
+				              	</div>				              	
 				              	              				              
 				          	</div> <!-- Repeat Detectores -->		            
 							       		 

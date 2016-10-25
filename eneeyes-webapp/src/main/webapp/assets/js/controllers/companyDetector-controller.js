@@ -106,7 +106,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 			
 			$scope.getOneCompany($scope.companyUid);
 									
-			$scope.msgDanger = "Detector Excluída!!" ;
+			$scope.msgDanger = "Detector Excluído!!" ;
 	        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');         	         	
         }, function(data) {
         	$scope.msgErro = "Erro: " + statusText;
@@ -146,6 +146,9 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.inclusaoCompanyDevice.$companyDevice({_csrf : angular.element('#_csrf').val()}, function(){         	
 			
 			$scope.getOneCompany($scope.companyUid);
+			
+			$scope.$root.msgInfo = "Dispositivo Incluído!" ;
+	        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
 			angular.element('body').removeClass('loading');
 			
 		}, function(data) {
@@ -187,8 +190,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 				
 				$timeout(function () {	
 					google.charts.setOnLoadCallback(drawGaugesDetector);
-				}, 100);
-				
+				}, 100);				
 			}				
 						
 		}, 300);
@@ -202,11 +204,11 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		
 		for (var j = 0; j < sensors.length; j++) {
 			
-			var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensors[j].uid ; })[0].alarmDto;
+			var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensors[j].uid ; });
 
-			var red = selectedAlarm == null ? 0 : selectedAlarm.alarm3 ;
-			var yellow = selectedAlarm == null ? 0 : selectedAlarm.alarm2 ;
-			var orange = selectedAlarm == null ? 0 : selectedAlarm.alarm1 ;
+			var red = selectedAlarm == null  || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
+			var yellow = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm2;
+			var orange = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm1;
 			
 			var gaugeOptions = {
 			     //width: 350, height: 140,
@@ -310,7 +312,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.deleteCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
 			
 			angular.element('body').removeClass('loading');
-			$scope.msgInfo = "Alarm Excluído!" ;
+			$scope.$root.msgInfo = "Alarme Excluído!" ;
 			$('#resultInfo').hide().show('slow').delay(1000).hide('slow');
 		
 		}, function(data) {
@@ -336,7 +338,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.inclusaoCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
 			
 			angular.element('body').removeClass('loading');
-			$scope.msgInfo = "Alarm Gravado!" ;
+			$scope.$root.msgInfo = "Alarme Gravado!" ;
 			$('#resultInfo').hide().show('slow').delay(1000).hide('slow');
 		
 		}, function(data) {

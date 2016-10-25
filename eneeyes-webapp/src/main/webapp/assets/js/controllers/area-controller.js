@@ -31,12 +31,17 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		$scope.inclusaoCompanyDevice = new CompanyDeviceService.save(companyDevice);
 		$scope.inclusaoCompanyDevice.$companyDevice({_csrf : angular.element('#_csrf').val()}, function(){         	
 			
+			$scope.clearFormArea();
+			
+			$scope.$root.msgInfo = "Novo Dispositivo Incluído!" ;
+	        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+	        
 			$scope.getOneCompany($scope.companyUid);
 			angular.element('body').removeClass('loading');
 			
 		}, function(data) {
 			angular.element('body').removeClass('loading');
-			$scope.msgErro = "Erro: " + data.statusText;
+			$scope.$root.msgErro = "Erro: " + data.statusText;
 		});		 
 	 }
 
@@ -51,6 +56,10 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		 
 		$scope.inclusaoArea = new AreaService.save(area);
 		$scope.inclusaoArea.$area({_csrf : angular.element('#_csrf').val()}, function(){         	
+			$scope.clearFormArea();
+			
+			$scope.$root.msgInfo = "Nova Área Incluída!" ;
+	        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
 			
 			$scope.getOneCompany($scope.companyUid);
 			angular.element('body').removeClass('loading');
@@ -72,18 +81,54 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 			latitude: $scope.selectedArea.latitude,
 			longitude: $scope.selectedArea.longitude,
 			image: $scope.selectedArea.image,
-			classified: $scope.selectedArea.classified,			
+			classified: $scope.selectedArea.classified == 1 ? true : false,	
 			unitDto: {uid : $scope.selectedUnit.uid}				
 		};
 		 
 		$scope.inclusaoArea = new AreaService.save(area);
 		$scope.inclusaoArea.$area({_csrf : angular.element('#_csrf').val()}, function(){         	
-			
-			$scope.getOneCompany($scope.companyUid);
+						
+			angular.element('body').removeClass('loading');
+			$scope.$root.msgInfo = "Área Gravada!" ;
+           $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+		
+		}, function(data) {
+			angular.element('body').removeClass('loading');
+			$scope.$root.msgErro = "Erro: " + data.statusText;
+		});			 
+	}
+	
+	$scope.saveCompanyDetectorCoords = function() {
+		
+		var detectorsCoords = JSON.parse(localStorage.getItem('easypin'));		
+		var item = $scope.selectedCompanyDetectorsArea;
+		
+		if(item == null) return;
+		
+		for (var i = 0; i < item.length; i++) {
+	    	
+			if($scope.selectedCompanyDetectorsArea[i].latitude != detectorsCoords.imgDipositivosArea[i].coords.lat ||
+					$scope.selectedCompanyDetectorsArea[i].longitude != detectorsCoords.imgDipositivosArea[i].coords.long) {
+			 
+				$scope.selectedCompanyDetectorsArea[i].latitude = detectorsCoords.imgDipositivosArea[i].coords.lat;
+			 	$scope.selectedCompanyDetectorsArea[i].longitude = detectorsCoords.imgDipositivosArea[i].coords.long;
+			 			 
+			 $scope.updateCompanyDetectorLatitudeLongitude($scope.selectedCompanyDetectorsArea[i].latitude, 
+					 $scope.selectedCompanyDetectorsArea[i].longitude, 
+					 $scope.selectedCompanyDetectorsArea[i].uid);
+			}
+	    }
+	}
+	
+	$scope.updateCompanyDetectorLatitudeLongitude = function(latitude, longitude, id) {
+		angular.element('body').addClass('loading');
+						 
+		$scope.updateLatitudeLongitude = new CompanyDetectorService.updateLatitudeLongitude();
+		$scope.updateLatitudeLongitude.$companyDetector({_csrf : angular.element('#_csrf').val(), latitude: latitude, longitude: longitude, id : id }, function(){		
 			
 			angular.element('body').removeClass('loading');
-			$scope.msgInfo = "Unidade Gravada!" ;
-           $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+			$scope.msgInfo = "Detector Gravado!" ;
+			$('#resultInfo').hide().show('slow').delay(1000).hide('slow');
 		
 		}, function(data) {
 			angular.element('body').removeClass('loading');
@@ -105,6 +150,9 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		$scope.selectedArea.latitude = '';
 		$scope.selectedArea.longitude = '';
 		$scope.selectedArea.classified = false;		
+		
+		$scope.areaNameInit = undefined;
+		$scope.saveCompanyDeviceInit = undefined;
  
 		$('#idAreaName').select();
 	}
@@ -118,11 +166,10 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 			
 			angular.element('body').removeClass('loading');
 			
-			$scope.getOneCompany($scope.companyUid);					
-//			$('.node-selected').remove();			
-//			$scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto.splice($scope.$root.selecteds.areaIndex, 1);
-									
-			$scope.msgDanger = "Área Excluída!!" ;
+			$scope.clearFormArea();
+			$scope.getOneCompany($scope.companyUid);
+			
+			$scope.$root.msgDanger = "Área Excluída!!" ;
 	        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');         	         	
         }, function(data) {
         	$scope.msgErro = "Erro: " + statusText;
@@ -343,8 +390,12 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 	 	{ name : 'ALARME', uid : 4 } 			  	
 	];	 	 
 	
-	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];
-	$scope.selectedArea = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex];			
+	$scope.selectedUnit = {};
+	$scope.selectedArea = {};
+	
+	angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex], $scope.selectedUnit);
+	angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex], $scope.selectedArea);
+	
 	$scope.btnNewArea = true;
 	$scope.initializeArea();
 		

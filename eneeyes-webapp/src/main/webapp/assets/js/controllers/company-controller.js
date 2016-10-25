@@ -32,8 +32,9 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
         
         map.fitBounds(bounds);
 	}
-
-	$scope.selectedCompany = $scope.$root.selectedCompany;
+	
+	$scope.selectedCompany = {};
+	angular.copy($scope.$root.selectedCompany, $scope.selectedCompany);
 	
 	$timeout(function () {
 		$scope.mapsCompanyUnits();				    	 	

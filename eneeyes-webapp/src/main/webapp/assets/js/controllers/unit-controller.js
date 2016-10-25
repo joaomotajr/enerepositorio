@@ -27,6 +27,10 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 		 
 		$scope.inclusaoArea = new AreaService.save(area);
 		$scope.inclusaoArea.$area({_csrf : angular.element('#_csrf').val()}, function(){         	
+			$scope.clearFormUnit();
+			
+			$scope.$root.msgInfo = "Nova Área Incluída!" ;
+	        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
 			
 			$scope.getOneCompany($scope.companyUid);			
 			angular.element('body').removeClass('loading');
@@ -46,12 +50,12 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 		
 		$scope.deletar.$unit({_csrf : angular.element('#_csrf').val(), id : $scope.selectedUnit.uid}, function(){
 			
-			$scope.getOneCompany($scope.companyUid);					
-			
-			angular.element('body').removeClass('loading');
-			
-			$scope.msgDanger = "Unidade Excluída!!" ;
-	        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');         	         	
+			$scope.clearFormUnit();
+			$scope.getOneCompany($scope.companyUid);		
+			angular.element('body').removeClass('loading');			
+			$scope.$root.msgDanger = "Unidade Excluída!!";			
+	        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');
+	        
         }, function(data) {
         	$scope.msgErro = "Erro: " + statusText;
 		});		 
@@ -72,6 +76,8 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 		$scope.selectedUnit.unitType  = undefined;
 		$scope.selectedUnit.latitude = null;	
 		$scope.selectedUnit.longitude = null;
+		
+		$scope.areaNameInit = undefined;
 	 
 		$('#idUnitName').select();
 	}
@@ -100,11 +106,9 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 		 
 		$scope.inclusaoUnit = new UnitService.save(unit);
 		$scope.inclusaoUnit.$unit({_csrf : angular.element('#_csrf').val()}, function(){         	
-			
-			$scope.getOneCompany($scope.companyUid);
 					
 			angular.element('body').removeClass('loading');
-			$scope.msgInfo = "Unidade Gravada!" ;
+			$scope.$root.msgInfo = "Unidade Gravada!" ;
            $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
 		
        });       
@@ -112,14 +116,13 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 	
 	$scope.getUnitAddressValid = function() {
 	
-		if($scope.selectedUnit.address != null && $scope.selectedUnit.state != null && $scope.selectedUnit.city != null) {
-					    	 		
-	 		return ($scope.selectedUnit.address == null ? "" : $scope.selectedUnit.address) + ", " + ($scope.selectedUnit.state == null ? "" : $scope.selectedUnit.state) + ", " + ($scope.selectedUnit.city == null ? "" : $scope.selectedUnit.city);				    	 		
-	 		
+		if($scope.selectedUnit.address != null && $scope.selectedUnit.state != null && $scope.selectedUnit.city != null) {					    	 		
+	 		return ($scope.selectedUnit.address == null ? "" : 
+	 			$scope.selectedUnit.address) + ", " + ($scope.selectedUnit.state == null ? "" : $scope.selectedUnit.state) + ", " + ($scope.selectedUnit.city == null ? "" : $scope.selectedUnit.city);	 		
 	 	}
-	 	else if ( $scope.selectedUnit.zip != null) {
-	 		
-	 		return ($scope.selectedUnit.zip == null ? "" : $scope.selectedUnit.zip);
+	 	else if ( $scope.selectedUnit.zip != null) {	 		
+	 		return ($scope.selectedUnit.zip == null ? "" : 
+	 			$scope.selectedUnit.zip);
 	 	}
 	 	else {
 	 		return "";
@@ -210,7 +213,9 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
        });       
 	}
 	
-	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];
+	$scope.selectedUnit = {};		
+	angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex], $scope.selectedUnit);	
+	
 	$scope.btnNewUnit = true;	
 	$scope.initializeUnit();
 

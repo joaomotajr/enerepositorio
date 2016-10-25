@@ -15,7 +15,7 @@ app.controller('companiesController', function ($scope, $timeout, $filter, Compa
 	         $scope.getCompanys();   
 			 
 			 angular.element('body').removeClass('loading');
-			 $scope.msgDanger = "Companhia Excluída!!" ;
+			 $scope.$root.msgDanger = "Companhia Excluída!!" ;
 	         $('#resultDanger').hide().show('slow').delay(1000).hide('slow');         	         	
         }, function(data) {        	
         	$scope.msgErro = "Erro:: " + statusText;
@@ -44,7 +44,7 @@ app.controller('companiesController', function ($scope, $timeout, $filter, Compa
             
             angular.element('body').removeClass('loading');
             
-            $scope.msgInfo = "Companhia Gravada!" ;
+            $scope.$root.msgInfo = "Companhia Gravada!" ;
             $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
                                              	
          });		 
@@ -105,7 +105,8 @@ app.controller('companiesController', function ($scope, $timeout, $filter, Compa
          });		 
 	} 	        
 	 
-
+	$scope.$root.selecteds = [];
+	
 	$scope.loadTreview = function(data) {
 		
 		 var initSelectableTree = function() {
@@ -117,18 +118,19 @@ app.controller('companiesController', function ($scope, $timeout, $filter, Compa
 				    	
 				    	$scope.LoadAjaxContentCompany('clear.html');
 				    	
-				    	$scope.$root.selecteds = [];
 				    	$scope.$root.selecteds.push({unitIndex: 0, areaIndex : 0, companyDetectorIndex: 0});
 				    	
 				    	if(node.type == 0 && $scope.$root.selectedCompany.unitsDto.length <= 0) {				    		 
 				    		 $scope.LoadAjaxContentCompany('companyInit.html');
 				    	}
-				    	else if(node.type == 0 ) {				    		
+				    	else if(node.type == 0 ) {
+				    		
 				    		$timeout(function () {
 				    			$scope.LoadAjaxContentCompany('company.html');				    	 	
 				    		}, 50);	 				    		 
 				    	}
 				    	else if(node.type == 1) {
+				    		
 				    		$scope.$root.selecteds.unitIndex = node.index;				    		
 				    		$timeout(function () {
 				    			$scope.LoadAjaxContentCompany('units.html');				    	 	
@@ -136,25 +138,16 @@ app.controller('companiesController', function ($scope, $timeout, $filter, Compa
 				    	}
 				    	else if(node.type == 2) {
 				    		
-					    	if($scope.selectedUnit == undefined) { //Se não foi clicado no Node da Unidade
-					    		$scope.$root.selecteds.unitIndex = node.unitIndex;
-					    	}
-					    	
+				    		$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
 					    	$scope.$root.selecteds.areaIndex = node.index;					    	
 					    	$timeout(function () {
 					    		$scope.LoadAjaxContentCompany('areas.html');				    	 	
 				    		}, 50);					    						    	
 				    	}
-				    	else if(node.type == 3) {
-				    		 
-					    	if($scope.selectedUnit == undefined) { //Se não foi clicado no Node da Unidade					    
-					    		$scope.$root.selecteds.unitIndex = node.unitIndex;					    		
-					    	}					    	 
-
-					    	if($scope.selectedArea == undefined) {	//Se não foi clicado no Node da Área
-					    		$scope.$root.selecteds.areaIndex = node.areaIndex;
-					    	}
-					    	
+				    	else if(node.type == 3) {				    		 
+					    						    
+					    	$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
+					    	$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
 					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;
 				    		 
 				    		if (node.companyDevice.deviceType == "DETECTOR") {

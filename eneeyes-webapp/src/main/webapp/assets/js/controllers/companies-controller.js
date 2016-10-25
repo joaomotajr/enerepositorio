@@ -105,20 +105,9 @@ app.controller('companiesController', function ($scope, $timeout, $filter, Compa
          });		 
 	} 	        
 	 
-//	$scope.getOneCompany = function(companyId) {
-//		 
-//		 $scope.listOne = new CompanyService.listOne();		 
-//		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
-//			 
-//			 $scope.selectedCompany = $scope.listOne.t;
-//			 $scope.itens = getTree();
-//			 $scope.loadTreview($scope.itens);			 
-//         });		 
-//	 }
 
-
-	 $scope.loadTreview = function(data) {
-		 
+	$scope.loadTreview = function(data) {
+		
 		 var initSelectableTree = function() {
 			 return $('#treeview-company').treeview({
 					data: data,		

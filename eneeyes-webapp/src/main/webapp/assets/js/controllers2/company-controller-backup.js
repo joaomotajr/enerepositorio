@@ -887,8 +887,7 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	    }
 		
 		return JSON.parse('{' + pinItensString + '}');;
-	}
-	
+	}	
 	 
 	$scope.getCompanys();	
 	$(".select2").select2();

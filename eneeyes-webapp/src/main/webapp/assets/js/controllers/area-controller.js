@@ -92,7 +92,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 	}
 	
 	$scope.newArea = function () {
-		$scope.btnAreaUnit = false;
+		$scope.btnNewArea = false;
 		$scope.clearFormArea();
 	}
 	
@@ -345,6 +345,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 	
 	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];
 	$scope.selectedArea = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex];			
+	$scope.btnNewArea = true;
 	$scope.initializeArea();
 		
 });

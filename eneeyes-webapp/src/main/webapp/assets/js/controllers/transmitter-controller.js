@@ -129,6 +129,10 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 		  	{ name : '_04_20mA', uid : 9 }
 		 ]; 
 	 
+	 $scope.refreshTransmitters = function() {
+		 $scope.getManufacturers();	
+	 } 
+	 
 	 $scope.getTransmitters();
 	 $scope.getManufacturers();	 
 	

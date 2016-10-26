@@ -228,11 +228,15 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		 $scope.detectorSensors.splice(index, 1);		 
 	 }	 
  
-	 $scope.getDetectors();
-	 $scope.getManufacturers();
-	 $scope.getTransmitters();
-	 $scope.getSensors();
-	 $scope.detectorImage = "/assets/img/cover.jpg";
+	 $scope.refreshDetectors = function() {
+		 $scope.getDetectors();
+		 $scope.getManufacturers();
+		 $scope.getTransmitters();
+		 $scope.getSensors();
+		 $scope.detectorImage = "/assets/img/cover.jpg";
+	 }
+	 
+	 $scope.refreshDetectors();
 	 
 	 $timeout(function () {                    
 		 $scope.loadEvents();

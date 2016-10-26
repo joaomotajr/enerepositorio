@@ -102,6 +102,10 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 		 
 	 }	
 	 
+	 $scope.refreshControllers = function() {
+		 $scope.getManufacturers();
+	 }
+	 
 	 $scope.getControllers();
 	 $scope.getManufacturers();
 	

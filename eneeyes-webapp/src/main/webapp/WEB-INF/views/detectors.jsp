@@ -65,6 +65,7 @@
 			<div class="box box-primary" ng-class="(detectorName || detectorModel || detectorManufacturer || detectorTransmitter) ? 'box-primary' : 'box-default'">
 				<div class="box-header">
 					<h3 class="box-title">Cadastro / Edição</h3>
+					<a href="#" class="text-muted pull-right" ng-click="refreshDetectors();"><i title="Refresh" class="fa fa-refresh"></i></a>
 				</div>
 				
 				<div class="box-body">
@@ -182,10 +183,8 @@
 						<button type="button" ng-click="clearFormDetector()" class="btn btn-default">Cancelar</button>                                                                
 						<button type="button" ng-click="saveDetector();" class="btn btn-primary" 
 							ng-disabled="(detectorName && detectorModel && detectorManufacturer && detectorTransmitter && (detectorSensors.length != 0 || newSensors.length > 0)) ? false : true">Salvar
-						</button>							                                                                
-
+						</button>
 					</div>
-					      
 					
 				</div>
 			</div>

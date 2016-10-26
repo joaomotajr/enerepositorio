@@ -43,6 +43,7 @@
 				<div class="box box-primary" ng-class="(transmitterName || transmitterModel || transmitterManufacturer) ? 'box-primary' : 'box-default'">
 					<div class="box-header">
 						<h3 class="box-title">Cadastro / Edição</h3>
+						<a href="#" class="text-muted pull-right" ng-click="refreshTransmitters();"><i title="Refresh" class="fa fa-refresh"></i></a>
 					</div>
 					<div class="box-body">
 						<form class="form">		

@@ -250,8 +250,12 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
 		 ]; 
 	 
-	 $scope.getSensors();
-	 $scope.getManufacturers();
-	 $scope.getGases();
+	 $scope.refreshSensors = function() {
+		 $scope.getSensors();
+		 $scope.getManufacturers();
+		 $scope.getGases();
+	 } 
+	 
+	 $scope.refreshSensors();
 
 });

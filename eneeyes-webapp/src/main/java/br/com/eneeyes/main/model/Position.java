@@ -27,7 +27,6 @@ public class Position {
     	this.uid = dto.getUid();
     	this.lastUpdate = dto.getLastUpdate();
     	this.lastValue = dto.getLastValue();    	
-    	this.unit = new Unit(dto.getUnitDto());
     	this.area = new Area(dto.getAreaDto());
     	this.companyDevice = new CompanyDevice(dto.getCompanyDeviceDto());
     }
@@ -42,10 +41,6 @@ public class Position {
 
 	@Column(name = "LAST_VALUE", nullable = true)
 	private Double lastValue;
-    	
-    @ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="UNIT_ID", nullable=false)
-    private Unit unit;
     
     @ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="AREA_ID", nullable=false)
@@ -79,14 +74,6 @@ public class Position {
 		this.lastValue = lastValue;
 	}
 
-	public Unit getUnit() {
-		return unit;
-	}
-
-	public void setUnit(Unit unit) {
-		this.unit = unit;
-	}
-
 	public Area getArea() {
 		return area;
 	}
@@ -102,6 +89,5 @@ public class Position {
 	public void setCompanyDevice(CompanyDevice companyDevice) {
 		this.companyDevice = companyDevice;
 	}
-
 
 }

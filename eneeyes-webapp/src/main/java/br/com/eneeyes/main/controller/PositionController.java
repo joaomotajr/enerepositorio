@@ -51,7 +51,7 @@ public class PositionController {
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listPageByUnit(@PathVariable Long unitId, @PathVariable Integer pageNumber ) {
 		
-		return service.listPageByUnit(unitId, pageNumber);		
+		return service.listPageByArea(unitId, pageNumber);		
 	}
 
 }

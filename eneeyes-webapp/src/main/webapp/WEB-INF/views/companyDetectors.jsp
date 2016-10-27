@@ -22,7 +22,9 @@
 
 	<div ng-controller="companyDetectorController">
 		<div class="box box-primary">					
-			<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-rss'></i> {{selectedCompanyDevice.deviceType}}</strong></div>		
+			<div class="box-header with-border">
+				<strong style="font-size:1.4em"><i class='fa fa-rss'></i> {{selectedCompanyDevice.deviceType}}</strong>
+			</div>		
 			<div class="box-body">
 							
 				<div class="nav-tabs-custom">
@@ -30,7 +32,7 @@
 				       	<li class="active"><a href="#tabCompanyDetector_1" id="stepTabDetector_1" data-toggle="tab">Cadastro</a></li>
 				       	<li><a href="#tabCompanyDetector_2" id="stepTabDetector_2" data-toggle="tab">Configuração</a></li>
 				       	<li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Histórico</a></li>
-				    	<li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+				    	<li ng-hide="selectedCompanyDetector" class="pull-right"><i title="[Nenhum Detector Associado ao Dispositivo]" class="fa fa-info-circle text-red"></i></li>
 				    </ul>
 					
 					<div class="tab-content">
@@ -43,7 +45,11 @@
 									    <div class="box box-primary">
 							                <div class="box-body box-profile">						                    
 							                    <img class="profile-user-img img-responsive img-circle" style="margin: 0 auto" ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
-							                    <p class="text-muted text-center ng-binding">{{selectedCompanyDetector.detectorDto.name}} - {{selectedCompanyDetector.detectorDto.model}}</p>						                    					                    	                
+							                    <p class="text-muted text-center ng-binding">
+							                    	{{selectedCompanyDetector.detectorDto.name}}
+							                    	<span ng-show="selectedCompanyDetector.detectorDto.name"> - </span>
+							                    	{{selectedCompanyDetector.detectorDto.model}}
+							                    </p>						                    					                    	                
 							                </div>
 						                </div>					                															
 									</div>
@@ -105,7 +111,7 @@
 				       		</form>
 				       		<div class="row">
 				       			<div class="col-md-12">
-				       				<button type="button" ng-click="newCompanyDetector();" class="btn btn-success pull-right">    Nova    </button>								
+				       				<!--<button type="button" ng-click="newCompanyDetector();" class="btn btn-success pull-right">    Nova    </button> -->								
 									<span class="pull-right">   </span>
 				       				<button type="button" ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" ng-disabled="(selectedCompanyDetector.name) ? false : true">   Salvar   </button>		       				
 				       				<span class="pull-right">   </span>

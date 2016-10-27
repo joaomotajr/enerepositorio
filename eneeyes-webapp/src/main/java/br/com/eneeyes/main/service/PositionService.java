@@ -26,8 +26,18 @@ public class PositionService implements IService<PositionDto> {
 
 	@Override
 	public BasicResult<?> save(PositionDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		Result<PositionDto> result = new Result<PositionDto>();
+		
+		Position position = new Position(dto);
+		position = repository.save(position);
+		
+		dto.setUid(position.getUid());
+		result.setEntity(dto);
+		
+		result.setResultType( ResultMessageType.SUCCESS );
+		result.setMessage("Executado com sucesso.");					
+		
+		return result;
 	}
 
 	@Override
@@ -74,12 +84,12 @@ public class PositionService implements IService<PositionDto> {
 
 	}
 	
-	public Result<?> listPageByUnit(Long unitId, Integer pageNumber) {
+	public Result<?> listPageByArea(Long unitId, Integer pageNumber) {
 		
 		Result<PositionDto> result = new Result<PositionDto>(); 	
 		
 		try {
-			Page<Position> lista = repository.findByUnitId(unitId, new PageRequest(pageNumber, PAGE_SIZE));
+			Page<Position> lista = repository.findByAreaId(unitId, new PageRequest(pageNumber, PAGE_SIZE));
 			
 			if (lista != null) {
 				

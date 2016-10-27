@@ -95,6 +95,17 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		});			 
 	}
 	
+	$scope.clearCompanyDetector = function () {
+		
+	    $scope.selectedCompanyDetector.uid = undefined;
+	    $scope.selectedCompanyDetector.name = '';
+	    $scope.selectedCompanyDevice.uid = undefined;
+	    $scope.selectedCompanyDetector.detectorDto = undefined;
+	    $scope.selectedCompanyDetector.local = '';
+	    $scope.selectedCompanyDetector.description = '';
+	}
+	
+	
 	$scope.deleteCompanyDetector = function() 
 	{		 
 		angular.element('body').addClass('loading');		
@@ -103,7 +114,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.deletar.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
 			
 			angular.element('body').removeClass('loading');
-			
+			$scope.clearCompanyDetector();
 			$scope.getOneCompany($scope.companyUid);
 									
 			$scope.msgDanger = "Detector Excluído!!" ;
@@ -129,34 +140,13 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
-			$scope.getCompanyDetectorAlarms();
+			
+			//* Detector já foi associado a dispositivo checa alarmes *//
+			if($scope.selectedCompanyDetector != null)
+				$scope.getCompanyDetectorAlarms();
         });		 
 	}
 		
-	$scope.saveCompanyDeviceInit = function() {
-		angular.element('body').addClass('loading');
-		
-		var companyDevice = {
-			uid: 0,
-			deviceType: $scope.sensorDetectionType.uid,
-			areaDto: {uid : $scope.selectedArea.uid}				
-		};
-		
-		$scope.inclusaoCompanyDevice = new CompanyDeviceService.save(companyDevice);
-		$scope.inclusaoCompanyDevice.$companyDevice({_csrf : angular.element('#_csrf').val()}, function(){         	
-			
-			$scope.getOneCompany($scope.companyUid);
-			
-			$scope.$root.msgInfo = "Dispositivo Incluído!" ;
-	        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
-			angular.element('body').removeClass('loading');
-			
-		}, function(data) {
-			angular.element('body').removeClass('loading');
-			$scope.msgErro = "Erro: " + data.statusText;
-		});		 
-	 }	
-	
 	$scope.deviceTypes = 
 		[
 		 	{ name : 'OUTROS', uid : 0 },
@@ -199,7 +189,9 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	 }
 	
 	drawGaugesDetector = function() {
-					
+		
+		if($scope.selectedCompanyDetector == null) return;
+		
 		var sensors = $scope.selectedCompanyDetector.detectorDto.sensorsDto;		
 		
 		for (var j = 0; j < sensors.length; j++) {
@@ -263,39 +255,31 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	$scope.selecionarAlarm = function(uid) {
 		
 		/* Obtem Alarm selecionado */
-		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; })[0];		
-
-	
+		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; })[0];
+		
 		alarm = {
 		 		alarmDto : selectedAlarm, 
 		 		companyDetectorDto: $scope.selectedCompanyDetector, 
 		 		sensorId : $scope.selectedSensor.uid
 		 };
-		$scope.saveCompanyDetectorAlarm(alarm);		
-		$scope.mostrarAlarmTela(selectedAlarm);		
-
-		 alarm = {
-		 		alarmDto : selectedAlarm, 
-		 		companyDetectorDto: $scope.selectedCompanyDetector, 
-		 		sensorId : $scope.selectedSensor.uid
-		 };
 		
 		$scope.saveCompanyDetectorAlarm(alarm);		
-		$scope.mostrarAlarmTela(selectedAlarm);	
-		
-
+		$scope.mostrarAlarmTela(selectedAlarm);
 	}
 	
 	$scope.mostrarAlarmTela = function(selectedAlarm) {
 				
 		/* Verifica se o Sensor possui Alarm */
 		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(img => img.sensorId === $scope.selectedSensor.uid);
-	
-		if (detectorAlarmIndex < 0)  /* Add - TELA  */		
-			$scope.selectedCompanyDetectorAlarms.push({alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid});		
-		else /* UPD TELA */
+				
+		if (detectorAlarmIndex < 0) {
+			/* Add - TELA  */
+			$scope.selectedCompanyDetectorAlarms.push({alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid});
+		}		
+		else {
+			/* Upd TELA */
 			$scope.selectedCompanyDetectorAlarms[detectorAlarmIndex] = {alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid};
-			
+		}
 	}
 		
 	$scope.removerAlarm = function(uid) {		
@@ -346,7 +330,6 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 			$scope.msgErro = "Erro: " + data.statusText;
 		});			 
 	}
-	
 	
 	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];
 	$scope.selectedArea = $scope.selectedUnit.areasDto[$scope.$root.selecteds.areaIndex];

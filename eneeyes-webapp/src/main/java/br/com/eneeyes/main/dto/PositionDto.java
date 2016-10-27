@@ -9,7 +9,6 @@ public class PositionDto {
 	private Long uid;
 	private Date lastUpdate;
 	private Double lastValue;	
-	private UnitDto unitDto;    
     private AreaDto areaDto;
     private CompanyDeviceDto companyDeviceDto;	
 		
@@ -22,7 +21,6 @@ public class PositionDto {
 		this.uid = position.getUid();
 		this.lastUpdate = position.getLastUpdate();
     	this.lastValue = position.getLastValue();    	
-    	this.unitDto = new UnitDto(position.getUnit());
     	this.areaDto = new AreaDto(position.getArea());
     	this.companyDeviceDto = new CompanyDeviceDto(position.getCompanyDevice());
     
@@ -50,14 +48,6 @@ public class PositionDto {
 
 	public void setLastValue(Double lastValue) {
 		this.lastValue = lastValue;
-	}
-
-	public UnitDto getUnitDto() {
-		return unitDto;
-	}
-
-	public void setUnitDto(UnitDto unitDto) {
-		this.unitDto = unitDto;
 	}
 
 	public AreaDto getAreaDto() {

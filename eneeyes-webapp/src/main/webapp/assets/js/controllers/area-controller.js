@@ -56,8 +56,8 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		 
 		$scope.inclusaoArea = new AreaService.save(area);
 		$scope.inclusaoArea.$area({_csrf : angular.element('#_csrf').val()}, function(){         	
-			$scope.clearFormArea();
-			
+
+			$scope.sensorDetectionType = '';			
 			$scope.$root.msgInfo = "Nova Área Incluída!" ;
 	        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
 			
@@ -152,7 +152,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		$scope.selectedArea.classified = false;		
 		
 		$scope.areaNameInit = undefined;
-		$scope.saveCompanyDeviceInit = undefined;
+		$scope.sensorDetectionType = '';
  
 		$('#idAreaName').select();
 	}

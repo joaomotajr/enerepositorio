@@ -1,6 +1,7 @@
 package br.com.eneeyes.main.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,8 +11,10 @@ import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDeviceDto;
 import br.com.eneeyes.main.model.Area;
 import br.com.eneeyes.main.model.CompanyDevice;
+import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.repository.AreaRepository;
 import br.com.eneeyes.main.repository.CompanyDeviceRepository;
+import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
@@ -24,6 +27,9 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 	
 	@Inject
 	private AreaRepository areaRepository;
+
+	@Inject
+	private PositionRepository positionRepository;
 	
 	public BasicResult<?> save(CompanyDeviceDto dto) {
 		Result<CompanyDeviceDto> result = new Result<CompanyDeviceDto>();		
@@ -35,12 +41,28 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 		
 		companyDevice = repository.save(companyDevice);
 		dto.setUid(companyDevice.getUid());
-				
+		
+		createInitialPosition(area, companyDevice);
+		
 		result.setEntity(dto);
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Executado com sucesso.");	
 		
 		return result;
+	}
+
+	private void createInitialPosition(Area area, CompanyDevice companyDevice) {
+		
+		if(positionRepository.findByCompanyDevice(companyDevice) == null) {
+
+			Position position = new Position();	
+			position.setArea(area);
+			position.setCompanyDevice(companyDevice);
+			position.setLastUpdate(new Date());
+			position.setLastValue((double) 0);
+			
+			positionRepository.save(position);
+		}
 	}
 
 	public BasicResult<?> delete(Long uid) {

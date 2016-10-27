@@ -4,6 +4,22 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 	var geocoder;
 	var loadGauge = false;
 	
+	$scope.showDanger = function(msg) {		
+		angular.element('body').removeClass('loading');
+		 $scope.$root.msgDanger = msg ;
+        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');	
+	}
+	
+	$scope.showInfo = function(msg) {
+		angular.element('body').removeClass('loading');            
+        $scope.$root.msgInfo = msg;
+        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+	}
+	
+	$scope.showErro = function(msg) {
+		angular.element('body').removeClass('loading');            
+        $scope.$root.msgErro = msg;
+	}	
 	
 	$scope.getOneCompany = function(companyId) {
 		 
@@ -26,14 +42,11 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 		};
 		 
 		$scope.inclusaoArea = new AreaService.save(area);
-		$scope.inclusaoArea.$area({_csrf : angular.element('#_csrf').val()}, function(){         	
-			$scope.clearFormUnit();
-			
-			$scope.$root.msgInfo = "Nova Área Incluída!" ;
-	        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
-			
+		$scope.inclusaoArea.$area({_csrf : angular.element('#_csrf').val()}, function(){
+			$scope.showInfo("Nova Área Incluída!");
+			$scope.clearFormUnit();						
 			$scope.getOneCompany($scope.companyUid);			
-			angular.element('body').removeClass('loading');
+			
         });
 		 
 	 }
@@ -50,14 +63,12 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 		
 		$scope.deletar.$unit({_csrf : angular.element('#_csrf').val(), id : $scope.selectedUnit.uid}, function(){
 			
+			$scope.showDanger("Unidade Excluída!");
 			$scope.clearFormUnit();
-			$scope.getOneCompany($scope.companyUid);		
-			angular.element('body').removeClass('loading');			
-			$scope.$root.msgDanger = "Unidade Excluída!!";			
-	        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');
+			$scope.getOneCompany($scope.companyUid);				
 	        
         }, function(data) {
-        	$scope.msgErro = "Erro: " + statusText;
+        	$scope.showErro("Erro: " + data.statusText);
 		});		 
 	}
 	
@@ -105,12 +116,15 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 		};		 
 		 
 		$scope.inclusaoUnit = new UnitService.save(unit);
-		$scope.inclusaoUnit.$unit({_csrf : angular.element('#_csrf').val()}, function(){         	
+		$scope.inclusaoUnit.$unit({_csrf : angular.element('#_csrf').val()}, function(){  
+			
+			if($scope.selectedUnit.uid == undefined) {
+				$scope.clearFormUnit();
+				$scope.getOneCompany($scope.companyUid);
+			}
+			
+			$scope.showInfo("Unidade Gravada");
 					
-			angular.element('body').removeClass('loading');
-			$scope.$root.msgInfo = "Unidade Gravada!" ;
-           $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
-		
        });       
 	}
 	

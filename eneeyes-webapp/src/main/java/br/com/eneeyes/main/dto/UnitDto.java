@@ -1,6 +1,7 @@
 package br.com.eneeyes.main.dto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -11,7 +12,7 @@ import br.com.eneeyes.main.model.Unit;
 import br.com.eneeyes.main.model.enums.UnitType;
 
 
-public class UnitDto {
+public class UnitDto implements Comparable<UnitDto> {
 	
 	private Long uid;
 	private String name;	
@@ -66,7 +67,7 @@ public class UnitDto {
 				lista.add(dto);
 			}
 		}
-		
+		Collections.sort(lista);
 		return lista;
 	}
 
@@ -145,8 +146,7 @@ public class UnitDto {
 		}	
 		else { 
 			this.unitType = unitType;
-		}
-		
+		}		
 	}
 	public final Date getDate() {
 		return date;
@@ -171,5 +171,9 @@ public class UnitDto {
 	}
 	public void setCompanyDto(CompanyDto companyDto) {
 		this.companyDto = companyDto;
+	}
+	@Override
+	public int compareTo(UnitDto unitDto) {
+		return unitDto.getUid().compareTo(this.uid);		
 	}
 }

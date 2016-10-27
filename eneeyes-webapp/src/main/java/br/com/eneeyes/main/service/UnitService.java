@@ -125,38 +125,5 @@ public class UnitService implements IService<UnitDto> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	public Result<?> listAllFilter() {
-		
-		Result<UnitDto> result = new Result<UnitDto>(); 	
-		
-		try {
-			List<Unit> lista = repository.findByCompanyID((long) 1);
-
-			if (lista != null) {				
-				
-				List<UnitDto> dto = new ArrayList<UnitDto>();
-				
-				for (Unit unit   : lista) {					
-					dto.add(new UnitDto(unit) );
-				}
-				
-				result.setList(dto);
-				
-				result.setResultType( ResultMessageType.SUCCESS );
-				result.setMessage("Executado com sucesso.");
-			} else {
-				result.setIsError(true);
-				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Unidade.");
-			}
-		} catch (Exception e) {
-			result.setIsError(true);
-			result.setMessage(e.getMessage());
-		}
-		
-		return result;	
-
-	}
 		
 }

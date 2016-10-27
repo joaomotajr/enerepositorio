@@ -687,14 +687,6 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
          });		 
 	 }
 	 
-	 $scope.getUnitFilter = function() {
-		 
-		 $scope.listAllFilter = new UnitService.listAllFilter();		 
-		 $scope.listAllFilter.$unit({_csrf : angular.element('#_csrf').val()}, function(){			
-			 console.log($scope.listAllFilter);		         	         	
-         });		 
-	 }
-	 
 	 $scope.getOneUnit = function() {
 		 
 		 $scope.listOne = new UnitService.listOne();	 

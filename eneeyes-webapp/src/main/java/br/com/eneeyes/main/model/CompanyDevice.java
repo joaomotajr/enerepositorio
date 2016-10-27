@@ -45,7 +45,7 @@ public class CompanyDevice {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="AREA_ID", nullable=false)
     private Area area;	
-
+		
 	public Long getUid() {
 		return uid;
 	}

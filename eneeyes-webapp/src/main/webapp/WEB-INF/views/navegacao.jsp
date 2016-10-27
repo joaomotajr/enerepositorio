@@ -42,7 +42,6 @@
         		<button type="button" class="btn btn-primary" ng-click="saveUnit()">Save Unit</button>
         		<button type="button" class="btn btn-primary" ng-click="getUnit()">Get Unit</button>
         		<button type="button" class="btn btn-primary" ng-click="getOneUnit()">Get One Unit</button>        		
-        		<button type="button" class="btn btn-primary" ng-click="getUnitFilter()">Get One Unit Filter</button>
         		<button type="button" class="btn btn-primary" ng-click="deletarUnit()">Deletar Unit</button>        		
        		</div>
        		<div class="row">        		

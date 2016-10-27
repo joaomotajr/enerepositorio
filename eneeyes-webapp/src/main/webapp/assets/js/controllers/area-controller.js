@@ -2,6 +2,22 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 
 	var loadGauge = false;
 	
+	$scope.showDanger = function(msg) {		
+		angular.element('body').removeClass('loading');
+		 $scope.$root.msgDanger = msg ;
+        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');	
+	}
+	
+	$scope.showInfo = function(msg) {
+		angular.element('body').removeClass('loading');            
+        $scope.$root.msgInfo = msg;
+        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+	}
+	
+	$scope.showErro = function(msg) {
+		angular.element('body').removeClass('loading');            
+        $scope.$root.msgErro = msg;        
+	}
 	
 	$scope.getOneCompany = function(companyId) {
 		 
@@ -31,40 +47,13 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		$scope.inclusaoCompanyDevice = new CompanyDeviceService.save(companyDevice);
 		$scope.inclusaoCompanyDevice.$companyDevice({_csrf : angular.element('#_csrf').val()}, function(){         	
 			
-			$scope.clearFormArea();
-			
-			$scope.$root.msgInfo = "Novo Dispositivo Incluído!" ;
-	        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
-	        
+			$scope.showInfo("Novo Dispositivo Incluído!");	     
+			$scope.clearFormArea();				        	           
 			$scope.getOneCompany($scope.companyUid);
-			angular.element('body').removeClass('loading');
-			
+						
 		}, function(data) {
-			angular.element('body').removeClass('loading');
-			$scope.$root.msgErro = "Erro: " + data.statusText;
+			$scope.showErro("Erro: " + data.statusText);
 		});		 
-	 }
-
-	$scope.saveAreaInit = function() {
-		angular.element('body').addClass('loading');
-		
-		var area = {
-			uid: 0,
-			name: $scope.areaNameInit,				
-			unitDto: {uid : $scope.selectedUnit.uid}				
-		};
-		 
-		$scope.inclusaoArea = new AreaService.save(area);
-		$scope.inclusaoArea.$area({_csrf : angular.element('#_csrf').val()}, function(){         	
-
-			$scope.sensorDetectionType = '';			
-			$scope.$root.msgInfo = "Nova Área Incluída!" ;
-	        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
-			
-			$scope.getOneCompany($scope.companyUid);
-			angular.element('body').removeClass('loading');
-        });
-		 
 	 }
 	
 	$scope.saveArea = function() {
@@ -86,15 +75,17 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		};
 		 
 		$scope.inclusaoArea = new AreaService.save(area);
-		$scope.inclusaoArea.$area({_csrf : angular.element('#_csrf').val()}, function(){         	
-						
-			angular.element('body').removeClass('loading');
-			$scope.$root.msgInfo = "Área Gravada!" ;
-           $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+		$scope.inclusaoArea.$area({_csrf : angular.element('#_csrf').val()}, function(){
+			
+			if($scope.selectedArea.uid == undefined) {
+				$scope.clearFormArea();
+				$scope.getOneCompany($scope.companyUid);
+			}
+			
+			$scope.showInfo("Área Gravada!");
 		
 		}, function(data) {
-			angular.element('body').removeClass('loading');
-			$scope.$root.msgErro = "Erro: " + data.statusText;
+			$scope.showErro("Erro: " + data.statusText);
 		});			 
 	}
 	
@@ -103,7 +94,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		var detectorsCoords = JSON.parse(localStorage.getItem('easypin'));		
 		var item = $scope.selectedCompanyDetectorsArea;
 		
-		if(item == null) return;
+		if(item == null || detectorsCoords == null) return;
 		
 		for (var i = 0; i < item.length; i++) {
 	    	
@@ -126,13 +117,10 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		$scope.updateLatitudeLongitude = new CompanyDetectorService.updateLatitudeLongitude();
 		$scope.updateLatitudeLongitude.$companyDetector({_csrf : angular.element('#_csrf').val(), latitude: latitude, longitude: longitude, id : id }, function(){		
 			
-			angular.element('body').removeClass('loading');
-			$scope.msgInfo = "Detector Gravado!" ;
-			$('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+			$scope.showInfo("Detector Gravado!");
 		
 		}, function(data) {
-			angular.element('body').removeClass('loading');
-			$scope.msgErro = "Erro: " + data.statusText;
+			$scope.showErro("Erro: " + data.statusText);
 		});			 
 	}
 	
@@ -164,15 +152,12 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		
 		$scope.deletar.$area({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid}, function(){
 			
-			angular.element('body').removeClass('loading');
-			
+			$scope.showDanger("Área Excluída!!");
 			$scope.clearFormArea();
-			$scope.getOneCompany($scope.companyUid);
-			
-			$scope.$root.msgDanger = "Área Excluída!!" ;
-	        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');         	         	
+			$scope.getOneCompany($scope.companyUid);			
+	                 	         	
         }, function(data) {
-        	$scope.msgErro = "Erro: " + statusText;
+        	$scope.showErro("Erro: " + data.statusText);
 		});		 
 	}	
 	

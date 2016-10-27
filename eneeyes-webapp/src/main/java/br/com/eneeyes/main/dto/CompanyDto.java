@@ -1,6 +1,7 @@
 package br.com.eneeyes.main.dto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -66,10 +67,11 @@ public class CompanyDto {
 			
 			while (itr.hasNext()) {
 				UnitDto dto = new UnitDto(itr.next());
-				lista.add(dto);
+				lista.add(dto);				
 			}
 		}
 		
+		Collections.sort(lista);		
 		return lista;
 	}
 	

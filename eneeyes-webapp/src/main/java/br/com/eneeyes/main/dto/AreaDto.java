@@ -1,6 +1,7 @@
 package br.com.eneeyes.main.dto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +11,7 @@ import br.com.eneeyes.main.model.Area;
 import br.com.eneeyes.main.model.CompanyDevice;
 
 
-public class AreaDto {
+public class AreaDto implements Comparable<AreaDto> {
 
 	private Long uid;
 	private String name;
@@ -60,8 +61,9 @@ public class AreaDto {
 				CompanyDeviceDto dto = new CompanyDeviceDto(itr.next());
 				lista.add(dto);
 			}
-		}
+		}		
 		
+		Collections.sort(lista);		
 		return lista;
 	}
 	
@@ -128,5 +130,9 @@ public class AreaDto {
 	}
 	public final void setUnitDto(UnitDto unitDto) {
 		this.unitDto = unitDto;
-	}		
+	}	
+	@Override
+	public int compareTo(AreaDto areaDto) {
+		return areaDto.getUid().compareTo(this.uid);		
+	}	
 }

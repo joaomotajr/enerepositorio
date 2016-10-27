@@ -25,9 +25,6 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	@Inject
 	private CompanyDeviceRepository companyDeviceRepository;
 	
-//	@Inject
-//	private DetectorCompanyAlarmRepository detectorCompanyAlarmRepository;
-		
 	public BasicResult<?> save(CompanyDetectorDto dto) {
 		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();		
 		
@@ -69,7 +66,7 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		try {			
 			repository.delete(uid);
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Área Excluída.");
+			result.setMessage("Detector Excluído.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			

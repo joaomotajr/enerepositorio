@@ -3,7 +3,7 @@ package br.com.eneeyes.main.dto;
 import br.com.eneeyes.main.model.CompanyDevice;
 import br.com.eneeyes.main.model.enums.DeviceType;
 
-public class CompanyDeviceDto {
+public class CompanyDeviceDto implements Comparable<CompanyDeviceDto> {
 
 	private Long uid;
 	private DeviceType deviceType;
@@ -45,6 +45,11 @@ public class CompanyDeviceDto {
 
 	public final void setAreaDto(AreaDto areaDto) {
 		this.areaDto = areaDto;
+	}
+	
+	@Override
+	public int compareTo(CompanyDeviceDto companyDeviceDto) {
+		return companyDeviceDto.getUid().compareTo(this.uid);		
 	}
 	
 }

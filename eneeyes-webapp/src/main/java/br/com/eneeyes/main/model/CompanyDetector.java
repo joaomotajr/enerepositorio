@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -92,16 +91,13 @@ public class CompanyDetector {
 	@Column(name = "RANGE_UNIT", nullable = true)		
 	private Double RangeUnit;
   
-	@ManyToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_DEVICE_ID", nullable = false)
 	private CompanyDevice companyDevice;
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="DETECTOR_ID", nullable = false)
 	private Detector detector;
-	
-//	@OneToMany(cascade=CascadeType.ALL, mappedBy="companyDetector", fetch = FetchType.EAGER)
-//	private Set<CompanyDetectorAlarm> detectorCompanyAlarms;
 		
 	public Long getUid() {
 		return uid;

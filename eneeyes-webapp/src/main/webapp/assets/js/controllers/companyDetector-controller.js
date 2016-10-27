@@ -22,6 +22,23 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 
 	var loadGauge = false;
 	
+	$scope.showDanger = function(msg) {		
+		angular.element('body').removeClass('loading');
+		 $scope.$root.msgDanger = msg ;
+        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');	
+	}
+	
+	$scope.showInfo = function(msg) {
+		angular.element('body').removeClass('loading');            
+        $scope.$root.msgInfo = msg;
+        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+	}
+	
+	$scope.showErro = function(msg) {
+		angular.element('body').removeClass('loading');            
+        $scope.$root.msgErro = msg;        
+	}
+	
 	$scope.getOneCompany = function(companyId) {
 		 
 		 $scope.listOne = new CompanyService.listOne();		 
@@ -59,13 +76,10 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.updateLatitudeLongitude = new CompanyDetectorService.updateLatitudeLongitude();
 		$scope.updateLatitudeLongitude.$companyDetector({_csrf : angular.element('#_csrf').val(), latitude: latitude, longitude: longitude, id : id }, function(){		
 			
-			angular.element('body').removeClass('loading');
-			$scope.msgInfo = "Detector Gravado!" ;
-			$('#resultInfo').hide().show('slow').delay(1000).hide('slow');
-		
-		}, function(data) {
-			angular.element('body').removeClass('loading');
-			$scope.msgErro = "Erro: " + data.statusText;
+			$scope.showInfo("Detector Gravado!");
+					
+		}, function(data) {			
+			$scope.showErro("Erro: " + data.statusText);
 		});			 
 	}
 	
@@ -85,24 +99,23 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
 		$scope.inclusaoCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){		
 								
-			angular.element('body').removeClass('loading');
-			$scope.msgInfo = "Detector Gravado!" ;
-			$('#resultInfo').hide().show('slow').delay(1000).hide('slow');
-		
+			$scope.showInfo("Detector Gravado!") ;
+					
 		}, function(data) {
-			angular.element('body').removeClass('loading');
-			$scope.msgErro = "Erro: " + data.statusText;
+			$scope.showErro("Erro: " + data.statusText);
 		});			 
 	}
 	
 	$scope.clearCompanyDetector = function () {
-		
-	    $scope.selectedCompanyDetector.uid = undefined;
-	    $scope.selectedCompanyDetector.name = '';
-	    $scope.selectedCompanyDevice.uid = undefined;
-	    $scope.selectedCompanyDetector.detectorDto = undefined;
-	    $scope.selectedCompanyDetector.local = '';
-	    $scope.selectedCompanyDetector.description = '';
+		$scope.selectedCompanyDetector.detectorDto.image = "/assets/img/cover.jpg"
+		$timeout(function () {						
+		    $scope.selectedCompanyDetector.uid = undefined;
+		    $scope.selectedCompanyDetector.name = '';
+		    $scope.selectedCompanyDevice.uid = undefined;	    	    
+		    $scope.selectedCompanyDetector.detectorDto = '';	    
+		    $scope.selectedCompanyDetector.local = '';
+		    $scope.selectedCompanyDetector.description = '';
+		}, 100);
 	}
 	
 	
@@ -113,14 +126,12 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		
 		$scope.deletar.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
 			
-			angular.element('body').removeClass('loading');
+			$scope.showDanger("Detector Excluído!");
 			$scope.clearCompanyDetector();
-			$scope.getOneCompany($scope.companyUid);
-									
-			$scope.msgDanger = "Detector Excluído!!" ;
-	        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');         	         	
+			$scope.getOneCompany($scope.companyUid);			
+	                 	         	
         }, function(data) {
-        	$scope.msgErro = "Erro: " + statusText;
+        	$scope.showErro("Erro: " + data.statusText);
 		});		 
 	}
 	
@@ -280,6 +291,8 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 			/* Upd TELA */
 			$scope.selectedCompanyDetectorAlarms[detectorAlarmIndex] = {alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid};
 		}
+		
+		drawGaugesDetector();
 	}
 		
 	$scope.removerAlarm = function(uid) {		
@@ -294,14 +307,11 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		
 		$scope.deleteCompanyDetectorAlarm = new CompanyDetectorAlarmService.deletar(alarm);
 		$scope.deleteCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
-			
-			angular.element('body').removeClass('loading');
-			$scope.$root.msgInfo = "Alarme Excluído!" ;
-			$('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+						
+			$scope.showDanger("Alarme Excluído!");			
 		
 		}, function(data) {
-			angular.element('body').removeClass('loading');
-			$scope.msgErro = "Erro: " + data.statusText;
+			$scope.showErro("Erro: " + data.statusText);
 		});
 		
 		$scope.removerAlarmTela(selectedAlarm);		
@@ -312,6 +322,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		var alarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(img => img.alarmDto.uid === alarm.uid);		 
 		$scope.selectedCompanyDetectorAlarms.splice( alarmIndex, 1);	
 		$scope.selectedAlarm = undefined;
+		drawGaugesDetector();
 		
 	}
 	
@@ -320,14 +331,11 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
  
 		$scope.inclusaoCompanyDetectorAlarm = new CompanyDetectorAlarmService.save(alarm);
 		$scope.inclusaoCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
-			
-			angular.element('body').removeClass('loading');
-			$scope.$root.msgInfo = "Alarme Gravado!" ;
-			$('#resultInfo').hide().show('slow').delay(1000).hide('slow');
-		
+						
+			$scope.showInfo = "Alarme Gravado!" ;
+					
 		}, function(data) {
-			angular.element('body').removeClass('loading');
-			$scope.msgErro = "Erro: " + data.statusText;
+			$scope.showErro("Erro: " + data.statusText);
 		});			 
 	}
 	

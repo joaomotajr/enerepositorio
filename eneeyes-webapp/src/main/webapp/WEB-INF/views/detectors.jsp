@@ -75,7 +75,8 @@
 							    <input type="file" id="idInputImageDetector" style='display:none'>							    
 							    <div class="box box-primary">
 					                <div class="box-body box-profile">                          
-					                    <img class="profile-user-img img-responsive img-circle" style="margin: 0 auto" alt="Imagem do Perfil" ng-src="{{detectorImage}}" onError="this.src='/assets/img/cover.jpg'">
+					                    <img class="profile-user-img img-responsive img-circle" style="margin: 0 auto" alt="Imagem do Perfil" 
+					                    	ng-src="{{detectorImage}}" onError="this.src='/assets/img/cover.jpg'">
 					                    <p class="text-muted text-center ng-binding">{{detectorName}} - {{detectorModel}} </p>                    
 					                    <a href="#" class="icon fa fa-photo fa-2.0x pull-right" ng-click="addPhoto();" title="Trocar foto"></a>
 					                    					                    	                

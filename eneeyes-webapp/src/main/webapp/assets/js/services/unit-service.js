@@ -19,10 +19,6 @@ app.factory('UnitService', function($resource){
         }),
         setParent : $resource('/security/api/unit/setparent/:id/:parentid/', {id: '@id', parentid: '@parentid'}, {
         	unit : {method : 'GET'}
-        }),
-        listAllFilter : $resource('/security/api/unit/allFilter',{},{
-        	unit : {method : 'GET'}
-        }),
-        
+        })        
      };
 });

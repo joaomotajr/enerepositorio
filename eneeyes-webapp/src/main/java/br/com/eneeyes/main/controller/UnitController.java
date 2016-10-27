@@ -40,13 +40,7 @@ public class UnitController {
 	public Result<?> listAll() {
 		return service.listAll();
 	}
-	
-	@RequestMapping(value = "/security/api/unit/allFilter", method = RequestMethod.GET, produces = "application/json")
-	@ResponseStatus(HttpStatus.OK)
-	public Result<?> listAllFilter() {
-		return service.listAllFilter();
-	}
-	
+		
 	@RequestMapping(value="/security/api/unit/obtemPorId/{uid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listById(@PathVariable Long uid) {

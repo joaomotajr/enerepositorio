@@ -39,5 +39,6 @@ app.controller('companyController', function ($scope, $timeout, $filter, Company
 	$timeout(function () {
 		$scope.mapsCompanyUnits();				    	 	
 	}, 250);
+
 		
 });

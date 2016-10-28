@@ -10,10 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.PositionDto;
+import br.com.eneeyes.main.model.register.Sensor;
 
 @Entity
 @Table(name = "position")
@@ -27,8 +28,9 @@ public class Position {
     	this.uid = dto.getUid();
     	this.lastUpdate = dto.getLastUpdate();
     	this.lastValue = dto.getLastValue();    	
-    	this.area = new Area(dto.getAreaDto());
-    	this.companyDevice = new CompanyDevice(dto.getCompanyDeviceDto());
+    	//this.area = new Area(dto.getAreaDto());
+    	//this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
+    	//this.sensor = new Sensor(dto.getSensorDto());
     }
 
 	@Id
@@ -42,14 +44,18 @@ public class Position {
 	@Column(name = "LAST_VALUE", nullable = true)
 	private Double lastValue;
     
-    @ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="AREA_ID", nullable=false)
-    private Area area;
+//    @ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name="AREA_ID", nullable=false)
+//    private Area area;
     		
-	@ManyToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY)
 	@JoinColumn(name="COMPANY_DEVICE_ID", nullable = false)
-	private CompanyDevice companyDevice;
-		
+	private CompanyDetector companyDetector;
+	
+	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY)
+	@JoinColumn(name="SENSOR_ID", nullable = false)
+	private Sensor sensor;
+	
 	public Long getUid() {
 		return uid;
 	}
@@ -74,20 +80,27 @@ public class Position {
 		this.lastValue = lastValue;
 	}
 
-	public Area getArea() {
-		return area;
+//	public Area getArea() {
+//		return area;
+//	}
+//
+//	public void setArea(Area area) {
+//		this.area = area;
+//	}
+	
+	public CompanyDetector getCompanyDetector() {
+		return companyDetector;
 	}
 
-	public void setArea(Area area) {
-		this.area = area;
+	public void setCompanyDetector(CompanyDetector companyDetector) {
+		this.companyDetector = companyDetector;
 	}
 	
-	public CompanyDevice getCompanyDevice() {
-		return companyDevice;
+	public final Sensor getSensor() {
+		return sensor;
 	}
 
-	public void setCompanyDevice(CompanyDevice companyDevice) {
-		this.companyDevice = companyDevice;
+	public final void setSensor(Sensor sensor) {
+		this.sensor = sensor;
 	}
-
 }

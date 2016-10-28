@@ -1,6 +1,7 @@
 package br.com.eneeyes.main.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,8 +11,11 @@ import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDevice;
+import br.com.eneeyes.main.model.Position;
+import br.com.eneeyes.main.model.register.Sensor;
 import br.com.eneeyes.main.repository.CompanyDetectorRepository;
 import br.com.eneeyes.main.repository.CompanyDeviceRepository;
+import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
@@ -25,6 +29,10 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	@Inject
 	private CompanyDeviceRepository companyDeviceRepository;
 	
+	@Inject
+	private PositionRepository positionRepository;
+
+	
 	public BasicResult<?> save(CompanyDetectorDto dto) {
 		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();		
 		
@@ -33,6 +41,9 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		CompanyDetector companyDetector = new CompanyDetector(dto);
 		companyDetector.setCompanyDevice(companyDevice);				
 		companyDetector = repository.save(companyDetector);
+		
+		createInitialPosition(companyDetector);
+		
 		dto.setUid(companyDetector.getUid());
 				
 		result.setEntity(dto);
@@ -47,8 +58,11 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 
 		List<CompanyDetector> list = new ArrayList<CompanyDetector>();
 		
-		for (CompanyDetectorDto companyDetectorDto   : listDto) {					
-			list.add(new CompanyDetector(companyDetectorDto));
+		for (CompanyDetectorDto companyDetectorDto   : listDto) {
+			
+			CompanyDetector companyDetector = new CompanyDetector(companyDetectorDto);
+			list.add(companyDetector);
+			createInitialPosition(companyDetector);
 		}
 		
 		list = repository.save(list);					
@@ -58,6 +72,25 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		
 		return result;
 	}
+	
+	private void createInitialPosition(CompanyDetector companyDetector) {
+		
+		for (Sensor sensor   : companyDetector.getDetector().getSensors()) {
+		
+			if(positionRepository.findBySensor(sensor) == null) {
+	
+				Position position = new Position();	
+				//position.setArea(area);
+				position.setCompanyDetector(companyDetector);
+				position.setSensor(sensor);
+				position.setLastUpdate(new Date());
+				position.setLastValue((double) 0);
+				
+				positionRepository.save(position);
+			}
+		}
+	}
+
 
 	public BasicResult<?> delete(Long uid) {
 				

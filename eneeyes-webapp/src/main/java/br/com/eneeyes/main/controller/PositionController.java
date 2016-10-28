@@ -46,12 +46,19 @@ public class PositionController {
 		
 		return service.findOne(uid);		
 	}
-	
-	@RequestMapping(value="/security/api/position/obtemPageByUnitId/{unitId}/{pageNumber}", method=RequestMethod.GET, produces = "application/json")
+	                                              
+	@RequestMapping(value="/security/api/position/obtemPorSensorId/{uid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> listPageByUnit(@PathVariable Long unitId, @PathVariable Integer pageNumber ) {
+	public BasicResult<?> findBySensor(@PathVariable Long uid) {
 		
-		return service.listPageByArea(unitId, pageNumber);		
+		return service.findBySensor(uid);		
 	}
+	
+//	@RequestMapping(value="/security/api/position/obtemPageByUnitId/{unitId}/{pageNumber}", method=RequestMethod.GET, produces = "application/json")
+//	@ResponseStatus(HttpStatus.OK)
+//	public BasicResult<?> listPageByUnit(@PathVariable Long unitId, @PathVariable Integer pageNumber ) {
+//		
+//		return service.listPageByArea(unitId, pageNumber);		
+//	}
 
 }

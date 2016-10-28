@@ -2,6 +2,7 @@ package br.com.eneeyes.main.dto;
 
 import java.util.Date;
 
+import br.com.eneeyes.main.dto.register.SensorDto;
 import br.com.eneeyes.main.model.Position;
 
 public class PositionDto {
@@ -9,9 +10,10 @@ public class PositionDto {
 	private Long uid;
 	private Date lastUpdate;
 	private Double lastValue;	
-    private AreaDto areaDto;
-    private CompanyDeviceDto companyDeviceDto;	
-		
+    //private AreaDto areaDto;
+    private CompanyDetectorDto companyDetectorDto;
+    private SensorDto sensorDto;
+	
 	public PositionDto() {
 		
 	}
@@ -21,9 +23,9 @@ public class PositionDto {
 		this.uid = position.getUid();
 		this.lastUpdate = position.getLastUpdate();
     	this.lastValue = position.getLastValue();    	
-    	this.areaDto = new AreaDto(position.getArea());
-    	this.companyDeviceDto = new CompanyDeviceDto(position.getCompanyDevice());
-    
+    	//this.areaDto = new AreaDto(position.getArea());
+    	//this.companyDetectorDto = new CompanyDetectorDto(position.getCompanyDetector());
+    	//this.sensorDto = new SensorDto(position.getSensor());
 	}
 	
 	public final Long getUid() {
@@ -50,23 +52,28 @@ public class PositionDto {
 		this.lastValue = lastValue;
 	}
 
-	public AreaDto getAreaDto() {
-		return areaDto;
+//	public AreaDto getAreaDto() {
+//		return areaDto;
+//	}
+//
+//	public void setAreaDto(AreaDto areaDto) {
+//		this.areaDto = areaDto;
+//	}
+	
+	public CompanyDetectorDto getCompanyDetectorDto() {
+		return companyDetectorDto;
 	}
 
-	public void setAreaDto(AreaDto areaDto) {
-		this.areaDto = areaDto;
+	public void setCompanyDetectorDto(CompanyDetectorDto companyDetectorDto) {
+		this.companyDetectorDto = companyDetectorDto;
 	}
 	
-	public CompanyDeviceDto getCompanyDeviceDto() {
-		return companyDeviceDto;
+	public final SensorDto getSensorDto() {
+		return sensorDto;
 	}
 
-	public void setCompanyDeviceDto(CompanyDeviceDto companyDeviceDto) {
-		this.companyDeviceDto = companyDeviceDto;
+	public final void setSensorDto(SensorDto sensorDto) {
+		this.sensorDto = sensorDto;
 	}
-
-
-
 
 }

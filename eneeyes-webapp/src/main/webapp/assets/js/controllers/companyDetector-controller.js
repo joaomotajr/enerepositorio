@@ -18,7 +18,7 @@ app.filter('gasFilter', function () {
 });
 
 
-app.controller('companyDetectorController', function ($scope, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService ) {
+app.controller('companyDetectorController', function ($scope, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, PositionService ) {
 
 	var loadGauge = false;
 	
@@ -187,10 +187,22 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 				if(! loadGauge) {
 					google.charts.load('current', { 'packages': ['gauge'] });
 					loadGauge = true;
+					
+//					setInterval(function() {
+//						
+//						if($scope.selectedCompanyDetector == null) return;						
+//						var sensors = $scope.selectedCompanyDetector.detectorDto.sensorsDto;						
+//						for (var j = 0; j < sensors.length; j++) {
+//							$scope.getPosition(sensors[j], j);
+//							formatGaugeSensor(sensors[j], 10, j);							
+//						}						
+//						
+//				    }, 13000);
 				}
 				
 				$timeout(function () {	
 					google.charts.setOnLoadCallback(drawGaugesDetector);
+										
 				}, 100);				
 			}				
 						
@@ -200,37 +212,68 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	 }
 	
 	drawGaugesDetector = function() {
-		
+				
 		if($scope.selectedCompanyDetector == null) return;
 		
 		var sensors = $scope.selectedCompanyDetector.detectorDto.sensorsDto;		
 		
 		for (var j = 0; j < sensors.length; j++) {
 			
-			var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensors[j].uid ; });
-
-			var red = selectedAlarm == null  || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
-			var yellow = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm2;
-			var orange = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm1;
+			formatGaugeSensor(sensors[j], 10, j); 
 			
-			var gaugeOptions = {
-			     //width: 350, height: 140,
-			     min: sensors[j].rangeMin, max: sensors[j].rangeMax,			     
-			     redFrom: red, redTo: sensors[j].rangeMax,
-			     yellowFrom: yellow, yellowTo: red,
-			     greenFrom: orange, greenTo: yellow, 
-			     minorTicks: 5
-			};
-						
-			var gaugeData = google.visualization.arrayToDataTable([
-              	['Label', 'Value'],
-              	['Sensor ' + (j + 1), 0],
-              ]);
-		    
-		    console.log('sensor_' + sensors[j].$$hashKey);			    
-		    gauge = new google.visualization.Gauge(document.getElementById('sensor_' + sensors[j].$$hashKey));
-		    gauge.draw(gaugeData, gaugeOptions);			
+//			var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensors[j].uid ; });
+//
+//			var red = selectedAlarm == null  || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
+//			var yellow = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm2;
+//			var orange = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm1;
+//			
+//			var gaugeOptions = {
+//			     //width: 350, height: 140,
+//			     min: sensors[j].rangeMin, max: sensors[j].rangeMax,			     
+//			     redFrom: red, redTo: sensors[j].rangeMax,
+//			     yellowFrom: yellow, yellowTo: red,
+//			     greenFrom: orange, greenTo: yellow, 
+//			     minorTicks: 5
+//			};
+//						
+//			var gaugeData = google.visualization.arrayToDataTable([
+//              	['Label', 'Value'],
+//              	['Sensor ' + (j + 1), 0],
+//              ]);
+//		    
+//		    console.log('sensor_' + sensors[j].$$hashKey);			    
+//		    gauge = new google.visualization.Gauge(document.getElementById('sensor_' + sensors[j].$$hashKey));		    
+//		    gaugeData.setValue(j, 1, 10);
+//		    gauge.draw(gaugeData, gaugeOptions);			
 		}	    		
+	}
+	
+	formatGaugeSensor = function(sensor, value, index) {
+		var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensor.uid ; });
+
+		var red = selectedAlarm == null  || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
+		var yellow = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm2;
+		var orange = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm1;
+		
+		var gaugeOptions = {
+		     min: sensor.rangeMin, max: sensor.rangeMax,			     
+		     redFrom: red, redTo: sensor.rangeMax,
+		     yellowFrom: yellow, yellowTo: red,
+		     greenFrom: orange, greenTo: yellow, 
+		     minorTicks: 5
+		};
+					
+		var gaugeData = google.visualization.arrayToDataTable([
+          	['Label', 'Value'],
+          	['Sensor ', 0],
+          ]);
+	    
+	    console.log('sensor_' + sensor.$$hashKey);			    
+	    gauge = new google.visualization.Gauge(document.getElementById('sensor_' + sensor.$$hashKey));		    
+	    //gaugeData.setValue(index, 1, value);
+	    //gaugeData.setValue(j, 1, 10);
+	    gauge.draw(gaugeData, gaugeOptions);
+		
 	}
 	
 	$scope.getCompanyDetectorAlarms = function() {
@@ -337,6 +380,19 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		}, function(data) {
 			$scope.showErro("Erro: " + data.statusText);
 		});			 
+	}
+	
+	$scope.getPosition = function(sensor, index) {
+		;
+		 $scope.listOnePosition = new PositionService.listOneBySensor();		 
+		 $scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : sensor.uid}, function(){		
+			 
+			 ret = $scope.listOnePosition.t;
+			 formatGaugeSensor(sensor, index, value);			  
+			 			 
+	    });		 
+		
+		;
 	}
 	
 	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];

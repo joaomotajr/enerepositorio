@@ -12,6 +12,7 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
         <jettyVersion>9.1.4.v20140401</jettyVersion>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
     <dependencies>
         <dependency>

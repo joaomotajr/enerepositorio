@@ -28,9 +28,7 @@ public class Position {
     	this.uid = dto.getUid();
     	this.lastUpdate = dto.getLastUpdate();
     	this.lastValue = dto.getLastValue();    	
-    	//this.area = new Area(dto.getAreaDto());
-    	//this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
-    	//this.sensor = new Sensor(dto.getSensorDto());
+    	this.sensor = new Sensor(dto.getSensorDto());
     }
 
 	@Id
@@ -43,16 +41,12 @@ public class Position {
 
 	@Column(name = "LAST_VALUE", nullable = true)
 	private Double lastValue;
-    
-//    @ManyToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name="AREA_ID", nullable=false)
-//    private Area area;
     		
 	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY)
-	@JoinColumn(name="COMPANY_DEVICE_ID", nullable = false)
+	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
 	private CompanyDetector companyDetector;
 	
-	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name="SENSOR_ID", nullable = false)
 	private Sensor sensor;
 	
@@ -79,14 +73,6 @@ public class Position {
 	public void setLastValue(Double lastValue) {
 		this.lastValue = lastValue;
 	}
-
-//	public Area getArea() {
-//		return area;
-//	}
-//
-//	public void setArea(Area area) {
-//		this.area = area;
-//	}
 	
 	public CompanyDetector getCompanyDetector() {
 		return companyDetector;

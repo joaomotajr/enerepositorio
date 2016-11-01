@@ -54,6 +54,13 @@ public class PositionController {
 		return service.findBySensor(uid);		
 	}
 	
+	@RequestMapping(value="/security/api/position/obtemPorCompanyDetectorId/{uid}", method=RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> findByCompanyDetector(@PathVariable Long uid) {
+		
+		return service.findByCompanyDetector(uid);		
+	}
+	
 //	@RequestMapping(value="/security/api/position/obtemPageByUnitId/{unitId}/{pageNumber}", method=RequestMethod.GET, produces = "application/json")
 //	@ResponseStatus(HttpStatus.OK)
 //	public BasicResult<?> listPageByUnit(@PathVariable Long unitId, @PathVariable Integer pageNumber ) {

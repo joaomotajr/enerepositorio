@@ -190,14 +190,9 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 					
 					setInterval(function() {
 						
-						if($scope.selectedCompanyDetector == null) return;						
-						var sensors = $scope.selectedCompanyDetector.detectorDto.sensorsDto;
-						
-						for (var j = 0; j < sensors.length; j++) {
-							
-							$scope.getPosition(sensors[j], j);
-											
-						}						
+						if($scope.selectedCompanyDetector != null) 												
+							$scope.getPositions($scope.selectedCompanyDetector);
+																	
 				    }, 13000);
 				}
 				
@@ -336,7 +331,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	
 	$scope.removerAlarmTela = function(alarm) {
 				
-		var alarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(img => img.alarmDto.uid === alarm.uid);		 
+		var alarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(item => item.alarmDto.uid === alarm.uid);		 
 		$scope.selectedCompanyDetectorAlarms.splice( alarmIndex, 1);	
 		$scope.selectedAlarm = undefined;
 		drawGaugesDetector();
@@ -369,6 +364,25 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	    });		 
 		
 		;
+	}
+	
+	$scope.getPositions = function(currentCompanyDetector) {
+		
+		 $scope.listOnePosition = new PositionService.listOneByCompanyDetector();		 
+		 $scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function(){		
+
+
+			 if($scope.listOnePosition != null) {			 
+				var sensors = currentCompanyDetector.detectorDto.sensorsDto;				 
+				for (var j = 0; j < sensors.length; j++) {
+											
+					var item = $.grep($scope.listOnePosition.list, function (e) { return e.sensorDto.uid == sensors[j].uid ; });
+					if (item[0].lastValue > 0)
+					formatGaugeSensor(sensors[j], item[0].lastValue );										
+				}}			 			 
+	    });	 
+		
+		
 	}
 	
 	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];

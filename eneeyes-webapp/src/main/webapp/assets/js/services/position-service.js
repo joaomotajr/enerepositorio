@@ -17,6 +17,9 @@ app.factory('PositionService', function($resource){
         listOneBySensor : $resource('/security/api/position/obtemPorSensorId/:id', {id: '@id'},{
         	position : {method : 'GET'}
         }),
+        listOneByCompanyDetector : $resource('/security/api/position/obtemPorCompanyDetectorId/:id', {id: '@id'},{
+        	position : {method : 'GET'}
+        }),
         save : $resource('/security/api/position/save',{},{
         	position : {method : 'POST'}
         }),

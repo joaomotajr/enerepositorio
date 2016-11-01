@@ -4,7 +4,7 @@
 
 <c:set var="context" value="${(empty context) ? 'default' : context}"/>
 
-<html lang="en" ng-app="eneeyes">
+<html lang="en" data-ng-app="eneeyes">
 	
 	<!-- HEADER - INI-->
 	<header>
@@ -20,7 +20,7 @@
 	<!-- PLEASE -->
 	
 	<!-- BODY - INI -->
-    <body ng-controller="SiteController" ng-cloak class="hold-transition skin-blue sidebar-mini">	
+    <body data-ng-controller="SiteController" data-ng-cloak class="hold-transition skin-blue sidebar-mini">	
        
         <input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         

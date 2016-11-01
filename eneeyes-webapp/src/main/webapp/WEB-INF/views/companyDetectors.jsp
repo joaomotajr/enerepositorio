@@ -20,7 +20,7 @@
 
 <div class="col-md-9">
 
-	<div ng-controller="companyDetectorController">
+	<div data-ng-controller="companyDetectorController">
 		<div class="box box-primary">					
 			<div class="box-header with-border">
 				<strong style="font-size:1.4em"><i class='fa fa-rss'></i> {{selectedCompanyDevice.deviceType}}</strong>
@@ -32,7 +32,7 @@
 				       	<li class="active"><a href="#tabCompanyDetector_1" id="stepTabDetector_1" data-toggle="tab">Cadastro</a></li>
 				       	<li><a href="#tabCompanyDetector_2" id="stepTabDetector_2" data-toggle="tab">Configuração</a></li>
 				       	<li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Histórico</a></li>
-				    	<li ng-hide="selectedCompanyDetector" class="pull-right"><i title="[Nenhum Detector Associado ao Dispositivo]" class="fa fa-info-circle text-red"></i></li>
+				    	<li data-ng-hide="selectedCompanyDetector" class="pull-right"><i title="[Nenhum Detector Associado ao Dispositivo]" class="fa fa-info-circle text-red"></i></li>
 				    </ul>
 					
 					<div class="tab-content">
@@ -45,10 +45,10 @@
 									    <div class="box box-primary">
 							                <div class="box-body box-profile">						                    
 							                    <img class="profile-user-img img-responsive img-circle" style="margin: 0 auto" 
-							                    	ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
-							                    <p class="text-muted text-center ng-binding">
+							                    	data-ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
+							                    <p class="text-muted text-center data-ng-binding">
 							                    	{{selectedCompanyDetector.detectorDto.name}}
-							                    	<span ng-show="selectedCompanyDetector.detectorDto.name"> - </span>
+							                    	<span data-ng-show="selectedCompanyDetector.detectorDto.name"> - </span>
 							                    	{{selectedCompanyDetector.detectorDto.model}}
 							                    </p>						                    					                    	                
 							                </div>
@@ -66,8 +66,8 @@
 							                    <div class="box-body">
 							                        <select class="form-control" data-live-search="true" 
 							                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-							                                ng-options="item as item.name for item in detectors | orderBy: 'name' track by item.uid" 
-					                                           ng-model="selectedCompanyDetector.detectorDto">
+							                                data-ng-options="item as item.name for item in detectors | orderBy: 'name' track by item.uid" 
+					                                           data-ng-model="selectedCompanyDetector.detectorDto">
 					                                           <option value="">Selecione</option> 
 							                        </select>    
 							                    </div>			                    			                            
@@ -80,16 +80,16 @@
 							        <div class="col-md-6">
 							            <div class="form-group">
 							                <label class="control-label">Nome</label>
-							                <span class="text-red" ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
-								            <span ng-show="userForm.username.$error.maxlength">Tamanho Máximo 20 caracteres</span>
-							                <input id="idAreaName" class="form-control" placeholder="Nome do Detector" ng-model="selectedCompanyDetector.name" ng-maxlength="20" name="username" required>
+							                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
+								            <span data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 20 caracteres</span>
+							                <input id="idAreaName" class="form-control" placeholder="Nome do Detector" data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="20" name="username" required>
 							            </div>
 							        </div>
 									
 							        <div class="col-md-6">
 							            <div class="form-group">
 							                <label class="control-label">Descrição</label>
-							                <input class="form-control" placeholder="E-mail" ng-model="selectedCompanyDetector.description">
+							                <input class="form-control" placeholder="E-mail" data-ng-model="selectedCompanyDetector.description">
 							            </div>
 							        </div>
 							    </div>
@@ -98,7 +98,7 @@
 							        <div class="col-md-6">
 							            <div class="form-group">
 							                <label class="control-label">Local</label>
-							                <input id="idUnitName" class="form-control" placeholder="Local" ng-model="selectedCompanyDetector.local">
+							                <input id="idUnitName" class="form-control" placeholder="Local" data-ng-model="selectedCompanyDetector.local">
 							            </div>
 							        </div>
 							        <div class="col-md-6">
@@ -112,11 +112,11 @@
 				       		</form>
 				       		<div class="row">
 				       			<div class="col-md-12">
-				       				<!--<button type="button" ng-click="newCompanyDetector();" class="btn btn-success pull-right">    Nova    </button> -->								
+				       				<!--<button type="button" data-ng-click="newCompanyDetector();" class="btn btn-success pull-right">    Nova    </button> -->								
 									<span class="pull-right">   </span>
-				       				<button type="button" ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" ng-disabled="(selectedCompanyDetector.name) ? false : true">   Salvar   </button>		       				
+				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name) ? false : true">   Salvar   </button>		       				
 				       				<span class="pull-right">   </span>
-				       				<button type="button" ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" ng-disabled="(selectedCompanyDetector.uid) ? false : true">   Excluir   </button>								
+				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">   Excluir   </button>								
 								</div>
 							</div>												
 							
@@ -127,7 +127,7 @@
 				       		
 				       		<div class="row">			       		 					              
 					        	    	
-				            	<div ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length > 1">
+				            	<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length > 1">
 				            	  	<div class="col-md-6">
 						              	<div class="panel panel-success">						                
 							                <div class="panel-heading">
@@ -135,24 +135,24 @@
 										   	</div>									   					               	
 							               	<div class="panel-body">
 						               			<div class="row">							            					                 		
-								                	<div ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">				                				                
+								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">				                				                
 										            	<div class="col-md-6">						                
 											            	<div id="{{'sensor_' + subItem.$$hashKey}}"></div>						            	    
 										            	</div>				                
 										            </div>							                				                				                
 						                		</div>	
 						                		<div class="row">					                    				                    				                    
-								                	<div ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">				                    			                    
+								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">				                    			                    
 									                	<div class="col-md-6">
 									                    	<div class="description-block">
 									                      		<h5 class="description-header">{{subItem.name}}</h5>
 									                      		<span class="description-text">Min|Max: {{subItem.rangeMin}} | {{subItem.rangeMax}}</span>
 									                      		<h5>{{subItem.unitMeterGases}}</h5>
 								                      			<h5>{{subItem.gasesDto[0].name}}</h5>									                      		
-																<label>Alarme </label> <a href="#" ng-click="configAlarm($index);" title="Troca/Selecionar Alarme"><i class="fa fa-bullhorn"></i></a>
+																<label>Alarme </label> <a href="#" data-ng-click="configAlarm($index);" title="Troca/Selecionar Alarme"><i class="fa fa-bullhorn"></i></a>
 																
-																<div ng-repeat="item in selectedCompanyDetectorAlarms">
-																	<div ng-if="item.sensorId == subItem.uid">
+																<div data-ng-repeat="item in selectedCompanyDetectorAlarms">
+																	<div data-ng-if="item.sensorId == subItem.uid">
 																		<label class="text-red">{{item.alarmDto.name}}</label>
 																	</div>																																		
 																</div>																
@@ -165,7 +165,7 @@
 					              	</div> 
 				              	</div>
 				              	
-				              	<div ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length == 1">
+				              	<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length == 1">
 				            	  	<div class="col-md-3">
 						              	<div class="panel panel-success">						                
 							                <div class="panel-heading">
@@ -173,18 +173,18 @@
 										   	</div>									   					               	
 							               	<div class="panel-body">
 							               		<div class="row">							            					                 		
-								                	<div ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">									            							                
+								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">									            							                
 											        	<div id="{{'sensor_' + subItem.$$hashKey}}"></div>									            					                
 										            </div>
 									            </div>							                				                				                
 							                	<div class="row">							                    				                    				                    
-								                	<div ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">									                	
+								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">									                	
 								                    	<div class="description-block">
 								                      		<h5 class="description-header"> {{subItem.name}}</h5>
 								                      		<span class="description-text">Min|Man: {{subItem.rangeMin}} | {{subItem.rangeMax}}</span>
 								                      		<h5>{{subItem.unitMeterGases}}</h5>
 								                      		<h5>{{subItem.gasesDto[0].name}}</h5>
-								                      		<label>Alarmes </label> <a href="#" ng-click="configAlarm($index);"><i class="fa fa-bullhorn"></i></a>
+								                      		<label>Alarmes </label> <a href="#" data-ng-click="configAlarm($index);"><i class="fa fa-bullhorn"></i></a>
 								                      		<label class="text-red">{{selectedCompanyDetectorAlarms[0].alarmDto.name}}</label>								                      		
 									                	</div>									                    					                    
 								                    </div>						                    					                    					                					                  			                  
@@ -232,7 +232,7 @@
 											</tr>
 										</thead>
 										<tbody>                                                        
-											<tr ng-repeat="item in alarms | gasFilter:search">
+											<tr data-ng-repeat="item in alarms | gasFilter:search">
 												<td>{{item.name}}</td>
 												<td>{{item.gasDto.name}}</td>															        
 												<td>{{item.alarm1}}</td>
@@ -240,11 +240,11 @@
 												<td>{{item.alarm3}}</td>
 												<td>
 																										
-													<div ng-if="item.uid == selectedAlarm.uid">
-														<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" ng-click="removerAlarm(item.uid)">Remover</button>
+													<div data-ng-if="item.uid == selectedAlarm.uid">
+														<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" data-ng-click="removerAlarm(item.uid)">Remover</button>
 													</div>
-													<div ng-if="item.uid != selectedAlarm.uid">
-														<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" ng-click="selecionarAlarm(item.uid)">Selecionar</button>
+													<div data-ng-if="item.uid != selectedAlarm.uid">
+														<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" data-ng-click="selecionarAlarm(item.uid)">Selecionar</button>
 													</div>
 													
 												</td>																		

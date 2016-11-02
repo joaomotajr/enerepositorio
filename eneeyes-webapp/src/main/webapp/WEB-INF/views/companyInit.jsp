@@ -1,4 +1,4 @@
-<div ng-controller="companiesController">    
+<div data-ng-controller="companiesController">    
 	<div class="col-md-9">
 		<!--  <div class="box box-primary" ng-show="selectedCompany.unitsDto.length <= 0"> -->
 		<div class="box box-primary">
@@ -9,9 +9,9 @@
 				<div class="col-md-6">
 					<label>Incluir Unidade</label>						
 					<div class="entry input-group">					
-				        <input type="text" class="form-control" placeholder="Digite o Nome da Unidade" ng-model="unitNameInit">
+				        <input type="text" class="form-control" placeholder="Digite o Nome da Unidade" data-ng-model="unitNameInit">
 				        <span class="input-group-btn">
-				        <button class="btn btn-info btn-flat" type="button" ng-click="saveUnitInit();">OK</button>
+				        <button class="btn btn-info btn-flat" type="button" data-ng-click="saveUnitInit();">OK</button>
 				        </span>
 					</div>
 				</div>		

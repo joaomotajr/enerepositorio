@@ -359,11 +359,8 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 			 if($scope.listOnePosition.t != null) {
 				 var currentPosition = $scope.listOnePosition.t.lastValue;			 
 				 formatGaugeSensor(currentSensor, currentPosition);			  
-			 }
-			 			 
-	    });		 
-		
-		;
+			 }			 			 
+	    });		
 	}
 	
 	$scope.getPositions = function(currentCompanyDetector) {
@@ -372,17 +369,16 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		 $scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function(){		
 
 
-			 if($scope.listOnePosition != null) {			 
+			 if($scope.listOnePosition.list != null && $scope.listOnePosition.list.length != 0) {			 
 				var sensors = currentCompanyDetector.detectorDto.sensorsDto;				 
 				for (var j = 0; j < sensors.length; j++) {
 											
 					var item = $.grep($scope.listOnePosition.list, function (e) { return e.sensorDto.uid == sensors[j].uid ; });
 					if (item[0].lastValue > 0)
 					formatGaugeSensor(sensors[j], item[0].lastValue );										
-				}}			 			 
-	    });	 
-		
-		
+				}
+			}			 			 
+	    });	
 	}
 	
 	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];

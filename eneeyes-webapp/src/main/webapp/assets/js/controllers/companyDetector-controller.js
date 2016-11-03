@@ -360,7 +360,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 				 var currentPosition = $scope.listOnePosition.t.lastValue;			 
 				 formatGaugeSensor(currentSensor, currentPosition);			  
 			 }			 			 
-	    });		
+	    });
 	}
 	
 	$scope.getPositions = function(currentCompanyDetector) {
@@ -378,7 +378,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 					formatGaugeSensor(sensors[j], item[0].lastValue );										
 				}
 			}			 			 
-	    });	
+	    });			
 	}
 	
 	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];
@@ -392,7 +392,5 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	else 
 		$scope.getDetectors();
 	
-	$scope.initializeDetector();
-		
-		
+	$scope.initializeDetector();		
 });

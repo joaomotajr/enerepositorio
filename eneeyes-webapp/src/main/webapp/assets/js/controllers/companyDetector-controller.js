@@ -21,6 +21,7 @@ app.filter('gasFilter', function () {
 app.controller('companyDetectorController', function ($scope, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, PositionService ) {
 
 	var loadGauge = false;
+	var timeGauge;
 	
 	$scope.showDanger = function(msg) {		
 		angular.element('body').removeClass('loading');
@@ -152,9 +153,10 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
 			
-			//* Detector j√° foi associado a dispositivo checa alarmes *//
+			//* Detector j· foi associado a dispositivo checa alarmes *//
 			if($scope.selectedCompanyDetector != null)
 				$scope.getCompanyDetectorAlarms();
+			
         });		 
 	}
 		
@@ -188,16 +190,14 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 					google.charts.load('current', { 'packages': ['gauge'] });
 					loadGauge = true;
 					
-					setInterval(function() {
-						
+					var timeGauge = setInterval(function() {						
 						if($scope.selectedCompanyDetector != null) 												
-							$scope.getPositions($scope.selectedCompanyDetector);
-																	
+							$scope.getPositions($scope.selectedCompanyDetector);																	
 				    }, 13000);
 				}
 				
 				$timeout(function () {	
-					google.charts.setOnLoadCallback(drawGaugesDetector);										
+					google.charts.setOnLoadCallback(initDrawGaugesDetector);										
 				}, 100);				
 			}				
 						
@@ -206,14 +206,15 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$("#stepTabDetector_1").trigger("click");	
 	 }
 	
-	drawGaugesDetector = function() {
-				
-		if($scope.selectedCompanyDetector == null) return;
+	initDrawGaugesDetector = function() {
 		
-		var sensors = $scope.selectedCompanyDetector.detectorDto.sensorsDto;		
-		for (var j = 0; j < sensors.length; j++) {			
-			formatGaugeSensor(sensors[j], 0); 			
-		}	    		
+		if($scope.selectedCompanyDetector != null) 												
+			$scope.getPositions($scope.selectedCompanyDetector);
+		
+		//var sensors = $scope.selectedCompanyDetector.detectorDto.sensorsDto;		
+		//for (var j = 0; j < sensors.length; j++) {			
+		//	formatGaugeSensor(sensors[j], 0); 			
+		//	}	    		
 	}
 	
 	formatGaugeSensor = function(sensor, value) {
@@ -236,8 +237,8 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
           	['Sensor ', 0],
           ]);
 	    
-	    console.log('sensor_' + sensor.$$hashKey);			    
-	    gauge = new google.visualization.Gauge(document.getElementById('sensor_' + sensor.$$hashKey));		    
+		var id = 'detector_' + $scope.selectedCompanyDetector.detectorDto.uid + '-sensor_' + sensor.uid;
+		gauge = new google.visualization.Gauge(document.getElementById(id));
 	    
 	    gauge.draw(gaugeData, gaugeOptions);
 	    gaugeData.setValue(0, 1 , value);
@@ -304,7 +305,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 			$scope.selectedCompanyDetectorAlarms[detectorAlarmIndex] = {alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid};
 		}
 		
-		drawGaugesDetector();
+		initDrawGaugesDetector();
 	}
 		
 	$scope.removerAlarm = function(uid) {		
@@ -334,7 +335,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		var alarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(item => item.alarmDto.uid === alarm.uid);		 
 		$scope.selectedCompanyDetectorAlarms.splice( alarmIndex, 1);	
 		$scope.selectedAlarm = undefined;
-		drawGaugesDetector();
+		initDrawGaugesDetector();
 		
 	}
 	
@@ -344,7 +345,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.inclusaoCompanyDetectorAlarm = new CompanyDetectorAlarmService.save(alarm);
 		$scope.inclusaoCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
 						
-			$scope.showInfo = "Alarme Gravado!" ;
+			$scope.showInfo("Alarme Gravado!") ;
 					
 		}, function(data) {
 			$scope.showErro("Erro: " + data.statusText);
@@ -368,22 +369,21 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		 $scope.listOnePosition = new PositionService.listOneByCompanyDetector();		 
 		 $scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function(){		
 
-
-			 if($scope.listOnePosition.list != null && $scope.listOnePosition.list.length != 0) {			 
-				var sensors = currentCompanyDetector.detectorDto.sensorsDto;				 
-				for (var j = 0; j < sensors.length; j++) {
+			 if($scope.listOnePosition.list != null && $scope.listOnePosition.list.length != 0) {
+		
+				for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
 											
-					var item = $.grep($scope.listOnePosition.list, function (e) { return e.sensorDto.uid == sensors[j].uid ; });
+					var item = $.grep($scope.listOnePosition.list, function (e) { return e.sensorDto.uid == currentCompanyDetector.detectorDto.sensorsDto[j].uid ; });
 					if (item[0].lastValue > 0)
-					formatGaugeSensor(sensors[j], item[0].lastValue );										
+					formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item[0].lastValue );										
 				}
 			}			 			 
 	    });			
 	}
-	
-	$scope.selectedUnit = $scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex];
-	$scope.selectedArea = $scope.selectedUnit.areasDto[$scope.$root.selecteds.areaIndex];
-	$scope.selectedCompanyDevice = $scope.selectedArea.companyDevicesDto[$scope.$root.selecteds.CompanyDeviceIndex]
+		
+	$scope.selectedUnit = angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex]);
+	$scope.selectedArea = angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex]);	
+	$scope.selectedCompanyDevice = angular.copy($scope.selectedArea.companyDevicesDto[$scope.$root.selecteds.CompanyDeviceIndex]);
 	
 	$scope.getAlarms();
 	

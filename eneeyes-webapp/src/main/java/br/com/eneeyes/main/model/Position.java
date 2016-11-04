@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.PositionDto;
@@ -42,11 +42,11 @@ public class Position {
 	@Column(name = "LAST_VALUE", nullable = true)
 	private Double lastValue;
     		
-	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY)
 	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
 	private CompanyDetector companyDetector;
 	
-	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name="SENSOR_ID", nullable = false)
 	private Sensor sensor;
 	

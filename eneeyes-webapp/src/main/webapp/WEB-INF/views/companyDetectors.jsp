@@ -137,7 +137,7 @@
 						               			<div class="row">							            					                 		
 								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">				                				                
 										            	<div class="col-md-6">						                
-											            	<div id="{{'sensor_' + subItem.$$hashKey}}"></div>						            	    
+											            <div id="{{'detector_' + selectedCompanyDetector.detectorDto.uid + '-sensor_' + subItem.uid}}"></div>						            	    
 										            	</div>				                
 										            </div>							                				                				                
 						                		</div>	
@@ -173,8 +173,8 @@
 										   	</div>									   					               	
 							               	<div class="panel-body">
 							               		<div class="row">							            					                 		
-								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">									            							                
-											        	<div id="{{'sensor_' + subItem.$$hashKey}}"></div>									            					                
+								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto">											        	
+											        	<div id="{{'detector_' + selectedCompanyDetector.detectorDto.uid + '-sensor_' + subItem.uid}}"></div>											        										            					                
 										            </div>
 									            </div>							                				                				                
 							                	<div class="row">							                    				                    				                    

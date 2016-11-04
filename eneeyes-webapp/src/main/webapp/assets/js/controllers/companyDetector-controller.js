@@ -126,7 +126,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		
 		$scope.deletar.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
 			
-			$scope.showDanger("Detector ExcluÃ­do!");
+			$scope.showDanger("Detector Excluído!");
 			$scope.clearCompanyDetector();
 			$scope.getOneCompany($scope.companyUid);			
 	                 	         	
@@ -320,7 +320,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.deleteCompanyDetectorAlarm = new CompanyDetectorAlarmService.deletar(alarm);
 		$scope.deleteCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
 						
-			$scope.showDanger("Alarme ExcluÃ­do!");			
+			$scope.showDanger("Alarme Excluído!");			
 		
 		}, function(data) {
 			$scope.showErro("Erro: " + data.statusText);

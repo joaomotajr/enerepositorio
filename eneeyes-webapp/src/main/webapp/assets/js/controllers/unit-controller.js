@@ -43,7 +43,7 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 		 
 		$scope.inclusaoArea = new AreaService.save(area);
 		$scope.inclusaoArea.$area({_csrf : angular.element('#_csrf').val()}, function(){
-			$scope.showInfo("Nova √Årea Inclu√≠da!");
+			$scope.showInfo("Nova ¡Årea IncluÌda!");
 			$scope.clearFormUnit();						
 			$scope.getOneCompany($scope.companyUid);			
 			
@@ -63,7 +63,7 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 		
 		$scope.deletar.$unit({_csrf : angular.element('#_csrf').val(), id : $scope.selectedUnit.uid}, function(){
 			
-			$scope.showDanger("Unidade Exclu√≠da!");
+			$scope.showDanger("Unidade ExcluÌda!");
 			$scope.clearFormUnit();
 			$scope.getOneCompany($scope.companyUid);				
 	        

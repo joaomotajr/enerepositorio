@@ -82,7 +82,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 				$scope.getOneCompany($scope.companyUid);
 			}
 			
-			$scope.showInfo("√Årea Gravada!");
+			$scope.showInfo("¡Årea Gravada!");
 		
 		}, function(data) {
 			$scope.showErro("Erro: " + data.statusText);
@@ -152,7 +152,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		
 		$scope.deletar.$area({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid}, function(){
 			
-			$scope.showDanger("√Årea Exclu√≠da!!");
+			$scope.showDanger("¡rea ExcluÌda!");
 			$scope.clearFormArea();
 			$scope.getOneCompany($scope.companyUid);			
 	                 	         	

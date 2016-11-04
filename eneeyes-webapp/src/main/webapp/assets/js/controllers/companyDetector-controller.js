@@ -225,7 +225,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		
 		var gaugeOptions = {
 		     min: sensor.rangeMin, max: sensor.rangeMax,			     
-		     redFrom: red, redTo: sensor.rangeMax,
+		     redFrom: red, redTo: red == 0 ? 0 : sensor.rangeMax,
 		     yellowFrom: yellow, yellowTo: red,
 		     greenFrom: orange, greenTo: yellow, 
 		     minorTicks: 5

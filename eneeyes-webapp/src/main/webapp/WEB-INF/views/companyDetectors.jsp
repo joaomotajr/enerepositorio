@@ -112,7 +112,8 @@
 				       		</form>
 				       		<div class="row">
 				       			<div class="col-md-12">
-				       				<!--<button type="button" data-ng-click="newCompanyDetector();" class="btn btn-success pull-right">    Nova    </button> -->								
+				       				<!--<button type="button" data-ng-click="newCompanyDetector();" class="btn btn-success pull-right">    Nova    </button> -->		
+				       				<input type="button" data-ng-click="killtimer()" value="Kill me">						
 									<span class="pull-right">   </span>
 				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name) ? false : true">   Salvar   </button>		       				
 				       				<span class="pull-right">   </span>
@@ -137,7 +138,7 @@
 						               			<div class="row">							            					                 		
 								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">				                				                
 										            	<div class="col-md-6">						                
-											            <div id="{{'detector_' + selectedCompanyDetector.detectorDto.uid + '-sensor_' + subItem.uid}}"></div>						            	    
+											            	<div id="{{'companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + subItem.uid}}"></div>						            	    
 										            	</div>				                
 										            </div>							                				                				                
 						                		</div>	
@@ -174,7 +175,7 @@
 							               	<div class="panel-body">
 							               		<div class="row">							            					                 		
 								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto">											        	
-											        	<div id="{{'detector_' + selectedCompanyDetector.detectorDto.uid + '-sensor_' + subItem.uid}}"></div>											        										            					                
+											        	<div id="{{'companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + subItem.uid}}"></div>											        										            					                
 										            </div>
 									            </div>							                				                				                
 							                	<div class="row">							                    				                    				                    

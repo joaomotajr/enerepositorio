@@ -1,4 +1,4 @@
-<div ng-controller="companiesController">
+<div data-ng-controller="companiesController">
 
 	<div class="row">
 	    <div class="col-md-12">
@@ -83,21 +83,21 @@
 					<div id="treeview-company" class="treeview" style="font-size:12px;line-height:0.85"></div>				
 				</div>				
 				
-				<div id="content" bind-unsafe-html="ajaxcontentCompany"></div>					
+				<div id="content" bind-unsafe-html="ajaxcontentCompany"></div>													
 			 	
 			</div>			
 			
-			<div id="resultErro" class="alert alert-warning col-sm-6" role="alert" ng-show="msgErro" >
-	            <button type="button" class="close" ><span ng-click="msgErro='';">&times;</span></button>
+			<div id="resultErro" class="alert alert-warning col-sm-6" role="alert" data-ng-show="msgErro" >
+	            <button type="button" class="close" ><span data-ng-click="msgErro='';">&times;</span></button>
 	            <strong>Alerta! </strong>{{msgErro}} 
 	        </div>  
 	        
-	        <div id="resultInfo" class="alert alert-info alert-dismissible col-sm-6" role="alert" ng-show="msgInfo" >
+	        <div id="resultInfo" class="alert alert-info alert-dismissible col-sm-6" role="alert" data-ng-show="msgInfo" >
                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                  <strong>Atenção! </strong>{{msgInfo}} <span id="msgComplemento"></span>
              </div>                     
              
-             <div id="resultDanger" class="alert alert-danger alert-dismissible col-sm-6" role="alert" ng-show="msgDanger" >
+             <div id="resultDanger" class="alert alert-danger alert-dismissible col-sm-6" role="alert" data-ng-show="msgDanger" >
                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                  <strong>Atenção! </strong>{{msgDanger}}                  
              </div>

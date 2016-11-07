@@ -2,7 +2,9 @@ app.service('testServices', function ($http, $q) {
 
 });
 
-app.controller('companiesController', function ($scope, $timeout, $filter, CompanyService, UnitService) {
+app.controller('companiesController', function ($scope, $timeout, $interval, $filter, CompanyService, UnitService) {
+
+	$scope.$root.timer = [];
 	
 	$scope.showDanger = function(msg) {		
 		angular.element('body').removeClass('loading');
@@ -21,33 +23,6 @@ app.controller('companiesController', function ($scope, $timeout, $filter, Compa
         $scope.$root.msgErro = msg;
         $('#resultErro').hide().show('slow').delay(1000).hide('slow');
 	}
-	
-//	$scope.saveUnitInit = function() {
-//		
-//		var unit = {
-//			uid: 0,
-//			name: $scope.unitNameInit,				
-//			companyDto: {uid : $scope.selectedCompany.uid}				
-//		};
-//		 
-//		$scope.inclusaoUnit = new UnitService.save(unit);
-//		$scope.inclusaoUnit.$unit({_csrf : angular.element('#_csrf').val()}, function(){         	
-//			
-//			$scope.showInfo("Inserida Nova Unidade!")
-//			$scope.getOneCompany($scope.companyUid);		
-//        });		 
-//	 }
-//	
-//	$scope.getOneCompany = function(companyId) {
-//		 
-//		 $scope.listOne = new CompanyService.listOne();		 
-//		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
-//			 
-//			 $scope.selectedCompany = $scope.listOne.t;
-//			 $scope.itens = getTree();
-//			 $scope.loadTreview($scope.itens);			 
-//	    });		 
-//	}
 		
 	$scope.deleteCompany = function() {
 		
@@ -151,28 +126,36 @@ app.controller('companiesController', function ($scope, $timeout, $filter, Compa
 			        collapseIcon: 'glyphicon glyphicon-chevron-down',			          
 				    onNodeSelected: function(event, node) {
 				    	
+				    	//Clear Timer(s)
+				    	while ($scope.$root.timer.length) {				        	
+				            $interval.cancel($scope.$root.timer.pop());				            
+				         }
+				    	
+				    	//Força atualização de conteudo
 				    	$scope.LoadAjaxContentCompany('clear.html');
 				    	
 				    	$scope.$root.selecteds.push({unitIndex: 0, areaIndex : 0, companyDetectorIndex: 0});
 				    	
 				    	if(node.type == 0 && $scope.$root.selectedCompany.unitsDto.length <= 0) {				    		 
 				    		 //$timeout(function () {$scope.LoadAjaxContentCompany('companyInit.html');}, 50);	
-				    		 $timeout(function () {$scope.LoadAjaxContentCompany('units.html');}, 50);
+				    		 $timeout(function () {$scope.LoadAjaxContentCompany('units.html');}, 50);				    		 
 				    	}
 				    	else if(node.type == 0 ) {
 				    		
-				    		$timeout(function () {$scope.LoadAjaxContentCompany('company.html');}, 50);	 				    		 
+				    		$timeout(function () {$scope.LoadAjaxContentCompany('company.html');}, 50);				    		 
 				    	}
 				    	else if(node.type == 1) {
 				    		
 				    		$scope.$root.selecteds.unitIndex = node.index;				    		
-				    		$timeout(function () {$scope.LoadAjaxContentCompany('units.html');}, 50);				    	 				    	 	
+				    		$timeout(function () {$scope.LoadAjaxContentCompany('units.html');}, 50);
+				    		
 				    	}
 				    	else if(node.type == 2) {
 				    		
 				    		$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
 					    	$scope.$root.selecteds.areaIndex = node.index;					    	
-					    	$timeout(function () {$scope.LoadAjaxContentCompany('areas.html');}, 50);					    						    	
+					    	$timeout(function () {$scope.LoadAjaxContentCompany('areas.html');}, 50);	
+					    	
 				    	}
 				    	else if(node.type == 3) {				    		 
 					    						    
@@ -180,8 +163,10 @@ app.controller('companiesController', function ($scope, $timeout, $filter, Compa
 					    	$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
 					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;
 				    		 
-				    		if (node.companyDevice.deviceType == "DETECTOR") 
-				    			$timeout(function () { $scope.LoadAjaxContentCompany('companyDetectors.html'); }, 50);				    	 	
+				    		if (node.companyDevice.deviceType == "DETECTOR") {
+				    			
+				    			$timeout(function () { $scope.LoadAjaxContentCompany('companyDetectors.html'); }, 50);				    			
+				    		}
 				    		else if (node.companyDevice.deviceType == "PLC" || node.companyDevice.deviceType == "CONTROLLER") 
 				    			$scope.LoadAjaxContentCompany('companyPlcs.html');
 				    						    		

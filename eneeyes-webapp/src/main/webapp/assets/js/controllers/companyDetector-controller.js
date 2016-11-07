@@ -18,10 +18,10 @@ app.filter('gasFilter', function () {
 });
 
 
-app.controller('companyDetectorController', function ($scope, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, PositionService ) {
+app.controller('companyDetectorController', function ($scope, $interval, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, PositionService ) {
 
 	var loadGauge = false;
-	var timeGauge;
+	//var timeGauge;
 	
 	$scope.showDanger = function(msg) {		
 		angular.element('body').removeClass('loading');
@@ -80,7 +80,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 			$scope.showInfo("Detector Gravado!");
 					
 		}, function(data) {			
-			$scope.showErro("Erro: " + data.statusText);
+			$scope.showErro("Ops!! " + data.statusText);
 		});			 
 	}
 	
@@ -103,7 +103,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 			$scope.showInfo("Detector Gravado!") ;
 					
 		}, function(data) {
-			$scope.showErro("Erro: " + data.statusText);
+			$scope.showErro("Ops!! " + data.statusText);
 		});			 
 	}
 	
@@ -127,12 +127,12 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		
 		$scope.deletar.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
 			
-			$scope.showDanger("Detector Excluído!");
+			$scope.showDanger("Detector Excluï¿½do!");
 			$scope.clearCompanyDetector();
 			$scope.getOneCompany($scope.companyUid);			
 	                 	         	
         }, function(data) {
-        	$scope.showErro("Erro: " + data.statusText);
+        	$scope.showErro("Ops!! " + data.statusText);
 		});		 
 	}
 	
@@ -153,7 +153,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
 			
-			//* Detector já foi associado a dispositivo checa alarmes *//
+			//* Detector jï¿½ foi associado a dispositivo checa alarmes *//
 			if($scope.selectedCompanyDetector != null)
 				$scope.getCompanyDetectorAlarms();
 			
@@ -171,7 +171,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	
 
 	 $scope.initializeDetector =  function()  {
-		 
+		 		 
 		$timeout(function () {
 			
 			$('.tabDetector a').on('click', function (event) {
@@ -185,15 +185,37 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 			    }			
 			});
 											
-			initGaugeDetector = function() {				
+			initGaugeDetector = function() {
+				
 				if(! loadGauge) {
 					google.charts.load('current', { 'packages': ['gauge'] });
 					loadGauge = true;
 					
-					var timeGauge = setInterval(function() {						
-						if($scope.selectedCompanyDetector != null) 												
-							$scope.getPositions($scope.selectedCompanyDetector);																	
-				    }, 13000);
+					var current = angular.copy($scope.selectedCompanyDetector);
+					
+					if(current != null) {					
+//						var timeGauge = setInterval(function() {						 												
+//							$scope.getPositions(current);																	
+//					    }, 13000);
+						
+//						if(angular.isDefined(timer))
+//				         {
+//				           $interval.cancel(timer);
+//				           timer=undefined;
+//				        }
+						
+						$scope.$root.timer.push($interval(function(){
+							$scope.getPositions(current);					        
+					    }, 13000));
+						
+//						$scope.killtimer=function(){
+//					        if(angular.isDefined(timer))
+//					          {
+//					            $interval.cancel(timer);
+//					            timer=undefined;
+//					          }
+//					    };					    
+					}
 				}
 				
 				$timeout(function () {	
@@ -207,17 +229,14 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 	 }
 	
 	initDrawGaugesDetector = function() {
+		var current = angular.copy($scope.selectedCompanyDetector);
 		
-		if($scope.selectedCompanyDetector != null) 												
-			$scope.getPositions($scope.selectedCompanyDetector);
-		
-		//var sensors = $scope.selectedCompanyDetector.detectorDto.sensorsDto;		
-		//for (var j = 0; j < sensors.length; j++) {			
-		//	formatGaugeSensor(sensors[j], 0); 			
-		//	}	    		
+		if(current != null) 												
+			$scope.getPositions(current);
+					    		
 	}
 	
-	formatGaugeSensor = function(sensor, value) {
+	formatGaugeSensor = function(sensor, value, id) {
 		var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensor.uid ; });
 
 		var red = selectedAlarm == null  || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
@@ -236,14 +255,19 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
           	['Label', 'Value'],
           	['Sensor ', 0],
           ]);
-	    
-		var id = 'detector_' + $scope.selectedCompanyDetector.detectorDto.uid + '-sensor_' + sensor.uid;
-		gauge = new google.visualization.Gauge(document.getElementById(id));
-	    
-	    gauge.draw(gaugeData, gaugeOptions);
-	    gaugeData.setValue(0, 1 , value);
-	    gauge.draw(gaugeData, gaugeOptions);
+	    		
+		objGauge = document.getElementById(id);
 		
+		if (objGauge == undefined) {
+			console.log('Objeto:: ' + id + "NÃ£o localizado:: " + Date())
+		}
+		else {
+			gauge = new google.visualization.Gauge(objGauge);
+							
+		    gauge.draw(gaugeData, gaugeOptions);
+		    gaugeData.setValue(0, 1 , value);
+		    gauge.draw(gaugeData, gaugeOptions);
+		}
 	}
 	
 	$scope.getCompanyDetectorAlarms = function() {
@@ -321,10 +345,10 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 		$scope.deleteCompanyDetectorAlarm = new CompanyDetectorAlarmService.deletar(alarm);
 		$scope.deleteCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
 						
-			$scope.showDanger("Alarme Excluído!");			
+			$scope.showDanger("Alarme ExcluÃ­do!");			
 		
 		}, function(data) {
-			$scope.showErro("Erro: " + data.statusText);
+			$scope.showErro("Ops!! " + data.statusText);
 		});
 		
 		$scope.removerAlarmTela(selectedAlarm);		
@@ -348,7 +372,7 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 			$scope.showInfo("Alarme Gravado!") ;
 					
 		}, function(data) {
-			$scope.showErro("Erro: " + data.statusText);
+			$scope.showErro("Ops!! " + data.statusText);
 		});			 
 	}
 	
@@ -374,10 +398,18 @@ app.controller('companyDetectorController', function ($scope, $timeout, $filter,
 				for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
 											
 					var item = $.grep($scope.listOnePosition.list, function (e) { return e.sensorDto.uid == currentCompanyDetector.detectorDto.sensorsDto[j].uid ; });
-					if (item[0].lastValue > 0)
-					formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item[0].lastValue );										
+					if (item[0].lastValue > 0) {
+						var id = 'companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;
+						formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item[0].lastValue, id);
+					}
 				}
-			}			 			 
+			}
+			else {
+				for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
+					var id = 'companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;
+					formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], 0, id);
+				}
+			}	
 	    });			
 	}
 		

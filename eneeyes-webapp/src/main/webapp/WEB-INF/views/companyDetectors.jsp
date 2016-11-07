@@ -199,7 +199,22 @@
 				       	</div>
 				       	
 				       	 
-				       	<div class="tab-pane" id="tabCompanyDetector_3">	        
+				       	<div class="tab-pane" id="tabCompanyDetector_3">	   
+				       			<div class="row">				            	
+				            	  	<div class="col-md-12">
+						              	<div class="panel panel-default">						                
+							                <div class="panel-heading">
+										    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
+										   	</div>									   					               	
+							               	<div class="panel-body">
+							               		
+							               		<div id="chart_div"></div>
+							               	
+						    				</div>
+						    			</div>
+						    		</div>
+						    	</div>
+				       	     
 				     	</div><!-- /.tab-content -->			     	
 				   </div>			   						
 				</div>
@@ -239,8 +254,7 @@
 												<td>{{item.alarm1}}</td>
 												<td>{{item.alarm2}}</td>
 												<td>{{item.alarm3}}</td>
-												<td>
-																										
+												<td>																										
 													<div data-ng-if="item.uid == selectedAlarm.uid">
 														<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" data-ng-click="removerAlarm(item.uid)">Remover</button>
 													</div>

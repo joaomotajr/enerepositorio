@@ -28,7 +28,13 @@
 							<label class="control-label">Sensor</label>
 		                	<input class="form-control" data-ng-model="companySensorUid">						                                                
 						</div>                                                                    
-					</div>        		
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Valor</label>
+		                	<input class="form-control" data-ng-model="companyValor">						                                                
+						</div>                                                                    
+					</div>         		
 					<div class="col-md-6">
 						<div class="form-group">
 	        				<button type="button" class="btn btn-primary" data-ng-click="saveHistoric()">Save Historic</button>

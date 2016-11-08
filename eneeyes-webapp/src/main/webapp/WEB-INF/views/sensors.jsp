@@ -13,7 +13,7 @@
 					</div>
 					<div class="box-body">
 						<div style="height: 500px; overflow: auto">
-							<table class="table table-hover">
+							<table class="table table-bordered table-hover">
 								<thead>
 									<tr>
 										<th>Nome</th>
@@ -24,7 +24,7 @@
 								</thead>
 								<tbody>                                                        
 									<tr ng-repeat="item in sensors">
-										<td>{{item.name}}</td>
+										<td>{{item.name}}-{{item.model}}</td>
 										<td>{{item.model}}</td>															        
 										<td>
 											<button type="button" class="btn btn-primary btn-xs" ng-click="editSensor($index)">editar</button>

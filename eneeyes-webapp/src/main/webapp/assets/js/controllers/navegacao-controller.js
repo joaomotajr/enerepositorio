@@ -225,7 +225,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		
 		$scope.historic = {
 				uid: 0,	
-				value: 90,
+				value: $scope.companyValor,
 				update: null,
 				companyDetectorDto: {uid: $scope.companyDetectorUid},
 				sensorDto: {uid: $scope.companySensorUid}

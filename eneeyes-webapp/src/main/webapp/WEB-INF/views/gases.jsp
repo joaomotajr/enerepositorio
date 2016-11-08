@@ -80,7 +80,7 @@
 						<div class="box-footer">
 							<button type="button" ng-click="clearFormGas()" class="btn btn-default">Cancelar</button>                                                                
 							<button type="button" ng-click="saveGas();" class="btn btn-primary" 
-								ng-disabled="(gasName && gasCas && gasFormula && gasUnitMeterGases) ? false : true">Salvar</button>								                                                                
+								ng-disabled="(gasName && gasCas && gasFormula) ? false : true">Salvar</button>								                                                                
 						</div>					      
 						
 					</div>

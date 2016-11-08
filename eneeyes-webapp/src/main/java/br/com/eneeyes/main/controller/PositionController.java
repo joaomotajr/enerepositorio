@@ -45,14 +45,7 @@ public class PositionController {
 	public BasicResult<?> listById(@PathVariable Long uid) {
 		
 		return service.findOne(uid);		
-	}
-	                                              
-	@RequestMapping(value="/security/api/position/obtemPorSensorId/{uid}", method=RequestMethod.GET, produces = "application/json")
-	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findBySensor(@PathVariable Long uid) {
-		
-		return service.findBySensor(uid);		
-	}
+	}                                             
 	
 	@RequestMapping(value="/security/api/position/obtemPorCompanyDetectorId/{uid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)

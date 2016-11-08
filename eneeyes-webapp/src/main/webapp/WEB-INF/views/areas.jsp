@@ -37,7 +37,7 @@
 <div class="col-md-9">
 	<div ng-controller="areaController">
 	<div class="box box-primary">					
-		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-map-o'></i> Área: {{selectedArea.name}}</strong></div>		
+		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-map-o'></i> ï¿½rea: {{selectedArea.name}}</strong></div>		
 		<div class="box-body">		
 						
 			<div class="nav-tabs-custom">
@@ -45,7 +45,7 @@
 			       	<li class="active"><a href="#tabArea_1" id="stepTabArea_1" data-toggle="tab">Cadastro</a></li>
 			       	<li><a href="#tabArea_2" id="stepTabArea_2" data-toggle="tab">Local</a></li>
 			       	<li><a href="#tabArea_3" id="stepTabArea_1" data-toggle="tab">Dispositivos</a></li>
-			    	<li title="Trocar Imagem da Área" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
+			    	<li title="Trocar Imagem da ï¿½rea" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
 			    </ul>
 				
 				<div class="tab-content">
@@ -60,8 +60,8 @@
 					        </div>					
 					        <div class="col-md-6">
 					            <div class="form-group">
-					                <label class="control-label">Descrição</label>
-					                <input class="form-control" placeholder="Descrição" ng-model="selectedArea.description">
+					                <label class="control-label">DescriÃ§Ã£o</label>
+					                <input class="form-control" placeholder="Descriï¿½ï¿½o" ng-model="selectedArea.description">
 					            </div>
 					        </div>
 					    </div>
@@ -78,7 +78,7 @@
 					        	<label class="control-label">Area Classificada</label>
 				                <div class="form-group">				                 	
       								<label><input type="radio" ng-model="selectedArea.classified" value="1" />&nbsp; Sim</label>        
-				                 	<label><input type="radio" ng-model="selectedArea.classified" value="0" />&nbsp;	Não</label>						                
+				                 	<label><input type="radio" ng-model="selectedArea.classified" value="0" />&nbsp;	Nï¿½o</label>						                
 				                </div>
 					        						            
 					        </div>
@@ -106,11 +106,11 @@
 			       		
 			       		<div class="row">
 			       			<div class="col-md-12">
-			       				<button type="button" ng-click="newArea();" ng-show="btnNewArea" class="btn btn-success pull-right">    Nova    </button>								
-								<span class="pull-right">   </span>
-			       				<button type="button" ng-click="saveArea();" class="btn btn-primary pull-right" ng-disabled="(selectedArea.name) ? false : true">   Salvar   </button>		       				
-			       				<span class="pull-right">   </span>
-			       				<button type="button" ng-click="deleteArea();" class="btn btn-danger pull-right" ng-disabled="(selectedArea.uid) ? false : true">   Excluir   </button>								
+			       				<button type="button" ng-click="newArea();" ng-show="btnNewArea" class="btn btn-success pull-right">ï¿½ï¿½ï¿½ï¿½Novaï¿½ï¿½ï¿½ï¿½</button>								
+								<span class="pull-right">ï¿½ï¿½ </span>
+			       				<button type="button" ng-click="saveArea();" class="btn btn-primary pull-right" ng-disabled="(selectedArea.name) ? false : true">ï¿½ï¿½ï¿½Salvarï¿½ï¿½ï¿½</button>		       				
+			       				<span class="pull-right">ï¿½ï¿½ </span>
+			       				<button type="button" ng-click="deleteArea();" class="btn btn-danger pull-right" ng-disabled="(selectedArea.uid) ? false : true">ï¿½ï¿½ï¿½Excluirï¿½ï¿½ï¿½</button>								
 							</div>
 						</div>												
 																	

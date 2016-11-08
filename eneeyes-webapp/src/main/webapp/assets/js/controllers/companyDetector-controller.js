@@ -202,11 +202,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 					var current = angular.copy($scope.selectedCompanyDetector);
 					
 					if(current != null) {					
-						
 						$scope.$root.timer.push($interval(function(){
 							$scope.getPositions(current);					        
-					    }, 13000));
-						
+					    }, 13000));						
 					}
 				}
 				

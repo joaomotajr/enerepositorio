@@ -15,6 +15,8 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
 	
 	public List<Position> findByCompanyDetector(CompanyDetector companyDetector);
 	
-	public Position findBySensor(Sensor sensor);
+	public Position findByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
+	
+	public Long countByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
 	
 }

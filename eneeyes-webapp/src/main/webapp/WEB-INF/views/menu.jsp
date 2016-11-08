@@ -37,9 +37,9 @@
 					        	  
 	            <li class="header">SELECIONE</li>	            
 	            <li>
-	            	<a href="#" ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fa fa-th"></i> <span>Dashboard</span></a>
-	            	<a href="#" ng-click="LoadAjaxContent('navegacao.html', 'Developer')"><i class="fa fa-circle-o"></i><span>Developer</span></a>
-	            	<a href="#" ng-click="LoadAjaxContent('cadastro.html', 'Cadastro')"><i class="fa fa-circle-o"></i><span>User</span></a>
+	            	<a href="#" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fa fa-th"></i> <span>Dashboard</span></a>
+	            	<a href="#" data-ng-click="LoadAjaxContent('navegacao.html', 'Developer')"><i class="fa fa-circle-o"></i><span>Developer</span></a>
+	            	<a href="#" data-ng-click="LoadAjaxContent('cadastro.html', 'Cadastro')"><i class="fa fa-circle-o"></i><span>User</span></a>
 	            </li>	                                    
 	            
 	          	<li class="treeview">
@@ -48,11 +48,11 @@
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">
-	                    <li class="active"><a href="#" ng-click="LoadAjaxContent('controllers.html', 'Controladoras')"><i class="fa fa-tasks"></i> Controladoras</a></li>
-	                    <li class="active"><a href="#" ng-click="LoadAjaxContent('transmitters.html','Transmissores')"><i class="fa fa-expand"></i> Transmissores</a></li>
-	                    <li class="active"><a href="#" ng-click="LoadAjaxContent('sensors.html','Sensores')"><i class="fa fa-feed"></i> Sensores</a></li>
-	                    <li class="active"><a href="#" ng-click="LoadAjaxContent('detectors.html','Detectores')"><i class="fa fa-th-large"></i> Detectores</a></li>
-	                    <li class="active"><a href="#" ng-click="LoadAjaxContent('gases.html', 'Gases')"><i class="fa fa-yelp"></i> Gases</a></li>
+	                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('controllers.html', 'Controladoras')"><i class="fa fa-tasks"></i> Controladoras</a></li>
+	                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('transmitters.html','Transmissores')"><i class="fa fa-expand"></i> Transmissores</a></li>
+	                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('sensors.html','Sensores')"><i class="fa fa-feed"></i> Sensores</a></li>
+	                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('detectors.html','Detectores')"><i class="fa fa-th-large"></i> Detectores</a></li>
+	                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('gases.html', 'Gases')"><i class="fa fa-yelp"></i> Gases</a></li>
 			            		        
 	              	</ul>
 	            </li>
@@ -63,8 +63,9 @@
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">			            		        
-			            <li><a href="#" ng-click="LoadAjaxContent('companies.html', 'Empresas')"><i class="fa fa-industry"></i> Empresa</a></li>
-			            <li><a href="#" ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn"></i> Alarmes</a></li>			            
+			            <li><a href="#" data-ng-click="LoadAjaxContent('companies.html', 'Empresas')"><i class="fa fa-industry"></i> Empresa</a></li>
+			            <li><a href="#" data-ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn"></i> Alarmes</a></li>
+			            <li><a href="#" data-ng-click="LoadAjaxContent('navegacao.html', 'Testes')"><i class="fa fa-key"></i> Teste</a></li>			            
 	              	</ul>
 	            </li>	                  
 	        </ul>

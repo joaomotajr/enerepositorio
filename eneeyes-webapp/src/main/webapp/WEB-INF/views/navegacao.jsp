@@ -13,16 +13,54 @@
 
         <!-- Main content - Modificado -->
         <section class="content">
+        
+        	<div class="row">      		           
+	            <form class="form col-md-6" name="userForm">
+		            <div class="col-md-6">                                                                                                                            
+						<div class="form-group">
+							<label class="control-label">CompanyDetector</label>
+		                	<input class="form-control" data-ng-model="companyDetectorUid">					                                                                                
+							                                                                        
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Sensor</label>
+		                	<input class="form-control" data-ng-model="companySensorUid">						                                                
+						</div>                                                                    
+					</div>        		
+					<div class="col-md-6">
+						<div class="form-group">
+	        				<button type="button" class="btn btn-primary" data-ng-click="saveHistoric()">Save Historic</button>
+	        			</div>
+	        		</div>        	        		
+	        		
+	        	</form>	        			        	
+       		</div>
+        	<hr />
+        	<div class="row">
+        	<div class="col-md-12">
+        	
+                <dl class="dl-horizontal" data-ng-repeat="item in CompanyDetectors">
+                    <dt>Detector: {{item.name}} - {{item.uid}}</dt>
+                        <dd>Sensor1: {{item.detectorDto.sensorsDto[0].name}} - {{item.detectorDto.sensorsDto[0].uid}} </dd>
+                        <dd>Sensor2: {{item.detectorDto.sensorsDto[1].name}} - {{item.detectorDto.sensorsDto[1].uid}} </dd>
+
+                </dl>
+            
+            </div>
+        	</div>
+        	
         	<div class="row">        		
-        		<button type="button" class="btn btn-primary" data-ng-click="saveCompanyDetector()">Save CompanyDetector</button>        	        		
+        		<!-- <button type="button" class="btn btn-primary" data-ng-click="saveCompanyDetector()">Save CompanyDetector</button> -->        	        		
         		<button type="button" class="btn btn-primary" data-ng-click="getCompanyDetector()">Get CompanyDetector</button>
-        		<button type="button" class="btn btn-primary" data-ng-click="getOneCompanyDetector()">Get One CompanyDetector</button>
-        		<button type="button" class="btn btn-primary" data-ng-click="getOneCompanyDetectorDevice()">Get Device CompanyDetector </button>
-        		<button type="button" class="btn btn-primary" data-ng-click="getOneCompanyDetectorDeviceByArea()">Get Area CompanyDetector  </button>
-        		<button type="button" class="btn btn-primary" data-ng-click="deletarCompanyDetector()">Deletar CompanyDetector</button>        		
+        		<!-- <button type="button" class="btn btn-primary" data-ng-click="getOneCompanyDetector()">Get One CompanyDetector</button> -->
+        		<!-- <button type="button" class="btn btn-primary" data-ng-click="getOneCompanyDetectorDevice()">Get Device CompanyDetector </button> -->
+        		<!-- <button type="button" class="btn btn-primary" data-ng-click="getOneCompanyDetectorDeviceByArea()">Get Area CompanyDetector  </button> -->
+        		<!-- <button type="button" class="btn btn-primary" data-ng-click="deletarCompanyDetector()">Deletar CompanyDetector</button>  -->      		
         		        		
        		</div>
-        
+        	<!-- 
         	<div class="row">        		
         		<button type="button" class="btn btn-primary" data-ng-click="saveCompanyDevice()">Save CompanyDevice</button>        		
         		<button type="button" class="btn btn-primary" data-ng-click="saveCompanyDevices()">Save CompanyDevices</button>        		
@@ -86,24 +124,7 @@
         		<button type="button" class="btn btn-primary" data-ng-click="getOneDetector()">Get One Detector</button>
         		<button type="button" class="btn btn-primary" data-ng-click="deletarDetector()">delete Detector</button>        		
        		</div>
-       		
-	         <div class="row">
-	            <div class="col-md-12">           
-					<div class="col-sm-3">					
-					<!-- 		                
-			          	<h2>Procurar</h2>	                      
-			            
-			            <div class="form-group">
-			                <label for="input-search" class="sr-only">Search Tree:</label>
-			                <input type="input" class="form-control" id="input-search" placeholder="Digite para Procurar..." value="">
-			            </div>		                      
-			        -->
-			        	<div id="treeview-searchable" class="treeview" style="font-size:12px;line-height:0.85"></div>		
-			        	
-			      </div>
-	              
-	         </div><!-- /.col-->
-            
-          </div><!-- ./row -->
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
+       		-->
+	         
+        </section>
+    </div>

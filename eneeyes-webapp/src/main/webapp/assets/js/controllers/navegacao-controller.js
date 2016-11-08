@@ -1,3 +1,21 @@
+app.factory('HistoricService', function($resource){    
+    
+    return {
+    	deletar : $resource('/security/api/historic/delete/:id', {id: '@id'},{
+    		historic : {method : 'DELETE'}
+        }),        
+        listAll : $resource('/security/api/historic/all',{},{
+        	historic : {method : 'GET'}
+        }),
+        listOne : $resource('/security/api/historic/obtemPorId/:id', {id: '@id'},{
+        	historic : {method : 'GET'}
+        }),       
+        save : $resource('/security/api/historic/save',{},{
+        	historic : {method : 'POST'}
+        }),
+     };
+});
+
 
 
 app.factory('DetectorService', function($resource){    
@@ -200,16 +218,32 @@ app.factory('CompanyService', function($resource){
      };
 });
 
-
-//app.factory('SetParentService', function($resource){
-//    return {	        
-//    setParent :  $resource('/security/api/unit/setparent/:id/:parentid/',  {id: '@id', parentid: '@parentid'}, {},
-//    		{query: {method: 'GET', isArray:true}})	    
-//    };
-//});
-
-app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService, ControllerService, GasService, SensorService, TransmitterService, DetectorService, CompanyDetectorService) {
+app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService, ControllerService, GasService, SensorService, TransmitterService, DetectorService, CompanyDetectorService, HistoricService) {
+	
 		
+	$scope.saveHistoric = function() {
+		
+		$scope.historic = {
+				uid: 0,	
+				value: 90,
+				update: null,
+				companyDetectorDto: {uid: $scope.companyDetectorUid},
+				sensorDto: {uid: $scope.companySensorUid}
+			 }	
+		 
+		 $scope.inclusao = new HistoricService.save($scope.historic);		 
+		 $scope.inclusao.$historic({_csrf : angular.element('#_csrf').val()}, function(){         	
+        	console.log($scope.inclusao);         	
+        });		 
+	 }
+	
+	$scope.getCompanyDetectors = function() {
+		 
+		 $scope.listAll = new DetectorService.listAll();		 
+		 $scope.listAll.$detector({_csrf : angular.element('#_csrf').val()}, function(){			
+			 console.log($scope.listAll);		         	         	
+        });		 
+	 }
 		
 /*-----------------------------------------------------------------------------------------------------------------*/
 	
@@ -268,24 +302,16 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 			 
 			 $scope.listOne = new DetectorService.listOne();		 
 			 $scope.listOne.$detector({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
-				 console.log($scope.listOne);
-	         	         	
-	         });
-			 
+				 console.log($scope.listOne);	         	         	
+	         });			 
 		 }
-		 
-		 
-		 
-		 $scope.deletarDetector = function() {
-			 
+		 		 
+		 $scope.deletarDetector = function() {			 
 			 $scope.deletar = new DetectorService.deletar();		 
 			 $scope.deletar.$detector({_csrf : angular.element('#_csrf').val(), id : 1}, function(){			
-				 console.log($scope.deletar);
-	         	         	
-	         });
-			 
-		 }
-	
+				 console.log($scope.deletar);	         	         	
+	         });			 
+		 }	
 	/*-----------------------------------------------------------------------------------------------------------------*/
 	
 	$scope.transmitter = {
@@ -525,7 +551,8 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	 $scope.getCompanyDetector = function() {
 		 
 		 $scope.listAll = new CompanyDetectorService.listAll();		 
-		 $scope.listAll.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){			
+		 $scope.listAll.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){
+			 $scope.CompanyDetectors = $scope.listAll.list; 
 			 console.log($scope.listAll);		         	         	
          });		 
 	 }

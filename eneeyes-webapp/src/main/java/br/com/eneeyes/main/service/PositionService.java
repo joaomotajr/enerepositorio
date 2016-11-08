@@ -10,7 +10,6 @@ import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.PositionDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Position;
-import br.com.eneeyes.main.model.register.Sensor;
 import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -71,33 +70,33 @@ public class PositionService implements IService<PositionDto> {
 		return result;
 	}
 	
-	public BasicResult<?> findBySensor(Long uid) {
-		Result<PositionDto> result = new Result<PositionDto>();
-		
-		Sensor sensor = new Sensor();
-		sensor.setUid(uid);
-		
-		try {
-			Position item = repository.findBySensor(sensor);
-
-			if (item != null) {
-				
-				result.setEntity(new PositionDto(item));
-				
-				result.setResultType( ResultMessageType.SUCCESS );
-				result.setMessage("Executado com sucesso.");
-			} else {
-				result.setIsError(true);
-				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Posição.");
-			}
-		} catch (Exception e) {
-			result.setIsError(true);
-			result.setMessage(e.getMessage());
-		}
-		
-		return result;
-	}
+//	public BasicResult<?> findBySensor(Long uid) {
+//		Result<PositionDto> result = new Result<PositionDto>();
+//		
+//		Sensor sensor = new Sensor();
+//		sensor.setUid(uid);
+//		
+//		try {
+//			Position item = repository.findBySensor(sensor);
+//
+//			if (item != null) {
+//				
+//				result.setEntity(new PositionDto(item));
+//				
+//				result.setResultType( ResultMessageType.SUCCESS );
+//				result.setMessage("Executado com sucesso.");
+//			} else {
+//				result.setIsError(true);
+//				result.setResultType( ResultMessageType.ERROR );
+//				result.setMessage("Nenhuma Posição.");
+//			}
+//		} catch (Exception e) {
+//			result.setIsError(true);
+//			result.setMessage(e.getMessage());
+//		}
+//		
+//		return result;
+//	}
 	
 	public BasicResult<?> findByCompanyDetector(Long uid) {
 		Result<PositionDto> result = new Result<PositionDto>();

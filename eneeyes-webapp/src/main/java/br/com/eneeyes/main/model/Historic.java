@@ -29,6 +29,7 @@ public class Historic {
     	this.update = dto.getUpdate();
     	this.value = dto.getValue();    	
     	this.sensor = new Sensor(dto.getSensorDto());
+    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
     }
 
 	@Id
@@ -36,7 +37,7 @@ public class Historic {
 	@Column(name = "UID")
 	private Long uid;
 	
-	@Column(name = "UPDATE", nullable = false)
+	@Column(name = "UP_DATE", nullable = false)
 	private Date update;
 
 	@Column(name = "VALUE", nullable = true)
@@ -62,7 +63,7 @@ public class Historic {
 		return update;
 	}
 
-	public void setLastUpdate(Date update) {
+	public void setUpdate(Date update) {
 		this.update = update;
 	}
 

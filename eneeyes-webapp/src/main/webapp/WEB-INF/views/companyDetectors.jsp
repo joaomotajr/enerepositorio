@@ -112,9 +112,8 @@
 				       		</form>
 				       		<div class="row">
 				       			<div class="col-md-12">
-				       				<!--<button type="button" data-ng-click="newCompanyDetector();" class="btn btn-success pull-right">    Nova    </button> -->		
-				       				<input type="button" data-ng-click="killtimer()" value="Kill me">						
-									<span class="pull-right">   </span>
+				       				<!--<button type="button" data-ng-click="newCompanyDetector();" class="btn btn-success pull-right">    Nova    </button> -->				       										
+									
 				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name) ? false : true">   Salvar   </button>		       				
 				       				<span class="pull-right">   </span>
 				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">   Excluir   </button>								

@@ -14,8 +14,9 @@ import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.HistoricDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Historic;
-import br.com.eneeyes.main.model.register.Sensor;
+import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.repository.HistoricRepository;
+import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
@@ -26,14 +27,22 @@ public class HistoricService implements IService<HistoricDto> {
 		
 	@Inject
 	private HistoricRepository repository;
+	
+	@Inject
+	private PositionRepository positionRepository;
 
 	@Override
 	public BasicResult<?> save(HistoricDto dto) {
 		Result<HistoricDto> result = new Result<HistoricDto>();
 		
 		Historic historic = new Historic(dto);
+		historic.setUpdate(new Date());
 		historic = repository.save(historic);
 		
+		//TODO Está perdendo os valores do CompanyDetector - Checar
+		historic.setCompanyDetector(new CompanyDetector(dto.getCompanyDetectorDto()) );
+		updatePosition(historic);				
+				
 		dto.setUid(historic.getUid());
 		result.setEntity(dto);
 		
@@ -42,6 +51,25 @@ public class HistoricService implements IService<HistoricDto> {
 		
 		return result;
 	}
+	
+	private void updatePosition(Historic historic) {
+					
+		Position position = new Position();
+		
+		position = positionRepository.findByCompanyDetectorAndSensor(historic.getCompanyDetector(), historic.getSensor()); 
+
+		if (position != null) {		
+
+			position.setLastUpdate(historic.getUpdate());
+			position.setLastValue(historic.getValue());
+			
+			positionRepository.save(position);
+		}
+		else {
+			// TODO Criar Log de Erros e Incosistências do Sistema
+		}
+	}
+
 
 	@Override
 	public BasicResult<?> delete(Long uid) {
@@ -73,35 +101,7 @@ public class HistoricService implements IService<HistoricDto> {
 		}
 		
 		return result;
-	}
-	
-	public BasicResult<?> findBySensor(Long uid) {
-		Result<HistoricDto> result = new Result<HistoricDto>();
-		
-		Sensor sensor = new Sensor();
-		sensor.setUid(uid);
-		
-		try {
-			Historic item = repository.findBySensor(sensor);
-
-			if (item != null) {
-				
-				result.setEntity(new HistoricDto(item));
-				
-				result.setResultType( ResultMessageType.SUCCESS );
-				result.setMessage("Executado com sucesso.");
-			} else {
-				result.setIsError(true);
-				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhum Histórico.");
-			}
-		} catch (Exception e) {
-			result.setIsError(true);
-			result.setMessage(e.getMessage());
-		}
-		
-		return result;
-	}
+	}	
 	
 	public BasicResult<?> findByCompanyDetector(Long uid) {
 		Result<HistoricDto> result = new Result<HistoricDto>();

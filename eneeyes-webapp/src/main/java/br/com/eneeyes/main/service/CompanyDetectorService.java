@@ -82,10 +82,10 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		
 		for (Sensor sensor   : sensors) {
 		
-			if(positionRepository.findBySensor(sensor) == null) {
+			if(positionRepository.countByCompanyDetectorAndSensor(companyDetector, sensor) == 0) {
 	
 				Position position = new Position();	
-				//position.setArea(area);
+
 				position.setCompanyDetector(companyDetector);
 				position.setSensor(sensor);
 				position.setLastUpdate(new Date());

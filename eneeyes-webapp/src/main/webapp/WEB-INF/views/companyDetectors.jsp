@@ -174,7 +174,7 @@
 										   	</div>									   					               	
 							               	<div class="panel-body">
 							               		<div class="row">							            					                 		
-								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto">											        	
+								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">											        	
 											        	<div id="{{'companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + subItem.uid}}"></div>											        										            					                
 										            </div>
 									            </div>							                				                				                

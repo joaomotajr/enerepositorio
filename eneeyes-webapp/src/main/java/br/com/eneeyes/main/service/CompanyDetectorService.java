@@ -3,6 +3,7 @@ package br.com.eneeyes.main.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,6 +14,7 @@ import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDevice;
 import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.register.Sensor;
+import br.com.eneeyes.main.repository.CompanyDetectorAlarmRepository;
 import br.com.eneeyes.main.repository.CompanyDetectorRepository;
 import br.com.eneeyes.main.repository.CompanyDeviceRepository;
 import br.com.eneeyes.main.repository.PositionRepository;
@@ -31,6 +33,9 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	
 	@Inject
 	private PositionRepository positionRepository;
+	
+	@Inject
+	private CompanyDetectorAlarmRepository companyDetectorAlarmRepository;
 
 	
 	public BasicResult<?> save(CompanyDetectorDto dto) {
@@ -43,10 +48,8 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		companyDetector = repository.save(companyDetector);
 		
 		createInitialPosition(companyDetector);
-		
-		dto.setUid(companyDetector.getUid());
-				
-		result.setEntity(dto);
+						
+		result.setEntity(new CompanyDetectorDto(companyDetector));
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Executado com sucesso.");	
 		
@@ -75,7 +78,9 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	
 	private void createInitialPosition(CompanyDetector companyDetector) {
 		
-		for (Sensor sensor   : companyDetector.getDetector().getSensors()) {
+		Set<Sensor> sensors = companyDetector.getDetector().getSensors();
+		
+		for (Sensor sensor   : sensors) {
 		
 			if(positionRepository.findBySensor(sensor) == null) {
 	
@@ -95,9 +100,11 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	public BasicResult<?> delete(Long uid) {
 				
 		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>(); 	
-		
-		try {			
+				
+		try {					
+			companyDetectorAlarmRepository.deleteAlarm(uid);			
 			repository.delete(uid);
+			
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Detector Excluído.");
 			

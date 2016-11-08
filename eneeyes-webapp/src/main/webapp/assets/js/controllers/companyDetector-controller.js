@@ -98,7 +98,14 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		 
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
 		$scope.inclusaoCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){		
-								
+			
+			//Se for um Company Detector novo ou não associado a um Detector
+			if($scope.selectedCompanyDetector.uid == undefined) {
+				$scope.selectedCompanyDetector = $scope.inclusaoCompanyDetector.t;
+				$scope.getCompanyDetectorAlarms();
+				initGaugeDetector();
+			}		
+			
 			$scope.showInfo("Detector Gravado!") ;
 					
 		}, function(data) {
@@ -126,7 +133,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		
 		$scope.deletar.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
 			
-			$scope.showDanger("Detector Exclu�do!");
+			$scope.showDanger("Detector Exclu�do!");
 			$scope.clearCompanyDetector();
 			$scope.getOneCompany($scope.companyUid);			
 	                 	         	
@@ -226,7 +233,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	      var idata = JSON.parse(data_json);
 	      for(var i in idata){
 	          idata[i][0] = new Date(idata[i][0]);
-	          console.log(idata[i]);
+	          
 	      }
 	      data.addRows(idata);
 
@@ -275,7 +282,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		objGauge = document.getElementById(id);
 		
 		if (objGauge == undefined) {
-			console.log('Objeto:: ' + id + "Não localizado:: " + Date())
+			console.log('Objeto:: ' + id + "Não localizado:: " + new Date())
 		}
 		else {
 			gauge = new google.visualization.Gauge(objGauge);
@@ -361,7 +368,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$scope.deleteCompanyDetectorAlarm = new CompanyDetectorAlarmService.deletar(alarm);
 		$scope.deleteCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
 						
-			$scope.showDanger("Alarme Excluído!");			
+			$scope.showDanger("Alarme Exclu�do!");			
 		
 		}, function(data) {
 			$scope.showErro("Ops!! " + data.statusText);
@@ -414,10 +421,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 				for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
 											
 					var item = $.grep($scope.listOnePosition.list, function (e) { return e.sensorDto.uid == currentCompanyDetector.detectorDto.sensorsDto[j].uid ; });
-					if (item[0].lastValue > 0) {
-						var id = 'companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;
-						formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item[0].lastValue, id);
-					}
+					var id = 'companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;
+					
+					formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item[0].lastValue, id);
+					
 				}
 			}
 			else {

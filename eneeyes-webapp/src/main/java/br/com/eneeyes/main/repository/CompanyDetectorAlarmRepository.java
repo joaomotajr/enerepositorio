@@ -27,6 +27,12 @@ public interface CompanyDetectorAlarmRepository extends JpaRepository<CompanyDet
 	@Query("delete CompanyDetectorAlarm c where c.companyDetector = ?1 and c.uid.sensorId = ?2")
 	int deleteAlarm(CompanyDetector companyDetector, Long sensorId);
 	
+	@Modifying
+	@Transactional
+	@Query("delete CompanyDetectorAlarm c where c.companyDetector.uid = ?1")
+	int deleteAlarm(Long companyDetectorId);
+	
+	
 	@Query("select c from CompanyDetectorAlarm c where c.companyDetector = ?2 and c.uid.sensorId = ?3")
 	CompanyDetectorAlarm selectCompanyDetectorAlarmByCompanyDetectorAndSensor(CompanyDetector companyDetector, Long sensorId);
 }

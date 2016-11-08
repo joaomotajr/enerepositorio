@@ -2,6 +2,7 @@ package br.com.eneeyes.main.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,8 +46,8 @@ public class CompanyDetectorAlarm implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="ALARM_ID", nullable=false, insertable=false, updatable=false)
 	private Alarm alarm;
-
-	@ManyToOne(fetch = FetchType.LAZY)
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable=false, insertable=false, updatable=false)
 	private CompanyDetector companyDetector;
 

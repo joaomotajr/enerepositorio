@@ -214,9 +214,33 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 					google.charts.setOnLoadCallback(drawBackgroundColor);
 					
 				}, 100);				
-			}				
+			}
+			
+			var table = $("#example").DataTable({
+				"order": [[1, "asc"]]
+			});
+
+			// Add event listener for opening and closing details
+			$("#example tbody").on("click", "td.details-control", function() {
+				var tr = $(this).closest("tr");
+				var row = table.row(tr);
+
+				if (row.child.isShown()) {
+					row.child.hide();
+					tr.removeClass("shown");
+				}
+				else {
+					row.child("<div>Content</div>").show();
+					tr.addClass("shown");
+				}
+			});
 						
 		}, 300);
+		
+		
+
+		
+		
 		
 		$("#stepTabDetector_1").trigger("click");	
 	 }

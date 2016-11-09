@@ -17,6 +17,9 @@
 	    <link rel="stylesheet" href="/assets/plugins/bootstrap-select/bootstrap-select.min.css">	        
 	    	    
 		<link rel="stylesheet" href="/assets/plugins/select2/select2.min.css">
+		
+		<!-- jQuery Datatbles -->
+		<link rel="stylesheet" href="/assets/plugins/datatables/jquery.dataTables.css">
 			   
 	    <!-- Font Awesome -->
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">

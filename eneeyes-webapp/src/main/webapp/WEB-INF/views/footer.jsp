@@ -14,7 +14,10 @@
     <script src="/assets/plugins/dist/jquery.easypin.js"></script>    
     
     <!-- jQuery UI 1.11.4 -->
-    <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>    
+    <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>
+    
+    <!-- jQuery Datatbles -->    
+    <script src="/assets/plugins/datatables/jquery.dataTables.js"></script>
 
     <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>

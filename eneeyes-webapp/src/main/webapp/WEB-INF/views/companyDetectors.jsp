@@ -15,7 +15,15 @@
     	background-size: cover;
     	background-position: 50% 50%;
 	}
-		
+	
+	td.details-control {
+		background: url("https://datatables.net/examples/resources/details_open.png") no-repeat center center;
+		cursor: pointer;
+	}	
+
+	tr.shown td.details-control {
+		background: url("https://datatables.net/examples/resources/details_close.png") no-repeat center center;
+	}		
 </style>
 
 <div class="col-md-9">
@@ -65,12 +73,35 @@
 							                    <div class="box-header with-border"><strong>Detector</strong></div>
 							                	 
 							                    <div class="box-body">
+							                    	<!-- 
 							                        <select class="form-control" data-live-search="true" 
 							                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 							                                data-ng-options="item as item.name for item in detectors | orderBy: 'name' track by item.uid" 
 					                                           data-ng-model="selectedCompanyDetector.detectorDto">
 					                                           <option value="">Selecione</option> 
-							                        </select>    
+							                        </select>
+							                         -->
+							                           
+							                         <table id="example" class="display">
+															<thead>
+																<tr>
+																	<th></th>
+																	<th>Nome</th>																	
+																	<th>Ação</th>						
+																</tr>
+															</thead>
+															<tbody>                                                        
+																<tr data-ng-repeat="item in detectors">
+																	<td class="details-control"></td>
+																	<td>{{item.name}}</td>																	
+																	<td>																	
+																		<div>
+																			<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" data-ng-click="selecionarDetector(item.uid)">Selecionar</button>
+																		</div>																		
+																	</td>																		
+																</tr>                                                               
+															</tbody>
+														</table>    
 							                    </div>			                    			                            
 							                </div>							    	
 								    	</div>							    						

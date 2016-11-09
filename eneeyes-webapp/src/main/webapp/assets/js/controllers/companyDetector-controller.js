@@ -245,11 +245,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	        vAxis: {
 	          title: 'Medições'
 	        },
-	        backgroundColor: '#f1f8e9',
-	        viewWindow:{
-                max:100,
-                min:99.8
-              }
+	        backgroundColor: '#f1f8e9'
 	      };
 
 	      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));

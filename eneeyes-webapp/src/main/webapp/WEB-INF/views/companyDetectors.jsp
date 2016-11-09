@@ -46,6 +46,7 @@
 							                <div class="box-body box-profile">						                    
 							                    <img class="profile-user-img img-responsive img-circle" style="margin: 0 auto" 
 							                    	data-ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
+							                    	
 							                    <p class="text-muted text-center data-ng-binding">
 							                    	{{selectedCompanyDetector.detectorDto.name}}
 							                    	<span data-ng-show="selectedCompanyDetector.detectorDto.name"> - </span>
@@ -125,19 +126,18 @@
 				       	 
 				       	<div class="tab-pane" id="tabCompanyDetector_2">		     
 				       		
-				       		<div class="row">			       		 					              
-					        	    	
+				       		<div class="row">	    	
 				            	<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length > 1">
 				            	  	<div class="col-md-6">
 						              	<div class="panel panel-success">						                
 							                <div class="panel-heading">
-										    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
+										    	<h3 class="panel-title" style="text-align:center;">Detector: {{selectedCompanyDetector.name}}</h3>							
 										   	</div>									   					               	
 							               	<div class="panel-body">
 						               			<div class="row">							            					                 		
 								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">				                				                
 										            	<div class="col-md-6">						                
-											            	<div id="{{'companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + subItem.uid}}"></div>						            	    
+											            	<div style=" width: 100%;" id="{{'companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + subItem.uid}}"></div>						            	    
 										            	</div>				                
 										            </div>							                				                				                
 						                		</div>	
@@ -174,7 +174,7 @@
 							               	<div class="panel-body">
 							               		<div class="row">							            					                 		
 								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">											        	
-											        	<div id="{{'companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + subItem.uid}}"></div>											        										            					                
+											        	<div style="width: 100%;" id="{{'companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + subItem.uid}}"></div>											        										            					                
 										            </div>
 									            </div>							                				                				                
 							                	<div class="row">							                    				                    				                    
@@ -192,27 +192,26 @@
 							              	</div> 			              	   
 						              	</div>
 					              	</div>
-				              	</div>
-					    		      						       		 
+				              	</div>					    		      						       		 
 				       		</div>			       	  	        
 				       	</div>
 				       	
 				       	 
 				       	<div class="tab-pane" id="tabCompanyDetector_3">	   
-				       			<div class="row">				            	
-				            	  	<div class="col-md-12">
-						              	<div class="panel panel-default">						                
-							                <div class="panel-heading">
-										    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
-										   	</div>									   					               	
-							               	<div class="panel-body">
-							               		
-							               		<div id="chart_div"></div>
-							               	
-						    				</div>
-						    			</div>
-						    		</div>
-						    	</div>
+			       			<div class="row">				            	
+			            	  	<div class="col-md-12">
+					              	<div class="panel panel-default">						                
+						                <div class="panel-heading">
+									    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
+									   	</div>									   					               	
+						               	<div class="panel-body">
+						               		
+						               		<div style="width: 100%;" id="chart_div"></div>
+						               	
+					    				</div>
+					    			</div>
+					    		</div>
+					    	</div>
 				       	     
 				     	</div><!-- /.tab-content -->			     	
 				   </div>			   						

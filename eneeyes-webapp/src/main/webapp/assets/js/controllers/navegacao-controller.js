@@ -233,7 +233,11 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		 
 		 $scope.inclusao = new HistoricService.save($scope.historic);		 
 		 $scope.inclusao.$historic({_csrf : angular.element('#_csrf').val()}, function(){         	
-        	console.log($scope.inclusao);         	
+        	console.log($scope.inclusao);
+        	
+        	$scope.companyValor = '';
+        	$scope.companyDetectorUid = '';
+        	$scope.companySensorUid = '';
         });		 
 	 }
 	

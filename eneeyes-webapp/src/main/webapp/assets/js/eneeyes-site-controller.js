@@ -105,27 +105,33 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 		}
 	}
 	
-	 $scope.removeTab = function (index) {
-		 $scope.tabsShow.splice(index, 1);
-	 };
-	
-	 $scope.teste = function (index) {
-		var a = 1;
-	 };
-	
-	$scope.query = '';
-
-	$scope.shop = {resultType:''};
-
-	$scope.listaDeDesejo = {
-		total: 0,
+	$scope.removeTab = function (index) {
+		if (index == 0) return;
+		
+		$scope.tabsShow.splice(index, 1);
+		
+		$timeout(function(){
+			$("#id_tab_" + index).trigger("click");				
+		},300);
 	};
+	
+//	 $scope.teste = function (index) {
+//		var a = 1;
+//	 };
+	
+//	$scope.query = '';
+//
+//	$scope.shop = {resultType:''};
+//
+//	$scope.listaDeDesejo = {
+//		total: 0,
+//	};
+//
+//	$scope.carrinho = {
+//		total: 0,
+//	};
 
-	$scope.carrinho = {
-		total: 0,
-	};
-
-	$scope.carrinhoDetalhe = {value:{sumarios:{}}};
+//	$scope.carrinhoDetalhe = {value:{sumarios:{}}};
 
 		
 	$scope.showUserMenu = false;

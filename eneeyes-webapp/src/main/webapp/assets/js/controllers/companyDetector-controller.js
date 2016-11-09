@@ -225,10 +225,12 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	 
 	 function drawBackgroundColor() {
 	      var data = new google.visualization.DataTable();
+	      
 	      data.addColumn('date', 'Date');
 	      data.addColumn('number', 'Formula');
 		
 	      var idata = JSON.parse(data_json);
+	      
 	      for(var i in idata){
 	          idata[i][0] = new Date(idata[i][0]);
 	          
@@ -236,13 +238,18 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	      data.addRows(idata);
 
 	      var options = {
-	        hAxis: {
-	          title: 'Date'
+	    	  width: 800,    	 
+	    	  hAxis: {
+	          title: 'Data'
 	        },
 	        vAxis: {
-	          title: 'Amount (ML)'
+	          title: 'Medições'
 	        },
-	        backgroundColor: '#f1f8e9'
+	        backgroundColor: '#f1f8e9',
+	        viewWindow:{
+                max:100,
+                min:99.8
+              }
 	      };
 
 	      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
@@ -265,7 +272,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		var orange = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm1;
 		
 		var gaugeOptions = {
-		     min: sensor.rangeMin, max: sensor.rangeMax,			     
+
+			 min: sensor.rangeMin, max: sensor.rangeMax,			     
 		     redFrom: red, redTo: red == 0 ? 0 : sensor.rangeMax,
 		     yellowFrom: yellow, yellowTo: red,
 		     greenFrom: orange, greenTo: yellow, 
@@ -280,7 +288,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		objGauge = document.getElementById(id);
 		
 		if (objGauge == undefined) {
-			console.log('Objeto:: ' + id + "NÃ£o localizado:: " + new Date())
+			console.log('Objeto:: ' + id + "Não localizado:: " + new Date())
 		}
 		else {
 			gauge = new google.visualization.Gauge(objGauge);

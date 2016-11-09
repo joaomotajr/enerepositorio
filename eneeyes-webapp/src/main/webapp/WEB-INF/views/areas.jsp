@@ -37,7 +37,7 @@
 <div class="col-md-9">
 	<div ng-controller="areaController">
 	<div class="box box-primary">					
-		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-map-o'></i> ï¿½rea: {{selectedArea.name}}</strong></div>		
+		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-map-o'></i> Área: {{selectedArea.name}}</strong></div>		
 		<div class="box-body">		
 						
 			<div class="nav-tabs-custom">
@@ -78,7 +78,7 @@
 					        	<label class="control-label">Area Classificada</label>
 				                <div class="form-group">				                 	
       								<label><input type="radio" ng-model="selectedArea.classified" value="1" />&nbsp; Sim</label>        
-				                 	<label><input type="radio" ng-model="selectedArea.classified" value="0" />&nbsp;	Nï¿½o</label>						                
+				                 	<label><input type="radio" ng-model="selectedArea.classified" value="0" />&nbsp; Não</label>						                
 				                </div>
 					        						            
 					        </div>
@@ -106,11 +106,11 @@
 			       		
 			       		<div class="row">
 			       			<div class="col-md-12">
-			       				<button type="button" ng-click="newArea();" ng-show="btnNewArea" class="btn btn-success pull-right">ï¿½ï¿½ï¿½ï¿½Novaï¿½ï¿½ï¿½ï¿½</button>								
-								<span class="pull-right">ï¿½ï¿½ </span>
-			       				<button type="button" ng-click="saveArea();" class="btn btn-primary pull-right" ng-disabled="(selectedArea.name) ? false : true">ï¿½ï¿½ï¿½Salvarï¿½ï¿½ï¿½</button>		       				
-			       				<span class="pull-right">ï¿½ï¿½ </span>
-			       				<button type="button" ng-click="deleteArea();" class="btn btn-danger pull-right" ng-disabled="(selectedArea.uid) ? false : true">ï¿½ï¿½ï¿½Excluirï¿½ï¿½ï¿½</button>								
+			       				<button type="button" ng-click="newArea();" ng-show="btnNewArea" class="btn btn-success pull-right">    Nova    </button>								
+								<span class="pull-right">  </span>
+			       				<button type="button" ng-click="saveArea();" class="btn btn-primary pull-right" ng-disabled="(selectedArea.name) ? false : true">   Salvar   </button>		       				
+			       				<span class="pull-right">  </span>
+			       				<button type="button" ng-click="deleteArea();" class="btn btn-danger pull-right" ng-disabled="(selectedArea.uid) ? false : true">   Excluir   </button>								
 							</div>
 						</div>												
 																	

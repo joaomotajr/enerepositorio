@@ -7,7 +7,7 @@
 						
 				<div class="col-md-12">
 
-					<div class="box box-primary" style="margin-bottom: 8px;" ng-class="{'collapsed-box' : selectedCompanyName}">
+					<div class="box box-primary" style="margin-bottom: 8px;" data-ng-class="{'collapsed-box' : selectedCompanyName}">
 					  
 						<div class="box-header with-border">
 							<h3 class="box-title">Cadastro</h3>
@@ -27,7 +27,7 @@
 				                            tabindex="-1" 
 				                            aria-hidden="true">
 				                            	<option value="" selected="selected">Selecione</option>                              				                            	
-				                                <option ng-repeat="company in companies" ng-model="company" value="{{company}}" > {{company.name}} </option>				                                                    
+				                                <option data-ng-repeat="company in companies" data-ng-model="company" value="{{company}}" > {{company.name}} </option>				                                                    
 				                        </select>
 				                        							                                                                    
 				                    </div>        
@@ -38,25 +38,25 @@
 								<br />
 								<div class="form-group">
 									<label class="control-label">Nome</label>                                                                        
-									<input id="idCompanyName" class="form-control" placeholder="Nome da Empresa" ng-model="companyName">                                                                        
+									<input id="idCompanyName" class="form-control" placeholder="Nome da Empresa" data-ng-model="companyName">                                                                        
 								</div>
 								
 								<div class="form-group">
 									<label class="control-label">Descrição</label>                                                                        
-									<input class="form-control" placeholder="Descrição" ng-model="companyDescription">                                                                        
+									<input class="form-control" placeholder="Descrição" data-ng-model="companyDescription">                                                                        
 								</div>
 							</div>
 						</div>
 						
 						<div class="box-footer">							
 							<div class="col-md-12">
-								<button type="button" ng-click="selCompany();" class="btn btn-success pull-right" ng-disabled="!companyUid">Selecionar</button>								
+								<button type="button" data-ng-click="selCompany();" class="btn btn-success pull-right" data-ng-disabled="!companyUid">Selecionar</button>								
 								<span class="pull-right">   </span>
-								<button type="button" ng-click="saveCompany();" class="btn btn-primary pull-right" ng-disabled="(companyName) ? false : true">   Salvar   </button>
+								<button type="button" data-ng-click="saveCompany();" class="btn btn-primary pull-right" data-ng-disabled="(companyName) ? false : true">   Salvar   </button>
 								<span class="pull-right">   </span>												
-								<button type="button" ng-click="deleteCompany();" class="btn btn-danger pull-right" ng-disabled="(companyName) ? false : true">   Excluir   </button>
+								<button type="button" data-ng-click="deleteCompany();" class="btn btn-danger pull-right" data-ng-disabled="(companyName) ? false : true">   Excluir   </button>
 							</div>
-						</div>
+						</div> 
 					</div>
 				
 				</div>
@@ -66,24 +66,24 @@
 				
 				<div class="col-md-12">								
 					<div class="callout callout-info"
-				 		ng-show="selectedCompanyName" 
+				 		data-ng-show="selectedCompanyName" 
 				 		style="padding: 5px 5px 5px 25px; margin:0 0 5px 0; background-color: #3c8dbc !important; border-color: #156fa3 !important">
-				 		<button type="button" class="close" ng-click="selCompany();" >×</button>
+				 		<button type="button" class="close" data-ng-click="selCompany();" >×</button>
 						<h4><i class="fa fa-industry"></i> {{selectedCompanyName}}</h4>										
 					</div>				
 				</div>
 			</div>
 			
-			<div class="row" ng-show="selectedCompanyName">		
+			<div class="row" data-ng-show="selectedCompanyName">		
 				 					
 				<div class="col-md-3" style="height: 500px; overflow: auto">				
 					<div class="form-group">			            
-			        	<input type="input" class="form-control" id="input-select-node" placeholder="Pesquisar..." value="">
+			        	<input type="input" class="form-control" id="input-select-node" placeholder="Pesquisar..." />
 			        </div>					            										  
 					<div id="treeview-company" class="treeview" style="font-size:12px;line-height:0.85"></div>				
 				</div>				
 				
-				<div id="content" bind-unsafe-html="ajaxcontentCompany"></div>													
+				<div id="content" data-bind-unsafe-html="ajaxcontentCompany"></div>													
 			 	
 			</div>			
 			

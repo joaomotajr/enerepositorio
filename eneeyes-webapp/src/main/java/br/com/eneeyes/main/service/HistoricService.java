@@ -39,7 +39,7 @@ public class HistoricService implements IService<HistoricDto> {
 		historic.setUpdate(new Date());
 		historic = repository.save(historic);
 		
-		//TODO Está perdendo os valores do CompanyDetector - Checar
+		//TODO Está perdendo os valores do CompanyDetector - Checar 
 		historic.setCompanyDetector(new CompanyDetector(dto.getCompanyDetectorDto()) );
 		updatePosition(historic);				
 				

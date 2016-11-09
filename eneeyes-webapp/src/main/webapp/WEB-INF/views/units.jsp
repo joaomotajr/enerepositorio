@@ -125,7 +125,7 @@
 											
 						<div class="row" data-ng-show="selectedUnit.areasDto.length <= 0">
 							<div class="col-md-6">
-								<label>Incluir Area</label>						
+								<label>Incluir Área</label>						
 								<div class="entry input-group">					
 							        <input type="text" class="form-control" placeholder="Digite o Nome da Área" data-ng-model="areaNameInit">
 							        <span class="input-group-btn">

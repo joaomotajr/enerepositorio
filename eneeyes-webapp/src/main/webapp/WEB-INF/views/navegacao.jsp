@@ -1,60 +1,47 @@
 	
 	<div data-ng-controller="navegacaoController">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">        
-          <!-- 
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Forms</a></li>
-            <li class="active">Editors</li>
-          </ol>
-           -->          
-        </section>
-
-        <!-- Main content - Modificado -->
-        <section class="content">
-        
+        <div class="row">
+        <div class="col-md-12"> 	
         	<div class="row">      		           
-	            <form class="form col-md-6" name="userForm">
-		            <div class="col-md-6">                                                                                                                            
-						<div class="form-group">
-							<label class="control-label">CompanyDetector</label>
-		                	<input class="form-control" data-ng-model="companyDetectorUid">					                                                                                
-							                                                                        
+	            <form class="form" name="userForm">
+		            <div class="col-md-6">
+			            <div class="col-md-3">                                                                                                                            
+							<div class="form-group">
+								<label class="control-label">CompanyDetector</label>
+			                	<input class="form-control" data-ng-model="companyDetectorUid">					                                                                                
+								                                                                        
+							</div>
 						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label class="control-label">Sensor</label>
-		                	<input class="form-control" data-ng-model="companySensorUid">						                                                
-						</div>                                                                    
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label class="control-label">Valor</label>
-		                	<input class="form-control" data-ng-model="companyValor">						                                                
-						</div>                                                                    
-					</div>         		
-					<div class="col-md-6">
-						<div class="form-group">
-	        				<button type="button" class="btn btn-primary" data-ng-click="saveHistoric()">Save Historic</button>
-	        			</div>
-	        		</div>        	        		
-	        		
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="control-label">Sensor</label>
+			                	<input class="form-control" data-ng-model="companySensorUid">						                                                
+							</div>                                                                    
+						</div>
+						<div class="col-md-3">
+							<div class="form-group">
+								<label class="control-label">Valor</label>
+			                	<input class="form-control" data-ng-model="companyValor">						                                                
+							</div>                                                                    
+						</div>         		
+						<div class="col-md-3">
+							<div class="form-group">
+								<label>Ação</label>
+		        				<button type="button" class="btn btn-primary" data-ng-click="saveHistoric()">Save Historic</button>
+		        			</div>
+		        		</div>        	        		
+	        		</div>
 	        	</form>	        			        	
        		</div>
+       		
         	<hr />
-        	<div class="row">
-        	<div class="col-md-12">
         	
+        	<div class="row">	        	
                 <dl class="dl-horizontal" data-ng-repeat="item in CompanyDetectors">
-                    <dt>Detector: {{item.name}} - {{item.uid}}</dt>
-                        <dd>Sensor1: {{item.detectorDto.sensorsDto[0].name}} - {{item.detectorDto.sensorsDto[0].uid}} </dd>
-                        <dd>Sensor2: {{item.detectorDto.sensorsDto[1].name}} - {{item.detectorDto.sensorsDto[1].uid}} </dd>
-
-                </dl>
-            
-            </div>
+                    <dt>Detector: {{item.name}} - ID: {{item.uid}}</dt>
+                        <dd>Sensor1: {{item.detectorDto.sensorsDto[0].name}} - ID: {{item.detectorDto.sensorsDto[0].uid}} / Min|Man: {{item.detectorDto.sensorsDto[0].rangeMin}} | {{item.detectorDto.sensorsDto[0].rangeMax}}</dd>	                        
+                        <dd>Sensor2: {{item.detectorDto.sensorsDto[1].name}} - ID: {{item.detectorDto.sensorsDto[1].uid}} / Min|Man: {{item.detectorDto.sensorsDto[1].rangeMin}} | {{item.detectorDto.sensorsDto[1].rangeMax}}</dd>
+	            </dl>	            
         	</div>
         	
         	<div class="row">        		
@@ -131,6 +118,6 @@
         		<button type="button" class="btn btn-primary" data-ng-click="deletarDetector()">delete Detector</button>        		
        		</div>
        		-->
-	         
-        </section>
+	    </div>
+    	</div>    
     </div>

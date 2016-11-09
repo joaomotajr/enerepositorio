@@ -25,11 +25,12 @@ public class Historic {
     }
     
     public Historic(HistoricDto dto) {
+    	
     	this.uid = dto.getUid();
     	this.update = dto.getUpdate();
     	this.value = dto.getValue();    	
     	this.sensor = new Sensor(dto.getSensorDto());
-    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
+    	
     }
 
 	@Id

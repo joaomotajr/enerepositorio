@@ -44,10 +44,11 @@
 	            
 	          	<li class="treeview">
 	            	<a href="#">
-	                <i class="fa fa-edit"></i> <span>Cadastro Equipamentos</span>
+	                <i class="fa fa-edit"></i> <span>Cadastros</span>
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">
+	            		<li class="active"><a href="#" data-ng-click="LoadAjaxContent('manufacturers.html', 'Fabricantes')"><i class="fa fa-industry"></i> Fabricantes</a></li>
 	                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('controllers.html', 'Controladoras')"><i class="fa fa-tasks"></i> Controladoras</a></li>
 	                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('transmitters.html','Transmissores')"><i class="fa fa-expand"></i> Transmissores</a></li>
 	                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('sensors.html','Sensores')"><i class="fa fa-feed"></i> Sensores</a></li>

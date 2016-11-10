@@ -7,7 +7,7 @@
 </sec:authorize>
 	<div class="ajax-loader"></div> 
     <!-- jQuery 2.1.4 -->
-    <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="/assets/plugins/jQuery/jquery-3.1.1.min.js"></script>
     
     <!-- Easy Pin -->    
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.easing/1.3/jquery.easing.1.3.min.js"></script>
@@ -35,31 +35,34 @@
     <!-- Bootstrap 3.3.5 -->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>       
-          
-    <!-- jQuery Knob Chart -->
-    <script src="/assets/plugins/knob/jquery.knob.js"></script>
-    <!-- daterangepicker -->
+        
+    <!-- jQuery Knob Chart 
+    <script src="/assets/plugins/knob/jquery.knob.js"></script> -->
+    <!-- daterangepicker 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- datepicker -->
-    <script src="/assets/plugins/datepicker/bootstrap-datepicker.js"></script>    
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>    
-    <!-- Slimscroll -->
-    <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="/assets/plugins/fastclick/fastclick.min.js"></script>    
-    <!-- iCheck -->
-    <script src="/assets/plugins/iCheck/icheck.min.js"></script>
+    <script src="/assets/plugins/daterangepicker/daterangepicker.js"></script> -->
+    
+    <!-- datepicker 
+    <script src="/assets/plugins/datepicker/bootstrap-datepicker.js"></script> -->    
+    <!-- Bootstrap WYSIHTML5 
+    <script src="/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script> -->    
+    <!-- Slimscroll 
+    <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script> -->
+    <!-- FastClick 
+    <script src="/assets/plugins/fastclick/fastclick.min.js"></script> -->    
+    <!-- iCheck 
+    <script src="/assets/plugins/iCheck/icheck.min.js"></script> -->
 
+ 
     <!-- AdminLTE App -->
     <script src="/assets/js/app.min.js"></script>
     
+    <!-- 
     <script src="/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
     <script src="/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
     <script src="/assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>    
     <script src="/assets/plugins/slimScroll/jquery.slimscroll.min.js"></script>    
-    <script src="/assets/plugins/chartjs/Chart.min.js"></script>
+    <script src="/assets/plugins/chartjs/Chart.min.js"></script> -->
    
     
     <!-- Image Notes -->
@@ -101,6 +104,7 @@
 	<script src="/assets/js/controllers/area-controller.js"></script>
 	<script src="/assets/js/controllers/companyDetector-controller.js"></script>	
 	<script src="/assets/js/controllers/alarm-controller.js"></script>
+	<script src="/assets/js/controllers/manufacturer-controller.js"></script>
 	
 		
 	<!-- PAGE LEVEL SERVICES -->

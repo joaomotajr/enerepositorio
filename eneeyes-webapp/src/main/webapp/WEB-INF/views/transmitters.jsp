@@ -93,7 +93,7 @@
 						<div class="box-footer">
 							<button type="button"  data-ng-click="clearFormTransmitter()" class="btn btn-default">Cancelar</button>                                                                
 							<button type="button"  data-ng-click="saveTransmitter();" class="btn btn-primary" 
-								 data-ng-disabled="(transmitterName && transmitterModel && transmitterManufacturer && transmitterCommProtocol) ? false : true">Salvar</button>								                                                                
+								 data-ng-disabled="(transmitterName && transmitterModel && transmitterManufacturer && transmitterCommProtocol) ? false : true">  Salvar  </button>								                                                                
 						</div>
 						      
 						

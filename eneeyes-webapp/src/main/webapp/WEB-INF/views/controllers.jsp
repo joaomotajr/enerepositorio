@@ -92,7 +92,7 @@
 						<div class="box-footer">
 							<button type="button"  data-ng-click="clearFormController()" class="btn btn-default">Cancelar</button>                                                                
 							<button type="button"  data-ng-click="saveController();" class="btn btn-primary" 
-								 data-ng-disabled="(controllerName && controllerModel && controllerManufacturer) ? false : true">Salvar</button>								                                                                
+								 data-ng-disabled="(controllerName && controllerModel && controllerManufacturer) ? false : true">  Salvar  </button>								                                                                
 						</div>                           
 						
 					</div>

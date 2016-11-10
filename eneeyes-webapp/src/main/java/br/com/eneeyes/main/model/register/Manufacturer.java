@@ -24,7 +24,8 @@ public class Manufacturer {
 	
 	public Manufacturer(ManufacturerDto dto) {
 		this.uid = dto.getUid();		
-		this.name = dto.getName();	
+		this.name = dto.getName();
+		this.initials = dto.getInitials();
 	}
 	
 	@Id
@@ -35,6 +36,9 @@ public class Manufacturer {
 	@Column(name = "NAME", nullable = true)
 	String name;
 	
+	@Column(name = "INITIALS", nullable = true)
+	String initials;
+		
 	public final Long getUid() {
 		return uid;
 	}
@@ -50,7 +54,14 @@ public class Manufacturer {
 	public final void setName(String name) {
 		this.name = name;
 	}
+	
+	public final String getInitials() {
+		return initials;
+	}
 
+	public final void setInitials(String initials) {
+		this.initials = initials;
+	}
 }
 
 

@@ -5,6 +5,7 @@ import br.com.eneeyes.main.model.register.Manufacturer;
 public class ManufacturerDto {
 	private Long uid;
 	private String name;
+	private String initials;
 	
 	public ManufacturerDto() {
 		
@@ -13,6 +14,7 @@ public class ManufacturerDto {
 		
 		this.uid = manufacturer.getUid();
 		this.name = manufacturer.getName();		
+		this.initials = manufacturer.getInitials();
 	}
 
 	public final Long getUid() {
@@ -28,5 +30,12 @@ public class ManufacturerDto {
 	}
 	public final void setName(String name) {
 		this.name = name;
+	}
+	
+	public final String getInitials() {
+		return initials;
+	}
+	public final void setInitials(String initials) {
+		this.initials = initials;
 	}
 }

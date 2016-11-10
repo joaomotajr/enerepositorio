@@ -13,7 +13,7 @@
 	<!-- <div class="box box-primary" data-ng-show="selectedCompany.unitsDto.length > 0"> -->
 	<div class="box box-primary">
 					
-		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-building'></i> {{selectedUnit.name}}</strong></div>
+		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-building'></i>Unidade: {{selectedUnit.name}}</strong></div>
 		
 		<div class="box-body">
 						

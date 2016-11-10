@@ -232,11 +232,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
             "info": false,
             "iDisplayLength": 6,
             "paging": false,            
-            "dom": '<"top"fl<"clear">>rt<"bottom"ip<"clear">>',
-            "columnDefs": [ { targets: 2, visible: false } ]
-        });
-		
-		
+            "dom": '<"top"fl<"clear">>rt<"bottom"ip<"clear">>'
+        });		
 		
 		$("#example tbody").on("click", "td.details-control", 
 			function() {
@@ -248,18 +245,19 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 					tr.removeClass("shown");
 				}
 				else {
-					//row.child("<div>Content</div>").show();
-					row.child( format(row.data()[2]) ).show();
+					row.child( format(row.data()[1]) ).show();
 					tr.addClass("shown");
 				}
 		});
 	 }
 	
 	function format ( d ) {
-	    // `d` is the original data object for the row
-		var sensorsDto = JSON.parse(d);
 		
-		if(sensorsDto.length == 1) {
+		var index = $scope.detectors.findIndex(item => item.name === d);
+		var detector = $scope.detectors[index];
+
+//		var sensorsDto = JSON.parse(d);		
+		if(detector.sensorsDto.length == 1) {
 			return '<div class="slider">'+
 	        '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
 	            '<tr>'+ 
@@ -269,8 +267,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
             	'</tr>'+
 	        	'<tr>'+ 
 	        		'<td>01</td>'+
-	                '<td>'+sensorsDto[0].name+'</td>'+	                
-	                '<td>'+sensorsDto[0].gasesDto[0].name+'</td>'+
+	                '<td>'+detector.sensorsDto[0].name+'</td>'+	                
+	                '<td>'+detector.sensorsDto[0].gasesDto[0].name+'</td>'+
 	            '</tr>'+            
 	           '</table>'+
 	       '</div>';		
@@ -286,13 +284,13 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
             	'</tr>'+
 	        	'<tr>'+ 
 	        		'<td>01</td>'+
-	                '<td>'+sensorsDto[0].name+'</td>'+	                
-	                '<td>'+sensorsDto[0].gasesDto[0].name+'</td>'+
+	                '<td>'+detector.sensorsDto[0].name+'</td>'+	                
+	                '<td>'+detector.sensorsDto[0].gasesDto[0].name+'</td>'+
 	            '</tr>'+
 	            '<tr>'+
 	                '<td>02</td>'+
-	                '<td>'+sensorsDto[1].name+'</td>'+
-	                '<td>'+sensorsDto[1].gasesDto[0].name+'</td>'+
+	                '<td>'+detector.sensorsDto[1].name+'</td>'+
+	                '<td>'+detector.sensorsDto[1].gasesDto[0].name+'</td>'+
 	            '</tr>'+
 	           '</table>'+
 	       '</div>';
@@ -374,6 +372,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	}
 	
 	$scope.selecionarDetector = function(item) {
+		if ($scope.selectedCompanyDetector ==  undefined)
+			$scope.selectedCompanyDetector = [];
+		
 		$scope.selectedCompanyDetector.detectorDto = item;
 	}
 	
@@ -528,8 +529,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	
 	if ($scope.selectedCompanyDevice != null)
 		$scope.getOneCompanyDetector();
-	else 
+	else {		
 		$scope.getDetectors();
+	}	
 	
 	$scope.initializeDetector();		
 });

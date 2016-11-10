@@ -31,7 +31,7 @@
 	<div data-ng-controller="companyDetectorController">
 		<div class="box box-primary">					
 			<div class="box-header with-border">
-				<strong style="font-size:1.4em"><i class='fa fa-rss'></i> {{selectedCompanyDevice.deviceType}}</strong>
+				<strong style="font-size:1.4em"><i class='fa fa-rss'></i> {{selectedCompanyDevice.deviceType}} <span data-ng-show="selectedCompanyDetector.name">-</span> {{selectedCompanyDetector.name}}</strong>
 			</div>		
 			<div class="box-body">
 							
@@ -46,103 +46,97 @@
 					<div class="tab-content">
 				    	
 				    	<div class="tab-pane active" id="tabCompanyDetector_1">
-				    		<form name="userForm">			    			
-					    		<div class="row">							
-									<div class="col-md-4">							    
-									    <input type="file" id="idInputImageDetector" style='display:none'>							    
-									    <div class="box box-primary">
-							                <div class="box-body box-profile">						                    
-							                    <img class="profile-user-img img-responsive img-circle" style="margin: 0 auto" 
-							                    	data-ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
-							                    	
-							                    <p class="text-muted text-center data-ng-binding">
-							                    	{{selectedCompanyDetector.detectorDto.name}}
-							                    	<span data-ng-show="selectedCompanyDetector.detectorDto.name"> - </span>
-							                    	{{selectedCompanyDetector.detectorDto.model}}
-							                    </p>						                    					                    	                
-							                </div>
-						                </div>					                															
-									</div>
-									<div class="col-md-2">
-						            	<label></label>
-						            </div>
-																
+				    		<div class="row">
+				    			<div class="col-md-12">
+					    		<form name="userForm">					    		
+									
+						    		<div class="row">				    			
+								        <div class="col-md-6">
+								            <div class="form-group">
+								                <label class="control-label">Nome</label>
+								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
+									            <span data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 20 caracteres</span>
+								                <input id="idAreaName" class="form-control" placeholder="Nome do Detector" data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="20" name="username" required>
+								            </div>
+								        </div>
+										
+								        <div class="col-md-6">
+								            <div class="form-group">
+								                <label class="control-label">Descrição</label>
+								                <input class="form-control" placeholder="E-mail" data-ng-model="selectedCompanyDetector.description">
+								            </div>
+								        </div>
+								    </div>
+									
 									<div class="row">
-					                 	<div class="col-md-6">						    	
-								    		<div class="box box-primary box-solid">
-							                    <div class="box-header with-border"><strong>Detectores</strong></div>
-							                	 
-							                    <div class="box-body">
-							                    	<!-- 
-							                        <select class="form-control" data-live-search="true" 
-							                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-							                                data-ng-options="item as item.name for item in detectors | orderBy: 'name' track by item.uid" 
-					                                           data-ng-model="selectedCompanyDetector.detectorDto">
-					                                           <option value="">Selecione</option> 
-							                        </select>
-							                         -->							                           
+								        <div class="col-md-6">
+								            <div class="form-group">
+								                <label class="control-label">Local</label>
+								                <input id="idUnitName" class="form-control" placeholder="Local" data-ng-model="selectedCompanyDetector.local">
+								            </div>
+								        </div>
+								        <div class="col-md-6">
+								        	<div class="form-group">
+								                <label class="control-label">Qtde Sensores</label>
+								                <input id="idUnitName" class="form-control" placeholder="Sensors" value={{selectedCompanyDetector.detectorDto.sensorsDto.length}} disabled>
+								            </div>							        
+				                       	</div>		        
+								    </div>								    		    					
+					       		</form>
+					       		</div>
+				    		</div>
+				    		<div class="row">
+				    			<div class="col-md-12">						    	
+						    		<div class="box box-default">
+					                    <div class="box-header with-border"><strong>Detectores</strong></div>					                	 
+					                    <div class="box-body">
+					                    	<div class="col-md-8">
+					                    		<div style="max-height: 300px; overflow: auto">					                    							                           
 						                         	<table id="example" class="display">
 														<thead>
 															<tr>
 																<th></th>
-																<th>Nome</th>
-																<th>obj</th>																	
+																<th>Nome</th>																
 																<th>Ação</th>																						
 															</tr>
 														</thead>
 														<tbody>                                                        
 															<tr data-ng-repeat="item in detectors">
 																<td class="details-control"></td>
-																<td>{{item.name}}</td>
-																<td>{{item.sensorsDto}}</td>																	
+																<td>{{item.name}}</td>																
 																<td>																	
-																	<div>
-																		<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" data-ng-click="selecionarDetector(item)">Selecionar</button>
-																	</div>																		
+																	<div data-ng-if="item.uid == selectedCompanyDetector.detectorDto.uid">
+																		<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" data-ng-click="selecionarDetector(item)" disabled>Selecionado</button>
+																	</div>	
+																	<div data-ng-if="item.uid != selectedCompanyDetector.detectorDto.uid">
+																		<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" data-ng-click="selecionarDetector(item)">  Selecionar  </button>
+																	</div>																																		
 																</td>																		
 															</tr>                                                               
 														</tbody>
-													</table>    
-							                    </div>			                    			                            
-							                </div>							    	
-								    	</div>							    						
-									</div>							
-								</div>
-								
-					    		<div class="row">				    			
-							        <div class="col-md-6">
-							            <div class="form-group">
-							                <label class="control-label">Nome</label>
-							                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
-								            <span data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 20 caracteres</span>
-							                <input id="idAreaName" class="form-control" placeholder="Nome do Detector" data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="20" name="username" required>
-							            </div>
-							        </div>
-									
-							        <div class="col-md-6">
-							            <div class="form-group">
-							                <label class="control-label">Descrição</label>
-							                <input class="form-control" placeholder="E-mail" data-ng-model="selectedCompanyDetector.description">
-							            </div>
-							        </div>
-							    </div>
-								
-								<div class="row">
-							        <div class="col-md-6">
-							            <div class="form-group">
-							                <label class="control-label">Local</label>
-							                <input id="idUnitName" class="form-control" placeholder="Local" data-ng-model="selectedCompanyDetector.local">
-							            </div>
-							        </div>
-							        <div class="col-md-6">
-							        	<div class="form-group">
-							                <label class="control-label">Qtde Sensores</label>
-							                <input id="idUnitName" class="form-control" placeholder="Sensors" value={{selectedCompanyDetector.detectorDto.sensorsDto.length}} disabled>
-							            </div>							        
-			                       	</div>		        
-							    </div>
-							    		    					
-				       		</form>
+													</table>
+												</div>    
+					                    	</div>
+					                    	
+					                    	<div class="col-md-4">							    
+											    <input type="file" id="idInputImageDetector" style='display:none'>									                						                    
+							                    <img class="profile-user-img img-responsive" style="margin: 0 auto" 
+							                    	data-ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
+							                    	
+							                    <p class="text-muted text-center data-ng-binding">
+							                    	{{selectedCompanyDetector.detectorDto.name}}
+							                    	<span data-ng-show="selectedCompanyDetector.detectorDto.name"> - </span>
+							                    	{{selectedCompanyDetector.detectorDto.model}}
+							                    </p>
+								                					                															
+											</div>
+											
+					                    </div>
+					                    
+					                </div>							    	
+						    	</div>
+				    		</div>				    					    	
+				    	
 				       		<div class="row">
 				       			<div class="col-md-12">
 				       				<!--<button type="button" data-ng-click="newCompanyDetector();" class="btn btn-success pull-right">    Nova    </button> -->				       										
@@ -151,8 +145,7 @@
 				       				<span class="pull-right">   </span>
 				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">   Excluir   </button>								
 								</div>
-							</div>												
-							
+							</div>						
 				    	         
 				       	</div><!-- /.tab-pane -->
 				       	 
@@ -308,4 +301,4 @@
 		</div>	
 		
 	</div>	
-</div>     
+</div>

@@ -24,11 +24,11 @@
 	    <!-- Font Awesome -->
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	    
-	    <!-- Ionicons -->
-	    <link rel="stylesheet" href="/assets/css/ionicons/ionicons.min.css">
+	    <!-- Ionicons 
+	    <link rel="stylesheet" href="/assets/css/ionicons/ionicons.min.css"> -->
 	    
-	    <!-- iCheck for checkboxes and radio inputs -->
-    	<link rel="stylesheet" href="/assets/plugins/iCheck/all.css">
+	    <!-- iCheck for checkboxes and radio inputs 
+    	<link rel="stylesheet" href="/assets/plugins/iCheck/all.css"> -->
 	    	    
 	    <!-- Theme style -->
 	    <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
@@ -37,16 +37,19 @@
 	         folder instead of downloading all of them to reduce the load. -->
 	    <link rel="stylesheet" href="/assets/css/skins/_all-skins.min.css">
 	    
-	    <!-- Morris chart -->
-	    <link rel="stylesheet" href="/assets/plugins/morris/morris.css">
-	    <!-- jvectormap -->
-	    <link rel="stylesheet" href="/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+	    <!-- Morris chart 
+	    <link rel="stylesheet" href="/assets/plugins/morris/morris.css"> -->
+	    
+	    <!-- jvectormap 
+	    <link rel="stylesheet" href="/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css"> -->
+	    
 	    <!-- Date Picker -->
 	    <link rel="stylesheet" href="/assets/plugins/datepicker/datepicker3.css">
 	    <!-- Daterange picker -->
 	    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker-bs3.css">
-	    <!-- bootstrap wysihtml5 - text editor -->
-	    <link rel="stylesheet" href="/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+	    
+	    <!-- bootstrap wysihtml5 - text editor 
+	    <link rel="stylesheet" href="/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"> -->
 	   	
 	   	<!-- Image Notes -->
 		<style type="text/css" media="all">@import "/assets/plugins/imageNotes/css/marker.css";</style>		

@@ -11,7 +11,7 @@
 	
 </style>
 
-	<div class="easy-modal" style="display:none;" modal-position="free">
+	<div class="easy-modal" style="display:none;" data-modal-position="free">
 	    <form>
 	        <h3>Dispositivo</h3>
 	        
@@ -19,7 +19,7 @@
 	        <!-- 
 	        <select name="uid" class="form-control" id="selCompanyDetector">
 	        	<option value="" >Selecione</option>
-			    <option value={{item.uid}} ng-repeat="item in selectedCompanyDetectorsArea">{{item.name}}</option>			    
+			    <option value={{item.uid}} data-ng-repeat="item in selectedCompanyDetectorsArea">{{item.name}}</option>			    
 			</select>
 			 -->
 			 <label>Detector</label>
@@ -30,12 +30,12 @@
 	    </form>
 	</div>        
 	 	 
-	<div style="display:none;" width="100" shadow="true" popover>
+	<div style="display:none;" data-width="100" data-shadow="true" data-popover>
 	    <div style="width:100%;text-align:center">{[content]}</div>
 	</div>
 
 <div class="col-md-9">
-	<div ng-controller="areaController">
+	<div data-ng-controller="areaController">
 	<div class="box box-primary">					
 		<div class="box-header with-border"><strong style="font-size:1.4em"><i class='fa fa-map-o'></i> Área: {{selectedArea.name}}</strong></div>		
 		<div class="box-body">		
@@ -55,13 +55,13 @@
 					        <div class="col-md-6">
 					            <div class="form-group">
 					                <label class="control-label">Nome</label>
-					                <input id="idAreaName" class="form-control" placeholder="Nome da Area / Matriz" ng-model="selectedArea.name">
+					                <input id="idAreaName" class="form-control" placeholder="Nome da Area / Matriz" data-ng-model="selectedArea.name">
 					            </div>
 					        </div>					
 					        <div class="col-md-6">
 					            <div class="form-group">
-					                <label class="control-label">DescriÃ§Ã£o</label>
-					                <input class="form-control" placeholder="Descriï¿½ï¿½o" ng-model="selectedArea.description">
+					                <label class="control-label">Descrição</label>
+					                <input class="form-control" placeholder="Descriï¿½ï¿½o" data-ng-model="selectedArea.description">
 					            </div>
 					        </div>
 					    </div>
@@ -70,15 +70,15 @@
 					        <div class="col-md-8">
 					            <div class="form-group">
 					                <label class="control-label">Local</label>
-					                <input id="idUnitName" class="form-control" placeholder="Local" ng-model="selectedArea.local">
+					                <input id="idUnitName" class="form-control" placeholder="Local" data-ng-model="selectedArea.local">
 					            </div>
 					        </div>
 					
 					        <div class="col-md-4">
-					        	<label class="control-label">Area Classificada</label>
+					        	<label class="control-label">Área Classificada</label>
 				                <div class="form-group">				                 	
-      								<label><input type="radio" ng-model="selectedArea.classified" value="1" />&nbsp; Sim</label>        
-				                 	<label><input type="radio" ng-model="selectedArea.classified" value="0" />&nbsp; Não</label>						                
+      								<label><input type="radio" data-ng-model="selectedArea.classified" value="1" />&nbsp; Sim</label>        
+				                 	<label><input type="radio" data-ng-model="selectedArea.classified" value="0" />&nbsp; Não</label>						                
 				                </div>
 					        						            
 					        </div>
@@ -88,14 +88,14 @@
 					        <div class="col-md-4">
 					            <div class="form-group">
 					                <label class="control-label">Latitude:</label>
-					                <input id="idUnitName" class="form-control" placeholder="Latitude" ng-model="selectedArea.longitude">
+					                <input id="idUnitName" class="form-control" placeholder="Latitude" data-ng-model="selectedArea.longitude">
 					            </div>
 					        </div>
 					
 					        <div class="col-md-4">
 					        	<div class="form-group">
 					                <label class="control-label">Longitude:</label>
-					                <input class="form-control" placeholder="Longitude" ng-model="selectedArea.latitude">
+					                <input class="form-control" placeholder="Longitude" data-ng-model="selectedArea.latitude">
 					            </div>					            
 					        </div>
 					
@@ -106,11 +106,11 @@
 			       		
 			       		<div class="row">
 			       			<div class="col-md-12">
-			       				<button type="button" ng-click="newArea();" ng-show="btnNewArea" class="btn btn-success pull-right">    Nova    </button>								
+			       				<button type="button" data-ng-click="newArea();" data-ng-show="btnNewArea" class="btn btn-success pull-right">    Nova    </button>								
 								<span class="pull-right">  </span>
-			       				<button type="button" ng-click="saveArea();" class="btn btn-primary pull-right" ng-disabled="(selectedArea.name) ? false : true">   Salvar   </button>		       				
+			       				<button type="button" data-ng-click="saveArea();" class="btn btn-primary pull-right" data-ng-disabled="(selectedArea.name) ? false : true">   Salvar   </button>		       				
 			       				<span class="pull-right">  </span>
-			       				<button type="button" ng-click="deleteArea();" class="btn btn-danger pull-right" ng-disabled="(selectedArea.uid) ? false : true">   Excluir   </button>								
+			       				<button type="button" data-ng-click="deleteArea();" class="btn btn-danger pull-right" data-ng-disabled="(selectedArea.uid) ? false : true">   Excluir   </button>								
 							</div>
 						</div>												
 																	
@@ -121,13 +121,13 @@
 							        
 							        <select class="form-control" data-live-search="true" 
 			                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-			                                ng-options="item as item.name for item in deviceTypes | orderBy: 'name' track by item.uid" 
-			                                         ng-model="sensorDetectionType">
+			                                data-ng-options="item as item.name for item in deviceTypes | orderBy: 'name' track by item.uid" 
+			                                         data-ng-model="sensorDetectionType">
 			                                         <option value="">Selecione</option> 
 			                        </select>
 			                                       
 							        <span class="input-group-btn">
-							        <button class="btn btn-info btn-flat" type="button" ng-click="saveCompanyDeviceInit();">OK</button>
+							        <button class="btn btn-info btn-flat" type="button" data-ng-click="saveCompanyDeviceInit();">OK</button>
 							        </span>
 								</div>
 							</div>
@@ -151,8 +151,8 @@
 						<div class="row">
 							<div class="col-md-2">								
 								<div class="box box-primary direct-chat direct-chat-primary">
-									<div class="direct-chat-msg right" ng-repeat="item in selectedCompanyDetectorsArea">			                      
-			                      		<img class="direct-chat-img" ng-src="{{item.detectorDto.image}}" style="width: auto ! important; height: 30px ! important ; max-height: 30px ! important;">
+									<div class="direct-chat-msg right" data-ng-repeat="item in selectedCompanyDetectorsArea">			                      
+			                      		<img class="direct-chat-img" data-ng-src="{{item.detectorDto.image}}" style="width: auto ! important; height: 30px ! important ; max-height: 30px ! important;">
 			                      		<div class="direct-chat-text" style="font-size: 0.7em; margin-right: 40px;"  >
 			                        		{{item.name}}
 			                      		</div><!-- /.direct-chat-text -->
@@ -163,11 +163,11 @@
 							<div class="col-md-10">
 								<div style="height: 430px; overflow: auto">
 									<div  id="idImageArea">																					    		    
-										<img src="{{selectedArea.image}}" style="width: 1000px; height: 400px; max-height: 400px;" onError="this.src='/assets/img/cover.jpg'" class="pin" easypin-id="imgDipositivosArea" />
+										<img src="{{selectedArea.image}}" style="width: 1000px; height: 400px; max-height: 400px;" onError="this.src='/assets/img/cover.jpg'" class="pin" data-easypin-id="imgDipositivosArea" />
 									</div>									
 								</div>
 								
-								<button type="button" ng-click="lockImageArea();" class="btn btn-sm btn-primary">Lock / Unlock</button>								
+								<button type="button" data-ng-click="lockImageArea();" class="btn btn-sm btn-primary">Lock / Unlock</button>								
 							</div>					    	
 						</div>
 			       		         
@@ -176,9 +176,9 @@
 			       	<div class="tab-pane" id="tabArea_3">
 			       					       					       		 
 			       		<div class="row">			       		 
-			       		 	<div ng-repeat="item in selectedCompanyDetectorsArea">				              
+			       		 	<div data-ng-repeat="item in selectedCompanyDetectorsArea">				              
 				            	
-				            	<div ng-if="item.detectorDto.sensorsDto.length > 1">
+				            	<div data-ng-if="item.detectorDto.sensorsDto.length > 1">
 				            	  	<div class="col-md-6">
 						              	<div class="panel panel-success">				              
 							                
@@ -187,13 +187,13 @@
 										   	</div>
 										   					               	
 							               	<div class="panel-body">							            					                 		
-							                	<div ng-repeat="subItem in item.detectorDto.sensorsDto">				                				                
+							                	<div data-ng-repeat="subItem in item.detectorDto.sensorsDto">				                				                
 									            	<div class="col-md-6">						                
 										            	<div id="{{'sensor_' + subItem.$$hashKey}}"></div>						            	    
 									            	</div>				                
 									            </div>							                				                				                
 							                	<div class="row">							                    				                    				                    
-								                	<div ng-repeat="subItem in item.detectorDto.sensorsDto">				                    			                    
+								                	<div data-ng-repeat="subItem in item.detectorDto.sensorsDto">				                    			                    
 									                	<div class="col-md-6">
 									                    	<div class="description-block">
 									                      		<h5 class="description-header">{{subItem.name}}</h5>
@@ -207,7 +207,7 @@
 					              	</div>  <!-- Col 06  -->
 				              	</div>
 				              	
-				              	<div ng-if="item.detectorDto.sensorsDto.length == 1">
+				              	<div data-ng-if="item.detectorDto.sensorsDto.length == 1">
 				            	  	<div class="col-md-3">
 						              	<div class="panel panel-success">				              
 							                
@@ -216,11 +216,11 @@
 										   	</div>
 										   					               	
 							               	<div class="panel-body">							            					                 		
-							                	<div ng-repeat="subItem in item.detectorDto.sensorsDto">									            							                
+							                	<div data-ng-repeat="subItem in item.detectorDto.sensorsDto">									            							                
 										        	<div id="{{'sensor_' + subItem.$$hashKey}}"></div>									            					                
 									            </div>							                				                				                
 							                	<div class="row">							                    				                    				                    
-								                	<div ng-repeat="subItem in item.detectorDto.sensorsDto">									                	
+								                	<div data-ng-repeat="subItem in item.detectorDto.sensorsDto">									                	
 								                    	<div class="description-block">
 								                      		<h5 class="description-header"> {{subItem.name}}</h5>
 								                      		<span class="description-text" style="font-size:0.7em">{{subItem.detectionType}} Min|Man: {{subItem.rangeMin}} | {{subItem.rangeMax}} </span>

@@ -70,7 +70,7 @@
 									<div class="row">
 					                 	<div class="col-md-6">						    	
 								    		<div class="box box-primary box-solid">
-							                    <div class="box-header with-border"><strong>Detector</strong></div>
+							                    <div class="box-header with-border"><strong>Detectores</strong></div>
 							                	 
 							                    <div class="box-body">
 							                    	<!-- 
@@ -80,28 +80,29 @@
 					                                           data-ng-model="selectedCompanyDetector.detectorDto">
 					                                           <option value="">Selecione</option> 
 							                        </select>
-							                         -->
-							                           
-							                         <table id="example" class="display">
-															<thead>
-																<tr>
-																	<th></th>
-																	<th>Nome</th>																	
-																	<th>Ação</th>						
-																</tr>
-															</thead>
-															<tbody>                                                        
-																<tr data-ng-repeat="item in detectors">
-																	<td class="details-control"></td>
-																	<td>{{item.name}}</td>																	
-																	<td>																	
-																		<div>
-																			<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" data-ng-click="selecionarDetector(item.uid)">Selecionar</button>
-																		</div>																		
-																	</td>																		
-																</tr>                                                               
-															</tbody>
-														</table>    
+							                         -->							                           
+						                         	<table id="example" class="display">
+														<thead>
+															<tr>
+																<th></th>
+																<th>Nome</th>
+																<th>obj</th>																	
+																<th>Ação</th>																						
+															</tr>
+														</thead>
+														<tbody>                                                        
+															<tr data-ng-repeat="item in detectors">
+																<td class="details-control"></td>
+																<td>{{item.name}}</td>
+																<td>{{item.sensorsDto}}</td>																	
+																<td>																	
+																	<div>
+																		<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" data-ng-click="selecionarDetector(item)">Selecionar</button>
+																	</div>																		
+																</td>																		
+															</tr>                                                               
+														</tbody>
+													</table>    
 							                    </div>			                    			                            
 							                </div>							    	
 								    	</div>							    						

@@ -78,7 +78,7 @@
 				 					
 				<div class="col-md-3" style="height: 500px; overflow: auto">				
 					<div class="form-group">			            
-			        	<input type="input" class="form-control" id="input-select-node" placeholder="Pesquisar..." />
+			        	<input type="text" class="form-control" id="input-select-node" placeholder="Pesquisar..." />
 			        </div>					            										  
 					<div id="treeview-company" class="treeview" style="font-size:12px;line-height:0.85"></div>				
 				</div>				

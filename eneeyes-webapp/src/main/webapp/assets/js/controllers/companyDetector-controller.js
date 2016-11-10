@@ -216,38 +216,92 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 				}, 100);				
 			}
 			
-			var table = $("#example").DataTable({
-				"order": [[1, "asc"]]
-			});
-
-			// Add event listener for opening and closing details
-			$("#example tbody").on("click", "td.details-control", function() {
+			initDatatable();
+						
+		}, 300);
+				
+		
+		$("#stepTabDetector_1").trigger("click");	
+	 }
+	 
+	function initDatatable() {
+	
+		var table = $('#example').DataTable({
+            "bLengthChange": false,
+            "filter": false,
+            "info": false,
+            "iDisplayLength": 6,
+            "paging": false,            
+            "dom": '<"top"fl<"clear">>rt<"bottom"ip<"clear">>',
+            "columnDefs": [ { targets: 2, visible: false } ]
+        });
+		
+		
+		
+		$("#example tbody").on("click", "td.details-control", 
+			function() {
 				var tr = $(this).closest("tr");
 				var row = table.row(tr);
-
+	
 				if (row.child.isShown()) {
 					row.child.hide();
 					tr.removeClass("shown");
 				}
 				else {
-					row.child("<div>Content</div>").show();
+					//row.child("<div>Content</div>").show();
+					row.child( format(row.data()[2]) ).show();
 					tr.addClass("shown");
 				}
-			});
-						
-		}, 300);
-		
-		
-
-		
-		
-		
-		$("#stepTabDetector_1").trigger("click");	
+		});
 	 }
+	
+	function format ( d ) {
+	    // `d` is the original data object for the row
+		var sensorsDto = JSON.parse(d);
+		
+		if(sensorsDto.length == 1) {
+			return '<div class="slider">'+
+	        '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+	            '<tr>'+ 
+            		'<th>Sensor</th>'+
+            		'<th>Nome</th>'+
+            		'<th>Gás</th>'+
+            	'</tr>'+
+	        	'<tr>'+ 
+	        		'<td>01</td>'+
+	                '<td>'+sensorsDto[0].name+'</td>'+	                
+	                '<td>'+sensorsDto[0].gasesDto[0].name+'</td>'+
+	            '</tr>'+            
+	           '</table>'+
+	       '</div>';		
+		}
+		else {
+			
+			return '<div class="slider">'+
+	        '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+	            '<tr>'+ 
+            		'<th>Sensor</th>'+
+            		'<th>Nome</th>'+
+            		'<th>Gás</th>'+
+            	'</tr>'+
+	        	'<tr>'+ 
+	        		'<td>01</td>'+
+	                '<td>'+sensorsDto[0].name+'</td>'+	                
+	                '<td>'+sensorsDto[0].gasesDto[0].name+'</td>'+
+	            '</tr>'+
+	            '<tr>'+
+	                '<td>02</td>'+
+	                '<td>'+sensorsDto[1].name+'</td>'+
+	                '<td>'+sensorsDto[1].gasesDto[0].name+'</td>'+
+	            '</tr>'+
+	           '</table>'+
+	       '</div>';
+		}
+	}
+	
+	var data_json = "[[1443226500000, 60], [1443233700000, 40], [1443244500000, 50], [1443255300000, 60], [1443267900000, 60], [1443278700000, 60], [1443287700000, 60], [1443298500000, 55], [1443309300000, 60], [1443317400000, 60], [1443321900000, 28], [1443325500000, 25], [1443326400000, 60], [1443338100000, 40], [1443349800000, 60], [1443349800000, 60], [1443359700000, 60], [1443359700000, 60], [1443369600000, 60], [1443382200000, 80], [1443393000000, 85], [1443400200000, 40], [1443409200000, 75], [1443420000000, 60]]";
 	 
-	 var data_json = "[[1443226500000, 60], [1443233700000, 40], [1443244500000, 50], [1443255300000, 60], [1443267900000, 60], [1443278700000, 60], [1443287700000, 60], [1443298500000, 55], [1443309300000, 60], [1443317400000, 60], [1443321900000, 28], [1443325500000, 25], [1443326400000, 60], [1443338100000, 40], [1443349800000, 60], [1443349800000, 60], [1443359700000, 60], [1443359700000, 60], [1443369600000, 60], [1443382200000, 80], [1443393000000, 85], [1443400200000, 40], [1443409200000, 75], [1443420000000, 60]]";
-	 
-	 function drawBackgroundColor() {
+	function drawBackgroundColor() {
 	      var data = new google.visualization.DataTable();
 	      
 	      data.addColumn('date', 'Date');
@@ -274,9 +328,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 
 	      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 	      chart.draw(data, options);
-	    }
+	}
 	
-	initDrawGaugesDetector = function() {
+	function initDrawGaugesDetector() {
 		var current = angular.copy($scope.selectedCompanyDetector);
 		
 		if(current != null) 												
@@ -284,7 +338,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 					    		
 	}
 	
-	formatGaugeSensor = function(sensor, value, id) {
+	function formatGaugeSensor(sensor, value, id) {
 		var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensor.uid ; });
 
 		var red = selectedAlarm == null  || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
@@ -319,6 +373,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		}
 	}
 	
+	$scope.selecionarDetector = function(item) {
+		$scope.selectedCompanyDetector.detectorDto = item;
+	}
+	
 	$scope.getCompanyDetectorAlarms = function() {
 		
 		$scope.resultCompanyDetectorAlarm = new CompanyDetectorAlarmService.listPorCompanyDetectorAlarm();		 
@@ -348,7 +406,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			$('#modalAlarm').modal({ show: 'false' });
 		}, 300);
 	}
-	
+	 
 	$scope.selecionarAlarm = function(uid) {
 		
 		/* Obtem Alarm selecionado */

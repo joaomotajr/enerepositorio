@@ -46,24 +46,18 @@
 						<a href="#" class="text-muted pull-right"  data-ng-click="refreshTransmitters();"><i title="Refresh" class="fa fa-refresh"></i></a>
 					</div>
 					<div class="box-body">
-						<form class="form">		
-						
-							<div class="box box-primary box-solid">
-			                    <div class="box-header with-border"><strong><i class="fa fa-industry"></i> Fabricante</strong>
-			                        <a href="#" data-popover> [Incluir Novo]</a>                        
-				                </div>
-			                	 
-			                    <div class="box-body">
-			                        <select class="form-control" data-live-search="true" 
-			                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-			                                 data-ng-options="item as item.name for item in manufacturers | orderBy: 'name' track by item.uid" 
-                                             data-ng-model="transmitterManufacturer">
-                                            <option value="">Selecione</option> 
-			                        </select>    
-			                    </div>
-			                    			                            
-			                </div>
-			                 							     
+						<form class="form">					
+								 
+			                <div class="form-group">    
+		                    	<label class="control-label">Fabricantes</label>  
+		                        <select class="form-control" data-live-search="true" 
+		                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+		                                 data-ng-options="item as item.name for item in manufacturers | orderBy: 'name' track by item.uid" 
+	                                           data-ng-model="transmitterManufacturer">
+	                                          <option value="">Selecione</option> 
+		                        </select>
+	                        </div>
+	                        						     
 			                <div class="row">
 		                 		<div class="col-md-6">                                                                                                                                 
 									<div class="form-group">

@@ -29,24 +29,6 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 			$scope.msgErro = "Erro: " + data.statusText;
 		});			 
 	 }
-	
-	$scope.saveManufacturer = function() {
-		
-		var manufacturer = {
-			uid: 0,
-			name: $scope.newManufacturer			
-    	}; 
-		 
-		$scope.inclusaoManufacturer = new ManufacturerService.save(manufacturer);		 
-		$scope.inclusaoManufacturer.$manufacturer({_csrf : angular.element('#_csrf').val()}, function()
-		{         	
-         	
-			$scope.manufacturers.push($scope.inclusaoManufacturer.t);
-                     	
-        });
-		
-		$(".popover").popover('hide');
-	 }
 	 
 	$scope.clearFormTransmitter = function () {
 	

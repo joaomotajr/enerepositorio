@@ -103,10 +103,7 @@
 						
 						<div class="row">
 							<div class="col-md-6">
-								<div class="box box-primary box-solid">
-				                    <div class="box-header with-border"><strong> Fabricante</strong>
-				                        <a href="#" data-popover> [Incluir Novo]</a>                        
-					                </div>
+								<div class="box box-primary box-solid">				                    
 				                	 
 				                    <div class="box-body">
 				                        <select class="form-control" data-live-search="true" 

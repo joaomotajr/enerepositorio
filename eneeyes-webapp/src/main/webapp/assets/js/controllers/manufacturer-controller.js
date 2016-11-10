@@ -3,21 +3,32 @@ app.controller('manufacturerController', function ($scope, $timeout, $filter, Ma
 			
 	$scope.saveManufacturer = function() {
 		
+		angular.element('body').addClass('loading');
+		
 		var manufacturer = {
-			uid: 0,
-			name: $scope.newManufacturer			
+			uid: $scope.manufacturerUid != undefined ? $scope.manufacturerUid : 0,
+			name: $scope.manufacturerName,
+			initials: $scope.manufacturerInitials			
     	}; 
 		 
 		$scope.inclusaoManufacturer = new ManufacturerService.save(manufacturer);		 
 		$scope.inclusaoManufacturer.$manufacturer({_csrf : angular.element('#_csrf').val()}, function()
 		{         	
-			$scope.manufacturers.push($scope.inclusaoManufacturer.t);                     	
-        });
-		
-		$(".popover").popover('hide');
+			$timeout(function () {				
+            	$scope.clearFormManufacturer();
+                $scope.getManufacturers();
+	            
+	            angular.element('body').removeClass('loading');				 
+	         }, 500);
+			
+		}, function(data) {
+			angular.element('body').removeClass('loading');
+			$scope.msgErro = "Erro: " + data.statusText;
+		});
+	
 	 }
 	 
-	$scope.clearFormTransmitter = function () {
+	$scope.clearFormManufacturer = function () {
 	
 	    $scope.manufacturerUid = undefined;
 	    $scope.manufacturerName = '';
@@ -32,20 +43,20 @@ app.controller('manufacturerController', function ($scope, $timeout, $filter, Ma
         });		 
 	 }	 
  
-	 $scope.editTransmitter = function (index) {
+	 $scope.editManufacturer = function (index) {
 	        $scope.manufacturerUid = $scope.manufacturers[index].uid;
 	        
 		    $scope.manufacturerName = $scope.manufacturers[index].name;
-		    manufacturerInitials = $scope.manufacturers[index].initials;		    	    
+		    $scope.manufacturerInitials = $scope.manufacturers[index].initials;		    	    
 		    	        
 	        $('#idManufacturerName').focus();
 	    }
 	 
-	 $scope.deleteTransmitter = function(index) {
+	 $scope.deleteManufacturer = function(index) {
 		 
 		 var uid = $scope.manufacturers[index].uid;		  
 		 
-		 $scope.deletar = new TransmitterService.deletar();		 
+		 $scope.deletar = new ManufacturerService.deletar();		 
 		 $scope.deletar.$manufacturer({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
 			 if (!$scope.deletar.isError)
 				 $scope.manufacturers.splice(index, 1);

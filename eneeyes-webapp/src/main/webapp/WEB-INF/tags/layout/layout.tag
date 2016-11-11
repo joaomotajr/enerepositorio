@@ -38,7 +38,7 @@
 		<jsp:include page="footer.jsp" />
         <c:if test="${context == 'authenticated'}">
 			<jsp:include page="footer-user.jsp" />
-		</c:if>
+		</c:if>	
 
     </body>
 	<!-- BODY - FIM -->

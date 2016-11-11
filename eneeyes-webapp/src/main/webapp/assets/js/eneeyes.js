@@ -52,7 +52,7 @@
     });
 }(jQuery));
 
-var app = angular.module('eneeyes', ['ngResource', 'angular-jquery-maskedinput', 'pascalprecht.translate', 'ngOptionsDisabled']);
+var app = angular.module('eneeyes', ['ngResource', 'angular-jquery-maskedinput', 'pascalprecht.translate']);
 
 function signin() {
     $('body').addClass('loading');

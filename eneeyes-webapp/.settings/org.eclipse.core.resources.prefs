@@ -9,5 +9,7 @@ encoding//src/main/webapp/assets/js/controllers/alarm-controller.js=ISO-8859-1
 encoding//src/main/webapp/assets/js/controllers/area-controller.js=ISO-8859-1
 encoding//src/main/webapp/assets/js/controllers/companyDetector-controller.js=ISO-8859-1
 encoding//src/main/webapp/assets/js/controllers/controller-controller.js=ISO-8859-1
+encoding//src/main/webapp/assets/js/controllers/detector-controller.js=ISO-8859-1
+encoding//src/main/webapp/assets/js/controllers/sensor-controller.js=ISO-8859-1
 encoding//src/main/webapp/assets/js/controllers/unit-controller.js=ISO-8859-1
 encoding/<project>=UTF-8

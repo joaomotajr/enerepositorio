@@ -65,6 +65,9 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	    $scope.detectorSensors = [];
 	    $scope.newSensors = [];
 	    
+	    $scope.msgSens1 = false;
+	    $scope.msgSens2 = false;
+	    
 	    $('.sort .ui-draggable').remove();
 		
 		$scope.inicializaLDragDrop();
@@ -75,8 +78,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		 
 		 $scope.resultDetectors = new DetectorService.listAll();		 
 		 $scope.resultDetectors.$detector({_csrf : angular.element('#_csrf').val()}, function(){			
-			 $scope.detectors = $scope.resultDetectors.list;
-			 
+			 $scope.detectors = $scope.resultDetectors.list;			 
 			 
 			 $scope.clearFormDetector();			 
 			 
@@ -144,11 +146,18 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		 
 		 $scope.resultSensors = new SensorService.listAll();		 
 		 $scope.resultSensors.$sensor({_csrf : angular.element('#_csrf').val()}, function(){			
-			 $scope.sensors = $scope.resultSensors.list; 		 			 
+			 $scope.sensors = angular.copy($scope.resultSensors.list);	 
          });		 
 	 }	
 	 
 	 $scope.inicializaLDragDrop = function () {
+		 
+		 $scope.refreshDragDrop = function()
+		 {
+			 $scope.sensors = angular.copy($scope.resultSensors.list);
+			 $scope.$apply();
+			 $scope.inicializaLDragDrop();
+		 }
 
 		$(".sort").sortable({
 		    items: 'li',
@@ -161,9 +170,15 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		
 		        $('.drag .' + clazz).draggable("option", "revert", true)
 		
+		        if($scope.newSensors.length > 1 || $scope.detectorSensors.length > 1) {
+					$('.sort .' + clazz).remove();	        		
+					$scope.msgSens1 = true;		
+					$scope.refreshDragDrop();
+	        	}
 		        if ($('.sort .' + clazz).length > 1) {
 		            $('.sort .' + clazz + ':not(:first)').remove();
-		            alert("ATENÇÃO! Item Já Existe.");
+		            $scope.msgSens2 = true;
+		            $scope.refreshDragDrop();
 		        }
 		        else {
 		            

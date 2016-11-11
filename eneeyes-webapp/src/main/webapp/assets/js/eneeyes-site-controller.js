@@ -36,8 +36,7 @@ if(document.getElementById('frm-inscricao') != null) {
     });
 }
 
-app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin,  $sce) {
-	$scope.$root.mensagensIntegracao = [];
+app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin, $sce) {
 	
 	$scope.showMessage = function(msg) {
 		$.gritter.add({

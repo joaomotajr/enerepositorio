@@ -47,14 +47,10 @@ public class Transmitter {
 	
 	@Column(name = "NAME", nullable = true)
 	String name;
-
-//	@Column(name = "MANUFACTURER", nullable = true)
-//	String manufacturer;
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="MANUFACTURER_ID", nullable = false)
 	private Manufacturer manufacturer;
-	
 	
 	@Column(name = "MODEL", nullable = true)
 	String model;
@@ -82,14 +78,6 @@ public class Transmitter {
 	public final void setName(String name) {
 		this.name = name;
 	}
-
-//	public final String getManufacturer() {
-//		return manufacturer;
-//	}
-//
-//	public final void setManufacturer(String manufacturer) {
-//		this.manufacturer = manufacturer;
-//	}
 	
 	public final Manufacturer getManufacturer() {
 		return manufacturer;

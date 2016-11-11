@@ -21,8 +21,7 @@
 			    <div class="tab-content">			    			    	
 			    	<div id="{{item.name}}" class="tab-pane" data-bind-unsafe-html="item.body" data-ng-repeat="item in tabsShow">
 			    	</div>			    	
-			    </div>			    		    
-			    
+			    </div>			    
 			</div>	  
 		</section>
 	</div>

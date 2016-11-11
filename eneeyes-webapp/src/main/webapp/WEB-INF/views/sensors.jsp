@@ -39,10 +39,11 @@
 						</div>                                                       
 					</div>
 				</div>
+				
 				<div id="resultErro" class="alert alert-warning" role="alert" data-ng-show="msgErro" >
-            		<button type="button" class="close" ><span data-ng-click="msgErro='';">&times;</span></button>
-            		<strong>Alerta! </strong>{{msgErro}} 
-        		</div>
+	           		<button type="button" class="close" ><span data-ng-click="msgErro='';">&times;</span></button>
+	           		<strong>Alerta! </strong>{{msgErro}} 
+	       		</div>
 			</div>                                                      
 																
 			<div class="col-sm-7">
@@ -138,7 +139,9 @@
 	                        
 	                        <div class="box box-primary box-solid">
 			                    <div class="box-header with-border ui-sortable-handle "><strong><i class="fa fa-yelp"></i> Gases </strong>
-			                    	<span class="text-red" data-ng-show="sensorGases.length == 0 && newGases.length == 0">  [Adicionar ao Menos Um Sensor]</span> 
+			                    	<span class="text-red" data-ng-show="sensorGases.length == 0 && newGases.length == 0">  [Adicionar um Gás]</span>
+			                    	<span class="pull-right" data-ng-show="msgGas1">[Máximo um Gás]</span>
+			                    	<span class="pull-right" data-ng-show="msgGas2">["ATENÇÃO! Gás Já Existe."]</span>			                    	 
 			                    </div>		                	 
 			                    <div class="box-body">		                    
 				                    <div class="col-sm-6">			                    
@@ -183,7 +186,8 @@
 							<button type="button" data-ng-click="saveSensor();" class="btn btn-primary" 
 								data-ng-disabled="(sensorName && sensorModel && sensorManufacturer && sensorDetectionType && (sensorGases.length != 0 || newGases.length > 0)) ? false : true">Salvar
 							</button>
-						</div>					
+						</div>
+																
 					</div>
 				</div>
 			</div>	

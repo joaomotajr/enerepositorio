@@ -1,7 +1,6 @@
 
 app.controller('sensorController', function ($scope, $timeout, $filter, SensorService, ManufacturerService, GasService) {
-	    
-	
+		
 	$scope.saveSensor = function() {
 		
 		angular.element('body').addClass('loading');
@@ -70,6 +69,9 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		$scope.sensorRangeMax = '';
 		$scope.sensorRangeMin = '';
 		$scope.sensorRangeUnit = '';
+		
+		$scope.msgGas1 = false;
+	    $scope.msgGas2 = false;
 		
 		$('.sort .ui-draggable').remove();
 		
@@ -155,11 +157,18 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		 
 		 $scope.resultGases = new GasService.listAll();		 
 		 $scope.resultGases.$gas({_csrf : angular.element('#_csrf').val()}, function(){			
-			 $scope.gases = $scope.resultGases.list; 		 			 
+			 $scope.gases = angular.copy($scope.resultGases.list); 		 			 
          });		 
 	 }	
 	 
 	 $scope.inicializaLDragDrop = function () {
+		 
+		 $scope.refreshDragDrop = function()
+		 {
+			 $scope.gases = angular.copy($scope.resultGases.list);
+			 $scope.$apply();
+			 $scope.inicializaLDragDrop();
+		 }
 
 		$(".sort").sortable({
 		    items: 'li',
@@ -171,10 +180,18 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		        var clazz = getClassNameWithNumberSuffix(ui.item);
 		
 		        $('.drag .' + clazz).draggable("option", "revert", true);
-		
-		        if ($('.sort .' + clazz).length > 1) {
+		        
+		        if($scope.newGases.length > 0 || $scope.sensorGases.length > 0) {
+					$('.sort .' + clazz).remove();	        		
+					
+					$scope.msgGas1 = true;	
+					$scope.refreshDragDrop();
+	        	}
+		        else if ($('.sort .' + clazz).length > 1) {
 		            $('.sort .' + clazz + ':not(:first)').remove();
-		            alert("ATENÇÃO! Gás Já Existe.");
+		            
+		            $scope.msgGas2 = true;
+		            $scope.refreshDragDrop();
 		        }
 		        else {
 		            

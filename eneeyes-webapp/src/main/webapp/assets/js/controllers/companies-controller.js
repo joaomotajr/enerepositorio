@@ -5,7 +5,7 @@ app.service('testServices', function ($http, $q) {
 app.controller('companiesController', function ($scope, $timeout, $interval, $filter, CompanyService, UnitService) {
 
 	$scope.$root.timer = [];
-	
+		
 	$scope.showDanger = function(msg) {		
 		angular.element('body').removeClass('loading');
 		 $scope.$root.msgDanger = msg ;

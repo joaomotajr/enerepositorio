@@ -135,6 +135,8 @@
 		                    <div class="box-header with-border ui-sortable-handle ">
 		                    	<strong><i class="fa fa-feed"></i> Sensores </strong>
 		                    	<span class="text-red" data-ng-show="detectorSensors.length == 0 && newSensors.length == 0">  [Adicionar ao Menos Um Sensor]</span>
+		                    	<span class="pull-right" data-ng-show="msgSens1">[Máximo Dois Sensores]</span>
+			                    <span class="pull-right" data-ng-show="msgSens2">["ATENÇÃO! Sensor Já Existe."]</span>
 		                    </div>
 		                	 
 		                    <div class="box-body">

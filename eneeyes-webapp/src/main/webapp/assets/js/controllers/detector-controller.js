@@ -1,6 +1,25 @@
+app.filter('manufacturerFilter', function () {
+    return function (objects, criteria) {
+        
+        if (!criteria)
+            return objects;
+        
+        var filterResult = new Array();
+
+        for (index in objects) {
+        
+   			 if (objects[index].manufacturerDto.uid == criteria.manufacturer.uid  ) {
+
+                 filterResult.push(objects[index]);
+             }
+        }
+
+        return filterResult;
+    }
+});
 
 app.controller('detectorController', function ($scope, $timeout, $filter, DetectorService, ManufacturerService, SensorService, TransmitterService) {
-	
+		
 	$scope.saveDetector = function() {		
 		
 		angular.element('body').addClass('loading');
@@ -45,13 +64,11 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		 
 		$scope.inclusaoManufacturer = new ManufacturerService.save(manufacturer);		 
 		$scope.inclusaoManufacturer.$manufacturer({_csrf : angular.element('#_csrf').val()}, function()
-		{         	
-         	
-			$scope.manufacturers.push($scope.inclusaoManufacturer.t);
-                     	
+		{	         	
+			$scope.manufacturers.push($scope.inclusaoManufacturer.t);                     	
         });
 		
-		$(".popover").popover('hide');
+		//$(".popover").popover('hide');
 	 }
 	 
 	$scope.clearFormDetector = function () {
@@ -182,7 +199,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		        }
 		        else {
 		            
-		            //Insere Tag Novo se elemento n√£o foi movido dentro da pr√≥pria lista
+		            //Insere Tag Novo se elemento n√o foi movido dentro da prÛpria lista
 		            if (ui.item.find('small').length < 1) {
 		                ui.item.append('<small class="label label-success"><i class="fa fa-bolt"></i> novo</small>');
 		                $scope.addSensorDetector(ui.item[0].id);
@@ -226,10 +243,13 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		 $scope.addPhoto = function() {
 			 event.preventDefault();
 			$('#idInputImageDetector').trigger('click');
-		 }
-		
+		 }		
 	}
-	 
+	
+	$scope.changeManufacturer = function() { 
+		 $scope.search = {manufacturer: $scope.detectorManufacturer};
+	}
+	
 	 $scope.addSensorDetector = function (idSensor) {
 
         sensorDto = {
@@ -244,8 +264,8 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	 }	 
  
 	 $scope.refreshDetectors = function() {
-		 $scope.getDetectors();
 		 $scope.getManufacturers();
+		 $scope.getDetectors();		 
 		 $scope.getTransmitters();
 		 $scope.getSensors();
 		 $scope.detectorImage = "/assets/img/cover.jpg";
@@ -256,5 +276,4 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	 $timeout(function () {                    
 		 $scope.loadEvents();
 	 }, 500);
-
 });

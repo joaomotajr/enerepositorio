@@ -104,12 +104,13 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="box box-primary box-solid">				                    
-				                	 
+				                	<div class="box-header with-border"><strong><i class="fa fa-expand"></i> Fabricante</strong></div>
 				                    <div class="box-body">
 				                        <select class="form-control" data-live-search="true" 
 				                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 				                                data-ng-options="item as item.name for item in manufacturers | orderBy: 'name' track by item.uid" 
-		                                           data-ng-model="detectorManufacturer">
+		                                           data-ng-model="detectorManufacturer"
+		                                           data-ng-change="changeManufacturer();">
 		                                           <option value="">Selecione</option> 
 				                        </select>    
 				                    </div>			                    			                            
@@ -123,7 +124,7 @@
 				                    <div class="box-body">
 				                        <select class="form-control" data-live-search="true" 
 				                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-				                                data-ng-options="item as item.name for item in transmitters | orderBy: 'name' track by item.uid" 
+				                                data-ng-options="item as item.name for item in transmitters | manufacturerFilter:search | orderBy: 'name' track by item.uid"  
 		                                           data-ng-model="detectorTransmitter">
 		                                           <option value="">Selecione</option> 
 				                        </select>    
@@ -165,7 +166,7 @@
 			                    <div class="col-sm-6">
 			                    	<label class="control-label">Lista de Sensores</label>			                    	                        
 			                        <div style="max-height: 250px; height:auto; overflow: auto">				                        	                                                       
-                                    	<ul class="drag todo-list" style="padding: 1px !important" data-ng-repeat="sensor in sensors">
+                                    	<ul class="drag todo-list" style="padding: 1px !important" data-ng-repeat="sensor in sensors | manufacturerFilter:search">
                                             <li id="{{sensor.uid}}" class="{{'c' + sensor.uid}}" style="background: #d1ddf9;">                                                        
                                                 <span class="handle"><i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i></span>
                                                 <span class="text">{{sensor.name}}</span>

@@ -43,7 +43,7 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
                      	
         });
 		
-		$(".popover").popover('hide');
+		//$(".popover").popover('hide');
 	 }
 	 
 	$scope.clearFormController = function () {

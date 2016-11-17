@@ -387,8 +387,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	}
 	
 	$scope.getAlarms = function() {
-		 
-		 $scope.resultAlarms = new AlarmService.listAll();		 
+		
+		$scope.resultAlarms = new AlarmService.listAll();
 		 $scope.resultAlarms.$alarm({_csrf : angular.element('#_csrf').val()}, function(){			 
 			 $scope.alarms = $scope.resultAlarms.list;			 
         });		 

@@ -53,7 +53,7 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
                      	
         });
 		
-		$(".popover").popover('hide');
+		//$(".popover").popover('hide');
 	 }
 	 
 	$scope.clearFormSensor = function () {

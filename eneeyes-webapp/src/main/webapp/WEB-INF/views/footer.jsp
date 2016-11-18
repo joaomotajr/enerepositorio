@@ -5,23 +5,16 @@
 <sec:authorize access="hasRole('CST')">
     <c:set var="authenticated" value="true"/>
 </sec:authorize>
-
 	<div class="ajax-loader"></div> 
     <!-- jQuery 2.1.4 -->
-    <script src="/assets/plugins/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="/assets/plugins/jQuery/jquery-2.1.4.min.js"></script>
     
     <!-- Easy Pin -->    
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.easing/1.3/jquery.easing.1.3.min.js"></script>
     <script src="/assets/plugins/dist/jquery.easypin.js"></script>    
     
     <!-- jQuery UI 1.11.4 -->
-    <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>
-    
-    <!-- jQuery Datatbles -->    
-    <script src="/assets/plugins/datatables/jquery.dataTables.js"></script>
-    
-        <!-- jQuery bpopup -->    
-    <script src="/assets/plugins/jquery.bpopup/jquery.bpopup.min.js"></script>
+    <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>    
 
     <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>
@@ -33,20 +26,16 @@
 	<script src="/assets/plugins/angular/angular-options-disabled.js"></script>
 	
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script> $.widget.bridge('uibutton', $.ui.button); </script>
+    <script>
+      $.widget.bridge('uibutton', $.ui.button);
+    </script>
     <!-- Bootstrap 3.3.5 -->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>       
- 
+    
     <!-- AdminLTE App -->
-    <script src="/assets/js/app.min.js"></script>   
-    
-    <!-- Image Notes -->
-    <script src="/assets/plugins/imageNotes/hammer.min.js"></script>
-    <script src="/assets/plugins/imageNotes/jquery.hammer.js"></script>
-    <script src="/assets/plugins/imageNotes/imgViewer.min.js"></script>
-    <script src="/assets/plugins/imageNotes/imgNotes.js"></script>
-    
+    <script src="/assets/js/app.min.js"></script>
+        
     <!-- Select2 -->
     <script src="/assets/plugins/select2/select2.min.js"></script>    
     

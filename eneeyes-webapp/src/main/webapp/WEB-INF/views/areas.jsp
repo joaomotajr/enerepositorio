@@ -45,7 +45,7 @@
 			       	<li class="active"><a href="#tabArea_1" id="stepTabArea_1" data-toggle="tab">Cadastro</a></li>
 			       	<li><a href="#tabArea_2" id="stepTabArea_2" data-toggle="tab">Local</a></li>
 			       	<li><a href="#tabArea_3" id="stepTabArea_1" data-toggle="tab">Dispositivos</a></li>
-			    	<li title="Trocar Imagem da ï¿½rea" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
+			    	<li title="Trocar Imagem da Área" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
 			    </ul>
 				
 				<div class="tab-content">

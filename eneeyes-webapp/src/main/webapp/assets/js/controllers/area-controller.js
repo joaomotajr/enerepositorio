@@ -47,7 +47,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		$scope.inclusaoCompanyDevice = new CompanyDeviceService.save(companyDevice);
 		$scope.inclusaoCompanyDevice.$companyDevice({_csrf : angular.element('#_csrf').val()}, function(){         	
 			
-			$scope.showInfo("Novo Dispositivo IncluÃƒÂ­do!");	     
+			$scope.showInfo("Novo Dispositivo IncluÃ­do!");	     
 			$scope.clearFormArea();				        	           
 			$scope.getOneCompany($scope.companyUid);
 						
@@ -82,7 +82,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 				$scope.getOneCompany($scope.companyUid);
 			}
 			
-			$scope.showInfo("ÃÂrea Gravada!");
+			$scope.showInfo("Área Gravada!");
 		
 		}, function(data) {
 			$scope.showErro("Erro: " + data.statusText);
@@ -152,7 +152,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		
 		$scope.deletar.$area({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid}, function(){
 			
-			$scope.showDanger("Ãrea ExcluÃ­da!");
+			$scope.showDanger("Área Excluída!");
 			$scope.clearFormArea();
 			$scope.getOneCompany($scope.companyUid);			
 	                 	         	
@@ -165,9 +165,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		
 		$scope.resultCompanyDetectorsArea = new CompanyDetectorService.listPorIdArea();		 
 		$scope.resultCompanyDetectorsArea.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid }, function(){			
-			
-			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;		
-			$scope.getCompanyDetectorAreaCoordinates = getDetectorsCoordinates($scope.selectedCompanyDetectorsArea);
+			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;          	         	
         });		 
 	}
 	 
@@ -237,7 +235,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 				google.charts.setOnLoadCallback(drawGaugesArea);
 			}
 			
-			$scope.getCompanyDetectorArea();			
+			$scope.getCompanyDetectorArea();
 						
 		}, 500);
 		
@@ -248,6 +246,11 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		
 		if($scope.selectedArea.companyDevicesDto.length > 0)
 			setDetectorsAreas();		
+
+		//	 setInterval(function () {
+		//   data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+		//	 chart.draw(data, options);
+		//	 }, 26000);
 	}
 	
 	setDetectorsAreas = function() {
@@ -280,7 +283,6 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 	    }		
 	}
 	
-	
 	drawGaugesDetector = function() {
 					
 		var sensors = $scope.selectedCompanyDetector.detectorDto.sensorsDto;		
@@ -306,35 +308,28 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		}	    		
 	}
 		
-	
-
 	initializeEasyPin = function() {
-		
+    	
+		var itens;
+		var limit = 0;
 		$('.easy-marker').remove();
 		
 		if($scope.selectedArea.companyDevicesDto.length > 0) {
-    		         
-    		//easyPin($scope.getCompanyDetectorAreaCoordinates, $scope.selectedCompanyDetectorsArea.length);
-    		
-			var imgDipositivosArea = $scope.getCompanyDetectorAreaCoordinates;
 			
-    		var $easyInstance = $('.pin').easypin({
-   			 	init: { imgDipositivosArea },           
-   			 	responsive: true,
-   			 	limit: $scope.selectedCompanyDetectorsArea.length,
-   			 	
-   			 	done: function(element) {
-   			 		return true;
-   			 	}
-   			 	
-    		});
-    		
-    			    		
-    		$timeout(function () {           
-	    		$('.pin').trigger("click");
-	    		//$scope.lockImageArea();
-	    	}, 300);	    		    	
+	    	itens = getDetectorsCoordinates();
+	    	
+	    	$timeout(function () {	    		
+	    		limit = $scope.selectedCompanyDetectorsArea.length;
+	    	}, 300);
+	    	
+	    	$timeout(function () {           
+	    		easyPin(itens, limit);			    		
+	    		$('.pin').trigger("click")
+	    	}, 600);	    	
 		}	
+    	    	
+    	$scope.lockImageArea();
+		
 	}
 	
 	easyPin = function(itens, limit) {			
@@ -348,12 +343,11 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		});	
     }	
 	
-	getDetectorsCoordinates = function(itens) {
+	getDetectorsCoordinates = function() {
 				
 		var pinItensString = "";
 				
-		//var item = $scope.selectedCompanyDetectorsArea;
-		var item = itens;
+		var item = $scope.selectedCompanyDetectorsArea;
 		for (var i = 0; i < item.length; i++) {
 	    				
 			var pinItem = ({

@@ -7,11 +7,13 @@
 </sec:authorize>
 	<div class="ajax-loader"></div> 
     <!-- jQuery 2.1.4 -->
-    <script src="/assets/plugins/jQuery/jquery-2.1.4.min.js"></script>
+    <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     
-    <!-- Easy Pin -->    
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.easing/1.3/jquery.easing.1.3.min.js"></script>
-    <script src="/assets/plugins/dist/jquery.easypin.js"></script>    
+    <!-- Easy Pin -->
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="/assets/plugins/dist/jquery.easypin.js"></script>
     
     <!-- jQuery UI 1.11.4 -->
     <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>    

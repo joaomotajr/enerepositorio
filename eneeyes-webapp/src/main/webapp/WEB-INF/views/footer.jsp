@@ -16,7 +16,10 @@
     <script src="/assets/plugins/dist/jquery.easypin.js"></script>
     
     <!-- jQuery UI 1.11.4 -->
-    <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>    
+    <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>
+    <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+         
 
     <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>
@@ -33,7 +36,10 @@
     </script>
     <!-- Bootstrap 3.3.5 -->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>       
+    <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>
+    
+    <!-- iCheck -->
+    <script src="/assets/plugins/iCheck/icheck.min.js"></script>           
     
     <!-- AdminLTE App -->
     <script src="/assets/js/app.min.js"></script>

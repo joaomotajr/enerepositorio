@@ -27,8 +27,8 @@
 	    <!-- Ionicons 
 	    <link rel="stylesheet" href="/assets/css/ionicons/ionicons.min.css"> -->
 	    
-	    <!-- iCheck for checkboxes and radio inputs 
-    	<link rel="stylesheet" href="/assets/plugins/iCheck/all.css"> -->
+	    <!-- iCheck for checkboxes and radio inputs  -->
+    	<link rel="stylesheet" href="/assets/plugins/iCheck/all.css"> 
 	    	    
 	    <!-- Theme style -->
 	    <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">

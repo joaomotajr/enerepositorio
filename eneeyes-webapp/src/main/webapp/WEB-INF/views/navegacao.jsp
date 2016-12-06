@@ -1,20 +1,31 @@
 <div data-ng-controller="navegacaoController">
 	<div class="row">
-        <div class="col-md-12"> 	
+        <div class="col-md-12">
         	<div class="row">      		           
 	            <form class="form" name="userForm">
-		            <div class="col-md-6">
+		            <div class="col-md-10">
+		            
 			            <div class="col-md-3">                                                                                                                            
 							<div class="form-group">
 								<label class="control-label">CompanyDetector</label>
-			                	<input class="form-control" data-ng-model="companyDetectorUid">					                                                                                
+			                	<select class="form-control" data-live-search="true" 
+		                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+		                                data-ng-options="item as item.name for item in CompanyDetectorss | orderBy: 'name' track by item.uid" 
+		                                         data-ng-model="selectedCompanyDetector" >
+		                                         <option value="">Selecione</option> 
+		                        </select>					                                                                                
 								                                                                        
 							</div>
-						</div>
+						</div>												
 						<div class="col-md-3">
 							<div class="form-group">
 								<label class="control-label">Sensor</label>
-			                	<input class="form-control" data-ng-model="companySensorUid">						                                                
+			                	<select class="form-control" 
+		                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+		                                data-ng-options="item as item.name for item in selectedCompanyDetector.detectorDto.sensorsDto | orderBy: 'name' track by item.uid" 
+		                                         data-ng-model="selectedCompanySensor">
+		                                         <option value="">Selecione</option> 
+		                        </select>						                                                
 							</div>                                                                    
 						</div>
 						<div class="col-md-3">
@@ -23,18 +34,71 @@
 			                	<input class="form-control" data-ng-model="companyValor">						                                                
 							</div>                                                                    
 						</div>         		
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<div class="form-group">
-								<label>Ação</label>
-		        				<button type="button" class="btn btn-primary" data-ng-click="saveHistoric()">Save Historic</button>
+								<label class="control-label">Ação</label>
+		        				<button type="button" class="btn btn-primary btn-sm form-control" data-ng-click="saveHistoric()">Save Historic</button>
 		        			</div>
 		        		</div>        	        		
 	        		</div>
 	        	</form>	        			        	
+       		</div>       		
+       		<hr />
+       		<div class="row">        		
+        		<div class="row">      		           
+		            <form class="form" name="userForm">
+			            <div class="col-md-6">		            			            
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Data inicio</label>
+				                	<input class="form-control" data-ng-model="dateIn">						                                                
+								</div>                                                                    
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label class="control-label">Data Fim</label>
+				                	<input class="form-control" data-ng-model="dateOut">						                                                
+								</div>                                                                    
+							</div>         		
+							<div class="col-md-3">
+								<div class="form-group">
+									<label>Ação</label>
+			        				<button type="button" class="btn btn-primary" data-ng-click="getHistoric()">Get Historic</button>
+			        			</div>
+			        		</div>        	        		
+		        		</div>
+		        	</form>	        			        	
+	       		</div>        		        		
        		</div>
        		
-        	<hr />
-        	
+       		<hr />
+       		<div class="row">        		
+        		<div class="row">      		           
+		            <form class="form" name="userForm">
+			            <div class="col-md-12">		            			            
+							<div class="col-md-9">									
+								<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+								  <button type="button" class="btn btn-default">1 hora</button>
+								  <button type="button" class="btn btn-default">  6h  </button>
+								  <button type="button" class="btn btn-default">  12h </button>
+								  <button type="button" class="btn btn-default">1 dia </button>
+								  <button type="button" class="btn btn-default">  2d  </button>
+								  <button type="button" class="btn btn-default">  4d  </button>
+								  <button type="button" class="btn btn-default"> 30d  </button>
+								</div>                                                              
+							</div>							        	        		
+		        		</div>
+		        	</form>	        			        	
+	       		</div>        		        		
+       		</div>       		
+       		
+       		<hr />
+       		<div class="row">
+        		<div class="col-md-12">           		        	        		
+        			<button type="button" class="btn btn-primary" data-ng-click="getCompanyDetector()">Get All CompanyDetector Info</button>
+        		</div>	        		
+       		</div>
+       		<br />
         	<div class="row">
         		<div class="col-md-12">	        	
 	                <dl class="dl-horizontal" data-ng-repeat="item in CompanyDetectors">
@@ -44,17 +108,6 @@
 		            </dl>	            
         		</div>
         	</div>
-        	
-        	<div class="row">
-        		<div class="col-md-12">	           		
-        		<!-- <button type="button" class="btn btn-primary" data-ng-click="saveCompanyDetector()">Save CompanyDetector</button> -->        	        		
-        		<button type="button" class="btn btn-primary" data-ng-click="getCompanyDetector()">Get CompanyDetector</button>
-        		<!-- <button type="button" class="btn btn-primary" data-ng-click="getOneCompanyDetector()">Get One CompanyDetector</button> -->
-        		<!-- <button type="button" class="btn btn-primary" data-ng-click="getOneCompanyDetectorDevice()">Get Device CompanyDetector </button> -->
-        		<!-- <button type="button" class="btn btn-primary" data-ng-click="getOneCompanyDetectorDeviceByArea()">Get Area CompanyDetector  </button> -->
-        		<!-- <button type="button" class="btn btn-primary" data-ng-click="deletarCompanyDetector()">Deletar CompanyDetector</button>  -->      		
-        		</div>	        		
-       		</div>
         	<!-- 
         	<div class="row">        		
         		<button type="button" class="btn btn-primary" data-ng-click="saveCompanyDevice()">Save CompanyDevice</button>        		

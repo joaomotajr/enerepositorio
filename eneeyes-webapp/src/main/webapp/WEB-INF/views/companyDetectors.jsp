@@ -85,6 +85,7 @@
 					       		</form>
 					       		</div>
 				    		</div>
+				    		
 				    		<div class="row">
 				    			<div class="col-md-12">						    	
 						    		<div class="box box-default">
@@ -220,8 +221,7 @@
 				              	</div>					    		      						       		 
 				       		</div>			       	  	        
 				       	</div>
-				       	
-				       	 
+				       					       	 
 				       	<div class="tab-pane" id="tabCompanyDetector_3">	   
 			       			<div class="row">				            	
 			            	  	<div class="col-md-12">
@@ -231,7 +231,7 @@
 									   	</div>									   					               	
 						               	<div class="panel-body">
 						               		
-						               		<div style="width: 100%;" id="chart_div"></div>
+						               		<div style="max-width: 800px; overflow: auto" id="chart_div"></div>
 						               	
 					    				</div>
 					    			</div>

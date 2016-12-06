@@ -42,10 +42,6 @@ public class CompanyDetector {
     	this.local = dto.getLocal();
 		this.latitude = dto.getLatitude();
 		this.longitude = dto.getLongitude();
-		this.unitMeterGases = dto.getUnitMeterGases();
-		this.RangeMax = dto.getRangeMax();
-		this.RangeMin = dto.getRangeMin();
-		this.RangeUnit = dto.getRangeUnit();
 		
 		if(dto.getDetectorDto() != null)
 			this.detector = new Detector(dto.getDetectorDto());
@@ -162,38 +158,6 @@ public class CompanyDetector {
 
 	public void setCompanyDevice(CompanyDevice companyDevice) {
 		this.companyDevice = companyDevice;
-	}
-	
-	public final UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
-	}
-	
-	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-		this.unitMeterGases = unitMeterGases;
-	}
-	
-	public final Double getRangeMax() {
-		return RangeMax;
-	}
-
-	public final void setRangeMax(Double rangeMax) {
-		RangeMax = rangeMax;
-	}
-
-	public final Double getRangeMin() {
-		return RangeMin;
-	}
-
-	public final void setRangeMin(Double rangeMin) {
-		RangeMin = rangeMin;
-	}
-
-	public final Double getRangeUnit() {
-		return RangeUnit;
-	}
-
-	public final void setRangeUnit(Double rangeUnit) {
-		RangeUnit = rangeUnit;
 	}
 	
 	public Detector getDetector() {

@@ -30,7 +30,7 @@ public class Historic {
     	this.update = dto.getUpdate();
     	this.value = dto.getValue();    	
     	this.sensor = new Sensor(dto.getSensorDto());
-    	
+    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());    	
     }
 
 	@Id

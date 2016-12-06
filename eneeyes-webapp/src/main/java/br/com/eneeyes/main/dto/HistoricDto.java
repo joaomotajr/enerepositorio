@@ -22,8 +22,7 @@ public class HistoricDto {
 		this.uid = historic.getUid();
 		this.update = historic.getUpdate();
     	this.value = historic.getValue();    	
-    	this.sensorDto = new SensorDto(historic.getSensor());
-    	this.companyDetectorDto = new CompanyDetectorDto(historic.getCompanyDetector());
+    	this.sensorDto = new SensorDto(historic.getSensor());    	    	
 	}
 	
 	public final Long getUid() {

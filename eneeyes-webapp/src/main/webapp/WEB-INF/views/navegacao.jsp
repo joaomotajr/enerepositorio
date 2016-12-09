@@ -78,13 +78,13 @@
 			            <div class="col-md-12">		            			            
 							<div class="col-md-9">									
 								<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-								  <button type="button" class="btn btn-default">1 hora</button>
-								  <button type="button" class="btn btn-default">  6h  </button>
-								  <button type="button" class="btn btn-default">  12h </button>
-								  <button type="button" class="btn btn-default">1 dia </button>
-								  <button type="button" class="btn btn-default">  2d  </button>
-								  <button type="button" class="btn btn-default">  4d  </button>
-								  <button type="button" class="btn btn-default"> 30d  </button>
+								  <button type="button" class="btn btn-default" data-ng-click="getHistorics(1);">1 hora</button>
+								  <button type="button" class="btn btn-default" data-ng-click="getHistorics(6);">  6h  </button>
+								  <button type="button" class="btn btn-default" data-ng-click="getHistorics(12);">  12h </button>
+								  <button type="button" class="btn btn-default" data-ng-click="getHistorics(24);">1 dia </button>
+								  <button type="button" class="btn btn-default" data-ng-click="getHistorics(48);">  2d  </button>
+								  <button type="button" class="btn btn-default" data-ng-click="getHistorics(96);">  4d  </button>
+								  <button type="button" class="btn btn-default" data-ng-click="getHistorics(720);"> 30d  </button>
 								</div>                                                              
 							</div>							        	        		
 		        		</div>

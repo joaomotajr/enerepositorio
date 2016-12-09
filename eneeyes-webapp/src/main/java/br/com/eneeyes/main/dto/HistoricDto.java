@@ -8,7 +8,7 @@ import br.com.eneeyes.main.model.Historic;
 public class HistoricDto {
 	
 	private Long uid;
-	private Date update;
+	private Date lastUpdate;
 	private Double value;	
     private CompanyDetectorDto companyDetectorDto;
     private SensorDto sensorDto;
@@ -20,7 +20,7 @@ public class HistoricDto {
 	public HistoricDto(Historic historic) {
 		
 		this.uid = historic.getUid();
-		this.update = historic.getUpdate();
+		this.lastUpdate = historic.getLastUpdate();
     	this.value = historic.getValue();    	
     	this.sensorDto = new SensorDto(historic.getSensor());    	    	
 	}
@@ -33,12 +33,12 @@ public class HistoricDto {
 		this.uid = uid;
 	}
 	
-	public Date getUpdate() {
-		return update;
+	public final Date getLastUpdate() {
+		return lastUpdate;
 	}
 
-	public void setUpdate(Date update) {
-		this.update = update;
+	public final void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 
 	public Double getValue() {

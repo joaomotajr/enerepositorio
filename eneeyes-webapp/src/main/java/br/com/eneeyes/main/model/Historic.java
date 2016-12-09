@@ -27,7 +27,7 @@ public class Historic {
     public Historic(HistoricDto dto) {
     	
     	this.uid = dto.getUid();
-    	this.update = dto.getUpdate();
+    	this.lastUpdate = dto.getLastUpdate();
     	this.value = dto.getValue();    	
     	this.sensor = new Sensor(dto.getSensorDto());
     	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());    	
@@ -38,8 +38,8 @@ public class Historic {
 	@Column(name = "UID")
 	private Long uid;
 	
-	@Column(name = "UP_DATE", nullable = false)
-	private Date update;
+	@Column(name = "LAST_UPDATE", nullable = false)
+	private Date lastUpdate;
 
 	@Column(name = "VALUE", nullable = true)
 	private Double value;
@@ -60,12 +60,12 @@ public class Historic {
 		this.uid = uid;
 	}
 	
-	public Date getUpdate() {
-		return update;
+	public final Date getLastUpdate() {
+		return lastUpdate;
 	}
 
-	public void setUpdate(Date update) {
-		this.update = update;
+	public final void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 
 	public Double getValue() {

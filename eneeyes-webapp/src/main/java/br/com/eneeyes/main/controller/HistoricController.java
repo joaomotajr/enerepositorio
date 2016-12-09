@@ -38,5 +38,29 @@ public class HistoricController {
 	public BasicResult<?> findByCompanyDetector(@PathVariable Long uid) {		
 		return service.findByCompanyDetector(uid);		
 	}
+	
+	@RequestMapping(value="/security/api/historic/findByCompanyDetectorAndSensorAndInterval/{companyDetectorId}/{sensorId}/{interval}", method=RequestMethod.GET, produces = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> findByCompanyDetectorAndSensorAndInterval(@PathVariable Long companyDetectorId, @PathVariable Long sensorId, @PathVariable Integer interval) {		
+		return service.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, interval);
+	}
+	
+	@RequestMapping(value="/security/api/historic/findByCompanyDetectorAndSensorUmaHora/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> findByCompanyDetectorAndSensorUmaHora(@PathVariable Long companyDetectorId, @PathVariable Long sensorId) {		
+		return service.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, 1);
+	}
+	
+	@RequestMapping(value="/security/api/historic/findByCompanyDetectorAndSensorVinteQuatroHoras/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> findByCompanyDetectorAndSensorVinteQuatroHoras(@PathVariable Long companyDetectorId, @PathVariable Long sensorId) {		
+		return service.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, 6);
+	}
+	
+	@RequestMapping(value="/security/api/historic/findByCompanyDetectorAndSensorSeisHoras/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> findByCompanyDetectorAndSensorSeisHoras(@PathVariable Long companyDetectorId, @PathVariable Long sensorId) {		
+		return service.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, 6);
+	}
 
 }

@@ -15,6 +15,7 @@ import br.com.eneeyes.main.dto.HistoricDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Historic;
 import br.com.eneeyes.main.model.Position;
+import br.com.eneeyes.main.model.register.Sensor;
 import br.com.eneeyes.main.repository.HistoricRepository;
 import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
@@ -36,7 +37,7 @@ public class HistoricService implements IService<HistoricDto> {
 		Result<HistoricDto> result = new Result<HistoricDto>();
 		
 		Historic historic = new Historic(dto);
-		historic.setUpdate(new Date());
+		historic.setLastUpdate(new Date());
 		historic = repository.save(historic);
 		
 		//TODO Está perdendo os valores do CompanyDetector - Checar 
@@ -60,7 +61,7 @@ public class HistoricService implements IService<HistoricDto> {
 
 		if (position != null) {		
 
-			position.setLastUpdate(historic.getUpdate());
+			position.setLastUpdate(historic.getLastUpdate());
 			position.setLastValue(historic.getValue());
 			
 			positionRepository.save(position);
@@ -121,7 +122,7 @@ public class HistoricService implements IService<HistoricDto> {
 		return result;
 	}
 	
-	public BasicResult<?> findByCompanyDetector(Long uid, Integer periodo) {
+	public BasicResult<?> findByCompanyDetectorAndInterval(Long uid, Integer periodo) {
 		Result<HistoricDto> result = new Result<HistoricDto>();
 		
 		CompanyDetector companyDetector = new CompanyDetector();
@@ -132,7 +133,32 @@ public class HistoricService implements IService<HistoricDto> {
 			Date fim = new Date(); 
 			Date inicio = new Date(fim.getTime() + (1000 * 60 * 60 * periodo));
 			
-			List<Historic> lista = repository.findByCompanyDetectorAndUpdateBetween(companyDetector, inicio, fim);			
+			List<Historic> lista = repository.findByCompanyDetectorAndLastUpdateBetween(companyDetector, inicio, fim);			
+			result = populateResult(lista);
+			
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	public BasicResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, Integer periodo) {
+		Result<HistoricDto> result = new Result<HistoricDto>();
+		
+		CompanyDetector companyDetector = new CompanyDetector();
+		companyDetector.setUid(companyDetectorId);
+		
+		Sensor sensor = new Sensor();
+		sensor.setUid(sensorId);
+		
+		try {
+						
+			Date fim = new Date(); 
+			Date inicio = new Date(fim.getTime() - (1000 * 60 * 60 * periodo));
+			
+			List<Historic> lista = repository.findByCompanyDetectorAndSensorAndLastUpdateBetween(companyDetector, sensor, inicio, fim);			
 			result = populateResult(lista);
 			
 		} catch (Exception e) {

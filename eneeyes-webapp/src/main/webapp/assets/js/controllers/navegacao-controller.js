@@ -13,6 +13,12 @@ app.factory('HistoricService', function($resource){
         save : $resource('/security/api/historic/save',{},{
         	historic : {method : 'POST'}
         }),
+        listUmaHora : $resource('/security/api/historic/findByCompanyDetectorAndSensorUmaHora/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
+        	historic : {method : 'GET'}
+        }),
+        listInterval : $resource('/security/api/historic/findByCompanyDetectorAndSensorAndInterval/:companyDetectorId/:sensorId/:interval/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', interval: '@interval'},{        
+        	historic : {method : 'GET'}
+        }),
      };
 });
 
@@ -225,7 +231,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		$scope.historic = {
 				uid: 0,	
 				value: $scope.companyValor,
-				update: null,
+				lastUpdate: null,
 				companyDetectorDto: {uid: $scope.selectedCompanyDetector.uid},
 				sensorDto: {uid: $scope.selectedCompanySensor.uid}
 			 }	
@@ -244,6 +250,25 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		$scope.listAll = new HistoricService.listAll();		 
 		$scope.listAll.$historic({_csrf : angular.element('#_csrf').val()}, function(){         	
        	console.log($scope.listAll);      	
+       	
+       });		
+	}
+	
+	$scope.getHistorics = function(interval) {
+		
+		$scope.listInterval = new HistoricService.listInterval();		
+		$scope.listInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
+			
+       	console.log($scope.listInterval);      	
+       	
+       });		
+	}
+	
+	$scope.getHistoricUmaHora = function() {
+		$scope.listUmaHora = new HistoricService.listUmaHora();		
+		$scope.listUmaHora.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid }, function(){
+			
+       	console.log($scope.listUmaHora);      	
        	
        });		
 	}

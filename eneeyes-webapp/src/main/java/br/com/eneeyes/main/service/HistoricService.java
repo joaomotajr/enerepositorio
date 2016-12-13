@@ -1,6 +1,7 @@
 package br.com.eneeyes.main.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -104,11 +105,11 @@ public class HistoricService implements IService<HistoricDto> {
 		return result;
 	}	
 	
-	public BasicResult<?> findByCompanyDetector(Long uid) {
+	public BasicResult<?> findByCompanyDetector(Long companyDetectorId) {
 		Result<HistoricDto> result = new Result<HistoricDto>();
 		
 		CompanyDetector companyDetector = new CompanyDetector();
-		companyDetector.setUid(uid);
+		companyDetector.setUid(companyDetectorId);
 		
 		try {
 			List<Historic> lista = repository.findByCompanyDetector(companyDetector);			
@@ -122,11 +123,11 @@ public class HistoricService implements IService<HistoricDto> {
 		return result;
 	}
 	
-	public BasicResult<?> findByCompanyDetectorAndInterval(Long uid, Integer periodo) {
+	public BasicResult<?> findByCompanyDetectorAndInterval(Long companyDetectorId, Integer periodo) {
 		Result<HistoricDto> result = new Result<HistoricDto>();
 		
 		CompanyDetector companyDetector = new CompanyDetector();
-		companyDetector.setUid(uid);
+		companyDetector.setUid(companyDetectorId);
 		
 		try {
 						
@@ -144,6 +145,28 @@ public class HistoricService implements IService<HistoricDto> {
 		return result;
 	}
 	
+	public BasicResult<?> findByTop10CompanyDetectorAndSensor(Long companyDetectorId, Long sensorId) {
+		Result<HistoricDto> result = new Result<HistoricDto>();
+		
+		CompanyDetector companyDetector = new CompanyDetector();
+		companyDetector.setUid(companyDetectorId);
+		
+		Sensor sensor = new Sensor();
+		sensor.setUid(sensorId);
+		
+		try {			
+			List<Historic> lista = repository.findTop10ByCompanyDetectorAndSensor(companyDetector, sensor); 
+					
+			result = populateResult(lista);
+			
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;
+	}
+		
 	public BasicResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, Integer periodo) {
 		Result<HistoricDto> result = new Result<HistoricDto>();
 		
@@ -157,6 +180,62 @@ public class HistoricService implements IService<HistoricDto> {
 						
 			Date fim = new Date(); 
 			Date inicio = new Date(fim.getTime() - (1000 * 60 * 60 * periodo));
+			
+			List<Historic> lista = repository.findByCompanyDetectorAndSensorAndLastUpdateBetween(companyDetector, sensor, inicio, fim);			
+			result = populateResult(lista);
+			
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut) {
+	Result<HistoricDto> result = new Result<HistoricDto>();
+		
+		CompanyDetector companyDetector = new CompanyDetector();
+		companyDetector.setUid(companyDetectorId);
+		
+		Sensor sensor = new Sensor();
+		sensor.setUid(sensorId);
+		
+		try {					
+			
+			List<Historic> lista = repository.findByCompanyDetectorAndSensorAndLastUpdateBetween(companyDetector, sensor, dateIn, dateOut);			
+			result = populateResult(lista);
+			
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	public static Date addMes(Date date, int qtde) {
+		
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.MONTH, qtde);			
+		
+		return c.getTime();		
+	}
+	
+	public BasicResult<?> findByCompanyDetectorAndSensorLastMonth(Long companyDetectorId, Long sensorId) {
+		Result<HistoricDto> result = new Result<HistoricDto>();
+		
+		CompanyDetector companyDetector = new CompanyDetector();
+		companyDetector.setUid(companyDetectorId);
+		
+		Sensor sensor = new Sensor();
+		sensor.setUid(sensorId);
+		
+		try {
+						
+			Date fim = new Date();									
+			Date inicio = addMes(fim, -1);
 			
 			List<Historic> lista = repository.findByCompanyDetectorAndSensorAndLastUpdateBetween(companyDetector, sensor, inicio, fim);			
 			result = populateResult(lista);
@@ -192,7 +271,6 @@ public class HistoricService implements IService<HistoricDto> {
 		
 		return result;
 	} 
-
 	
 	public Result<?> listAll() {
 		

@@ -1,5 +1,7 @@
 package br.com.eneeyes.main.controller;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 
 import org.springframework.http.HttpStatus;
@@ -45,22 +47,21 @@ public class HistoricController {
 		return service.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, interval);
 	}
 	
-	@RequestMapping(value="/security/api/historic/findByCompanyDetectorAndSensorUmaHora/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/historic/findByTop10CompanyDetectorAndSensor/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDetectorAndSensorUmaHora(@PathVariable Long companyDetectorId, @PathVariable Long sensorId) {		
-		return service.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, 1);
+	public BasicResult<?> findByTop10CompanyDetectorAndSensor(@PathVariable Long companyDetectorId, @PathVariable Long sensorId) {		
+		return service.findByTop10CompanyDetectorAndSensor(companyDetectorId, sensorId);
 	}
 	
-	@RequestMapping(value="/security/api/historic/findByCompanyDetectorAndSensorVinteQuatroHoras/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/historic/findByCompanyDetectorAndSensorLastMonth/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDetectorAndSensorVinteQuatroHoras(@PathVariable Long companyDetectorId, @PathVariable Long sensorId) {		
-		return service.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, 6);
+	public BasicResult<?> findByCompanyDetectorAndSensorLastMonth(@PathVariable Long companyDetectorId, @PathVariable Long sensorId) {		
+		return service.findByCompanyDetectorAndSensorLastMonth(companyDetectorId, sensorId);
 	}
 	
-	@RequestMapping(value="/security/api/historic/findByCompanyDetectorAndSensorSeisHoras/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/historic/findByCompanyDetectorAndSensorAndIntervalDays/{companyDetectorId}/{sensorId}/{dateIn}/{dateOut}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDetectorAndSensorSeisHoras(@PathVariable Long companyDetectorId, @PathVariable Long sensorId) {		
-		return service.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, 6);
+	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(@PathVariable Long companyDetectorId, @PathVariable Long sensorId, @PathVariable Date dateIn, @PathVariable Date dateOut) {		
+		return service.findByCompanyDetectorAndSensorAndIntervalDays(companyDetectorId, sensorId, dateIn, dateOut);
 	}
-
 }

@@ -20,7 +20,7 @@ app.filter('gasFilter', function () {
 
 app.controller('companyDetectorController', function ($scope, $interval, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, PositionService ) {
 
-	var loadGauge = false;
+	var loadGoogleCharts = false;
 	
 	$scope.showDanger = function(msg) {		
 		angular.element('body').removeClass('loading');
@@ -159,7 +159,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
 			
-			//* Detector jï¿½ foi associado a dispositivo checa alarmes *//
+			//* Detector já foi associado a dispositivo checa alarmes *//
 			if($scope.selectedCompanyDetector != null)
 				$scope.getCompanyDetectorAlarms();
 			
@@ -177,47 +177,46 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	
 
 	 $scope.initializeDetector =  function()  {
-		 		 
+		
+		if(! loadGoogleCharts) {				
+			google.charts.load('current', { 'packages': ['gauge', 'corechart'] });				
+			loadGoogleCharts = true;
+		}
+				 		 
 		$timeout(function () {
 			
 			$('.tabDetector a').on('click', function (event) {
-			    event.preventDefault();	
+			    event.preventDefault();
+			    
+			    //Limpa Timers
+			    while ($scope.$root.timer.length) {				        	
+		            $interval.cancel($scope.$root.timer.pop());				            
+		         }
 			    
 			    if ($(event.target).attr('href') == "#tabCompanyDetector_2") {			    	
-			    	initGaugeDetector();
+			    	
+			    	google.charts.setOnLoadCallback(initDrawGaugesDetector);
+			    	initGaugeTimer();
 				}
 			    else if ($(event.target).attr('href') == "#tabCompanyDetector_3") {
-			    	
+			    													
+					google.charts.setOnLoadCallback(drawBackgroundColor);
 			    }			
 			});
 											
-			initGaugeDetector = function() {
+			initGaugeTimer = function() {
+													
+				var current = angular.copy($scope.selectedCompanyDetector);
 				
-				if(! loadGauge) {
-					
-					google.charts.load('current', { 'packages': ['gauge', 'corechart'] });
-					
-					loadGauge = true;
-					
-					var current = angular.copy($scope.selectedCompanyDetector);
-					
-					if(current != null) {					
-						$scope.$root.timer.push($interval(function(){
-							$scope.getPositions(current);					        
-					    }, 13000));						
-					}
-				}
-				
-				$timeout(function () {	
-					
-					google.charts.setOnLoadCallback(initDrawGaugesDetector);
-					google.charts.setOnLoadCallback(drawBackgroundColor);
-					
-				}, 100);				
-			}
-			
-			initDatatable();
-						
+				if(current != null) {					
+					$scope.$root.timer.push($interval(function(){
+						$scope.getPositions(current);					        
+				    }, 13000));						
+				}						
+			}			
+	
+			initDatatable();			
+									
 		}, 300);
 				
 		
@@ -441,7 +440,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			$scope.selectedCompanyDetectorAlarms[detectorAlarmIndex] = {alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid};
 		}
 		
-		initDrawGaugesDetector();
+		initDrawGaugesDetector();		
 	}
 		
 	$scope.removerAlarm = function(uid) {		

@@ -13,15 +13,20 @@ app.factory('HistoricService', function($resource){
         save : $resource('/security/api/historic/save',{},{
         	historic : {method : 'POST'}
         }),
-        listUmaHora : $resource('/security/api/historic/findByCompanyDetectorAndSensorUmaHora/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
+        listIntervalDays : $resource('/security/api/historic/findByCompanyDetectorAndSensorAndIntervalDays/:companyDetectorId/:sensorId/:dateIn/:dateOut/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', dateIn: '@dateIn', dateIn: '@dateOut' },{        
         	historic : {method : 'GET'}
         }),
         listInterval : $resource('/security/api/historic/findByCompanyDetectorAndSensorAndInterval/:companyDetectorId/:sensorId/:interval/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', interval: '@interval'},{        
         	historic : {method : 'GET'}
         }),
+        listLastMonth : $resource('/security/api/historic/findByCompanyDetectorAndSensorLastMonth/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
+        	historic : {method : 'GET'}
+        }),
+        listTop10 : $resource('/security/api/historic/findByTop10CompanyDetectorAndSensor/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
+        	historic : {method : 'GET'}
+        }),
      };
 });
-
 
 
 app.factory('DetectorService', function($resource){    
@@ -41,7 +46,6 @@ app.factory('DetectorService', function($resource){
         }),
      };
 });
-
 
 app.factory('TransmitterService', function($resource){    
     
@@ -97,7 +101,6 @@ app.factory('GasService', function($resource){
      };
 });
 
-
 app.factory('ControllerService', function($resource){    
     
     return {
@@ -140,7 +143,6 @@ app.factory('CompanyDetectorService', function($resource){
      };
 });
 
-
 app.factory('CompanyDeviceService', function($resource){    
     
     return {
@@ -159,7 +161,6 @@ app.factory('CompanyDeviceService', function($resource){
      };
 });
 
-
 app.factory('AreaService', function($resource){    
     
     return {
@@ -177,8 +178,6 @@ app.factory('AreaService', function($resource){
         }),
      };
 });
-
-
 
 app.factory('UnitService', function($resource){    
     
@@ -200,11 +199,9 @@ app.factory('UnitService', function($resource){
         }),
         listAllFilter : $resource('/security/api/unit/allFilter',{},{
         	unit : {method : 'GET'}
-        }),
-        
+        }),        
      };
 });
-
 
 app.factory('CompanyService', function($resource){    
     
@@ -264,15 +261,41 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
        });		
 	}
 	
-	$scope.getHistoricUmaHora = function() {
-		$scope.listUmaHora = new HistoricService.listUmaHora();		
-		$scope.listUmaHora.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid }, function(){
+	$scope.getLast10 = function() {
+		$scope.listTop10 = new HistoricService.listTop10();		
+		$scope.listTop10.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid }, function(){
 			
-       	console.log($scope.listUmaHora);      	
+       	console.log($scope.listTop10);      	
        	
        });		
 	}
 	
+	$scope.getLastMonth = function() {
+		$scope.listLastMonth = new HistoricService.listLastMonth();		
+		$scope.listLastMonth.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid }, function(){
+			
+       	console.log($scope.listLastMonth);      	
+       	
+       });		
+	}
+	
+	$scope.getHistoricInterval = function() {
+		
+		var dataInicio = new Date(getDate($scope.dateIn));
+		var dataFim = new Date(getDate($scope.dateOut, true));
+		
+		$scope.listIntervalDays = new HistoricService.listIntervalDays();		
+		$scope.listIntervalDays.$historic({_csrf : angular.element('#_csrf').val(),			
+			companyDetectorId: $scope.selectedCompanyDetector.uid, 
+			sensorId: $scope.selectedCompanySensor.uid,
+			dateIn: dataInicio,
+			dateOut: dataFim
+		}, function(){
+			       	
+			console.log($scope.listLastMonth);      	
+       });		
+	}		
+		
 	$scope.getCompanyDetectors = function() {
 		 
 		 $scope.listAll = new CompanyDetectorService.listAll();		 
@@ -281,6 +304,27 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 			 console.log($scope.listAll);		         	         	
         });		 
 	 }
+	
+    getDate = function (data, end) {
+
+        if (data == undefined)
+            return null;
+
+        var dataAdm = new Date();        
+        var newDate = data.split('/', 3);
+
+        dataAdm.setDate(newDate[0]);
+        dataAdm.setMonth(newDate[1] - 1);
+        dataAdm.setYear(newDate[2]);
+        
+        if (end)
+        	dataAdm.setHours(23, 59, 59, 999);
+        else	
+        	dataAdm.setHours(0, 0, 0, 0);
+        
+        return dataAdm;
+    }
+
 
 /*-----------------------------------------------------------------------------------------------------------------*/
 	

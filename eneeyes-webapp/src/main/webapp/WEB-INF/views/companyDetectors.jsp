@@ -140,8 +140,6 @@
 				    	
 				       		<div class="row">
 				       			<div class="col-md-12">
-				       				<!--<button type="button" data-ng-click="newCompanyDetector();" class="btn btn-success pull-right">    Nova    </button> -->				       										
-									
 				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name) ? false : true">   Salvar   </button>		       				
 				       				<span class="pull-right">   </span>
 				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">   Excluir   </button>								
@@ -225,32 +223,48 @@
 				       	<div class="tab-pane" id="tabCompanyDetector_3">	   
 			       			<div class="row">				            	
 			            	  	<div class="col-md-12">
-					              	<div class="panel panel-default">						                
+					              	<div class="panel panel-success">						                
 						                <div class="panel-heading">
 									    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
 									   	</div>									   					               	
 						               	<div class="panel-body">
-						               	
-						               		<div class="row">      		           
-									            <form class="form" name="userForm">
-									            	            			            
-													<div class="pull-right">									
-														<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-														  <button type="button" class="btn btn-default" data-ng-click="getHistorics(1);">1 hora</button>
-														  <button type="button" class="btn btn-default" data-ng-click="getHistorics(6);">  6h  </button>
-														  <button type="button" class="btn btn-default" data-ng-click="getHistorics(12);">  12h </button>
-														  <button type="button" class="btn btn-default" data-ng-click="getHistorics(24);">1 dia </button>
-														  <button type="button" class="btn btn-default" data-ng-click="getHistorics(48);">  2d  </button>
-														  <button type="button" class="btn btn-default" data-ng-click="getHistorics(96);">  4d  </button>
-														  <button type="button" class="btn btn-default" data-ng-click="getLastMonth();"> 30d  </button>
-														</div>                                                              
-													</div>							        	        		
-									        		
-									        	</form>	        			        	
-								       		</div> 
-						               		<div class="row">
-						               			<div style="max-width: 800px; overflow: auto" id="chart_div"></div>
+						               							               							               							               		
+						               		<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length == 1">
+						               			<ul class="nav nav-tabs" id="myTab">
+												 	<li class="active"><a data-target="sensor1" data-toggle="tab">{{selectedCompanyDetector.detectorDto.sensorsDto[0].name}}</a></li>												  	
+												</ul>
+									
+												<div class="tab-content">
+													<div class="tab-pane active" id="sensor1">
+													  	<div class="row">
+									               			<div style="max-width: 800px; overflow: auto" id="chart_div1"></div>
+									               		</div>
+								               		</div>												  	
+												</div>					               		
 						               		</div>
+						               		
+						               		<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length > 1">
+						               			<ul class="nav nav-tabs" id="myTab">
+												 	<li class="active"><a data-target="#sensor1" data-toggle="tab">{{selectedCompanyDetector.detectorDto.sensorsDto[0].name}}</a></li>
+												  	<li><a data-target="#sensor2" data-toggle="tab">{{selectedCompanyDetector.detectorDto.sensorsDto[1].name}}</a></li>										  	
+												</ul>
+									
+												<div class="tab-content">
+												  	<div class="tab-pane active" id="sensor1">
+												  		<div class="row">
+									               			<div style="max-width: 800px; overflow: auto" id="chart_div1"></div>
+									               		</div>
+												  	</div>
+												  	<div class="tab-pane" id="sensor2">
+												  		<div class="row">
+									               			<div style="max-width: 800px; overflow: auto" id="chart_div2"></div>
+									               		</div>
+												  	</div>												  	
+												</div>			
+						               		</div>
+						               		
+						               		
+						               		
 					    				</div>
 					    			</div>
 					    		</div>

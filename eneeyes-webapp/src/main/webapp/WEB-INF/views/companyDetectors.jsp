@@ -230,9 +230,27 @@
 									    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
 									   	</div>									   					               	
 						               	<div class="panel-body">
-						               		
-						               		<div style="max-width: 800px; overflow: auto" id="chart_div"></div>
 						               	
+						               		<div class="row">      		           
+									            <form class="form" name="userForm">
+									            	            			            
+													<div class="pull-right">									
+														<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+														  <button type="button" class="btn btn-default" data-ng-click="getHistorics(1);">1 hora</button>
+														  <button type="button" class="btn btn-default" data-ng-click="getHistorics(6);">  6h  </button>
+														  <button type="button" class="btn btn-default" data-ng-click="getHistorics(12);">  12h </button>
+														  <button type="button" class="btn btn-default" data-ng-click="getHistorics(24);">1 dia </button>
+														  <button type="button" class="btn btn-default" data-ng-click="getHistorics(48);">  2d  </button>
+														  <button type="button" class="btn btn-default" data-ng-click="getHistorics(96);">  4d  </button>
+														  <button type="button" class="btn btn-default" data-ng-click="getLastMonth();"> 30d  </button>
+														</div>                                                              
+													</div>							        	        		
+									        		
+									        	</form>	        			        	
+								       		</div> 
+						               		<div class="row">
+						               			<div style="max-width: 800px; overflow: auto" id="chart_div"></div>
+						               		</div>
 					    				</div>
 					    			</div>
 					    		</div>

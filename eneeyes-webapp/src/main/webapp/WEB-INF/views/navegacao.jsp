@@ -51,14 +51,16 @@
 							<div class="col-md-3">
 								<div class="form-group">
 									<label class="control-label">Data inicio</label>				                	
-				                	 <input class="form-control" type="text" data-datepicker data-ng-model="dateIn" />  
+				                	 <!--  <input class="form-control" type="text" data-datepicker data-ng-model="dateIn" />  -->
+				                	 <input type="text" class="form-control" data-date-format="dd/mm/yyyy" datemonopicker ng-model="dateIn" data-mask="99/99/9999" mask/>
 				                					                			                                                
 								</div>                                                                    
 							</div>
 							<div class="col-md-3">
 								<div class="form-group">
 									<label class="control-label">Data Fim</label>				                	
-				                	<input class="form-control" type="text" data-datepicker data-ng-model="dateOut" />				                							                                                
+				                	<!-- <input class="form-control" type="text" data-datepicker data-ng-model="dateOut" /> -->
+				                	<input type="text" class="form-control" data-date-format="dd/mm/yyyy" datemonopicker ng-model="dateOut" data-mask="99/99/9999" mask/>				                							                                                
 								</div>                                                                    
 							</div>
 							<div class="col-md-2">
@@ -74,9 +76,7 @@
 			        			</div>
 			        		</div>        	        		
 			        		<div class="col-md-2">
-								<div class="form-group">
-									<label class="control-label">Ação</label>
-			        				<button type="button" class="btn btn-primary btn-sm form-control" data-ng-click="getLast10()" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">Get Last 10</button>
+								<div class="form-group">									
 			        			</div>
 			        		</div>
 		        		</div>

@@ -76,7 +76,7 @@
         </form>
 
         <a href="#">Esqueci a Senha</a><br>
-        <a href="register.html" class="text-center">Solicitar Cadastramento</a>
+        <a href="#" class="text-center">Solicitar Cadastramento</a>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->

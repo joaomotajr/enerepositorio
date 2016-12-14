@@ -1,7 +1,7 @@
 (function($){
-	$("#esqueciSenha").on('click', function(){
-		$('#modalLogin').modal('hide');
-	});
+//	$("#esqueciSenha").on('click', function(){
+//		$('#modalLogin').modal('hide');
+//	});
 	
     var section;
     $('#navbar, #navcmd').on('click', 'li a', function(){
@@ -99,39 +99,39 @@ app.directive('bindUnsafeHtml', ['$compile', function ($compile) {
 }]);
 
 
-app.directive('iCheck', ['$timeout', '$parse', function ($timeout, $parse) {
-    return {
-        require: 'ngModel',
-        link: function ($scope, element, $attrs, ngModel) {
-            return $timeout(function () {
-                var value = $attrs.value;
-                var $element = $(element);
-
-                // Instantiate the iCheck control.                            
-                $element.iCheck({
-                    checkboxClass: 'icheckbox_square-green',
-                    radioClass: 'iradio_square-green',
-                    increaseArea: '20%'
-                });
-
-                // If the model changes, update the iCheck control.
-                $scope.$watch($attrs.ngModel, function (newValue) {
-                    $element.iCheck('update');
-                });
-
-                // If the iCheck control changes, update the model.
-                $element.on('ifChanged', function (event) {
-                    if ($element.attr('type') === 'radio' && $attrs.ngModel) {
-                        $scope.$apply(function () {
-                            ngModel.$setViewValue(value);
-                        });
-                    }
-                });
-
-            });
-        }
-    };
-}]);
+//app.directive('iCheck', ['$timeout', '$parse', function ($timeout, $parse) {
+//    return {
+//        require: 'ngModel',
+//        link: function ($scope, element, $attrs, ngModel) {
+//            return $timeout(function () {
+//                var value = $attrs.value;
+//                var $element = $(element);
+//
+//                // Instantiate the iCheck control.                            
+//                $element.iCheck({
+//                    checkboxClass: 'icheckbox_square-green',
+//                    radioClass: 'iradio_square-green',
+//                    increaseArea: '20%'
+//                });
+//
+//                // If the model changes, update the iCheck control.
+//                $scope.$watch($attrs.ngModel, function (newValue) {
+//                    $element.iCheck('update');
+//                });
+//
+//                // If the iCheck control changes, update the model.
+//                $element.on('ifChanged', function (event) {
+//                    if ($element.attr('type') === 'radio' && $attrs.ngModel) {
+//                        $scope.$apply(function () {
+//                            ngModel.$setViewValue(value);
+//                        });
+//                    }
+//                });
+//
+//            });
+//        }
+//    };
+//}]);
 
 
 app.directive('numberOnly', function () {
@@ -245,15 +245,15 @@ app.directive("datemonopicker", ['$filter', function($filter) {
 	}
 }]);
 
-app.directive("datepicker", function () {
-	return {
-	    restrict: "A",
-	    link: function (scope, el, attr) {
-	        el.datepicker({ dateFormat: 'dd/mm/yy' });
-	        //el.mask("99/99/9999");
-	    }
-	};
-});
+//app.directive("datepicker", function () {
+//	return {
+//	    restrict: "A",
+//	    link: function (scope, el, attr) {
+//	        el.datepicker({ dateFormat: 'dd/mm/yy' });
+//	        //el.mask("99/99/9999");
+//	    }
+//	};
+//});
 
 app.directive('popover', function($compile) { 
     var content =

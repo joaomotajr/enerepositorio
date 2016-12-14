@@ -21,10 +21,7 @@ app.factory('HistoricService', function($resource){
         }),
         listLastMonth : $resource('/security/api/historic/findByCompanyDetectorAndSensorLastMonth/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
         	historic : {method : 'GET'}
-        }),
-        listTop10 : $resource('/security/api/historic/findByTop10CompanyDetectorAndSensor/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
-        	historic : {method : 'GET'}
-        }),
+        }),        
      };
 });
 
@@ -260,16 +257,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
        	
        });		
 	}
-	
-	$scope.getLast10 = function() {
-		$scope.listTop10 = new HistoricService.listTop10();		
-		$scope.listTop10.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid }, function(){
-			
-       	console.log($scope.listTop10);      	
-       	
-       });		
-	}
-	
+		
 	$scope.getLastMonth = function() {
 		$scope.listLastMonth = new HistoricService.listLastMonth();		
 		$scope.listLastMonth.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid }, function(){
@@ -292,7 +280,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 			dateOut: dataFim
 		}, function(){
 			       	
-			console.log($scope.listLastMonth);      	
+			console.log($scope.listIntervalDays);      	
        });		
 	}		
 		
@@ -305,25 +293,25 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
         });		 
 	 }
 	
-    getDate = function (data, end) {
-
-        if (data == undefined)
-            return null;
-
-        var dataAdm = new Date();        
-        var newDate = data.split('/', 3);
-
-        dataAdm.setDate(newDate[0]);
-        dataAdm.setMonth(newDate[1] - 1);
-        dataAdm.setYear(newDate[2]);
-        
-        if (end)
-        	dataAdm.setHours(23, 59, 59, 999);
-        else	
-        	dataAdm.setHours(0, 0, 0, 0);
-        
-        return dataAdm;
-    }
+//    getDate = function (data, end) {
+//
+//        if (data == undefined)
+//            return null;
+//
+//        var dataAdm = new Date();        
+//        var newDate = data.split('/', 3);
+//
+//        dataAdm.setDate(newDate[0]);
+//        dataAdm.setMonth(newDate[1] - 1);
+//        dataAdm.setYear(newDate[2]);
+//        
+//        if (end)
+//        	dataAdm.setHours(23, 59, 59, 999);
+//        else	
+//        	dataAdm.setHours(0, 0, 0, 0);
+//        
+//        return dataAdm;
+//    }
 
 
 /*-----------------------------------------------------------------------------------------------------------------*/

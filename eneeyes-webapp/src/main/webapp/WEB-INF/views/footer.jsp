@@ -37,6 +37,8 @@
     <!-- Bootstrap 3.3.5 -->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap-inputmask.js"></script>
+    <script src="/assets/plugins/datepicker/bootstrap-datepicker.js"></script>
     
     <!-- iCheck -->
     <script src="/assets/plugins/iCheck/icheck.min.js"></script>           

@@ -2,6 +2,7 @@
  * 
  */
 
+
 app.factory('HistoricService', function($resource){    
     
     return {
@@ -13,15 +14,18 @@ app.factory('HistoricService', function($resource){
         }),
         listOne : $resource('/security/api/historic/obtemPorId/:id', {id: '@id'},{
         	historic : {method : 'GET'}
-        }),
-        listOneBySensor : $resource('/security/api/historic/obtemPorSensorId/:id', {id: '@id'},{
-        	historic : {method : 'GET'}
-        }),
-        listOneByCompanyDetector : $resource('/security/api/historic/obtemPorCompanyDetectorId/:id', {id: '@id'},{
-        	historic : {method : 'GET'}
-        }),
+        }),       
         save : $resource('/security/api/historic/save',{},{
         	historic : {method : 'POST'}
         }),
+        listIntervalDays : $resource('/security/api/historic/findByCompanyDetectorAndSensorAndIntervalDays/:companyDetectorId/:sensorId/:dateIn/:dateOut/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', dateIn: '@dateIn', dateIn: '@dateOut' },{        
+        	historic : {method : 'GET'}
+        }),
+        listInterval : $resource('/security/api/historic/findByCompanyDetectorAndSensorAndInterval/:companyDetectorId/:sensorId/:interval/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', interval: '@interval'},{        
+        	historic : {method : 'GET'}
+        }),
+        listLastMonth : $resource('/security/api/historic/findByCompanyDetectorAndSensorLastMonth/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
+        	historic : {method : 'GET'}
+        }),        
      };
 });

@@ -44,7 +44,7 @@
 	    <link rel="stylesheet" href="/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css"> -->
 	    
 	    <!-- Date Picker -->
-	    <link rel="stylesheet" href="/assets/plugins/datepicker/datepicker3.css">
+	    <link rel="stylesheet" href="/assets/plugins/datepicker/datepicker.css">
 	    <!-- Daterange picker -->
 	    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker-bs3.css">
 	    

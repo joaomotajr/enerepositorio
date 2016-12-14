@@ -144,28 +144,6 @@ public class HistoricService implements IService<HistoricDto> {
 		
 		return result;
 	}
-	
-	public BasicResult<?> findByTop10CompanyDetectorAndSensor(Long companyDetectorId, Long sensorId) {
-		Result<HistoricDto> result = new Result<HistoricDto>();
-		
-		CompanyDetector companyDetector = new CompanyDetector();
-		companyDetector.setUid(companyDetectorId);
-		
-		Sensor sensor = new Sensor();
-		sensor.setUid(sensorId);
-		
-		try {			
-			List<Historic> lista = repository.findTop10ByCompanyDetectorAndSensor(companyDetector, sensor); 
-					
-			result = populateResult(lista);
-			
-		} catch (Exception e) {
-			result.setIsError(true);
-			result.setMessage(e.getMessage());
-		}
-		
-		return result;
-	}
 		
 	public BasicResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, Integer periodo) {
 		Result<HistoricDto> result = new Result<HistoricDto>();

@@ -20,17 +20,12 @@ public interface HistoricRepository extends JpaRepository<Historic, Long> {
 	public List<Historic> findByCompanyDetector(CompanyDetector companyDetector);
 	
 	public List<Historic> findByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
-		
-	public List<Historic> findTop10ByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
 	
 	public List<Historic> findByCompanyDetectorAndSensorAndLastUpdateBetween(CompanyDetector companyDetector, Sensor sensor, Date in, Date out);
 	
 	public List<Historic> findByLastUpdateBetween(Date in, Date out);
 	
 	public List<Historic> findByCompanyDetectorAndLastUpdateBetween(CompanyDetector companyDetector, Date in, Date out);
-
-//	@Query("select p from Historic p where p.companyDetector = ?1 and p.lastUpdate < ?2")
-//	public List<Historic> findByCompanyDetectorAndLastUpdate(CompanyDetector companyDetector, Date out);
 	
 	
 }

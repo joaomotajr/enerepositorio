@@ -3,14 +3,14 @@
         <div class="col-md-12">
         	<div class="row">      		           
 	            <form class="form" name="userForm">
-		            <div class="col-md-10">
+		            <div class="col-md-12">
 		            
 			            <div class="col-md-3">                                                                                                                            
 							<div class="form-group">
 								<label class="control-label">CompanyDetector</label>
 			                	<select class="form-control" data-live-search="true" 
 		                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-		                                data-ng-options="item as item.name for item in CompanyDetectorss | orderBy: 'name' track by item.uid" 
+		                                data-ng-options="item as item.name for item in CompanyDetectors | orderBy: 'name' track by item.uid" 
 		                                         data-ng-model="selectedCompanyDetector" >
 		                                         <option value="">Selecione</option> 
 		                        </select>					                                                                                
@@ -28,7 +28,7 @@
 		                        </select>						                                                
 							</div>                                                                    
 						</div>
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<div class="form-group">
 								<label class="control-label">Valor</label>
 			                	<input class="form-control" data-ng-model="companyValor">						                                                
@@ -37,11 +37,23 @@
 						<div class="col-md-2">
 							<div class="form-group">
 								<label class="control-label">Ação</label>
-		        				<button type="button" class="btn btn-primary btn-sm form-control" data-ng-click="saveHistoric()">Save Historic</button>
+		        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="saveHistoric()">Save Historic</button>
 		        			</div>
 		        		</div>        	        		
-	        		</div>
-	        	</form>	        			        	
+		        		<div class="col-md-2">
+							<div class="form-group">
+								<label class="control-label">Ação</label>
+		        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="clearHistoric()">Clear</button>
+		        			</div>
+		        		</div>
+	        		</div>	        		
+	        	</form>	
+	        	<div class="col-md-3">  
+	        	<div id="result" class="alert alert-success" role="alert" data-ng-show="msg" >
+	           		<button type="button" class="close" ><span data-ng-click="msg='';">&times;</span></button>
+	           		<strong>Alerta! </strong>{{msg}} 
+	       		</div>      			        	
+	       		</div>
        		</div>       		
        		<hr />
        		<div class="row">        		
@@ -89,7 +101,7 @@
         		<div class="row">      		           
 		            <form class="form" name="userForm">
 			            <div class="col-md-12">		            			            
-							<div class="col-md-9">									
+							<div class="col-md-6">									
 								<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
 								  <button type="button" class="btn btn-default" data-ng-click="getHistorics(1);"   data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 hora</button>
 								  <button type="button" class="btn btn-default" data-ng-click="getHistorics(6);"   data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  6h  </button>
@@ -100,6 +112,18 @@
 								  <button type="button" class="btn btn-default" data-ng-click="getLastMonth();" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 30d  </button>
 								</div>                                                              
 							</div>							        	        		
+							
+							<div class="col-md-6">									
+								<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+								  <button type="button" class="btn btn-default" data-ng-click="getHistorics2(1);"   data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 hora</button>
+								  <button type="button" class="btn btn-default" data-ng-click="getHistorics2(6);"   data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  6h  </button>
+								  <button type="button" class="btn btn-default" data-ng-click="getHistorics2(12);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  12h </button>
+								  <button type="button" class="btn btn-default" data-ng-click="getHistorics2(24);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 dia </button>
+								  <button type="button" class="btn btn-default" data-ng-click="getHistorics2(48);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  2d  </button>
+								  <button type="button" class="btn btn-default" data-ng-click="getHistorics2(96);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  4d  </button>
+								  <button type="button" class="btn btn-default" data-ng-click="getLastMonth2();" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 30d  </button>
+								</div>                                                              
+							</div>
 		        		</div>
 		        	</form>	        			        	
 	       		</div>        		        		

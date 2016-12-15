@@ -47,11 +47,11 @@ public class HistoricController {
 		return service.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, interval);
 	}
 	
-//	@RequestMapping(value="/security/api/historic/findByTop10CompanyDetectorAndSensor/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
-//	@ResponseStatus(HttpStatus.OK)
-//	public BasicResult<?> findByTop10CompanyDetectorAndSensor(@PathVariable Long companyDetectorId, @PathVariable Long sensorId) {		
-//		return service.findByTop10CompanyDetectorAndSensor(companyDetectorId, sensorId);
-//	}
+	@RequestMapping(value="/security/api/historic/findByCompanyDetectorAndInterval/{companyDetectorId}/{interval}", method=RequestMethod.GET, produces = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> findByCompanyDetectorAndInterval(@PathVariable Long companyDetectorId, @PathVariable Integer interval) {		
+		return service.findByCompanyDetectorAndInterval(companyDetectorId, interval);
+	}	
 	
 	@RequestMapping(value="/security/api/historic/findByCompanyDetectorAndSensorLastMonth/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)

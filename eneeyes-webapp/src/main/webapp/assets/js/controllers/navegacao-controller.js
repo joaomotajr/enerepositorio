@@ -1,29 +1,29 @@
-app.factory('HistoricService', function($resource){    
-    
-    return {
-    	deletar : $resource('/security/api/historic/delete/:id', {id: '@id'},{
-    		historic : {method : 'DELETE'}
-        }),        
-        listAll : $resource('/security/api/historic/all',{},{
-        	historic : {method : 'GET'}
-        }),
-        listOne : $resource('/security/api/historic/obtemPorId/:id', {id: '@id'},{
-        	historic : {method : 'GET'}
-        }),       
-        save : $resource('/security/api/historic/save',{},{
-        	historic : {method : 'POST'}
-        }),
-        listIntervalDays : $resource('/security/api/historic/findByCompanyDetectorAndSensorAndIntervalDays/:companyDetectorId/:sensorId/:dateIn/:dateOut/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', dateIn: '@dateIn', dateIn: '@dateOut' },{        
-        	historic : {method : 'GET'}
-        }),
-        listInterval : $resource('/security/api/historic/findByCompanyDetectorAndSensorAndInterval/:companyDetectorId/:sensorId/:interval/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', interval: '@interval'},{        
-        	historic : {method : 'GET'}
-        }),
-        listLastMonth : $resource('/security/api/historic/findByCompanyDetectorAndSensorLastMonth/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
-        	historic : {method : 'GET'}
-        }),        
-     };
-});
+//app.factory('HistoricService', function($resource){    
+//    
+//    return {
+//    	deletar : $resource('/security/api/historic/delete/:id', {id: '@id'},{
+//    		historic : {method : 'DELETE'}
+//        }),        
+//        listAll : $resource('/security/api/historic/all',{},{
+//        	historic : {method : 'GET'}
+//        }),
+//        listOne : $resource('/security/api/historic/obtemPorId/:id', {id: '@id'},{
+//        	historic : {method : 'GET'}
+//        }),       
+//        save : $resource('/security/api/historic/save',{},{
+//        	historic : {method : 'POST'}
+//        }),
+//        listIntervalDays : $resource('/security/api/historic/findByCompanyDetectorAndSensorAndIntervalDays/:companyDetectorId/:sensorId/:dateIn/:dateOut/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', dateIn: '@dateIn', dateIn: '@dateOut' },{        
+//        	historic : {method : 'GET'}
+//        }),
+//        listInterval : $resource('/security/api/historic/findByCompanyDetectorAndSensorAndInterval/:companyDetectorId/:sensorId/:interval/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', interval: '@interval'},{        
+//        	historic : {method : 'GET'}
+//        }),
+//        listLastMonth : $resource('/security/api/historic/findByCompanyDetectorAndSensorLastMonth/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
+//        	historic : {method : 'GET'}
+//        }),        
+//     };
+//});
 
 
 app.factory('DetectorService', function($resource){    
@@ -220,6 +220,20 @@ app.factory('CompanyService', function($resource){
 
 app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService, ControllerService, GasService, SensorService, TransmitterService, DetectorService, CompanyDetectorService, HistoricService) {
 	
+	$scope.showInfo = function(msg) {
+		angular.element('body').removeClass('loading');            
+        $scope.msg = msg;
+        $('#result').hide().show('slow').delay(500).hide('slow');
+	}
+	
+	$scope.clearHistoric = function() {
+			
+		$scope.companyValor = '';
+        $scope.selectedCompanyDetector = '';
+        $scope.selectedCompanySensor = '';
+			
+	}
+	
 	$scope.saveHistoric = function() {
 		
 		$scope.historic = {
@@ -232,11 +246,12 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		 
 		 $scope.inclusao = new HistoricService.save($scope.historic);		 
 		 $scope.inclusao.$historic({_csrf : angular.element('#_csrf').val()}, function(){         	
-        	console.log($scope.inclusao);
+        	        	
+        	$scope.showInfo('Salvo');
         	
         	$scope.companyValor = '';
-        	$scope.selectedCompanyDetector = '';
-        	$scope.selectedCompanySensor = '';
+        	//$scope.selectedCompanyDetector = '';
+        	//$scope.selectedCompanySensor = '';
         });		 
 	 }
 	
@@ -250,8 +265,18 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 	
 	$scope.getHistorics = function(interval) {
 		
+		$scope.listInterval2 = new HistoricService.listInterval2();		
+		$scope.listInterval2.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
+			
+       	console.log($scope.listInterval2);      	
+       	
+       });		
+	}
+	
+	$scope.getHistorics2 = function(interval) {
+		
 		$scope.listInterval = new HistoricService.listInterval();		
-		$scope.listInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
+		$scope.listInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, interval: interval }, function(){
 			
        	console.log($scope.listInterval);      	
        	
@@ -288,11 +313,11 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		 
 		 $scope.listAll = new CompanyDetectorService.listAll();		 
 		 $scope.listAll.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){
-			 $scope.CompanyDetectorss = $scope.listAll.list; 
+			 $scope.CompanyDetectors = $scope.listAll.list; 
 			 console.log($scope.listAll);		         	         	
         });		 
 	 }
-	
+		
 //    getDate = function (data, end) {
 //
 //        if (data == undefined)

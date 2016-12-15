@@ -18,7 +18,7 @@ app.filter('gasFilter', function () {
 });
 
 
-app.controller('companyDetectorController', function ($scope, $interval, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, PositionService, HistoricService ) {
+app.controller('companyDetectorController', function ($scope, $interval, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, PositionService, HistoricService) {
 
 	var loadGoogleCharts = false;
 	
@@ -199,8 +199,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			    	initGaugeTimer();
 				}
 			    else if ($(event.target).attr('href') == "#tabCompanyDetector_3") {
-			    													
-					google.charts.setOnLoadCallback(drawBackgroundColor);
+			    	
+					google.charts.setOnLoadCallback(initChartLinesDetector);
+					
+					drawBackgroundColor();
 			    }			
 			});
 											
@@ -215,8 +217,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 				}						
 			}			
 	
-			initDatatable();			
-									
+			initDatatable();		
+												
 		}, 300);
 				
 		
@@ -303,6 +305,14 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 					    		
 	}
 	
+	function initChartLinesDetector() {
+		var current = angular.copy($scope.selectedCompanyDetector);
+		
+		if(current != null) 												
+			$scope.getHistorics(current, 1);
+					    		
+	}
+	
 	function formatGaugeSensor(sensor, value, id) {
 		var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensor.uid ; });
 
@@ -338,23 +348,31 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		}
 	}
 	
-	var data_json = "[[1443226500000, 200], [1443233700000, 250], [1443244500000, 280], [1443255300000, 290], [1443267900000, 320], [1443278700000, 300], [1443287700000, 350], [1443298500000, 250], [1443309300000, 280], [1443317400000, 150], [1443321900000, 300], [1443325500000, 380], [1443326400000, 420], [1443338100000, 445], [1443349800000, 300], [1443349800000, 200], [1443359700000, 1000], [1443359700000, 50], [1443369600000, 50], [1443382200000, 490], [1443393000000, 450], [1443400200000, 400], [1443409200000, 350], [1443420000000, 300]]";
+	var data_json1 = "[[1443226500000, 200], [1443233700000, 250], [1443244500000, 280], [1443255300000, 290], [1443267900000, 320], [1443278700000, 300], [1443287700000, 350], [1443298500000, 250], [1443309300000, 280], [1443317400000, 150], [1443321900000, 300], [1443325500000, 380], [1443326400000, 420], [1443338100000, 445], [1443349800000, 300], [1443349800000, 200], [1443359700000, 1000], [1443359700000, 50], [1443369600000, 50], [1443382200000, 490], [1443393000000, 450], [1443400200000, 400], [1443409200000, 350], [1443420000000, 300]]";
+	//var data_json2 = "[[1443226500000, 20], [1443233700000, 25], [1443244500000, 28], [1443255300000, 29], [1443267900000, 32], [1443278700000, 30], [1443287700000, 35], [1443298500000, 25], [1443309300000, 28], [1443317400000, 15], [1443321900000, 30], [1443325500000, 380], [1443326400000, 420], [1443338100000, 445], [1443349800000, 300], [1443349800000, 200], [1443359700000, 1000], [1443359700000, 50], [1443369600000, 50], [1443382200000, 49], [1443393000000, 45], [1443400200000, 40], [1443409200000, 35], [1443420000000, 30]]";
 	 
 	function formatLineSensor(sensor, value, id) {
-		 var data = new google.visualization.DataTable();
-	      
-	      data.addColumn('date', 'Date');
-	      data.addColumn('number', 'Medições');
 		
-	      var idata = JSON.parse(data_json);
+		var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensor.uid ; });
+		
+		var red =    selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
+		var yellow = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm2;
+		var orange = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm1;
+		
+		var data = new google.visualization.DataTable();
 	      
-	      for(var i in idata){
-	          idata[i][0] = new Date(idata[i][0]);	          
-	      }
+	    data.addColumn('date', 'Date');
+	    data.addColumn('number', 'Medições');
+		
+	    //var idata = JSON.parse(data_json);
 	      
-	      data.addRows(idata);
+	    for(var i in value){
+	    	value[i][0] = new Date(value[i][0]);	          
+		}
+	      
+	    data.addRows(value);
 
-	      var options = {
+	    var options = {
 	          title: "Medições no Período",
 	          legend: 'none',
 	    	  width: 800,
@@ -364,35 +382,35 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	    	  },
 	    	  vAxis: {
 	    		  title: 'Alarmes',
-	    		  ticks: [0, 300, 400, 450, 500]
+	    		  ticks: [0, orange, yellow, red, sensor.rangeMax]
 	    	  },
 	        backgroundColor: '#f1f8e9'
 	      };
-
-	      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-	      chart.draw(data, options);
+	    
+	    var chart = new google.visualization.LineChart(document.getElementById(id));
+	    chart.draw(data, options);
 	
 	}	
 	
 	function drawBackgroundColor() {
-	      var data = new google.visualization.DataTable();
+	      var data1 = new google.visualization.DataTable();
 	      
-	      data.addColumn('date', 'Date');
-	      data.addColumn('number', 'Medições');
+	      data1.addColumn('date', 'Date');
+	      data1.addColumn('number', 'Medições');
 		
-	      var idata = JSON.parse(data_json);
+	      var idata1 = JSON.parse(data_json1);
 	      
-	      for(var i in idata){
-	          idata[i][0] = new Date(idata[i][0]);	          
+	      for(var i in idata1){
+	          idata1[i][0] = new Date(idata1[i][0]);	          
 	      }
 	      
-	      data.addRows(idata);
+	      data1.addRows(idata1);
 
 	      var options1 = {
 	          title: "Medições no Período",
 	          legend: 'none',
-	    	  width: 800,
-	    	  height: 300,
+	    	  width: 750,
+	    	  height: 200,
 	    	  hAxis: {
 	    		  title: 'Data',	    		  
 	    	  },
@@ -403,27 +421,41 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	        backgroundColor: '#f1f8e9'
 	      };
 	      
-	      var options2 = {
-	          title: "Medições no Período",
-	          legend: 'none',
-	    	  width: 800,
-	    	  height: 300,
-	    	  hAxis: {
-	    		  title: 'Data',	    		  
-	    	  },
-	    	  vAxis: {
-	    		  title: 'Alarmes',
-	    		  ticks: [0, 30, 40, 45, 50]
-	    	  },
-	        backgroundColor: '#f1f8e9'
-	      };
-	      
-
 	      var chart1 = new google.visualization.LineChart(document.getElementById('chart_div1'));
-	      chart1.draw(data, options1);
+	      chart1.draw(data1, options1);
 	      
-	      var chart2 = new google.visualization.LineChart(document.getElementById('chart_div2'));
-	      chart2.draw(data, options2);
+	      
+//	      var data2 = new google.visualization.DataTable();
+//	      
+//	      data2.addColumn('date', 'Date');
+//	      data2.addColumn('number', 'Medições');		
+//	      
+//	      var idata2 = JSON.parse(data_json2);
+//	      
+//	      for(var i in idata2){
+//	          idata2[i][0] = new Date(idata2[i][0]);	          
+//	      }
+//	      
+//	      data2.addRows(idata2);
+//	      
+//	      var options2 = {
+//	          title: "Medições no Período",
+//	          legend: 'none',
+//	    	  width: 750,
+//	    	  height: 200,
+//	    	  hAxis: {
+//	    		  title: 'Data',	    		  
+//	    	  },
+//	    	  vAxis: {
+//	    		  title: 'Alarmes',
+//	    		  ticks: [0, 30, 40, 45, 50]
+//	    	  },
+//	        backgroundColor: '#f1f8e9'
+//	      };
+//	      
+//	      
+//	      var chart2 = new google.visualization.LineChart(document.getElementById('chart_div2'));
+//	      chart2.draw(data2, options2);
 
 	}
 	
@@ -559,23 +591,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		
 		 $scope.listOnePosition = new PositionService.listOneByCompanyDetector();		 
 		 $scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function() {		
-
-//			 if($scope.listOnePosition.list != null && $scope.listOnePosition.list.length != 0) {
-//		
-//				for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
-//					
-//					var item = $.grep($scope.listOnePosition.list, function (e) { return e.sensorDto.uid == currentCompanyDetector.detectorDto.sensorsDto[j].uid ; });
-//					var id = 'companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;
-//					
-//					formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item[0].lastValue, id);					
-//				}
-//			 }
-//			 else {
-//				 for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
-//					 var id = 'companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;
-//					 formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], 0, id);
-//				 }
-//			}	 	
 			 
 			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
 				
@@ -584,23 +599,35 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 					item = $.grep($scope.listOnePosition.list, function (e) { return e.sensorDto.uid == currentCompanyDetector.detectorDto.sensorsDto[j].uid ; });
 				}
 				
-				var id = 'companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;					
+				var id = 'gauge_companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;					
 				formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item == 0 ? 0 : item[0].lastValue, id);					
 			}				
 			
 	    });			
 	}
 	
-	$scope.getHistorics = function(interval) {
+	$scope.getHistorics = function(currentCompanyDetector, interval) {
 		
 		$scope.listInterval = new HistoricService.listInterval();		
-		$scope.listInterval.$historic({_csrf : angular.element('#_csrf').val(), 
-			companyDetectorId: $scope.selectedCompanyDetector.uid, 
-			sensorId: $scope.selectedCompanySensor.uid, 
+		$scope.listInterval.$historic({_csrf : angular.element('#_csrf').val(),  
+			companyDetectorId: currentCompanyDetector.uid,			 
 			interval: interval }, function(){
-			
-				$scope.listLineValues = $scope.listInterval.list;      	
-       	
+				
+			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
+				
+				var item = 0;					
+				if($scope.listInterval.list != null && $scope.listInterval.list.length != 0) {									
+					
+					var itens = new Array();
+					for (var k = 0; k < $scope.listInterval.list.length; k++) {
+						
+						itens.push([$scope.listInterval.list[k].lastUpdate, $scope.listInterval.list[k].value ] );
+					}
+				}
+				
+				var id = 'line_companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;					
+				formatLineSensor(currentCompanyDetector.detectorDto.sensorsDto[j], itens, id);					
+			}      	
        });		
 	}
 		

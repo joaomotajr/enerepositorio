@@ -40,6 +40,7 @@
 				       	<li class="active"><a href="#tabCompanyDetector_1" id="stepTabDetector_1" data-toggle="tab">Cadastro</a></li>
 				       	<li><a href="#tabCompanyDetector_2" id="stepTabDetector_2" data-toggle="tab">Configuração</a></li>
 				       	<li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Histórico</a></li>
+				       	<li><a href="#tabCompanyDetector_4" id="stepTabDetector_4" data-toggle="tab">Teste</a></li>
 				    	<li data-ng-hide="selectedCompanyDetector" class="pull-right"><i title="[Nenhum Detector Associado ao Dispositivo]" class="fa fa-info-circle text-red"></i></li>
 				    </ul>
 					
@@ -161,7 +162,7 @@
 						               			<div class="row">							            					                 		
 								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">				                				                
 										            	<div class="col-md-6">						                
-											            	<div style=" width: 100%;" id="{{'companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + subItem.uid}}"></div>						            	    
+											            	<div style=" width: 100%;" id="{{'gauge_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + subItem.uid}}"></div>						            	    
 										            	</div>				                
 										            </div>							                				                				                
 						                		</div>	
@@ -198,7 +199,7 @@
 							               	<div class="panel-body">
 							               		<div class="row">							            					                 		
 								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">											        	
-											        	<div style="width: 100%;" id="{{'companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + subItem.uid}}"></div>											        										            					                
+											        	<div style="width: 100%;" id="{{'gauge_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + subItem.uid}}"></div>											        										            					                
 										            </div>
 									            </div>							                				                				                
 							                	<div class="row">							                    				                    				                    
@@ -209,6 +210,7 @@
 								                      		<h5>{{subItem.unitMeterGases}}</h5>
 								                      		<h5>{{subItem.gasesDto[0].name}}</h5>
 								                      		<label>Alarmes </label> <a href="#" data-ng-click="configAlarm($index);"><i class="fa fa-bullhorn"></i></a>
+								                      		
 								                      		<label class="text-red">{{selectedCompanyDetectorAlarms[0].alarmDto.name}}</label>								                      		
 									                	</div>									                    					                    
 								                    </div>						                    					                    					                					                  			                  
@@ -237,7 +239,7 @@
 												<div class="tab-content">
 													<div class="tab-pane active" id="sensor1">
 													  	<div class="row">
-									               			<div style="max-width: 800px; overflow: auto" id="chart_div1"></div>
+									               			<div style="max-width: 800px; overflow: auto" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[0].uid}}"></div>
 									               		</div>
 								               		</div>												  	
 												</div>					               		
@@ -252,25 +254,48 @@
 												<div class="tab-content">
 												  	<div class="tab-pane active" id="sensor1">
 												  		<div class="row">
-									               			<div style="max-width: 800px; overflow: auto" id="chart_div1"></div>
+									               			<div style="max-width: 800px; overflow: auto" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[0].uid}}"></div>
 									               		</div>
 												  	</div>
 												  	<div class="tab-pane" id="sensor2">
 												  		<div class="row">
-									               			<div style="max-width: 800px; overflow: auto" id="chart_div2"></div>
+									               			<div style="max-width: 800px; overflow: auto" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[1].uid}}"></div>
 									               		</div>
 												  	</div>												  	
 												</div>			
 						               		</div>
-						               		
-						               		
-						               		
+						               								               		
 					    				</div>
 					    			</div>
 					    		</div>
 					    	</div>
 				       	     
-				     	</div><!-- /.tab-content -->			     	
+				     	</div><!-- /.tab-content -->	
+				     	
+				     	<div class="tab-pane" id="tabCompanyDetector_4">	   
+			       			<div class="row">				            	
+			            	  	<div class="col-md-12">
+					              	<div class="panel panel-success">						                
+						                <div class="panel-heading">
+									    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
+									   	</div>
+									   										   					               	
+						               	<div class="panel-body">
+						        
+				        					<div class="tab-pane" id="sensor3">
+										  		<div class="row">
+							               			<div style="max-width: 800px; overflow: auto" id="chart_div1"></div>
+							               		</div>
+										  	</div>
+						               								               		
+					    				</div>
+					    			</div>
+					    		</div>
+					    	</div>
+				       	     
+				     	</div><!-- /.tab-content -->	
+				     	
+				     			     	
 				   </div>			   						
 				</div>
 							

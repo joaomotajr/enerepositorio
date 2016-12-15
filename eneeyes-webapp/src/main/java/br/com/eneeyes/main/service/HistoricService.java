@@ -130,11 +130,12 @@ public class HistoricService implements IService<HistoricDto> {
 		companyDetector.setUid(companyDetectorId);
 		
 		try {
-						
+			
 			Date fim = new Date(); 
-			Date inicio = new Date(fim.getTime() + (1000 * 60 * 60 * periodo));
+			Date inicio = new Date(fim.getTime() - (1000 * 60 * 60 * periodo));
 			
 			List<Historic> lista = repository.findByCompanyDetectorAndLastUpdateBetween(companyDetector, inicio, fim);			
+		
 			result = populateResult(lista);
 			
 		} catch (Exception e) {

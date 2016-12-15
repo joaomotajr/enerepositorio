@@ -43,7 +43,30 @@
 <!-- 	</persistence-unit> -->
 	
 	<persistence-unit name="eneeyes.db.development" transaction-type="RESOURCE_LOCAL">
-    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>    	
+    	<class>br.com.eneeyes.archetype.model.acl.User</class>    	
+    	<class>br.com.eneeyes.archetype.model.acl.Role</class>    	
+    	<class>br.com.eneeyes.archetype.model.acl.Permission</class>
+    	
+    	<class>br.com.eneeyes.main.model.register.Gas</class>
+    	<class>br.com.eneeyes.main.model.register.Controller</class>
+    	<class>br.com.eneeyes.main.model.register.Detector</class>
+    	<class>br.com.eneeyes.main.model.register.Manufacturer</class>
+    	<class>br.com.eneeyes.main.model.register.Sensor</class>
+    	<class>br.com.eneeyes.main.model.register.Transmitter</class>
+    	
+    	<class>br.com.eneeyes.main.model.Alarm</class>
+    	<class>br.com.eneeyes.main.model.Area</class>
+    	<class>br.com.eneeyes.main.model.Company</class>
+    	<class>br.com.eneeyes.main.model.CompanyDetector</class>
+    	<class>br.com.eneeyes.main.model.CompanyDetectorAlarm</class>
+    	<class>br.com.eneeyes.main.model.CompanyDetectorAlarmPK</class>
+    	<class>br.com.eneeyes.main.model.CompanyDevice</class>
+    	<class>br.com.eneeyes.main.model.Historic</class>
+    	<class>br.com.eneeyes.main.model.Position</class>
+    	<class>br.com.eneeyes.main.model.Unit</class>    	
+    	
+    	
 		<properties>
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property>
 			<property name="hibernate.connection.username" value="root"></property>

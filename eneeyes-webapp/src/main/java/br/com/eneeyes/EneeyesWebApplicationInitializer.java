@@ -36,12 +36,16 @@ public class EneeyesWebApplicationInitializer implements WebApplicationInitializ
         log.info(String.format("app.env: %s", System.getProperty("spring.profiles.default")));
 
         HiddenHttpMethodFilter hiddenHttpMethodFilter = new HiddenHttpMethodFilter();
-        servletContext.addFilter("hiddenHttpMethodFilter", hiddenHttpMethodFilter).getServletNameMappings().add("/*");
+        servletContext.addFilter("hiddenHttpMethodFilter", hiddenHttpMethodFilter)
+        //.getServletNameMappings().add("/*");
+        .addMappingForUrlPatterns(null, false, "/*");
 
         CharacterEncodingFilter characterEncondingFilter = new CharacterEncodingFilter();
         characterEncondingFilter.setEncoding("utf8");
         characterEncondingFilter.setForceEncoding(true);
-        servletContext.addFilter("characterEncodingFilter", characterEncondingFilter).getServletNameMappings().add("/*");
+        servletContext.addFilter("characterEncodingFilter", characterEncondingFilter)
+        //.getServletNameMappings().add("/*");
+        .addMappingForUrlPatterns(null, true, "/*");
 
         DelegatingFilterProxy springSecurityFilterChain = new DelegatingFilterProxy();
         FilterRegistration.Dynamic filter = servletContext.addFilter("springSecurityFilterChain", springSecurityFilterChain);

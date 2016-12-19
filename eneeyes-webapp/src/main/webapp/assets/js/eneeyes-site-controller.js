@@ -502,6 +502,6 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         });
     };
 
-   $scope.LoadAjaxContent('navegacao.html', 'Testes')
+   $scope.LoadAjaxContent('companies.html', 'Empresas')
    
 });

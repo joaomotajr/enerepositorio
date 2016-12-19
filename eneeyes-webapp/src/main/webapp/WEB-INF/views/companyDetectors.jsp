@@ -16,13 +16,13 @@
     	background-position: 50% 50%;
 	}
 	
-	td.details-control {
-		background: url("https://datatables.net/examples/resources/details_open.png") no-repeat center center;
+	td.details-control {		
+		background: url("/assets/plugins/datatables/images/details_open.png") no-repeat center center;		
 		cursor: pointer;
 	}	
 
 	tr.shown td.details-control {
-		background: url("https://datatables.net/examples/resources/details_close.png") no-repeat center center;
+		background: url("/assets/plugins/datatables/images/details_close.png") no-repeat center center;
 	}		
 </style>
 
@@ -39,8 +39,7 @@
 					<ul class="nav nav-tabs tabDetector">
 				       	<li class="active"><a href="#tabCompanyDetector_1" id="stepTabDetector_1" data-toggle="tab">Cadastro</a></li>
 				       	<li><a href="#tabCompanyDetector_2" id="stepTabDetector_2" data-toggle="tab">Configuração</a></li>
-				       	<li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Histórico</a></li>
-				       	<li><a href="#tabCompanyDetector_4" id="stepTabDetector_4" data-toggle="tab">Teste</a></li>
+				       	<li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Histórico</a></li>				       	
 				    	<li data-ng-hide="selectedCompanyDetector" class="pull-right"><i title="[Nenhum Detector Associado ao Dispositivo]" class="fa fa-info-circle text-red"></i></li>
 				    </ul>
 					
@@ -57,7 +56,7 @@
 								                <label class="control-label">Nome</label>
 								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
 									            <span data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 20 caracteres</span>
-								                <input id="idAreaName" class="form-control" placeholder="Nome do Detector" data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="20" name="username" required>
+								                <input id="idAreaName" class="form-control" placeholder="Nome do Detector" data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="8" name="username" required>
 								            </div>
 								        </div>
 										
@@ -271,30 +270,6 @@
 					    	</div>
 				       	     
 				     	</div><!-- /.tab-content -->	
-				     	
-				     	<div class="tab-pane" id="tabCompanyDetector_4">	   
-			       			<div class="row">				            	
-			            	  	<div class="col-md-12">
-					              	<div class="panel panel-success">						                
-						                <div class="panel-heading">
-									    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
-									   	</div>
-									   										   					               	
-						               	<div class="panel-body">
-						        
-				        					<div class="tab-pane" id="sensor3">
-										  		<div class="row">
-							               			<div style="max-width: 800px; overflow: auto" id="chart_div1"></div>
-							               		</div>
-										  	</div>
-						               								               		
-					    				</div>
-					    			</div>
-					    		</div>
-					    	</div>
-				       	     
-				     	</div><!-- /.tab-content -->	
-				     	
 				     			     	
 				   </div>			   						
 				</div>

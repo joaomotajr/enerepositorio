@@ -4,6 +4,8 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 	var geocoder;
 	var loadGauge = false;
 	
+	angular.element('body').addClass('loading');
+	
 	$scope.showDanger = function(msg) {		
 		angular.element('body').removeClass('loading');
 		 $scope.$root.msgDanger = msg ;
@@ -204,9 +206,13 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 					 mapTypeId: google.maps.MapTypeId.ROADMAP
 				});		
 			 }, 400);			 
-		 }
-	 	
+		}
+	 		 	
 	 	$("#stepTabUnit_1").trigger("click");
+	 	
+	 	$timeout(function () {
+			angular.element('body').removeClass('loading');				
+		}, 200);
 	}
 	
 	mapUnit = function (lat, lng) {
@@ -232,6 +238,5 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 	
 	$scope.btnNewUnit = true;	
 	$scope.initializeUnit();
-
 		
 });

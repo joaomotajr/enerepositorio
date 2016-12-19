@@ -126,7 +126,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 					expandIcon: 'glyphicon glyphicon-chevron-right',
 			        collapseIcon: 'glyphicon glyphicon-chevron-down',			          
 				    onNodeSelected: function(event, node) {
-			    	
+				    				    	
 				    	//Clear Timer(s)
 				    	while ($scope.$root.timer.length) {				        	
 				            $interval.cancel($scope.$root.timer.pop());				            

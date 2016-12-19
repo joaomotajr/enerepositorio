@@ -245,16 +245,6 @@ app.directive("datemonopicker", ['$filter', function($filter) {
 	}
 }]);
 
-//app.directive("datepicker", function () {
-//	return {
-//	    restrict: "A",
-//	    link: function (scope, el, attr) {
-//	        el.datepicker({ dateFormat: 'dd/mm/yy' });
-//	        //el.mask("99/99/9999");
-//	    }
-//	};
-//});
-
 app.directive('popover', function($compile) { 
     var content =
     	"<div>" +

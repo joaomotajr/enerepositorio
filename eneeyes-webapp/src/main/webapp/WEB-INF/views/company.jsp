@@ -8,11 +8,12 @@
 			</div>
 			
 			<div class="box-body">
-				<div class="col-md-6">
+				<div class="col-md-12">
 					<label>Mapas das Unidades</label>						
-					<div class="entry input-group">					
-				        <div align="center"  id="mapCompany" style="height: 500px; width: 800px"></div>
-					</div>
+					<div style="max-width: 800px; overflow: auto">					
+				        <div id="mapCompany" style="height: 500px; width: 800px"></div>
+					</div>					
+					
 				</div>		
 			</div>		
 			

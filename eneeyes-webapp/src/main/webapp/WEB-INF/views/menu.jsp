@@ -65,8 +65,7 @@
 	              	</a>
 	            	<ul class="treeview-menu">			            		        
 			            <li><a href="#" data-ng-click="LoadAjaxContent('companies.html', 'Empresas')"><i class="fa fa-industry"></i> Empresa</a></li>
-			            <li><a href="#" data-ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn"></i> Alarmes</a></li>
-			            <li><a href="#" data-ng-click="LoadAjaxContent('navegacao.html', 'Testes')"><i class="fa fa-key"></i> Teste</a></li>			            
+			            <li><a href="#" data-ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn"></i> Alarmes</a></li>			            	            
 	              	</ul>
 	            </li>	                  
 	        </ul>

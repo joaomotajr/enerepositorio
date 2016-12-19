@@ -1,6 +1,7 @@
 app.controller('areaController', function ($scope, $timeout, $filter, AreaService, CompanyDetectorService, DetectorService, CompanyDeviceService, CompanyService) {
 
 	var loadGauge = false;
+	angular.element('body').addClass('loading');
 	
 	$scope.showDanger = function(msg) {		
 		angular.element('body').removeClass('loading');
@@ -82,7 +83,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 				$scope.getOneCompany($scope.companyUid);
 			}
 			
-			$scope.showInfo("¡Årea Gravada!");
+			$scope.showInfo("ÔøΩÔøΩrea Gravada!");
 		
 		}, function(data) {
 			$scope.showErro("Erro: " + data.statusText);
@@ -152,7 +153,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		
 		$scope.deletar.$area({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid}, function(){
 			
-			$scope.showDanger("¡rea ExcluÌda!");
+			$scope.showDanger("ÔøΩrea ExcluÔøΩda!");
 			$scope.clearFormArea();
 			$scope.getOneCompany($scope.companyUid);			
 	                 	         	
@@ -239,7 +240,11 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 						
 		}, 500);
 		
-		$("#stepTabArea_1").trigger("click");	
+		$("#stepTabArea_1").trigger("click");
+		
+		$timeout(function () {
+			angular.element('body').removeClass('loading');				
+		}, 200);
 	 }	  
 		
 	drawGaugesArea = function() {

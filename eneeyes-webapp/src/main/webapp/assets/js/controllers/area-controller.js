@@ -47,13 +47,14 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		
 		$scope.inclusaoCompanyDevice = new CompanyDeviceService.save(companyDevice);
 		$scope.inclusaoCompanyDevice.$companyDevice({_csrf : angular.element('#_csrf').val()}, function(){         	
-			
-			$scope.showInfo("Novo Dispositivo Incluído!");	     
+							     
 			$scope.clearFormArea();				        	           
 			$scope.getOneCompany($scope.companyUid);
+			
+			$scope.showInfo($scope.inclusaoCompanyDevice.message);
 						
 		}, function(data) {
-			$scope.showErro("Erro: " + data.statusText);
+			$scope.showErro("Ops: " + data.statusText);
 		});		 
 	 }
 	
@@ -83,7 +84,7 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 				$scope.getOneCompany($scope.companyUid);
 			}
 			
-			$scope.showInfo("��rea Gravada!");
+			$scope.showInfo($scope.inclusaoArea.message);
 		
 		}, function(data) {
 			$scope.showErro("Erro: " + data.statusText);
@@ -118,10 +119,10 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		$scope.updateLatitudeLongitude = new CompanyDetectorService.updateLatitudeLongitude();
 		$scope.updateLatitudeLongitude.$companyDetector({_csrf : angular.element('#_csrf').val(), latitude: latitude, longitude: longitude, id : id }, function(){		
 			
-			$scope.showInfo("Detector Gravado!");
+			$scope.showInfo($scope.updateLatitudeLongitude.message);
 		
 		}, function(data) {
-			$scope.showErro("Erro: " + data.statusText);
+			$scope.showErro("Ops:: " + data.statusText);
 		});			 
 	}
 	
@@ -153,12 +154,13 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		
 		$scope.deletar.$area({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid}, function(){
 			
-			$scope.showDanger("�rea Exclu�da!");
 			$scope.clearFormArea();
-			$scope.getOneCompany($scope.companyUid);			
+			$scope.getOneCompany($scope.companyUid);
+			
+			$scope.showDanger($scope.deletar.message);
 	                 	         	
         }, function(data) {
-        	$scope.showErro("Erro: " + data.statusText);
+        	$scope.showErro("Ops:: " + data.statusText);
 		});		 
 	}	
 	

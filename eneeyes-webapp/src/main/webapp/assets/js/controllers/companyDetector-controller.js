@@ -78,7 +78,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$scope.updateLatitudeLongitude = new CompanyDetectorService.updateLatitudeLongitude();
 		$scope.updateLatitudeLongitude.$companyDetector({_csrf : angular.element('#_csrf').val(), latitude: latitude, longitude: longitude, id : id }, function(){		
 			
-			$scope.showInfo("Detector Gravado!");
+			$scope.showInfo($scope.updateLatitudeLongitude.message);
 					
 		}, function(data) {			
 			$scope.showErro("Ops!! " + data.statusText);
@@ -105,10 +105,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			if($scope.selectedCompanyDetector.uid == undefined) {
 				$scope.selectedCompanyDetector = $scope.inclusaoCompanyDetector.t;
 				$scope.getCompanyDetectorAlarms();
-				initGaugeDetector();
+				//initGaugeDetector();
 			}		
 			
-			$scope.showInfo("Detector Gravado!") ;
+			$scope.showInfo($scope.inclusaoCompanyDetector.message) ;
 					
 		}, function(data) {
 			$scope.showErro("Ops!! " + data.statusText);
@@ -134,8 +134,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$scope.deletar = new CompanyDetectorService.deletar();	
 		
 		$scope.deletar.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
-			
-			$scope.showDanger("Detector Exclu�do!");
+						
+			$scope.showDanger($scope.deletar.message) ;
 			$scope.clearCompanyDetector();
 			$scope.getOneCompany($scope.companyUid);			
 	                 	         	
@@ -340,7 +340,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		objGauge = document.getElementById(id);
 		
 		if (objGauge == undefined) {
-			console.log('Objeto:: ' + id + "N�o localizado:: " + new Date())
+			console.log('Objeto:: ' + id + "Não localizado:: " + new Date())
 		}
 		else {
 			gauge = new google.visualization.Gauge(objGauge);
@@ -380,7 +380,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	    data.addRows(value);
 
 	    var options = {
-	          title: "Medições no Período",
+	          title: "Medi&ccedil;&otilde;es no Per&iacute;odo",
 	          titleTextStyle: { color: '#FF0000' },
 	          legend: { position: 'none' },	          
 	    	  width: 800,
@@ -489,8 +489,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		
 		$scope.deleteCompanyDetectorAlarm = new CompanyDetectorAlarmService.deletar(alarm);
 		$scope.deleteCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
-						
-			$scope.showDanger("Alarme Excluído!");			
+		
+			$scope.showDanger($scope.deleteCompanyDetectorAlarm.message) ;
 		
 		}, function(data) {
 			$scope.showErro("Ops!! " + data.statusText);

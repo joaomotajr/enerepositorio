@@ -24,9 +24,6 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 	
 	@Inject
 	private AreaRepository areaRepository;
-
-//	@Inject
-//	private PositionRepository positionRepository;
 	
 	public BasicResult<?> save(CompanyDeviceDto dto) {
 		Result<CompanyDeviceDto> result = new Result<CompanyDeviceDto>();		
@@ -39,28 +36,12 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 		companyDevice = repository.save(companyDevice);
 		dto.setUid(companyDevice.getUid());
 		
-//		createInitialPosition(area, companyDevice);
-		
 		result.setEntity(dto);
 		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Executado com sucesso.");	
+		result.setMessage("Dispositivos Incluído/Gravado com Sucesso.");	
 		
 		return result;
 	}
-
-//	private void createInitialPosition(Area area, CompanyDevice companyDevice) {
-//		
-//		if(positionRepository.findByCompanyDevice(companyDevice) == null) {
-//
-//			Position position = new Position();	
-//			position.setArea(area);
-//			position.setCompanyDevice(companyDevice);
-//			position.setLastUpdate(new Date());
-//			position.setLastValue((double) 0);
-//			
-//			positionRepository.save(position);
-//		}
-//	}
 
 	public BasicResult<?> delete(Long uid) {
 				
@@ -69,7 +50,7 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 		try {			
 			repository.delete(uid);
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Área Excluída.");
+			result.setMessage("Dispositivo Excluído.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
@@ -101,7 +82,7 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma area.");
+				result.setMessage("Nenhum Dispositivo.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);
@@ -127,7 +108,7 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma area.");
+				result.setMessage("Nenhuma Dispositivo.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

@@ -55,7 +55,7 @@
 								            <div class="form-group">
 								                <label class="control-label">Nome</label>
 								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
-									            <span data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 20 caracteres</span>
+									            <span data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 8 caracteres</span>
 								                <input id="idAreaName" class="form-control" placeholder="Nome do Detector" data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="8" name="username" required>
 								            </div>
 								        </div>
@@ -140,7 +140,7 @@
 				    	
 				       		<div class="row">
 				       			<div class="col-md-12">
-				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name) ? false : true">   Salvar   </button>		       				
+				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true">   Salvar   </button>		       				
 				       				<span class="pull-right">   </span>
 				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">   Excluir   </button>								
 								</div>

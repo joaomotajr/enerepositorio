@@ -2,6 +2,7 @@ package br.com.eneeyes.main.model;
 
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -96,6 +98,9 @@ public class CompanyDetector {
 	@JoinColumn(name="DETECTOR_ID", nullable = false)
 	private Detector detector;
 		
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
+	private Set<Position> position;
+			
 	public Long getUid() {
 		return uid;
 	}
@@ -104,7 +109,7 @@ public class CompanyDetector {
 		this.uid = uid;
 	}
 
-	public String getName() {
+	public String getName() {	
 		return name;
 	}
 

@@ -38,7 +38,7 @@ public class AreaService implements IService<AreaDto> {
 				
 		result.setEntity(dto);
 		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Executado com sucesso.");	
+		result.setMessage("Área Gravada com sucesso.");	
 		
 		return result;
 	}
@@ -82,7 +82,7 @@ public class AreaService implements IService<AreaDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma area.");
+				result.setMessage("Nenhuma Área.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);
@@ -108,7 +108,7 @@ public class AreaService implements IService<AreaDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma area.");
+				result.setMessage("Nenhuma Área.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

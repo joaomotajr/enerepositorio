@@ -3,44 +3,44 @@
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	
-<!-- 	<persistence-unit name="eneeyes.db.production" transaction-type="RESOURCE_LOCAL"> -->
-<!--     	<provider>org.hibernate.ejb.HibernatePersistence	</provider> -->
-<!-- 		<properties> -->
-<!-- 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property> -->
-<!-- 			<property name="hibernate.connection.username" value="root"></property> -->
-<!-- 			<property name="hibernate.connection.password" value="pass"></property> -->
-<!-- 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property> -->
-<!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> -->
-<!-- 			<property name="hibernate.show_sql" value="true" /> -->
-<!-- 			<property name="hibernate.format_sql" value="true" /> -->
-<!-- 			<property name="hibernate.hbm2ddl.auto" value="update" /> -->
-<!-- 			<property name="hibernate.jdbc.batch_size" value="100" /> -->
-<!-- 			<property name="hibernate.order_inserts" value="true" /> -->
-<!-- 			<property name="hibernate.order_updates" value="true" /> -->
-<!-- 			<property name="hibernate.cache.use_second_level_cache" value="true" /> -->
-<!-- 		</properties> -->
-<!-- 	</persistence-unit> -->
+	<persistence-unit name="eneeyes.db.production" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property>
+			<property name="hibernate.connection.username" value="root"></property>
+			<property name="hibernate.connection.password" value="pass"></property>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.jdbc.batch_size" value="100" />
+			<property name="hibernate.order_inserts" value="true" />
+			<property name="hibernate.order_updates" value="true" />
+			<property name="hibernate.cache.use_second_level_cache" value="true" />
+		</properties>
+	</persistence-unit>
 
-<!-- 	<persistence-unit name="eneeyes.db.homologation" transaction-type="RESOURCE_LOCAL"> -->
-<!--     	<provider>org.hibernate.ejb.HibernatePersistence</provider> -->
-<!-- 		<properties> -->
-<!-- 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property> -->
-<!-- 			<property name="hibernate.connection.username" value="root"></property> -->
-<!-- 			<property name="hibernate.connection.password" value="pass"></property> -->
-<!-- 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property> -->
-<!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> -->
-<!-- 			<property name="hibernate.show_sql" value="false" /> -->
-<!-- 			<property name="hibernate.format_sql" value="true" /> -->
-<!-- 			<property name="hibernate.hbm2ddl.auto" value="update" /> -->
-<!-- 			<property name="hibernate.jdbc.batch_size" value="100" /> -->
-<!-- 			<property name="hibernate.order_inserts" value="true" /> -->
-<!-- 			<property name="hibernate.order_updates" value="true" /> -->
-<!-- 			<property name="hibernate.cache.use_second_level_cache" value="true" /> -->
+	<persistence-unit name="eneeyes.db.homologation" transaction-type="RESOURCE_LOCAL">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property>
+			<property name="hibernate.connection.username" value="root"></property>
+			<property name="hibernate.connection.password" value="pass"></property>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.jdbc.batch_size" value="100" />
+			<property name="hibernate.order_inserts" value="true" />
+			<property name="hibernate.order_updates" value="true" />
+			<property name="hibernate.cache.use_second_level_cache" value="true" />
 			<!-- <property name="hibernate.multiTenancy" value="SCHEMA"/>
 			<property name="hibernate.tenant_identifier_resolver" value="br.com.eneeyes.archetype.web.config.multitenant.SchemaResolver"/>
 			<property name="hibernate.multi_tenant_connection_provider" value="br.com.eneeyes.archetype.web.config.multitenant.MultiTenantProvider"/> -->
-<!-- 		</properties> -->
-<!-- 	</persistence-unit> -->
+		</properties>
+	</persistence-unit>
 	
 	<persistence-unit name="eneeyes.db.development" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
@@ -89,21 +89,21 @@
 		</properties>
 	</persistence-unit>
 
-<!-- 	<persistence-unit name="eneeyes.db.development.forward" transaction-type="RESOURCE_LOCAL"> -->
-<!--     	<provider>org.hibernate.ejb.HibernatePersistence</provider> -->
-<!-- 		<properties> -->
-<!-- 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property> -->
-<!-- 			<property name="hibernate.connection.username" value="root"></property> -->
-<!-- 			<property name="hibernate.connection.password" value="pass"></property> -->
-<!-- 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property> -->
-<!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> -->
-<!-- 			<property name="hibernate.show_sql" value="true" /> -->
-<!-- 			<property name="hibernate.format_sql" value="true" /> -->
-<!-- 			<property name="hibernate.hbm2ddl.auto" value="update" /> -->
-<!-- 			<property name="hibernate.jdbc.batch_size" value="100" /> -->
-<!-- 			<property name="hibernate.order_inserts" value="true" /> -->
-<!-- 			<property name="hibernate.order_updates" value="true" /> -->
-<!-- 			<property name="hibernate.cache.use_second_level_cache" value="true" /> -->
-<!-- 		</properties> -->
-<!-- 	</persistence-unit> -->
+	<persistence-unit name="eneeyes.db.development.forward" transaction-type="RESOURCE_LOCAL">
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<properties>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property>
+			<property name="hibernate.connection.username" value="root"></property>
+			<property name="hibernate.connection.password" value="pass"></property>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.jdbc.batch_size" value="100" />
+			<property name="hibernate.order_inserts" value="true" />
+			<property name="hibernate.order_updates" value="true" />
+			<property name="hibernate.cache.use_second_level_cache" value="true" />
+		</properties>
+	</persistence-unit>
 </persistence>

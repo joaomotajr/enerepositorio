@@ -31,7 +31,7 @@ public class CompanyService implements IService<CompanyDto> {
 		result.setEntity(dto);
 		
 		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Executado com sucesso.");	
+		result.setMessage("Empresa Gravada com sucesso.");	
 		
 		return result;
 	}

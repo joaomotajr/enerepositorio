@@ -51,7 +51,7 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 						
 		result.setEntity(new CompanyDetectorDto(companyDetector));
 		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Executado com sucesso.");	
+		result.setMessage("Detector Gravado com Sucesso.");	
 		
 		return result;
 	}

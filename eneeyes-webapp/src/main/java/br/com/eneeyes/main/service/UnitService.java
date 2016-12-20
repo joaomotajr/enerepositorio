@@ -38,7 +38,7 @@ public class UnitService implements IService<UnitDto> {
 		result.setEntity(dto);
 		
 		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Executado com sucesso.");					
+		result.setMessage("Unidade Gravada com Sucesso.");					
 		
 		return result;
 	}

@@ -45,9 +45,11 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 		 
 		$scope.inclusaoArea = new AreaService.save(area);
 		$scope.inclusaoArea.$area({_csrf : angular.element('#_csrf').val()}, function(){
-			$scope.showInfo("Nova ¡Årea IncluÌda!");
+						
 			$scope.clearFormUnit();						
-			$scope.getOneCompany($scope.companyUid);			
+			$scope.getOneCompany($scope.companyUid);
+			
+			$scope.showInfo($scope.inclusaoArea.message);
 			
         });
 		 
@@ -64,13 +66,14 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 		$scope.deletar = new UnitService.deletar();	
 		
 		$scope.deletar.$unit({_csrf : angular.element('#_csrf').val(), id : $scope.selectedUnit.uid}, function(){
-			
-			$scope.showDanger("Unidade ExcluÌda!");
+						
 			$scope.clearFormUnit();
-			$scope.getOneCompany($scope.companyUid);				
+			$scope.getOneCompany($scope.companyUid);
+			
+			$scope.showDanger($scope.deletar.message);
 	        
         }, function(data) {
-        	$scope.showErro("Erro: " + data.statusText);
+        	$scope.showErro("Ops: " + data.statusText);
 		});		 
 	}
 	
@@ -125,7 +128,7 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 				$scope.getOneCompany($scope.companyUid);
 			}
 			
-			$scope.showInfo("Unidade Gravada");
+			$scope.showInfo($scope.inclusaoUnit.message);
 					
        });       
 	}

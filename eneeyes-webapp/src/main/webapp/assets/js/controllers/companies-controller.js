@@ -31,12 +31,15 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		 $scope.deletar = new CompanyService.deletar();		 
 		 $scope.deletar.$company({_csrf : angular.element('#_csrf').val(), id : $scope.companyUid}, function(){			
 			 
-			 $scope.showDanger("Companhia Excluída!") ;
-			 $scope.clearFormCompany();
-	         $scope.getCompanys();   
+		 	$scope.clearFormCompany();
+            $scope.getCompanys();   
+            
+            $timeout(function () { $('#selCompany').select2();}, 200);                       
+            $scope.showDanger($scope.deletar.message);
+			 	         
 			 	                  	         	
         }, function(data) {        	
-        	$scope.show("Erro:: " + statusText);
+        	$scope.show("Ops:: " + statusText);
 		 });		 
 	}
 	
@@ -56,7 +59,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
             $scope.getCompanys();   
             
             $timeout(function () { $('#selCompany').select2();}, 200);                       
-            $scope.showInfo("Companhia Gravada!") ;
+            $scope.showInfo($scope.inclusaoCompany.message) ;
             
                                              	
          });		 
@@ -95,7 +98,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 			$scope.clearFormCompany();					
 			$scope.getCompanys();
 			
-			$timeout(function () { $('#selCompany').select2(); }, 100);
+			$timeout(function () { $('#selCompany').select2(); }, 200);
 		}		
 	}
 	

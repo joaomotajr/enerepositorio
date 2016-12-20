@@ -28,8 +28,7 @@
 				                            aria-hidden="true">
 				                            	<option value="" selected="selected">Selecione</option>                              				                            	
 				                                <option data-ng-repeat="company in companies" data-ng-model="company" value="{{company}}" > {{company.name}} </option>				                                                    
-				                        </select>
-				                        							                                                                    
+				                        </select>				                        							                                                                    
 				                    </div>        
 				                </div>        
 		                            
@@ -54,7 +53,7 @@
 								<span class="pull-right">   </span>
 								<button type="button" data-ng-click="saveCompany();" class="btn btn-primary pull-right" data-ng-disabled="(companyName) ? false : true">   Salvar   </button>
 								<span class="pull-right">   </span>												
-								<button type="button" data-ng-click="deleteCompany();" class="btn btn-danger pull-right" data-ng-disabled="(companyName) ? false : true">   Excluir   </button>
+								<button type="button" data-ng-click="deleteCompany();" class="btn btn-danger pull-right" data-ng-disabled="!companyUid">   Excluir   </button>
 							</div>
 						</div> 
 					</div>

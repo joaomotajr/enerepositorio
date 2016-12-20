@@ -43,7 +43,9 @@
 <!-- 	</persistence-unit> -->
 	
 	<persistence-unit name="eneeyes.db.development" transaction-type="RESOURCE_LOCAL">
-    	<provider>org.hibernate.ejb.HibernatePersistence</provider>    	
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	
+    	<!-- 
     	<class>br.com.eneeyes.archetype.model.acl.User</class>    	
     	<class>br.com.eneeyes.archetype.model.acl.Role</class>    	
     	<class>br.com.eneeyes.archetype.model.acl.Permission</class>
@@ -65,7 +67,7 @@
     	<class>br.com.eneeyes.main.model.Historic</class>
     	<class>br.com.eneeyes.main.model.Position</class>
     	<class>br.com.eneeyes.main.model.Unit</class>    	
-    	
+    	 -->
     	
 		<properties>
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property>

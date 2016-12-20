@@ -43,7 +43,7 @@ public class CompanyService implements IService<CompanyDto> {
 		try {			
 			repository.delete(uid);
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Área Excluída.");
+			result.setMessage("Empresa Excluída.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			

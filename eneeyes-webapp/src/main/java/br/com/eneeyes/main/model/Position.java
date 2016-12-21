@@ -42,7 +42,7 @@ public class Position {
 	@Column(name = "LAST_VALUE", nullable = true)
 	private Double lastValue;
     		
-	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
 	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
 	private CompanyDetector companyDetector;
 	

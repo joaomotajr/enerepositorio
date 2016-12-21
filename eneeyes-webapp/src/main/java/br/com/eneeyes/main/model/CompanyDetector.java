@@ -100,6 +100,9 @@ public class CompanyDetector {
 		
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
 	private Set<Position> position;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
+	private Set<Historic> historic;
 			
 	public Long getUid() {
 		return uid;

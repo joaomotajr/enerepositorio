@@ -127,7 +127,7 @@
 			                        </select>
 			                                       
 							        <span class="input-group-btn">
-							        <button class="btn btn-info btn-flat" type="button" ng-click="saveCompanyDeviceInit();">OK</button>
+							        <button class="btn btn-info btn-flat" type="button" ng-disabled="!sensorDetectionType" ng-click="saveCompanyDeviceInit();">OK</button>
 							        </span>
 								</div>
 							</div>

@@ -48,8 +48,10 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 		$scope.inclusaoCompanyDevice = new CompanyDeviceService.save(companyDevice);
 		$scope.inclusaoCompanyDevice.$companyDevice({_csrf : angular.element('#_csrf').val()}, function(){         	
 							     
-			$scope.clearFormArea();				        	           
+			//$scope.clearFormArea();				        	           
 			$scope.getOneCompany($scope.companyUid);
+			
+			$scope.sensorDetectionType = '';
 			
 			$scope.showInfo($scope.inclusaoCompanyDevice.message);
 						

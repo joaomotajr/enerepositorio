@@ -1,5 +1,6 @@
 package br.com.eneeyes.main.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.CompanyDeviceDto;
@@ -44,7 +46,10 @@ public class CompanyDevice {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="AREA_ID", nullable=false)
-    private Area area;	
+    private Area area;
+		
+	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "companyDevice")
+	private CompanyDetector companyDetector;
 		
 	public Long getUid() {
 		return uid;

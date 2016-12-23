@@ -1,0 +1,574 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.highlighted {
+   color: #ffffff !important;
+   background-color: #3cb066!important;
+}
+
+.no-highlighted {
+   color: #fc142a!important;
+}
+
+html {
+    -webkit-transition: background-color 1s;
+    transition: background-color 1s;
+}
+html, body {
+    /* For the loading indicator to be vertically centered ensure */
+    /* the html and body elements take up the full viewport */
+    min-height: 100%;
+}
+html.loading {
+    /* Replace #333 with the background-color of your choice */
+    /* Replace loading.gif with the loading image of your choice */
+    background: rgba( 255, 255, 255, .2 ) url('../img/rolling.gif') no-repeat 50% 50%;
+
+    /* Ensures that the transition only runs in one direction */
+    -webkit-transition: background-color 0;
+    transition: background-color 0;
+}
+body {
+    -webkit-transition: opacity 1s ease-in;
+    transition: opacity 1s ease-in;
+}
+html.loading body {
+    /* Make the contents of the body opaque during loading */
+    opacity: 0.1;
+
+    /* Ensures that the transition only runs in one direction */
+    -webkit-transition: opacity 0.1;
+    transition: opacity 0.1;
+}
+
+/* BLOCO PARA AJUSTAR COR DOS BOTOES NA TELA DE RESUMO */
+
+.btn-primary-dashboard {
+	/* Ajusta cor do bot�o sem foco */
+	color: #ffffff;
+	background-color: #a3c2e7;
+	border-color: #285e8e;
+}
+
+.btn-primary-dashboard:hover,
+.btn-primary-dashboard:focus,
+.btn-primary-dashboard:active,
+.btn-primary-dashboard.active,
+.open .dropdown-toggle.btn-primary-dashboard {
+	/* Ajusta cor do bot�o ativo */
+  color: #ffffff;
+  background-color: #285e8e;
+  border-color: #a3c2e7;
+}
+
+.btn-success-dashboard {
+  color: #ffffff;
+  background-color: #89cb89;
+  border-color: #47a447;
+}
+
+.btn-success-dashboard:hover,
+.btn-success-dashboard:focus,
+.btn-success-dashboard:active,
+.btn-success-dashboard.active,
+.open .dropdown-toggle.btn-success-dashboard {
+  color: #ffffff;
+  background-color: #47a447;
+  border-color: #89cb89;
+}
+
+.btn-warning-dashboard {
+  color: #ffffff;
+  background-color: #f4c482;
+  border-color: #ed9c28;
+}
+
+.btn-warning-dashboard:hover,
+.btn-warning-dashboard:focus,
+.btn-warning-dashboard:active,
+.btn-warning-dashboard.active,
+.open .dropdown-toggle.btn-warning-dashboard {
+  color: #ffffff;
+  background-color: #ed9c28;
+  border-color: #f4c482;
+}
+
+.btn-danger-dashboard {
+  color: #ffffff;
+  background-color: #e27b78;
+  border-color: #d2322d;
+}
+
+.btn-danger-dashboard:hover,
+.btn-danger-dashboard:focus,
+.btn-danger-dashboard:active,
+.btn-danger-dashboard.active,
+.open .dropdown-toggle.btn-danger-dashboard {
+  color: #ffffff;
+  background-color: #d2322d;
+  border-color: #e27b78;
+}
+
+/* FIM BLOCO PARA AJUSTAR COR DOS BOTOES NA TELA DE RESUMO */
+
+/* BLOCO PARA AJUSTAR COR DOS NAV-PILLS CONFORME OPCAO DO DASHBOARD */
+.nav-pills-primary > li {
+  float: left;
+}
+
+.nav-pills-primary > li > a {
+  border-radius: 5px;
+}
+
+.nav-pills-primary > li + li {
+  margin-left: 2px;
+}
+
+.nav-pills-primary > li.active > a,
+.nav-pills-primary > li.active > a:hover,
+.nav-pills-primary > li.active > a:focus {
+  color: #ffffff;
+  background-color: #285e8e;
+}
+
+.nav-pills-info > li {
+  float: left;
+}
+
+.nav-pills-info > li > a {
+  border-radius: 5px;
+}
+
+.nav-pills-info > li + li {
+  margin-left: 2px;
+}
+
+.nav-pills-info > li.active > a,
+.nav-pills-info > li.active > a:hover,
+.nav-pills-info > li.active > a:focus {
+  color: #ffffff;
+  background-color: #39b3d7;
+}
+
+.nav-pills-success > li {
+  float: left;
+}
+
+.nav-pills-success > li > a {
+  border-radius: 5px;
+}
+
+.nav-pills-success > li + li {
+  margin-left: 2px;
+}
+
+.nav-pills-success > li.active > a,
+.nav-pills-success > li.active > a:hover,
+.nav-pills-success > li.active > a:focus {
+  color: #ffffff;
+  background-color: #47a447;
+}
+
+.nav-pills-warning > li {
+  float: left;
+}
+
+.nav-pills-warning > li > a {
+  border-radius: 5px;
+}
+
+.nav-pills-warning > li + li {
+  margin-left: 2px;
+}
+
+.nav-pills-warning > li.active > a,
+.nav-pills-warning > li.active > a:hover,
+.nav-pills-warning > li.active > a:focus {
+  color: #ffffff;
+  background-color: #ed9c28;
+}
+
+.nav-pills-danger > li {
+  float: left;
+}
+
+.nav-pills-danger > li > a {
+  border-radius: 5px;
+}
+
+.nav-pills-danger > li + li {
+  margin-left: 2px;
+}
+
+.nav-pills-danger > li.active > a,
+.nav-pills-danger > li.active > a:hover,
+.nav-pills-danger > li.active > a:focus {
+  color: #ffffff;
+  background-color: #d2322d;
+}
+
+/* FIM BLOCO PARA AJUSTAR COR DOS NAV-PILLS CONFORME OPCAO DO DASHBOARD */
+
+.table > thead > tr > td.pessimo,
+.table > tbody > tr > td.pessimo,
+.table > tfoot > tr > td.pessimo,
+.table > thead > tr > th.pessimo,
+.table > tbody > tr > th.pessimo,
+.table > tfoot > tr > th.pessimo,
+.table > thead > tr.pessimo > td,
+.table > tbody > tr.pessimo > td,
+.table > tfoot > tr.pessimo > td,
+.table > thead > tr.pessimo > th,
+.table > tbody > tr.pessimo > th,
+.table > tfoot > tr.pessimo > th {
+  background-color: #ded7fe;
+  border-color: #c9befd;
+}
+
+.table-hover > tbody > tr > td.pessimo:hover,
+.table-hover > tbody > tr > th.pessimo:hover,
+.table-hover > tbody > tr.pessimo:hover > td,
+.table-hover > tbody > tr.pessimo:hover > th {
+  background-color: #c9befd;
+  border-color: #b4a5fc;
+}
+
+.table > thead > tr > td.tipoVenda,
+.table > tbody > tr > td.tipoVenda,
+.table > tfoot > tr > td.tipoVenda,
+.table > thead > tr > th.tipoVenda,
+.table > tbody > tr > th.tipoVenda,
+.table > tfoot > tr > th.tipoVenda,
+.table > thead > tr.tipoVenda > td,
+.table > tbody > tr.tipoVenda > td,
+.table > tfoot > tr.tipoVenda > td,
+.table > thead > tr.tipoVenda > th,
+.table > tbody > tr.tipoVenda > th,
+.table > tfoot > tr.tipoVenda > th {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.table-hover > tbody > tr > td.tipoVenda:hover,
+.table-hover > tbody > tr > th.tipoVenda:hover,
+.table-hover > tbody > tr.tipoVenda:hover > td,
+.table-hover > tbody > tr.tipoVenda:hover > th {
+  background-color: #d0e9c6;
+  border-color: #c9e2b3;
+}
+
+.table > thead > tr > td.recusada,
+.table > tbody > tr > td.recusada,
+.table > tfoot > tr > td.recusada,
+.table > thead > tr > th.recusada,
+.table > tbody > tr > th.recusada,
+.table > tfoot > tr > th.recusada,
+.table > thead > tr.recusada > td,
+.table > tbody > tr.recusada > td,
+.table > tfoot > tr.recusada > td,
+.table > thead > tr.recusada > th,
+.table > tbody > tr.recusada > th,
+.table > tfoot > tr.recusada > th {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+.table-hover > tbody > tr > td.recusada:hover,
+.table-hover > tbody > tr > th.recusada:hover,
+.table-hover > tbody > tr.recusada:hover > td,
+.table-hover > tbody > tr.recusada:hover > th {
+  background-color: #ebcccc;
+  border-color: #e6c1c7;
+}
+
+.table > thead > tr > td.pendente,
+.table > tbody > tr > td.pendente,
+.table > tfoot > tr > td.pendente,
+.table > thead > tr > th.pendente,
+.table > tbody > tr > th.pendente,
+.table > tfoot > tr > th.pendente,
+.table > thead > tr.pendente > td,
+.table > tbody > tr.pendente > td,
+.table > tfoot > tr.pendente > td,
+.table > thead > tr.pendente > th,
+.table > tbody > tr.pendente > th,
+.table > tfoot > tr.pendente > th {
+  background-color: #fcf8e3;
+  border-color: #fbeed5;
+}
+
+.table-hover > tbody > tr > td.pendente:hover,
+.table-hover > tbody > tr > th.pendente:hover,
+.table-hover > tbody > tr.pendente:hover > td,
+.table-hover > tbody > tr.pendente:hover > th {
+  background-color: #faf2cc;
+  border-color: #f8e5be;
+}
+
+.table > thead > tr > td.taxa,
+.table > tbody > tr > td.taxa,
+.table > tfoot > tr > td.taxa,
+.table > thead > tr > th.taxa,
+.table > tbody > tr > th.taxa,
+.table > tfoot > tr > th.taxa,
+.table > thead > tr.taxa > td,
+.table > tbody > tr.taxa > td,
+.table > tfoot > tr.taxa > td,
+.table > thead > tr.taxa > th,
+.table > tbody > tr.taxa > th,
+.table > tfoot > tr.taxa > th {
+  background-color: #e7c8a9;
+  border-color: #e2bb95;
+}
+
+.table-hover > tbody > tr > td.taxa:hover,
+.table-hover > tbody > tr > th.taxa:hover,
+.table-hover > tbody > tr.taxa:hover > td,
+.table-hover > tbody > tr.taxa:hover > th {
+  background-color: #e2bb95;
+  border-color: #dcae81;
+}
+
+.table > thead > tr > td.data,
+.table > tbody > tr > td.data,
+.table > tfoot > tr > td.data,
+.table > thead > tr > th.data,
+.table > tbody > tr > th.data,
+.table > tfoot > tr > th.data,
+.table > thead > tr.data > td,
+.table > tbody > tr.data > td,
+.table > tfoot > tr.data > td,
+.table > thead > tr.data > th,
+.table > tbody > tr.data > th,
+.table > tfoot > tr.data > th {
+  background-color: #ffbf80;
+  border-color: #ffb267;
+}
+
+.table-hover > tbody > tr > td.data:hover,
+.table-hover > tbody > tr > th.data:hover,
+.table-hover > tbody > tr.data:hover > td,
+.table-hover > tbody > tr.data:hover > th {
+  background-color: #ffb267;
+  border-color: #ffa54d;
+}
+
+.table > thead > tr > td.pagamento,
+.table > tbody > tr > td.pagamento,
+.table > tfoot > tr > td.pagamento,
+.table > thead > tr > th.pagamento,
+.table > tbody > tr > th.pagamento,
+.table > tfoot > tr > th.pagamento,
+.table > thead > tr.pagamento > td,
+.table > tbody > tr.pagamento > td,
+.table > tfoot > tr.pagamento > td,
+.table > thead > tr.pagamento > th,
+.table > tbody > tr.pagamento > th,
+.table > tfoot > tr.pagamento > th {
+  background-color: #cde6ff;
+  border-color: #b4d9ff;
+}
+
+.table-hover > tbody > tr > td.pagamento:hover,
+.table-hover > tbody > tr > th.pagamento:hover,
+.table-hover > tbody > tr.pagamento:hover > td,
+.table-hover > tbody > tr.pagamento:hover > th {
+  background-color: #b4d9ff;
+  border-color: #9accff;
+}
+
+.table > thead > tr > td.parcelas,
+.table > tbody > tr > td.parcelas,
+.table > tfoot > tr > td.parcelas,
+.table > thead > tr > th.parcelas,
+.table > tbody > tr > th.parcelas,
+.table > tfoot > tr > th.parcelas,
+.table > thead > tr.parcelas > td,
+.table > tbody > tr.parcelas > td,
+.table > tfoot > tr.parcelas > td,
+.table > thead > tr.parcelas > th,
+.table > tbody > tr.parcelas > th,
+.table > tfoot > tr.parcelas > th {
+  background-color: #ccffe6;
+  border-color: #b3ffd9;
+}
+
+.table-hover > tbody > tr > td.parcelas:hover,
+.table-hover > tbody > tr > th.parcelas:hover,
+.table-hover > tbody > tr.parcelas:hover > td,
+.table-hover > tbody > tr.parcelas:hover > th {
+  background-color: #b3ffd9;
+  border-color: #99ffcc;
+}
+
+.table > thead > tr > td.chargeback,
+.table > tbody > tr > td.chargeback,
+.table > tfoot > tr > td.chargeback,
+.table > thead > tr > th.chargeback,
+.table > tbody > tr > th.chargeback,
+.table > tfoot > tr > th.chargeback,
+.table > thead > tr.chargeback > td,
+.table > tbody > tr.chargeback > td,
+.table > tfoot > tr.chargeback > td,
+.table > thead > tr.chargeback > th,
+.table > tbody > tr.chargeback > th,
+.table > tfoot > tr.chargeback > th {
+  background-color: #ff9aff;
+  border-color: #ff80ff;
+}
+
+.table-hover > tbody > tr > td.chargeback:hover,
+.table-hover > tbody > tr > th.chargeback:hover,
+.table-hover > tbody > tr.chargeback:hover > td,
+.table-hover > tbody > tr.chargeback:hover > th {
+  background-color: #ff80ff;
+  border-color: #ff67ff;
+}
+
+
+
+
+.panel-pessimo {
+  border-color: #c9befd;
+}
+
+.panel-pessimo > .panel-heading {
+  color: #765bfa;
+  background-color: #ded7fe;
+  border-color: #c9befd;
+}
+
+.panel-pessimo > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #c9befd;
+}
+
+.panel-pessimo > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #c9befd;
+}
+
+.panel-tipoVenda {
+  border-color: #d6e9c6;
+}
+
+.panel-tipoVenda > .panel-heading {
+  color: #b2dba1;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.panel-tipoVenda > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #d6e9c6;
+}
+
+.panel-tipoVenda > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #d6e9c6;
+}
+
+.panel-recusada {
+  border-color: #eed3d7;
+}
+
+.panel-recusada > .panel-heading {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
+.panel-recusada > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #eed3d7;
+}
+
+.panel-recusada > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #eed3d7;
+}
+
+.panel-taxa {
+  border-color: #e2bb95;
+}
+
+.panel-taxa > .panel-heading {
+  color: #d6a26d;
+  background-color: #e7c8a9;
+  border-color: #e2bb95;
+}
+
+.panel-taxa > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #e2bb95;
+}
+
+.panel-taxa > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #e2bb95;
+}
+
+.panel-data {
+  border-color: #ffb267;
+}
+
+.panel-data > .panel-heading {
+  color: #ff9834;
+  background-color: #ffbf80;
+  border-color: #ffb267;
+}
+
+.panel-data > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #ffb267;
+}
+
+.panel-data > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #ffb267;
+}
+
+.panel-pagamento {
+  border-color: #b4d9ff;
+}
+
+.panel-pagamento > .panel-heading {
+  color: #81c0ff;
+  background-color: #cde6ff;
+  border-color: #b4d9ff;
+}
+
+.panel-pagamento > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #b4d9ff;
+}
+
+.panel-pagamento > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #b4d9ff;
+}
+
+.panel-parcelas {
+  border-color: #b3ffd9;
+}
+
+.panel-parcelas > .panel-heading {
+  color: #34ff9c;
+  background-color: #ccffe6;
+  border-color: #b3ffd9;
+}
+
+.panel-parcelas > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #b3ffd9;
+}
+
+.panel-parcelas > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #b3ffd9;
+}
+
+.panel-chargeback {
+  border-color: #ff80ff;
+}
+
+.panel-chargeback > .panel-heading {
+  color: #ff4eff;
+  background-color: #ff9aff;
+  border-color: #ff80ff;
+}
+
+.panel-chargeback > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #ff80ff;
+}
+
+.panel-chargeback > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #ff80ff;
+}

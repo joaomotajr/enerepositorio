@@ -1,224 +1,5 @@
-//app.factory('HistoricService', function($resource){    
-//    
-//    return {
-//    	deletar : $resource('/security/api/historic/delete/:id', {id: '@id'},{
-//    		historic : {method : 'DELETE'}
-//        }),        
-//        listAll : $resource('/security/api/historic/all',{},{
-//        	historic : {method : 'GET'}
-//        }),
-//        listOne : $resource('/security/api/historic/obtemPorId/:id', {id: '@id'},{
-//        	historic : {method : 'GET'}
-//        }),       
-//        save : $resource('/security/api/historic/save',{},{
-//        	historic : {method : 'POST'}
-//        }),
-//        listIntervalDays : $resource('/security/api/historic/findByCompanyDetectorAndSensorAndIntervalDays/:companyDetectorId/:sensorId/:dateIn/:dateOut/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', dateIn: '@dateIn', dateIn: '@dateOut' },{        
-//        	historic : {method : 'GET'}
-//        }),
-//        listInterval : $resource('/security/api/historic/findByCompanyDetectorAndSensorAndInterval/:companyDetectorId/:sensorId/:interval/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', interval: '@interval'},{        
-//        	historic : {method : 'GET'}
-//        }),
-//        listLastMonth : $resource('/security/api/historic/findByCompanyDetectorAndSensorLastMonth/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
-//        	historic : {method : 'GET'}
-//        }),        
-//     };
-//});
 
-
-app.factory('DetectorService', function($resource){    
-    
-    return {
-    	deletar : $resource('/security/api/detector/delete/:id', {id: '@id'},{
-    		detector : {method : 'DELETE'}
-        }),        
-        listAll : $resource('/security/api/detector/all',{},{
-        	detector : {method : 'GET'}
-        }),
-        listOne : $resource('/security/api/detector/obtemPorId/:id', {id: '@id'},{
-        	detector : {method : 'GET'}
-        }),       
-        save : $resource('/security/api/detector/save',{},{
-        	detector : {method : 'POST'}
-        }),
-     };
-});
-
-app.factory('TransmitterService', function($resource){    
-    
-    return {
-    	deletar : $resource('/security/api/transmitter/delete/:id', {id: '@id'},{
-    		transmitter : {method : 'DELETE'}
-        }),        
-        listAll : $resource('/security/api/transmitter/all',{},{
-        	transmitter : {method : 'GET'}
-        }),
-        listOne : $resource('/security/api/transmitter/obtemPorId/:id', {id: '@id'},{
-        	transmitter : {method : 'GET'}
-        }),
-        save : $resource('/security/api/transmitter/save',{},{
-        	transmitter : {method : 'POST'}
-        }),
-     };
-});
-
-app.factory('SensorService', function($resource){    
-    
-    return {
-    	deletar : $resource('/security/api/sensor/delete/:id', {id: '@id'},{
-    		sensor : {method : 'DELETE'}
-        }),        
-        listAll : $resource('/security/api/sensor/all',{},{
-        	sensor : {method : 'GET'}
-        }),
-        listOne : $resource('/security/api/sensor/obtemPorId/:id', {id: '@id'},{
-        	sensor : {method : 'GET'}
-        }),
-        save : $resource('/security/api/sensor/save',{},{
-        	sensor : {method : 'POST'}
-        }),
-     };
-});
-
-app.factory('GasService', function($resource){    
-    
-    return {
-    	deletar : $resource('/security/api/gas/delete/:id', {id: '@id'},{
-    		gas : {method : 'DELETE'}
-        }),        
-        listAll : $resource('/security/api/gas/all',{},{
-        	gas : {method : 'GET'}
-        }),
-        listOne : $resource('/security/api/gas/obtemPorId/:id', {id: '@id'},{
-        	gas : {method : 'GET'}
-        }),
-        save : $resource('/security/api/gas/save',{},{
-        	gas : {method : 'POST'}
-        }),
-     };
-});
-
-app.factory('ControllerService', function($resource){    
-    
-    return {
-    	deletar : $resource('/security/api/controller/delete/:id', {id: '@id'},{
-    		controller : {method : 'DELETE'}
-        }),        
-        listAll : $resource('/security/api/controller/all',{},{
-        	controller : {method : 'GET'}
-        }),
-        listOne : $resource('/security/api/controller/obtemPorId/:id', {id: '@id'},{
-        	controller : {method : 'GET'}
-        }),
-        save : $resource('/security/api/controller/save',{},{
-        	controller : {method : 'POST'}
-        }),
-     };
-});
-
-app.factory('CompanyDetectorService', function($resource){    
-    
-    return {
-    	deletar : $resource('/security/api/companyDetector/delete/:id', {id: '@id'},{
-    		companyDetector : {method : 'DELETE'}
-        }),        
-        listAll : $resource('/security/api/companyDetector/all',{},{
-        	companyDetector : {method : 'GET'}
-        }),
-        listOne : $resource('/security/api/companyDetector/obtemPorId/:id', {id: '@id'},{
-        	companyDetector : {method : 'GET'}
-        }),   
-	    listPorIdDeviceType : $resource('/security/api/companyDetector/obtemPorIdDeviceType/:id', {id: '@id'},{
-	    	companyDetector : {method : 'GET'}
-	    }),    
-	    listPorIdArea : $resource('/security/api/companyDetector/obtemPorIdArea/:id', {id: '@id'},{
-	    	companyDetector : {method : 'GET'}
-	    }),
-        save : $resource('/security/api/companyDetector/save',{},{
-        	companyDetector : {method : 'POST'}
-        }),
-     };
-});
-
-app.factory('CompanyDeviceService', function($resource){    
-    
-    return {
-    	deletar : $resource('/security/api/companyDevice/delete/:id', {id: '@id'},{
-    		companyDevice : {method : 'DELETE'}
-        }),        
-        listAll : $resource('/security/api/companyDevice/all',{},{
-        	companyDevice : {method : 'GET'}
-        }),
-        listOne : $resource('/security/api/companyDevice/obtemPorId/:id', {id: '@id'},{
-        	companyDevice : {method : 'GET'}
-        }),
-        save : $resource('/security/api/companyDevice/save',{},{
-        	companyDevice : {method : 'POST'}
-        }),
-     };
-});
-
-app.factory('AreaService', function($resource){    
-    
-    return {
-    	deletar : $resource('/security/api/area/delete/:id', {id: '@id'},{
-            area : {method : 'DELETE'}
-        }),        
-        listAll : $resource('/security/api/area/all',{},{
-            area : {method : 'GET'}
-        }),
-        listOne : $resource('/security/api/area/obtemPorId/:id', {id: '@id'},{
-            area : {method : 'GET'}
-        }),
-        save : $resource('/security/api/area/save',{},{
-            area : {method : 'POST'}
-        }),
-     };
-});
-
-app.factory('UnitService', function($resource){    
-    
-    return {
-    	deletar : $resource('/security/api/unit/delete/:id', {id: '@id'},{
-    		unit : {method : 'DELETE'}
-        }),        
-        listAll : $resource('/security/api/unit/all',{},{
-        	unit : {method : 'GET'}
-        }),
-        listOne : $resource('/security/api/unit/obtemPorId/:id', {id: '@id'},{
-        	unit : {method : 'GET'}
-        }),
-        save : $resource('/security/api/unit/save',{},{
-        	unit : {method : 'POST'}
-        }),
-        setParent : $resource('/security/api/unit/setparent/:id/:parentid/', {id: '@id', parentid: '@parentid'}, {
-        	unit : {method : 'GET'}
-        }),
-        listAllFilter : $resource('/security/api/unit/allFilter',{},{
-        	unit : {method : 'GET'}
-        }),        
-     };
-});
-
-app.factory('CompanyService', function($resource){    
-    
-    return {
-    	deletar : $resource('/security/api/company/delete/:id', {id: '@id'},{
-    		company : {method : 'DELETE'}
-        }),        
-        listAll : $resource('/security/api/company/all',{},{
-        	company : {method : 'GET'}
-        }),
-        listOne : $resource('/security/api/company/obtemPorId/:id', {id: '@id'},{
-        	company : {method : 'GET'}
-        }),
-        save : $resource('/security/api/company/save',{},{
-        	company : {method : 'POST'}
-        }),
-     };
-});
-
-app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService, ControllerService, GasService, SensorService, TransmitterService, DetectorService, CompanyDetectorService, HistoricService) {
+app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaService, UnitService, CompanyService, CompanyDeviceService, ControllerService, GasService, SensorService, TransmitterService, DetectorService, CompanyDetectorService, HistoricService, CompanyDetectorAlarmService) {
 	
 	$scope.showInfo = function(msg) {
 		angular.element('body').removeClass('loading');            
@@ -247,47 +28,54 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		 $scope.inclusao = new HistoricService.save($scope.historic);		 
 		 $scope.inclusao.$historic({_csrf : angular.element('#_csrf').val()}, function(){         	
         	        	
-        	$scope.showInfo('Salvo');
-        	
+        	$scope.showInfo('Salvo');        	
         	$scope.companyValor = '';
-        	//$scope.selectedCompanyDetector = '';
-        	//$scope.selectedCompanySensor = '';
+
         });		 
 	 }
 	
 	$scope.getHistoric = function() {
-		$scope.listAll = new HistoricService.listAll();		 
-		$scope.listAll.$historic({_csrf : angular.element('#_csrf').val()}, function(){         	
-       	console.log($scope.listAll);      	
-       	
-       });		
-	}
-	
-	$scope.getHistorics = function(interval) {
-		
-		$scope.listInterval2 = new HistoricService.listInterval2();		
-		$scope.listInterval2.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
-			
-       	console.log($scope.listInterval2);      	
+		$scope.listHistoric = new HistoricService.listAll();		 
+		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val()}, function(){         	
+       	console.log($scope.listHistoric);      	
        	
        });		
 	}
 	
 	$scope.getHistorics2 = function(interval) {
 		
-		$scope.listInterval = new HistoricService.listInterval();		
-		$scope.listInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, interval: interval }, function(){
+		$scope.listHistoric = new HistoricService.listInterval2();		
+		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
 			
-       	console.log($scope.listInterval);      	
+       	console.log($scope.listHistoric);      	
+       	
+       });		
+	}
+	
+	$scope.getHistorics = function(interval) {
+		
+		$scope.listHistoric = new HistoricService.listInterval();		
+		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, interval: interval }, function(){
+			
+       	console.log($scope.listHistoric);      	
+       	
+       });		
+	}
+	
+	$scope.getLastMonth = function() {
+		$scope.listHistoric = new HistoricService.listLastMonth();		
+		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid }, function(){
+			
+       	console.log($scope.listHistoric);      	
        	
        });		
 	}
 		
-	$scope.getLastMonth = function() {
-		$scope.listLastMonth = new HistoricService.listLastMonth();		
-		$scope.listLastMonth.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid }, function(){
+	$scope.getLastMonth2 = function() {
+		$scope.listHistoric = new HistoricService.listLastMonth2();		
+		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid }, function(){
 			
-       	console.log($scope.listLastMonth);      	
+       	console.log($scope.listHistoric);      	
        	
        });		
 	}
@@ -317,8 +105,40 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 			 console.log($scope.listAll);		         	         	
         });		 
 	 }
+	
+	$scope.listCompanyDetectors = function() {
+		$scope.getCompanyDetectors();
+		$scope.listCompanyDetectors = angular.copy($scope.CompanyDetectors);     		 
+	}	
+	
+	$scope.changeCompanyDetector = function() {
+		
+		$scope.selectedSensorAlarm = undefined;
+		$scope.selectedCompanySensor = undefined;
+		
+		if($scope.selectedCompanyDetector == null) return;
+		
+		$scope.resultCompanyDetectorAlarm = new CompanyDetectorAlarmService.listPorCompanyDetectorAlarm();		 
+		$scope.resultCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){			
+			$scope.selectedCompanyDetectorAlarms = $scope.resultCompanyDetectorAlarm.list;
+        });		 
+	}
+	
+	$scope.changeSensor = function() {
+		
+		if($scope.selectedCompanySensor == null) return;
+		
+		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(function (i) { return i.sensorId === $scope.selectedCompanySensor.uid});				
+		if (detectorAlarmIndex >= 0) {			
+			$scope.selectedSensorAlarm = $scope.selectedCompanyDetectorAlarms[detectorAlarmIndex].alarmDto ;
+		}
+		
+	}
 
 /*-----------------------------------------------------------------------------------------------------------------*/
+	/*-----------------------------------------------------------------------------------------------------------------*/
+		/*-----------------------------------------------------------------------------------------------------------------*/
+			/*-----------------------------------------------------------------------------------------------------------------*/
 	
 	$scope.det1 = {
 		uid: 1
@@ -854,12 +674,7 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 			 console.log($scope.deletar);         	         	
          });		 
 	 }
-	
-	function closeTab() {
-		alert(url);
-	}
-
-	
+		
 	$scope.getCompanyDetectors();
 	
 });

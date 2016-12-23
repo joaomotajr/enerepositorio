@@ -27,8 +27,11 @@ app.factory('HistoricService', function($resource){
         listInterval2 : $resource('/security/api/historic/findByCompanyDetectorAndSensorAndInterval/:companyDetectorId/:sensorId/:interval/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', interval: '@interval'},{        
         	historic : {method : 'GET'}
         }),
-        listLastMonth : $resource('/security/api/historic/findByCompanyDetectorAndSensorLastMonth/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
+        listLastMonth : $resource('/security/api/historic/findByCompanyDetectorLastMonth/:companyDetectorId/', {companyDetectorId: '@companyDetectorId'},{        
         	historic : {method : 'GET'}
         }),        
+        listLastMonth2 : $resource('/security/api/historic/findByCompanyDetectorAndSensorLastMonth/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
+        	historic : {method : 'GET'}
+        }),
      };
 });

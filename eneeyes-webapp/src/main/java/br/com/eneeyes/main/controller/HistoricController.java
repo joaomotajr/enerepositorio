@@ -59,6 +59,12 @@ public class HistoricController {
 		return service.findByCompanyDetectorAndSensorLastMonth(companyDetectorId, sensorId);
 	}
 	
+	@RequestMapping(value="/security/api/historic/findByCompanyDetectorLastMonth/{companyDetectorId}", method=RequestMethod.GET, produces = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> findByCompanyDetectorAndSensorLastMonth(@PathVariable Long companyDetectorId) {		
+		return service.findByCompanyDetectorLastMonth(companyDetectorId);
+	}
+	
 	@RequestMapping(value="/security/api/historic/findByCompanyDetectorAndSensorAndIntervalDays/{companyDetectorId}/{sensorId}/{dateIn}/{dateOut}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(@PathVariable Long companyDetectorId, @PathVariable Long sensorId, @PathVariable Date dateIn, @PathVariable Date dateOut) {		

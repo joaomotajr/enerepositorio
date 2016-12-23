@@ -202,6 +202,28 @@ public class HistoricService implements IService<HistoricDto> {
 		return c.getTime();		
 	}
 	
+	public BasicResult<?> findByCompanyDetectorLastMonth(Long companyDetectorId) {
+		Result<HistoricDto> result = new Result<HistoricDto>();
+		
+		CompanyDetector companyDetector = new CompanyDetector();
+		companyDetector.setUid(companyDetectorId);
+				
+		try {
+						
+			Date fim = new Date();									
+			Date inicio = addMes(fim, -1);
+			
+			List<Historic> lista = repository.findByCompanyDetectorAndLastUpdateBetween(companyDetector, inicio, fim);			
+			result = populateResult(lista);
+			
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;
+	}
+	
 	public BasicResult<?> findByCompanyDetectorAndSensorLastMonth(Long companyDetectorId, Long sensorId) {
 		Result<HistoricDto> result = new Result<HistoricDto>();
 		

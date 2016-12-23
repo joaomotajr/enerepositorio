@@ -86,6 +86,9 @@
 	<script src="/assets/js/services/gas-service.js"></script>
 	<script src="/assets/js/services/detector-service.js"></script>
 	<script src="/assets/js/services/company-service.js"></script>
+	<script src="/assets/js/services/unit-service.js"></script>
+	<script src="/assets/js/services/area-service.js"></script>
+	<script src="/assets/js/services/companyDevice-service.js"></script>
 	<script src="/assets/js/services/companyDetector-service.js"></script>
 	<script src="/assets/js/services/alarm-service.js"></script>
 	<script src="/assets/js/services/companyDetectorAlarm-service.js"></script>

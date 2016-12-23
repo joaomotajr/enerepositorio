@@ -10,6 +10,7 @@ import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.PositionDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Position;
+import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -20,7 +21,7 @@ public class PositionService implements IService<PositionDto> {
 	//private static final int PAGE_SIZE = 50;
 	
 	@Inject
-	private PositionRepository repository;
+	private PositionRepository repository;	
 
 	@Override
 	public BasicResult<?> save(PositionDto dto) {
@@ -29,6 +30,8 @@ public class PositionService implements IService<PositionDto> {
 		Position position = new Position(dto);
 		position = repository.save(position);
 		
+		checkAlarm(position);
+		
 		dto.setUid(position.getUid());
 		result.setEntity(dto);
 		
@@ -36,6 +39,12 @@ public class PositionService implements IService<PositionDto> {
 		result.setMessage("Executado com sucesso.");					
 		
 		return result;
+	}
+	
+	private void checkAlarm(Position position) {
+		
+		PositionAlarm positionAlarm = new PositionAlarm();
+		positionAlarm.setUid((long) 1);
 	}
 
 	@Override

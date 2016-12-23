@@ -32,6 +32,9 @@ public class HistoricService implements IService<HistoricDto> {
 	
 	@Inject
 	private PositionRepository positionRepository;
+	
+	@Inject
+	PositionService service;
 
 	@Override
 	public BasicResult<?> save(HistoricDto dto) {

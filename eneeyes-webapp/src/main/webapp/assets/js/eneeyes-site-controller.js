@@ -113,25 +113,6 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 			$("#id_tab_" + index).trigger("click");				
 		},300);
 	};
-	
-//	 $scope.teste = function (index) {
-//		var a = 1;
-//	 };
-	
-//	$scope.query = '';
-//
-//	$scope.shop = {resultType:''};
-//
-//	$scope.listaDeDesejo = {
-//		total: 0,
-//	};
-//
-//	$scope.carrinho = {
-//		total: 0,
-//	};
-
-//	$scope.carrinhoDetalhe = {value:{sumarios:{}}};
-
 		
 	$scope.showUserMenu = false;
 	$scope.showMenuUser = function(show, link) {

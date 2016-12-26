@@ -1,5 +1,5 @@
-package br.com.eneeyes.archetype.api;
 
+package br.com.eneeyes.archetype.api;
 import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,5 +52,26 @@ public class SigninController {
     @ResponseStatus(HttpStatus.OK)
     public void signin() {
     }
+        
+    @RequestMapping(value="/api/signin/{login}/{pass}", method=RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public SigninResult signin(@PathVariable String login, @PathVariable String pass) {
+		
+    	SigninDto signinDto = new SigninDto();
+    	signinDto.setLogin(login);
+    	signinDto.setCredential(pass);
+    	
+    	SigninResult signinResult = new SigninResult();
+    	    	
+        try {
+            Authentication auth = securityManager.authenticate(new UsernamePasswordAuthenticationToken(signinDto.getLogin(), signinDto.getCredential()));
+            SecurityContextHolder.getContext().setAuthentication(auth);
+            signinResult.setResultType(ResultMessageType.SUCCESS);
+        } catch (AuthenticationException e) {
+            signinResult.setResultType(ResultMessageType.ERROR);
+            signinResult.getMessages().add(new ResultErrorMessage(e.getMessage()));
+        }
+        return signinResult;
+	}
     
 }

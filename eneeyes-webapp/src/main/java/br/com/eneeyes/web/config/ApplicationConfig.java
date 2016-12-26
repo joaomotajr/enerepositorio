@@ -20,7 +20,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 public class ApplicationConfig {
     @Bean
     public String ediPath() {
-        return "/var/lib/openshift/55fb80510c1e6614f7000151/app-root/data/conciliador.recebidos/";
+        return "/var/lib/openshift/55fb80510c1e6614f7000151/app-root/data/eneeyes.recebidos/";
     }
 
     @Bean

@@ -85,15 +85,15 @@ app.controller('navegacaoController', function ($scope, $timeout, $filter, AreaS
 		var dataInicio = new Date(getDate($scope.dateIn));
 		var dataFim = new Date(getDate($scope.dateOut, true));
 		
-		$scope.listIntervalDays = new HistoricService.listIntervalDays();		
-		$scope.listIntervalDays.$historic({_csrf : angular.element('#_csrf').val(),			
+		$scope.listHistoric = new HistoricService.listIntervalDays();		
+		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(),			
 			companyDetectorId: $scope.selectedCompanyDetector.uid, 
 			sensorId: $scope.selectedCompanySensor.uid,
 			dateIn: dataInicio,
 			dateOut: dataFim
 		}, function(){
 			       	
-			console.log($scope.listIntervalDays);      	
+			console.log($scope.listHistoric);      	
        });		
 	}		
 		

@@ -50,6 +50,8 @@ public class Position {
 	@JoinColumn(name="SENSOR_ID", nullable = false)
 	private Sensor sensor;
 	
+	
+	
 	public Long getUid() {
 		return uid;
 	}

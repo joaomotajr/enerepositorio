@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.PositionAlarmDto;
+import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.register.Sensor;
 
@@ -33,6 +34,8 @@ public class PositionAlarm {
     	this.lastValue = dto.getLastValue();    	
     	this.sensor = new Sensor(dto.getSensorDto());
     	this.alarmType = dto.getAlarmType();
+    	this.alarmStatus = dto.getAlarmStatus();
+    	this.statusUpdate = dto.getStatusUpdate(); 
     }
 
 	@Id
@@ -60,8 +63,8 @@ public class PositionAlarm {
 	@Enumerated(EnumType.ORDINAL) 
 	private AlarmType AlarmType() { 
 	    return alarmType; 
-	}	
-
+	}
+	
 	public final AlarmType getAlarmType() {
 		return alarmType;
 	}
@@ -69,6 +72,25 @@ public class PositionAlarm {
 	public final void setAlarmType(AlarmType alarmType) {
 		this.alarmType = alarmType;
 	}
+	
+	@Column(name = "ALARM_STATUS", columnDefinition = "int default 0", nullable = true)
+	private AlarmStatus alarmStatus;	
+
+	@Enumerated(EnumType.ORDINAL) 
+	private AlarmStatus AlarmStatus() { 
+	    return alarmStatus; 
+	}
+
+	public final AlarmStatus getAlarmStatus() {
+		return alarmStatus;
+	}
+
+	public final void setAlarmStatus(AlarmStatus alarmStatus) {
+		this.alarmStatus = alarmStatus;
+	}
+	
+	@Column(name = "STATUS_UPDATE", nullable = true)
+	private Date statusUpdate;
 	
 	public Long getUid() {
 		return uid;
@@ -108,5 +130,13 @@ public class PositionAlarm {
 
 	public final void setSensor(Sensor sensor) {
 		this.sensor = sensor;
+	}
+	
+	public Date getStatusUpdate() {
+		return statusUpdate;
+	}
+
+	public void setStatusUpdate(Date statusUpdate) {
+		this.statusUpdate = statusUpdate;
 	}
 }

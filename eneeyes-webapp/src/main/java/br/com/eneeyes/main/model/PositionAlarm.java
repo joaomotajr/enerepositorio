@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.aspectj.lang.annotation.AfterReturning;
+
 import br.com.eneeyes.main.dto.PositionAlarmDto;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
@@ -56,7 +58,7 @@ public class PositionAlarm {
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="SENSOR_ID", nullable = false)
 	private Sensor sensor;
-	
+	    
 	@Column(name = "ALARM_TYPE", columnDefinition = "int default 0")
 	private AlarmType alarmType;	
 

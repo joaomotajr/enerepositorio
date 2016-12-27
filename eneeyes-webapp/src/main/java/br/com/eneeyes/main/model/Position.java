@@ -41,6 +41,9 @@ public class Position {
 
 	@Column(name = "LAST_VALUE", nullable = true)
 	private Double lastValue;
+	
+	@Column(name = "LAST_CHECKED", nullable = true)
+	private Date lastChecked;
     		
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
 	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
@@ -49,8 +52,6 @@ public class Position {
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="SENSOR_ID", nullable = false)
 	private Sensor sensor;
-	
-	
 	
 	public Long getUid() {
 		return uid;

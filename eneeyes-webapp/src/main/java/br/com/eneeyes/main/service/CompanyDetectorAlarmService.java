@@ -3,8 +3,8 @@ package br.com.eneeyes.main.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDetectorAlarmDto;
@@ -14,10 +14,10 @@ import br.com.eneeyes.main.repository.CompanyDetectorAlarmRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
-@Named
+@Service
 public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlarmDto> {
 
-	@Inject
+	@Autowired
 	private CompanyDetectorAlarmRepository companyDetectorAlarmRepository;
 
 	@Override
@@ -81,6 +81,14 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 		}
 		
 		return result;
+	}
+	
+	public CompanyDetectorAlarmDto findByCompanyDetectorAndSensor(long companyDetectorUid, long sensorUid) {
+			
+		CompanyDetectorAlarm companyDetectorAlarm = companyDetectorAlarmRepository.FindByCompanyDetectorAndSensor(companyDetectorUid , sensorUid);
+		
+		return(new CompanyDetectorAlarmDto(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getId().getSensorId()));
+		
 	}
 
 	@Override

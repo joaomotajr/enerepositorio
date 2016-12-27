@@ -1,7 +1,7 @@
 package br.com.eneeyes.main.model.enums;
 
 public enum AlarmStatus {
-	CHECKED(0), UPDATED(1), PENDENT(1), READED(3);
+	CREATED(-1), CHECKED(0), UPDATED(1), PENDENT(1), READED(3);
 	
 	private final int code;
 	

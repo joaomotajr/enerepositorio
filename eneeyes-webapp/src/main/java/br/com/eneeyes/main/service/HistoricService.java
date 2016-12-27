@@ -5,36 +5,30 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.HistoricDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Historic;
-import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.register.Sensor;
 import br.com.eneeyes.main.repository.HistoricRepository;
-import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
 
-@Named
+@Service
 public class HistoricService implements IService<HistoricDto> {
 	private static final int PAGE_SIZE = 50;
 		
-	@Inject
+	@Autowired
 	private HistoricRepository repository;
-	
-	@Inject
-	private PositionRepository positionRepository;
-	
-	@Inject
-	PositionService service;
+		
+	@Autowired
+	PositionService positionService;
 
 	@Override
 	public BasicResult<?> save(HistoricDto dto) {
@@ -44,7 +38,6 @@ public class HistoricService implements IService<HistoricDto> {
 		historic.setLastUpdate(new Date());
 		historic = repository.save(historic);
 		
-		//TODO Está perdendo os valores do CompanyDetector - Checar 
 		historic.setCompanyDetector(new CompanyDetector(dto.getCompanyDetectorDto()) );
 		updatePosition(historic);				
 				
@@ -58,21 +51,8 @@ public class HistoricService implements IService<HistoricDto> {
 	}
 	
 	private void updatePosition(Historic historic) {
-					
-		Position position = new Position();
-		
-		position = positionRepository.findByCompanyDetectorAndSensor(historic.getCompanyDetector(), historic.getSensor()); 
 
-		if (position != null) {		
-
-			position.setLastUpdate(historic.getLastUpdate());
-			position.setLastValue(historic.getValue());
-			
-			positionRepository.save(position);
-		}
-		else {
-			// TODO Criar Log de Erros e Incosistências do Sistema
-		}
+		positionService.updatePosition(historic);
 	}
 
 
@@ -196,7 +176,7 @@ public class HistoricService implements IService<HistoricDto> {
 		return result;
 	}
 	
-	public static Date addMes(Date date, int qtde) {
+	public static Date addMonth(Date date, int qtde) {
 		
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
@@ -214,7 +194,7 @@ public class HistoricService implements IService<HistoricDto> {
 		try {
 						
 			Date fim = new Date();									
-			Date inicio = addMes(fim, -1);
+			Date inicio = addMonth(fim, -1);
 			
 			List<Historic> lista = repository.findByCompanyDetectorAndLastUpdateBetween(companyDetector, inicio, fim);			
 			result = populateResult(lista);
@@ -239,7 +219,7 @@ public class HistoricService implements IService<HistoricDto> {
 		try {
 						
 			Date fim = new Date();									
-			Date inicio = addMes(fim, -1);
+			Date inicio = addMonth(fim, -1);
 			
 			List<Historic> lista = repository.findByCompanyDetectorAndSensorAndLastUpdateBetween(companyDetector, sensor, inicio, fim);			
 			result = populateResult(lista);

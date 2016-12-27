@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +17,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.CompanyDetectorDto;
-import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Detector;
 
 /**
@@ -72,23 +69,6 @@ public class CompanyDetector {
 	
 	@Column(name = "LONGITUDE", nullable = true)		
 	private Double longitude;
-	
-	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
-	private UnitMeterGases unitMeterGases;
-
-	@Enumerated(EnumType.ORDINAL) 
-	private UnitMeterGases UnitMeterGases() { 
-	    return unitMeterGases; 
-	}
-	
-	@Column(name = "RANGE_MAX", nullable = true)		
-	private Double RangeMax;
-	
-	@Column(name = "RANGE_MIN", nullable = true)		
-	private Double RangeMin;
-	
-	@Column(name = "RANGE_UNIT", nullable = true)		
-	private Double RangeUnit;
   
 	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_DEVICE_ID", nullable = false)

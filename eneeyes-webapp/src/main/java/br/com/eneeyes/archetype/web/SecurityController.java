@@ -66,19 +66,7 @@ public class SecurityController {
 			request.getSession().setAttribute("loginFailure", null);
 			request.setAttribute("shiroLoginFailure", true);
 		}
-		
-		/*SavedRequest savedReq = WebUtils.getSavedRequest(request);
-		if(savedReq != null) {
-			request.getSession().setAttribute("requestSaved", savedReq.getRequestUrl());
-		} else {
-			String requestSaved = (String) request.getSession().getAttribute("requestSaved");
-			request.getSession().setAttribute("requestSaved", null);
-			if(requestSaved != null) {
-				model.setViewName("redirect:/#"+viewPath);
-				return model;
-			}
-		}*/
-		
+
 		model.addObject("locale", LocaleContextHolder.getLocale());
 		model.setViewName(viewPath);
 		return model;

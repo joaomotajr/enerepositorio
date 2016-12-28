@@ -1,7 +1,9 @@
 package br.com.eneeyes.main.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import br.com.eneeyes.main.dto.PositionDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Historic;
 import br.com.eneeyes.main.model.Position;
+import br.com.eneeyes.main.model.register.Sensor;
 import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -23,7 +26,7 @@ public class PositionService implements IService<PositionDto> {
 	private PositionRepository repository;
 	
 	@Autowired
-	PositionAlarmService positionAlarmService;
+	PositionAlarmService positionAlarmService;	
 	
 	@Override
 	public BasicResult<?> save(PositionDto dto) {
@@ -67,6 +70,10 @@ public class PositionService implements IService<PositionDto> {
 			result.setMessage("Executado com sucesso.");
 		}
 		else {		
+			
+			//TODO Testar
+			//createInitialPosition(historic.getCompanyDetector());
+			
 			result.setResultType( ResultMessageType.ERROR );
 			result.setMessage("Inconsistencia na Posição.");
 		}		
@@ -77,6 +84,27 @@ public class PositionService implements IService<PositionDto> {
 	private void checkAlarm(Position position) {
 		
 		positionAlarmService.checkAlarmLimits(position);
+	}
+	
+	@SuppressWarnings("unused")
+	private void createInitialPosition(CompanyDetector companyDetector) {
+		
+		Set<Sensor> sensors = companyDetector.getDetector().getSensors();
+		
+		for (Sensor sensor   : sensors) {
+		
+			if(repository.countByCompanyDetectorAndSensor(companyDetector, sensor) == 0) {
+	
+				Position position = new Position();	
+
+				position.setCompanyDetector(companyDetector);
+				position.setSensor(sensor);
+				position.setLastUpdate(new Date());
+				position.setLastValue((double) 0);
+				
+				repository.save(position);
+			}
+		}
 	}
 
 	@Override

@@ -36,6 +36,9 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	
 	@Inject
 	private CompanyDetectorAlarmRepository companyDetectorAlarmRepository;
+	
+	@Inject
+	PositionService positionService;
 
 	
 	public BasicResult<?> save(CompanyDetectorDto dto) {

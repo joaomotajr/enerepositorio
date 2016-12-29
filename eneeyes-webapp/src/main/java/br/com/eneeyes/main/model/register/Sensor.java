@@ -35,8 +35,11 @@ import br.com.eneeyes.main.model.enums.UnitMeterGases;
 @Table(name = "sensor")
 public class Sensor {
 	
-	public Sensor() {
-		
+	public Sensor() {	
+	}
+	
+	public Sensor(Long uid) {
+		this.uid = uid;
 	}
 	
 	public Sensor(SensorDto dto) {

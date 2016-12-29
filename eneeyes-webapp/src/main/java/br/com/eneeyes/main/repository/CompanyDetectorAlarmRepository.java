@@ -17,8 +17,8 @@ public interface CompanyDetectorAlarmRepository extends JpaRepository<CompanyDet
 	List<CompanyDetectorAlarm> FindByCompanyDetector(CompanyDetector companyDetector);
 	
 	@Query("select a from CompanyDetectorAlarm a where a.uid.companyDetectorId = ?1 and a.uid.sensorId = ?2")
-	CompanyDetectorAlarm FindByCompanyDetectorAndSensor(long companyDetectorUid, long sensorUid);
-		
+	CompanyDetectorAlarm FindByCompanyDetectorIdAndSensorId(long companyDetectorUid, long sensorUid);
+	
 	@Modifying
 	@Transactional
 	@Query("update CompanyDetectorAlarm c set c.alarm = ?1 where c.companyDetector = ?2 and c.uid.sensorId = ?3")
@@ -32,8 +32,7 @@ public interface CompanyDetectorAlarmRepository extends JpaRepository<CompanyDet
 	@Modifying
 	@Transactional
 	@Query("delete CompanyDetectorAlarm c where c.companyDetector.uid = ?1")
-	int deleteAlarm(Long companyDetectorId);
-	
+	int deleteAlarm(Long companyDetectorId);	
 	
 	@Query("select c from CompanyDetectorAlarm c where c.companyDetector = ?2 and c.uid.sensorId = ?3")
 	CompanyDetectorAlarm selectCompanyDetectorAlarmByCompanyDetectorAndSensor(CompanyDetector companyDetector, Long sensorId);

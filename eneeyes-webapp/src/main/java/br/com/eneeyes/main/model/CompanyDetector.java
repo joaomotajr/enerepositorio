@@ -27,9 +27,12 @@ import br.com.eneeyes.main.model.register.Detector;
 @Entity
 @Table(name = "company_detector")
 public class CompanyDetector {
+	public CompanyDetector() {   	
+    
+    }
 	
-    public CompanyDetector() {
-    	
+    public CompanyDetector(Long uid) {    	
+    	this.uid = uid;
     }
     
     public CompanyDetector(CompanyDetectorDto dto) {

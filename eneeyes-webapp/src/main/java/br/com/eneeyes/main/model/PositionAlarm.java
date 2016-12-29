@@ -15,8 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.aspectj.lang.annotation.AfterReturning;
-
 import br.com.eneeyes.main.dto.PositionAlarmDto;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
@@ -32,7 +30,8 @@ public class PositionAlarm {
     
     public PositionAlarm(PositionAlarmDto dto) {
     	this.uid = dto.getUid();
-    	this.lastUpdate = dto.getLastUpdate();
+    	this.firstUpdate = dto.getFirstUpdate();
+    	this.lastUpdate = dto.getLastUpdate();    	
     	this.lastValue = dto.getLastValue();    	
     	this.sensor = new Sensor(dto.getSensorDto());
     	this.alarmType = dto.getAlarmType();
@@ -44,6 +43,9 @@ public class PositionAlarm {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UID")
 	private Long uid;
+	
+	@Column(name = "FIRST_UPDATE", nullable = false)
+	private Date firstUpdate;
 	
 	@Column(name = "LAST_UPDATE", nullable = false)
 	private Date lastUpdate;
@@ -100,6 +102,14 @@ public class PositionAlarm {
 
 	public void setUid(Long uid) {
 		this.uid = uid;
+	}
+	
+	public final Date getFirstUpdate() {
+		return firstUpdate;
+	}
+
+	public final void setFirstUpdate(Date firstUpdate) {
+		this.firstUpdate = firstUpdate;
 	}
 	
 	public Date getLastUpdate() {

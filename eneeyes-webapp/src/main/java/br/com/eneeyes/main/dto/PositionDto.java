@@ -4,6 +4,7 @@ import java.util.Date;
 
 import br.com.eneeyes.main.dto.register.SensorDto;
 import br.com.eneeyes.main.model.Position;
+import br.com.eneeyes.main.model.enums.AlarmType;
 
 public class PositionDto {
 	
@@ -12,6 +13,7 @@ public class PositionDto {
 	private Double lastValue;	
     private CompanyDetectorDto companyDetectorDto;
     private SensorDto sensorDto;
+    private AlarmType alarmType;
 	
 	public PositionDto() {
 		
@@ -23,6 +25,7 @@ public class PositionDto {
 		this.lastUpdate = position.getLastUpdate();
     	this.lastValue = position.getLastValue();    	
     	this.sensorDto = new SensorDto(position.getSensor());
+    	this.alarmType = position.getAlarmType();
 	}
 	
 	public final Long getUid() {
@@ -63,6 +66,21 @@ public class PositionDto {
 
 	public final void setSensorDto(SensorDto sensorDto) {
 		this.sensorDto = sensorDto;
+	}
+	
+	public final AlarmType getAlarmType() {
+		return alarmType;
+	}
+
+	public final void setAlarmType(AlarmType alarmType) {
+		this.alarmType = alarmType;
+		
+		if (alarmType == null ) {			
+			this.alarmType = AlarmType.NORMAL;
+		}	
+		else { 
+			this.alarmType = alarmType;
+		}
 	}
 
 }

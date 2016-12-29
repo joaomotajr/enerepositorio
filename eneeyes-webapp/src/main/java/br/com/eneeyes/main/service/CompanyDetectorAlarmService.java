@@ -48,6 +48,11 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 		return result;
 	}
 	
+	public void deleteByCompanyDetectorId(long companyDetectorId) {
+				
+		companyDetectorAlarmRepository.deleteAlarm(companyDetectorId);		
+	}
+	
 	@Override
 	public BasicResult<?> findOne(Long uid) {
 		return null;
@@ -85,9 +90,9 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 	
 	public CompanyDetectorAlarmDto findByCompanyDetectorAndSensor(long companyDetectorUid, long sensorUid) {
 			
-		CompanyDetectorAlarm companyDetectorAlarm = companyDetectorAlarmRepository.FindByCompanyDetectorAndSensor(companyDetectorUid , sensorUid);
+		CompanyDetectorAlarm companyDetectorAlarm = companyDetectorAlarmRepository.FindByCompanyDetectorIdAndSensorId(companyDetectorUid , sensorUid);
 		
-		return(new CompanyDetectorAlarmDto(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getId().getSensorId()));
+		return(companyDetectorAlarm == null ? null : new CompanyDetectorAlarmDto(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getId().getSensorId()));
 		
 	}
 

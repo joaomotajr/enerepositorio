@@ -13,6 +13,7 @@ import br.com.eneeyes.main.dto.PositionDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Historic;
 import br.com.eneeyes.main.model.Position;
+import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.register.Sensor;
 import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
@@ -30,20 +31,23 @@ public class PositionService implements IService<PositionDto> {
 	
 	@Override
 	public BasicResult<?> save(PositionDto dto) {
-		Result<PositionDto> result = new Result<PositionDto>();
+//		Result<PositionDto> result = new Result<PositionDto>();
+//		
+//		Position position = new Position(dto);
+//		position = repository.save(position);
+//		
+//		checkAlarm(position);
+//		
+//		dto.setUid(position.getUid());
+//		result.setEntity(dto);
+//		
+//		result.setResultType( ResultMessageType.SUCCESS );
+//		result.setMessage("Executado com sucesso.");					
+//		
+//		return result;
 		
-		Position position = new Position(dto);
-		position = repository.save(position);
-		
-		checkAlarm(position);
-		
-		dto.setUid(position.getUid());
-		result.setEntity(dto);
-		
-		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Executado com sucesso.");					
-		
-		return result;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public BasicResult<?> updatePosition(Historic historic) {
@@ -52,10 +56,14 @@ public class PositionService implements IService<PositionDto> {
 		
 		Position position = new Position();
 		
-		position = repository.findByCompanyDetectorAndSensor(historic.getCompanyDetector(), historic.getSensor()); 
-
+		position = repository.findByCompanyDetectorAndSensor(historic.getCompanyDetector(), historic.getSensor());
+		
 		if (position != null) {		
+			
+			position.setCompanyDetector(historic.getCompanyDetector());
+			AlarmType alarmType = positionAlarmService.checkAlarmLimits(position);
 
+			position.setAlarmType(alarmType);
 			position.setLastUpdate(historic.getLastUpdate());
 			position.setLastValue(historic.getValue());
 			
@@ -64,15 +72,14 @@ public class PositionService implements IService<PositionDto> {
 			//TODO Position não possui CompanyDetector, o objeto é Lazy pq é chave de pesquisa
 			position.setCompanyDetector(historic.getCompanyDetector());
 			
-			checkAlarm(position);
-			
+			if (alarmType != AlarmType.NORMAL) {				
+				positionAlarmService.saveOrUpdatePositionAlarm(position, historic.getCompanyDetector(), historic.getSensor(), alarmType);
+			}
+						
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Executado com sucesso.");
 		}
 		else {		
-			
-			//TODO Testar
-			//createInitialPosition(historic.getCompanyDetector());
 			
 			result.setResultType( ResultMessageType.ERROR );
 			result.setMessage("Inconsistencia na Posição.");
@@ -81,13 +88,7 @@ public class PositionService implements IService<PositionDto> {
 		return result;		
 	}	
 	
-	private void checkAlarm(Position position) {
-		
-		positionAlarmService.checkAlarmLimits(position);
-	}
-	
-	@SuppressWarnings("unused")
-	private void createInitialPosition(CompanyDetector companyDetector) {
+	public void createInitialPosition(CompanyDetector companyDetector) {
 		
 		Set<Sensor> sensors = companyDetector.getDetector().getSensors();
 		

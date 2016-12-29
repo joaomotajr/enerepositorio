@@ -10,6 +10,7 @@ import br.com.eneeyes.main.model.enums.AlarmType;
 public class PositionAlarmDto {
 	
 	private Long uid;
+	private Date firstUpdate;
 	private Date lastUpdate;
 	private Double lastValue;	
     private CompanyDetectorDto companyDetectorDto;
@@ -25,6 +26,7 @@ public class PositionAlarmDto {
 	public PositionAlarmDto(PositionAlarm positionAlarm) {
 		
 		this.uid = positionAlarm.getUid();
+		this.firstUpdate = positionAlarm.getFirstUpdate();
 		this.lastUpdate = positionAlarm.getLastUpdate();
     	this.lastValue = positionAlarm.getLastValue();    	
     	this.sensorDto = new SensorDto(positionAlarm.getSensor());
@@ -39,6 +41,14 @@ public class PositionAlarmDto {
 	
 	public final void setUid(Long uid) {
 		this.uid = uid;
+	}
+	
+	public final Date getFirstUpdate() {
+		return firstUpdate;
+	}
+
+	public final void setFirstUpdate(Date firstUpdate) {
+		this.firstUpdate = firstUpdate;
 	}
 	
 	public Date getLastUpdate() {

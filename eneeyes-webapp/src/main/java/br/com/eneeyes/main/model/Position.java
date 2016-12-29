@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.PositionDto;
+import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.register.Sensor;
 
 @Entity
@@ -29,6 +32,7 @@ public class Position {
     	this.lastUpdate = dto.getLastUpdate();
     	this.lastValue = dto.getLastValue();    	
     	this.sensor = new Sensor(dto.getSensorDto());
+    	this.alarmType = dto.getAlarmType();
     }
 
 	@Id
@@ -41,9 +45,6 @@ public class Position {
 
 	@Column(name = "LAST_VALUE", nullable = true)
 	private Double lastValue;
-	
-	@Column(name = "LAST_CHECKED", nullable = true)
-	private Date lastChecked;
     		
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
 	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
@@ -53,6 +54,14 @@ public class Position {
 	@JoinColumn(name="SENSOR_ID", nullable = false)
 	private Sensor sensor;
 	
+	@Column(name = "ALARM_TYPE", columnDefinition = "int default 0", nullable = false)
+	private AlarmType alarmType;	
+
+	@Enumerated(EnumType.ORDINAL) 
+	private AlarmType AlarmType() { 
+	    return alarmType; 
+	}
+		
 	public Long getUid() {
 		return uid;
 	}
@@ -91,5 +100,13 @@ public class Position {
 
 	public final void setSensor(Sensor sensor) {
 		this.sensor = sensor;
+	}
+	
+	public final AlarmType getAlarmType() {
+		return alarmType;
+	}
+
+	public final void setAlarmType(AlarmType alarmType) {
+		this.alarmType = alarmType;
 	}
 }

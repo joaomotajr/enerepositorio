@@ -1,45 +1,35 @@
 package br.com.eneeyes.main.service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDevice;
-import br.com.eneeyes.main.model.Position;
-import br.com.eneeyes.main.model.register.Sensor;
-import br.com.eneeyes.main.repository.CompanyDetectorAlarmRepository;
 import br.com.eneeyes.main.repository.CompanyDetectorRepository;
 import br.com.eneeyes.main.repository.CompanyDeviceRepository;
-import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
 
-@Named
+@Service
 public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 
-	@Inject
+	@Autowired
 	private CompanyDetectorRepository repository;
 	
-	@Inject
+	@Autowired
 	private CompanyDeviceRepository companyDeviceRepository;
+		
+	@Autowired
+	CompanyDetectorAlarmService companyDetectorAlarmService;
 	
-	@Inject
-	private PositionRepository positionRepository;
-	
-	@Inject
-	private CompanyDetectorAlarmRepository companyDetectorAlarmRepository;
-	
-	@Inject
+	@Autowired
 	PositionService positionService;
-
 	
 	public BasicResult<?> save(CompanyDetectorDto dto) {
 		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();		
@@ -80,23 +70,25 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	}
 	
 	private void createInitialPosition(CompanyDetector companyDetector) {
-		
-		Set<Sensor> sensors = companyDetector.getDetector().getSensors();
-		
-		for (Sensor sensor   : sensors) {
-		
-			if(positionRepository.countByCompanyDetectorAndSensor(companyDetector, sensor) == 0) {
-	
-				Position position = new Position();	
-
-				position.setCompanyDetector(companyDetector);
-				position.setSensor(sensor);
-				position.setLastUpdate(new Date());
-				position.setLastValue((double) 0);
 				
-				positionRepository.save(position);
-			}
-		}
+		positionService.createInitialPosition(companyDetector);
+		
+//		Set<Sensor> sensors = companyDetector.getDetector().getSensors();
+//		
+//		for (Sensor sensor   : sensors) {
+//		
+//			if(positionRepository.countByCompanyDetectorAndSensor(companyDetector, sensor) == 0) {
+//	
+//				Position position = new Position();	
+//
+//				position.setCompanyDetector(companyDetector);
+//				position.setSensor(sensor);
+//				position.setLastUpdate(new Date());
+//				position.setLastValue((double) 0);
+//				
+//				positionRepository.save(position);
+//			}
+//		}
 	}
 
 
@@ -105,7 +97,8 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>(); 	
 				
 		try {					
-			companyDetectorAlarmRepository.deleteAlarm(uid);			
+			companyDetectorAlarmService.deleteByCompanyDetectorId(uid);
+			
 			repository.delete(uid);
 			
 			result.setResultType( ResultMessageType.SUCCESS );

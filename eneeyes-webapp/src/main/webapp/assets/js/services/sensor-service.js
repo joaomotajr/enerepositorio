@@ -5,16 +5,16 @@
 app.factory('SensorService', function($resource){    
     
     return {
-    	deletar : $resource('/security/api/sensor/delete/:id', {id: '@id'},{
+    	deletar : $resource('/eneeyes/security/api/sensor/delete/:id', {id: '@id'},{
     		sensor : {method : 'DELETE'}
         }),        
-        listAll : $resource('/security/api/sensor/all',{},{
+        listAll : $resource('/eneeyes/security/api/sensor/all',{},{
         	sensor : {method : 'GET'}
         }),
-        listOne : $resource('/security/api/sensor/obtemPorId/:id', {id: '@id'},{
+        listOne : $resource('/eneeyes/security/api/sensor/obtemPorId/:id', {id: '@id'},{
         	sensor : {method : 'GET'}
         }),
-        save : $resource('/security/api/sensor/save',{},{
+        save : $resource('/eneeyes/security/api/sensor/save',{},{
         	sensor : {method : 'POST'}
         }),
      };

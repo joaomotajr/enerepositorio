@@ -183,7 +183,7 @@ function shallowClearAndCopy(src, dst) {
  *   as  methods with the `$` prefix. This allows you to easily perform CRUD operations (create,
  *   read, update, delete) on server-side data like this:
  *   ```js
- *   var User = $resource('/user/:userId', {userId:'@id'});
+ *   var User = $resource('/eneeyes/user/:userId', {userId:'@id'});
  *   var user = User.get({userId:123}, function() {
  *     user.abc = true;
  *     user.$save();
@@ -237,7 +237,7 @@ function shallowClearAndCopy(src, dst) {
  *
  * ```js
      // Define CreditCard class
-     var CreditCard = $resource('/user/:userId/card/:cardId',
+     var CreditCard = $resource('/eneeyes/user/:userId/card/:cardId',
       {userId:123, cardId:'@id'}, {
        charge: {method:'POST', params:{charge:true}}
       });
@@ -280,7 +280,7 @@ function shallowClearAndCopy(src, dst) {
  * operations (create, read, update, delete) on server-side data.
 
    ```js
-     var User = $resource('/user/:userId', {userId:'@id'});
+     var User = $resource('/eneeyes/user/:userId', {userId:'@id'});
      User.get({userId:123}, function(user) {
        user.abc = true;
        user.$save();
@@ -292,7 +292,7 @@ function shallowClearAndCopy(src, dst) {
  * could rewrite the above example and get access to http headers as:
  *
    ```js
-     var User = $resource('/user/:userId', {userId:'@id'});
+     var User = $resource('/eneeyes/user/:userId', {userId:'@id'});
      User.get({userId:123}, function(u, getResponseHeaders){
        u.abc = true;
        u.$save(function(u, putResponseHeaders) {
@@ -305,7 +305,7 @@ function shallowClearAndCopy(src, dst) {
  * You can also access the raw `$http` promise via the `$promise` property on the object returned
  *
    ```
-     var User = $resource('/user/:userId', {userId:'@id'});
+     var User = $resource('/eneeyes/user/:userId', {userId:'@id'});
      User.get({userId:123})
          .$promise.then(function(user) {
            $scope.user = user;
@@ -320,7 +320,7 @@ function shallowClearAndCopy(src, dst) {
  *		// Some APIs expect a PUT request in the format URL/object/ID
  *		// Here we are creating an 'update' method
  *		app.factory('Notes', ['$resource', function($resource) {
- *    return $resource('/notes/:id', null,
+ *    return $resource('/eneeyes/notes/:id', null,
  *        {
  *            'update': { method:'PUT' }
  *        });

@@ -5,16 +5,16 @@
 app.factory('CompanyDeviceService', function($resource){    
     
     return {
-    	deletar : $resource('/security/api/companyDevice/delete/:id', {id: '@id'},{
+    	deletar : $resource('/eneeyes/security/api/companyDevice/delete/:id', {id: '@id'},{
     		companyDevice : {method : 'DELETE'}
         }),        
-        listAll : $resource('/security/api/companyDevice/all',{},{
+        listAll : $resource('/eneeyes/security/api/companyDevice/all',{},{
         	companyDevice : {method : 'GET'}
         }),
-        listOne : $resource('/security/api/companyDevice/obtemPorId/:id', {id: '@id'},{
+        listOne : $resource('/eneeyes/security/api/companyDevice/obtemPorId/:id', {id: '@id'},{
         	companyDevice : {method : 'GET'}
         }),
-        save : $resource('/security/api/companyDevice/save',{},{
+        save : $resource('/eneeyes/security/api/companyDevice/save',{},{
         	companyDevice : {method : 'POST'}
         }),
      };

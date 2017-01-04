@@ -3,56 +3,57 @@
 
 	<!-- BEGIN HEAD -->
 	<head>
+		<base href="eneeyes">  		
 	    <meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <title>Eneeyes | Principal**</title>
-	    <link rel="shortcut icon" href="/assets/img/favicon.ico">
+	    <link rel="shortcut icon" href="/eneeyes/assets/img/favicon.ico">
 	    
 	    <!-- Tell the browser to be responsive to screen width -->
 	    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	    	    	    
 	    <!-- Bootstrap 3.3.5 -->
-	    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-	    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap-treeview.css">	    
-	    <link rel="stylesheet" href="/assets/plugins/bootstrap-select/bootstrap-select.min.css">	        
+	    <link rel="stylesheet" href="/eneeyes/assets/bootstrap/css/bootstrap.min.css">
+	    <link rel="stylesheet" href="/eneeyes/assets/bootstrap/css/bootstrap-treeview.css">	    
+	    <link rel="stylesheet" href="/eneeyes/assets/plugins/bootstrap-select/bootstrap-select.min.css">	        
 	    	    
-		<link rel="stylesheet" href="/assets/plugins/select2/select2.min.css">
+		<link rel="stylesheet" href="/eneeyes/assets/plugins/select2/select2.min.css">
 		
 		<!-- jQuery Datatbles -->
-		<link rel="stylesheet" href="/assets/plugins/datatables/jquery.dataTables.css">
+		<link rel="stylesheet" href="/eneeyes/assets/plugins/datatables/jquery.dataTables.css">
 			   
 	    <!-- Font Awesome -->
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	    
 	    <!-- Ionicons 
-	    <link rel="stylesheet" href="/assets/css/ionicons/ionicons.min.css"> -->
+	    <link rel="stylesheet" href="/eneeyes/assets/css/ionicons/ionicons.min.css"> -->
 	    
 	    <!-- iCheck for checkboxes and radio inputs  -->
-    	<link rel="stylesheet" href="/assets/plugins/iCheck/all.css"> 
+    	<link rel="stylesheet" href="/eneeyes/assets/plugins/iCheck/all.css"> 
 	    	    
 	    <!-- Theme style -->
-	    <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
+	    <link rel="stylesheet" href="/eneeyes/assets/css/AdminLTE.min.css">
 	     
 	    <!-- AdminLTE Skins. Choose a skin from the css/skins
 	         folder instead of downloading all of them to reduce the load. -->
-	    <link rel="stylesheet" href="/assets/css/skins/_all-skins.min.css">
+	    <link rel="stylesheet" href="/eneeyes/assets/css/skins/_all-skins.min.css">
 	    
 	    <!-- Morris chart 
-	    <link rel="stylesheet" href="/assets/plugins/morris/morris.css"> -->
+	    <link rel="stylesheet" href="/eneeyes/assets/plugins/morris/morris.css"> -->
 	    
 	    <!-- jvectormap 
-	    <link rel="stylesheet" href="/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css"> -->
+	    <link rel="stylesheet" href="/eneeyes/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css"> -->
 	    
 	    <!-- Date Picker -->
-	    <link rel="stylesheet" href="/assets/plugins/datepicker/datepicker.css">
+	    <link rel="stylesheet" href="/eneeyes/assets/plugins/datepicker/datepicker.css">
 	    <!-- Daterange picker -->
-	    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker-bs3.css">
+	    <link rel="stylesheet" href="/eneeyes/assets/plugins/daterangepicker/daterangepicker-bs3.css">
 	    
 	    <!-- bootstrap wysihtml5 - text editor 
-	    <link rel="stylesheet" href="/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"> -->
+	    <link rel="stylesheet" href="/eneeyes/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"> -->
 	   	
 	   	<!-- Image Notes -->
-		<style type="text/css" media="all">@import "/assets/plugins/imageNotes/css/marker.css";</style>		
+		<style type="text/css" media="all">@import "/eneeyes/assets/plugins/imageNotes/css/marker.css";</style>		
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" media="screen">
 			    	    
 	    <style>
@@ -73,7 +74,7 @@
 				left: 0;
 				height: 100%;
 				width: 100%; 	
-				background: rgba(255, 255, 255, .5) url('/assets/img/loader.gif') 50% 50% no-repeat;
+				background: rgba(255, 255, 255, .5) url('/eneeyes/assets/img/loader.gif') 50% 50% no-repeat;
 			}
 			  
 	    </style>
@@ -116,7 +117,7 @@
                       <li><!-- start message -->
                         <a href="#">
                           <div class="pull-left">
-                            <img src="/assets/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src="/eneeyes/assets/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Support Team
@@ -128,7 +129,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="/assets/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                            <img src="/eneeyes/assets/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             AdminLTE Design Team
@@ -140,7 +141,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="/assets/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                            <img src="/eneeyes/assets/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Developers
@@ -152,7 +153,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="/assets/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                            <img src="/eneeyes/assets/img/user3-128x128.jpg" class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Sales Department
@@ -164,7 +165,7 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="/assets/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                            <img src="/eneeyes/assets/img/user4-128x128.jpg" class="img-circle" alt="User Image">
                           </div>
                           <h4>
                             Reviewers
@@ -295,14 +296,14 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="/assets/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                  <img src="/eneeyes/assets/img/user2-160x160.jpg" class="user-image" alt="User Image">
                   <span class="hidden-xs"><sec:authentication property="principal.displayName" /></span>
                 </a>
                 <ul class="dropdown-menu">
                 
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="/assets/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="/eneeyes/assets/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     <p>
                       <sec:authentication property="principal.displayName" /> - Web Developer
                       <small>Member since Nov. 2012</small>
@@ -316,7 +317,7 @@
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="/eneeyes/logout" class="btn btn-default btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>

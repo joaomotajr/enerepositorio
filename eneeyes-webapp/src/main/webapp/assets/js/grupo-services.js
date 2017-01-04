@@ -1,18 +1,18 @@
 app.factory('GrupoService', function($resource){
     return {
-       inclui : $resource('/eneeyes/security/api/inclusaoGrupo',{},{
+       inclui : $resource('/security/api/inclusaoGrupo',{},{
            grupo : {method : 'POST'}
        }),
-       pesquisaSimples : $resource('/eneeyes/security/api/pesquisaSimplesGrupo',{},{
+       pesquisaSimples : $resource('/security/api/pesquisaSimplesGrupo',{},{
            grupo : {method : 'POST'}
        }),
-       pesquisaCompleta : $resource('/eneeyes/security/api/pesquisaCompletaGrupo',{},{
+       pesquisaCompleta : $resource('/security/api/pesquisaCompletaGrupo',{},{
            grupo : {method : 'POST'}
        }),       
-       atualiza : $resource('/eneeyes/security/api/atualizaGrupo',{},{
+       atualiza : $resource('/security/api/atualizaGrupo',{},{
     	   grupo : {method : 'POST'}
        }),
-       remove : $resource('/eneeyes/security/api/removeGrupo',{},{
+       remove : $resource('/security/api/removeGrupo',{},{
     	   grupo : {method : 'POST'}
        })
     };

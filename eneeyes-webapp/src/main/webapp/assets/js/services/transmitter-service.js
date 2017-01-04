@@ -5,16 +5,16 @@
 app.factory('TransmitterService', function($resource){    
     
     return {
-    	deletar : $resource('/eneeyes/security/api/transmitter/delete/:id', {id: '@id'},{
+    	deletar : $resource('/security/api/transmitter/delete/:id', {id: '@id'},{
     		transmitter : {method : 'DELETE'}
         }),        
-        listAll : $resource('/eneeyes/security/api/transmitter/all',{},{
+        listAll : $resource('/security/api/transmitter/all',{},{
         	transmitter : {method : 'GET'}
         }),
-        listOne : $resource('/eneeyes/security/api/transmitter/obtemPorId/:id', {id: '@id'},{
+        listOne : $resource('/security/api/transmitter/obtemPorId/:id', {id: '@id'},{
         	transmitter : {method : 'GET'}
         }),
-        save : $resource('/eneeyes/security/api/transmitter/save',{},{
+        save : $resource('/security/api/transmitter/save',{},{
         	transmitter : {method : 'POST'}
         }),
      };

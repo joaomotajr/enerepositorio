@@ -218,7 +218,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         });
         $scope.result.$save({_csrf : angular.element('#_csrf').val()},function(){
             if($scope.result.resultType == 'SUCCESS') {
-                window.location.href = '/eneeyes';
+                window.location.href = '/';
             } else {
             	if($scope.result.errorMessages != null && $scope.result.errorMessages.length > 0) {
             		$scope.errorMessage = $scope.result.errorMessages[0].message;
@@ -251,34 +251,34 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 		});
     };
 
-//    $scope.verificaUsuario = function() {
-//    	angular.element('body').addClass('loading');
-//        var success = true;
-//        var deferred = $q.defer();
-//
-//        $http.post('/api/perfil/verifica-usario?_csrf='+angular.element('#_csrf').val(),{email:$scope.forms.signup.email})
-//        .success(function(data) {
-//        	angular.element('body').removeClass('loading');
-//            done = true;
-//            if (data.errorMessages.length > 0) {
-//                deferred.resolve(false);
-//                $scope.forms.signup.errorMessage = data.errorMessages[0].message;
-//            } else {
-//                deferred.resolve(true);
-//            }
-//        })
-//		.error(function(data, status) {
-//			if (status >= 400 && status <= 505 ) {
-//				angular.element('body').removeClass('loading');
-//				angular.element('.session-expired').modal('show');
-//				$timeout(function(){
-//					window.location.href='/';
-//				},2500);
-//			}
-//		});
-//
-//        return deferred.promise;
-//    };
+    $scope.verificaUsuario = function() {
+    	angular.element('body').addClass('loading');
+        var success = true;
+        var deferred = $q.defer();
+
+        $http.post('/api/perfil/verifica-usario?_csrf='+angular.element('#_csrf').val(),{email:$scope.forms.signup.email})
+        .success(function(data) {
+        	angular.element('body').removeClass('loading');
+            done = true;
+            if (data.errorMessages.length > 0) {
+                deferred.resolve(false);
+                $scope.forms.signup.errorMessage = data.errorMessages[0].message;
+            } else {
+                deferred.resolve(true);
+            }
+        })
+		.error(function(data, status) {
+			if (status >= 400 && status <= 505 ) {
+				angular.element('body').removeClass('loading');
+				angular.element('.session-expired').modal('show');
+				$timeout(function(){
+					window.location.href='/';
+				},2500);
+			}
+		});
+
+        return deferred.promise;
+    };
 
 	$scope.clearForgetPasswordForm = function () {
 		if ($scope.forms.forgetPassword == null) {

@@ -5,22 +5,22 @@
 app.factory('PositionService', function($resource){    
     
     return {
-    	deletar : $resource('/eneeyes/security/api/position/delete/:id', {id: '@id'},{
+    	deletar : $resource('/security/api/position/delete/:id', {id: '@id'},{
     		position : {method : 'DELETE'}
         }),        
-        listAll : $resource('/eneeyes/security/api/position/all',{},{
+        listAll : $resource('/security/api/position/all',{},{
         	position : {method : 'GET'}
         }),
-        listOne : $resource('/eneeyes/security/api/position/obtemPorId/:id', {id: '@id'},{
+        listOne : $resource('/security/api/position/obtemPorId/:id', {id: '@id'},{
         	position : {method : 'GET'}
         }),
-        listOneBySensor : $resource('/eneeyes/security/api/position/obtemPorSensorId/:id', {id: '@id'},{
+        listOneBySensor : $resource('/security/api/position/obtemPorSensorId/:id', {id: '@id'},{
         	position : {method : 'GET'}
         }),
-        listOneByCompanyDetector : $resource('/eneeyes/security/api/position/obtemPorCompanyDetectorId/:id', {id: '@id'},{
+        listOneByCompanyDetector : $resource('/security/api/position/obtemPorCompanyDetectorId/:id', {id: '@id'},{
         	position : {method : 'GET'}
         }),
-        save : $resource('/eneeyes/security/api/position/save',{},{
+        save : $resource('/security/api/position/save',{},{
         	position : {method : 'POST'}
         }),
      };

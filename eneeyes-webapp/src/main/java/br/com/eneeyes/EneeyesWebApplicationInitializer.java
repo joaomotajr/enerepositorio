@@ -32,12 +32,13 @@ public class EneeyesWebApplicationInitializer implements WebApplicationInitializ
             System.setProperty("spring.profiles.default","mi");
         }
 
+
         log.info(String.format("app.env: %s", System.getProperty("spring.profiles.default")));
 
         HiddenHttpMethodFilter hiddenHttpMethodFilter = new HiddenHttpMethodFilter();
         servletContext.addFilter("hiddenHttpMethodFilter", hiddenHttpMethodFilter)
         .getServletNameMappings().add("/*");
-        //.addMappingForUrlPatterns(null, false, "/*");        
+        //.addMappingForUrlPatterns(null, false, "/*");
 
         CharacterEncodingFilter characterEncondingFilter = new CharacterEncodingFilter();
         characterEncondingFilter.setEncoding("utf8");

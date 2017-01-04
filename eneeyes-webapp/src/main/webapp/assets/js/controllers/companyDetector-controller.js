@@ -257,7 +257,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	
 	function format ( d ) {
 		
-		//var index = $scope.detectors.findIndex(item => item.name === d);
 		var index = $scope.detectors.findIndex(function(item) {return item.name === d});
 		var detector = $scope.detectors[index];
 	
@@ -380,7 +379,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	    data.addRows(value);
 
 	    var options = {
-	          title: "Medi&ccedil;&otilde;es no Per&iacute;odo",
+	          title: "Dados Recentes dos Detectores.",
 	          titleTextStyle: { color: '#FF0000' },
 	          legend: { position: 'none' },	          
 	    	  width: 800,
@@ -462,7 +461,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	$scope.mostrarAlarmTela = function(selectedAlarm) {
 				
 		/* Verifica se o Sensor possui Alarm */
-		//var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(img => img.sensorId === $scope.selectedSensor.uid);
 		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(function (i) { return i.sensorId === $scope.selectedSensor.uid});
 				
 		if (detectorAlarmIndex < 0) {
@@ -501,7 +499,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	
 	$scope.removerAlarmTela = function(alarm) {
 				
-		//var alarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(item => item.alarmDto.uid === alarm.uid);
 		var alarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex( function(item) { return item.alarmDto.uid === alarm.uid });
 		
 		$scope.selectedCompanyDetectorAlarms.splice( alarmIndex, 1);	

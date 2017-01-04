@@ -1,63 +1,8 @@
-function callPaginaAjax(url) {
-	angular.element('body').scope().LoadAjaxContent(url);
-}
-
-//if(document.getElementById('frm-inscricao') != null) {
-//	$('#btn-inscricao').click(function() {
-//        angular.element('#fld-inscricao').removeClass('has-error');
-//        angular.element('#inc-error').css('display', 'none');
-//        angular.element('body').scope().forms.signup.errorMessage = '';
-//        angular.element('body').scope().$apply();
-//    });
-//
-//    $('#frm-inscricao').submit(function(e) {
-//        e.preventDefault();
-//        var reg = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-//        var success = reg.test(this.email.value);
-//        if (!success) {
-//            angular.element('#fld-inscricao').addClass('has-error');
-//            angular.element('#inc-error').css('display', 'block');
-//        }
-//        if (success) {
-//            var t = this;
-//            var q = angular.element('body').scope().verificaUsuario();
-//            q.then(function(resolve){
-//                if (resolve) {
-//                    $(t).unbind('submit').submit();
-//                }
-//            }, function(){});
-//        }
-//    });
-//
-//    $('.bs-forget-password-modal').on('show.bs.modal', function (e) {
-//    	var scope = angular.element('.bs-forget-password-modal').scope();
-//    	scope.clearForgetPasswordForm();
-//    	scope.$apply();
-//    });
+//function callPaginaAjax(url) {
+//	angular.element('body').scope().LoadAjaxContent(url);
 //}
 
 app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin, $sce) {
-	
-//	$scope.showMessage = function(msg) {
-//		$.gritter.add({
-//            title: '<center>Aten\u00e7\u00e3o!</center>',
-//            text: msg,
-//            image: '',
-//            sticky: true,
-//            time: '',
-//            class_name: 'my-sticky-class'
-//        });
-//	};
-//	
-//	$scope.LoadAjaxContent = function(url, title){
-//		$http.get(url)
-//        .success(function (data) {
-//        	$scope.ajaxcontent = data;
-//        })
-//        .error(function (data, status, headers, config) {
-//        	alert(errorThrown);
-//        });
-//	}
 	
 	
 	$scope.LoadAjaxContentCompany = function(url){
@@ -74,6 +19,8 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	$scope.tabsShow = [];
 	
 	$scope.LoadAjaxContent = function(url, title) {
+		
+		title= title.replace(/\s/g,'');
 		
 		tabIsOpened = $(".nav-tabs").find("." + title ).attr('id');
 					
@@ -164,41 +111,6 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         },
      },
     };
-
-//	$scope.queryfocus = false;
-//    $scope.$watch('query', function(n, o) {
-//    	if (! $scope.queryfocus) {
-//    		return;
-//    	}
-//
-//    	if (n != null && n.length < 3) {
-//    	    angular.element('#search-container').removeClass('show-autocomplete');
-//    	    angular.element('#search-container').addClass('hide-autocomplete');
-//    	    angular.element('#search-box').removeClass('clear-bottom');
-//    		return;
-//    	}
-//
-//        angular.element('#search-container').removeClass('hide-autocomplete');
-//        angular.element('#search-container').addClass('show-autocomplete');
-//    	angular.element('#search-box').addClass('clear-bottom');
-//
-//		$scope.autocomplete = new DocumentoBusca($scope.usuarioFiltro);
-//		$scope.autocomplete.$search({_csrf : angular.element('#_csrf').val(), q : $scope.query, totalItems: 5}, function() {}, function(data) {
-//			 if (data.status >= 400 && data.status <= 505 ) {
-//				 angular.element('body').removeClass('loading');
-//				 angular.element('.session-expired').modal('show');
-//				 $timeout(function(){
-//					window.location.href='/';
-//				 },2500);
-//			 }
-//		 });
-//
-//		angular.element('body').click(function() {
-//			angular.element('#search-container').removeClass('show-autocomplete');
-//			angular.element('#search-container').addClass('hide-autocomplete');
-//			angular.element('#search-box').removeClass('clear-bottom');
-//		});
-//    });
     
     $scope.errorMessage = '';
 

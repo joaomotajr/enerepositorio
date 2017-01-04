@@ -1,5 +1,5 @@
-
-        <div class="row">
+	<div data-ng-controller="dashController">
+		<div class="row">
        		<div class="col-md-12">
 
 				<div class="box box-primary" style="margin-bottom: 8px;">
@@ -149,7 +149,7 @@
 				                  <ul class="products-list product-list-in-box">
 				                    <li class="item">
 				                      <div class="product-img">
-				                        <img src="dist/img/default-50x50.gif" alt="Product Image">
+				                        <img src="/assets/img/default-50x50.gif" alt="Product Image">
 				                      </div>
 				                      <div class="product-info">
 				                        <a href="javascript::;" class="product-title">Samsung TV <span class="label label-warning pull-right">$1800</span></a>
@@ -160,7 +160,7 @@
 				                    </li><!-- /.item -->
 				                    <li class="item">
 				                      <div class="product-img">
-				                        <img src="dist/img/default-50x50.gif" alt="Product Image">
+				                        <img src="/assets/img/default-50x50.gif" alt="Product Image">
 				                      </div>
 				                      <div class="product-info">
 				                        <a href="javascript::;" class="product-title">Bicycle <span class="label label-info pull-right">$700</span></a>
@@ -171,7 +171,7 @@
 				                    </li><!-- /.item -->
 				                    <li class="item">
 				                      <div class="product-img">
-				                        <img src="dist/img/default-50x50.gif" alt="Product Image">
+				                        <img src="/assets/img/default-50x50.gif" alt="Product Image">
 				                      </div>
 				                      <div class="product-info">
 				                        <a href="javascript::;" class="product-title">Xbox One <span class="label label-danger pull-right">$350</span></a>
@@ -182,7 +182,7 @@
 				                    </li><!-- /.item -->
 				                    <li class="item">
 				                      <div class="product-img">
-				                        <img src="dist/img/default-50x50.gif" alt="Product Image">
+				                        <img src="/assets/img/default-50x50.gif" alt="Product Image">
 				                      </div>
 				                      <div class="product-info">
 				                        <a href="javascript::;" class="product-title">PlayStation 4 <span class="label label-success pull-right">$399</span></a>
@@ -208,10 +208,9 @@
        				</div>
       			</div>	
        		</div>
-    </div>    
-        
-    
-    <script src="/assets/plugins/adminlte/dashboard2.js"></script>          
-    <script src="/assets/plugins/adminlte/dashboard.js"></script>           
+    	</div>    
+    </div>
+<!--     <script src="/assets/plugins/adminlte/dashboard2.js"></script>           -->
+<!--     <script src="/assets/plugins/adminlte/dashboard.js"></script>            -->
 
     

@@ -35,13 +35,28 @@
 	          <!-- Sidebar Menu -->
 			<ul class="sidebar-menu">
 					        	  
-	            <li class="header">SELECIONE</li>	            
-	            <li>
-	            	<a href="#" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fa fa-th"></i> <span>Dashboard</span></a>
-	            	<a href="#" data-ng-click="LoadAjaxContent('navegacao.html', 'Developer')"><i class="fa fa-circle-o"></i><span>Developer</span></a>
-	            	<a href="#" data-ng-click="LoadAjaxContent('cadastro.html', 'Cadastro')"><i class="fa fa-circle-o"></i><span>User</span></a>
+	            <li class="header">SELECIONE</li>
+	           
+	            	            
+	            <li class="treeview">
+	            	<a href="#" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fa fa-th text-aqua"></i> 
+	            		<span>Dashboard</span>
+	            		<span class="label label-success pull-right">Novo</span>	            		
+	            	</a>	            	
+	            </li>
+	            <li class="treeview">
+	            	<a href="#" data-ng-click="LoadAjaxContent('navegacao.html', 'Developer')"><i class="fa fa-circle-o"></i>
+	            	<span>Developer</span>
+	            	<span class="label label-danger pull-right">Temp</span>
+	            	</a>
+	            </li>	
+	            <li class="treeview">
+	            	<a href="#" data-ng-click="LoadAjaxContent('clear.html', 'Cadastro')"><i class="fa fa-circle-o"></i>
+	            	<span>User</span>
+	            	<span class="label label-primary pull-right">Breve</span>
+	            	</a>
 	            </li>	                                    
-	            
+	           
 	          	<li class="treeview">
 	            	<a href="#">
 	                <i class="fa fa-edit"></i> <span>Cadastros</span>
@@ -68,6 +83,18 @@
 			            <li><a href="#" data-ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn"></i> Alarmes</a></li>			            	            
 	              	</ul>
 	            </li>	                  
+	            
+	            <li class="treeview">
+	            	<a href="#">
+	                <i class="fa fa-search"></i> <span>Consultas</span>
+	                <i class="fa fa-angle-left pull-right"></i>
+	              	</a>
+	            	<ul class="treeview-menu">			            		        
+			            <li><a href="#" data-ng-click="LoadAjaxContent('logHistoric.html', 'Log Detectores')"><i class="fa fa-files-o"></i> Log Detectores</a></li>
+			            <li><a href="#" data-ng-click="LoadAjaxContent('clear.html', 'Log Alarmes')"><i class="fa-file-audio-o"></i> Log Alarmes</a></li>			            	            
+	              	</ul>
+	            </li>
+	            
 	        </ul>
         </section>        
 	</aside>

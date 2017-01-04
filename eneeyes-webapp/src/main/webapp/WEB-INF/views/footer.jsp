@@ -76,6 +76,8 @@
 	<script src="/assets/js/controllers/companyDetector-controller.js"></script>	
 	<script src="/assets/js/controllers/alarm-controller.js"></script>
 	<script src="/assets/js/controllers/manufacturer-controller.js"></script>
+	<script src="/assets/js/controllers/dashboard-controller.js"></script>
+	<script src="/assets/js/controllers/logHistoric-controller.js"></script>
 	
 		
 	<!-- PAGE LEVEL SERVICES -->
@@ -94,6 +96,7 @@
 	<script src="/assets/js/services/companyDetectorAlarm-service.js"></script>
 	<script src="/assets/js/services/position-service.js"></script>
 	<script src="/assets/js/services/historic-service.js"></script>
+	<script src="/assets/js/services/view-service.js"></script>
 	
 	<!-- PAGE LEVEL FACTORIES -->
 	

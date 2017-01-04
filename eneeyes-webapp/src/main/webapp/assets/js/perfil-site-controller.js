@@ -15,19 +15,19 @@ app.controller('PerfilController', function ($scope, $filter, Perfil) {
       }
     };
 
-	$scope.carregarMeusDocumentos = function() {
-		$scope.meusDocumentos = new Perfil.documentos();
-		
-		$scope.meusDocumentos.$lista({_csrf : angular.element('#_csrf').val()},function(){}, function(data) {
-			 if (data.status >= 400 && data.status <= 505 ) {
-				 angular.element('body').removeClass('loading');
-				 angular.element('.session-expired').modal('show');
-				 $timeout(function(){
-					window.location.href='/';
-				 },2500);
-			 }
-		 });
-	};
+//	$scope.carregarMeusDocumentos = function() {
+//		$scope.meusDocumentos = new Perfil.documentos();
+//		
+//		$scope.meusDocumentos.$lista({_csrf : angular.element('#_csrf').val()},function(){}, function(data) {
+//			 if (data.status >= 400 && data.status <= 505 ) {
+//				 angular.element('body').removeClass('loading');
+//				 angular.element('.session-expired').modal('show');
+//				 $timeout(function(){
+//					window.location.href='/';
+//				 },2500);
+//			 }
+//		 });
+//	};
 
 	$scope.carregarDocumento = function(uid, mtVersion) {
 		window.location.href = "/security/documento/" + uid + "/mtVersion/" + mtVersion;

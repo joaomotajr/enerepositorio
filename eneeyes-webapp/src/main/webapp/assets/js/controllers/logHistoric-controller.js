@@ -27,11 +27,14 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	}
 	
 	$scope.clearHistoric = function() {
-				
+		
+		$scope.selectedCompany = '';
         $scope.selectedCompanyDetector = '';
         $scope.findedCompanyDetector = '';
         $scope.selectedCompanySensor = '';
-			
+        $scope.listHistoric = undefined;
+        $scope.listHistoricInterval = undefined;
+        			
 	}		
 	
 	$scope.getHistorics2 = function(interval) {
@@ -77,15 +80,15 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		var dataInicio = new Date(getDate($scope.dateIn));
 		var dataFim = new Date(getDate($scope.dateOut, true));
 		
-		$scope.listHistoric = new HistoricService.listIntervalDays();		
-		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(),			
-			companyDetectorId: $scope.selectedCompanyDetector.uid, 
+		$scope.listHistoricInterval = new HistoricService.listIntervalDays();		
+		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(),			
+			companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, 
 			sensorId: $scope.selectedCompanySensor.uid,
 			dateIn: dataInicio,
 			dateOut: dataFim
 		}, function(){
 			       	
-			console.log($scope.listHistoric);      	
+			console.log($scope.listHistoricInterval);      	
        });		
 	}		
 		

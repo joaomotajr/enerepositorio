@@ -45,8 +45,8 @@
 	            	</a>	            	
 	            </li>
 	            <li class="treeview">
-	            	<a href="#" data-ng-click="LoadAjaxContent('navegacao.html', 'Developer')"><i class="fa fa-circle-o"></i>
-	            	<span>Developer</span>
+	            	<a href="#" data-ng-click="LoadAjaxContent('simulador.html', 'Simulador')"><i class="fa fa-circle-o"></i>
+	            	<span>Simulador</span>
 	            	<span class="label label-danger pull-right">Temp</span>
 	            	</a>
 	            </li>	

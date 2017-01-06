@@ -397,6 +397,6 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         });
     };
 
-   $scope.LoadAjaxContent('navegacao.html', 'Developer')
+   $scope.LoadAjaxContent('dashboard.html', 'Dashboard')
    
 });

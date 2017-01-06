@@ -28,7 +28,7 @@
 				<div class="box box-primary">
 					
 					<div class="box-header">
-					 	<h3 class="box-title">Pesquisa Historico de Detectores</h3>
+					 	<h3 class="box-title">Gera Log para Detectores/Sensores</h3>
 					</div>
 					
 					<div class="box-body">

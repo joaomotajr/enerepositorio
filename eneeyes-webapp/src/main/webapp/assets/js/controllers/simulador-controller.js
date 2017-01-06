@@ -13,6 +13,7 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 		$scope.selectedCompany = '';
         $scope.selectedCompanyDetector = '';
         $scope.selectedCompanySensor = '';
+        $scope.selectedSensorAlarm = ''
 			
 	}
 	

@@ -37,23 +37,16 @@
 	         folder instead of downloading all of them to reduce the load. -->
 	    <link rel="stylesheet" href="/assets/css/skins/_all-skins.min.css">
 	    
-	    <!-- Morris chart 
-	    <link rel="stylesheet" href="/assets/plugins/morris/morris.css"> -->
-	    
-	    <!-- jvectormap 
-	    <link rel="stylesheet" href="/assets/plugins/jvectormap/jquery-jvectormap-1.2.2.css"> -->
-	    
 	    <!-- Date Picker -->
 	    <link rel="stylesheet" href="/assets/plugins/datepicker/datepicker.css">
 	    <!-- Daterange picker -->
 	    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker-bs3.css">
-	    
-	    <!-- bootstrap wysihtml5 - text editor 
-	    <link rel="stylesheet" href="/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"> -->
 	   	
 	   	<!-- Image Notes -->
 		<style type="text/css" media="all">@import "/assets/plugins/imageNotes/css/marker.css";</style>		
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" media="screen">
+
+		<link rel="stylesheet" href="/assets/css/custom.css">
 			    	    
 	    <style>
 	    

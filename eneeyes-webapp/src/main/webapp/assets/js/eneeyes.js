@@ -1,5 +1,64 @@
 var app = angular.module('eneeyes', ['ngResource', 'angular-jquery-maskedinput', 'pascalprecht.translate']);
 
+
+app.directive('validateRange', ['$parse', function($parse) {
+
+    function link($scope, $element, $attrs, ngModel) {
+        var attrRange, range = [];
+
+        function validate(value) {
+            var validMin = true, validMax = true;
+            if (typeof range[0] === 'number') {
+                ngModel.$setValidity('min', value >= range[0]);
+                validMin = value >= range[0];
+            }
+            if (typeof range[1] === 'number') {
+                ngModel.$setValidity('max', value <= range[1]);
+                validMax = value <= range[1];
+            }
+            return validMin && validMax ? value : undefined;
+        }
+
+        attrRange = $attrs.validateRange.split(/,/);
+
+        range[0] = $parse(attrRange[0] || '')($scope);
+        range[1] = $parse(attrRange[1] || '')($scope);
+
+        $scope.$watchCollection('[' + $attrs.validateRange + ']', function(vals) {
+            range = vals;
+            validate(ngModel.$viewValue);
+        });
+
+        ngModel.$parsers.unshift(validate);
+        ngModel.$formatters.unshift(validate);
+    }
+
+    return {
+        link: link,
+        require: 'ngModel'
+    };
+    
+}]);
+
+app.filter('companyFilter', function () {
+    return function (objects, criteria) {
+        var filterResult = new Array();
+
+        if (!criteria)
+            return null;
+
+        for (index in objects) {
+                        
+        	 if (objects[index] != null && objects[index].companyId == criteria.company.uid  ) {
+
+                 filterResult.push(objects[index]);
+             }   
+        }
+
+        return filterResult;
+    }
+});
+
 app.filter('numberFixedLen', function () {
     return function (n, len) {
         var num = parseInt(n, 10);

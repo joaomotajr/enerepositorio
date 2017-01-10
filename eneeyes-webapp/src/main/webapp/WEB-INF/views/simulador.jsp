@@ -82,13 +82,18 @@
 									<div class="col-md-2">
 										<div class="form-group">
 											<label class="control-label">Valor</label>
-						                	<input class="form-control" data-ng-model="companyValor">						                                                
+						                	<input class="form-control" type="number" data-ng-model="companyValor" name="companyValor" data-validate-range="0,selectedCompanySensor.rangeMax" required>
+<!-- 						                	  {{ userForm.companyValor.$error }} -->
+						                	 
+						                	<p data-ng-show="!userForm.companyValor.$error.required && userForm.companyValor.$error.max && !userForm.companyValor.$pristine" class="help-block">Valor Máximo : {{selectedCompanySensor.rangeMax}} </p>
+										    <p data-ng-show="!userForm.companyValor.$error.required && (userForm.companyValor.$error.number || userForm.companyValor.$error.min)" class="help-block">Valor Inválido</p>
+										    <p data-ng-show="userForm.companyValor.$error.required && !userForm.companyValor.$pristine" class="help-block">Valor Obrigatório</p>
 										</div>                                                                    
 									</div>         		
 									<div class="col-md-2">
 										<div class="form-group">
 											<label class="control-label">Ação</label>
-					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="saveHistoric()">Save Historic</button>
+					        				<button type="button" class="btn btn-primary btn-xs form-control" ng-disabled="!userForm.$valid" data-ng-click="saveHistoric()">Save Historic</button>
 					        			</div>
 					        		</div>
 			

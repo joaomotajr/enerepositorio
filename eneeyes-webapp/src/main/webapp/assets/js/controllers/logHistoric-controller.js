@@ -1,23 +1,3 @@
-app.filter('companyFilter', function () {
-    return function (objects, criteria) {
-        var filterResult = new Array();
-
-        if (!criteria)
-            return objects;
-
-        for (index in objects) {
-                        
-        	 if (objects[index] != null && objects[index].companyId == criteria.company.uid  ) {
-
-                 filterResult.push(objects[index]);
-             }   
-        }
-
-        return filterResult;
-    }
-});
-
-
 app.controller('logHistoricController', function ($scope, $timeout, $filter, CompanyService, DetectorService, CompanyDetectorService, HistoricService, CompanyDetectorAlarmService, ViewService) {
 	
 	$scope.showInfo = function(msg) {

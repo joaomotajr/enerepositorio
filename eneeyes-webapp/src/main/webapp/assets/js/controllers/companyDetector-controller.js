@@ -33,7 +33,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	$scope.showInfo = function(msg) {
 		angular.element('body').removeClass('loading');            
         $scope.$root.msgInfo = msg;
-        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
+        $('#resultInfo').hide().show('slow').delay(1000).hide('fast');
 	}
 	
 	$scope.showErro = function(msg) {
@@ -478,6 +478,11 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	$scope.removerAlarm = function(uid) {		
 
 		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; })[0];
+		
+//		if($scope.selectedSensor.rangeMax > selectedAlarm.alarm3) {
+//			$scope.showErro("Atenção! Alarme incompatível com o range do Sensor");
+//			return;
+//		}
 				
 		alarm = {
 		 		alarmDto : selectedAlarm, 

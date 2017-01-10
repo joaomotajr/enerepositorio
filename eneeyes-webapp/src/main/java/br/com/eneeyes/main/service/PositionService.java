@@ -31,20 +31,7 @@ public class PositionService implements IService<PositionDto> {
 	
 	@Override
 	public BasicResult<?> save(PositionDto dto) {
-//		Result<PositionDto> result = new Result<PositionDto>();
-//		
-//		Position position = new Position(dto);
-//		position = repository.save(position);
-//		
-//		checkAlarm(position);
-//		
-//		dto.setUid(position.getUid());
-//		result.setEntity(dto);
-//		
-//		result.setResultType( ResultMessageType.SUCCESS );
-//		result.setMessage("Executado com sucesso.");					
-//		
-//		return result;
+
 		
 		// TODO Auto-generated method stub
 		return null;
@@ -102,6 +89,7 @@ public class PositionService implements IService<PositionDto> {
 				position.setSensor(sensor);
 				position.setLastUpdate(new Date());
 				position.setLastValue((double) 0);
+				position.setAlarmType(AlarmType.NORMAL);
 				
 				repository.save(position);
 			}

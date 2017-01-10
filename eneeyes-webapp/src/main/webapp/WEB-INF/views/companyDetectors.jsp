@@ -282,7 +282,7 @@
 				<div class="modal-content">                            
 					<div class="modal-body">
 						<div class="panel panel-default">
-							<div class="panel-heading" style="text-align:center">Selecione Alarme para o Sensor: </div>                                                                      
+							<div class="panel-heading" style="text-align:center">Selecione Alarme para o Sensor: <strong> {{selectedSensor.name}} </strong> - Valor Máximo: <strong>{{selectedSensor.rangeMax}}</strong> </div>                                                                           
 					  	</div>
 				
 						<div class="box">

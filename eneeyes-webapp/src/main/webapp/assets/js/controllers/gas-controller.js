@@ -88,15 +88,15 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
          } 		 
 	 }
 	 
-	 $scope.unitMetersGases = 
-		 [
-		  	{ name : 'DESCONHECIDO', uid : 0 },
-		  	{ name : 'PPM', uid :  1 },
-		  	{ name : 'PPB', uid : 2 },
-		  	{ name : 'LEL_PERCENT', uid : 3 },
-		  	{ name : 'LEL_PERCENT_METRO', uid : 4 },
-		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
-		 ]; 
+//	 $scope.unitMetersGases = 
+//		 [
+//		  	{ name : 'DESCONHECIDO', uid : 0 },
+//		  	{ name : 'PPM', uid :  1 },
+//		  	{ name : 'PPB', uid : 2 },
+//		  	{ name : 'LEL_PERCENT', uid : 3 },
+//		  	{ name : 'LEL_PERCENT_METRO', uid : 4 },
+//		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
+//		 ]; 
 	 
 	 $scope.getGases();	 
 	

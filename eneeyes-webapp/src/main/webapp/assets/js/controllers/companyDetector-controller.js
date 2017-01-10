@@ -105,7 +105,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			if($scope.selectedCompanyDetector.uid == undefined) {
 				$scope.selectedCompanyDetector = $scope.inclusaoCompanyDetector.t;
 				$scope.getCompanyDetectorAlarms();
-				//initGaugeDetector();
 			}		
 			
 			$scope.showInfo($scope.inclusaoCompanyDetector.message) ;
@@ -266,7 +265,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	            '<tr>'+ 
             		'<th>Sensor</th>'+
             		'<th>Nome</th>'+
-            		'<th>Gás</th>'+
+            		'<th>G&aacutes</th>'+
             	'</tr>'+
 	        	'<tr>'+ 
 	        		'<td>01</td>'+
@@ -282,7 +281,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	            '<tr>'+ 
             		'<th>Sensor</th>'+
             		'<th>Nome</th>'+
-            		'<th>Gás</th>'+
+            		'<th>G&aacutes</th>'+
             	'</tr>'+
 	        	'<tr>'+ 
 	        		'<td>01</td>'+
@@ -562,10 +561,11 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$scope.listInterval.$historic({_csrf : angular.element('#_csrf').val(),  
 			companyDetectorId: currentCompanyDetector.uid,			 
 			interval: interval }, function(){
+			
 			var itens = [];	
 			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
 				
-				var item = 0;					
+				//var item = 0;					
 				if($scope.listInterval.list != null && $scope.listInterval.list.length != 0) {									
 					
 					var itens = new Array();

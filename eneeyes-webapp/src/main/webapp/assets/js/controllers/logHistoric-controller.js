@@ -1,4 +1,46 @@
+app.filter('alarmFilter', function () {
+    return function (objects, criteria) {
+        var filterResult = new Array();
+
+        if (!criteria)
+            return null;            
+        else if (criteria.uid == 0)
+        	return objects;
+        else if (criteria.uid == 5) {        	
+        	for (index in objects) {
+           		 if(objects[index].value >= criteria.alarm1) {
+                    filterResult.push(objects[index]);
+           		 }
+        	}
+        }
+        else if (criteria.uid == 3) {            	
+        	for (index in objects) {
+           		 if(objects[index].value >= criteria.alarm3) {
+                    filterResult.push(objects[index]);
+           		 }
+        	}
+        }
+        else if (criteria.uid == 2) {            	
+        	for (index in objects) {
+           		 if(objects[index].value >= criteria.alarm2 && objects[index].value < criteria.alarm3 ) {
+                    filterResult.push(objects[index]);
+           		 }
+        	}
+        }
+        else if (criteria.uid == 1) {            	
+        	for (index in objects) {
+           		 if(objects[index].value >= criteria.alarm1 && objects[index].value < criteria.alarm2) {
+                    filterResult.push(objects[index]);
+           		 }
+        	}
+        }
+        return filterResult;
+    }
+});
+
 app.controller('logHistoricController', function ($scope, $timeout, $filter, CompanyService, DetectorService, CompanyDetectorService, HistoricService, CompanyDetectorAlarmService, ViewService) {
+
+	var loadGoogleCharts = false;
 	
 	$scope.showInfo = function(msg) {
 		angular.element('body').removeClass('loading');            
@@ -11,7 +53,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		$scope.selectedCompany = '';
         $scope.selectedCompanyDetector = '';
         $scope.findedCompanyDetector = '';
-        $scope.selectedCompanySensor = '';
+        $scope.selectedCompanySensor = undefined;        
         $scope.listHistoric = undefined;
         $scope.listHistoricInterval = undefined;
         			
@@ -103,6 +145,18 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(function (i) { return i.sensorId === $scope.selectedCompanySensor.uid});				
 		if (detectorAlarmIndex >= 0) {			
 			$scope.selectedSensorAlarm = $scope.selectedCompanyDetectorAlarms[detectorAlarmIndex].alarmDto ;
+						
+			$scope.filterAlarm = 
+				 [
+				  	{ name : 'TODO HISTORICO', alarm1: null, alarm2: null, alarm3: null, uid : 0 },				  	
+				  	{ name : 'ALARME 1', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 1 },
+				  	{ name : 'ALARME 2', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 2 },
+				  	{ name : 'ALARME 3', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 3 },
+				  	{ name : 'TODOS ALARMES', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: null, alarm3: null,  uid :  5 },
+				 ];
+			
+			 $scope.selectedfilterAlarm = $scope.filterAlarm[0];
+			
 		}		
 	}
 
@@ -132,6 +186,75 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
         });			 
 	}
 	
+	$scope.showGrafico = function(detectorId) {
+		
+		if(! loadGoogleCharts) {				
+			google.charts.load('current', { 'packages': ['gauge', 'corechart'] });				
+			loadGoogleCharts = true;
+		}
+		
+		google.charts.setOnLoadCallback(formatLineSensor);	
+		
+		$timeout(function () {
+			$('#modalGraficoHistorico').modal({ show: 'false' });
+		}, 500);
+	}
+	
+	function formatLineSensor() {
+		var value = $scope.listHistoricInterval.list;
+		
+		var red =     $scope.selectedSensorAlarm == null  ? 0 :  $scope.selectedSensorAlarm.alarm3;
+		var yellow =  $scope.selectedSensorAlarm == null  ? 0 :  $scope.selectedSensorAlarm.alarm2;
+		var orange =  $scope.selectedSensorAlarm == null  ? 0 :  $scope.selectedSensorAlarm.alarm1;
+		
+		var data = new google.visualization.DataTable();
+	      
+	    data.addColumn('string', 'Date');
+	    data.addColumn('number', 'Medições');    
+
+	    var itens = new Array();
+	    	    
+	    for(var i in value) {
+	    	var itemDate = new Date(value[i].lastUpdate);
+
+	    	changeDate = itemDate.toLocaleDateString();
+	    	valor = value[i].value;
+	    	
+	    	itens.push([changeDate, valor]);
+		}
+	      
+	    data.addRows(itens);
+
+	    var options = {
+	          title: "Dados Recentes dos Detectores.",
+	          titleTextStyle: { color: '#FF0000' },
+	          legend: { position: 'none' },	          
+	    	  width: 800,
+	    	  height: 500,
+	    	  hAxis: {
+	    		  title: 'Data',
+	    		  color: '#333', count: 5,
+	    		  logscale: true
+	    	  },
+	    	  vAxis: {
+	    		  title: 'Alarmes',
+	    		  titleTextStyle: { color: '#FF0000' },
+	    		  maxValue:$scope.selectedCompanySensor.rangeMax,
+	              minValue:0,
+	    		  ticks: [0, orange, yellow, red, $scope.selectedCompanySensor.rangeMax]
+	    	  },
+	    	  curveType: 'function',
+	          explorer: {},
+	          pointSize:3	        
+	      };
+	    
+	    var chart = new google.visualization.LineChart("graficoHistorico");
+	    chart.draw(data, options);
+	
+	}
+	
+		
+	$scope.clearHistoric();
 	$scope.getCompanys();
 	$scope.getCompanyDetectors();	
 	

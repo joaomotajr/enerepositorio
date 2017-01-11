@@ -34,7 +34,6 @@
 		color: red;
 		font-weight: 800;
 	}
-
 </style>
 
 <div data-ng-controller="logHistoricController">
@@ -87,8 +86,7 @@
 				            <form class="form" name="userForm">
 					            <div class="col-md-12">
 					            	
-					            	<div class="col-md-1">
-					            	</div>
+					            	<div class="col-md-1"></div>
 					            	 
 					            	<div class="col-md-3">                                                                                                                            
 										<div class="form-group">
@@ -282,8 +280,7 @@
 							                    <tbody>                                    
 							                     	<tr data-ng-repeat="item in listHistoric.list">
 							                     		<td>{{item.sensorDto.uid}} / {{item.sensorDto.name}} </td>	                               
-							                      		<td>{{item.lastUpdate | date:'dd/MM/yyyy HH:mm' }}</td>
-<!-- 									                      		<td>{{item.value}}</td>	 -->
+							                      		<td>{{item.lastUpdate | date:'dd/MM/yyyy HH:mm' }}</td>									                  
 							                      		
 							                      		<td> {{item.value}}									                      		
 							                      			<span data-ng-if="item.value >= selectedSensorAlarm.alarm1 && item.value < selectedSensorAlarm.alarm2" class="label label-success pull-right">1</span>									                      		

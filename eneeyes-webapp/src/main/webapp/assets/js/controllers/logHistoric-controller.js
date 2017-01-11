@@ -239,8 +239,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	    		  title: 'Valores',
 	    		  gridlines: {color: '#333', count: 4},
 	    		  baselineColor: '#fbf6a7',
-	    		  textPosition: 'none'
-	    	  },
+	    		  textPosition: 'none'	    	  },
 	    	  vAxis: {
 	    		  title: 'Alarmes',
 	    		  count: 5,

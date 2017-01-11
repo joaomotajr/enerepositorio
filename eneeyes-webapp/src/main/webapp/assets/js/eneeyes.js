@@ -1,6 +1,5 @@
 var app = angular.module('eneeyes', ['ngResource', 'angular-jquery-maskedinput', 'pascalprecht.translate']);
 
-
 app.directive('validateRange', ['$parse', function($parse) {
 
     function link($scope, $element, $attrs, ngModel) {

@@ -481,8 +481,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 //		if($scope.selectedSensor.rangeMax > selectedAlarm.alarm3) {
 //			$scope.showErro("Atenção! Alarme incompatível com o range do Sensor");
 //			return;
-//		}
-				
+//		}				
 		alarm = {
 		 		alarmDto : selectedAlarm, 
 		 		companyDetectorDto: $scope.selectedCompanyDetector, 

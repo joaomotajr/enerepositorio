@@ -565,7 +565,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			var itens = [];	
 			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
 				
-				//var item = 0;					
 				if($scope.listInterval.list != null && $scope.listInterval.list.length != 0) {									
 					
 					var itens = new Array();

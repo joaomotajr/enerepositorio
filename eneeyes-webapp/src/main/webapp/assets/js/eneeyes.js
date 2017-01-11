@@ -202,6 +202,7 @@ app.directive("datemonopicker", ['$filter', function($filter) {
 	      elem.datepicker()
 	      	.on('changeDate', function (ev) {
 	      		updateModel($filter('date')(ev.date, "dd/MM/yyyy"));
+	      		$(this).datepicker('hide');
 	      	});
 	    }
 	}

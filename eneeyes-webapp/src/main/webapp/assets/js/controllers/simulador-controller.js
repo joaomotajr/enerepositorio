@@ -67,7 +67,10 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(function (i) { return i.sensorId === $scope.selectedCompanySensor.uid});				
 		if (detectorAlarmIndex >= 0) {			
 			$scope.selectedSensorAlarm = $scope.selectedCompanyDetectorAlarms[detectorAlarmIndex].alarmDto ;
-		}		
+		}
+		else {
+			$scope.selectedSensorAlarm = undefined;
+		}	
 	}
 	
 	$scope.getCompanys = function() {
@@ -95,7 +98,8 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
        	         	
        });			 
 	}	
-		
+	
+	$scope.clearHistoric();
 	$scope.getCompanyDetectors();
 	$scope.getCompanys();
 	

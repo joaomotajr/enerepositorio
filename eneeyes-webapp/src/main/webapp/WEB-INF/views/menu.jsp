@@ -91,7 +91,7 @@
 	              	</a>
 	            	<ul class="treeview-menu">			            		        
 			            <li><a href="#" data-ng-click="LoadAjaxContent('logHistoric.html', 'Log Detectores')"><i class="fa fa-files-o"></i> Log Detectores</a></li>
-			            <li><a href="#" data-ng-click="LoadAjaxContent('clear.html', 'Log Alarmes')"><i class="fa-file-audio-o"></i> Log Alarmes</a></li>			            	            
+			            <li><a href="#" data-ng-click="LoadAjaxContent('clear.html', 'Log Alarmes')"><i class="fa fa-file-audio-o"></i> Log Alarmes</a></li>			            	            
 	              	</ul>
 	            </li>
 	            

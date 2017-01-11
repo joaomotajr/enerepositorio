@@ -155,9 +155,13 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 				  	{ name : 'TODOS ALARMES', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: null, alarm3: null,  uid :  5 },
 				 ];
 			
-			 $scope.selectedfilterAlarm = $scope.filterAlarm[0];
-			
-		}		
+			 $scope.selectedfilterAlarm = $scope.filterAlarm[0];			
+		}
+		else {
+			$scope.selectedSensorAlarm = undefined;
+			$scope.listHistoric = undefined;
+       		$scope.listHistoricInterval = undefined;
+		}	
 	}
 
 	$scope.getCompanys = function() {
@@ -189,7 +193,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	$scope.showGrafico = function(detectorId) {
 		
 		if(! loadGoogleCharts) {				
-			google.charts.load('current', { 'packages': ['gauge', 'corechart'] });				
+			google.charts.load('current', { 'packages': ['corechart', 'line'] });				
 			loadGoogleCharts = true;
 		}
 		
@@ -209,8 +213,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		
 		var data = new google.visualization.DataTable();
 	      
-	    data.addColumn('string', 'Date');
-	    data.addColumn('number', 'Medições');    
+	    data.addColumn('string', 'Data');
+	    data.addColumn('number', 'Valores');    
 
 	    var itens = new Array();
 	    	    
@@ -228,31 +232,31 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	    var options = {
 	          title: "Dados Recentes dos Detectores.",
 	          titleTextStyle: { color: '#FF0000' },
-	          legend: { position: 'none' },	          
-	    	  width: 800,
-	    	  height: 500,
+	          //legend: { position: 'none' },
+	          width: 800,
+	          height: 400,
 	    	  hAxis: {
-	    		  title: 'Data',
-	    		  color: '#333', count: 5,
-	    		  logscale: true
+	    		  title: 'Valores',
+	    		  gridlines: {color: '#333', count: 4},
 	    	  },
 	    	  vAxis: {
 	    		  title: 'Alarmes',
+	    		  count: 5,
 	    		  titleTextStyle: { color: '#FF0000' },
 	    		  maxValue:$scope.selectedCompanySensor.rangeMax,
 	              minValue:0,
-	    		  ticks: [0, orange, yellow, red, $scope.selectedCompanySensor.rangeMax]
-	    	  },
-	    	  curveType: 'function',
-	          explorer: {},
-	          pointSize:3	        
+	    		  ticks: [0, orange, yellow, red, $scope.selectedCompanySensor.rangeMax],	    		  
+	    	  },        
 	      };
-	    
-	    var chart = new google.visualization.LineChart("graficoHistorico");
+	    objChart = document.getElementById("graficoHistorico");
+	    var chart = new google.visualization.LineChart(objChart);
 	    chart.draw(data, options);
 	
 	}
 	
+	$('dateIn').on('changeDate', function(ev){
+	    $(this).datepicker('hide');
+	});
 		
 	$scope.clearHistoric();
 	$scope.getCompanys();

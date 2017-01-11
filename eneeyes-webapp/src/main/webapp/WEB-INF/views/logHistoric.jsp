@@ -107,7 +107,7 @@
 											
 						                	<select class="form-control" data-live-search="true" 
 					                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-					                                data-ng-options="item as item.companyDetectorName for item in CompanyDetectors | companyFilter:search | orderBy: 'name' track by item.companyDetectorId" 
+					                                data-ng-options="item as item.companyDetectorName for item in CompanyDetectors | companyFilter:search | orderBy: 'companyDetectorName' track by item.companyDetectorId" 
 					                                         data-ng-model="selectedCompanyDetector" 
 					                                         data-ng-change="changeCompanyDetector();">
 					                                         <option value="">Selecione</option> 
@@ -302,19 +302,22 @@
 		</div>		
 		
 		<div id="modalGraficoHistorico" class="modal">                
-			<div class="modal-dialog" role="document">
+			<div class="modal-dialog  modal-lg" role="document">
 				<div class="modal-content">                            
 					<div class="modal-body">
 						<div class="panel panel-default">
-							<div class="panel-heading" style="text-align:center">Selecione Alarme para o Sensor: <strong> {{selectedSensor.name}} </strong> - Valor Máximo: <strong>{{selectedSensor.rangeMax}}</strong> </div>                                                                           
+							<div class="panel-heading" style="text-align:center">Gráficos </div>                                                                           
 					  	</div>
 				
 						<div class="box">
 							<div class="box-header">
-							  <h3 class="box-title">Cadastro de Alarmes</h3>
+							  <h3 class="box-title">Gráfico do Sensor Selecionado</h3>
 							</div>
 							<div class="box-body">
-								<div style="max-width: 800px; overflow: auto" id="graficoHistorico"></div>                                                       
+<!-- 								<div class="col-md-12"> -->
+									<div  id="graficoHistorico"></div>
+<!-- 									<div style="max-width: 800px; overflow: auto" id="graficoHistorico"></div>                                                        -->
+<!-- 								</div> -->
 							</div>
 						</div>				
 				  	</div>

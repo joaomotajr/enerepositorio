@@ -97,14 +97,16 @@
 														<thead>
 															<tr>
 																<th></th>
-																<th>Nome</th>																
-																<th>Ação</th>																						
+																<th>Nome</th>
+																<th>Modelo</th>																
+																<th>Ação</th>																																						
 															</tr>
 														</thead>
 														<tbody>                                                        
 															<tr data-ng-repeat="item in detectors">
 																<td class="details-control"></td>
-																<td>{{item.name}}</td>																
+																<td>{{item.name}}</td>
+																<td>{{item.model}}</td>																
 																<td>																	
 																	<div data-ng-if="item.uid == selectedCompanyDetector.detectorDto.uid">
 																		<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" data-ng-click="selecionarDetector(item)" disabled>Selecionado</button>

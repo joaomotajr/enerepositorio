@@ -49,26 +49,10 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	            angular.element('body').removeClass('loading');				 
 	         }, 500);
 			           
-		}, function(data) {
-			angular.element('body').removeClass('loading');
-			$scope.msgErro = "Erro: " + data.statusText;
+//		}, function(data) {
+//			angular.element('body').removeClass('loading');
+//			$scope.msgErro = "Erro: " + data.statusText;
 		});			 
-	 }
-	
-	$scope.saveManufacturer = function() {
-		
-		var manufacturer = {
-			uid: 0,
-			name: $scope.newManufacturer			
-    	}; 
-		 
-		$scope.inclusaoManufacturer = new ManufacturerService.save(manufacturer);		 
-		$scope.inclusaoManufacturer.$manufacturer({_csrf : angular.element('#_csrf').val()}, function()
-		{	         	
-			$scope.manufacturers.push($scope.inclusaoManufacturer.t);                     	
-        });
-		
-		//$(".popover").popover('hide');
 	 }
 	 
 	$scope.clearFormDetector = function () {
@@ -152,10 +136,9 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 			 else {
 				 $scope.msgErro = "Erro: " + $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
-			 }
-         	         	
-		 }, function(data) {		
-			 $scope.msgErro = "Erro: " + data.statusText;
+			 }         	         	
+//		 }, function(data) {		
+//			 $scope.msgErro = "Erro: " + data.statusText;
 		});		 
 	 }	 
 	 

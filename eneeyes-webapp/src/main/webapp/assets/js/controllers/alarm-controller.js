@@ -25,9 +25,9 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	            angular.element('body').removeClass('loading');				 
 	         }, 500);
            
-		}, function(data) {
-			angular.element('body').removeClass('loading');
-			$scope.msgErro = "Erro: " + data.statusText;
+//		}, function(data) {
+//			angular.element('body').removeClass('loading');
+//			$scope.msgErro = "Erro: " + data.statusText;
 		});		 
 	 }
 		 
@@ -39,8 +39,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	    $scope.gasUnitMeterGases = '';
 		$scope.alarmAlarm1 = '';
 		$scope.alarmAlarm2 = '';
-		$scope.alarmAlarm3 = '';
-					
+		$scope.alarmAlarm3 = '';					
 	}
 
 	 
@@ -78,8 +77,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 				 console.log($scope.deletar.systemMessage); 
 			 }
          	         	
-		 }, function(data) {		
-			 $scope.msgErro = "Erro: " + data.statusText;
+//		 }, function(data) {		
+//			 $scope.msgErro = "Erro: " + data.statusText;
 		});	 
 	 }	 
 	 

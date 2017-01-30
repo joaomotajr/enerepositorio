@@ -30,30 +30,11 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 				$scope.clearFormSensor();
 	            $scope.getSensors();                     	
 	            angular.element('body').removeClass('loading');				 
-	         }, 500);
-           
-		}, function(data) {
-			angular.element('body').removeClass('loading');
-			$scope.msgErro = "Erro: " + data.statusText;
+	         }, 500);           
+//		}, function(data) {
+//			angular.element('body').removeClass('loading');
+//			$scope.msgErro = "Erro: " + data.statusText;
 		});		 
-	 }
-	
-	$scope.saveManufacturer = function() {
-		
-		var manufacturer = {
-			uid: 0,
-			name: $scope.newManufacturer			
-    	}; 
-		 
-		$scope.inclusaoManufacturer = new ManufacturerService.save(manufacturer);		 
-		$scope.inclusaoManufacturer.$manufacturer({_csrf : angular.element('#_csrf').val()}, function()
-		{         	
-         	
-			$scope.manufacturers.push($scope.inclusaoManufacturer.t);
-                     	
-        });
-		
-		//$(".popover").popover('hide');
 	 }
 	 
 	$scope.clearFormSensor = function () {
@@ -75,10 +56,8 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		
 		$('.sort .ui-draggable').remove();
 		
-		$scope.inicializaLDragDrop();
-					
+		$scope.inicializaLDragDrop();					
 	}
-
 	 
 	$scope.getSensors = function() {
 		 
@@ -138,8 +117,8 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 				 console.log($scope.deletar.systemMessage); 
 			 }
          	         	
-		 }, function(data) {		
-			 $scope.msgErro = "Erro: " + data.statusText;
+//		 }, function(data) {		
+//			 $scope.msgErro = "Erro: " + data.statusText;
 		});	 
 	 }	 
 	 
@@ -242,9 +221,10 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		  	{ name : 'CAT', uid :  1 },
 		  	{ name : 'FTA', uid : 2 },
 		  	{ name : 'FID', uid : 3 },
-		  	{ name : 'ECM', uid : 4 },
+		  	{ name : 'EC', uid : 4 },
 		  	{ name : 'IR', uid : 5 },
-		  	{ name : 'BUT', uid : 6 }		  	
+		  	{ name : 'BUT', uid : 6 },		  	
+		  	{ name : 'GALVANCIA', uid : 7}
 		 ]; 
 	 
 	 $scope.getUnitMetersGases = function (name) {

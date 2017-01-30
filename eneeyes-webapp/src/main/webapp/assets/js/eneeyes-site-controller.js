@@ -1,7 +1,3 @@
-//function callPaginaAjax(url) {
-//	angular.element('body').scope().LoadAjaxContent(url);
-//}
-
 app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin, $sce) {
 	
 	

@@ -117,7 +117,7 @@
 										    </div>
 										    <div class="col-md-3">
 										    	<div class="form-group">
-									                <label class="control-label">Incremento</label>
+									                <label class="control-label">Resolução</label>
 									                <input class="form-control" placeholder="Unit" data-ng-model="sensorRangeUnit">
 									            </div>
 										    </div>

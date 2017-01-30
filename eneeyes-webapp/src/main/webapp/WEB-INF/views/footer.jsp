@@ -5,6 +5,7 @@
 <sec:authorize access="hasRole('CST')">
     <c:set var="authenticated" value="true"/>
 </sec:authorize>
+
 	<div class="ajax-loader"></div> 
     <!-- jQuery 2.1.4 -->
     <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
@@ -103,3 +104,16 @@
 	
 		
     <!-- END PAGE LEVEL SCRIPTS -->
+    
+    <div class="modal fade session-expired" tabindex="-1" role="dialog" aria-labelledby="sessionExpiredModal" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="text-warning">Sess&atilde;o expirou!</h4>
+				</div>
+				<div class="modal-body">
+					<h4>A sua sess&atilde;o expirou e ser&aacute; redirecionado para a p&aacute;gina principal do site. Nesta p&aacute;gina voc&ecirc; dever&aacute; realizar um novo acesso.</h4>
+				</div>
+			</div>
+		</div>
+	</div>

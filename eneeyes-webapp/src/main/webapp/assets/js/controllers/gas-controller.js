@@ -11,7 +11,6 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 			name: $scope.gasName,
 			cas: $scope.gasCas,
 			formula: $scope.gasFormula,
-			//unitMeterGases : $scope.gasUnitMeterGases.uid
     	}; 
 		 
 		$scope.inclusaoGas = new GasService.save(gas);		 
@@ -24,9 +23,9 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 	            angular.element('body').removeClass('loading');				 
 	         }, 500);	
 			
-		}, function(data) {
-			angular.element('body').removeClass('loading');
-			$scope.msgErro = "Erro: " + data.statusText;
+//		}, function(data) {
+//			angular.element('body').removeClass('loading');
+//			$scope.msgErro = "Erro: " + data.statusText;
 		});		 
 	 }
 		 
@@ -71,10 +70,9 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 			 else {
 				 $scope.msgErro = "Erro: " + $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
-			 }
-         	         	
-		 }, function(data) {		
-			 $scope.msgErro = "Erro: " + data.statusText;
+			 }         	         	
+//		 }, function(data) {		
+//			 $scope.msgErro = "Erro: " + data.statusText;
 		});		 
 	 }	 
 	 

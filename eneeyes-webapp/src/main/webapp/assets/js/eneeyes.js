@@ -1,4 +1,48 @@
-var app = angular.module('eneeyes', ['ngResource', 'angular-jquery-maskedinput', 'pascalprecht.translate']);
+var app = angular.module('eneeyes', ['ngResource', 'angular-jquery-maskedinput', 'pascalprecht.translate', 'dependency']);
+
+angular.module('dependency', [])
+.config(['$httpProvider', function ($httpProvider) {
+
+  $httpProvider.interceptors.push(function ($q, $rootScope, $timeout) {
+      return {
+          'request': function (config) {
+              console.log('request intercept');
+              return config;
+          },
+          'requestError': function (rejection) {
+              console.log('request error');
+              return rejection;
+          },
+
+          'response': function (response) {
+              $rootScope.loading = false;
+              console.log('response intercept');
+              return response;	
+          },
+
+          'responseError': function (rejection) {
+        	  
+        	  console.log('response error');
+        	  
+        	  if (rejection.status >= 400 && rejection.status <= 505 ) {
+        		    angular.element('body').removeClass('loading');
+	  			    angular.element('.session-expired').modal('show');
+	  				
+	  				$timeout(function(){
+	  					window.location.href='/';
+	  				},2500);
+	  				
+	                return response;
+	  		 }
+        	  else {
+        		  return $q.reject(rejection);
+        	  }               
+          }
+      };
+  });
+
+}]);
+
 
 app.directive('validateRange', ['$parse', function($parse) {
 
@@ -73,7 +117,7 @@ app.filter('numberFixedLen', function () {
     };
 });
 
-app.directive('bindUnsafeHtml', ['$compile', function ($compile) {
+app.directive('bindUnsafeHtml', ['$compile', '$timeout', function ($compile, $timeout) {
     return function(scope, element, attrs) {
         scope.$watch(
           function(scope) {
@@ -81,9 +125,19 @@ app.directive('bindUnsafeHtml', ['$compile', function ($compile) {
             return scope.$eval(attrs.bindUnsafeHtml);
           },
           function(value) {
-            // when the 'bindUnsafeHtml' expression changes
-            // assign it into the current DOM
-            element.html(value);
+        	//Checa se servidor enviou página de login, devidor sessão expirada
+        	if(value != undefined && value.indexOf('loginPage') > 0) {
+        		        		
+        		angular.element('.session-expired').modal('show');
+  				
+  				$timeout(function(){
+  					window.location.href='/';
+  				},2500);        		
+        	}
+        	else
+                // when the 'bindUnsafeHtml' expression changes
+                // assign it into the current DOM
+        		element.html(value);
 
             // compile the new DOM and link it to the current
             // scope.

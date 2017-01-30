@@ -20,31 +20,9 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
                 $scope.getControllers();
 	                     	
 	            angular.element('body').removeClass('loading');				 
-	         }, 500);
-                     	
-		}, function(data) {
-			angular.element('body').removeClass('loading');
-			$scope.msgErro = "Erro: " + data.statusText;
+	         }, 500);			
 		});		 
-	 }
-	
-	$scope.saveManufacturer = function() {
-		
-		var manufacturer = {
-			uid: 0,
-			name: $scope.newManufacturer			
-    	}; 
-		 
-		$scope.inclusaoManufacturer = new ManufacturerService.save(manufacturer);		 
-		$scope.inclusaoManufacturer.$manufacturer({_csrf : angular.element('#_csrf').val()}, function()
-		{         	
-         	
-			$scope.manufacturers.push($scope.inclusaoManufacturer.t);
-                     	
-        });
-		
-		//$(".popover").popover('hide');
-	 }
+	}
 	 
 	$scope.clearFormController = function () {
 	
@@ -53,7 +31,6 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 	    $scope.controllerModel = '';
 	    $scope.controllerManufacturer = '';	
 	}
-
 	 
 	$scope.getControllers = function() {
 		 
@@ -76,8 +53,7 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 	        
 		    $scope.controllerName = $scope.controllers[index].name;
 		    $scope.controllerModel = $scope.controllers[index].model;
-		    $scope.controllerManufacturer = $scope.controllers[index].manufacturerDto;	
-		    
+		    $scope.controllerManufacturer = $scope.controllers[index].manufacturerDto;
 		    	        
 	        $('#idControllerName').focus();
 	    }
@@ -96,8 +72,8 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 				 console.log($scope.deletar.systemMessage); 
 			 }
          	         	
-		 }, function(data) {		
-			 $scope.msgErro = "Erro: " + data.statusText;
+//		 }, function(data) {		
+//			 $scope.msgErro = "Erro: " + data.statusText;
 		});
 		 
 	 }	

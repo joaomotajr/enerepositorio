@@ -32,7 +32,7 @@ angular.module('dependency', [])
 	  					window.location.href='/';
 	  				},2500);
 	  				
-	                return rejection;
+	                return response;
 	  		 }
         	  else {
         		  return $q.reject(rejection);

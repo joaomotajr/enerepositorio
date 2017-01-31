@@ -1,5 +1,4 @@
 app.controller('controllerController', function ($scope, $timeout, $filter, ControllerService, ManufacturerService) {
-	    
 	
 	$scope.saveController = function() {
 		
@@ -71,9 +70,6 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 				 $scope.msgErro = "Erro: " + $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
 			 }
-         	         	
-//		 }, function(data) {		
-//			 $scope.msgErro = "Erro: " + data.statusText;
 		});
 		 
 	 }	

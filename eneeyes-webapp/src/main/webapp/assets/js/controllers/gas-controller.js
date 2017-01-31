@@ -21,11 +21,7 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 	            $scope.getGases();
 	            
 	            angular.element('body').removeClass('loading');				 
-	         }, 500);	
-			
-//		}, function(data) {
-//			angular.element('body').removeClass('loading');
-//			$scope.msgErro = "Erro: " + data.statusText;
+	         }, 500);
 		});		 
 	 }
 		 
@@ -34,8 +30,7 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 	    $scope.gasUid = undefined;
 	    $scope.gasName = '';
 	    $scope.gasCas = '';
-	    $scope.gasFormula = '';	
-	    //$scope.gasUnitMeterGases = '';
+	    $scope.gasFormula = '';
 	}
 	 
 	$scope.getGases = function() {
@@ -51,8 +46,7 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 	        
 		    $scope.gasName = $scope.gases[index].name;
 		    $scope.gasCas = $scope.gases[index].cas;
-		    $scope.gasFormula = $scope.gases[index].formula;		    	    
-		    //$scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.gases[index].unitMeterGases);		    
+		    $scope.gasFormula = $scope.gases[index].formula;   
 		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases('DESCONHECIDO');
 		    		
 	        $('#idGasName').focus();
@@ -70,9 +64,8 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 			 else {
 				 $scope.msgErro = "Erro: " + $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
-			 }         	         	
-//		 }, function(data) {		
-//			 $scope.msgErro = "Erro: " + data.statusText;
+			 }        	         	
+
 		});		 
 	 }	 
 	 
@@ -85,16 +78,6 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
              }
          } 		 
 	 }
-	 
-//	 $scope.unitMetersGases = 
-//		 [
-//		  	{ name : 'DESCONHECIDO', uid : 0 },
-//		  	{ name : 'PPM', uid :  1 },
-//		  	{ name : 'PPB', uid : 2 },
-//		  	{ name : 'LEL_PERCENT', uid : 3 },
-//		  	{ name : 'LEL_PERCENT_METRO', uid : 4 },
-//		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
-//		 ]; 
 	 
 	 $scope.getGases();	 
 	

@@ -41,6 +41,7 @@
 						</div>                                                       
 					</div>
 				</div>
+				
 				<div id="resultErro" class="alert alert-warning" role="alert" data-ng-show="msgErro" >
             		<button type="button" class="close" ><span data-ng-click="msgErro='';">&times;</span></button>
             		<strong>Alerta! </strong>{{msgErro}} 
@@ -105,21 +106,25 @@
 			                    <div class="box-body">
 								    <div class="row">
 								    	<div class="col-md-4">
-									    	<div class="form-group">
+									    	<div data-ng-class="{'has-error': userForm.alarmAlarm1.$invalid && !userForm.alarmAlarm1.$pristine}">
 								                <label class="control-label">Alarme 1</label>
-								                <input class="form-control" placeholder="Alarme 1" data-ng-model="alarmAlarm1">
+								                <input type="number" class="form-control" name="alarmAlarm1" placeholder="Alarme 1 - Decimal" data-ng-model="alarmAlarm1" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required />
 								            </div>
 									    </div>
 									    <div class="col-md-4">
 									    	<div class="form-group">
-								                <label class="control-label">Alarme 2</label>
-								                <input class="form-control" placeholder="Alarme 2" data-ng-model="alarmAlarm2">
+								                <div data-ng-class="{'has-error': userForm.alarmAlarm2.$invalid && !userForm.alarmAlarm2.$pristine}">
+								                <label class="control-label">Alarme 1</label>
+								                <input type="number" class="form-control" name="alarmAlarm2" placeholder="Alarme 2 - Decimal" data-ng-model="alarmAlarm2" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required />
+								            </div>
 								            </div>
 									    </div>
 									    <div class="col-md-4">
-									    	<div class="form-group">
-								                <label class="control-label">Alarme 3</label>
-								                <input class="form-control" placeholder="Alarme 3" data-ng-model="alarmAlarm3">
+									    	<div class="form-group">								                
+								                <div data-ng-class="{'has-error': userForm.alarmAlarm3.$invalid && !userForm.alarmAlarm3.$pristine}">
+								                	<label class="control-label">Alarme 1</label>
+								                	<input type="number" class="form-control" name="alarmAlarm3" placeholder="Alarme 3 - Decimal" data-ng-model="alarmAlarm3" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required />								                							          
+								            	</div>
 								            </div>
 									    </div>									    
 								    </div>
@@ -128,7 +133,7 @@
 			            </form>
 			            
 						<div class="box-footer">
-							<button type="button" data-ng-click="clearFormAlarm()" class="btn btn-default">Cancelar</button>                                                                
+							<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-default">Cancelar</button>                                                                
 							<button type="button" data-ng-click="saveAlarm();" class="btn btn-primary" 
 								data-ng-disabled="(alarmName && alarmGas && gasUnitMeterGases && alarmAlarm1 && alarmAlarm2 && alarmAlarm3) ? false : true">Salvar
 							</button>

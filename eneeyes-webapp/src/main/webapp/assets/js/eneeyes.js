@@ -24,7 +24,7 @@ angular.module('dependency', [])
         	  
         	  console.log('response error');
         	  
-        	  if (rejection.status >= 400 && rejection.status <= 505 ) {
+        	  if (rejection.status > 400 && rejection.status <= 505 ) {
         		    angular.element('body').removeClass('loading');
 	  			    angular.element('.session-expired').modal('show');
 	  				
@@ -35,8 +35,13 @@ angular.module('dependency', [])
 	                return response;
 	  		 }
         	  else {
-        		  return $q.reject(rejection);
-        	  }               
+        		  angular.element('body').removeClass('loading'); 
+        		  $rootScope.alertDanger = rejection.statusText;
+        	  }
+//        	  else {
+//        		  //Propagar o erro para tratamento local
+//        		  return $q.reject(rejection);
+//        	  }               
           }
       };
   });

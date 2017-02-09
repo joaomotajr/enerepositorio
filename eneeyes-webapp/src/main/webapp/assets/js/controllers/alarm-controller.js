@@ -134,5 +134,5 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 
 	 $scope.getAlarms();	 
 	 $scope.getGases();
-
+	 angular.element('body').removeClass('loading');
 });

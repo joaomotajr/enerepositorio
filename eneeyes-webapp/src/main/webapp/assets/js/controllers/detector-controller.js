@@ -22,6 +22,13 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		
 	$scope.saveDetector = function() {		
 		
+		var exists =  $scope.detectors.findIndex(function (i) { return i.name.toLowerCase() === $scope.detectorName.toLowerCase() });
+		
+		if ( exists >= 0 && $scope.detectorUid == undefined) {
+			 $scope.detectorNameExist = "true";
+			 return;
+		}
+		
 		angular.element('body').addClass('loading');
 		
 		for (var i = 0; i < $scope.newSensors.length; i++) {
@@ -68,6 +75,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	    
 	    $scope.msgSens1 = false;
 	    $scope.msgSens2 = false;
+	    $scope.detectorNameExist = "false";
 	    
 	    $('.sort .ui-draggable').remove();
 		
@@ -134,7 +142,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 			 if (!$scope.deletar.isError)
 				 $scope.detectors.splice(index, 1);
 			 else {
-				 $scope.msgErro = "Erro: " + $scope.deletar.message;
+				 $scope.msgErroDetector = $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
 			 }         	         	
 //		 }, function(data) {		
@@ -254,7 +262,13 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		 $scope.detectorImage = "/assets/img/cover.jpg";
 	 }
 	 
+	 $scope.keypress = function($event) {
+	    $scope.lastKey = $event.keyCode
+	    $scope.detectorNameExist = "false";
+	  };
+	 
 	 $scope.refreshDetectors();
+	 angular.element('body').removeClass('loading');
 	 
 	 $timeout(function () {                    
 		 $scope.loadEvents();

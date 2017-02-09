@@ -12,7 +12,8 @@
 								<thead>
 									<tr>
 										<th>Nome</th>
-										<th>Fórumla</th>                                                            
+										<th>Fórumla</th>
+										<th>C.A.S</th>                                                        
 										<th>Editar</th>
 										<th>Excluir</th>						
 									</tr>
@@ -20,7 +21,8 @@
 								<tbody>                                                        
 									<tr  data-ng-repeat="item in gases">
 										<td>{{item.name}}</td>
-										<td>{{item.formula}}</td>															        
+										<td>{{item.formula}}</td>
+										<td>{{item.cas}}</td>																        
 										<td>
 											<button type="button" class="btn btn-info btn-xs"  data-ng-click="editGas($index)">editar</button>
 										</td>
@@ -34,9 +36,9 @@
 					</div>
 				</div>
 				
-				<div id="resultErro" class="alert alert-warning" role="alert"  data-ng-show="msgErro" >
-            		<button type="button" class="close" ><span  data-ng-click="msgErro='';">&times;</span></button>
-            		<strong>Alerta! </strong>{{msgErro}} 
+				<div class="alert alert-warning" role="alert"  data-ng-show="msgErroGas" >
+            		<button type="button" class="close" ><span  data-ng-click="msgErroGas='';">&times;</span></button>
+            		<strong>Alerta! </strong>{{msgErroGas}} 
         		</div>
 			</div>                                                      
 																
@@ -48,9 +50,10 @@
 					<div class="box-body">
 						<form class="form">					
 			                 							                                                                                                                                    
-							<div class="form-group">
-								<label class="control-label">Nome</label>                                                                        
-								<input id="idGasName" class="form-control inputProfile" placeholder="Nome do Gas"  data-ng-model="gasName">                                                                        
+							<div data-ng-class="{'has-error': gasNameExist=='true'}">
+								<label class="control-label">Nome</label>           
+								<span data-ng-show="gasNameExist">Gas já Existe</span>                                                             
+								<input data-ng-keydown="keypress($event)" id="idGasName" class="form-control inputProfile" placeholder="Nome do Gas"  data-ng-model="gasName">                                                                        
 							</div>
 		
 							<div class="form-group">

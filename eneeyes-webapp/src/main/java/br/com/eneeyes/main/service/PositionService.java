@@ -30,9 +30,7 @@ public class PositionService implements IService<PositionDto> {
 	PositionAlarmService positionAlarmService;	
 	
 	@Override
-	public BasicResult<?> save(PositionDto dto) {
-
-		
+	public BasicResult<?> save(PositionDto dto) {		
 		// TODO Auto-generated method stub
 		return null;
 	}

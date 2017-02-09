@@ -137,4 +137,6 @@ app.controller('dashController', function ($scope, $timeout, $filter, CompanyDet
 		
 	$scope.getCompanyDetectors();
 	
+	angular.element('body').removeClass('loading');		
+	
 });

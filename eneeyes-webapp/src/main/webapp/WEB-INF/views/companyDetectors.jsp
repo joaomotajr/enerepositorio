@@ -53,17 +53,22 @@
 						    		<div class="row">				    			
 								        <div class="col-md-6">
 								            <div class="form-group">
-								                <label class="control-label">Nome</label>
-								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
-									            <span data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 8 caracteres</span>
-								                <input id="idAreaName" class="form-control" placeholder="Nome do Detector" data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="8" name="username" required>
+								            
+								                <label class="control-label">Identificação</label>
+								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Identificação Obrigatorio]</span>
+									            <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 8 caracteres</span>
+								                <input data-disallow-spaces id="idAreaName" class="form-control" 
+								                	placeholder="Identificação do Detector (Sem Espaços)" 
+								                	data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="8" name="username" 
+								                	title="Identificação do Detector (Sem Espaços)"
+								                required>
 								            </div>
 								        </div>
 										
 								        <div class="col-md-6">
 								            <div class="form-group">
 								                <label class="control-label">Descrição</label>
-								                <input class="form-control" placeholder="E-mail" data-ng-model="selectedCompanyDetector.description">
+								                <input class="form-control" placeholder="Descrição" data-ng-model="selectedCompanyDetector.description">
 								            </div>
 								        </div>
 								    </div>

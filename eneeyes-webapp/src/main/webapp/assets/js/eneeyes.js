@@ -7,6 +7,7 @@ angular.module('dependency', [])
       return {
           'request': function (config) {
               console.log('request intercept');
+              $rootScope.alertDanger = undefined;
               return config;
           },
           'requestError': function (rejection) {
@@ -23,6 +24,7 @@ angular.module('dependency', [])
           'responseError': function (rejection) {
         	  
         	  console.log('response error');
+        	  $rootScope.alertDanger = undefined;
         	  
         	  if (rejection.status > 400 && rejection.status <= 505 ) {
         		    angular.element('body').removeClass('loading');
@@ -30,10 +32,14 @@ angular.module('dependency', [])
 	  				
 	  				$timeout(function(){
 	  					window.location.href='/';
-	  				},2500);
+	  				},2500);	  				
 	  				
 	                return response;
 	  		 }
+        	  if (rejection.status == 0) {
+        		  angular.element('body').removeClass('loading'); 
+        		  $rootScope.alertDanger = "Servidor Offline, Contate o Administrador do Sistema";
+        	  }
         	  else {
         		  angular.element('body').removeClass('loading'); 
         		  $rootScope.alertDanger = rejection.statusText;
@@ -47,6 +53,18 @@ angular.module('dependency', [])
   });
 
 }]);
+
+app.directive('disallowSpaces', function() {'1'
+	  return {
+	    restrict: 'A',
+
+	    link: function($scope, $element) {
+	      $element.bind('input', function() {
+	        $(this).val($(this).val().replace(/ /g, ''));
+	      });
+	    }
+	  };
+})
 
 
 app.directive('validateRange', ['$parse', function($parse) {

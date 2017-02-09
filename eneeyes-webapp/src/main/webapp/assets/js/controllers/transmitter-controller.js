@@ -2,7 +2,14 @@
 app.controller('transmitterController', function ($scope, $timeout, $filter, TransmitterService, ManufacturerService) {
 	    
 	
-	$scope.saveTransmitter = function() {
+	$scope.saveTransmitter = function() {		
+		
+		var exists =  $scope.transmitters.findIndex(function (i) { return i.name.toLowerCase() === $scope.transmitterName.toLowerCase() });
+		
+		if ( exists >= 0 && $scope.transmitterUid == undefined) {
+			  $scope.transmitterNameExist = "true";
+			  return
+		}
 		
 		angular.element('body').addClass('loading');
 		
@@ -77,7 +84,7 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 			 if (!$scope.deletar.isError)
 				 $scope.transmitters.splice(index, 1);
 			 else {
-				 $scope.msgErro = "Erro: " + $scope.deletar.message;
+				 $scope.msgErroTransmitter = $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage);
 			 }
          	         	
@@ -111,11 +118,17 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 		  	{ name : '_04_20mA', uid : 9 }
 		 ]; 
 	 
+	 $scope.keypress = function($event) {
+	    $scope.lastKey = $event.keyCode
+	    $scope.transmitterNameExist = "false";
+	  };
+		  	 
 	 $scope.refreshTransmitters = function() {
 		 $scope.getManufacturers();	
 	 } 
 	 
 	 $scope.getTransmitters();
-	 $scope.getManufacturers();	 
+	 $scope.getManufacturers();	
+	 angular.element('body').removeClass('loading');
 	
 });

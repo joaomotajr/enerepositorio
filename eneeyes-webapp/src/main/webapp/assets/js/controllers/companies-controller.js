@@ -237,6 +237,8 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 	 }
 	 
 	$scope.getCompanys();	
+	angular.element('body').removeClass('loading');
+	
 	$(".select2").select2();
 		
 });

@@ -308,5 +308,10 @@ public class HistoricService implements IService<HistoricDto> {
 		
 	}
 
+	public BasicResult<?> save(Long companyId, Long unitId, Long areaId, String companyDetectorName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

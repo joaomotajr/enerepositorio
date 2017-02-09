@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Index;
+
 import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.register.Detector;
 
@@ -26,6 +28,13 @@ import br.com.eneeyes.main.model.register.Detector;
 
 @Entity
 @Table(name = "company_detector")
+@org.hibernate.annotations.Table(
+		   appliesTo = "company_detector",
+		   indexes = {
+		      @Index(name="idxName", columnNames = "name"),
+		      @Index(name="idxNameDate", columnNames = {"name", "date"})
+		   }
+		)
 public class CompanyDetector {
 	public CompanyDetector() {   	
     

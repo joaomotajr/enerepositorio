@@ -33,9 +33,9 @@
 						</div>                                                       
 					</div>
 				</div>
-				<div id="resultErro" class="alert alert-warning" role="alert"  data-ng-show="msgErro" >
-            		<button type="button" class="close" ><span  data-ng-click="msgErro='';">&times;</span></button>
-            		<strong>Alerta! </strong>{{msgErro}} 
+				<div class="alert alert-warning" role="alert"  data-ng-show="msgErroManufacturer" >
+            		<button type="button" class="close" ><span  data-ng-click="msgErroManufacturer='';">&times;</span></button>
+            		<strong>Alerta! </strong>{{msgErroManufacturer}} 
         		</div>
 			</div>                                                      
 																
@@ -51,8 +51,9 @@
 			                <div class="row">
 		                 		<div class="col-md-6">                                                                                                                                 
 									<div class="form-group">
-										<label class="control-label">Nome</label>                                                                        
-										<input id="idTransmitterName" class="form-control inputProfile" placeholder="Nome do Fabricante"  data-ng-model="manufacturerName">                                                                        
+										<label class="control-label">Nome</label>          
+										<span class="text-red" data-ng-show="manufacturerNameExist">Fabricante ja Existe</span>                                                               
+										<input id="idTransmitterName" data-ng-keydown="keypress($event)" class="form-control inputProfile" placeholder="Nome do Fabricante"  data-ng-model="manufacturerName">                                                                        
 									</div>
 								</div>
 								<div class="col-md-6">

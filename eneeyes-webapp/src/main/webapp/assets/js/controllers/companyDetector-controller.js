@@ -107,10 +107,11 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 				$scope.getCompanyDetectorAlarms();
 			}		
 			
+			angular.element('body').removeClass('loading');
 			$scope.showInfo($scope.inclusaoCompanyDetector.message) ;
 					
-		}, function(data) {
-			$scope.showErro("Ops!! " + data.statusText);
+//		}, function(data) {
+//			$scope.showErro("Ops!! " + data.statusText);
 		});			 
 	}
 	
@@ -136,10 +137,12 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 						
 			$scope.showDanger($scope.deletar.message) ;
 			$scope.clearCompanyDetector();
-			$scope.getOneCompany($scope.companyUid);			
+			$scope.getOneCompany($scope.companyUid);
+			
+			angular.element('body').removeClass('loading');
 	                 	         	
-        }, function(data) {
-        	$scope.showErro("Ops!! " + data.statusText);
+//        }, function(data) {
+//        	$scope.showErro("Ops!! " + data.statusText);
 		});		 
 	}
 	
@@ -218,7 +221,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	
 			initDatatable();
 															
-		}, 300);
+		}, 500);
 				
 		$("#stepTabDetector_1").trigger("click");
 		
@@ -372,7 +375,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	    		value[i][0] = itemDate.toLocaleTimeString()
 
 	    	changeDate = itemDate.toLocaleDateString();
-
 		}
 	      
 	    data.addRows(value);
@@ -517,9 +519,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$scope.inclusaoCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
 						
 			$scope.showInfo("Alarme Gravado!") ;
+			angular.element('body').removeClass('loading');
 					
-		}, function(data) {
-			$scope.showErro("Ops!! " + data.statusText);
+//		}, function(data) {
+//			$scope.showErro("Ops!! " + data.statusText);
 		});			 
 	}
 	

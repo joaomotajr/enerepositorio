@@ -101,5 +101,5 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 	$scope.clearHistoric();
 	$scope.getCompanyDetectors();
 	$scope.getCompanys();
-	
+	angular.element('body').removeClass('loading');  	
 });

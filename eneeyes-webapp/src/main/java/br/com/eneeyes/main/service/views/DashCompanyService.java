@@ -6,8 +6,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
+import br.com.eneeyes.main.dto.external.HistoricExternalDto;
 import br.com.eneeyes.main.model.views.DashCompany;
 import br.com.eneeyes.main.repository.views.DashCompanyRepository;
+import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
 @Named
@@ -40,6 +42,11 @@ public class DashCompanyService {
 		
 		return result;	
 		
+	}
+
+	public BasicResult<?> save(HistoricExternalDto historicExternalDto) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -23,6 +23,8 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 		if (tabIsOpened)
 			$("#" + tabIsOpened).trigger("click");
 		else {
+			
+			angular.element('body').addClass('loading');		
 			$http.get(url)
 	        .success(function (data) {
 	        	
@@ -42,7 +44,8 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	            
 	        })
 	        .error(function (data, status, headers, config) {
-	        	alert(errorThrown);
+	        	angular.element('body').removeClass('loading');
+	        	alert(config);
 	        });
 		}
 	}
@@ -50,11 +53,15 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	$scope.removeTab = function (index) {
 		if (index == 0) return;
 		
+		$timeout(function(){
+			$("#id_tab_" + index).trigger("click");				
+		},100);
+		
 		$scope.tabsShow.splice(index, 1);
 		
 		$timeout(function(){
 			$("#id_tab_" + index).trigger("click");				
-		},300);
+		},100);
 	};
 		
 	$scope.showUserMenu = false;

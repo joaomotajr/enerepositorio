@@ -28,6 +28,13 @@ public class HistoricController {
 		return service.save(historicDto);
 	}
 	
+	@RequestMapping(value="/security/api/historic/saveByDeviceName", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> save(@PathVariable Long companyId, @PathVariable Long unitId, @PathVariable Long areaId, @PathVariable String companyDetectorName) {
+		
+		return service.save(companyId, unitId, areaId, companyDetectorName);
+	}
+	
 	@RequestMapping(value = "/security/api/historic/all", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listAll() {

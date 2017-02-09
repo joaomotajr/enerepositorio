@@ -7,7 +7,7 @@
 	<div data-ng-controller="sensorController">
 												
 		<div class="row">				                                                    
-			<div class="col-md-5">                                                        
+			<div class="col-md-6">                                                        
 				<div class="box box-primary" data-ng-class="(sensorName || sensorModel || sensorManufacturer || sensorDetectionType) ? 'box-default' : 'box-primary'">
 					<div class="box-header">
 					  <h3 class="box-title">Cadastro de Sensores</h3>
@@ -18,15 +18,19 @@
 								<thead>
 									<tr>
 										<th>Nome</th>
-										<th>Modelo</th>                                                            
+										<th>Modelo</th>
+										<th>Gas</th>                                                               
 										<th>Editar</th>
 										<th>Excluir</th>						
 									</tr>
 								</thead>
 								<tbody>                                                        
 									<tr data-ng-repeat="item in sensors">
-										<td>{{item.name}}-{{item.model}}</td>
-										<td>{{item.model}}</td>															        
+										<td>{{item.name}}</td>
+										<td>{{item.model}}</td>	
+										<td>								
+											{{item.gasesDto[0].name}}
+										</td>													        
 										<td>
 											<button type="button" class="btn btn-primary btn-xs" data-ng-click="editSensor($index)">editar</button>
 										</td>
@@ -40,13 +44,14 @@
 					</div>
 				</div>
 				
-				<div id="resultErro" class="alert alert-warning" role="alert" data-ng-show="msgErro" >
-	           		<button type="button" class="close" ><span data-ng-click="msgErro='';">&times;</span></button>
-	           		<strong>Alerta! </strong>{{msgErro}} 
+				<div class="alert alert-warning" role="alert" data-ng-show="msgErroSensor" >
+	           		<button type="button" class="close" ><span data-ng-click="msgErroSensor='';">&times;</span></button>
+	           		<strong>Alerta! </strong>{{msgErroSensor}} 
 	       		</div>
+	 	       		
 			</div>                                                      
 																
-			<div class="col-sm-7">
+			<div class="col-sm-6">
 				<div class="box box-primary" data-ng-class="(sensorName || sensorModel || sensorManufacturer || sensorDetectionType) ? 'box-primary' : 'box-default'">
 					<div class="box-header">
 						<h3 class="box-title">Cadastro / Edição</h3>
@@ -84,9 +89,10 @@
 			                	<div class="col-md-6">                                                                                                                
 									<div class="form-group">
 										<label class="control-label">Nome</label>
+										<span class="text-red" data-ng-show="sensorNameExist">Sensor ja Existe</span> 
 										<span class="text-red" data-ng-show="sensorForm.username.$error.required && !sensorForm.username.$pristine">  [Nome Obrigatorio]</span>
 									    <span class="text-red" data-ng-show="sensorForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
-										<input id="idSensorName" class="form-control inputProfile" placeholder="Nome do Sensor" data-ng-model="sensorName" data-ng-maxlength="15" name="username" required>                                                                        
+										<input id="idSensorName"  data-ng-keydown="keypress($event)" class="form-control inputProfile" placeholder="Nome do Sensor" data-ng-model="sensorName" data-ng-maxlength="15" name="username" required>                                                                        
 									</div>
 								</div>							
 								<div class="col-md-6">

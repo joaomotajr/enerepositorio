@@ -3,6 +3,13 @@ app.controller('manufacturerController', function ($scope, $timeout, $filter, Ma
 			
 	$scope.saveManufacturer = function() {
 		
+		var exists =  $scope.manufacturers.findIndex(function (i) { return i.name.toLowerCase() === $scope.manufacturerName.toLowerCase() });
+		
+		if ( exists >= 0  && $scope.manufacturerUid == undefined ) {
+			$scope.manufacturerNameExist = "true";
+			return;
+		}	
+		
 		angular.element('body').addClass('loading');
 		
 		var manufacturer = {
@@ -61,7 +68,7 @@ app.controller('manufacturerController', function ($scope, $timeout, $filter, Ma
 			 if (!$scope.deletar.isError)
 				 $scope.manufacturers.splice(index, 1);
 			 else {
-				 $scope.msgErro = "Erro: " + $scope.deletar.message;
+				 $scope.msgErroManufacturer = $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage);
 			 }
          	         	
@@ -70,10 +77,15 @@ app.controller('manufacturerController', function ($scope, $timeout, $filter, Ma
 		});		 
 	 }
 	 
+	 $scope.keypress = function($event) {
+	    $scope.lastKey = $event.keyCode
+	    $scope.manufacturerNameExist = "false";
+	  };
+	 
 	 $scope.refreshManufacturers = function() {
 		 $scope.getManufacturers();	
 	 } 
 
 	 $scope.getManufacturers();	 
-	
+	 angular.element('body').removeClass('loading');	
 });

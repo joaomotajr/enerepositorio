@@ -24,8 +24,7 @@ angular.module('dependency', [])
           'responseError': function (rejection) {
         	  
         	  console.log('response error');
-        	  $rootScope.alertDanger = undefined;
-        	  
+        	          	  
         	  if (rejection.status > 400 && rejection.status <= 505 ) {
         		    angular.element('body').removeClass('loading');
 	  			    angular.element('.session-expired').modal('show');

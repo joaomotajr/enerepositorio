@@ -6,8 +6,10 @@ VIEW `dash_companies` AS
     SELECT 
         `c`.`UID` AS `company_id`,
         `c`.`NAME` AS `company`,
-        `u`.`NAME` AS `units`,
+        `u`.`NAME` AS `unit`,
+        `u`.`UID` AS `unit_id`,
         `a`.`NAME` AS `area`,
+        `a`.`UID` AS `area_id`,
         (CASE
             WHEN (`cd`.`DEVICE_TYPE` = '1') THEN 'DETECTOR'
             WHEN ISNULL(`cd`.`DEVICE_TYPE`) THEN 'NENHUM'

@@ -224,10 +224,9 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		  	{ name : 'OUTROS', uid : 0 },
 		  	{ name : 'CAT', uid :  1 },
 		  	{ name : 'FTA', uid : 2 },
-		  	{ name : 'FID', uid : 3 },
+		  	{ name : 'PID', uid : 3 },
 		  	{ name : 'EC', uid : 4 },
-		  	{ name : 'IR', uid : 5 },
-		  	{ name : 'BUT', uid : 6 },		  	
+		  	{ name : 'IR', uid : 5 },	  	
 		  	{ name : 'GALVANCIA', uid : 7}
 		 ]; 
 	 

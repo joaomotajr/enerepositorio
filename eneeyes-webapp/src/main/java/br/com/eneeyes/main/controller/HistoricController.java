@@ -19,7 +19,21 @@ import br.com.eneeyes.main.service.HistoricService;
 public class HistoricController {
 	
 	@Autowired
-	HistoricService service;	
+	HistoricService service;
+	
+	@RequestMapping(value="/api/historic/SaveByPositionUid2/{uid}/{value}", method=RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public Boolean saveByPositionUid2(@PathVariable Long uid, @PathVariable Double value) {
+		
+		return service.saveByPositionUid(uid, value);
+	}
+	
+	@RequestMapping(value="/api/historic/SaveByPositionUid/{uid}/{value}", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public Boolean saveByPositionUid(@PathVariable Long uid, @PathVariable Double value) {
+		
+		return service.saveByPositionUid(uid, value);
+	}
 	
 	@RequestMapping(value="/security/api/historic/save", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)

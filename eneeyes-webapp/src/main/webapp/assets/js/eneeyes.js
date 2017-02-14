@@ -23,10 +23,19 @@ angular.module('dependency', [])
 
           'responseError': function (rejection) {
         	  
-        	  console.log('response error');
-        	          	  
-        	  if (rejection.status > 400 && rejection.status <= 505 ) {
-        		    angular.element('body').removeClass('loading');
+        	console.log('response error');
+        	  
+        	  
+        	 if (rejection.status == 0) {
+        		  angular.element('body').removeClass('loading'); 
+        		  $rootScope.alertDanger = "Servidor Offline, Contate o Administrador do Sistema";
+        	 }
+        	 else if (rejection.status == 404) {
+        		 angular.element('body').removeClass('loading'); 
+        		 $rootScope.alertDanger = "Item Requisitado Inexistente, Contate o Administrador do Sistema";
+        	 }
+        	 else if (rejection.status > 400 && rejection.status <= 505 ) {
+     		    	angular.element('body').removeClass('loading');
 	  			    angular.element('.session-expired').modal('show');
 	  				
 	  				$timeout(function(){
@@ -35,14 +44,10 @@ angular.module('dependency', [])
 	  				
 	                return response;
 	  		 }
-        	  if (rejection.status == 0) {
-        		  angular.element('body').removeClass('loading'); 
-        		  $rootScope.alertDanger = "Servidor Offline, Contate o Administrador do Sistema";
-        	  }
-        	  else {
+        	 else {
         		  angular.element('body').removeClass('loading'); 
         		  $rootScope.alertDanger = rejection.statusText;
-        	  }
+        	 }
 //        	  else {
 //        		  //Propagar o erro para tratamento local
 //        		  return $q.reject(rejection);

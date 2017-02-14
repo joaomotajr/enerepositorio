@@ -84,11 +84,11 @@ public class Historic {
 		this.companyDetector = companyDetector;
 	}
 	
-	public final Sensor getSensor() {
+	public Sensor getSensor() {
 		return sensor;
 	}
 
-	public final void setSensor(Sensor sensor) {
+	public void setSensor(Sensor sensor) {
 		this.sensor = sensor;
 	}
 }

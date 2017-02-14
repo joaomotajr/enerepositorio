@@ -16,6 +16,28 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
         $scope.selectedSensorAlarm = ''			
 	}
 	
+	$scope.saveHistoricByPostionUid2 = function() {
+				
+		 $scope.inclusao = new HistoricService.saveByPositionUid2();		 
+		 $scope.inclusao.$historic({uid : 15,value : 888}, function() {         	
+        	        	
+        	$scope.showInfo('Salvo');        	
+        	$scope.companyValor = '';
+
+        });		 
+	 }	
+	
+	$scope.saveHistoricByPostionUid = function() {
+		
+		 $scope.inclusao = new HistoricService.saveByPositionUid();		 
+		 $scope.inclusao.$historic({uid : 15,value : 888}, function() {         	
+       	        	
+       	$scope.showInfo('Salvo');        	
+       	$scope.companyValor = '';
+
+       });		 
+	 }
+	
 	$scope.saveHistoric = function() {
 		
 		$scope.historic = {

@@ -100,7 +100,13 @@ public class PositionService implements IService<PositionDto> {
 		return null;
 	}
 
-	@Override
+	
+	public Position findByUid(Long uid) {
+			
+		return repository.findOne(uid);				
+	}
+	
+	
 	public BasicResult<?> findOne(Long uid) {
 		Result<PositionDto> result = new Result<PositionDto>();
 		
@@ -125,6 +131,7 @@ public class PositionService implements IService<PositionDto> {
 		
 		return result;
 	}
+
 	
 	public BasicResult<?> findByCompanyDetector(Long uid) {
 		Result<PositionDto> result = new Result<PositionDto>();

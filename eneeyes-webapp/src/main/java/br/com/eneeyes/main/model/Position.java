@@ -29,8 +29,9 @@ public class Position {
     
     public Position(PositionDto dto) {
     	this.uid = dto.getUid();
-    	this.lastUpdate = dto.getLastUpdate();
+    	this.lastUpdate = dto.getLastUpdate();    	
     	this.lastValue = dto.getLastValue();    	
+    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
     	this.sensor = new Sensor(dto.getSensorDto());
     	this.alarmType = dto.getAlarmType();
     }
@@ -46,7 +47,7 @@ public class Position {
 	@Column(name = "LAST_VALUE", nullable = true)
 	private Double lastValue;
     		
-	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
 	private CompanyDetector companyDetector;
 	

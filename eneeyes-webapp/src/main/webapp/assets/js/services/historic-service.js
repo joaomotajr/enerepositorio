@@ -17,6 +17,12 @@ app.factory('HistoricService', function($resource){
         }),       
         save : $resource('/security/api/historic/save',{},{
         	historic : {method : 'POST'}
+        }),                            
+        saveByPositionUid : $resource('/api/historic/SaveByPositionUid/:uid/:value/', {uid: '@uid', value: '@value' },{
+        	historic : {method : 'POST'}
+        }),                             
+        saveByPositionUid2 : $resource('/api/historic/SaveByPositionUid2/:uid/:value/', {uid: '@uid', value: '@value' },{
+        	historic : {method : 'GET'}
         }),
         listIntervalDays : $resource('/security/api/historic/findByCompanyDetectorAndSensorAndIntervalDays/:companyDetectorId/:sensorId/:dateIn/:dateOut/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', dateIn: '@dateIn', dateIn: '@dateOut' },{        
         	historic : {method : 'GET'}

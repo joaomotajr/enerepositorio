@@ -93,14 +93,21 @@
 									<div class="col-md-2">
 										<div class="form-group">
 											<label class="control-label">Ação</label>
-					        				<button type="button" class="btn btn-primary btn-xs form-control" ng-disabled="!userForm.$valid" data-ng-click="saveHistoric()">Save Historic</button>
+					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-disabled="!userForm.$valid" data-ng-click="saveHistoric()">Save Historic</button>
 					        			</div>
 					        		</div>
 			
-					        		<div class="col-md-2">
+					        		<div class="col-md-1">
 										<div class="form-group">
 											<label class="control-label">.</label>
 					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="clearHistoric()">Limpa Pesquisa</button>
+					        			</div>
+					        		</div>
+					        		
+					        		<div class="col-md-1">
+										<div class="form-group">
+											<label class="control-label">.</label>
+					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="saveHistoricByPostionUid()">TesteWS</button>
 					        			</div>
 					        		</div>
 				        		</div>	        		

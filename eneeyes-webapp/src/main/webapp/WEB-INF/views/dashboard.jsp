@@ -84,53 +84,53 @@
 					                      <tbody>
 					                        <tr>
 					                          <td><a href="pages/examples/invoice.html">OR9842</a></td>
-					                          <td>Call of Duty IV</td>
+					                          <td>Loga</td>
 					                          <td><span class="label label-success">Desligado</span></td>
-					                          <td><div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div></td>
+					                          <td><div class="sparkbar" data-color="#00a65a" data-height="20">Sensor A1</div></td>
 					                        </tr>
 					                        <tr>
 					                          <td><a href="pages/examples/invoice.html">OR1848</a></td>
-					                          <td>Samsung Smart TV</td>
+					                          <td>Nestle</td>
 					                          <td><span class="label label-warning">Pendente</span></td>
-					                          <td><div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div></td>
+					                          <td><div class="sparkbar" data-color="#f39c12" data-height="20">Sensor A2</div></td>
 					                        </tr>
 					                        <tr>
 					                          <td><a href="pages/examples/invoice.html">OR7429</a></td>
-					                          <td>iPhone 6 Plus</td>
+					                          <td>Vopak</td>
 					                          <td><span class="label label-danger">Reestart</span></td>
-					                          <td><div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div></td>
+					                          <td><div class="sparkbar" data-color="#f56954" data-height="20">Sensor A3</div></td>
 					                        </tr>
 					                        <tr>
 					                          <td><a href="pages/examples/invoice.html">OR7429</a></td>
-					                          <td>Samsung Smart TV</td>
+					                          <td>Construtora Quintella</td>
 					                          <td><span class="label label-info">Calibragem</span></td>
-					                          <td><div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div></td>
+					                          <td><div class="sparkbar" data-color="#00c0ef" data-height="20">Sensor A4</div></td>
 					                        </tr>
 					                        <tr>
 					                          <td><a href="pages/examples/invoice.html">OR1848</a></td>
-					                          <td>Samsung Smart TV</td>
+					                          <td>INB</td>
 					                          <td><span class="label label-warning">Alarmado</span></td>
-					                          <td><div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div></td>
+					                          <td><div class="sparkbar" data-color="#f39c12" data-height="20">Sensor A5</div></td>
 					                        </tr>
 					                        <tr>
 					                          <td><a href="pages/examples/invoice.html">OR7429</a></td>
-					                          <td>iPhone 6 Plus</td>
+					                          <td>SCGás</td>
 					                          <td><span class="label label-danger">Atenção</span></td>
-					                          <td><div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div></td>
+					                          <td><div class="sparkbar" data-color="#f56954" data-height="20">Sensor A6</div></td>
 					                        </tr>
 					                        <tr>
 					                          <td><a href="pages/examples/invoice.html">OR9842</a></td>
-					                          <td>Call of Duty IV</td>
+					                          <td>Anglo American</td>
 					                          <td><span class="label label-success">Instalação</span></td>
-					                          <td><div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div></td>
+					                          <td><div class="sparkbar" data-color="#00a65a" data-height="20">Sensor A7</div></td>
 					                        </tr>
 					                      </tbody>
 					                    </table>
 					                  </div><!-- /.table-responsive -->
 					                </div><!-- /.box-body -->
 					                <div class="box-footer clearfix">
-					                  <a href="javascript::;" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-					                  <a href="javascript::;" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
+					                  <a href="javascript::;" class="btn btn-sm btn-info btn-flat pull-left">Baixar Alertas</a>
+					                  <a href="javascript::;" class="btn btn-sm btn-default btn-flat pull-right">Ver Todos Alertas</a>
 					                </div><!-- /.box-footer -->
 					              </div><!-- /.box -->
 							
@@ -152,9 +152,9 @@
 				                        <img src="/assets/img/default-50x50.gif" alt="Product Image">
 				                      </div>
 				                      <div class="product-info">
-				                        <a href="javascript::;" class="product-title">Samsung TV <span class="label label-warning pull-right">$1800</span></a>
+				                        <a href="javascript::;" class="product-title">Loga<span class="label label-warning pull-right"></span></a>
 				                        <span class="product-description">
-				                          Samsung 32" 1080p 60Hz LED Smart HDTV.
+				                          Sensor A1
 				                        </span>
 				                      </div>
 				                    </li><!-- /.item -->
@@ -163,9 +163,10 @@
 				                        <img src="/assets/img/default-50x50.gif" alt="Product Image">
 				                      </div>
 				                      <div class="product-info">
-				                        <a href="javascript::;" class="product-title">Bicycle <span class="label label-info pull-right">$700</span></a>
+				                        <a href="javascript::;" class="product-title">Nestle <span class="label label-info pull-right"></span></a>
 				                        <span class="product-description">
-				                          26" Mongoose Dolomite Men's 7-speed, Navy Blue.
+				                          Sensor A2
+										 
 				                        </span>
 				                      </div>
 				                    </li><!-- /.item -->
@@ -174,9 +175,9 @@
 				                        <img src="/assets/img/default-50x50.gif" alt="Product Image">
 				                      </div>
 				                      <div class="product-info">
-				                        <a href="javascript::;" class="product-title">Xbox One <span class="label label-danger pull-right">$350</span></a>
+				                        <a href="javascript::;" class="product-title">Vopak<span class="label label-danger pull-right"></span></a>
 				                        <span class="product-description">
-				                          Xbox One Console Bundle with Halo Master Chief Collection.
+				                          Sensor A3
 				                        </span>
 				                      </div>
 				                    </li><!-- /.item -->
@@ -185,19 +186,18 @@
 				                        <img src="/assets/img/default-50x50.gif" alt="Product Image">
 				                      </div>
 				                      <div class="product-info">
-				                        <a href="javascript::;" class="product-title">PlayStation 4 <span class="label label-success pull-right">$399</span></a>
+				                        <a href="javascript::;" class="product-title">Construtora Quintella<span class="label label-success pull-right"></span></a>
 				                        <span class="product-description">
-				                          PlayStation 4 500GB Console (PS4)
+				                          Sensor A4
 				                        </span>
 				                      </div>
 				                    </li><!-- /.item -->
 				                  </ul>
 				                </div><!-- /.box-body -->
 				                <div class="box-footer text-center">
-				                  <a href="javascript::;" class="uppercase">View All Products</a>
+				                  <a href="javascript::;" class="uppercase">Ver Todos Dispositivos</a>
 				                </div><!-- /.box-footer -->
-				              </div><!-- /.box -->
-				          	
+				              </div><!-- /.box -->  	
 				          	
 				          	
 				          	</div>

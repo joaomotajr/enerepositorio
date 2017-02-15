@@ -18,11 +18,11 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
         $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
 	}
 	
-	$scope.showErro = function(msg) {
-		angular.element('body').removeClass('loading');            
-        $scope.$root.msgErro = msg;
-        $('#resultErro').hide().show('slow').delay(1000).hide('slow');
-	}
+//	$scope.showErro = function(msg) {
+//		angular.element('body').removeClass('loading');            
+//        $scope.$root.msgErro = msg;
+//        $('#resultErro').hide().show('slow').delay(1000).hide('slow');
+//	}
 		
 	$scope.deleteCompany = function() {
 		

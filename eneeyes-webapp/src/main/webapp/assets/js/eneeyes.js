@@ -7,7 +7,6 @@ angular.module('dependency', [])
       return {
           'request': function (config) {
               console.log('request intercept');
-              $rootScope.alertDanger = undefined;
               return config;
           },
           'requestError': function (rejection) {
@@ -23,8 +22,7 @@ angular.module('dependency', [])
 
           'responseError': function (rejection) {
         	  
-        	console.log('response error');
-        	  
+        	console.log('response error');        	  
         	  
         	 if (rejection.status == 0) {
         		  angular.element('body').removeClass('loading'); 
@@ -288,26 +286,26 @@ app.directive("datemonopicker", ['$filter', function($filter) {
 	}
 }]);
 
-app.directive('popover', function($compile) { 
-    var content =
-    	"<div>" +
-    	"<label> Fabricante </label>" +
-    	"<input type='text' class='input-small' ng-model='newManufacturer' style='color:navy ! important;' />&nbsp&nbsp"  +
-    	"<button type='button' data-dismiss='popover-content' data-toggle='popover' ng-click='saveManufacturer();' class='btn btn-info btn-xs' ng-disabled='(newManufacturer) ? false : true'> OK</button>" +
-    	"</div>";
-    
-    return {
-        link: function(scope, element, attrs) {
-            element.popover({            
-                placement: 'top',
-                html: true,
-                clickedAway : true,
-                content: $compile(content)(scope)
-            });
-        }
-    
-    };
-});
+//app.directive('popover', function($compile) { 
+//    var content =
+//    	"<div>" +
+//    	"<label> Fabricante </label>" +
+//    	"<input type='text' class='input-small' ng-model='newManufacturer' style='color:navy ! important;' />&nbsp&nbsp"  +
+//    	"<button type='button' data-dismiss='popover-content' data-toggle='popover' ng-click='saveManufacturer();' class='btn btn-info btn-xs' ng-disabled='(newManufacturer) ? false : true'> OK</button>" +
+//    	"</div>";
+//    
+//    return {
+//        link: function(scope, element, attrs) {
+//            element.popover({            
+//                placement: 'top',
+//                html: true,
+//                clickedAway : true,
+//                content: $compile(content)(scope)
+//            });
+//        }
+//    
+//    };
+//});
 
 app.directive('myLink', function () {
     return {

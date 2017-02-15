@@ -6,11 +6,11 @@ app.filter('gasFilter', function () {
             return objects;
 
         for (index in objects) {
-            
-        	 if (objects[index].unitMeterGases == criteria.unitMeterGases && objects[index].gasDto.name == criteria.gas  ) {
+        	
+        	if (objects[index].unitMeterGases == criteria.unitMeterGases && objects[index].gasDto.name == criteria.gas  ) {
 
-                 filterResult.push(objects[index]);
-             }   
+        		filterResult.push(objects[index]);
+            }   
         }
 
         return filterResult;
@@ -18,7 +18,8 @@ app.filter('gasFilter', function () {
 });
 
 
-app.controller('companyDetectorController', function ($scope, $interval, $timeout, $filter, CompanyDeviceService, CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, PositionService, HistoricService) {
+app.controller('companyDetectorController', function ($scope, $interval, $timeout, $filter, CompanyDeviceService, 
+		CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, PositionService, HistoricService) {
 
 	var loadGoogleCharts = false;
 	
@@ -36,10 +37,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
         $('#resultInfo').hide().show('slow').delay(1000).hide('fast');
 	}
 	
-	$scope.showErro = function(msg) {
-		angular.element('body').removeClass('loading');            
-        $scope.$root.msgErro = msg;        
-	}
+//	$scope.showErro = function(msg) {
+//		angular.element('body').removeClass('loading');            
+//        $scope.$root.msgErro = msg;        
+//	}
 	
 	$scope.getOneCompany = function(companyId) {
 		 
@@ -80,8 +81,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			
 			$scope.showInfo($scope.updateLatitudeLongitude.message);
 					
-		}, function(data) {			
-			$scope.showErro("Ops!! " + data.statusText);
+//		}, function(data) {			
+//			$scope.showErro("Ops!! " + data.statusText);
 		});			 
 	}
 	
@@ -232,7 +233,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	 
 	function initDatatable() {
 	
-		var table = $('#example').DataTable({
+		var table = $('#sensorDetails').DataTable({
             "bLengthChange": false,
             "filter": false,
             "info": false,
@@ -526,17 +527,17 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		});			 
 	}
 	
-	$scope.getPosition = function(currentSensor) {
-		
-		 $scope.listOnePosition = new PositionService.listOneBySensor();		 
-		 $scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : currentSensor.uid}, function(){		
-
-			 if($scope.listOnePosition.t != null) {
-				 var currentPosition = $scope.listOnePosition.t.lastValue;			 
-				 formatGaugeSensor(currentSensor, currentPosition);			  
-			 }			 			 
-	    });
-	}
+//	$scope.getPosition = function(currentSensor) {
+//		
+//		 $scope.listOnePosition = new PositionService.listOneBySensor();		 
+//		 $scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : currentSensor.uid}, function(){		
+//
+//			 if($scope.listOnePosition.t != null) {
+//				 var currentPosition = $scope.listOnePosition.t.lastValue;			 
+//				 formatGaugeSensor(currentSensor, currentPosition);			  
+//			 }			 			 
+//	    });
+//	}
 	
 	$scope.getPositions = function(currentCompanyDetector) {
 		

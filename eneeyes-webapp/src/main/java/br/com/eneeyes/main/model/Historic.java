@@ -44,7 +44,7 @@ public class Historic {
 	@Column(name = "VALUE", nullable = true)
 	private Double value;
     		
-	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
 	private CompanyDetector companyDetector;
 	

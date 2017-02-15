@@ -74,7 +74,7 @@
 	            
 	            <li class="treeview">
 	            	<a href="#">
-	                <i class="fa fa-cube"></i> <span>Cadastro Clientes</span>
+	                <i class="fa fa-cube"></i> <span>Clientes</span>
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">			            		        

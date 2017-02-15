@@ -51,9 +51,14 @@
 					    		<form name="userForm">					    		
 									
 						    		<div class="row">				    			
-								        <div class="col-md-6">
-								            <div class="form-group">
-								            
+								        <div class="col-md-4">
+								        	<div class="form-group">
+								                <label class="control-label">Código</label>
+								                <input class="form-control" placeholder="Código do Detector" data-ng-model="selectedCompanyDetector.uid" readonly>
+								            </div>	
+								        </div>
+								        <div class="col-md-4">
+								            <div class="form-group">								            
 								                <label class="control-label">Identificação</label>
 								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Identificação Obrigatorio]</span>
 									            <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 8 caracteres</span>
@@ -65,7 +70,7 @@
 								            </div>
 								        </div>
 										
-								        <div class="col-md-6">
+								        <div class="col-md-4">
 								            <div class="form-group">
 								                <label class="control-label">Descrição</label>
 								                <input class="form-control" placeholder="Descrição" data-ng-model="selectedCompanyDetector.description">
@@ -80,12 +85,53 @@
 								                <input id="idUnitName" class="form-control" placeholder="Local" data-ng-model="selectedCompanyDetector.local">
 								            </div>
 								        </div>
-								        <div class="col-md-6">
-								        	<div class="form-group">
-								                <label class="control-label">Qtde Sensores</label>
-								                <input id="idUnitName" class="form-control" placeholder="Sensors" value={{selectedCompanyDetector.detectorDto.sensorsDto.length}} disabled>
-								            </div>							        
-				                       	</div>		        
+<!-- 								        <div class="col-md-6"> -->
+<!-- 								        	<div class="form-group"> -->
+<!-- 								                <label class="control-label">Identificação Sensor(es)</label> -->
+<!-- 								                <input id="idUnitName" class="form-control" placeholder="Sensors" value={{selectedCompanyDetector.detectorDto.sensorsDto.length}} disabled> -->
+<!-- 								            </div> -->
+<!-- 								        </div> -->
+
+										<div class="col-md-6">
+											<label class="control-label">Identificação Sensores</label>
+											<div class="box box-default collapsed-box">
+												<div class="box-header with-border">
+													<h5 class="box-title">Sensores no Detector Selecionado: {{selectedCompanyDetector.detectorDto.sensorsDto.length}} </h5>
+													<div class="box-tools pull-right" title="Clique para mais detalhes">
+														<button class="btn btn-box-tool" data-widget="collapse">
+															<i class="fa fa-plus"></i>
+														</button>
+													</div>
+													<!-- /.box-tools -->
+												</div>
+												<!-- /.box-header -->
+												<div class="box-body">
+													<table class="table table-bordered table-hover">
+														<thead>
+															<tr>					
+																<th>ID</th>
+																<th>Status</th>																
+																<th>Nome</th>																																						
+															</tr>
+														</thead>
+														<tbody>                                                        
+															<tr data-ng-repeat="item in listOnePosition.list">
+																
+																<td>{{item.uid}}</td>
+																<td>{{item.alarmType}}</td>	
+																<td>{{item.sensorDto.name}}</td>																						
+															</tr>                                                               
+														</tbody>
+													</table>												
+												
+												</div>
+												<!-- /.box-body -->
+											</div>
+											<!-- /.box -->
+										</div>
+
+
+													        
 								    </div>								    		    					
 					       		</form>
 					       		</div>
@@ -98,7 +144,7 @@
 					                    <div class="box-body">
 					                    	<div class="col-md-8">
 					                    		<div style="max-height: 300px; overflow: auto">					                    							                           
-						                         	<table id="example" class="display">
+						                         	<table id="sensorDetails" class="display">
 														<thead>
 															<tr>
 																<th></th>

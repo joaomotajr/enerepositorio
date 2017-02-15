@@ -80,6 +80,7 @@
 	<script src="/assets/js/controllers/dashboard-controller.js"></script>
 	<script src="/assets/js/controllers/logHistoric-controller.js"></script>
 	<script src="/assets/js/controllers/simulador-controller.js"></script>
+	<script src="/assets/js/controllers/conteudo-controller.js"></script>
 	
 		
 	<!-- PAGE LEVEL SERVICES -->

@@ -1,6 +1,7 @@
 <!-- <div id="content" bind-unsafe-html="ajaxcontent"></div>  -->
 
-<div id="contentTab">
+<div data-ng-controller="conteudoController">
+
 	<div class="content-wrapper">
 	
 		<section class="content-header"></section>	
@@ -8,7 +9,10 @@
 		<section class="content">		
 		
 			<div class="alert alert-danger alert-dismissable" role="alert" data-ng-show="alertDanger">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true" data-ng-click="alertDanger='';">×</button>
+<!-- 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true" data-ng-click="alertDanger='';">×</button> -->
+				
+				<button type="button" class="close" ><span data-ng-click="clearAlert();">&times;</span></button>
+				
 				<h4><i class="icon fa fa-info"></i> Atenção!</h4>
 				{{alertDanger}}
 			</div>

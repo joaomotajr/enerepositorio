@@ -29,8 +29,9 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 	
 	$scope.saveHistoricByPostionUid = function() {
 		
-		 $scope.inclusao = new HistoricService.saveByPositionUid();		 
-		 $scope.inclusao.$historic({uid : 15,value : 888}, function() {         	
+		//$scope.inclusao = new HistoricService.checkErro();		 
+		$scope.inclusao = new HistoricService.saveByPositionUid();		 
+		$scope.inclusao.$historic({uid : 15,value : 888}, function() {         	
        	        	
        	$scope.showInfo('Salvo');        	
        	$scope.companyValor = '';

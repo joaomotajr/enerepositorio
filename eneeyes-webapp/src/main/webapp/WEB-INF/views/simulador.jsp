@@ -83,7 +83,6 @@
 										<div class="form-group">
 											<label class="control-label">Valor</label>
 						                	<input class="form-control" type="number" data-ng-model="companyValor" name="companyValor" data-validate-range="0,selectedCompanySensor.rangeMax" required>
-<!-- 						                	  {{ userForm.companyValor.$error }} -->
 						                	 
 						                	<p data-ng-show="!userForm.companyValor.$error.required && userForm.companyValor.$error.max && !userForm.companyValor.$pristine" class="help-block">Valor Máximo : {{selectedCompanySensor.rangeMax}} </p>
 										    <p data-ng-show="!userForm.companyValor.$error.required && (userForm.companyValor.$error.number || userForm.companyValor.$error.min)" class="help-block">Valor Inválido</p>
@@ -100,7 +99,7 @@
 					        		<div class="col-md-1">
 										<div class="form-group">
 											<label class="control-label">.</label>
-					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="clearHistoric()">Limpa Pesquisa</button>
+					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="clearHistoric()">Limpa</button>
 					        			</div>
 					        		</div>
 					        		

@@ -31,9 +31,9 @@ public class Position {
     	this.uid = dto.getUid();
     	this.lastUpdate = dto.getLastUpdate();    	
     	this.lastValue = dto.getLastValue();    	
-    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
     	this.sensor = new Sensor(dto.getSensorDto());
     	this.alarmType = dto.getAlarmType();
+    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());        	
     }
 
 	@Id

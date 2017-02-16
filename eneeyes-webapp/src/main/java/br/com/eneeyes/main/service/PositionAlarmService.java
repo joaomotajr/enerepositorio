@@ -34,18 +34,6 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 
 	@Override
 	public BasicResult<?> save(PositionAlarmDto dto) {
-//		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
-//		
-//		PositionAlarm positionAlarm = new PositionAlarm(dto);
-//		positionAlarm = repository.save(positionAlarm);
-//		
-//		dto.setUid(positionAlarm.getUid());
-//		result.setEntity(dto);
-//		
-//		result.setResultType( ResultMessageType.SUCCESS );
-//		result.setMessage("Executado com sucesso.");					
-//		
-//		return result;
 		
 		// TODO Auto-generated method stub
 		return null;
@@ -209,8 +197,6 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			result.setMessage(e.getMessage());
 		}
 		
-		return result;	
-
-	}
-	
+		return result;
+	}	
 }

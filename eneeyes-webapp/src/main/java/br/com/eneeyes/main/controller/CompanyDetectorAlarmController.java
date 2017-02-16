@@ -39,5 +39,11 @@ public class CompanyDetectorAlarmController {
 		
 		return service.findByCompanyDetector(uid);		
 	}
-
+	
+	@RequestMapping(value="/security/api/companyDetectorAlarm/obtemPorAreaId/{uid}", method=RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> findByAreaId(@PathVariable Long uid) {
+		
+		return service.findByAreaId(uid);		
+	}
 }

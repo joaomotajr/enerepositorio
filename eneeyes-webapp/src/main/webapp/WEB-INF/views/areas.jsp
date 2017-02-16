@@ -11,7 +11,7 @@
 	
 </style>
 
-<div class="easy-modal" style="display:none;" modal-position="free">
+<div class="easy-modal" style="display:none;" modal-position="">
     <form>
         <h3>Dispositivo</h3>
         
@@ -26,7 +26,7 @@
 		 <label>Range</label>
 		 <label>Unidade</label>
 		<hr>			        
-        <button type="button" class="btn btn-primary easy-submit">OK</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
     </form>
 </div>        
  	 

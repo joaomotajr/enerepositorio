@@ -18,6 +18,9 @@ import br.com.eneeyes.main.result.Result;
 public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlarmDto> {
 
 	@Autowired
+	CompanyDetectorService companyDetectorService;
+	
+	@Autowired
 	private CompanyDetectorAlarmRepository companyDetectorAlarmRepository;
 
 	@Override
@@ -83,6 +86,39 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 			result.setIsError(true);
 			result.setResultType( ResultMessageType.ERROR );
 			result.setMessage("Nenhum Alarm Cadastrado.");
+		}
+		
+		return result;
+	}
+	
+	public BasicResult<?> findByAreaId(Long uid) {
+		Result<CompanyDetectorAlarmDto> result = new Result<CompanyDetectorAlarmDto>();
+		
+		List<CompanyDetector> companyDetectors = companyDetectorService.findByAreaId(uid);
+		
+		try {
+			List<CompanyDetectorAlarm> lista = companyDetectorAlarmRepository.findByCompanyDetectorIn(companyDetectors);
+			
+			if (lista != null) {
+				
+				List<CompanyDetectorAlarmDto> dto = new ArrayList<CompanyDetectorAlarmDto>();
+				
+				for (CompanyDetectorAlarm companyDetectorAlarm   : lista) {					
+					dto.add(new CompanyDetectorAlarmDto(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getId().getSensorId()));
+				}
+								
+				result.setList(dto);
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhuma area.");
+			}
+			
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
 		}
 		
 		return result;

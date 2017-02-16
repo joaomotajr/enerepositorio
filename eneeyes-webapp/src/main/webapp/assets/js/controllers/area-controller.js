@@ -1,4 +1,5 @@
-app.controller('areaController', function ($scope, $interval, $timeout, $filter, AreaService, CompanyDetectorService, DetectorService, CompanyDeviceService, CompanyService, PositionService) {
+app.controller('areaController', function ($scope, $interval, $timeout, $filter, AreaService, CompanyDetectorService, 
+		DetectorService, CompanyDeviceService, CompanyService, PositionService, CompanyDetectorAlarmService) {
 
 	var loadGoogleCharts = false;
 		
@@ -150,9 +151,21 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 	
 	$scope.getCompanyDetectorArea = function() {
 		
-		$scope.resultCompanyDetectorsArea = new CompanyDetectorService.listPorIdArea();		 
+		$scope.resultCompanyDetectorsArea = new CompanyDetectorService.listPorAreaId();		 
 		$scope.resultCompanyDetectorsArea.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid }, function(){			
-			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;          	         	
+			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;    
+			
+			// TODO Precisa rever a busca de alarms pela área, pois não retorna o detector
+			//$scope.getCompanyDetectorAlarmsArea();
+			
+        });		 
+	}
+	
+	$scope.getCompanyDetectorAlarmsArea = function() {
+		
+		$scope.resultCompanyDetectorAlarmArea = new CompanyDetectorAlarmService.listPorAreaId();		 
+		$scope.resultCompanyDetectorAlarmArea.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid}, function(){			
+			$scope.selectedCompanyDetectorAlarmsArea = $scope.resultCompanyDetectorAlarmArea.list;
         });		 
 	}
 	 
@@ -252,7 +265,7 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 	}
 	
 	function formatGaugeSensor(sensor, value, id) {
-//		var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensor.uid ; });
+//		var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarmsArea, function (e) { return e.sensorId == sensor.uid ; });
 //
 //		var red =    selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
 //		var yellow = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm2;
@@ -306,8 +319,7 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 	    	}, 600);	    	
 		}	
     	    	
-    	$scope.lockImageArea();
-		
+    	$scope.lockImageArea();		
 	}
 	
 	easyPin = function(itens, limit) {			

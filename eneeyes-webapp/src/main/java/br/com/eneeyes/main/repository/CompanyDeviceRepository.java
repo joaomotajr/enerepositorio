@@ -11,6 +11,6 @@ public interface CompanyDeviceRepository  extends JpaRepository<CompanyDevice, L
 	
 	//@OrderBy("uid")
 	@Query("select c from CompanyDevice c where c.area.uid = ?1")
-	public List<CompanyDevice> findCompanyDeviceByIdArea(Long uid);
+	public List<CompanyDevice> findCompanyDeviceByAreaId(Long uid);
 	
 }

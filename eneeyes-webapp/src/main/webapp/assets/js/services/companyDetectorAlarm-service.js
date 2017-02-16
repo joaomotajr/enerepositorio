@@ -11,6 +11,9 @@ app.factory('CompanyDetectorAlarmService', function($resource){
         listAll : $resource('/security/api/companyDetectorAlarm/all',{},{
         	companyDetectorAlarm : {method : 'GET'}
         }),
+        listPorAreaId : $resource('/security/api/companyDetectorAlarm/obtemPorAreaId/:id', {id: '@id'},{
+        	companyDetectorAlarm : {method : 'GET'}
+	    }),
         listPorCompanyDetectorAlarm : $resource('/security/api/companyDetectorAlarm/obtemPorCompanyDetector/:id', {id: '@id'},{        	
         	companyDetectorAlarm : {method : 'GET'}
         }),	    

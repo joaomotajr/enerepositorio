@@ -198,7 +198,7 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		
 		try {
 			
-			List<CompanyDevice> companyDevice = companyDeviceRepository.findCompanyDeviceByIdArea(uid);
+			List<CompanyDevice> companyDevice = companyDeviceRepository.findCompanyDeviceByAreaId(uid);
 			
 			List<CompanyDetector> lista = repository.findByCompanyDeviceIn(companyDevice);
 
@@ -229,7 +229,7 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	
 	public List<CompanyDetector> findByAreaId(Long uid) {
 			
-		List<CompanyDevice> companyDevice = companyDeviceRepository.findCompanyDeviceByIdArea(uid);
+		List<CompanyDevice> companyDevice = companyDeviceRepository.findCompanyDeviceByAreaId(uid);
 		
 		return repository.findByCompanyDeviceIn(companyDevice);
 

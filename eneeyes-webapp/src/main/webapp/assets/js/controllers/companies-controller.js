@@ -1,6 +1,6 @@
-app.service('testServices', function ($http, $q) {
-
-});
+//app.service('testServices', function ($http, $q) {
+//
+//});
 
 app.controller('companiesController', function ($scope, $timeout, $interval, $filter, CompanyService, UnitService) {
 
@@ -17,12 +17,6 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
         $scope.$root.msgInfo = msg;
         $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
 	}
-	
-//	$scope.showErro = function(msg) {
-//		angular.element('body').removeClass('loading');            
-//        $scope.$root.msgErro = msg;
-//        $('#resultErro').hide().show('slow').delay(1000).hide('slow');
-//	}
 		
 	$scope.deleteCompany = function() {
 		
@@ -141,7 +135,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 				    	$scope.$root.selecteds.push({unitIndex: 0, areaIndex : 0, companyDetectorIndex: 0});
 				    	
 				    	if(node.type == 0 && $scope.$root.selectedCompany.unitsDto.length <= 0) {				    		 
-				    		 //$timeout(function () {$scope.LoadAjaxContentCompany('companyInit.html');}, 50);	
+
 				    		 $timeout(function () {$scope.LoadAjaxContentCompany('units.html');}, 50);				    		 
 				    	}
 				    	else if(node.type == 0 ) {

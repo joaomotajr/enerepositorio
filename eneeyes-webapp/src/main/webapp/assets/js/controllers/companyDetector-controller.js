@@ -242,7 +242,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
             "dom": '<"top"fl<"clear">>rt<"bottom"ip<"clear">>'
         });		
 		
-		$("#example tbody").on("click", "td.details-control", 
+		$("#sensorDetails tbody").on("click", "td.details-control", 
 			function() {
 				var tr = $(this).closest("tr");
 				var row = table.row(tr);
@@ -583,19 +583,25 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			}      	
        });		
 	}
+	
+	/* ------------------------------------- Inicio Processamento --------------------------------------------*/
+	
+	if($scope.$root.selecteds.unitIndex != undefined) {
 		
-	$scope.selectedUnit = angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex]);
-	$scope.selectedArea = angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex]);	
-	$scope.selectedCompanyDevice = angular.copy($scope.selectedArea.companyDevicesDto[$scope.$root.selecteds.CompanyDeviceIndex]);
-	
-	$scope.getAlarms();
-	
-	if ($scope.selectedCompanyDevice != null)
-		$scope.getOneCompanyDetector();
-	else {		
-		$scope.getDetectors();
-	}	
+		$scope.selectedUnit = angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex]);
+		$scope.selectedArea = angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex]);	
+		$scope.selectedCompanyDevice = angular.copy($scope.selectedArea.companyDevicesDto[$scope.$root.selecteds.CompanyDeviceIndex]);
+		
+		$scope.getAlarms();
+		
+		if ($scope.selectedCompanyDevice != null)
+			$scope.getOneCompanyDetector();
+		else {		
+			$scope.getDetectors();
+		}	
+	}
 	
 	$scope.initializeDetector();	
 	
+	/* ------------------------------------------------------------------------------------------------------- */
 });

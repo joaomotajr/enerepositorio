@@ -384,13 +384,20 @@ app.controller('areaController', function ($scope, $timeout, $filter, AreaServic
 	 	{ name : 'ALARME', uid : 4 } 			  	
 	];	 	 
 	
-	$scope.selectedUnit = {};
-	$scope.selectedArea = {};
+	/* ------------------------------------- Inicio Processamento --------------------------------------------*/
 	
-	angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex], $scope.selectedUnit);
-	angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex], $scope.selectedArea);
+	if($scope.$root.selecteds.unitIndex != undefined) {
+		
+		$scope.selectedUnit = {};
+		$scope.selectedArea = {};
+	
+		angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex], $scope.selectedUnit);
+		angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex], $scope.selectedArea);
+	}
 	
 	$scope.btnNewArea = true;
 	$scope.initializeArea();
+	
+	/* ------------------------------------------------------------------------------------------------------- */
 		
 });

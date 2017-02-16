@@ -128,10 +128,7 @@
 												<!-- /.box-body -->
 											</div>
 											<!-- /.box -->
-										</div>
-
-
-													        
+										</div>													        
 								    </div>								    		    					
 					       		</form>
 					       		</div>

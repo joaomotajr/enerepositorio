@@ -29,6 +29,9 @@ public class PositionService implements IService<PositionDto> {
 	@Autowired
 	PositionAlarmService positionAlarmService;	
 	
+	@Autowired
+	CompanyDetectorService companyDetectorService;
+	
 	@Override
 	public BasicResult<?> save(PositionDto dto) {		
 		// TODO Auto-generated method stub
@@ -99,14 +102,12 @@ public class PositionService implements IService<PositionDto> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	
 	public Position findByUid(Long uid) {
 			
 		return repository.findOne(uid);				
 	}
-	
-	
+		
 	public BasicResult<?> findOne(Long uid) {
 		Result<PositionDto> result = new Result<PositionDto>();
 		
@@ -131,7 +132,6 @@ public class PositionService implements IService<PositionDto> {
 		
 		return result;
 	}
-
 	
 	public BasicResult<?> findByCompanyDetector(Long uid) {
 		Result<PositionDto> result = new Result<PositionDto>();
@@ -147,6 +147,39 @@ public class PositionService implements IService<PositionDto> {
 				List<PositionDto> dto = new ArrayList<PositionDto>();
 				
 				for (Position position   : lista) {					
+					dto.add(new PositionDto(position) );
+				}
+								
+				result.setList(dto);
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhuma area.");
+			}
+			
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	public BasicResult<?> findByAreaId(Long uid) {
+		Result<PositionDto> result = new Result<PositionDto>();
+		
+		List<CompanyDetector> lista = companyDetectorService.findByAreaId(uid);
+		
+		try {
+			List<Position> postions = repository.findByCompanyDetectorIn(lista);
+			
+			if (lista != null) {
+				
+				List<PositionDto> dto = new ArrayList<PositionDto>();
+				
+				for (Position position   : postions) {					
 					dto.add(new PositionDto(position) );
 				}
 								

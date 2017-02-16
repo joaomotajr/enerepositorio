@@ -37,11 +37,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
         $('#resultInfo').hide().show('slow').delay(1000).hide('fast');
 	}
 	
-//	$scope.showErro = function(msg) {
-//		angular.element('body').removeClass('loading');            
-//        $scope.$root.msgErro = msg;        
-//	}
-	
 	$scope.getOneCompany = function(companyId) {
 		 
 		 $scope.listOne = new CompanyService.listOne();		 
@@ -79,10 +74,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$scope.updateLatitudeLongitude = new CompanyDetectorService.updateLatitudeLongitude();
 		$scope.updateLatitudeLongitude.$companyDetector({_csrf : angular.element('#_csrf').val(), latitude: latitude, longitude: longitude, id : id }, function(){		
 			
-			$scope.showInfo($scope.updateLatitudeLongitude.message);
-					
-//		}, function(data) {			
-//			$scope.showErro("Ops!! " + data.statusText);
+			$scope.showInfo($scope.updateLatitudeLongitude.message);					
+
 		});			 
 	}
 	
@@ -109,10 +102,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			}		
 			
 			angular.element('body').removeClass('loading');
-			$scope.showInfo($scope.inclusaoCompanyDetector.message) ;
-					
-//		}, function(data) {
-//			$scope.showErro("Ops!! " + data.statusText);
+			$scope.showInfo($scope.inclusaoCompanyDetector.message);		
+
 		});			 
 	}
 	
@@ -142,8 +133,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			
 			angular.element('body').removeClass('loading');
 	                 	         	
-//        }, function(data) {
-//        	$scope.showErro("Ops!! " + data.statusText);
 		});		 
 	}
 	
@@ -165,9 +154,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
 			
 			//* Detector j� foi associado a dispositivo checa alarmes *//
-			if($scope.selectedCompanyDetector != null)
+			if($scope.selectedCompanyDetector != null) {
 				$scope.getCompanyDetectorAlarms();
-			
+				$scope.getPositionsNoTimer($scope.selectedCompanyDetector);
+			}
         });		 
 	}
 		
@@ -198,14 +188,18 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		            $interval.cancel($scope.$root.timer.pop());				            
 		         }
 			    
+			    google.charts.setOnLoadCallback(initDrawGaugesDetector);
+			    google.charts.setOnLoadCallback(initChartLinesDetector);
+			    
 			    if ($(event.target).attr('href') == "#tabCompanyDetector_2") {			    	
 			    	
-			    	google.charts.setOnLoadCallback(initDrawGaugesDetector);
+			    	//google.charts.setOnLoadCallback(initDrawGaugesDetector);
 			    	initGaugeTimer();
 				}
 			    else if ($(event.target).attr('href') == "#tabCompanyDetector_3") {
 			    	
-					google.charts.setOnLoadCallback(initChartLinesDetector);					
+					//google.charts.setOnLoadCallback(initChartLinesDetector);	
+					initChartTimer();
 			    }			
 			});
 											
@@ -215,10 +209,23 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 				
 				if(current != null) {					
 					$scope.$root.timer.push($interval(function(){
-						$scope.getPositions(current);					        
-				    }, 13000));						
+						$scope.getPositions(current);     
+						
+				    }, 5000));						
 				}						
-			}			
+			}
+			
+			initChartTimer = function() {
+				
+				var current = angular.copy($scope.selectedCompanyDetector);
+				
+				if(current != null) {					
+					$scope.$root.timer.push($interval(function(){
+						$scope.getHistorics(current, 3);     
+						
+				    }, 5000));						
+				}						
+			}
 	
 			initDatatable();
 															
@@ -270,11 +277,15 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
             		'<th>Sensor</th>'+
             		'<th>Nome</th>'+
             		'<th>G&aacutes</th>'+
+            		'<th>Range</th>'+
+            		'<th>Medição</th>'+
             	'</tr>'+
 	        	'<tr>'+ 
 	        		'<td>01</td>'+
 	                '<td>'+detector.sensorsDto[0].name+'</td>'+	                
 	                '<td>'+detector.sensorsDto[0].gasesDto[0].name+'</td>'+
+	                '<td>'+detector.sensorsDto[0].rangeMin + '-' + +detector.sensorsDto[0].rangeMax +'</td>'+
+	                '<td>'+detector.sensorsDto[0].unitMeterGases + '</td>'+
 	            '</tr>'+            
 	           '</table>'+
 	       '</div>';		
@@ -286,16 +297,22 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
             		'<th>Sensor</th>'+
             		'<th>Nome</th>'+
             		'<th>G&aacutes</th>'+
+            		'<th>Range</th>'+
+            		'<th>Medição</th>'+            		
             	'</tr>'+
 	        	'<tr>'+ 
 	        		'<td>01</td>'+
-	                '<td>'+detector.sensorsDto[0].name+'</td>'+	                
+	                '<td>'+detector.sensorsDto[0].name + '</td>' +	                
 	                '<td>'+detector.sensorsDto[0].gasesDto[0].name+'</td>'+
+	                '<td>'+detector.sensorsDto[0].rangeMin + '-' + +detector.sensorsDto[0].rangeMax +'</td>'+
+	                '<td>'+detector.sensorsDto[0].unitMeterGases + '</td>'+
 	            '</tr>'+
 	            '<tr>'+
 	                '<td>02</td>'+
 	                '<td>'+detector.sensorsDto[1].name+'</td>'+
 	                '<td>'+detector.sensorsDto[1].gasesDto[0].name+'</td>'+
+	                '<td>'+detector.sensorsDto[1].rangeMin + '-' + +detector.sensorsDto[0].rangeMax +'</td>'+
+	                '<td>'+detector.sensorsDto[1].unitMeterGases + '</td>'+
 	            '</tr>'+
 	           '</table>'+
 	       '</div>';
@@ -310,12 +327,29 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 					    		
 	}
 	
-	function initChartLinesDetector() {
-		var current = angular.copy($scope.selectedCompanyDetector);
+	$scope.getPositionsNoTimer = function(currentCompanyDetector) {
 		
-		if(current != null) 												
-			$scope.getHistorics(current, 3);
-					    		
+		 $scope.listOnePositionNoTimer = new PositionService.listOneByCompanyDetector();		 
+		 $scope.listOnePositionNoTimer.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function() {});
+	}
+	
+	$scope.getPositions = function(currentCompanyDetector) {
+		
+		 $scope.listOnePosition = new PositionService.listOneByCompanyDetector();		 
+		 $scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function() {		
+			 
+			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
+				
+				var item = 0;					
+				if($scope.listOnePosition.list != null && $scope.listOnePosition.list.length != 0) {									
+					item = $.grep($scope.listOnePosition.list, function (e) { return e.sensorDto.uid == currentCompanyDetector.detectorDto.sensorsDto[j].uid ; });
+				}
+				
+				var id = 'gauge_companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;					
+				formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item == 0 ? 0 : item[0].lastValue, id);					
+			}				
+			
+	    });			
 	}
 	
 	function formatGaugeSensor(sensor, value, id) {
@@ -352,6 +386,40 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		    gauge.draw(gaugeData, gaugeOptions);
 		}
 	}	
+	
+	function initChartLinesDetector() {
+		var current = angular.copy($scope.selectedCompanyDetector);
+		
+		if(current != null) 												
+			$scope.getHistorics(current, 3);
+					    		
+	}
+	
+	$scope.getHistorics = function(currentCompanyDetector, interval) {
+		
+		$scope.listInterval = new HistoricService.listInterval();		
+		$scope.listInterval.$historic({_csrf : angular.element('#_csrf').val(),  
+			companyDetectorId: currentCompanyDetector.uid,			 
+			interval: interval }, function(){
+			
+			var itens = [];	
+			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
+				
+				if($scope.listInterval.list != null && $scope.listInterval.list.length != 0) {									
+					
+					var itens = new Array();
+					for (var k = 0; k < $scope.listInterval.list.length; k++) {
+						
+						if( $scope.listInterval.list[k].sensorDto.uid == currentCompanyDetector.detectorDto.sensorsDto[j].uid)
+							itens.push([$scope.listInterval.list[k].lastUpdate, $scope.listInterval.list[k].value ] );
+					}
+				}
+				
+				var id = 'line_companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;					
+				formatLineSensor(currentCompanyDetector.detectorDto.sensorsDto[j], itens, id);					
+			}      	
+       });		
+	}	
 	 
 	function formatLineSensor(sensor, value, id) {
 		
@@ -381,7 +449,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	    data.addRows(value);
 
 	    var options = {
-	          title: "Dados Recentes dos Detectores.",
+	          title: "Dados Recentes do Sensor.",
 	          titleTextStyle: { color: '#FF0000' },
 	          legend: { position: 'none' },	          
 	    	  width: 800,
@@ -480,11 +548,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	$scope.removerAlarm = function(uid) {		
 
 		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; })[0];
-		
-//		if($scope.selectedSensor.rangeMax > selectedAlarm.alarm3) {
-//			$scope.showErro("Atenção! Alarme incompatível com o range do Sensor");
-//			return;
-//		}				
+				
 		alarm = {
 		 		alarmDto : selectedAlarm, 
 		 		companyDetectorDto: $scope.selectedCompanyDetector, 
@@ -521,68 +585,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 						
 			$scope.showInfo("Alarme Gravado!") ;
 			angular.element('body').removeClass('loading');
-					
-//		}, function(data) {
-//			$scope.showErro("Ops!! " + data.statusText);
 		});			 
-	}
-	
-//	$scope.getPosition = function(currentSensor) {
-//		
-//		 $scope.listOnePosition = new PositionService.listOneBySensor();		 
-//		 $scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : currentSensor.uid}, function(){		
-//
-//			 if($scope.listOnePosition.t != null) {
-//				 var currentPosition = $scope.listOnePosition.t.lastValue;			 
-//				 formatGaugeSensor(currentSensor, currentPosition);			  
-//			 }			 			 
-//	    });
-//	}
-	
-	$scope.getPositions = function(currentCompanyDetector) {
-		
-		 $scope.listOnePosition = new PositionService.listOneByCompanyDetector();		 
-		 $scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function() {		
-			 
-			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
-				
-				var item = 0;					
-				if($scope.listOnePosition.list != null && $scope.listOnePosition.list.length != 0) {									
-					item = $.grep($scope.listOnePosition.list, function (e) { return e.sensorDto.uid == currentCompanyDetector.detectorDto.sensorsDto[j].uid ; });
-				}
-				
-				var id = 'gauge_companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;					
-				formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item == 0 ? 0 : item[0].lastValue, id);					
-			}				
-			
-	    });			
-	}
-	
-	$scope.getHistorics = function(currentCompanyDetector, interval) {
-		
-		$scope.listInterval = new HistoricService.listInterval();		
-		$scope.listInterval.$historic({_csrf : angular.element('#_csrf').val(),  
-			companyDetectorId: currentCompanyDetector.uid,			 
-			interval: interval }, function(){
-			
-			var itens = [];	
-			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
-				
-				if($scope.listInterval.list != null && $scope.listInterval.list.length != 0) {									
-					
-					var itens = new Array();
-					for (var k = 0; k < $scope.listInterval.list.length; k++) {
-						
-						if( $scope.listInterval.list[k].sensorDto.uid == currentCompanyDetector.detectorDto.sensorsDto[j].uid)
-							itens.push([$scope.listInterval.list[k].lastUpdate, $scope.listInterval.list[k].value ] );
-					}
-				}
-				
-				var id = 'line_companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;					
-				formatLineSensor(currentCompanyDetector.detectorDto.sensorsDto[j], itens, id);					
-			}      	
-       });		
-	}
+	}	
 	
 	/* ------------------------------------- Inicio Processamento --------------------------------------------*/
 	

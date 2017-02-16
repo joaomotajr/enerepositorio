@@ -71,26 +71,9 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	
 	private void createInitialPosition(CompanyDetector companyDetector) {
 				
-		positionService.createInitialPosition(companyDetector);
-		
-//		Set<Sensor> sensors = companyDetector.getDetector().getSensors();
-//		
-//		for (Sensor sensor   : sensors) {
-//		
-//			if(positionRepository.countByCompanyDetectorAndSensor(companyDetector, sensor) == 0) {
-//	
-//				Position position = new Position();	
-//
-//				position.setCompanyDetector(companyDetector);
-//				position.setSensor(sensor);
-//				position.setLastUpdate(new Date());
-//				position.setLastValue((double) 0);
-//				
-//				positionRepository.save(position);
-//			}
-//		}
-	}
+		positionService.createInitialPosition(companyDetector);		
 
+	}
 
 	public BasicResult<?> delete(Long uid) {
 				
@@ -241,6 +224,14 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		}
 		
 		return result;	
+
+	}
+	
+	public List<CompanyDetector> findByAreaId(Long uid) {
+			
+		List<CompanyDevice> companyDevice = companyDeviceRepository.findCompanyDeviceByIdArea(uid);
+		
+		return repository.findByCompanyDeviceIn(companyDevice);
 
 	}
 

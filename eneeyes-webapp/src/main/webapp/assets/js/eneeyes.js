@@ -32,6 +32,10 @@ angular.module('dependency', [])
         		 angular.element('body').removeClass('loading'); 
         		 $rootScope.alertDanger = "Item Requisitado Inexistente, Contate o Administrador do Sistema";
         	 }
+        	 else if (rejection.status == 415) {
+        		 angular.element('body').removeClass('loading'); 
+        		 $rootScope.alertDanger = "Tipo de Media Insuportado, Contate o Administrador do Sistema";
+        	 }
         	 else if (rejection.status > 400 && rejection.status <= 505 ) {
      		    	angular.element('body').removeClass('loading');
 	  			    angular.element('.session-expired').modal('show');

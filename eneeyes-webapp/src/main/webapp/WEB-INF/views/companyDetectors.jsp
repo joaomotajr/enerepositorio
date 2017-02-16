@@ -85,18 +85,12 @@
 								                <input id="idUnitName" class="form-control" placeholder="Local" data-ng-model="selectedCompanyDetector.local">
 								            </div>
 								        </div>
-<!-- 								        <div class="col-md-6"> -->
-<!-- 								        	<div class="form-group"> -->
-<!-- 								                <label class="control-label">Identificação Sensor(es)</label> -->
-<!-- 								                <input id="idUnitName" class="form-control" placeholder="Sensors" value={{selectedCompanyDetector.detectorDto.sensorsDto.length}} disabled> -->
-<!-- 								            </div> -->
-<!-- 								        </div> -->
 
 										<div class="col-md-6">
 											<label class="control-label">Identificação Sensores</label>
-											<div class="box box-default collapsed-box">
+											<div class="box box-info collapsed-box">
 												<div class="box-header with-border">
-													<h5 class="box-title">Sensores no Detector Selecionado: {{selectedCompanyDetector.detectorDto.sensorsDto.length}} </h5>
+													<Label class="box-title">Sensores no Detector Selecionado: {{selectedCompanyDetector.detectorDto.sensorsDto.length}} </label>
 													<div class="box-tools pull-right" title="Clique para mais detalhes">
 														<button class="btn btn-box-tool" data-widget="collapse">
 															<i class="fa fa-plus"></i>
@@ -115,7 +109,7 @@
 															</tr>
 														</thead>
 														<tbody>                                                        
-															<tr data-ng-repeat="item in listOnePosition.list">
+															<tr data-ng-repeat="item in listOnePositionNoTimer.list">
 																
 																<td>{{item.uid}}</td>
 																<td>{{item.alarmType}}</td>	

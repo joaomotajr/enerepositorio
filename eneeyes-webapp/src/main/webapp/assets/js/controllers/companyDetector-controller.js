@@ -85,7 +85,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		
 		var companyDetector = {
 			uid: $scope.selectedCompanyDetector.uid == undefined ? 0 : $scope.selectedCompanyDetector.uid,
-			name: $scope.selectedCompanyDetector.name,
+			name: $scope.selectedCompanyDetector.name.toUpperCase(),
 			companyDeviceDto: {uid : $scope.selectedCompanyDevice.uid},
 			detectorDto: {uid: $scope.selectedCompanyDetector.detectorDto.uid},
 			local: $scope.selectedCompanyDetector.local,
@@ -278,10 +278,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
             		'<th>Nome</th>'+
             		'<th>G&aacutes</th>'+
             		'<th>Range</th>'+
-            		'<th>Medição</th>'+
+            		'<th>Medi&ccedil;&atilde;o </th>'+
             	'</tr>'+
 	        	'<tr>'+ 
-	        		'<td>01</td>'+
+	        		'<td>1o.</td>'+
 	                '<td>'+detector.sensorsDto[0].name+'</td>'+	                
 	                '<td>'+detector.sensorsDto[0].gasesDto[0].name+'</td>'+
 	                '<td>'+detector.sensorsDto[0].rangeMin + '-' + +detector.sensorsDto[0].rangeMax +'</td>'+
@@ -298,17 +298,17 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
             		'<th>Nome</th>'+
             		'<th>G&aacutes</th>'+
             		'<th>Range</th>'+
-            		'<th>Medição</th>'+            		
+            		'<th>Medi&ccedil;&atilde;o </th>'+          		
             	'</tr>'+
 	        	'<tr>'+ 
-	        		'<td>01</td>'+
+	        		'<td>1o.</td>'+
 	                '<td>'+detector.sensorsDto[0].name + '</td>' +	                
 	                '<td>'+detector.sensorsDto[0].gasesDto[0].name+'</td>'+
 	                '<td>'+detector.sensorsDto[0].rangeMin + '-' + +detector.sensorsDto[0].rangeMax +'</td>'+
 	                '<td>'+detector.sensorsDto[0].unitMeterGases + '</td>'+
 	            '</tr>'+
 	            '<tr>'+
-	                '<td>02</td>'+
+	                '<td>2o.</td>'+
 	                '<td>'+detector.sensorsDto[1].name+'</td>'+
 	                '<td>'+detector.sensorsDto[1].gasesDto[0].name+'</td>'+
 	                '<td>'+detector.sensorsDto[1].rangeMin + '-' + +detector.sensorsDto[0].rangeMax +'</td>'+

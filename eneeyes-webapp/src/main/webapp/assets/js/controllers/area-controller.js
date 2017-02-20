@@ -32,6 +32,7 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 	}
 	
 	$scope.saveCompanyDeviceInit = function() {
+		
 		angular.element('body').addClass('loading');
 		
 		var companyDevice = {
@@ -257,14 +258,14 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 					}
 
 					var id = 'sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].$$hashKey;				
-					formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item == 0 ? 0 : item[0].lastValue, id);					
+					formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item == 0 ? 0 : item[0], id);					
 				}				
 			 }				
 			
 	    });			
 	}
 	
-	function formatGaugeSensor(sensor, value, id) {
+	function formatGaugeSensor(sensor, item, id) {
 //		var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarmsArea, function (e) { return e.sensorId == sensor.uid ; });
 //
 //		var red =    selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
@@ -282,7 +283,7 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 							
 		var gaugeData = google.visualization.arrayToDataTable([
           	['Label', 'Value'],
-          	['Sensor ', 0],
+          	['Id: ' + item.uid, 0],
           ]);
 	    		
 		objGauge = document.getElementById(id);
@@ -294,7 +295,7 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 			gauge = new google.visualization.Gauge(objGauge);
 							
 		    gauge.draw(gaugeData, gaugeOptions);
-		    gaugeData.setValue(0, 1 , value);
+		    gaugeData.setValue(0, 1 , item.lastValue);
 		    gauge.draw(gaugeData, gaugeOptions);
 		}
 	}	
@@ -358,13 +359,13 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 	
 	$scope.deviceTypes = 
 	[
-	 	{ name : 'OUTROS', uid : 0 },
-	 	{ name : 'DETECTOR', uid :  1 },
-	 	{ name : 'PLC', uid : 2 },
-	 	{ name : 'CONTROLADORA', uid : 3 },
-	 	{ name : 'ALARME', uid : 4 } 			  	
-	];	 	 
-	
+	 	{ name : 'OUTROS', uid : 0, disabled : true },	 	
+	 	{ name : 'PLC', uid : 2, disabled : true },
+	 	{ name : 'CONTROLADORA', uid : 3, disabled : true },
+	 	{ name : 'ALARME', uid : 4, disabled : true },
+	 	{ name : 'DETECTOR', uid :  1, disabled : false }
+	];
+
 	/* ------------------------------------- Inicio Processamento --------------------------------------------*/
 	
 	if($scope.$root.selecteds.unitIndex != undefined) {

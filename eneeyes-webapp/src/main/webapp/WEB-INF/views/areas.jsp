@@ -45,7 +45,7 @@
 					<ul class="nav nav-tabs tabArea">
 				       	<li class="active"><a href="#tabArea_1" id="stepTabArea_1" data-toggle="tab">Cadastro</a></li>
 				       	<li><a href="#tabArea_2" id="stepTabArea_2" data-toggle="tab">Local</a></li>
-				       	<li><a href="#tabArea_3" id="stepTabArea_1" data-toggle="tab">Dispositivos</a></li>
+				       	<li><a href="#tabArea_3" id="stepTabArea_3" data-toggle="tab">Dispositivos</a></li>
 				    	<li title="Trocar Imagem da Área" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
 				    </ul>
 					
@@ -128,7 +128,7 @@
 				                        </select>
 				                                       
 								        <span class="input-group-btn">
-								        <button class="btn btn-info btn-flat" type="button" ng-disabled="!sensorDetectionType" ng-click="saveCompanyDeviceInit();">OK</button>
+								        <button class="btn btn-info btn-flat" type="button" ng-disabled="sensorDetectionType.name != 'DETECTOR'" ng-click="saveCompanyDeviceInit();">OK</button>
 								        </span>
 									</div>
 								</div>
@@ -213,7 +213,7 @@
 							              	<div class="panel panel-success">				              
 								                
 								                <div class="panel-heading">
-											    	<h3 class="panel-title">{{item.name}}</h3>							
+											    	<h3 class="panel-title" style="text-align:center;">{{item.name}}</h3>							
 											   	</div>
 											   					               	
 								               	<div class="panel-body">							            					                 		

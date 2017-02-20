@@ -6,7 +6,6 @@ angular.module('dependency', [])
   $httpProvider.interceptors.push(function ($q, $rootScope, $timeout) {
       return {
           'request': function (config) {
-              console.log('request intercept');
               return config;
           },
           'requestError': function (rejection) {
@@ -15,8 +14,7 @@ angular.module('dependency', [])
           },
 
           'response': function (response) {
-              $rootScope.loading = false;
-              console.log('response intercept');
+              $rootScope.loading = false;          
               return response;	
           },
 
@@ -35,6 +33,10 @@ angular.module('dependency', [])
         	 else if (rejection.status == 415) {
         		 angular.element('body').removeClass('loading'); 
         		 $rootScope.alertDanger = "Tipo de Media Insuportado, Contate o Administrador do Sistema";
+        	 }
+        	 else if (rejection.status == 500) {
+        		 angular.element('body').removeClass('loading'); 
+        		 $rootScope.alertDanger = "Ops alguma retorno indesejado no servidor, Contate o Administrador do Sistema";
         	 }
         	 else if (rejection.status > 400 && rejection.status <= 505 ) {
      		    	angular.element('body').removeClass('loading');

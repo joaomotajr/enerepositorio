@@ -92,7 +92,7 @@
 
 										<div class="col-md-6">
 											<label class="control-label">Identificação do Detector/Sensores</label>
-											<div class="box box-info collapsed-box">
+											<div class="box box-primary collapsed-box">
 												<div class="box-header with-border">
 													<Label class="box-title">{{selectedCompanyDetector.detectorDto.name}}-{{selectedCompanyDetector.detectorDto.model}} Sensores: {{selectedCompanyDetector.detectorDto.sensorsDto.length}} </label>
 													<div class="box-tools pull-right" title="Clique para mais detalhes">
@@ -134,7 +134,7 @@
 				    		
 				    		<div class="row">
 				    			<div class="col-md-12">						    	
-						    		<div class="box box-default">
+						    		<div class="box box-primary">
 					                    <div class="box-header with-border"><strong>Lista de Detectores</strong></div>					                	 
 					                    <div class="box-body">
 					                    	<div class="col-md-8">

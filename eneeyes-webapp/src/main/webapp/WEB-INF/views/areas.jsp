@@ -181,7 +181,7 @@
 					            	
 					            	<div ng-if="item.detectorDto.sensorsDto.length > 1">
 					            	  	<div class="col-md-6">
-							              	<div class="panel panel-success">				              
+							              	<div class="panel panel-info">				              
 								                
 								                <div class="panel-heading">
 											    	<h3 class="panel-title" style="text-align:center;">{{item.name}}</h3>							
@@ -210,7 +210,7 @@
 					              	
 					              	<div ng-if="item.detectorDto.sensorsDto.length == 1">
 					            	  	<div class="col-md-3">
-							              	<div class="panel panel-success">				              
+							              	<div class="panel panel-info">				              
 								                
 								                <div class="panel-heading">
 											    	<h3 class="panel-title" style="text-align:center;">{{item.name}}</h3>							

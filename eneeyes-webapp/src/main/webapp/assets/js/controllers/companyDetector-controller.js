@@ -352,7 +352,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	    });			
 	}
 	
-	function formatGaugeSensor(sensor, value, id) {
+	function formatGaugeSensor(sensor, item, id) {
 		var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensor.uid ; });
 
 		var red =    selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
@@ -371,8 +371,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		};
 					
 		var gaugeData = google.visualization.arrayToDataTable([
-          	['Label', 'Value'],
-          	['Sensor ', 0],
+          	['Label', 'Value'],          	
           	['Id: ' + item.uid, 0],
           ]);
 	    		

@@ -157,7 +157,7 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;    
 			
 			// TODO Precisa rever a busca de alarms pela área, pois não retorna o detector
-			//$scope.getCompanyDetectorAlarmsArea();
+			$scope.getCompanyDetectorAlarmsArea();
 			
         });		 
 	}
@@ -258,26 +258,38 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 					}
 
 					var id = 'sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].$$hashKey;				
-					formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item == 0 ? 0 : item[0], id);					
+					formatGaugeSensor(currentCompanyDetector, currentCompanyDetector.detectorDto.sensorsDto[j], item == 0 ? 0 : item[0], id);					
 				}				
 			 }				
 			
 	    });			
 	}
 	
-	function formatGaugeSensor(sensor, item, id) {
-//		var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarmsArea, function (e) { return e.sensorId == sensor.uid ; });
-//
-//		var red =    selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
-//		var yellow = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm2;
-//		var orange = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm1;
-//		
+	function formatGaugeSensor(detector, sensor, item, id) {
+
+		var selectedAlarm = [] ;
+		
+		$scope.selectedCompanyDetectorAlarmsArea.forEach(
+				function(e) {
+					if ( e.sensorId == sensor.uid &&
+						 e.companyDetectorDto.uid == detector.uid) {										
+						 selectedAlarm.push(e);
+					}
+				}
+			);		
+
+		var red =    selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
+		var yellow = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm2;
+		var orange = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm1;
+		
 		var gaugeOptions = {
-			width: 220, height: 120,
-			 //min: sensor.rangeMin, max: sensor.rangeMax,			     
-		     //redFrom: red, redTo: red == 0 ? 0 : sensor.rangeMax,
-		     //yellowFrom: yellow, yellowTo: red,
-		     //greenFrom: orange, greenTo: yellow, 
+			 width: 220, height: 120,
+			 min: sensor.rangeMin, max: sensor.rangeMax,			     
+		     redFrom: red, redTo: red == 0 ? 0 : sensor.rangeMax,
+		     yellowFrom: yellow, yellowTo: red,
+		     greenFrom: orange, 
+		     greenColor: "gray",
+		     greenTo: yellow, 
 		     minorTicks: 5
 		};
 							

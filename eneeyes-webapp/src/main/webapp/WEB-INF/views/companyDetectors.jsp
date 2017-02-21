@@ -202,9 +202,9 @@
 				       		<div class="row">	    	
 				            	<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length > 1">
 				            	  	<div class="col-md-6">
-						              	<div class="panel panel-success">						                
+						              	<div class="panel panel-info">						                
 							                <div class="panel-heading">
-										    	<h3 class="panel-title" style="text-align:center;">Detector: {{selectedCompanyDetector.name}}</h3>							
+										    	<h3 class="panel-title" style="text-align:center;">Detector: {{selectedCompanyDetector.name}}</h3>										    								
 										   	</div>									   					               	
 							               	<div class="panel-body">
 						               			<div class="row">							            					                 		
@@ -240,7 +240,7 @@
 				              	
 				              	<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length == 1">
 				            	  	<div class="col-md-3">
-						              	<div class="panel panel-success">						                
+						              	<div class="panel panel-info">						                
 							                <div class="panel-heading">
 										    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
 										   	</div>									   					               	
@@ -339,6 +339,12 @@
 							  <h3 class="box-title">Cadastro de Alarmes</h3>
 							</div>
 							<div class="box-body">
+								
+								<div class="alert alert-warning" role="alert" data-ng-show="msgErroAlarm" >
+					           		<button type="button" class="close" ><span data-ng-click="msgErroAlarm='';">&times;</span></button>
+					           		<strong>Alerta! </strong>{{msgErroAlarm}} 
+					       		</div>
+							
 								<div style="height: 500px; overflow: auto">
 									<table class="table table-hover">
 										<thead>
@@ -360,10 +366,10 @@
 												<td>{{item.alarm3}}</td>
 												<td>																										
 													<div data-ng-if="item.uid == selectedAlarm.uid">
-														<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" data-ng-click="removerAlarm(item.uid)">Remover</button>
+														<button type="button" class="btn btn-danger btn-xs" data-ng-click="removerAlarm(item.uid)">Remover</button>
 													</div>
 													<div data-ng-if="item.uid != selectedAlarm.uid">
-														<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" data-ng-click="selecionarAlarm(item.uid)">Selecionar</button>
+														<button type="button" class="btn btn-primary btn-xs"  data-ng-click="selecionarAlarm(item.uid)">Selecionar</button>
 													</div>
 													
 												</td>																		

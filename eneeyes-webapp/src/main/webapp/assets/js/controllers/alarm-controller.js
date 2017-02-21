@@ -22,11 +22,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 				$scope.clearFormAlarm();
 	            $scope.getAlarms();                     	
 	            angular.element('body').removeClass('loading');				 
-	         }, 500);
-           
-//		}, function(data) {
-//			angular.element('body').removeClass('loading');
-//			$scope.msgErro = "Erro: " + data.statusText;
+	         }, 500);           
+
 		});		 
 	 }
 		 
@@ -74,10 +71,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 				 $scope.msgErro = "Erro: " + $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
 			 }
-         	         	
-//		 }, function(data) {		
-//			 angular.element('body').removeClass('loading');
-//			 $scope.msgErro = "Erro: " + data.statusText;
+
 		});	 
 	 }	 
 	 

@@ -65,19 +65,7 @@
 								<label class="control-label">Fórmula</label>                                                       
 								<input class="form-control inputProfile" placeholder="Fórmula do Gás"  data-ng-model="gasFormula">                                                
 							</div>
-							
-							<!-- 
-							<div class="form-group">
-					            <label class="control-label">Unidade de Medida</label>
-								<select class="form-control" data-live-search="true" 
-		                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-		                                 data-ng-options="item as item.name for item in unitMetersGases | orderBy: 'name' track by item.uid" 
-		                                          data-ng-model="gasUnitMeterGases">
-		                                         <option value="">Selecione</option> 
-		                        </select>               
-	                        </div>
-	                         -->
-	                       			                 
+			                       			                 
 			            </form>	
 						
 						<div class="box-footer">

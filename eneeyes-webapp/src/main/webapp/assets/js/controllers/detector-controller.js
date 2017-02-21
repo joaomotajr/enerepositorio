@@ -145,8 +145,6 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 				 $scope.msgErroDetector = $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
 			 }         	         	
-//		 }, function(data) {		
-//			 $scope.msgErro = "Erro: " + data.statusText;
 		});		 
 	 }	 
 	 

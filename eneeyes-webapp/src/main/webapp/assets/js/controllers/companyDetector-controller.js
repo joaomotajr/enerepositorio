@@ -346,7 +346,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 				}
 				
 				var id = 'gauge_companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;					
-				formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item == 0 ? 0 : item[0].lastValue, id);					
+				formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item == 0 ? 0 : item[0], id);					
 			}				
 			
 	    });			
@@ -364,13 +364,16 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			 min: sensor.rangeMin, max: sensor.rangeMax,			     
 		     redFrom: red, redTo: red == 0 ? 0 : sensor.rangeMax,
 		     yellowFrom: yellow, yellowTo: red,
-		     greenFrom: orange, greenTo: yellow, 
+		     greenFrom: orange, 
+		     greenColor: "gray",
+		     greenTo: yellow, 
 		     minorTicks: 5
 		};
 					
 		var gaugeData = google.visualization.arrayToDataTable([
           	['Label', 'Value'],
           	['Sensor ', 0],
+          	['Id: ' + item.uid, 0],
           ]);
 	    		
 		objGauge = document.getElementById(id);
@@ -382,7 +385,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			gauge = new google.visualization.Gauge(objGauge);
 							
 		    gauge.draw(gaugeData, gaugeOptions);
-		    gaugeData.setValue(0, 1 , value);
+		    gaugeData.setValue(0, 1 , item.lastValue);
 		    gauge.draw(gaugeData, gaugeOptions);
 		}
 	}	
@@ -517,6 +520,13 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		
 		/* Obtem Alarm selecionado */
 		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; })[0];
+		
+		if($scope.selectedSensor.rangeMax < selectedAlarm.alarm3) {
+			$scope.msgErroAlarm = "Alarm Selecionado excede Range Max do Sensor, Verifique";
+			return;
+		}
+		
+		$scope.msgErroAlarm = undefined;
 		
 		alarm = {
 		 		alarmDto : selectedAlarm, 

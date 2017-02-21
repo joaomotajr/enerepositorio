@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDetectorAlarmDto;
+import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDetectorAlarm;
 import br.com.eneeyes.main.repository.CompanyDetectorAlarmRepository;
@@ -104,7 +105,11 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 				List<CompanyDetectorAlarmDto> dto = new ArrayList<CompanyDetectorAlarmDto>();
 				
 				for (CompanyDetectorAlarm companyDetectorAlarm   : lista) {					
-					dto.add(new CompanyDetectorAlarmDto(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getId().getSensorId()));
+					
+					CompanyDetectorDto companyDetectorDto = new CompanyDetectorDto();
+					companyDetectorDto.setUid(companyDetectorAlarm.getId().getCompanyDetectorId());
+					
+					dto.add(new CompanyDetectorAlarmDto(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getId().getSensorId(), companyDetectorDto));					
 				}
 								
 				result.setList(dto);

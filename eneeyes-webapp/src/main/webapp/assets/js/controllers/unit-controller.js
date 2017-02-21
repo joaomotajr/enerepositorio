@@ -16,11 +16,6 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
         $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
 	}
 	
-//	$scope.showErro = function(msg) {
-//		angular.element('body').removeClass('loading');            
-//        $scope.$root.msgErro = msg;
-//	}	
-	
 	$scope.getOneCompany = function(companyId) {
 		 
 		 $scope.listOne = new CompanyService.listOne();		 
@@ -124,6 +119,9 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 			if($scope.selectedUnit.uid == undefined) {
 				$scope.clearFormUnit();
 				$scope.getOneCompany($scope.companyUid);
+			}
+			else {
+				$scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex] = $scope.selectedUnit;
 			}
 			
 			$scope.showInfo($scope.inclusaoUnit.message);

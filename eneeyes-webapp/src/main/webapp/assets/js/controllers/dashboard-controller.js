@@ -1,4 +1,5 @@
-app.controller('dashController', function ($scope, $timeout, $interval, $filter, PositionService) {
+
+app.controller('dashController', function ($scope, $timeout, $interval, $filter, PositionService, ViewService) {
 	
 	$scope.getPositions = function() {
 		
@@ -24,8 +25,10 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 						
 						var offDate = (twoMinutesLater - new Date(e.lastUpdate)) / 1000;
 						
-						if ( offDate > 120 ) {							 
+						// off line por mais de 5 minutos
+						if ( offDate > 300 ) {							 
 						     $scope.sumary.offLine ++;
+						     e.offLine = true;
 						}
 						
 						if ( e.alarmType == "NORMAL") {
@@ -46,17 +49,32 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 						}
 
 					}
-				);		
-							
-			
+				);
 	    });			
 	}
+	
+	
+	$scope.getCompaniesPosition = function() {
+		 
+		 $scope.listAllDashCompaniesPosition = new ViewService.listAllDashCompaniesPosition();		 
+		 $scope.listAllDashCompaniesPosition.$view({_csrf : angular.element('#_csrf').val()}, function(){
+			 $scope.CompaniesPositions = $scope.listAllDashCompaniesPosition.list; 
+			 console.log($scope.listAllDashCompaniesPosition);		         	         	
+       });		 
+	 }
+	
+	$scope.alarmFilter = function(item){
+	    if(item.alarmType != 'NORMAL' || item.offLine){
+	        return item;
+	    }
+	};
 		
+	//$scope.getCompaniesPosition();
 	$scope.getPositions();
 	
 	$interval(function(){
 		$scope.getPositions();
-    }, 20000)
+    }, 10000)
 	
 	angular.element('body').removeClass('loading');		
 	

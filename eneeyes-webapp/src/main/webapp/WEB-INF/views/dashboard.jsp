@@ -1,3 +1,14 @@
+ 	<style>
+		
+	.offLine {		
+		background-color: black ! important;
+		color: white ! important;	
+	}	
+	</style>
+
+
+
+
 	<div data-ng-controller="dashController">
 		<div class="row">
        		<div class="col-md-12">
@@ -7,7 +18,7 @@
 					<div class="box-header with-border">
 						<h3 class="box-title">STATUS</h3>
 						<div class="box-tools pull-right"></div>
-					</div>
+					</div>'
 					
 					<div class="box-body">
 						<div class="row">
@@ -135,16 +146,18 @@
 															<th>Alerta ID</th>
 															<th>Sensor</th>
 															<th>Gás</th>
-															<th>Tipo de Alarme</th>
-															<th>Hora</th>
+															<th>Alarme</th>
+															<th>Última Comunicação</th>
 														</tr>
 													</thead>
 													<tbody>
-														<tr data-ng-repeat="item in listPositions.list">																
+														<tr data-ng-repeat="item in listPositions.list | filter:alarmFilter">																
 															<td>{{item.uid}}</td>
 															<td>{{item.sensorDto.name}}</td>	
 															<td>{{item.sensorDto.gasesDto[0].name}}</td>
-															<td> <span data-ng-class="{'label-success' : item.alarmType=='NORMAL', 'label-warning' : item.alarmType=='ALERTA', 'label-info' : item.alarmType=='DETECCAO', 'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} </span></td>																						
+															
+															<td data-ng-if="!item.offLine"> <span class="label" data-ng-class="{'label-warning' : item.alarmType=='ALERTA', 'label-default' : item.alarmType=='DETECCAO', 'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} </span></td>																						
+															<td data-ng-if="item.offLine"> <span class="label label-default offLine"> Off Line </span></td>
 															<td>{{item.lastUpdate | date:'dd/MM/yyyy HH:mm'}}</td>
 														</tr>   																							
 														
@@ -171,8 +184,7 @@
 							<div class="col-md-4">
 								<div class="box box-primary">
 									<div class="box-header with-border">
-										<h3 class="box-title">Dispositivos para Manutenção
-											Preventiva</h3>
+										<h3 class="box-title">Manutenção Preventiva</h3>
 										<div class="box-tools pull-right">
 											<button class="btn btn-box-tool" data-widget="collapse">
 												<i class="fa fa-minus"></i>

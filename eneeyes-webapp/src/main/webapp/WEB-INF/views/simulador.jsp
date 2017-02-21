@@ -132,7 +132,7 @@
 			       					<label data-ng-show="selectedCompanySensor">Range Max: </label><span> {{selectedCompanySensor.rangeMax}}</span>
 			       				</div>
 			       				<div class="col-md-2">
-			       					<label data-ng-show="selectedCompanySensor">Alarm 1: </label><strong style='color: green'> {{selectedSensorAlarm.alarm1}}</strong>
+			       					<label data-ng-show="selectedCompanySensor">Alarm 1: </label><strong style='color: gray'> {{selectedSensorAlarm.alarm1}}</strong>
 			       				</div>
 			       				<div class="col-md-2">
 			       					<label data-ng-show="selectedCompanySensor">Alarm 2: </label><strong style='color: orange'> {{selectedSensorAlarm.alarm2}}</strong>

@@ -76,6 +76,10 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 				$scope.clearFormArea();
 				$scope.getOneCompany($scope.companyUid);
 			}
+			else {
+				$scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex] = 
+					$scope.selectedArea;
+			}
 			
 			$scope.showInfo($scope.inclusaoArea.message);		
 		

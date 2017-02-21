@@ -6,22 +6,22 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
-import br.com.eneeyes.main.model.views.DashCompany;
-import br.com.eneeyes.main.repository.views.DashCompanyRepository;
+import br.com.eneeyes.main.model.views.DashCompaniesPosition;
+import br.com.eneeyes.main.repository.views.DashCompaniesPositionRepository;
 import br.com.eneeyes.main.result.Result;
 
 @Named
-public class DashCompanyService {
+public class DashCompaniesPositionService {
 	
 	@Inject
-	private DashCompanyRepository repository;
+	private DashCompaniesPositionRepository repository;
 	
 	public Result<?> listAll() {
 		
-		Result<DashCompany> result = new Result<DashCompany>();
+		Result<DashCompaniesPosition> result = new Result<DashCompaniesPosition>();
 		
 		try {
-			List<DashCompany> lista = repository.findAll();
+			List<DashCompaniesPosition> lista = repository.findAll();
 
 			if (lista != null) {
 				

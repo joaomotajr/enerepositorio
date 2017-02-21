@@ -434,7 +434,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		var data = new google.visualization.DataTable();
 	      
 	    data.addColumn('string', 'Date');
-	    data.addColumn('number', 'Medições');
+	    data.addColumn('number', 'Valor');
     
 	    var changeDate = '';  
 	    for(var i in value) {
@@ -453,7 +453,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	    var options = {
 	          title: "Dados Recentes do Sensor.",
 	          titleTextStyle: { color: '#FF0000' },
-	          legend: { position: 'none' },	          
+	          legend: { position: 'none' },	
+	          animation: { duration: 500, easing: 'out' },
 	    	  width: 800,
 	    	  height: 500,
 	    	  hAxis: {

@@ -1,6 +1,5 @@
 app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin, $sce) {
-	
-	
+
 	$scope.LoadAjaxContentCompany = function(url){
 		$http.get(url)
 	    .success(function (data) {
@@ -400,6 +399,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         });
     };
 
-   $scope.LoadAjaxContent('dashboard.html', 'Dashboard');
+	angular.element('body').addClass('loading');
+    $scope.LoadAjaxContent('dashboard.html', 'Dashboard');
    
 });

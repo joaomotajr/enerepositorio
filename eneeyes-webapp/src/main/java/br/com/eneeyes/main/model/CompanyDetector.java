@@ -89,7 +89,10 @@ public class CompanyDetector {
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="DETECTOR_ID", nullable = false)
 	private Detector detector;
-		
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
+	private Set<PositionAlarm> positionAlarm;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
 	private Set<Position> position;
 	

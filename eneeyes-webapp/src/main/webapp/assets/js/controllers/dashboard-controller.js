@@ -1,10 +1,12 @@
 
 app.controller('dashController', function ($scope, $timeout, $interval, $filter, PositionService, ViewService) {
 	
-	$scope.getPositions = function() {
+	$scope.getCompaniesPosition = function() {
 		
-		 $scope.listPositions = new PositionService.listAll();		 
-		 $scope.listPositions.$position({_csrf : angular.element('#_csrf').val()}, function() {		
+		$scope.loading = true;	
+		
+		 $scope.listAllDashCompaniesPosition = new ViewService.listAllDashCompaniesPosition();		 
+		 $scope.listAllDashCompaniesPosition.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			 
 			 $scope.sumary = {
 					 alarm1 :  0, 
@@ -16,14 +18,13 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 			 }			 
 			 
 			 var twoMinutesLater = new Date();
-			 //twoMinutesLater.setMinutes(twoMinutesLater.getMinutes() + 2);
 				
-			 $scope.listPositions.list.forEach(
+			 $scope.listAllDashCompaniesPosition.list.forEach(
 				function(e) {
 
 						$scope.sumary.devices ++;
 						
-						var offDate = (twoMinutesLater - new Date(e.lastUpdate)) / 1000;
+						var offDate = (twoMinutesLater - new Date(e.last_update)) / 1000;
 						
 						// off line por mais de 5 minutos
 						if ( offDate > 300 ) {							 
@@ -50,31 +51,18 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 
 					}
 				);
-	    });			
-	}
-	
-	
-	$scope.getCompaniesPosition = function() {
-		 
-		 $scope.listAllDashCompaniesPosition = new ViewService.listAllDashCompaniesPosition();		 
-		 $scope.listAllDashCompaniesPosition.$view({_csrf : angular.element('#_csrf').val()}, function(){
-			 $scope.CompaniesPositions = $scope.listAllDashCompaniesPosition.list; 
-			 console.log($scope.listAllDashCompaniesPosition);		         	         	
+			 
+			 $scope.loading = undefined;
+         	         	
        });		 
 	 }
-	
-	$scope.alarmFilter = function(item){
-	    if(item.alarmType != 'NORMAL' || item.offLine){
-	        return item;
-	    }
-	};
 		
-	//$scope.getCompaniesPosition();
-	$scope.getPositions();
-	
-	$interval(function(){
-		$scope.getPositions();
-    }, 10000)
+	$scope.getCompaniesPosition();
+    
+    $scope.$root.timer.push($interval(function() {
+    	$scope.getCompaniesPosition();     						
+    }, 10000));	
+    
 	
 	angular.element('body').removeClass('loading');		
 	

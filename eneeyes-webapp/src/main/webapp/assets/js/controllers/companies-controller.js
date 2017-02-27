@@ -4,7 +4,7 @@
 
 app.controller('companiesController', function ($scope, $timeout, $interval, $filter, CompanyService, UnitService) {
 
-	$scope.$root.timer = [];
+//	$scope.$root.timer = [];
 	
 	$scope.getCompanys = function() {
 		 

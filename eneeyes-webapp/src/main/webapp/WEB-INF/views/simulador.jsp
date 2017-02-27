@@ -103,12 +103,12 @@
 					        			</div>
 					        		</div>
 					        		
-					        		<div class="col-md-1">
-										<div class="form-group">
-											<label class="control-label">.</label>
-					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="saveHistoricByPostionUid()">TesteWS</button>
-					        			</div>
-					        		</div>
+<!-- 					        		<div class="col-md-1"> -->
+<!-- 										<div class="form-group"> -->
+<!-- 											<label class="control-label">.</label> -->
+<!-- 					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="saveHistoricByPostionUid()">TesteWS</button> -->
+<!-- 					        			</div> -->
+<!-- 					        		</div> -->
 				        		</div>	        		
 				        	</form>				
 				        	

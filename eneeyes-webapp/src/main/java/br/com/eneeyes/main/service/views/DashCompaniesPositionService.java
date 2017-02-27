@@ -25,6 +25,7 @@ public class DashCompaniesPositionService {
 
 			if (lista != null) {
 				
+				
 				result.setList(lista);				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");

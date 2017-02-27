@@ -5,7 +5,7 @@
 	<head>
 	    <meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <title>Eneeyes | Principal**</title>
+	    <title>Eneeyes</title>
 	    <link rel="shortcut icon" href="/assets/img/favicon.ico">
 	    
 	    <!-- Tell the browser to be responsive to screen width -->
@@ -78,7 +78,7 @@
 <header class="main-header">
 
 	<!-- Logo -->
-	<a href="#" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+	<a href="#" class="logo" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"> <!-- mini logo for sidebar mini 50x50 pixels -->
 		<span class="logo-mini"><b>ENE</b></span> <!-- logo for regular state and mobile devices -->
 		<span class="logo-lg"><b>Ene</b>EYES</span>
 	</a>

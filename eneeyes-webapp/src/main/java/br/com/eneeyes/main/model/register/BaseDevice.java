@@ -13,6 +13,8 @@ public abstract class BaseDevice {
 	@Column(name = "MODEL", nullable = true)
 	String model;
 	
+	
+	
 	public final String getName() {
 		return name;
 	}

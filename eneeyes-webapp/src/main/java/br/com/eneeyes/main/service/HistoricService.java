@@ -1,5 +1,6 @@
 package br.com.eneeyes.main.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.HistoricDto;
-import br.com.eneeyes.main.dto.external.paramsClpDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Historic;
 import br.com.eneeyes.main.model.Position;
@@ -32,7 +32,9 @@ public class HistoricService implements IService<HistoricDto> {
 	@Autowired
 	PositionService positionService;
 	
-	public Boolean saveByPositionUid(Long uid, Double value) {
+	public Boolean saveByPositionUid(Long uid, String strValue) {
+		
+		BigDecimal value = new BigDecimal(strValue);
 		
 		Boolean ret = false;		
 		Position position = positionService.findByUid(uid);
@@ -54,12 +56,6 @@ public class HistoricService implements IService<HistoricDto> {
 		}
 		return ret;
 	}
-	
-	public Boolean saveByPositionUid3(paramsClpDto param) {
-		return null;
-				
-	}
-	
 
 	@Override
 	public BasicResult<?> save(HistoricDto dto) {

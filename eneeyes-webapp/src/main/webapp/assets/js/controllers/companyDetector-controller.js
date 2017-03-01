@@ -383,7 +383,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		else {
 			gauge = new google.visualization.Gauge(objGauge);
 							
-		    gauge.draw(gaugeData, gaugeOptions);
+		    //gauge.draw(gaugeData, gaugeOptions);
 		    gaugeData.setValue(0, 1 , item.lastValue);
 		    gauge.draw(gaugeData, gaugeOptions);
 		}
@@ -504,6 +504,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	
 	$scope.configAlarm = function(index) {
 		
+		$scope.sensorIndex = index; 
 		$scope.selectedSensor = $scope.selectedCompanyDetector.detectorDto.sensorsDto[index];
 		
 		if($.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == $scope.selectedSensor.uid ; }).length != 0 )			
@@ -516,7 +517,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		}, 300);
 	}
 	 
-	$scope.selecionarAlarm = function(uid) {
+	$scope.selecionarAlarm = function(uid, index) {
 		
 		/* Obtem Alarm selecionado */
 		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; })[0];
@@ -536,6 +537,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		
 		$scope.saveCompanyDetectorAlarm(alarm);		
 		$scope.mostrarAlarmTela(selectedAlarm);
+		
+		$scope.configAlarm($scope.sensorIndex); 
 	}
 	
 	$scope.mostrarAlarmTela = function(selectedAlarm) {
@@ -557,6 +560,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		
 	$scope.removerAlarm = function(uid) {		
 
+		angular.element('body').addClass('loading');
+		
 		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; })[0];
 				
 		alarm = {
@@ -568,10 +573,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$scope.deleteCompanyDetectorAlarm = new CompanyDetectorAlarmService.deletar(alarm);
 		$scope.deleteCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
 		
-			$scope.showDanger($scope.deleteCompanyDetectorAlarm.message) ;
-		
-		}, function(data) {
-			$scope.showErro("Ops!! " + data.statusText);
+			angular.element('body').removeClass('loading');
+				
 		});
 		
 		$scope.removerAlarmTela(selectedAlarm);		
@@ -592,8 +595,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
  
 		$scope.inclusaoCompanyDetectorAlarm = new CompanyDetectorAlarmService.save(alarm);
 		$scope.inclusaoCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
-						
-			$scope.showInfo("Alarme Gravado!") ;
+
 			angular.element('body').removeClass('loading');
 		});			 
 	}	

@@ -49,11 +49,11 @@ public class PositionService implements IService<PositionDto> {
 		if (position != null) {		
 			
 			position.setCompanyDetector(historic.getCompanyDetector());
-			AlarmType alarmType = positionAlarmService.checkAlarmLimits(position);
-
-			position.setAlarmType(alarmType);
 			position.setLastUpdate(historic.getLastUpdate());
 			position.setLastValue(historic.getValue());
+			
+			AlarmType alarmType = positionAlarmService.checkAlarmLimits(position);
+			position.setAlarmType(alarmType);
 			
 			repository.save(position);
 			

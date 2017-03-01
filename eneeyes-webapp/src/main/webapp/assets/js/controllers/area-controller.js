@@ -310,7 +310,7 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 		else {
 			gauge = new google.visualization.Gauge(objGauge);
 							
-		    gauge.draw(gaugeData, gaugeOptions);
+		    //gauge.draw(gaugeData, gaugeOptions);
 		    gaugeData.setValue(0, 1 , item.lastValue);
 		    gauge.draw(gaugeData, gaugeOptions);
 		}

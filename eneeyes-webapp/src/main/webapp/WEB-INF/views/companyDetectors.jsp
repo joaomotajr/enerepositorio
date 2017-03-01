@@ -369,7 +369,7 @@
 														<button type="button" class="btn btn-danger btn-xs" data-ng-click="removerAlarm(item.uid)">Remover</button>
 													</div>
 													<div data-ng-if="item.uid != selectedAlarm.uid">
-														<button type="button" class="btn btn-primary btn-xs"  data-ng-click="selecionarAlarm(item.uid)">Selecionar</button>
+														<button type="button" class="btn btn-primary btn-xs"  data-ng-click="selecionarAlarm(item.uid, $index)">Selecionar</button>
 													</div>
 													
 												</td>																		

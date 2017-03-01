@@ -59,9 +59,9 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		
 	$scope.getCompaniesPosition();
     
-    $scope.$root.timer.push($interval(function() {
+    $interval(function() {
     	$scope.getCompaniesPosition();     						
-    }, 10000));	
+    }, 10000);	
     
 	
 	angular.element('body').removeClass('loading');		

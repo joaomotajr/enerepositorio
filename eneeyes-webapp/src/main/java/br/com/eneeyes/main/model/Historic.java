@@ -1,6 +1,5 @@
 package br.com.eneeyes.main.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -43,7 +42,7 @@ public class Historic {
 	private Date lastUpdate;
 
 	@Column(name = "VALUE", nullable = true)
-	private BigDecimal value;
+	private Double value;
     		
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
@@ -69,11 +68,11 @@ public class Historic {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public BigDecimal getValue() {
+	public Double getValue() {
 		return value;
 	}
 
-	public void setValue(BigDecimal value) {
+	public void setValue(Double value) {
 		this.value = value;
 	}
 	

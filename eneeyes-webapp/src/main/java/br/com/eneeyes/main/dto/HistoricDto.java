@@ -1,6 +1,5 @@
 package br.com.eneeyes.main.dto;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import br.com.eneeyes.main.dto.register.SensorDto;
@@ -10,7 +9,7 @@ public class HistoricDto {
 	
 	private Long uid;
 	private Date lastUpdate;
-	private BigDecimal value;	
+	private Double value;	
     private CompanyDetectorDto companyDetectorDto;
     private SensorDto sensorDto;
 	
@@ -43,11 +42,11 @@ public class HistoricDto {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public BigDecimal getValue() {
+	public Double getValue() {
 		return value;
 	}
 
-	public void setValue(BigDecimal value) {
+	public void setValue(Double value) {
 		this.value = value;
 	}
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eneeyes.main.dto.HistoricDto;
+import br.com.eneeyes.main.dto.external.paramsClpDto;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.service.HistoricService;
 
@@ -23,16 +24,23 @@ public class HistoricController {
 	
 	@RequestMapping(value="/api/historic/SaveByPositionUid2/{uid}/{value}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public Boolean saveByPositionUid2(@PathVariable Long uid, @PathVariable String value) {
+	public Boolean saveByPositionUid2(@PathVariable Long uid, @PathVariable Double value) {
 		
 		return service.saveByPositionUid(uid, value);
 	}
 	
 	@RequestMapping(value="/api/historic/SaveByPositionUid/{uid}/{value}", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public Boolean saveByPositionUid(@PathVariable Long uid, @PathVariable String value) {
+	public Boolean saveByPositionUid(@PathVariable Long uid, @PathVariable Double value) {
 		
 		return service.saveByPositionUid(uid, value);
+	}
+	
+	@RequestMapping(value="/api/historic/SaveByPositionUid3", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public Boolean saveByPositionUid3(@RequestBody paramsClpDto params) {
+		
+		return service.saveByPositionUid3(params);
 	}
 	
 	@RequestMapping(value="/security/api/historic/save", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")

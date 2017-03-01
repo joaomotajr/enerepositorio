@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.HistoricDto;
+import br.com.eneeyes.main.dto.external.paramsClpDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Historic;
+import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.register.Sensor;
 import br.com.eneeyes.main.repository.HistoricRepository;
 import br.com.eneeyes.main.result.BasicResult;
@@ -29,6 +31,35 @@ public class HistoricService implements IService<HistoricDto> {
 		
 	@Autowired
 	PositionService positionService;
+	
+	public Boolean saveByPositionUid(Long uid, Double value) {
+		
+		Boolean ret = false;		
+		Position position = positionService.findByUid(uid);
+		
+		if(position != null ) {	
+			Historic historic = new Historic();
+			historic.setCompanyDetector(position.getCompanyDetector());
+			historic.setSensor(position.getSensor());		
+			historic.setLastUpdate(new Date());
+			historic.setValue(value);					
+		
+			try {
+				this.save(new HistoricDto(historic));
+				ret = true;
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		}
+		return ret;
+	}
+	
+	public Boolean saveByPositionUid3(paramsClpDto param) {
+		return null;
+				
+	}
+	
 
 	@Override
 	public BasicResult<?> save(HistoricDto dto) {
@@ -306,6 +337,11 @@ public class HistoricService implements IService<HistoricDto> {
 		
 		return result;	
 		
+	}
+
+	public BasicResult<?> save(Long companyId, Long unitId, Long areaId, String companyDetectorName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

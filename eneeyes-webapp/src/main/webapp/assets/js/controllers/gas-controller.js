@@ -1,9 +1,15 @@
 
 app.controller('gasController', function ($scope, $timeout, $filter, GasService) {
-	    
 	
 	$scope.saveGas = function() {
 		
+		var exists =  $scope.gases.findIndex(function (i) { return i.name.toLowerCase()  === $scope.gasName.toLowerCase() });
+		
+		if ( exists >= 0  && $scope.gasUid == undefined ) {
+			$scope.gasNameExist = "true";
+			return;
+		}
+	
 		angular.element('body').addClass('loading');
 		
 		var gas = {
@@ -31,6 +37,7 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 	    $scope.gasName = '';
 	    $scope.gasCas = '';
 	    $scope.gasFormula = '';
+	    $scope.gasNameExist = "false";
 	}
 	 
 	$scope.getGases = function() {
@@ -62,7 +69,7 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 			 if (!$scope.deletar.isError)
 				 $scope.gases.splice(index, 1);
 			 else {
-				 $scope.msgErro = "Erro: " + $scope.deletar.message;
+				 $scope.msgErroGas = $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
 			 }        	         	
 
@@ -79,6 +86,11 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
          } 		 
 	 }
 	 
-	 $scope.getGases();	 
-	
+	 $scope.keypress = function($event) {
+	    $scope.lastKey = $event.keyCode
+	    $scope.gasNameExist = "false";
+	  };
+	 
+	 $scope.getGases();	 	 
+	 angular.element('body').removeClass('loading');	
 });

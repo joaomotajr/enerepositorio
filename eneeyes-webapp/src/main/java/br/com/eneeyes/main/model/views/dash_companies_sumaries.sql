@@ -2,12 +2,15 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `dash_summary_companies` AS
+VIEW `dash_sumary` AS
     SELECT 
-        `x`.`NAME` AS `NAME`,
-        SUM(`x`.`units`) AS `units`,
-        SUM(`x`.`areas`) AS `areas`,
-        SUM(`x`.`devices`) AS `devices`
+        `c`.`NAME` AS `NAME`,
+        COUNT(DISTINCT `u`.`UID`) AS `units`,
+        COUNT(DISTINCT `a`.`UID`) AS `areas`,
+        COUNT(`cd`.`UID`) AS `devices`
     FROM
-        `dash_totals_companies` `x`
-    GROUP BY `x`.`NAME`
+        (((`company` `c`
+        LEFT JOIN `unit` `u` ON ((`c`.`UID` = `u`.`COMPANY_ID`)))
+        LEFT JOIN `area` `a` ON ((`u`.`UID` = `a`.`UNIT_ID`)))
+        LEFT JOIN `company_device` `cd` ON ((`a`.`UID` = `cd`.`AREA_ID`)))
+    GROUP BY `c`.`NAME`

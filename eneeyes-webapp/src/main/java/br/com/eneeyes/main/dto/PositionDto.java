@@ -26,6 +26,7 @@ public class PositionDto {
     	this.lastValue = position.getLastValue();    	
     	this.sensorDto = new SensorDto(position.getSensor());
     	this.alarmType = position.getAlarmType();
+    	this.companyDetectorDto = new CompanyDetectorDto(position.getCompanyDetector());  
 	}
 	
 	public final Long getUid() {

@@ -44,7 +44,7 @@ insert into aln_id_role values (NULL, 'CUSTOMER', 'ACTIVE', 'CST');
 insert into aln_id_role values (NULL, 'EXPERT', 'ACTIVE', 'EXT');
 
 * INCLUIR USUARIO INICIAL
-INSERT INTO `conciliador`.`aln_id_user`(`ID_`, `ACCESS_TOKEN_`, `CREATE_DATE_`, `DISPLAYNAME_`, `EXPIRE_TIME_`, `HASH_`, `IMAGE_URL_`, `LOGIN_`, `NICKNAME_`, `PROFILE_URL_`, `PROVIDER_ID_`, `PROVIDER_USER_ID_`, `REFRESH_TOKEN_`, `SECRET_`, `STATUS_`, `CNPJ_`) VALUES (null,null,'2015-09-18','CK Medic',null,sha1('123456'),null,'joaomotajunior@gmail.com','CK Medic',null,null,null,null,null,'ACTIVE', '13210102813');
+INSERT INTO `enedb`.`aln_id_user`(`ID_`, `ACCESS_TOKEN_`, `CREATE_DATE_`, `DISPLAYNAME_`, `EXPIRE_TIME_`, `HASH_`, `IMAGE_URL_`, `LOGIN_`, `NICKNAME_`, `PROFILE_URL_`, `PROVIDER_ID_`, `PROVIDER_USER_ID_`, `REFRESH_TOKEN_`, `SECRET_`, `STATUS_`, `CNPJ_`) VALUES (null,null,'2015-09-18','CK Medic',null,sha1('123456'),null,'joaomotajunior@gmail.com','CK Medic',null,null,null,null,null,'ACTIVE', '13210102813');
 
 /* LIMPAR TABELAS */
 drop table detector_sensors;
@@ -77,8 +77,8 @@ insert into gas (name, cas, formula) values ('Chlorine', '7782-50-5', 'Cl2');
 insert into gas (name, cas, formula) values ('Chlorine Dioxide', '10049-04-4',	'ClO2');
 
 /* INCLUIR ROLES */
-INSERT INTO `conciliador`.`aln_id_role` (`NAME_`, `STATUS_`, `VALUE_`) VALUES ('ADMINISTRATOR', 'ACTIVE', 'ADM');
-INSERT INTO `conciliador`.`aln_id_role` (`NAME_`, `STATUS_`, `VALUE_`) VALUES ('CONTRACTOR', 'ACTIVE', 'CTR');
-INSERT INTO `conciliador`.`aln_id_role` (`NAME_`, `STATUS_`, `VALUE_`) VALUES ('MANAGER', 'ACTIVE', 'MNG');
-INSERT INTO `conciliador`.`aln_id_role` (`NAME_`, `STATUS_`, `VALUE_`) VALUES ('OPERATOR', 'ACTIVE', 'OPR');
+INSERT INTO `enedb`.`aln_id_role` (`NAME_`, `STATUS_`, `VALUE_`) VALUES ('ADMINISTRATOR', 'ACTIVE', 'ADM');
+INSERT INTO `enedb`.`aln_id_role` (`NAME_`, `STATUS_`, `VALUE_`) VALUES ('CONTRACTOR', 'ACTIVE', 'CTR');
+INSERT INTO `enedb`.`aln_id_role` (`NAME_`, `STATUS_`, `VALUE_`) VALUES ('MANAGER', 'ACTIVE', 'MNG');
+INSERT INTO `enedb`.`aln_id_role` (`NAME_`, `STATUS_`, `VALUE_`) VALUES ('OPERATOR', 'ACTIVE', 'OPR');
 

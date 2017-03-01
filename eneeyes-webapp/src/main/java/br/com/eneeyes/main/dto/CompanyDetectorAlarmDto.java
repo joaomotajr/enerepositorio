@@ -29,6 +29,14 @@ public class CompanyDetectorAlarmDto {
 		
 	}
 	
+	public CompanyDetectorAlarmDto(Alarm alarm, Long sensorId, CompanyDetectorDto companyDetectorDto) {
+		
+		this.alarmDto =  new AlarmDto(alarm);
+		this.sensorId = sensorId;
+		this.companyDetectorDto = companyDetectorDto;
+		
+	}
+	
 	public final AlarmDto getAlarmDto() {
 		return alarmDto;
 	}

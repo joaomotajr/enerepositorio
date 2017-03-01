@@ -1,140 +1,69 @@
 
-app.controller('dashController', function ($scope, $timeout, $filter, CompanyDetectorService, HistoricService, CompanyDetectorAlarmService) {
+app.controller('dashController', function ($scope, $timeout, $interval, $filter, PositionService, ViewService) {
 	
-	$scope.showInfo = function(msg) {
-		angular.element('body').removeClass('loading');            
-        $scope.msg = msg;
-        $('#result').hide().show('slow').delay(500).hide('slow');
-	}
-	
-	$scope.clearHistoric = function() {
-			
-		$scope.companyValor = '';
-        $scope.selectedCompanyDetector = '';
-        $scope.selectedCompanySensor = '';
-			
-	}
-	
-	$scope.saveHistoric = function() {
+	$scope.getCompaniesPosition = function() {
 		
-		$scope.historic = {
-				uid: 0,	
-				value: $scope.companyValor,
-				lastUpdate: null,
-				companyDetectorDto: {uid: $scope.selectedCompanyDetector.uid},
-				sensorDto: {uid: $scope.selectedCompanySensor.uid}
-			 }	
-		 
-		 $scope.inclusao = new HistoricService.save($scope.historic);		 
-		 $scope.inclusao.$historic({_csrf : angular.element('#_csrf').val()}, function(){         	
-        	        	
-        	$scope.showInfo('Salvo');        	
-        	$scope.companyValor = '';
+		$scope.loading = true;	
+		
+		 $scope.listAllDashCompaniesPosition = new ViewService.listAllDashCompaniesPosition();		 
+		 $scope.listAllDashCompaniesPosition.$view({_csrf : angular.element('#_csrf').val()}, function(){
+			 
+			 $scope.sumary = {
+					 alarm1 :  0, 
+					 alarm2 : 0,
+					 alarm3 : 0,
+					 normal : 0,
+					 devices: 0,
+					 offLine: 0						 
+			 }			 
+			 
+			 var twoMinutesLater = new Date();
+				
+			 $scope.listAllDashCompaniesPosition.list.forEach(
+				function(e) {
 
-        });		 
+						$scope.sumary.devices ++;
+						
+						var offDate = (twoMinutesLater - new Date(e.last_update)) / 1000;
+						
+						// off line por mais de 5 minutos
+						if ( offDate > 300 ) {							 
+						     $scope.sumary.offLine ++;
+						     e.offLine = true;
+						}
+						
+						if ( e.alarmType == "NORMAL") {
+							 
+						     $scope.sumary.normal ++;
+						}
+						else if ( e.alarmType == "DETECCAO") {
+							$scope.sumary.alarm1 ++;			
+							 
+						}
+						else if ( e.alarmType == "ALERTA") {
+							$scope.sumary.alarm2 ++;			
+							 
+						}
+						else if ( e.alarmType == "EVACUACAO") {
+							$scope.sumary.alarm3 ++;	
+							 
+						}
+
+					}
+				);
+			 
+			 $scope.loading = undefined;
+         	         	
+       });		 
 	 }
+		
+	$scope.getCompaniesPosition();
+    
+    $interval(function() {
+    	$scope.getCompaniesPosition();     						
+    }, 10000);	
+    
 	
-	$scope.getHistoric = function() {
-		$scope.listHistoric = new HistoricService.listAll();		 
-		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val()}, function(){         	
-       	console.log($scope.listHistoric);      	
-       	
-       });		
-	}
-	
-	$scope.getHistorics2 = function(interval) {
-		
-		$scope.listHistoric = new HistoricService.listInterval2();		
-		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
-			
-       	console.log($scope.listHistoric);      	
-       	
-       });		
-	}
-	
-	$scope.getHistorics = function(interval) {
-		
-		$scope.listHistoric = new HistoricService.listInterval();		
-		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, interval: interval }, function(){
-			
-       	console.log($scope.listHistoric);      	
-       	
-       });		
-	}
-	
-	$scope.getLastMonth = function() {
-		$scope.listHistoric = new HistoricService.listLastMonth();		
-		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid }, function(){
-			
-       	console.log($scope.listHistoric);      	
-       	
-       });		
-	}
-		
-	$scope.getLastMonth2 = function() {
-		$scope.listHistoric = new HistoricService.listLastMonth2();		
-		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.uid, sensorId: $scope.selectedCompanySensor.uid }, function(){
-			
-       	console.log($scope.listHistoric);      	
-       	
-       });		
-	}
-	
-	$scope.getHistoricInterval = function() {
-		
-		var dataInicio = new Date(getDate($scope.dateIn));
-		var dataFim = new Date(getDate($scope.dateOut, true));
-		
-		$scope.listHistoric = new HistoricService.listIntervalDays();		
-		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(),			
-			companyDetectorId: $scope.selectedCompanyDetector.uid, 
-			sensorId: $scope.selectedCompanySensor.uid,
-			dateIn: dataInicio,
-			dateOut: dataFim
-		}, function(){
-			       	
-			console.log($scope.listHistoric);      	
-       });		
-	}		
-		
-	$scope.getCompanyDetectors = function() {
-		 
-		 $scope.listAll = new CompanyDetectorService.listAll();		 
-		 $scope.listAll.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){
-			 $scope.CompanyDetectors = $scope.listAll.list; 
-			 console.log($scope.listAll);		         	         	
-        });		 
-	 }
-	
-	$scope.listCompanyDetectors = function() {
-		$scope.getCompanyDetectors();
-		$scope.listCompanyDetectors = angular.copy($scope.CompanyDetectors);     		 
-	}	
-	
-	$scope.changeCompanyDetector = function() {
-		
-		$scope.selectedSensorAlarm = undefined;
-		$scope.selectedCompanySensor = undefined;
-		
-		if($scope.selectedCompanyDetector == null) return;
-		
-		$scope.resultCompanyDetectorAlarm = new CompanyDetectorAlarmService.listPorCompanyDetectorAlarm();		 
-		$scope.resultCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){			
-			$scope.selectedCompanyDetectorAlarms = $scope.resultCompanyDetectorAlarm.list;
-        });		 
-	}
-	
-	$scope.changeSensor = function() {
-		
-		if($scope.selectedCompanySensor == null) return;
-		
-		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(function (i) { return i.sensorId === $scope.selectedCompanySensor.uid});				
-		if (detectorAlarmIndex >= 0) {			
-			$scope.selectedSensorAlarm = $scope.selectedCompanyDetectorAlarms[detectorAlarmIndex].alarmDto ;
-		}
-		
-	}
-		
-	$scope.getCompanyDetectors();
+	angular.element('body').removeClass('loading');		
 	
 });

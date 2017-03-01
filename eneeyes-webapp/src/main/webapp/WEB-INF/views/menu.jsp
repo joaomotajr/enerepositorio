@@ -11,7 +11,7 @@
           <!-- Sidebar user panel (optional) -->
 			<div class="user-panel">
 				<div class="pull-left image">
-					<img src="/assets/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+					<img src="/assets/img/avatar_160x160.png" class="img-circle" alt="User Image">
 				</div>
 				<div class="pull-left info">
 					<p><sec:authentication property="principal.displayName" /></p>					
@@ -23,7 +23,7 @@
           	<!-- search form (Optional) -->
           	<form action="#" method="get" class="sidebar-form">
 				<div class="input-group">
-					<input type="text" name="q" class="form-control" placeholder="Search...">
+					<input type="text" name="q" class="form-control" placeholder="Procurar" disabled>
 					<span class="input-group-btn">
 					<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
 					</span>
@@ -50,7 +50,7 @@
 	            	</a>
 	            </li>	
 	            <li class="treeview">
-	            	<a href="#" data-ng-click="LoadAjaxContent('clear.html', 'Cadastro')"><i class="fa fa-circle-o"></i>
+	            	<a href="#"><i class="fa fa-circle-o"></i>
 	            	<span>User</span>
 	            	<span class="label label-primary pull-right">Breve</span>
 	            	</a>
@@ -74,7 +74,7 @@
 	            
 	            <li class="treeview">
 	            	<a href="#">
-	                <i class="fa fa-cube"></i> <span>Cadastro Clientes</span>
+	                <i class="fa fa-cube"></i> <span>Clientes</span>
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">			            		        
@@ -90,7 +90,7 @@
 	              	</a>
 	            	<ul class="treeview-menu">			            		        
 			            <li><a href="#" data-ng-click="LoadAjaxContent('logHistoric.html', 'Log Detectores')"><i class="fa fa-files-o"></i> Log Detectores</a></li>
-			            <li><a href="#" data-ng-click="LoadAjaxContent('logHistoricAlarm.html', 'Log Alarmes')"><i class="fa fa-file-audio-o"></i> Log Alarmes</a></li>			            	            
+<!-- 			            <li><a href="#" data-ng-click="LoadAjaxContent('logHistoricAlarm.html', 'Log Alarmes')"><i class="fa fa-file-audio-o"></i> Log Alarmes</a></li>			            	             -->
 	              	</ul>
 	            </li>
 	            

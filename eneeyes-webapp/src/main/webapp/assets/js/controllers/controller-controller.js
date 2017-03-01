@@ -80,5 +80,6 @@ app.controller('controllerController', function ($scope, $timeout, $filter, Cont
 	 
 	 $scope.getControllers();
 	 $scope.getManufacturers();
+	 angular.element('body').removeClass('loading');
 	
 });

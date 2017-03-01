@@ -21,7 +21,7 @@
 	}
 	
 	.alarm1 {
-		color: green;
+		color: gray;
 		font-weight: 800;
 	}
 	
@@ -226,7 +226,7 @@
 							                      		<td>{{item.lastUpdate | date:'dd/MM/yyyy HH:mm' }}</td>
 
 														<td> {{item.value}}									                      		
-							                      			<span data-ng-if="item.value >= selectedSensorAlarm.alarm1 && item.value < selectedSensorAlarm.alarm2" class="label label-success pull-right">1</span>									                      		
+							                      			<span data-ng-if="item.value >= selectedSensorAlarm.alarm1 && item.value < selectedSensorAlarm.alarm2" class="label label-default pull-right">1</span>									                      		
 							                      			<span data-ng-if="item.value >= selectedSensorAlarm.alarm2 && item.value < selectedSensorAlarm.alarm3" class="label label-warning pull-right">2</span>									                      											                      		
 							                      			<span data-ng-if="item.value >= selectedSensorAlarm.alarm3" class="label label-danger pull-right">3</span>
 							                      		</td>
@@ -283,7 +283,7 @@
 							                      		<td>{{item.lastUpdate | date:'dd/MM/yyyy HH:mm' }}</td>									                  
 							                      		
 							                      		<td> {{item.value}}									                      		
-							                      			<span data-ng-if="item.value >= selectedSensorAlarm.alarm1 && item.value < selectedSensorAlarm.alarm2" class="label label-success pull-right">1</span>									                      		
+							                      			<span data-ng-if="item.value >= selectedSensorAlarm.alarm1 && item.value < selectedSensorAlarm.alarm2" class="label label-default pull-right">1</span>									                      		
 							                      			<span data-ng-if="item.value >= selectedSensorAlarm.alarm2 && item.value < selectedSensorAlarm.alarm3" class="label label-warning pull-right">2</span>									                      											                      		
 							                      			<span data-ng-if="item.value >= selectedSensorAlarm.alarm3" class="label label-danger pull-right">3</span>
 							                      		</td>

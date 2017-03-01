@@ -20,6 +20,9 @@ app.factory('PositionService', function($resource){
         listOneByCompanyDetector : $resource('/security/api/position/obtemPorCompanyDetectorId/:id', {id: '@id'},{
         	position : {method : 'GET'}
         }),
+        listByAreaId : $resource('/security/api/position/obtemPorAreaId/:id', {id: '@id'},{
+        	position : {method : 'GET'}
+        }),
         save : $resource('/security/api/position/save',{},{
         	position : {method : 'POST'}
         }),

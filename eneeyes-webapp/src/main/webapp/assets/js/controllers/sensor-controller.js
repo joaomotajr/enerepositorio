@@ -3,6 +3,13 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		
 	$scope.saveSensor = function() {
 		
+		var exists =  $scope.sensors.findIndex(function (i) { return i.name.toLowerCase() === $scope.sensorName.toLowerCase() });
+		
+		if ( exists >= 0 && $scope.sensorUid == undefined) {
+			 $scope.sensorNameExist = "true";
+			 return;
+		}
+		
 		angular.element('body').addClass('loading');
 		
 		for (var i = 0; i < $scope.newGases.length; i++) {
@@ -51,7 +58,8 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		
 		$scope.msgGas1 = false;
 	    $scope.msgGas2 = false;
-		
+	    $scope.sensorNameExist = "false";
+	    
 		$('.sort .ui-draggable').remove();
 		
 		$scope.inicializaLDragDrop();					
@@ -111,7 +119,7 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 			 if (!$scope.deletar.isError)
 				 $scope.sensors.splice(index, 1);
 			 else {
-				 $scope.msgErro = "Erro: " + $scope.deletar.message;
+				 $scope.msgErroSensor = $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
 			 }
 
@@ -216,10 +224,9 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		  	{ name : 'OUTROS', uid : 0 },
 		  	{ name : 'CAT', uid :  1 },
 		  	{ name : 'FTA', uid : 2 },
-		  	{ name : 'FID', uid : 3 },
+		  	{ name : 'PID', uid : 3 },
 		  	{ name : 'EC', uid : 4 },
-		  	{ name : 'IR', uid : 5 },
-		  	{ name : 'BUT', uid : 6 },		  	
+		  	{ name : 'IR', uid : 5 },	  	
 		  	{ name : 'GALVANCIA', uid : 7}
 		 ]; 
 	 
@@ -243,12 +250,18 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
 		 ]; 
 	 
+	 $scope.keypress = function($event) {
+		 $scope.lastKey = $event.keyCode
+		 $scope.sensorNameExist = "false";
+	  };
+	 
 	 $scope.refreshSensors = function() {
 		 $scope.getSensors();
 		 $scope.getManufacturers();
 		 $scope.getGases();
 	 } 
 	 
-	 $scope.refreshSensors();
+	 $scope.refreshSensors();	 
+	 angular.element('body').removeClass('loading');
 
 });

@@ -1,12 +1,19 @@
 <!-- <div id="content" bind-unsafe-html="ajaxcontent"></div>  -->
 
+<div data-ng-controller="conteudoController">
 
-<div id="contentTab">
 	<div class="content-wrapper">
 	
 		<section class="content-header"></section>	
 			
 		<section class="content">		
+		
+			<div id="resultDanger"  class="alert alert-danger alert-dismissable" role="alert" data-ng-show="alertDanger">
+				<button type="button" class="close" ><span data-ng-click="clearAlert();">&times;</span></button>
+				<h4><i class="icon fa fa-info"></i> Atenção!</h4>
+				{{alertDanger}}
+			</div>
+			
 			<div id="content" data-bind-unsafe-html="ajaxcontent"></div>
 						
 			<div class="nav-tabs-custom" id='tabs' data-ng-show="tabsShow.length > 0">

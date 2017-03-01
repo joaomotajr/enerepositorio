@@ -17,7 +17,7 @@ app.factory('CompanyDetectorService', function($resource){
 	    listPorCompanyDevice : $resource('/security/api/companyDetector/obtemPorCompanyDevice/:id', {id: '@id'},{
 	    	companyDetector : {method : 'GET'}
 	    }),    
-	    listPorIdArea : $resource('/security/api/companyDetector/obtemPorIdArea/:id', {id: '@id'},{
+	    listPorAreaId : $resource('/security/api/companyDetector/obtemPorAreaId/:id', {id: '@id'},{
 	    	companyDetector : {method : 'GET'}
 	    }),
         save : $resource('/security/api/companyDetector/save',{},{

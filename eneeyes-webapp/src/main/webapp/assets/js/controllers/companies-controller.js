@@ -1,10 +1,20 @@
-app.service('testServices', function ($http, $q) {
-
-});
+//app.service('testServices', function ($http, $q) {
+//
+//});
 
 app.controller('companiesController', function ($scope, $timeout, $interval, $filter, CompanyService, UnitService) {
 
-	$scope.$root.timer = [];
+//	$scope.$root.timer = [];
+	
+	$scope.getCompanys = function() {
+		 
+		 $scope.resultCompanies = new CompanyService.listAll();		 
+		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
+			 $scope.companies = $scope.resultCompanies.list;
+        });		 
+	} 
+	
+	$scope.getCompanys();	
 		
 	$scope.showDanger = function(msg) {		
 		angular.element('body').removeClass('loading');
@@ -16,12 +26,6 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		angular.element('body').removeClass('loading');            
         $scope.$root.msgInfo = msg;
         $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
-	}
-	
-	$scope.showErro = function(msg) {
-		angular.element('body').removeClass('loading');            
-        $scope.$root.msgErro = msg;
-        $('#resultErro').hide().show('slow').delay(1000).hide('slow');
 	}
 		
 	$scope.deleteCompany = function() {
@@ -111,14 +115,6 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 	    $scope.LoadAjaxContentCompany('clear.html');
 	}
 	 
-	$scope.getCompanys = function() {
-		 
-		 $scope.resultCompanies = new CompanyService.listAll();		 
-		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
-			 $scope.companies = $scope.resultCompanies.list;
-         });		 
-	} 	        
-	 
 	$scope.$root.selecteds = [];
 	
 	$scope.loadTreview = function(data) {
@@ -141,12 +137,12 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 				    	$scope.$root.selecteds.push({unitIndex: 0, areaIndex : 0, companyDetectorIndex: 0});
 				    	
 				    	if(node.type == 0 && $scope.$root.selectedCompany.unitsDto.length <= 0) {				    		 
-				    		 //$timeout(function () {$scope.LoadAjaxContentCompany('companyInit.html');}, 50);	
+
 				    		 $timeout(function () {$scope.LoadAjaxContentCompany('units.html');}, 50);				    		 
 				    	}
 				    	else if(node.type == 0 ) {
 				    		
-				    		$timeout(function () {$scope.LoadAjaxContentCompany('company.html');}, 50);				    		 
+				    		$timeout(function () {$scope.LoadAjaxContentCompany('company.html');}, 200);				    		 
 				    	}
 				    	else if(node.type == 1) {
 				    		
@@ -236,7 +232,8 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		return itens;
 	 }
 	 
-	$scope.getCompanys();	
+	angular.element('body').removeClass('loading');
+	
 	$(".select2").select2();
 		
 });

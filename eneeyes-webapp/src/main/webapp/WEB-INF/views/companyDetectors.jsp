@@ -23,7 +23,11 @@
 
 	tr.shown td.details-control {
 		background: url("/assets/plugins/datatables/images/details_close.png") no-repeat center center;
-	}		
+	}	
+	
+	.selected {		
+		font-weight: 800;	
+	}	
 </style>
 
 <div class="col-md-9">
@@ -51,19 +55,29 @@
 					    		<form name="userForm">					    		
 									
 						    		<div class="row">				    			
-								        <div class="col-md-6">
-								            <div class="form-group">
-								                <label class="control-label">Nome</label>
-								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
-									            <span data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 8 caracteres</span>
-								                <input id="idAreaName" class="form-control" placeholder="Nome do Detector" data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="8" name="username" required>
+								        <div class="col-md-4">
+								        	<div class="form-group">
+								                <label class="control-label">Código</label>
+								                <input class="form-control" placeholder="Código do Detector" data-ng-model="selectedCompanyDetector.uid" readonly>
+								            </div>	
+								        </div>
+								        <div class="col-md-4">
+								            <div class="form-group">								            
+								                <label class="control-label">Identificação</label>
+								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Identificação Obrigatorio]</span>
+									            <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 8 caracteres</span>
+								                <input data-disallow-spaces id="companyDetectorName" class="form-control" style="text-transform:uppercase" 
+								                	placeholder="Identificação do Detector (Sem Espaços)" 
+								                	data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="8" name="username" 
+								                	title="Identificação do Detector (Sem Espaços)"
+								                required>
 								            </div>
 								        </div>
 										
-								        <div class="col-md-6">
+								        <div class="col-md-4">
 								            <div class="form-group">
 								                <label class="control-label">Descrição</label>
-								                <input class="form-control" placeholder="E-mail" data-ng-model="selectedCompanyDetector.description">
+								                <input class="form-control" placeholder="Descrição" data-ng-model="selectedCompanyDetector.description">
 								            </div>
 								        </div>
 								    </div>
@@ -75,12 +89,44 @@
 								                <input id="idUnitName" class="form-control" placeholder="Local" data-ng-model="selectedCompanyDetector.local">
 								            </div>
 								        </div>
-								        <div class="col-md-6">
-								        	<div class="form-group">
-								                <label class="control-label">Qtde Sensores</label>
-								                <input id="idUnitName" class="form-control" placeholder="Sensors" value={{selectedCompanyDetector.detectorDto.sensorsDto.length}} disabled>
-								            </div>							        
-				                       	</div>		        
+
+										<div class="col-md-6">
+											<label class="control-label">Identificação do Detector/Sensores</label>
+											<div class="box box-primary collapsed-box">
+												<div class="box-header with-border">
+													<Label class="box-title">{{selectedCompanyDetector.detectorDto.name}}-{{selectedCompanyDetector.detectorDto.model}} Sensores: {{selectedCompanyDetector.detectorDto.sensorsDto.length}} </label>
+													<div class="box-tools pull-right" title="Clique para mais detalhes">
+														<button class="btn btn-box-tool" data-widget="collapse">
+															<i class="fa fa-plus"></i>
+														</button>
+													</div>
+													<!-- /.box-tools -->
+												</div>
+												<!-- /.box-header -->
+												<div class="box-body">
+													<table class="table table-bordered table-hover">
+														<thead>
+															<tr>					
+																<th>ID</th>
+																<th>Status</th>																
+																<th>Nome</th>																																						
+															</tr>
+														</thead>
+														<tbody>                                                        
+															<tr data-ng-repeat="item in listOnePositionNoTimer.list">
+																
+																<td>{{item.uid}}</td>
+																<td>{{item.alarmType}}</td>	
+																<td>{{item.sensorDto.name}}</td>																						
+															</tr>                                                               
+														</tbody>
+													</table>												
+												
+												</div>
+												<!-- /.box-body -->
+											</div>
+											<!-- /.box -->
+										</div>													        
 								    </div>								    		    					
 					       		</form>
 					       		</div>
@@ -88,12 +134,12 @@
 				    		
 				    		<div class="row">
 				    			<div class="col-md-12">						    	
-						    		<div class="box box-default">
-					                    <div class="box-header with-border"><strong>Detectores</strong></div>					                	 
+						    		<div class="box box-primary">
+					                    <div class="box-header with-border"><strong>Lista de Detectores</strong></div>					                	 
 					                    <div class="box-body">
 					                    	<div class="col-md-8">
 					                    		<div style="max-height: 300px; overflow: auto">					                    							                           
-						                         	<table id="example" class="display">
+						                         	<table id="sensorDetails" class="display">
 														<thead>
 															<tr>
 																<th></th>
@@ -105,15 +151,16 @@
 														<tbody>                                                        
 															<tr data-ng-repeat="item in detectors">
 																<td class="details-control"></td>
-																<td>{{item.name}}</td>
-																<td>{{item.model}}</td>																
+																<td data-ng-class="{'selected': item.uid == selectedCompanyDetector.detectorDto.uid }">{{item.name}}</td>
+																<td data-ng-class="{'selected': item.uid == selectedCompanyDetector.detectorDto.uid }">{{item.model}}</td>																
 																<td>																	
 																	<div data-ng-if="item.uid == selectedCompanyDetector.detectorDto.uid">
-																		<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" data-ng-click="selecionarDetector(item)" disabled>Selecionado</button>
+																		<button type="button" class="btn btn-danger btn-xs" data-ng-click="selecionarDetector(item)" disabled>Selecionado</button>
 																	</div>	
 																	<div data-ng-if="item.uid != selectedCompanyDetector.detectorDto.uid">
-																		<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" data-ng-click="selecionarDetector(item)">  Selecionar  </button>
-																	</div>																																		
+																		<button type="button" class="btn btn-xs" data-ng-class="(selectedCompanyDetector.uid == null) ? 'btn-primary' : 'btn-default'" 
+																		data-ng-click="selecionarDetector(item)" data-ng-disabled="selectedCompanyDetector.uid != null">  Selecionar  </button>
+																	</div>																							    								
 																</td>																		
 															</tr>                                                               
 														</tbody>
@@ -155,9 +202,9 @@
 				       		<div class="row">	    	
 				            	<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length > 1">
 				            	  	<div class="col-md-6">
-						              	<div class="panel panel-success">						                
+						              	<div class="panel panel-info">						                
 							                <div class="panel-heading">
-										    	<h3 class="panel-title" style="text-align:center;">Detector: {{selectedCompanyDetector.name}}</h3>							
+										    	<h3 class="panel-title" style="text-align:center;">Detector: {{selectedCompanyDetector.name}}</h3>										    								
 										   	</div>									   					               	
 							               	<div class="panel-body">
 						               			<div class="row">							            					                 		
@@ -193,7 +240,7 @@
 				              	
 				              	<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length == 1">
 				            	  	<div class="col-md-3">
-						              	<div class="panel panel-success">						                
+						              	<div class="panel panel-info">						                
 							                <div class="panel-heading">
 										    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
 										   	</div>									   					               	
@@ -292,6 +339,12 @@
 							  <h3 class="box-title">Cadastro de Alarmes</h3>
 							</div>
 							<div class="box-body">
+								
+								<div class="alert alert-warning" role="alert" data-ng-show="msgErroAlarm" >
+					           		<button type="button" class="close" ><span data-ng-click="msgErroAlarm='';">&times;</span></button>
+					           		<strong>Alerta! </strong>{{msgErroAlarm}} 
+					       		</div>
+							
 								<div style="height: 500px; overflow: auto">
 									<table class="table table-hover">
 										<thead>
@@ -313,10 +366,10 @@
 												<td>{{item.alarm3}}</td>
 												<td>																										
 													<div data-ng-if="item.uid == selectedAlarm.uid">
-														<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal" data-ng-click="removerAlarm(item.uid)">Remover</button>
+														<button type="button" class="btn btn-danger btn-xs" data-ng-click="removerAlarm(item.uid)">Remover</button>
 													</div>
 													<div data-ng-if="item.uid != selectedAlarm.uid">
-														<button type="button" class="btn btn-primary btn-xs" data-dismiss="modal" data-ng-click="selecionarAlarm(item.uid)">Selecionar</button>
+														<button type="button" class="btn btn-primary btn-xs"  data-ng-click="selecionarAlarm(item.uid, $index)">Selecionar</button>
 													</div>
 													
 												</td>																		

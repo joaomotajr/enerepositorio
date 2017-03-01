@@ -83,7 +83,6 @@
 										<div class="form-group">
 											<label class="control-label">Valor</label>
 						                	<input class="form-control" type="number" data-ng-model="companyValor" name="companyValor" data-validate-range="0,selectedCompanySensor.rangeMax" required>
-<!-- 						                	  {{ userForm.companyValor.$error }} -->
 						                	 
 						                	<p data-ng-show="!userForm.companyValor.$error.required && userForm.companyValor.$error.max && !userForm.companyValor.$pristine" class="help-block">Valor Máximo : {{selectedCompanySensor.rangeMax}} </p>
 										    <p data-ng-show="!userForm.companyValor.$error.required && (userForm.companyValor.$error.number || userForm.companyValor.$error.min)" class="help-block">Valor Inválido</p>
@@ -93,16 +92,23 @@
 									<div class="col-md-2">
 										<div class="form-group">
 											<label class="control-label">Ação</label>
-					        				<button type="button" class="btn btn-primary btn-xs form-control" ng-disabled="!userForm.$valid" data-ng-click="saveHistoric()">Save Historic</button>
+					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-disabled="!userForm.$valid" data-ng-click="saveHistoric()">Save Historic</button>
 					        			</div>
 					        		</div>
 			
-					        		<div class="col-md-2">
+					        		<div class="col-md-1">
 										<div class="form-group">
 											<label class="control-label">.</label>
-					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="clearHistoric()">Limpa Pesquisa</button>
+					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="clearHistoric()">Limpa</button>
 					        			</div>
 					        		</div>
+					        		
+<!-- 					        		<div class="col-md-1"> -->
+<!-- 										<div class="form-group"> -->
+<!-- 											<label class="control-label">.</label> -->
+<!-- 					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="saveHistoricByPostionUid()">TesteWS</button> -->
+<!-- 					        			</div> -->
+<!-- 					        		</div> -->
 				        		</div>	        		
 				        	</form>				
 				        	
@@ -126,7 +132,7 @@
 			       					<label data-ng-show="selectedCompanySensor">Range Max: </label><span> {{selectedCompanySensor.rangeMax}}</span>
 			       				</div>
 			       				<div class="col-md-2">
-			       					<label data-ng-show="selectedCompanySensor">Alarm 1: </label><strong style='color: green'> {{selectedSensorAlarm.alarm1}}</strong>
+			       					<label data-ng-show="selectedCompanySensor">Alarm 1: </label><strong style='color: gray'> {{selectedSensorAlarm.alarm1}}</strong>
 			       				</div>
 			       				<div class="col-md-2">
 			       					<label data-ng-show="selectedCompanySensor">Alarm 2: </label><strong style='color: orange'> {{selectedSensorAlarm.alarm2}}</strong>

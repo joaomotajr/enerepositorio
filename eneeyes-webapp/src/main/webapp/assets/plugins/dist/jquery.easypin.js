@@ -300,13 +300,22 @@
             var markerIndex = $(markerContainer).attr('data-index');
             var parentIndex = $(depends.parentElement).attr('data-index');
             var parentId = $('.easypin-target', depends.parentElement).attr('easypin-id');
-
-            // remove marker
+//
+//            // remove marker
+//            $(markerContainer).on('click', '.easy-delete', function(e) {
+//
+//                dataRemove(parentId, markerIndex);
+//
+//                $(e.currentTarget).closest('.easy-marker').remove();
+//            };
+            
+         // set the marker content
             $(markerContainer).on('click', '.easy-delete', function(e) {
+                // creates popup and return instance
+                var modalInstance = createPopup(e, markerContainer);
 
-                dataRemove(parentId, markerIndex);
-
-                $(e.currentTarget).closest('.easy-marker').remove();
+                // data set to input fields
+                setDataToFields(parentId, markerIndex, modalInstance);
             });
 
             // set the marker content
@@ -995,7 +1004,7 @@
        	yAttribute: 'data-y',
 		markerSrc: '/assets/img/marker.png',
 		editSrc: '/assets/img/edit.png',
-		deleteSrc: '/assets/img/remove.png',
+		deleteSrc: '/assets/img/edit.png',
        	parentClass: 'pinParent',
 		markerClass: 'easy-marker',
 		hoverClass: 'hoverClass',

@@ -12,8 +12,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			unitMeterGases : $scope.gasUnitMeterGases.uid,
 			alarm1 : $scope.alarmAlarm1,
 			alarm2 : $scope.alarmAlarm2,
-			alarm3 : $scope.alarmAlarm3
-	    
+			alarm3 : $scope.alarmAlarm3	    
     	}; 
 		 
 		$scope.inclusaoAlarm = new AlarmService.save(alarm);		 
@@ -23,11 +22,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 				$scope.clearFormAlarm();
 	            $scope.getAlarms();                     	
 	            angular.element('body').removeClass('loading');				 
-	         }, 500);
-           
-//		}, function(data) {
-//			angular.element('body').removeClass('loading');
-//			$scope.msgErro = "Erro: " + data.statusText;
+	         }, 500);           
+
 		});		 
 	 }
 		 
@@ -39,9 +35,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	    $scope.gasUnitMeterGases = '';
 		$scope.alarmAlarm1 = '';
 		$scope.alarmAlarm2 = '';
-		$scope.alarmAlarm3 = '';					
+		$scope.alarmAlarm3 = '';		
 	}
-
 	 
 	$scope.getAlarms = function() {
 		 
@@ -76,9 +71,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 				 $scope.msgErro = "Erro: " + $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
 			 }
-         	         	
-//		 }, function(data) {		
-//			 $scope.msgErro = "Erro: " + data.statusText;
+
 		});	 
 	 }	 
 	 
@@ -135,5 +128,5 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 
 	 $scope.getAlarms();	 
 	 $scope.getGases();
-
+	 angular.element('body').removeClass('loading');
 });

@@ -22,18 +22,20 @@
 					        											
 	<div class="row">	
 				                                                    
-		<div class="col-md-5">                                                        
+		<div class="col-md-6">                                                        
 			<div class="box box-primary" data-ng-class="(detectorName || detectorModel || detectorManufacturer || detectorTransmitter) ? 'box-default' : 'box-primary'">
 				<div class="box-header">
 				  <h3 class="box-title">Cadastro de Detectores</h3>
 				</div>
 				<div class="box-body">
-					<div style="height: 500px; overflow: auto">
-						<table class="table table-hover">
+					<div style="height: 500px; overflow: auto">						
+						<table class="table table-bordered table-hover">
 							<thead>
 								<tr>
 									<th>Nome</th>
-									<th>Modelo</th>                                                            
+									<th>Modelo</th>
+									<th>Fabricante</th>
+									<th>Sensor(es)</th>                                                              
 									<th>Editar</th>
 									<th>Excluir</th>						
 								</tr>
@@ -41,7 +43,11 @@
 							<tbody>                                                        
 								<tr data-ng-repeat="item in detectors">
 									<td>{{item.name}}</td>
-									<td>{{item.model}}</td>															        
+									<td>{{item.model}}</td>
+									<td>{{item.manufacturerDto.name}}</td>		
+									<td>								
+										{{item.sensorsDto[0].name}} <span data-ng-show="item.sensorsDto[1].name">/</span> {{item.sensorsDto[1].name}}
+									</td>														        
 									<td>
 										<button type="button" class="btn btn-primary btn-xs" data-ng-click="editDetector($index)">editar</button>
 									</td>
@@ -55,13 +61,13 @@
 				</div>
 			</div>
 			
-			<div id="resultErro" class="alert alert-warning" role="alert" data-ng-show="msgErro" >
-           		<button type="button" class="close" ><span data-ng-click="msgErro='';">&times;</span></button>
-           		<strong>Alerta! </strong>{{msgErro}} 
+			<div class="alert alert-warning" role="alert" data-ng-show="msgErroDetector" >
+           		<button type="button" class="close" ><span data-ng-click="msgErroDetector='';">&times;</span></button>
+           		<strong>Alerta! </strong>{{msgErroDetector}} 
        		</div>
 		</div>                                                      
 															
-		<div class="col-sm-7">
+		<div class="col-sm-6">
 			<div class="box box-primary" data-ng-class="(detectorName || detectorModel || detectorManufacturer || detectorTransmitter) ? 'box-primary' : 'box-default'">
 				<div class="box-header">
 					<h3 class="box-title">Cadastro / Edição</h3>
@@ -87,9 +93,10 @@
 			                 	<div class="col-md-6">                                                                                                                                    
 									<div class="form-group">
 										<label class="control-label">Nome</label>
+										<span class="text-red" data-ng-show="detectorNameExist">Detector ja Existe</span> 
 										<span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
 								        <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
-										<input id="idDetectorName" class="form-control inputProfile" placeholder="Nome do Detector" data-ng-model="detectorName" data-ng-maxlength="15" name="username" required>                                                                        
+										<input id="idDetectorName" data-ng-keydown="keypress($event)" class="form-control inputProfile" placeholder="Nome do Detector" data-ng-model="detectorName" data-ng-maxlength="15" name="username" required>                                                                        
 									</div>							
 								</div>
 								<div class="col-md-6">

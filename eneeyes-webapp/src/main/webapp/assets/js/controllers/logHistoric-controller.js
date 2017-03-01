@@ -262,5 +262,6 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	$scope.clearHistoric();
 	$scope.getCompanys();
 	$scope.getCompanyDetectors();	
+	angular.element('body').removeClass('loading');
 	
 });

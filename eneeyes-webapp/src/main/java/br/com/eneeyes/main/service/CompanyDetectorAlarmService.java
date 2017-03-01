@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDetectorAlarmDto;
+import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDetectorAlarm;
 import br.com.eneeyes.main.repository.CompanyDetectorAlarmRepository;
@@ -17,6 +18,9 @@ import br.com.eneeyes.main.result.Result;
 @Service
 public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlarmDto> {
 
+	@Autowired
+	CompanyDetectorService companyDetectorService;
+	
 	@Autowired
 	private CompanyDetectorAlarmRepository companyDetectorAlarmRepository;
 
@@ -83,6 +87,43 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 			result.setIsError(true);
 			result.setResultType( ResultMessageType.ERROR );
 			result.setMessage("Nenhum Alarm Cadastrado.");
+		}
+		
+		return result;
+	}
+	
+	public BasicResult<?> findByAreaId(Long uid) {
+		Result<CompanyDetectorAlarmDto> result = new Result<CompanyDetectorAlarmDto>();
+		
+		List<CompanyDetector> companyDetectors = companyDetectorService.findByAreaId(uid);
+		
+		try {
+			List<CompanyDetectorAlarm> lista = companyDetectorAlarmRepository.findByCompanyDetectorIn(companyDetectors);
+			
+			if (lista != null) {
+				
+				List<CompanyDetectorAlarmDto> dto = new ArrayList<CompanyDetectorAlarmDto>();
+				
+				for (CompanyDetectorAlarm companyDetectorAlarm   : lista) {					
+					
+					CompanyDetectorDto companyDetectorDto = new CompanyDetectorDto();
+					companyDetectorDto.setUid(companyDetectorAlarm.getId().getCompanyDetectorId());
+					
+					dto.add(new CompanyDetectorAlarmDto(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getId().getSensorId(), companyDetectorDto));					
+				}
+								
+				result.setList(dto);
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhuma area.");
+			}
+			
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
 		}
 		
 		return result;

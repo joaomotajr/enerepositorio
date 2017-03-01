@@ -6,7 +6,6 @@ angular.module('dependency', [])
   $httpProvider.interceptors.push(function ($q, $rootScope, $timeout) {
       return {
           'request': function (config) {
-              console.log('request intercept');
               return config;
           },
           'requestError': function (rejection) {
@@ -15,33 +14,68 @@ angular.module('dependency', [])
           },
 
           'response': function (response) {
-              $rootScope.loading = false;
-              console.log('response intercept');
+              $rootScope.loading = false;          
               return response;	
           },
 
           'responseError': function (rejection) {
         	  
-        	  console.log('response error');
+        	console.log('response error');        	  
         	  
-        	  if (rejection.status >= 400 && rejection.status <= 505 ) {
-        		    angular.element('body').removeClass('loading');
+        	 if (rejection.status == 0) {
+        		  angular.element('body').removeClass('loading'); 
+        		  $rootScope.alertDanger = "Ops Servidor Sem Resposta, Se o Problema Persistir Contate o Administrador do Sistema";
+        		  $('#resultDanger').hide().show('slow').delay(5000).hide('slow');        		  
+        		  
+        	 }
+        	 else if (rejection.status == 404) {
+        		 angular.element('body').removeClass('loading'); 
+        		 $rootScope.alertDanger = "Ops Item Requisitado Inexistente, Contate o Administrador do Sistema";
+        		 $('#resultDanger').hide().show('slow').delay(5000).hide('slow');
+        	 }
+        	 else if (rejection.status == 415) {
+        		 angular.element('body').removeClass('loading'); 
+        		 $rootScope.alertDanger = "Tipo de Media Insuportado, Contate o Administrador do Sistema";
+        	 }
+        	 else if (rejection.status == 500) {
+        		 angular.element('body').removeClass('loading'); 
+        		 $rootScope.alertDanger = "Ops alguma retorno indesejado no servidor, Contate o Administrador do Sistema";
+        	 }
+        	 else if (rejection.status > 400 && rejection.status <= 505 ) {
+     		    	angular.element('body').removeClass('loading');
 	  			    angular.element('.session-expired').modal('show');
 	  				
 	  				$timeout(function(){
 	  					window.location.href='/';
-	  				},2500);
+	  				},2500);	  				
 	  				
 	                return response;
 	  		 }
-        	  else {
-        		  return $q.reject(rejection);
-        	  }               
+        	 else {
+        		  angular.element('body').removeClass('loading'); 
+        		  $rootScope.alertDanger = rejection.statusText;
+        	 }
+//        	  else {
+//        		  //Propagar o erro para tratamento local
+//        		  return $q.reject(rejection);
+//        	  }               
           }
       };
   });
 
 }]);
+
+app.directive('disallowSpaces', function() {'1'
+	  return {
+	    restrict: 'A',
+
+	    link: function($scope, $element) {
+	      $element.bind('input', function() {
+	        $(this).val($(this).val().replace(/ /g, ''));
+	      });
+	    }
+	  };
+})
 
 
 app.directive('validateRange', ['$parse', function($parse) {
@@ -261,26 +295,26 @@ app.directive("datemonopicker", ['$filter', function($filter) {
 	}
 }]);
 
-app.directive('popover', function($compile) { 
-    var content =
-    	"<div>" +
-    	"<label> Fabricante </label>" +
-    	"<input type='text' class='input-small' ng-model='newManufacturer' style='color:navy ! important;' />&nbsp&nbsp"  +
-    	"<button type='button' data-dismiss='popover-content' data-toggle='popover' ng-click='saveManufacturer();' class='btn btn-info btn-xs' ng-disabled='(newManufacturer) ? false : true'> OK</button>" +
-    	"</div>";
-    
-    return {
-        link: function(scope, element, attrs) {
-            element.popover({            
-                placement: 'top',
-                html: true,
-                clickedAway : true,
-                content: $compile(content)(scope)
-            });
-        }
-    
-    };
-});
+//app.directive('popover', function($compile) { 
+//    var content =
+//    	"<div>" +
+//    	"<label> Fabricante </label>" +
+//    	"<input type='text' class='input-small' ng-model='newManufacturer' style='color:navy ! important;' />&nbsp&nbsp"  +
+//    	"<button type='button' data-dismiss='popover-content' data-toggle='popover' ng-click='saveManufacturer();' class='btn btn-info btn-xs' ng-disabled='(newManufacturer) ? false : true'> OK</button>" +
+//    	"</div>";
+//    
+//    return {
+//        link: function(scope, element, attrs) {
+//            element.popover({            
+//                placement: 'top',
+//                html: true,
+//                clickedAway : true,
+//                content: $compile(content)(scope)
+//            });
+//        }
+//    
+//    };
+//});
 
 app.directive('myLink', function () {
     return {

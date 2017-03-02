@@ -7,8 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
@@ -24,7 +22,7 @@ import br.com.eneeyes.main.result.Result;
 
 @Service
 public class HistoricService implements IService<HistoricDto> {
-	private static final int PAGE_SIZE = 50;
+	//private static final int PAGE_SIZE = 50;
 		
 	@Autowired
 	private HistoricRepository repository;
@@ -134,29 +132,6 @@ public class HistoricService implements IService<HistoricDto> {
 		
 		return result;
 	}
-	
-	public BasicResult<?> findByCompanyDetectorAndInterval(Long companyDetectorId, Integer periodo) {
-		Result<HistoricDto> result = new Result<HistoricDto>();
-		
-		CompanyDetector companyDetector = new CompanyDetector();
-		companyDetector.setUid(companyDetectorId);
-		
-		try {
-			
-			Date fim = new Date(); 
-			Date inicio = new Date(fim.getTime() - (1000 * 60 * 60 * periodo));
-			
-			List<Historic> lista = repository.findByCompanyDetectorAndLastUpdateBetween(companyDetector, inicio, fim);			
-		
-			result = populateResult(lista);
-			
-		} catch (Exception e) {
-			result.setIsError(true);
-			result.setMessage(e.getMessage());
-		}
-		
-		return result;
-	}
 		
 	public BasicResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, Integer periodo) {
 		Result<HistoricDto> result = new Result<HistoricDto>();
@@ -184,7 +159,7 @@ public class HistoricService implements IService<HistoricDto> {
 	}
 	
 	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut) {
-	Result<HistoricDto> result = new Result<HistoricDto>();
+		Result<HistoricDto> result = new Result<HistoricDto>();
 		
 		CompanyDetector companyDetector = new CompanyDetector();
 		companyDetector.setUid(companyDetectorId);
@@ -205,35 +180,13 @@ public class HistoricService implements IService<HistoricDto> {
 		return result;
 	}
 	
-	public static Date addMonth(Date date, int qtde) {
+	private static Date addMonth(Date date, int qtde) {
 		
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		c.add(Calendar.MONTH, qtde);			
 		
 		return c.getTime();		
-	}
-	
-	public BasicResult<?> findByCompanyDetectorLastMonth(Long companyDetectorId) {
-		Result<HistoricDto> result = new Result<HistoricDto>();
-		
-		CompanyDetector companyDetector = new CompanyDetector();
-		companyDetector.setUid(companyDetectorId);
-				
-		try {
-						
-			Date fim = new Date();									
-			Date inicio = addMonth(fim, -1);
-			
-			List<Historic> lista = repository.findByCompanyDetectorAndLastUpdateBetween(companyDetector, inicio, fim);			
-			result = populateResult(lista);
-			
-		} catch (Exception e) {
-			result.setIsError(true);
-			result.setMessage(e.getMessage());
-		}
-		
-		return result;
 	}
 	
 	public BasicResult<?> findByCompanyDetectorAndSensorLastMonth(Long companyDetectorId, Long sensorId) {
@@ -302,40 +255,40 @@ public class HistoricService implements IService<HistoricDto> {
 
 	}
 	
-	public Result<?> listPageByCompanyDetector(Long uid, Integer pageNumber) {
-		
-		CompanyDetector companyDetector = new CompanyDetector();
-		companyDetector.setUid(uid);
-		
-		Result<HistoricDto> result = new Result<HistoricDto>(); 	
-		
-		try {
-			Page<Historic> lista = repository.findByCompanyDetector(companyDetector, new PageRequest(pageNumber, PAGE_SIZE));
-									
-			if (lista != null) {
-				
-				List<HistoricDto> dto = new ArrayList<HistoricDto>();
-				
-				for (Historic historic   : lista) {					
-					dto.add(new HistoricDto(historic) );
-				}
-								
-				result.setList(dto);
-				result.setResultType( ResultMessageType.SUCCESS );
-				result.setMessage("Executado com sucesso.");
-			} else {
-				result.setIsError(true);
-				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhum Histórico.");
-			}
-		} catch (Exception e) {
-			result.setIsError(true);
-			result.setMessage(e.getMessage());
-		}
-		
-		return result;	
-		
-	}
+//	public Result<?> listPageByCompanyDetector(Long uid, Integer pageNumber) {
+//		
+//		CompanyDetector companyDetector = new CompanyDetector();
+//		companyDetector.setUid(uid);
+//		
+//		Result<HistoricDto> result = new Result<HistoricDto>(); 	
+//		
+//		try {
+//			Page<Historic> lista = repository.findByCompanyDetector(companyDetector, new PageRequest(pageNumber, PAGE_SIZE));
+//									
+//			if (lista != null) {
+//				
+//				List<HistoricDto> dto = new ArrayList<HistoricDto>();
+//				
+//				for (Historic historic   : lista) {					
+//					dto.add(new HistoricDto(historic) );
+//				}
+//								
+//				result.setList(dto);
+//				result.setResultType( ResultMessageType.SUCCESS );
+//				result.setMessage("Executado com sucesso.");
+//			} else {
+//				result.setIsError(true);
+//				result.setResultType( ResultMessageType.ERROR );
+//				result.setMessage("Nenhum Histórico.");
+//			}
+//		} catch (Exception e) {
+//			result.setIsError(true);
+//			result.setMessage(e.getMessage());
+//		}
+//		
+//		return result;	
+//		
+//	}
 
 	public BasicResult<?> save(Long companyId, Long unitId, Long areaId, String companyDetectorName) {
 		// TODO Auto-generated method stub

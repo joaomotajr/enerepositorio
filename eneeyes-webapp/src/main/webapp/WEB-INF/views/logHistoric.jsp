@@ -215,29 +215,23 @@
 							        		<div class="form-group">
 												<label class="control-label">Intervalos Pré-Definidos: </label> <br />								
 												<div class="btn-group" role="group" aria-label="Basic example">
-												  <button type="button" class="btn btn-default" data-ng-click="getHistorics2(1);"   data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 hora</button>
-												  <button type="button" class="btn btn-default" data-ng-click="getHistorics2(6);"   data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  6h  </button>
-												  <button type="button" class="btn btn-default" data-ng-click="getHistorics2(12);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  12h </button>
-												  <button type="button" class="btn btn-default" data-ng-click="getHistorics2(24);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 dia </button>
-												  <button type="button" class="btn btn-default" data-ng-click="getHistorics2(48);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  2d  </button>
-												  <button type="button" class="btn btn-default" data-ng-click="getHistorics2(96);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  4d  </button>
-												  <button type="button" class="btn btn-default" data-ng-click="getLastMonth2();" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 30d  </button>
+												  <button type="button" class="btn btn-default" data-ng-click="getHistorics(1);"   data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 hora</button>
+												  <button type="button" class="btn btn-default" data-ng-click="getHistorics(6);"   data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  6h  </button>
+												  <button type="button" class="btn btn-default" data-ng-click="getHistorics(12);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  12h </button>
+												  <button type="button" class="btn btn-default" data-ng-click="getHistorics(24);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 dia </button>
+												  <button type="button" class="btn btn-default" data-ng-click="getHistorics(48);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  2d  </button>
+												  <button type="button" class="btn btn-default" data-ng-click="getHistorics(96);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  4d  </button>
+												  <button type="button" class="btn btn-default" data-ng-click="getLastMonth();" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 30d  </button>
 												</div>
 											</div>
-										</div>
-										
-									
-										
+										</div>									
 						        			
-						        			<div class= "pull-right">
-						        				<div class="form-group">
-						        					<br />									
-													<label data-ng-show='loading'>Loading...</label>				
-												</div>
+					        			<div class= "pull-right">
+					        				<div class="form-group">
+					        					<br />									
+												<label data-ng-show='loading'>Loading...</label>				
 											</div>
-						        		
-						        		
-						        										        		 
+										</div>								        		 
 									</form>
 									
 								</div>    
@@ -248,7 +242,7 @@
 							                <table class='zui-table' cellspacing="0" width="100%" data-ng-visible="listHistoric">					            				                            
 							                	<thead>
 							                    	<tr>	                
-							                    		<th>Sensor</th>                                                                                   
+							                    		<th>ID</th>                                                                                   
 							                      		<th>Data</th>
 							                      		<th>Hora</th>	                      		
 							                      		<th>Valor</th>
@@ -257,9 +251,9 @@
 							                    </thead>
 							                    <tbody>                                    
 							                     	<tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">
-							                     		<td>{{item.sensorDto.uid}} / {{item.sensorDto.name}} </td>	                               
-							                      		<td>{{item.lastUpdate | date:'dd/MM/yyyy' }}</td>
-							                      		<td>{{item.lastUpdate | date:'HH:mm:ss' }}</td>
+							                     		<td>{{item.sensor_id}} </td>
+							                      		<td>{{item.last_update | date:'dd/MM/yyyy' }}</td>
+							                      		<td>{{item.last_update | date:'HH:mm:ss' }}</td>
 
 														<td> {{item.value}} </td>
 														<td>

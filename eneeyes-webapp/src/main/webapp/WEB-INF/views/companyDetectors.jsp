@@ -345,7 +345,7 @@
 					           		<strong>Alerta! </strong>{{msgErroAlarm}} 
 					       		</div>
 							
-								<div style="height: 500px; overflow: auto">
+								<div style="height: 500px; overflow: auto" data-ngcloak>
 									<table class="table table-hover">
 										<thead>
 											<tr>

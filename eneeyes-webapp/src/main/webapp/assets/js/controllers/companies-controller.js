@@ -231,8 +231,11 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		
 		return itens;
 	 }
-	 
-	angular.element('body').removeClass('loading');
+		
+	$timeout(function(){
+		angular.element('body').removeClass('loading');
+	}, 1500);
+	
 	
 	$(".select2").select2();
 		

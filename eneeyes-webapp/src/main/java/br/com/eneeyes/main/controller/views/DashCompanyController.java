@@ -15,12 +15,12 @@ import br.com.eneeyes.main.service.views.DashCompanyService;
 public class DashCompanyController {
 	
 	@Inject
-	DashCompanyService dashCompanyservice;	
+	DashCompanyService dashCompanyService;	
 	
 	@RequestMapping(value = "/security/api/view/allDashCompany", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> allDashCompany() {
-		return dashCompanyservice.listAll();
+		return dashCompanyService.listAll();
 	}
 
 }

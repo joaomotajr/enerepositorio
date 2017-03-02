@@ -36,6 +36,8 @@ public class HistoricService implements IService<HistoricDto> {
 		
 		BigDecimal value = new BigDecimal(strValue);
 		
+		value = value.divide(new BigDecimal(100000));
+		
 		Boolean ret = false;		
 		Position position = positionService.findByUid(uid);
 		

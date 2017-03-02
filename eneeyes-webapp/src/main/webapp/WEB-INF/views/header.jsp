@@ -8,12 +8,11 @@
 	    <title>Eneeyes</title>
 	    <link rel="shortcut icon" href="/assets/img/favicon.ico">
 	    
-	    <style>
-	    
-	    .dj-hide {
-		    display: none;
-		}
-	    
+	      
+	    <style>	    
+		    .dj-hide {
+			    display: none;
+			}	    
 	    </style>
 	    
 	    <!-- Tell the browser to be responsive to screen width -->
@@ -257,7 +256,7 @@
 					</ul></li>
 
 				<!-- Control Sidebar Toggle Button -->
-				<li title="Configurações"><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
+				<li title="Configuraï¿½ï¿½es"><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
 			</ul>
 		</div>
 	</nav>

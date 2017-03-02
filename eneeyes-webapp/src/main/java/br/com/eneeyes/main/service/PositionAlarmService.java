@@ -1,5 +1,6 @@
 package br.com.eneeyes.main.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,15 +53,16 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		
 		if(alarm != null) {
 			
-			if( position.getLastValue() > alarm.getAlarmDto().getAlarm3() ) {
+			//if( position.getLastValue() > alarm.getAlarmDto().getAlarm3() ) {
+			if( position.getLastValue().compareTo( new BigDecimal(alarm.getAlarmDto().getAlarm3())) > 0 ) {
 				
 				alarmType = AlarmType.EVACUACAO;
 			}
-			else if( position.getLastValue() > alarm.getAlarmDto().getAlarm2() ) {
+			else if( position.getLastValue().compareTo( new BigDecimal(alarm.getAlarmDto().getAlarm2())) > 0 ) {
 				
 				alarmType = AlarmType.ALERTA;
 			}
-			else if( position.getLastValue() > alarm.getAlarmDto().getAlarm1() ) {
+			else if( position.getLastValue().compareTo( new BigDecimal(alarm.getAlarmDto().getAlarm1())) > 0 ) {
 				
 				alarmType = AlarmType.DETECCAO;				
 			}		

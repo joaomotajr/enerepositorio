@@ -120,7 +120,7 @@
 
 						<!-- Main row -->
 						<div class="row">
-							<div class="col-md-8">
+							<div class="col-md-9">
 	
 								<div class="box box-primary">
 									<div class="box-header with-border">
@@ -139,7 +139,7 @@
 														<!-- /.box-header -->
 									<div class="box-body">
 										<div class="table-responsive">
-											<div style="max-height: 300px; overflow: auto">
+											<div style="max-height: 500px; overflow: auto">
 												<table class="table no-margin">
 													<thead>
 														<tr>
@@ -150,12 +150,13 @@
 															<th>Sensor</th>
 															<th>Gás</th>
 															<th>Status</th>
-															<th>Última Comunicação</th>
+															<th>Comunicação</th>
+															<th>Valor</th>
 														</tr>
 													</thead>
 													<tbody>
 
-														<tr data-ng-repeat="item in listAllDashCompaniesPosition.list">																
+														<tr data-ng-repeat="item in dashCompaniesPosition">																
 															<td>{{item.uid}}</td>
 															
 															<td>{{item.company_name}}</td>
@@ -167,14 +168,26 @@
 															<td data-ng-if="item.offLine"> <span class="label label-default offLine"> Off Line </span></td>
 
 															<td>
+																<label title="{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}"  data-ng-class="{ 
+																	'text-success' : item.alarmType=='NORMAL',
+																	'text-warning' : item.alarmType=='ALERTA', 
+																	'text-muted' : item.alarmType=='DETECCAO', 
+																	'text-danger' : item.alarmType=='EVACUACAO'}"> 
+<!-- 																	{{item.last_update | date:'dd/MM/yyyy HH:mm'}} | {{item.last_value}}  -->
+																	{{item.last_update}} atrás
+																</label>
+															</td> 
+															
+															<td>
 																<label  data-ng-class="{ 
 																	'text-success' : item.alarmType=='NORMAL',
 																	'text-warning' : item.alarmType=='ALERTA', 
 																	'text-muted' : item.alarmType=='DETECCAO', 
 																	'text-danger' : item.alarmType=='EVACUACAO'}"> 
-																	{{item.last_update | date:'dd/MM/yyyy HH:mm'}} | {{item.last_value}} 
+<!-- 																	{{item.last_update | date:'dd/MM/yyyy HH:mm'}} | {{item.last_value}}  -->
+																	{{item.last_value}} 
 																</label>
-															</td> 
+															</td>
 														</tr>   																							
 														
 													</tbody>
@@ -197,7 +210,7 @@
 								<!-- /.box -->
 	
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<div class="box box-primary">
 									<div class="box-header with-border">
 										<h3 class="box-title">MANUTENÇÃO PREVENTIVA</h3>

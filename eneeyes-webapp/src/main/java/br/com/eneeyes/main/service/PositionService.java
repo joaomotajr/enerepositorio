@@ -1,5 +1,6 @@
 package br.com.eneeyes.main.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -89,7 +90,7 @@ public class PositionService implements IService<PositionDto> {
 				position.setCompanyDetector(companyDetector);
 				position.setSensor(sensor);
 				position.setLastUpdate(new Date());
-				position.setLastValue((double) 0);
+				position.setLastValue(BigDecimal.ZERO);
 				position.setAlarmType(AlarmType.NORMAL);
 				
 				repository.save(position);

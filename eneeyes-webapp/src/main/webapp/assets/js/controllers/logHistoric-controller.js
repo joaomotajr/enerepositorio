@@ -61,43 +61,52 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	
 	$scope.getHistorics2 = function(interval) {
 		
-		$scope.listHistoric = new HistoricService.listInterval2();		
-		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
-			
-       	console.log($scope.listHistoric);      	
-       	
-       });		
-	}
-	
-	$scope.getHistorics = function(interval) {
+		$scope.loading = true;
 		
-		$scope.listHistoric = new HistoricService.listInterval();		
-		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, interval: interval }, function(){
+		$scope.listHistoricInterval = new HistoricService.listInterval2();		
+		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
 			
-       	console.log($scope.listHistoric);      	
+			$scope.loading = false;
+			console.log($scope.listHistoric);      	
        	
        });		
 	}
 	
-	$scope.getLastMonth = function() {
-		$scope.listHistoric = new HistoricService.listLastMonth();		
-		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId }, function(){
-			
-       	console.log($scope.listHistoric);      	
-       	
-       });		
-	}
+//	$scope.getHistorics = function(interval) {
+//		
+//		$scope.listHistoric = new HistoricService.listInterval();		
+//		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, interval: interval }, function(){
+//			
+//       	console.log($scope.listHistoric);      	
+//       	
+//       });		
+//	}
+	
+//	$scope.getLastMonth = function() {
+//		$scope.listHistoric = new HistoricService.listLastMonth();		
+//		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId }, function(){
+//			
+//       	console.log($scope.listHistoric);      	
+//       	
+//       });		
+//	}
 		
 	$scope.getLastMonth2 = function() {
-		$scope.listHistoric = new HistoricService.listLastMonth2();		
-		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid }, function(){
+		
+		$scope.loading = true;
+		
+		$scope.listHistoricInterval = new HistoricService.listLastMonth2();		
+		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid }, function(){
 			
-       	console.log($scope.listHistoric);      	
+			$scope.loading = false;
+			console.log($scope.listHistoric);      	
        	
        });		
 	}
 	
 	$scope.getHistoricInterval = function() {
+		
+		$scope.loading = true;
 		
 		var dataInicio = new Date(getDate($scope.dateIn));
 		var dataFim = new Date(getDate($scope.dateOut, true));
@@ -109,7 +118,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 			dateIn: dataInicio,
 			dateOut: dataFim
 		}, function(){
-			       	
+			
+			$scope.loading = false;
 			console.log($scope.listHistoricInterval);      	
        });		
 	}		
@@ -149,9 +159,9 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 			$scope.filterAlarm = 
 				 [
 				  	{ name : 'TODO HISTORICO', alarm1: null, alarm2: null, alarm3: null, uid : 0 },				  	
-				  	{ name : 'ALARME 1', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 1 },
-				  	{ name : 'ALARME 2', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 2 },
-				  	{ name : 'ALARME 3', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 3 },
+				  	{ name : 'DETECCAO', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 1 },
+				  	{ name : 'ALERTA', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 2 },
+				  	{ name : 'EVACUACAO', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 3 },
 				  	{ name : 'TODOS ALARMES', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: null, alarm3: null,  uid :  5 },
 				 ];
 			

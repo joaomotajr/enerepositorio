@@ -1,12 +1,22 @@
 
 app.controller('dashController', function ($scope, $timeout, $interval, $filter, PositionService, ViewService) {
 	
+	$scope.dashCompaniesPosition = [];
+	
 	$scope.getCompaniesPosition = function() {
 		
 		$scope.loading = true;	
 		
 		 $scope.listAllDashCompaniesPosition = new ViewService.listAllDashCompaniesPosition();		 
 		 $scope.listAllDashCompaniesPosition.$view({_csrf : angular.element('#_csrf').val()}, function(){
+			 
+			 for(var i = 0; i < $scope.listAllDashCompaniesPosition.list.length; i++) {				 
+				 
+				 $scope.dashCompaniesPosition[i] = $scope.listAllDashCompaniesPosition.list[i];
+				 $scope.dashCompaniesPosition[i].last_update_full = $scope.dashCompaniesPosition[i].last_update;
+				 $scope.dashCompaniesPosition[i].last_update = timeSince($scope.dashCompaniesPosition[i].last_update);				 
+				 				 
+			 }
 			 
 			 $scope.sumary = {
 					 alarm1 :  0, 
@@ -24,7 +34,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 
 						$scope.sumary.devices ++;
 						
-						var offDate = (twoMinutesLater - new Date(e.last_update)) / 1000;
+						var offDate = (twoMinutesLater - new Date(e.last_update_full)) / 1000;
 						
 						// off line por mais de 5 minutos
 						if ( offDate > 300 ) {							 
@@ -48,8 +58,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 							$scope.sumary.alarm3 ++;	
 							 
 						}
-
-					}
+					}			
 				);
 			 
 			 $scope.loading = undefined;

@@ -1,5 +1,6 @@
 package br.com.eneeyes.main.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import br.com.eneeyes.main.dto.register.SensorDto;
@@ -12,7 +13,7 @@ public class PositionAlarmDto {
 	private Long uid;
 	private Date firstUpdate;
 	private Date lastUpdate;
-	private Double lastValue;	
+	private BigDecimal lastValue;	
     private CompanyDetectorDto companyDetectorDto;
     private SensorDto sensorDto;
     private AlarmType alarmType;    
@@ -59,11 +60,11 @@ public class PositionAlarmDto {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public Double getLastValue() {
+	public BigDecimal getLastValue() {
 		return lastValue;
 	}
 
-	public void setLastValue(Double lastValue) {
+	public void setLastValue(BigDecimal lastValue) {
 		this.lastValue = lastValue;
 	}
 

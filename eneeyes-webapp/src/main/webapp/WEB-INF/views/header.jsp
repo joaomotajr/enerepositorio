@@ -8,6 +8,13 @@
 	    <title>Eneeyes</title>
 	    <link rel="shortcut icon" href="/assets/img/favicon.ico">
 	    
+	      
+	    <style>	    
+		    .dj-hide {
+			    display: none;
+			}	    
+	    </style>
+	    
 	    <!-- Tell the browser to be responsive to screen width -->
 	    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	    	    	    

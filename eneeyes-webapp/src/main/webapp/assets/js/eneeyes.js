@@ -1,10 +1,12 @@
 var app = angular.module('eneeyes', ['ngResource', 'angular-jquery-maskedinput', 'pascalprecht.translate', 'dependency']);
 
-angular.module('dependency', [])
+angular.module('dependency', []) 
 .config(['$httpProvider', function ($httpProvider) {
 
-  $httpProvider.interceptors.push(function ($q, $rootScope, $timeout) {
+  	$httpProvider.interceptors.push(function ($q, $rootScope, $timeout) {
+  	  
       return {
+    	      	  
           'request': function (config) {
               return config;
           },
@@ -12,12 +14,10 @@ angular.module('dependency', [])
               console.log('request error');
               return rejection;
           },
-
           'response': function (response) {
               $rootScope.loading = false;          
               return response;	
           },
-
           'responseError': function (rejection) {
         	  
         	console.log('response error');        	  

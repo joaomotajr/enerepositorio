@@ -22,7 +22,7 @@ public interface HistoricRepository extends JpaRepository<Historic, Long> {
 	public List<Historic> findByCompanyDetectorAndLastUpdateBetween(CompanyDetector companyDetector, Date in, Date out);
 	
 	public List<Historic> findByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
-	
+
 	public List<Historic> findByCompanyDetectorAndSensorAndLastUpdateBetween(CompanyDetector companyDetector, Sensor sensor, Date in, Date out);
 	
 	public List<Historic> findByLastUpdateBetween(Date in, Date out);

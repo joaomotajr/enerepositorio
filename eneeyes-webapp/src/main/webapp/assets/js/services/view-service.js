@@ -11,5 +11,17 @@ app.factory('ViewService', function($resource){
         listAllOther : $resource('/security/api/view/allOther',{},{
         	view : {method : 'GET'}
         }),
+        listAllHistoricView : $resource('/security/api/view/allHistoricView',{},{
+        	view : {method : 'GET'}
+        }),
+        listIntervalDays : $resource('/security/api/view/findByCompanyDetectorAndSensorAndIntervalDays/:companyDetectorId/:sensorId/:dateIn/:dateOut/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', dateIn: '@dateIn', dateIn: '@dateOut' },{        
+        	historic : {method : 'GET'}
+        }),
+        listInterval : $resource('/security/api/view/findByCompanyDetectorAndSensorAndInterval/:companyDetectorId/:sensorId/:interval/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', interval: '@interval'},{        
+        	historic : {method : 'GET'}
+        }),        
+        listLastMonth : $resource('/security/api/view/findByCompanyDetectorAndSensorLastMonth/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
+        	historic : {method : 'GET'}
+        }),
      };
 });

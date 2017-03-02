@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.eneeyes.main.model.Alarm;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDetectorAlarm;
-import br.com.eneeyes.main.model.Position;
 
 public interface CompanyDetectorAlarmRepository extends JpaRepository<CompanyDetectorAlarm, Long> {
 	

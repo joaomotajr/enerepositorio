@@ -5,6 +5,7 @@ encoding//src/main/resources=UTF-8
 encoding//src/main/webapp/WEB-INF/tags/layout/layout.tag=UTF-8
 encoding//src/main/webapp/WEB-INF/views/clear.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/companies.jsp=ISO-8859-1
+encoding//src/main/webapp/WEB-INF/views/conteudo.jsp=US-ASCII
 encoding//src/main/webapp/WEB-INF/views/index.jsp=UTF-8
 encoding//src/main/webapp/assets/js/controllers/alarm-controller.js=ISO-8859-1
 encoding//src/main/webapp/assets/js/controllers/controller-controller.js=ISO-8859-1

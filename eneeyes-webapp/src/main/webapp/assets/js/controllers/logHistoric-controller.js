@@ -59,43 +59,24 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
         			
 	}		
 	
-	$scope.getHistorics2 = function(interval) {
+	$scope.getHistorics = function(interval) {
 		
 		$scope.loading = true;
 		
-		$scope.listHistoricInterval = new HistoricService.listInterval2();		
+		$scope.listHistoricInterval = new ViewService.listInterval();		
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
 			
 			$scope.loading = false;
 			console.log($scope.listHistoric);      	
        	
        });		
-	}
+	}	
 	
-//	$scope.getHistorics = function(interval) {
-//		
-//		$scope.listHistoric = new HistoricService.listInterval();		
-//		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, interval: interval }, function(){
-//			
-//       	console.log($scope.listHistoric);      	
-//       	
-//       });		
-//	}
-	
-//	$scope.getLastMonth = function() {
-//		$scope.listHistoric = new HistoricService.listLastMonth();		
-//		$scope.listHistoric.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId }, function(){
-//			
-//       	console.log($scope.listHistoric);      	
-//       	
-//       });		
-//	}
-		
-	$scope.getLastMonth2 = function() {
+	$scope.getLastMonth = function() {
 		
 		$scope.loading = true;
 		
-		$scope.listHistoricInterval = new HistoricService.listLastMonth2();		
+		$scope.listHistoricInterval = new ViewService.listLastMonth();		
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid }, function(){
 			
 			$scope.loading = false;
@@ -111,7 +92,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		var dataInicio = new Date(getDate($scope.dateIn));
 		var dataFim = new Date(getDate($scope.dateOut, true));
 		
-		$scope.listHistoricInterval = new HistoricService.listIntervalDays();		
+		$scope.listHistoricInterval = new ViewService.listIntervalDays();		
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(),			
 			companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, 
 			sensorId: $scope.selectedCompanySensor.uid,
@@ -271,7 +252,12 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		
 	$scope.clearHistoric();
 	$scope.getCompanys();
-	$scope.getCompanyDetectors();	
-	angular.element('body').removeClass('loading');
+	$scope.getCompanyDetectors();
+	
+	$timeout(function(){
+		angular.element('body').removeClass('loading');
+	}, 1000);
+	
+	
 	
 });

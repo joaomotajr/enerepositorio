@@ -287,7 +287,7 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 		var orange = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm1;
 		
 		var gaugeOptions = {
-			 width: 220, height: 120,
+			 width: 300, height: 150,
 			 min: sensor.rangeMin, max: sensor.rangeMax,			     
 		     redFrom: red, redTo: red == 0 ? 0 : sensor.rangeMax,
 		     yellowFrom: yellow, yellowTo: red,
@@ -309,8 +309,7 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 		}
 		else {
 			gauge = new google.visualization.Gauge(objGauge);
-							
-		    //gauge.draw(gaugeData, gaugeOptions);
+
 		    gaugeData.setValue(0, 1 , item.lastValue);
 		    gauge.draw(gaugeData, gaugeOptions);
 		}

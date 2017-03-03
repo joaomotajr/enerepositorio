@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.eneeyes.archetype.model.acl.Role;
-import br.com.eneeyes.archetype.model.acl.RoleType;
 import br.com.eneeyes.archetype.model.acl.User;
 import br.com.eneeyes.archetype.result.UserResult;
 import br.com.eneeyes.archetype.services.identity.IdentityService;
@@ -51,13 +49,15 @@ public class ApplicationController {
         if (isAuthenticated) {
         	boolean  userAdmin = false;
         	User user = (User) auth.getPrincipal();
-    		for(Role role : user.getRoles()) {
-    			if(role.getId() != null) {
-	    			userAdmin = role.getId() == RoleType.ADMINISTRATOR.getId();
-	    			session.setAttribute(TIPO_USUARIO, RoleType.USER.getName(role.getId()));
-	    			break;
-    			}
-    		}
+        	
+//    		for(Role role : user.getRoles()) {
+//    			if(role.getId() != null) {
+//	    			userAdmin = role.getId() == RoleType.ADMINISTRATOR.getId();
+//	    			session.setAttribute(TIPO_USUARIO, RoleType.USER.getName(role.getId()));
+//	    			break;
+//    			}
+//    		}
+    		
     		session.setAttribute(ID_USUARIO, user.getId());
     		session.setAttribute(CNPJ_RAIZ_USUARIO, user.getCnpj());
         	if(userAdmin) {

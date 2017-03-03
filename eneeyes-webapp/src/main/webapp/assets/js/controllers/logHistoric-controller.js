@@ -56,6 +56,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
         $scope.selectedCompanySensor = undefined;        
         $scope.listHistoric = undefined;
         $scope.listHistoricInterval = undefined;
+        $scope.dateIn = undefined;
+        $scope.dateOut = undefined;
         			
 	}		
 	
@@ -221,24 +223,27 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	    data.addRows(itens);
 
 	    var options = {
-	          title: "Dados Recentes dos Detectores.",
-	          titleTextStyle: { color: '#FF0000' },
-	          //legend: { position: 'none' },
+          
+	          legend: {position: 'none'},
 	          width: 800,
 	          height: 400,
 	    	  hAxis: {
-	    		  title: 'Valores',
 	    		  gridlines: {color: '#333', count: 4},
 	    		  baselineColor: '#fbf6a7',
-	    		  textPosition: 'none'	    	  },
-	    	  vAxis: {
-	    		  title: 'Alarmes',
-	    		  count: 5,
-	    		  titleTextStyle: { color: '#FF0000' },
-	    		  maxValue:$scope.selectedCompanySensor.rangeMax,
-	              minValue:0,
-	    		  ticks: [0, orange, yellow, red, $scope.selectedCompanySensor.rangeMax],	    		  
-	    	  },        
+	    		  textPosition: 'none'	    	  
+	    	  },
+	    	  vAxis: {	    		  
+	    		  maxValue: $scope.selectedCompanySensor.rangeMax,
+	              minValue: 0,
+	    		  textStyle: {
+                      'color': '#8C8C8C',
+                      'fontName': 'Calibri',
+                      'fontSize': 12,
+                  },
+	    		  ticks: [{v:0, f: 'Range Minimo: 0' }, {v: orange, f: 'Detecção: ' + orange}, {v: yellow, f: 'Alerta: ' + yellow}, {v: red, f: 'Evacuação: ' + red}, {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanySensor.rangeMax} ]
+	    	  },
+	    	  curveType: 'function',
+	          pointSize:1
 	      };
 	    objChart = document.getElementById("graficoHistorico");
 	    var chart = new google.visualization.LineChart(objChart);

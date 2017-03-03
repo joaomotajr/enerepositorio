@@ -33,9 +33,17 @@
 <div class="col-md-9">
 
 	<div data-ng-controller="companyDetectorController">
-		<div class="box box-primary">					
+		<div class="box box-primary"> 					
 			<div class="box-header with-border">
 				<strong style="font-size:1.4em"><i class='fa fa-rss'></i> {{selectedCompanyDevice.deviceType}} <span data-ng-show="selectedCompanyDetector.name">-</span> {{selectedCompanyDetector.name}}</strong>
+				
+<!-- 				 	<div class="box-tools pull-right">  				 			 -->
+<!-- 						<span data-ng-if="alarmesFired[0]=='NORMAL' && alarmesFired[1]=='NORMAL' " class="text-success"> NORMAL </span>									                      		 -->
+<!--                 		<span data-ng-if="alarmesFired[0]=='ALERTA'" class="text-warning"> ALERTA </span>									                      		 -->
+<!--                 		<span data-ng-if="alarmesFired[0]=='DETECCAO'" class="text-muted"> DETECÇÃO </span>									                      											                      		 -->
+<!--                 		<span data-ng-if="alarmesFired[0]=='EVACUACAO'" class="text-danger"> EVACUAÇÃO </span>  											             -->
+<!--                     </div> -->
+				
 			</div>		
 			<div class="box-body">
 							
@@ -202,7 +210,7 @@
 				       		<div class="row">	    	
 				            	<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length > 1">
 				            	  	<div class="col-md-6">
-						              	<div class="panel panel-info">						                
+						              	<div class="panel panel-primary">						                
 							                <div class="panel-heading">
 										    	<h3 class="panel-title" style="text-align:center;">Detector: {{selectedCompanyDetector.name}}</h3>										    								
 										   	</div>									   					               	
@@ -240,7 +248,7 @@
 				              	
 				              	<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length == 1">
 				            	  	<div class="col-md-3">
-						              	<div class="panel panel-info">						                
+						              	<div class="panel panel-primary">						                
 							                <div class="panel-heading">
 										    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
 										   	</div>									   					               	
@@ -273,7 +281,7 @@
 				       	<div class="tab-pane" id="tabCompanyDetector_3">	   
 			       			<div class="row">				            	
 			            	  	<div class="col-md-12">
-					              	<div class="panel panel-success">						                
+					              	<div class="panel panel-primary">						                
 						                <div class="panel-heading">
 									    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
 									   	</div>									   					               	
@@ -287,7 +295,7 @@
 												<div class="tab-content">
 													<div class="tab-pane active" id="sensor1">
 													  	<div class="row">
-									               			<div style="max-width: 800px; overflow: auto" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[0].uid}}"></div>
+									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[0].uid}}"></div>
 									               		</div>
 								               		</div>												  	
 												</div>					               		
@@ -302,12 +310,12 @@
 												<div class="tab-content">
 												  	<div class="tab-pane active" id="sensor1">
 												  		<div class="row">
-									               			<div style="max-width: 800px; overflow: auto" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[0].uid}}"></div>
+									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[0].uid}}"></div>
 									               		</div>
 												  	</div>
 												  	<div class="tab-pane" id="sensor2">
 												  		<div class="row">
-									               			<div style="max-width: 800px; overflow: auto" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[1].uid}}"></div>
+									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[1].uid}}"></div>
 									               		</div>
 												  	</div>												  	
 												</div>			

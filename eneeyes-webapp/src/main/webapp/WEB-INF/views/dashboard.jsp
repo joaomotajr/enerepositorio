@@ -6,9 +6,6 @@
 	}	
 	</style>
 
-
-
-
 	<div data-ng-controller="dashController">
 		<div class="row">
        		<div class="col-md-12">
@@ -173,7 +170,6 @@
 																	'text-warning' : item.alarmType=='ALERTA', 
 																	'text-muted' : item.alarmType=='DETECCAO', 
 																	'text-danger' : item.alarmType=='EVACUACAO'}"> 
-<!-- 																	{{item.last_update | date:'dd/MM/yyyy HH:mm'}} | {{item.last_value}}  -->
 																	{{item.last_update}} atrás
 																</label>
 															</td> 
@@ -184,7 +180,6 @@
 																	'text-warning' : item.alarmType=='ALERTA', 
 																	'text-muted' : item.alarmType=='DETECCAO', 
 																	'text-danger' : item.alarmType=='EVACUACAO'}"> 
-<!-- 																	{{item.last_update | date:'dd/MM/yyyy HH:mm'}} | {{item.last_value}}  -->
 																	{{item.last_value}} 
 																</label>
 															</td>

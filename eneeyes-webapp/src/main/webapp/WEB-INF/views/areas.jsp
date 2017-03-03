@@ -9,6 +9,11 @@
 		object-fit: fill;
 	}	
 	
+	div.chart_div table {
+	    width: auto;
+	    margin: 0 auto !important;
+	}
+	
 </style>
 
 <div class="easy-modal" style="display:none;" modal-position="">

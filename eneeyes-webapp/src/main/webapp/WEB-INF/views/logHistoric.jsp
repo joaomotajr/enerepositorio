@@ -293,7 +293,7 @@
 							</div>
 							<div class="box-body">
 <!-- 								<div class="col-md-12"> -->
-									<div  id="graficoHistorico"></div>
+									<div  id="graficoHistorico" style="max-width: 800px; overflow-x: auto; overflow-y: hidden;"></div>
 <!-- 									<div style="max-width: 800px; overflow: auto" id="graficoHistorico"></div>                                                        -->
 <!-- 								</div> -->
 							</div>

@@ -13,10 +13,11 @@ import br.com.eneeyes.main.model.CompanyDevice;
 public interface CompanyDetectorRepository extends JpaRepository<CompanyDetector, Long> {
 
 	public CompanyDetector findByCompanyDevice(CompanyDevice companyDevice );
+		
 	public List<CompanyDetector> findByCompanyDeviceIn(List<CompanyDevice> companyDevice);	
 	
 	@Modifying
-	@Transactional
+	@Transactional	
 	@Query("update CompanyDetector cd set cd.latitude = ?1, cd.longitude = ?2 where cd.uid = ?3")
 	int setLatitudeLongitude(Double latitude, Double longitude, Long uid);
 }

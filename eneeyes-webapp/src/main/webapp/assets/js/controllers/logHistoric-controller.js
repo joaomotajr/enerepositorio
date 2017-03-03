@@ -42,6 +42,10 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 
 	var loadGoogleCharts = false;
 	
+	$scope.buttonClick = function (s) { 
+		$scope.selectedButton = s 
+	}
+	
 	$scope.showInfo = function(msg) {
 		angular.element('body').removeClass('loading');            
         $scope.msg = msg;
@@ -65,6 +69,9 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		
 		$scope.loading = true;
 		
+		$scope.selectedPeriodo = setInterval(interval);
+		$scope.selectedButton = interval; 
+		
 		$scope.listHistoricInterval = new ViewService.listInterval();		
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
 			
@@ -77,6 +84,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	$scope.getLastMonth = function() {
 		
 		$scope.loading = true;
+		$scope.selectedPeriodo = setInterval('mes');
+		$scope.selectedButton = 30; 
 		
 		$scope.listHistoricInterval = new ViewService.listLastMonth();		
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid }, function(){
@@ -94,6 +103,9 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		var dataInicio = new Date(getDate($scope.dateIn));
 		var dataFim = new Date(getDate($scope.dateOut, true));
 		
+		$scope.selectedPeriodo = dataInicio.toLocaleDateString() + ' à ' + dataFim.toLocaleDateString();
+		$scope.selectedButton = 100; 
+		
 		$scope.listHistoricInterval = new ViewService.listIntervalDays();		
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(),			
 			companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, 
@@ -107,6 +119,25 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
        });		
 	}		
 		
+	function setInterval(interval) {
+		
+		if ( interval == 1 )
+			return "Última Hora";
+		else if ( interval == 6 )
+			return "Últimas Seis Horas";
+		else if ( interval == 12 )
+			return "Últimas Doze Horas";
+		else if ( interval == 48 )
+			return "Últimos Dois Dias";
+		else if ( interval == 96 )
+			return "Últimos Quatro Dias";
+		else if ( interval == 'mes' )
+			return "Último Mês";
+		else 
+			return 'Desconhecido';
+				
+	}
+	
 	$scope.getCompanyDetectors = function() {
 		 
 		 $scope.listAllDashCompany = new ViewService.listAllDashCompany();		 
@@ -207,14 +238,14 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		var data = new google.visualization.DataTable();
 	      
 	    data.addColumn('string', 'Data');
-	    data.addColumn('number', 'Valores');    
+	    data.addColumn('number', 'Valor');    
 
 	    var itens = new Array();
 	    	    
 	    for(var i in value) {
-	    	var itemDate = new Date(value[i].lastUpdate);
+	    	var itemDate = new Date( value[i].last_update );
 
-	    	changeDate = itemDate.toLocaleDateString();
+	    	changeDate = weekday[itemDate.getDay()] + ' ' + itemDate.toLocaleDateString() + ' as ' + itemDate.toLocaleTimeString();
 	    	valor = value[i].value;
 	    	
 	    	itens.push([changeDate, valor]);
@@ -225,7 +256,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	    var options = {
           
 	          legend: {position: 'none'},
-	          width: 800,
+	          width: 900,
 	          height: 400,
 	    	  hAxis: {
 	    		  gridlines: {color: '#333', count: 4},

@@ -33,16 +33,18 @@
 <div class="col-md-9">
 
 	<div data-ng-controller="companyDetectorController">
-		<div class="box box-primary"> 					
-			<div class="box-header with-border">
+		<div class="box box-primary">
+			<div class="box-header with-border">			
 				<strong style="font-size:1.4em"><i class='fa fa-rss'></i> {{selectedCompanyDevice.deviceType}} <span data-ng-show="selectedCompanyDetector.name">-</span> {{selectedCompanyDetector.name}}</strong>
 				
-<!-- 				 	<div class="box-tools pull-right">  				 			 -->
-<!-- 						<span data-ng-if="alarmesFired[0]=='NORMAL' && alarmesFired[1]=='NORMAL' " class="text-success"> NORMAL </span>									                      		 -->
-<!--                 		<span data-ng-if="alarmesFired[0]=='ALERTA'" class="text-warning"> ALERTA </span>									                      		 -->
-<!--                 		<span data-ng-if="alarmesFired[0]=='DETECCAO'" class="text-muted"> DETECÇÃO </span>									                      											                      		 -->
-<!--                 		<span data-ng-if="alarmesFired[0]=='EVACUACAO'" class="text-danger"> EVACUAÇÃO </span>  											             -->
-<!--                     </div> -->
+				<div class="box-tools pull-right">  
+					<div class="btn-group">
+                		<button data-ng-if="alarmesFired[0] != null" type="button" class="btn btn-xs" title="{{alarmesFired[0]}}"
+                		data-ng-class="{'bg-black' : alarmesFired[0]=='OFFLINE', 'bg-green' : alarmesFired[0]=='NORMAL', 'bg-orange' : alarmesFired[0]=='ALERTA', 'bg-gray' : alarmesFired[0]=='DETECCAO', 'bg-red' : alarmesFired[0]=='EVACUACAO'}">S1</button>
+                   		<button data-ng-if="alarmesFired[1] != null" type="button" class="btn btn-xs" title="{{alarmesFired[1]}}"
+                   		data-ng-class="{'bg-black' : alarmesFired[1]=='OFFLINE', 'bg-green' : alarmesFired[1]=='NORMAL', 'bg-orange' : alarmesFired[1]=='ALERTA', 'bg-gray' : alarmesFired[1]=='DETECCAO', 'bg-red' : alarmesFired[1]=='EVACUACAO'}">S2</button>                  
+                 	</div>
+                </div>				
 				
 			</div>		
 			<div class="box-body">

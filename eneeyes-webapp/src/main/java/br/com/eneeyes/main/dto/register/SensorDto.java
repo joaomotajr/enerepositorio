@@ -10,7 +10,7 @@ import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Gas;
 import br.com.eneeyes.main.model.register.Sensor;
 
-public class SensorDto extends BaseDeviceDto {
+public class SensorDto extends BaseDeviceDto implements Comparable<SensorDto> {
 	
 	private Long uid;
 	private DetectionType detectionType;
@@ -18,10 +18,10 @@ public class SensorDto extends BaseDeviceDto {
 	private UnitMeterGases unitMeterGases;
 	private Double rangeMax;	
 	private Double rangeMin;			
-	private Double rangeUnit;	
+	private Double rangeUnit;
+	private DetectorDto detectorDto;
 	
-	public SensorDto() {
-		super();
+	public SensorDto() {		
 	}
 	
 	public SensorDto(Sensor sensor) {
@@ -119,6 +119,18 @@ public class SensorDto extends BaseDeviceDto {
 
 	public final void setRangeUnit(Double rangeUnit) {
 		this.rangeUnit = rangeUnit;
+	}	
+	
+	public final DetectorDto getDetectorDto() {
+		return detectorDto;
 	}
 
+	public void setDetectorDto(DetectorDto detectorDto) {
+		this.detectorDto = detectorDto;
+	}
+	
+	@Override
+	public int compareTo(SensorDto sensorDto) {
+		return sensorDto.getUid().compareTo(this.uid);		
+	}
 }

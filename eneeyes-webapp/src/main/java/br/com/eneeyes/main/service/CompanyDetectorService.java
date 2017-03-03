@@ -187,7 +187,7 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		repository.setLatitudeLongitude(latitude, longitude, uid);
 		
 		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Executado com sucesso.");
+		result.setMessage("Coordenadadas Salvas com sucesso.");
 		
 		return result;	
 	}

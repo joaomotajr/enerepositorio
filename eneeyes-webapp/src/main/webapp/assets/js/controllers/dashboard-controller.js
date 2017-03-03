@@ -26,15 +26,13 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					 devices: 0,
 					 offLine: 0						 
 			 }			 
-			 
-			 var twoMinutesLater = new Date();
-				
+			 				
 			 $scope.listAllDashCompaniesPosition.list.forEach(
 				function(e) {
 
 						$scope.sumary.devices ++;
 						
-						var offDate = (twoMinutesLater - new Date(e.last_update_full)) / 1000;
+						var offDate = (new Date() - new Date(e.last_update_full)) / 1000;
 						
 						// off line por mais de 5 minutos
 						if ( offDate > 300 ) {							 

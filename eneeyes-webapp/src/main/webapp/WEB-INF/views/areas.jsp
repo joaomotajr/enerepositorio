@@ -173,7 +173,11 @@
 										</div>									
 									</div>
 									
-									<button type="button" ng-click="lockImageArea();" class="btn btn-sm btn-primary">Lock / Unlock</button>								
+									<button type="button" ng-click="lockImageArea();" class="btn btn-sm btn-primary">
+										<i ng-hide="!isLock" class="fa fa-lock"></i>
+										<i ng-hide="isLock" class="fa fa-unlock"></i>
+										&nbsp;{{btnLockUnlock}}
+									</button>								
 								</div>					    	
 							</div>
 				       		         

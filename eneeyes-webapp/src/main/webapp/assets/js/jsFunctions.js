@@ -57,3 +57,15 @@
 	    }
 	    return Math.floor(seconds) + " segundos";
 	}
+	
+	var weekday = new Array(7);
+	
+	weekday[0]="Domingo";
+	weekday[1]="Segunda-Feira";
+	weekday[2]="Terça-Feira";
+	weekday[3]="Quarta-Feira";
+	weekday[4]="Quinta-Feira";
+	weekday[5]="Sexta-Feira";
+	weekday[6]="Sábado";
+	
+	

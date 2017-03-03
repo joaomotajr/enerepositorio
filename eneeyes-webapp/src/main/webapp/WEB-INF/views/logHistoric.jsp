@@ -34,6 +34,11 @@
 		color: red;
 		font-weight: 800;
 	}
+	
+	.clicked 
+	{
+		background-color:red;
+	}
 </style>
 
 <div data-ng-controller="logHistoricController">
@@ -204,7 +209,7 @@
 										<div class="col-md-1">
 											<div class="form-group">
 												<label class="control-label">Clique</label>
-						        				<button type="button" class="btn btn-primary btn-sm form-control" data-ng-click="getHistoricInterval()" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">Buscar</button>
+						        				<button type="button" class="btn btn-default btn-sm form-control" data-ng-class="{'btn-primary': selectedButton == 100}" data-ng-click="getHistoricInterval()" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">Buscar</button>
 						        			</div>
 						        		</div>
 						        		
@@ -215,13 +220,14 @@
 							        		<div class="form-group">
 												<label class="control-label">Intervalos Pré-Definidos: </label> <br />								
 												<div class="btn-group" role="group" aria-label="Basic example">
-												  <button type="button" class="btn btn-default" data-ng-click="getHistorics(1);"   data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 hora</button>
-												  <button type="button" class="btn btn-default" data-ng-click="getHistorics(6);"   data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  6h  </button>
-												  <button type="button" class="btn btn-default" data-ng-click="getHistorics(12);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  12h </button>
-												  <button type="button" class="btn btn-default" data-ng-click="getHistorics(24);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 dia </button>
-												  <button type="button" class="btn btn-default" data-ng-click="getHistorics(48);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  2d  </button>
-												  <button type="button" class="btn btn-default" data-ng-click="getHistorics(96);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  4d  </button>
-												  <button type="button" class="btn btn-default" data-ng-click="getLastMonth();" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 30d  </button>
+												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 1}" data-ng-click="getHistorics(1);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 hora</button>
+												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 6}" data-ng-click="getHistorics(6);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  6h  </button>
+												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 12}" data-ng-click="getHistorics(12);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  12h </button>
+												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 24}" data-ng-click="getHistorics(24);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 dia </button>
+												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 48}" data-ng-click="getHistorics(48);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  2d  </button>
+												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 96}" data-ng-click="getHistorics(96);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  4d  </button>
+												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 30}" data-ng-click="getLastMonth();" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 30d  </button>
+												  												  
 												</div>
 											</div>
 										</div>									
@@ -273,9 +279,8 @@
 								                                               
 							</div>
 						</div>				
-					</div>                                                      
-																		
-					</div>								
+					</div>																		
+				</div>								
 			</div>                                                      
 		</div>		
 		
@@ -284,16 +289,16 @@
 				<div class="modal-content">                            
 					<div class="modal-body">
 						<div class="panel panel-default">
-							<div class="panel-heading" style="text-align:center">Gráficos </div>                                                                           
+							<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Gráfico do Período:</strong> {{selectedPeriodo}}</div>                                                                           
 					  	</div>
 				
 						<div class="box">
 							<div class="box-header">
-							  <h3 class="box-title">Gráfico do Sensor Selecionado</h3>
+							  <h3 class="box-title"><strong>Gráfico do Sensor:</strong> {{selectedCompanySensor.name}} - Gás: {{selectedCompanySensor.gasesDto[0].name}} </h3>
 							</div>
 							<div class="box-body">
 <!-- 								<div class="col-md-12"> -->
-									<div  id="graficoHistorico" style="max-width: 800px; overflow-x: auto; overflow-y: hidden;"></div>
+									<div  id="graficoHistorico" style="max-width: 900px; overflow-x: auto; overflow-y: hidden;"></div>
 <!-- 									<div style="max-width: 800px; overflow: auto" id="graficoHistorico"></div>                                                        -->
 <!-- 								</div> -->
 							</div>

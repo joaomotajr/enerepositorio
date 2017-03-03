@@ -48,27 +48,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			 $scope.loadTreview($scope.itens);			 
 	    });		 
 	}
-	
-//	$scope.saveCompanyDetectorCoords = function() {
-//		
-//		var detectorsCoords = JSON.parse(localStorage.getItem('easypin'));		
-//		var item = $scope.selectedCompanyDetectorsArea;
-//		
-//		for (var i = 0; i < item.length; i++) {
-//	    	
-//			if($scope.selectedCompanyDetectorsArea[i].latitude != detectorsCoords.imgDipositivosArea[i].coords.lat ||
-//					$scope.selectedCompanyDetectorsArea[i].longitude != detectorsCoords.imgDipositivosArea[i].coords.long) {
-//			 
-//				$scope.selectedCompanyDetectorsArea[i].latitude = detectorsCoords.imgDipositivosArea[i].coords.lat;
-//			 	$scope.selectedCompanyDetectorsArea[i].longitude = detectorsCoords.imgDipositivosArea[i].coords.long;
-//			 			 
-//			 $scope.updateCompanyDetectorLatitudeLongitude($scope.selectedCompanyDetectorsArea[i].latitude, 
-//					 $scope.selectedCompanyDetectorsArea[i].longitude, 
-//					 $scope.selectedCompanyDetectorsArea[i].uid);
-//			}
-//	    }
-//	}
-	
+
 	$scope.updateCompanyDetectorLatitudeLongitude = function(latitude, longitude, id) {
 		angular.element('body').addClass('loading');
 						 
@@ -78,8 +58,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			$scope.showInfo($scope.updateLatitudeLongitude.message);					
 
 		});			 
-	}
-	
+	}	
 	
 	$scope.saveCompanyDetector = function() {
 		angular.element('body').addClass('loading');
@@ -118,11 +97,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		    $scope.selectedCompanyDetector.local = '';
 		    $scope.selectedCompanyDetector.description = '';
 		}, 100);
-	}
+	}	
 	
-	
-	$scope.deleteCompanyDetector = function() 
-	{		 
+	$scope.deleteCompanyDetector = function() {		 
 		angular.element('body').addClass('loading');		
 		$scope.deletar = new CompanyDetectorService.deletar();	
 		
@@ -154,7 +131,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
 			
-			//* Detector jï¿½ foi associado a dispositivo checa alarmes *//
+			//* Detector já foi associado a dispositivo checa alarmes *//
 			if($scope.selectedCompanyDetector != null) {
 				$scope.getCompanyDetectorAlarms();
 				$scope.getPositionsNoTimer($scope.selectedCompanyDetector);
@@ -229,7 +206,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			initDatatable();
 															
 		}, 500);
-				
+		   
 		$("#stepTabDetector_1").trigger("click");
 		
 		$timeout(function () {
@@ -329,7 +306,15 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	$scope.getPositionsNoTimer = function(currentCompanyDetector) {
 		
 		 $scope.listOnePositionNoTimer = new PositionService.listOneByCompanyDetector();		 
-		 $scope.listOnePositionNoTimer.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function() {});
+		 $scope.listOnePositionNoTimer.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function() {
+			 
+			 for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {				
+					
+				var offDate = ((new Date() - new Date($scope.listOnePositionNoTimer.list[j].lastUpdate)) / 1000) > 300;
+				$scope.alarmesFired[j] = offDate ? "OFFLINE" : $scope.listOnePositionNoTimer.list[j].alarmType;
+			 }
+			 
+		 });
 	}
 	
 	$scope.alarmesFired = [];
@@ -341,7 +326,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			 
 			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
 				
-				$scope.alarmesFired[j] = $scope.listOnePosition.list[j].alarmType
+				
+				var offDate = ((new Date() - new Date($scope.listOnePosition.list[j].lastUpdate)) / 1000) > 300;
+				$scope.alarmesFired[j] = offDate ? "OFFLINE" : $scope.listOnePosition.list[j].alarmType;
 				
 				var item = 0;					
 				if($scope.listOnePosition.list != null && $scope.listOnePosition.list.length != 0) {									

@@ -2,6 +2,9 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 		DetectorService, CompanyDeviceService, CompanyService, PositionService, CompanyDetectorAlarmService) {
 
 	var loadGoogleCharts = false;
+	
+	$scope.isLock = true;
+    $scope.btnLockUnlock = 'Unlock';    
 		
 	$scope.showDanger = function(msg) {		
 		angular.element('body').removeClass('loading');
@@ -28,7 +31,11 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 		
 	$scope.lockImageArea = function() {		
 		
-		$("#idImageArea").toggleClass("disableDiv");		
+		$("#idImageArea").toggleClass("disableDiv");
+		
+		 $scope.isLock = !$scope.isLock;
+	     $scope.btnLockUnlock = $scope.isLock ? ' Lock ' : 'Unlock';
+		
 	}
 	
 	$scope.saveCompanyDeviceInit = function() {

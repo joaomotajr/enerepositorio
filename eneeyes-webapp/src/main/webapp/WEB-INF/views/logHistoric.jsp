@@ -1,20 +1,24 @@
 <style>
 	.zui-table {
-		border: solid 1px #DDEEEE;
+		border: solid 1px #3c8dbc;		
 		border-collapse: collapse;
 		border-spacing: 0;
 		font: normal 13px Arial, sans-serif;
 	}
+	.zui-table thead tr {
+		border-radius: 5px ! important;
+	}
+	
 	.zui-table thead th {
-		background-color: #DDEFEF;
-		border: solid 1px #DDEEEE;
-		color: #336B6B !important;
+		background-color: #3c8dbc;
+		border: solid 1px #3c8dbc;		 
+		color: white !important;
 		padding: 10px;
 		text-align: left;
-		text-shadow: 1px 1px 1px #fff;
+		*text-shadow: 1px 1px 1px #fff;
 	}
 	.zui-table tbody td {
-		border: solid 1px #DDEEEE;
+		border: solid 1px #3c8dbc;
 		color: #333;
 		padding: 10px;
 		text-shadow: 1px 1px 1px #fff;
@@ -180,30 +184,48 @@
 							
 							<div class="box-header">
 								<h3 class="box-title">Selecione Intervalos Pré-Definidos ou Data de Inicio e Fim</h3>									  	
-								
+								<!-- 
 							  	<div class="pull-right" style="margin-bottom: 0px ! important">                                        
                               	<label><span class="icon fa fa-reorder"></span> FILTRAR &nbsp;</label>
 									<select data-ng-options="item as item.name for item in filterAlarm | orderBy: 'name' track by item.uid" 
 				                    	data-ng-model="selectedfilterAlarm">
 				                        <option value="">Selecione</option> 
 				                	</select>               
-                                </div>									  
+                                </div>
+                                 -->	                                 
+                                 
+                                <div class="pull-right" style="margin-bottom: 0px ! important">   
+			        				<label data-ng-show='loading'><span class="icon fa fa-reorder"></span> Loading...</label>			        									
+									</div>
+								</div>										  
 							</div>
 							
 							<div class="box-body">	
 								<div class="row">
 								 	<form class="form" name="userForm">						 		
 								 	
-										<div class="col-md-2">
+										<div class="col-md-3">
 											<div class="form-group">
 												<label class="control-label">Data inicio</label>									                	 
-							                	 <input type="text" class="form-control" data-date-format="dd/mm/yyyy" data-datemonopicker data-ng-model="dateIn" data-mask="99/99/9999" mask/>									                					                			                                                
+<!-- 							                	 <input type="text" class="form-control" data-date-format="dd/mm/yyyy" data-datemonopicker data-ng-model="dateIn" data-mask="99/99/9999" mask/> -->
+							                	 <div class='input-group date' id='dateIn'>
+													<input type="text" class="form-control" data-ng-model="dateOut" name="dateIn">
+													<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+													</span>
+							                	</div>													                					                			                                                
 											</div>                                                                    
 										</div>
-										<div class="col-md-2">
+										<div class="col-md-3">
 											<div class="form-group">
 												<label class="control-label">Data Fim</label>				                	
-							                	<input type="text" class="form-control" data-date-format="dd/mm/yyyy" data-datemonopicker data-ng-model="dateOut" data-mask="99/99/9999" mask/>				                							                                                
+<!-- 							                	<input type="text" class="form-control" data-date-format="dd/mm/yyyy" data-datemonopicker data-ng-model="dateOut" data-mask="99/99/9999" mask/> -->
+							                	
+							                	<div class='input-group date' id='dateOut'>
+													<input type="text" class="form-control" data-ng-model="dateOut" name="dateOut">
+													<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+													</span>
+							                	</div>	
+							                					                							                                                
 											</div>                                                                    
 										</div>
 										<div class="col-md-1">
@@ -213,8 +235,8 @@
 						        			</div>
 						        		</div>
 						        		
-						        		<div class="col-md-1">
-						        		</div>
+<!-- 						        		<div class="col-md-1"> -->
+<!-- 						        		</div> -->
 						        								        		
 						        		<div class="col-md-5">
 							        		<div class="form-group">
@@ -231,19 +253,62 @@
 												</div>
 											</div>
 										</div>									
-						        			
+						        		<!-- 	
 					        			<div class= "pull-right">
 					        				<div class="form-group">
 					        					<br />									
 												<label data-ng-show='loading'>Loading...</label>				
 											</div>
-										</div>								        		 
+										</div>
+										-->								        		 
 									</form>
 									
 								</div>    
 								
-								<div class="row">        		
-					        		<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="box box-primary">
+					
+											<div class="box-header">
+											 	<h4 class="box-title">Dispositivo:  {{selectedCompanyDetector.companyDetectorName}} <span data-ng-show="selectedCompanySensor"> - </span> {{selectedCompanySensor.name}}</h4>											 	
+											</div>
+											
+											<div class="box-body">
+												<div class="col-md-12">
+												<div class="row">			                                        
+					                              	<label class="control-label"><span class="icon fa fa-reorder"></span> FILTRAR</label>
+													<select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-options="item as item.name for item in filterAlarm | orderBy: 'name' track by item.uid" 
+								                    	data-ng-model="selectedfilterAlarm">
+								                        <option value="">Selecione</option> 
+								                	</select>               
+				                                </div>
+				                                
+				                                 <br />
+				                                
+				                                <div class="row">
+                                                     <label class="control-label"> <span class="icon fa fa-object-group"></span> Agrupar (Mostrando Máximo e Minimo)</label>
+                                                     <div style="border: 1px solid #cbc6c6; border-radius: 2px 2px 2px 2px;padding-top: 8px; padding-left:8px">
+	                                                     <div class="radio3 radio-check radio-success radio-inline">
+	                                                         <input type="radio" id="radio5" value="1" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(1)">
+	                                                         <label for="radio5">Nenhum</label>
+	                                                     </div>
+	                                                     <div class="radio3 radio-check radio-warning radio-inline">
+	                                                         <input type="radio" id="radio6" value="2" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(2)">
+	                                                         <label for="radio6">Por Hora</label>
+	                                                     </div>
+	                                                     <div class="radio3 radio-check radio-default radio-inline">
+	                                                         <input type="radio" id="radio7" value="3" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(3)">
+	                                                         <label for="radio7">Por dia</label>
+	                                                     </div>                                                     
+                                                     </div>
+                                                 </div>
+				                                    
+											</div>
+											</div>
+										</div>			
+									
+									</div>        		
+					        		<div class="col-md-8">
 					        			<div style="max-height:350px; height:auto; overflow: auto">	                
 							                <table class='zui-table' cellspacing="0" width="100%" data-ng-visible="listHistoric">					            				                            
 							                	<thead>

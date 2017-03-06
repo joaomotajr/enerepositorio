@@ -100,10 +100,15 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		
 		$scope.loading = true;
 		
-		var dataInicio = new Date(getDate($scope.dateIn));
-		var dataFim = new Date(getDate($scope.dateOut, true));
+		//var dataInicio = new Date(getDate($scope.dateIn));
+		//var dataFim = new Date(getDate($scope.dateOut, true));
 		
-		$scope.selectedPeriodo = dataInicio.toLocaleDateString() + ' à ' + dataFim.toLocaleDateString();
+		var dataInicio = new Date($('#dateIn').data().date);
+		var dataFim = new Date($('#dateOut').data().date);
+		
+		//$scope.selectedPeriodo = dataInicio.toLocaleDateString() + ' à ' + dataFim.toLocaleDateString();
+		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' à ' + dataFim.toLocaleString();
+		
 		$scope.selectedButton = 100; 
 		
 		$scope.listHistoricInterval = new ViewService.listIntervalDays();		
@@ -289,9 +294,31 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	$scope.clearHistoric();
 	$scope.getCompanys();
 	$scope.getCompanyDetectors();
+	$scope.tipoGrupo = 1;
 	
 	$timeout(function(){
 		angular.element('body').removeClass('loading');
+		
+		$('#dateIn').datetimepicker(
+			{
+				defaultDate: new Date(),
+				format:'DD/MM/YYYY HH:mm:ss'
+			}
+		);
+		$('#dateOut').datetimepicker(
+			{
+				defaultDate: new Date(),
+				format:'DD/MM/YYYY HH:mm:ss'
+			}
+		);
+		
+		$("#dateIn").on("dp.change",function (e) {
+	        jQuery('#dateOut').data("DateTimePicker").setMinDate(e.date);
+		});
+		$("#dateOut").on("dp.change",function (e) {
+	        jQuery('#dateIn').data("DateTimePicker").setMaxDate(e.date);
+		});
+		
 	}, 1000);
 	
 	

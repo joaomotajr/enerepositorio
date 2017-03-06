@@ -40,6 +40,8 @@
     <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>
     <script src="/assets/bootstrap/js/bootstrap-inputmask.js"></script>
     <script src="/assets/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="/assets/plugins/datepicker/moment.min.js"></script>
+    <script src="/assets/plugins/datepicker/bootstrap-datetimepicker.min.js"></script>    
     
     <!-- iCheck -->
     <script src="/assets/plugins/iCheck/icheck.min.js"></script>           

@@ -11,10 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "historic_view_hour")
-public class HistoricViewHour {
+@Table(name = "historic_view_day")
+public class HistoricViewDay {
 
-    public HistoricViewHour() {
+    public HistoricViewDay() {
     	
     }     
 

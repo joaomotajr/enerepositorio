@@ -42,6 +42,26 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 
 	var loadGoogleCharts = false;
 	
+	function printData()
+	{
+	
+	   var divToPrint = document.getElementById("printTable");
+	   	   
+	   divToPrint.style.visibility = "visible";
+	   
+	   newWin= window.open("");
+	   newWin.document.write(divToPrint.outerHTML);
+	   newWin.print();
+	   newWin.close();
+	   
+	   divToPrint.style.visibility = "hidden";
+	}
+
+	$('#exportPDF').on('click',function(){
+		printData();
+	})		
+	
+	 	
 	$scope.buttonClick = function (s) { 
 		$scope.selectedButton = s 
 	}
@@ -50,6 +70,10 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		angular.element('body').removeClass('loading');            
         $scope.msg = msg;
         $('#result').hide().show('slow').delay(500).hide('slow');
+	}
+	
+	$scope.clearTipoGrupo = function(grupo) {
+		$scope.listHistoricInterval = undefined;
 	}
 	
 	$scope.clearHistoric = function() {
@@ -71,13 +95,18 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		$scope.selectedPeriodo = setInterval(interval);
 		$scope.selectedButton = interval; 
 		
-		
-		$scope.listHistoricInterval = new ViewService.listInterval();		
+		if($scope.tipoGrupo == 1)
+			$scope.listHistoricInterval = new ViewService.listInterval();
+		else if($scope.tipoGrupo == 2)
+			$scope.listHistoricInterval = new ViewService.listIntervalGroupHours();
+		else if($scope.tipoGrupo == 3)
+			$scope.listHistoricInterval = new ViewService.listIntervalGroupDays();		
+				
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
 			
 			$scope.loading = false;
 			
-			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0) 
+			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
 				$(function() { $('#btnSelDevice').click(); })  	
        	
        });		
@@ -89,12 +118,18 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		$scope.selectedPeriodo = setInterval('mes');
 		$scope.selectedButton = 30; 
 		
-		$scope.listHistoricInterval = new ViewService.listLastMonth();		
+		if($scope.tipoGrupo == 1)
+			$scope.listHistoricInterval = new ViewService.listLastMonth();
+		else if($scope.tipoGrupo == 2)
+			$scope.listHistoricInterval = new ViewService.listLastMonthGroupHours();
+		else if($scope.tipoGrupo == 3)
+			$scope.listHistoricInterval = new ViewService.listLastMonthGroupDays();
+		
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid }, function(){
 			
 			$scope.loading = false;
 			
-			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0) 
+			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus'))
 				$(function() { $('#btnSelDevice').click(); })     	
        	
        });		
@@ -109,9 +144,15 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 
 		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' à ' + dataFim.toLocaleString();
 		
-		$scope.selectedButton = 100; 
+		$scope.selectedButton = 100; 		
 		
-		$scope.listHistoricInterval = new ViewService.listIntervalDays();		
+		if($scope.tipoGrupo == 1)			
+			$scope.listHistoricInterval = new ViewService.listIntervalDays();
+		else if($scope.tipoGrupo == 2)
+			$scope.listHistoricInterval = new ViewService.listIntervalDaysGroupHours();
+		else if($scope.tipoGrupo == 3)
+			$scope.listHistoricInterval = new ViewService.listIntervalDaysGroupDays();
+						
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(),			
 			companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, 
 			sensorId: $scope.selectedCompanySensor.uid,
@@ -121,7 +162,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 			
 			$scope.loading = false;
 			
-			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0) 
+			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
 				$(function() { $('#btnSelDevice').click(); })     	
        });		
 	}		
@@ -291,7 +332,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	$('dateIn').on('changeDate', function(ev){
 	    $(this).datepicker('hide');
 	});
-		
+
 	$scope.clearHistoric();
 	$scope.getCompanys();
 	$scope.getCompanyDetectors();
@@ -301,16 +342,10 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		angular.element('body').removeClass('loading');
 		
 		$('#dateIn').datetimepicker(
-			{
-				defaultDate: new Date(),
-				format:'DD/MM/YYYY HH:mm:ss'
-			}
+			{ defaultDate: new Date(), format:'DD/MM/YYYY HH:mm:ss' }
 		);
 		$('#dateOut').datetimepicker(
-			{
-				defaultDate: new Date(),
-				format:'DD/MM/YYYY HH:mm:ss'
-			}
+			{ defaultDate: new Date(), format:'DD/MM/YYYY HH:mm:ss' }
 		);
 		
 		$("#dateIn").on("dp.change",function (e) {

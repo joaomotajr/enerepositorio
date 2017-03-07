@@ -8,23 +8,23 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
-import br.com.eneeyes.main.model.views.HistoricViewHour;
-import br.com.eneeyes.main.repository.views.HistoricViewHourRepository;
+import br.com.eneeyes.main.model.views.HistoricViewDay;
+import br.com.eneeyes.main.repository.views.HistoricViewDayRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
 @Named
-public class HistoricViewHourService {
+public class HistoricViewDayService {
 	
 	@Inject
-	private HistoricViewHourRepository repository;
+	private HistoricViewDayRepository repository;
 	
 	public Result<?> listAll() {
 		
-		Result<HistoricViewHour> result = new Result<HistoricViewHour>();
+		Result<HistoricViewDay> result = new Result<HistoricViewDay>();
 		
 		try {
-			List<HistoricViewHour> lista = repository.findAll();
+			List<HistoricViewDay> lista = repository.findAll();
 
 			if (lista != null) {
 				
@@ -46,14 +46,14 @@ public class HistoricViewHourService {
 	}
 	
 	public BasicResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, Integer periodo) {
-		Result<HistoricViewHour> result = new Result<HistoricViewHour>();
+		Result<HistoricViewDay> result = new Result<HistoricViewDay>();
 			
 		try {
 			
 			Date dataFim = new Date(); 
 			Date dataInicio = new Date(dataFim.getTime() - (1000 * 60 * 60 * periodo));
 			
-			List<HistoricViewHour> lista = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetween(companyDetectorId, sensorId, dataInicio, dataFim);
+			List<HistoricViewDay> lista = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetween(companyDetectorId, sensorId, dataInicio, dataFim);
 			
 			if (lista != null) {
 			
@@ -76,11 +76,11 @@ public class HistoricViewHourService {
 	}
 	
 	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut) {
-		Result<HistoricViewHour> result = new Result<HistoricViewHour>();
+		Result<HistoricViewDay> result = new Result<HistoricViewDay>();
 			
 		try {				
 			
-			List<HistoricViewHour> lista = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetween(companyDetectorId, sensorId, dateIn, dateOut);
+			List<HistoricViewDay> lista = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetween(companyDetectorId, sensorId, dateIn, dateOut);
 			
 			if (lista != null) {
 				
@@ -103,14 +103,14 @@ public class HistoricViewHourService {
 	}
 	
 	public BasicResult<?> findByCompanyDetectorAndSensorLastMonth(Long companyDetectorId, Long sensorId) {
-		Result<HistoricViewHour> result = new Result<HistoricViewHour>();
+		Result<HistoricViewDay> result = new Result<HistoricViewDay>();
 		
 		try {
 			
 			Date dataFim = new Date(); 
 			Date dataInicio = addMonth(dataFim, -1);
 			
-			List<HistoricViewHour> lista = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetween(companyDetectorId, sensorId, dataInicio, dataFim);
+			List<HistoricViewDay> lista = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetween(companyDetectorId, sensorId, dataInicio, dataFim);
 			
 			if (lista != null) {
 				

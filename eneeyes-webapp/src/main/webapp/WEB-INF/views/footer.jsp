@@ -58,6 +58,8 @@
     <!-- Google Gauge -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- END GLOBAL SCRIPTS -->
+    
+    <script type="text/javascript" src="/assets/plugins/pdf/jspdf.min.js"></script>
 
     <!-- PAGE LEVEL SCRIPTS -->    
     <script src="/assets/js/eneeyes.js"></script>

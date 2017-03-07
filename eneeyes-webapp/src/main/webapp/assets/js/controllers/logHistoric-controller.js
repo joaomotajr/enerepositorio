@@ -58,7 +58,6 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
         $scope.selectedCompanyDetector = '';
         $scope.findedCompanyDetector = '';
         $scope.selectedCompanySensor = undefined;        
-        $scope.listHistoric = undefined;
         $scope.listHistoricInterval = undefined;
         $scope.dateIn = undefined;
         $scope.dateOut = undefined;
@@ -72,11 +71,14 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		$scope.selectedPeriodo = setInterval(interval);
 		$scope.selectedButton = interval; 
 		
+		
 		$scope.listHistoricInterval = new ViewService.listInterval();		
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
 			
 			$scope.loading = false;
-			console.log($scope.listHistoric);      	
+			
+			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0) 
+				$(function() { $('#btnSelDevice').click(); })  	
        	
        });		
 	}	
@@ -91,7 +93,9 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid }, function(){
 			
 			$scope.loading = false;
-			console.log($scope.listHistoric);      	
+			
+			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0) 
+				$(function() { $('#btnSelDevice').click(); })     	
        	
        });		
 	}
@@ -100,13 +104,9 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		
 		$scope.loading = true;
 		
-		//var dataInicio = new Date(getDate($scope.dateIn));
-		//var dataFim = new Date(getDate($scope.dateOut, true));
-		
 		var dataInicio = new Date($('#dateIn').data().date);
 		var dataFim = new Date($('#dateOut').data().date);
-		
-		//$scope.selectedPeriodo = dataInicio.toLocaleDateString() + ' à ' + dataFim.toLocaleDateString();
+
 		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' à ' + dataFim.toLocaleString();
 		
 		$scope.selectedButton = 100; 
@@ -120,7 +120,9 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}, function(){
 			
 			$scope.loading = false;
-			console.log($scope.listHistoricInterval);      	
+			
+			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0) 
+				$(function() { $('#btnSelDevice').click(); })     	
        });		
 	}		
 		
@@ -188,8 +190,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}
 		else {
 			$scope.selectedSensorAlarm = undefined;
-			$scope.listHistoric = undefined;
-       		$scope.listHistoricInterval = undefined;
+	     	$scope.listHistoricInterval = undefined;
 		}	
 	}
 
@@ -313,10 +314,10 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		);
 		
 		$("#dateIn").on("dp.change",function (e) {
-	        jQuery('#dateOut').data("DateTimePicker").setMinDate(e.date);
+	        //jQuery('#dateOut').data("DateTimePicker").setMinDate(e.date);
 		});
 		$("#dateOut").on("dp.change",function (e) {
-	        jQuery('#dateIn').data("DateTimePicker").setMaxDate(e.date);
+	        //jQuery('#dateIn').data("DateTimePicker").setMaxDate(e.date);
 		});
 		
 	}, 1000);

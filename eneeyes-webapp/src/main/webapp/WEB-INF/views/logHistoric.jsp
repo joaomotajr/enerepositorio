@@ -48,12 +48,11 @@
 <div data-ng-controller="logHistoricController">
 		<div class="row">						                                                    
 			<div class="col-md-12">                                                        
-				<div class="box box-primary">
-					
+				<div class="box box-primary">					
 					<div class="box-header">
 					 	<h3 class="box-title">Pesquisa Historico de Detectores</h3>
 					 	<div class="box-tools pull-right">
-	                  		<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>					                    
+	                  		<button id="btnSelDevice" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>					                    
 	                  	</div>
 					</div>
 					
@@ -65,25 +64,25 @@
 										<li>
 											<a href="#step-1" class="disabled" data-ng-class="(selectedCompany) ? 'selected' : 'disabled'" rel="1">
 												<span class="step_no">1</span>
-												<span class="step_descr">Passo 1<br><small>Selecione Empresa</small></span>
+												<span class="step_descr">Selecione Empresa</span>
 										  	</a>
 										</li>
 										<li>
 										  	<a href="#step-2" class="disabled" data-ng-class="(selectedCompanyDetector) ? 'selected' : 'disabled'" rel="2">
 												<span class="step_no">2</span>
-												<span class="step_descr">Passo 2<br><small>Selecione Detector</small></span>
+												<span class="step_descr">Selecione Detector</span>
 										  	</a>
 										</li>
 										<li>
 										  	<a href="#step-3" class="disabled" data-ng-class="(selectedCompanySensor) ? 'selected' : 'disabled'" rel="3">
 												<span class="step_no">3</span>
-												<span class="step_descr">Passo 3<br><small>Selecione Sensor/Gas</small></span>
+												<span class="step_descr">Selecione Sensor/Gas</span>
 										  	</a>
 										</li>
 										<li>
-										  	<a href="#step-4" class="disabled" data-ng-click="showGrafico();" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'" rel="4">
+										  	<a href="#step-4" class="disabled" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'" rel="4">
 												<span class="step_no">4</span>
-												<span class="step_descr">Passo 4<br><small>Pesquisar / Gráfico</small></span>
+												<span class="step_descr">Pesquisar</span>
 										  	</a>
 										</li>
 									</ul>
@@ -143,7 +142,7 @@
 					        		<div class="col-md-2">
 										<div class="form-group">
 											<label class="control-label">.</label>
-					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="clearHistoric()">Limpa Pesquisa</button>
+					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="clearHistoric()">Limpar Pesquisa</button>
 					        			</div>
 					        		</div>
 				        		</div>	        		
@@ -172,8 +171,6 @@
 			       				</div>
 			       			</div>       		
 			       		</div>	
-			       
- 			       		<br />  
 			       		
 			       	</div>
 				</div>	
@@ -184,21 +181,11 @@
 							
 							<div class="box-header">
 								<h3 class="box-title">Selecione Intervalos Pré-Definidos ou Data de Inicio e Fim</h3>									  	
-								<!-- 
-							  	<div class="pull-right" style="margin-bottom: 0px ! important">                                        
-                              	<label><span class="icon fa fa-reorder"></span> FILTRAR &nbsp;</label>
-									<select data-ng-options="item as item.name for item in filterAlarm | orderBy: 'name' track by item.uid" 
-				                    	data-ng-model="selectedfilterAlarm">
-				                        <option value="">Selecione</option> 
-				                	</select>               
-                                </div>
-                                 -->	                                 
-                                 
+		                         
                                 <div class="pull-right" style="margin-bottom: 0px ! important">   
-			        				<label data-ng-show='loading'><span class="icon fa fa-reorder"></span> Loading...</label>			        									
-									</div>
-								</div>										  
-							</div>
+			        				<label data-ng-show='loading'><span class="icon fa fa-hourglass-half"></span> Loading...</label>			        									
+								</div>
+							</div>			
 							
 							<div class="box-body">	
 								<div class="row">
@@ -209,12 +196,13 @@
 												<label class="control-label">Data inicio</label>									                	 
 <!-- 							                	 <input type="text" class="form-control" data-date-format="dd/mm/yyyy" data-datemonopicker data-ng-model="dateIn" data-mask="99/99/9999" mask/> -->
 							                	 <div class='input-group date' id='dateIn'>
-													<input type="text" class="form-control" data-ng-model="dateOut" name="dateIn">
+													<input type="text" class="form-control" data-ng-model="dateIn" name="dateIn">
 													<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 													</span>
 							                	</div>													                					                			                                                
 											</div>                                                                    
 										</div>
+										
 										<div class="col-md-3">
 											<div class="form-group">
 												<label class="control-label">Data Fim</label>				                	
@@ -228,39 +216,29 @@
 							                					                							                                                
 											</div>                                                                    
 										</div>
+										
 										<div class="col-md-1">
 											<div class="form-group">
 												<label class="control-label">Clique</label>
 						        				<button type="button" class="btn btn-default btn-sm form-control" data-ng-class="{'btn-primary': selectedButton == 100}" data-ng-click="getHistoricInterval()" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">Buscar</button>
 						        			</div>
 						        		</div>
-						        		
-<!-- 						        		<div class="col-md-1"> -->
-<!-- 						        		</div> -->
 						        								        		
 						        		<div class="col-md-5">
 							        		<div class="form-group">
 												<label class="control-label">Intervalos Pré-Definidos: </label> <br />								
 												<div class="btn-group" role="group" aria-label="Basic example">
-												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 1}" data-ng-click="getHistorics(1);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 hora</button>
-												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 6}" data-ng-click="getHistorics(6);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  6h  </button>
-												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 12}" data-ng-click="getHistorics(12);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  12h </button>
-												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 24}" data-ng-click="getHistorics(24);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 dia </button>
-												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 48}" data-ng-click="getHistorics(48);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  2d  </button>
-												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 96}" data-ng-click="getHistorics(96);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  4d  </button>
-												  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 30}" data-ng-click="getLastMonth();" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 30d  </button>
-												  												  
+													  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 1}" data-ng-click="getHistorics(1);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 hora</button>
+													  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 6}" data-ng-click="getHistorics(6);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  6h  </button>
+													  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 12}" data-ng-click="getHistorics(12);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  12h </button>
+													  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 24}" data-ng-click="getHistorics(24);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 dia </button>
+													  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 48}" data-ng-click="getHistorics(48);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  2d  </button>
+													  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 96}" data-ng-click="getHistorics(96);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">  4d  </button>
+													  <button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 30}" data-ng-click="getLastMonth();" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 30d  </button>												  												  
 												</div>
 											</div>
 										</div>									
-						        		<!-- 	
-					        			<div class= "pull-right">
-					        				<div class="form-group">
-					        					<br />									
-												<label data-ng-show='loading'>Loading...</label>				
-											</div>
-										</div>
-										-->								        		 
+						        							        		 
 									</form>
 									
 								</div>    
@@ -275,35 +253,52 @@
 											
 											<div class="box-body">
 												<div class="col-md-12">
-												<div class="row">			                                        
-					                              	<label class="control-label"><span class="icon fa fa-reorder"></span> FILTRAR</label>
-													<select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-options="item as item.name for item in filterAlarm | orderBy: 'name' track by item.uid" 
-								                    	data-ng-model="selectedfilterAlarm">
-								                        <option value="">Selecione</option> 
-								                	</select>               
-				                                </div>
-				                                
-				                                 <br />
-				                                
-				                                <div class="row">
-                                                     <label class="control-label"> <span class="icon fa fa-object-group"></span> Agrupar (Mostrando Máximo e Minimo)</label>
-                                                     <div style="border: 1px solid #cbc6c6; border-radius: 2px 2px 2px 2px;padding-top: 8px; padding-left:8px">
-	                                                     <div class="radio3 radio-check radio-success radio-inline">
-	                                                         <input type="radio" id="radio5" value="1" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(1)">
-	                                                         <label for="radio5">Nenhum</label>
+													<div class="row">			                                        
+						                              	<label class="control-label"><span class="icon fa fa-reorder"></span> FILTRAR</label>
+														<select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-options="item as item.name for item in filterAlarm | orderBy: 'name' track by item.uid" 
+									                    	data-ng-model="selectedfilterAlarm">
+									                        <option value="">Selecione</option> 
+									                	</select>               
+					                                </div>
+					                                
+					                                 <br />
+					                                
+					                                <div class="row">
+	                                                     <label class="control-label"> <span class="icon fa fa-object-group"></span> Agrupar (Mostrando Máximo e Minimo)</label>
+	                                                     <div style="border: 1px solid #cbc6c6; border-radius: 2px 2px 2px 2px;padding-top: 8px; padding-left:8px">
+		                                                     <div class="radio3 radio-check radio-success radio-inline">
+		                                                         <input type="radio" id="radio5" value="1" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(1)">
+		                                                         <label for="radio5">Nenhum</label>
+		                                                     </div>
+		                                                     <div class="radio3 radio-check radio-warning radio-inline">
+		                                                         <input type="radio" id="radio6" value="2" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(2)">
+		                                                         <label for="radio6">Por Hora</label>
+		                                                     </div>
+		                                                     <div class="radio3 radio-check radio-default radio-inline">
+		                                                         <input type="radio" id="radio7" value="3" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(3)">
+		                                                         <label for="radio7">Por dia</label>
+		                                                     </div>                                                     
 	                                                     </div>
-	                                                     <div class="radio3 radio-check radio-warning radio-inline">
-	                                                         <input type="radio" id="radio6" value="2" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(2)">
-	                                                         <label for="radio6">Por Hora</label>
-	                                                     </div>
-	                                                     <div class="radio3 radio-check radio-default radio-inline">
-	                                                         <input type="radio" id="radio7" value="3" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(3)">
-	                                                         <label for="radio7">Por dia</label>
-	                                                     </div>                                                     
-                                                     </div>
-                                                 </div>
-				                                    
-											</div>
+	                                                 </div>
+	                                                 
+	                                                 <br />
+	                                                 
+	                                                 <div class="row">
+	                                                 	<div class="form-group">
+	                                                 		<div class="col-md-6">
+																<button type="button" class="btn btn-primary btn-xs form-control" 
+																data-ng-click="exportExcel();" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
+																Exportar Excel</button>
+									        				</div>
+									        				<div class="col-md-6">
+									        				<button type="button" class="btn btn-primary btn-xs form-control"
+									        					data-ng-click="showGrafico();" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
+									        					Mostrar no Gráfico</button>
+									        				</div>
+									        			</div>	                                                 
+	                                                 </div>
+					                                    
+												</div>
 											</div>
 										</div>			
 									
@@ -362,10 +357,7 @@
 							  <h3 class="box-title"><strong>Gráfico do Sensor:</strong> {{selectedCompanySensor.name}} - Gás: {{selectedCompanySensor.gasesDto[0].name}} </h3>
 							</div>
 							<div class="box-body">
-<!-- 								<div class="col-md-12"> -->
-									<div  id="graficoHistorico" style="max-width: 900px; overflow-x: auto; overflow-y: hidden;"></div>
-<!-- 									<div style="max-width: 800px; overflow: auto" id="graficoHistorico"></div>                                                        -->
-<!-- 								</div> -->
+								<div  id="graficoHistorico" style="max-width: 900px; overflow-x: auto; overflow-y: hidden;"></div>
 							</div>
 						</div>				
 				  	</div>

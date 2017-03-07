@@ -8,6 +8,7 @@ VIEW `historic_view_day` AS
         `historic`.`COMPANY_DETECTOR_ID` AS `COMPANY_DETECTOR_ID`,
         `historic`.`SENSOR_ID` AS `SENSOR_ID`,
         DATE_FORMAT(`historic`.`LAST_UPDATE`, '%d/%m/%Y') AS `last_update_date`,
+        DATE_FORMAT(`historic`.`LAST_UPDATE`, '%Y%m%d') AS `last_update_date_number`,
         COUNT(0) AS `ticks`,
         MAX(`historic`.`VALUE`) AS `max_value`,
         MIN(`historic`.`VALUE`) AS `min_value`

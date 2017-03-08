@@ -115,6 +115,6 @@ public class DashCompany implements Serializable {
 	}
 	public final void setDeviceType(int deviceType) {
 		this.deviceType = deviceType;
-	}	
+	}
 
 }

@@ -15,7 +15,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 				 $scope.dashCompaniesPosition[i] = $scope.listAllDashCompaniesPosition.list[i];
 				 $scope.dashCompaniesPosition[i].last_update_full = $scope.dashCompaniesPosition[i].last_update;
 				 $scope.dashCompaniesPosition[i].last_update = timeSince($scope.dashCompaniesPosition[i].last_update);				 
-				 				 
+				 $scope.dashCompaniesPosition[i].last_value	= Math.round($scope.dashCompaniesPosition[i].last_value * 100) / 100 ;
 			 }
 			 
 			 $scope.sumary = {

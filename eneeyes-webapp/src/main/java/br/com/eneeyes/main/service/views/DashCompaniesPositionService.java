@@ -23,8 +23,7 @@ public class DashCompaniesPositionService {
 		try {
 			List<DashCompaniesPosition> lista = repository.findAll();
 
-			if (lista != null) {
-				
+			if (lista != null) {				
 				
 				result.setList(lista);				
 				result.setResultType( ResultMessageType.SUCCESS );

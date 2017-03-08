@@ -57,9 +57,14 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	   divToPrint.style.visibility = "hidden";
 	}
 
-	$('#exportPDF').on('click',function(){
+	$('#exportRel').on('click',function(){
 		printData();
-	})		
+	})	
+	
+	$("#exportExcel").click(function(e) {
+	    window.open('data:application/vnd.ms-excel,' + encodeURIComponent( $('div[id$=dvData]').html()));
+	    e.preventDefault();
+	});
 	
 	 	
 	$scope.buttonClick = function (s) { 
@@ -85,6 +90,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
         $scope.listHistoricInterval = undefined;
         $scope.dateIn = undefined;
         $scope.dateOut = undefined;
+        $scope.tipoGrupo = 1;
         			
 	}		
 	
@@ -139,8 +145,11 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		
 		$scope.loading = true;
 		
-		var dataInicio = new Date($('#dateIn').data().date);
-		var dataFim = new Date($('#dateOut').data().date);
+		//var dataInicio = new Date($('#dateIn').data().date);
+		//var dataFim = new Date($('#dateOut').data().date);
+		
+		var dataInicio = new Date($('#dateIn').data().DateTimePicker.date._d);
+		var dataFim = new Date($('#dateOut').data().DateTimePicker.date._d);
 
 		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' à ' + dataFim.toLocaleString();
 		
@@ -190,8 +199,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		 
 		 $scope.listAllDashCompany = new ViewService.listAllDashCompany();		 
 		 $scope.listAllDashCompany.$view({_csrf : angular.element('#_csrf').val()}, function(){
-			 $scope.CompanyDetectors = $scope.listAllDashCompany.list; 
-			 console.log($scope.listAllDashCompany);		         	         	
+			 $scope.companyDetectors = $scope.listAllDashCompany.list; 				         	         	
         });		 
 	 }
 	
@@ -284,8 +292,15 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		
 		var data = new google.visualization.DataTable();
 	      
-	    data.addColumn('string', 'Data');
-	    data.addColumn('number', 'Valor');    
+		if($scope.tipoGrupo == 1) {
+			data.addColumn('string', 'Data');
+			data.addColumn('number', 'Valor');
+		}
+		else {
+			data.addColumn('string', 'Data');
+			data.addColumn('number', 'Máximo');			
+			data.addColumn('number', 'Minimo');
+		}
 
 	    var itens = new Array();
 	    	    
@@ -293,9 +308,13 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	    	var itemDate = new Date( value[i].last_update );
 
 	    	changeDate = weekday[itemDate.getDay()] + ' ' + itemDate.toLocaleDateString() + ' as ' + itemDate.toLocaleTimeString();
-	    	valor = value[i].value;
 	    	
-	    	itens.push([changeDate, valor]);
+	    	if($scope.tipoGrupo == 1) {
+	    		itens.push([changeDate, value[i].value]);
+	    	}
+	    	else {
+	    		itens.push([changeDate, value[i].max_value, value[i].min_value]);
+	    	}
 		}
 	      
 	    data.addRows(itens);

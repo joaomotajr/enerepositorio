@@ -19,7 +19,7 @@ public class DashCompaniesPositionController {
 	
 	@RequestMapping(value = "/security/api/view/allDashCompaniesPosition", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> allDashCompaniesPoistion() {
+	public BasicResult<?> allDashCompaniesPosition() {
 		return service.listAll();
 	}
 

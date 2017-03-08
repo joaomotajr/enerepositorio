@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
+import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 
 @Entity
@@ -122,5 +123,15 @@ public class DashCompaniesPosition implements Serializable {
 	
 	public void setGas_name(String gas_name) {
 		this.gas_name = gas_name;
+	}
+	
+	@Column(name = "unit_meter_gases")
+	private UnitMeterGases unitMeterGases;
+	public final UnitMeterGases getUnitMeterGases() {
+		return unitMeterGases;
+	}
+
+	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
+		this.unitMeterGases = unitMeterGases;
 	}
 }

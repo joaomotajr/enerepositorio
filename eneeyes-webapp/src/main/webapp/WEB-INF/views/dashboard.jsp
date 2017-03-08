@@ -39,7 +39,7 @@
 								<div class="small-box bg-green">
 									<div class="inner">
 										<h3>{{sumary.normal}}</h3>
-										<p>Status Operacional</p>
+										<p>Operacional</p>
 									</div>
 									<div class="icon">
 										<i class="ion ion-stats-bars"></i>
@@ -55,7 +55,7 @@
 								<div class="small-box bg-gray">
 									<div class="inner">
 										<h3>{{sumary.alarm1}}</h3>
-										<p>Alarme 1 - Detecção</p>
+										<p>Detecção</p>
 									</div>
 									<div class="icon">
 										<i class="ion ion-person-add"></i>
@@ -71,7 +71,7 @@
 								<div class="small-box bg-yellow">
 									<div class="inner">
 										<h3>{{sumary.alarm2}}</h3>
-										<p>Alarm 2 - Alerta</p>
+										<p>Alerta</p>
 									</div>
 									<div class="icon">
 										<i class="ion ion-pie-graph"></i>
@@ -87,7 +87,7 @@
 								<div class="small-box bg-red">
 									<div class="inner">
 										<h3>{{sumary.alarm3}}</h3>
-										<p>Alarm3 - Evacuação</p>
+										<p>Evacuação</p>
 									</div>
 									<div class="icon">
 										<i class="ion ion-pie-graph"></i>
@@ -139,8 +139,7 @@
 											<div style="max-height: 500px; overflow: auto">
 												<table class="table no-margin">
 													<thead>
-														<tr>
-														
+														<tr>														
 															<th>ID</th>
 															<th>Empresa</th>
 															<th>Detector</th>	
@@ -181,8 +180,11 @@
 																	'text-muted' : item.alarmType=='DETECCAO', 
 																	'text-danger' : item.alarmType=='EVACUACAO'}"> 
 																	{{item.last_value}} 
+																	<span style="vertical-align:super;font-size:0.5em" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
+																	<span style="vertical-align:super;font-size:0.5em" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}</span>
 																</label>
 															</td>
+														
 														</tr>   																							
 														
 													</tbody>
@@ -190,17 +192,8 @@
 											</div>
 										</div>
 										<!-- /.table-responsive -->
-									</div>	
-								
-<!-- 									/.box-body -->
-<!-- 									<div class="box-footer clearfix"> -->
-<!-- 										<a href="javascript::;" -->
-<!-- 											class="btn btn-sm btn-info btn-flat pull-left">Baixar -->
-<!-- 											Alertas</a> <a href="javascript::;" -->
-<!-- 											class="btn btn-sm btn-default btn-flat pull-right">Ver -->
-<!-- 											Todos Alertas</a> -->
-<!-- 									</div> -->
-<!-- 									/.box-footer -->
+									</div>							
+
 								</div>
 								<!-- /.box -->
 	
@@ -208,14 +201,11 @@
 							<div class="col-md-3">
 								<div class="box box-primary">
 									<div class="box-header with-border">
-										<h3 class="box-title">MANUTENÇÃO PREVENTIVA</h3>
+										<h3 class="box-title">MANUTENÇÃO </h3>
 										<div class="box-tools pull-right">
 											<button class="btn btn-box-tool" data-widget="collapse">
 												<i class="fa fa-minus"></i>
 											</button>
-<!-- 											<button class="btn btn-box-tool" data-widget="remove"> -->
-<!-- 												<i class="fa fa-times"></i> -->
-<!-- 											</button> -->
 										</div>
 									</div>
 									<!-- /.box-header -->
@@ -264,24 +254,13 @@
 													</a> <span class="product-description"> Sensor A4 </span>
 												</div>
 											</li>
-											<!-- /.item -->
+				
 										</ul>
 									</div>
-									
-<!-- 									/.box-body -->
-<!-- 									<div class="box-footer text-center"> -->
-<!-- 										<a href="javascript::;" class="uppercase">Ver Todos -->
-<!-- 											Dispositivos</a> -->
-<!-- 									</div> -->
-<!-- 									/.box-footer -->
-									
+								
 								</div>
-								<!-- /.box -->
-	
-	
 							</div>
 						</div>
-						<!-- /.row -->
 					</div>
       			</div>	
        		</div>

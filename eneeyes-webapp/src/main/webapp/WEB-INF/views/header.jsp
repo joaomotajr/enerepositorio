@@ -6,9 +6,9 @@
 	    <meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <title>Eneeyes</title>
-	    <link rel="shortcut icon" href="/assets/img/favicon.ico">
 	    
-	      
+	    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon" />
+	    	      
 	    <style>	    
 		    .dj-hide {
 			    display: none;

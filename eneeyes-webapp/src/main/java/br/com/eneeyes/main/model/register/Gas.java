@@ -30,8 +30,7 @@ public class Gas {
 		this.uid = dto.getUid();
 		this.name = dto.getName();		
 		this.cas = dto.getCas();
-		this.formula = dto.getFormula();
-		this.unitMeterGases = dto.getUnitMeterGases();		
+		this.formula = dto.getFormula();	
 	}
 
 	@Id
@@ -47,14 +46,6 @@ public class Gas {
 	
 	@Column(name = "FORMULA", nullable = true)
 	private String formula;
-
-	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
-	private UnitMeterGases unitMeterGases;
-
-	@Enumerated(EnumType.ORDINAL) 
-	private UnitMeterGases UnitMeterGases() { 
-	    return unitMeterGases; 
-	}
 			
 	public final Long getUid() {
 		return uid;
@@ -88,11 +79,4 @@ public class Gas {
 		this.formula = formula;
 	}
 
-	public final UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
-	}
-
-	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-		this.unitMeterGases = unitMeterGases;
-	}
 }

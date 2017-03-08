@@ -1,0 +1,72 @@
+@CHARSET "ISO-8859-1";
+
+	body.loading {
+		overflow: hidden;
+	}
+	
+	body.loading .ajax-loader {
+		display: block;
+	}  
+	
+	.ajax-loader {
+		display: none;
+		position: fixed;
+		z-index: 2000;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%; 	
+		background: rgba(255, 255, 255, .5) url('/assets/img/loader.gif') 50% 50% no-repeat;
+	}
+	
+	
+	<!-- Tabelas de Log Historic e Alarmes  -->
+	.zui-table {
+		border: solid 1px #3c8dbc;		
+		border-collapse: collapse;
+		border-spacing: 0;
+		font: normal 13px Arial, sans-serif;
+	}
+	.zui-table thead tr {
+		border-radius: 5px ! important;
+	}
+	
+	.zui-table thead th {
+		background-color: #3c8dbc;
+		border: solid 1px #3c8dbc;		 
+		color: white !important;
+		padding: 10px;
+		text-align: left;
+		*text-shadow: 1px 1px 1px #fff;
+	}
+	.zui-table tbody td {
+		border: solid 1px #3c8dbc;
+		color: #333;
+		padding: 10px;
+		text-shadow: 1px 1px 1px #fff;
+	}
+	
+	.alarm1 {
+		color: gray;
+		font-weight: 800;
+	}
+	
+	.alarm2 {
+		color: orange;
+		font-weight: 800;
+	}
+	
+	.alarm3 {
+		color: red;
+		font-weight: 800;
+	}
+	
+	.clicked 
+	{
+		background-color:red;
+	}
+	
+	.offLine {		
+		background-color: black ! important;
+		color: white ! important;	
+	}

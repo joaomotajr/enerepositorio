@@ -1,3 +1,4 @@
+ 	<!-- 
  	<style>
 		
 	.offLine {		
@@ -5,7 +6,8 @@
 		color: white ! important;	
 	}	
 	</style>
-
+ 	-->
+ 	
 	<div data-ng-controller="dashController">
 		<div class="row">
        		<div class="col-md-12">

@@ -7,7 +7,8 @@ public class CompanyDeviceDto implements Comparable<CompanyDeviceDto> {
 
 	private Long uid;
 	private DeviceType deviceType;
-	private AreaDto areaDto;	
+	private AreaDto areaDto;
+	private String name;
 
 	public CompanyDeviceDto() {
 		
@@ -16,6 +17,7 @@ public class CompanyDeviceDto implements Comparable<CompanyDeviceDto> {
 	public CompanyDeviceDto(CompanyDevice companyDevice) {
 		this.uid = companyDevice.getUid();
 		this.deviceType = companyDevice.getdeviceType();
+		this.name = companyDevice.getName();
 	}
 	
 	public final Long getUid() {
@@ -52,4 +54,11 @@ public class CompanyDeviceDto implements Comparable<CompanyDeviceDto> {
 		return companyDeviceDto.getUid().compareTo(this.uid);		
 	}
 	
+	public final String getName() {
+		return name;
+	}
+
+	public final void setName(String name) {
+		this.name = name;
+	}	
 }

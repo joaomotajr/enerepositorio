@@ -1,49 +1,3 @@
-<style>
-	.zui-table {
-		border: solid 1px #3c8dbc;		
-		border-collapse: collapse;
-		border-spacing: 0;
-		font: normal 13px Arial, sans-serif;
-	}
-	.zui-table thead tr {
-		border-radius: 5px ! important;
-	}
-	
-	.zui-table thead th {
-		background-color: #3c8dbc;
-		border: solid 1px #3c8dbc;		 
-		color: white !important;
-		padding: 10px;
-		text-align: left;
-		*text-shadow: 1px 1px 1px #fff;
-	}
-	.zui-table tbody td {
-		border: solid 1px #3c8dbc;
-		color: #333;
-		padding: 10px;
-		text-shadow: 1px 1px 1px #fff;
-	}
-	
-	.alarm1 {
-		color: gray;
-		font-weight: 800;
-	}
-	
-	.alarm2 {
-		color: orange;
-		font-weight: 800;
-	}
-	
-	.alarm3 {
-		color: red;
-		font-weight: 800;
-	}
-	
-	.clicked 
-	{
-		background-color:red;
-	}
-</style>
 
 <div data-ng-controller="logHistoricController">
 		<div class="row">						                                                    
@@ -82,7 +36,7 @@
 										<li>
 										  	<a href="#step-4" class="disabled" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'" rel="4">
 												<span class="step_no">4</span>
-												<span class="step_descr">Pesquisar</span>
+												<span class="step_descr">Pesquisar / Limpar Pesquisa</span>
 										  	</a>
 										</li>
 									</ul>
@@ -93,13 +47,9 @@
 			        	<div class="row">      		           
 				            <form class="form" name="userForm">
 					            <div class="col-md-12">
-					            	
-					            	<div class="col-md-1"></div>
 					            	 
 					            	<div class="col-md-3">                                                                                                                            
 										<div class="form-group">
-											<label class="control-label">Empresa</label>
-											
 											<select class="form-control" data-live-search="true" 
 					                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 					                                data-ng-options="item as item.name for item in companies | orderBy: 'name' track by item.uid" 
@@ -112,7 +62,6 @@
 					            
 						            <div class="col-md-3">                                                                                                                            
 										<div class="form-group">
-											<label class="control-label">Detector</label>
 											
 						                	<select class="form-control" data-live-search="true" 
 					                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
@@ -127,7 +76,6 @@
 																			
 									<div class="col-md-3">
 										<div class="form-group">
-											<label class="control-label">Sensor</label>
 											
 						                	<select class="form-control" 
 					                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
@@ -139,10 +87,9 @@
 										</div>									                                                                                     
 									</div>
 			
-					        		<div class="col-md-2">
+					        		<div class="col-md-3">
 										<div class="form-group">
-											<label class="control-label"> </label>
-					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-click="clearHistoric()">Limpar Pesquisa</button>
+					        				<button type="button" class="btn btn-default btn-xs form-control" data-ng-click="clearHistoric()">Limpar Pesquisa</button>
 					        			</div>
 					        		</div>
 				        		</div>	        		
@@ -161,7 +108,7 @@
 								<h3 class="box-title">Selecione Intervalos Pré-Definidos ou Data de Inicio e Fim</h3>									  	
 		                         
                                 <div class="pull-right" style="margin-bottom: 0px ! important">   
-			        				<label data-ng-show='loading'><span class="icon fa fa-hourglass-half"></span> Loading...</label>			        									
+			        				<label data-ng-show='loading'><span class="icon fa fa-hourglass-half"></span> Loading...</label>
 								</div>
 							</div>			
 							
@@ -187,7 +134,7 @@
 										<div class="col-md-3">
 											<div class="form-group">
 												<label class="control-label">Data inicio</label>									                	 
-<!-- 							                	 <input type="text" class="form-control" data-date-format="dd/mm/yyyy" data-datemonopicker data-ng-model="dateIn" data-mask="99/99/9999" mask/> -->
+
 							                	 <div class='input-group date' id='dateIn'>
 													<input type="text" class="form-control" data-ng-model="dateIn" name="dateIn">
 													<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
@@ -198,8 +145,7 @@
 										
 										<div class="col-md-3">
 											<div class="form-group">
-												<label class="control-label">Data Fim</label>				                	
-<!-- 							                	<input type="text" class="form-control" data-date-format="dd/mm/yyyy" data-datemonopicker data-ng-model="dateOut" data-mask="99/99/9999" mask/> -->
+												<label class="control-label">Data Fim</label>			                	
 							                	
 							                	<div class='input-group date' id='dateOut'>
 													<input type="text" class="form-control" data-ng-model="dateOut" name="dateOut">
@@ -226,7 +172,9 @@
 										<div class="box box-primary">
 					
 											<div class="box-header">
-											 	<h4 class="box-title"><strong>Dispositivo: </strong>  {{selectedCompanyDetector.companyDetectorName}} <span data-ng-show="selectedCompanySensor"> - </span> {{selectedCompanySensor.name}}</h4>											 	
+											 	<h4 class="box-title">
+											 	<strong>Dispositivo: </strong>  {{selectedCompanyDetector.companyDetectorName}} 
+											 	<span data-ng-show="selectedCompanySensor"> - </span> {{selectedCompanySensor.name}}</h4>											 	
 											</div>
 											
 											<div class="box-body">
@@ -261,7 +209,10 @@
 													</div>
 												
 													<div class="row">			                                        
-						                              	<label class="control-label"><span class="icon fa fa-reorder"></span> FILTRAR</label>
+						                              	<label class="control-label"><span class="icon fa fa-filter"></span> FILTRAR</label>
+						                              	<div class="box-tools pull-right">							                  		
+									                  		<label data-ng-show='countHistoric > 0'><span class="icon fa fa-search"></span> {{countHistoric}}</label>					                    
+									                  	</div>
 														<select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-options="item as item.name for item in filterAlarm | orderBy: 'name' track by item.uid" 
 									                    	data-ng-model="selectedfilterAlarm">
 									                        <option value="">Selecione</option> 
@@ -320,8 +271,7 @@
 					        				               
 							                <table data-ng-if="tipoGrupo==1" class='zui-table' cellspacing="0" width="100%" data-ng-visible="listHistoric">					            				                            
 							                	<thead>
-							                    	<tr>	                
-							                    		<th>ID</th>                                                                                   
+							                    	<tr>                                                                                 
 							                      		<th>Data</th>
 							                      		<th>Hora</th>	                      		
 							                      		<th>Valor</th>
@@ -329,11 +279,9 @@
 							                     	</tr>
 							                    </thead>
 							                    <tbody>                                    
-							                     	<tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">
-							                     		<td>{{item.sensor_id}} </td>
+							                     	<tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">							                     		
 							                      		<td>{{item.last_update | date:'dd/MM/yyyy' }}</td>
 							                      		<td>{{item.last_update | date:'HH:mm:ss' }}</td>
-
 														<td> {{item.value}} </td>
 														<td>
 															<span data-ng-if="item.value < selectedSensorAlarm.alarm1 && item.value < selectedSensorAlarm.alarm1" class="label label-success"> NORMAL </span>									                      		
@@ -347,8 +295,7 @@
 							            	
 							            	<table data-ng-if="tipoGrupo!=1" class='zui-table' cellspacing="0" width="100%" data-ng-visible="listHistoric">					            				                            
 							                	<thead>
-							                    	<tr>	                
-							                    		<th>ID</th>                                                                                   
+							                    	<tr>                                                                                   
 							                      		<th>Data</th>
 							                      		<th>Hora</th>	                      		
 							                      		<th>Máximo</th>
@@ -357,11 +304,9 @@
 							                     	</tr>
 							                    </thead>
 							                    <tbody>                                    
-							                     	<tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">
-							                     		<td>{{item.sensor_id}} </td>
+							                     	<tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">							                     		
 							                      		<td>{{item.last_update | date:'dd/MM/yyyy' }}</td>
 							                      		<td>{{item.last_update | date:'HH:mm:ss' }}</td>
-
 														<td> {{item.max_value}} </td>
 														<td> {{item.min_value}} </td>
 														<td>
@@ -374,7 +319,7 @@
 							                    </tbody>
 							            	</table>
 							            	
-							            	<p data-ng-hide="listHistoricInterval == undefined || listHistoricInterval.list.length > 0" class="text-center">NENHUM REGISTRO</p>
+							            	<p data-ng-hide="listHistoricInterval == undefined || listHistoricInterval.list.length > 0 || loading" class="text-center">NENHUM REGISTRO</p>
 						            	</div>                                                         	            
 					        		</div>							        		
 					        	</div>
@@ -413,8 +358,8 @@
 		<div id="printTable" style="visibility:hidden" >
 		
 			<div class="col-md-12">
-				<h1>Empresa: {{selectedCompany.name}}</h1>
-				
+				<h1>Empresa: {{selectedCompanyDetector.company}}</h1>
+				<h2>Unidade: {{selectedCompanyDetector.unit}} - Área: {{selectedCompanyDetector.area}} </h2>
 				<hr>
 				<h3 class="box-title"><strong>Dispositivo: </strong>  {{selectedCompanyDetector.companyDetectorName}} <span data-ng-show="selectedCompanySensor"> - </span> {{selectedCompanySensor.name}}</h3>
 							
@@ -437,28 +382,42 @@
 	            
 	            <br />
 	            <div id="dvData">
-	            <table class='zui-table' cellspacing="0" width="100%">	                   
-                   		<tr>	                
-                   			<th>ID</th>                                                                                   
-                     		<th>Data</th>
-                     		<th>Hora</th>	                      		
-                     		<th>Valor</th>
-                     		<th>Alarme Status</th>			                                                                                                                            
-                    	</tr>                                    
-                    	<tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">
-                    		<td>{{item.sensor_id}} </td>
-                     		<td>{{item.last_update | date:'dd/MM/yyyy' }}</td>
-                     		<td>{{item.last_update | date:'HH:mm:ss' }}</td>
-
-						<td> {{item.value}} </td>
-						<td>
-							<span data-ng-if="item.value < selectedSensorAlarm.alarm1 && item.value < selectedSensorAlarm.alarm1" class="label label-success"> NORMAL </span>									                      		
-                     			<span data-ng-if="item.value >= selectedSensorAlarm.alarm1 && item.value < selectedSensorAlarm.alarm2" class="label label-default"> DETECÇÃO </span>									                      		
-                     			<span data-ng-if="item.value >= selectedSensorAlarm.alarm2 && item.value < selectedSensorAlarm.alarm3" class="label label-warning"> ALERTA </span>									                      											                      		
-                     			<span data-ng-if="item.value >= selectedSensorAlarm.alarm3" class="label label-danger"> EVACUAÇÃO </span>
-                     		</td>
-                    	</tr>	                   
-	           	</table>            	
+		            <table class='zui-table' cellspacing="0" width="100%">	                   
+	                   	<tr>	                
+	                   			<th>ID</th>                                                                                   
+	                     		<th>Data</th>
+	                     		<th>Hora</th>                     	
+	                     			                     		
+	                     		<th data-ng-if="tipoGrupo==1">Valor</th>
+	                     		<th data-ng-if="tipoGrupo!=1">Maximo</th>
+	                     		<th data-ng-if="tipoGrupo!=1">Minimo</th>
+	                     		
+	                     		<th>Alarme Status</th>			                                                                                                                            
+	                    	</tr>                                    
+	                    	<tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">
+	                    		<td>{{item.sensor_id}} </td>
+	                     		<td>{{item.last_update | date:'dd/MM/yyyy' }}</td>
+	                     		<td>{{item.last_update | date:'HH:mm:ss' }}</td>
+	
+							<td data-ng-if="tipoGrupo==1"> {{item.value}} </td>						
+							<td data-ng-if="tipoGrupo!=1"> {{item.max_value}} </td>
+							<td data-ng-if="tipoGrupo!=1"> {{item.min_value}} </td>
+							
+							<td data-ng-if="tipoGrupo==1">
+								<span data-ng-if="item.value < selectedSensorAlarm.alarm1 && item.value < selectedSensorAlarm.alarm1" class="label label-success"> NORMAL </span>									                      		
+	                     			<span data-ng-if="item.value >= selectedSensorAlarm.alarm1 && item.value < selectedSensorAlarm.alarm2" class="label label-default"> DETECÇÃO </span>									                      		
+	                     			<span data-ng-if="item.value >= selectedSensorAlarm.alarm2 && item.value < selectedSensorAlarm.alarm3" class="label label-warning"> ALERTA </span>									                      											                      		
+	                     			<span data-ng-if="item.value >= selectedSensorAlarm.alarm3" class="label label-danger"> EVACUAÇÃO </span>
+	                     	</td>
+	                     	
+	                     	<td data-ng-if="tipoGrupo!=1">
+								<span data-ng-if="item.max_value < selectedSensorAlarm.alarm1 && item.max_value < selectedSensorAlarm.alarm1" class="label label-success"> NORMAL </span>									                      		
+                      			<span data-ng-if="item.max_value >= selectedSensorAlarm.alarm1 && item.max_value < selectedSensorAlarm.alarm2" class="label label-default"> DETECÇÃO </span>									                      		
+                      			<span data-ng-if="item.max_value >= selectedSensorAlarm.alarm2 && item.max_value < selectedSensorAlarm.alarm3" class="label label-warning"> ALERTA </span>									                      											                      		
+                      			<span data-ng-if="item.max_value >= selectedSensorAlarm.alarm3" class="label label-danger"> EVACUAÇÃO </span>
+                      		</td>
+	                    </tr>	                   
+		           	</table>            	
 				</div>	
 			</div>
 		</div>			

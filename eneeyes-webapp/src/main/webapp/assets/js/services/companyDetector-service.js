@@ -23,9 +23,9 @@ app.factory('CompanyDetectorService', function($resource){
         save : $resource('/security/api/companyDetector/save',{},{
         	companyDetector : {method : 'POST'}
         }),
-        saveList : $resource('/security/api/companyDetector/saveList',{},{
-        	companyDetector : {method : 'POST'}
-        }),
+//        saveList : $resource('/security/api/companyDetector/saveList',{},{
+//        	companyDetector : {method : 'POST'}
+//        }),
         updateLatitudeLongitude : $resource('/security/api/companyDetector/updateLatitudeLongitude/:latitude/:longitude/:id/', {latitude: '@latitude', longitude: '@longitude', id: '@id'}, {
         	companyDetector : {method : 'GET'}
         }),

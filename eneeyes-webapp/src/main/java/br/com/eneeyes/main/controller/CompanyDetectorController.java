@@ -1,7 +1,5 @@
 package br.com.eneeyes.main.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,12 +26,12 @@ public class CompanyDetectorController {
 		return service.save(companyDetectorDto);
 	}
 	
-	@RequestMapping(value="/security/api/companyDetector/saveList", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> saveList(@RequestBody List<CompanyDetectorDto> companyDetectorsDto) {
-		
-		return service.save(companyDetectorsDto);
-	}
+//	@RequestMapping(value="/security/api/companyDetector/saveList", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+//	@ResponseStatus(HttpStatus.OK)
+//	public BasicResult<?> saveList(@RequestBody List<CompanyDetectorDto> companyDetectorsDto) {
+//		
+//		return service.save(companyDetectorsDto);
+//	}
 	
 	@RequestMapping(value="/security/api/companyDetector/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)

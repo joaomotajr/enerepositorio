@@ -80,6 +80,12 @@
 	    return Math.floor(seconds) + " segundos";
 	}
 	
+	function padZeros(num, size) {
+	    var s = num + "";
+	    while (s.length < size) s = "0" + s;
+	    return s;
+	}
+	
 	var weekday = new Array(7);
 	
 	weekday[0]="Domingo";

@@ -9,7 +9,9 @@ import javax.inject.Named;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDto;
 import br.com.eneeyes.main.model.Company;
+import br.com.eneeyes.main.model.views.CompanyView;
 import br.com.eneeyes.main.repository.CompanyRepository;
+import br.com.eneeyes.main.repository.views.CompanyViewRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
@@ -19,6 +21,9 @@ public class CompanyService implements IService<CompanyDto> {
 
 	@Inject
 	private CompanyRepository repository;
+	
+	@Inject
+	private CompanyViewRepository viewRepository;
 	
 	public BasicResult<?> save(CompanyDto dto) {
 		
@@ -70,6 +75,32 @@ public class CompanyService implements IService<CompanyDto> {
 				}
 				
 				result.setList(dto);
+				
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhuma Compania.");
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;	
+
+	}
+	
+	public Result<?> listAllView() {
+		
+		Result<CompanyView> result = new Result<CompanyView>(); 	
+		
+		try {
+			List<CompanyView> lista = viewRepository.findAll();
+			if (lista != null) {
+								
+				result.setList(lista);
 				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");

@@ -24,13 +24,13 @@ angular.module('dependency', [])
         	  
         	 if (rejection.status == 0) {
         		  angular.element('body').removeClass('loading'); 
-        		  $rootScope.alertDanger = "Ops Servidor Sem Resposta, Se o Problema Persistir Contate o Administrador do Sistema";
+        		  $rootScope.alertDanger = "Servidor Sem Resposta, Se o Problema Persistir Contate o Administrador do Sistema";
         		  $('#resultDanger').hide().show('slow').delay(5000).hide('slow');        		  
         		  
         	 }
         	 else if (rejection.status == 404) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertDanger = "Ops Item Requisitado Inexistente, Contate o Administrador do Sistema";
+        		 $rootScope.alertDanger = "Item Requisitado Inexistente, Contate o Administrador do Sistema";
         		 $('#resultDanger').hide().show('slow').delay(5000).hide('slow');
         	 }
         	 else if (rejection.status == 415) {
@@ -39,7 +39,7 @@ angular.module('dependency', [])
         	 }
         	 else if (rejection.status == 500) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertDanger = "Ops alguma retorno indesejado no servidor, Contate o Administrador do Sistema";
+        		 $rootScope.alertDanger = "Algum retorno indesejado no servidor, Contate o Administrador do Sistema";
         	 }
         	 else if (rejection.status > 400 && rejection.status <= 505 ) {
      		    	angular.element('body').removeClass('loading');

@@ -24,6 +24,9 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	
 	@Autowired
 	private CompanyDeviceRepository companyDeviceRepository;
+	
+	@Autowired
+	private CompanyDeviceService companyDeviceService;
 		
 	@Autowired
 	CompanyDetectorAlarmService companyDetectorAlarmService;
@@ -41,6 +44,8 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		companyDetector = repository.save(companyDetector);
 		
 		createInitialPosition(companyDetector);
+		
+		updateCompanyDeviceName(dto.getName(), dto.getCompanyDeviceDto().getUid());
 						
 		result.setEntity(new CompanyDetectorDto(companyDetector));
 		result.setResultType( ResultMessageType.SUCCESS );
@@ -49,30 +54,35 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		return result;
 	}
 	
-	public BasicResult<?> save(List<CompanyDetectorDto> listDto) {
-		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();		
-
-		List<CompanyDetector> list = new ArrayList<CompanyDetector>();
-		
-		for (CompanyDetectorDto companyDetectorDto   : listDto) {
-			
-			CompanyDetector companyDetector = new CompanyDetector(companyDetectorDto);
-			list.add(companyDetector);
-			createInitialPosition(companyDetector);
-		}
-		
-		list = repository.save(list);					
-		
-		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Executado com sucesso.");	
-		
-		return result;
-	}
+//	public BasicResult<?> save(List<CompanyDetectorDto> listDto) {
+//		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();		
+//
+//		List<CompanyDetector> list = new ArrayList<CompanyDetector>();
+//		
+//		for (CompanyDetectorDto companyDetectorDto   : listDto) {
+//			
+//			CompanyDetector companyDetector = new CompanyDetector(companyDetectorDto);
+//			list.add(companyDetector);
+//			createInitialPosition(companyDetector);
+//		}
+//		
+//		list = repository.save(list);					
+//		
+//		result.setResultType( ResultMessageType.SUCCESS );
+//		result.setMessage("Executado com sucesso.");	
+//		
+//		return result;
+//	}
 	
 	private void createInitialPosition(CompanyDetector companyDetector) {
 				
 		positionService.createInitialPosition(companyDetector);		
 
+	}
+	
+	private void updateCompanyDeviceName(String name, Long uid) {
+		
+		companyDeviceService.updateCompanyDeviceName(name, uid);
 	}
 
 	public BasicResult<?> delete(Long uid) {

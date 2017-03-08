@@ -249,12 +249,12 @@
 																<span class="icon fa fa-file-text"></span> Relatório</button>
 									        				</div>
 									        				<div class="col-md-4">
-																<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" 
-																 data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
+																<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="Exportação Permitida até 500 Linhas" 
+																 data-ng-class="((listHistoric.list || listHistoricInterval.list) && countHistoric <= 500) ? 'selected' : 'disabled'">
 																<span class="icon fa fa-file-excel-o"></span> Excel</button>
 									        				</div>
 									        				<div class="col-md-4">
-									        				<button type="button" class="btn bg-navy btn-xs form-control"
+									        				<button type="button" class="btn bg-navy btn-xs form-control" 
 									        					data-ng-click="showGrafico();" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
 									        					<span class="icon fa fa-line-chart"></span> Gráfico</button>
 									        				</div>

@@ -9,7 +9,6 @@ public class GasDto {
 	private String name;	
 	private String cas;	
 	private String formula;
-	private UnitMeterGases unitMeterGases;	
 	
 	public GasDto() {
 		
@@ -20,7 +19,6 @@ public class GasDto {
 		this.name = gas.getName();
 		this.cas = gas.getCas();
 		this.formula = gas.getFormula();
-		this.unitMeterGases = gas.getUnitMeterGases();
 	}
 
 	public final Long getUid() {
@@ -53,13 +51,5 @@ public class GasDto {
 
 	public final void setFormula(String formula) {
 		this.formula = formula;
-	}
-
-	public final UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
-	}
-
-	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-		this.unitMeterGases = unitMeterGases;
 	}	
 }

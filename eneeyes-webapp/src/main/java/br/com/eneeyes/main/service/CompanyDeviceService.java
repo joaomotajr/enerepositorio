@@ -23,8 +23,13 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 	private CompanyDeviceRepository repository;
 	
 	@Inject
-	private AreaRepository areaRepository;
-	
+	private AreaRepository areaRepository;		
+
+	public int updateCompanyDeviceName(String name, Long uid) {
+			
+		return repository.updateCompanyDeviceName(name, uid);		
+	}
+
 	public BasicResult<?> save(CompanyDeviceDto dto) {
 		Result<CompanyDeviceDto> result = new Result<CompanyDeviceDto>();		
 		

@@ -27,7 +27,8 @@
 	
 	.selected {		
 		font-weight: 800;	
-	}	
+	}
+	
 </style>
 
 <div class="col-md-9">
@@ -355,7 +356,7 @@
 					           		<strong>Alerta! </strong>{{msgErroAlarm}} 
 					       		</div>
 							
-								<div style="height: 500px; overflow: auto" data-ngcloak>
+								<div style="height: 500px; overflow: auto">
 									<table class="table table-hover">
 										<thead>
 											<tr>

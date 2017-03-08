@@ -29,6 +29,7 @@ public class CompanyDevice {
 		
 		this.uid = dto.getUid();
 		this.deviceType = dto.getDeviceType();
+		this.name = dto.getName();
 	}
 
 	@Id
@@ -50,7 +51,10 @@ public class CompanyDevice {
 		
 	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "companyDevice")
 	private CompanyDetector companyDetector;
-		
+	
+	@Column(name = "NAME", nullable = true)
+	private String name;
+	
 	public Long getUid() {
 		return uid;
 	}
@@ -78,5 +82,13 @@ public class CompanyDevice {
 
 	public final void setArea(Area area) {
 		this.area = area;
+	}
+	
+	public final String getName() {
+		return name;
+	}
+
+	public final void setName(String name) {
+		this.name = name;
 	}
 }

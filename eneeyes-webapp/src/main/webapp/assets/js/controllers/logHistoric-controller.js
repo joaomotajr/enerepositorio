@@ -42,6 +42,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 
 	var loadGoogleCharts = false;
 	
+	$scope.countHistoric = 0;
+	
 	function printData()
 	{
 	
@@ -111,6 +113,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
 			
 			$scope.loading = false;
+			$scope.countHistoric = padZeros($scope.listHistoricInterval.list.length,5);
 			
 			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
 				$(function() { $('#btnSelDevice').click(); })  	
@@ -134,6 +137,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid }, function(){
 			
 			$scope.loading = false;
+			$scope.countHistoric = padZeros($scope.listHistoricInterval.list.length,5);
 			
 			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus'))
 				$(function() { $('#btnSelDevice').click(); })     	
@@ -144,9 +148,6 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	$scope.getHistoricInterval = function() {
 		
 		$scope.loading = true;
-		
-		//var dataInicio = new Date($('#dateIn').data().date);
-		//var dataFim = new Date($('#dateOut').data().date);
 		
 		var dataInicio = new Date($('#dateIn').data().DateTimePicker.date._d);
 		var dataFim = new Date($('#dateOut').data().DateTimePicker.date._d);
@@ -170,6 +171,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}, function(){
 			
 			$scope.loading = false;
+			$scope.countHistoric = padZeros($scope.listHistoricInterval.list.length,5);
 			
 			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
 				$(function() { $('#btnSelDevice').click(); })     	
@@ -245,7 +247,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 
 	$scope.getCompanys = function() {
 		 
-		 $scope.resultCompanies = new CompanyService.listAll();		 
+		 $scope.resultCompanies = new CompanyService.listAllView();		 
 		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.companies = $scope.resultCompanies.list;
         });		 

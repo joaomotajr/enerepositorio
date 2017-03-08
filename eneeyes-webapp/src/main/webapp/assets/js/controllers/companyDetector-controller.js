@@ -210,7 +210,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$("#stepTabDetector_1").trigger("click");
 		
 		$timeout(function () {
-			angular.element('body').removeClass('loading');				
+			angular.element('body').removeClass('loading');			
 		}, 200);
 	 }
 	 
@@ -611,7 +611,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		}	
 	}
 	
-	$scope.initializeDetector();	
-	
+	$scope.initializeDetector();
+		
 	/* ------------------------------------------------------------------------------------------------------- */
 });

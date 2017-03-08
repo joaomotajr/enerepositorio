@@ -22,12 +22,12 @@
 				                    <div class="box-header with-border"><strong style="font-size:1.4em">Pesquisar Empresa.</strong></div>
 				                
 				                    <div class="box-body">
-				                        <select id="selCompany" class="form-control select2 select2-hidden-accessible"  
+				                        <select id="selCompany" class="form-control select2 select2-hidden-accessible"				                        	
 				                            style="width: 100%;" 
 				                            tabindex="-1" 
 				                            aria-hidden="true">
 				                            	<option value="" selected="selected">Selecione</option>                              				                            	
-				                                <option data-ng-repeat="company in companies" data-ng-model="company" value="{{company}}" > {{company.name}} </option>				                                                    
+				                                <option data-ng-repeat="company in companies" value="{{company.uid}}" > {{company.name}} </option>				                                                    
 				                        </select>				                        							                                                                    
 				                    </div>        
 				                </div>        

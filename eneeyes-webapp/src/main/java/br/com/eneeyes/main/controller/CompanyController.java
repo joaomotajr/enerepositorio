@@ -40,6 +40,12 @@ public class CompanyController {
 		return service.listAll();
 	}
 	
+	@RequestMapping(value = "/security/api/company/allView", method = RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> listAllView() {
+		return service.listAllView();
+	}
+	
 	@RequestMapping(value="/security/api/company/obtemPorId/{uid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listById(@PathVariable Long uid) {

@@ -1,14 +1,9 @@
-//app.service('testServices', function ($http, $q) {
-//
-//});
 
 app.controller('companiesController', function ($scope, $timeout, $interval, $filter, CompanyService, UnitService) {
 
-//	$scope.$root.timer = [];
-	
 	$scope.getCompanys = function() {
 		 
-		 $scope.resultCompanies = new CompanyService.listAll();		 
+		 $scope.resultCompanies = new CompanyService.listAllView();		 
 		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.companies = $scope.resultCompanies.list;
         });		 
@@ -76,17 +71,24 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 			$scope.clearFormCompany();			
 		}
 		else {
-
-			$scope.selectedCompany =  $.parseJSON ($(this).val());
 			
-			$scope.companyUid = $scope.selectedCompany.uid;
-		    $scope.companyName = $scope.selectedCompany.name;
-		    $scope.companyDescription = $scope.selectedCompany.description;
-		}
-		
-	    $scope.$apply();
-	    		
+			$scope.getOneCompany($(this).val());
+		}	    		
 	});
+	
+	$scope.getOneCompany = function(companyId) {
+		 
+		 $scope.listOne = new CompanyService.listOne();		 
+		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
+			 
+			 $scope.selectedCompany = $scope.listOne.t;
+			 
+			 $scope.companyUid = $scope.selectedCompany.uid;
+			 $scope.companyName = $scope.selectedCompany.name;
+			 $scope.companyDescription = $scope.selectedCompany.description;
+			 			 
+	    });		 
+	}
 	
 	$scope.selCompany = function() {
 				
@@ -219,10 +221,14 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 			   for (var k = 0; k < $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length; k++) {
 				   
 				   //Dispositivos
-				   if($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType == "DETECTOR")
-					   var device = "<i class='fa fa fa-rss' style='font-size:1.2em;'></i> " + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
-				   else
-					   var device = "<i class='fa  fa-keyboard-o' style='font-size:1.2em;'></i> " + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
+				   if($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType == "DETECTOR") {
+				   		var device = "<i class='fa fa fa-rss' style='font-size:1.2em;'></i> DETECTOR";
+					    if ($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name != "")  
+					    	device +=	"<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name + "</small>";
+				   }
+				   else {   
+					   var device = "<i class='fa fa-keyboard-o' style='font-size:1.2em;'></i> " + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
+				   }
 				   
 				   itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : 3, index: k, areaIndex: j, unitIndex: i, companyDevice : $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k] });
 			   }
@@ -234,8 +240,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		
 	$timeout(function(){
 		angular.element('body').removeClass('loading');
-	}, 1500);
-	
+	}, 500);	
 	
 	$(".select2").select2();
 		

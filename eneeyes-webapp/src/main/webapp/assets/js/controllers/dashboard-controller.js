@@ -38,9 +38,8 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 						if ( offDate > 300 ) {							 
 						     $scope.sumary.offLine ++;
 						     e.offLine = true;
-						}
-						
-						if ( e.alarmType == "NORMAL") {
+						}						
+						else if ( e.alarmType == "NORMAL") {
 							 
 						     $scope.sumary.normal ++;
 						}

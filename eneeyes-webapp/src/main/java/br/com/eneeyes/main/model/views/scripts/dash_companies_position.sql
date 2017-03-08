@@ -14,7 +14,8 @@ VIEW `dash_companies_position` AS
         `pos`.`LAST_VALUE` AS `last_value`,
         `pos`.`ALARM_TYPE` AS `alarm_type`,
         `pos`.`LAST_UPDATE` AS `last_update`,
-        `g`.`NAME` AS `gas_name`
+        `g`.`NAME` AS `gas_name`,
+        `s`.`UNIT_METER_GASES` AS `unit_meter_gases`
     FROM
         ((((((((`company` `c`
         LEFT JOIN `unit` `u` ON ((`c`.`UID` = `u`.`COMPANY_ID`)))

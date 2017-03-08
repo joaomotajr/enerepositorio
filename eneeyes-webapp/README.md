@@ -43,6 +43,9 @@ insert into aln_id_role values (NULL, 'ADMINISTRATOR', 'ACTIVE', 'ADM');
 insert into aln_id_role values (NULL, 'CUSTOMER', 'ACTIVE', 'CST');
 insert into aln_id_role values (NULL, 'EXPERT', 'ACTIVE', 'EXT');
 
+*Atualizar nome em dispositivos
+update company_device cd inner join company_detector c on (cd.uid = c.company_device_id) set cd.name = c.name;
+
 * INCLUIR USUARIO INICIAL
 INSERT INTO `enedb`.`aln_id_user`(`ID_`, `ACCESS_TOKEN_`, `CREATE_DATE_`, `DISPLAYNAME_`, `EXPIRE_TIME_`, `HASH_`, `IMAGE_URL_`, `LOGIN_`, `NICKNAME_`, `PROFILE_URL_`, `PROVIDER_ID_`, `PROVIDER_USER_ID_`, `REFRESH_TOKEN_`, `SECRET_`, `STATUS_`, `CNPJ_`) VALUES (null,null,'2015-09-18','CK Medic',null,sha1('123456'),null,'joaomotajunior@gmail.com','CK Medic',null,null,null,null,null,'ACTIVE', '13210102813');
 

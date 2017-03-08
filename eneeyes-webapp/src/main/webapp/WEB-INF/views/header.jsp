@@ -31,17 +31,13 @@
 	    <!-- Font Awesome -->
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	    
-	    <!-- Ionicons 
-	    <link rel="stylesheet" href="/assets/css/ionicons/ionicons.min.css"> -->
-	    
 	    <!-- iCheck for checkboxes and radio inputs  -->
     	<link rel="stylesheet" href="/assets/plugins/iCheck/all.css"> 
 	    	    
 	    <!-- Theme style -->
 	    <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
 	     
-	    <!-- AdminLTE Skins. Choose a skin from the css/skins
-	         folder instead of downloading all of them to reduce the load. -->
+	    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
 	    <link rel="stylesheet" href="/assets/css/skins/_all-skins.min.css">
 	    
 	    <!-- Date Picker -->
@@ -53,8 +49,12 @@
 		<style type="text/css" media="all">@import "/assets/plugins/imageNotes/css/marker.css";</style>		
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" media="screen">
 
-		<link rel="stylesheet" href="/assets/css/custom.css">
-			    	    
+
+		<!-- Escpeificos -->
+		<link rel="stylesheet" href="/assets/css/custom.css">		
+		<link rel="stylesheet" href="/assets/css/eneeyes.css">
+		
+		<!-- 	    	    
 	    <style>
 	    
 	     	body.loading {
@@ -77,7 +77,8 @@
 			}
 			  
 	    </style>
-	    
+	     -->
+	     
 	</head>
 
 	<!-- HEADER SECTION -->
@@ -123,49 +124,7 @@
 										<p>Bem Vindo ao nosso Site!!</p>
 								</a>
 								</li>
-								<!-- end message -->
-<!-- 								<li><a href="#"> -->
-<!-- 										<div class="pull-left"> -->
-<!-- 											<img src="/assets/img/user3-128x128.jpg" class="img-circle" -->
-<!-- 												alt="User Image"> -->
-<!-- 										</div> -->
-<!-- 										<h4> -->
-<!-- 											AdminLTE Design Team <small><i class="fa fa-clock-o"></i> -->
-<!-- 												2 hours</small> -->
-<!-- 										</h4> -->
-<!-- 										<p>Why not buy a new awesome theme?</p> -->
-<!-- 								</a></li> -->
-<!-- 								<li><a href="#"> -->
-<!-- 										<div class="pull-left"> -->
-<!-- 											<img src="/assets/img/user4-128x128.jpg" class="img-circle" -->
-<!-- 												alt="User Image"> -->
-<!-- 										</div> -->
-<!-- 										<h4> -->
-<!-- 											Developers <small><i class="fa fa-clock-o"></i> Today</small> -->
-<!-- 										</h4> -->
-<!-- 										<p>Why not buy a new awesome theme?</p> -->
-<!-- 								</a></li> -->
-<!-- 								<li><a href="#"> -->
-<!-- 										<div class="pull-left"> -->
-<!-- 											<img src="/assets/img/user3-128x128.jpg" class="img-circle" -->
-<!-- 												alt="User Image"> -->
-<!-- 										</div> -->
-<!-- 										<h4> -->
-<!-- 											Sales Department <small><i class="fa fa-clock-o"></i> -->
-<!-- 												Yesterday</small> -->
-<!-- 										</h4> -->
-<!-- 										<p>Why not buy a new awesome theme?</p> -->
-<!-- 								</a></li> -->
-<!-- 								<li><a href="#"> -->
-<!-- 										<div class="pull-left"> -->
-<!-- 											<img src="/assets/img/user4-128x128.jpg" class="img-circle" -->
-<!-- 												alt="User Image"> -->
-<!-- 										</div> -->
-<!-- 										<h4> -->
-<!-- 											Reviewers <small><i class="fa fa-clock-o"></i> 2 days</small> -->
-<!-- 										</h4> -->
-<!-- 										<p>Why not buy a new awesome theme?</p> -->
-<!-- 								</a></li> -->
+
 							</ul>
 						</li>
 						<li class="footer"><a href="#">Ver Todas Mensagens</a></li>

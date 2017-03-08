@@ -8,6 +8,9 @@ app.factory('CompanyService', function($resource){
         listAll : $resource('/security/api/company/all',{},{
         	company : {method : 'GET'}
         }),
+        listAllView : $resource('/security/api/company/allView',{},{
+        	company : {method : 'GET'}
+        }),
         listOne : $resource('/security/api/company/obtemPorId/:id', {id: '@id'},{
         	company : {method : 'GET'}
         }),

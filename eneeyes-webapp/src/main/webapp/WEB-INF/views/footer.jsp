@@ -67,7 +67,6 @@
 	<script src="/assets/js/eneeyes-site-controller.js"></script>
 	<script src="/assets/js/message-translate.js"></script>	 
 	<script src="/assets/js/jsFunctions.js"></script>
-	<script src="/assets/js/controllers/navegacao-controller.js"></script>
  	<script src="/assets/js/controllers/controller-controller.js"></script> 
 	<script src="/assets/js/controllers/transmitter-controller.js"></script>
 	<script src="/assets/js/controllers/sensor-controller.js"></script>

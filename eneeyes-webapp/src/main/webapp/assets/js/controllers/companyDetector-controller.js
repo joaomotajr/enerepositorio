@@ -451,7 +451,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	    		  textStyle: {
                           'color': '#8C8C8C',
                               'fontName': 'Calibri',
-                              'fontSize': 8,
+                              'fontSize': 9,
                       },
 	    	  },
 	    	  vAxis: {
@@ -460,9 +460,16 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	              textStyle: {
                       'color': '#8C8C8C',
                           'fontName': 'Calibri',
-                          'fontSize': 12,
+                          'fontSize': 9,
+                          'fontStyle' : 'bold',
                   },
-	    		  ticks: [{v:0, f: 'Range Minimo: 0' }, {v: orange, f: 'Detecção: ' + orange}, {v: yellow, f: 'Alerta: ' + yellow}, {v: red, f: 'Evacuação: ' + red}, {v: sensor.rangeMax, f: 'Range Máximo: ' + sensor.rangeMax} ]
+	    		  ticks: [ 
+	    		           {v:0, f: 'Range Minimo: 0' }, 
+	    		           {v: orange, f: 'Detecção: ' + orange}, 
+	    		           {v: yellow, f: 'Alerta: ' + yellow}, 
+	    		           {v: red, f: 'Evacuação: ' + red}, 
+	    		           {v: sensor.rangeMax, f: 'Range Máximo: ' + sensor.rangeMax} 
+	    		        ]
 	    	  },
 	    	  curveType: 'function',
 	          pointSize:1	        

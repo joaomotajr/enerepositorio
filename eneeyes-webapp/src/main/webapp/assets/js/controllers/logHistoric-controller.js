@@ -320,12 +320,14 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}
 	      
 	    data.addRows(itens);
+	    
+	    //getTicks(0, orange, yellow, red, $scope.selectedCompanySensor.rangeMax);
 
 	    var options = {
           
 	          legend: {position: 'none'},
 	          width: 900,
-	          height: 400,
+	          height: 450,
 	    	  hAxis: {
 	    		  gridlines: {color: '#333', count: 4},
 	    		  baselineColor: '#fbf6a7',
@@ -337,9 +339,17 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	    		  textStyle: {
                       'color': '#8C8C8C',
                       'fontName': 'Calibri',
-                      'fontSize': 12,
+                      'fontStyle' : 'bold',
+                      'fontSize': 9,
                   },
-	    		  ticks: [{v:0, f: 'Range Minimo: 0' }, {v: orange, f: 'Detecção: ' + orange}, {v: yellow, f: 'Alerta: ' + yellow}, {v: red, f: 'Evacuação: ' + red}, {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanySensor.rangeMax} ]
+	    		  ticks: [
+	    		          {v:0, f: 'Range Minimo: 0' }, 
+	    		          {v: orange, f: 'Detecção: ' + orange}, 
+	    		          {v: yellow, f: 'Alerta: ' + yellow}, 
+	    		          {v: red, f: 'Evacuação: ' + red}, 
+	    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanySensor.rangeMax}
+	    		          //{v: 850, f: 'Range Máximo: Fim '}
+	    		         ]
 	    	  },
 	    	  curveType: 'function',
 	          pointSize:1
@@ -348,6 +358,21 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	    var chart = new google.visualization.LineChart(objChart);
 	    chart.draw(data, options);
 	
+	}
+	
+	function getTicks(min, orange, yellow, red, max) {
+		ticks = [];
+		
+		ticks.push({v:0, f: 'Range Minimo: 0' });
+		
+		for (var i = 20; i < max; i+=20) {				
+			
+			
+		 }
+		
+		ticks.push({v: max, f: 'Range Máximo: ' + max});
+		
+		return ticks;
 	}
 	
 	$('dateIn').on('changeDate', function(ev){

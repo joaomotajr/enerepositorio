@@ -40,7 +40,8 @@ public class SiteService {
     @Produce
     ProducerTemplate producer;
 
-    public Future<Result> sendMessage(final String to, final String from, final String subject, final String message) throws Exception {
+    @SuppressWarnings("rawtypes")
+	public Future<Result> sendMessage(final String to, final String from, final String subject, final String message) throws Exception {
         Map<String, String> sendmail = new HashMap<String, String>();
         sendmail.put("from", from);
         sendmail.put("to", to);
@@ -58,7 +59,8 @@ public class SiteService {
 
         Result<Boolean> result = new Success("SCCSTE0001","async.send.mail.successMessage");
         try {
-            Map<String, String> sendmail = objectMapper.readValue(json, Map.class);
+            @SuppressWarnings("unchecked")
+			Map<String, String> sendmail = objectMapper.readValue(json, Map.class);
             String from = sendmail.get("from");
             String to = sendmail.get("to");
             String subject = sendmail.get("subject");

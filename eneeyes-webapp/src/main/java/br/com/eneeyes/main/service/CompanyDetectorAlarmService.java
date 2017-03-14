@@ -12,6 +12,7 @@ import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDetectorAlarm;
 import br.com.eneeyes.main.repository.CompanyDetectorAlarmRepository;
+import br.com.eneeyes.main.repository.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
@@ -32,6 +33,8 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 		
 		if (companyDetectorAlarmRepository.updateAlarm(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getCompanyDetector(), companyDetectorAlarm.getId().getSensorId()) <= 0)		
 			companyDetectorAlarm = companyDetectorAlarmRepository.save(companyDetectorAlarm);
+		
+		CompanyDetectorAlarmSingletonRepository.populate(findAll());
 		
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Executado com sucesso.");
@@ -135,6 +138,11 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 		
 		return(companyDetectorAlarm == null ? null : new CompanyDetectorAlarmDto(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getId().getSensorId()));
 		
+	}
+	
+	public List<CompanyDetectorAlarm> findAll() {
+		
+		return companyDetectorAlarmRepository.findAll();		
 	}
 
 	@Override

@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -37,8 +38,7 @@ public class Alarm {
 		this.alarm1 = dto.getAlarm1();
 		this.alarm2 = dto.getAlarm2();
 		this.alarm3 = dto.getAlarm3();
-		this.alarmOff = dto.getAlarmOff();
-		
+		this.alarmOff = dto.getAlarmOff();		
 	}	
 	
 	@Id
@@ -72,6 +72,10 @@ public class Alarm {
 	
 	@Column(name = "ALARM_OFF", nullable = true)		
 	private Boolean alarmOff;
+		
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
+	@JoinColumn(name="COMPANY_ID", nullable = false)
+	private Company company;
 	
 	public final Long getUid() {
 		return uid;

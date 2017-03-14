@@ -320,8 +320,6 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}
 	      
 	    data.addRows(itens);
-	    
-	    //getTicks(0, orange, yellow, red, $scope.selectedCompanySensor.rangeMax);
 
 	    var options = {
           
@@ -348,7 +346,6 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	    		          {v: yellow, f: 'Alerta: ' + yellow}, 
 	    		          {v: red, f: 'Evacuação: ' + red}, 
 	    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanySensor.rangeMax}
-	    		          //{v: 850, f: 'Range Máximo: Fim '}
 	    		         ]
 	    	  },
 	    	  curveType: 'function',
@@ -358,22 +355,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	    var chart = new google.visualization.LineChart(objChart);
 	    chart.draw(data, options);
 	
-	}
-	
-	function getTicks(min, orange, yellow, red, max) {
-		ticks = [];
-		
-		ticks.push({v:0, f: 'Range Minimo: 0' });
-		
-		for (var i = 20; i < max; i+=20) {				
-			
-			
-		 }
-		
-		ticks.push({v: max, f: 'Range Máximo: ' + max});
-		
-		return ticks;
-	}
+	}	
 	
 	$('dateIn').on('changeDate', function(ev){
 	    $(this).datepicker('hide');

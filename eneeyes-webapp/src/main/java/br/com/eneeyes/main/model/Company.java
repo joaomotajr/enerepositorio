@@ -43,6 +43,9 @@ public class Company {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "company", cascade = CascadeType.ALL)
 	private Set<Unit> units = new HashSet<Unit>();	
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "company", cascade = CascadeType.ALL)
+	private Set<Alarm> alarms = new HashSet<Alarm>();
+	
 	public final Long getUid() {
 		return uid;
 	}

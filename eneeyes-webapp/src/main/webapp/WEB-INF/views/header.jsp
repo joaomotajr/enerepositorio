@@ -53,31 +53,6 @@
 		<!-- Escpeificos -->
 		<link rel="stylesheet" href="/assets/css/custom.css">		
 		<link rel="stylesheet" href="/assets/css/eneeyes.css">
-		
-		<!-- 	    	    
-	    <style>
-	    
-	     	body.loading {
-				overflow: hidden;
-			}
-			
-			body.loading .ajax-loader {
-				display: block;
-			}  
-			
-			.ajax-loader {
-				display: none;
-				position: fixed;
-				z-index: 2000;
-				top: 0;
-				left: 0;
-				height: 100%;
-				width: 100%; 	
-				background: rgba(255, 255, 255, .5) url('/assets/img/loader.gif') 50% 50% no-repeat;
-			}
-			  
-	    </style>
-	     -->
 	     
 	</head>
 
@@ -88,7 +63,13 @@
 	<!-- Logo -->
 	<a href="#" class="logo" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"> <!-- mini logo for sidebar mini 50x50 pixels -->
 		<span class="logo-mini"><b>ENE</b></span> <!-- logo for regular state and mobile devices -->
-		<span class="logo-lg"><b>Ene</b>EYES</span>
+<!--  		<span class="logo-lg"><b>Ene</b>EYES</span>  -->
+		
+	 	<span class="logo-lg">	 		
+			<img src="/assets/img/enesens_light.png" style="float: left; padding:5px; width: 43%;">
+			<span class="text-black"> <b>Ene</b>EYES </span>	
+		</span>
+		
 	</a>
 
 	<!-- Header Navbar: style can be found in header.less -->
@@ -102,40 +83,33 @@
 			<ul class="nav navbar-nav">
 
 				<!-- Messages: style can be found in dropdown.less-->
-				<li class="dropdown messages-menu"><a href="#"
-					class="dropdown-toggle" data-toggle="dropdown"> <i
-						class="fa fa-envelope-o"></i> <span class="label label-success">1</span>
-				</a>
+				<li class="dropdown messages-menu">
+				
+				<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span class="label label-success">1</span>	</a>
 					<ul class="dropdown-menu">
 						<li class="header">Voce tem 1 Mensagem</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
 							<ul class="menu">
 								<li>
-									<!-- start message --> <a href="#">
-										<div class="pull-left">
-											<img src="/assets/img/avatar_160x160.png" class="img-circle"
-												alt="User Image">
-										</div>
-										<h4>
-											Time de Desenvolvimento <small><i class="fa fa-clock-o"></i> 5
-												mins</small>
-										</h4>
+									<!-- start message --> 
+									<a href="#">
+										<div class="pull-left">	<img src="/assets/img/avatar_160x160.png" class="img-circle" alt="User Image"></div>
+										<h4> Time de Desenvolvimento <small><i class="fa fa-clock-o"></i> 5 mins</small> </h4>
 										<p>Bem Vindo ao nosso Site!!</p>
-								</a>
+									</a>
 								</li>
 
 							</ul>
 						</li>
 						<li class="footer"><a href="#">Ver Todas Mensagens</a></li>
-					</ul></li>
+					</ul>
+				</li>
 					
 
 				<!-- Notifications: style can be found in dropdown.less -->
-				<li class="dropdown notifications-menu"><a href="#"
-					class="dropdown-toggle" data-toggle="dropdown"> <i
-						class="fa fa-bell-o"></i> <span class="label label-warning">2</span>
-				</a>
+				<li class="dropdown notifications-menu">
+					<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning">2</span></a>
 					<ul class="dropdown-menu">
 						<li class="header">Voce tem 2 Alarmes Pendentes</li>
 						<li>
@@ -155,10 +129,8 @@
 					</ul></li>
 
 				<!-- Tasks: style can be found in dropdown.less -->
-				<li class="dropdown tasks-menu"><a href="#"
-					class="dropdown-toggle" data-toggle="dropdown"> <i
-						class="fa fa-flag-o"></i> <span class="label label-danger">1</span>
-				</a>
+				<li class="dropdown tasks-menu">
+				<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span class="label label-danger">1</span></a>
 					<ul class="dropdown-menu">
 						<li class="header">Voce Tem um Tarefa</li>
 						<li>
@@ -186,22 +158,20 @@
 					</ul></li>
 
 				<!-- User Account: style can be found in dropdown.less -->
-				<li class="dropdown user user-menu"><a href="#"
-					class="dropdown-toggle" data-toggle="dropdown"> <img
-						src="/assets/img/avatar_128x128.png" class="user-image"
-						alt="User Image"> <span class="hidden-xs"><sec:authentication
-								property="principal.displayName" /></span>
+				<li class="dropdown user user-menu">
+				<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> 
+					<img src="/assets/img/avatar_128x128.png" class="user-image" alt="User Image"> 
+					<span class="hidden-xs"><sec:authentication property="principal.displayName" /></span>
 				</a>
+				
 				<ul class="dropdown-menu">
-
 						<!-- User image -->
 						<li class="user-header"><img
-							src="/assets/img/avatar_128x128.png" class="img-circle"
-							alt="User Image">
+							src="/assets/img/avatar_128x128.png" class="img-circle"	alt="User Image">
 							<p>
-								<sec:authentication property="principal.displayName" />
-								- Administrador do Site <small>Desde Nov. 2016</small>
-							</p></li>
+								<sec:authentication property="principal.displayName" /> - Administrador do Site <small>Desde Nov. 2016</small>
+							</p>
+						</li>
 
 						<!-- Menu Footer-->
 						<li class="user-footer">

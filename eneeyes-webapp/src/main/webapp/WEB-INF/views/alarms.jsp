@@ -85,7 +85,8 @@
 				                        </div>               
 			                        </div>
 		                        </div>                
-			                </div>                    
+			                </div>    
+			                                
 			                <div class="row">
 			                	<div class="col-md-6">                                                                                                                
 									<div class="form-group">
@@ -96,9 +97,19 @@
 									</div>
 								</div>							
 								<div class="col-md-6">
-									<div class="form-group">
-										                                                
-									</div>
+									
+									<div class="box box-primary box-solid">				                    
+					                	<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Empresa</strong></div>
+					                    <div class="box-body">
+					                        <select class="form-control" data-live-search="true" 
+					                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+					                                data-ng-options="item as item.name for item in companies | orderBy: 'name' track by item.uid" 
+			                                           data-ng-model="alarmCompany">
+			                                           <option value="">Selecione</option> 
+					                        </select>    
+					                    </div>			                    			                            
+					                </div>
+					                
 								</div>														
 							</div>	                        
 	                       	<div class="box box-primary box-solid">

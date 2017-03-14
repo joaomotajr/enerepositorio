@@ -6,10 +6,13 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.model.Alarm;
 import br.com.eneeyes.main.repository.AlarmRepository;
+import br.com.eneeyes.main.repository.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
@@ -20,12 +23,17 @@ public class AlarmService implements IService<AlarmDto> {
 	@Inject
 	private AlarmRepository repository;
 	
+	@Autowired
+	CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
+	
 	public BasicResult<?> save(AlarmDto dto) {
 		
 		Result<AlarmDto> result = new Result<AlarmDto>(); 	
 		
 		Alarm alarm = new Alarm(dto);		
 		alarm = repository.save(alarm);
+		
+		CompanyDetectorAlarmSingletonRepository.populate(companyDetectorAlarmAlarmService.findAll());
 		
 		dto.setUid(alarm.getUid());				
 		result.setEntity(dto);

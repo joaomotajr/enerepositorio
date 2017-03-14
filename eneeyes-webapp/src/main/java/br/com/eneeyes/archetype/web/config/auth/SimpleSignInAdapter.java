@@ -56,8 +56,8 @@ public final class SimpleSignInAdapter implements SignInAdapter {
 		if(user == null) {
 			user = new User();
 			user.setLogin(data.getProviderUserId());
-			user.setProviderUserId(data.getProviderUserId());
-			user.setProviderId(data.getProviderId());
+//			user.setProviderUserId(data.getProviderUserId());
+//			user.setProviderId(data.getProviderId());
 			user.setNickname(data.getDisplayName());
 			user.setStatus(UserStatus.ACTIVE);
 			
@@ -66,11 +66,11 @@ public final class SimpleSignInAdapter implements SignInAdapter {
 		}
 		
 		user.setDisplayName(data.getDisplayName());
-		user.setProfileUrl(data.getProfileUrl());
+//		user.setProfileUrl(data.getProfileUrl());
 		user.setImageUrl(data.getImageUrl());
-		user.setAccessToken(data.getAccessToken());
-		user.setSecret(data.getSecret());
-		user.setRefreshToken(data.getRefreshToken());
+//		user.setAccessToken(data.getAccessToken());
+//		user.setSecret(data.getSecret());
+//		user.setRefreshToken(data.getRefreshToken());
 		user.setExpireTime(data.getExpireTime());
 		
 		ids.save(user);

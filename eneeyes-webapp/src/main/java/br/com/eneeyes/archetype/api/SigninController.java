@@ -36,10 +36,14 @@ public class SigninController {
     @RequestMapping(value="/api/signin", method = RequestMethod.POST, consumes = {"application/xml", "application/json"}, produces = {"application/xml", "application/json"})
     @ResponseStatus(HttpStatus.OK)
     public SigninResult signin(@RequestBody SigninDto signinDto) {
+    	
         SigninResult signinResult = new SigninResult(signinDto);
+        
         try {
-            Authentication auth = securityManager.authenticate(new UsernamePasswordAuthenticationToken(signinDto.getLogin(), signinDto.getCredential()));
+            
+        	Authentication auth = securityManager.authenticate(new UsernamePasswordAuthenticationToken(signinDto.getLogin(), signinDto.getCredential()));
             SecurityContextHolder.getContext().setAuthentication(auth);
+            
             signinResult.setResultType(ResultMessageType.SUCCESS);
         } catch (AuthenticationException e) {
             signinResult.setResultType(ResultMessageType.ERROR);
@@ -58,6 +62,7 @@ public class SigninController {
 	public SigninResult signin(@PathVariable String login, @PathVariable String pass) {
 		
     	SigninDto signinDto = new SigninDto();
+    	
     	signinDto.setLogin(login);
     	signinDto.setCredential(pass);
     	

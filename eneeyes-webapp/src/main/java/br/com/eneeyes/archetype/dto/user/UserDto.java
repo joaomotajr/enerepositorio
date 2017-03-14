@@ -44,8 +44,8 @@ public class UserDto implements Serializable {
 
 	public UserDto(User user) {
 		this.id = user.getId();
-		this.cpf = user.getCpf();
-		this.cnpj = user.getCnpj();
+//		this.cpf = user.getCpf();
+//		this.cnpj = user.getCnpj();
 		this.displayName = user.getDisplayName();
 		this.nickname = user.getNickname();
 		this.fone = user.getFone();
@@ -60,13 +60,13 @@ public class UserDto implements Serializable {
 		this.hash = user.getHash();
 		this.status = user.getStatus();
 		this.createDate = user.getCreateDate();
-		this.providerId = user.getProviderId();
-		this.providerUserId = user.getProviderUserId();
-		this.profileUrl = user.getProfileUrl();
+//		this.providerId = user.getProviderId();
+//		this.providerUserId = user.getProviderUserId();
+//		this.profileUrl = user.getProfileUrl();
 		this.imageUrl = user.getImageUrl();
-		this.accessToken = user.getAccessToken();
-		this.secret = user.getSecret();
-		this.refreshToken = user.getRefreshToken();
+//		this.accessToken = user.getAccessToken();
+//		this.secret = user.getSecret();
+//		this.refreshToken = user.getRefreshToken();
 		this.expireTime = user.getExpireTime();
 	}
 

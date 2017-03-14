@@ -405,16 +405,16 @@
 							
 							<td data-ng-if="tipoGrupo==1">
 								<span data-ng-if="item.value < selectedSensorAlarm.alarm1 && item.value < selectedSensorAlarm.alarm1" class="label label-success"> NORMAL </span>									                      		
-	                     			<span data-ng-if="item.value >= selectedSensorAlarm.alarm1 && item.value < selectedSensorAlarm.alarm2" class="label label-default"> DETECÇÃO </span>									                      		
+	                     			<span data-ng-if="item.value >= selectedSensorAlarm.alarm1 && item.value < selectedSensorAlarm.alarm2" class="label label-default"> DETECCAO </span>									                      		
 	                     			<span data-ng-if="item.value >= selectedSensorAlarm.alarm2 && item.value < selectedSensorAlarm.alarm3" class="label label-warning"> ALERTA </span>									                      											                      		
-	                     			<span data-ng-if="item.value >= selectedSensorAlarm.alarm3" class="label label-danger"> EVACUAÇÃO </span>
+	                     			<span data-ng-if="item.value >= selectedSensorAlarm.alarm3" class="label label-danger"> EVACUACAO </span>
 	                     	</td>
 	                     	
 	                     	<td data-ng-if="tipoGrupo!=1">
 								<span data-ng-if="item.max_value < selectedSensorAlarm.alarm1 && item.max_value < selectedSensorAlarm.alarm1" class="label label-success"> NORMAL </span>									                      		
-                      			<span data-ng-if="item.max_value >= selectedSensorAlarm.alarm1 && item.max_value < selectedSensorAlarm.alarm2" class="label label-default"> DETECÇÃO </span>									                      		
+                      			<span data-ng-if="item.max_value >= selectedSensorAlarm.alarm1 && item.max_value < selectedSensorAlarm.alarm2" class="label label-default"> DETECCAO </span>									                      		
                       			<span data-ng-if="item.max_value >= selectedSensorAlarm.alarm2 && item.max_value < selectedSensorAlarm.alarm3" class="label label-warning"> ALERTA </span>									                      											                      		
-                      			<span data-ng-if="item.max_value >= selectedSensorAlarm.alarm3" class="label label-danger"> EVACUAÇÃO </span>
+                      			<span data-ng-if="item.max_value >= selectedSensorAlarm.alarm3" class="label label-danger"> EVACUACAO </span>
                       		</td>
 	                    </tr>	                   
 		           	</table>            	

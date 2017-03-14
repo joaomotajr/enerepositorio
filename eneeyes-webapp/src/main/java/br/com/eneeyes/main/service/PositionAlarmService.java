@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,7 @@ import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.register.Sensor;
+import br.com.eneeyes.main.repository.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.repository.PositionAlarmRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -27,7 +27,7 @@ import br.com.eneeyes.main.result.Result;
 @Named
 public class PositionAlarmService implements IService<PositionAlarmDto> {
 	
-	@Inject
+	@Autowired
 	private PositionAlarmRepository repository;
 	
 	@Autowired
@@ -46,14 +46,18 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		
 		CompanyDetector companyDetector = new CompanyDetector(position.getCompanyDetector().getUid());
 		Sensor sensor = new Sensor(position.getSensor().getUid());
-				
-		CompanyDetectorAlarmDto alarm = companyDetectorAlarmAlarmService.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());
+		
+		if(CompanyDetectorAlarmSingletonRepository.init()) {
+			CompanyDetectorAlarmSingletonRepository.populate(companyDetectorAlarmAlarmService.findAll());
+		}
+		
+		CompanyDetectorAlarmDto alarm = CompanyDetectorAlarmSingletonRepository.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());
+		//CompanyDetectorAlarmDto alarm = companyDetectorAlarmAlarmService.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());
 			
 		AlarmType alarmType = AlarmType.NORMAL ;
 		
 		if(alarm != null) {
 			
-			//if( position.getLastValue() > alarm.getAlarmDto().getAlarm3() ) {
 			if( position.getLastValue().compareTo( new BigDecimal(alarm.getAlarmDto().getAlarm3())) > 0 ) {
 				
 				alarmType = AlarmType.EVACUACAO;

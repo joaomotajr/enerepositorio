@@ -1,5 +1,5 @@
 
-app.controller('alarmController', function ($scope, $timeout, $filter, AlarmService, GasService) {
+app.controller('alarmController', function ($scope, $timeout, $filter, AlarmService, GasService, CompanyService) {
 
 	$scope.saveAlarm = function() {
 		
@@ -116,6 +116,14 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
          } 		 
 	 }
 	 
+	$scope.getCompanys = function() {
+		 
+		 $scope.resultCompanies = new CompanyService.listAllView();		 
+		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
+			 $scope.companies = $scope.resultCompanies.list;
+        });		 
+	}
+	 
 	 $scope.unitMetersGases = 
 		 [
 		  	{ name : 'DESCONHECIDO', uid : 0 },
@@ -128,5 +136,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 
 	 $scope.getAlarms();	 
 	 $scope.getGases();
+	 $scope.getCompanys();
+	 
 	 angular.element('body').removeClass('loading');
 });

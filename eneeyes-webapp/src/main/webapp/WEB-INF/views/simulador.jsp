@@ -123,13 +123,12 @@
 			       		
 		       			<div class="row">       		
 			       			<div class="col-md-12" style='font-size: 1.3em'>
-			       				<div class="col-md-1">
-			       				</div>
-			       				<div class="col-md-3">
-			       					<label class="text-muted">Range Alarmes do Sensor: </label>
-			       				</div>
+			       				
 			       				<div class="col-md-2">
 			       					<label data-ng-show="selectedCompanySensor">Range Max: </label><span> {{selectedCompanySensor.rangeMax}}</span>
+			       				</div>
+			       				<div class="col-md-4">			       					
+			       					<label data-ng-show="selectedCompanySensor">Alarme: </label><span> {{selectedSensorAlarm.name}}</span>
 			       				</div>
 			       				<div class="col-md-2">
 			       					<label data-ng-show="selectedCompanySensor">Alarm 1: </label><strong style='color: gray'> {{selectedSensorAlarm.alarm1}}</strong>

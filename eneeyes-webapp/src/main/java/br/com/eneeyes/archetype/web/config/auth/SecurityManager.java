@@ -83,18 +83,18 @@ public class SecurityManager implements AuthenticationManager {
 		return createAuth(user);
 	}
 	
-	public Authentication authenticate(String cnpj) {
-		User user;
-		try {
-			user = identityDao.findByCnpj(cnpj).getUser();
-			if (user != null) {
-				return createAuth(user);
-			}
-		} catch (Exception e) {
-			log.error(e);
-		}
-		return null;
-	}
+//	public Authentication authenticate(String cnpj) {
+//		User user;
+//		try {
+//			user = identityDao.findByCnpj(cnpj).getUser();
+//			if (user != null) {
+//				return createAuth(user);
+//			}
+//		} catch (Exception e) {
+//			log.error(e);
+//		}
+//		return null;
+//	}
 
     public Authentication createAuth(final User user) {
         List<GrantedAuthority> grants = new ArrayList<GrantedAuthority>();

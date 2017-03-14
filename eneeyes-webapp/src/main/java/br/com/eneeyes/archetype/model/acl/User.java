@@ -36,11 +36,11 @@ public class User implements Serializable {
 	@Column(name="ID_")
 	private Long id;
 	
-	@Column(name="CPF_")
-	private String cpf;
+//	@Column(name="CPF_")
+//	private String cpf;
 	
-	@Column(name="CNPJ_")
-	private String cnpj;
+//	@Column(name="CNPJ_")
+//	private String cnpj;
 	
 	@Column(name="DISPLAYNAME_")
 	private String displayName;
@@ -79,23 +79,23 @@ public class User implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createDate;
 	
-	@Column(name="PROVIDER_ID_")
-	private String providerId;
-	
-	@Column(name="PROVIDER_USER_ID_", unique=true, length=100)
-	private String providerUserId;
-	
-	@Column(name="PROFILE_URL_")
-	private String profileUrl;
+//	@Column(name="PROVIDER_ID_")
+//	private String providerId;
+//	
+//	@Column(name="PROVIDER_USER_ID_", unique=true, length=100)
+//	private String providerUserId;
+//	
+//	@Column(name="PROFILE_URL_")
+//	private String profileUrl;
 	
 	@Column(name="IMAGE_URL_")
 	private String imageUrl;
 	
-	@Column(name="ACCESS_TOKEN_")
-	private String accessToken;
+//	@Column(name="ACCESS_TOKEN_")
+//	private String accessToken;
 	
-	@Column(name="SECRET_")
-	private String secret;
+//	@Column(name="SECRET_")
+//	private String secret;
 	
 	@Column(name="REFRESH_TOKEN_")
 	private String refreshToken;
@@ -118,8 +118,8 @@ public class User implements Serializable {
 
 	public User(UserDto userDto) {
 		this.id = userDto.getId();
-		this.cpf = userDto.getCpf();
-		this.cnpj = userDto.getCnpj();
+//		this.cpf = userDto.getCpf();
+//		this.cnpj = userDto.getCnpj();
 		this.displayName = userDto.getDisplayName();
 		this.nickname = userDto.getNickname();
 		this.fone = userDto.getFone();
@@ -130,12 +130,12 @@ public class User implements Serializable {
 		this.hash = userDto.getHash();
 		this.status = userDto.getStatus();
 		this.createDate = userDto.getCreateDate();		
-		this.providerId = userDto.getProviderId();
-		this.providerUserId = userDto.getProviderUserId();
-		this.profileUrl = userDto.getProfileUrl();
-		this.imageUrl = userDto.getImageUrl();
-		this.accessToken = userDto.getAccessToken();
-		this.secret = userDto.getSecret();
+//		this.providerId = userDto.getProviderId();
+//		this.providerUserId = userDto.getProviderUserId();
+//		this.profileUrl = userDto.getProfileUrl();
+//		this.imageUrl = userDto.getImageUrl();
+//		this.accessToken = userDto.getAccessToken();
+//		this.secret = userDto.getSecret();
 		this.refreshToken = userDto.getRefreshToken();
 		this.expireTime = userDto.getExpireTime();
 	}
@@ -162,33 +162,33 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	/**
-	 * @return the cpf
-	 */
-	public String getCpf() {
-		return cpf;
-	}
-
-	/**
-	 * @param cpf the cpf to set
-	 */
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	/**
-	 * @return the cnpj
-	 */
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	/**
-	 * @param cnpj the cnpj to set
-	 */
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
+//	/**
+//	 * @return the cpf
+//	 */
+//	public String getCpf() {
+//		return cpf;
+//	}
+//
+//	/**
+//	 * @param cpf the cpf to set
+//	 */
+//	public void setCpf(String cpf) {
+//		this.cpf = cpf;
+//	}
+//
+//	/**
+//	 * @return the cnpj
+//	 */
+//	public String getCnpj() {
+//		return cnpj;
+//	}
+//
+//	/**
+//	 * @param cnpj the cnpj to set
+//	 */
+//	public void setCnpj(String cnpj) {
+//		this.cnpj = cnpj;
+//	}
 
 	/**
 	 * @return the displayName
@@ -330,47 +330,47 @@ public class User implements Serializable {
 		this.createDate = createDate;
 	}
 
-	/**
-	 * @return the providerId
-	 */
-	public String getProviderId() {
-		return providerId;
-	}
+//	/**
+//	 * @return the providerId
+//	 */
+//	public String getProviderId() {
+//		return providerId;
+//	}
+//
+//	/**
+//	 * @param providerId the providerId to set
+//	 */
+//	public void setProviderId(String providerId) {
+//		this.providerId = providerId;
+//	}
+//
+//	/**
+//	 * @return the providerUserId
+//	 */
+//	public String getProviderUserId() {
+//		return providerUserId;
+//	}
 
-	/**
-	 * @param providerId the providerId to set
-	 */
-	public void setProviderId(String providerId) {
-		this.providerId = providerId;
-	}
-
-	/**
-	 * @return the providerUserId
-	 */
-	public String getProviderUserId() {
-		return providerUserId;
-	}
-
-	/**
-	 * @param providerUserId the providerUserId to set
-	 */
-	public void setProviderUserId(String providerUserId) {
-		this.providerUserId = providerUserId;
-	}
-
-	/**
-	 * @return the profileUrl
-	 */
-	public String getProfileUrl() {
-		return profileUrl;
-	}
-
-	/**
-	 * @param profileUrl the profileUrl to set
-	 */
-	public void setProfileUrl(String profileUrl) {
-		this.profileUrl = profileUrl;
-	}
+//	/**
+//	 * @param providerUserId the providerUserId to set
+//	 */
+//	public void setProviderUserId(String providerUserId) {
+//		this.providerUserId = providerUserId;
+//	}
+//
+//	/**
+//	 * @return the profileUrl
+//	 */
+//	public String getProfileUrl() {
+//		return profileUrl;
+//	}
+//
+//	/**
+//	 * @param profileUrl the profileUrl to set
+//	 */
+//	public void setProfileUrl(String profileUrl) {
+//		this.profileUrl = profileUrl;
+//	}
 
 	/**
 	 * @return the imageUrl
@@ -386,33 +386,33 @@ public class User implements Serializable {
 		this.imageUrl = imageUrl;
 	}
 
-	/**
-	 * @return the accessToken
-	 */
-	public String getAccessToken() {
-		return accessToken;
-	}
+//	/**
+//	 * @return the accessToken
+//	 */
+//	public String getAccessToken() {
+//		return accessToken;
+//	}
+//
+//	/**
+//	 * @param accessToken the accessToken to set
+//	 */
+//	public void setAccessToken(String accessToken) {
+//		this.accessToken = accessToken;
+//	}
 
-	/**
-	 * @param accessToken the accessToken to set
-	 */
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
-
-	/**
-	 * @return the secret
-	 */
-	public String getSecret() {
-		return secret;
-	}
-
-	/**
-	 * @param secret the secret to set
-	 */
-	public void setSecret(String secret) {
-		this.secret = secret;
-	}
+//	/**
+//	 * @return the secret
+//	 */
+//	public String getSecret() {
+//		return secret;
+//	}
+//
+//	/**
+//	 * @param secret the secret to set
+//	 */
+//	public void setSecret(String secret) {
+//		this.secret = secret;
+//	}
 
 	/**
 	 * @return the refreshToken

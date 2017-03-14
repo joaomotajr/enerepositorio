@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -101,54 +100,54 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
 		return new UserResult(resultType, null, user);
 	}
 	
-	@Transactional
-	public UserResult findByCnpj(String cnpj) throws Exception{
-		ResultMessageType resultType = ResultMessageType.SUCCESS;
-		User user = null;
-		try {
-			user = repository.findByCnpj(cnpj);
-		} catch (NoResultException e) {
-			log.error(e);
-			resultType = ResultMessageType.ERROR;
-		}
-		return new UserResult(resultType, null, user);
-	}
+//	@Transactional
+//	public UserResult findByCnpj(String cnpj) throws Exception{
+//		ResultMessageType resultType = ResultMessageType.SUCCESS;
+//		User user = null;
+//		try {
+//			user = repository.findByCnpj(cnpj);
+//		} catch (NoResultException e) {
+//			log.error(e);
+//			resultType = ResultMessageType.ERROR;
+//		}
+//		return new UserResult(resultType, null, user);
+//	}
+//
+//	public UserResult findByLoginAndProviderId(String login, String providerId) throws Exception {
+//		return new UserResult(ResultMessageType.SUCCESS, null, repository.findByLoginAndProviderId(login, providerId));
+//	}
+//
+//	public UserResult findByLoginAndProviderIdAndProviderUserId(String login,
+//			String providerId, String providerUserId) throws Exception {
+//		return new UserResult(ResultMessageType.SUCCESS, null, repository.findByLoginAndProviderIdAndProviderUserId(login, providerId, providerUserId));
+//	}
+//
+//	public UserCollectionResult findByProviderIdsAndProviderUsersIds(
+//			Set<String> providerIds, Set<String> providerUsersIds) throws Exception {
+//		List<User> users = repository.findByProviderIdInAndProviderUserIdIn(providerIds, providerUsersIds);
+//		UserCollectionResult collection = new UserCollectionResult();
+//		collection.setItems(users.toArray(new User[users.size()]));
+//		return collection;
+//	}
+//
+//	@Transactional
+//	public UserResult findUserConnection(String providerId,
+//			String providerUserId) throws Exception {
+//		User user = repository.findByProviderIdAndProviderUserId(providerId, providerUserId);
+//		UserResult result = new UserResult();
+//        result.setResultType((user != null) ? ResultMessageType.SUCCESS : ResultMessageType.ERROR);
+//        result.setUser(toNativeBean(user));
+//		return result;
+//	}
 
-	public UserResult findByLoginAndProviderId(String login, String providerId) throws Exception {
-		return new UserResult(ResultMessageType.SUCCESS, null, repository.findByLoginAndProviderId(login, providerId));
-	}
-
-	public UserResult findByLoginAndProviderIdAndProviderUserId(String login,
-			String providerId, String providerUserId) throws Exception {
-		return new UserResult(ResultMessageType.SUCCESS, null, repository.findByLoginAndProviderIdAndProviderUserId(login, providerId, providerUserId));
-	}
-
-	public UserCollectionResult findByProviderIdsAndProviderUsersIds(
-			Set<String> providerIds, Set<String> providerUsersIds) throws Exception {
-		List<User> users = repository.findByProviderIdInAndProviderUserIdIn(providerIds, providerUsersIds);
-		UserCollectionResult collection = new UserCollectionResult();
-		collection.setItems(users.toArray(new User[users.size()]));
-		return collection;
-	}
-
-	@Transactional
-	public UserResult findUserConnection(String providerId,
-			String providerUserId) throws Exception {
-		User user = repository.findByProviderIdAndProviderUserId(providerId, providerUserId);
-		UserResult result = new UserResult();
-        result.setResultType((user != null) ? ResultMessageType.SUCCESS : ResultMessageType.ERROR);
-        result.setUser(toNativeBean(user));
-		return result;
-	}
-
-	@Transactional
-	public UserCollectionResult findUsersConnections(String providerId,
-			Set<String> ids) throws Exception {
-		List<User> users = repository.findByProviderIdAndProviderUserIdIn(providerId, ids);
-		UserCollectionResult collection = new UserCollectionResult();
-		collection.setItems(users.toArray(new User[users.size()]));
-		return collection;
-	}
+//	@Transactional
+//	public UserCollectionResult findUsersConnections(String providerId,
+//			Set<String> ids) throws Exception {
+//		List<User> users = repository.findByProviderIdAndProviderUserIdIn(providerId, ids);
+//		UserCollectionResult collection = new UserCollectionResult();
+//		collection.setItems(users.toArray(new User[users.size()]));
+//		return collection;
+//	}
 
 	@Transactional
 	public UserResult save(User user) {
@@ -274,6 +273,7 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
 			Map<String, Object> token = new HashMap<String, Object>();
 			token.put("expire",calendar.getTime());
 			token.put("hash",MessageDigester.digestSha1(user.getHash()));
+			
 			String json = objectMapper.writeValueAsString(token);
 			String refreshToken = MessageDigester.encode64(json);
 
@@ -332,7 +332,7 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
             String refreshToken = MessageDigester.encode64(json);
 
             user.setHash(MessageDigester.digestSha1(pass1).toString());
-            user.setRefreshToken(refreshToken);
+//            user.setRefreshToken(refreshToken);
             save(user);
 
             String to = user.getLogin();
@@ -384,12 +384,24 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
 		return result;
 	}
 
-  @Override
-  public boolean senhaExpirada(User user) throws Exception
-  {
-    // TODO Auto-generated method stub
-    return false;
-  }
+	  @Override
+	  public boolean senhaExpirada(User user) throws Exception
+	  {
+	    // TODO Auto-generated method stub
+	    return false;
+	  }
+
+	@Override
+	public UserResult findUserConnection(String providerId, String providerUserId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public UserCollectionResult findUsersConnections(String providerId, Set<String> ids) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }

@@ -46,15 +46,15 @@ public final class SimpleConnectionSignUp implements ConnectionSignUp {
 		
 		User user = new User();
 		user.setLogin(key.getProviderUserId());
-		user.setProviderUserId(key.getProviderUserId());
-		user.setProviderId(key.getProviderId());
+//		user.setProviderUserId(key.getProviderUserId());
+//		user.setProviderId(key.getProviderId());
 		user.setNickname(data.getDisplayName());
 		user.setDisplayName(data.getDisplayName());
-		user.setProfileUrl(data.getProfileUrl());
+//		user.setProfileUrl(data.getProfileUrl());
 		user.setImageUrl(data.getImageUrl());
-		user.setAccessToken(data.getAccessToken());
-		user.setSecret(data.getSecret());
-		user.setRefreshToken(data.getRefreshToken());
+//		user.setAccessToken(data.getAccessToken());
+//		user.setSecret(data.getSecret());
+//		user.setRefreshToken(data.getRefreshToken());
 		user.setExpireTime(data.getExpireTime());
 		
 		ids.save(user);

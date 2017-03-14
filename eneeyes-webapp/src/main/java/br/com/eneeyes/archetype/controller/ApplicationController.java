@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.com.eneeyes.archetype.model.acl.Role;
+import br.com.eneeyes.archetype.model.acl.RoleType;
 import br.com.eneeyes.archetype.model.acl.User;
 import br.com.eneeyes.archetype.result.UserResult;
 import br.com.eneeyes.archetype.services.identity.IdentityService;
@@ -50,16 +52,17 @@ public class ApplicationController {
         	boolean  userAdmin = false;
         	User user = (User) auth.getPrincipal();
         	
-//    		for(Role role : user.getRoles()) {
-//    			if(role.getId() != null) {
-//	    			userAdmin = role.getId() == RoleType.ADMINISTRATOR.getId();
-//	    			session.setAttribute(TIPO_USUARIO, RoleType.USER.getName(role.getId()));
-//	    			break;
-//    			}
-//    		}
+    		for(Role role : user.getRoles()) {
+    			if(role.getId() != null) {
+	    			userAdmin = role.getId() == RoleType.ADMINISTRATOR.getId();
+	    			session.setAttribute(TIPO_USUARIO, RoleType.USER.getName(role.getId()));
+	    			break;
+    			}
+    		}
     		
     		session.setAttribute(ID_USUARIO, user.getId());
-    		session.setAttribute(CNPJ_RAIZ_USUARIO, user.getCnpj());
+//    		session.setAttribute(CNPJ_RAIZ_USUARIO, user.getCnpj());
+    		
         	if(userAdmin) {
         		viewName = "redirect:/security/index-user-admin.html";
         		log.info("Usuario administrador: Redirecionando para o modulo de gerenciamento da aplicacao...");
@@ -111,6 +114,7 @@ public class ApplicationController {
         UserResult userResult;
 		try {
 			userResult = identityService.findByRefreshToken(refreshToken);
+			
 	        if (userResult.hasSuccess()) {
 	            Authentication auth = securityManager.createAuth(userResult.getUser());
 	            SecurityContextHolder.getContext().setAuthentication(auth);

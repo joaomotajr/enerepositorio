@@ -8,7 +8,7 @@ public class checkDeviceCalibration extends BaseService {
 
 	@Override
 	@Schedule(dayOfWeek = segundaASexta, hour = seteETrezeHoras)
-	public void sheculle() {
+	public void schedule() {
 		// TODO Auto-generated method stub
 		super.init();
 	}

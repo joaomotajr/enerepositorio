@@ -44,6 +44,8 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 	 
 	$scope.clearFormSensor = function () {
 	
+		 $scope.gases = angular.copy($scope.resultGases.list);
+		 
 	    $scope.sensorUid = undefined;  
 	    $scope.sensorName = '';
 	    $scope.sensorModel = '';
@@ -105,8 +107,10 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
             }, 1000);
 		    
 		    $scope.newGases = [];
-		    		    
-	        $('#idSensorName').focus();
+	        
+	        $timeout(function () {
+	            $('#modalEditSensor').modal({ show: 'false' });                        
+	        }, 200);
 	    }
 	 
 	 $scope.deleteSensor = function(index) {
@@ -122,7 +126,6 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 				 $scope.msgErroSensor = $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
 			 }
-
 		});	 
 	 }	 
 	 
@@ -146,12 +149,12 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 	 
 	 $scope.inicializaLDragDrop = function () {
 		 
-		 $scope.refreshDragDrop = function()
-		 {
-			 $scope.gases = angular.copy($scope.resultGases.list);
-			 $scope.$apply();
-			 $scope.inicializaLDragDrop();
-		 }
+//		 $scope.refreshDragDrop = function()
+//		 {
+//			 $scope.gases = angular.copy($scope.resultGases.list);
+//			 $scope.$apply();
+//			 $scope.inicializaLDragDrop();
+//		 }
 
 		$(".sort").sortable({
 		    items: 'li',
@@ -174,7 +177,7 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		            $('.sort .' + clazz + ':not(:first)').remove();
 		            
 		            $scope.msgGas2 = true;
-		            $scope.refreshDragDrop();
+		            //$scope.refreshDragDrop();
 		        }
 		        else {
 		            

@@ -24,6 +24,7 @@
 	    <link rel="stylesheet" href="/assets/plugins/bootstrap-select/bootstrap-select.min.css">	        
 	    	    
 		<link rel="stylesheet" href="/assets/plugins/select2/select2.min.css">
+		<link rel="stylesheet" href="/assets/css/checkbox3.min.css">
 		
 		<!-- jQuery Datatbles -->
 		<link rel="stylesheet" href="/assets/plugins/datatables/jquery.dataTables.css">

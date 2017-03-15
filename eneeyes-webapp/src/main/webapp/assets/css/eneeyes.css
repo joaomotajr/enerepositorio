@@ -70,3 +70,16 @@
 		background-color: black ! important;
 		color: white ! important;	
 	}
+	
+	imgDetector {	  
+	   	width: auto;
+    	max-height: 160px;
+    	height: 160px;
+    	background-size: cover;
+    	background-position: 50% 50%;
+	}
+	
+	.todo-list>li {
+	    padding: 4px;
+	}
+	

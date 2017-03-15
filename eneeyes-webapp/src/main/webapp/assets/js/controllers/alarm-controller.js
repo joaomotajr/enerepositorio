@@ -1,6 +1,6 @@
 
 app.controller('alarmController', function ($scope, $timeout, $filter, AlarmService, GasService, CompanyService) {
-
+	
 	$scope.saveAlarm = function() {
 		
 		angular.element('body').addClass('loading');
@@ -12,7 +12,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			unitMeterGases : $scope.gasUnitMeterGases.uid,
 			alarm1 : $scope.alarmAlarm1,
 			alarm2 : $scope.alarmAlarm2,
-			alarm3 : $scope.alarmAlarm3	    
+			alarm3 : $scope.alarmAlarm3,
+			companyDto : $scope.company
     	}; 
 		 
 		$scope.inclusaoAlarm = new AlarmService.save(alarm);		 
@@ -48,6 +49,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 }	 
  
 	 $scope.editAlarm = function (index) {
+		 
 	        $scope.alarmUid = $scope.alarms[index].uid;
 	        $scope.alarmGas = $scope.alarms[index].gasDto;
 		    $scope.alarmName = $scope.alarms[index].name;		    
@@ -56,8 +58,10 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		    $scope.alarmAlarm3 = $scope.alarms[index].alarm3;
 		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.alarms[index].unitMeterGases);
 			$scope.company = $scope.alarms[index].companyDto;	 
-		 		    		    
-	        $('#idAlarmName').focus();
+			
+			$timeout(function () {
+	            $('#modalAlarmEdit').modal({ show: 'false' });                        
+	        }, 200);
 	    }
 	 
 	 $scope.deleteAlarm = function(index) {
@@ -136,9 +140,14 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
 		 ]; 
 	 
-	 $scope.getAlarms();	 
-	 $scope.getGases();
-	 $scope.getCompanys();
+	 $scope.refreshAlarms = function() {
+		 $scope.getAlarms();	 
+		 $scope.getGases();
+		 $scope.getCompanys();
+	 }
 	 
-	 angular.element('body').removeClass('loading');
+	 $scope.refreshAlarms();
+	 
+	 angular.element('body').removeClass('loading');	 
+		
 });

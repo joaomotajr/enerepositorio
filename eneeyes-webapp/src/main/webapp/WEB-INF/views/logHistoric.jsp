@@ -108,6 +108,7 @@
 								<h3 class="box-title">Selecione Intervalos Pré-Definidos ou Data de Inicio e Fim</h3>									  	
 		                         
                                 <div class="pull-right" style="margin-bottom: 0px ! important">   
+                                	<span data-ng-hide='loading' class="icon fa fa-search fa-2.0x pull-right"></span>
 			        				<label data-ng-show='loading'><span class="icon fa fa-hourglass-half"></span> Loading...</label>
 								</div>
 							</div>			

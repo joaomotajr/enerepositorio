@@ -1,31 +1,13 @@
-<!--	 Content Wrapper. Contains page     content -->
-
-	<style>
-		.todo-list>li {
-		    padding: 4px;
-		}
-		
-		img {
-		  *float: left;
-		  *width: 150px;
-		  *height: 150px;
-		  *border: 1px solid #000;
-		  *margin-right: 1em;
-		    width: auto;
-    		max-height: 160px;
-    		height: 160px;
-		}
-			
-	</style>
-	 
+ 
 <div data-ng-controller="detectorController">
 					        											
 	<div class="row">	
 				                                                    
-		<div class="col-md-6">                                                        
+		<div class="col-md-12">                                                        
 			<div class="box box-primary" data-ng-class="(detectorName || detectorModel || detectorManufacturer || detectorTransmitter) ? 'box-default' : 'box-primary'">
 				<div class="box-header">
 				  <h3 class="box-title">Cadastro de Detectores</h3>
+				  <a href="#" class="text-muted pull-right" data-ng-click="refreshDetectors();"><i title="Refresh" class="fa fa-refresh"></i></a>
 				</div>
 				<div class="box-body">
 					<div style="height: 500px; overflow: auto">						
@@ -35,7 +17,9 @@
 									<th>Nome</th>
 									<th>Modelo</th>
 									<th>Fabricante</th>
-									<th>Sensor(es)</th>                                                              
+									<th>Transmissor</th>
+									<th>Sensor(es)</th>
+									<th>Imagem</th>                                                              
 									<th>Editar</th>
 									<th>Excluir</th>						
 								</tr>
@@ -45,9 +29,13 @@
 									<td>{{item.name}}</td>
 									<td>{{item.model}}</td>
 									<td>{{item.manufacturerDto.name}}</td>		
+									<td>{{item.transmitterDto.name}}</td>
 									<td>								
-										{{item.sensorsDto[0].name}} <span data-ng-show="item.sensorsDto[1].name">/</span> {{item.sensorsDto[1].name}}
-									</td>														        
+										1-{{item.sensorsDto[0].name}} <span data-ng-show="item.sensorsDto[1].name">/ 2-</span> {{item.sensorsDto[1].name}}
+									</td>
+									<td>			
+										<img class="direct-chat-img" data-ng-src="{{item.image}}" style="width: auto ! important; height: 25px ! important ; max-height: 25px ! important;">
+									</td>											        
 									<td>
 										<button type="button" class="btn btn-primary btn-xs" data-ng-click="editDetector($index)">editar</button>
 									</td>
@@ -59,6 +47,10 @@
 						</table>
 					</div>                                                       
 				</div>
+				
+				<div class="box-footer">						                                                                
+					<button type="button" data-ng-click="inicializaLDragDrop(); userForm.$setPristine()" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalEditDetector">Novo</button>
+				</div>
 			</div>
 			
 			<div class="alert alert-warning" role="alert" data-ng-show="msgErroDetector" >
@@ -66,139 +58,148 @@
            		<strong>Alerta! </strong>{{msgErroDetector}} 
        		</div>
 		</div>                                                      
-															
-		<div class="col-sm-6">
-			<div class="box box-primary" data-ng-class="(detectorName || detectorModel || detectorManufacturer || detectorTransmitter) ? 'box-primary' : 'box-default'">
-				<div class="box-header">
-					<h3 class="box-title">Cadastro / Edição</h3>
-					<a href="#" class="text-muted pull-right" data-ng-click="refreshDetectors();"><i title="Refresh" class="fa fa-refresh"></i></a>
-				</div>
 				
-				<div class="box-body">
-					<form class="form" name="userForm">					
-						<div class="row">							
-							<div class="col-md-6">							    
-							    <input type="file" id="idInputImageDetector" style='display:none'>							    
-							    <div class="box box-primary">
-					                <div class="box-body box-profile">                          
-					                    <img class="profile-user-img img-responsive img-circle" style="margin: 0 auto" alt="Imagem do Perfil" 
-					                    	data-ng-src="{{detectorImage}}" onError="this.src='/assets/img/cover.jpg'">
-					                    <p class="text-muted text-center data-ng-binding">{{detectorName}} - {{detectorModel}} </p>                    
-					                    <a href="#" class="icon fa fa-photo fa-2.0x pull-right" data-ng-click="addPhoto();" title="Trocar foto"></a>
-					                    					                    	                
-					                </div>
-				                </div>															
-							</div>							
-							<div class="row">
-			                 	<div class="col-md-6">                                                                                                                                    
-									<div class="form-group">
-										<label class="control-label">Nome</label>
-										<span class="text-red" data-ng-show="detectorNameExist">Detector ja Existe</span> 
-										<span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
-								        <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
-										<input id="idDetectorName" data-ng-keydown="keypress($event)" class="form-control inputProfile" placeholder="Nome do Detector" data-ng-model="detectorName" data-ng-maxlength="15" name="username" required>                                                                        
-									</div>							
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<label class="control-label">Modelo</label>                                                       
-										<input class="form-control inputProfile" placeholder="Modelo do Detector" data-ng-model="detectorModel">                                                
-									</div>
-								</div>							
-							</div>							
+	</div>	 
+	
+	<div id="modalEditDetector" class="modal">                
+		<div class="modal-dialog  modal-lg" role="document">
+			<div class="modal-content">                            
+				<div class="modal-body">					
+					<div class="panel panel-default">
+						<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Edição de Detectores</strong></div>	
+				  	</div>
+				  							
+					<div class="box box-primary" data-ng-class="(detectorName || detectorModel || detectorManufacturer || detectorTransmitter) ? 'box-primary' : 'box-default'">
+					
+						<div class="box-header">
+							<h3 class="box-title">Cadastro / Edição</h3>							
 						</div>
 						
-						<div class="row">
-							<div class="col-md-6">
-								<div class="box box-primary box-solid">				                    
-				                	<div class="box-header with-border"><strong><i class="fa fa-expand"></i> Fabricante</strong></div>
-				                    <div class="box-body">
-				                        <select class="form-control" data-live-search="true" 
-				                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-				                                data-ng-options="item as item.name for item in manufacturers | orderBy: 'name' track by item.uid" 
-		                                           data-ng-model="detectorManufacturer"
-		                                           data-ng-change="changeManufacturer();">
-		                                           <option value="">Selecione</option> 
-				                        </select>    
-				                    </div>			                    			                            
-				                </div>
-			                </div>
-			                
-			                <div class="col-md-6">
-				                <div class="box box-primary box-solid">
-				                    <div class="box-header with-border"><strong><i class="fa fa-expand"></i> Transmissor</strong></div>
+						<div class="box-body">
+							<form class="form" name="userForm">					
+								<div class="row">							
+									<div class="col-md-6">							    
+									    <input type="file" id="idInputImageDetector" style='display:none'>							    
+									    <div class="box box-primary">
+							                <div class="box-body box-profile">                          
+							                    <img class="profile-user-img img-responsive img-circle imgDetector" style="margin: 0 auto" alt="Imagem do Perfil" 
+							                    	data-ng-src="{{detectorImage}}" onError="this.src='/assets/img/cover.jpg'">
+							                    <p class="text-muted text-center data-ng-binding">{{detectorName}} - {{detectorModel}} </p>                    
+							                    <a href="#" class="icon fa fa-photo fa-2.0x pull-right" data-ng-click="addPhoto();" title="Trocar foto"></a>
+							                    					                    	                
+							                </div>
+						                </div>															
+									</div>							
+									<div class="row">
+					                 	<div class="col-md-6">                                                                                                                                    
+											<div class="form-group">
+												<label class="control-label">Nome</label>
+												<span class="text-red" data-ng-show="detectorNameExist">Detector ja Existe</span> 
+												<span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
+										        <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
+												<input id="idDetectorName" data-ng-keydown="keypress($event)" class="form-control inputProfile" placeholder="Nome do Detector" data-ng-model="detectorName" data-ng-maxlength="15" name="username" required>                                                                        
+											</div>							
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="control-label">Modelo</label>                                                       
+												<input class="form-control inputProfile" placeholder="Modelo do Detector" data-ng-model="detectorModel">                                                
+											</div>
+										</div>							
+									</div>							
+								</div>
+								
+								<div class="row">
+									<div class="col-md-6">
+										<div class="box box-primary box-solid">				                    
+						                	<div class="box-header with-border"><strong><i class="fa fa-expand"></i> Fabricante</strong></div>
+						                    <div class="box-body">
+						                        <select class="form-control" data-live-search="true" 
+						                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+						                                data-ng-options="item as item.name for item in manufacturers | orderBy: 'name' track by item.uid" 
+				                                           data-ng-model="detectorManufacturer"
+				                                           data-ng-change="changeManufacturer();">
+				                                           <option value="">Selecione</option> 
+						                        </select>    
+						                    </div>			                    			                            
+						                </div>
+					                </div>
+					                
+					                <div class="col-md-6">
+						                <div class="box box-primary box-solid">
+						                    <div class="box-header with-border"><strong><i class="fa fa-expand"></i> Transmissor</strong></div>
+						                	 
+						                    <div class="box-body">
+						                        <select class="form-control" data-live-search="true" 
+						                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+						                                data-ng-options="item as item.name for item in transmitters | manufacturerFilter:search | orderBy: 'name' track by item.uid"  
+				                                           data-ng-model="detectorTransmitter">
+				                                           <option value="">Selecione</option> 
+						                        </select>    
+						                    </div>			                    			                            
+						                </div>		     
+					                </div>
+				                </div>		     
+		                        <div class="box box-primary box-solid">
+				                    <div class="box-header with-border ui-sortable-handle ">
+				                    	<strong><i class="fa fa-feed"></i> Sensores </strong>
+				                    	<span class="text-red" data-ng-show="detectorSensors.length == 0 && newSensors.length == 0">  [Adicionar ao Menos Um Sensor]</span>
+				                    	<span class="pull-right" data-ng-show="msgSens1">[Máximo Dois Sensores]</span>
+					                    <span class="pull-right" data-ng-show="msgSens2">["ATENÇÃO! Sensor Já Existe."]</span>
+				                    </div>
 				                	 
 				                    <div class="box-body">
-				                        <select class="form-control" data-live-search="true" 
-				                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-				                                data-ng-options="item as item.name for item in transmitters | manufacturerFilter:search | orderBy: 'name' track by item.uid"  
-		                                           data-ng-model="detectorTransmitter">
-		                                           <option value="">Selecione</option> 
-				                        </select>    
-				                    </div>			                    			                            
-				                </div>		     
-			                </div>
-		                </div>		     
-                        <div class="box box-primary box-solid">
-		                    <div class="box-header with-border ui-sortable-handle ">
-		                    	<strong><i class="fa fa-feed"></i> Sensores </strong>
-		                    	<span class="text-red" data-ng-show="detectorSensors.length == 0 && newSensors.length == 0">  [Adicionar ao Menos Um Sensor]</span>
-		                    	<span class="pull-right" data-ng-show="msgSens1">[Máximo Dois Sensores]</span>
-			                    <span class="pull-right" data-ng-show="msgSens2">["ATENÇÃO! Sensor Já Existe."]</span>
-		                    </div>
-		                	 
-		                    <div class="box-body">
-		                    
-			                    <div class="col-sm-6">
-			                    
-			                    	<label class="control-label">Sensores</label>			                    	
-				                    <div style="max-height: 250px; height:auto; overflow: auto">                                                                       
-	                                    <ul class="sort todo-list" style="padding: 1px !important" data-ng-repeat="sensor in detectorSensors">
-	                                         <li id="{{sensor.uid}}" class="{{'c' + sensor.uid}}" style="padding: 4px">
-	                                             <span class="handle"><i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i></span>                                               
-	                                             <span class="text">{{sensor.name}} </span>
-	                                         
-	                                             <div class="tools">                                                        
-	                                                 <i class="fa fa-trash-o" data-ng-click="deleteSensor($index)"></i>
-	                                             </div>
-	                                         </li>                                                                                                   
-	                                     </ul> 
-	                                     <ul data-ng-if="detectorSensors.length < 1" class="sort todo-list" style="padding: 1px !important" title="Arraste aqui para Incluir">
-	                                         <li data-ng-show="newSensors.length <= 0" style="background:rgb(60, 141, 188); border-color:lightgray;color:white;padding: 4px;"> Arraste aqui para Incluir</li>
-	                                     </ul>
-	                                </div>
-	                                								        
-			                    </div>				                    
-		                    
-			                    <div class="col-sm-6">
-			                    	<label class="control-label">Lista de Sensores</label>			                    	                        
-			                        <div style="max-height: 250px; height:auto; overflow: auto">				                        	                                                       
-                                    	<ul class="drag todo-list" style="padding: 1px !important" data-ng-repeat="sensor in sensors | manufacturerFilter:search">
-                                            <li id="{{sensor.uid}}" class="{{'c' + sensor.uid}}" style="background: #d1ddf9;">                                                        
-                                                <span class="handle"><i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i></span>
-                                                <span class="text">{{sensor.name}}</span>
-                                            </li>                                
-                                        </ul>
-                                    </div>
-			                    </div>			                            
-		                    </div>
-		                    			                            
-			            </div>	
-			            			                 
-		            </form>
-		            
-					<div class="box-footer">
-						<button type="button" data-ng-click="clearFormDetector()" class="btn btn-default">Cancelar</button>                                                                
-						<button type="button" data-ng-click="saveDetector();" class="btn btn-primary" 
-							data-ng-disabled="(detectorName && detectorModel && detectorManufacturer && detectorTransmitter && (detectorSensors.length != 0 || newSensors.length > 0)) ? false : true">Salvar
-						</button>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-		
-	</div>	  
+				                    
+					                    <div class="col-sm-6">
+					                    
+					                    	<label class="control-label">Sensores</label>			                    	
+						                    <div style="max-height: 250px; height:auto; overflow: auto">                                                                       
+			                                    <ul class="sort todo-list" style="padding: 1px !important" data-ng-repeat="sensor in detectorSensors">
+			                                         <li id="{{sensor.uid}}" class="{{'c' + sensor.uid}}" style="padding: 4px">
+			                                             <span class="handle"><i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i></span>                                               
+			                                             <span class="text">{{sensor.name}} </span>
+			                                         
+			                                             <div class="tools">                                                        
+			                                                 <i class="fa fa-trash-o" data-ng-click="deleteSensor($index)"></i>
+			                                             </div>
+			                                         </li>                                                                                                   
+			                                     </ul> 
+			                                     <ul data-ng-if="detectorSensors.length < 1" class="sort todo-list" style="padding: 1px !important" title="Arraste aqui para Incluir">
+			                                         <li data-ng-show="newSensors.length <= 0" style="background:rgb(60, 141, 188); border-color:lightgray;color:white;padding: 4px;"> Arraste aqui para Incluir</li>
+			                                     </ul>
+			                                </div>
+			                                								        
+					                    </div>				                    
+				                    
+					                    <div class="col-sm-6">
+					                    	<label class="control-label">Lista de Sensores</label>			                    	                        
+					                        <div style="max-height: 250px; height:auto; overflow: auto">				                        	                                                       
+		                                    	<ul class="drag todo-list" style="padding: 1px !important" data-ng-repeat="sensor in sensors | manufacturerFilter:search">
+		                                            <li id="{{sensor.uid}}" class="{{'c' + sensor.uid}}" style="background: #d1ddf9;">                                                        
+		                                                <span class="handle"><i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i></span>
+		                                                <span class="text">{{sensor.name}}</span>
+		                                            </li>                                
+		                                        </ul>
+		                                    </div>
+					                    </div>			                            
+				                    </div>				                    			                            
+					            </div>					            			                 
+				            </form>
+							
+						</div>	
+					</div>									
+			  	</div>
+			  	
+			  	<div class="modal-footer">
+			  		<button type="button" data-ng-click="clearFormDetector()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
+					<button type="button" data-ng-click="saveDetector();" class="btn btn-primary" data-dismiss="modal"
+						data-ng-disabled="(detectorName && detectorModel && detectorManufacturer && detectorTransmitter && (detectorSensors.length != 0 || newSensors.length > 0)) ? false : true">Salvar
+					</button>					                               
+			  	</div>
+			  	
+		  	</div>
+		</div>		
+	</div> 
 		
 </div>
 

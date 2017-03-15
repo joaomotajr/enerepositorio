@@ -54,22 +54,21 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	            $scope.getDetectors();
 	                     	
 	            angular.element('body').removeClass('loading');				 
-	         }, 500);
-			           
-//		}, function(data) {
-//			angular.element('body').removeClass('loading');
-//			$scope.msgErro = "Erro: " + data.statusText;
+	         }, 500);			           
+
 		});			 
 	 }
 	 
 	$scope.clearFormDetector = function () {
-	
+		
+		$scope.sensors = angular.copy($scope.resultSensors.list);
+		
 	    $scope.detectorUid = undefined;  
 	    $scope.detectorName = '';
 	    $scope.detectorModel = '';
 	    $scope.detectorManufacturer = '';
-	    $scope.detectorTransmitter = ''
-	    $scope.detectorImage = "/assets/img/cover.jpg"
+	    $scope.detectorTransmitter = '';
+	    $scope.detectorImage = "/assets/img/cover.jpg";
 	    $scope.detectorSensors = [];
 	    $scope.newSensors = [];
 	    
@@ -78,8 +77,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	    $scope.detectorNameExist = "false";
 	    
 	    $('.sort .ui-draggable').remove();
-		
-		$scope.inicializaLDragDrop();
+	
 	}
 
 	 
@@ -129,7 +127,9 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		    
 		    $scope.newSensors = [];
 		    		    
-	        $('#idDetectorName').focus();
+		    $timeout(function () {
+	            $('#modalEditDetector').modal({ show: 'false' });                        
+	        }, 200);
 	    }
 	 
 	 $scope.deleteDetector = function(index) {
@@ -154,16 +154,17 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		 $scope.resultSensors.$sensor({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.sensors = angular.copy($scope.resultSensors.list);	 
          });		 
-	 }	
+	 }
+	 
+//	 $scope.refreshDragDrop = function()
+//	 {
+//		 $scope.sensors = angular.copy($scope.resultSensors.list);
+//		 $scope.$apply();
+//		 $scope.inicializaLDragDrop();
+//	 }
 	 
 	 $scope.inicializaLDragDrop = function () {
-		 
-		 $scope.refreshDragDrop = function()
-		 {
-			 $scope.sensors = angular.copy($scope.resultSensors.list);
-			 $scope.$apply();
-			 $scope.inicializaLDragDrop();
-		 }
+	
 
 		$(".sort").sortable({
 		    items: 'li',
@@ -184,7 +185,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		        if ($('.sort .' + clazz).length > 1) {
 		            $('.sort .' + clazz + ':not(:first)').remove();
 		            $scope.msgSens2 = true;
-		            $scope.refreshDragDrop();
+		            //$scope.refreshDragDrop();
 		        }
 		        else {
 		            

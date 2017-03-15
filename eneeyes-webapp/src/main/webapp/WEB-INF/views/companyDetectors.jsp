@@ -1,20 +1,4 @@
  <style>
-	.todo-list>li {
-	    padding: 4px;
-	}
-	
-	img {
-	  *	float: left;
-	  *	width: 150px;
-	  *	height: 100px;
-	  *	border: 1px solid #000;
-	  *	margin-right: 1em;
-	   	width: auto;
-    	max-height: 160px;
-    	height: 160px;
-    	background-size: cover;
-    	background-position: 50% 50%;
-	}
 	
 	td.details-control {		
 		background: url("/assets/plugins/datatables/images/details_open.png") no-repeat center center;		
@@ -181,7 +165,7 @@
 					                    	
 					                    	<div class="col-md-4">							    
 											    <input type="file" id="idInputImageDetector" style='display:none'>									                						                    
-							                    <img class="profile-user-img img-responsive" style="margin: 0 auto" 
+							                    <img class="profile-user-img img-responsive imgDetector" style="margin: 0 auto" 
 							                    	data-ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
 							                    	
 							                    <p class="text-muted text-center data-ng-binding">

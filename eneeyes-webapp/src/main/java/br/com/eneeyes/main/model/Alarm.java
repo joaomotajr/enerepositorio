@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Gas;
+import br.com.eneeyes.main.model.views.CompanyView;
 
 @Entity
 @Table(name = "alarm")
@@ -33,12 +34,13 @@ public class Alarm {
 		this.unitMeterGases = dto.getUnitMeterGases();
 		
 		if(dto.getGasDto() != null)
-			this.gas = new Gas(dto.getGasDto());
-		
+			this.gas = new Gas(dto.getGasDto());		
+				
 		this.alarm1 = dto.getAlarm1();
 		this.alarm2 = dto.getAlarm2();
 		this.alarm3 = dto.getAlarm3();
-		this.alarmOff = dto.getAlarmOff();		
+		this.alarmOff = dto.getAlarmOff();
+		this.company = dto.getCompanyDto();		
 	}	
 	
 	@Id
@@ -73,10 +75,10 @@ public class Alarm {
 	@Column(name = "ALARM_OFF", nullable = true)		
 	private Boolean alarmOff;
 		
-	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_ID", nullable = false)
-	private Company company;
-	
+	private CompanyView company;
+		
 	public final Long getUid() {
 		return uid;
 	}
@@ -139,5 +141,13 @@ public class Alarm {
 
 	public final void setAlarmOff(Boolean alarmOff) {
 		this.alarmOff = alarmOff;
+	}
+	
+	public CompanyView getCompany() {
+		return company;
+	}
+
+	public void setCompany(CompanyView company) {
+		this.company = company;
 	}
 }

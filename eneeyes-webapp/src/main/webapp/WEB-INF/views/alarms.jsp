@@ -104,7 +104,7 @@
 					                        <select class="form-control" data-live-search="true" 
 					                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 					                                data-ng-options="item as item.name for item in companies | orderBy: 'name' track by item.uid" 
-			                                           data-ng-model="alarmCompany">
+			                                           data-ng-model="company">
 			                                           <option value="">Selecione</option> 
 					                        </select>    
 					                    </div>			                    			                            

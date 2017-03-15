@@ -20,9 +20,10 @@ angular.module('dependency', [])
           },
           'responseError': function (rejection) {
         	  
-        	console.log('response error');        	  
-        	  
+        	 $rootScope.errorTimes ++        	  
+        	 
         	 if (rejection.status == 0) {
+        		 
         		  angular.element('body').removeClass('loading'); 
         		  $rootScope.alertDanger = "Servidor Sem Resposta, Se o Problema Persistir Contate o Administrador do Sistema";
         		  $('#resultDanger').hide().show('slow').delay(5000).hide('slow');        		  

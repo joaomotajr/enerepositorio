@@ -21,6 +21,7 @@ public class CompanyView {
 	private Long uid;	
 	private String name;
 	private String description;
+	private Long company_Id;	
 	
 	public final Long getUid() {
 		return uid;
@@ -39,5 +40,11 @@ public class CompanyView {
 	}
 	public final void setDescription(String description) {
 		this.description = description;
+	}
+	public Long getCompany_Id() {
+		return company_Id;
+	}
+	public void setCompany_Id(Long company_Id) {
+		this.company_Id = company_Id;
 	}
 }

@@ -1,6 +1,7 @@
 app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin, $sce) {
 
 	$scope.$root.timer = [];
+	$scope.$root.errorTimes = 0;
 	
 	$scope.LoadAjaxContentCompany = function(url){
 		$http.get(url)

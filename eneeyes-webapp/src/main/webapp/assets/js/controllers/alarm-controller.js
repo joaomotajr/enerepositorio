@@ -35,7 +35,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	    $scope.gasUnitMeterGases = '';
 		$scope.alarmAlarm1 = '';
 		$scope.alarmAlarm2 = '';
-		$scope.alarmAlarm3 = '';		
+		$scope.alarmAlarm3 = '';	
+		$scope.company = '';
 	}
 	 
 	$scope.getAlarms = function() {
@@ -54,6 +55,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		    $scope.alarmAlarm2 = $scope.alarms[index].alarm2;
 		    $scope.alarmAlarm3 = $scope.alarms[index].alarm3;
 		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.alarms[index].unitMeterGases);
+			$scope.company = $scope.alarms[index].companyDto;	 
 		 		    		    
 	        $('#idAlarmName').focus();
 	    }

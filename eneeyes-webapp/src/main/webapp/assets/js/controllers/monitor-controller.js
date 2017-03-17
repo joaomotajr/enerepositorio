@@ -1,21 +1,21 @@
 
-app.controller('dashController', function ($scope, $timeout, $interval, $filter, ViewService) {
+app.controller('monitorController', function ($scope, $timeout, $interval, $filter, ViewService) {
 	
-	$scope.dashCompaniesPosition = [];
+	$scope.dashCompaniesAlarm = [];
 	
-	$scope.getCompaniesPosition = function() {
+	$scope.getCompaniesAlarm = function() {
 		
 		$scope.loading = true;	
-		
-		 $scope.listAllDashCompaniesPosition = new ViewService.listAllDashCompaniesPosition();		 
-		 $scope.listAllDashCompaniesPosition.$view({_csrf : angular.element('#_csrf').val()}, function(){
+		                                                    
+		 $scope.listAllDashCompaniesAlarm = new ViewService.listAllDashCompaniesAlarm();		 
+		 $scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			 
-			 for(var i = 0; i < $scope.listAllDashCompaniesPosition.list.length; i++) {				 
+			 for(var i = 0; i < $scope.listAllDashCompaniesAlarm.list.length; i++) {				 
 				 
-				 $scope.dashCompaniesPosition[i] = $scope.listAllDashCompaniesPosition.list[i];
-				 $scope.dashCompaniesPosition[i].last_update_full = $scope.dashCompaniesPosition[i].last_update;
-				 $scope.dashCompaniesPosition[i].last_update = timeSince($scope.dashCompaniesPosition[i].last_update);				 
-				 $scope.dashCompaniesPosition[i].last_value	= Math.round($scope.dashCompaniesPosition[i].last_value * 100) / 100 ;
+				 $scope.dashCompaniesAlarm[i] = $scope.listAllDashCompaniesAlarm.list[i];
+				 $scope.dashCompaniesAlarm[i].last_update_full = $scope.dashCompaniesAlarm[i].last_update;
+				 $scope.dashCompaniesAlarm[i].last_update = timeSince($scope.dashCompaniesAlarm[i].last_update);				 
+				 $scope.dashCompaniesAlarm[i].last_value	= Math.round($scope.dashCompaniesAlarm[i].last_value * 100) / 100 ;
 			 }
 			 
 			 $scope.sumary = {
@@ -27,7 +27,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					 offLine: 0						 
 			 }			 
 			 				
-			 $scope.listAllDashCompaniesPosition.list.forEach(
+			 $scope.listAllDashCompaniesAlarm.list.forEach(
 				function(e) {
 
 						$scope.sumary.devices ++;
@@ -63,10 +63,10 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
        });		 
 	 }
 		
-	$scope.getCompaniesPosition();
+	$scope.getCompaniesAlarm();
     
     $interval(function() {
-    	$scope.getCompaniesPosition();     						
+    	$scope.getCompaniesAlarm();     						
     }, 10000);	
     
 	

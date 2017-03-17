@@ -18,8 +18,7 @@
     <!-- jQuery UI 1.11.4 -->
     <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>
     <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
-         
+    <script src="/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>         
 
     <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>
@@ -80,6 +79,7 @@
 	<script src="/assets/js/controllers/alarm-controller.js"></script>
 	<script src="/assets/js/controllers/manufacturer-controller.js"></script>
 	<script src="/assets/js/controllers/dashboard-controller.js"></script>
+	<script src="/assets/js/controllers/monitor-controller.js"></script>
 	<script src="/assets/js/controllers/logHistoric-controller.js"></script>
 	<script src="/assets/js/controllers/simulador-controller.js"></script>
 	<script src="/assets/js/controllers/conteudo-controller.js"></script>

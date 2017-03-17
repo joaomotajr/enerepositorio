@@ -1,12 +1,3 @@
- 	<!-- 
- 	<style>
-		
-	.offLine {		
-		background-color: black ! important;
-		color: white ! important;	
-	}	
-	</style>
- 	-->
  	
 	<div data-ng-controller="dashController">
 		<div class="row">

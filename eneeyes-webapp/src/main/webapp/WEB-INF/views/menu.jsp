@@ -39,7 +39,10 @@
 	            	            
 	            <li class="treeview">
 	            	<a href="#" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fa fa-th text-aqua"></i> 
-	            		<span>Dashboard</span>
+	            		<span>Dashboard</span>	            			            		
+	            	</a>
+	            	<a href="#" data-ng-click="LoadAjaxContent('monitor.html', 'Monitoramento')"><i class="fa fa-eye text-yellow"></i> 
+	            		<span>Monitoramento</span>
 	            		<span class="label label-success pull-right">Novo</span>	            		
 	            	</a>	            	
 	            </li>
@@ -74,7 +77,7 @@
 	            
 	            <li class="treeview">
 	            	<a href="#">
-	                <i class="fa fa-cube"></i> <span>Clientes</span>
+	                <i class="fa fa-cube text-aqua"></i> <span>Clientes</span>
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">			            		        
@@ -90,7 +93,6 @@
 	              	</a>
 	            	<ul class="treeview-menu">			            		        
 			            <li><a href="#" data-ng-click="LoadAjaxContent('logHistoric.html', 'Log Detectores')"><i class="fa fa-files-o"></i> Log Detectores</a></li>
-<!-- 			            <li><a href="#" data-ng-click="LoadAjaxContent('logHistoricAlarm.html', 'Log Alarmes')"><i class="fa fa-file-audio-o"></i> Log Alarmes</a></li>			            	             -->
 	              	</ul>
 	            </li>
 	            

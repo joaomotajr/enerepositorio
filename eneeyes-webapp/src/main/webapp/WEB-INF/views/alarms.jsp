@@ -2,7 +2,13 @@
 	<style>
 		.todo-list>li {
 		    padding: 4px;
-		}	
+		}
+		
+		.disableDiv {
+			pointer-events: none;
+			opacity: 0.5;
+		}
+			
 	</style>	 
 	<div data-ng-controller="alarmController as alarmController">
 												
@@ -118,8 +124,22 @@
 								    			</div>
 								    								                	 
 							                    <div class="box-body">
+							                        <!-- 							            				
+							            			<div class="checkbox3 checkbox-inline checkbox-check checkbox-light">
+		                                            	<input type="checkbox" id="checkbox-fa-light-1" checked>
+		                                            	<label for="checkbox-fa-light-0">Emitir Alarme Sonoro? </label>
+		                                          	</div>
+		                                          	 -->
+		                                          	 
+		                                          	<div class="btn-group" id="toggle_event_editing">
+														<button type="button" class="btn btn-default locked_active">OFF</button>
+														<button type="button" class="btn bg-black unlocked_inactive">ON</button>
+													</div>
+						                            
 												    <div class="row">
-												    
+												    	
+												    	<div id="travar">
+												    	
 												    	<div class="col-md-3" style="padding-right: 5px !important;">															
 									                    	<label class="control-label">Gás
 									                    		<span class="text-red pull-right" data-ng-show="userForm.gasName.$dirty && userForm.gasName.$invalid">  [Campo Obrigatório]</span>
@@ -156,6 +176,7 @@
 													            </div>
 													    	</div>
 													    </div>
+													    
 													    <div class="col-md-2" style="padding-right: 5px !important; padding-left: 5px !important">
 													    	<div class="form-group">
 												                <div data-ng-class="{'has-error': userForm.alarmAlarm2.$invalid && !userForm.alarmAlarm2.$pristine}">
@@ -164,6 +185,7 @@
 												            	</div>
 												            </div>
 													    </div>
+													  
 													    <div class="col-md-2" style="padding-left: 5px !important">
 													    	<div class="form-group">								                
 												                <div data-ng-class="{'has-error': userForm.alarmAlarm3.$invalid && !userForm.alarmAlarm3.$pristine}">
@@ -171,7 +193,7 @@
 												                	<input type="number" class="form-control" name="alarmAlarm3" placeholder="Alarme 3 - Decimal" data-ng-model="alarmAlarm3" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required />								                							          
 												            	</div>
 												            </div>
-													    </div>														    
+													    </div>
 								                        
 								                        <div class="row">
 									                        <div class="col-md-12">
@@ -285,8 +307,8 @@
 										            			</div>
 										            		</div>	
 													    </div>	
-													    												    
-													    								    
+													
+														</div>    								    
 												    </div>
 										    	</div>
 										    </div>	

@@ -1,16 +1,34 @@
 package br.com.eneeyes.main.service.scheduller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.logging.Logger;
+
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
+import javax.ejb.Timeout;
+import javax.ejb.Timer;
 
 @Singleton
-public class checkDeviceCalibration extends BaseService {
+public class checkDeviceCalibration {
+	
+	protected final String localhost = "127.0.0.1";
+	protected final String usernameAdmin = "SKYNET";
+	protected final String segundaASexta = "Mon-Fri";
+	protected final String seteETrezeHoras = "*";
+	protected final String timestampFormat = "dd/MM/yyyy às HH:mm:ss";
+	
 
-	@Override
+	Logger log = Logger.getLogger("Service");
+
 	@Schedule(dayOfWeek = segundaASexta, hour = seteETrezeHoras)
 	public void schedule() {
-		// TODO Auto-generated method stub
-		super.init();
+		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Start Automatico :: " + new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
+	}
+	
+	@Timeout
+	public void timeout(Timer timer) {
+		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Ocorreu Timeout :: ");
 	}
 
 }

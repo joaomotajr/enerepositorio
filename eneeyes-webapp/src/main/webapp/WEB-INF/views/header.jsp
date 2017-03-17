@@ -48,7 +48,8 @@
 	   	
 	   	<!-- Image Notes -->
 		<style type="text/css" media="all">@import "/assets/plugins/imageNotes/css/marker.css";</style>		
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" media="screen">
+<!-- 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" media="screen">		 -->
+		<link rel="stylesheet" href="/assets/plugins/jQueryUI/jquery-ui.min.css"></link>
 
 
 		<!-- Escpeificos -->

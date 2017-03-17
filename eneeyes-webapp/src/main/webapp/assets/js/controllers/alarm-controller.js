@@ -140,6 +140,22 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
 		 ]; 
 	 
+	 $('#toggle_event_editing button').click(function(){
+		 if($(this).hasClass('locked_active') || $(this).hasClass('unlocked_inactive')){
+			/* code to do when unlocking */
+		    //$('#switch_status').html('Switched on.');
+		    $("#travar").toggleClass("disableDiv");
+		}else{
+			/* code to do when locking */
+		    //$('#switch_status').html('Switched off.');
+		    $("#travar").toggleClass("disableDiv");
+		}
+		
+		/* reverse locking status */
+		$('#toggle_event_editing button').eq(0).toggleClass('locked_inactive locked_active bg-black btn-default');
+		$('#toggle_event_editing button').eq(1).toggleClass('unlocked_inactive unlocked_active btn-default bg-black');
+	 });
+	 
 	 $scope.refreshAlarms = function() {
 		 $scope.getAlarms();	 
 		 $scope.getGases();

@@ -20,7 +20,7 @@ public abstract class BaseService {
 	protected final String localhost = "127.0.0.1";
 	protected final String usernameAdmin = "SKYNET";
 	protected final String segundaASexta = "Mon-Fri";
-	protected final String seteETrezeHoras = "7, 17";
+	protected final String seteETrezeHoras = "*";
 	protected final String timestampFormat = "dd/MM/yyyy às HH:mm:ss";
 
 	@Inject

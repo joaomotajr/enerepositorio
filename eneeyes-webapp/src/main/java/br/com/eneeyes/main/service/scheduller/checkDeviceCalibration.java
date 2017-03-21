@@ -2,12 +2,14 @@ package br.com.eneeyes.main.service.scheduller;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.Logger;
 
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 @Singleton
 public class checkDeviceCalibration {
@@ -19,7 +21,9 @@ public class checkDeviceCalibration {
 	protected final String timestampFormat = "dd/MM/yyyy às HH:mm:ss";
 	
 
-	Logger log = Logger.getLogger("Service");
+	//Logger log = Logger.getLogger("Service");
+	
+	private Log log = LogFactory.getLog(getClass());
 
 	@Schedule(dayOfWeek = segundaASexta, hour = seteETrezeHoras)
 	public void schedule() {

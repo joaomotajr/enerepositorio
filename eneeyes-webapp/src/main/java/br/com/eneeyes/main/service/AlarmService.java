@@ -43,6 +43,13 @@ public class AlarmService implements IService<AlarmDto> {
 		
 		return result;
 	}
+	
+	public int onOff(AlarmDto dto) {
+		
+		Alarm alarm = new Alarm(dto);		
+		return repository.onOff(!alarm.getAlarmOff(), alarm.getUid());
+						
+	}
 
 	public BasicResult<?> delete(Long uid) {
 				

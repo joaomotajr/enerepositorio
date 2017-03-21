@@ -86,6 +86,11 @@
 	    return s;
 	}
 	
+	var validateEmail = function(elementValue) {
+	    var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+	    return emailPattern.test(elementValue);
+	}
+	
 	var weekday = new Array(7);
 	
 	weekday[0]="Domingo";
@@ -95,5 +100,8 @@
 	weekday[4]="Quinta-Feira";
 	weekday[5]="Sexta-Feira";
 	weekday[6]="Sábado";
+	
+	
+	
 	
 	

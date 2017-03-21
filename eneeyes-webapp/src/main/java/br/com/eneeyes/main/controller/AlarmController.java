@@ -28,6 +28,13 @@ public class AlarmController {
 		return service.save(alarmDto);
 	}
 	
+	@RequestMapping(value="/security/api/alarm/onOff", method=RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public int onOff(@RequestBody AlarmDto alarmDto) {
+		
+		return service.onOff(alarmDto);
+	}
+	
 	@RequestMapping(value="/security/api/alarm/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> delete(@PathVariable Long uid) {

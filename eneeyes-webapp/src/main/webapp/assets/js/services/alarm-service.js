@@ -13,5 +13,8 @@ app.factory('AlarmService', function($resource){
         save : $resource('/security/api/alarm/save',{},{
         	alarm : {method : 'POST'}
         }),
+        onOff : $resource('/security/api/alarm/onOff',{},{
+        	alarm : {method : 'PUT'}
+        }),
      };
 });

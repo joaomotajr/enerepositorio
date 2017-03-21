@@ -4,7 +4,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	$scope.saveAlarm = function() {
 		
 		angular.element('body').addClass('loading');
-					
+							
 		var alarm = {
 			uid: $scope.alarmUid != undefined ? $scope.alarmUid : 0,
 			name: $scope.alarmName,
@@ -13,7 +13,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			alarm1 : $scope.alarmAlarm1,
 			alarm2 : $scope.alarmAlarm2,
 			alarm3 : $scope.alarmAlarm3,
-			companyDto : $scope.company
+			companyDto : $scope.company,
+			alarmOff: angular.element('#alarmOn').hasClass('unlocked_inactive') == true ? true : false
     	}; 
 		 
 		$scope.inclusaoAlarm = new AlarmService.save(alarm);		 
@@ -24,6 +25,22 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	            $scope.getAlarms();                     	
 	            angular.element('body').removeClass('loading');				 
 	         }, 500);           
+
+		});		 
+	 }
+	
+	
+	$scope.onOffAlarm = function() {
+					
+		var alarm = {
+			uid: $scope.alarmUid != undefined ? $scope.alarmUid : 0,			
+			alarmOff: angular.element('#alarmOn').hasClass('unlocked_inactive') == true ? true : false
+    	}; 
+		
+		$scope.inclusaoAlarm = new AlarmService.onOff(alarm);				 
+		$scope.inclusaoAlarm.$alarm({_csrf : angular.element('#_csrf').val()}, function()
+		{        	
+			$scope.getAlarms(); 
 
 		});		 
 	 }
@@ -49,7 +66,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 }	 
  
 	 $scope.editAlarm = function (index) {
-		 
+
 	        $scope.alarmUid = $scope.alarms[index].uid;
 	        $scope.alarmGas = $scope.alarms[index].gasDto;
 		    $scope.alarmName = $scope.alarms[index].name;		    
@@ -57,7 +74,15 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		    $scope.alarmAlarm2 = $scope.alarms[index].alarm2;
 		    $scope.alarmAlarm3 = $scope.alarms[index].alarm3;
 		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.alarms[index].unitMeterGases);
-			$scope.company = $scope.alarms[index].companyDto;	 
+			$scope.company = $scope.alarms[index].companyDto;
+			
+			if( $scope.alarms[index].alarmOff != true || angular.element('#alarmOn').hasClass('unlocked_inactive') == false )  
+			{
+				$("#travar").toggleClass("disableDiv");				 
+			
+				$('#toggle_event_editing button').eq(0).toggleClass('locked_inactive locked_active bg-black btn-default');
+				$('#toggle_event_editing button').eq(1).toggleClass('unlocked_inactive unlocked_active btn-default bg-black');
+			}				
 			
 			$timeout(function () {
 	            $('#modalAlarmEdit').modal({ show: 'false' });                        
@@ -141,21 +166,48 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 ]; 
 	 
 	 $('#toggle_event_editing button').click(function(){
-		 if($(this).hasClass('locked_active') || $(this).hasClass('unlocked_inactive')){
-			/* code to do when unlocking */
-		    //$('#switch_status').html('Switched on.');
-		    $("#travar").toggleClass("disableDiv");
-		}else{
-			/* code to do when locking */
-		    //$('#switch_status').html('Switched off.');
-		    $("#travar").toggleClass("disableDiv");
-		}
+		 //if($(this).hasClass('locked_active') || $(this).hasClass('unlocked_inactive')){
+		 event.preventDefault();	    
+		 
+		$("#travar").toggleClass("disableDiv");			 
 		
-		/* reverse locking status */
 		$('#toggle_event_editing button').eq(0).toggleClass('locked_inactive locked_active bg-black btn-default');
 		$('#toggle_event_editing button').eq(1).toggleClass('unlocked_inactive unlocked_active btn-default bg-black');
 	 });
 	 
+ 
+	 $("#checkboxSonoroOnOff").click(function(e, parameters) {		 
+		 $(".checkboxSonoro").prop('checked', $(this).prop("checked"));         
+     });
+	 
+	 $("#checkboxEmailOnOff").click(function(e, parameters) {		 
+		 $(".checkboxEmail").prop('checked', $(this).prop("checked")); 
+		 
+		 $("#alarmEmail").prop('disabled', !$(this).prop("checked"));         
+		 $("#alarmEmail").prop('readonly', !$(this).prop("checked")); 
+		 
+		 $scope.emailValid = true;
+     });
+	 
+	 $("#checkboxSmsOnOff").click(function(e, parameters) {		 
+		 $(".checkboxSms").prop('checked', $(this).prop("checked"));         
+     });
+	 
+    $scope.validEmail = function ($event) {
+
+    	regex  = /^[a-z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$/;
+    	
+        if (validateEmail( $('#alarmEmail').val()) ) {
+            $scope.emailValid = true;
+        }
+        else if ($('#alarmEmail').val() == '') {
+            $scope.emailValid = false;
+        }
+        else {
+            $scope.emailValid = false;
+        }
+    }
+    
 	 $scope.refreshAlarms = function() {
 		 $scope.getAlarms();	 
 		 $scope.getGases();
@@ -164,6 +216,45 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 
 	 $scope.refreshAlarms();
 	 
-	 angular.element('body').removeClass('loading');	 
+	 angular.element('body').removeClass('loading');
+	 
+	 $('#alarmCelular').keydown(function (e) {
+			var key = e.charCode || e.keyCode || 0;
+			$phone = $(this);
+
+			if (key !== 8 && key !== 9) {
+				if ($phone.val().length === 3) {
+					$phone.val($phone.val() + ')');
+				}
+				if ($phone.val().length === 4) {
+					$phone.val($phone.val() + ' ');
+				}			
+				if ($phone.val().length === 10) {
+					$phone.val($phone.val() + '-');
+				}
+			}
+
+			return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
+		})
+		
+		.bind('focus click', function () {
+			$phone = $(this);
+			
+			if ($phone.val().length === 0) {
+				$phone.val('(');
+			}
+			else {
+				var val = $phone.val();
+				$phone.val('').val(val); // Ensure cursor remains at the end
+			}
+		})
+		
+		.blur(function () {
+			$phone = $(this);
+			
+			if ($phone.val() === '(') {
+				$phone.val('');
+			}
+		});
 		
 });

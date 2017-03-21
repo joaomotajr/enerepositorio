@@ -15,6 +15,8 @@ public class AlarmDto {
 	private Double alarm2;		
 	private Double alarm3;		
 	private Boolean alarmOff;
+	private Boolean alarmEmail;	
+	private String Email;
 	private CompanyView companyDto;
 
 	public AlarmDto() {
@@ -102,7 +104,24 @@ public class AlarmDto {
 	public CompanyView getCompanyDto() {
 		return companyDto;
 	}
+	
 	public void setCompanyDto(CompanyView companyDto) {
 		this.companyDto = companyDto;
+	}
+	
+	public final Boolean getAlarmEmail() {
+		return alarmEmail;
+	}
+
+	public final void setAlarmEmail(Boolean alarmEmail) {
+		this.alarmEmail = alarmEmail;
+	}
+
+	public final String getEmail() {
+		return Email;
+	}
+
+	public final void setEmail(String email) {
+		Email = email;
 	}
 }

@@ -1,31 +1,15 @@
 package br.com.eneeyes.main.service;
 
-import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
-import java.util.UUID;
 
 import javax.inject.Named;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.eneeyes.archetype.model.acl.User;
-import br.com.eneeyes.archetype.model.acl.UserRepository;
-import br.com.eneeyes.archetype.result.UserResult;
 import br.com.eneeyes.archetype.services.SiteService;
-import br.com.eneeyes.archetype.web.result.ResultErrorMessage;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDetectorAlarmDto;
 import br.com.eneeyes.main.dto.PositionAlarmDto;
@@ -48,16 +32,11 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	private PositionAlarmRepository repository;
 	
 	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
 	CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
 	
 	@Autowired
-	private SiteService siteService;
-	
-	private Log log = LogFactory.getLog(getClass());
-
+	SiteService siteService;
+		
 	@Override
 	public BasicResult<?> save(PositionAlarmDto dto) {
 		
@@ -132,7 +111,9 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		
 		//TODO - Inserir log de Sistema e Tratamento de Erro
 		//sendEmail("joaomotajunior@gmail.com");
-		SendHTMLEmail();
+		//SendHTMLEmail();
+		
+		siteService.SendEmail("joaomotajunior@gmail.com");
 		
 	}	
 
@@ -167,79 +148,6 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		
 		return result;
 	}
-		
-	private void sendEmail(String email1) {
-		UserResult result = new UserResult();
-		
-		User user = userRepository.findByLogin(email1);
-		if (user == null) {
-            result.addMessage(new ResultErrorMessage("form.erro.site.forgetPassword.naoEncontrado"));
-            return;
-        }
-		
-		try 
-		{
-			
-			String to = user.getLogin();
-			String key = UUID.randomUUID().toString();
-			String urlTemplate = this.getClass().getClassLoader().getResource("/templates/recover-password.html").toString().replace("file:", "");
-			String message = FileUtils.readFileToString(new File(urlTemplate)).replace("{{KEY}}",key);
-			String subject = "Eneneyes - Recuperação de senha";
-			String from = "joaomotajr@hotmail.com.br";
-						
-			siteService.sendMessage(to, from, subject, message);
-		}
-		catch (Exception e) 
-		{	
-			log.error(e);
-		}
-	}
-	
-
-
-
-   public static void SendHTMLEmail() {
-      // Recipient's email ID needs to be mentioned.
-      String to = "joaomotajr@hotmail.com";
-
-      // Sender's email ID needs to be mentioned
-      String from = "joaomotajunior@gmail.com";
-
-      // Assuming you are sending email from localhost
-      String host = "localhost";
-
-      // Get system properties
-      Properties properties = System.getProperties();
-
-      // Setup mail server
-      properties.setProperty("mail.smtp.host", host);
-
-      // Get the default Session object.
-      Session session = Session.getDefaultInstance(properties);
-
-      try {
-         // Create a default MimeMessage object.
-         MimeMessage message = new MimeMessage(session);
-
-         // Set From: header field of the header.
-         message.setFrom(new InternetAddress(from));
-
-         // Set To: header field of the header.
-         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-         // Set Subject: header field
-         message.setSubject("This is the Subject Line!");
-
-         // Send the actual HTML message, as big as you like
-         message.setContent("<h1>This is actual message</h1>", "text/html");
-
-         // Send message
-         Transport.send(message);
-         System.out.println("Sent message successfully....");
-      }catch (MessagingException mex) {
-         mex.printStackTrace();
-      }
-   }
 
 	
 	public BasicResult<?> findByCompanyDetector(Long uid) {

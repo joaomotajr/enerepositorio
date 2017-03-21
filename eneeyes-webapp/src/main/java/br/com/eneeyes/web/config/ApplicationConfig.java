@@ -38,19 +38,27 @@ public class ApplicationConfig {
 
     @Bean
     public Session mailSession() {
-        final Properties properties = System.getProperties();
-        properties.setProperty("mail.smtp.host", "mail.dcm.net.br");
-        properties.setProperty("mail.smtp.port", "587");
-        properties.put("mail.smtp.auth", "true");
-        properties.setProperty("mail.user", "cadastro@dcm.net.br");
-        properties.setProperty("mail.password", "!nov2@15");
-
-        Session session = Session.getInstance(properties,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(properties.getProperty("mail.user"), properties.getProperty("mail.password"));
-                    }
-                });
+    	
+    	final String from = "joao.junior@chipsat.com.br";
+  	   	final  String password = "F@lcon5002";  	    
+  	   	
+	    Properties props = new Properties();  
+	  
+	    props.setProperty("mail.transport.protocol", "smtp");     
+	    props.setProperty("mail.host", "smtp.gmail.com");  
+	    props.put("mail.smtp.auth", "true");  
+	    props.put("mail.smtp.port", "465");  
+	    props.put("mail.debug", "true");  
+	    props.put("mail.smtp.socketFactory.port", "465");  
+	    props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");  
+	    props.put("mail.smtp.socketFactory.fallback", "false"); 
+	     
+	    Session session = Session.getInstance(props,
+	        new javax.mail.Authenticator() {
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication(from, password);
+	            }
+	        });           
 
         return session;
     }

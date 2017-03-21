@@ -266,11 +266,14 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
 			String message = FileUtils.readFileToString(new File(urlTemplate)).replace("{{KEY}}",key);
 			String subject = "Eneneyes - Recuperação de senha";
 			String from = "joaomotajr@hotmail.com.br";
+			
 			siteService.sendMessage(to, from, subject, message);
 
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.DATE, 3);
+			
 			Map<String, Object> token = new HashMap<String, Object>();
+			
 			token.put("expire",calendar.getTime());
 			token.put("hash",MessageDigester.digestSha1(user.getHash()));
 			
@@ -338,8 +341,10 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
             String to = user.getLogin();
             String urlTemplate = this.getClass().getClassLoader().getResource("/templates/change-password-mail.html").toString().replace("file:","");
             String message = FileUtils.readFileToString(new File(urlTemplate)).replace("{{REFRESH_TOKEN}}",refreshToken);
+            
             String subject = "Eneneyes - Sua senha foi alterada";
             String from = "joaomotajr@hotmail.com.br";
+            
             siteService.sendMessage(to, from, subject, message);
 
             result.addMessage(new ResultSuccessMessage("form.success.site.changePassword"));

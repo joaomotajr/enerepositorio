@@ -1,12 +1,16 @@
 package br.com.eneeyes.archetype.services;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.Future;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -15,6 +19,7 @@ import javax.mail.internet.MimeMessage;
 import org.apache.camel.Consume;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -42,7 +47,9 @@ public class SiteService {
 
     @SuppressWarnings("rawtypes")
 	public Future<Result> sendMessage(final String to, final String from, final String subject, final String message) throws Exception {
-        Map<String, String> sendmail = new HashMap<String, String>();
+        
+    	Map<String, String> sendmail = new HashMap<String, String>();
+        
         sendmail.put("from", from);
         sendmail.put("to", to);
         sendmail.put("subject", subject);
@@ -71,6 +78,7 @@ public class SiteService {
             mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             mimeMessage.setSubject(subject);
             mimeMessage.setContent(message, "text/html; charset=utf-8");
+            
             Transport.send(mimeMessage);
         } catch (Exception e) {
             log.error(e);
@@ -78,5 +86,41 @@ public class SiteService {
         }
         return result;
     }
+    
+    public void SendEmail(String to) {
+ 	   
+	   String subject = "Enviando email com JavaMail";
+	   //String msg = "Enviei este email utilizando JavaMail com minha conta GMail!";
+	   String from = "joao.junior@chipsat.com.br";            
+       
+       try {
+  
+    	   Transport transport = mailSession.getTransport();  
+    	   InternetAddress addressFrom = new InternetAddress(from);  
+    	   
+    	   String key = UUID.randomUUID().toString();
+    	   String urlTemplate = this.getClass().getClassLoader().getResource("/templates/recover-password.html").toString().replace("file:", "");
+    	   String msg = FileUtils.readFileToString(new File(urlTemplate)).replace("{{KEY}}",key);
+
+    	   MimeMessage message = new MimeMessage(mailSession);  
+    	   message.setSender(addressFrom);  
+    	   message.setSubject(subject);  
+    	   message.setContent(msg, "text/html; charset=utf-8");    	   
+    	   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));  
+
+    	   transport.connect();  
+    	   Transport.send(message);  
+    	   transport.close();
+             
+        } 
+       catch (MessagingException e) 
+       {
+             throw new RuntimeException(e);
+       } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+  
+   }
 
 }

@@ -221,7 +221,8 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 				
 				if(current != null) {					
 					$scope.$root.timer.push($interval(function(){
-						$scope.getPositions(current);     						
+						if($scope.$root.currentPage == "Empresas")
+							$scope.getPositions(current);     						
 				    }, 5000));						
 				}						
 			}

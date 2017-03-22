@@ -18,7 +18,11 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			alarmEmail:  $scope.alarmEmail, 		
 			email :	$scope.email,
 			alarmSms:  $scope.alarmCelular,
-			celular : $scope.celular
+			celular : $scope.celular,
+			alarmAction:  $scope.alarmAction,
+			action1 : $scope.action1,
+			action2 : $scope.action2,
+			action3 : $scope.action3
 		}; 
 		 
 		$scope.inclusaoAlarm = new AlarmService.save(alarm);		 
@@ -81,6 +85,12 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			$scope.company = $scope.alarms[index].companyDto;
 			$scope.email = $scope.alarms[index].email;
 			$scope.celular = $scope.alarms[index].celular;
+			$scope.action1 = $scope.alarms[index].action1;
+			$scope.action2 = $scope.alarms[index].action2;
+			$scope.action3 = $scope.alarms[index].action3;
+									
+			$("#checkboxActionOff").prop('checked', $scope.alarms[index].alarmAction);
+			showAction($scope.alarms[index].alarmAction);
 			
 			$("#checkboxEmailOnOff").prop('checked', $scope.alarms[index].alarmEmail); 
 			showEmail($scope.alarms[index].alarmEmail);
@@ -88,12 +98,19 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			$("#checkboxSmsOnOff").prop('checked', $scope.alarms[index].alarmSms); 
 			showCelular($scope.alarms[index].alarmSms);
 			
-			if( $scope.alarms[index].alarmOff != true || angular.element('#alarmOn').hasClass('unlocked_inactive') == false )  
+			if( $scope.alarms[index].alarmOff != true )  
 			{
-				$("#travar").toggleClass("disableDiv");			
-				$('#toggle_event_editing button').eq(0).toggleClass('locked_inactive locked_active bg-black btn-default');
-				$('#toggle_event_editing button').eq(1).toggleClass('unlocked_inactive unlocked_active btn-default bg-black');
+				$("#travar").addClass("disableDiv");
+				
+				$('#toggle_event_editing button').eq(1).addClass('locked_active btn-default').removeClass('unlocked_active bg-black');
+				$('#toggle_event_editing button').eq(0).addClass('unlocked_inactive bg-black').removeClass('locked_active btn-default');
 			}				
+			else {
+				$("#travar").removeClass("disableDiv");
+				
+				$('#toggle_event_editing button').eq(0).addClass('locked_active btn-default').removeClass('unlocked_active bg-black');
+				$('#toggle_event_editing button').eq(1).addClass('unlocked_inactive bg-black').removeClass('locked_active btn-default');
+			}
 			
 			$scope.validEmail();
 			$scope.validMobile();
@@ -179,75 +196,6 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
 		 ]; 
 	 
-	 $('#toggle_event_editing button').click(function(){
-		 event.preventDefault();	    
-		 
-		$("#travar").toggleClass("disableDiv");			 
-		
-		$('#toggle_event_editing button').eq(0).toggleClass('locked_inactive locked_active bg-black btn-default');
-		$('#toggle_event_editing button').eq(1).toggleClass('unlocked_inactive unlocked_active btn-default bg-black');
-	 });
-	 
- 
-	 $("#checkboxSonoroOnOff").click(function(e, parameters) {		 
-		 $(".checkboxSonoro").prop('checked', $(this).prop("checked"));         
-     });
-	 
-	 $("#checkboxEmailOnOff").click(function(e, parameters) {		 
-		 showEmail($(this).prop("checked"));
-     });	 
-	 function showEmail (checked) {
-		 
-		 $(".checkboxEmail").prop('checked', checked);
-		 
-		 $("#alarmEmail").prop('disabled', !checked );         
-		 $("#alarmEmail").prop('readonly', !checked); 
-		 		 
-		 $scope.alarmEmail = checked;
-	 }
-	 
-	 $("#checkboxSmsOnOff").click(function(e, parameters) {		 
-		 showCelular($(this).prop("checked"));         
-     });
-	 function showCelular(checked) {
-		 
-		 $(".checkboxCelular").prop('checked', checked);
-		 
-		 $("#alarmCelular").prop('disabled', !checked );         
-		 $("#alarmCelular").prop('readonly', !checked); 
-		 		 
-		 $scope.alarmCelular = checked;
-	 }
-	 
-	 $scope.validMobile = function ($event) {
-		 
-		 $scope.mobileValid = ($scope.celular != null && $scope.celular.length == 15); 
-	 }
-	 
-	 
-	 $scope.validEmail = function ($event) {
-    	
-        if (validateEmail( $scope.email )) {
-            $scope.emailValid = true;
-        }
-        else if ( $scope.email == '') {
-            $scope.emailValid = false;
-        }
-        else {
-            $scope.emailValid = false;
-        }
-	 }
-    
-	 $scope.refreshAlarms = function() {
-		 $scope.getAlarms();	 
-		 $scope.getGases();
-		 $scope.getCompanys();
-	 }
-	 
-	 $scope.refreshAlarms();
-	 
-	 angular.element('body').removeClass('loading');
-	 
 	 $('#alarmCelular').keydown(function (e) {
 			var key = e.charCode || e.keyCode || 0;
 			$phone = $(this);
@@ -286,5 +234,107 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 				$phone.val('');
 			}
 		});
+	 
+	 
+	 $('#toggle_event_editing button').click(function(){
+		 event.preventDefault();	    
+		 
+		$("#travar").toggleClass("disableDiv");			 
+		
+		$('#toggle_event_editing button').eq(0).toggleClass('locked_inactive locked_active bg-black btn-default');
+		$('#toggle_event_editing button').eq(1).toggleClass('unlocked_inactive unlocked_active btn-default bg-black');
+	 });
+	 
+ 
+	 $("#checkboxSonoroOnOff").click(function(e, parameters) {		 
+		 $(".checkboxSonoro").prop('checked', $(this).prop("checked"));         
+     });
+	 
+	 
+	 $("#checkboxEmailOnOff").click(function(e, parameters) {		 
+		 showEmail($(this).prop("checked"));
+     });	 
+	 function showEmail (checked) {
+		 
+		 $(".checkboxEmail").prop('checked', checked);
+		 
+		 $("#alarmEmail").prop('disabled', !checked );         
+		 $("#alarmEmail").prop('readonly', !checked); 
+		 		 
+		 $scope.alarmEmail = checked;
+		 $scope.validEmail();
+	 }
+	 $scope.validEmail = function ($event) {
+	    	
+
+		 if (!$("#checkboxEmailOnOff").prop('checked') || validateEmail( $scope.email )) {
+			 $scope.emailValid = true;
+		 }
+		 else if ( $scope.email == '') {
+			 $scope.emailValid = false;
+		 }
+		 else {
+		    $scope.emailValid = false;
+		 }
+		 
+		 if(!$scope.$$phase) 
+			 $scope.$apply();
+	 }
+
+	 
+	 
+	 $("#checkboxSmsOnOff").click(function(e, parameters) {		 
+		 showCelular($(this).prop("checked"));         
+     });
+	 function showCelular(checked) {
+		 
+		 $(".checkboxSms").prop('checked', checked);
+		 
+		 $("#alarmCelular").prop('disabled', !checked );         
+		 $("#alarmCelular").prop('readonly', !checked); 
+		 		 
+		 $scope.alarmCelular = checked;
+		 
+		 $scope.validMobile();
+	 }	 
+	 $scope.validMobile = function ($event) {		 
+	 
+		 $scope.mobileValid =  (!$("#checkboxSmsOnOff").prop('checked') || ($scope.celular != null && $scope.celular.length == 15));
+		 
+		 if(!$scope.$$phase) 
+			 $scope.$apply();					 
+	 }	 
+	 
+	 $("#checkboxActionOff").click(function(e, parameters) {		 
+		 		 
+		 showAction($("#checkboxActionOff").prop('checked'));
+     });
+	 
+	 function showAction(checked) {
+	 
+		 $scope.alarmAction = checked;
+		 
+		 if(!checked)
+			 $(".travarAction").addClass("disableDiv");
+		 else
+			 $(".travarAction").removeClass("disableDiv");
+		 
+		 if(!$scope.$$phase) 
+			 $scope.$apply();			
+	 }
+	 	 
+	 
+     /* ----------------- Processamento ------------------*/
+	 
+	 $scope.refreshAlarms = function() {
+		 $scope.getAlarms();	 
+		 $scope.getGases();
+		 $scope.getCompanys();
+	 }
+	 
+	 $scope.refreshAlarms();
+	 
+	 angular.element('body').removeClass('loading');
+		
 		
 });

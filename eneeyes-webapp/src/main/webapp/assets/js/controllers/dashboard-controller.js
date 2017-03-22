@@ -66,7 +66,8 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 	$scope.getCompaniesPosition();
     
     $interval(function() {
-    	$scope.getCompaniesPosition();     						
+    	if($scope.$root.currentPage == "Dashboard")
+    		$scope.getCompaniesPosition();     						
     }, 10000);	
     
 	

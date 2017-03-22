@@ -44,6 +44,10 @@ public class Alarm {
 		this.alarmSms = dto.getAlarmSms();
 		this.celular = dto.getCelular();
 		this.alarmOff = dto.getAlarmOff();
+		this.alarmAction = dto.getAlarmAction();
+		this.action1 = dto.getAction1();
+		this.action2 = dto.getAction2();
+		this.action3 = dto.getAction3();
 		this.company = dto.getCompanyDto();		
 	}	
 	
@@ -90,6 +94,18 @@ public class Alarm {
 	
 	@Column(name = "CELULAR", nullable = true)		
 	private String celular;
+	
+	@Column(name = "ALARM_ACTION", nullable = true)		
+	private Boolean alarmAction;
+	
+	@Column(name = "ACTION1", nullable = true, length=300)		
+	private String action1;
+	
+	@Column(name = "ACTION2", nullable = true, length=300)		
+	private String action2;
+	
+	@Column(name = "ACTION3", nullable = true, length=300)		
+	private String action3;	
 		
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_ID", nullable = false)
@@ -197,5 +213,37 @@ public class Alarm {
 
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+	
+	public final Boolean getAlarmAction() {
+		return alarmAction;
+	}
+
+	public final void setAlarmAction(Boolean alarmAction) {
+		this.alarmAction = alarmAction;
+	}
+
+	public final String getAction1() {
+		return action1;
+	}
+
+	public final void setAction1(String action1) {
+		this.action1 = action1;
+	}
+
+	public final String getAction2() {
+		return action2;
+	}
+
+	public final void setAction2(String action2) {
+		this.action2 = action2;
+	}
+
+	public final String getAction3() {
+		return action3;
+	}
+
+	public final void setAction3(String action3) {
+		this.action3 = action3;
 	}
 }

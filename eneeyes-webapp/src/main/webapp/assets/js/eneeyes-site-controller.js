@@ -1,6 +1,7 @@
 app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin, $sce) {
 
 	$scope.$root.timer = [];
+	$scope.$root.currentPage = "";
 	$scope.$root.errorTimes = 0;
 	
 	$scope.LoadAjaxContentCompany = function(url){
@@ -18,7 +19,8 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	
 	$scope.LoadAjaxContent = function(url, title) {
 		
-		title= title.replace(/\s/g,'');
+		title= title.replace(/\s/g,'');		
+		$scope.$root.currentPage = title;
 		
 		tabIsOpened = $(".nav-tabs").find("." + title ).attr('id');
 					
@@ -65,6 +67,11 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 			$("#id_tab_" + index).trigger("click");				
 		},100);
 	};
+	
+	
+	$(".menu").click(function(e, parameters) {		 
+		 var a = 1;         
+    });
 		
 	$scope.showUserMenu = false;
 	$scope.showMenuUser = function(show, link) {

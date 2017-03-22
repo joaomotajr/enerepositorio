@@ -19,6 +19,11 @@ public class AlarmDto {
 	private String email;
 	private Boolean alarmSms;
 	private String celular;
+	private Boolean alarmAction;
+	private String action1;
+	private String action2;
+	private String action3;
+	
 	private CompanyView companyDto;
 
 	public AlarmDto() {
@@ -38,9 +43,12 @@ public class AlarmDto {
 		this.alarmEmail = alarm.getAlarmEmail();
 		this.email = alarm.getEmail();
 		this.alarmSms = alarm.getAlarmSms();
-		this.celular = alarm.getCelular();
-		this.companyDto = alarm.getCompany();
-		
+		this.celular = alarm.getCelular();		
+		this.alarmAction = alarm.getAlarmAction();
+		this.action1 = alarm.getAction1();
+		this.action2 = alarm.getAction2();
+		this.action3 = alarm.getAction3();		
+		this.companyDto = alarm.getCompany();		
 	}
 	
 	public final Long getUid() {
@@ -145,5 +153,37 @@ public class AlarmDto {
 
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+	
+	public final Boolean getAlarmAction() {
+		return alarmAction;
+	}
+
+	public final void setAlarmAction(Boolean alarmAction) {
+		this.alarmAction = alarmAction;
+	}
+
+	public final String getAction1() {
+		return action1;
+	}
+
+	public final void setAction1(String action1) {
+		this.action1 = action1;
+	}
+
+	public final String getAction2() {
+		return action2;
+	}
+
+	public final void setAction2(String action2) {
+		this.action2 = action2;
+	}
+
+	public final String getAction3() {
+		return action3;
+	}
+
+	public final void setAction3(String action3) {
+		this.action3 = action3;
 	}
 }

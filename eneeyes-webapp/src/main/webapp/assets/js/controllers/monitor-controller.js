@@ -66,7 +66,8 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 	$scope.getCompaniesAlarm();
     
     $interval(function() {
-    	$scope.getCompaniesAlarm();     						
+    	if($scope.$root.currentPage == "Monitor")
+    		$scope.getCompaniesAlarm();     						
     }, 10000);	
     
 	

@@ -7,4 +7,9 @@ app.controller('conteudoController', function ($scope, $rootScope, $timeout, $fi
 	 $scope.clearAlert = function() {
 		 $rootScope.alertDanger = undefined;
 	 }
+	 
+	 $scope.fCurrentPage = function(menu) {
+		 $rootScope.currentPage = menu;
+	 }
+	 	 
 });

@@ -185,7 +185,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 				
 				if(current != null) {					
 					$scope.$root.timer.push($interval(function(){
-						$scope.getPositions(current);     
+						if($scope.$root.currentPage == "Empresas")
+							$scope.getPositions(current);     
 						
 				    }, 5000));						
 				}						
@@ -197,7 +198,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 				
 				if(current != null) {					
 					$scope.$root.timer.push($interval(function(){
-						$scope.getHistorics(current, 1);     
+						if($scope.$root.currentPage == "Empresas")
+							$scope.getHistorics(current, 1);     
 						
 				    }, 5000));						
 				}						

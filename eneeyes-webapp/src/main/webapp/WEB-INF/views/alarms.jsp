@@ -21,7 +21,7 @@
 					</div>
 					<div class="box-body">
 						<div style="height: 500px; overflow: auto;">
-							<table class="table table-hover"  >
+							<table class="table table-hover">
 								<thead>
 									<tr>
 										<th>Empresa</th>
@@ -223,17 +223,23 @@
 										                        <div class="col-md-12">
 											            			<div class="col-md-2">										            									            				
 												            			<div class="checkbox3 checkbox-round">
-							                                            	<input type="checkbox" id="checkboxEmailOnOff" checked>
+							                                            	<input type="checkbox" 
+							                                            	id="checkboxEmailOnOff" checked>
 							                                            	<label for="checkboxEmailOnOff">Enviar E-MAIL? </label>
 							                                          	</div>
 							                                        </div>
 							                                        
 							                                        <div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important">
-							                                        	<div data-ng-class="{'has-error': !emailValid && userForm.alarmEmail.$dirty}">	
+							                                        	<div data-ng-class="{'has-error': !emailValid}">	
 								                                        	<div class="input-group">								                                        	
 														                    	<span class="input-group-addon" data-ng-show="emailValid">@</span>													                    														                    	
 														                    	<span class="input-group-addon text-red" data-ng-hide="emailValid">@</span>
-														                    	<input id="alarmEmail" type="text" class="form-control" placeholder="Email" name="alarmEmail" data-ng-keyup="validEmail($event);" required>
+														                    	<input 
+														                    		id="alarmEmail" 
+														                    		data-ng-model="email" type="text" class="form-control" 
+														                    		placeholder="Email" 
+														                    		data-ng-change="validEmail($event);"														                    		 
+														                    		required>
 														                    </div>
 													                  	</div>						                                         												            			
 								                                   	</div>			            			
@@ -268,10 +274,16 @@
 							                                          	</div>
 							                                        </div>
 							                                        
-							                                        <div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important">	
-							                                        	<div class="input-group">
-													                    	<span class="input-group-addon"><i class="fa fa-phone-square"></i></span>
-													                    	<input class="form-control" id="alarmCelular" name="alarmCelular" type="text" maxlength="15" placeholder="(XX) XXXXX-XXXX" data-ng-keyup="validMobile($event);" />													                    	
+							                                        <div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important">
+							                                        	<div data-ng-class="{'has-error': !mobileValid}">	
+								                                        	<div class="input-group">
+														                    	<span class="input-group-addon" data-ng-show="mobileValid"><i class="fa fa-phone-square"></i></span>
+														                    	<span class="input-group-addon text-red" data-ng-hide="mobileValid"><i class="fa fa-phone-square"></i></span>
+														                    	<input class="form-control" 
+														                    		id="alarmCelular" 
+														                    		data-ng-model="celular" 
+														                    		type="text" maxlength="15" placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />													                    	
+														                  	</div>
 													                  	</div>						                                         													            			
 								                                   	</div>			            			
 											            			
@@ -295,6 +307,31 @@
 											            			</div>
 											            		</div>	
 														    </div>	
+														    
+														    <div class="row">
+										                        <div class="col-md-12">
+											            			<div class="col-md-2">										            									            				
+												            			<div class="checkbox3 checkbox-round">
+							                                            	<input type="checkbox" id="checkboxActionOff" checked>
+							                                            	<label for="checkboxActionOff">Ações a Realizar? </label>
+							                                          	</div>
+							                                        </div>
+							                                        
+							                                        <div class="col-md-4">						                                        						                                         													            			
+								                                   	</div>			            			
+											            			
+											            			<div class="col-md-2">											            				
+											            			</div>
+											            			
+											            			<div class="col-md-2">											            				
+											            			</div>
+											            			
+											            			<div class="col-md-2">											            				
+											            			</div>
+											            			
+											            		</div>	
+														    </div>	
+														    
 													
 														</div>    								    
 												    </div>
@@ -313,7 +350,7 @@
 				  	<div class="modal-footer">						
 						<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
 						<button type="button" data-ng-click="saveAlarm();" class="btn btn-primary" data-dismiss="modal"
-							data-ng-disabled="(userForm.$valid && !(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3)) ? false : true">Salvar
+							data-ng-disabled="(  userForm.$valid && !(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3)) ? false : true">Salvar
 						</button>						                                
 				  	</div>
 			  	</div>

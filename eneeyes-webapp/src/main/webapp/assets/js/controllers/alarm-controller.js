@@ -14,8 +14,12 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			alarm2 : $scope.alarmAlarm2,
 			alarm3 : $scope.alarmAlarm3,
 			companyDto : $scope.company,
-			alarmOff: angular.element('#alarmOn').hasClass('unlocked_inactive') == true ? true : false
-    	}; 
+			alarmOff: angular.element('#alarmOn').hasClass('unlocked_inactive') == true ? true : false,
+			alarmEmail:  $scope.alarmEmail, 		
+			email :	$scope.email,
+			alarmSms:  $scope.alarmCelular,
+			celular : $scope.celular
+		}; 
 		 
 		$scope.inclusaoAlarm = new AlarmService.save(alarm);		 
 		$scope.inclusaoAlarm.$alarm({_csrf : angular.element('#_csrf').val()}, function()
@@ -75,14 +79,24 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		    $scope.alarmAlarm3 = $scope.alarms[index].alarm3;
 		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.alarms[index].unitMeterGases);
 			$scope.company = $scope.alarms[index].companyDto;
+			$scope.email = $scope.alarms[index].email;
+			$scope.celular = $scope.alarms[index].celular;
+			
+			$("#checkboxEmailOnOff").prop('checked', $scope.alarms[index].alarmEmail); 
+			showEmail($scope.alarms[index].alarmEmail);
+			
+			$("#checkboxSmsOnOff").prop('checked', $scope.alarms[index].alarmSms); 
+			showCelular($scope.alarms[index].alarmSms);
 			
 			if( $scope.alarms[index].alarmOff != true || angular.element('#alarmOn').hasClass('unlocked_inactive') == false )  
 			{
-				$("#travar").toggleClass("disableDiv");				 
-			
+				$("#travar").toggleClass("disableDiv");			
 				$('#toggle_event_editing button').eq(0).toggleClass('locked_inactive locked_active bg-black btn-default');
 				$('#toggle_event_editing button').eq(1).toggleClass('unlocked_inactive unlocked_active btn-default bg-black');
 			}				
+			
+			$scope.validEmail();
+			$scope.validMobile();
 			
 			$timeout(function () {
 	            $('#modalAlarmEdit').modal({ show: 'false' });                        
@@ -166,7 +180,6 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 ]; 
 	 
 	 $('#toggle_event_editing button').click(function(){
-		 //if($(this).hasClass('locked_active') || $(this).hasClass('unlocked_inactive')){
 		 event.preventDefault();	    
 		 
 		$("#travar").toggleClass("disableDiv");			 
@@ -181,32 +194,49 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
      });
 	 
 	 $("#checkboxEmailOnOff").click(function(e, parameters) {		 
-		 $(".checkboxEmail").prop('checked', $(this).prop("checked")); 
+		 showEmail($(this).prop("checked"));
+     });	 
+	 function showEmail (checked) {
 		 
-		 $("#alarmEmail").prop('disabled', !$(this).prop("checked"));         
-		 $("#alarmEmail").prop('readonly', !$(this).prop("checked")); 
+		 $(".checkboxEmail").prop('checked', checked);
 		 
-		 $scope.emailValid = true;
-     });
+		 $("#alarmEmail").prop('disabled', !checked );         
+		 $("#alarmEmail").prop('readonly', !checked); 
+		 		 
+		 $scope.alarmEmail = checked;
+	 }
 	 
 	 $("#checkboxSmsOnOff").click(function(e, parameters) {		 
-		 $(".checkboxSms").prop('checked', $(this).prop("checked"));         
+		 showCelular($(this).prop("checked"));         
      });
+	 function showCelular(checked) {
+		 
+		 $(".checkboxCelular").prop('checked', checked);
+		 
+		 $("#alarmCelular").prop('disabled', !checked );         
+		 $("#alarmCelular").prop('readonly', !checked); 
+		 		 
+		 $scope.alarmCelular = checked;
+	 }
 	 
-    $scope.validEmail = function ($event) {
-
-    	regex  = /^[a-z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$/;
+	 $scope.validMobile = function ($event) {
+		 
+		 $scope.mobileValid = ($scope.celular != null && $scope.celular.length == 15); 
+	 }
+	 
+	 
+	 $scope.validEmail = function ($event) {
     	
-        if (validateEmail( $('#alarmEmail').val()) ) {
+        if (validateEmail( $scope.email )) {
             $scope.emailValid = true;
         }
-        else if ($('#alarmEmail').val() == '') {
+        else if ( $scope.email == '') {
             $scope.emailValid = false;
         }
         else {
             $scope.emailValid = false;
         }
-    }
+	 }
     
 	 $scope.refreshAlarms = function() {
 		 $scope.getAlarms();	 
@@ -245,7 +275,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			}
 			else {
 				var val = $phone.val();
-				$phone.val('').val(val); // Ensure cursor remains at the end
+				$phone.val('').val(val);
 			}
 		})
 		

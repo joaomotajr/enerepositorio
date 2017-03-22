@@ -39,8 +39,10 @@ public class Alarm {
 		this.alarm1 = dto.getAlarm1();
 		this.alarm2 = dto.getAlarm2();
 		this.alarm3 = dto.getAlarm3();
-		this.alarmEmail = dto.getAlarmEmail();
+		this.alarmEmail = dto.getAlarmEmail();				
 		this.email = dto.getEmail();
+		this.alarmSms = dto.getAlarmSms();
+		this.celular = dto.getCelular();
 		this.alarmOff = dto.getAlarmOff();
 		this.company = dto.getCompanyDto();		
 	}	
@@ -82,6 +84,12 @@ public class Alarm {
 	
 	@Column(name = "EMAIL", nullable = true)		
 	private String email;
+	
+	@Column(name = "ALARM_SMS", nullable = true)		
+	private Boolean alarmSms;
+	
+	@Column(name = "CELULAR", nullable = true)		
+	private String celular;
 		
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_ID", nullable = false)
@@ -173,5 +181,21 @@ public class Alarm {
 
 	public final void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public Boolean getAlarmSms() {
+		return alarmSms;
+	}
+
+	public void setAlarmSms(Boolean alarmSms) {
+		this.alarmSms = alarmSms;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.eneeyes.archetype.services.SiteService;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
+import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.dto.CompanyDetectorAlarmDto;
 import br.com.eneeyes.main.dto.PositionAlarmDto;
 import br.com.eneeyes.main.model.CompanyDetector;
@@ -18,9 +19,11 @@ import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
+import br.com.eneeyes.main.model.enums.EmailStatus;
+import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.register.Sensor;
-import br.com.eneeyes.main.repository.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.repository.PositionAlarmRepository;
+import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
@@ -56,27 +59,86 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		}
 		
 		CompanyDetectorAlarmDto alarm = CompanyDetectorAlarmSingletonRepository.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());
-		//CompanyDetectorAlarmDto alarm = companyDetectorAlarmAlarmService.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());
 			
 		AlarmType alarmType = AlarmType.NORMAL ;
 		
 		if(alarm != null) {
 			
-			if( position.getLastValue().compareTo( new BigDecimal(alarm.getAlarmDto().getAlarm3())) > 0 ) {
-				
+			if( position.getLastValue().compareTo( new BigDecimal(alarm.getAlarmDto().getAlarm3())) > 0 ) {				
 				alarmType = AlarmType.EVACUACAO;
 			}
-			else if( position.getLastValue().compareTo( new BigDecimal(alarm.getAlarmDto().getAlarm2())) > 0 ) {
-				
+			else if( position.getLastValue().compareTo( new BigDecimal(alarm.getAlarmDto().getAlarm2())) > 0 ) {				
 				alarmType = AlarmType.ALERTA;
 			}
-			else if( position.getLastValue().compareTo( new BigDecimal(alarm.getAlarmDto().getAlarm1())) > 0 ) {
-				
+			else if( position.getLastValue().compareTo( new BigDecimal(alarm.getAlarmDto().getAlarm1())) > 0 ) {				
 				alarmType = AlarmType.DETECCAO;				
 			}		
 		}	
 		
-		return alarmType;
+		return alarmType;		 
+	}
+	
+	/** Método checar se houve violação de Alarme
+	 * Criar Alarme correspondentes
+	 * Carregar Filas de eventos 
+     *   @return Tipo do Alarme */
+	public AlarmType checkAndUpdateAlarmsAndActions(Position position) {		
+		
+		CompanyDetector companyDetector = new CompanyDetector(position.getCompanyDetector().getUid());
+		Sensor sensor = new Sensor(position.getSensor().getUid());
+		
+		if(CompanyDetectorAlarmSingletonRepository.init()) {
+			CompanyDetectorAlarmSingletonRepository.populate(companyDetectorAlarmAlarmService.findAll());
+		}
+		
+		CompanyDetectorAlarmDto alarm = CompanyDetectorAlarmSingletonRepository.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());
+		
+		AlarmDto alarmDto = alarm.getAlarmDto();
+		
+		AlarmType alarmType = getExistsAlarm(alarmDto, position.getLastValue());
+		
+		if (alarmType != AlarmType.NORMAL) {
+			
+			EmailStatus emailStatus = null;
+			if(alarm.getAlarmDto().getAlarmEmail() != null)
+				emailStatus = EmailStatus.PENDENT;
+			else
+				emailStatus = EmailStatus.OFF;
+			
+			SmsStatus smsStatus = null;
+			if(alarm.getAlarmDto().getAlarmSms() != null)
+				smsStatus = SmsStatus.PENDENT;
+			else
+				smsStatus = SmsStatus.OFF;
+				
+			saveOrUpdatePositionAlarm(position, companyDetector, sensor, alarmType, emailStatus, smsStatus);
+		}
+		
+		
+		return alarmType; 
+	}
+	
+	private AlarmType getExistsAlarm(AlarmDto alarm, BigDecimal lastValue ) {
+			
+		AlarmType alarmType = AlarmType.NORMAL ;
+				
+		if(alarm != null) {
+			
+			if(!alarm.getAlarmOn() ) {				
+				alarmType = AlarmType.OFF;				
+			}				
+			else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm3())) > 0 ) {				
+				alarmType = AlarmType.EVACUACAO;							
+			}
+			else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm2())) > 0 ) {				
+				alarmType = AlarmType.ALERTA;
+			}
+			else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm1())) > 0 ) {				
+				alarmType = AlarmType.DETECCAO;
+			}		
+		}	
+		
+		return alarmType;		
 	}
 
 	/**
@@ -85,7 +147,8 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	 * @param sensor
 	 * @param alarmType
 	 */
-	public void saveOrUpdatePositionAlarm(Position position, CompanyDetector companyDetector, Sensor sensor, AlarmType alarmType) {
+	public void saveOrUpdatePositionAlarm(Position position, CompanyDetector companyDetector, Sensor sensor, 
+			AlarmType alarmType, EmailStatus emailStatus, SmsStatus smsStatus) {
 		
 		PositionAlarm positionAlarm = repository.findByCompanyDetectorAndSensorAndAlarmType(companyDetector, sensor, alarmType);
 		
@@ -100,6 +163,8 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			positionAlarm.setAlarmStatus(AlarmStatus.CREATED);
 			positionAlarm.setLastUpdate(new Date());
 			positionAlarm.setAlarmType(alarmType);
+			positionAlarm.setEmailStatus(emailStatus);
+			positionAlarm.setSmsStatus(smsStatus);
 		}
 		else {
 			
@@ -109,12 +174,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		
 		repository.save(positionAlarm);
 		
-		//TODO - Inserir log de Sistema e Tratamento de Erro
-		//sendEmail("joaomotajunior@gmail.com");
-		//SendHTMLEmail();
-		
-		siteService.SendEmail("joaomotajunior@gmail.com");
-		
+		//siteService.SendEmail("joaomotajunior@gmail.com");		
 	}	
 
 	@Override
@@ -149,7 +209,6 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		return result;
 	}
 
-	
 	public BasicResult<?> findByCompanyDetector(Long uid) {
 		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
 		
@@ -184,7 +243,6 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		return result;
 	}
 
-	
 	public Result<?> listAll() {
 		
 		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>(); 	

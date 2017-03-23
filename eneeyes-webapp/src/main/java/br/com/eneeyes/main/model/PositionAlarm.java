@@ -19,6 +19,8 @@ import javax.persistence.Table;
 import br.com.eneeyes.main.dto.PositionAlarmDto;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
+import br.com.eneeyes.main.model.enums.EmailStatus;
+import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.register.Sensor;
 
 @Entity
@@ -37,7 +39,9 @@ public class PositionAlarm {
     	this.sensor = new Sensor(dto.getSensorDto());
     	this.alarmType = dto.getAlarmType();
     	this.alarmStatus = dto.getAlarmStatus();
-    	this.statusUpdate = dto.getStatusUpdate(); 
+    	this.statusUpdate = dto.getStatusUpdate();
+    	this.emailStatus = dto.getEmailStatus();
+    	this.smsStatus = dto.getSmsStatus();
     }
 
 	@Id
@@ -96,6 +100,38 @@ public class PositionAlarm {
 	
 	@Column(name = "STATUS_UPDATE", nullable = true)
 	private Date statusUpdate;
+	
+	@Column(name = "EMAIL_STATUS", columnDefinition = "int default 0", nullable = true)
+	private EmailStatus emailStatus;	
+
+	@Enumerated(EnumType.ORDINAL) 
+	private EmailStatus EmailStatus() { 
+	    return emailStatus; 
+	}
+	
+	public final EmailStatus getEmailStatus() {
+		return emailStatus;
+	}
+
+	public final void setEmailStatus(EmailStatus emailStatus) {
+		this.emailStatus = emailStatus;
+	}	
+	
+	@Column(name = "Sms_STATUS", columnDefinition = "int default 0", nullable = true)
+	private SmsStatus smsStatus;	
+
+	@Enumerated(EnumType.ORDINAL) 
+	private SmsStatus SmsStatus() { 
+	    return smsStatus; 
+	}
+	
+	public final SmsStatus getSmsStatus() {
+		return smsStatus;
+	}
+
+	public final void setSmsStatus(SmsStatus smsStatus) {
+		this.smsStatus = smsStatus;
+	}
 	
 	public Long getUid() {
 		return uid;

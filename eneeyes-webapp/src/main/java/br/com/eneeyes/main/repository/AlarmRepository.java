@@ -14,7 +14,7 @@ public interface AlarmRepository extends JpaRepository<Alarm, Long> {
 	
 	@Modifying
 	@Transactional
-	@Query("update Alarm a set a.alarmOff = ?1  where a.uid = ?2 ")
+	@Query("update Alarm a set a.alarmOn = ?1  where a.uid = ?2 ")
 	int onOff(Boolean onOff, Long uid);
 	
 }

@@ -12,7 +12,7 @@ import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.model.Alarm;
 import br.com.eneeyes.main.repository.AlarmRepository;
-import br.com.eneeyes.main.repository.CompanyDetectorAlarmSingletonRepository;
+import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
@@ -47,7 +47,7 @@ public class AlarmService implements IService<AlarmDto> {
 	public int onOff(AlarmDto dto) {
 		
 		Alarm alarm = new Alarm(dto);		
-		return repository.onOff(!alarm.getAlarmOff(), alarm.getUid());
+		return repository.onOff(!alarm.getAlarmOn(), alarm.getUid());
 						
 	}
 

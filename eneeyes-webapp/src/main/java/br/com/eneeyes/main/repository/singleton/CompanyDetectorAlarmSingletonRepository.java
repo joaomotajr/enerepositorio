@@ -1,4 +1,4 @@
-package br.com.eneeyes.main.repository;
+package br.com.eneeyes.main.repository.singleton;
 
 import java.util.List;
 

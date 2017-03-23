@@ -43,7 +43,7 @@ public class Alarm {
 		this.email = dto.getEmail();
 		this.alarmSms = dto.getAlarmSms();
 		this.celular = dto.getCelular();
-		this.alarmOff = dto.getAlarmOff();
+		this.alarmOn = dto.getAlarmOn();
 		this.alarmAction = dto.getAlarmAction();
 		this.action1 = dto.getAction1();
 		this.action2 = dto.getAction2();
@@ -80,8 +80,8 @@ public class Alarm {
 	@Column(name = "ALARM_3")		
 	private Double alarm3;
 	
-	@Column(name = "ALARM_OFF", nullable = true)		
-	private Boolean alarmOff;
+	@Column(name = "ALARM_ON", nullable = true)		
+	private Boolean alarmOn;
 	
 	@Column(name = "ALARM_EMAIL", nullable = true)		
 	private Boolean alarmEmail;
@@ -167,12 +167,12 @@ public class Alarm {
 		this.alarm3 = alarm3;
 	}
 
-	public final Boolean getAlarmOff() {
-		return alarmOff;
+	public final Boolean getAlarmOn() {
+		return alarmOn;
 	}
 
-	public final void setAlarmOff(Boolean alarmOff) {
-		this.alarmOff = alarmOff;
+	public final void setAlarmOn(Boolean alarmOn) {
+		this.alarmOn = alarmOn;
 	}
 	
 	public CompanyView getCompany() {

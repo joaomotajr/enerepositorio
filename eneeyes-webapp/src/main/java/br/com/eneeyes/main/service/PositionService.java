@@ -53,7 +53,8 @@ public class PositionService implements IService<PositionDto> {
 			position.setLastUpdate(historic.getLastUpdate());
 			position.setLastValue(historic.getValue());
 			
-			AlarmType alarmType = positionAlarmService.checkAlarmLimits(position);
+			//AlarmType alarmType = positionAlarmService.checkAlarmLimits(position);
+			AlarmType alarmType = positionAlarmService.checkAndUpdateAlarmsAndActions(position);
 			position.setAlarmType(alarmType);
 			
 			repository.save(position);
@@ -61,9 +62,9 @@ public class PositionService implements IService<PositionDto> {
 			//TODO Position não possui CompanyDetector, o objeto é Lazy pq é chave de pesquisa
 			position.setCompanyDetector(historic.getCompanyDetector());
 			
-			if (alarmType != AlarmType.NORMAL) {				
-				positionAlarmService.saveOrUpdatePositionAlarm(position, historic.getCompanyDetector(), historic.getSensor(), alarmType);
-			}
+//			if (alarmType != AlarmType.NORMAL) {				
+//				positionAlarmService.saveOrUpdatePositionAlarm(position, historic.getCompanyDetector(), historic.getSensor(), alarmType);
+//			}
 						
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Executado com sucesso.");

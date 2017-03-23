@@ -340,13 +340,17 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
                       'fontStyle' : 'bold',
                       'fontSize': 9,
                   },
-	    		  ticks: [
-	    		          {v:0, f: 'Range Minimo: 0' }, 
-	    		          {v: orange, f: 'Detecção: ' + orange}, 
-	    		          {v: yellow, f: 'Alerta: ' + yellow}, 
-	    		          {v: red, f: 'Evacuação: ' + red}, 
-	    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanySensor.rangeMax}
-	    		         ]
+//	    		  ticks: [
+//	    		          {v:0, f: 'Range Minimo: 0' }, 
+//	    		          {v: orange, f: 'Detecção: ' + orange}, 
+//	    		          {v: yellow, f: 'Alerta: ' + yellow}, 
+//	    		          {v: red, f: 'Evacuação: ' + red}, 
+//	    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanySensor.rangeMax}
+//	    		         ]
+                  ticks: [
+                          	{v:0, f: 'Range Minimo: 0' }, 
+							{v: 15, f: 'Range Máximo: 15'}
+						]
 	    	  },
 	    	  curveType: 'function',
 	          pointSize:1

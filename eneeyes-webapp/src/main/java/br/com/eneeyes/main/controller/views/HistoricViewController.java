@@ -18,30 +18,30 @@ import br.com.eneeyes.main.service.views.HistoricViewService;
 public class HistoricViewController {
 	
 	@Inject
-	HistoricViewService historicViewService;	
+	HistoricViewService service;	
 	
 	@RequestMapping(value = "/security/api/view/allHistoricView", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> allHistoricView() {
-		return historicViewService.listAll();
+		return service.listAll();
 	}
 	
 	@RequestMapping(value="/security/api/view/findByCompanyDetectorAndSensorAndInterval/{companyDetectorId}/{sensorId}/{interval}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)                      
 	public BasicResult<?> findByCompanyDetectorAndSensorAndInterval(@PathVariable Long companyDetectorId, @PathVariable Long sensorId, @PathVariable Integer interval) {		
-		return historicViewService.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, interval);
+		return service.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, interval);
 	}
 	
 	@RequestMapping(value="/security/api/view/findByCompanyDetectorAndSensorLastMonth/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> findByCompanyDetectorAndSensorLastMonth(@PathVariable Long companyDetectorId, @PathVariable Long sensorId) {		
-		return historicViewService.findByCompanyDetectorAndSensorLastMonth(companyDetectorId, sensorId);
+		return service.findByCompanyDetectorAndSensorLastMonth(companyDetectorId, sensorId);
 	}	
 	
 	@RequestMapping(value="/security/api/view/findByCompanyDetectorAndSensorAndIntervalDays/{companyDetectorId}/{sensorId}/{dateIn}/{dateOut}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(@PathVariable Long companyDetectorId, @PathVariable Long sensorId, @PathVariable Date dateIn, @PathVariable Date dateOut) {		
-		return historicViewService.findByCompanyDetectorAndSensorAndIntervalDays(companyDetectorId, sensorId, dateIn, dateOut);
+		return service.findByCompanyDetectorAndSensorAndIntervalDays(companyDetectorId, sensorId, dateIn, dateOut);
 	}
 
 }

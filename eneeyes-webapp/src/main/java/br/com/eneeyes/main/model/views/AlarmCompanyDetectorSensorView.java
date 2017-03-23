@@ -1,0 +1,81 @@
+package br.com.eneeyes.main.model.views;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+@Entity
+@Table(name="alarm_companydetector_sensor_view")
+public class AlarmCompanyDetectorSensorView implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	public AlarmCompanyDetectorSensorView() {		
+	
+	}	
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "uid")
+	private Long uid;
+	
+	private Long alarm_id;	
+	private Long company_detector_id;
+	private Long sensor_id;
+	private String company_detector_name;
+	
+	private String sensor_name;
+		
+	public Long getUid() {
+		return uid;
+	}
+	
+	public void setUid(Long uid) {
+		this.uid = uid;
+	}
+	
+	public Long getAlarm_id() {
+		return alarm_id;
+	}
+	
+	public void setAlarm_id(Long alarm_id) {
+		this.alarm_id = alarm_id;
+	}
+	
+	public Long getCompany_detector_id() {
+		return company_detector_id;
+	}
+	
+	public void setCompany_detector_id(Long company_detector_id) {
+		this.company_detector_id = company_detector_id;
+	}
+	
+	public Long getSensor_id() {
+		return sensor_id;
+	}
+	
+	public void setSensor_id(Long sensor_id) {
+		this.sensor_id = sensor_id;
+	}
+		
+	public String getCompany_detector_name() {
+		return company_detector_name;
+	}
+
+	public void setCompany_detector_name(String company_detector_name) {
+		this.company_detector_name = company_detector_name;
+	}
+	
+	public String getSensor_name() {
+		return sensor_name;
+	}
+	public void setSensor_name(String sensor_name) {
+		this.sensor_name = sensor_name;
+	}	
+
+}

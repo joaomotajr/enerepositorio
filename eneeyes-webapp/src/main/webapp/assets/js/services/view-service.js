@@ -41,5 +41,8 @@ app.factory('ViewService', function($resource){
         listLastMonthGroupDays : $resource('/security/api/view/findByCompanyDetectorAndSensorLastMonthGroupDays/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
         	historic : {method : 'GET'}
         }),
+        listAlarmCompanyDetectorSensorView : $resource('/security/api/view/findAlarmCompanyDetectorSensorViewByAlarmId/:alarmId/', {alarmId: '@alarmId'},{        
+        	view : {method : 'GET'}
+        }),
      };
 });

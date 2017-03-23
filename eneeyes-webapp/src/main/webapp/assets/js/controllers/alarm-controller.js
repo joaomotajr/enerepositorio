@@ -1,5 +1,5 @@
 
-app.controller('alarmController', function ($scope, $timeout, $filter, AlarmService, GasService, CompanyService) {
+app.controller('alarmController', function ($scope, $timeout, $filter, AlarmService, GasService, CompanyService, ViewService) {
 	
 	$scope.saveAlarm = function() {
 		
@@ -73,7 +73,18 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
          });		 
 	 }	 
  
+	$scope.usedAlarms = function(alarmId) {
+		 
+		 $scope.resultUsedAlarms = new ViewService.listAlarmCompanyDetectorSensorView();		 
+		 $scope.resultUsedAlarms.$view({_csrf : angular.element('#_csrf').val(), alarmId : alarmId}, function(){			
+ 			 
+			 $scope.usedalarms = $scope.resultUsedAlarms.list;
+		});		 		 
+	 }
+	
 	 $scope.editAlarm = function (index) {
+		 
+		 	$scope.usedAlarms($scope.alarms[index].uid); 
 
 	        $scope.alarmUid = $scope.alarms[index].uid;
 	        $scope.alarmGas = $scope.alarms[index].gasDto;

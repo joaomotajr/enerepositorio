@@ -19,8 +19,8 @@ import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.register.Sensor;
-import br.com.eneeyes.main.repository.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.repository.PositionAlarmRepository;
+import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
@@ -56,7 +56,6 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		}
 		
 		CompanyDetectorAlarmDto alarm = CompanyDetectorAlarmSingletonRepository.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());
-		//CompanyDetectorAlarmDto alarm = companyDetectorAlarmAlarmService.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());
 			
 		AlarmType alarmType = AlarmType.NORMAL ;
 		

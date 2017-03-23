@@ -7,6 +7,8 @@ import br.com.eneeyes.main.dto.register.SensorDto;
 import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
+import br.com.eneeyes.main.model.enums.EmailStatus;
+import br.com.eneeyes.main.model.enums.SmsStatus;
 
 public class PositionAlarmDto {
 	
@@ -19,6 +21,8 @@ public class PositionAlarmDto {
     private AlarmType alarmType;    
     private AlarmStatus alarmStatus;
     private Date statusUpdate;
+    private EmailStatus emailStatus;
+	private SmsStatus smsStatus;
 
 	public PositionAlarmDto() {
 		
@@ -34,6 +38,8 @@ public class PositionAlarmDto {
     	this.alarmType = positionAlarm.getAlarmType();
     	this.alarmStatus = positionAlarm.getAlarmStatus();
     	this.statusUpdate = positionAlarm.getStatusUpdate();
+    	this.emailStatus = positionAlarm.getEmailStatus();
+    	this.smsStatus = positionAlarm.getSmsStatus();
 	}
 	
 	public final Long getUid() {
@@ -120,5 +126,21 @@ public class PositionAlarmDto {
 
 	public void setStatusUpdate(Date statusUpdate) {
 		this.statusUpdate = statusUpdate;
+	}
+	
+	public final EmailStatus getEmailStatus() {
+		return emailStatus;
+	}
+
+	public final void setEmailStatus(EmailStatus emailStatus) {
+		this.emailStatus = emailStatus;
+	}
+
+	public final SmsStatus getSmsStatus() {
+		return smsStatus;
+	}
+
+	public final void setSmsStatus(SmsStatus smsStatus) {
+		this.smsStatus = smsStatus;
 	}
 }

@@ -12,7 +12,7 @@ import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDetectorAlarm;
 import br.com.eneeyes.main.repository.CompanyDetectorAlarmRepository;
-import br.com.eneeyes.main.repository.CompanyDetectorAlarmSingletonRepository;
+import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 

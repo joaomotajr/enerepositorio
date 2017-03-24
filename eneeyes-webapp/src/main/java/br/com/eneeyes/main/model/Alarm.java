@@ -80,16 +80,16 @@ public class Alarm {
 	@Column(name = "ALARM_3")		
 	private Double alarm3;
 	
-	@Column(name = "ALARM_ON", nullable = true)		
+	@Column(name = "ALARM_ON", nullable = true, columnDefinition = "Boolean default true")		
 	private Boolean alarmOn;
 	
-	@Column(name = "ALARM_EMAIL", nullable = true)		
+	@Column(name = "ALARM_EMAIL", nullable = true, columnDefinition = "Boolean default false")		
 	private Boolean alarmEmail;
 	
 	@Column(name = "EMAIL", nullable = true)		
 	private String email;
 	
-	@Column(name = "ALARM_SMS", nullable = true)		
+	@Column(name = "ALARM_SMS", nullable = true, columnDefinition = "Boolean default false")		
 	private Boolean alarmSms;
 	
 	@Column(name = "CELULAR", nullable = true)		

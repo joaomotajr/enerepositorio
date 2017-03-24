@@ -9,7 +9,6 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.eneeyes.archetype.services.SiteService;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.dto.CompanyDetectorAlarmDto;
@@ -36,9 +35,6 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	
 	@Autowired
 	CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
-	
-	@Autowired
-	SiteService siteService;
 		
 	@Override
 	public BasicResult<?> save(PositionAlarmDto dto) {
@@ -100,13 +96,13 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		if (alarmType != AlarmType.NORMAL) {
 			
 			EmailStatus emailStatus = null;
-			if(alarm.getAlarmDto().getAlarmEmail() != null)
+			if(alarm.getAlarmDto().getAlarmEmail() != null && alarm.getAlarmDto().getAlarmEmail())
 				emailStatus = EmailStatus.PENDENT;
 			else
 				emailStatus = EmailStatus.OFF;
 			
 			SmsStatus smsStatus = null;
-			if(alarm.getAlarmDto().getAlarmSms() != null)
+			if(alarm.getAlarmDto().getAlarmSms() != null && alarm.getAlarmDto().getAlarmSms())
 				smsStatus = SmsStatus.PENDENT;
 			else
 				smsStatus = SmsStatus.OFF;
@@ -172,9 +168,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			positionAlarm.setLastValue(position.getLastValue());				
 		}
 		
-		repository.save(positionAlarm);
-		
-		//siteService.SendEmail("joaomotajunior@gmail.com");		
+		repository.save(positionAlarm);			
 	}	
 
 	@Override

@@ -18,14 +18,12 @@ public class checkDeviceCalibration {
 	protected final String usernameAdmin = "SKYNET";
 	protected final String segundaASexta = "Mon-Fri";
 	protected final String seteETrezeHoras = "*";
+	protected final String cadaMinuto = "*";
 	protected final String timestampFormat = "dd/MM/yyyy às HH:mm:ss";
-	
-
-	//Logger log = Logger.getLogger("Service");
 	
 	private Log log = LogFactory.getLog(getClass());
 
-	@Schedule(dayOfWeek = segundaASexta, hour = seteETrezeHoras)
+	@Schedule(dayOfWeek = segundaASexta, hour = seteETrezeHoras, minute = cadaMinuto)
 	public void schedule() {
 		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Start Automatico :: " + new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
 	}

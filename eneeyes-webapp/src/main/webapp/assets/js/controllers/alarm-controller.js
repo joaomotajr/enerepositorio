@@ -14,7 +14,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			alarm2 : $scope.alarmAlarm2,
 			alarm3 : $scope.alarmAlarm3,
 			companyDto : $scope.company,
-			alarmOff: angular.element('#alarmOn').hasClass('unlocked_inactive') == true ? true : false,
+			alarmOn: angular.element('#alarmOn').hasClass('unlocked_inactive') == true ? true : false,
 			alarmEmail:  $scope.alarmEmail, 		
 			email :	$scope.email,
 			alarmSms:  $scope.alarmCelular,
@@ -42,7 +42,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 					
 		var alarm = {
 			uid: $scope.alarmUid != undefined ? $scope.alarmUid : 0,			
-			alarmOff: angular.element('#alarmOn').hasClass('unlocked_inactive') == true ? true : false
+			alarmOn: angular.element('#alarmOn').hasClass('unlocked_inactive') == true ? true : false
     	}; 
 		
 		$scope.inclusaoAlarm = new AlarmService.onOff(alarm);				 
@@ -109,7 +109,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			$("#checkboxSmsOnOff").prop('checked', $scope.alarms[index].alarmSms); 
 			showCelular($scope.alarms[index].alarmSms);
 			
-			if( $scope.alarms[index].alarmOff != true )  
+			if( $scope.alarms[index].alarmOn != true )  
 			{
 				$("#travar").addClass("disableDiv");
 				

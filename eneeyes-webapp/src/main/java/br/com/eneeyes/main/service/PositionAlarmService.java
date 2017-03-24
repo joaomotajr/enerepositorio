@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.inject.Named;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.AlarmDto;
@@ -27,7 +26,7 @@ import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
 
-@Named
+@Service
 public class PositionAlarmService implements IService<PositionAlarmDto> {
 	
 	@Autowired
@@ -163,18 +162,17 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			positionAlarm.setSmsStatus(smsStatus);
 		}
 		else {
-			
+			// TODO Verificar se haverá reenvio de Actions em casos de Reinscidência do mesmo alerta				
 			positionAlarm.setLastUpdate(new Date());
 			positionAlarm.setLastValue(position.getLastValue());				
 		}
 		
 		repository.save(positionAlarm);			
-	}	
-
-	@Override
-	public BasicResult<?> delete(Long uid) {
-		// TODO Auto-generated method stub
-		return null;
+	}
+	
+	public int updateEmailStatus(Long positionAlarmId, EmailStatus emailStatus) {
+		
+		return repository.updateEmailStatus(emailStatus, positionAlarmId);		
 	}
 
 	@Override
@@ -266,5 +264,11 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public BasicResult<?> delete(Long uid) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }

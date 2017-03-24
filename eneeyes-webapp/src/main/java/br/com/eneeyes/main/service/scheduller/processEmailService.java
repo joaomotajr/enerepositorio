@@ -1,41 +1,42 @@
 package br.com.eneeyes.main.service.scheduller;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.ejb.Schedule;
-import javax.ejb.Singleton;
-import javax.ejb.Timeout;
-import javax.ejb.Timer;
-
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import br.com.eneeyes.archetype.services.SiteService;
+import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.views.QueueEmailView;
+import br.com.eneeyes.main.service.PositionAlarmService;
 import br.com.eneeyes.main.service.views.QueueEmailViewService;
 
-@Singleton
+@Component
 public class processEmailService {
 	
 	@Autowired
 	QueueEmailViewService service;
 	
 	@Autowired
+	PositionAlarmService positionAlarmService;
+	
+	@Autowired
 	SiteService siteService;
 	
-	protected final String localhost = "127.0.0.1";
-	protected final String segundaASexta = "Mon-Fri";
-	protected final String cadaHora = "*";
-	protected final String cadaMinuto = "*";
 	protected final String timestampFormat = "dd/MM/yyyy às HH:mm:ss";
 	
 	private Log log = LogFactory.getLog(getClass());
-	
-	@Schedule(dayOfWeek = segundaASexta, hour = cadaHora, minute = cadaMinuto)
+
+	@Scheduled(fixedDelay = 60000)
 	public void schedule() {
 		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Start Automatico :: " 
 				+ new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
@@ -46,15 +47,33 @@ public class processEmailService {
 		for (QueueEmailView item   : queueLista) {			
 			
 			String email = item.getEmail();
+						
+			String key ="Detector: " + item.getCompany_detector_name() + " / Tipo de Alarme: " + item.getAlarmType().toString() + "\n -  Data/Hora: " + item.getLast_Update();			
+			String urlTemplate = this.getClass().getClassLoader().getResource("/templates/alarme.html").toString().replace("file:", "");
+			String msg = "";
 			
-			siteService.SendEmail(email);
+			try {
+				
+				 msg = FileUtils.readFileToString(new File(urlTemplate)).replace("{{ALERTA}}", key);
+				 
+			} catch (IOException e) {
+				
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
+			Boolean ok = siteService.SendEmail(email, "Alerta de ALARME Detectado", msg);
+			
+			if (ok)
+				positionAlarmService.updateEmailStatus(item.getUid(), EmailStatus.SENDED);
+			else {
+				if(item.getEmailStatus() == EmailStatus.ERR_TRY_ONE)				
+					positionAlarmService.updateEmailStatus(item.getUid(), EmailStatus.ERR_TRY);
+				else
+					positionAlarmService.updateEmailStatus(item.getUid(), EmailStatus.ERR_TRY_ONE);
+			}
 		}	
 	}
-	
-	@Timeout
-	public void timeout(Timer timer) {
-		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Ocorreu Timeout :: ");
-	}
+
 
 }

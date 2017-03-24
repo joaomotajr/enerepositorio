@@ -64,13 +64,26 @@ public class processEmailService {
 			
 			Boolean ok = siteService.SendEmail(email, "Alerta de ALARME Detectado", msg);
 			
-			if (ok)
+			if (ok) {
 				positionAlarmService.updateEmailStatus(item.getUid(), EmailStatus.SENDED);
+				
+				log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Email Enviado :: " 
+						+ new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
+			}
 			else {
-				if(item.getEmailStatus() == EmailStatus.ERR_TRY_ONE)				
+				if(item.getEmailStatus() == EmailStatus.ERR_TRY_ONE) {				
 					positionAlarmService.updateEmailStatus(item.getUid(), EmailStatus.ERR_TRY);
-				else
+				
+				log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ":Email Falha 1a. Tentativa :: " 
+						+ new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
+				}	
+				else {
 					positionAlarmService.updateEmailStatus(item.getUid(), EmailStatus.ERR_TRY_ONE);
+					
+					log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Email Falha :: " 
+							+ new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
+
+				}
 			}
 		}	
 	}

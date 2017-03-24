@@ -273,16 +273,20 @@
 									    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
 									   	</div>									   					               	
 						               	<div class="panel-body">
+						               		<input class="pull-right ng-pristine ng-untouched ng-valid" type="checkbox" style="margin-right: 30px" data-ng-model="changeGraphic">
+					               			<label data-ng-show="changeGraphic" class="pull-right">Gráfico Completo&nbsp;&nbsp;</label>
+											<label data-ng-hide="changeGraphic" class="pull-right">Gráfico Medições&nbsp;&nbsp;</label>
 						               							               							               							               		
 						               		<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length == 1">
 						               			<ul class="nav nav-tabs" id="myTab">
-												 	<li class="active"><a data-target="sensor1" data-toggle="tab">{{selectedCompanyDetector.detectorDto.sensorsDto[0].name}}</a></li>												  	
+												 	<li class="active"><a data-target="sensor1" data-toggle="tab">{{selectedCompanyDetector.detectorDto.sensorsDto[0].name}}</a></li>												 	
+												 												  	
 												</ul>
 									
 												<div class="tab-content">
 													<div class="tab-pane active" id="sensor1">
-													  	<div class="row">
-									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[0].uid}}"></div>
+													  	<div class="row">													  		
+									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[0].uid}}"></div>									               			
 									               		</div>
 								               		</div>												  	
 												</div>					               		
@@ -296,7 +300,7 @@
 									
 												<div class="tab-content">
 												  	<div class="tab-pane active" id="sensor1">
-												  		<div class="row">
+												  		<div class="row">												  															  			
 									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[0].uid}}"></div>
 									               		</div>
 												  	</div>

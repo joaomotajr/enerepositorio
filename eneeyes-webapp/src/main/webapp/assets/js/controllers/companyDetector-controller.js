@@ -440,42 +440,73 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		}
 	      
 	    data.addRows(value);
-
-	    var options = {
-	          title: "Dados do Sensor na Última Hora.",
-	          legend: {position: 'none'},
-	          'lineWidth': 0.75,
-	    	  width: 850,
-	    	  height: 400,
-	    	  hAxis: {
-	    		  title: 'Data', 
-	    		  textPosition: 'none',
-	    		  textStyle: {
-                          'color': '#8C8C8C',
-                              'fontName': 'Calibri',
-                              'fontSize': 9,
-                      },
-	    	  },
-	    	  vAxis: {
-	    		  maxValue:sensor.rangeMax,
-	              minValue:0,
-	              textStyle: {
-                      'color': '#8C8C8C',
-                          'fontName': 'Calibri',
-                          'fontSize': 9,
-                          'fontStyle' : 'bold',
-                  },
-	    		  ticks: [ 
-	    		           {v:0, f: 'Range Minimo: 0' }, 
-	    		           {v: orange, f: 'Detecção: ' + orange}, 
-	    		           {v: yellow, f: 'Alerta: ' + yellow}, 
-	    		           {v: red, f: 'Evacuação: ' + red}, 
-	    		           {v: sensor.rangeMax, f: 'Range Máximo: ' + sensor.rangeMax} 
-	    		        ]
-	    	  },
-	    	  curveType: 'function',
-	          pointSize:1	        
-	      };
+	    
+	    if ($scope.changeGraphic) {
+		    var options = {
+		          title: "Dados do Sensor na Última Hora.",
+		          legend: {position: 'none'},
+		          'lineWidth': 0.75,
+		    	  width: 850,
+		    	  height: 400,
+		    	  hAxis: {
+		    		  title: 'Data', 
+		    		  textPosition: 'none',
+		    		  textStyle: {
+	                          'color': '#8C8C8C',
+	                              'fontName': 'Calibri',
+	                              'fontSize': 9,
+	                      },
+		    	  },
+		    	  vAxis: {
+		    		  maxValue:sensor.rangeMax,
+		              minValue:0,
+		              textStyle: {
+	                      'color': '#8C8C8C',
+	                          'fontName': 'Calibri',
+	                          'fontSize': 9,
+	                          'fontStyle' : 'bold',
+	                  },
+		    		  ticks: [ 
+		    		           {v:0, f: 'Range Minimo: 0' }, 
+		    		           {v: orange, f: 'Detecção: ' + orange}, 
+		    		           {v: yellow, f: 'Alerta: ' + yellow}, 
+		    		           {v: red, f: 'Evacuação: ' + red}, 
+		    		           {v: sensor.rangeMax, f: 'Range Máximo: ' + sensor.rangeMax} 
+		    		        ]
+		    	  },
+		    	  //curveType: 'function',
+		          pointSize:1	        
+		      };
+	    }
+		else {
+			var options = {
+		          title: "Dados do Sensor na Última Hora.",
+		          legend: {position: 'none'},
+		          'lineWidth': 0.75,
+		    	  width: 850,
+		    	  height: 400,
+		    	  hAxis: {
+		    		  title: 'Data', 
+		    		  textPosition: 'none',
+		    		  textStyle: {
+	                          'color': '#8C8C8C',
+	                              'fontName': 'Calibri',
+	                              'fontSize': 9,
+	                      },
+		    	  },
+		    	  vAxis: {
+		              textStyle: {
+	                      'color': '#8C8C8C',
+	                          'fontName': 'Calibri',
+	                          'fontSize': 9,
+	                          'fontStyle' : 'bold',
+	                  },
+		    	  },
+		    	  //curveType: 'function',
+		          pointSize:1	        
+		      };
+		    	
+		}
 	    
 	    var chart = new google.visualization.LineChart(document.getElementById(id));
 	    chart.draw(data, options);

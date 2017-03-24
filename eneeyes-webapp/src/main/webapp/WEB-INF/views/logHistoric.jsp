@@ -337,12 +337,15 @@
 				<div class="modal-content">                            
 					<div class="modal-body">
 						<div class="panel panel-default">
-							<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Gráfico do Período:</strong> {{selectedPeriodo}}</div>                                                                           
+							<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Gráfico do Período:</strong> {{selectedPeriodo}}</div>															                                                                           
 					  	</div>
 				
 						<div class="box">
 							<div class="box-header">
 							  <h3 class="box-title"><strong>Gráfico do Sensor:</strong> {{selectedCompanySensor.name}} - Gás: {{selectedCompanySensor.gasesDto[0].name}} </h3>
+							  	<input class="pull-right ng-pristine ng-untouched ng-valid" type="checkbox" style="margin-right: 30px" data-ng-model="changeGraphic" data-ng-change="showGrafico();">
+								<label data-ng-show="changeGraphic" class="pull-right">Gráfico Completo&nbsp;&nbsp;</label>
+								<label data-ng-hide="changeGraphic" class="pull-right">Gráfico Medições&nbsp;&nbsp;</label>
 							</div>
 							<div class="box-body">
 								<div  id="graficoHistorico" style="max-width: 900px; overflow-x: auto; overflow-y: hidden;"></div>
@@ -383,7 +386,7 @@
 	            
 	            <br />
 	            <div id="dvData">
-		            <table class='zui-table' cellspacing="0" width="100%">	                   
+		            <table class='zui-table' data-cellspacing="0" data-width="100%">	                   
 	                   	<tr>	                
 	                   			<th>ID</th>                                                                                   
 	                     		<th>Data</th>

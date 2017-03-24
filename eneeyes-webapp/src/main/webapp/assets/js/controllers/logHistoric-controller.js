@@ -271,7 +271,11 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
         });			 
 	}
 	
-	$scope.showGrafico = function(detectorId) {
+	$scope.changedGraphic = function() {
+		$scope.count=0;
+	}
+	
+	$scope.showGrafico = function() {
 		
 		if(! loadGoogleCharts) {				
 			google.charts.load('current', { 'packages': ['corechart', 'line'] });				
@@ -320,41 +324,65 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}
 	      
 	    data.addRows(itens);
-
-	    var options = {
-          
-	          legend: {position: 'none'},
-	          width: 900,
-	          height: 450,
-	    	  hAxis: {
-	    		  gridlines: {color: '#333', count: 4},
-	    		  baselineColor: '#fbf6a7',
-	    		  textPosition: 'none'	    	  
-	    	  },
-	    	  vAxis: {	    		  
-	    		  maxValue: $scope.selectedCompanySensor.rangeMax,
-	              minValue: 0,
-	    		  textStyle: {
-                      'color': '#8C8C8C',
-                      'fontName': 'Calibri',
-                      'fontStyle' : 'bold',
-                      'fontSize': 9,
-                  },
-//	    		  ticks: [
-//	    		          {v:0, f: 'Range Minimo: 0' }, 
-//	    		          {v: orange, f: 'Detecção: ' + orange}, 
-//	    		          {v: yellow, f: 'Alerta: ' + yellow}, 
-//	    		          {v: red, f: 'Evacuação: ' + red}, 
-//	    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanySensor.rangeMax}
-//	    		         ]
-                  ticks: [
-                          	{v:0, f: 'Range Minimo: 0' }, 
-							{v: 15, f: 'Range Máximo: 15'}
-						]
-	    	  },
-	    	  curveType: 'function',
-	          pointSize:1
-	      };
+	    
+	    if ($scope.changeGraphic) {
+		    var options = {
+	          
+		          legend: {position: 'none'},
+		          width: 900,
+		          height: 450,
+		    	  hAxis: {
+		    		  gridlines: {color: '#333', count: 4},
+		    		  baselineColor: '#fbf6a7',
+		    		  textPosition: 'none'	    	  
+		    	  },
+		    	  vAxis: {	    		  
+		    		  maxValue: $scope.selectedCompanySensor.rangeMax,
+		              minValue: 0,
+		    		  textStyle: {
+	                      'color': '#8C8C8C',
+	                      'fontName': 'Calibri',
+	                      'fontStyle' : 'bold',
+	                      'fontSize': 9,
+	                  },
+		    		  ticks: [
+		    		          {v:0, f: 'Range Minimo: 0' }, 
+		    		          {v: orange, f: 'Detecção: ' + orange}, 
+		    		          {v: yellow, f: 'Alerta: ' + yellow}, 
+		    		          {v: red, f: 'Evacuação: ' + red}, 
+		    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanySensor.rangeMax}
+		    		        ],
+		    	  },
+		    	  //curveType: 'function',
+		          pointSize:1
+		      };
+	    }    
+		else
+			{
+			   var options = {
+				          
+		          legend: {position: 'none'},
+		          width: 900,
+		          height: 450,
+		    	  hAxis: {
+		    		  gridlines: {color: '#333', count: 4},
+		    		  baselineColor: '#fbf6a7',
+		    		  textPosition: 'none'	    	  
+		    	  },
+		    	  vAxis: {	    		  
+		    		  
+		    		  textStyle: {
+	                      'color': '#8C8C8C',
+	                      'fontName': 'Calibri',
+	                      'fontStyle' : 'bold',
+	                      'fontSize': 9,
+	                  },
+		    	  },
+		    	  //curveType: 'function',
+		          pointSize:1
+		      };			
+		}
+	    
 	    objChart = document.getElementById("graficoHistorico");
 	    var chart = new google.visualization.LineChart(objChart);
 	    chart.draw(data, options);

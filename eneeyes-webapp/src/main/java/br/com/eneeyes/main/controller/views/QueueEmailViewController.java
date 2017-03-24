@@ -17,7 +17,7 @@ public class QueueEmailViewController {
 	@Inject
 	QueueEmailViewService service;	
 	
-	@RequestMapping(value = "/security/api/view/allQueueEmailView", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/api/view/allQueueEmailView", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> allQueueEmailView() {
 		return service.listAll();

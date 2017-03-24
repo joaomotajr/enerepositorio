@@ -266,7 +266,7 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
 			String message = FileUtils.readFileToString(new File(urlTemplate)).replace("{{KEY}}",key);
 			String subject = "Eneneyes - Recuperação de senha";
 						
-			siteService.sendMessage(to, subject, message);
+			siteService.SendEmail(to, subject, message);
 
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.DATE, 3);
@@ -342,8 +342,9 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
             String message = FileUtils.readFileToString(new File(urlTemplate)).replace("{{REFRESH_TOKEN}}",refreshToken);
             
             String subject = "Eneneyes - Sua senha foi alterada";
+
+            siteService.SendEmail(to, subject, message);
             
-            siteService.sendMessage(to, subject, message);
 
             result.addMessage(new ResultSuccessMessage("form.success.site.changePassword"));
         } catch (Throwable throwable) {

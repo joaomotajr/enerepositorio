@@ -1,7 +1,7 @@
 package br.com.eneeyes.main.model.enums;
 
 public enum EmailStatus {
-	OFF(0), PENDENT(1), SENDED(2);
+	OFF(0), PENDENT(1), SENDED(2), ERR_TRY_ONE(3), ERR_TRY(4);
 	
 	private final int code;
 	

@@ -403,7 +403,7 @@
 	                     		<td>{{item.last_update | date:'dd/MM/yyyy' }}</td>
 	                     		<td>{{item.last_update | date:'HH:mm:ss' }}</td>
 	
-							<td data-ng-if="tipoGrupo==1"> {{item.value}} </td>						
+							<td data-ng-if="tipoGrupo==1"> {{changeToValue(item.value)}} </td>						
 							<td data-ng-if="tipoGrupo!=1"> {{item.max_value}} </td>
 							<td data-ng-if="tipoGrupo!=1"> {{item.min_value}} </td>
 							

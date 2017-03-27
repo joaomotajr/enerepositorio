@@ -392,6 +392,10 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	$('dateIn').on('changeDate', function(ev){
 	    $(this).datepicker('hide');
 	});
+	
+	$scope.changeToValue = function(valor) {
+	  return valor.toString().replace(".", ",")
+	}
 
 	$scope.clearHistoric();
 	$scope.getCompanys();

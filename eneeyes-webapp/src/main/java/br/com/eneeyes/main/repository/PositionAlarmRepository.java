@@ -11,6 +11,7 @@ import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
+import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.register.Sensor;
 
 public interface PositionAlarmRepository extends JpaRepository<PositionAlarm, Long> {
@@ -27,5 +28,10 @@ public interface PositionAlarmRepository extends JpaRepository<PositionAlarm, Lo
 	@Transactional
 	@Query("update PositionAlarm p set p.emailStatus = ?1 where p.uid = ?2 ")
 	int updateEmailStatus(EmailStatus emailStatus, long positionAlarmId);
+	
+	@Modifying
+	@Transactional
+	@Query("update PositionAlarm p set p.smsStatus = ?1 where p.uid = ?2 ")
+	int updateSmsStatus(SmsStatus smsStatus, long positionAlarmId);
 	
 }

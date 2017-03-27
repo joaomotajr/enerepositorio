@@ -1,7 +1,7 @@
 package br.com.eneeyes.main.model.enums;
 
-public enum SmsStatus {
-	OFF(0), PENDENT(1), SENDED(2), RECEIVED(3), READED(4);
+public enum SmsStatus {	
+	OFF(0), PENDENT(1), SENDED(2), ERR_TRY_ONE(3), ERR_TRY(4), READED(5);
 	
 	private final int code;
 	

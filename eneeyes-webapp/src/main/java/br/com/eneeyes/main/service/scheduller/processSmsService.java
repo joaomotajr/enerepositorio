@@ -1,8 +1,9 @@
 package br.com.eneeyes.main.service.scheduller;
 
-import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,14 +12,16 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import br.com.eneeyes.archetype.services.SiteService;
+import br.com.eneeyes.main.model.enums.SmsStatus;
+import br.com.eneeyes.main.model.views.QueueSmsView;
 import br.com.eneeyes.main.service.PositionAlarmService;
-import br.com.eneeyes.main.service.views.QueueEmailViewService;
+import br.com.eneeyes.main.service.views.QueueSmsViewService;
 
 @Component
 public class processSmsService {
 	
 	@Autowired
-	QueueEmailViewService service;
+	QueueSmsViewService service;
 	
 	@Autowired
 	PositionAlarmService positionAlarmService;
@@ -31,24 +34,32 @@ public class processSmsService {
 	private Log log = LogFactory.getLog(getClass());
 
 	@Scheduled(fixedDelay = 10000)
-	public void schedule() {
+	public void schedule()  {
 		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Start Automatico :: " 
 				+ new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
 		
-		String userName = "GRUPO";
-		String pass = "ALLCANCE";
-		byte[] b = (userName + ":" + pass).getBytes();
+		List<QueueSmsView> smsLista = new ArrayList<QueueSmsView>();
+		smsLista = service.findAll();
 		
-		String enc2 = new String(java.util.Base64.getMimeEncoder().encode(b), StandardCharsets.UTF_8);
+		for (QueueSmsView item   : smsLista) {
+						
+			String msg ="Detector: " + item.getCompany_detector_name() + " / Tipo de Alarme: " + item.getAlarmType().toString() + " -  Data/Hora: " + item.getLast_Update();
+			Boolean ok = siteService.SendSms(item.getCelular(), msg);
+			
+			if (ok)
+				positionAlarmService.updateSmsStatus(item.getUid(), SmsStatus.SENDED);
+			else {
+				if(item.getSmsStatus() == SmsStatus.ERR_TRY_ONE)				
+					positionAlarmService.updateSmsStatus(item.getUid(), SmsStatus.ERR_TRY);
+				else
+					positionAlarmService.updateSmsStatus(item.getUid(), SmsStatus.ERR_TRY_ONE);
+			}
+		}
 		
-//		HttpResponse<String> response = Unirest.post("https://api.allcancesms.com/sms/1/text/single")
-//				.header("authorization", "Basic R1JVUE86QUxMQ0FOQ0U=")
-//				.header("content-type", "application/json")
-//				.header("accept", "application/json")
-//				.body("{\"from\":\"AllcanceSMS\",\"to\":\"5537999368807\",\"text\":\"Teste SMS.\"}")
-//				.asString();
+		//byte[] b = (userName + ":" + pass).getBytes();
+		//String userPass = new String(java.util.Base64.getMimeEncoder().encode(b), StandardCharsets.UTF_8);
+						
 		
-		System.out.println("enc1 = <" + enc2 + ">");
 	}
 
 

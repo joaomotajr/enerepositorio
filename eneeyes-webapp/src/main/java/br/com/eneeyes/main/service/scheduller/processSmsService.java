@@ -43,7 +43,7 @@ public class processSmsService {
 		
 		for (QueueSmsView item   : smsLista) {
 						
-			String msg ="Detector: " + item.getCompany_detector_name() + " / Tipo de Alarme: " + item.getAlarmType().toString() + " -  Data/Hora: " + item.getLast_Update();
+			String msg ="SISTEMA DE MONITORAMENTO ENESENS: Detector: " + item.getCompany_detector_name() + " / Tipo de Alarme: " + item.getAlarmType().toString() + " -  Data/Hora: " + item.getLast_Update();
 			Boolean ok = siteService.SendSms(item.getCelular(), msg);
 			
 			if (ok)

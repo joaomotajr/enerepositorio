@@ -135,8 +135,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 
 		 var uid = $scope.alarms[index].uid;		  
 		 
-		 $scope.deletar = new SensorService.deletar();		 
-		 $scope.deletar.alarm({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
+		 $scope.deletar = new AlarmService.deletar();		 
+		 $scope.deletar.$alarm({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
 			 			 
 			 if (!$scope.deletar.isError)
 				 $scope.alarms.splice(index, 1);

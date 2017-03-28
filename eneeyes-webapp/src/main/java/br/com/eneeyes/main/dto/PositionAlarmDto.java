@@ -23,7 +23,7 @@ public class PositionAlarmDto {
     private Date statusUpdate;
     private EmailStatus emailStatus;
 	private SmsStatus smsStatus;
-
+	private String action;
 	public PositionAlarmDto() {
 		
 	}
@@ -40,6 +40,7 @@ public class PositionAlarmDto {
     	this.statusUpdate = positionAlarm.getStatusUpdate();
     	this.emailStatus = positionAlarm.getEmailStatus();
     	this.smsStatus = positionAlarm.getSmsStatus();
+    	this.action = positionAlarm.getAction();
 	}
 	
 	public final Long getUid() {
@@ -142,5 +143,13 @@ public class PositionAlarmDto {
 
 	public final void setSmsStatus(SmsStatus smsStatus) {
 		this.smsStatus = smsStatus;
+	}
+	
+	public final String getAction() {
+		return action;
+	}
+
+	public final void setAction(String action) {
+		this.action = action;
 	}
 }

@@ -105,10 +105,17 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 				smsStatus = SmsStatus.PENDENT;
 			else
 				smsStatus = SmsStatus.OFF;
+			
+			String action = null;
+			if(alarmType == AlarmType.DETECCAO)
+				action = alarm.getAlarmDto().getAction1();
+			else if(alarmType == AlarmType.ALERTA)
+				action = alarm.getAlarmDto().getAction2();
+			else if(alarmType == AlarmType.EVACUACAO)
+				action = alarm.getAlarmDto().getAction3();
 				
-			saveOrUpdatePositionAlarm(position, companyDetector, sensor, alarmType, emailStatus, smsStatus);
-		}
-		
+			saveOrUpdatePositionAlarm(position, companyDetector, sensor, alarmType, emailStatus, smsStatus, action);
+		}		
 		
 		return alarmType; 
 	}
@@ -143,7 +150,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	 * @param alarmType
 	 */
 	public void saveOrUpdatePositionAlarm(Position position, CompanyDetector companyDetector, Sensor sensor, 
-			AlarmType alarmType, EmailStatus emailStatus, SmsStatus smsStatus) {
+			AlarmType alarmType, EmailStatus emailStatus, SmsStatus smsStatus, String action) {
 		
 		PositionAlarm positionAlarm = repository.findByCompanyDetectorAndSensorAndAlarmType(companyDetector, sensor, alarmType);
 		
@@ -160,6 +167,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			positionAlarm.setAlarmType(alarmType);
 			positionAlarm.setEmailStatus(emailStatus);
 			positionAlarm.setSmsStatus(smsStatus);
+			positionAlarm.setAction(action);
 		}
 		else {
 			// TODO Verificar se haverá reenvio de Actions em casos de Reinscidência do mesmo alerta				
@@ -229,7 +237,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma area.");
+				result.setMessage("Nenhuma Posição.");
 			}
 			
 		} catch (Exception e) {
@@ -261,7 +269,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma area.");
+				result.setMessage("Nenhuma Posição.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

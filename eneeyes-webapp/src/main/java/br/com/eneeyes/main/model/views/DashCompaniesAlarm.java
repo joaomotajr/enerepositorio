@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
+import br.com.eneeyes.main.model.enums.EmailStatus;
+import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 
@@ -36,9 +38,15 @@ public class DashCompaniesAlarm implements Serializable {
 	private String sensor_name;
 	private Long sensor_id;
 	private Double last_value;
-	
+		
 	@Column(name = "alarm_type")
 	private AlarmType alarmType;
+	
+	@Column(name = "email_status")
+	private EmailStatus emailStatus;
+	
+	@Column(name = "sms_status")
+	private SmsStatus smsStatus;
 	
 	private Date last_update;	
 	private String gas_name;
@@ -46,6 +54,8 @@ public class DashCompaniesAlarm implements Serializable {
 	@Column(name = "unit_meter_gases")
 	private UnitMeterGases unitMeterGases;
 	
+	private String action;
+		
 	public Long getUid() {
 		return uid;
 	}
@@ -116,7 +126,20 @@ public class DashCompaniesAlarm implements Serializable {
 
 	public final void setAlarmType(AlarmType alarmType) {
 		this.alarmType = alarmType;
-	}	
+	}
+	
+	public final EmailStatus getEmailStatus() {
+		return emailStatus;
+	}
+	public final void setEmailStatus(EmailStatus emailStatus) {
+		this.emailStatus = emailStatus;
+	}
+	public final SmsStatus getSmsStatus() {
+		return smsStatus;
+	}
+	public final void setSmsStatus(SmsStatus smsStatus) {
+		this.smsStatus = smsStatus;
+	}
 		
 	public Date getLast_update() {
 		return last_update;
@@ -132,13 +155,19 @@ public class DashCompaniesAlarm implements Serializable {
 	public void setGas_name(String gas_name) {
 		this.gas_name = gas_name;
 	}
-	
-	
+		
 	public final UnitMeterGases getUnitMeterGases() {
 		return unitMeterGases;
 	}
 
 	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
 		this.unitMeterGases = unitMeterGases;
+	}
+	
+	public final String getAction() {
+		return action;
+	}
+	public final void setAction(String action) {
+		this.action = action;
 	}
 }

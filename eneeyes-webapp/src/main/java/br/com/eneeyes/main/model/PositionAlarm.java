@@ -42,6 +42,7 @@ public class PositionAlarm {
     	this.statusUpdate = dto.getStatusUpdate();
     	this.emailStatus = dto.getEmailStatus();
     	this.smsStatus = dto.getSmsStatus();
+    	this.action = dto.getAction();
     }
 
 	@Id
@@ -117,7 +118,7 @@ public class PositionAlarm {
 		this.emailStatus = emailStatus;
 	}	
 	
-	@Column(name = "Sms_STATUS", columnDefinition = "int default 0", nullable = true)
+	@Column(name = "SMS_STATUS", columnDefinition = "int default 0", nullable = true)
 	private SmsStatus smsStatus;	
 
 	@Enumerated(EnumType.ORDINAL) 
@@ -133,6 +134,9 @@ public class PositionAlarm {
 		this.smsStatus = smsStatus;
 	}
 	
+	@Column(name = "ACTION", nullable = true, length=300)		
+	private String action;		
+
 	public Long getUid() {
 		return uid;
 	}
@@ -187,5 +191,13 @@ public class PositionAlarm {
 
 	public void setStatusUpdate(Date statusUpdate) {
 		this.statusUpdate = statusUpdate;
+	}
+	
+	public final String getAction() {
+		return action;
+	}
+
+	public final void setAction(String action) {
+		this.action = action;
 	}
 }

@@ -277,41 +277,6 @@ public class HistoricService implements IService<HistoricDto> {
 		return result;	
 
 	}
-	
-//	public Result<?> listPageByCompanyDetector(Long uid, Integer pageNumber) {
-//		
-//		CompanyDetector companyDetector = new CompanyDetector();
-//		companyDetector.setUid(uid);
-//		
-//		Result<HistoricDto> result = new Result<HistoricDto>(); 	
-//		
-//		try {
-//			Page<Historic> lista = repository.findByCompanyDetector(companyDetector, new PageRequest(pageNumber, PAGE_SIZE));
-//									
-//			if (lista != null) {
-//				
-//				List<HistoricDto> dto = new ArrayList<HistoricDto>();
-//				
-//				for (Historic historic   : lista) {					
-//					dto.add(new HistoricDto(historic) );
-//				}
-//								
-//				result.setList(dto);
-//				result.setResultType( ResultMessageType.SUCCESS );
-//				result.setMessage("Executado com sucesso.");
-//			} else {
-//				result.setIsError(true);
-//				result.setResultType( ResultMessageType.ERROR );
-//				result.setMessage("Nenhum Histórico.");
-//			}
-//		} catch (Exception e) {
-//			result.setIsError(true);
-//			result.setMessage(e.getMessage());
-//		}
-//		
-//		return result;	
-//		
-//	}
 
 	public BasicResult<?> save(Long companyId, Long unitId, Long areaId, String companyDetectorName) {
 		// TODO Auto-generated method stub

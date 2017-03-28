@@ -44,7 +44,7 @@ public class ManufacturerService implements IService<ManufacturerDto> {
 		try {			
 			repository.delete(uid);
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Área Excluída.");
+			result.setMessage("Empresa Excluída.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
@@ -77,7 +77,7 @@ public class ManufacturerService implements IService<ManufacturerDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Compania.");
+				result.setMessage("Nenhuma Empresa Localizada.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);
@@ -105,7 +105,7 @@ public class ManufacturerService implements IService<ManufacturerDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Compania.");
+				result.setMessage("Nenhuma Empresa Localizada.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

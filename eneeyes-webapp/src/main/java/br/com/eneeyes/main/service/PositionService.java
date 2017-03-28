@@ -158,7 +158,7 @@ public class PositionService implements IService<PositionDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma area.");
+				result.setMessage("Nenhuma Posição.");
 			}
 			
 		} catch (Exception e) {
@@ -191,7 +191,7 @@ public class PositionService implements IService<PositionDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma area.");
+				result.setMessage("Nenhuma Posição.");
 			}
 			
 		} catch (Exception e) {
@@ -223,7 +223,7 @@ public class PositionService implements IService<PositionDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma area.");
+				result.setMessage("Nenhuma Posição.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

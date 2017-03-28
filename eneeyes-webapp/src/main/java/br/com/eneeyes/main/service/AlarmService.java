@@ -56,13 +56,13 @@ public class AlarmService implements IService<AlarmDto> {
 		try {			
 			repository.delete(uid);
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Controladora/PLC Excluída.");
+			result.setMessage("Alarme Excluído.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
 			result.setIsError(true);
 			result.setSystemMessage(e.getMessage());
-			result.setMessage("Controladora/PLC Não Pode Ser Excluída.");
+			result.setMessage("Alarme Não Pode Ser Excluído, talvez haja dispositivos associados.");
 		}		
 		
 		return result;		
@@ -89,7 +89,7 @@ public class AlarmService implements IService<AlarmDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Compania.");
+				result.setMessage("Nenhum Alarme Localizado.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);
@@ -117,7 +117,7 @@ public class AlarmService implements IService<AlarmDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Compania.");
+				result.setMessage("Nenhum Alarme Localizado.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

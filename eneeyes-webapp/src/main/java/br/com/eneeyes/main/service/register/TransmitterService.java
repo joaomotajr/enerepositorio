@@ -78,7 +78,7 @@ public class TransmitterService implements IService<TransmitterDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Compania.");
+				result.setMessage("Nenhum Transmissor Localizado.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);
@@ -106,7 +106,7 @@ public class TransmitterService implements IService<TransmitterDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhum Transmissor.");
+				result.setMessage("Nenhum Transmissor Localizado.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

@@ -89,7 +89,7 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 		} else {
 			result.setIsError(true);
 			result.setResultType( ResultMessageType.ERROR );
-			result.setMessage("Nenhum Alarm Cadastrado.");
+			result.setMessage("Nenhum Detector Cadastrado.");
 		}
 		
 		return result;
@@ -121,7 +121,7 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma area.");
+				result.setMessage("Nenhuma Detector para a Área.");
 			}
 			
 		} catch (Exception e) {

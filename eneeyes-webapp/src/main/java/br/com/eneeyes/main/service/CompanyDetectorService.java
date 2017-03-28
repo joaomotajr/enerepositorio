@@ -54,26 +54,6 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		return result;
 	}
 	
-//	public BasicResult<?> save(List<CompanyDetectorDto> listDto) {
-//		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();		
-//
-//		List<CompanyDetector> list = new ArrayList<CompanyDetector>();
-//		
-//		for (CompanyDetectorDto companyDetectorDto   : listDto) {
-//			
-//			CompanyDetector companyDetector = new CompanyDetector(companyDetectorDto);
-//			list.add(companyDetector);
-//			createInitialPosition(companyDetector);
-//		}
-//		
-//		list = repository.save(list);					
-//		
-//		result.setResultType( ResultMessageType.SUCCESS );
-//		result.setMessage("Executado com sucesso.");	
-//		
-//		return result;
-//	}
-	
 	private void createInitialPosition(CompanyDetector companyDetector) {
 				
 		positionService.createInitialPosition(companyDetector);		

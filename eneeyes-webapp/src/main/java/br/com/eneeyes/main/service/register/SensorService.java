@@ -79,7 +79,7 @@ public class SensorService implements IService<SensorDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Unidade.");
+				result.setMessage("Nenhum Sensor Localizado.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);
@@ -106,7 +106,7 @@ public class SensorService implements IService<SensorDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Unidade.");
+				result.setMessage("Nenhum Sensor Localizado.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

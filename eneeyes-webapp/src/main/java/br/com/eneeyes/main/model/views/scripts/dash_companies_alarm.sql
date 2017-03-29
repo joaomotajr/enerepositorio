@@ -13,8 +13,11 @@ VIEW `dash_companies_alarm` AS
         `s`.`NAME` AS `sensor_name`,
         `s`.`UID` AS `sensor_id`,
         `pa`.`LAST_VALUE` AS `last_value`,
-        `pa`.`ALARM_TYPE` AS `alarm_type`,
         `pa`.`LAST_UPDATE` AS `last_update`,
+        `pa`.`ALARM_TYPE` AS `alarm_type`,
+        `pa`.`EMAIL_STATUS` AS `email_status`,
+        `pa`.`SMS_STATUS` AS `sms_status`,
+        `pa`.`ACTION` AS `action`,
         `g`.`NAME` AS `gas_name`,
         `s`.`UNIT_METER_GASES` AS `unit_meter_gases`
     FROM

@@ -62,11 +62,21 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
          	         	
        });		 
 	 }
+	
+	$scope.editAction = function(index) {
+		$scope.positionAlarmUid = $scope.dashCompaniesAlarm[index].uid;
+		$scope.positionAlarmAction = $scope.dashCompaniesAlarm[index].action;
+		
+		$timeout(function () {
+            $('#modalAction').modal({ show: 'false' });                        
+        }, 200);
+		
+	}
 		
 	$scope.getCompaniesAlarm();
     
     $interval(function() {
-    	if($scope.$root.currentPage == "Monitor")
+    	if($scope.$root.currentPage == "Monitoramento")
     		$scope.getCompaniesAlarm();     						
     }, 10000);	
     

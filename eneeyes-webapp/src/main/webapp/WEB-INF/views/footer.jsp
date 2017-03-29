@@ -103,6 +103,7 @@
 	<script src="/assets/js/services/historic-service.js"></script>
 	<script src="/assets/js/services/view-service.js"></script>
 	<script src="/assets/js/services/sms-service.js"></script>
+	<script src="/assets/js/services/positionAlarmMessage-service.js"></script>
 	
 	<!-- PAGE LEVEL FACTORIES -->
 	

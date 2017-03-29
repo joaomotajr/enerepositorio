@@ -1,5 +1,5 @@
 
-app.controller('monitorController', function ($scope, $timeout, $interval, $filter, ViewService) {
+app.controller('monitorController', function ($scope, $timeout, $interval, $filter, ViewService, PositionAlarmMessageService) {
 	
 	$scope.dashCompaniesAlarm = [];
 	
@@ -10,6 +10,8 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 		 $scope.listAllDashCompaniesAlarm = new ViewService.listAllDashCompaniesAlarm();		 
 		 $scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			 
+			 $scope.dashCompaniesAlarm = []; 
+			 
 			 for(var i = 0; i < $scope.listAllDashCompaniesAlarm.list.length; i++) {				 
 				 
 				 $scope.dashCompaniesAlarm[i] = $scope.listAllDashCompaniesAlarm.list[i];
@@ -18,60 +20,46 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 				 $scope.dashCompaniesAlarm[i].last_value	= Math.round($scope.dashCompaniesAlarm[i].last_value * 100) / 100 ;
 			 }
 			 
-			 $scope.sumary = {
-					 alarm1 :  0, 
-					 alarm2 : 0,
-					 alarm3 : 0,
-					 normal : 0,
-					 devices: 0,
-					 offLine: 0						 
-			 }			 
-			 				
-			 $scope.listAllDashCompaniesAlarm.list.forEach(
-				function(e) {
-
-						$scope.sumary.devices ++;
-						
-						var offDate = (new Date() - new Date(e.last_update_full)) / 1000;
-						
-						// off line por mais de 5 minutos
-						if ( offDate > 300 ) {							 
-						     $scope.sumary.offLine ++;
-						     e.offLine = true;
-						}						
-						else if ( e.alarmType == "NORMAL") {
-							 
-						     $scope.sumary.normal ++;
-						}
-						else if ( e.alarmType == "DETECCAO") {
-							$scope.sumary.alarm1 ++;			
-							 
-						}
-						else if ( e.alarmType == "ALERTA") {
-							$scope.sumary.alarm2 ++;			
-							 
-						}
-						else if ( e.alarmType == "EVACUACAO") {
-							$scope.sumary.alarm3 ++;	
-							 
-						}
-					}			
-				);
-			 
 			 $scope.loading = undefined;
          	         	
        });		 
-	 }
+	 }	
+	       
+	$scope.savePositionAlarmMessage = function() {
+		angular.element('body').addClass('loading');
+
+		var positionAlarmMessage = {
+			uid: 0,
+			message: $scope.selectedPositionAlarm.feedback,
+			//user: null,
+			positionAlarmDto: {uid: $scope.selectedPositionAlarm.uid}
+		};
+		 
+		$scope.inclusaoPositionAlarmMessage = new PositionAlarmMessageService.save(positionAlarmMessage);
+		$scope.inclusaoPositionAlarmMessage.$positionAlarmMessage({_csrf : angular.element('#_csrf').val()});			 
+	}
 	
 	$scope.editAction = function(index) {
-		$scope.positionAlarmUid = $scope.dashCompaniesAlarm[index].uid;
-		$scope.positionAlarmAction = $scope.dashCompaniesAlarm[index].action;
+		
+		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarm[index];
 		
 		$timeout(function () {
             $('#modalAction').modal({ show: 'false' });                        
         }, 200);
 		
 	}
+	
+	$scope.statusCreatedFilter = function(item){
+		if(item.alarmStatus === "CREATED"){
+		    return item;
+		}
+	};
+	 
+	$scope.statusReadedFilter = function(item){
+		if(item.alarmStatus === "READED"){
+			return item;
+        }
+	};
 		
 	$scope.getCompaniesAlarm();
     

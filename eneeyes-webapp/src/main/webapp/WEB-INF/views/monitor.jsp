@@ -31,22 +31,16 @@
 									</thead>
 									<tbody>
 
-										<tr data-ng-repeat="item in dashCompaniesAlarm">																
+										<tr data-ng-repeat="item in dashCompaniesAlarm | filter:statusCreatedFilter">																
 											
 											<td>{{item.company_name}}</td>
 											<td>{{item.company_detector_name}}</td>
 												
-											<td data-ng-if="!item.offLine"> <span class="label" data-ng-class="{'label-success' : item.alarmType=='NORMAL', 'label-warning' : item.alarmType=='ALERTA', 'label-default' : item.alarmType=='DETECCAO', 'label-danger' : item.alarmType=='EVACUACAO'}">  {{item.alarmType}}  </span></td>																						
-											<td data-ng-if="item.offLine"> <span class="label label-default offLine"> Off Line </span></td>
+											<td  data-ng-if="!item.offLine" style="padding-top: 13px ! important;"> <span class="label" data-ng-class="{'label-success' : item.alarmType=='NORMAL', 'label-warning' : item.alarmType=='ALERTA', 'label-default' : item.alarmType=='DETECCAO', 'label-danger' : item.alarmType=='EVACUACAO'}">  {{item.alarmType}}  </span></td>																						
+											<td  data-ng-if="item.offLine"  style="padding-top: 13px ! important;"> <span class="label label-default offLine"> Off Line </span></td>
 
 											<td>
-												<label title="{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}"  data-ng-class="{ 
-													'text-success' : item.alarmType=='NORMAL',
-													'text-warning' : item.alarmType=='ALERTA', 
-													'text-muted' : item.alarmType=='DETECCAO', 
-													'text-danger' : item.alarmType=='EVACUACAO'}">Á 
-													{{item.last_update}} atrás
-												</label>
+												{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
 											</td>
 											<td>
                                             	<span data-ng-if="item.emailStatus=='OFF'" class="icon fa fa-envelope" style="font-size:1.4em; color: gray" title="Aviso EMAIL não Habilitado"></span>
@@ -62,7 +56,7 @@
                                             	<span data-ng-if="item.smsStatus=='SENDED'"  style="font-size:1.4em; color: green" title="SMS Enviado">SMS</span>
                                             	<span data-ng-if="item.smsStatus=='READED'"  style="font-size:1.4em; color: green" title="SMS Recebido pelo Destinatário">SMS</span>	                
                                            		&nbsp;&nbsp; 
-                                           		<span data-ng-click="editAction($index)" class="button fa fa-info-circle" style="font-size:1.6em; color: navy" title="Ações a serem Verificadas pelo Operador"></span>
+                                           		<span data-ng-click="editAction($index)" class="button fa fa-info-circle" style="font-size:1.6em;" title="Ações a serem Verificadas pelo Operador"></span>
                                             </td>                                        						
 										</tr>										
 									</tbody>
@@ -106,8 +100,8 @@
 										</tr>
 									</thead>
 									<tbody>
-
-										<tr data-ng-repeat="item in dashCompaniesAlarm">																
+										
+										<tr data-ng-repeat="item in dashCompaniesAlarm | filter:statusReadedFilter">																
 											
 											<td>{{item.company_name}}</td>
 											<td>{{item.company_detector_name}}</td>	
@@ -116,13 +110,7 @@
 											<td data-ng-if="item.offLine"> <span class="label label-default offLine"> Off Line </span></td>
 
 											<td>
-												<label title="{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}"  data-ng-class="{ 
-													'text-success' : item.alarmType=='NORMAL',
-													'text-warning' : item.alarmType=='ALERTA', 
-													'text-muted' : item.alarmType=='DETECCAO', 
-													'text-danger' : item.alarmType=='EVACUACAO'}">Á  
-													{{item.last_update}} atrás
-												</label>
+												{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}												
 											</td>											
 										</tr>   																							
 										
@@ -139,28 +127,105 @@
        		
     	</div>    
     	
-   		<div id="modalAction" class="modal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title">Posicionamento do alarme</h4>
+		 <div id="modalAction" class="modal">                
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">                            
+					<div class="modal-body"style="padding-bottom: 0px; !important">
+					
+						<div class="panel panel-default">
+							<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Posicionamento de Alarmes</strong></div>														                                                                           
+						</div>
+											
+						<div class="box box-primary" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
+							<div class="box-header">
+								<h3 class="box-title">Dados do Alarme</h3>
+								<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
+							</div>					
+							<div class="box-body" style="padding-bottom: 0px; !important">
+								<form class="form" name="userForm">		
+								
+									<div class="row">											
+										<div class="col-md-12">
+											<div class="box-body" style="background-color: #e7e7e7">											                												                	 
+												<dl class="dl-horizontal">
+													<dt>Empresa:</dt>
+														<dd>{{selectedPositionAlarm.company_name}}</dd>
+													<dt>Unidade / Área:</dt>
+														<dd>{{selectedPositionAlarm.unit_name}} / {{selectedPositionAlarm.area_name}}</dd>													
+													<dt>Detector / Sensor</dt>
+														<dd>{{selectedPositionAlarm.company_detector_name}} / {{selectedPositionAlarm.sensor_name}}</dd>													
+													<dt>Alarme: </dt>
+														
+														<!--
+														<dd> 
+															<label data-ng-class="{ 
+																'text-success' : selectedPositionAlarm.alarmType=='NORMAL',
+																'text-warning' : selectedPositionAlarm.alarmType=='ALERTA', 
+																'text-muted' : selectedPositionAlarm.alarmType=='DETECCAO', 
+																'text-danger' : selectedPositionAlarm.alarmType=='EVACUACAO'}"> 
+																{{selectedPositionAlarm.alarmType}}
+															</label>
+														</dd>
+														-->
+														
+														<dd style="margin-top: 7px; margin-bottom: 7px"><span class="label"  
+															data-ng-class="{'label-success' : selectedPositionAlarm.alarmType=='NORMAL', 'label-warning' : selectedPositionAlarm.alarmType=='ALERTA', 'label-default' : selectedPositionAlarm.alarmType=='DETECCAO', 'label-danger' : selectedPositionAlarm.alarmType=='EVACUACAO'}"> {{selectedPositionAlarm.alarmType}} 
+															</span>
+														</dd>																													
+														
+													<dt>Data/Hora Evento: </dt>
+														<dd>
+															{{selectedPositionAlarm.first_update  | date:'yyyy-MM-dd HH:mm:ss'}}  
+														</dd>
+													<dt>Data/Hora Ultima Médição: </dt>
+														<dd>
+															{{selectedPositionAlarm.last_update_full  | date:'yyyy-MM-dd HH:mm:ss'}}  
+														</dd>														
+													<dt>Medições: </dt>															
+														<dd>
+															Gás: {{selectedPositionAlarm.gas_name}} | Medição: {{selectedPositionAlarm.last_value}}
+															<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
+															<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases!='LEL_PERCENT'"> {{selectedPositionAlarm.unitMeterGases}}</span>
+														</dd>
+							                  	</dl>											                	
+								                	
+								            </div>
+											<hr>
+											<div class="box box-primary box-solid">				                    
+												<div class="box-header with-border"><i class="fa fa-user"></i> Providências:
+												</div>
+												<div class="box-body">													                                                                        
+													<input class="form-control inputProfile" data-ng-model="selectedPositionAlarm.action" disabled>                                                                       
+												</div>
+											</div>
+											
+											<div class="box box-info box-solid">				                    
+												<div class="box-header with-border"><i class="fa fa-history"></i> Feedback:
+												</div>
+												<div class="box-body">													                                                                        
+													<input class="form-control inputProfile" data-ng-model="selectedPositionAlarm.feedback">                                                                       
+												</div>
+											</div>
+										</div>																		
+													  
+									</div>    
+																										
+								</form>
+							</div>
+						</div>
+										
 					</div>
-					<div class="modal-body">					
-						<form>								                                        
-                        	<div class="form-group">
-                            	<label class="control-label"><i class="fa fa-user"> Ações a Serem Executadas</i></label>  					
-								<textarea class="form-control" data-ng-model="positionAlarmAction" readonly disabled></textarea>							
-							</div>  
-						</form>
+					
+					<div class="modal-footer">						
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
+						<button type="button" data-ng-click="savePositionAlarmMessage();" class="btn btn-primary" data-dismiss="modal"
+							data-ng-disabled="(selectedPositionAlarm.feedback) ? false : true">Salvar
+						</button>						                                
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Sair</button>
-						<button type="button" class="btn bt-primary">OK</button>
-					</div>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-           </div>
+					
+				</div>
+			</div>		
+		</div>
     	
     	
     </div>

@@ -2,6 +2,8 @@ package br.com.eneeyes.main.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.PositionAlarmDto;
@@ -135,8 +138,11 @@ public class PositionAlarm {
 	}
 	
 	@Column(name = "ACTION", nullable = true, length=300)		
-	private String action;		
-
+	private String action;	
+		
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="positionAlarm", cascade = CascadeType.ALL)
+	private Set<PositionAlarmMessage> positionAlarmMessages = new HashSet<PositionAlarmMessage>();
+	
 	public Long getUid() {
 		return uid;
 	}
@@ -199,5 +205,13 @@ public class PositionAlarm {
 
 	public final void setAction(String action) {
 		this.action = action;
+	}
+	
+	public final Set<PositionAlarmMessage> getPositionAlarmMessages() {
+		return positionAlarmMessages;
+	}
+
+	public final void setPositionAlarmMessages(Set<PositionAlarmMessage> positionAlarmMessages) {
+		this.positionAlarmMessages = positionAlarmMessages;
 	}
 }

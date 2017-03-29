@@ -1,7 +1,6 @@
 package br.com.eneeyes.main.controller;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,7 @@ import br.com.eneeyes.main.service.PositionAlarmService;
 @RestController
 public class PositionAlarmController {
 	
-	@Inject
+	@Autowired
 	PositionAlarmService service;	
 	
 	@RequestMapping(value="/api/positionAlarm/{command}/", method=RequestMethod.GET, produces = "application/json")

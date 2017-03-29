@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
@@ -48,7 +49,11 @@ public class DashCompaniesAlarm implements Serializable {
 	@Column(name = "sms_status")
 	private SmsStatus smsStatus;
 	
-	private Date last_update;	
+	@Column(name = "alarm_status")
+	private AlarmStatus alarmStatus;
+	
+	private Date first_update;
+	private Date last_update;
 	private String gas_name;
 	
 	@Column(name = "unit_meter_gases")
@@ -59,6 +64,7 @@ public class DashCompaniesAlarm implements Serializable {
 	public Long getUid() {
 		return uid;
 	}
+	
 	public void setUid(Long uid) {
 		this.uid = uid;
 	}
@@ -66,6 +72,7 @@ public class DashCompaniesAlarm implements Serializable {
 	public Long getCompany_id() {
 		return company_id;
 	}
+	
 	public void setCompany_id(Long company_id) {
 		this.company_id = company_id;
 	}
@@ -73,6 +80,7 @@ public class DashCompaniesAlarm implements Serializable {
 	public String getCompany_name() {
 		return company_name;
 	}
+	
 	public void setCompany_name(String company_name) {
 		this.company_name = company_name;
 	}
@@ -80,6 +88,7 @@ public class DashCompaniesAlarm implements Serializable {
 	public String getUnit_name() {
 		return unit_name;
 	}
+	
 	public void setUnit_name(String unit_name) {
 		this.unit_name = unit_name;
 	}
@@ -87,6 +96,7 @@ public class DashCompaniesAlarm implements Serializable {
 	public String getArea_name() {
 		return area_name;
 	}
+	
 	public void setArea_name(String area_name) {
 		this.area_name = area_name;
 	}
@@ -94,6 +104,7 @@ public class DashCompaniesAlarm implements Serializable {
 	public String getCompany_detector_name() {
 		return company_detector_name;
 	}
+	
 	public void setCompany_detector_name(String company_detector_name) {
 		this.company_detector_name = company_detector_name;
 	}
@@ -101,6 +112,7 @@ public class DashCompaniesAlarm implements Serializable {
 	public String getSensor_name() {
 		return sensor_name;
 	}
+	
 	public void setSensor_name(String sensor_name) {
 		this.sensor_name = sensor_name;
 	}
@@ -116,6 +128,7 @@ public class DashCompaniesAlarm implements Serializable {
 	public Double getLast_value() {
 		return last_value;
 	}
+	
 	public void setLast_value(Double last_value) {
 		this.last_value = last_value;
 	}
@@ -131,19 +144,38 @@ public class DashCompaniesAlarm implements Serializable {
 	public final EmailStatus getEmailStatus() {
 		return emailStatus;
 	}
+	
 	public final void setEmailStatus(EmailStatus emailStatus) {
 		this.emailStatus = emailStatus;
 	}
+	
 	public final SmsStatus getSmsStatus() {
 		return smsStatus;
 	}
+	
 	public final void setSmsStatus(SmsStatus smsStatus) {
 		this.smsStatus = smsStatus;
 	}
-		
+	
+	public final AlarmStatus getAlarmStatus() {
+		return alarmStatus;
+	}
+
+	public final void setAlarmStatus(AlarmStatus alarmStatus) {
+		this.alarmStatus = alarmStatus;
+	}
+	
+	public final Date getFirst_update() {
+		return first_update;
+	}
+	public final void setFirst_update(Date first_update) {
+		this.first_update = first_update;
+	}
+	
 	public Date getLast_update() {
 		return last_update;
 	}
+	
 	public void setLast_update(Date last_update) {
 		this.last_update = last_update;
 	}
@@ -167,6 +199,7 @@ public class DashCompaniesAlarm implements Serializable {
 	public final String getAction() {
 		return action;
 	}
+	
 	public final void setAction(String action) {
 		this.action = action;
 	}

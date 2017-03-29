@@ -187,6 +187,11 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		
 		return repository.updateSmsStatus(smstatus, positionAlarmId);		
 	}
+	
+	public int updateAlarmStatus(Long positionAlarmId, AlarmStatus alarmtatus) {
+		
+		return repository.updateAlarmStatus(alarmtatus, positionAlarmId);		
+	}
 
 	@Override
 	public BasicResult<?> findOne(Long uid) {

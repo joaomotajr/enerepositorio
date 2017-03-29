@@ -114,7 +114,7 @@ public class PositionAlarmDto {
 		this.alarmStatus = alarmStatus;
 		
 		if (alarmStatus == null ) {			
-			this.alarmStatus = AlarmStatus.CHECKED;
+			this.alarmStatus = AlarmStatus.CREATED;
 		}	
 		else { 
 			this.alarmStatus = alarmStatus;

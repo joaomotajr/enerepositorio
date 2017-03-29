@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.PositionAlarm;
+import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
@@ -17,6 +18,8 @@ import br.com.eneeyes.main.model.register.Sensor;
 public interface PositionAlarmRepository extends JpaRepository<PositionAlarm, Long> {
 	
 	public List<PositionAlarm> findByCompanyDetector(CompanyDetector companyDetector);
+	
+	public PositionAlarm findByUid(Long uid);
 	
 	public PositionAlarm findByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
 	
@@ -33,5 +36,10 @@ public interface PositionAlarmRepository extends JpaRepository<PositionAlarm, Lo
 	@Transactional
 	@Query("update PositionAlarm p set p.smsStatus = ?1 where p.uid = ?2 ")
 	int updateSmsStatus(SmsStatus smsStatus, long positionAlarmId);
+		
+	@Modifying
+	@Transactional
+	@Query("update PositionAlarm p set p.alarmStatus = ?1 where p.uid = ?2 ")
+	int updateAlarmStatus(AlarmStatus alarmStatus, long positionAlarmId);
 	
 }

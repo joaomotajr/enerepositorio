@@ -1,6 +1,7 @@
 package br.com.eneeyes.main.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,7 @@ public class PositionAlarmMessageService implements IService<PositionAlarmMessag
 						
 		PositionAlarmMessage positionAlarmMessage = new PositionAlarmMessage(dto);	
 		positionAlarmMessage.setPositionAlarm(positionAlarm);
+		positionAlarmMessage.setLastUpdate(new Date());
 		
 		positionAlarmMessage = repository.save(positionAlarmMessage);
 		positionAlarmService.updateAlarmStatus(positionAlarm.getUid(), AlarmStatus.READED);

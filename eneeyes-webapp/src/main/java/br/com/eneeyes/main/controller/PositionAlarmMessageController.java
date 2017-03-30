@@ -1,7 +1,5 @@
 package br.com.eneeyes.main.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,9 +21,9 @@ public class PositionAlarmMessageController {
 
 	@RequestMapping(value = "/security/api/positionAlarmMessage/save", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> save(@RequestBody PositionAlarmMessageDto dto, HttpSession session) {
-		// User user =
-		// (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	public BasicResult<?> save(@RequestBody PositionAlarmMessageDto dto) {
+		 //User user =
+		 //(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();		 
 		return service.save(dto);
 	}
 

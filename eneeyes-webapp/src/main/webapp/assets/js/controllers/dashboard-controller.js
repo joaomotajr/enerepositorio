@@ -7,8 +7,8 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		
 		$scope.loading = true;	
 		
-		 $scope.listAllDashCompaniesPosition = new ViewService.listAllDashCompaniesPosition();		 
-		 $scope.listAllDashCompaniesPosition.$view({_csrf : angular.element('#_csrf').val()}, function(){
+		$scope.listAllDashCompaniesPosition = new ViewService.listAllDashCompaniesPosition();		 
+		$scope.listAllDashCompaniesPosition.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			 
 			 for(var i = 0; i < $scope.listAllDashCompaniesPosition.list.length; i++) {				 
 				 
@@ -28,38 +28,37 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 			 }			 
 			 				
 			 $scope.listAllDashCompaniesPosition.list.forEach(
-				function(e) {
+				 function(e) {
 
-						$scope.sumary.devices ++;
-						
-						var offDate = (new Date() - new Date(e.last_update_full)) / 1000;
-						
-						// off line por mais de 5 minutos
-						if ( offDate > 300 ) {							 
-						     $scope.sumary.offLine ++;
-						     e.offLine = true;
-						}						
-						else if ( e.alarmType == "NORMAL") {
-							 
-						     $scope.sumary.normal ++;
-						}
-						else if ( e.alarmType == "DETECCAO") {
-							$scope.sumary.alarm1 ++;			
-							 
-						}
-						else if ( e.alarmType == "ALERTA") {
-							$scope.sumary.alarm2 ++;			
-							 
-						}
-						else if ( e.alarmType == "EVACUACAO") {
-							$scope.sumary.alarm3 ++;	
-							 
-						}
-					}			
-				);
+					$scope.sumary.devices ++;
+					
+					var offDate = (new Date() - new Date(e.last_update_full)) / 1000;
+					
+					// off line por mais de 5 minutos
+					if ( offDate > 300 ) {							 
+					     $scope.sumary.offLine ++;
+					     e.offLine = true;
+					}						
+					else if ( e.alarmType == "NORMAL") {
+						 
+					     $scope.sumary.normal ++;
+					}
+					else if ( e.alarmType == "DETECCAO") {
+						$scope.sumary.alarm1 ++;			
+						 
+					}
+					else if ( e.alarmType == "ALERTA") {
+						$scope.sumary.alarm2 ++;			
+						 
+					}
+					else if ( e.alarmType == "EVACUACAO") {
+						$scope.sumary.alarm3 ++;	
+						 
+					}
+				}			
+		 	);			 			 
 			 
-			 $scope.loading = undefined;
-         	         	
+			$scope.loading = undefined;         	         	
        });		 
 	 }
 		

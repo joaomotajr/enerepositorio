@@ -44,5 +44,8 @@ app.factory('ViewService', function($resource){
         listAlarmCompanyDetectorSensorView : $resource('/security/api/view/findAlarmCompanyDetectorSensorViewByAlarmId/:alarmId/', {alarmId: '@alarmId'},{        
         	view : {method : 'GET'}
         }),
+        listAllOffline : $resource('/security/api/view/offline/:interval/', {interval: '@interval'},{        
+        	view : {method : 'GET'}
+        }),
      };
 });

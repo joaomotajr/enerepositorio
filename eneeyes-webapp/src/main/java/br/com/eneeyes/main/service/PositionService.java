@@ -233,5 +233,4 @@ public class PositionService implements IService<PositionDto> {
 		return result;	
 
 	}
-
 }

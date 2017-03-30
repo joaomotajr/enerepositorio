@@ -10,7 +10,7 @@ app.factory('PositionService', function($resource){
         }),        
         listAll : $resource('/security/api/position/all',{},{
         	position : {method : 'GET'}
-        }),
+        }),        
         listOne : $resource('/security/api/position/obtemPorId/:id', {id: '@id'},{
         	position : {method : 'GET'}
         }),

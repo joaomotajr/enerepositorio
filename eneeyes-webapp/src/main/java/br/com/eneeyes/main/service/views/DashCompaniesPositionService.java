@@ -1,19 +1,21 @@
 package br.com.eneeyes.main.service.views;
 
+import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.model.views.DashCompaniesPosition;
 import br.com.eneeyes.main.repository.views.DashCompaniesPositionRepository;
+import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
-@Named
+@Service
 public class DashCompaniesPositionService {
 	
-	@Inject
+	@Autowired
 	private DashCompaniesPositionRepository repository;
 	
 	public Result<?> listAll() {
@@ -31,7 +33,7 @@ public class DashCompaniesPositionService {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Compania.");
+				result.setMessage("Nenhuma Posição.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);
@@ -40,6 +42,34 @@ public class DashCompaniesPositionService {
 		
 		return result;	
 		
+	}
+
+	public BasicResult<?> listOffline(Integer periodo) {
+		Result<DashCompaniesPosition> result = new Result<DashCompaniesPosition>();
+		
+		try {
+			
+			Date nowD = new Date(); 
+			Date lastMinutes = new Date(nowD.getTime() - (1000 * 60 *  periodo));
+			
+			List<DashCompaniesPosition> lista = repository.findByLastMinutesOfLastUpdate(lastMinutes);
+
+			if (lista != null) {				
+				
+				result.setList(lista);				
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhuma Posição.");
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;	
 	}
 
 }

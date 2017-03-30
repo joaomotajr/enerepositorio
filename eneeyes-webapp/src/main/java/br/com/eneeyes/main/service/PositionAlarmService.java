@@ -35,13 +35,6 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	@Autowired
 	CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
 		
-	@Override
-	public BasicResult<?> save(PositionAlarmDto dto) {
-		
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
     /** Método checar se houve violação de Alarme
      *   @return sem retorno  						*/
 	public AlarmType checkAlarmLimits(Position position) {		
@@ -288,5 +281,12 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	public BasicResult<?> delete(Long uid) {
 		// TODO Auto-generated method stub
 		return null;
-	}	
+	}
+	
+	@Override
+	public BasicResult<?> save(PositionAlarmDto dto) {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

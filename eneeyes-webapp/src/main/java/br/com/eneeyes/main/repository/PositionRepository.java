@@ -10,9 +10,6 @@ import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.register.Sensor;
 
 public interface PositionRepository extends JpaRepository<Position, Long> {
-
-//	@Query("select p from Position p where p.area.uid = ?1")
-//	public Page<Position> findByAreaId(Long idUnit, Pageable pageable);
 	
 	public List<Position> findByCompanyDetector(CompanyDetector companyDetector);
 	
@@ -23,14 +20,7 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
 	public List<Position> findByCompanyDetectorAndLastUpdateBetween(CompanyDetector companyDetector, Date in, Date out);
 
 	public List<Position> findByCompanyDetectorIn(List<CompanyDetector> lista);
-		
-//	public List<Position> findByLastCheckedAfter(Date lastChecked);
-//	
-//	public List<Position> findByLastCheckedBetween(Date in, Date out);
-//	
-//	@Modifying
-//	@Transactional
-//	@Query("update Position p set p.lastChecked = ?1  where p.companyDetector = ?2 and p.sensor = ?3")
-//	int setCheckDate(Date lastChecked, CompanyDetector companyDetector, Sensor sensor);
+	
+	public List<Position> findByLastUpdateBetween(Date in, Date out);	
 	
 }

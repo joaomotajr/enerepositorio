@@ -110,7 +110,7 @@
 
 						<!-- Main row -->
 						<div class="row">
-							<div class="col-md-9">
+							<div class="col-md-12">
 	
 								<div class="box box-primary">
 									<div class="box-header with-border">
@@ -124,13 +124,12 @@
 											</button>
 
 										</div>
-									</div>
+									</div>									
 									
-														<!-- /.box-header -->
 									<div class="box-body">
 										<div class="table-responsive">
 											<div style="max-height: 500px; overflow: auto">
-												<table class="table no-margin">
+												<table class="table no-margin" id="dashboard">
 													<thead>
 														<tr>														
 															<th>ID</th>
@@ -183,14 +182,12 @@
 													</tbody>
 												</table>
 											</div>
-										</div>
-										<!-- /.table-responsive -->
-									</div>							
-
+										</div>									
+									</div>
 								</div>
-								<!-- /.box -->
 	
 							</div>
+							<!-- 
 							<div class="col-md-3">
 								<div class="box box-primary">
 									<div class="box-header with-border">
@@ -201,7 +198,7 @@
 											</button>
 										</div>
 									</div>
-									<!-- /.box-header -->
+									
 									<div class="box-body">
 										<ul class="products-list product-list-in-box">
 											<li class="item">
@@ -214,7 +211,7 @@
 														class="product-description"> Sensor A1 </span>
 												</div>
 											</li>
-											<!-- /.item -->
+										
 											<li class="item">
 												<div class="product-img">
 													<img src="/assets/img/default-50x50.gif" alt="Product Image">
@@ -225,7 +222,7 @@
 														class="product-description"> Sensor A2 </span>
 												</div>
 											</li>
-											<!-- /.item -->
+											
 											<li class="item">
 												<div class="product-img">
 													<img src="/assets/img/default-50x50.gif" alt="Product Image">
@@ -236,7 +233,7 @@
 														class="product-description"> Sensor A3 </span>
 												</div>
 											</li>
-											<!-- /.item -->
+											
 											<li class="item">
 												<div class="product-img">
 													<img src="/assets/img/default-50x50.gif" alt="Product Image">
@@ -253,6 +250,7 @@
 								
 								</div>
 							</div>
+							-->
 						</div>
 					</div>
       			</div>	

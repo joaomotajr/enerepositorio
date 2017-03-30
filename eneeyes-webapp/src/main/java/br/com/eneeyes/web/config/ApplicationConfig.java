@@ -39,15 +39,15 @@ public class ApplicationConfig {
     @Bean
     public Session mailSession() {
     	
-    	final String from = "joao.junior@chipsat.com.br";
-  	   	final  String password = "F@lcon5002";  	    
+    	final String from = "projetos@enesens.com.br";
+  	   	final  String password = "enetecnologia2014";  	    
   	   	
 	    Properties props = new Properties();  
 	  
 	    props.setProperty("mail.transport.protocol", "smtp");     
 	    props.setProperty("mail.host", "smtp.gmail.com");  
 	    props.put("mail.smtp.auth", "true");  
-	    props.put("mail.smtp.port", "465");  
+	    props.put("mail.smtp.port", "587");  
 	    props.put("mail.debug", "true");  
 	    props.put("mail.smtp.socketFactory.port", "465");  
 	    props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");  

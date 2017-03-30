@@ -33,7 +33,7 @@ public class processSmsService {
 	
 	private Log log = LogFactory.getLog(getClass());
 
-	@Scheduled(fixedDelay = 10000)
+	@Scheduled(fixedDelay = 60000)
 	public void schedule()  {
 		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Start Automatico :: " 
 				+ new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));

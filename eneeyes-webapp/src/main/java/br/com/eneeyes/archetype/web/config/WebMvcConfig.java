@@ -41,6 +41,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/img/**").addResourceLocations("/img/");
 		registry.addResourceHandler("/js/**").addResourceLocations("/js/");
 		registry.addResourceHandler("/lib/**").addResourceLocations("/lib/");
+		registry.addResourceHandler("/sound/**").addResourceLocations("/sound/");
 		registry.addResourceHandler("/partials/**").addResourceLocations("/partials/");
 		registry.addResourceHandler("/config.xml").addResourceLocations("/config.xml");
 		registry.addResourceHandler("/assets/plugins/**").addResourceLocations("/assets/plugins/");

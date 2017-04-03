@@ -1,4 +1,5 @@
-	
+	<audio id="alarmSound" src="/assets/sound/alert_01.mp3" preload="auto"></audio>
+		
 	<div data-ng-controller="monitorController">
 		<div class="row">
        		<div class="col-md-6" style="font-size: 8px !important;">
@@ -290,9 +291,16 @@
 					</div>
 					
 					<div class="modal-footer">						
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						
+						<button data-ng-if="selectedPositionAlarm.alarmStatus=='READED'" type="button" data-ng-click="updateAlarmStatus('SOLVED')" class="btn btn-success" data-dismiss="modal"
+							title="Encerrar Alarme"
+							data-ng-disabled="(selectedPositionAlarm.feedback) ? false : true">Encerrar Alarme
+						</button>
+						                                                                
 						<button data-ng-if="!isOffline" type="button" data-ng-click="savePositionAlarmMessage();" class="btn btn-primary" data-dismiss="modal"
-							data-ng-disabled="(selectedPositionAlarm.feedback) ? false : true">Salvar
+							title="Salvar Nova Mensagem"
+							data-ng-disabled="(selectedPositionAlarm.feedback) ? false : true">Registrar Providència 
 						</button>						                                
 					</div>
 					

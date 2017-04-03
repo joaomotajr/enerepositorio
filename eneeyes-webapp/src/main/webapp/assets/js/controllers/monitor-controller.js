@@ -1,5 +1,5 @@
 
-app.controller('monitorController', function ($scope, $timeout, $interval, $filter, ViewService, PositionAlarmMessageService, ViewService) {
+app.controller('monitorController', function ($scope, $timeout, $interval, $filter, ViewService, PositionAlarmMessageService, PositionAlarmService, ViewService) {
 		
 	$scope.getCompaniesPositionOffline = function() {
 		
@@ -62,7 +62,9 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 		};
 		 
 		$scope.inclusaoPositionAlarmMessage = new PositionAlarmMessageService.save(positionAlarmMessage);
-		$scope.inclusaoPositionAlarmMessage.$positionAlarmMessage({_csrf : angular.element('#_csrf').val()});			 
+		$scope.inclusaoPositionAlarmMessage.$positionAlarmMessage({_csrf : angular.element('#_csrf').val()}, function() {				
+			$scope.getCompaniesAlarm(); 
+		});
 	}
 	
 	$scope.getPositionAlarmMessage = function(positionAlarmId) {
@@ -107,6 +109,19 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
             $('#modalAction').modal({ show: 'false' });                        
         }, 200);
 		
+	}
+	
+	$scope.updateAlarmStatus = function(status) {
+		
+		$scope.updateStatus = new PositionAlarmService.updateStatus();				 
+		$scope.updateStatus.$positionAlarm({_csrf : angular.element('#_csrf').val(), alarmStatus : status, uid: $scope.selectedPositionAlarm.uid}, function() {
+			$scope.getCompaniesAlarm(); 
+		});		 
+	 }
+	
+	$scope.playSound = function() {
+ 		 
+		 document.getElementById('xyz').play();
 	}
 		
 	$scope.getCompaniesAlarm();

@@ -9,10 +9,8 @@
 	<div class="ajax-loader"></div> 
     <!-- jQuery 2.1.4 -->
     <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    
+        
     <!-- Easy Pin -->
-    
-<!--     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script> -->
     <script src="/assets/plugins/dist/jquery.easypin.js"></script>
     
     <!-- jQuery UI 1.11.4 -->
@@ -105,6 +103,7 @@
 	<script src="/assets/js/services/view-service.js"></script>
 	<script src="/assets/js/services/sms-service.js"></script>
 	<script src="/assets/js/services/positionAlarmMessage-service.js"></script>
+	<script src="/assets/js/services/positionAlarm-service.js"></script>
 	
 	<!-- PAGE LEVEL FACTORIES -->
 	

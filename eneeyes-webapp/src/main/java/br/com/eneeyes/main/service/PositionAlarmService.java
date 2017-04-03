@@ -171,19 +171,31 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		repository.save(positionAlarm);			
 	}
 	
-	public int updateEmailStatus(Long positionAlarmId, EmailStatus emailStatus) {
+	public int updateEmailStatus(Long uid, EmailStatus emailStatus) {
 		
-		return repository.updateEmailStatus(emailStatus, positionAlarmId);		
+		return repository.updateEmailStatus(emailStatus, uid);		
 	}
 	
-	public int updateSmsStatus(Long positionAlarmId, SmsStatus smstatus) {
+	public int updateSmsStatus(Long uid, SmsStatus smstatus) {
 		
-		return repository.updateSmsStatus(smstatus, positionAlarmId);		
-	}
+		return repository.updateSmsStatus(smstatus, uid);		
+	}	
 	
-	public int updateAlarmStatus(Long positionAlarmId, AlarmStatus alarmtatus) {
+	public BasicResult<?> updateAlarmStatus(Long uid, AlarmStatus alarmtatus) {
+		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
 		
-		return repository.updateAlarmStatus(alarmtatus, positionAlarmId);		
+		try {
+			repository.updateAlarmStatus(alarmtatus, uid);
+			
+			result.setResultType( ResultMessageType.SUCCESS );
+			result.setMessage("Executado com sucesso.");
+			
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;
 	}
 
 	@Override

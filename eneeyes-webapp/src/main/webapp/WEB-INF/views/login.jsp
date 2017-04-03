@@ -43,12 +43,12 @@
 		        	<form>
 		          
 		          		<div class="form-group has-feedback">
-		            		<input type="email" class="form-control" placeholder="Email" ng-model="forms.signin.login">
+		            		<input type="email" class="form-control" placeholder="Email" data-ng-model="forms.signin.login">
 		            		<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 		          		</div>
 		          
 		          		<div class="form-group has-feedback">
-		            		<input type="password" class="form-control" placeholder="Password" ng-model="forms.signin.credential">
+		            		<input type="password" class="form-control" placeholder="Password" data-ng-model="forms.signin.credential">
 		            		<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 		          		</div>
 		          
@@ -65,7 +65,7 @@
 		              			</div>
 		            		</div><!-- /.col -->	            
 		            		<div class="col-xs-4">
-		              			<button type="button" ng-click="signin()" class="btn btn-primary btn-block btn-flat">Sign In</button>
+		              			<button type="button" data-ng-click="signin()" class="btn btn-primary btn-block btn-flat">Sign In</button>
 		            		</div><!-- /.col -->	            
 		          		</div>
 		       		</form>

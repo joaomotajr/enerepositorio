@@ -16,8 +16,18 @@
 		.box {
 			margin-bottom: 5px !important;
 		}
+		
+		.list-group-item {                    
+            padding: 5px 15px !important;
+            border: none !important;
+         }
+         
+         .list-group {
+            margin-bottom: 0px !important;
+         }
 			
-	</style>	 
+	</style>
+		
 	<div data-ng-controller="alarmController as alarmController">
 												
 		<div class="row">				                                                    
@@ -89,9 +99,9 @@
 								<form class="form" name="userForm">		
 								
 									<div class="row">											
-										<div class="col-md-6">
-											<div class="box box-primary box-solid">				                    
-							                	<div class="box-header with-border"><strong><i class="fa fa-info"></i> Nome:</strong>
+										<div class="col-md-3">
+											<div class="box box-primary">				                    
+							                	<div class="box-header with-border"><strong>Nome</strong>
 							                		<strong class="text-red pull-right" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</strong>
 												    <strong class="text-red pull-right" data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 12 caracteres</strong>
 							                	</div>
@@ -101,8 +111,8 @@
 											</div>
 										</div>
 																	
-										<div class="col-md-6">													
-											<div class="box box-primary box-solid">				                    
+										<div class="col-md-3">													
+											<div class="box box-primary">				                    
 							                	<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Empresa</strong>
 							                		<strong class="text-red pull-right" data-ng-show="userForm.companyName.$dirty && userForm.companyName.$invalid">  Campo Obrigatório</strong>
 							                	</div>
@@ -118,13 +128,31 @@
 							                    	</div>
 							                    </div>			                    			                            
 							                </div>
-							        	</div>										
+							        	</div>					
+							        	
+							        	<div class="col-md-6">
+							        		<div class="box box-primary" style="padding-bottom: 0px; !important;">
+							        			<div class="box-header with-border"><strong><i class="fa fa-rss"></i> Dispositivos Associados a este Alarme</strong>
+							                		<strong class="text-red pull-right" data-ng-show="userForm.companyName.$dirty && userForm.companyName.$invalid">  Campo Obrigatório</strong>
+							                	</div>
+							                	
+									        	<div class="box-body" style="padding-bottom: 0px; !important; padding-top: 0px; !important;">									        		                                                                                       
+				                                    <div class="list-group" style="max-height: 50px ! important; height:auto; overflow: auto; font-size: 0.9em  ! important">
+				                                    	<p data-ng-show="!usedAlarms || usedAlarms.length <= 0" class="text-center">NENHUM DETECTOR ASSOCIADO</p>
+				                                        <span class="list-group-item" data-ng-repeat="item in usedAlarms">
+				                                        	<strong>Detector/Sensor:</strong> {{item.company_detector_name}}/{{item.sensor_name}} - <strong>Local:</strong> {{item.company_detector_local}} 			                                            
+				                                        </span>                            
+				                                    </div>					                                
+									        	</div>
+									        		
+								        	</div>								        	
+							        	</div>					
 										              
 					                </div>    
 					                									
 									<div class="row">    
 										<div class="col-md-12">                  
-					                       	<div class="box box-primary box-solid" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
+					                       	<div class="box box-info" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
 					                       	
 								    			<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Limites do Alarme </strong>
 								    				<strong class="text-red pull-right" data-ng-show="(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3) && !userForm.alarmAlarm1.$pristine">  [Sequência de Valores dos Alarmes Inválida]</strong>
@@ -205,9 +233,13 @@
 							                                            	<input type="checkbox" id="checkboxSonoroOnOff" checked>
 							                                            	<label for="checkboxSonoroOnOff">Emitir Alarme Sonoro? </label>
 							                                          	</div>
-							                                         </div>					            			
-											            			
-											            			<div class="col-md-2">
+							                                         </div>					      
+							                                         <div class="col-md-2">
+							                                         	<input class="button" type="button" id="btnSound" data-ng-click="testeSound();">
+							                                         </div>
+							                                               			
+											            			<!-- 
+											            			<div class="col-md-2">											            			
 											            				<div class="checkbox3 checkbox-muted checkbox-inline checkbox-check checkbox-light">
 							                                            	<input class="checkboxSonoro" type="checkbox" id="checkboxSonoro1" checked disabled>
 							                                            	<label for="checkboxSonoro1">Alarme 1</label>
@@ -225,9 +257,59 @@
 							                                            	<label for="checkboxSonoro3">Alarme 3</label>
 							                                          	</div>
 											            			</div>
+											            			 -->
 											            		</div>	
-														    </div>													    
-														    
+														    </div>			
+
+														    <div class="row">
+														    	<div class="col-md-12">
+														    		<div class="col-md-2">										            									            				
+												            			<div class="checkbox3 checkbox-round">
+							                                            	<input type="checkbox" 
+							                                            	id="checkboxEmailOnOff" checked>
+							                                            	<label for="checkboxEmailOnOff">Enviar E-MAIL? </label>
+							                                          	</div>
+							                                        </div>
+							                                        
+							                                        <div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important">
+							                                        	<div data-ng-class="{'has-error': !emailValid}">	
+								                                        	<div class="input-group">								                                        	
+														                    	<span class="input-group-addon" data-ng-show="emailValid">@</span>													                    														                    	
+														                    	<span class="input-group-addon text-red" data-ng-hide="emailValid">@</span>
+														                    	<input 
+														                    		id="alarmEmail" 
+														                    		data-ng-model="email" type="text" class="form-control" 
+														                    		placeholder="Email" 
+														                    		data-ng-change="validEmail($event);">
+														                    </div>
+													                  	</div>						                                         												            			
+								                                   	</div>
+								                                   	
+								                                   	<div class="col-md-2">										            									            				
+												            			<div class="checkbox3 checkbox-round">
+							                                            	<input type="checkbox" id="checkboxSmsOnOff" checked>
+							                                            	<label for="checkboxSmsOnOff">Enviar SMS? </label>
+							                                          	</div>
+							                                        </div>
+							                                        
+							                                        <div class="col-md-4" style="padding-left: 5px !important;">
+							                                        	<div data-ng-class="{'has-error': !mobileValid}">	
+								                                        	<div class="input-group">
+														                    	<span class="input-group-addon" data-ng-show="mobileValid"><i class="fa fa-phone-square"></i></span>
+														                    	<span class="input-group-addon text-red" data-ng-hide="mobileValid"><i class="fa fa-phone-square"></i></span>
+														                    	<input class="form-control" 
+														                    		id="alarmCelular" 
+														                    		data-ng-model="celular" 
+														                    		type="text" maxlength="15" placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />													                    	
+														                  	</div>
+													                  	</div>						                                         													            			
+								                                   	</div>
+														    	
+														    	
+														    	</div>
+														    </div>
+														    										    
+														    <!-- 
 														    <div class="row">
 										                        <div class="col-md-12">
 											            			<div class="col-md-2">										            									            				
@@ -272,7 +354,7 @@
 											            			</div>
 											            		</div>	
 														    </div>	
-														    
+														     
 														    <div class="row">
 										                        <div class="col-md-12">
 											            			<div class="col-md-2">										            									            				
@@ -315,7 +397,7 @@
 											            			</div>
 											            		</div>	
 														    </div>	
-														    
+														     -->
 														    <hr style="margin-top: 5px !important; margin-bottom: 5px !important;">							                                
 							                                
 							                                <div class="row"  style="padding-bottom: 5px !important">
@@ -327,7 +409,7 @@
 							                                          	</div>
 							                                        </div>
 							                            			<div class="travarAction">            
-								                                    	<div class="col-md-9" style="padding-left: 5px !important; padding-right: 5px !important">								                                        
+								                                    	<div class="col-md-10" style="padding-left: 5px !important;">								                                        
 								                                        	<div class="entry input-group" id="">
 								                                        		<span class="input-group-addon btn-add text-white bg-gray"><i class="fa fa-bullhorn"> Alarme 1</i></span>  					
 																				<textarea class="form-control" rows="1" data-ng-model="action1" placeholder="Providências do Agente de Monitoramento se Houver alarme 1" maxlength="250"></textarea>																				                                   						
@@ -341,7 +423,7 @@
 											                        <div class="col-md-12">
 												            			<div class="col-md-2">												            			
 								                                        </div>							                                        
-								                                    	<div class="col-md-9" style="padding-left: 5px !important; padding-right: 5px !important">								                                        
+								                                    	<div class="col-md-10" style="padding-left: 5px !important; ">								                                        
 								                                        	<div class="entry input-group" id="">
 								                                        		<span class="input-group-addon btn-add text-white bg-orange"><i class="fa fa-bullhorn"> Alarme 2</i></span>  					
 																				<textarea class="form-control" data-ng-model="action2" rows="1" placeholder="Providências do Agente de Monitoramento se Houver alarme 2" maxlength="250"></textarea>																				                                   						
@@ -354,14 +436,15 @@
 											                        <div class="col-md-12">
 												            			<div class="col-md-2">												            			
 								                                        </div>							                                        
-								                                    	<div class="col-md-9" style="padding-left: 5px !important; padding-right: 5px !important">								                                        
+								                                    	<div class="col-md-10" style="padding-left: 5px !important; ">								                                        
 								                                       		<div class="entry input-group" id="">
 							                                        			<span class="input-group-addon btn-add text-white bg-red"><i class="fa fa-bullhorn"> Alarme 3</i></span>  					
 																				<textarea class="form-control" data-ng-model="action3" rows="1" placeholder="Providências do Agente de Monitoramento se Houver alarme 3" maxlength="250"></textarea>																				                                   						
 																			</div>
 																		</div>                                        						                                        						                                         													            			
 								                                   	</div>							                                   
-								                                </div>							                                
+								                                </div>	
+								                                						                                
 															</div>
 														</div>    								    
 												    </div>

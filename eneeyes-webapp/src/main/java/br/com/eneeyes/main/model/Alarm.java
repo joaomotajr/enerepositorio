@@ -39,6 +39,7 @@ public class Alarm {
 		this.alarm1 = dto.getAlarm1();
 		this.alarm2 = dto.getAlarm2();
 		this.alarm3 = dto.getAlarm3();
+		this.alarmSound = dto.getAlarmSound();
 		this.alarmEmail = dto.getAlarmEmail();				
 		this.email = dto.getEmail();
 		this.alarmSms = dto.getAlarmSms();
@@ -82,6 +83,9 @@ public class Alarm {
 	
 	@Column(name = "ALARM_ON", nullable = true, columnDefinition = "Boolean default true")		
 	private Boolean alarmOn;
+	
+	@Column(name = "ALARM_SOUND", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarmSound;
 	
 	@Column(name = "ALARM_EMAIL", nullable = true, columnDefinition = "Boolean default false")		
 	private Boolean alarmEmail;
@@ -181,6 +185,14 @@ public class Alarm {
 
 	public void setCompany(CompanyView company) {
 		this.company = company;
+	}
+	
+	public final Boolean getAlarmSound() {
+		return alarmSound;
+	}
+
+	public final void setAlarmSound(Boolean alarmSound) {
+		this.alarmSound = alarmSound;
 	}
 	
 	public final Boolean getAlarmEmail() {

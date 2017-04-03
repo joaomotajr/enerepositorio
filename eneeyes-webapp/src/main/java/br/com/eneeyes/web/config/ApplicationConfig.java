@@ -14,7 +14,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Configuration
-//@ImportResource({"classpath:camel-context.xml"})
 @PropertySource("classpath:camel.properties")
 @EnableScheduling
 public class ApplicationConfig {

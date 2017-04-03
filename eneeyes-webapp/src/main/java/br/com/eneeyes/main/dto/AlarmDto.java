@@ -15,6 +15,7 @@ public class AlarmDto {
 	private Double alarm2;		
 	private Double alarm3;		
 	private Boolean alarmOn;
+	private Boolean alarmSound;
 	private Boolean alarmEmail;	
 	private String email;
 	private Boolean alarmSms;
@@ -40,6 +41,7 @@ public class AlarmDto {
 		this.alarm2 = alarm.getAlarm2();
 		this.alarm3 = alarm.getAlarm3();
 		this.alarmOn = alarm.getAlarmOn();
+		this.alarmSound = alarm.getAlarmSound();
 		this.alarmEmail = alarm.getAlarmEmail();
 		this.email = alarm.getEmail();
 		this.alarmSms = alarm.getAlarmSms();
@@ -113,6 +115,14 @@ public class AlarmDto {
 
 	public final void setAlarmOn(Boolean alarmOn) {
 		this.alarmOn = alarmOn;
+	}
+	
+	public final Boolean getAlarmSound() {
+		return alarmSound;
+	}
+
+	public final void setAlarmSound(Boolean alarmSound) {
+		this.alarmSound = alarmSound;
 	}
 	
 	public CompanyView getCompanyDto() {

@@ -15,7 +15,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			alarm3 : $scope.alarmAlarm3,
 			companyDto : $scope.company,
 			alarmOn: angular.element('#alarmOn').hasClass('unlocked_inactive') == true ? true : false,
-			alarmEmail:  $scope.alarmEmail, 		
+			alarmEmail:  $scope.alarmEmail,
+			alarmSound:  $("#checkboxSonoroOnOff").prop('checked'),
 			email :	$scope.email,
 			alarmSms:  $scope.alarmCelular,
 			celular : $scope.celular,
@@ -72,20 +73,9 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			 $scope.alarms = $scope.resultAlarms.list;			 
          });		 
 	 }	 
- 
-	$scope.usedAlarms = function(alarmId) {
-		 
-		 $scope.resultUsedAlarms = new ViewService.listAlarmCompanyDetectorSensorView();		 
-		 $scope.resultUsedAlarms.$view({_csrf : angular.element('#_csrf').val(), alarmId : alarmId}, function(){			
- 			 
-			 $scope.usedalarms = $scope.resultUsedAlarms.list;
-		});		 		 
-	 }
 	
 	 $scope.editAlarm = function (index) {
 		 
-		 	$scope.usedAlarms($scope.alarms[index].uid); 
-
 	        $scope.alarmUid = $scope.alarms[index].uid;
 	        $scope.alarmGas = $scope.alarms[index].gasDto;
 		    $scope.alarmName = $scope.alarms[index].name;		    
@@ -102,6 +92,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 									
 			$("#checkboxActionOff").prop('checked', $scope.alarms[index].alarmAction);
 			showAction($scope.alarms[index].alarmAction);
+			
+			$("#checkboxSonoroOnOff").prop('checked', $scope.alarms[index].alarmSound);
 			
 			$("#checkboxEmailOnOff").prop('checked', $scope.alarms[index].alarmEmail); 
 			showEmail($scope.alarms[index].alarmEmail);
@@ -126,10 +118,27 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			$scope.validEmail();
 			$scope.validMobile();
 			
+			//$scope.usedAlarms($scope.alarms[index].uid); 
+			
+			$scope.resultUsedAlarms = new ViewService.listAlarmCompanyDetectorSensorView();		 
+			 $scope.resultUsedAlarms.$view({_csrf : angular.element('#_csrf').val(), alarmId : $scope.alarms[index].uid}, function(){			
+	 			 
+				 $scope.usedAlarms = $scope.resultUsedAlarms.list;
+			});
+			
 			$timeout(function () {
 	            $('#modalAlarmEdit').modal({ show: 'false' });                        
 	        }, 200);
-	    }
+	 }
+	 
+	$scope.usedAlarms = function(alarmId) {
+		 
+		 $scope.resultUsedAlarms = new ViewService.listAlarmCompanyDetectorSensorView();		 
+		 $scope.resultUsedAlarms.$view({_csrf : angular.element('#_csrf').val(), alarmId : alarmId}, function(){			
+ 			 
+			 $scope.usedAlarms = $scope.resultUsedAlarms.list;
+		});		 		 
+	 }
 	 
 	 $scope.deleteAlarm = function(index) {
 		 
@@ -291,7 +300,6 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 if(!$scope.$$phase) 
 			 $scope.$apply();
 	 }
-
 	 
 	 
 	 $("#checkboxSmsOnOff").click(function(e, parameters) {		 
@@ -332,8 +340,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 
 		 if(!$scope.$$phase) 
 			 $scope.$apply();			
-	 }
-	 	 
+	 }	 
 	 
      /* ----------------- Processamento ------------------*/
 	 

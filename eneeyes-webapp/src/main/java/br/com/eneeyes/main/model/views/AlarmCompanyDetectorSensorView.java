@@ -28,7 +28,8 @@ public class AlarmCompanyDetectorSensorView implements Serializable {
 	private Long company_detector_id;
 	private Long sensor_id;
 	private String company_detector_name;
-	
+	private String company_detector_local;	
+	private Double range_max;
 	private String sensor_name;
 		
 	public Long getUid() {
@@ -69,6 +70,22 @@ public class AlarmCompanyDetectorSensorView implements Serializable {
 
 	public void setCompany_detector_name(String company_detector_name) {
 		this.company_detector_name = company_detector_name;
+	}
+	
+	public final String getCompany_detector_local() {
+		return company_detector_local;
+	}
+
+	public final void setCompany_detector_local(String company_detector_local) {
+		this.company_detector_local = company_detector_local;
+	}
+
+	public final Double getRange_max() {
+		return range_max;
+	}
+
+	public final void setRange_max(Double range_max) {
+		this.range_max = range_max;
 	}
 	
 	public String getSensor_name() {

@@ -234,10 +234,7 @@
 							                                            	<label for="checkboxSonoroOnOff">Emitir Alarme Sonoro? </label>
 							                                          	</div>
 							                                         </div>					      
-							                                         <div class="col-md-2">
-							                                         	<input class="button" type="button" id="btnSound" data-ng-click="testeSound();">
-							                                         </div>
-							                                               			
+							                 							                                               			
 											            			<!-- 
 											            			<div class="col-md-2">											            			
 											            				<div class="checkbox3 checkbox-muted checkbox-inline checkbox-check checkbox-light">

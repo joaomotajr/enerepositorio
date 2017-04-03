@@ -121,7 +121,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 	
 	$scope.playSound = function() {
  		 
-		 document.getElementById('xyz').play();
+		 document.getElementById('alarmSound').play();
 	}
 		
 	$scope.getCompaniesAlarm();

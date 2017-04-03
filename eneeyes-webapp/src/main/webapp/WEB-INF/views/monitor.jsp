@@ -1,4 +1,4 @@
-	<audio id="alarmSound" src="/assets/sound/alert_01.mp3" preload="auto"></audio>
+	<audio id="alarmSound" src="/assets/img/alert_01.mp3" preload="auto"></audio>
 		
 	<div data-ng-controller="monitorController">
 		<div class="row">

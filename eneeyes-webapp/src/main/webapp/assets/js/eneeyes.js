@@ -27,13 +27,13 @@ angular.module('dependency', []).config(['$httpProvider', function ($httpProvide
         		 
         		  angular.element('body').removeClass('loading'); 
         		  $rootScope.alertDanger = "Servidor Sem Resposta, Se o Problema Persistir Contate o Administrador do Sistema";
-        		  $('#resultDanger').hide().show('slow').delay(5000).hide('slow');        		  
+        		  $('#resultDanger').hide().show('slow').delay(15000).hide('slow');        		  
         		  
         	 }
         	 else if (rejection.status == 404) {
         		 angular.element('body').removeClass('loading'); 
         		 $rootScope.alertDanger = "Item Requisitado Inexistente, Contate o Administrador do Sistema";
-        		 $('#resultDanger').hide().show('slow').delay(5000).hide('slow');
+        		 $('#resultDanger').hide().show('slow').delay(15000).hide('slow');
         	 }
         	 else if (rejection.status == 415) {
         		 angular.element('body').removeClass('loading'); 

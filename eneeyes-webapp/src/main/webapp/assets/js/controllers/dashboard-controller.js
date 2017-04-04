@@ -65,7 +65,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 	$scope.getCompaniesPosition();
     
     $interval(function() {
-    	if($scope.$root.currentPage == "Dashboard")
+    	if($scope.$root.currentPage == "Dashboard" && $scope.$root.errorTimes <= 5)
     		$scope.getCompaniesPosition();     						
     }, 10000);	
     

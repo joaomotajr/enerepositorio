@@ -19,6 +19,7 @@ VIEW `dash_companies_alarm` AS
         `pa`.`EMAIL_STATUS` AS `email_status`,
         `pa`.`SMS_STATUS` AS `sms_status`,
         `pa`.`ALARM_STATUS` AS `alarm_status`,
+        `pa`.`SOUND_STATUS` AS `sound_status`,
         `pa`.`ACTION` AS `action`,
         `g`.`NAME` AS `gas_name`,
         `s`.`UNIT_METER_GASES` AS `unit_meter_gases`

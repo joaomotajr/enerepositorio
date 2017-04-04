@@ -24,6 +24,7 @@ import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
+import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.model.register.Sensor;
 
 @Entity
@@ -46,6 +47,7 @@ public class PositionAlarm {
     	this.emailStatus = dto.getEmailStatus();
     	this.smsStatus = dto.getSmsStatus();
     	this.action = dto.getAction();
+    	this.soundStatus = dto.getSoundStatus();
     }
 
 	@Id
@@ -143,6 +145,22 @@ public class PositionAlarm {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="positionAlarm", cascade = CascadeType.ALL)
 	private Set<PositionAlarmMessage> positionAlarmMessages = new HashSet<PositionAlarmMessage>();
 	
+	@Column(name = "SOUND_STATUS", columnDefinition = "int default 0" , nullable = true)
+	private SoundStatus soundStatus;
+	
+	public final SoundStatus getSoundStatus() {
+		return soundStatus;
+	}
+
+	public final void setSoundStatus(SoundStatus soundStatus) {
+		this.soundStatus = soundStatus;
+	}
+
+	@Enumerated(EnumType.ORDINAL) 
+	private SoundStatus soundStatus() { 
+	    return soundStatus; 
+	}
+	
 	public Long getUid() {
 		return uid;
 	}
@@ -214,4 +232,5 @@ public class PositionAlarm {
 	public final void setPositionAlarmMessages(Set<PositionAlarmMessage> positionAlarmMessages) {
 		this.positionAlarmMessages = positionAlarmMessages;
 	}
+	
 }

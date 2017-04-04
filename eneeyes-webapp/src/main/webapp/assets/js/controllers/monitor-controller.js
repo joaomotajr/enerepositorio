@@ -1,5 +1,5 @@
 
-app.controller('monitorController', function ($scope, $timeout, $interval, $filter, ViewService, PositionAlarmMessageService, PositionAlarmService, ViewService) {
+app.controller('monitorController', function ($scope, $rootScope, $timeout, $interval, $filter, ViewService, PositionAlarmMessageService, PositionAlarmService, ViewService) {
 		
 	$scope.getCompaniesPositionOffline = function() {
 		
@@ -17,7 +17,6 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 				 $scope.dashCompaniesOffline[i].last_update = timeSince($scope.dashCompaniesOffline[i].last_update);				 
 				 $scope.dashCompaniesOffline[i].last_value	= Math.round($scope.dashCompaniesOffline[i].last_value * 100) / 100 ;								 
 			 }			 
-			 
 		});		 
 	 }	
 	
@@ -72,11 +71,9 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 		$scope.inclusaoPositionAlarmMessage = new PositionAlarmMessageService.listByPositionAlarmId(positionAlarmId);
 		$scope.inclusaoPositionAlarmMessage.$positionAlarmMessage({_csrf : angular.element('#_csrf').val(), id : positionAlarmId }, function(){
 		
-			$scope.selectedPositionAlarm.messages = $scope.inclusaoPositionAlarmMessage.list;
-						 
+			$scope.selectedPositionAlarm.messages = $scope.inclusaoPositionAlarmMessage.list;						 
 		});
 	}
-
 	
 	$scope.editActionCreated = function(index) {
 		
@@ -107,8 +104,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 		
 		$timeout(function () {
             $('#modalAction').modal({ show: 'false' });                        
-        }, 200);
-		
+        }, 200);		
 	}
 	
 	$scope.updateAlarmStatus = function(status) {
@@ -128,7 +124,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 	$scope.getCompaniesPositionOffline();
     
     $interval(function() {
-    	if($scope.$root.currentPage == "Monitoramento")
+    	if($scope.$root.currentPage == "Monitoramento" && $scope.$root.errorTimes <= 5)
     		$scope.getCompaniesAlarm();
     		$scope.getCompaniesPositionOffline();
     }, 10000);	

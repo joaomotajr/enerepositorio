@@ -19,6 +19,7 @@ import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
+import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.model.register.Sensor;
 import br.com.eneeyes.main.repository.PositionAlarmRepository;
 import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRepository;
@@ -106,8 +107,15 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 				action = alarm.getAlarmDto().getAction2();
 			else if(alarmType == AlarmType.EVACUACAO)
 				action = alarm.getAlarmDto().getAction3();
-				
-			saveOrUpdatePositionAlarm(position, companyDetector, sensor, alarmType, emailStatus, smsStatus, action);
+			
+			SoundStatus soundStatus = null;
+			if(alarm.getAlarmDto().getAlarmSound())
+				soundStatus = SoundStatus.ON;
+			else
+				soundStatus = SoundStatus.OFF;
+			
+			saveOrUpdatePositionAlarm(position, companyDetector, sensor, alarmType, emailStatus, smsStatus, action, soundStatus);
+		
 		}		
 		
 		return alarmType; 
@@ -143,7 +151,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	 * @param alarmType
 	 */
 	public void saveOrUpdatePositionAlarm(Position position, CompanyDetector companyDetector, Sensor sensor, 
-			AlarmType alarmType, EmailStatus emailStatus, SmsStatus smsStatus, String action) {
+			AlarmType alarmType, EmailStatus emailStatus, SmsStatus smsStatus, String action, SoundStatus soundStatus) {
 		
 		PositionAlarm positionAlarm = repository.findByCompanyDetectorAndSensorAndAlarmType(companyDetector, sensor, alarmType);
 		
@@ -161,6 +169,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			positionAlarm.setEmailStatus(emailStatus);
 			positionAlarm.setSmsStatus(smsStatus);
 			positionAlarm.setAction(action);
+			positionAlarm.setSoundStatus(soundStatus);
 		}
 		else {
 			// TODO Verificar se haverá reenvio de Actions em casos de Reinscidência do mesmo alerta				
@@ -179,7 +188,12 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	public int updateSmsStatus(Long uid, SmsStatus smstatus) {
 		
 		return repository.updateSmsStatus(smstatus, uid);		
-	}	
+	}
+	
+	public int updateSoundStatus(Long uid, Boolean soundStatus) {
+		
+		return repository.updateSoundStatus(soundStatus, uid);		
+	}
 	
 	public BasicResult<?> updateAlarmStatus(Long uid, AlarmStatus alarmtatus) {
 		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();

@@ -9,6 +9,7 @@ import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
+import br.com.eneeyes.main.model.enums.SoundStatus;
 
 public class PositionAlarmDto {
 	
@@ -24,9 +25,8 @@ public class PositionAlarmDto {
     private EmailStatus emailStatus;
 	private SmsStatus smsStatus;
 	private String action;
-	public PositionAlarmDto() {
-		
-	}
+	private SoundStatus soundStatus;
+	
 	
 	public PositionAlarmDto(PositionAlarm positionAlarm) {
 		
@@ -41,6 +41,7 @@ public class PositionAlarmDto {
     	this.emailStatus = positionAlarm.getEmailStatus();
     	this.smsStatus = positionAlarm.getSmsStatus();
     	this.action = positionAlarm.getAction();
+    	this.soundStatus = positionAlarm.getSoundStatus();
 	}
 	
 	public final Long getUid() {
@@ -152,4 +153,21 @@ public class PositionAlarmDto {
 	public final void setAction(String action) {
 		this.action = action;
 	}
+	
+	public final SoundStatus getSoundStatus() {
+		return soundStatus;
+	}
+	
+	public final void setSoundStatus(SoundStatus soundStatus) {
+		this.soundStatus = soundStatus;
+		
+		if (soundStatus == null ) {			
+			this.soundStatus = SoundStatus.OFF;
+		}	
+		else { 
+			this.soundStatus = soundStatus;
+		}
+	}
+	
+	
 }

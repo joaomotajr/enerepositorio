@@ -14,6 +14,7 @@ import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
+import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 
@@ -48,6 +49,9 @@ public class DashCompaniesAlarm implements Serializable {
 	
 	@Column(name = "sms_status")
 	private SmsStatus smsStatus;
+	
+	@Column(name = "sound_status")
+	private SoundStatus soundStatus;
 	
 	@Column(name = "alarm_status")
 	private AlarmStatus alarmStatus;
@@ -155,6 +159,14 @@ public class DashCompaniesAlarm implements Serializable {
 	
 	public final void setSmsStatus(SmsStatus smsStatus) {
 		this.smsStatus = smsStatus;
+	}
+	
+	public final SoundStatus getSoundStatus() {
+		return soundStatus;
+	}
+
+	public final void setSoundStatus(SoundStatus soundStatus) {
+		this.soundStatus = soundStatus;
 	}
 	
 	public final AlarmStatus getAlarmStatus() {

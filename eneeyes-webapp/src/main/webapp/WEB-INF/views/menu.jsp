@@ -52,12 +52,14 @@
 	            	<span class="label label-danger pull-right">Temp</span>
 	            	</a>
 	            </li>	
+	            <!-- 
 	            <li class="treeview">
 	            	<a href="#" data-ng-click="LoadAjaxContent('datatable.html', 'datatable')"><i class="fa fa-circle-o"></i>
 	            	<span>Datatable</span>
 	            	<span class="label label-danger pull-right">Temp</span>
 	            	</a>
 	            </li>
+	             -->
 	            <li class="treeview">
 	            	<a href="#"><i class="fa fa-circle-o"></i>
 	            	<span>User</span>

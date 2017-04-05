@@ -22,8 +22,6 @@ public class PositionAlarmMessageController {
 	@RequestMapping(value = "/security/api/positionAlarmMessage/save", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> save(@RequestBody PositionAlarmMessageDto dto) {
-		 //User user =
-		 //(User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();		 
 		return service.save(dto);
 	}
 
@@ -38,7 +36,7 @@ public class PositionAlarmMessageController {
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listByPositionAlarm(@PathVariable Long uid) {
 
-		return service.findByPositionAlarmId(uid);
+		return service.findByPositionAlarmId(uid); 
 	}
 
 }

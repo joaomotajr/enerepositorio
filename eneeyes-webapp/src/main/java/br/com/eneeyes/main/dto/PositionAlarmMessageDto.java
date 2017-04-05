@@ -5,10 +5,11 @@ import java.util.Date;
 import br.com.eneeyes.main.model.PositionAlarmMessage;
 
 public class PositionAlarmMessageDto {
+	
 	private Long uid;
 	private String message;
 	private PositionAlarmDto positionAlarmDto;
-	private Date lastUpdate;
+	private Date lastUpdate;	
 	
 	public PositionAlarmMessageDto() {
 		

@@ -27,6 +27,9 @@ public class PositionAlarmDto {
 	private String action;
 	private SoundStatus soundStatus;
 	
+	public PositionAlarmDto() {
+		
+	}
 	
 	public PositionAlarmDto(PositionAlarm positionAlarm) {
 		

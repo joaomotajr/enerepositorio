@@ -28,7 +28,8 @@ app.controller('monitorController', function ($scope, $rootScope, $timeout, $int
 		 $scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			 
 			 $scope.dashCompaniesAlarmCreated = [];
-			 $scope.dashCompaniesAlarmReaded = [];			 
+			 $scope.dashCompaniesAlarmReaded = [];	
+			 $scope.alarmsCount = $scope.listAllDashCompaniesAlarm.list.length;
 			 
 			 $scope.listAllDashCompaniesAlarm.list.forEach(
 				 function(e) {			
@@ -59,8 +60,8 @@ app.controller('monitorController', function ($scope, $rootScope, $timeout, $int
 		var positionAlarmMessage = {
 			uid: 0,
 			message: $scope.selectedPositionAlarm.feedback,
-			lastUpdate: new Date(),
-			positionAlarmDto: {uid: $scope.selectedPositionAlarm.uid}
+			lastUpdate: null,
+			positionAlarmDto: { uid: $scope.selectedPositionAlarm.uid }
 		};
 
 		$scope.inclusaoPositionAlarmMessage = new PositionAlarmMessageService.save(positionAlarmMessage);

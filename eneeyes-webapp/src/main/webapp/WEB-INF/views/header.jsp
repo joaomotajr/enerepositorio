@@ -87,19 +87,20 @@
 				<!-- Messages: style can be found in dropdown.less-->
 				<li class="dropdown messages-menu">
 				
-				<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span class="label label-success">1</span>	</a>
+				<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span class="label label-success"></span>	</a>
 					<ul class="dropdown-menu">
-						<li class="header">Voce tem 1 Mensagem</li>
+						<li class="header">Voce tem 0 Mensagem</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
 							<ul class="menu">
 								<li>
-									<!-- start message --> 
+									<!-- start message  
 									<a href="#">
 										<div class="pull-left">	<img src="/assets/img/avatar_160x160.png" class="img-circle" alt="User Image"></div>
 										<h4> Time de Desenvolvimento <small><i class="fa fa-clock-o"></i> 5 mins</small> </h4>
 										<p>Bem Vindo ao nosso Site!!</p>
 									</a>
+									-->
 								</li>
 
 							</ul>
@@ -108,38 +109,41 @@
 					</ul>
 				</li>
 					
-
+				
 				<!-- Notifications: style can be found in dropdown.less -->
-				<li class="dropdown notifications-menu">
-					<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning">2</span></a>
+				<li class="dropdown notifications-menu" data-ng-controller="monitorController">
+					<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning">{{ dashCompaniesAlarmCreated.length }}</span></a>
 					<ul class="dropdown-menu">
-						<li class="header">Voce tem 2 Alarmes Pendentes</li>
+						<li class="header">Voce tem {{ dashCompaniesAlarmCreated.length }} Alarmes Pendentes</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
-							<ul class="menu">
+							<ul class="menu" data-ng-repeat="item in dashCompaniesAlarmCreated">
+			
+								<li>
+									<a href="#"> 
+									<i class="fa fa-bullhorn" data-ng-class="{'text-green' : item.alarmType=='NORMAL', 'text-orange' : item.alarmType=='ALERTA', 'text-gray' : item.alarmType=='DETECCAO', 'text-red' : item.alarmType=='EVACUACAO'}"></i>
+										{{item.company_name}} {{item.company_detector_name}} {{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
+									</a>
+								</li>
 								
-								<li><a href="#"> <i class="fa fa-warning text-yellow"></i>
-										Alarme Um
-								</a></li>
-								<li><a href="#"> <i class="fa fa-warning text-red"></i>
-										Alarme Dois
-								</a></li>
 								
 							</ul>
 						</li>
-						<li class="footer"><a href="#">Ver todos</a></li>
-					</ul></li>
-
+						<li class="footer"><a href="#" data-ng-click="LoadAjaxContent('monitor.html', 'Monitoramento')">Ver todos</a></li>
+					</ul>
+				</li>
+				
 				<!-- Tasks: style can be found in dropdown.less -->
 				<li class="dropdown tasks-menu">
-				<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span class="label label-danger">1</span></a>
+				<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span class="label label-danger"></span></a>
 					<ul class="dropdown-menu">
 						<li class="header">Voce Tem um Tarefa</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
 							<ul class="menu">
 								<li>
-									<!-- Task item --> <a href="#">
+									<!-- Task item  
+									<a href="#">		
 										<h3>
 											Ler manual do aplicativo <small class="pull-right">20%</small>
 										</h3>
@@ -150,7 +154,8 @@
 												<span class="sr-only">20% Completo</span>
 											</div>
 										</div>
-								</a>
+									</a>
+									-->
 								</li>
 																
 								<!-- end task item -->

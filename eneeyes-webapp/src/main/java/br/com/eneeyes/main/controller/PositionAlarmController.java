@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eneeyes.main.model.enums.AlarmStatus;
+import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.service.PositionAlarmService;
 
@@ -28,6 +29,12 @@ public class PositionAlarmController {
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> updateAlarmStatus(@PathVariable Long uid, @PathVariable AlarmStatus alarmStatus) {		
 		return service.updateAlarmStatus(uid, alarmStatus);
+	}
+	
+	@RequestMapping(value="/security/api/positionAlarm/updateSoundStatus/{soundStatus}/{uid}", method=RequestMethod.PUT, consumes = "application/json", produces = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> updateAlarmStatus(@PathVariable Long uid, @PathVariable SoundStatus soundStatus) {		
+		return service.updateSoundStatus(uid, soundStatus);
 	}
 
 }

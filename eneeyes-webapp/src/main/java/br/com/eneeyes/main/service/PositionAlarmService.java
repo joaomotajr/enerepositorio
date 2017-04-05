@@ -190,16 +190,28 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		return repository.updateSmsStatus(smstatus, uid);		
 	}
 	
-	public int updateSoundStatus(Long uid, Boolean soundStatus) {
-		
-		return repository.updateSoundStatus(soundStatus, uid);		
-	}
-	
 	public BasicResult<?> updateAlarmStatus(Long uid, AlarmStatus alarmtatus) {
 		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
 		
 		try {
 			repository.updateAlarmStatus(alarmtatus, uid);
+			
+			result.setResultType( ResultMessageType.SUCCESS );
+			result.setMessage("Executado com sucesso.");
+			
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	public BasicResult<?> updateSoundStatus(Long uid, SoundStatus soundStatus) {
+		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
+		
+		try {
+			repository.updateSoundStatus(soundStatus, uid);
 			
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Executado com sucesso.");

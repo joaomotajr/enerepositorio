@@ -43,6 +43,9 @@ app.controller('monitorController', function ($scope, $rootScope, $timeout, $int
 					else if (e.alarmStatus == "READED") {
 						$scope.dashCompaniesAlarmReaded.push(e);
 					}
+					
+					if(e.soundStatus == 'ON')
+						$scope.playSound();
 				}	
 			 );		 			 
 				 
@@ -56,10 +59,10 @@ app.controller('monitorController', function ($scope, $rootScope, $timeout, $int
 		var positionAlarmMessage = {
 			uid: 0,
 			message: $scope.selectedPositionAlarm.feedback,
-			//user: null,
+			lastUpdate: new Date(),
 			positionAlarmDto: {uid: $scope.selectedPositionAlarm.uid}
 		};
-		 
+
 		$scope.inclusaoPositionAlarmMessage = new PositionAlarmMessageService.save(positionAlarmMessage);
 		$scope.inclusaoPositionAlarmMessage.$positionAlarmMessage({_csrf : angular.element('#_csrf').val()}, function() {				
 			$scope.getCompaniesAlarm(); 
@@ -113,6 +116,14 @@ app.controller('monitorController', function ($scope, $rootScope, $timeout, $int
 		$scope.updateStatus.$positionAlarm({_csrf : angular.element('#_csrf').val(), alarmStatus : status, uid: $scope.selectedPositionAlarm.uid}, function() {
 			$scope.getCompaniesAlarm(); 
 		});		 
+	}
+	
+	$scope.updateSoundStatus = function(index) {
+		
+		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarmCreated[index];
+		
+		$scope.updateSoundStatus = new PositionAlarmService.updateSoundStatus();				 
+		$scope.updateSoundStatus.$positionAlarm({_csrf : angular.element('#_csrf').val(), soundStatus : 'SILENT', uid: $scope.selectedPositionAlarm.uid});		 
 	 }
 	
 	$scope.playSound = function() {

@@ -13,6 +13,7 @@ import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
+import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.model.register.Sensor;
 
 public interface PositionAlarmRepository extends JpaRepository<PositionAlarm, Long> {
@@ -45,6 +46,6 @@ public interface PositionAlarmRepository extends JpaRepository<PositionAlarm, Lo
 	@Modifying
 	@Transactional
 	@Query("update PositionAlarm p set p.soundStatus = ?1 where p.uid = ?2 ")
-	int updateSoundStatus(Boolean soundStatus, long uid);
+	int updateSoundStatus(SoundStatus soundStatus, long uid);
 	
 }

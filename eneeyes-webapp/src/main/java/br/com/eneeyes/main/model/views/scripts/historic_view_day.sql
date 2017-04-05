@@ -9,6 +9,7 @@ SELECT
         `historic`.`SENSOR_ID` AS `SENSOR_ID`,        
         STR_TO_DATE(DATE_FORMAT(`historic`.`LAST_UPDATE`, '%Y-%m-%d 00:00:00'), '%Y-%m-%d %H:%i:%s') AS `last_update`,
         COUNT(0) AS `ticks`,
+        MAX(`historic`.`VALUE`) AS `value`,
         MAX(`historic`.`VALUE`) AS `max_value`,
         MIN(`historic`.`VALUE`) AS `min_value`
     FROM

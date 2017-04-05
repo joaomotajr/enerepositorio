@@ -223,17 +223,18 @@
 					                                 <br />
 					                                
 					                                <div class="row">
-	                                                     <label class="control-label"> <span class="icon fa fa-object-group"></span> Agrupar (Mostrando Máximo e Minimo)</label>
+	                                                     <label class="control-label" title="NOTE: Se houver mais de um TIPO de ALARME no Período Agrupado, apenas o maior será EXIBIDO"> 
+	                                                     <span class="icon fa fa-object-group"></span> Agrupar (Mostrando Máximo e Minimo)</label>
 	                                                     <div style="border: 1px solid #cbc6c6; border-radius: 2px 2px 2px 2px;padding-top: 8px; padding-left:8px">
 		                                                     <div class="radio3 radio-check radio-success radio-inline">
 		                                                         <input type="radio" id="radio5" value="1" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(1)">
 		                                                         <label for="radio5">Nenhum</label>
 		                                                     </div>
-		                                                     <div class="radio3 radio-check radio-warning radio-inline">
+		                                                     <div class="radio3 radio-check radio-warning radio-inline" title="NOTE: Se houve mais de um tipo de alarme na HORA, apenas o maior será Exibido">
 		                                                         <input type="radio" id="radio6" value="2" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(2)">
 		                                                         <label for="radio6">Por Hora</label>
 		                                                     </div>
-		                                                     <div class="radio3 radio-check radio-default radio-inline">
+		                                                     <div class="radio3 radio-check radio-default radio-inline" title="NOTE: Se houve mais de um tipo de alarme no DIA, apenas o maior será Exibido">
 		                                                         <input type="radio" id="radio7" value="3" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(3)">
 		                                                         <label for="radio7">Por dia</label>
 		                                                     </div>                                                     

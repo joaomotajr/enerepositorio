@@ -26,6 +26,7 @@ public class HistoricViewDay {
 	private Long sensor_id;
 	private Date last_update;
 	private int ticks;
+	private BigDecimal value;	
 	private BigDecimal max_value;
 	private BigDecimal min_value;
 		
@@ -58,6 +59,12 @@ public class HistoricViewDay {
 	}
 	public void setTicks(int ticks) {
 		this.ticks = ticks;
+	}
+	public final BigDecimal getValue() {
+		return value;
+	}
+	public final void setValue(BigDecimal value) {
+		this.value = value;
 	}
 	public BigDecimal getMax_value() {
 		return max_value;

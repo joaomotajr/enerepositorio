@@ -6,7 +6,6 @@ import br.com.eneeyes.main.model.PositionAlarmMessage;
 
 public class PositionAlarmMessageDto {
 	private Long uid;
-	//private User user;
 	private String message;
 	private PositionAlarmDto positionAlarmDto;
 	private Date lastUpdate;
@@ -18,7 +17,6 @@ public class PositionAlarmMessageDto {
 	public PositionAlarmMessageDto(PositionAlarmMessage positionAlarmMessage) {
 		
 		this.uid = positionAlarmMessage.getUid();
-		//this.user = positionAlarmMessage.getUser();
 		this.message = positionAlarmMessage.getMessage();		
 		this.lastUpdate = positionAlarmMessage.getLastUpdate();
 	}
@@ -30,14 +28,6 @@ public class PositionAlarmMessageDto {
 	public final void setUid(Long uid) {
 		this.uid = uid;
 	}
-	
-//	public final User getUser() {
-//		return user;
-//	}
-//	
-//	public final void setUser(User user) {
-//		this.user = user;
-//	}
 	
 	public final String getMessage() {
 		return message;

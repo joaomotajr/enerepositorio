@@ -29,7 +29,6 @@ public class PositionAlarmMessage {
 	
 	public PositionAlarmMessage(PositionAlarmMessageDto dto) {
 		this.uid = dto.getUid();
-		//this.user = dto.getUser();		
 		this.message = dto.getMessage();
 		this.lastUpdate = dto.getLastUpdate();
 	}
@@ -38,10 +37,6 @@ public class PositionAlarmMessage {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UID")
 	private Long uid;
-	
-//	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
-//	@JoinColumn(name="USER_ID", nullable = true)
-//	private User user;
 	
 	@Column(name = "MESSAGE", nullable = true, length=300)		
 	private String message;	
@@ -60,14 +55,6 @@ public class PositionAlarmMessage {
 	public final void setUid(Long uid) {
 		this.uid = uid;
 	}
-	
-//	public final User getUser() {
-//		return user;
-//	}
-//
-//	public final void setUser(User user) {
-//		this.user = user;
-//	}
 
 	public final String getMessage() {
 		return message;

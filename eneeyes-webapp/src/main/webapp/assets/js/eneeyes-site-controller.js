@@ -3,6 +3,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	$scope.$root.timer = [];
 	$scope.$root.currentPage = "";
 	$scope.$root.errorTimes = 0;
+	$scope.$root.currentTabOpened = "";
 	
 	$scope.LoadAjaxContentCompany = function(url){
 		$http.get(url)
@@ -19,15 +20,22 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	
 	$scope.LoadAjaxContent = function(url, title) {
 		
+		if($scope.$root.currentPage == title) return;
+		
 		title= title.replace(/\s/g,'');		
 		$scope.$root.currentPage = title;
 		
 		tabIsOpened = $(".nav-tabs").find("." + title ).attr('id');
 					
-		if (tabIsOpened)
-			$("#" + tabIsOpened).trigger("click");
-		else {
+		if (tabIsOpened) {		
 			
+			$timeout(function() {
+				$("#" + tabIsOpened).trigger("click");				
+			},300);
+		}
+		else {
+		
+			$scope.$root.currentTabOpened = tabIsOpened;
 			angular.element('body').addClass('loading');		
 			$http.get(url)
 	        .success(function (data) {
@@ -42,7 +50,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	        	
 	        	$scope.tabsShow.push(sBody);     	
 	           
-	        	$timeout(function(){
+	        	$timeout(function() {
 					$("#id_tab_" + num_tabs).trigger("click");				
 				},300);
 	            

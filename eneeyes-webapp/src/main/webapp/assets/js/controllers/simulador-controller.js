@@ -62,8 +62,7 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 		 
 		 $scope.listAllDashCompany = new ViewService.listAllDashCompany();		 
 		 $scope.listAllDashCompany.$view({_csrf : angular.element('#_csrf').val()}, function(){
-			 $scope.CompanyDetectors = $scope.listAllDashCompany.list; 
-			 console.log($scope.listAllDashCompany);		         	         	
+			 $scope.CompanyDetectors = $scope.listAllDashCompany.list;        	         	
        });		 
 	 }
 	

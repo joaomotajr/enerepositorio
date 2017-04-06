@@ -185,6 +185,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 				
 				if(current != null) {					
 					$scope.$root.timer.push($interval(function(){
+						if($scope.$root == null) return;
 						if($scope.$root.currentPage == "Empresas")
 							$scope.getPositions(current);     
 						

@@ -26,6 +26,8 @@ public interface PositionAlarmRepository extends JpaRepository<PositionAlarm, Lo
 	
 	public PositionAlarm findByCompanyDetectorAndSensorAndAlarmType(CompanyDetector companyDetector, Sensor sensor, AlarmType alarmType);
 	
+	public PositionAlarm findByCompanyDetectorAndSensorAndAlarmTypeAndAlarmStatusNotIn(CompanyDetector companyDetector, Sensor sensor, AlarmType alarmType, List<AlarmStatus> solvedOrCancelesAlarms);
+	
 	public Long countByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
 	
 	@Modifying
@@ -42,6 +44,11 @@ public interface PositionAlarmRepository extends JpaRepository<PositionAlarm, Lo
 	@Transactional
 	@Query("update PositionAlarm p set p.alarmStatus = ?1 where p.uid = ?2 ")
 	int updateAlarmStatus(AlarmStatus alarmStatus, long uid);
+	
+	@Modifying
+	@Transactional
+	@Query("update PositionAlarm p set p.alarmStatus = ?1, p.soundStatus = ?2 where p.uid = ?3")
+	int updateAlarmStatusAndSoundStatus(AlarmStatus alarmStatus, SoundStatus soundStatus, long uid);
 	
 	@Modifying
 	@Transactional

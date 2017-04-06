@@ -4,43 +4,18 @@ angular.element(document).ready(function() {
     angular.bootstrap(bootElement, ['angularDatatable']);
 });
 
-app.controller('datatableController', function ($scope, $timeout, $filter, CompanyService) {
+app.controller('datatableController', function ($scope, $timeout, $filter, ViewService ) {
 	
 
 	$scope.getCompaniesAlarm = function() {
-		
-		$scope.loading = true;	
 		                                                    
 		 $scope.listAllDashCompaniesAlarm = new ViewService.listAllDashCompaniesAlarm();		 
 		 $scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function(){
-			 
-			 $scope.dashCompaniesAlarm = []; 
-			 
-			 for(var i = 0; i < $scope.listAllDashCompaniesAlarm.list.length; i++) {				 
-				 
-				 $scope.dashCompaniesAlarm[i] = $scope.listAllDashCompaniesAlarm.list[i];
-				 $scope.dashCompaniesAlarm[i].last_update_full = $scope.dashCompaniesAlarm[i].last_update;
-				 $scope.dashCompaniesAlarm[i].last_update = timeSince($scope.dashCompaniesAlarm[i].last_update);				 
-				 $scope.dashCompaniesAlarm[i].last_value	= Math.round($scope.dashCompaniesAlarm[i].last_value * 100) / 100;
-				 
-				 var offDate = (new Date() - new Date($scope.dashCompaniesAlarm[i].last_update_full)) / 1000;
-					
-					// off line por mais de 5 minutos
-					if ( offDate > 300 ) {							 
-						$scope.dashCompaniesAlarm[i].offLine = offDate;
-					     e.offLine = true;
-					}
-			 }
-				 
-			 $scope.loading = undefined;
-         	         	
+			 		 
+			 console.log($scope.listAllDashCompaniesAlarm.list);    	
        });		 
 	 }
 
-	$scope.contacts = [
-           { id: 1, firstName: "John", lastName: "Smith" },
-           { id: 2, firstName: "Steve", lastName: "Buscemi" }
-       ]
        
        $scope.selections = function () {
            return $scope.contacts.filter(function (contact) {
@@ -50,14 +25,16 @@ app.controller('datatableController', function ($scope, $timeout, $filter, Compa
        
        $scope.dataTableOptions = {
            //TODO: move some of this into datatable directive?
-           columns: [
-               { title: "Select" },
+           columns: [               
                { title: "ID" },
-               { title: "Last name" },
-               { title: "First name" }
+               { title: "Empresa" },
+               { title: "Área" },
+               { title: "Detector" },
+               { title: "Gás" },
+               { title: "Alarme" }
            ],
            columnMap: function (p) { //thing I made up
-               return [ null, p.id, p.firstName, p.lastName ]
+               return [ p.uid, p.company_name, p.area_name, p.company_detector_name, p.gas_name, p.alarmType ]
            },
            columnDefs: [ {
                orderable: true,
@@ -72,6 +49,8 @@ app.controller('datatableController', function ($scope, $timeout, $filter, Compa
            },
            order: [[ 1, 'asc' ]]
        };
+       
+       $scope.getCompaniesAlarm();
 
        angular.element('body').removeClass('loading');
 		

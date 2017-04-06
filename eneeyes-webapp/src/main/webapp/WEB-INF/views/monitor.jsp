@@ -1,4 +1,4 @@
-	<audio id="alarmSound" src="/assets/img/alert_01.mp3" preload="auto"></audio>
+<!-- 	<audio id="alarmSound" src="/assets/img/alert_01.mp3" preload="auto"></audio> -->
 		
 	<div data-ng-controller="monitorController">
 		<div class="row">
@@ -212,7 +212,8 @@
 											
 						<div class="box box-primary" style="padding-bottom: 8px; !important; margin-bottom: 8px !important;">
 							<div class="box-header">
-								<h3 class="box-title">Dados do Alarme</h3>
+								<h3 data-ng-if="!isOffline" class="box-title">Dados do Dispositivo e Alarme</h3>
+								<h3 data-ng-if="isOffline" class="box-title">Dados do Dispositivo</h3>								
 								<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
 							</div>					
 							<div class="box-body" style="padding-bottom: 0px; !important">
@@ -277,7 +278,7 @@
 												</div>
 											</div>											
 											
-											<div class="box box-info box-solid" style="padding-bottom: 8px; !important; margin-bottom: 8px !important;">				                    
+											<div class="box box-info box-solid" data-ng-if="!isOffline" style="padding-bottom: 8px; !important; margin-bottom: 8px !important;">				                    
 												<div class="box-header with-border"><i class="fa fa-history"></i> Feedback:
 												</div>
 												<div class="box-body">													                                                                        

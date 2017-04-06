@@ -101,6 +101,11 @@
 	              	</a>
 	            	<ul class="treeview-menu">			            		        
 			            <li><a href="#" data-ng-click="LoadAjaxContent('logHistoric.html', 'Log Detectores')"><i class="fa fa-files-o"></i> Log Detectores</a></li>
+				            <li class="treeview">
+				            	<a href="#" data-ng-click="LoadAjaxContent('datatable.html', 'Log Alarmes')"><i class="fa fa-list-alt"></i>	<span>Log Alarmes</span>
+				            	<span class="label label-success pull-right">Novo</span>
+				            	</a>
+		            		</li>
 	              	</ul>
 	            </li>
 	            

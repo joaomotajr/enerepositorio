@@ -152,8 +152,13 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	 */
 	public void saveOrUpdatePositionAlarm(Position position, CompanyDetector companyDetector, Sensor sensor, 
 			AlarmType alarmType, EmailStatus emailStatus, SmsStatus smsStatus, String action, SoundStatus soundStatus) {
+				
+		List<AlarmStatus> solvedOrCancelesAlarms = new ArrayList<AlarmStatus>();
 		
-		PositionAlarm positionAlarm = repository.findByCompanyDetectorAndSensorAndAlarmType(companyDetector, sensor, alarmType);
+		solvedOrCancelesAlarms.add(AlarmStatus.SOLVED);
+		solvedOrCancelesAlarms.add(AlarmStatus.CANCELED);
+
+		PositionAlarm positionAlarm = repository.findByCompanyDetectorAndSensorAndAlarmTypeAndAlarmStatusNotIn(companyDetector, sensor, alarmType, solvedOrCancelesAlarms);
 		
 		if(positionAlarm == null) {
 			
@@ -195,6 +200,23 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		
 		try {
 			repository.updateAlarmStatus(alarmtatus, uid);
+			
+			result.setResultType( ResultMessageType.SUCCESS );
+			result.setMessage("Executado com sucesso.");
+			
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	public BasicResult<?> updateAlarmStatusAndSilent(Long uid, AlarmStatus alarmStatus) {
+		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
+		
+		try {
+			repository.updateAlarmStatusAndSoundStatus(alarmStatus, SoundStatus.SILENT, uid);
 			
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Executado com sucesso.");

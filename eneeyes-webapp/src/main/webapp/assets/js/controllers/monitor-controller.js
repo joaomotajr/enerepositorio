@@ -1,5 +1,5 @@
 
-app.controller('monitorController', function ($scope, $rootScope, $timeout, $interval, $filter, ViewService, PositionAlarmMessageService, PositionAlarmService, ViewService) {
+app.controller('monitorController', function ($scope, $timeout, $interval, $filter, ViewService, PositionAlarmMessageService, PositionAlarmService, ViewService) {
 		
 	$scope.getCompaniesPositionOffline = function() {
 		
@@ -14,7 +14,7 @@ app.controller('monitorController', function ($scope, $rootScope, $timeout, $int
 								
 				 $scope.dashCompaniesOffline[i] = $scope.listAllOffline.list[i];
 				 $scope.dashCompaniesOffline[i].last_update_full = $scope.dashCompaniesOffline[i].last_update;
-				 $scope.dashCompaniesOffline[i].last_update = timeSince($scope.dashCompaniesOffline[i].last_update);				 
+				 $scope.dashCompaniesOffline[i].last_update = timeSince($scope.listAllOffline.serverDate, $scope.dashCompaniesOffline[i].last_update);				 
 				 $scope.dashCompaniesOffline[i].last_value	= Math.round($scope.dashCompaniesOffline[i].last_value * 100) / 100 ;								 
 			 }			 
 		});		 
@@ -40,13 +40,13 @@ app.controller('monitorController', function ($scope, $rootScope, $timeout, $int
 					 
 					if (e.alarmStatus == "CREATED") {
 						$scope.dashCompaniesAlarmCreated.push(e);
+						if(e.soundStatus == 'ON') $scope.playSound();
 					}
 					else if (e.alarmStatus == "READED") {
 						$scope.dashCompaniesAlarmReaded.push(e);
 					}
 					
-					if(e.soundStatus == 'ON')
-						$scope.playSound();
+					
 				}	
 			 );		 			 
 				 
@@ -128,14 +128,18 @@ app.controller('monitorController', function ($scope, $rootScope, $timeout, $int
 	 }
 	
 	$scope.playSound = function() {
- 		 
-		 document.getElementById('alarmSound').play();
+		
+		elementLoaded = document.getElementById('alarmSound');
+		
+		if (elementLoaded != null)
+			elementLoaded.play();
 	}
 		
 	$scope.getCompaniesAlarm();
 	$scope.getCompaniesPositionOffline();
     
     $interval(function() {
+    	if($scope.$root == null) return;
     	if($scope.$root.currentPage == "Monitoramento" && $scope.$root.errorTimes <= 5)
     		$scope.getCompaniesAlarm();
     		$scope.getCompaniesPositionOffline();

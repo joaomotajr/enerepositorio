@@ -84,7 +84,7 @@ public class PositionAlarmMessageService implements IService<PositionAlarmMessag
 		positionAlarmMessage.setLastUpdate(new Date());
 		
 		positionAlarmMessage = repository.save(positionAlarmMessage);
-		positionAlarmService.updateAlarmStatus(positionAlarm.getUid(), AlarmStatus.READED);
+		positionAlarmService.updateAlarmStatusAndSilent(positionAlarm.getUid(), AlarmStatus.READED);
 		
 				
 		dto.setUid(positionAlarmMessage.getUid());

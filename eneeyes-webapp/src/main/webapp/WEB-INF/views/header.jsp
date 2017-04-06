@@ -48,9 +48,7 @@
 	   	
 	   	<!-- Image Notes -->
 		<style type="text/css" media="all">@import "/assets/plugins/imageNotes/css/marker.css";</style>		
-<!-- 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" media="screen">		 -->
 		<link rel="stylesheet" href="/assets/plugins/jQueryUI/jquery-ui.min.css"></link>
-
 
 		<!-- Escpeificos -->
 		<link rel="stylesheet" href="/assets/css/custom.css">		
@@ -65,7 +63,6 @@
 	<!-- Logo -->
 	<a href="#" class="logo" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"> <!-- mini logo for sidebar mini 50x50 pixels -->
 		<span class="logo-mini"><b>ENE</b></span> <!-- logo for regular state and mobile devices -->
-<!--  		<span class="logo-lg"><b>Ene</b>EYES</span>  -->
 		
 	 	<span class="logo-lg">	 		
 			<img src="/assets/img/enesens_light.png" style="float: left; padding:5px; width: 43%;">
@@ -112,6 +109,7 @@
 				
 				<!-- Notifications: style can be found in dropdown.less -->
 				<li class="dropdown notifications-menu" data-ng-controller="monitorController">
+					<audio id="alarmSound" src="/assets/img/alert_01.mp3" preload="auto"></audio>
 					<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning">{{ dashCompaniesAlarmCreated.length }}</span></a>
 					<ul class="dropdown-menu">
 						<li class="header">Voce tem {{ dashCompaniesAlarmCreated.length }} Alarmes Pendentes</li>
@@ -192,7 +190,7 @@
 					</ul></li>
 
 				<!-- Control Sidebar Toggle Button -->
-				<li title="Configuraï¿½ï¿½es"><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
+				<li title="Configurações"><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
 			</ul>
 		</div>
 	</nav>

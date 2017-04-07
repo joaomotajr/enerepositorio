@@ -1,3 +1,9 @@
+/*-----------------------------------------------------------
+ View Para retornar o Posicionamento Atual de cada dispositivo
+ com as informações de origem e localização do mesmo. 
+ Tela: 	dashboard
+ 		monitor
+---------------------------------------------------------*/
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 

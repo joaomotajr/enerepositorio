@@ -1,3 +1,9 @@
+/*--------------------------------------------------------
+ View Para retornar Detectores que utilizam os Alarmes na
+ Hora da Edição de Alarmes.
+ Tela: alarm.
+---------------------------------------------------------*/
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 

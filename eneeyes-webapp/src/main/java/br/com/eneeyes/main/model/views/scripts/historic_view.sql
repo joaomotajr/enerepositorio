@@ -1,3 +1,8 @@
+/*--------------------------------------------------------
+ View Para retornar Dados do Historico de Medições.
+ Possibilitando filtros e ordenações  
+ Tela: 	logHistoric 		
+---------------------------------------------------------*/
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 

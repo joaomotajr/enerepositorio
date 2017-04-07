@@ -1,3 +1,11 @@
+/*--------------------------------------------------------
+ View Para retornar os Eventos de Alarme (PositionAlarm)
+ com as informações de origem do detector em questão
+ bem como ações e status 
+ Tela: 	logAlarm
+ 		monitor
+---------------------------------------------------------*/
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 

@@ -1,3 +1,10 @@
+/*--------------------------------------------------------
+ View Para retornar Dados de Empresas, Unidade e Áreas
+ com os respectivos Detectores 
+ Tela: 	logHistoric
+ 		simulador
+---------------------------------------------------------*/
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 

@@ -1,3 +1,7 @@
+/*--------------------------------------------------------
+ View Para retornar SMSs em Status pendentes para envio.
+ Uso em Serviços de envio de sms: processSmsService 
+---------------------------------------------------------*/
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 

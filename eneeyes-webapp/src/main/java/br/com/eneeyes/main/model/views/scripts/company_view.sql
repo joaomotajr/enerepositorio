@@ -1,3 +1,11 @@
+/*--------------------------------------------------------
+ View Para retornar Dados de Empresas sem carregas as 
+ tabelas/obejtos a ela associados nem JPA
+ Telas: companies
+ 		logHistoric
+ 		alarm
+---------------------------------------------------------*/
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 

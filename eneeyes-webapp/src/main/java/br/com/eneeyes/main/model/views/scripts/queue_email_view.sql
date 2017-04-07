@@ -1,9 +1,13 @@
+/*--------------------------------------------------------
+ View Para retornar Emails em Status pendentes para envio.
+ Uso em Serviços de envio de Emails: processEmailService 
+---------------------------------------------------------*/
 
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `queue_e_view` AS
+VIEW `queue_email_view` AS
     SELECT 
         `pa`.`UID` AS `UID`,
         `pa`.`EMAIL_STATUS` AS `EMAIL_STATUS`,

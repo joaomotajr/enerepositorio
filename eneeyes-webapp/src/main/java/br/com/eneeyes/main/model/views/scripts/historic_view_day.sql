@@ -1,3 +1,11 @@
+/*--------------------------------------------------------
+ View Para retornar Dados do Historico de Medições,
+ aqrupados por dia, retornando os máximos e minimos dentro
+ de cada dia agrupado. 
+   
+ Tela: 	logHistoric 		
+---------------------------------------------------------*/
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 

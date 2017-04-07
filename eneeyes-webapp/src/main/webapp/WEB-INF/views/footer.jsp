@@ -82,7 +82,7 @@
 	<script src="/assets/js/controllers/logHistoric-controller.js"></script>
 	<script src="/assets/js/controllers/simulador-controller.js"></script>
 	<script src="/assets/js/controllers/conteudo-controller.js"></script>
-	<script src="/assets/js/controllers/datatable-controller.js"></script>
+	<script src="/assets/js/controllers/logAlarm-controller.js"></script>
 	
 		
 	<!-- PAGE LEVEL SERVICES -->

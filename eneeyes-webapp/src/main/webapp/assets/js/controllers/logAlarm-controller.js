@@ -4,7 +4,7 @@ angular.element(document).ready(function() {
     angular.bootstrap(bootElement, ['angularDatatable']);
 });
 
-app.controller('datatableController', function ($scope, $timeout, $filter, ViewService, PositionAlarmMessageService) {
+app.controller('logAlarmController', function ($scope, $timeout, $filter, ViewService, PositionAlarmMessageService) {
 
 	$scope.getCompaniesAlarm = function() {
 		                                                    
@@ -22,16 +22,15 @@ app.controller('datatableController', function ($scope, $timeout, $filter, ViewS
                 
            { title: "" },
            { title: "Empresa" },
-           { title: "Unidade" },
-           { title: "Area" },
+           { title: "Unidade" },           
            { title: "Detector" },
-           { title: "Gás" },
            { title: "Alarme" },
+           { title: "Status" },
            { title: "Data/Hora" },
            { title: "Ação" }
        ],
        columnMap: function (p) { //thing I made up
-                   return [null, p.company_name, p.unit_name, p.area_name, p.company_detector_name+'/'+p.sensor_name , p.gas_name, p.alarmType, new Date(p.first_update).toLocaleString(),
+                   return [null, p.company_name, p.unit_name, p.company_detector_name+'/'+p.sensor_name, p.alarmType, p.alarmStatus, new Date(p.first_update).toLocaleString(),
                     "<button id='" + p.uid + "' class='btn btn-default btn-xs'>Histórico</button>"]
        },
        columnDefs: [ {
@@ -52,7 +51,8 @@ app.controller('datatableController', function ($scope, $timeout, $filter, ViewS
 		
 		if(this.innerText=='Histórico') {
 			var uid = $(this).find("button").attr('id');		
-			//$scope.selectedPositionAlarmMessages = $.grep($scope.listAllDashCompaniesAlarm.list, function (e) { return e.uid == uid ; })[0];
+			
+			$scope.selectedPositionAlarm = $.grep($scope.listAllDashCompaniesAlarm.list, function (e) { return e.uid == uid ; })[0];
 			$scope.getPositionAlarmMessage(uid);
 			
 			$timeout(function () {

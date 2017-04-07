@@ -136,7 +136,7 @@
 				<li class="dropdown tasks-menu">
 				<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span class="label label-danger"></span></a>
 					<ul class="dropdown-menu">
-						<li class="header">Voce Tem um Tarefa</li>
+						<li class="header">Sem Tarefas Pendentes</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
 							<ul class="menu">

@@ -221,6 +221,7 @@
 								
 									<div class="row">											
 										<div class="col-md-12">
+										
 											<div class="box-body" style="background-color: #e7e7e7">											                												                	 
 												<dl class="dl-horizontal">
 													<dt>Empresa:</dt>
@@ -251,9 +252,9 @@
 															<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases!='LEL_PERCENT'"> {{selectedPositionAlarm.unitMeterGases}}</span>
 														</dd>
 													
-							                  	</dl>											                	
-								                	
+							                  	</dl>								                	
 								            </div>
+								            
 											<hr style="margin-top: 8px !important; margin-bottom: 8px !important;">
 											<div class="box box-primary box-solid" data-ng-if="!isOffline" style="padding-bottom: 8px; !important; margin-bottom: 8px !important;">				                    
 												<div class="box-header with-border"><i class="fa fa-user"></i> Providências:

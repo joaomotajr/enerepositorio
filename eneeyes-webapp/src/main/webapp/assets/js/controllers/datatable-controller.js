@@ -4,54 +4,74 @@ angular.element(document).ready(function() {
     angular.bootstrap(bootElement, ['angularDatatable']);
 });
 
-app.controller('datatableController', function ($scope, $timeout, $filter, ViewService ) {
-	
+app.controller('datatableController', function ($scope, $timeout, $filter, ViewService, PositionAlarmMessageService) {
 
 	$scope.getCompaniesAlarm = function() {
 		                                                    
 		 $scope.listAllDashCompaniesAlarm = new ViewService.listAllDashCompaniesAlarm();		 
 		 $scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			 		 
-			 console.log($scope.listAllDashCompaniesAlarm.list);    	
+			 console.log($scope.listAllDashCompaniesAlarm.list);		 
        });		 
-	 }
+	}
 
-       
-       $scope.selections = function () {
-           return $scope.contacts.filter(function (contact) {
-       		return contact.selected;
-       	})
-       }
-       
-       $scope.dataTableOptions = {
-           //TODO: move some of this into datatable directive?
-           columns: [               
-               { title: "ID" },
-               { title: "Empresa" },
-               { title: "√Årea" },
-               { title: "Detector" },
-               { title: "G√°s" },
-               { title: "Alarme" }
-           ],
-           columnMap: function (p) { //thing I made up
-               return [ p.uid, p.company_name, p.area_name, p.company_detector_name, p.gas_name, p.alarmType ]
-           },
-           columnDefs: [ {
-               orderable: true,
-               className: 'select-checkbox',
-               targets:   0,
-               sortable: true,
-               aTargets: [0, 1]
-           } ],
-           select: { // DataTables Select extension
-               style: 'multi', //multi-item selection
-               selector: 'td:first-child'
-           },
-           order: [[ 1, 'asc' ]]
-       };
-       
-       $scope.getCompaniesAlarm();
-
-       angular.element('body').removeClass('loading');
+	
+	$scope.dataTableOptions = {
+       //TODO: move some of this into datatable directive?
+       columns: [          
+                
+           { title: "" },
+           { title: "Empresa" },
+           { title: "Unidade" },
+           { title: "Area" },
+           { title: "Detector" },
+           { title: "G·s" },
+           { title: "Alarme" },
+           { title: "Data/Hora" },
+           { title: "AÁ„o" }
+       ],
+       columnMap: function (p) { //thing I made up
+                   return [null, p.company_name, p.unit_name, p.area_name, p.company_detector_name+'/'+p.sensor_name , p.gas_name, p.alarmType, new Date(p.first_update).toLocaleString(),
+                    "<button id='" + p.uid + "' class='btn btn-default btn-xs'>HistÛrico</button>"]
+       },
+       columnDefs: [ {
+           orderable: true,
+           className: 'select-checkbox',
+           targets:   0,
+           sortable: true,
+           aTargets: [0, 1]
+       } ],
+       select: { // DataTables Select extension
+           style: 'multi', //multi-item selection
+           selector: 'td:first-child'
+       },
+       order: [[ 1, 'asc' ]]
+   };
+	
+	$('#idDatatable').on('click', 'tbody td', function() {
 		
+		if(this.innerText=='HistÛrico') {
+			var uid = $(this).find("button").attr('id');		
+			//$scope.selectedPositionAlarmMessages = $.grep($scope.listAllDashCompaniesAlarm.list, function (e) { return e.uid == uid ; })[0];
+			$scope.getPositionAlarmMessage(uid);
+			
+			$timeout(function () {
+	            $('#modalShowMessages').modal({ show: 'false' });                        
+	        }, 200);
+		}
+	})
+	
+	$scope.getPositionAlarmMessage = function(positionAlarmId) {
+						 
+		$scope.inclusaoPositionAlarmMessage = new PositionAlarmMessageService.listByPositionAlarmId(positionAlarmId);
+		$scope.inclusaoPositionAlarmMessage.$positionAlarmMessage({_csrf : angular.element('#_csrf').val(), id : positionAlarmId }, function(){
+		
+			$scope.selectedPositionAlarmMessages = $scope.inclusaoPositionAlarmMessage.list;						 
+		});
+	}
+   
+   $scope.getCompaniesAlarm();
+
+   angular.element('body').removeClass('loading');
+    		
 });

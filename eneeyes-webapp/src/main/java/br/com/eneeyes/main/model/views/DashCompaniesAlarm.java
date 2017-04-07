@@ -63,6 +63,17 @@ public class DashCompaniesAlarm implements Serializable {
 	@Column(name = "unit_meter_gases")
 	private UnitMeterGases unitMeterGases;
 	
+//	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+//	private List<PositionAlarmMessage> positionAlarmMessages = new ArrayList<PositionAlarmMessage>();
+//	
+//	public List<PositionAlarmMessage> getPositionAlarmMessages() {
+//		return positionAlarmMessages;
+//	}
+//
+//	public void setPositionAlarmMessages(List<PositionAlarmMessage> positionAlarmMessages) {
+//		this.positionAlarmMessages = positionAlarmMessages;
+//	}
+
 	private String action;
 		
 	public Long getUid() {
@@ -215,4 +226,5 @@ public class DashCompaniesAlarm implements Serializable {
 	public final void setAction(String action) {
 		this.action = action;
 	}
+
 }

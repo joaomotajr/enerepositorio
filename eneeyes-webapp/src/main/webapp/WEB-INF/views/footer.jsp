@@ -16,7 +16,8 @@
     <!-- jQuery UI 1.11.4 -->
     <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>
     <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>         
+    <script src="/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="/assets/plugins/datatables/dataTables.select.min.js"></script>         
 
     <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>

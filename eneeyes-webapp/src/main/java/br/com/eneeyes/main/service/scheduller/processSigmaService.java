@@ -67,12 +67,12 @@ public class processSigmaService {
 		        c.setTime(item.getLast_Update() );
 		        XMLGregorianCalendar eventDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
 		        
-		        eventoRecebido.setAuxiliar(item.getCompany_detector_name());
-		        eventoRecebido.setCodigo(item.getAlarm_name());
+		        eventoRecebido.setAuxiliar("999");
+		        eventoRecebido.setCodigo("E100");
 		        eventoRecebido.setData(eventDate);
 		        eventoRecebido.setDescricaoReceptora("Teste da Enesens [LOGA]");
 		        eventoRecebido.setEmpresa(new Long(10001));
-		        eventoRecebido.setIdCentral("9261");
+		        eventoRecebido.setIdCentral("F999");
 		        eventoRecebido.setParticao("001");
 		        eventoRecebido.setProtocolo((byte) 2);
 		        eventoRecebido.setTipoIntegracao((byte) 1);

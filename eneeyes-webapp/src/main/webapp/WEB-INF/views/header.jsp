@@ -5,7 +5,7 @@
 	<head>
 	    <meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	    <title>Eneeyes</title>
+	    <title>E-Gas</title>
 	    
 	    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon" />
 	    	      
@@ -67,7 +67,7 @@
 		
 	 	<span class="logo-lg">	 		
 			<img src="/assets/img/enesens_light.png" style="float: left; padding:5px; width: 43%;">
-			<span class="text-black"> <b>Ene</b>EYES </span>	
+			<span class="text-black"> <b>E</b>-Gas </span>	
 		</span>
 		
 	</a>

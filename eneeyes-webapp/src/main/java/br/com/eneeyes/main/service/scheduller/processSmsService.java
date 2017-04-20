@@ -35,7 +35,7 @@ public class processSmsService {
 
 	@Scheduled(fixedDelay = 60000)
 	public void schedule()  {
-		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Start Automatico :: " 
+		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ":Sms Service - Start Automatico :: " 
 				+ new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
 		
 		List<QueueSmsView> smsLista = new ArrayList<QueueSmsView>();
@@ -54,11 +54,7 @@ public class processSmsService {
 				else
 					positionAlarmService.updateSmsStatus(item.getUid(), SmsStatus.ERR_TRY_ONE);
 			}
-		}
-		
-		//byte[] b = (userName + ":" + pass).getBytes();
-		//String userPass = new String(java.util.Base64.getMimeEncoder().encode(b), StandardCharsets.UTF_8);
-						
+		}						
 		
 	}
 

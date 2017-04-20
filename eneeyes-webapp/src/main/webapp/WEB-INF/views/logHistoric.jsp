@@ -2,7 +2,7 @@
 <div data-ng-controller="logHistoricController">
 		<div class="row">						                                                    
 			<div class="col-md-12">                                                        
-				<div class="box box-primary">					
+				<div class="box box-primary" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">	
 					<div class="box-header">
 					 	<h3 class="box-title">Pesquisa Historico de Detectores</h3>
 					 	<div class="box-tools pull-right">
@@ -10,7 +10,7 @@
 	                  	</div>
 					</div>
 					
-					<div class="box-body">
+					<div class="box-body" style="padding-bottom: 0px; !important">
 						<div class="row">        		
 			        		<div class="col-md-12">
 				        		<div id="wizard" class="form_wizard wizard_horizontal">        		
@@ -102,7 +102,7 @@
 				
 				<div class="row">						                                                    
 					<div class="col-md-12">                                                        
-						<div class="box box-primary">
+						<div class="box box-solid box-primary" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
 							
 							<div class="box-header">
 								<h3 class="box-title">Selecione Intervalos Pré-Definidos ou Data de Inicio e Fim</h3>									  	
@@ -113,7 +113,80 @@
 								</div>
 							</div>			
 							
-							<div class="box-body">	
+							<div class="box-body" style="padding-bottom: 0px; !important">	
+								<div class="row">
+								
+									<div class="col-md-4" style="padding-right: 5px !important;">									
+										<div class="box box-solid">
+	 										<div class="box-header with-border">				
+		 										<label class="control-label" title="NOTE: Se houver mais de um TIPO de ALARME no Período Agrupado, apenas o maior será EXIBIDO"> 
+		                                        	<span class="icon fa fa-object-group"></span> Agrupar (Mostrando Máximo e Minimo)
+		                                        </label>                                        
+											</div>
+											<div class="box-body">	
+		                                         <div class="radio3 radio-check radio-success radio-inline">
+		                                             <input type="radio" id="radio5" value="1" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(1)">
+		                                             <label for="radio5">Nenhum</label>
+		                                         </div>
+		                                         <div class="radio3 radio-check radio-warning radio-inline" title="NOTE: Se houve mais de um tipo de alarme na HORA, apenas o maior será Exibido">
+		                                             <input type="radio" id="radio6" value="2" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(2)">
+		                                             <label for="radio6">Hora</label>
+		                                         </div>
+		                                         <div class="radio3 radio-check radio-default radio-inline" title="NOTE: Se houve mais de um tipo de alarme no DIA, apenas o maior será Exibido">
+		                                             <input type="radio" id="radio7" value="3" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(3)">
+		                                             <label for="radio7">Dia</label>
+		                                         </div>
+	                                         </div>                                                     
+										 </div>
+									</div>		
+															
+									<div class="col-md-4" style="padding-right: 5px !important; padding-left: 5px !important">
+										<form>						
+											<div class="box box-solid">
+												<div class="box-header with-border">				
+			 										<label class="control-label"><span class="icon fa fa-caret"></span> Exibir / Exportar </label>                                        
+												</div>		
+												<div class="box-body">										        	
+				                            		<div class="form-group">
+                                                 		<div class="col-md-4">
+															<button id="exportRel" type="button" class="btn btn-default btn-xs form-control" 
+															 data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
+															<span class="icon fa fa-file-text"></span> Relatório</button>
+								        				</div>
+								        				<div class="col-md-4">
+															<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="Exportação Permitida até 500 Linhas" 
+															 data-ng-class="((listHistoric.list || listHistoricInterval.list) && countHistoric <= 500) ? 'selected' : 'disabled'">
+															<span class="icon fa fa-file-excel-o"></span> Excel</button>
+								        				</div>
+								        				<div class="col-md-4">
+								        				<button type="button" class="btn bg-navy btn-xs form-control" 
+								        					data-ng-click="showGrafico();" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
+								        					<span class="icon fa fa-line-chart"></span> Gráfico</button>
+								        				</div>
+								        			</div>	 								        			
+						        				</div>
+						        			</div>									    	        
+									    </form>								
+				        			</div>				        			
+				        			
+				        			<div class="col-md-4" style="padding-left: 5px !important">
+										<form>						
+											<div class="box box-solid">
+												<div class="box-header with-border">				
+			 										<label class="control-label"><span class="icon fa fa-filter"></span> FILTRAR</label>                                       
+												</div>		
+												<div class="box-body">	
+													<select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-options="item as item.name for item in filterAlarm | orderBy: 'name' track by item.uid" 
+								                    	data-ng-model="selectedfilterAlarm">
+								                        <option value="">Selecione</option> 
+								                	</select>										        	
+						        				</div>
+						        			</div>									    	        
+									    </form>								
+				        			</div>
+				        			
+								</div>
+								
 								<div class="row">
 								 	<form class="form" name="userForm">						 		
 								 		
@@ -207,61 +280,7 @@
 											                	
 											                </div>
 											            </div>
-													</div>
-												
-													<div class="row">			                                        
-						                              	<label class="control-label"><span class="icon fa fa-filter"></span> FILTRAR</label>
-						                              	<div class="box-tools pull-right">							                  		
-									                  		<label data-ng-show='countHistoric > 0'><span class="icon fa fa-search"></span> {{countHistoric}}</label>					                    
-									                  	</div>
-														<select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-options="item as item.name for item in filterAlarm | orderBy: 'name' track by item.uid" 
-									                    	data-ng-model="selectedfilterAlarm">
-									                        <option value="">Selecione</option> 
-									                	</select>               
-					                                </div>
-					                                
-					                                 <br />
-					                                
-					                                <div class="row">
-	                                                     <label class="control-label" title="NOTE: Se houver mais de um TIPO de ALARME no Período Agrupado, apenas o maior será EXIBIDO"> 
-	                                                     <span class="icon fa fa-object-group"></span> Agrupar (Mostrando Máximo e Minimo)</label>
-	                                                     <div style="border: 1px solid #cbc6c6; border-radius: 2px 2px 2px 2px;padding-top: 8px; padding-left:8px">
-		                                                     <div class="radio3 radio-check radio-success radio-inline">
-		                                                         <input type="radio" id="radio5" value="1" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(1)">
-		                                                         <label for="radio5">Nenhum</label>
-		                                                     </div>
-		                                                     <div class="radio3 radio-check radio-warning radio-inline" title="NOTE: Se houve mais de um tipo de alarme na HORA, apenas o maior será Exibido">
-		                                                         <input type="radio" id="radio6" value="2" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(2)">
-		                                                         <label for="radio6">Por Hora</label>
-		                                                     </div>
-		                                                     <div class="radio3 radio-check radio-default radio-inline" title="NOTE: Se houve mais de um tipo de alarme no DIA, apenas o maior será Exibido">
-		                                                         <input type="radio" id="radio7" value="3" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(3)">
-		                                                         <label for="radio7">Por dia</label>
-		                                                     </div>                                                     
-	                                                     </div>
-	                                                 </div>
-	                                                 
-	                                                 <br />
-	                                                 
-	                                                 <div class="row">
-	                                                 	<div class="form-group">
-	                                                 		<div class="col-md-4">
-																<button id="exportRel" type="button" class="btn btn-default btn-xs form-control" 
-																 data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
-																<span class="icon fa fa-file-text"></span> Relatório</button>
-									        				</div>
-									        				<div class="col-md-4">
-																<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="Exportação Permitida até 500 Linhas" 
-																 data-ng-class="((listHistoric.list || listHistoricInterval.list) && countHistoric <= 500) ? 'selected' : 'disabled'">
-																<span class="icon fa fa-file-excel-o"></span> Excel</button>
-									        				</div>
-									        				<div class="col-md-4">
-									        				<button type="button" class="btn bg-navy btn-xs form-control" 
-									        					data-ng-click="showGrafico();" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
-									        					<span class="icon fa fa-line-chart"></span> Gráfico</button>
-									        				</div>
-									        			</div>	                                                 
-	                                                 </div>
+													</div>												
 					                                    
 												</div>
 											</div>

@@ -15,6 +15,7 @@ public class AlarmDto {
 	private Double alarm2;		
 	private Double alarm3;		
 	private Boolean alarmOn;
+	private Boolean alarmSigma;
 	private Boolean alarmSound;
 	private Boolean alarmEmail;	
 	private String email;
@@ -41,6 +42,7 @@ public class AlarmDto {
 		this.alarm2 = alarm.getAlarm2();
 		this.alarm3 = alarm.getAlarm3();
 		this.alarmOn = alarm.getAlarmOn();
+		this.alarmSigma = alarm.getAlarmSigma();
 		this.alarmSound = alarm.getAlarmSound();
 		this.alarmEmail = alarm.getAlarmEmail();
 		this.email = alarm.getEmail();
@@ -115,6 +117,14 @@ public class AlarmDto {
 
 	public final void setAlarmOn(Boolean alarmOn) {
 		this.alarmOn = alarmOn;
+	}
+	
+	public final Boolean getAlarmSigma() {
+		return alarmSigma;
+	}
+
+	public final void setAlarmSigma(Boolean alarmSigma) {
+		this.alarmSigma = alarmSigma;
 	}
 	
 	public final Boolean getAlarmSound() {

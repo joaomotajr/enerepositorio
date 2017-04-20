@@ -8,6 +8,7 @@ import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
+import br.com.eneeyes.main.model.enums.SigmaStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
 
@@ -26,6 +27,7 @@ public class PositionAlarmDto {
 	private SmsStatus smsStatus;
 	private String action;
 	private SoundStatus soundStatus;
+	private SigmaStatus sigmaStatus;
 	
 	public PositionAlarmDto() {
 		
@@ -45,6 +47,7 @@ public class PositionAlarmDto {
     	this.smsStatus = positionAlarm.getSmsStatus();
     	this.action = positionAlarm.getAction();
     	this.soundStatus = positionAlarm.getSoundStatus();
+    	this.sigmaStatus = positionAlarm.getSigmaStatus();
 	}
 	
 	public final Long getUid() {
@@ -172,5 +175,19 @@ public class PositionAlarmDto {
 		}
 	}
 	
+	public final SigmaStatus getSigmaStatus() {
+		return sigmaStatus;
+	}
+
+	public final void setSigmaStatus(SigmaStatus sigmaStatus) {
+		this.sigmaStatus = sigmaStatus;
+		
+		if (sigmaStatus == null ) {			
+			this.sigmaStatus = SigmaStatus.OFF;
+		}	
+		else { 
+			this.sigmaStatus = sigmaStatus;
+		}
+	}	
 	
 }

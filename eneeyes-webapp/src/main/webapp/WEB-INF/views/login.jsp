@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="loginPage">
-    <title>Eneeyes | Log in</title>
+    <title>E-Gas | Log in</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -34,7 +34,7 @@
 	    <div class="login-box">
 			    
 			<div class="login-logo">
-		 		<a href="#"><b>Ene</b>eyes</a>
+		 		<a href="#"><b>E</b>Gas</a>
 			</div>	      	
 	      	
 	      	<div id="login" class="tab-pane active">

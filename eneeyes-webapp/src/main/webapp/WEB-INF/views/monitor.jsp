@@ -27,7 +27,8 @@
 											<th>Detector</th>
 											<th>Alarme</th>
 											<th>Data/hora</th>
-											<th>Notificações</th>											
+											<th>  Interações  </th>
+											<th>Reportar</th>											
 										</tr>
 									</thead>
 									<tbody>
@@ -42,6 +43,11 @@
 												{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
 											</td>
 											<td>
+												<span data-ng-if="item.sigmaStatus=='OFF'" class="icon fa fa-exchange" style="font-size:1.4em; color: gray" title="Sem Integração ao Sigma Habilitada"></span>
+                                            	<span data-ng-if="item.sigmaStatus=='ERROR'" class="icon fa fa-exchange" style="font-size:1.4em; color: red" title="Falha ao Informar Sigma"></span>
+                                            	<span data-ng-if="item.sigmaStatus=='SENDED'" class="icon fa fa-exchange" style="font-size:1.4em; color: green" title="Integração ao Sigma Realizada"></span>
+                                            	<span data-ng-if="item.sigmaStatus=='ON'" class="icon fa fa-exchange" style="font-size:1.4em; color: orange" title="Integração ao Sigma em fila"></span>
+                                            	&nbsp;&nbsp;
 												<span data-ng-if="item.soundStatus=='OFF'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: gray" title="Alerta Sonoro não Habilitado"></span>
                                             	<a href="#" data-ng-click="updateSoundStatus($index);" data-ng-if="item.soundStatus=='ON'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: red" title="Alerta Sonoro"></a>
                                             	<span data-ng-if="item.soundStatus=='SILENT'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: green" title="Alerta Silenciado"></span>
@@ -59,7 +65,9 @@
                                             	<span data-ng-if="item.smsStatus=='SENDED'"  style="font-size:1.4em; color: green" title="SMS Enviado">SMS</span>
                                             	<span data-ng-if="item.smsStatus=='READED'"  style="font-size:1.4em; color: green" title="SMS Recebido pelo Destinatário">SMS</span>	                
                                            		&nbsp;&nbsp; 
-                                           		<span data-ng-click="editActionCreated($index)" class="button fa fa-info-circle" style="font-size:1.6em;" title="Ações a serem Verificadas pelo Operador"></span>
+                                           	</td>
+                                           	<td>
+                                           		<a href="#" data-ng-click="editActionCreated($index)" class="button fa fa-list-ol" style="font-size:1.6em;" title="Ações a serem Verificadas pelo Operador"></a>
                                             </td>                                        						
 										</tr>										
 									</tbody>
@@ -98,7 +106,8 @@
 											<th>Detector</th>
 											<th>Alarme</th>
 											<th>Data/hora</th>
-											<th>Notificações</th>
+											<th>  Interações  </th>
+											<th>Reportar</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -112,6 +121,11 @@
 												{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
 											</td>
 											<td>
+												<span data-ng-if="item.sigmaStatus=='OFF'" class="icon fa fa-exchange" style="font-size:1.4em; color: gray" title="Sem Integração ao Sigma Habilitada"></span>
+                                            	<span data-ng-if="item.sigmaStatus=='ERROR'" class="icon fa fa-exchange" style="font-size:1.4em; color: red" title="Falha ao Informar Sigma"></span>
+                                            	<span data-ng-if="item.sigmaStatus=='SENDED'" class="icon fa fa-exchange" style="font-size:1.4em; color: green" title="Integração ao Sigma Realizada"></span>
+                                            	<span data-ng-if="item.sigmaStatus=='ON'" class="icon fa fa-exchange" style="font-size:1.4em; color: orange" title="Integração ao Sigma em fila"></span>
+                                            	&nbsp;&nbsp;
                                             	<span data-ng-if="item.emailStatus=='OFF'" class="icon fa fa-envelope" style="font-size:1.4em; color: gray" title="Aviso EMAIL não Habilitado"></span>
                                             	<span data-ng-if="item.emailStatus=='PENDENT'" class="icon fa fa-envelope" style="font-size:1.4em; color: orange" title="EMAIL na fila para Envio"></span>	
                                             	<span data-ng-if="item.emailStatus=='ERR_TRY_ONE'" class="icon fa fa-envelope" style="font-size:1.4em; color: red" title="Falha na 1a. Tentativa"></span>
@@ -124,8 +138,10 @@
                                             	<span data-ng-if="item.smsStatus=='ERR_TRY'"  style="font-size:1.4em; color: red" title="Falha ao Enviar SMS">SMS</span>
                                             	<span data-ng-if="item.smsStatus=='SENDED'"  style="font-size:1.4em; color: green" title="SMS Enviado">SMS</span>
                                             	<span data-ng-if="item.smsStatus=='READED'"  style="font-size:1.4em; color: green" title="SMS Recebido pelo Destinatário">SMS</span>	                
-                                           		&nbsp;&nbsp; 
-                                           		<span data-ng-click="editActionReaded($index)" class="button fa fa-info-circle" style="font-size:1.6em;" title="Ações a serem Verificadas pelo Operador"></span>
+                                           		&nbsp;&nbsp;
+                                           	</td>
+                                           	<td>
+                                           		<a href="#" data-ng-click="editActionReaded($index)" class="button fa fa-list-ol" style="font-size:1.6em;" title="Ações a serem Verificadas pelo Operador"></a>
                                             </td>        											
 										</tr>   																							
 										
@@ -167,7 +183,8 @@
 											<th>Empresa</th>
 											<th>Detector</th>
 											<th>Alarme</th>
-											<th>Data/hora</th>											
+											<th>Data/hora</th>
+											<th>Detalhes</th>											
 										</tr>
 									</thead>
 									<tbody>

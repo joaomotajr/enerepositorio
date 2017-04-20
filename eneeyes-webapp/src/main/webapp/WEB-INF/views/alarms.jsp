@@ -159,12 +159,20 @@
 								    			</div>
 								    								                	 
 							                    <div class="box-body" style="padding-bottom: 0px; !important">
-							                      	 
-		                                          	<div class="btn-group" id="toggle_event_editing">
-														<button type="button" id='alarmOff' class="btn btn-default locked_active">OFF</button>
-														<button type="button" id='alarmOn' class="btn bg-black unlocked_inactive">ON</button>
+							                      	<div class="row">
+								                      	<div class="col-md-9"> 
+				                                          	<div class="btn-group" id="toggle_event_editing">
+																<button type="button" id='alarmOff' class="btn btn-default locked_active">OFF</button>
+																<button type="button" id='alarmOn' class="btn bg-black unlocked_inactive">ON</button>
+															</div>
+														</div>
+														<div class="col-md-3">					            				
+									            			<div class="checkbox3 checkbox-danger checkbox-inline checkbox-check checkbox-circle checkbox-light">
+				                                            	<input type="checkbox" id="checkboxSigmaOnOff" checked>
+				                                            	<label for="checkboxSigmaOnOff">Integrar ao Sigma? </label>
+				                                          	</div>
+				                                        </div>
 													</div>
-													
 						                            <hr style="margin-top: 5px !important; margin-bottom: 5px !important;">
 						                            
 												    <div class="row">
@@ -229,7 +237,7 @@
 									                        <div class="row">
 										                        <div class="col-md-12">
 											            			<div class="col-md-6">					            				
-												            			<div class="checkbox3 checkbox-round">
+												            			<div class="checkbox3 checkbox-inline checkbox-check checkbox-round  checkbox-light">												            			
 							                                            	<input type="checkbox" id="checkboxSonoroOnOff" checked>
 							                                            	<label for="checkboxSonoroOnOff">Emitir Alarme Sonoro? </label>
 							                                          	</div>
@@ -261,7 +269,7 @@
 														    <div class="row">
 														    	<div class="col-md-12">
 														    		<div class="col-md-2">										            									            				
-												            			<div class="checkbox3 checkbox-round">
+												            			<div class="checkbox3 checkbox-inline checkbox-check checkbox-round checkbox-light">
 							                                            	<input type="checkbox" 
 							                                            	id="checkboxEmailOnOff" checked>
 							                                            	<label for="checkboxEmailOnOff">Enviar E-MAIL? </label>
@@ -283,7 +291,7 @@
 								                                   	</div>
 								                                   	
 								                                   	<div class="col-md-2">										            									            				
-												            			<div class="checkbox3 checkbox-round">
+												            			<div class="checkbox3 checkbox-inline checkbox-check checkbox-round checkbox-light">												            			
 							                                            	<input type="checkbox" id="checkboxSmsOnOff" checked>
 							                                            	<label for="checkboxSmsOnOff">Enviar SMS? </label>
 							                                          	</div>
@@ -395,7 +403,7 @@
 											            		</div>	
 														    </div>	
 														     -->
-														    <hr style="margin-top: 5px !important; margin-bottom: 5px !important;">							                                
+														    <hr style="margin-top: 8px !important; margin-bottom: 8px !important;">							                                
 							                                
 							                                <div class="row"  style="padding-bottom: 5px !important">
 										                        <div class="col-md-12">

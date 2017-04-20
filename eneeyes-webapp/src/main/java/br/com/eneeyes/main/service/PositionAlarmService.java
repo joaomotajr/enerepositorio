@@ -18,6 +18,7 @@ import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
+import br.com.eneeyes.main.model.enums.SigmaStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.model.register.Sensor;
@@ -88,6 +89,12 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		
 		if (alarmType != AlarmType.NORMAL) {
 			
+			SigmaStatus sigmaStatus = null;
+			if(alarm.getAlarmDto().getAlarmSigma() != null && alarm.getAlarmDto().getAlarmSigma())
+				sigmaStatus = SigmaStatus.ON;
+			else
+				sigmaStatus = SigmaStatus.OFF;
+			
 			EmailStatus emailStatus = null;
 			if(alarm.getAlarmDto().getAlarmEmail() != null && alarm.getAlarmDto().getAlarmEmail())
 				emailStatus = EmailStatus.PENDENT;
@@ -114,7 +121,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			else
 				soundStatus = SoundStatus.OFF;
 			
-			saveOrUpdatePositionAlarm(position, companyDetector, sensor, alarmType, emailStatus, smsStatus, action, soundStatus);
+			saveOrUpdatePositionAlarm(position, companyDetector, sensor, alarmType, emailStatus, smsStatus, action, soundStatus, sigmaStatus);
 		
 		}		
 		
@@ -151,7 +158,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	 * @param alarmType
 	 */
 	public void saveOrUpdatePositionAlarm(Position position, CompanyDetector companyDetector, Sensor sensor, 
-			AlarmType alarmType, EmailStatus emailStatus, SmsStatus smsStatus, String action, SoundStatus soundStatus) {
+			AlarmType alarmType, EmailStatus emailStatus, SmsStatus smsStatus, String action, SoundStatus soundStatus, SigmaStatus sigmaStatus) {
 				
 		List<AlarmStatus> solvedOrCancelesAlarms = new ArrayList<AlarmStatus>();
 		
@@ -175,6 +182,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			positionAlarm.setSmsStatus(smsStatus);
 			positionAlarm.setAction(action);
 			positionAlarm.setSoundStatus(soundStatus);
+			positionAlarm.setSigmaStatus(sigmaStatus);
 		}
 		else {
 			// TODO Verificar se haverá reenvio de Actions em casos de Reinscidência do mesmo alerta				
@@ -245,6 +253,11 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		
 		return result;
 	}
+	
+	public int updateSigmaStatus(Long uid, SigmaStatus sigmatatus) {
+		
+		return repository.updateSigmaStatus(sigmatatus, uid);		
+	}	
 
 	@Override
 	public BasicResult<?> findOne(Long uid) {

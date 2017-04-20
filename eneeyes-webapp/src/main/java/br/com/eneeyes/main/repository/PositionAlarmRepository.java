@@ -12,6 +12,7 @@ import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
+import br.com.eneeyes.main.model.enums.SigmaStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.model.register.Sensor;
@@ -54,5 +55,10 @@ public interface PositionAlarmRepository extends JpaRepository<PositionAlarm, Lo
 	@Transactional
 	@Query("update PositionAlarm p set p.soundStatus = ?1 where p.uid = ?2 ")
 	int updateSoundStatus(SoundStatus soundStatus, long uid);
+	
+	@Modifying
+	@Transactional
+	@Query("update PositionAlarm p set p.sigmaStatus = ?1 where p.uid = ?2 ")
+	int updateSigmaStatus(SigmaStatus sigmaStatus, long uid);
 	
 }

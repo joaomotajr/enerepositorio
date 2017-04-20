@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
+import br.com.eneeyes.main.model.enums.SigmaStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
@@ -47,6 +48,9 @@ public class DashCompaniesAlarm implements Serializable {
 	@Column(name = "email_status")
 	private EmailStatus emailStatus;
 	
+	@Column(name = "sigma_status")
+	private SigmaStatus sigmaStatus;
+	
 	@Column(name = "sms_status")
 	private SmsStatus smsStatus;
 	
@@ -62,17 +66,6 @@ public class DashCompaniesAlarm implements Serializable {
 	
 	@Column(name = "unit_meter_gases")
 	private UnitMeterGases unitMeterGases;
-	
-//	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-//	private List<PositionAlarmMessage> positionAlarmMessages = new ArrayList<PositionAlarmMessage>();
-//	
-//	public List<PositionAlarmMessage> getPositionAlarmMessages() {
-//		return positionAlarmMessages;
-//	}
-//
-//	public void setPositionAlarmMessages(List<PositionAlarmMessage> positionAlarmMessages) {
-//		this.positionAlarmMessages = positionAlarmMessages;
-//	}
 
 	private String action;
 		
@@ -154,6 +147,14 @@ public class DashCompaniesAlarm implements Serializable {
 
 	public final void setAlarmType(AlarmType alarmType) {
 		this.alarmType = alarmType;
+	}
+	
+	public final SigmaStatus getSigmaStatus() {
+		return sigmaStatus;
+	}
+
+	public final void setSigmaStatus(SigmaStatus sigmaStatus) {
+		this.sigmaStatus = sigmaStatus;
 	}
 	
 	public final EmailStatus getEmailStatus() {

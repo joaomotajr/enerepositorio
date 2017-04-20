@@ -20,12 +20,12 @@ public class ClientSample {
 	        	        
 	        EventoRecebido eventoRecebido = new EventoRecebido();
 	        
-	        eventoRecebido.setAuxiliar("999");
-	        eventoRecebido.setCodigo("E100");
+	        eventoRecebido.setAuxiliar("DG-01");
+	        eventoRecebido.setCodigo("DETECCAO");
 	        eventoRecebido.setData(DatatypeFactory.newInstance().newXMLGregorianCalendar("2017-04-19T14:45:00Z"));
-	        eventoRecebido.setDescricaoReceptora("Teste");
+	        eventoRecebido.setDescricaoReceptora("Teste da Enesens");
 	        eventoRecebido.setEmpresa(new Long(10001));
-	        eventoRecebido.setIdCentral("F999");
+	        eventoRecebido.setIdCentral("9261");
 	        eventoRecebido.setParticao("001");
 	        eventoRecebido.setProtocolo((byte) 2);
 	        eventoRecebido.setTipoIntegracao((byte) 1);

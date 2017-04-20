@@ -38,7 +38,7 @@ public class processEmailService {
 
 	@Scheduled(fixedDelay = 60000)
 	public void schedule() {
-		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Start Automatico :: " 
+		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ":Email Service - Start Automatico :: " 
 				+ new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
 		
 		List<QueueEmailView> queueLista = new ArrayList<QueueEmailView>();

@@ -23,6 +23,7 @@ import br.com.eneeyes.main.dto.PositionAlarmDto;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
+import br.com.eneeyes.main.model.enums.SigmaStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.model.register.Sensor;
@@ -159,6 +160,22 @@ public class PositionAlarm {
 	@Enumerated(EnumType.ORDINAL) 
 	private SoundStatus soundStatus() { 
 	    return soundStatus; 
+	}
+	
+	@Column(name = "SIGMA_STATUS", columnDefinition = "int default 0" , nullable = true)
+	private SigmaStatus sigmaStatus;
+	
+	public final SigmaStatus getSigmaStatus() {
+		return sigmaStatus;
+	}
+
+	public final void setSigmaStatus(SigmaStatus sigmaStatus) {
+		this.sigmaStatus = sigmaStatus;
+	}
+
+	@Enumerated(EnumType.ORDINAL) 
+	private SigmaStatus sigmaStatus() { 
+	    return sigmaStatus; 
 	}
 	
 	public Long getUid() {

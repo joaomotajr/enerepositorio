@@ -45,6 +45,7 @@ public class Alarm {
 		this.alarmSms = dto.getAlarmSms();
 		this.celular = dto.getCelular();
 		this.alarmOn = dto.getAlarmOn();
+		this.alarmSigma = dto.getAlarmSigma();
 		this.alarmAction = dto.getAlarmAction();
 		this.action1 = dto.getAction1();
 		this.action2 = dto.getAction2();
@@ -83,6 +84,9 @@ public class Alarm {
 	
 	@Column(name = "ALARM_ON", nullable = true, columnDefinition = "Boolean default true")		
 	private Boolean alarmOn;
+	
+	@Column(name = "ALARM_SIGMA", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarmSigma;
 	
 	@Column(name = "ALARM_SOUND", nullable = true, columnDefinition = "Boolean default false")		
 	private Boolean alarmSound;
@@ -177,6 +181,14 @@ public class Alarm {
 
 	public final void setAlarmOn(Boolean alarmOn) {
 		this.alarmOn = alarmOn;
+	}
+	
+	public final Boolean getAlarmSigma() {
+		return alarmSigma;
+	}
+
+	public final void setAlarmSigma(Boolean alarmSigma) {
+		this.alarmSigma = alarmSigma;
 	}
 	
 	public CompanyView getCompany() {

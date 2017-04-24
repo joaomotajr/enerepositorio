@@ -129,7 +129,9 @@
 	weekday[5]="Sexta-Feira";
 	weekday[6]="Sábado";
 	
-	
+	function dayDiff(first, second) {
+	    return Math.round((second-first)/(1000*60*60*24));
+	}
 	
 	
 	

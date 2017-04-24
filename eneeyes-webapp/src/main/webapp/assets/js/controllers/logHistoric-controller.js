@@ -147,11 +147,26 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	
 	$scope.getHistoricInterval = function() {
 		
-		$scope.loading = true;
-		
 		var dataInicio = new Date($('#dateIn').data().DateTimePicker.date._d);
 		var dataFim = new Date($('#dateOut').data().DateTimePicker.date._d);
+				
+		if(dayDiff(dataInicio, dataFim) > 30 ) {
+			
+			$scope.daysDiff ="ATENÇÃO: Intervalo Não Pode Exceder 30 dias " ;
+			
+			$("#snoAlertBox").fadeIn();
+			closeSnoAlertBox();
+			return;
+		}
+		
+		function closeSnoAlertBox(){
+			window.setTimeout(function () {
+			  $("#snoAlertBox").fadeOut(300)
+			}, 3000);
+		} 
 
+		$scope.loading = true;
+		
 		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' à ' + dataFim.toLocaleString();
 		
 		$scope.selectedButton = 100; 		

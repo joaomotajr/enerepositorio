@@ -140,9 +140,13 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
     
     $interval(function() {
     	if($scope.$root == null) return;
-    	if($scope.$root.currentPage == "Monitoramento" && $scope.$root.errorTimes <= 5)
+    	
+    	if($scope.$root.errorTimes <= 5) {
     		$scope.getCompaniesAlarm();
-    		$scope.getCompaniesPositionOffline();
+    		
+    		if($scope.$root.currentPage == "Monitoramento")	
+    			$scope.getCompaniesPositionOffline();
+    	}
     }, 10000);	
     
 	

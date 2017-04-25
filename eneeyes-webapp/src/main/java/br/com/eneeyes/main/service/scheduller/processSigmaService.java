@@ -16,6 +16,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import br.com.eneeyes.archetype.services.SiteService;
+import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.SigmaStatus;
 import br.com.eneeyes.main.model.views.QueueSigmaView;
 import br.com.eneeyes.main.service.PositionAlarmService;
@@ -55,8 +56,15 @@ public class processSigmaService {
 		
 		if(sigmaLista == null ||sigmaLista.isEmpty()) return;
 		
-		service1 = new ReceptorEventosWebService_Service();
-		port1 = service1.getReceptorEventosWebServicePort();
+		try {
+			service1 = new ReceptorEventosWebService_Service();
+			port1 = service1.getReceptorEventosWebServicePort();
+		}		
+		catch(Exception ex) { 
+			
+			System.out.println("Erro: " + ex.getMessage());
+			return;			
+		}
 		
 		for (QueueSigmaView item  : sigmaLista) {
 			
@@ -67,12 +75,23 @@ public class processSigmaService {
 		        c.setTime(item.getLast_Update() );
 		        XMLGregorianCalendar eventDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
 		        
-		        eventoRecebido.setAuxiliar("999");
-		        eventoRecebido.setCodigo("E100");
+		        String codigo = "0";
+		        
+		        if (item.getAlarmType() == AlarmType.DETECCAO)
+		        	codigo = "1000";
+		        else if (item.getAlarmType() == AlarmType.ALERTA)
+		        	codigo = "2000";
+		        else if (item.getAlarmType() == AlarmType.EVACUACAO)
+		        	codigo = "3000";
+		        
+		        String auxiliar = "47" + item.getCompany_detector_id() + item.getSensor_id();
+		        
+		        eventoRecebido.setAuxiliar(auxiliar);
+		        eventoRecebido.setCodigo(codigo);
 		        eventoRecebido.setData(eventDate);
 		        eventoRecebido.setDescricaoReceptora("Teste da Enesens [LOGA]");
-		        eventoRecebido.setEmpresa(new Long(10001));
-		        eventoRecebido.setIdCentral("F999");
+		        eventoRecebido.setEmpresa(new Long(10056));
+		        eventoRecebido.setIdCentral("9261");
 		        eventoRecebido.setParticao("001");
 		        eventoRecebido.setProtocolo((byte) 2);
 		        eventoRecebido.setTipoIntegracao((byte) 1);

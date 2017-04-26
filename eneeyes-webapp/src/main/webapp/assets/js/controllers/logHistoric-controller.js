@@ -145,25 +145,45 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
        });		
 	}
 	
+	function checkInterval (dataInicio, dataFim ) {
+		
+		daysExceed = false;
+		
+		if($scope.tipoGrupo == 1 && dayDiff(dataInicio, dataFim) > 15 ) {
+			
+			$scope.daysDiff ="ATENÇÃO: Esta Pesquisa Não Pode Exceder 15 dias " ;
+			
+			$("#snoAlertBox").fadeIn();
+			window.setTimeout(function () {
+				  $("#snoAlertBox").fadeOut(300)
+			}, 3000);
+			
+			daysExceed = true;
+		}		
+		else if($scope.tipoGrupo == 2 && dayDiff(dataInicio, dataFim) > 360 ) {
+			
+			$scope.daysDiff ="ATENÇÃO: Esta Pesquisa Não Pode Exceder 360 dias " ;
+			
+			$("#snoAlertBox").fadeIn();
+			
+			window.setTimeout(function () {
+				  $("#snoAlertBox").fadeOut(300)
+			}, 3000);
+			
+			daysExceed = true;
+		}	
+		
+		return daysExceed;
+	}
+		
 	$scope.getHistoricInterval = function() {
 		
 		var dataInicio = new Date($('#dateIn').data().DateTimePicker.date._d);
 		var dataFim = new Date($('#dateOut').data().DateTimePicker.date._d);
 				
-		if(dayDiff(dataInicio, dataFim) > 30 ) {
-			
-			$scope.daysDiff ="ATENÇÃO: Intervalo Não Pode Exceder 30 dias " ;
-			
-			$("#snoAlertBox").fadeIn();
-			closeSnoAlertBox();
-			return;
-		}
+		if(checkInterval(dataInicio, dataFim)) return;
 		
-		function closeSnoAlertBox(){
-			window.setTimeout(function () {
-			  $("#snoAlertBox").fadeOut(300)
-			}, 3000);
-		} 
+		 
 
 		$scope.loading = true;
 		

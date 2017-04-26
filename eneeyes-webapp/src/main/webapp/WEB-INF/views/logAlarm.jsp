@@ -49,7 +49,7 @@
 									<div class="row">											
 										<div class="col-md-12">
 										
-											<div class="box-body" style="background-color: #e7e7e7">											                												                	 
+											<div class="box-body" style="background-color: black; color:white">											                												                	 
 												<dl class="dl-horizontal">
 													<dt>Empresa:</dt>
 														<dd>{{selectedPositionAlarm.company_name}}</dd>
@@ -102,7 +102,14 @@
 															<span data-ng-if="selectedPositionAlarm.smsStatus=='READED'"  style="color: green" title="SMS Recebido pelo Destinatário"> SMS</span>	                
 														</dd>
 														<dd>
-															<span data-ng-if="selectedPositionAlarm.action"> Provdências Imediatas:</span>
+															Integração Sigma:
+															<span data-ng-if="selectedPositionAlarm.sigmaStatus=='OFF'" class="icon fa fa-exchange" style="font-size:1.4em; color: gray" title="Sem Integração ao Sigma Habilitada"></span>
+			                                            	<span data-ng-if="selectedPositionAlarm.sigmaStatus=='ERROR'" class="icon fa fa-exchange" style="font-size:1.4em; color: red" title="Falha ao Informar Sigma"></span>
+			                                            	<span data-ng-if="selectedPositionAlarm.sigmaStatus=='SENDED'" class="icon fa fa-exchange" style="font-size:1.4em; color: green" title="Integração ao Sigma Realizada"></span>
+			                                            	<span data-ng-if="selectedPositionAlarm.sigmaStatus=='ON'" class="icon fa fa-exchange" style="font-size:1.4em; color: orange" title="Integração ao Sigma em fila"></span>
+			                                            </dd>														
+			                                            <dt data-ng-if="selectedPositionAlarm.action">Providências Imediatas:</dt>
+														<dd>
 															<span data-ng-if="selectedPositionAlarm.action" style="color: gray" title="Aviso de SMS não Habilitado"> {{selectedPositionAlarm.action}}</span>
 														</dd>	
 																							

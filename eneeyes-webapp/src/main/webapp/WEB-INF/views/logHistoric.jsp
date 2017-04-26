@@ -130,7 +130,7 @@
 								<div class="row">
 								
 									<div class="col-md-4">																															
-										<div class="col-md-3">	
+										<div class="col-md-3" style="padding-right: 2px !important;">	
 											<label style="margin-top: 5px !important;" title="Mostrando Máximo e Minimo"><span class="icon fa fa-object-group"></span> Agrupar</label>
 										</div>
 										<div class="col-md-9" style="background:gray; border-color:lightgray; border-radius: 2px 2px 2px 2px; color:white">
@@ -151,10 +151,10 @@
 									
 				        			<div class="col-md-3" >
 										<form>												
-											<div class="col-md-4">	
+											<div class="col-md-4" style="padding-right: 2px !important;">	 
 												<label style="margin-top: 5px !important;" class="control-label"><span class="icon fa fa-filter"></span> FILTRAR</label>
 											</div>
-											<div class="col-md-8">
+											<div class="col-md-8" style="padding-left: 2px !important;">
 											<select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-options="item as item.name for item in filterAlarm | orderBy: 'name' track by item.uid" 
 						                    	data-ng-model="selectedfilterAlarm">
 						                        <option value="">Selecione</option> 
@@ -164,8 +164,8 @@
 				        			</div>
 				        			
 				        			<div class="col-md-5" >									
-										<div class="col-md-3">	
-											<label style="margin-top: 5px !important;" title="Mostrando Máximo e Minimo"><span class="icon fa fa-caret"></span>Exibir/Exportar</label>
+										<div class="col-md-3">
+											<label style="margin-top: 2px !important; padding-right: 5px !important;" title="Mostrando Máximo e Minimo"><span class="icon fa fa-caret"></span>Exibir/Exportar</label>
 										</div>										        	
 	                            		<div class="form-group">
                                               	<div class="col-md-3" style="padding-right: 5px !important;">

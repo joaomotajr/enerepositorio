@@ -84,7 +84,8 @@ public class processSigmaService {
 		        else if (item.getAlarmType() == AlarmType.EVACUACAO)
 		        	codigo = "3000";
 		        
-		        String auxiliar = "47" + item.getCompany_detector_id() + item.getSensor_id();
+		        //String auxiliar = "47" + item.getCompany_detector_id() + item.getSensor_id();
+		        String auxiliar = "47" + item.getCompany_detector_name().replaceAll("[^0-9]", "");
 		        
 		        eventoRecebido.setAuxiliar(auxiliar);
 		        eventoRecebido.setCodigo(codigo);

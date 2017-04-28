@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.SmsStatus;
+import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 
 @Entity
@@ -42,6 +43,11 @@ public class QueueSmsView implements Serializable {
 	
 	@Column(name = "alarm_type")
 	private AlarmType alarmType;
+	
+	private String gas_name;
+	
+	@Column(name = "unit_meter_gases")
+	private UnitMeterGases unitMeterGases;
 	
 	public Long getUid() {
 		return uid;
@@ -124,4 +130,19 @@ public class QueueSmsView implements Serializable {
 		this.alarmType = alarmType;
 	}
 	
+	public String getGas_name() {
+		return gas_name;
+	}
+	
+	public void setGas_name(String gas_name) {
+		this.gas_name = gas_name;
+	}
+
+	public final UnitMeterGases getUnitMeterGases() {
+		return unitMeterGases;
+	}
+
+	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
+		this.unitMeterGases = unitMeterGases;
+	}	
 }

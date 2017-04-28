@@ -48,7 +48,11 @@ public class processEmailService {
 			
 			String email = item.getEmail();
 						
-			String key ="Detector: " + item.getCompany_detector_name() + " / Tipo de Alarme: " + item.getAlarmType().toString() + "\n -  Data/Hora: " + item.getLast_Update();			
+			String key ="Detector: " + item.getCompany_detector_name() + 
+					"<br> Tipo de Alarme: " + item.getAlarmType().toString() + 
+					"<br> Data/Hora: " + item.getLast_Update() + 
+					"<hr> Gas: " + item.getGas_name() + " - Medição: " + item.getLast_value() + " "  + item.getUnitMeterGases();
+			
 			String urlTemplate = this.getClass().getClassLoader().getResource("/templates/alarme.html").toString().replace("file:", "");
 			String msg = "";
 			

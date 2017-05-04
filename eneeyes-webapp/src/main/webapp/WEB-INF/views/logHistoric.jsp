@@ -2,7 +2,7 @@
 #snoAlertBox{
     position:absolute;
     z-index:1400;
-   	top:2%;
+   	top:90%;
     right:4%;
     margin:0px auto;
 	text-align:center;

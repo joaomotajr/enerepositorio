@@ -130,7 +130,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		if($scope.tipoGrupo == 1) {
 			//$scope.listHistoricInterval = new ViewService.listLastMonth();
 			
-			$scope.daysDiff ="ATENï¿½ï¿½O: Esta Pesquisa Nï¿½o Pode Exceder 15 dias " ;
+			$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 15 dias " ;
 			
 			$("#snoAlertBox").fadeIn();
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300) }, 3000);
@@ -159,7 +159,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		
 		if($scope.tipoGrupo == 1 && dayDiff(dataInicio, dataFim) > 15 ) {
 			
-			$scope.daysDiff ="ATENï¿½ï¿½O: Esta Pesquisa Nï¿½o Pode Exceder 15 dias " ;
+			$scope.daysDiff ="ATENï¿½ï¿½O: Esta Pesquisa NÃO Pode Exceder 15 dias " ;
 			
 			$("#snoAlertBox").fadeIn();
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);
@@ -168,7 +168,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}		
 		else if($scope.tipoGrupo == 2 && dayDiff(dataInicio, dataFim) > 360 ) {
 			
-			$scope.daysDiff ="ATENï¿½ï¿½O: Esta Pesquisa Nï¿½o Pode Exceder 360 dias " ;
+			$scope.daysDiff ="ATENï¿½ï¿½O: Esta Pesquisa NÃO Pode Exceder 360 dias " ;
 			
 			$("#snoAlertBox").fadeIn();
 			

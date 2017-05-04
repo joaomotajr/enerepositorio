@@ -35,6 +35,7 @@ public class QueueEmailView implements Serializable {
 
 	private String alarm_name;
 	private String email;
+	private String email1;
 	private Long company_detector_id;
 	private String company_detector_name;
 	private Long sensor_id;
@@ -79,6 +80,14 @@ public class QueueEmailView implements Serializable {
 	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getEmail1() {
+		return email1;
+	}
+	
+	public void setEmail1(String email1) {
+		this.email1 = email1;
 	}
 	
 	public Long getCompany_detector_id() {

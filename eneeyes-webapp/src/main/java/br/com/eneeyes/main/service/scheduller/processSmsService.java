@@ -48,7 +48,7 @@ public class processSmsService {
 				+ " -  Data/Hora: " + item.getLast_Update()
 				+ " Gas: " + item.getGas_name() + " - Medição: " + item.getLast_value() + " "  + item.getUnitMeterGases();
 			
-			Boolean ok = siteService.SendSms(item.getCelular(), msg);
+			Boolean ok = siteService.SendSms(item.getCelular(), msg) && item.getCelular1() == null ? true : siteService.SendSms(item.getCelular1(), msg) ;
 			
 			if (ok)
 				positionAlarmService.updateSmsStatus(item.getUid(), SmsStatus.SENDED);

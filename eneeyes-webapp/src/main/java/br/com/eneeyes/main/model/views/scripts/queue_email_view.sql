@@ -17,6 +17,7 @@ VIEW `queue_email_view` AS
         `pa`.`ALARM_TYPE` AS `ALARM_TYPE`,
         `a`.`NAME` AS `NAME`,
         `a`.`EMAIL` AS `EMAIL`,
+        `a`.`EMAIL1` AS `EMAIL1`,
         `cda`.`COMPANY_DETECTOR_ID` AS `COMPANY_DETECTOR_ID`,
         `cd`.`NAME` AS `COMPANY_DETECTOR_NAME`,
         `cda`.`SENSOR_ID` AS `SENSOR_ID`

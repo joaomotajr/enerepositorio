@@ -16,6 +16,7 @@ VIEW `queue_sms_view` AS
         `pa`.`ALARM_TYPE` AS `ALARM_TYPE`,
         `a`.`NAME` AS `NAME`,
         `a`.`CELULAR` AS `CELULAR`,
+        `a`.`CELULAR1` AS `CELULAR1`,
         `cda`.`COMPANY_DETECTOR_ID` AS `COMPANY_DETECTOR_ID`,
         `cd`.`NAME` AS `COMPANY_DETECTOR_NAME`,
         `cda`.`SENSOR_ID` AS `SENSOR_ID`

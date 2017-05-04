@@ -19,8 +19,10 @@ public class AlarmDto {
 	private Boolean alarmSound;
 	private Boolean alarmEmail;	
 	private String email;
+	private String email1;	
 	private Boolean alarmSms;
 	private String celular;
+	private String celular1;
 	private Boolean alarmAction;
 	private String action1;
 	private String action2;
@@ -46,8 +48,10 @@ public class AlarmDto {
 		this.alarmSound = alarm.getAlarmSound();
 		this.alarmEmail = alarm.getAlarmEmail();
 		this.email = alarm.getEmail();
+		this.email1 = alarm.getEmail1();
 		this.alarmSms = alarm.getAlarmSms();
-		this.celular = alarm.getCelular();		
+		this.celular = alarm.getCelular();
+		this.celular1 = alarm.getCelular1();
 		this.alarmAction = alarm.getAlarmAction();
 		this.action1 = alarm.getAction1();
 		this.action2 = alarm.getAction2();
@@ -150,6 +154,14 @@ public class AlarmDto {
 	public final void setAlarmEmail(Boolean alarmEmail) {
 		this.alarmEmail = alarmEmail;
 	}
+	
+	public final String getEmail1() {
+		return email1;
+	}
+
+	public final void setEmail1(String email1) {
+		this.email1 = email1;
+	}
 
 	public final String getEmail() {
 		return email;
@@ -173,6 +185,14 @@ public class AlarmDto {
 
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+	
+	public final String getCelular1() {
+		return celular1;
+	}
+
+	public final void setCelular1(String celular1) {
+		this.celular1 = celular1;
 	}
 	
 	public final Boolean getAlarmAction() {

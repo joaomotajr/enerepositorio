@@ -35,6 +35,7 @@ public class QueueSmsView implements Serializable {
 
 	private String alarm_name;
 	private String celular;
+	private String celular1;
 	private Long company_detector_id;
 	private String company_detector_name;
 	private Long sensor_id;
@@ -80,6 +81,14 @@ public class QueueSmsView implements Serializable {
 
 	public final void setCelular(String celular) {
 		this.celular = celular;
+	}
+	
+	public final String getCelular1() {
+		return celular1;
+	}
+
+	public final void setCelular1(String celular1) {
+		this.celular1 = celular1;
 	}
 	
 	public Long getCompany_detector_id() {

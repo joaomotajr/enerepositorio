@@ -46,7 +46,7 @@ public class processEmailService {
 		
 		for (QueueEmailView item   : queueLista) {			
 			
-			String email = item.getEmail();
+			String emails[] = {item.getEmail(), item.getEmail1()}  ;
 						
 			String key ="Detector: " + item.getCompany_detector_name() + 
 					"<br> Tipo de Alarme: " + item.getAlarmType().toString() + 
@@ -66,7 +66,7 @@ public class processEmailService {
 				e.printStackTrace();
 			}
 			
-			Boolean ok = siteService.SendEmail(email, "Alerta de ALARME Detectado", msg);
+			Boolean ok = siteService.SendEmail(emails, "Alerta de ALARME Detectado", msg);
 			
 			if (ok)
 				positionAlarmService.updateEmailStatus(item.getUid(), EmailStatus.SENDED);

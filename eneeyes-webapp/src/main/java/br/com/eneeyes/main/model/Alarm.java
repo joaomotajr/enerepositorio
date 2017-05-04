@@ -42,8 +42,10 @@ public class Alarm {
 		this.alarmSound = dto.getAlarmSound();
 		this.alarmEmail = dto.getAlarmEmail();				
 		this.email = dto.getEmail();
+		this.email1 = dto.getEmail1();
 		this.alarmSms = dto.getAlarmSms();
 		this.celular = dto.getCelular();
+		this.celular1 = dto.getCelular1();
 		this.alarmOn = dto.getAlarmOn();
 		this.alarmSigma = dto.getAlarmSigma();
 		this.alarmAction = dto.getAlarmAction();
@@ -97,11 +99,17 @@ public class Alarm {
 	@Column(name = "EMAIL", nullable = true)		
 	private String email;
 	
+	@Column(name = "EMAIL1", nullable = true)		
+	private String email1;
+	
 	@Column(name = "ALARM_SMS", nullable = true, columnDefinition = "Boolean default false")		
 	private Boolean alarmSms;
 	
 	@Column(name = "CELULAR", nullable = true)		
 	private String celular;
+	
+	@Column(name = "CELULAR1", nullable = true)		
+	private String celular1;
 	
 	@Column(name = "ALARM_ACTION", nullable = true)		
 	private Boolean alarmAction;
@@ -223,6 +231,14 @@ public class Alarm {
 		this.email = email;
 	}
 	
+	public final String getEmail1() {
+		return email1;
+	}
+
+	public final void setEmail1(String email1) {
+		this.email1 = email1;
+	}
+	
 	public Boolean getAlarmSms() {
 		return alarmSms;
 	}
@@ -230,13 +246,21 @@ public class Alarm {
 	public void setAlarmSms(Boolean alarmSms) {
 		this.alarmSms = alarmSms;
 	}
-
+	
 	public String getCelular() {
 		return celular;
 	}
 
 	public void setCelular(String celular) {
 		this.celular = celular;
+	}
+	
+	public final String getCelular1() {
+		return celular1;
+	}
+
+	public final void setCelular1(String celular1) {
+		this.celular1 = celular1;
 	}
 	
 	public final Boolean getAlarmAction() {

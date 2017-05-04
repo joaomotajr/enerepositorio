@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * Created by asus on 24/09/14.
+ * Created by JR on 24/04/17.
  */
 @Named
 public class SiteService {
@@ -31,7 +31,7 @@ public class SiteService {
     @Inject
     Session mailSession;
    
-    public Boolean SendEmail(String to, String subject, String body) {
+    public Boolean SendEmail(String[] to, String subject, String body) {
  	   
 	   String from = "joao.junior@chipsat.com.br";            
        
@@ -44,7 +44,11 @@ public class SiteService {
 		   message.setSender(addressFrom);  
 		   message.setSubject(subject);  
 		   message.setContent(body, "text/html; charset=utf-8");    	   
-		   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));  
+		   
+		   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to[0]));  
+		   
+		   if(to[1] != null)
+			   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to[1]));
 	
 		   transport.connect();  
 		   Transport.send(message);  

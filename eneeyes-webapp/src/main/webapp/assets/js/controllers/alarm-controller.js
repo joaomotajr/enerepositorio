@@ -19,8 +19,10 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			alarmEmail:  $scope.alarmEmail,
 			alarmSound:  $("#checkboxSonoroOnOff").prop('checked'),
 			email :	$scope.email,
+			email1 :	$scope.email1,
 			alarmSms:  $scope.alarmCelular,
 			celular : $scope.celular,
+			celular1 : $scope.celular1,
 			alarmAction:  $scope.alarmAction,
 			action1 : $scope.action1,
 			action2 : $scope.action2,
@@ -86,7 +88,9 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.alarms[index].unitMeterGases);
 			$scope.company = $scope.alarms[index].companyDto;
 			$scope.email = $scope.alarms[index].email;
+			$scope.email1 = $scope.alarms[index].email1;
 			$scope.celular = $scope.alarms[index].celular;
+			$scope.celular1 = $scope.alarms[index].celular1;
 			$scope.action1 = $scope.alarms[index].action1;
 			$scope.action2 = $scope.alarms[index].action2;
 			$scope.action3 = $scope.alarms[index].action3;
@@ -120,8 +124,6 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			
 			$scope.validEmail();
 			$scope.validMobile();
-			
-			//$scope.usedAlarms($scope.alarms[index].uid); 
 			
 			$scope.resultUsedAlarms = new ViewService.listAlarmCompanyDetectorSensorView();		 
 			 $scope.resultUsedAlarms.$view({_csrf : angular.element('#_csrf').val(), alarmId : $scope.alarms[index].uid}, function(){			
@@ -219,7 +221,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
 		 ]; 
 	 
-	 $('#alarmCelular').keydown(function (e) {
+	 $('.alarmCelularMask').keydown(function (e) {
 			var key = e.charCode || e.keyCode || 0;
 			$phone = $(this);
 
@@ -283,21 +285,33 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 
 		 $("#alarmEmail").prop('disabled', !checked );         
 		 $("#alarmEmail").prop('readonly', !checked); 
+		 
+		 $("#alarmEmail1").prop('disabled', !checked );         
+		 $("#alarmEmail1").prop('readonly', !checked);
 		 		 
 		 $scope.alarmEmail = checked;
 		 $scope.validEmail();
 	 }
-	 $scope.validEmail = function ($event) {
-	    	
+	 $scope.validEmail = function ($event) {	    	
 
 		 if (!$("#checkboxEmailOnOff").prop('checked') || validateEmail( $scope.email )) {
 			 $scope.emailValid = true;
 		 }
-		 else if ( $scope.email == '') {
+		 else if ( $scope.email == '' || $scope.email1 == null) {
 			 $scope.emailValid = false;
 		 }
 		 else {
 		    $scope.emailValid = false;
+		 }
+		 
+		 if (!$("#checkboxEmailOnOff").prop('checked') || validateEmail( $scope.email1 )) {
+			 $scope.emailValid1 = true;
+		 }
+		 else if ( $scope.email1 == '' || $scope.email1 == null) {
+			 $scope.emailValid1 = true;
+		 }
+		 else {
+		    $scope.emailValid1 = false;
 		 }
 		 
 		 if(!$scope.$$phase) 
@@ -314,6 +328,9 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 
 		 $("#alarmCelular").prop('disabled', !checked );         
 		 $("#alarmCelular").prop('readonly', !checked); 
+		 
+		 $("#alarmCelular1").prop('disabled', !checked );         
+		 $("#alarmCelular1").prop('readonly', !checked); 
 		 		 
 		 $scope.alarmCelular = checked;
 		 
@@ -322,6 +339,10 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 $scope.validMobile = function ($event) {		 
 	 
 		 $scope.mobileValid =  (!$("#checkboxSmsOnOff").prop('checked') || ($scope.celular != null && $scope.celular.length == 15));
+		 $scope.mobileValid1 =  (
+				 				 !$("#checkboxSmsOnOff").prop('checked') || 
+				 				 (($scope.celular1 != null && $scope.celular1.length == 15) || (($scope.celular1 == "" || $scope.celular1 == null)  && $scope.mobileValid))  
+				 				);		 
 		 
 		 if(!$scope.$$phase) 
 			 $scope.$apply();					 

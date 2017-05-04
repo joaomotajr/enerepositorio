@@ -302,10 +302,53 @@
 								                                        	<div class="input-group">
 														                    	<span class="input-group-addon" data-ng-show="mobileValid"><i class="fa fa-phone-square"></i></span>
 														                    	<span class="input-group-addon text-red" data-ng-hide="mobileValid"><i class="fa fa-phone-square"></i></span>
-														                    	<input class="form-control" 
+														                    	
+														                    	<input class="form-control alarmCelularMask" 
 														                    		id="alarmCelular" 
 														                    		data-ng-model="celular" 
 														                    		type="text" maxlength="15" placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />													                    	
+														                  	</div>
+													                  	</div>						                                         													            			
+								                                   	</div>
+														    	
+														    	
+														    	</div>
+														    </div>
+														    
+														    
+														    <div class="row">
+														    	<div class="col-md-12">
+														    		<div class="col-md-2">												            		
+							                                        </div>
+							                                        
+							                                        <div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important">
+							                                        	<div data-ng-class="{'has-error': !emailValid1}">	
+								                                        	<div class="input-group">								                                        	
+														                    	<span class="input-group-addon" data-ng-show="emailValid1">@</span>													                    														                    	
+														                    	<span class="input-group-addon text-red" data-ng-hide="emailValid1">@</span>
+														                    	<input 
+														                    		id="alarmEmail1" 
+														                    		data-ng-model="email1" type="text" class="form-control" 
+														                    		placeholder="Email" 
+														                    		data-ng-change="validEmail($event);">
+														                    </div>
+													                  	</div>						                                         												            			
+								                                   	</div>
+								                                   	
+								                                   	<div class="col-md-2">												            			
+							                                        </div>
+							                                        
+							                                        <div class="col-md-4" style="padding-left: 5px !important;">
+							                                        	<div data-ng-class="{'has-error': !mobileValid1}">	
+								                                        	<div class="input-group">
+														                    	<span class="input-group-addon" data-ng-show="mobileValid1"><i class="fa fa-phone-square"></i></span>
+														                    	<span class="input-group-addon text-red" data-ng-hide="mobileValid1"><i class="fa fa-phone-square"></i></span>
+														                    	
+														                    	<input class="form-control alarmCelularMask" 
+														                    		id="alarmCelular1" 
+														                    		data-ng-model="celular1" 
+														                    		type="text" maxlength="15" placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />
+														                    														                    	
 														                  	</div>
 													                  	</div>						                                         													            			
 								                                   	</div>
@@ -468,7 +511,7 @@
 				  	<div class="modal-footer">						
 						<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
 						<button type="button" data-ng-click="saveAlarm();" class="btn btn-primary" data-dismiss="modal"
-							data-ng-disabled="(emailValid && mobileValid && userForm.$valid && !(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3)) ? false : true">Salvar
+							data-ng-disabled="(emailValid && mobileValid && emailValid1 && mobileValid1 && userForm.$valid && !(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3)) ? false : true">Salvar
 						</button>						                                
 				  	</div>
 				  	

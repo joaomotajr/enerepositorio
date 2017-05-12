@@ -57,8 +57,8 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
 	@Autowired
 	private RoleService roleService;
 
-    @Inject
-    private SiteService siteService;
+//    @Inject
+//    private SiteService siteService;
 
 	@Override
 	public UserCollectionResult newResultCollection() {
@@ -260,13 +260,13 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
                 return result;
             }
 
-			String to = user.getLogin();
-			String key = UUID.randomUUID().toString();
-			String urlTemplate = this.getClass().getClassLoader().getResource("/templates/recover-password.html").toString().replace("file:", "");
-			String message = FileUtils.readFileToString(new File(urlTemplate)).replace("{{KEY}}",key);
-			String subject = "Eneneyes - Recuperação de senha";
+//			String to = user.getLogin();
+//			String key = UUID.randomUUID().toString();
+//			String urlTemplate = this.getClass().getClassLoader().getResource("/templates/recover-password.html").toString().replace("file:", "");
+//			String message = FileUtils.readFileToString(new File(urlTemplate)).replace("{{KEY}}",key);
+//			String subject = "Eneneyes - Recuperação de senha";
 						
-			siteService.SendEmail(to, subject, message);
+			//siteService.SendEmail(to, subject, message);
 
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.DATE, 3);
@@ -276,11 +276,11 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
 			token.put("expire",calendar.getTime());
 			token.put("hash",MessageDigester.digestSha1(user.getHash()));
 			
-			String json = objectMapper.writeValueAsString(token);
-			String refreshToken = MessageDigester.encode64(json);
+//			String json = objectMapper.writeValueAsString(token);
+//			String refreshToken = MessageDigester.encode64(json);
 
-			user.setHash(MessageDigester.digestSha1(key).toString());
-			user.setRefreshToken(refreshToken);
+//			user.setHash(MessageDigester.digestSha1(key).toString());
+//			user.setRefreshToken(refreshToken);
 
 			UserResult r = save(user);
 			if (r.hasError()) {
@@ -330,20 +330,20 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
             Map<String, Object> token = new HashMap<String, Object>();
             token.put("expire",calendar.getTime());
             token.put("hash",MessageDigester.digestSha1(pass1));
-            String json = objectMapper.writeValueAsString(token);
-            String refreshToken = MessageDigester.encode64(json);
+//            String json = objectMapper.writeValueAsString(token);
+//            String refreshToken = MessageDigester.encode64(json);
 
             user.setHash(MessageDigester.digestSha1(pass1).toString());
 //            user.setRefreshToken(refreshToken);
             save(user);
 
-            String to = user.getLogin();
-            String urlTemplate = this.getClass().getClassLoader().getResource("/templates/change-password-mail.html").toString().replace("file:","");
-            String message = FileUtils.readFileToString(new File(urlTemplate)).replace("{{REFRESH_TOKEN}}",refreshToken);
-            
-            String subject = "Eneneyes - Sua senha foi alterada";
-
-            siteService.SendEmail(to, subject, message);
+//            String to = user.getLogin();
+//            String urlTemplate = this.getClass().getClassLoader().getResource("/templates/change-password-mail.html").toString().replace("file:","");
+//            String message = FileUtils.readFileToString(new File(urlTemplate)).replace("{{REFRESH_TOKEN}}",refreshToken);
+//            
+//            String subject = "Eneneyes - Sua senha foi alterada";
+//
+//            siteService.SendEmail(to, subject, message);
             
 
             result.addMessage(new ResultSuccessMessage("form.success.site.changePassword"));

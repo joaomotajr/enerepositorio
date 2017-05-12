@@ -1,9 +1,8 @@
 
 package br.com.eneeyes.archetype.api;
-import javax.inject.Inject;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,7 +29,7 @@ public class SigninController {
 
     Log log = LogFactory.getLog(getClass());
 
-    @Inject
+    @Autowired
     SecurityManager securityManager;
 
     @RequestMapping(value="/api/signin", method = RequestMethod.POST, consumes = {"application/xml", "application/json"}, produces = {"application/xml", "application/json"})

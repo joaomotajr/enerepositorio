@@ -2,18 +2,18 @@ package br.com.eneeyes.main.service.views;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.model.views.DashCompaniesAlarm;
 import br.com.eneeyes.main.repository.views.DashCompaniesAlarmRepository;
 import br.com.eneeyes.main.result.Result;
 
-@Named
+@Service
 public class DashCompaniesAlarmService {
 	
-	@Inject
+	@Autowired
 	private DashCompaniesAlarmRepository repository;
 	
 	public Result<?> listAll() {

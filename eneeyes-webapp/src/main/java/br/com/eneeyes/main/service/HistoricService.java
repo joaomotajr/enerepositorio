@@ -19,7 +19,6 @@ import br.com.eneeyes.main.repository.HistoricRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
-
 @Service
 public class HistoricService implements IService<HistoricDto> {
 	//private static final int PAGE_SIZE = 50;

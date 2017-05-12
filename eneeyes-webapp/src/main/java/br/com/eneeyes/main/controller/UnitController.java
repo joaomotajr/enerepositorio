@@ -1,7 +1,6 @@
 package br.com.eneeyes.main.controller;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,15 +9,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.eneeyes.main.service.UnitService;
 import br.com.eneeyes.main.dto.UnitDto;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
+import br.com.eneeyes.main.service.UnitService;
 
 @RestController
 public class UnitController {
 	
-	@Inject
+	@Autowired
 	UnitService service;	
 	
 	@RequestMapping(value="/security/api/unit/save", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")

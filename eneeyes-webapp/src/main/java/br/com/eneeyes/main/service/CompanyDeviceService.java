@@ -3,8 +3,8 @@ package br.com.eneeyes.main.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDeviceDto;
@@ -15,14 +15,13 @@ import br.com.eneeyes.main.repository.CompanyDeviceRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
-
-@Named
+@Service
 public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 
-	@Inject
+	@Autowired
 	private CompanyDeviceRepository repository;
 	
-	@Inject
+	@Autowired
 	private AreaRepository areaRepository;		
 
 	public int updateCompanyDeviceName(String name, Long uid) {

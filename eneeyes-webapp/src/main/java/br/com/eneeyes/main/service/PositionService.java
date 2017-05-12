@@ -20,7 +20,6 @@ import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
-
 @Service
 public class PositionService implements IService<PositionDto> {
 	

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
+
+import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.register.SensorDto;
@@ -14,13 +15,11 @@ import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 import br.com.eneeyes.main.service.IService;
 
-
-@Named
+@Service
 public class SensorService implements IService<SensorDto> {
 	
 	@Inject
 	private SensorRepository repository;
-
 	
 	public BasicResult<?> save(SensorDto dto) {
 		Result<SensorDto> result = new Result<SensorDto>();

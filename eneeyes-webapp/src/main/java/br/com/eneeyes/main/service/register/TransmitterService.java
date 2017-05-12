@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
+
+import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.register.TransmitterDto;
@@ -14,8 +15,7 @@ import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 import br.com.eneeyes.main.service.IService;
 
-
-@Named
+@Service
 public class TransmitterService implements IService<TransmitterDto> {
 
 	@Inject

@@ -15,7 +15,6 @@ import br.com.eneeyes.main.repository.CompanyDeviceRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
-
 @Service
 public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 

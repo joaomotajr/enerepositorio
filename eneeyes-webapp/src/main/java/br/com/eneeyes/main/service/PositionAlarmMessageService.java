@@ -17,7 +17,6 @@ import br.com.eneeyes.main.repository.PositionAlarmRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
-
 @Service
 public class PositionAlarmMessageService implements IService<PositionAlarmMessageDto> {
 	

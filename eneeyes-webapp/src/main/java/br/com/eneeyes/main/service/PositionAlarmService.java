@@ -27,7 +27,6 @@ import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRep
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
-
 @Service
 public class PositionAlarmService implements IService<PositionAlarmDto> {
 	

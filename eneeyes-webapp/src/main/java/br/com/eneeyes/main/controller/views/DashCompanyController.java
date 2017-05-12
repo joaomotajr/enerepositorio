@@ -1,7 +1,6 @@
 package br.com.eneeyes.main.controller.views;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +13,7 @@ import br.com.eneeyes.main.service.views.DashCompanyService;
 @RestController
 public class DashCompanyController {
 	
-	@Inject
+	@Autowired
 	DashCompanyService dashCompanyService;	
 	
 	@RequestMapping(value = "/security/api/view/allDashCompany", method = RequestMethod.GET, produces = "application/json")

@@ -2,8 +2,7 @@ package br.com.eneeyes.main.controller.views;
 
 import java.util.Date;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,7 @@ import br.com.eneeyes.main.service.views.HistoricViewService;
 @RestController
 public class HistoricViewController {
 	
-	@Inject
+	@Autowired
 	HistoricViewService service;	
 	
 	@RequestMapping(value = "/security/api/view/allHistoricView", method = RequestMethod.GET, produces = "application/json")

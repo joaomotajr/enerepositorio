@@ -3,8 +3,8 @@ package br.com.eneeyes.main.service.register;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.register.ManufacturerDto;
@@ -14,11 +14,10 @@ import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 import br.com.eneeyes.main.service.IService;
 
-
-@Named
+@Service
 public class ManufacturerService implements IService<ManufacturerDto> {
 
-	@Inject
+	@Autowired
 	private ManufacturerRepository repository;
 	
 	public BasicResult<?> save(ManufacturerDto dto) {

@@ -4,8 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.model.views.HistoricViewDay;
@@ -13,10 +13,10 @@ import br.com.eneeyes.main.repository.views.HistoricViewDayRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
-@Named
+@Service
 public class HistoricViewDayService {
 	
-	@Inject
+	@Autowired
 	private HistoricViewDayRepository repository;
 	
 	public Result<?> listAll() {

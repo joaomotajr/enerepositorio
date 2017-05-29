@@ -66,8 +66,8 @@
 		<span class="logo-mini"><b>ENE</b></span> <!-- logo for regular state and mobile devices -->
 		
 	 	<span class="logo-lg">	 		
-			<img src="/assets/img/enesens_light.png" style="float: left; padding:5px; width: 43%;">
-			<span class="text-black"> <b>E</b>-Gas </span>	
+ 			<img src="/assets/img/enesens_light.png" style="float: left; padding:5px; width: 43%;"> 			 
+<!-- 			<span class="text-black"> <b>E</b>-Gas </span>	 -->
 		</span>
 		
 	</a>

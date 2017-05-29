@@ -19,8 +19,27 @@
 				  	<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 				</div>
 			</div>
-
+			
+			<!-- 
+			<div class="row">
+				<span class="logo-lg">	 		
+					<img src="/assets/img/Logo_e-GAS.PNG" style="background-color: white; float: left; margin-left: 20px; padding:5px; width: 85%;">			
+				</span>
+			</div>
+			 -->
+			<div class="row"> 
+				<a href="#" class="logo-lg" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"> <!-- mini logo for sidebar mini 50x50 pixels -->
+					
+				 	<span class="logo-lg">	 		
+			 			<img src="/assets/img/Logo_e-GAS.PNG" style="background-color: white; float: left; margin-left: 20px; padding:5px; width: 85%;"> 			 
+					</span>
+					
+				</a>
+			</div>			
+			
+			
           	<!-- search form (Optional) -->
+          	<!--
           	<form action="#" method="get" class="sidebar-form">
 				<div class="input-group">
 					<input type="text" name="q" class="form-control" placeholder="Procurar" disabled>
@@ -29,13 +48,14 @@
 					</span>
 	          </div>
           	</form>
+          	-->
           	<!-- /.search form -->
+        
 
 	          <!-- Sidebar Menu -->
 			<ul class="sidebar-menu">
 					        	  
-	            <li class="header">SELECIONE</li>
-	           
+<!-- 	            <li class="header">SELECIONE</li> -->
 	            	            
 	            <li class="treeview">
 	            	<a href="#" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fa fa-th text-aqua"></i> 

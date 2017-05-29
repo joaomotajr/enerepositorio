@@ -1,10 +1,44 @@
-app.controller('UserController', function ($scope, $timeout, $filter, UserService, FilialService) {
+app.controller('UserController', function ($scope, $timeout, $filter, UserService) {
+
+	var arrayUser = [];
+	
+	$scope.userLogado = {
+		isAdmin : false,		
+		isManager : false,
+		isOperator : false,
+		id : ''	
+	}
+	   	
+   	$scope.getUserLogado = function() {
+   		
+   		if(arrayUser.length == 0){
+   			
+   			/** TIPO DO USUARIO */
+   			var tipoUsuario = $('#tipoUsuario').val();
+   			if(tipoUsuario) {
+   				if(tipoUsuario == "administrator"){$scope.userLogado.isAdmin = true;}
+   				if(tipoUsuario == "manager"){$scope.userLogado.isManager = true;}
+   				if(tipoUsuario == "operator"){$scope.userLogado.isOperator = true;}
+   			}
+   			
+   			/** ID DO USUARIO */
+   			var idUsuario = $('#idUsuario').val();
+   			if(idUsuario) {
+   				$scope.userLogado.id = idUsuario;
+   			}
+   			
+   			arrayUser[0] = $scope.userLogado;
+   			
+   		} else {
+   			$scope.userLogado = arrayUser[0];
+   		}
+   		
+	}
 	
 	/** VARIAVEIS - MODAL */
 	$scope.user = {
 		id: undefined,
-		cpf: undefined,
-		cnpj: undefined,
+		cpf: undefined,		
     	displayName: undefined,
     	nickname: undefined,
     	fone: undefined,
@@ -53,8 +87,7 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
             	
             	// Atualiza o listUser
             	$scope.users.listUser[$scope.index].id = $scope.user.id;
-            	$scope.users.listUser[$scope.index].cpf = $scope.user.cpf;
-            	$scope.users.listUser[$scope.index].cnpj = $scope.user.cnpj;
+            	$scope.users.listUser[$scope.index].cpf = $scope.user.cpf;            	
             	$scope.users.listUser[$scope.index].displayName = $scope.user.displayName;
             	$scope.users.listUser[$scope.index].nickname = $scope.user.nickname;
             	$scope.users.listUser[$scope.index].fone = $scope.user.fone;
@@ -83,23 +116,23 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
         /** INCLUSAO DE USUARIO */
     	} else {
     		$('#dataTables-users').dataTable().fnDestroy();
+    		
     		$scope.users.listUser = [];
         	$scope.user.status = 'ACTIVE';
+        	
         	if($scope.user.cpf) {
         		$scope.user.cpf = $scope.user.cpf.replace(/[\.-]/g, '');
         	}
-        	if($scope.user.cnpj) {
-        		$scope.user.cnpj = $scope.user.cnpj.replace(/[\.\/-]/g, '');
-        	} else {
-        		$scope.user.cnpj = $scope.userLogado.cnpjRaiz.replace(/[\.\/-]/g, '');
-        	}
+        	
         	$scope.inclusao = new UserService.inclusao($scope.user);
-            $scope.inclusao.$user({_csrf : angular.element('#_csrf').val()}, function(){
+            
+        	$scope.inclusao.$user({_csrf : angular.element('#_csrf').val()}, function(){
             	$('html').removeClass('loading');
             	$scope.fecharModal();
             	setMessagePesquisa($scope.inclusao);
             });
-            $timeout(function(){
+            
+        	$timeout(function(){
     			$('#dataTables-users').dataTable();
     		},5);
     	}
@@ -108,13 +141,13 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 	/** EXCLUSAO DE USUARIO */
     $scope.excluirUsuario = function() {
         $('html').addClass('loading');
+        
         $scope.clearMessageCadastro();
+        
         if($scope.user.cpf) {
     		$scope.user.cpf = $scope.user.cpf.replace(/[\.-]/g, '');
     	}
-    	if($scope.user.cnpj) {
-    		$scope.user.cnpj = $scope.user.cnpj.replace(/[\.\/-]/g, '');
-    	}
+    	
     	$scope.remocao = new UserService.remocao($scope.user);
         $scope.remocao.$user({_csrf : angular.element('#_csrf').val()}, function(){
         	$('html').removeClass('loading');
@@ -133,33 +166,41 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 	$scope.pesquisaUser = function() {
     	$('#dataTables-users').dataTable().fnDestroy();
         $('html').addClass('loading');
+        
         clearMessagePesquisa();
-    	$scope.users.listUser = [];
+    	
+        $scope.users.listUser = [];
+    	
     	if($scope.user.cpf) {
     		$scope.user.cpf = $scope.user.cpf.replace(/[\.-]/g, '');
-    	}
-    	if($scope.user.cnpj) {
-    		$scope.user.cnpj = $scope.user.cnpj.replace(/[\.\/-]/g, '');
-    	}
+    	}    	
+    	
     	$scope.pesquisa = new UserService.pesquisa($scope.user);
         $scope.pesquisa.$users({_csrf : angular.element('#_csrf').val()}, function(){
         	$('html').removeClass('loading');
         	$scope.user.cpf = $scope.cpfFormatter($scope.user.cpf);
-    		$scope.user.cnpj = $scope.cnpjFormatter($scope.user.cnpj);
+    		
         	setMessagePesquisa($scope.pesquisa);
-        	if($scope.pesquisa.errorMessages.length == 0) {
-        		filterUsers($scope.pesquisa.listUser);
-        	}
-        	if($scope.users.listUser.length > 0) {
-        		$timeout(function(){
-        			$('#dataTables-users').dataTable().fnSort([0, 'asc']);
-        		},5);	
-        	} else {
-        		$timeout(function(){
-        			$('#dataTables-users').dataTable();
-        		},5);
-        	}
-        });
+        	        	
+//        	if($scope.users.listUser.length > 0) {
+//        		$timeout(function(){
+//        			$('#dataTables-users').dataTable().fnSort([0, 'asc']);
+//        		},5);	
+//        	} else {
+//        		$timeout(function(){
+//        			$('#dataTables-users').dataTable();
+//        		},5);
+//        	}
+        },
+		function(data) {
+			if (data.status >= 400 && data.status <= 505 ) {
+				angular.element('html').removeClass('loading');
+				angular.element('.session-expired').modal('show');
+				$timeout(function(){
+					window.location.href='/';
+				},2500);
+			}
+		});
     }
 	
 	/** ATIVACAO DE USUARIO */
@@ -181,13 +222,16 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
         $scope.ativaInativa.$user({_csrf : angular.element('#_csrf').val()}, function(){
         	$('html').removeClass('loading');
         	$scope.users.listUser[$scope.index] = $.extend(true, {}, $scope.user);
+        	
         	var data = [$scope.cpfFormatter($scope.users.listUser[$scope.index].cpf),
         	            $scope.users.listUser[$scope.index].displayName,
         	            $scope.users.listUser[$scope.index].login,
         	            $scope.getTipoUsuario($scope.users.listUser[$scope.index].role),
         	            $scope.getStatus($scope.users.listUser[$scope.index].status),
         	            $filter('date')($scope.users.listUser[$scope.index].createDate, 'dd/MM/yyyy')];
+        	
         	$('#dataTables-users').DataTable().row($scope.index).data(data).draw();
+        	
         	$scope.fecharModal();
         });	
 	}
@@ -198,7 +242,6 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
     	$scope.index = index;
     	$scope.user.id = $scope.users.listUser[index].id;
     	$scope.user.cpf = $scope.cpfFormatter($scope.users.listUser[index].cpf);
-    	$scope.user.cnpj = $scope.cnpjFormatter($scope.users.listUser[index].cnpj);
 		$scope.user.displayName = $scope.users.listUser[index].displayName;
 		$scope.user.nickname = $scope.users.listUser[index].nickname;
 		$scope.user.fone = $scope.users.listUser[index].fone;
@@ -216,7 +259,6 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 	$scope.getTipoUsuario = function(tipo) {
 		if(!tipo) {return null;}
 		if(tipo == 1) {return 'Administrador';}
-		if(tipo == 2) {return 'Contratante';}
 		if(tipo == 3) {return 'Gerente';}
 		if(tipo == 4) {return 'Operador';}
 	}
@@ -234,18 +276,6 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3-\$4");
 	}
 	
-	$scope.cnpjFormatter = function(cnpj) {
-		if(!cnpj) {
-			return "";
-		}
-		if(cnpj.length == 8) { //CNPJ Raiz
-			return cnpj.replace(/(\d{2})(\d{3})(\d{3})/g,"\$1.\$2.\$3");	
-		} else {
-			return cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g,"\$1.\$2.\$3\/$4\-\$5");
-		}
-		
-	}
-	
 	$scope.fecharModal = function() {
     	$(".modal").modal("hide");
     	$scope.clearUserModal();
@@ -258,7 +288,6 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 	$scope.clearUserModal = function() {
 		$scope.user.id = undefined;
 		$scope.user.cpf = undefined;
-		$scope.user.cnpj = undefined;
 		$scope.user.displayName = undefined;
 		$scope.user.nickname = undefined;
 		$scope.user.fone = undefined;
@@ -269,26 +298,24 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		$scope.user.hash = undefined;
 		$scope.user.status = undefined;
 		$scope.user.createDate = undefined;
-		if($scope.userLogado.isAdmin) {
-			$scope.user.filialId = undefined;
-		}
+		
    	}
 	
-	function filterUsers(listUsers) {
-		if(!listUsers) {
-			return false;
-		}
-   		listUsers.forEach(function(value, index, ar) {
-   			if($scope.userLogado.isAdmin) {
-   				$scope.users.listUser = listUsers;
-   				return false;
-   			} else {
-   				if(value.role != 1 && value.role != 2) { // Remove Admins e Contractors
-   					$scope.users.listUser.push(value);
-   				}
-   			}
-   		});
-   	}
+//	function filterUsers(listUsers) {
+//		if(!listUsers) {
+//			return false;
+//		}
+//   		listUsers.forEach(function(value, index, ar) {
+//   			if($scope.userLogado.isAdmin) {
+//   				$scope.users.listUser = listUsers;
+//   				return false;
+//   			} else {
+//   				if(value.role != 1 && value.role != 2) { // Remove Admins e Contractors
+//   					$scope.users.listUser.push(value);
+//   				}
+//   			}
+//   		});
+//   	}
 
 	function clearMessagePesquisa() {
    		$scope.messagePesquisaError = "";
@@ -338,48 +365,8 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		userId: '',
 		listaCnpjFiliais: [],
 		listaLoginUsers: []
-	}
-    
-    $scope.pesquisaUserByFilial = function() {
-		$scope.user.status = 'ACTIVE';
-		$('#dataTables-users').dataTable().fnDestroy();
-		$scope.clearUserModal();
-		clearMessagePesquisa();
-		if($scope.user.filialId) {
-	        $('html').addClass('loading');
-	    	$scope.users.listUser = [];
-	    	$scope.pesquisaByFilial = new UserService.pesquisaByFilial($scope.user);
-	        $scope.pesquisaByFilial.$users({_csrf : angular.element('#_csrf').val()}, function(){
-	        	$('html').removeClass('loading');
-	        	if($scope.pesquisaByFilial.errorMessages.length == 0) {
-	        		filterUsers($scope.pesquisaByFilial.listUser);
-	        		$timeout(function(){
-	        			$('#dataTables-users').dataTable().fnSort([0, 'asc']);
-	        		},5);
-	        	}
-	        });
-		} else { //Selecione...
-			$scope.users.listUser = [];
-			$timeout(function(){
-				$('#dataTables-users').dataTable();
-			},5)
-		}
-	}
-    
-    $scope.getUsuariosdaFilial = function() {
-		$scope.noData = false;
-		$scope.usuariosFilial = [];
-		$scope.logins = [];
-		$scope.modelo = {filialId: $scope.user.filialId};
-    	$scope.pesquisaUser = new UserService.pesquisaUser($scope.modelo);
-        $scope.pesquisaUser.$naoRelacionados({_csrf : angular.element('#_csrf').val()}, function(){
-    		$scope.usuariosFilial = $scope.pesquisaUser.listUser;
-    		if($scope.usuariosFilial.length == 0) {
-    			$scope.noData = true;
-    		} 
-        });
-	}
-    
+	}   
+   
     $scope.setLogin = function (event) {
     	$scope.logins = [];
 		if(event.target != undefined) {
@@ -390,80 +377,15 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		}
 	}
     
-    $scope.incluirRelacionamento = function() {
-    	clearRelacionamento();
-    	$scope.clearLogins = [];
-    	$scope.logins.forEach(function(value, index, ar) {
-    		if(value != undefined && value != 'null') {
-    			$scope.clearLogins.push(value);
-    		}
-    	});
-    	$scope.logins = $scope.clearLogins;
-    	$scope.relacionamento.listaLoginUsers = $scope.logins;
-    	$scope.relacionamento.filialId = $scope.user.filialId;
-    	$scope.relacionaByFilial = new FilialService.relacionaByFilial($scope.relacionamento);
-        $scope.relacionaByFilial.$user({_csrf : angular.element('#_csrf').val()}, function(){
-        	$scope.fecharModal();
-        	if($scope.relacionaByFilial.errorMessages && $scope.relacionaByFilial.errorMessages.length > 0) {
-        		setMessagePesquisa($scope.relacionaByFilial);
-        	}
-    		$scope.user.status = 'ACTIVE';
-    		$('#dataTables-users').dataTable().fnDestroy();	
-    		$('html').addClass('loading');
-	    	$scope.users.listUser = [];
-	    	$scope.pesquisaByFilial = new UserService.pesquisaByFilial($scope.user);
-	        $scope.pesquisaByFilial.$users({_csrf : angular.element('#_csrf').val()}, function(){
-	        	$('html').removeClass('loading');
-	        	if($scope.pesquisaByFilial.errorMessages.length == 0) {
-	        		filterUsers($scope.pesquisaByFilial.listUser);
-	        		$timeout(function(){
-	        			$('#dataTables-users').dataTable().fnSort([0, 'asc']);
-	        		},5);
-	        	}
-	        });
-        });
+    $scope.refresh = function() {
+    	$scope.pesquisaUser();
     }
     
-    $scope.excluirRelacionamento = function() {
-    	clearRelacionamento();
-    	$scope.relacionamento.listaLoginUsers = $scope.logins;
-    	$scope.relacionamento.filialId = $scope.user.filialId;
-    	$scope.desrelacionaByFilial = new FilialService.desrelacionaByFilial($scope.relacionamento);
-        $scope.desrelacionaByFilial.$user({_csrf : angular.element('#_csrf').val()}, function(){
-        	$scope.pesquisaUserByFilial();
-        	$scope.fecharModal();
-        	if($scope.desrelacionaByFilial.errorMessages && $scope.desrelacionaByFilial.errorMessages.length > 0) {
-        		setMessagePesquisa($scope.desrelacionaByFilial);
-        	}
-        });
-    }
-    
-	function clearRelacionamento() {
-   		$scope.relacionamento.filialId = '';
-   		$scope.relacionamento.userId = '';
-   		$scope.relacionamento.listaCnpjFiliais = [];
-   		$scope.relacionamento.listaLoginUsers = [];  			
-   	}
-	
-	$scope.getFiliaisContratante = function() {
-   		$scope.filiaisContratante = [];
-		$scope.modelo = {id: '',cnpj: '',tradeName: '',unitName: '',cep: '',address: '',number: '',complement: '',district: '',
-						 city: '',state: '',fone1: '',fone2: '',fax: '',email: '',status: undefined,userId: ''};
-    	$scope.contrato = new FilialService.pesquisa($scope.modelo);
-        $scope.contrato.$filiais({_csrf : angular.element('#_csrf').val()}, function(){
-    		$scope.filiaisContratante = $scope.contrato.listFilial;
-    		if($scope.filiaisContratante.length == 0) {
-    			$scope.noData = true;
-    		} 
-        });   		
-   	}
-    
-    /** FUNCOES DE INICIALIZACAO */
-    $timeout(function(){
-		$('#dataTables-users').dataTable();
-	},5)
-	
     $scope.clearUserModal();
-    $scope.getFiliaisContratante();
+    $scope.pesquisaUser();
+    
+    $scope.getUserLogado();
+    
+    angular.element('body').removeClass('loading');
    	
 });

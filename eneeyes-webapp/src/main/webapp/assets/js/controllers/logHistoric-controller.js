@@ -159,7 +159,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		
 		if($scope.tipoGrupo == 1 && dayDiff(dataInicio, dataFim) > 15 ) {
 			
-			$scope.daysDiff ="ATENï¿½ï¿½O: Esta Pesquisa NÃO Pode Exceder 15 dias " ;
+			$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 15 dias " ;
 			
 			$("#snoAlertBox").fadeIn();
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);
@@ -168,7 +168,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}		
 		else if($scope.tipoGrupo == 2 && dayDiff(dataInicio, dataFim) > 360 ) {
 			
-			$scope.daysDiff ="ATENï¿½ï¿½O: Esta Pesquisa NÃO Pode Exceder 360 dias " ;
+			$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 360 dias " ;
 			
 			$("#snoAlertBox").fadeIn();
 			
@@ -218,17 +218,17 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	function setInterval(interval) {
 		
 		if ( interval == 1 )
-			return "ï¿½ltima Hora";
+			return "Última Hora";
 		else if ( interval == 6 )
-			return "ï¿½ltimas Seis Horas";
+			return "Últimas Seis Horas";
 		else if ( interval == 12 )
-			return "ï¿½ltimas Doze Horas";
+			return "Últimas Doze Horas";
 		else if ( interval == 48 )
-			return "ï¿½ltimos Dois Dias";
+			return "Últimas Dois Dias";
 		else if ( interval == 96 )
-			return "ï¿½ltimos Quatro Dias";
+			return "Últimos Quatro Dias";
 		else if ( interval == 'mes' )
-			return "ï¿½ltimo Mï¿½s";
+			return "Último Mês";
 		else 
 			return 'Desconhecido';
 				

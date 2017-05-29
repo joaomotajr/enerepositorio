@@ -1,6 +1,5 @@
 package br.com.eneeyes.archetype.services.identity;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,7 +14,6 @@ import javax.persistence.NoResultException;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -30,7 +28,6 @@ import br.com.eneeyes.archetype.model.acl.UserCriteria;
 import br.com.eneeyes.archetype.model.acl.UserRepository;
 import br.com.eneeyes.archetype.result.UserCollectionResult;
 import br.com.eneeyes.archetype.result.UserResult;
-import br.com.eneeyes.archetype.services.SiteService;
 import br.com.eneeyes.archetype.utils.MessageDigester;
 import br.com.eneeyes.archetype.web.result.ResultErrorMessage;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
@@ -99,55 +96,6 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
 		}
 		return new UserResult(resultType, null, user);
 	}
-	
-//	@Transactional
-//	public UserResult findByCnpj(String cnpj) throws Exception{
-//		ResultMessageType resultType = ResultMessageType.SUCCESS;
-//		User user = null;
-//		try {
-//			user = repository.findByCnpj(cnpj);
-//		} catch (NoResultException e) {
-//			log.error(e);
-//			resultType = ResultMessageType.ERROR;
-//		}
-//		return new UserResult(resultType, null, user);
-//	}
-//
-//	public UserResult findByLoginAndProviderId(String login, String providerId) throws Exception {
-//		return new UserResult(ResultMessageType.SUCCESS, null, repository.findByLoginAndProviderId(login, providerId));
-//	}
-//
-//	public UserResult findByLoginAndProviderIdAndProviderUserId(String login,
-//			String providerId, String providerUserId) throws Exception {
-//		return new UserResult(ResultMessageType.SUCCESS, null, repository.findByLoginAndProviderIdAndProviderUserId(login, providerId, providerUserId));
-//	}
-//
-//	public UserCollectionResult findByProviderIdsAndProviderUsersIds(
-//			Set<String> providerIds, Set<String> providerUsersIds) throws Exception {
-//		List<User> users = repository.findByProviderIdInAndProviderUserIdIn(providerIds, providerUsersIds);
-//		UserCollectionResult collection = new UserCollectionResult();
-//		collection.setItems(users.toArray(new User[users.size()]));
-//		return collection;
-//	}
-//
-//	@Transactional
-//	public UserResult findUserConnection(String providerId,
-//			String providerUserId) throws Exception {
-//		User user = repository.findByProviderIdAndProviderUserId(providerId, providerUserId);
-//		UserResult result = new UserResult();
-//        result.setResultType((user != null) ? ResultMessageType.SUCCESS : ResultMessageType.ERROR);
-//        result.setUser(toNativeBean(user));
-//		return result;
-//	}
-
-//	@Transactional
-//	public UserCollectionResult findUsersConnections(String providerId,
-//			Set<String> ids) throws Exception {
-//		List<User> users = repository.findByProviderIdAndProviderUserIdIn(providerId, ids);
-//		UserCollectionResult collection = new UserCollectionResult();
-//		collection.setItems(users.toArray(new User[users.size()]));
-//		return collection;
-//	}
 
 	@Transactional
 	public UserResult save(User user) {

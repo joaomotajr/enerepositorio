@@ -26,8 +26,9 @@ public class SecurityController {
     private boolean hasRole(String roleName) {
 		boolean hasRole = false;
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
 		for(Role role : user.getRoles()) {
-			if(role.getValue().equals(roleName)) {
+			if(role.getName().equals(roleName)) {
 				hasRole = true;
 			}
 		}

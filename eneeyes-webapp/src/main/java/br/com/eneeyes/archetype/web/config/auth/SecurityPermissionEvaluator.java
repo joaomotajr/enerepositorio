@@ -14,9 +14,11 @@ public class SecurityPermissionEvaluator implements PermissionEvaluator {
 	private boolean hasPermission(Authentication authentication, Object permission) {
 		boolean hasPermission = false;
 		User user = ((User)authentication.getPrincipal());
+		
 		for(Role role : user.getRoles()) {
 			for(Permission rolePermission : role.getPermissions()) {
-				if(rolePermission.getValue().equals(permission.toString())) {
+				
+				if(rolePermission.getName().equals(permission.toString())) {
 					hasPermission = true;
 				}
 			}

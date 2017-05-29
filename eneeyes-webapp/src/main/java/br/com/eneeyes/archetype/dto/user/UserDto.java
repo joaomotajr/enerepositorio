@@ -1,8 +1,10 @@
 package br.com.eneeyes.archetype.dto.user;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,21 +20,18 @@ public class UserDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String cpf;
-	private String cnpj;
 	private String displayName;
 	private String nickname;
 	private String fone;
 	private String cell;
 	private String email;
-	private Long role;
+	//private Long role;
+	private List<Role> roles;
+	
 	private String login;
 	private String hash;
 	private UserStatus status;
-	private Date createDate;
-	private Long filialId;
-	private String providerId;
-	private String providerUserId;
-	private String profileUrl;
+	private Date createDate;	
 	private String imageUrl;
 	private String accessToken;
 	private String secret;
@@ -44,31 +43,58 @@ public class UserDto implements Serializable {
 
 	public UserDto(User user) {
 		this.id = user.getId();
-//		this.cpf = user.getCpf();
-//		this.cnpj = user.getCnpj();
+		this.cpf = user.getCpf();
+
 		this.displayName = user.getDisplayName();
 		this.nickname = user.getNickname();
 		this.fone = user.getFone();
 		this.cell = user.getCell();
 		this.email = user.getEmail();
-		if(user.getRoles() != null) {
-			Iterator<Role> iter = user.getRoles().iterator();
-			Role role = (Role) iter.next();
-			this.role = role.getId();
-		}
+		
+//		if(user.getRoles() != null) {
+//			Iterator<Role> iter = user.getRoles().iterator();
+//			Role role = (Role) iter.next();
+//			this.role = role.getId();
+//		}
+		
+		if(user.getRoles() != null)
+			this.roles = parseRoles(user.getRoles());
+		
 		this.login = user.getLogin();
 		this.hash = user.getHash();
 		this.status = user.getStatus();
 		this.createDate = user.getCreateDate();
-//		this.providerId = user.getProviderId();
-//		this.providerUserId = user.getProviderUserId();
-//		this.profileUrl = user.getProfileUrl();
 		this.imageUrl = user.getImageUrl();
 //		this.accessToken = user.getAccessToken();
 //		this.secret = user.getSecret();
 //		this.refreshToken = user.getRefreshToken();
 		this.expireTime = user.getExpireTime();
 	}
+	
+	private final List<Role> parseRoles(Set<Role> roles) {		
+		List<Role> lista = new ArrayList<Role>();		
+		
+		for (Role item   : roles) {
+			
+			Role role = new Role();
+			role.setId(item.getId());
+			role.setName(item.getName());
+		
+			lista.add(role);			
+		}		
+		return lista;		
+	}
+	
+	public final List<Role> getRoles() {
+		return roles;
+	}
+
+	public final void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	
+	
 
 	/**
 	 * @return the id
@@ -99,21 +125,7 @@ public class UserDto implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
-	/**
-	 * @return the cnpj
-	 */
-	@XmlElement
-	public String getCnpj() {
-		return cnpj;
-	}
 
-	/**
-	 * @param cnpj the cnpj to set
-	 */
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
 	
 	/**
 	 * @return the displayName
@@ -189,22 +201,7 @@ public class UserDto implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	/**
-	 * @return the role
-	 */
-	@XmlElement
-	public Long getRole() {
-		return role;
-	}
-
-	/**
-	 * @param role the role to set
-	 */
-	public void setRole(Long role) {
-		this.role = role;
-	}
-	
+			
 	/**
 	 * @return the login
 	 */
@@ -274,66 +271,6 @@ public class UserDto implements Serializable {
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
-	}
-	
-	/**
-	 * @return the filialId
-	 */
-	@XmlElement
-	public Long getFilialId() {
-		return filialId;
-	}
-
-	/**
-	 * @param filialId the filialId to set
-	 */
-	public void setFilialId(Long filialId) {
-		this.filialId = filialId;
-	}
-	
-	/**
-	 * @return the providerId
-	 */
-	@XmlElement
-	public String getProviderId() {
-		return providerId;
-	}
-
-	/**
-	 * @param providerId the providerId to set
-	 */
-	public void setProviderId(String providerId) {
-		this.providerId = providerId;
-	}
-
-	/**
-	 * @return the providerUserId
-	 */
-	@XmlElement
-	public String getProviderUserId() {
-		return providerUserId;
-	}
-
-	/**
-	 * @param providerUserId the providerUserId to set
-	 */
-	public void setProviderUserId(String providerUserId) {
-		this.providerUserId = providerUserId;
-	}
-
-	/**
-	 * @return the profileUrl
-	 */
-	@XmlElement
-	public String getProfileUrl() {
-		return profileUrl;
-	}
-
-	/**
-	 * @param profileUrl the profileUrl to set
-	 */
-	public void setProfileUrl(String profileUrl) {
-		this.profileUrl = profileUrl;
 	}
 
 	/**

@@ -65,6 +65,7 @@
 	<script src="/assets/js/eneeyes-site-controller.js"></script>
 	<script src="/assets/js/message-translate.js"></script>	 
 	<script src="/assets/js/jsFunctions.js"></script>
+	<script src="/assets/js/user-controller.js"></script>
  	<script src="/assets/js/controllers/controller-controller.js"></script> 
 	<script src="/assets/js/controllers/transmitter-controller.js"></script>
 	<script src="/assets/js/controllers/sensor-controller.js"></script>
@@ -86,6 +87,7 @@
 	
 		
 	<!-- PAGE LEVEL SERVICES -->
+	<script src="/assets/js/user-services.js"></script>
 	<script src="/assets/js/services/controller-service.js"></script>
 	<script src="/assets/js/services/transmitter-service.js"></script>					
 	<script src="/assets/js/services/manufacturer-service.js"></script>

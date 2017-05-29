@@ -38,8 +38,7 @@ public class RoleServiceImpl implements RoleService {
 		Role target = new Role();
 		target.setId(source.getId());
 		target.setName(source.getName());
-		target.setValue(source.getValue());
-		target.setStatus(source.getStatus());
+
 		return target;
 	}
 

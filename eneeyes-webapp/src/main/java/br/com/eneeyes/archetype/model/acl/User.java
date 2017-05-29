@@ -3,6 +3,7 @@ package br.com.eneeyes.archetype.model.acl;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -36,12 +37,9 @@ public class User implements Serializable {
 	@Column(name="ID_")
 	private Long id;
 	
-//	@Column(name="CPF_")
-//	private String cpf;
-	
-//	@Column(name="CNPJ_")
-//	private String cnpj;
-	
+	@Column(name="CPF_")
+	private String cpf;
+
 	@Column(name="DISPLAYNAME_")
 	private String displayName;
 	
@@ -62,7 +60,7 @@ public class User implements Serializable {
 	joinColumns= @JoinColumn(name="USER_ID_", referencedColumnName="ID_"), 
 	inverseJoinColumns= @JoinColumn(name="ROLE_ID_", referencedColumnName="ID_"))
 	private Set<Role> roles = new HashSet<Role>();
-	
+		
 	@Column(name="LOGIN_", unique=true, nullable=false, length=100)
 	@NotBlank
 	private String login;
@@ -78,15 +76,6 @@ public class User implements Serializable {
 	@Column(name="CREATE_DATE_", nullable=false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createDate;
-	
-//	@Column(name="PROVIDER_ID_")
-//	private String providerId;
-//	
-//	@Column(name="PROVIDER_USER_ID_", unique=true, length=100)
-//	private String providerUserId;
-//	
-//	@Column(name="PROFILE_URL_")
-//	private String profileUrl;
 	
 	@Column(name="IMAGE_URL_")
 	private String imageUrl;
@@ -118,34 +107,52 @@ public class User implements Serializable {
 
 	public User(UserDto userDto) {
 		this.id = userDto.getId();
-//		this.cpf = userDto.getCpf();
-//		this.cnpj = userDto.getCnpj();
+		this.cpf = userDto.getCpf();
 		this.displayName = userDto.getDisplayName();
 		this.nickname = userDto.getNickname();
 		this.fone = userDto.getFone();
 		this.cell = userDto.getCell();
 		this.email = userDto.getEmail();
-		this.roles = setHoles(userDto.getRole());
+//		this.roles = setHoles(userDto.getRole());
+		
+		if(userDto.getRoles() != null)
+			this.roles = parseRoles(userDto.getRoles());
+		
 		this.login = userDto.getLogin();
 		this.hash = userDto.getHash();
 		this.status = userDto.getStatus();
 		this.createDate = userDto.getCreateDate();		
-//		this.providerId = userDto.getProviderId();
-//		this.providerUserId = userDto.getProviderUserId();
-//		this.profileUrl = userDto.getProfileUrl();
-//		this.imageUrl = userDto.getImageUrl();
 //		this.accessToken = userDto.getAccessToken();
 //		this.secret = userDto.getSecret();
 		this.refreshToken = userDto.getRefreshToken();
 		this.expireTime = userDto.getExpireTime();
 	}
 
-	private Set<Role> setHoles(Long roleType) {
-		Set<Role> roles = new HashSet<Role>();
-		Role role = new Role();
-		role.setId(roleType);
-		roles.add(role);
-		return roles;
+//	private Set<Role> setHoles(Long roleType) {
+//		Set<Role> roles = new HashSet<Role>();
+//		Role role = new Role();
+//		role.setId(roleType);
+//		roles.add(role);
+//		return roles;
+//	}
+	
+	public final void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	
+	private final Set<Role> parseRoles(List<Role> roles) {		
+		Set<Role> lista = new HashSet<Role>();		
+		
+		for (Role item   : roles) {
+			
+			Role role = new Role();
+			role.setId(item.getId());
+			role.setName(item.getName());
+		
+			lista.add(role);			
+		}		
+		return lista;		
 	}
 	
 	/**
@@ -162,33 +169,19 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-//	/**
-//	 * @return the cpf
-//	 */
-//	public String getCpf() {
-//		return cpf;
-//	}
-//
-//	/**
-//	 * @param cpf the cpf to set
-//	 */
-//	public void setCpf(String cpf) {
-//		this.cpf = cpf;
-//	}
-//
-//	/**
-//	 * @return the cnpj
-//	 */
-//	public String getCnpj() {
-//		return cnpj;
-//	}
-//
-//	/**
-//	 * @param cnpj the cnpj to set
-//	 */
-//	public void setCnpj(String cnpj) {
-//		this.cnpj = cnpj;
-//	}
+	/**
+	 * @return the cpf
+	 */
+	public String getCpf() {
+		return cpf;
+	}
+
+	/**
+	 * @param cpf the cpf to set
+	 */
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
 	/**
 	 * @return the displayName
@@ -267,12 +260,12 @@ public class User implements Serializable {
 		return roles;
 	}
 
-	/**
-	 * @param roles the roles to set
-	 */
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
+//	/**
+//	 * @param roles the roles to set
+//	 */
+//	public void setRoles(Set<Role> roles) {
+//		this.roles = roles;
+//	}
 
 	/**
 	 * @return the login
@@ -329,48 +322,6 @@ public class User implements Serializable {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-
-//	/**
-//	 * @return the providerId
-//	 */
-//	public String getProviderId() {
-//		return providerId;
-//	}
-//
-//	/**
-//	 * @param providerId the providerId to set
-//	 */
-//	public void setProviderId(String providerId) {
-//		this.providerId = providerId;
-//	}
-//
-//	/**
-//	 * @return the providerUserId
-//	 */
-//	public String getProviderUserId() {
-//		return providerUserId;
-//	}
-
-//	/**
-//	 * @param providerUserId the providerUserId to set
-//	 */
-//	public void setProviderUserId(String providerUserId) {
-//		this.providerUserId = providerUserId;
-//	}
-//
-//	/**
-//	 * @return the profileUrl
-//	 */
-//	public String getProfileUrl() {
-//		return profileUrl;
-//	}
-//
-//	/**
-//	 * @param profileUrl the profileUrl to set
-//	 */
-//	public void setProfileUrl(String profileUrl) {
-//		this.profileUrl = profileUrl;
-//	}
 
 	/**
 	 * @return the imageUrl

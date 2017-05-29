@@ -81,7 +81,6 @@ insert into gas (name, cas, formula) values ('Chlorine Dioxide', '10049-04-4',	'
 
 /* INCLUIR ROLES */
 INSERT INTO `enedb`.`aln_id_role` (`NAME_`, `STATUS_`, `VALUE_`) VALUES ('ADMINISTRATOR', 'ACTIVE', 'ADM');
-INSERT INTO `enedb`.`aln_id_role` (`NAME_`, `STATUS_`, `VALUE_`) VALUES ('CONTRACTOR', 'ACTIVE', 'CTR');
 INSERT INTO `enedb`.`aln_id_role` (`NAME_`, `STATUS_`, `VALUE_`) VALUES ('MANAGER', 'ACTIVE', 'MNG');
 INSERT INTO `enedb`.`aln_id_role` (`NAME_`, `STATUS_`, `VALUE_`) VALUES ('OPERATOR', 'ACTIVE', 'OPR');
 

@@ -56,8 +56,6 @@ public final class SimpleSignInAdapter implements SignInAdapter {
 		if(user == null) {
 			user = new User();
 			user.setLogin(data.getProviderUserId());
-//			user.setProviderUserId(data.getProviderUserId());
-//			user.setProviderId(data.getProviderId());
 			user.setNickname(data.getDisplayName());
 			user.setStatus(UserStatus.ACTIVE);
 			
@@ -66,7 +64,6 @@ public final class SimpleSignInAdapter implements SignInAdapter {
 		}
 		
 		user.setDisplayName(data.getDisplayName());
-//		user.setProfileUrl(data.getProfileUrl());
 		user.setImageUrl(data.getImageUrl());
 //		user.setAccessToken(data.getAccessToken());
 //		user.setSecret(data.getSecret());
@@ -76,14 +73,15 @@ public final class SimpleSignInAdapter implements SignInAdapter {
 		ids.save(user);
 		
 		List<GrantedAuthority> grants = new ArrayList<GrantedAuthority>();
+		
 		for(Role role : user.getRoles()) {
-			final String roleValue = role.getValue();
+			final String roleName = role.getName();
 			grants.add(new GrantedAuthority() {
 				
 				private static final long serialVersionUID = 4490745121463633506L;
 
 				public String getAuthority() {
-					return roleValue;
+					return roleName;
 				}
 			});				
 		}

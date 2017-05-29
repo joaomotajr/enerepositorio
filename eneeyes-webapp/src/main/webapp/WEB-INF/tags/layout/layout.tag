@@ -3,6 +3,8 @@
 <%@ attribute name="context" required="false" type="java.lang.String" %>
 
 <c:set var="context" value="${(empty context) ? 'default' : context}"/>
+<c:set var="tipoUsuario" value="${(empty tipoUsuario) ? '' : tipoUsuario}"/>
+<c:set var="idUsuario" value="${(empty idUsuario) ? '' : idUsuario}"/>
 
 <html lang="en" data-ng-app="eneeyes">
 	
@@ -23,6 +25,8 @@
     <body data-ng-controller="SiteController" data-ng-cloak class="hold-transition skin-blue sidebar-mini">	
        
         <input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="hidden" id="tipoUsuario" value="${tipoUsuario}">
+        <input type="hidden" id="idUsuario" value="${idUsuario}">
         
         <div class="wrapper" >
 	    	<span id="rootMenu">

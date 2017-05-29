@@ -82,19 +82,6 @@ public class SecurityManager implements AuthenticationManager {
 		
 		return createAuth(user);
 	}
-	
-//	public Authentication authenticate(String cnpj) {
-//		User user;
-//		try {
-//			user = identityDao.findByCnpj(cnpj).getUser();
-//			if (user != null) {
-//				return createAuth(user);
-//			}
-//		} catch (Exception e) {
-//			log.error(e);
-//		}
-//		return null;
-//	}
 
     public Authentication createAuth(final User user) {
         List<GrantedAuthority> grants = new ArrayList<GrantedAuthority>();
@@ -108,15 +95,16 @@ public class SecurityManager implements AuthenticationManager {
             }
         });
 
-        if(UserStatus.ACTIVE.equals(user.getStatus())) {
+        if(UserStatus.ACTIVE.equals(user.getStatus())) {	
             for(Role role : user.getRoles()) {
-                final String roleValue = role.getValue();
+                final String roleName = role.getName();
+                
                 grants.add(new GrantedAuthority() {
 
                     private static final long serialVersionUID = 4490745121463633506L;
 
                     public String getAuthority() {
-                        return roleValue;
+                        return roleName;
                     }
                 });
             }

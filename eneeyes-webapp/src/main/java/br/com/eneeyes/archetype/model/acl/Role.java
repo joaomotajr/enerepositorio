@@ -6,8 +6,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="aln_id_role")
@@ -31,19 +28,11 @@ public class Role implements Serializable {
 	@Column(name="NAME_", unique=true, nullable=false, length=100)
 	private String name;
 	
-	@Column(name="VALUE_", unique=true, nullable=false, length=100)
-	@Pattern(regexp="[A-Z]{3,100}")
-	private String value;
-	
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="aln_id_role_permissions", 
 		joinColumns= @JoinColumn(name="ROLE_ID_", referencedColumnName="ID_"), 
 		inverseJoinColumns= @JoinColumn(name="PERMISSION_ID_", referencedColumnName="ID_"))
 	private Set<Permission> permissions = new HashSet<Permission>();
-	
-	@Column(name="STATUS_", nullable=false)
-	@Enumerated(EnumType.STRING)
-	private RoleStatus status;
 	
 	public Role() {
 		super();
@@ -57,8 +46,6 @@ public class Role implements Serializable {
 	public Role(String name, String value, RoleStatus status) {
 		super();
 		this.name = name;
-		this.value = value;
-		this.status = status;
 	}
 
 	public Long getId() {
@@ -77,14 +64,6 @@ public class Role implements Serializable {
 		this.name = name;
 	}
 
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
 	public Set<Permission> getPermissions() {
 		return permissions;
 	}
@@ -93,17 +72,8 @@ public class Role implements Serializable {
 		this.permissions = permissions;
 	}
 
-	public RoleStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(RoleStatus status) {
-		this.status = status;
-	}
-
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", name=" + name + ", value=" + value
-				+ ", permissions=" + permissions + ", statusSendMessage=" + status + "]";
+		return "Role [id=" + id + ", name=" + name + "permissions=" + permissions + "]";
 	}
 }

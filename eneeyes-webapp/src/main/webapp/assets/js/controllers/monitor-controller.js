@@ -24,14 +24,18 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 		
 		$scope.loading = true;	
 		                                                    
-		 $scope.listAllDashCompaniesAlarm = new ViewService.listAllDashCompaniesAlarm();		 
-		 $scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function(){
+		$scope.listAllDashCompaniesAlarm = new ViewService.listAllDashCompaniesAlarm();		 
+		$scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			 
-			 $scope.dashCompaniesAlarmCreated = [];
-			 $scope.dashCompaniesAlarmReaded = [];	
-			 $scope.alarmsCount = $scope.listAllDashCompaniesAlarm.list.length;
+			$scope.dashCompaniesAlarmCreated = [];
+			$scope.dashCompaniesAlarmReaded = [];	
 			 
-			 $scope.listAllDashCompaniesAlarm.list.forEach(
+			if(!$scope.listAllDashCompaniesAlarm.list)
+				return;
+			
+			$scope.alarmsCount = $scope.listAllDashCompaniesAlarm.list.length;
+			 
+			$scope.listAllDashCompaniesAlarm.list.forEach(
 				 function(e) {			
 					 					 
 					 e.last_update_full = e.last_update;
@@ -48,9 +52,9 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 					
 					
 				}	
-			 );		 			 
+			);		 			 
 				 
-			 $scope.loading = undefined;
+			$scope.loading = undefined;
          	         	
        });		 
 	 }	

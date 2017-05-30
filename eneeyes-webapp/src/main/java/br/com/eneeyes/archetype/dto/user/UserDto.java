@@ -51,12 +51,6 @@ public class UserDto implements Serializable {
 		this.cell = user.getCell();
 		this.email = user.getEmail();
 		
-//		if(user.getRoles() != null) {
-//			Iterator<Role> iter = user.getRoles().iterator();
-//			Role role = (Role) iter.next();
-//			this.role = role.getId();
-//		}
-		
 		if(user.getRoles() != null)
 			this.roles = parseRoles(user.getRoles());
 		

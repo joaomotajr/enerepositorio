@@ -31,7 +31,7 @@ public class SecurityManager implements AuthenticationManager {
 	
 	private String SIGNIN_ERROR = "signin.error";
 	private String SIGNIN_INACTIVE = "signin.inactive";
-	private String PASSWORD_EXPIRED = "password.expired";
+	private String SIGNIN_NEW = "signin.new";
 
     public Authentication authenticate(Authentication authentication)
             throws AuthenticationException  {
@@ -69,10 +69,10 @@ public class SecurityManager implements AuthenticationManager {
                     throw new BadCredentialsException(SIGNIN_ERROR);
                 }
                 
-                //Senha expirada
-                if(identityDao.senhaExpirada(user)) {
-                	log.error("Usuario com senha expirada: " + user.getLogin());
-                	throw new BadCredentialsException(PASSWORD_EXPIRED+"#"+user.getId()+"#"+user.getDisplayName());
+                //Deve Trocar a 
+                if(identityDao.deveTrocarSenha(user)) {
+                	log.error("Usuario Deve Trocar Senha: " + user.getLogin());
+                	throw new BadCredentialsException(SIGNIN_NEW);
                 }
                 
             }

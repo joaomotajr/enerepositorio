@@ -54,9 +54,6 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
 	@Autowired
 	private RoleService roleService;
 
-//    @Inject
-//    private SiteService siteService;
-
 	@Override
 	public UserCollectionResult newResultCollection() {
 		return new UserCollectionResult();
@@ -187,71 +184,11 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
 	}
 
 	@Override
-	public UserResult recoverPassword(String email1, String email2) {
-		UserResult result = new UserResult();
-		result.setResultType(ResultMessageType.SUCCESS);
-
-		try {
-			if (!Pattern.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", email1)) {
-                result.addMessage(new ResultErrorMessage("form.erro.site.forgetPassword.invalido"));
-                return result;
-            }
-
-			if (!email1.equals(email2)) {
-                result.addMessage(new ResultErrorMessage("form.erro.site.forgetPassword.naoConfere"));
-                return result;
-            }
-
-			User user = repository.findByLogin(email1);
-			if (user == null) {
-                result.addMessage(new ResultErrorMessage("form.erro.site.forgetPassword.naoEncontrado"));
-                return result;
-            }
-
-//			String to = user.getLogin();
-//			String key = UUID.randomUUID().toString();
-//			String urlTemplate = this.getClass().getClassLoader().getResource("/templates/recover-password.html").toString().replace("file:", "");
-//			String message = FileUtils.readFileToString(new File(urlTemplate)).replace("{{KEY}}",key);
-//			String subject = "Eneneyes - Recuperação de senha";
-						
-			//siteService.SendEmail(to, subject, message);
-
-			Calendar calendar = Calendar.getInstance();
-			calendar.add(Calendar.DATE, 3);
-			
-			Map<String, Object> token = new HashMap<String, Object>();
-			
-			token.put("expire",calendar.getTime());
-			token.put("hash",MessageDigester.digestSha1(user.getHash()));
-			
-//			String json = objectMapper.writeValueAsString(token);
-//			String refreshToken = MessageDigester.encode64(json);
-
-//			user.setHash(MessageDigester.digestSha1(key).toString());
-//			user.setRefreshToken(refreshToken);
-
-			UserResult r = save(user);
-			if (r.hasError()) {
-				result.addMessage(new ResultErrorMessage("form.erro.site.forgetPassword.system"));
-				return result;
-			}
-
-			result.addMessage(new ResultSuccessMessage("form.success.site.recoverPassword"));
-		} catch (Exception e) {
-			log.error(e);
-			result.addMessage(new ResultErrorMessage("form.erro.site.forgetPassword.system"));
-		} catch (Throwable t) {
-			log.error(t);
-			result.addMessage(new ResultErrorMessage("form.erro.site.forgetPassword.system"));
-		}
-
-		return result;
-	}
-
-	@Override
     public UserResult changePassword(String pass1, String pass2) {
-        UserResult result = new UserResult();
+        
+		UserResult result = new UserResult();
         ResultMessageType resultType = ResultMessageType.SUCCESS;
+        
         try {
             User user = repository.findOne(securityManager.currentUser().getId());
 
@@ -275,24 +212,19 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
 
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.DATE, 3);
+            
             Map<String, Object> token = new HashMap<String, Object>();
+            
             token.put("expire",calendar.getTime());
             token.put("hash",MessageDigester.digestSha1(pass1));
-//            String json = objectMapper.writeValueAsString(token);
-//            String refreshToken = MessageDigester.encode64(json);
+            
+            String json = objectMapper.writeValueAsString(token);
+            String refreshToken = MessageDigester.encode64(json);
 
             user.setHash(MessageDigester.digestSha1(pass1).toString());
-//            user.setRefreshToken(refreshToken);
-            save(user);
-
-//            String to = user.getLogin();
-//            String urlTemplate = this.getClass().getClassLoader().getResource("/templates/change-password-mail.html").toString().replace("file:","");
-//            String message = FileUtils.readFileToString(new File(urlTemplate)).replace("{{REFRESH_TOKEN}}",refreshToken);
-//            
-//            String subject = "Eneneyes - Sua senha foi alterada";
-//
-//            siteService.SendEmail(to, subject, message);
+            user.setRefreshToken(refreshToken);
             
+            save(user);
 
             result.addMessage(new ResultSuccessMessage("form.success.site.changePassword"));
         } catch (Throwable throwable) {
@@ -337,7 +269,7 @@ public class IdentityServiceImpl extends ServiceListEmbedded<User, UserCriteria,
 	}
 
 	  @Override
-	  public boolean senhaExpirada(User user) throws Exception
+	  public boolean deveTrocarSenha(User user) throws Exception
 	  {
 	    // TODO Auto-generated method stub
 	    return false;

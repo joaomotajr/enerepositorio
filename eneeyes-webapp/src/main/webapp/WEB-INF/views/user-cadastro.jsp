@@ -1,21 +1,14 @@
-<!-- MENSAGENS -->
-<div class="row">
-	<p translate="{{messageCadastro}}" data-ng-show="messageCadastro.length" class="col-md-10 col-md-offset-1 alert alert-info" style="text-align: center;"></p>
-	<p translate="{{messageCadastroError}}" data-ng-show="messageCadastroError.length" class="col-md-10 col-md-offset-1 alert alert-danger" style="text-align: center;"></p>
-</div>
 
 <!-- FORMULARIO DE CADASTRO/EDICAO DE USUARIO -->
 <form novalidate="novalidate" name="formCadastro" class="form-horizontal" data-ng-submit="saveUser()">
+	
 	<div class="form-group ">
 		<label class="col-sm-4 col-md-2 control-label" title="CPF do Cliente">CPF* </label>
 		<div class="col-sm-6 col-md-3">
 			<input type="text" name="cpf" class="form-control" data-mask="999.999.999-99" mask data-ng-model="user.cpf" required="required">
-		</div>	
-		<label class="col-sm-4 col-md-3 control-label">CNPJ Raiz* </label>
-		<div class="col-sm-6 col-md-3" ng-if="userLogado.isAdmin">
-			<input type="text" name="cnpj" class="form-control" data-mask="99.999.999" mask data-ng-model="user.cnpj" required="required">
-		</div>				
+		</div>						
 	</div>	
+	
 	<div class="form-group ">
 		<label class="col-sm-4 col-md-2 control-label" title="Nome do Cliente">Nome* </label>
 		<div class="col-sm-6 col-md-3">
@@ -26,6 +19,7 @@
 			<input type="text" class="form-control" data-ng-model="user.nickname">
 		</div>
 	</div>
+	
 	<div class="form-group ">
 		<label class="col-sm-4 col-md-2 control-label" title="Cidade">Telefone </label>
 		<div class="col-sm-6 col-md-3">
@@ -35,7 +29,8 @@
 		<div class="col-sm-6 col-md-3" >
 			<input type="text" class="form-control" data-mask="(99) 99999-9999" mask data-ng-model="user.cell">
 		</div>
-	</div>	
+	</div>
+		
 	<div class="form-group ">
 		<label class="col-sm-4 col-md-2 control-label" title="Cidade">E-mail </label>
 		<div class="col-sm-6 col-md-3">
@@ -52,6 +47,7 @@
 			</select>
 		</div>
 	</div>	
+	
 	<div class="form-group">
 		<label class="col-sm-4 col-md-2 control-label">Login*</label>
 		<div class="col-sm-6 col-md-3">
@@ -62,14 +58,11 @@
 			<input type="password" class="form-control" data-ng-model="user.hash" data-ng-disabled="isEdit" required="required">
 		</div>
 	</div>	
+	
 	<br />	
+	
 	<div class="btn-block">
 		<div class="col-sm-12" align="right">
-		
-			<!-- Botao Incluir Filial -->
-			<a class="btn btn-success" data-ng-show="isEdit && userLogado.isAdmin && user.role == 2"  data-ng-click="clearMessageCadastro()" data-toggle="modal" data-target="#modalCadastrarFilial">
-				<i class="icon-briefcase icon-white"></i>&nbsp;Adicionar Filial
-			</a>
 		
 			<!-- Botao Excluir -->
 			<a class="btn btn-danger" data-ng-show="isEdit" data-ng-click="clearMessageCadastro()" data-toggle="modal" data-target="#modalExcluirUser">

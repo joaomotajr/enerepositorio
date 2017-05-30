@@ -136,8 +136,8 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 
     $scope.signin = function() {
     	
-    	$scope.forms.signin.login = "joaomotajunior@gmail.com"
-    	$scope.forms.signin.credential = "123456";
+//    	$scope.forms.signin.login = "joaomotajunior@gmail.com"
+//    	$scope.forms.signin.credential = "123456";
     		
         angular.element('html').addClass('loading');
         angular.element('#signin-error').css('display','none');
@@ -148,7 +148,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
             login : $scope.forms.signin.login,
             credential : $scope.forms.signin.credential,
         });
-        $scope.result.$save({_csrf : angular.element('#_csrf').val()},function(){
+        $scope.result.$save({_csrf : angular.element('#_csrf').val()}, function(){
             if($scope.result.resultType == 'SUCCESS') {
                 window.location.href = '/';
             } else {
@@ -160,10 +160,20 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
             		var userId = $scope.errorMessage.split('#')[1];
             		var username = $scope.errorMessage.split('#')[2];
             		
-            		if(errorMessage == 'password.expired') {
+            		if(errorMessage == 'signin.new') {
             			angular.element('#signin-alert').css('display','block');
+            			
             			$scope.forms.signexpired.userId = userId;
             			$scope.forms.signexpired.username = username;
+            		}		
+        			else if(errorMessage == "signin.error") {
+
+            			$scope.errorMessage = 'Usuário ou Senha Inválidos!!!';
+
+            			angular.element('#signin-error').css('display','block');
+            			angular.element('#signin-user').addClass('has-error');
+            			angular.element('#signin-pass').addClass('has-error');            		
+            			
             		} else {
             			angular.element('#signin-error').css('display','block');
             			angular.element('#signin-user').addClass('has-error');
@@ -181,35 +191,6 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 				},2500);
 			}
 		});
-    };
-
-    $scope.verificaUsuario = function() {
-    	angular.element('body').addClass('loading');
-        var success = true;
-        var deferred = $q.defer();
-
-        $http.post('/api/perfil/verifica-usario?_csrf='+angular.element('#_csrf').val(),{email:$scope.forms.signup.email})
-        .success(function(data) {
-        	angular.element('body').removeClass('loading');
-            done = true;
-            if (data.errorMessages.length > 0) {
-                deferred.resolve(false);
-                $scope.forms.signup.errorMessage = data.errorMessages[0].message;
-            } else {
-                deferred.resolve(true);
-            }
-        })
-		.error(function(data, status) {
-			if (status >= 400 && status <= 505 ) {
-				angular.element('body').removeClass('loading');
-				angular.element('.session-expired').modal('show');
-				$timeout(function(){
-					window.location.href='/';
-				},2500);
-			}
-		});
-
-        return deferred.promise;
     };
 
 	$scope.clearForgetPasswordForm = function () {

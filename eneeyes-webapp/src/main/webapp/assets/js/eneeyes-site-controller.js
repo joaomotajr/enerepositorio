@@ -1,9 +1,15 @@
 app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin, $sce) {
 
+	$scope.$root.recolheLogo = true;
+	
 	$scope.$root.timer = [];
 	$scope.$root.currentPage = "";
 	$scope.$root.errorTimes = 0;
 	$scope.$root.currentTabOpened = "";
+	
+	$scope.showLogo = function(){
+		$scope.$root.recolheLogo = !$scope.$root.recolheLogo; 
+	}
 	
 	$scope.LoadAjaxContentCompany = function(url){
 		$http.get(url)

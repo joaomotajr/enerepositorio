@@ -1,8 +1,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sec:csrfMetaTags />
-        <!-- MENU SECTION - Modificado  -->       
-       <!-- Left side column. contains the logo and sidebar -->
+    <!-- MENU SECTION - Modificado  -->       
+    
+    <!-- Left side column. contains the logo and sidebar -->
 	<aside class="main-sidebar">
 		
         <!-- sidebar: style can be found in sidebar.less -->
@@ -18,20 +19,14 @@
 				  	<!-- Status -->
 				  	<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 				</div>
-			</div>
-			
-			<!-- 
-			<div class="row">
-				<span class="logo-lg">	 		
-					<img src="/assets/img/Logo_e-GAS.PNG" style="background-color: white; float: left; margin-left: 20px; padding:5px; width: 85%;">			
-				</span>
-			</div>
-			 -->
+			</div>	
+
 			<div class="row"> 
-				<a href="#" class="logo-lg" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"> <!-- mini logo for sidebar mini 50x50 pixels -->
-					
-				 	<span class="logo-lg">	 		
-			 			<img src="/assets/img/Logo_e-GAS.PNG" style="background-color: white; float: left; margin-left: 20px; padding:5px; width: 85%;"> 			 
+				
+				<a href="#" data-ng-controller="SiteController" class="logo-lg" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')">
+									 	 			 
+				 	<span class="logo-lg" >	 		
+			 			<img data-ng-if="recolheLogo" src="/assets/img/Logo_e-GAS.PNG" style="background-color: white; float: left; margin-left: 20px; padding:5px; width: 85%;"> 			 
 					</span>
 					
 				</a>
@@ -151,8 +146,7 @@
 	              	
               		<ul class="treeview-menu">                		
                 		<li>
-                			<a href="#" data-ng-click="LoadAjaxContent('userPesquisa.html', 'Usuários')"><i class="fa fa-users text-yellow"></i> <span>Usuários</span>
-                			<span class="label label-warning pull-right">Testing</span></a>
+                			<a href="#" data-ng-click="LoadAjaxContent('userPesquisa.html', 'Usuários')"><i class="fa fa-users text-yellow"></i> <span>Usuários</span></a>
                 		</li>                		
                 		<li><a href="#" data-ng-click="LoadAjaxContent('companies.html', 'Empresas')"><i class="fa fa-industry"></i> Empresa</a></li> 
                 		

@@ -1,63 +1,54 @@
-	<div data-ng-controller="UserController">
+
+	<div data-ng-controller="UserController as UserController">
 		<div class="row">				                                                    
-			<div class="col-md-12">                                                        
+			<div class="col-md-10">                                                        
 				<div class="box box-primary" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
-					<div class="box-header">
+					<div class="box-header">					  
 					  <h3 class="box-title">Gerenciamento e Pesquisa de Usu&aacute;rios</h3>
-					  <a href="#" class="text-muted pull-right" data-ng-click="refresh();"><i title="Refresh" class="fa fa-refresh"></i></a>
+					  <a href="#" class="text-muted pull-right" data-ng-click="refreshAlarms();"><i title="Refresh" class="fa fa-refresh"></i></a>
 					</div>
-					
-					<div class="box-body">				
-											
-						<!-- RESULTA DA PESQUISA -->
-						<div class="row">
-							<div class="col-md-12">
-								<div class="panel panel-info">
-									<div class="panel-heading"> Resultado </div>
-									<div class="panel-body">
-										<div class="table-responsive">
-											<table class="table table-striped table-bordered table-hover">
-						                        <thead>
-													<tr>
-														<th width="150px">CPF</th>
-														<th width="200px">Nome</th>
-														<th>Login</th>
-														<th>Tipo</th>
-														<th>Status</th>
-														<th>Data de Cria&ccedil;&atilde;o</th>
-													</tr>
-						                        </thead>
-												<tbody>
-													<tr data-ng-repeat="user in pesquisa.listUser" data-ng-class="{'danger' : user.status == 'INACTIVE', 'success' : user.status == 'ACTIVE'}"
-															   data-toggle="modal" data-target="#modalDetalheUser" data-ng-click="detalheUser($index)">
-															   
-														<td width="150px" align="center">{{cpfFormatter(user.cpf)}}</td>
-														<td width="200px">{{user.displayName}}</td>									
-														<td>{{user.login}}</td>
-														<td align="center">{{user.roles[0].name}}</td>
-														<td align="center">{{getStatus(user.status)}}</td>
-														<td align="center">{{user.createDate | date: 'dd/MM/yyyy'}}</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>						                                                 
-					</div>
-					
-					<div class="box-footer">
-						<div class="form-group">
-							<div class="col-sm-12" align="left">
-								<a class="btn btn-success" data-toggle="modal" data-target="#modalCadastrarUser" 
-									data-ng-click="novoUsuario()"><i class="icon-plus icon-white"></i>&nbsp;Novo Usu&aacute;rio</a>
-							</div>
-						</div>						                                                                
+					<div class="box-body">
+						<div style="height: 500px; overflow: auto;">
+							<table class="table table-striped table-bordered table-hover">
+		                        <thead>
+									<tr>
+										<th width="150px">CPF</th>
+										<th width="200px">Nome</th>
+										<th>Login</th>
+										<th>Tipo</th>
+										<th>Status</th>
+										<th>Data de Cria&ccedil;&atilde;o</th>
+									</tr>
+		                        </thead>
+								<tbody>
+									<tr data-ng-repeat="user in pesquisa.listUser" data-ng-class="{'danger' : user.status == 'INACTIVE', 'success' : user.status == 'ACTIVE'}">
+											   
+										<td width="150px" align="center">{{cpfFormatter(user.cpf)}}</td>
+										<td width="200px">{{user.displayName}}</td>									
+										<td>{{user.login}}</td>
+										<td align="center">{{user.roles[0].name}}</td>
+										<td align="center">{{getStatus(user.status)}}</td>
+										<td align="center">{{user.createDate | date: 'dd/MM/yyyy'}}</td>
+										
+										<td>
+											<button type="button" class="btn btn-primary btn-xs" data-ng-click="detalheUser($index)" data-toggle="modal" data-target="#modalDetalheUser">editar</button>
+										</td>
+										<td>
+											<button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteAlarm($index)">excluir</button>
+										</td>
+										
+									</tr>
+								</tbody>
+							</table>							
 						
+						</div>                                                       
+					</div>
+					
+					<div class="box-footer">									
+						<button type="button" data-ng-click="novoUsuario(); userForm.$setPristine()" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalCadastrarUser">Novo</button>
 					</div>
 				</div>
-				
+								
 				<div id="resultErro" class="alert alert-warning" role="alert" data-ng-show="msgErro" >
             		<button type="button" class="close" ><span data-ng-click="msgErro='';">&times;</span></button>
             		<strong>Alerta! </strong>{{msgErro}} 
@@ -86,14 +77,7 @@
 								<jsp:include page="user-cadastro.jsp"/>
 							</div>
 						</div>
-										
-				  	</div>
-				  	
-				  	<div class="modal-footer">						
-						<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
-						<button type="button" data-ng-click="saveAlarm();" class="btn btn-primary" data-dismiss="modal"
-							data-ng-disabled="(emailValid && mobileValid && emailValid1 && mobileValid1 && userForm.$valid && !(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3)) ? false : true">Salvar
-						</button>						                                
+																
 				  	</div>
 				  	
 			  	</div>
@@ -117,8 +101,7 @@
 		        </div>
 		    </div>
 		</div>
-		
-		
+			
 		<!-- MODAL EXCLUSAO DE USUARIO -->
 		<div id="modalExcluirUser" class="modal fade col-md-offset-3 col-md-6" style="margin-top: 130px;">
 		    <div class="modal-dialog">

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,6 +27,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.eneeyes.archetype.dto.user.UserDto;
+import br.com.eneeyes.main.model.views.CompanyView;
 
 @Entity
 @Table(name="aln_id_user")
@@ -80,17 +83,15 @@ public class User implements Serializable {
 	@Column(name="IMAGE_URL_")
 	private String imageUrl;
 	
-//	@Column(name="ACCESS_TOKEN_")
-//	private String accessToken;
-	
-//	@Column(name="SECRET_")
-//	private String secret;
-	
 	@Column(name="REFRESH_TOKEN_")
 	private String refreshToken;
 	
 	@Column(name="EXPIRE_TIME_")
 	private Long expireTime;
+	
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="COMPANY_ID", nullable = false)
+	private CompanyView company;
 
 	public User() {
 		super();
@@ -113,7 +114,6 @@ public class User implements Serializable {
 		this.fone = userDto.getFone();
 		this.cell = userDto.getCell();
 		this.email = userDto.getEmail();
-//		this.roles = setHoles(userDto.getRole());
 		
 		if(userDto.getRoles() != null)
 			this.roles = parseRoles(userDto.getRoles());
@@ -121,20 +121,11 @@ public class User implements Serializable {
 		this.login = userDto.getLogin();
 		this.hash = userDto.getHash();
 		this.status = userDto.getStatus();
-		this.createDate = userDto.getCreateDate();		
-//		this.accessToken = userDto.getAccessToken();
-//		this.secret = userDto.getSecret();
+		this.createDate = userDto.getCreateDate();
 		this.refreshToken = userDto.getRefreshToken();
 		this.expireTime = userDto.getExpireTime();
+		this.company = userDto.getCompanyDto();
 	}
-
-//	private Set<Role> setHoles(Long roleType) {
-//		Set<Role> roles = new HashSet<Role>();
-//		Role role = new Role();
-//		role.setId(roleType);
-//		roles.add(role);
-//		return roles;
-//	}
 	
 	public final void setRoles(Set<Role> roles) {
 		this.roles = roles;
@@ -260,13 +251,6 @@ public class User implements Serializable {
 		return roles;
 	}
 
-//	/**
-//	 * @param roles the roles to set
-//	 */
-//	public void setRoles(Set<Role> roles) {
-//		this.roles = roles;
-//	}
-
 	/**
 	 * @return the login
 	 */
@@ -337,34 +321,6 @@ public class User implements Serializable {
 		this.imageUrl = imageUrl;
 	}
 
-//	/**
-//	 * @return the accessToken
-//	 */
-//	public String getAccessToken() {
-//		return accessToken;
-//	}
-//
-//	/**
-//	 * @param accessToken the accessToken to set
-//	 */
-//	public void setAccessToken(String accessToken) {
-//		this.accessToken = accessToken;
-//	}
-
-//	/**
-//	 * @return the secret
-//	 */
-//	public String getSecret() {
-//		return secret;
-//	}
-//
-//	/**
-//	 * @param secret the secret to set
-//	 */
-//	public void setSecret(String secret) {
-//		this.secret = secret;
-//	}
-
 	/**
 	 * @return the refreshToken
 	 */
@@ -391,6 +347,14 @@ public class User implements Serializable {
 	 */
 	public void setExpireTime(Long expireTime) {
 		this.expireTime = expireTime;
+	}
+	
+	public final CompanyView getCompany() {
+		return company;
+	}
+
+	public final void setCompany(CompanyView company) {
+		this.company = company;
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-app.controller('UserController', function ($scope, $timeout, $filter, UserService) {
+app.controller('UserController', function ($scope, $timeout, $filter, UserService, CompanyService) {
 
 	var arrayUser = [];
 	
@@ -238,7 +238,9 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 	
 	/** FUNCOES AUXILIARES */
     $scope.detalheUser = function(index) {
+    	
     	$scope.clearMessageCadastro();
+    	
     	$scope.index = index;
     	$scope.user.id = $scope.users.listUser[index].id;
     	$scope.user.cpf = $scope.cpfFormatter($scope.users.listUser[index].cpf);
@@ -377,13 +379,32 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		}
 	}
     
+    $scope.getCompanys = function() {
+		 
+		 $scope.resultCompanies = new CompanyService.listAllView();		 
+		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
+			 $scope.companies = $scope.resultCompanies.list;
+       });		 
+	}
+    
+    $scope.validEmail = function ($event) {	    	
+
+		 if (validateEmail( $scope.email )) {
+			 $scope.emailValid = true;
+		 }		 
+		 else {
+		    $scope.emailValid = false;
+		 }		 
+		 
+	 }
+    
     $scope.refresh = function() {
+    	$scope.clearUserModal();
     	$scope.pesquisaUser();
+    	$scope.getCompanys();
     }
     
-    $scope.clearUserModal();
-    $scope.pesquisaUser();
-    
+    $scope.refresh();
     $scope.getUserLogado();
     
     angular.element('body').removeClass('loading');

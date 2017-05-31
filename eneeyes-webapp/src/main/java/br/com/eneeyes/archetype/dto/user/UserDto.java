@@ -13,6 +13,7 @@ import br.com.eneeyes.archetype.model.acl.Role;
 import br.com.eneeyes.archetype.model.acl.User;
 import br.com.eneeyes.archetype.model.acl.UserStatus;
 import br.com.eneeyes.archetype.utils.MessageDigester;
+import br.com.eneeyes.main.model.views.CompanyView;
 
 @XmlRootElement
 public class UserDto implements Serializable {
@@ -24,10 +25,8 @@ public class UserDto implements Serializable {
 	private String nickname;
 	private String fone;
 	private String cell;
-	private String email;
-	//private Long role;
-	private List<Role> roles;
-	
+	private String email;	
+	private List<Role> roles;	
 	private String login;
 	private String hash;
 	private UserStatus status;
@@ -37,6 +36,7 @@ public class UserDto implements Serializable {
 	private String secret;
 	private String refreshToken;
 	private Long expireTime;
+	private CompanyView companyDto;
 	
 	public UserDto() {
 	}
@@ -59,10 +59,8 @@ public class UserDto implements Serializable {
 		this.status = user.getStatus();
 		this.createDate = user.getCreateDate();
 		this.imageUrl = user.getImageUrl();
-//		this.accessToken = user.getAccessToken();
-//		this.secret = user.getSecret();
-//		this.refreshToken = user.getRefreshToken();
 		this.expireTime = user.getExpireTime();
+		this.companyDto = user.getCompany();
 	}
 	
 	private final List<Role> parseRoles(Set<Role> roles) {		
@@ -86,10 +84,7 @@ public class UserDto implements Serializable {
 	public final void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-
 	
-	
-
 	/**
 	 * @return the id
 	 */
@@ -341,5 +336,12 @@ public class UserDto implements Serializable {
 	public void setExpireTime(Long expireTime) {
 		this.expireTime = expireTime;
 	}
+	
+	public final CompanyView getCompanyDto() {
+		return companyDto;
+	}
 
+	public final void setCompanyDto(CompanyView companyDto) {
+		this.companyDto = companyDto;
+	}
 }

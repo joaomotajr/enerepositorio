@@ -1,7 +1,48 @@
 
-<!-- FORMULARIO DE CADASTRO/EDICAO DE USUARIO -->
-<form novalidate="novalidate" name="formCadastro" class="form-horizontal" data-ng-submit="saveUser()">
-	
+	<div>
+		<form class="form" name="userForm" novalidate>
+		
+			<div class="row">
+			
+				<div class="col-md-4">													
+					<div class="box box-primary">				                    
+		               	<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Empresa</strong>
+		               		<strong class="text-red pull-right" data-ng-show='(userForm.companyName.$dirty && userForm.companyName.$invalid)'>  Campo Obrigatório</strong>
+		               	</div>
+		               	
+		                <div class="box-body">
+		                   	<div data-ng-class="{'has-error': userForm.companyName.$dirty && userForm.companyName.$invalid}">							               
+		                       <select name="companyName" class="form-control" data-live-search="true"
+		                           style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+		                               data-ng-options="item as item.name for item in companies | orderBy: 'name' track by item.uid" 
+		                                        data-ng-model="user.company" required>
+		                                        <option value="">Selecione</option> 
+		                       </select>    
+		                   	</div>
+		                   </div>			                    			                            
+		               </div>
+		       	</div>
+				<div class="col-md-8">
+					<div class="box box-primary">				                    
+			             <div class="box-header with-border"><strong>Nome</strong>
+				         	<strong class="text-red pull-right" data-ng-show='userForm.username.$error.required && !userForm.username.$pristine'>  [Nome Obrigatorio]</strong>
+							<strong class="text-red pull-right" data-ng-show='userForm.username.$error.maxlength'>Tamanho Máximo 12 caracteres</strong>
+			             </div>
+			             <div class="box-body">													                                                                        
+							<input class="form-control inputProfile" placeholder="Nome" data-ng-model="user.name" data-ng-maxlength="30" name="username" required>                                                                       
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="modal-footer">						
+		<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
+		<button type="button" data-ng-click="saveAlarm();" class="btn btn-primary" data-dismiss="modal"	data-ng-disabled="(userForm.$valid) ? false : true">Salvar</button>						                                
+ 	</div>
+ 	
+	<!-- 
 	<div class="form-group ">
 		<label class="col-sm-4 col-md-2 control-label" title="CPF do Cliente">CPF* </label>
 		<div class="col-sm-6 col-md-3">
@@ -58,28 +99,29 @@
 			<input type="password" class="form-control" data-ng-model="user.hash" data-ng-disabled="isEdit" required="required">
 		</div>
 	</div>	
-	
+	 
+	 
 	<br />	
 	
 	<div class="btn-block">
 		<div class="col-sm-12" align="right">
 		
-			<!-- Botao Excluir -->
+	
 			<a class="btn btn-danger" data-ng-show="isEdit" data-ng-click="clearMessageCadastro()" data-toggle="modal" data-target="#modalExcluirUser">
 				<i class="icon-remove icon-white"></i>&nbsp;Excluir
 			</a>
 			
-			<!-- Botao Ativar -->
+	
 			<a class="btn btn-success" data-ng-show="isEdit && user.status == 'INACTIVE'" data-ng-click="ativarUser()">
 				<i class="icon-ok icon-white"></i>&nbsp;Ativar
 			</a>
 			
-			<!-- Botao Inativar -->
+	
 			<a class="btn btn-warning" data-ng-show="isEdit && user.status == 'ACTIVE'" data-ng-click="clearMessageCadastro()" data-toggle="modal" data-target="#modalInativarUser">
 				<i class="icon-ban-circle icon-white"></i>&nbsp;Inativar
 			</a>
 			
-			<!-- Botao Salvar (Adicao) ou Atualizar (Atualizacao) -->
+	
 			<button type="submit"  class="btn btn-primary" data-ng-disabled="formCadastro.$invalid">
 				<div data-ng-show="isCad"><i class="icon-save icon-white"></i>&nbsp;Salvar</div>
 				<div data-ng-show="isEdit"><i class="icon-edit icon-white"></i>&nbsp;Atualizar</div>
@@ -87,5 +129,5 @@
 			
 		</div>
 		<sub data-ng-show="isCad" class="col-sm-4">* Preenchimento Obrigat&oacute;rio</sub>	
-	</div>				
-</form>
+	</div>
+	-->				

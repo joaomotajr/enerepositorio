@@ -132,9 +132,7 @@
 							        	
 							        	<div class="col-md-6">
 							        		<div class="box box-primary" style="padding-bottom: 0px; !important;">
-							        			<div class="box-header with-border"><strong><i class="fa fa-rss"></i> Dispositivos Associados a este Alarme</strong>
-							                		<strong class="text-red pull-right" data-ng-show="userForm.companyName.$dirty && userForm.companyName.$invalid">  Campo Obrigatório</strong>
-							                	</div>
+							        			<div class="box-header with-border"><strong><i class="fa fa-rss"></i> Dispositivos Associados a este Alarme</strong></div>
 							                	
 									        	<div class="box-body" style="padding-bottom: 0px; !important; padding-top: 0px; !important;">									        		                                                                                       
 				                                    <div class="list-group" style="max-height: 50px ! important; height:auto; overflow: auto; font-size: 0.9em  ! important">

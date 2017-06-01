@@ -1,4 +1,4 @@
-app.controller('UserController', function ($scope, $timeout, $filter, UserService, CompanyService) {
+app.controller('UserController', function ($scope, $timeout, $filter, UserService, CompanyService, RoleService) {
 
 	var arrayUser = [];
 	
@@ -175,7 +175,7 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
     		$scope.user.cpf = $scope.user.cpf.replace(/[\.-]/g, '');
     	}    	
     	
-    	$scope.pesquisa = new UserService.pesquisa($scope.user);
+    	$scope.pesquisa = new UserService.listAll();
         $scope.pesquisa.$users({_csrf : angular.element('#_csrf').val()}, function(){
         	
         	$('html').removeClass('loading');
@@ -184,8 +184,8 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
     		
         	setMessagePesquisa($scope.pesquisa);
         	
-        	if($scope.pesquisa != null && $scope.pesquisa.listUser != null)
-        		$scope.users.listUser = $scope.pesquisa.listUser;
+        	if($scope.pesquisa != null && $scope.pesquisa.list != null)
+        		$scope.users.listUser = $scope.pesquisa.list;
 
         },
 		function(data) {
@@ -368,6 +368,14 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
        });		 
 	}
     
+    $scope.getRoles = function() {
+		 
+		 $scope.resultRoles = new RoleService.listAll();		 
+		 $scope.resultRoles.$roles({_csrf : angular.element('#_csrf').val()}, function(){			
+			 $scope.roles = $scope.resultRoles.list;
+      });		 
+	}
+    
     $scope.validEmail = function ($event) {	    	
 
 		 if (validateEmail( $scope.email )) {
@@ -383,6 +391,7 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
     	$scope.clearUserModal();
     	$scope.pesquisaUser();
     	$scope.getCompanys();
+    	$scope.getRoles();
     }
     
     $scope.refresh();

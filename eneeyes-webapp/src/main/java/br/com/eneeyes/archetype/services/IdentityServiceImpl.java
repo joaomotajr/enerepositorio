@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.eneeyes.archetype.model.User;
 import br.com.eneeyes.archetype.repository.UserRepository;
-import br.com.eneeyes.archetype.result.UserResult;
+import br.com.eneeyes.archetype.result.IdentityResult;
 import br.com.eneeyes.archetype.utils.MessageDigester;
 import br.com.eneeyes.archetype.web.result.ResultErrorMessage;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
@@ -40,36 +40,9 @@ public class IdentityServiceImpl implements IdentityService {
 
 	@Autowired
 	private Validator validator;
-	    
-//	@Override
-//	public UserCollectionResult newResultCollection() {
-//		return new UserCollectionResult();
-//	}
-//
-//	@Override
-//	public User toNativeBean(User source) {
-//		User target = new User();
-//
-//        if (source == null) {
-//            return target;
-//        }
-//
-//		target.setId(source.getId());
-//		target.setLogin(source.getLogin());
-//		target.setNickname(source.getNickname());
-//		target.setDisplayName(source.getDisplayName());
-//		target.setHash(source.getHash());
-//		target.setCreateDate(source.getCreateDate());
-//		target.setStatus(source.getStatus());
-//
-//		for(Role role : source.getRoles()) {
-//			target.getRoles().add(role);
-//		}
-//		return target;
-//	}
 
 	@Transactional
-	public UserResult findByLogin(String login) {
+	public IdentityResult findByLogin(String login) {
 		ResultMessageType resultType = ResultMessageType.SUCCESS;
 		User user = null;
 		try {
@@ -78,12 +51,12 @@ public class IdentityServiceImpl implements IdentityService {
 			log.error(e);
 			resultType = ResultMessageType.ERROR;
 		}
-		return new UserResult(resultType, null, user);
+		return new IdentityResult(resultType, null, user);
 	}
 
 	@Transactional
-	public UserResult save(User user) {
-		UserResult result = new UserResult();
+	public IdentityResult save(User user) {
+		IdentityResult result = new IdentityResult();
 		ResultMessageType resultType = ResultMessageType.ERROR;
 		
 		try {
@@ -93,12 +66,6 @@ public class IdentityServiceImpl implements IdentityService {
             if((user.getId() == null || user.getId() < 1) && (user.getHash() == null || user.getHash().trim().length() < 1)) {
                 user.setHash(MessageDigester.digestSha1(UUID.randomUUID().toString()));
 			}
-			
-//			if(user.getRoles().size() < 1) {
-//				result.getMessages().add(new ResultErrorMessage("roles#may not be empty"));
-//				result.setUser(toNativeBean(user));
-//				return result;
-//			}
 			
 			result = persist(user);
 			resultType = result.getResultType();
@@ -116,14 +83,13 @@ public class IdentityServiceImpl implements IdentityService {
 		}
 		
 		result.setResultType(resultType);
-//		result.setUser(toNativeBean(user));
 		
 		return result;
 	}
 	
 	@Transactional
-	public UserResult persist(User user) {
-		UserResult result = new UserResult();
+	public IdentityResult persist(User user) {
+		IdentityResult result = new IdentityResult();
 		ResultMessageType resultType = ResultMessageType.SUCCESS;
 		
 		try {
@@ -148,14 +114,13 @@ public class IdentityServiceImpl implements IdentityService {
 		}
 		
 		result.setResultType(resultType);
-//		result.setUser(toNativeBean(user));
 		
 		return result;
 	}
 
 	@Transactional
-	public UserResult remove(Long userId) {
-		UserResult result = new UserResult();
+	public IdentityResult remove(Long userId) {
+		IdentityResult result = new IdentityResult();
 		ResultMessageType resultType = ResultMessageType.SUCCESS;
 		try {
 			if(userId == null || userId < 1) 
@@ -171,9 +136,9 @@ public class IdentityServiceImpl implements IdentityService {
 	}
 
 	@Override
-    public UserResult changePassword(String pass1, String pass2) {
+    public IdentityResult changePassword(String pass1, String pass2) {
         
-		UserResult result = new UserResult();
+		IdentityResult result = new IdentityResult();
         ResultMessageType resultType = ResultMessageType.SUCCESS;
         
         try {
@@ -225,9 +190,4 @@ public class IdentityServiceImpl implements IdentityService {
     	return false;
 	}
 
-	@Override
-	public UserResult findUserConnection(String providerId, String providerUserId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

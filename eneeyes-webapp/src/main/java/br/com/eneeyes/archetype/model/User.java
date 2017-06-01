@@ -43,7 +43,7 @@ public class User implements Serializable {
 	@Column(name="CPF_")
 	private String cpf;
 
-	@Column(name="DISPLAYNAME_")
+	@Column(name="DISPLAYNAME_", length=15)
 	private String displayName;
 	
 	@Column(name="NICKNAME_", length=100)

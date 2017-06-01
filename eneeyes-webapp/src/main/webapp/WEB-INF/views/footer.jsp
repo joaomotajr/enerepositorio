@@ -88,6 +88,7 @@
 		
 	<!-- PAGE LEVEL SERVICES -->
 	<script src="/assets/js/user-services.js"></script>
+	<script src="/assets/js/role-services.js"></script>
 	<script src="/assets/js/services/controller-service.js"></script>
 	<script src="/assets/js/services/transmitter-service.js"></script>					
 	<script src="/assets/js/services/manufacturer-service.js"></script>
@@ -107,6 +108,7 @@
 	<script src="/assets/js/services/sms-service.js"></script>
 	<script src="/assets/js/services/positionAlarmMessage-service.js"></script>
 	<script src="/assets/js/services/positionAlarm-service.js"></script>
+	
 	
 	<!-- PAGE LEVEL FACTORIES -->
 	

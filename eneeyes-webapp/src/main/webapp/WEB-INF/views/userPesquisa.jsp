@@ -5,7 +5,7 @@
 				<div class="box box-primary" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
 					<div class="box-header">					  
 					  <h3 class="box-title">Gerenciamento e Pesquisa de Usu&aacute;rios</h3>
-					  <a href="#" class="text-muted pull-right" data-ng-click="refreshAlarms();"><i title="Refresh" class="fa fa-refresh"></i></a>
+					  <a href="#" class="text-muted pull-right" data-ng-click="refresh();"><i title="Refresh" class="fa fa-refresh"></i></a>
 					</div>
 					<div class="box-body">
 						<div style="height: 500px; overflow: auto;">

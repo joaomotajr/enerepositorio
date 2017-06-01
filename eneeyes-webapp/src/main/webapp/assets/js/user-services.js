@@ -1,22 +1,19 @@
 app.factory('UserService', function($resource){
     return {
-       inclusao : $resource('/security/api/inclusaoUser',{},{
+       save : $resource('/security/api/user/inclusaoUser',{},{
            user : {method : 'POST'}
        }),
-       edicao : $resource('/security/api/edicaoUser',{},{
-           user : {method : 'POST'}
+       update : $resource('/security/api/user/edicaoUser',{},{
+           user : {method : 'PUT'}
        }),
-       remocao : $resource('/security/api/remocaoUser',{},{
-           user : {method : 'POST'}
+       deletar : $resource('/security/api/user/remocaoUser',{},{
+           user : {method : 'DELETE'}
        }),       
-       pesquisa : $resource('/security/api/pesquisaUser',{},{
-    	   users : {method : 'POST'}
+       listAll : $resource('/security/api/user/pesquisaUsers',{},{
+    	   users : {method : 'GET'}
        }),
-       pesquisaUser : $resource('/security/api/pesquisaUserNaoRelacionado',{},{
-    	   naoRelacionados : {method : 'POST'}
-       }),
-       pesquisaByFilial : $resource('/security/api/pesquisaUserByFilial',{},{
-    	   users : {method : 'POST'}
-       })
+       listOne : $resource('/security/api/user/obtemPorId/:id', {id: '@id'},{
+    	   user : {method : 'GET'}
+    	})
     };
 });

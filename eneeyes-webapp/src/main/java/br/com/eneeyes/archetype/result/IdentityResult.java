@@ -13,7 +13,7 @@ import br.com.eneeyes.archetype.web.result.ResultMessage;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 
 @XmlRootElement
-public class UserResult extends ResultBase<User> {
+public class IdentityResult extends ResultBase<User> {
 			
 	/**
 	 * 
@@ -22,17 +22,17 @@ public class UserResult extends ResultBase<User> {
 	private User user;
 	private List<UserDto> listUser;
 
-	public UserResult() {
+	public IdentityResult() {
 	}
 	
-	public UserResult(ResultMessageType resultType, ResultMessage message) {
+	public IdentityResult(ResultMessageType resultType, ResultMessage message) {
         setResultType(resultType);
 		List<ResultMessage> messages = new ArrayList<ResultMessage>();
 		messages.add(message);
 		setMessages(messages);
 	}
 	
-	public UserResult(ResultMessageType resultType, List<ResultMessage> messages, User user) {
+	public IdentityResult(ResultMessageType resultType, List<ResultMessage> messages, User user) {
         setResultType(resultType);
         setMessages(messages);
 		this.user = user;

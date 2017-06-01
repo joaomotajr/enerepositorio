@@ -177,20 +177,16 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
     	
     	$scope.pesquisa = new UserService.pesquisa($scope.user);
         $scope.pesquisa.$users({_csrf : angular.element('#_csrf').val()}, function(){
+        	
         	$('html').removeClass('loading');
+
         	$scope.user.cpf = $scope.cpfFormatter($scope.user.cpf);
     		
         	setMessagePesquisa($scope.pesquisa);
-        	        	
-//        	if($scope.users.listUser.length > 0) {
-//        		$timeout(function(){
-//        			$('#dataTables-users').dataTable().fnSort([0, 'asc']);
-//        		},5);	
-//        	} else {
-//        		$timeout(function(){
-//        			$('#dataTables-users').dataTable();
-//        		},5);
-//        	}
+        	
+        	if($scope.pesquisa != null && $scope.pesquisa.listUser != null)
+        		$scope.users.listUser = $scope.pesquisa.listUser;
+
         },
 		function(data) {
 			if (data.status >= 400 && data.status <= 505 ) {
@@ -242,6 +238,7 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
     	$scope.clearMessageCadastro();
     	
     	$scope.index = index;
+    	$scope.user.company = $scope.users.listUser[index].companyDto;
     	$scope.user.id = $scope.users.listUser[index].id;
     	$scope.user.cpf = $scope.cpfFormatter($scope.users.listUser[index].cpf);
 		$scope.user.displayName = $scope.users.listUser[index].displayName;
@@ -302,22 +299,6 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		$scope.user.createDate = undefined;
 		
    	}
-	
-//	function filterUsers(listUsers) {
-//		if(!listUsers) {
-//			return false;
-//		}
-//   		listUsers.forEach(function(value, index, ar) {
-//   			if($scope.userLogado.isAdmin) {
-//   				$scope.users.listUser = listUsers;
-//   				return false;
-//   			} else {
-//   				if(value.role != 1 && value.role != 2) { // Remove Admins e Contractors
-//   					$scope.users.listUser.push(value);
-//   				}
-//   			}
-//   		});
-//   	}
 
 	function clearMessagePesquisa() {
    		$scope.messagePesquisaError = "";

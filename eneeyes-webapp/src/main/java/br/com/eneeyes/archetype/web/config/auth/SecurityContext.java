@@ -15,7 +15,7 @@
  */
 package br.com.eneeyes.archetype.web.config.auth;
 
-import br.com.eneeyes.archetype.model.acl.User;
+import br.com.eneeyes.archetype.model.User;
 
 /**
  * Simple SecurityContext that stores the currently signed-in connection in a thread local.

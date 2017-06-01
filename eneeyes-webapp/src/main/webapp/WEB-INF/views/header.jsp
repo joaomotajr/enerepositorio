@@ -112,9 +112,9 @@
 				<!-- Notifications: style can be found in dropdown.less -->
 				<li class="dropdown notifications-menu" data-ng-controller="monitorController">
 					<audio id="alarmSound" src="/assets/img/alert_01.mp3" preload="auto"></audio>
-					<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning">{{ dashCompaniesAlarmCreated.length }}</span></a>
+					<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning" data-ng-bind="dashCompaniesAlarmCreated.length"></span></a>
 					<ul class="dropdown-menu">
-						<li class="header">Voce tem {{ dashCompaniesAlarmCreated.length }} Alarmes Pendentes</li>
+						<li class="header">Voce tem <span data-ng-bind="dashCompaniesAlarmCreated.length"></span> Alarmes Pendentes</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
 							<ul class="menu" data-ng-repeat="item in dashCompaniesAlarmCreated">

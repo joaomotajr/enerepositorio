@@ -6,8 +6,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import br.com.eneeyes.archetype.dto.user.UserDto;
-import br.com.eneeyes.archetype.model.acl.User;
+import br.com.eneeyes.archetype.dto.UserDto;
+import br.com.eneeyes.archetype.model.User;
 import br.com.eneeyes.archetype.web.result.ResultBase;
 import br.com.eneeyes.archetype.web.result.ResultMessage;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;

@@ -2,7 +2,7 @@ package br.com.eneeyes.archetype.result;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import br.com.eneeyes.archetype.dto.user.UserPassDto;
+import br.com.eneeyes.archetype.dto.UserPassDto;
 import br.com.eneeyes.archetype.web.result.ResultBase;
 
 @XmlRootElement

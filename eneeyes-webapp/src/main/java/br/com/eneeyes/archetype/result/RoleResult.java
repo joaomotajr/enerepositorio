@@ -2,7 +2,7 @@ package br.com.eneeyes.archetype.result;
 
 import java.util.List;
 
-import br.com.eneeyes.archetype.model.acl.Role;
+import br.com.eneeyes.archetype.model.Role;
 import br.com.eneeyes.archetype.web.result.Result;
 import br.com.eneeyes.archetype.web.result.ResultMessage;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;

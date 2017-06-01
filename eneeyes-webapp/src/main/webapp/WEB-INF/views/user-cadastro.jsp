@@ -4,12 +4,13 @@
 		
 			<div class="row">
 			
-				<div class="col-md-4">													
+			
+				<div class="col-md-4">
+																	
 					<div class="box box-primary">				                    
-		               	<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Empresa</strong>
+		               	<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Perfil</strong>
 		               		<strong class="text-red pull-right" data-ng-show='(userForm.companyName.$dirty && userForm.companyName.$invalid)'>  Campo Obrigatório</strong>
-		               	</div>
-		               	
+		               	</div>		               	
 		                <div class="box-body">
 		                   	<div data-ng-class="{'has-error': userForm.companyName.$dirty && userForm.companyName.$invalid}">							               
 		                       <select name="companyName" class="form-control" data-live-search="true"
@@ -19,21 +20,90 @@
 		                                        <option value="">Selecione</option> 
 		                       </select>    
 		                   	</div>
-		                   </div>			                    			                            
-		               </div>
+		            	</div>			                    			                            
+		            </div>
 		       	</div>
+		       	
+			
+				<div class="col-md-4">
+																	
+					<div class="box box-primary">				                    
+		               	<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Empresa</strong>
+		               		<strong class="text-red pull-right" data-ng-show='(userForm.companyName.$dirty && userForm.companyName.$invalid)'>  Campo Obrigatório</strong>
+		               	</div>		               	
+		                <div class="box-body">
+		                   	<div data-ng-class="{'has-error': userForm.companyName.$dirty && userForm.companyName.$invalid}">							               
+		                       <select name="companyName" class="form-control" data-live-search="true"
+		                           style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+		                               data-ng-options="item as item.name for item in companies | orderBy: 'name' track by item.uid" 
+		                                        data-ng-model="user.company" required>
+		                                        <option value="">Selecione</option> 
+		                       </select>    
+		                   	</div>
+		            	</div>			                    			                            
+		            </div>
+		            
+		       	</div>
+								
+			</div>
+			<div class="row">
+			
 				<div class="col-md-8">
+				
 					<div class="box box-primary">				                    
 			             <div class="box-header with-border"><strong>Nome</strong>
 				         	<strong class="text-red pull-right" data-ng-show='userForm.username.$error.required && !userForm.username.$pristine'>  [Nome Obrigatorio]</strong>
 							<strong class="text-red pull-right" data-ng-show='userForm.username.$error.maxlength'>Tamanho Máximo 12 caracteres</strong>
 			             </div>
 			             <div class="box-body">													                                                                        
-							<input class="form-control inputProfile" placeholder="Nome" data-ng-model="user.name" data-ng-maxlength="30" name="username" required>                                                                       
+							<input class="form-control inputProfile" placeholder="Nome" data-ng-model="user.displayName" data-ng-maxlength="30" name="username" required>                                                                       
 						</div>
 					</div>
-				</div>
+				</div>	
+			
 			</div>
+			
+			<div class="row">
+				
+					<div class="col-md-1">										            									            											
+						<label>E-MAIL</label>			
+					</div>
+					
+					<div class="col-md-6" style="padding-left: 5px !important; padding-right: 5px !important">
+						<div data-ng-class="{'has-error': !emailValid}">	
+							<div class="input-group">								                                        	
+								<span class="input-group-addon" data-ng-show="emailValid">@</span>													                    														                    	
+								<span class="input-group-addon text-red" data-ng-hide="emailValid">@</span>
+								<input 
+									id="alarmEmail" 
+									data-ng-model="email" type="text" class="form-control" 
+									placeholder="Email" 
+									data-ng-change="validEmail($event);">
+							</div>
+						</div>						                                         												            			
+					</div>
+					
+					<div class="col-md-1">										            									            										
+						<label>Celular</label>			
+					</div>
+					
+					<div class="col-md-4" style="padding-left: 5px !important;">
+						<div data-ng-class="{'has-error': !mobileValid}">	
+							<div class="input-group">
+								<span class="input-group-addon" data-ng-show="mobileValid"><i class="fa fa-phone-square"></i></span>
+								<span class="input-group-addon text-red" data-ng-hide="mobileValid"><i class="fa fa-phone-square"></i></span>
+								
+								<input class="form-control alarmCelularMask" 
+									id="alarmCelular" 
+									data-ng-model="celular" 
+									type="text" maxlength="15" placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />													                    	
+							</div>
+						</div>						                                         													            			
+					</div>
+				
+				
+			</div>				
+			
 		</form>
 	</div>
 

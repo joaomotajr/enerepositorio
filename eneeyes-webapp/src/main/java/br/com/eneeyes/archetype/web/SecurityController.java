@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.eneeyes.archetype.model.acl.Role;
-import br.com.eneeyes.archetype.model.acl.User;
+import br.com.eneeyes.archetype.model.Role;
+import br.com.eneeyes.archetype.model.User;
 
 @Controller
 @SessionAttributes("linkedinAuthorization")

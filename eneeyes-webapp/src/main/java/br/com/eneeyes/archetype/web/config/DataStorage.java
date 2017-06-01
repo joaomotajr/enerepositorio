@@ -17,7 +17,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 
-import br.com.eneeyes.archetype.model.validator.ConstraintValidatorFactoryImpl;
+import br.com.eneeyes.archetype.utils.ConstraintValidatorFactoryImpl;
 
 public class DataStorage {
 
@@ -78,18 +78,4 @@ public class DataStorage {
 		Validator validator = context.getValidator();
 		return validator;
     }
-
-    /*@Bean
-    public MongoTemplate mongoTemplate() throws Exception {
-        String openshiftMongoDbHost = System.getenv("OPENSHIFT_MONGODB_DB_HOST");
-        int openshiftMongoDbPort = Integer.parseInt(System.getenv("OPENSHIFT_MONGODB_DB_PORT"));
-        String username = System.getenv("OPENSHIFT_MONGODB_DB_USERNAME");
-        String password = System.getenv("OPENSHIFT_MONGODB_DB_PASSWORD");
-        Mongo mongo = new Mongo(openshiftMongoDbHost, openshiftMongoDbPort);
-        UserCredentials userCredentials = new UserCredentials(username, password);
-        String databaseName = System.getenv("OPENSHIFT_APP_NAME");
-        MongoDbFactory mongoDbFactory = new SimpleMongoDbFactory(mongo, databaseName, userCredentials);
-        MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory);
-        return mongoTemplate;
-    }*/
 }

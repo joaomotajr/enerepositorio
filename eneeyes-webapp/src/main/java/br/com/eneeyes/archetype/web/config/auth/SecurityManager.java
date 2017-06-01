@@ -15,10 +15,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import br.com.eneeyes.archetype.model.acl.Role;
-import br.com.eneeyes.archetype.model.acl.User;
-import br.com.eneeyes.archetype.model.acl.UserStatus;
-import br.com.eneeyes.archetype.services.identity.IdentityService;
+import br.com.eneeyes.archetype.model.Role;
+import br.com.eneeyes.archetype.model.User;
+import br.com.eneeyes.archetype.model.UserStatus;
+import br.com.eneeyes.archetype.services.IdentityService;
 import br.com.eneeyes.archetype.utils.MessageDigester;
 
 @Component

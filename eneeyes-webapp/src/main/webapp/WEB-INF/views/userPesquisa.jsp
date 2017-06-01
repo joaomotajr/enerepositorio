@@ -21,7 +21,7 @@
 									</tr>
 		                        </thead>
 								<tbody>
-									<tr data-ng-repeat="user in pesquisa.listUser" data-ng-class="{'danger' : user.status == 'INACTIVE', 'success' : user.status == 'ACTIVE'}">
+									<tr data-ng-repeat="user in users.listUser" data-ng-class="{'danger' : user.status == 'INACTIVE', 'success' : user.status == 'ACTIVE'}">
 											   
 										<td width="150px" align="center">{{cpfFormatter(user.cpf)}}</td>
 										<td width="200px">{{user.displayName}}</td>									
@@ -57,8 +57,8 @@
 			
 		</div>
 		
-		<div id="modalCadastrarUser" class="modal fade col-md-12" tabindex="-1">
-			<div class="modal-dialog  modal-lg" role="document">
+		<div id="modalCadastrarUser" class="modal" tabindex="-1">
+			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">                            
 					<div class="modal-body"style="padding-bottom: 0px; !important">
 					
@@ -85,19 +85,29 @@
 		</div>
 		
 		<!-- MODAL EDICAO USUARIO --> 
-		<div id="modalDetalheUser" class="modal fade col-md-12" tabindex="-1">
-		    <div class="modal-dialog">
+		<div id="modalDetalheUser" class="modal" tabindex="-1">
+		    <div class="modal-dialog modal-lg" role="document">
 		        <div class="modal-content">
-		        	<header class="modal-header">
-		        		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		                <h4 class="modal-title" align="center"><b>Gerenciar Usu&aacute;rio: {{user.displayName}}</b></h4>
-		            </header>
-		            <div class="modal-body box dark" align="center">
-						<jsp:include page="user-cadastro.jsp"/>
-		            </div>
-		            <div class="modal-footer" style="margin-top: -1px; padding-top: 15px; padding-bottom: 15px;">
-						<button class="col-md-1 col-md-offset-11 btn btn-default" data-ng-click="fecharModal()"><i class="icon-exit icon-white"></i>Fechar</button>
-		            </div>
+		        
+		        	<div class="modal-body"style="padding-bottom: 0px; !important">
+					
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="modal-title" align="center"><b>Gerenciar Usu&aacute;rio: {{user.displayName}}</b></h4>
+							</div>														                                                                           
+					  	</div>
+											
+						<div class="box box-primary" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
+							<div class="box-header">
+								<h3 class="box-title">Cadastro / Edição</h3>
+								<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
+							</div>					
+							<div class="box-body" style="padding-bottom: 0px; !important">
+								<jsp:include page="user-cadastro.jsp"/>
+							</div>
+						</div>																
+				  	</div>		            
+		            
 		        </div>
 		    </div>
 		</div>

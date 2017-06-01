@@ -5,9 +5,9 @@ import java.io.Serializable;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 
-import br.com.eneeyes.archetype.model.acl.Permission;
-import br.com.eneeyes.archetype.model.acl.Role;
-import br.com.eneeyes.archetype.model.acl.User;
+import br.com.eneeyes.archetype.model.Permission;
+import br.com.eneeyes.archetype.model.Role;
+import br.com.eneeyes.archetype.model.User;
 
 public class SecurityPermissionEvaluator implements PermissionEvaluator {
 

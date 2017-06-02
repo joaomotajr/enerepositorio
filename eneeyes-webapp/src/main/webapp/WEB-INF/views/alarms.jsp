@@ -260,7 +260,7 @@
 							                                            	<label for="checkboxSonoro3">Alarme 3</label>
 							                                          	</div>
 											            			</div>
-											            			 -->
+											            			-->
 											            		</div>	
 														    </div>			
 
@@ -279,11 +279,8 @@
 								                                        	<div class="input-group">								                                        	
 														                    	<span class="input-group-addon" data-ng-show="emailValid">@</span>													                    														                    	
 														                    	<span class="input-group-addon text-red" data-ng-hide="emailValid">@</span>
-														                    	<input 
-														                    		id="alarmEmail" 
-														                    		data-ng-model="email" type="text" class="form-control" 
-														                    		placeholder="Email" 
-														                    		data-ng-change="validEmail($event);">
+														                    	<input id="alarmEmail" data-ng-model="email" type="text" class="form-control" 
+														                    		placeholder="Email" data-ng-change="validEmail($event);">
 														                    </div>
 													                  	</div>						                                         												            			
 								                                   	</div>
@@ -302,8 +299,7 @@
 														                    	<span class="input-group-addon text-red" data-ng-hide="mobileValid"><i class="fa fa-phone-square"></i></span>
 														                    	
 														                    	<input class="form-control alarmCelularMask" 
-														                    		id="alarmCelular" 
-														                    		data-ng-model="celular" 
+														                    		id="alarmCelular" data-ng-model="celular" 
 														                    		type="text" maxlength="15" placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />													                    	
 														                  	</div>
 													                  	</div>						                                         													            			

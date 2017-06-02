@@ -14,6 +14,9 @@ app.factory('UserService', function($resource){
        }),
        listOne : $resource('/security/api/user/obtemPorId/:id', {id: '@id'},{
     	   user : {method : 'GET'}
-    	})
+       }),
+       listByLogin : $resource('/security/api/user/pesquisaUserByLogin/:login', {login: '@login'},{
+     	   user : {method : 'GET'}
+       })
     };
 });

@@ -1,4 +1,8 @@
-
+	<style>
+	.fieldNeeded {
+	    font-size: 88%;
+	}
+	</style>
 	<div data-ng-controller="UserController as UserController">
 		<div class="row">				                                                    
 			<div class="col-md-10">                                                        
@@ -40,12 +44,12 @@
 									</tr>
 								</tbody>
 							</table>							
-						
+							
 						</div>                                                       
 					</div>
 					
 					<div class="box-footer">									
-						<button type="button" data-ng-click="novoUsuario(); userForm.$setPristine()" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalCadastrarUser">Novo</button>
+						<button type="button" data-ng-click="novoUsuario(); userForm.$setPristine()" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalDetalheUser">Novo</button>
 					</div>
 				</div>
 								
@@ -57,56 +61,12 @@
 			
 		</div>
 		
-		<div id="modalCadastrarUser" class="modal" tabindex="-1">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">                            
-					<div class="modal-body"style="padding-bottom: 0px; !important">
-					
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="modal-title" align="center"><b>Inclus&atilde;o de Usu&aacute;rio</b></h4>
-							</div>														                                                                           
-					  	</div>
-											
-						<div class="box box-primary" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
-							<div class="box-header">
-								<h3 class="box-title">Cadastro / Edição</h3>
-								<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
-							</div>					
-							<div class="box-body" style="padding-bottom: 0px; !important">
-								<jsp:include page="user-cadastro.jsp"/>
-							</div>
-						</div>
-																
-				  	</div>
-				  	
-			  	</div>
-			</div>		
-		</div>
-		
 		<!-- MODAL EDICAO USUARIO --> 
 		<div id="modalDetalheUser" class="modal" tabindex="-1">
 		    <div class="modal-dialog modal-lg" role="document">
 		        <div class="modal-content">
-		        
-		        	<div class="modal-body"style="padding-bottom: 0px; !important">
-					
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="modal-title" align="center"><b>Gerenciar Usu&aacute;rio: {{user.displayName}}</b></h4>
-							</div>														                                                                           
-					  	</div>
-											
-						<div class="box box-primary" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
-							<div class="box-header">
-								<h3 class="box-title">Cadastro / Edição</h3>
-								<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
-							</div>					
-							<div class="box-body" style="padding-bottom: 0px; !important">
-								<jsp:include page="user-cadastro.jsp"/>
-							</div>
-						</div>																
-				  	</div>		            
+		      	    
+		      	    <jsp:include page="user-cadastro.jsp"/>        
 		            
 		        </div>
 		    </div>

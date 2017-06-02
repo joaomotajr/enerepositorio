@@ -211,11 +211,15 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 
     $scope.recuperarSenha = function() {
     	angular.element('body').addClass('loading');
+    	
     	$scope.forms.forgetPassword.errorMessage = null;
         $scope.forms.forgetPassword.successMessage = null;
+        
         $http.post('/api/perfil/recover-password?_csrf='+angular.element('#_csrf').val(),
 			{email1:$scope.forms.forgetPassword.email1, email2:$scope.forms.forgetPassword.email2}).success(function(data) {
-			angular.element('body').removeClass('loading');
+			
+				angular.element('body').removeClass('loading');
+		
 			if (data.errorMessages.length > 0) {
 				$scope.forms.forgetPassword.errorMessage = data.errorMessages[0].message;
 			}

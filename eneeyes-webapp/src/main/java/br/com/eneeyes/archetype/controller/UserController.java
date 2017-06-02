@@ -22,7 +22,7 @@ public class UserController {
     @RequestMapping(value="/security/api/user/inclusaoUser", method = RequestMethod.POST, consumes = {"application/xml", "application/json"}, produces = {"application/xml", "application/json"})
     @ResponseStatus(HttpStatus.OK)
     public BasicResult<?> inclusaoUser(@RequestBody UserDto userDto) throws Exception {
-		userDto.setHashDigestSha1();
+		
 		return service.save(userDto);		
     }
     
@@ -30,12 +30,24 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public BasicResult<?> pesquisaUsers() throws Exception {
 		return service.listAll();		
-    } 
+    }
+    
+    @RequestMapping(value="/security/api/user/pesquisaUserByLogin/{login}", method = RequestMethod.GET, produces = {"application/xml", "application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public BasicResult<?> pesquisaUserByLogin(@PathVariable String login) throws Exception {
+		return service.pesquisaUserByLogin(login);		
+    }
     
     @RequestMapping(value="/security/api/user/remocaoUser", method = RequestMethod.DELETE, produces = {"application/xml", "application/json"})
     @ResponseStatus(HttpStatus.OK)
     public BasicResult<?> remocaoUser(@PathVariable Long uid) throws Exception {
 		return service.delete(uid);		
-    }  
+    }
+    
+    @RequestMapping(value="/security/api/user/edicaoUser",  method=RequestMethod.PUT, consumes = "application/json", produces = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> updateUser(@RequestBody UserDto userDto) {		
+		return service.updateUser(userDto);
+	}
    
 }

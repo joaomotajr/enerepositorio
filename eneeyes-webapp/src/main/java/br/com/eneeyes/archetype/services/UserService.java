@@ -1,6 +1,7 @@
 package br.com.eneeyes.archetype.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,10 +19,23 @@ import br.com.eneeyes.main.result.Result;
 	@Service
 	public class UserService {
 
-  	public BasicResult<?> save(UserDto userDto)
+  	public BasicResult<?> save(UserDto dto)
   	{
-	  // TODO Auto-generated method stub
-	  return null;
+  		Result<UserDto> result = new Result<UserDto>(); 	
+  		dto.setHashDigestSha1();
+  		
+		User user = new User(dto);
+		user.setCreateDate(new Date());
+				
+		user = repository.save(user);
+				
+		dto.setId(user.getId());				
+		result.setEntity(dto);
+		
+		result.setResultType( ResultMessageType.SUCCESS );
+		result.setMessage("Executado com sucesso.");	
+		
+		return result;
   	}
 
 	@Inject
@@ -61,6 +75,66 @@ import br.com.eneeyes.main.result.Result;
 	public BasicResult<?> delete(Long uid) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public BasicResult<?> pesquisaUserByLogin(String login) {
+		Result<UserDto> result = new Result<UserDto>();
+		
+		try {
+			User user = repository.findByLogin(login);
+
+			if (user != null) {
+				
+				UserDto dto = new UserDto();
+				
+				result.setEntity(dto); ;				
+				result.setResultType( ResultMessageType.SUCCESS );
+				
+			} else {
+				
+				result.setResultType( ResultMessageType.NO_DATA );
+								
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setResultType( ResultMessageType.ERROR );									
+		}	
+		
+		return result;
+	}
+
+	public BasicResult<?> updateUser(UserDto dto) {
+		Result<UserDto> result = new Result<UserDto>(); 	
+				
+		User user = repository.findById(dto.getId());
+		
+		if (user != null) {
+			
+			user.setCpf(dto.getCpf());
+			user.setDisplayName(dto.getDisplayName());
+			user.setNickname(dto.getNickname());
+			user.setFone(dto.getFone());
+			user.setCell(dto.getCell());
+			user.setEmail(dto.getEmail());
+			user.setStatus(dto.getStatus());			
+			user.setCreateDate(new Date());
+			user.setCreateDate(new Date());
+			
+			//dto.setHashDigestSha1();
+			//user.setHash(dto.getHash());
+			
+			user = repository.save(user);
+								
+			result.setEntity( new UserDto(user) );
+			
+			result.setResultType( ResultMessageType.SUCCESS );
+			result.setMessage("Executado com sucesso.");			
+		}
+		else {
+			result.setResultType( ResultMessageType.NO_DATA );
+		}	
+		
+		return result;
 	}
 	
 

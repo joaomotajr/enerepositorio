@@ -40,7 +40,7 @@
 		        	<form>
 		          
 		          		<div class="form-group has-feedback">
-		            		<input type="email" class="form-control" placeholder="Email/Usuário" data-ng-model="forms.signin.login">
+		            		<input type="text" class="form-control" placeholder="Email/Usuário" data-ng-model="forms.signin.login">
 		            		<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 		          		</div>
 		          

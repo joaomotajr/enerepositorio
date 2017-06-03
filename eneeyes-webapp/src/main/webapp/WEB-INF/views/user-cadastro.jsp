@@ -13,7 +13,7 @@
 				
 					<div class="col-md-3">																		
 						<div class="box box-primary">				                    
-							<div class="box-header with-border"><strong><i class="fa fa-users"></i>Perfil *</strong>
+							<div class="box-header with-border"><strong><i class="fa fa-users"></i> Perfil *</strong>
 								<strong class="text-red pull-right fieldNeeded" data-ng-show='(userForm.rolename.$dirty && userForm.rolename.$invalid)'>  Campo Obrigatório</strong>
 							</div>		               	
 							<div class="box-body">
@@ -32,7 +32,7 @@
 				
 					<div class="col-md-5">																		
 						<div class="box box-primary">				                    
-							<div class="box-header with-border"><strong><i class="fa fa-industry"></i>Empresa *</strong>
+							<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Empresa *</strong>
 								<strong class="text-red pull-right fieldNeeded" data-ng-show='(userForm.companyName.$dirty && userForm.companyName.$invalid)'>  Campo Obrigatório</strong>
 							</div>		               	
 							<div class="box-body">

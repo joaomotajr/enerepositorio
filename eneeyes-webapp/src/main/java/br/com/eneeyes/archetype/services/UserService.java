@@ -2,15 +2,19 @@ package br.com.eneeyes.archetype.services;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.dto.UserDto;
+import br.com.eneeyes.archetype.model.Role;
 import br.com.eneeyes.archetype.model.User;
 import br.com.eneeyes.archetype.repository.UserRepository;
+import br.com.eneeyes.archetype.utils.MessageDigester;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -118,11 +122,30 @@ import br.com.eneeyes.main.result.Result;
 			user.setEmail(dto.getEmail());
 			user.setStatus(dto.getStatus());			
 			user.setCreateDate(new Date());
-			user.setCreateDate(new Date());
+			user.setCompany(dto.getCompanyDto());
 			
-			//dto.setHashDigestSha1();
-			//user.setHash(dto.getHash());
+//			try {
+//				if(user.getHash() != MessageDigester.digestSha1(dto.getHash())) {
+//					user.setHash(MessageDigester.digestSha1(dto.getHash()));
+//				}
+//			} catch (Throwable e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			
+			
+			Set<Role> roles = new HashSet<Role>();
+			for (Role item   : dto.getRoles()) {
+				
+				Role role = new Role();
+				role.setId(item.getId());
+				role.setName(item.getName());
+			
+				roles.add(role);			
+			}				
+			
+			user.setRoles(roles);
+						
 			user = repository.save(user);
 								
 			result.setEntity( new UserDto(user) );

@@ -78,6 +78,8 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
         		$scope.user.cpf = $scope.user.cpf.replace(/[\.-]/g, '');
         	}
         	
+    		$scope.user.roles[0] = $scope.selectedRole; 
+    		
         	$scope.update = new UserService.update($scope.user);
             $scope.update.$user({_csrf : angular.element('#_csrf').val()}, function(){
             	$('html').removeClass('loading');
@@ -227,6 +229,7 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 	
 	$scope.clearUserModal = function() {
 		
+		$scope.selectedRole = undefined;
 		$scope.user.id = undefined;
 		$scope.user.cpf = '';
 		$scope.user.displayName = '';
@@ -234,7 +237,7 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		$scope.user.fone = '';
 		$scope.user.cell = '';
 		$scope.user.email = '';
-		$scope.user.roles = [1];
+		$scope.user.roles = [1];		
 		$scope.user.login = '';
 		$scope.user.hash = '';
 		$scope.user.status = '';

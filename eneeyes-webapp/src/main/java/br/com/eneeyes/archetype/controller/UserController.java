@@ -38,7 +38,7 @@ public class UserController {
 		return service.pesquisaUserByLogin(login);		
     }
     
-    @RequestMapping(value="/security/api/user/remocaoUser", method = RequestMethod.DELETE, produces = {"application/xml", "application/json"})
+    @RequestMapping(value="/security/api/user/remocaoUser/{uid}", method = RequestMethod.DELETE, produces = {"application/xml", "application/json"})
     @ResponseStatus(HttpStatus.OK)
     public BasicResult<?> remocaoUser(@PathVariable Long uid) throws Exception {
 		return service.delete(uid);		

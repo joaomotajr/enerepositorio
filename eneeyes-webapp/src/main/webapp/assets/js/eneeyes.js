@@ -297,26 +297,41 @@ app.directive("datemonopicker", ['$filter', function($filter) {
 	}
 }]);
 
-//app.directive('popover', function($compile) { 
-//    var content =
-//    	"<div>" +
-//    	"<label> Fabricante </label>" +
-//    	"<input type='text' class='input-small' ng-model='newManufacturer' style='color:navy ! important;' />&nbsp&nbsp"  +
-//    	"<button type='button' data-dismiss='popover-content' data-toggle='popover' ng-click='saveManufacturer();' class='btn btn-info btn-xs' ng-disabled='(newManufacturer) ? false : true'> OK</button>" +
-//    	"</div>";
-//    
-//    return {
-//        link: function(scope, element, attrs) {
-//            element.popover({            
-//                placement: 'top',
-//                html: true,
-//                clickedAway : true,
-//                content: $compile(content)(scope)
-//            });
-//        }
-//    
-//    };
-//});
+app.directive('popover', function($compile) { 
+    var content =
+    	"<div>" +    	
+    	"<Label>Confirma a Exclus&atilde;o: {{popover}} ? </label><br>"+
+    	"<button type='button' data-toggle='popover' ng-click='confirmOK();' class='btn btn-info btn-xs'> Sim</button>&nbsp&nbsp" +
+    	"<button type='button' data-toggle='popover' ng-click='cancel();' class='btn btn-danger btn-xs'> N&atilde;o</button>" +
+    	"</div>";
+    
+    return {
+    	scope: {
+    			popover: '@',
+    			confirm: '&'
+	    },
+        link: function(scope, element, attrs) {
+            element.popover({            
+                placement: 'top',
+                html: true,
+                trigger: 'manual',
+                clickedAway : true,
+                content: $compile(content)(scope)
+            });
+            $(element).bind('click', function() {
+            	$(element).popover('toggle');
+            });
+            scope.cancel = function () {                
+                $(element).popover('hide');
+            };
+            scope.confirmOK = function () {
+            	scope.confirm();
+                $(element).popover('hide');
+            }            
+        }
+    
+    };
+});
 
 app.directive('myLink', function () {
     return {

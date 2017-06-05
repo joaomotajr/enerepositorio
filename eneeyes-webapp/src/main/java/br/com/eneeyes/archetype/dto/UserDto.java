@@ -32,6 +32,8 @@ public class UserDto implements Serializable {
 	private UserStatus status;
 	private Date createDate;	
 	private CompanyView companyDto;
+	private Boolean reset;
+	private String image;
 	
 	public UserDto() {
 	}
@@ -54,6 +56,12 @@ public class UserDto implements Serializable {
 		this.status = user.getStatus();
 		this.createDate = user.getCreateDate();
 		this.companyDto = user.getCompany();
+		this.reset = user.getReset();
+		
+		if (user.getImage() != null) {
+			byte[] image = user.getImage();
+			this.image = new String(image);
+		}
 	}
 	
 	private final List<Role> parseRoles(Set<Role> roles) {		
@@ -261,5 +269,21 @@ public class UserDto implements Serializable {
 
 	public final void setCompanyDto(CompanyView companyDto) {
 		this.companyDto = companyDto;
+	}
+	
+	public final Boolean getReset() {
+		return reset;
+	}
+
+	public final void setReset(Boolean reset) {
+		this.reset = reset;
+	}
+	
+	public final String getImage() {
+		return image;
+	}
+
+	public final void setImage(String image) {
+		this.image = image;
 	}
 }

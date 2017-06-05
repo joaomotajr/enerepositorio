@@ -2,6 +2,9 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 
 	var arrayUser = [];
 	
+	$scope.isLock = true;
+    $scope.inativeUserInfo = 'INATIVO';    
+	
 	$scope.userLogado = {
 		isAdmin : false,		
 		isManager : false,
@@ -78,7 +81,7 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
         		$scope.user.cpf = $scope.user.cpf.replace(/[\.-]/g, '');
         	}
         	
-    		$scope.user.roles[0] = $scope.selectedRole; 
+    		$scope.user.roles[0] = $scope.selectedRole;
     		
         	$scope.update = new UserService.update($scope.user);
             $scope.update.$user({_csrf : angular.element('#_csrf').val()}, function(){
@@ -96,14 +99,13 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
             	$scope.users.listUser[$scope.index].login = $scope.user.login;
             	$scope.users.listUser[$scope.index].hash = $scope.user.hash;
             	$scope.users.listUser[$scope.index].status = $scope.user.status;
-            	$scope.users.listUser[$scope.index].companyDto = $scope.user.companyDto;
-            	            	
+            	$scope.users.listUser[$scope.index].companyDto = $scope.user.companyDto;   
+            	            	            	            	
             });   	
         
         /** INCLUSAO DE USUARIO */
     	} else {
-    		
-    		$scope.users.listUser = [];
+    		    		 		
         	$scope.user.status = 'ACTIVE';
         	$scope.user.roles[0] = $scope.selectedRole; 
         	
@@ -113,26 +115,27 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
         	
         	$scope.save = new UserService.save($scope.user);            
         	$scope.save.$user({_csrf : angular.element('#_csrf').val()}, function(){
+        		
+        		$scope.users.listUser.push($scope.save.t);
+        		
             	$('html').removeClass('loading');            	         	            	
             });            
     	}
     }
     
 	/** EXCLUSAO DE USUARIO */
-    $scope.excluirUsuario = function() {
+    $scope.excluirUsuario = function(index) {
         $('html').addClass('loading');
         
-        if($scope.user.cpf) {
-    		$scope.user.cpf = $scope.user.cpf.replace(/[\.-]/g, '');
-    	}
-    	
+        var userIndex = index;  
+            	
     	$scope.deletar = new UserService.deletar($scope.user);
-        $scope.deletar.$user({_csrf : angular.element('#_csrf').val()}, function(){
+    	$scope.deletar.$user({_csrf : angular.element('#_csrf').val(), id : $scope.users.listUser[index].id}, function(){
         	$('html').removeClass('loading');
         	        	
-	        $scope.users.listUser.splice($scope.index, 1);
-	        
+	        $scope.users.listUser.splice(userIndex, 1);
         });    	
+    	
     }
 	
 	$scope.pesquisaUsers = function() {
@@ -157,37 +160,13 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		});
     }
 	
-	/** ATIVACAO DE USUARIO */
-	$scope.ativarUser = function() {
-		$scope.ativaInativaUser('ACTIVE');		
-	}
-	
-	/** INATIVACAO DE USUARIO */
-	$scope.inativarUser = function() {
-		$scope.ativaInativaUser('INACTIVE');
-	}
-    
-	$scope.ativaInativaUser = function(status) {
-		$scope.clearMessageCadastro();
-		$scope.clearUserModal();
-		$scope.user = $.extend(true, {}, $scope.users.listUser[$scope.index]);
-		$scope.user.status = status;
-    	$scope.ativaInativa = new UserService.edicao($scope.user);
-        $scope.ativaInativa.$user({_csrf : angular.element('#_csrf').val()}, function(){
-        	
-        	$('html').removeClass('loading');
-        	$scope.users.listUser[$scope.index] = $.extend(true, {}, $scope.user);
-        	        	
-        });	
-	}
-	
 	/** FUNCOES AUXILIARES */
     $scope.detalheUser = function(index) {
     	
     	$scope.loginValid = true;
     	
     	$scope.index = index;
-    	$scope.user.companyDto = $scope.users.listUser[index].companyDto;
+    	   	
     	$scope.user.id = $scope.users.listUser[index].id;
     	$scope.user.cpf = $scope.cpfFormatter($scope.users.listUser[index].cpf);
 		$scope.user.displayName = $scope.users.listUser[index].displayName;
@@ -200,9 +179,24 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		$scope.user.hash = "##############################";
 		$scope.user.status = $scope.users.listUser[index].status;
 		$scope.user.createDate = $scope.users.listUser[index].createDate;
-    	
+		
+		if($scope.users.listUser[index].companyDto == null)
+			$scope.userTipo = 2
+		else {
+			$scope.userTipo = 1;
+			$scope.user.companyDto = $scope.users.listUser[index].companyDto;
+		}
+		
 		$scope.validEmail();
 		
+		if( $scope.user.status == 'ACTIVE' )  
+		{		
+			
+		}				
+		else {					
+			
+		}				
+				
 		$scope.isCad = false;
     	$scope.isEdit = true;
     }
@@ -242,19 +236,11 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		$scope.user.hash = '';
 		$scope.user.status = '';
 		$scope.user.createDate = '';
-		$scope.user.companyDto = undefined;		
-   	}
-   
-    $scope.setLogin = function (event) {
-    	$scope.logins = [];
-		if(event.target != undefined) {
-			$scope.logins[0] = event.target.value;
-		} else {
-			$scope.logins[0] = event;
-			$scope.user.login = event;
-		}
-	}
-        
+		$scope.user.companyDto = undefined;
+		$scope.user.reset = false;
+		$scope.userTipo = null;
+   	}   
+ 
     $scope.validLogin = function(login) {
 		
     	if(login == "") return;
@@ -276,6 +262,7 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
     	}
     	
     	$scope.user.hash = pass;
+    	$scope.user.reset = true;
  	}
        
     
@@ -284,6 +271,8 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		 $scope.resultCompanies = new CompanyService.listAllView();		 
 		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.companies = $scope.resultCompanies.list;
+			 $scope.companies.push({uid: 0 , company_id: 0});
+			 
        });		 
 	}
     
@@ -305,9 +294,7 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		 }
 		 else {
 		    $scope.emailValid = false;
-		 }
-		 
-		 
+		 }		 
 	 }
     
     getRandomChar = function() {
@@ -318,6 +305,11 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		return String.fromCharCode(Math.floor(Math.random()*(ascii[i][1]-ascii[i][0]))+ascii[i][0]);
 	}
     
+	$scope.inativeUser = function() {		
+				 
+	     $scope.user.status = $scope.user.status == 'INACTIVE'  ? 'ACTIVE' : 'INACTIVE';		
+	}
+		
     $scope.refresh = function() {
     	$scope.clearUserModal();
     	$scope.pesquisaUsers();
@@ -327,7 +319,7 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
     
     $scope.refresh();
     $scope.getUserLogado();
-    
+      
     angular.element('body').removeClass('loading');
    	
 });

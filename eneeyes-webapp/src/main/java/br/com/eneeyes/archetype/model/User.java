@@ -1,6 +1,7 @@
 package br.com.eneeyes.archetype.model;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -83,6 +85,13 @@ public class User implements Serializable {
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_ID", nullable = true)
 	private CompanyView company;
+	
+	@Column(name = "RESET")		
+	private Boolean reset;
+	
+	@Lob
+	@Column(name = "IMAGE", nullable = true)
+	byte[] image;
 
 	public User() {
 		super();
@@ -114,12 +123,24 @@ public class User implements Serializable {
 		this.status = userDto.getStatus();
 		this.createDate = userDto.getCreateDate();
 		this.company = userDto.getCompanyDto();
+		this.reset = userDto.getReset();
+		
+		
+		if (userDto.getImage() != null) {
+			try {
+					
+				byte[] image = null;
+				image = userDto.getImage().getBytes("US-ASCII");
+				this.setImage(image);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}	
+		}
 	}
 	
 	public final void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-
 	
 	private final Set<Role> parseRoles(List<Role> roles) {		
 		Set<Role> lista = new HashSet<Role>();		
@@ -302,6 +323,22 @@ public class User implements Serializable {
 
 	public final void setCompany(CompanyView company) {
 		this.company = company;
+	}
+	
+	public final Boolean getReset() {
+		return reset;
+	}
+
+	public final void setReset(Boolean reset) {
+		this.reset = reset;
+	}
+	
+	public final byte[] getImage() {
+		return image;
+	}
+
+	public final void setImage(byte[] image) {
+		this.image = image;
 	}
 
 	@Override

@@ -32,15 +32,28 @@
 				
 					<div class="col-md-5">																		
 						<div class="box box-primary">				                    
-							<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Empresa *</strong>
-								<strong class="text-red pull-right fieldNeeded" data-ng-show='(userForm.companyName.$dirty && userForm.companyName.$invalid)'>  Campo Obrigatório</strong>
+							<div class="box-header with-border" style="padding:1px ! important">							
+									
+								<div>
+									<strong><i class="fa fa-user"></i> Usuário de: </strong>
+									<div class="radio3 radio-check radio-success radio-inline">
+										<input type="radio" id="radio5" value="1" data-ng-model="userTipo">
+										<label for="radio5">Empresa</label>
+									</div>
+									<div class="radio3 radio-check radio-warning radio-inline">
+										<input type="radio" id="radio6" value="2" data-ng-model="userTipo">
+										<label for="radio6">Central</label>
+									</div>                                                                        
+								</div>									
+							
+								<strong class="text-red pull-right fieldNeeded" data-ng-show='(userForm.companyName.$dirty && userForm.companyName.$invalid && userTipo == 1)'>  Campo Obrigatório</strong>
 							</div>		               	
 							<div class="box-body">
-								<div data-ng-class="{'has-error': userForm.companyName.$dirty && userForm.companyName.$invalid}">							               
+								<div data-ng-class="{'has-error': userForm.companyName.$dirty && userForm.companyName.$invalid && userTipo == 1}">							               
 								   <select name="companyName" class="form-control" data-live-search="true"
 									   style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 										   data-ng-options="item as item.name for item in companies | orderBy: 'name' track by item.uid" 
-													data-ng-model="user.companyDto" required>
+													data-ng-model="user.companyDto" data-ng-required='userTipo!=2'>
 													<option value="">Selecione</option>		                                        
 								   </select>    
 								</div>
@@ -96,45 +109,38 @@
 						<input type="text" class="form-control" placeholder="Celular" data-mask="(99) 99999-9999" mask data-ng-model="user.cell">					
 					</div>
 					
-					<div class="col-md-6">
-<!-- 						<label class="control-label" title="Cidade">E-mail</label>					 -->
-<!-- 						<input type="text" class="form-control" data-ng-model="user.email"> -->
-						
-						<div data-ng-class="{'has-error': !emailValid}">	
+					<div class="col-md-6">						
+						<div data-ng-class="{'has-error': !emailValid}">
+							<label class="control-label" title="Email">E-mail</label>	
 	                        <div class="input-group">								                                        	
 		                    	<span class="input-group-addon" data-ng-show="emailValid">@</span>													                    														                    	
 		                    	<span class="input-group-addon text-red" data-ng-hide="emailValid">@</span>
 		                    	<input data-ng-model="user.email" type="text" class="form-control" placeholder="Email" data-ng-change="validEmail($event);">
 		                    </div>
-	                  	</div>
-											
-					</div>
-					
-					
-					
+	                  	</div>											
+					</div>					
 				</div>				
 				<hr>
 				<div class="row">
-					<div class="col-md-4">
-						<label class="control-label" title="Cidade">Login *</label>
+					<div class="col-md-3">
+						<label class="control-label" title="Login">Login *</label>
 						<strong class="text-red pull-right fieldNeeded" data-ng-show='userForm.userlogin.$error.required && !userForm.userlogin.$pristine'>  Campo Obrigatório</strong>
 						
 						<div data-ng-class="{'has-error': !loginValid}">	
 							<div class="input-group">						                    						                  
 								<input name="userlogin" data-ng-model="user.login" type="text" class="form-control" placeholder="Login" data-ng-disabled="isEdit" required>
-								
-									<a data-ng-if="!isEdit" href="#" title="Validar Nome de Usuário" data-ng-click="validLogin(user.login);" class="input-group-addon">
-									<i data-ng-class="(!loginValid) ? 'text-red' : 'text-green'" class="fa fa-check"></i></a>								
-									<a data-ng-if="isEdit" href="#" title="Validar Nome de Usuário" class="input-group-addon"><i class="fa fa-check text-green"></i></a>								
-								
+							
+								<a data-ng-if="!isEdit" href="#" title="Validar Nome de Usuário" data-ng-click="validLogin(user.login);" class="input-group-addon">
+								<i data-ng-class="(!loginValid) ? 'text-red' : 'text-green'" class="fa fa-check"></i></a>								
+								<a data-ng-if="isEdit" href="#" title="Validar Nome de Usuário" class="input-group-addon"><i class="fa fa-check text-green"></i></a>								
 							</div>
 						</div>						                                         												            			
 					</div>
 					
-					<div class="col-md-2">
+					<div class="col-md-1">
 					</div>
 					
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<label class="control-label" title="Senha Provisória" data-ng-if="!isEdit">Senha</label>						
 						<label class="control-label" title="Senha Provisória" data-ng-if="isEdit">Resetar Senha</label>
 						
@@ -144,8 +150,18 @@
 								<a href="#" title="Gerar Senha Provisória" data-ng-click="makeHash();" Class="input-group-addon"><i class="fa fa-key"></i></a>
 							</div>
 						</div>						                                  												            			
+					</div>
+					
+					<div class="col-md-1">
+					</div>
+					
+					<div class="col-md-3" data-ng-if="isEdit">					
+						<label class="control-label" title="Status do Usuário" data-ng-if="isEdit">Status do Usuário</label>
+						<div class="input-group">	
+							<button type="button" data-ng-click="inativeUser();" class="btn btn-primary" data-ng-if="user.status=='ACTIVE'"><i class="fa fa-user"> </i>  ATIVO  </button>
+							<button type="button" data-ng-click="inativeUser();" class="btn btn-danger" data-ng-if="user.status=='INACTIVE'"><i class="fa fa-user-times"> </i>INATIVO</button>
+						</div>							
 					</div>								
-									
 					
 				</div>
 				

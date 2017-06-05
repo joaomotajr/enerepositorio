@@ -16,8 +16,8 @@
 							<table class="table table-striped table-bordered table-hover">
 		                        <thead>
 									<tr>
-										<th width="150px">CPF</th>
-										<th width="200px">Nome</th>
+<!-- 										<th width="150px">CPF</th> -->
+										<th width="200px">Nick Name</th>
 										<th>Login</th>
 										<th>Tipo</th>
 										<th>Status</th>
@@ -27,7 +27,7 @@
 								<tbody>
 									<tr data-ng-repeat="user in users.listUser" data-ng-class="{'danger' : user.status == 'INACTIVE', 'success' : user.status == 'ACTIVE'}">
 											   
-										<td width="150px" align="center">{{cpfFormatter(user.cpf)}}</td>
+<!-- 										<td width="150px" align="center">{{cpfFormatter(user.cpf)}}</td> -->
 										<td width="200px">{{user.displayName}}</td>									
 										<td>{{user.login}}</td>
 										<td align="center">{{user.roles[0].name}}</td>
@@ -38,7 +38,7 @@
 											<button type="button" class="btn btn-primary btn-xs" data-ng-click="detalheUser($index)" data-toggle="modal" data-target="#modalDetalheUser">editar</button>
 										</td>
 										<td>
-											<button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteAlarm($index)">excluir</button>
+											<a type="button" class="btn btn-danger btn-xs" data-popover=' do usuário: [ {{user.login}} ]' data-confirm="excluirUsuario($index)" >excluir</a>
 										</td>
 										
 									</tr>
@@ -68,45 +68,6 @@
 		      	    
 		      	    <jsp:include page="user-cadastro.jsp"/>        
 		            
-		        </div>
-		    </div>
-		</div>
-			
-		<!-- MODAL EXCLUSAO DE USUARIO -->
-		<div id="modalExcluirUser" class="modal fade col-md-offset-3 col-md-6" style="margin-top: 130px;">
-		    <div class="modal-dialog">
-		        <div class="modal-content">
-					<header class="modal-header">
-		        		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		        		<h4 class="modal-title" align="center"><b>Exclus&atilde;o de Usu&aacute;rio</b></h4>
-		            </header>          
-		            <div class="modal-body" align="center">
-						<p class="alert alert-danger">Voc&ecirc; tem certeza que deseja excluir o usu&aacute;rio "{{user.displayName | uppercase}}"?</p>
-		            </div>
-		             <div class="modal-footer" style="margin-top: -1px; padding-top: 15px; padding-bottom: 15px;">
-						<a class="btn btn-danger"  data-ng-click="fecharModalById('modalExcluirUser')"><i class="icon-thumbs-down icon-white"></i>&nbsp;N&atilde;o</a>
-						<a class="btn btn-success" data-ng-click="excluirUsuario()"><i class="icon-thumbs-up icon-white"></i>&nbsp;Sim</a>
-		            </div>
-		        </div>
-		    </div>
-		</div>
-		
-		<!-- MODAL INATIVACAO DE USUARIO -->
-		<div id="modalInativarUser" class="modal fade col-md-offset-3 col-md-6" style="margin-top: 130px;">
-		    <div class="modal-dialog">
-		        <div class="modal-content">
-					<header class="modal-header">
-		        		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		        		<h4 class="modal-title" align="center"><b>Inativa&ccedil;&atilde;o de Usu&aacute;rio</b></h4>
-		            </header>          
-		            <div class="modal-body" align="center">
-						<p class="alert alert-danger"><strong>Aten&ccedil;&atilde;o</strong>: a inativa&ccedil;&atilde;o do usu&aacute;rio bloquear&aacute; o acesso total ao sistema. 
-						Voc&ecirc; tem certeza que deseja inativar o usu&aacute;rio "{{user.displayName | uppercase}}"?</p>
-		            </div>
-		             <div class="modal-footer" style="margin-top: -1px; padding-top: 15px; padding-bottom: 15px;">
-						<a class="btn btn-danger"  data-ng-click="fecharModalById('modalInativarUser')"><i class="icon-thumbs-down icon-white"></i>&nbsp;N&atilde;o</a>
-						<a class="btn btn-success" data-ng-click="inativarUser()"><i class="icon-thumbs-up icon-white"></i>&nbsp;Sim</a>
-		            </div>
 		        </div>
 		    </div>
 		</div>

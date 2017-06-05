@@ -14,7 +14,6 @@ import br.com.eneeyes.archetype.dto.UserDto;
 import br.com.eneeyes.archetype.model.Role;
 import br.com.eneeyes.archetype.model.User;
 import br.com.eneeyes.archetype.repository.UserRepository;
-import br.com.eneeyes.archetype.utils.MessageDigester;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -33,7 +32,9 @@ import br.com.eneeyes.main.result.Result;
 				
 		user = repository.save(user);
 				
-		dto.setId(user.getId());				
+		dto.setId(user.getId());
+		dto.setCreateDate(user.getCreateDate());
+		
 		result.setEntity(dto);
 		
 		result.setResultType( ResultMessageType.SUCCESS );
@@ -77,8 +78,21 @@ import br.com.eneeyes.main.result.Result;
 	}
 
 	public BasicResult<?> delete(Long uid) {
-		// TODO Auto-generated method stub
-		return null;
+		Result<UserDto> result = new Result<UserDto>(); 	
+		
+		try {			
+			repository.delete(uid);
+			
+			result.setResultType( ResultMessageType.SUCCESS );
+			result.setMessage("Usuário Excluído.");
+			
+		} catch (Exception e) {
+			e.printStackTrace();			
+			result.setIsError(true);
+			result.setSystemMessage(e.getMessage());			
+		}		
+		
+		return result;
 	}
 
 	public BasicResult<?> pesquisaUserByLogin(String login) {
@@ -124,15 +138,13 @@ import br.com.eneeyes.main.result.Result;
 			user.setCreateDate(new Date());
 			user.setCompany(dto.getCompanyDto());
 			
-//			try {
-//				if(user.getHash() != MessageDigester.digestSha1(dto.getHash())) {
-//					user.setHash(MessageDigester.digestSha1(dto.getHash()));
-//				}
-//			} catch (Throwable e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+			dto.setHashDigestSha1();
+			user.setHash(dto.getHash());
 			
+			if(dto.getReset()) {
+				dto.setHashDigestSha1();
+				user.setHash(dto.getHash());	
+			}				
 			
 			Set<Role> roles = new HashSet<Role>();
 			for (Role item   : dto.getRoles()) {

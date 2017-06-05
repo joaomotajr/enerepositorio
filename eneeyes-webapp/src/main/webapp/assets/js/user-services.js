@@ -6,7 +6,7 @@ app.factory('UserService', function($resource){
        update : $resource('/security/api/user/edicaoUser',{},{
            user : {method : 'PUT'}
        }),
-       deletar : $resource('/security/api/user/remocaoUser',{},{
+       deletar : $resource('/security/api/user/remocaoUser/:id', {id: '@id'},{
            user : {method : 'DELETE'}
        }),       
        listAll : $resource('/security/api/user/pesquisaUsers',{},{

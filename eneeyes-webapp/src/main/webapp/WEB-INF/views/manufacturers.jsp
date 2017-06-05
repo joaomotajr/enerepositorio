@@ -25,7 +25,8 @@
 											<button type="button" class="btn btn-info btn-xs"  data-ng-click="editManufacturer($index)">editar</button>
 										</td>
 										<td>
-											<button type="button" class="btn btn-danger btn-xs"  data-ng-click="deleteManufacturer($index)">excluir</button>
+<!-- 											<button type="button" class="btn btn-danger btn-xs"  data-ng-click="deleteManufacturer($index)">excluir</button> -->
+											<a type="button" class="btn btn-danger btn-xs" data-popover=' do Fabricante: [ {{item.name}} ]' data-confirm="deleteManufacturer($index)" >excluir</a>
 										</td>						
 									</tr>                                                               
 								</tbody>

@@ -40,22 +40,6 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 
 		});		 
 	 }
-	
-	
-	$scope.onOffAlarm = function() {
-					
-		var alarm = {
-			uid: $scope.alarmUid != undefined ? $scope.alarmUid : 0,			
-			alarmOn: angular.element('#alarmOn').hasClass('unlocked_inactive') == true ? true : false
-    	}; 
-		
-		$scope.inclusaoAlarm = new AlarmService.onOff(alarm);				 
-		$scope.inclusaoAlarm.$alarm({_csrf : angular.element('#_csrf').val()}, function()
-		{        	
-			$scope.getAlarms(); 
-
-		});		 
-	 }
 		 
 	$scope.clearFormAlarm = function () {
 	

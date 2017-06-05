@@ -40,7 +40,7 @@
 										<button type="button" class="btn btn-primary btn-xs" data-ng-click="editDetector($index)">editar</button>
 									</td>
 									<td>
-										<button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteDetector($index)">excluir</button>
+										<a type="button" class="btn btn-danger btn-xs" data-popover=' do Detector: [ {{item.name}} ]' data-confirm="deleteDetector($index)" >excluir</a>
 									</td>						
 								</tr>                                                               
 							</tbody>

@@ -51,7 +51,7 @@
 									</tr>
 								</thead>
 								<tbody>                                                        
-									<tr data-ng-repeat="item in alarms">
+									<tr data-ng-repeat="item in alarms" data-ng-class="{'danger' : item.alarmOn == false, 'success' : item.alarmOn == true}">
 										<td>{{item.companyDto.name}}</td>
 										<td>{{item.name}}</td>
 										<td>{{item.gasDto.name}}</td>															        
@@ -60,7 +60,7 @@
 											<button type="button" class="btn btn-primary btn-xs" data-ng-click="editAlarm($index)">editar</button>
 										</td>
 										<td>
-											<button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteAlarm($index)">excluir</button>
+											<a type="button" class="btn btn-danger btn-xs" data-popover=' do Alarme: [ {{item.name}} ]' data-confirm="deleteAlarm($index)" >excluir</a>
 										</td>						
 									</tr>                                                               
 								</tbody>
@@ -160,8 +160,8 @@
 							                      	<div class="row">
 								                      	<div class="col-md-9"> 
 				                                          	<div class="btn-group" id="toggle_event_editing">
-																<button type="button" id='alarmOff' class="btn btn-default locked_active">OFF</button>
-																<button type="button" id='alarmOn' class="btn bg-black unlocked_inactive">ON</button>
+																<button type="button" class="btn btn-default locked_active">OFF</button>
+																<button type="button" class="btn bg-black unlocked_inactive">ON</button>
 															</div>
 														</div>
 														<div class="col-md-3">					            				

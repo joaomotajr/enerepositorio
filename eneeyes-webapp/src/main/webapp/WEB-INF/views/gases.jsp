@@ -27,7 +27,8 @@
 											<button type="button" class="btn btn-info btn-xs"  data-ng-click="editGas($index)">editar</button>
 										</td>
 										<td>
-											<button type="button" class="btn btn-danger btn-xs"  data-ng-click="deleteGas($index)">excluir</button>
+<!-- 											<button type="button" class="btn btn-danger btn-xs"  data-ng-click="deleteGas($index)">excluir</button> -->
+											<a type="button" class="btn btn-danger btn-xs" data-popover=' do Gas: [ {{item.name}} ]' data-confirm="deleteGas($index)" >excluir</a>
 										</td>						
 									</tr>                                                               
 								</tbody>

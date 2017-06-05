@@ -42,7 +42,8 @@
 											<button type="button" class="btn btn-primary btn-xs" data-ng-click="editSensor($index)">editar</button>
 										</td>
 										<td>
-											<button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteSensor($index)">excluir</button>
+<!-- 											<button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteSensor($index)">excluir</button> -->
+											<a type="button" class="btn btn-danger btn-xs" data-popover=' do Sensor: [ {{item.name}} ]' data-confirm="deleteSensor($index)" >excluir</a>
 										</td>						
 									</tr>                                                               
 								</tbody>

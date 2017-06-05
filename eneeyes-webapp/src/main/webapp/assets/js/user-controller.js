@@ -139,7 +139,6 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
     }
 	
 	$scope.pesquisaUsers = function() {
-    	$('#dataTables-users').dataTable().fnDestroy();
         $('html').addClass('loading');
                 
         $scope.users.listUser = [];
@@ -188,14 +187,6 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
 		}
 		
 		$scope.validEmail();
-		
-		if( $scope.user.status == 'ACTIVE' )  
-		{		
-			
-		}				
-		else {					
-			
-		}				
 				
 		$scope.isCad = false;
     	$scope.isEdit = true;

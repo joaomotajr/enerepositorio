@@ -40,12 +40,12 @@
 		        	<form>
 		          
 		          		<div class="form-group has-feedback">
-		            		<input type="text" class="form-control" placeholder="Email/Usuário" data-ng-model="forms.signin.login">
+		            		<input type="text" class="form-control" placeholder="Email/Usuário" data-ng-model="forms.signin.login" data-ng-keyup="$event.keyCode == 13 ? signin() : null">
 		            		<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 		          		</div>
 		          
 		          		<div class="form-group has-feedback">
-		            		<input type="password" class="form-control" placeholder="Senha" data-ng-model="forms.signin.credential">
+		            		<input type="password" class="form-control" placeholder="Senha" data-ng-model="forms.signin.credential" data-ng-keyup="$event.keyCode == 13 ? signin() : null">
 		            		<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 		          		</div>
 		          

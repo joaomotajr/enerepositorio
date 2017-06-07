@@ -12,7 +12,7 @@ app.factory('UserService', function($resource){
        listAll : $resource('/security/api/user/pesquisaUsers',{},{
     	   users : {method : 'GET'}
        }),
-       listOne : $resource('/security/api/user/obtemPorId/:id', {id: '@id'},{
+       listOne : $resource('/security/api/user/pesquisaUserById/:id', {id: '@id'},{
     	   user : {method : 'GET'}
        }),
        listByLogin : $resource('/security/api/user/pesquisaUserByLogin/:login', {login: '@login'},{

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eneeyes.archetype.dto.UserDto;
+import br.com.eneeyes.archetype.dto.UserPassDto;
 import br.com.eneeyes.archetype.services.UserService;
 import br.com.eneeyes.main.result.BasicResult;
 
@@ -32,6 +33,12 @@ public class UserController {
 		return service.listAll();		
     }
     
+    @RequestMapping(value="/security/api/user/pesquisaUserById/{uid}", method = RequestMethod.GET, produces = {"application/xml", "application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public BasicResult<?> pesquisaUser(@PathVariable Long uid) throws Exception {
+		return service.listOne(uid);		
+    }
+    
     @RequestMapping(value="/security/api/user/pesquisaUserByLogin/{login}", method = RequestMethod.GET, produces = {"application/xml", "application/json"})
     @ResponseStatus(HttpStatus.OK)
     public BasicResult<?> pesquisaUserByLogin(@PathVariable String login) throws Exception {
@@ -49,5 +56,15 @@ public class UserController {
 	public BasicResult<?> updateUser(@RequestBody UserDto userDto) {		
 		return service.updateUser(userDto);
 	}
+    
+    @RequestMapping(value="/api/user/changePassword", method = RequestMethod.POST, consumes = {"application/xml", "application/json"}, produces = {"application/xml", "application/json"})
+    @ResponseStatus(HttpStatus.OK)
+    public BasicResult<?> changePassword(@RequestBody UserPassDto userPassDto) {
+    	userPassDto.setPasswordDigestSha1();
+    	userPassDto.setNewPasswordDigestSha1();
+    	userPassDto.setConfirmdDigestSha1();
+    	return service.updatePassword(userPassDto);
+    }
+
    
 }

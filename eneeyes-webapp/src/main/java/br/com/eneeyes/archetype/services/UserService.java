@@ -1,19 +1,25 @@
 package br.com.eneeyes.archetype.services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.dto.UserDto;
+import br.com.eneeyes.archetype.dto.UserPassDto;
 import br.com.eneeyes.archetype.model.Role;
 import br.com.eneeyes.archetype.model.User;
 import br.com.eneeyes.archetype.repository.UserRepository;
+import br.com.eneeyes.archetype.utils.MessageDigester;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -103,7 +109,7 @@ import br.com.eneeyes.main.result.Result;
 
 			if (user != null) {
 				
-				UserDto dto = new UserDto();
+				UserDto dto = new UserDto(user);
 				
 				result.setEntity(dto); ;				
 				result.setResultType( ResultMessageType.SUCCESS );
@@ -124,7 +130,7 @@ import br.com.eneeyes.main.result.Result;
 	public BasicResult<?> updateUser(UserDto dto) {
 		Result<UserDto> result = new Result<UserDto>(); 	
 				
-		User user = repository.findById(dto.getId());
+		User user = repository.findOne(dto.getId());
 		
 		if (user != null) {
 			
@@ -137,10 +143,7 @@ import br.com.eneeyes.main.result.Result;
 			user.setStatus(dto.getStatus());			
 			user.setCreateDate(new Date());
 			user.setCompany(dto.getCompanyDto());
-			
-			dto.setHashDigestSha1();
-			user.setHash(dto.getHash());
-			
+						
 			if(dto.getReset()) {
 				dto.setHashDigestSha1();
 				user.setHash(dto.getHash());	
@@ -170,6 +173,80 @@ import br.com.eneeyes.main.result.Result;
 		}	
 		
 		return result;
+	}
+
+	public BasicResult<?> listOne(Long uid) {
+		Result<UserDto> result = new Result<UserDto>();
+		
+		try {
+			User user = repository.findOne(uid);
+
+			if (user != null) {
+				
+				UserDto dto = new UserDto(user);
+				
+				result.setEntity(dto); ;				
+				result.setResultType( ResultMessageType.SUCCESS );
+				
+			} else {
+				
+				result.setResultType( ResultMessageType.NO_DATA );
+								
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setResultType( ResultMessageType.ERROR );									
+		}	
+		
+		return result;
+	}
+
+	public BasicResult<?> updatePassword(UserPassDto userPassDto) {
+		
+		Result<UserDto> result = new Result<UserDto>(); 	
+		
+		try {
+			User user = repository.findOne(userPassDto.getUserId());
+			
+			if (user != null) {
+				
+				if (!Pattern.matches("^[0-9a-zA-ZáéíóúàâêôãõüçÁÉÍÓÚÀÂÊÔÃÕÜÇöÖñÑ@. ]{6,10}$", userPassDto.getNewPassword())) {	                
+					result.setResultType( ResultMessageType.ERROR );
+	                return result;
+	            }
+
+	            if (!userPassDto.getNewPassword().equals(userPassDto.getConfirm())) {	                
+	            	result.setResultType( ResultMessageType.ERROR );
+	                return result;
+	            }
+
+	            if (user.getLogin() == null || !Pattern.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", user.getLogin())) {	                
+	            	result.setResultType( ResultMessageType.ERROR );
+	                return result;
+	            }
+	            
+	            Calendar calendar = Calendar.getInstance();
+	            calendar.add(Calendar.DATE, 3);
+	            
+	            Map<String, Object> token = new HashMap<String, Object>();
+	            
+	            token.put("expire", calendar.getTime());
+	            token.put("hash", MessageDigester.digestSha1(userPassDto.getNewPassword()));            
+	            
+				user.setHash(userPassDto.getConfirm());	
+	            
+	            repository.save(user);
+				
+				
+			}
+		
+		 } catch (Throwable throwable) {
+			 result.setIsError(true);
+			result.setResultType( ResultMessageType.ERROR );		
+	         
+	     }
+		
+		return null;
 	}
 	
 

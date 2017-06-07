@@ -184,8 +184,9 @@
 	
 							<!-- Menu Footer-->
 							<li class="user-footer">
-								<div class="pull-left" data-ng-controller="UserPerfilController">							
-									<a href="#" type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modalPerfilUser">Perfil</a>
+								<div class="pull-left" data-ng-controller="UserPerfilController">									
+<!--  									<a href="#" type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modalPerfilUser">Perfil</a>  -->
+ 									<a href="#" type="button" class="btn btn-default btn-flat" data-ng-click="getUserLogado">Perfil</a>
 								</div>
 								<div class="pull-right">
 									<a href="/logout" class="btn btn-default btn-flat">Sair</a>

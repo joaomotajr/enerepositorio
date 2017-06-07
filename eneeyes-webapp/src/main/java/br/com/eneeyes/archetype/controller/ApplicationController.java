@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.eneeyes.archetype.model.Role;
@@ -50,20 +49,7 @@ public class ApplicationController {
         }
 
         return view(viewName, model, session);
-    }
-    
-    @RequestMapping(value="/inscricao.html")
-    public ModelAndView signup(ModelAndView model, HttpSession session){
-    	model.addObject("layoutContext", "default");
-    	return view("cadastro", model, session);
-    }
-
-    @RequestMapping(value="/inscricao.html", method = RequestMethod.POST)
-    public ModelAndView signup(ModelAndView model, @RequestParam String email, HttpSession session){
-    	model.addObject("layoutContext", "default");
-        model.addObject("inscricao_email", email);
-    	return view("cadastro", model, session);
-    }    
+    } 
 
     @RequestMapping(value="/{viewName}.html")
     public ModelAndView view(@PathVariable String viewName, ModelAndView model, HttpSession session) {

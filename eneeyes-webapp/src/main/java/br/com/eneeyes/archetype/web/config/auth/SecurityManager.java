@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import br.com.eneeyes.archetype.model.Role;
 import br.com.eneeyes.archetype.model.User;
 import br.com.eneeyes.archetype.model.UserStatus;
-import br.com.eneeyes.archetype.services.IdentityService;
+import br.com.eneeyes.archetype.repository.UserRepository;
 import br.com.eneeyes.archetype.utils.MessageDigester;
 
 @Component
@@ -27,7 +27,7 @@ public class SecurityManager implements AuthenticationManager {
 	private Log log = LogFactory.getLog(getClass());
 	
 	@Autowired
-	private IdentityService identityDao;
+	private UserRepository repository;
 	
 	private String SIGNIN_ERROR = "signin.error";
 	private String SIGNIN_INACTIVE = "signin.inactive";
@@ -52,7 +52,7 @@ public class SecurityManager implements AuthenticationManager {
 		}
 		
 		// Valida usuario inativo
-		final User user = identityDao.findByLogin(login).getUser();
+		final User user = repository.findByLogin(login);
         if(user != null && user.getStatus().equals(UserStatus.INACTIVE)) {
         	log.error("Tentativa de login invalido: " + login);
         	throw new BadCredentialsException(SIGNIN_INACTIVE);
@@ -69,11 +69,11 @@ public class SecurityManager implements AuthenticationManager {
                     throw new BadCredentialsException(SIGNIN_ERROR);
                 }
                 
-                //Deve Trocar a 
-                if(identityDao.deveTrocarSenha(user)) {
-                	log.error("Usuario Deve Trocar Senha: " + user.getLogin());
-                	throw new BadCredentialsException(SIGNIN_NEW);
-                }
+	             // Senha Deve ser trocada
+	            if(user != null && user.getReset() != null  && user.getReset() ) {
+	            	log.error("Usuario Deve Trocar Senha: " + user.getLogin());
+	            	throw new BadCredentialsException(SIGNIN_NEW+"#"+user.getId()+"#"+user.getDisplayName());
+	            }
                 
             }
 		} catch (Throwable t) {

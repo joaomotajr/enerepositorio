@@ -5,6 +5,7 @@
 <c:set var="context" value="${(empty context) ? 'default' : context}"/>
 <c:set var="tipoUsuario" value="${(empty tipoUsuario) ? '' : tipoUsuario}"/>
 <c:set var="idUsuario" value="${(empty idUsuario) ? '' : idUsuario}"/>
+<c:set var="isMaster" value="${(empty isFrom) ? '' : isFrom}"/>
 
 <html lang="en" data-ng-app="eneeyes">
 	
@@ -27,7 +28,8 @@
         <input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="hidden" id="tipoUsuario" value="${tipoUsuario}">
         <input type="hidden" id="idUsuario" value="${idUsuario}">
-        
+        <input type="hidden" id="isFrom" value="${isFrom}">
+                
         <div class="wrapper" >
 	    	<span id="rootMenu">
 		        <c:if test="${context == 'authenticated'}">

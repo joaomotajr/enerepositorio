@@ -19,6 +19,7 @@ public class ApplicationController {
     
     private String TIPO_USUARIO = "tipoUsuario";
     private String ID_USUARIO = "idUsuario";
+    private String IS_FROM = "isFrom";
         
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView index(ModelAndView model, HttpSession session) {
@@ -39,7 +40,11 @@ public class ApplicationController {
     			}
     		}
     		
-    		session.setAttribute(ID_USUARIO, user.getId());   		
+    		session.setAttribute(ID_USUARIO, user.getId());
+    		if(user.getCompany() != null)
+    			session.setAttribute(IS_FROM, user.getCompany().getUid());
+    		else
+    			session.setAttribute(IS_FROM, "MASTER");
 
         	viewName = "redirect:/security/index-user.html";	
         	        	

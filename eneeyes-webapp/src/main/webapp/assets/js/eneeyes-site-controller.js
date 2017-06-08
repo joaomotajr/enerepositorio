@@ -1,4 +1,4 @@
-app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin, $sce, Password) {
+app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin, $sce, UserService) {
 
 	$scope.$root.recolheLogo = true;
 	
@@ -6,6 +6,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	$scope.$root.currentPage = "";
 	$scope.$root.errorTimes = 0;
 	$scope.$root.currentTabOpened = "";
+	$scope.$root.isFrom = $('#isFrom').val();
 	
 	$scope.showLogo = function(){
 		$scope.$root.recolheLogo = !$scope.$root.recolheLogo; 
@@ -93,12 +94,12 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
     	 newPassword: '',
          confirm : ''
      },     
-     changePassword : {
-        pass1 : '',
-        pass2 : '',
-        errorMessage: '',
-        successMessage: '',
-     }
+//     changePassword : {
+//        pass1 : '',
+//        pass2 : '',
+//        errorMessage: '',
+//        successMessage: '',
+//     }
     };
     
     $scope.errorMessage = '';
@@ -173,29 +174,38 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         angular.element('#password-success').css('display','none');
         angular.element('#password-error').css('display','none');
 
-        $scope.password = new Password($scope.forms.signexpired);
-        $scope.password.$change({_csrf : angular.element('#_csrf').val()},function(){
+        $scope.updatePass = new UserService.updatePass($scope.forms.signexpired);
+        $scope.updatePass.$user({_csrf : angular.element('#_csrf').val()},function(){
         	
         	angular.element('html').removeClass('loading');
             
-        	if($scope.password.resultType == 'SUCCESS') {
+        	if($scope.updatePass.resultType == 'SUCCESS') {
             	
-            	$scope.passwordSuccessMessage = $scope.password.messages[0].message;            	
-            	angular.element('#password-success').css('display','block');            	
+        		$scope.successMessage = $scope.updatePass.message + " Refaça o Login";          
+            	
+            	angular.element('#formSignin').css('display','none');            	
+            	angular.element('#password-success').css('display','block');
+    			
             	$scope.forms.signexpired = [];
+            	
+            	angular.element('html').removeClass('loading');
             
             	$timeout(function(){
-					window.location.href='/';
+            		angular.element('#password-success').css('display','none');
+            		$scope.forms.signin.credential = $scope.forms.signexpired.confirm;
+            		$scope.forms.signin.credential = '';
+            		$scope.showNewPass = false;            		
+										
 				},5000);
             
             } else {
-            
-            	if($scope.password.errorMessages != null && $scope.password.errorMessages.length > 0) {
             	
-            		$scope.passwordErrorMessage = $scope.password.errorMessages[0].message;
-            		angular.element('html').removeClass('loading');
-        			angular.element('#password-error').css('display','block');
-            	}
+            	$scope.errorMessage = 'Erro ao Atualizar Senha!!!';
+
+    			angular.element('#signin-error').css('display','block');
+    			angular.element('#signin-user').addClass('has-error');
+    			angular.element('#signin-pass').addClass('has-error');            		
+            	            	
             }        
 		});    	
     	

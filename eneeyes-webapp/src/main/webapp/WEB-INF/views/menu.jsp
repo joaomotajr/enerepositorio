@@ -122,7 +122,7 @@
 		            		<span>Monitoramento</span></a>
 		            	</li>
 		            		
-		            	<li class="treeview">
+		            	<li class="treeview" data-ng-if="isFrom=='MASTER'">
 			            	<a href="#" data-ng-click="LoadAjaxContent('simulador.html', 'Simulador')"><i class="fa fa-circle-o"></i>
 			            	<span>Simulador</span>
 			            	<span class="label label-danger pull-right">Temp</span>

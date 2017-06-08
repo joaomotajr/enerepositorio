@@ -57,7 +57,8 @@
 		          		</div>
 		          
 		          		<div class="form-group has-feedback">
-		            		<input type="password" class="form-control" placeholder="Senha" data-ng-model="forms.signin.credential" data-ng-keyup="$event.keyCode == 13 ? signin() : null">
+		            		<input type="password" class="form-control" placeholder="Senha" data-ng-model="forms.signin.credential" 
+		            			data-ng-keyup="$event.keyCode == 13 ? signin() : null">
 		            		<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 		          		</div>
 		          
@@ -67,14 +68,18 @@
 				  		
 			  			<div class="alert alert-warning" id="signinAlert" data-ng-show="signinAlert" style="display:none;">					        
 							<small>Prezado(a) <strong>{{forms.signexpired.username}}</strong>, sua senha expirou. Clique </small>
-							<a class="text-muted" href="#" data-ng-click="showNewPass=true; signinAlert = false" >aqui</a><small> para troc&aacute;-la.</small>					        
+							<a class="text-muted" href="#" data-ng-click="showNewPass=true; signinAlert = false; forms.signexpired.password=forms.signin.credential; focusNewPass=true" >aqui</a><small> para troc&aacute;-la.</small>					        
+						</div>
+						
+						<div id="password-success" class="alert alert-success" style="display:none">
+							{{successMessage}}
 						</div>
 				  
 		          		<div class="row">
 		            		<div class="col-xs-8">
 		            		</div>	            
 		            		<div class="col-xs-4">
-		              			<button type="button" data-ng-click="signin()" class="btn btn-primary btn-block btn-flat"		              			
+		              			<button type="button" data-ng-click="signin()" class="btn btn-primary btn-block btn-flat" data-ng-disabled="showNewPass"		              			
 		              			data-ng-disabled="(forms.signin.login == '' || forms.signin.credential == '') ? true : false">Entrar</button>
 		            		</div>	            
 		          		</div>
@@ -86,10 +91,11 @@
 						<input type="password" placeholder="senha atual" title="Senha Informada pelo Administrador" 
 							class="form-control" data-ng-model="forms.signexpired.password" name="password" required/>
 							
-						<input type="password" placeholder="nova senha" class="form-control" data-ng-model="forms.signexpired.newPassword"
+						<input type="password" placeholder="nova senha" class="form-control" data-ng-model="forms.signexpired.newPassword" data-focus-me="focusNewPass"
 							data-ng-minlength="8" data-ng-maxlength="20" data-ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" name="password1" required />
 							
-						<input type="password" placeholder="confirme a nova senha" class="form-control" data-ng-model="forms.signexpired.confirm" data-valid-Second-Password name="password2" required/>
+						<input type="password" placeholder="confirme a nova senha" class="form-control" data-ng-model="forms.signexpired.confirm" 
+							data-valid-Second-Password='{{forms.signexpired.newPassword}}' name="password2" required/>
 										
 						<div class="alert alert-danger passAlert" data-ng-if="signinForm.password.$error.required && signinForm.password.$dirty">
 							<i class="fa fa-ban"></i><span> Digite Senha Atual!</span>
@@ -97,10 +103,12 @@
 						<div class="alert alert-danger passAlert" data-ng-show="!signinForm.password.$error.required && signinForm.password1.$error.required && signinForm.password1.$dirty">
 							<i class="fa fa-ban"></i><span> Digite a Nova Senha!</span>
 						</div>
-						<div class="alert alert-danger passAlert" data-ng-show="!signinForm.password1.$error.required && (signinForm.password1.$error.minlength || signinForm.password1.$error.maxlength) && signinForm.password1.$dirty">																
+						<div class="alert alert-danger passAlert" 
+							data-ng-show="!signinForm.password1.$error.required && (signinForm.password1.$error.minlength || signinForm.password1.$error.maxlength) && signinForm.password1.$dirty">																
 							<i class="fa fa-ban"></i><span > Senha precisar ter entre 8 and 20 digitos!</span>
 						</div>
-						<div class="alert alert-danger passAlert" data-ng-show="!signinForm.password1.$error.required && !signinForm.password1.$error.minlength && !signinForm.password1.$error.maxlength && signinForm.password1.$error.pattern && signinForm.password1.$dirty">
+						<div class="alert alert-danger passAlert" 
+							data-ng-show="!signinForm.password1.$error.required && !signinForm.password1.$error.minlength && !signinForm.password1.$error.maxlength && signinForm.password1.$error.pattern && signinForm.password1.$dirty">
 							<i class="fa fa-ban"></i><span> Precisa Uma letra Maiúscula &amp; Uma Minúscula, e Um Número ou Simbolo!</span>
 						</div>
 						<div class="alert alert-danger passAlert" data-ng-show="!signinForm.password1.$error.required && signinForm.password2.$error.required && signinForm.password2.$dirty"> 	
@@ -109,7 +117,8 @@
 						<div class="alert alert-danger passAlert" data-ng-show="!signinForm.password2.$error.required && signinForm.password2.$error.noMatch && signinForm.password1.$dirty"> 	
 							<i class="fa fa-ban"></i><span> Senhas Não Conferem!</span>
 						</div>
-						<br>
+						<br>						
+						
 						<div class="row">
 		            		<div class="col-xs-8">
 		            		</div>	            

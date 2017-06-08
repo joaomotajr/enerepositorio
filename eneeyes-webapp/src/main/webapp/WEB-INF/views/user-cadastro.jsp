@@ -125,10 +125,13 @@
 					<div class="col-md-3">
 						<label class="control-label" title="Login">Login *</label>
 						<strong class="text-red pull-right fieldNeeded" data-ng-show='userForm.userlogin.$error.required && !userForm.userlogin.$pristine'>  Campo Obrigatório</strong>
-						
+						<strong class="text-red pull-right fieldNeeded" 
+						data-ng-show='!userForm.userlogin.$error.minLength && !userForm.userlogin.$error.maxLength && userForm.userlogin.$error.pattern && userForm.userlogin.$dirty'> Precisa Iniciar com uma Letra, e Conter Números &amp; Letras Apenas</strong>
+												
 						<div data-ng-class="{'has-error': !loginValid}">	
 							<div class="input-group">						                    						                  
-								<input name="userlogin" data-ng-model="user.login" type="text" class="form-control" placeholder="Login" data-ng-disabled="isEdit" required>
+								<input name="userlogin" data-ng-model="user.login" type="text" class="form-control" placeholder="Login" 
+									data-ng-disabled="isEdit" data-ng-pattern="/^[A-z][A-z0-9]*$/" data-ng-minlength="5" data-ng-maxlength="20" required>
 							
 								<a data-ng-if="!isEdit" href="#" title="Validar Nome de Usuário" data-ng-click="validLogin(user.login);" class="input-group-addon">
 								<i data-ng-class="(!loginValid) ? 'text-red' : 'text-green'" class="fa fa-check"></i></a>								

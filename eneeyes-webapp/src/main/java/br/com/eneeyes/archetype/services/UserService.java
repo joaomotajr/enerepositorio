@@ -19,7 +19,6 @@ import br.com.eneeyes.archetype.dto.UserPassDto;
 import br.com.eneeyes.archetype.model.Role;
 import br.com.eneeyes.archetype.model.User;
 import br.com.eneeyes.archetype.repository.UserRepository;
-import br.com.eneeyes.archetype.utils.MessageDigester;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -146,6 +145,7 @@ import br.com.eneeyes.main.result.Result;
 						
 			if(dto.getReset()) {
 				dto.setHashDigestSha1();
+				user.setReset(true);
 				user.setHash(dto.getHash());	
 			}				
 			
@@ -220,33 +220,68 @@ import br.com.eneeyes.main.result.Result;
 	                return result;
 	            }
 
-	            if (user.getLogin() == null || !Pattern.matches("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$", user.getLogin())) {	                
+	            if (user.getLogin() == null || !Pattern.matches("^[A-z][A-z0-9]*$", user.getLogin())) {	                
 	            	result.setResultType( ResultMessageType.ERROR );
 	                return result;
 	            }
-	            
+	            	            
 	            Calendar calendar = Calendar.getInstance();
 	            calendar.add(Calendar.DATE, 3);
 	            
 	            Map<String, Object> token = new HashMap<String, Object>();
 	            
+	            userPassDto.setConfirmdDigestSha1();
 	            token.put("expire", calendar.getTime());
-	            token.put("hash", MessageDigester.digestSha1(userPassDto.getNewPassword()));            
+	            token.put("hash", userPassDto.getConfirm());            
 	            
-				user.setHash(userPassDto.getConfirm());	
+	            user.setReset(false);
+				user.setHash(userPassDto.getConfirm());
+				
+				user = repository.save(user);
 	            
-	            repository.save(user);
-				
-				
+				result.setEntity( new UserDto(user) );				
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Senha Atualizada com Sucesso.");
 			}
 		
-		 } catch (Throwable throwable) {
-			 result.setIsError(true);
-			result.setResultType( ResultMessageType.ERROR );		
-	         
-	     }
+		} catch (Throwable throwable) {
+			
+			result.setIsError(true);
+			result.setResultType( ResultMessageType.ERROR );
+			result.setMessage(throwable.getMessage());	         
+	    }
 		
-		return null;
+		return result;
+	}
+
+	public BasicResult<?> updateUserProfile(UserDto dto) {
+		Result<UserDto> result = new Result<UserDto>(); 	
+		
+		User user = repository.findOne(dto.getId());
+		
+		if (user != null) {
+			
+			user.setLogin(dto.getLogin());
+			user.setCpf(dto.getCpf());
+			user.setDisplayName(dto.getDisplayName());
+			user.setNickname(dto.getNickname());
+			user.setFone(dto.getFone());
+			user.setCell(dto.getCell());
+			user.setEmail(dto.getEmail());		
+			user.setCreateDate(new Date());
+						
+			user = repository.save(user);
+								
+			result.setEntity( new UserDto(user) );
+			
+			result.setResultType( ResultMessageType.SUCCESS );
+			result.setMessage("Executado com sucesso.");			
+		}
+		else {
+			result.setResultType( ResultMessageType.NO_DATA );
+		}	
+		
+		return result;
 	}
 	
 

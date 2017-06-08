@@ -206,14 +206,34 @@ app.directive('numberOnly', function () {
 	  };
 });
 
+app.directive('focusMe', function($timeout) {
+	  return {
+	    scope: { trigger: '=focusMe' },
+	    link: function(scope, element) {
+	      scope.$watch('trigger', function(value) {
+	        
+	    	  if(value === true) { 	          
+	    		  element[0].focus();
+	    		  scope.trigger = false;	          
+	    	  }
+	      });
+	    }
+	  };
+	});
+
 
 app.directive('validSecondPassword', function () {
     return {
+    	scope: {
+    		validSecondPassword: '@'			
+    	},
         require: 'ngModel',
-        link: function (scope, elm, attrs, ctrl) {
+        link: function (scope, elm, attrs, ctrl) {            
             ctrl.$parsers.unshift(function (viewValue, $scope) {
-                var noMatch = viewValue != scope.signinForm.password1.$viewValue
-                ctrl.$setValidity('noMatch', !noMatch)
+            	var noMatch = (viewValue != scope.validSecondPassword);
+                ctrl.$setValidity('noMatch', !noMatch);
+
+                return viewValue;
             });
         }
     }

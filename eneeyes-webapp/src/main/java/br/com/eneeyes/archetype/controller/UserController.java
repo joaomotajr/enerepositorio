@@ -56,15 +56,19 @@ public class UserController {
 	public BasicResult<?> updateUser(@RequestBody UserDto userDto) {		
 		return service.updateUser(userDto);
 	}
-    
-    @RequestMapping(value="/api/user/changePassword", method = RequestMethod.POST, consumes = {"application/xml", "application/json"}, produces = {"application/xml", "application/json"})
+        
+    @RequestMapping(value="/api/user/changePassword", method = RequestMethod.PUT, consumes = {"application/json"}, produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     public BasicResult<?> changePassword(@RequestBody UserPassDto userPassDto) {
-    	userPassDto.setPasswordDigestSha1();
-    	userPassDto.setNewPasswordDigestSha1();
-    	userPassDto.setConfirmdDigestSha1();
+    	
     	return service.updatePassword(userPassDto);
     }
+    
+    @RequestMapping(value="/security/api/user/edicaoUserProfile",  method=RequestMethod.PUT, consumes = "application/json", produces = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> updateUserProfile(@RequestBody UserDto userDto) {		
+		return service.updateUserProfile(userDto);
+	}
 
    
 }

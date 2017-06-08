@@ -126,8 +126,7 @@
 										<i class="fa fa-bullhorn" data-ng-class="{'text-green' : item.alarmType=='NORMAL', 'text-orange' : item.alarmType=='ALERTA', 'text-gray' : item.alarmType=='DETECCAO', 'text-red' : item.alarmType=='EVACUACAO'}"></i>
 											{{item.company_name}} {{item.company_detector_name}} {{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
 										</a>
-									</li>
-									
+									</li>									
 									
 								</ul>
 							</li>
@@ -137,7 +136,7 @@
 					
 					<!-- Tasks: style can be found in dropdown.less -->
 					<li class="dropdown tasks-menu">
-					<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span class="label label-danger"></span></a>
+						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span class="label label-danger"></span></a>
 						<ul class="dropdown-menu">
 							<li class="header">Sem Tarefas Pendentes</li>
 							<li>
@@ -164,16 +163,17 @@
 								</ul>
 							</li>
 							<li class="footer"><a href="#">Ver todas as Tarefas</a></li>
-						</ul></li>
+						</ul>
+					</li>
 	
 					<!-- User Account: style can be found in dropdown.less -->
 					<li class="dropdown user user-menu">
-					<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> 
-						<img src="/assets/img/avatar_128x128.png" class="user-image" alt="User Image"> 
-						<span class="hidden-xs"><sec:authentication property="principal.displayName" /></span>
-					</a>
-					
-					<ul class="dropdown-menu">
+						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> 
+							<img src="/assets/img/avatar_128x128.png" class="user-image" alt="User Image"> 
+							<span class="hidden-xs"><sec:authentication property="principal.displayName" /></span>
+						</a>
+						
+						<ul class="dropdown-menu">
 							<!-- User image -->
 							<li class="user-header"><img
 								src="/assets/img/avatar_128x128.png" class="img-circle"	alt="User Image">
@@ -184,15 +184,15 @@
 	
 							<!-- Menu Footer-->
 							<li class="user-footer">
-								<div class="pull-left" data-ng-controller="UserPerfilController">									
-<!--  									<a href="#" type="button" class="btn btn-default btn-flat" data-toggle="modal" data-target="#modalPerfilUser">Perfil</a>  -->
- 									<a href="#" type="button" class="btn btn-default btn-flat" data-ng-click="getUserLogado">Perfil</a>
+								<div class="pull-left">																	
+ 									<a href="#" type="button" class="btn btn-default btn-flat" data-ng-click="LoadAjaxContent('userPerfil.html', 'Perfil')">Perfil</a>
 								</div>
 								<div class="pull-right">
 									<a href="/logout" class="btn btn-default btn-flat">Sair</a>
 								</div>
 							</li>
-						</ul></li>
+						</ul>
+					</li>
 	
 					<!-- Control Sidebar Toggle Button -->
 					<li title="Configurações"><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
@@ -207,6 +207,5 @@
       <div class="control-sidebar-bg"></div>
 	<!-- END HEADER SECTION -->
 	
-	<jsp:include page="user-perfil.jsp"/>
 	
 </html>	

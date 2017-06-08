@@ -23,20 +23,16 @@ app.controller('UserPerfilController', function ($scope, $timeout, $filter, User
     $scope.saveUser = function() {
     	$('html').addClass('loading');
     	    	    		
-		if($scope.user.cpf) {
-    		$scope.user.cpf = $scope.user.cpf.replace(/[\.-]/g, '');
+		if($scope.userPerfil.cpf) {
+    		$scope.userPerfil.cpf = $scope.user.cpf.replace(/[\.-]/g, '');
     	}
 		
-    	$scope.update = new UserService.update($scope.user);
-        $scope.update.$user({_csrf : angular.element('#_csrf').val()}, function(){
+    	$scope.updateProfile = new UserService.updateProfile($scope.userPerfil);
+        $scope.updateProfile.$user({_csrf : angular.element('#_csrf').val()}, function(){
         	$('html').removeClass('loading');        	     	            	            	            	
         });             
     }
-    
-    $scope.testeUser = function() {
-    	alert($scope.userPerfil);
-    }
-	
+        
 	$scope.pesquisaUser = function() {
     	
         $('html').addClass('loading');
@@ -60,9 +56,12 @@ app.controller('UserPerfilController', function ($scope, $timeout, $filter, User
         	
         	$timeout(function () {
         		if($scope.userPerfil.image == null) $scope.userPerfil.image = "/assets/img/cover.jpg";
+        		$scope.validEmail();
+        		$scope.loginValid = true;
         		
 	            $('#modalPerfilUser').modal({ show: 'false' });                        
-	        }, 800);
+	            
+	        }, 500);
 		});
     }
 
@@ -80,19 +79,23 @@ app.controller('UserPerfilController', function ($scope, $timeout, $filter, User
     	
 		 $scope.resultLogin = new UserService.listByLogin();		 
 		 $scope.resultLogin.$user({_csrf : angular.element('#_csrf').val(), 'login' : login}, function() { 			 
-			 if($scope.resultLogin.resultType == "NO_DATA")
+			 if($scope.resultLogin.resultType == "NO_DATA" || $scope.resultLogin.resultType == "SUCCESS")
 				 $scope.loginValid = true;
 			 else
 			 	$scope.loginValid = false;   
       });		 
-	}       
+	}
+    
+//    $scope.emailkeypress = function($event) {	    
+//	    $scope.loginValid = false;;
+//	};
    
     $scope.validEmail = function ($event) {	    	
 		
-		 if (validateEmail( $scope.user.email )) {
+		 if (validateEmail( $scope.userPerfil.email )) {
 			 $scope.emailValid = true;
 		 }
-		 else if ( $scope.user.email == null || $scope.user.email == '') {
+		 else if ( $scope.userPerfil.email == null || $scope.userPerfil.email == '') {
 			 $scope.emailValid = true;
 		 }
 		 else {
@@ -103,7 +106,7 @@ app.controller('UserPerfilController', function ($scope, $timeout, $filter, User
 	$scope.loadEvents = function() {
 		
 		$('#idInputImageUser').change( encodeImageFileAsURL( function(base64Img) {		    
-		    $scope.user.image =  base64Img;
+		    $scope.userPerfil.image =  base64Img;
 			$scope.$apply();		    
 		}));		
 		  
@@ -112,6 +115,8 @@ app.controller('UserPerfilController', function ($scope, $timeout, $filter, User
 			$('#idInputImageUser').trigger('click');
 		 }		
 	}
+	
+	$scope.getUserLogado();
 	
 	$timeout(function () {                    
 		 $scope.loadEvents();

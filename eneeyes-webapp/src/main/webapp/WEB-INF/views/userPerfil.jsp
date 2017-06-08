@@ -1,9 +1,15 @@
+<!--  
 <div data-ng-controller="UserPerfilController as UserPerfilController">
 	<div id="modalPerfilUser" class="modal" tabindex="-1">
 	    <div class="modal-dialog modal-lg" role="document">
 	    	<div class="modal-content">
 				<div class="modal-body"style="padding-bottom: 0px; !important">
-										
+				
+					 -->										
+		<div data-ng-controller="UserPerfilController as UserPerfilController">					 
+			<div class="row">				                                                    
+				<div class="col-md-10">		 
+				
 					<div class="box box-primary" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
 						<div class="box-header">
 							<h3 class="box-title">Cadastro / Edição</h3>
@@ -85,8 +91,9 @@
 						                    </div>
 					                  	</div>											
 									</div>					
-								</div>				
-								<hr>
+								</div>
+												
+								<hr>								
 								<div class="row">
 									<div class="col-md-3">
 										<label class="control-label" title="Login">Login *</label>
@@ -94,31 +101,33 @@
 										
 										<div data-ng-class="{'has-error': !loginValid}">	
 											<div class="input-group">						                    						                  
-												<input name="userlogin" data-ng-model="userPerfil.login" type="text" class="form-control" placeholder="Login" data-ng-disabled="isEdit" required>
+												<input name="userlogin" data-ng-model="userPerfil.login" type="text" class="form-control" placeholder="Login" data-ng-disabled="isEdit" data-ng-keydown="loginValid=false" required>
 											
 												<a data-ng-if="!isEdit" href="#" title="Validar Nome de Usuário" data-ng-click="validLogin(userPerfil.login);" class="input-group-addon">
 												<i data-ng-class="(!loginValid) ? 'text-red' : 'text-green'" class="fa fa-check"></i></a>								
 												<a data-ng-if="isEdit" href="#" title="Validar Nome de Usuário" class="input-group-addon"><i class="fa fa-check text-green"></i></a>								
 											</div>
 										</div>						                                         												            			
-									</div>
-																	
-									
+									</div>									
 								</div>
 								
 							</form>
 						</div>
 				
 						<div class="modal-footer">						
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="testeUser();">Teste</button>                                                                 
-							<button type="button" data-ng-click="saveUser();" class="btn btn-primary" data-dismiss="modal"	data-ng-disabled="(loginValid && userForm.$valid) ? false : true">Salvar</button>
-				
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>							                                                                
+							<button type="button" data-ng-click="saveUser();" class="btn btn-primary" data-dismiss="modal"	data-ng-disabled="(loginValid && emailValid && userForm.$valid) ? false : true">Salvar</button>				
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+					<!-- 
 															
 				</div>
 			</div>
 		</div>
 	</div>			
 </div>
+
+ -->

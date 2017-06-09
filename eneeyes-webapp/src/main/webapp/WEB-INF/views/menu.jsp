@@ -11,8 +11,8 @@
 
           <!-- Sidebar user panel (optional) -->
 			<div class="user-panel">
-				<div class="pull-left image">
-					<img src="/assets/img/avatar_160x160.png" class="img-circle" alt="User Image">
+				<div class="pull-left image" data-ng-controller="SiteController">
+					<img data-ng-src="{{userImage}}" class="img-circle" alt="User Image">
 				</div>
 				<div class="pull-left info">
 					<p><sec:authentication property="principal.displayName" /></p>					

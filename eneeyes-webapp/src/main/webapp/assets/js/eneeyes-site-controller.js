@@ -7,6 +7,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	$scope.$root.errorTimes = 0;
 	$scope.$root.currentTabOpened = "";
 	$scope.$root.isFrom = $('#isFrom').val();
+	$scope.$root.userImage = '/assets/img/avatar_128x128.png';
 	
 	$scope.showLogo = function(){
 		$scope.$root.recolheLogo = !$scope.$root.recolheLogo; 
@@ -83,32 +84,23 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	};
 
     $scope.forms = {
-     signin : {
-        login : '',
-        credential : '',
-     },
-     signexpired : {
-    	 userId : '',
-    	 username: '',
-    	 password : '',
-    	 newPassword: '',
-         confirm : ''
-     },     
-//     changePassword : {
-//        pass1 : '',
-//        pass2 : '',
-//        errorMessage: '',
-//        successMessage: '',
-//     }
+	    signin : {
+	    	login : '',
+	        credential : '',
+	     },
+		     signexpired : {
+		     userId : '',
+		     username: '',
+		     password : '',
+		     newPassword: '',
+		    confirm : ''
+	    }
     };
     
     $scope.errorMessage = '';
 
     $scope.signin = function() {
-    	
-//    	$scope.forms.signin.login = "joaomotajunior@gmail.com"
-//    	$scope.forms.signin.credential = "123456";
-    		
+
         angular.element('html').addClass('loading');
         angular.element('#signin-error').css('display','none');
         angular.element('#signin-user').removeClass('has-error');
@@ -120,7 +112,9 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         });
         $scope.result.$save({_csrf : angular.element('#_csrf').val()}, function(){
             if($scope.result.resultType == 'SUCCESS') {
+            	
                 window.location.href = '/';
+                
             } else {
             	if($scope.result.errorMessages != null && $scope.result.errorMessages.length > 0) {
             		$scope.errorMessage = $scope.result.errorMessages[0].message;

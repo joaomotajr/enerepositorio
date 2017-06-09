@@ -168,15 +168,15 @@
 	
 					<!-- User Account: style can be found in dropdown.less -->
 					<li class="dropdown user user-menu">
-						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> 
-							<img src="/assets/img/avatar_128x128.png" class="user-image" alt="User Image"> 
+						<a href="#"	class="dropdown-toggle" data-toggle="dropdown" data-ng-controller="SiteController"> 
+							<img data-ng-src="{{userImage}}" class="user-image" alt="User Image"> 
 							<span class="hidden-xs"><sec:authentication property="principal.displayName" /></span>
 						</a>
 						
 						<ul class="dropdown-menu">
 							<!-- User image -->
 							<li class="user-header"><img
-								src="/assets/img/avatar_128x128.png" class="img-circle"	alt="User Image">
+								data-ng-src="{{userImage}}" class="img-circle"	alt="User Image" data-ng-controller="SiteController">
 								<p>
 									<sec:authentication property="principal.displayName" /> - Administrador do Site <small>Desde Nov. 2016</small>
 								</p>

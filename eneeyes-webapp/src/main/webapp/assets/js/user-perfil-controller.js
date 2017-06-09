@@ -24,7 +24,7 @@ app.controller('UserPerfilController', function ($scope, $timeout, $filter, User
     	$('html').addClass('loading');
     	    	    		
 		if($scope.userPerfil.cpf) {
-    		$scope.userPerfil.cpf = $scope.user.cpf.replace(/[\.-]/g, '');
+    		$scope.userPerfil.cpf = $scope.userPerfil.cpf.replace(/[\.-]/g, '');
     	}
 		
     	$scope.updateProfile = new UserService.updateProfile($scope.userPerfil);
@@ -46,7 +46,7 @@ app.controller('UserPerfilController', function ($scope, $timeout, $filter, User
         		id: $scope.userResult.t.id,
 	        	cpf : $scope.cpfFormatter($scope.userResult.t.cpf),		
 	        	displayName : $scope.userResult.t.displayName,
-	        	nickname : $scope.userResult.t.nickName,
+	        	nickname : $scope.userResult.t.nickname,
 	        	fone : $scope.userResult.t.fone,
 	        	cell : $scope.userResult.t.cell,
 	        	email : $scope.userResult.t.email,
@@ -85,10 +85,6 @@ app.controller('UserPerfilController', function ($scope, $timeout, $filter, User
 			 	$scope.loginValid = false;   
       });		 
 	}
-    
-//    $scope.emailkeypress = function($event) {	    
-//	    $scope.loginValid = false;;
-//	};
    
     $scope.validEmail = function ($event) {	    	
 		

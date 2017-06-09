@@ -1,4 +1,4 @@
-app.controller('UserPerfilController', function ($scope, $timeout, $filter, UserService) {
+app.controller('UserPerfilController', function ($scope, $timeout, $filter, $window, UserService) {
 
 	$scope.userLogado = {
 		isAdmin : false,		
@@ -29,7 +29,14 @@ app.controller('UserPerfilController', function ($scope, $timeout, $filter, User
 		
     	$scope.updateProfile = new UserService.updateProfile($scope.userPerfil);
         $scope.updateProfile.$user({_csrf : angular.element('#_csrf').val()}, function(){
-        	$('html').removeClass('loading');        	     	            	            	            	
+        	$('html').removeClass('loading');
+        	
+        	if($scope.updateProfile.t.reset)
+        		$window.location.href = "/logout"; 
+        	else {
+        		$scope.$root.userImage = $scope.userResult.t.image;        	
+        		$scope.selfClose();
+        	}
         });             
     }
         
@@ -77,12 +84,16 @@ app.controller('UserPerfilController', function ($scope, $timeout, $filter, User
 		
     	if(login == "") return;
     	
-		 $scope.resultLogin = new UserService.listByLogin();		 
-		 $scope.resultLogin.$user({_csrf : angular.element('#_csrf').val(), 'login' : login}, function() { 			 
-			 if($scope.resultLogin.resultType == "NO_DATA" || $scope.resultLogin.resultType == "SUCCESS")
-				 $scope.loginValid = true;
-			 else
-			 	$scope.loginValid = false;   
+    	var oldLogin = login;
+    		
+		$scope.resultLogin = new UserService.listByLogin();		 
+		$scope.resultLogin.$user({_csrf : angular.element('#_csrf').val(), 'login' : login}, function() { 			 
+			if($scope.resultLogin.resultType == "NO_DATA")
+				$scope.loginValid = true;
+			else if($scope.resultLogin.resultType == "SUCCESS" && $scope.resultLogin.t.login == oldLogin )
+				$scope.loginValid = true;
+			else
+				$scope.loginValid = false;   
       });		 
 	}
    
@@ -110,6 +121,14 @@ app.controller('UserPerfilController', function ($scope, $timeout, $filter, User
 			 event.preventDefault();
 			$('#idInputImageUser').trigger('click');
 		 }		
+	}
+	
+	$scope.selfClose = function() {
+		
+		var currentTabId = $(".nav-tabs").find("." + $scope.currentPage ).attr('id').substr(3,6);
+    	var index = $scope.tabsShow.findIndex(function(item) {return item.name === currentTabId});
+    	
+    	$scope.removeTab(index);		
 	}
 	
 	$scope.getUserLogado();

@@ -143,7 +143,7 @@ import br.com.eneeyes.main.result.Result;
 			user.setCreateDate(new Date());
 			user.setCompany(dto.getCompanyDto());
 						
-			if(dto.getReset()) {
+			if(dto.getReset() != null && dto.getReset()) {
 				dto.setHashDigestSha1();
 				user.setReset(true);
 				user.setHash(dto.getHash());	
@@ -269,7 +269,12 @@ import br.com.eneeyes.main.result.Result;
 			user.setCell(dto.getCell());
 			user.setEmail(dto.getEmail());		
 			user.setCreateDate(new Date());
-						
+			user.setImage(dto.getImage());
+			
+			if(dto.getReset() != null && dto.getReset()) {			
+				user.setReset(true);
+			}
+			
 			user = repository.save(user);
 								
 			result.setEntity( new UserDto(user) );
@@ -283,6 +288,4 @@ import br.com.eneeyes.main.result.Result;
 		
 		return result;
 	}
-	
-
 }

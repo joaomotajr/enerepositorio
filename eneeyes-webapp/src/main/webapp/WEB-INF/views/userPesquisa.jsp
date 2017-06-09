@@ -66,7 +66,7 @@
 		    <div class="modal-dialog modal-lg" role="document">
 		        <div class="modal-content">
 		      	    
-		      	    <jsp:include page="user-cadastro.jsp"/>        
+		      	    <jsp:include page="userCadastro.jsp"/>        
 		            
 		        </div>
 		    </div>

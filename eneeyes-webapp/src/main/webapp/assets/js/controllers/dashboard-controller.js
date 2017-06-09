@@ -1,5 +1,5 @@
 
-app.controller('dashController', function ($scope, $timeout, $interval, $filter, ViewService) {
+app.controller('dashController', function ($scope, $timeout, $interval, $filter, ViewService, UserService) {
 	
 	$scope.dashCompaniesPosition = [];
 	
@@ -61,8 +61,22 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 			$scope.loading = undefined;         	         	
        });		 
 	 }
+	
+	$scope.pesquisaUser = function() {
+		var idUsuario = $('#idUsuario').val();
+		
+    	$scope.userImage = new UserService.listOne();
+        $scope.userImage.$user({_csrf : angular.element('#_csrf').val(), id : idUsuario }, function(){
+       	
+        	$timeout(function () {
+        		if($scope.userImage.t.image != null)
+        			$scope.$root.userImage = $scope.userImage.t.image;	            
+	        }, 500);
+		});
+    }	
 		
 	$scope.getCompaniesPosition();
+	$scope.pesquisaUser();
     
     $interval(function() {
     	if($scope.$root == null) return;

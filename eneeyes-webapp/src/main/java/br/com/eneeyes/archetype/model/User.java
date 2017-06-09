@@ -124,14 +124,14 @@ public class User implements Serializable {
 		this.createDate = userDto.getCreateDate();
 		this.company = userDto.getCompanyDto();
 		this.reset = userDto.getReset();
-		
+//		this.setImage(userDto.getImage());
 		
 		if (userDto.getImage() != null) {
 			try {
 					
 				byte[] image = null;
 				image = userDto.getImage().getBytes("US-ASCII");
-				this.setImage(image);
+				this.image = image;
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}	
@@ -339,6 +339,21 @@ public class User implements Serializable {
 
 	public final void setImage(byte[] image) {
 		this.image = image;
+	}
+	
+	public final void setImage(String image) {
+		
+		if (image == null) return; 
+		
+		try {
+			byte[] img = null;
+			img = image.getBytes("US-ASCII");
+				
+			this.image = img;
+		
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

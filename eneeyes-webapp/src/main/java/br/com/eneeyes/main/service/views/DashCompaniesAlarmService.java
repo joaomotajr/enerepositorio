@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.model.views.DashCompaniesAlarm;
 import br.com.eneeyes.main.repository.views.DashCompaniesAlarmRepository;
+import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
 @Service
@@ -40,6 +41,30 @@ public class DashCompaniesAlarmService {
 		
 		return result;	
 		
+	}
+
+	public BasicResult<?> listByCompanyId(Long companyId) {
+		Result<DashCompaniesAlarm> result = new Result<DashCompaniesAlarm>();
+		
+		try {
+			List<DashCompaniesAlarm> lista = repository.findByCompanyId(companyId);
+
+			if (lista != null) {				
+				
+				result.setList(lista);				
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhuma Posição.");
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;	
 	}
 
 }

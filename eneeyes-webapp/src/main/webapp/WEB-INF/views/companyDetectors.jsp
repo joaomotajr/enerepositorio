@@ -372,9 +372,11 @@
 													</div>
 													
 												</td>																		
-											</tr>                                                               
+											</tr>        
+											                                                       
 										</tbody>
 									</table>
+									<p data-ng-hide="alarms.length > 0 " class="text-center">NENHUM ALARME ATENDE ESTE DETECTOR.</p>
 								</div>                                                       
 							</div>
 						</div>				

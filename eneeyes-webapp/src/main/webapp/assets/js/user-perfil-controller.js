@@ -61,14 +61,11 @@ app.controller('UserPerfilController', function ($scope, $timeout, $filter, $win
 	        	image : $scope.userResult.t.image
         	};
         	
-        	$timeout(function () {
-        		if($scope.userPerfil.image == null) $scope.userPerfil.image = "/assets/img/cover.jpg";
-        		$scope.validEmail();
-        		$scope.loginValid = true;
-        		
-	            $('#modalPerfilUser').modal({ show: 'false' });                        
-	            
-	        }, 500);
+        	if($scope.userPerfil.image == null) $scope.userPerfil.image = "/assets/img/cover.jpg";
+    	
+        	$scope.validEmail();
+    		$scope.loginValid = true;   		
+	        
 		});
     }
 

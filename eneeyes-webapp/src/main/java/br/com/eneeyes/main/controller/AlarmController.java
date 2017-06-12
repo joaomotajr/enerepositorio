@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.eneeyes.archetype.model.User;
+import br.com.eneeyes.archetype.web.config.auth.signin.SigninUtils;
 import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.service.AlarmService;
@@ -44,7 +46,21 @@ public class AlarmController {
 	@RequestMapping(value = "/security/api/alarm/all", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listAll() {
-		return service.listAll();
+		
+		User user = SigninUtils.principal();
+				
+		if(user.getCompany()  == null)		
+			return service.listAll();
+		else
+			return service.listByCompanyId(user.getCompany().getUid());
+				
+	}
+	
+	@RequestMapping(value="/security/api/alarm/obtemPorCompanyId/{companyId}", method=RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> listByCompanyId(@PathVariable Long companyId) {
+		
+		return service.listByCompanyId(companyId);		
 	}
 	
 	@RequestMapping(value="/security/api/alarm/obtemPorId/{uid}", method=RequestMethod.GET, produces = "application/json")

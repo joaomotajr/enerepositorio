@@ -143,4 +143,33 @@ public class CompanyService implements IService<CompanyDto> {
 		
 		return result;	
 	}
+	
+	public Result<?> listOneView(Long uid) {
+		
+		Result<CompanyView> result = new Result<CompanyView>();
+		
+		try {
+			CompanyView item = viewRepository.findOne(uid);
+
+			if (item != null) {
+				
+				List<CompanyView> companiesView = new ArrayList<CompanyView>();													
+				companiesView.add(item);
+				
+				result.setList(companiesView);
+				
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhuma Compania.");
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;	
+	}
 }

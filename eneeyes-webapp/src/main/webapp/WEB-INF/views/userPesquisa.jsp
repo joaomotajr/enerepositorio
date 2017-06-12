@@ -16,21 +16,23 @@
 							<table class="table table-striped table-bordered table-hover">
 		                        <thead>
 									<tr>
-<!-- 										<th width="150px">CPF</th> -->
+										<th>Empresa</th>
 										<th width="200px">Nick Name</th>
 										<th>Login</th>
 										<th>Tipo</th>
 										<th>Status</th>
-										<th>Data de Cria&ccedil;&atilde;o</th>
+										<th>Data</th>
 									</tr>
 		                        </thead>
 								<tbody>
-									<tr data-ng-repeat="user in users.listUser" data-ng-class="{'danger' : user.status == 'INACTIVE', 'success' : user.status == 'ACTIVE'}">
-											   
-<!-- 										<td width="150px" align="center">{{cpfFormatter(user.cpf)}}</td> -->
+									<tr data-ng-repeat="user in users.listUser" data-ng-class="{'danger' : user.status == 'INACTIVE', 'warning' : !user.companyDto}">
+										<td width="100px" data-ng-if="!user.companyDto" align="center">MASTER</td>
+										<td width="100px" data-ng-if="user.companyDto" align="center">{{user.companyDto.name}}</td>
+																					   
 										<td width="200px">{{user.displayName}}</td>									
-										<td>{{user.login}}</td>
-										<td align="center">{{user.roles[0].name}}</td>
+										<td>{{user.login}}</td>										
+										<td  data-ng-if="user.companyDto" align="center">{{user.roles[0].name}}</td>
+										<td  data-ng-if="!user.companyDto" align="center">ADMINISTRATOR</td>
 										<td align="center">{{getStatus(user.status)}}</td>
 										<td align="center">{{user.createDate | date: 'dd/MM/yyyy'}}</td>
 										
@@ -49,7 +51,7 @@
 					</div>
 					
 					<div class="box-footer">									
-						<button type="button" data-ng-click="novoUsuario(); userForm.$setPristine()" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalDetalheUser">Novo</button>
+						<button type="button" data-ng-click="novoUsuario(); userForm.$setPristine()" class="btn btn-primary pull-right" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalDetalheUser">Novo</button>
 					</div>
 				</div>
 								

@@ -28,7 +28,8 @@ public class DashCompaniesPosition implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "uid")
 	private Long uid;
-		
+
+	private Long company_id;
 	private String company_name;
 	private String unit_name;
 	private String area_name;
@@ -50,6 +51,14 @@ public class DashCompaniesPosition implements Serializable {
 	}
 	public void setUid(Long uid) {
 		this.uid = uid;
+	}
+	
+	public Long getCompany_id() {
+		return company_id;
+	}
+	
+	public void setCompany_id(Long company_id) {
+		this.company_id = company_id;
 	}
 		
 	public String getCompany_name() {

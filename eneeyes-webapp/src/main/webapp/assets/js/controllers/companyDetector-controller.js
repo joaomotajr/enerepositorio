@@ -531,8 +531,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	
 	$scope.getAlarms = function() {
 		
-		$scope.resultAlarms = new AlarmService.listAll();
-		 $scope.resultAlarms.$alarm({_csrf : angular.element('#_csrf').val()}, function(){			 
+		$scope.resultAlarms = new AlarmService.listByCompanyId();
+		 $scope.resultAlarms.$alarm({_csrf : angular.element('#_csrf').val(), companyId : $scope.$root.selectedCompany.uid }, function(){			 
 			 $scope.alarms = $scope.resultAlarms.list;			 
         });		 
 	}
@@ -548,7 +548,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$scope.search = { unitMeterGases: $scope.selectedSensor.unitMeterGases, gas : $scope.selectedCompanyDetector.detectorDto.sensorsDto[index].gasesDto[0].name };
 		
 		$timeout(function () {
-			$('#modalAlarm').modal({ show: 'false' });
+			$('#modalAlarm').modal({ show: 'false', backdrop: 'static', keyboard:'false' });
+						 
 		}, 300);
 	}
 	 

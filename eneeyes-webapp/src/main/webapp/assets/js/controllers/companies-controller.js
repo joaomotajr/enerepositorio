@@ -1,15 +1,6 @@
 
 app.controller('companiesController', function ($scope, $timeout, $interval, $filter, CompanyService, UnitService) {
 
-	$scope.getCompanys = function() {
-		 
-		 $scope.resultCompanies = new CompanyService.listAllView();		 
-		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
-			 $scope.companies = $scope.resultCompanies.list;
-        });		 
-	} 
-	
-	$scope.getCompanys();	
 		
 	$scope.showDanger = function(msg) {		
 		angular.element('body').removeClass('loading');
@@ -237,11 +228,27 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		
 		return itens;
 	 }
-		
-	$timeout(function(){
-		angular.element('body').removeClass('loading');
-	}, 500);	
+	 
+	 $scope.getCompanys = function() {
+		 
+		 if($scope.$root.isFrom != "MASTER")	{
+		 
+			 $scope.getOneCompany($scope.$root.isFrom);
+		 }
+		 else {		
+			 $scope.resultCompanies = new CompanyService.listAllView();		 
+			 	$scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
+				 $scope.companies = $scope.resultCompanies.list;
+	        });		 
+		 }
+	 } 
 	
-	$(".select2").select2();
+	 $scope.getCompanys();
+	 	
+	 $timeout(function(){
+		angular.element('body').removeClass('loading');
+	 }, 500);	
+	
+	 $(".select2").select2();
 		
 });

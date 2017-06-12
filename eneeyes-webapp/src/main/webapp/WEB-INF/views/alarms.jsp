@@ -69,7 +69,7 @@
 					</div>
 					
 					<div class="box-footer">						                                                                
-						<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalAlarmEdit">Novo</button>
+						<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-primary pull-right" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalAlarmEdit">Novo</button>
 					</div>
 				</div>
 				

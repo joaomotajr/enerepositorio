@@ -186,13 +186,21 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
              }
          } 		 
 	 }
-	 
+	
 	$scope.getCompanys = function() {
-		 
-		 $scope.resultCompanies = new CompanyService.listAllView();		 
-		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
-			 $scope.companies = $scope.resultCompanies.list;
-        });		 
+//		if($scope.$root.isFrom)	{
+//					 
+//			 $scope.resultCompany = new CompanyService.listOneView();		 
+//			 	$scope.resultCompany.$company({_csrf : angular.element('#_csrf').val(), id : $scope.$root.isFrom}, function(){			
+//			 	$scope.companies.push($scope.resultCompany);
+//		    });
+//		 }
+//		 else {		
+			 $scope.resultCompanies = new CompanyService.listAllView();		 
+			 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
+					 $scope.companies = $scope.resultCompanies.list;
+		        });		 
+//		}
 	}
 	 
 	 $scope.unitMetersGases = 

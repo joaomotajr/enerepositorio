@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.eneeyes.archetype.model.User;
+import br.com.eneeyes.archetype.web.config.auth.signin.SigninUtils;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.service.views.DashCompaniesAlarmService;
 
@@ -19,7 +21,12 @@ public class DashCompaniesAlarmController {
 	@RequestMapping(value = "/security/api/view/allDashCompaniesAlarm", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> allDashCompaniesAlarm() {
-		return service.listAll();
+		User user = SigninUtils.principal();
+		
+		if(user.getCompany()  == null)		
+			return service.listAll();
+		else
+			return service.listByCompanyId(user.getCompany().getUid());
 	}
 
 }

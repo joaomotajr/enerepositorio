@@ -7,6 +7,9 @@ app.factory('AlarmService', function($resource){
         listAll : $resource('/security/api/alarm/all',{},{
         	alarm : {method : 'GET'}
         }),
+        listByCompanyId : $resource('/security/api/alarm/obtemPorCompanyId/:companyId', {id: '@companyId'},{
+        	alarm : {method : 'GET'}
+        }),
         listOne : $resource('/security/api/alarm/obtemPorId/:id', {id: '@id'},{
         	alarm : {method : 'GET'}
         }),

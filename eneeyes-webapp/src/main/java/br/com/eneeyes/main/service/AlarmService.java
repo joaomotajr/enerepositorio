@@ -98,6 +98,38 @@ public class AlarmService implements IService<AlarmDto> {
 		return result;	
 
 	}
+	
+	public Result<?> listByCompanyId(Long companyId) {
+		
+		Result<AlarmDto> result = new Result<AlarmDto>(); 	
+		
+		try {
+			List<Alarm> lista = repository.findByCompanyId(companyId);
+
+			if (lista != null) {
+				
+				List<AlarmDto> dto = new ArrayList<AlarmDto>();
+				
+				for (Alarm alarm : lista) {					
+					dto.add(new AlarmDto(alarm) );
+				}								
+				
+				result.setList(dto);				
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhum Alarme Localizado.");
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;	
+
+	}
 
 
 	public Result<?> findOne(Long uid) {

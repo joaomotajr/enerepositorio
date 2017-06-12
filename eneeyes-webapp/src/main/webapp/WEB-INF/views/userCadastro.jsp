@@ -35,12 +35,12 @@
 							<div class="box-header with-border" style="padding:1px ! important">							
 									
 								<div>
-									<strong><i class="fa fa-user"></i> Usuário de: </strong>
+									<strong><i class="fa fa-user"> </i>  Usuário de:  </strong>
 									<div class="radio3 radio-check radio-success radio-inline">
 										<input type="radio" id="radio5" value="1" data-ng-model="userTipo">
-										<label for="radio5">Empresa</label>
+										<label for="radio5"> Empresa</label>
 									</div>
-									<div class="radio3 radio-check radio-warning radio-inline">
+									<div data-ng-show="isFrom == 'MASTER'" class="radio3 radio-check radio-warning radio-inline">
 										<input type="radio" id="radio6" value="2" data-ng-model="userTipo">
 										<label for="radio6">Central</label>
 									</div>                                                                        
@@ -48,7 +48,7 @@
 							
 								<strong class="text-red pull-right fieldNeeded" data-ng-show='(userForm.companyName.$dirty && userForm.companyName.$invalid && userTipo == 1)'>  Campo Obrigatório</strong>
 							</div>		               	
-							<div class="box-body">
+							<div class="box-body" data-ng-hide="userTipo==2">
 								<div data-ng-class="{'has-error': userForm.companyName.$dirty && userForm.companyName.$invalid && userTipo == 1}">							               
 								   <select name="companyName" class="form-control" data-live-search="true"
 									   style="width: 100%;" tabindex="-1" aria-hidden="true"                              
@@ -124,6 +124,7 @@
 				<div class="row">
 					<div class="col-md-3">
 						<label class="control-label" title="Login">Login *</label>
+						<strong class="text-red pull-right fieldNeeded" data-ng-show='(userForm.userlogin.$error.minlength || userForm.userlogin.$error.maxlength)'>  Minimo 5 e Máximo 20 caraceteres</strong>
 						<strong class="text-red pull-right fieldNeeded" data-ng-show='userForm.userlogin.$error.required && !userForm.userlogin.$pristine'>  Campo Obrigatório</strong>
 						<strong class="text-red pull-right fieldNeeded" 
 						data-ng-show='!userForm.userlogin.$error.minLength && !userForm.userlogin.$error.maxLength && userForm.userlogin.$error.pattern && userForm.userlogin.$dirty'> Precisa Iniciar com uma Letra, e Conter Números &amp; Letras Apenas</strong>
@@ -133,7 +134,8 @@
 								<input name="userlogin" data-ng-model="user.login" type="text" class="form-control" placeholder="Login" 
 									data-ng-disabled="isEdit" data-ng-pattern="/^[A-z][A-z0-9]*$/" data-ng-minlength="5" data-ng-maxlength="20" required>
 							
-								<a data-ng-if="!isEdit" href="#" title="Validar Nome de Usuário" data-ng-click="validLogin(user.login);" class="input-group-addon">
+								<a data-ng-if="!isEdit" data-ng-hide="userForm.userlogin.$error.minlength || userForm.userlogin.$error.maxlength || userForm.userlogin.$error.pattern || userForm.userlogin.$error.required" 
+								href="#" title="Validar Nome de Usuário" data-ng-click="validLogin(user.login);" class="input-group-addon">
 								<i data-ng-class="(!loginValid) ? 'text-red' : 'text-green'" class="fa fa-check"></i></a>								
 								<a data-ng-if="isEdit" href="#" title="Validar Nome de Usuário" class="input-group-addon"><i class="fa fa-check text-green"></i></a>								
 							</div>

@@ -288,4 +288,34 @@ import br.com.eneeyes.main.result.Result;
 		
 		return result;
 	}
+
+	public BasicResult<?> listByCompanyView(Long companyId) {
+		Result<UserDto> result = new Result<UserDto>();
+		
+		try {
+			List<User> lista = repository.findByCompanyId(companyId);
+
+			if (lista != null) {
+				
+				List<UserDto> dto = new ArrayList<UserDto>();
+								
+				for (User user   : lista) {					
+					dto.add(new UserDto(user) );
+				}
+								
+				result.setList(dto); ;				
+				result.setResultType( ResultMessageType.SUCCESS );
+				
+			} else {
+				
+				result.setResultType( ResultMessageType.NO_DATA );
+								
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setResultType( ResultMessageType.ERROR );									
+		}	
+		
+		return result;
+	}
 }

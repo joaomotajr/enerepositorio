@@ -19,9 +19,16 @@
 							<div class="col-md-6">
 								<br />
 								<div class="box box-primary">
-				                    <div class="box-header with-border"><strong style="font-size:1.4em">Pesquisar Empresa.</strong></div>
+				                    <div class="box-header with-border">
+				                    	<strong data-ng-if="isFrom == 'MASTER'" style="font-size:1.4em"><i class="fa fa-industry"></i> Pesquisar Empresa</strong>
+				                    	<strong data-ng-if="isFrom != 'MASTER'" style="font-size:1.4em"><i class="fa fa-industry"></i> Empresa</strong>
+				                    </div>
 				                
-				                    <div class="box-body">
+				                    <div class="box-body" data-ng-hide="isFrom == 'MASTER'">				                    	
+				                    	<input class="form-control" type="text" data-ng-model="companyName" disabled>			                        				                        							                                                                    
+				                    </div>        
+				                    <div class="box-body" data-ng-show="isFrom == 'MASTER'">				                    	
+				                    	 
 				                        <select id="selCompany" class="form-control select2 select2-hidden-accessible"				                        	
 				                            style="width: 100%;" 
 				                            tabindex="-1" 
@@ -29,7 +36,7 @@
 				                            	<option value="" selected="selected">Selecione</option>                              				                            	
 				                                <option data-ng-repeat="company in companies" value="{{company.uid}}" > {{company.name}} </option>				                                                    
 				                        </select>				                        							                                                                    
-				                    </div>        
+				                    </div>
 				                </div>        
 		                            
 							</div>
@@ -49,11 +56,11 @@
 						
 						<div class="box-footer">							
 							<div class="col-md-12">
-								<button type="button" data-ng-click="selCompany();" class="btn btn-success pull-right" data-ng-disabled="!companyUid">Selecionar</button>								
+								<button type="button" data-ng-click="selCompany();" class="btn btn-success pull-right" data-ng-disabled="!companyUid">  Abrir  </button>								
 								<span class="pull-right">   </span>
-								<button type="button" data-ng-click="saveCompany();" class="btn btn-primary pull-right" data-ng-disabled="(companyName) ? false : true">   Salvar   </button>
+								<button type="button" data-ng-click="saveCompany();" class="btn btn-primary pull-right" data-ng-disabled="(companyName) ? false : true"> Salvar </button>
 								<span class="pull-right">   </span>												
-								<button type="button" data-ng-click="deleteCompany();" class="btn btn-danger pull-right" data-ng-disabled="!companyUid">   Excluir   </button>
+								<button type="button" data-ng-click="deleteCompany();" class="btn btn-danger pull-right" data-ng-disabled="!companyUid"> Excluir </button>
 							</div>
 						</div> 
 					</div>

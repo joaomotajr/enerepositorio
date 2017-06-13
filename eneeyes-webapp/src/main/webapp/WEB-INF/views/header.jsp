@@ -195,17 +195,21 @@
 					</li>
 	
 					<!-- Control Sidebar Toggle Button -->
-<!-- 					<li title="Configurações"><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li> -->
+ 					<li title="Configurações"><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
 				</ul>
 			</div>
 		</nav>
 		
 	</header>
-
+	
+	<jsp:include page="configuracoes.jsp"/>
+		
 	<!-- Add the sidebar's background. This div must be placed
      immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
 	<!-- END HEADER SECTION -->
+	
+	
 	
 	
 </html>	

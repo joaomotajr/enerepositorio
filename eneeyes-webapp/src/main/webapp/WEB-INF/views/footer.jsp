@@ -44,7 +44,8 @@
     <script src="/assets/plugins/iCheck/icheck.min.js"></script>           
     
     <!-- AdminLTE App -->
-    <script src="/assets/js/app.min.js"></script>
+    <script src="/assets/plugins/adminlte/app.min.js"></script>
+    <script src="/assets/plugins/adminlte/demo.js"></script>
         
     <!-- Select2 -->
     <script src="/assets/plugins/select2/select2.min.js"></script>    

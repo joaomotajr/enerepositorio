@@ -72,6 +72,8 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	$scope.removeTab = function (index) {
 		if (index == 0) return;
 		
+		$scope.$root.currentPage = "";
+		
 		$timeout(function(){
 			$("#id_tab_" + index).trigger("click");				
 		},100);

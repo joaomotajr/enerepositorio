@@ -185,8 +185,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 				
 				if(current != null) {					
 					$scope.$root.timer.push($interval(function(){
-						if($scope.$root == null) return;
-						if($scope.$root.currentPage == "Empresas")
+						if($rootScope == null) return;
+						if($rootScope.currentPage == "Empresas")
 							$scope.getPositions(current);     
 						
 				    }, 5000));						

@@ -1,4 +1,4 @@
-app.controller('areaController', function ($scope, $interval, $timeout, $filter, AreaService, CompanyDetectorService, 
+app.controller('areaController', function ($scope, $rootScope, $interval, $timeout, $filter, AreaService, CompanyDetectorService, 
 		DetectorService, CompanyDeviceService, CompanyService, PositionService, CompanyDetectorAlarmService) {
 
 	var loadGoogleCharts = false;
@@ -221,7 +221,8 @@ app.controller('areaController', function ($scope, $interval, $timeout, $filter,
 				
 				if(current != null) {					
 					$scope.$root.timer.push($interval(function(){
-						if($scope.$root.currentPage == "Empresas")
+						if($rootScope == null) return;
+						if($rootScope.currentPage == "Empresas")
 							$scope.getPositions(current);     						
 				    }, 5000));						
 				}						

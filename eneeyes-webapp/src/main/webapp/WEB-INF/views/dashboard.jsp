@@ -152,7 +152,7 @@
 															<td>{{item.sensor_name}}</td>
 															<td>{{item.gas_name}}</td>
 															
-															<td style="padding-top: 13px ! important;" data-ng-if="!item.offLine"> <span class="label" data-ng-class="{'label-success' : item.alarmType=='NORMAL', 'label-warning' : item.alarmType=='ALERTA', 'label-default' : item.alarmType=='DETECCAO', 'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} </span></td>																						
+															<td style="padding-top: 13px ! important;" data-ng-if="!item.offLine"> <span class="label" data-ng-class="{'label-primary' : item.alarmType=='OFF', 'label-success' : item.alarmType=='NORMAL', 'label-warning' : item.alarmType=='ALERTA', 'label-default' : item.alarmType=='DETECCAO', 'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} </span></td>																						
 															<td style="padding-top: 13px ! important;" data-ng-if="item.offLine"> <span class="label label-default offLine"> Off Line </span></td>
 
 															<td>

@@ -114,13 +114,13 @@
 					<!-- Notifications: style can be found in dropdown.less -->
 					<li class="dropdown notifications-menu" data-ng-controller="monitorController">
 						<audio id="alarmSound" src="/assets/img/alert_01.mp3" preload="auto"></audio>
-						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning" data-ng-bind="dashCompaniesAlarmCreated.length"></span></a>
+						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning" data-ng-bind="dashCompaniesAlarm.length"></span></a>
 						<ul class="dropdown-menu">
-							<li class="header">Voce tem <span data-ng-bind="dashCompaniesAlarmCreated.length"></span> Alarmes Pendentes</li>
+							<li class="header">Voce tem <span data-ng-bind="dashCompaniesAlarm.length"></span> Alarmes Pendentes</li>
 							<li>
 								<!-- inner menu: contains the actual data -->
-								<ul class="menu" data-ng-repeat="item in dashCompaniesAlarmCreated">
-				
+								<ul class="menu" data-ng-repeat="item in dashCompaniesAlarm | filter: {alarmStatus: 'CREATED' } track by item.uid">
+												
 									<li>
 										<a href="#"> 
 										<i class="fa fa-bullhorn" data-ng-class="{'text-green' : item.alarmType=='NORMAL', 'text-orange' : item.alarmType=='ALERTA', 'text-gray' : item.alarmType=='DETECCAO', 'text-red' : item.alarmType=='EVACUACAO'}"></i>

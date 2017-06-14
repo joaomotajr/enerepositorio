@@ -35,10 +35,17 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					var offDate = (new Date() - new Date(e.last_update_full)) / 1000;
 					
 					// off line por mais de 5 minutos
-					if ( offDate > 300 ) {							 
+					
+					if ( e.alarmType == "OFF" ) {
+						$scope.sumary.offLine ++;
+					}
+					else if ( offDate > 300 ) {							 
 					     $scope.sumary.offLine ++;
 					     e.offLine = true;
-					}						
+					}
+					else if ( e.alarmType == "OFF" ) {
+						$scope.sumary.offLine ++;
+					}
 					else if ( e.alarmType == "NORMAL") {
 						 
 					     $scope.sumary.normal ++;

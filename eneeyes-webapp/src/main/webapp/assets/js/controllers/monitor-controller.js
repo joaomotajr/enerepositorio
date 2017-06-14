@@ -1,15 +1,35 @@
 
 app.controller('monitorController', function ($scope, $timeout, $interval, $filter, ViewService, PositionAlarmMessageService, PositionAlarmService, ViewService) {
+
+	$scope.dashCompaniesAlarm = [];
+	$scope.dashCompaniesOffline = [];
+	
+	$scope.updateSound = function(index) {
 		
+		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarm[index];
+		
+		$scope.updateSoundStatus = new PositionAlarmService.updateSoundStatus();				 
+		$scope.updateSoundStatus.$positionAlarm({_csrf : angular.element('#_csrf').val(), soundStatus : 'SILENT', uid: $scope.selectedPositionAlarm.uid}, function() {
+			$scope.dashCompaniesAlarm[index].soundStatus = 'SILENT';
+		});		 
+		
+	 }
+	
+	$scope.playSound = function() {
+		
+		elementLoaded = document.getElementById('alarmSound');
+		
+		if (elementLoaded != null)
+			elementLoaded.play();
+	}
+	
 	$scope.getCompaniesPositionOffline = function() {
 		
 		$scope.loading = true;	
 		
 		$scope.listAllOffline = new ViewService.listAllOffline();		 
 		$scope.listAllOffline.$view({_csrf : angular.element('#_csrf').val(), interval: 5}, function(){
-			
-			$scope.dashCompaniesOffline = [];
-			 
+						 
 			 for(var i = 0; i < $scope.listAllOffline.list.length; i++) {
 								
 				 $scope.dashCompaniesOffline[i] = $scope.listAllOffline.list[i];
@@ -26,33 +46,22 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 		                                                    
 		$scope.listAllDashCompaniesAlarm = new ViewService.listAllDashCompaniesAlarm();		 
 		$scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function(){
-			 
-			$scope.dashCompaniesAlarmCreated = [];
-			$scope.dashCompaniesAlarmReaded = [];	
-			 
+			
 			if(!$scope.listAllDashCompaniesAlarm.list)
 				return;
+
+			for(var i = 0; i < $scope.listAllDashCompaniesAlarm.list.length; i++) {
+				
+				$scope.dashCompaniesAlarm[i] = $scope.listAllDashCompaniesAlarm.list[i];
+				$scope.dashCompaniesAlarm[i].last_update_full = $scope.listAllDashCompaniesAlarm.list[i].last_update;
+				$scope.dashCompaniesAlarm[i].last_update = timeSince($scope.listAllDashCompaniesAlarm.list[i].last_update);				 
+				$scope.dashCompaniesAlarm[i].last_value	 = Math.round($scope.listAllDashCompaniesAlarm.list[i].last_value * 100) / 100 ;
+				$scope.dashCompaniesAlarm[i].index = i; 
 			
-			$scope.alarmsCount = $scope.listAllDashCompaniesAlarm.list.length;
-			 
-			$scope.listAllDashCompaniesAlarm.list.forEach(
-				 function(e) {			
-					 					 
-					 e.last_update_full = e.last_update;
-					 e.last_update = timeSince(e.last_update);				 
-					 e.last_value	= Math.round(e.last_value * 100) / 100;
-					 
-					if (e.alarmStatus == "CREATED") {
-						$scope.dashCompaniesAlarmCreated.push(e);
-						if(e.soundStatus == 'ON') $scope.playSound();
-					}
-					else if (e.alarmStatus == "READED") {
-						$scope.dashCompaniesAlarmReaded.push(e);
-					}
-					
-					
-				}	
-			);		 			 
+				if ($scope.dashCompaniesAlarm[i].alarmStatus == "CREATED" && $scope.dashCompaniesAlarm[i].soundStatus == "ON") {
+					$scope.playSound();
+				}
+			}
 				 
 			$scope.loading = undefined;
          	         	
@@ -86,7 +95,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 	$scope.editActionCreated = function(index) {
 		
 		$scope.isOffline = false;
-		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarmCreated[index];
+		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarm[index];
 		$scope.getPositionAlarmMessage($scope.selectedPositionAlarm.uid);
 		
 		$timeout(function () {
@@ -97,7 +106,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 	$scope.editActionReaded = function(index) {
 		
 		$scope.isOffline = false;
-		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarmReaded[index];
+		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarm[index];
 		$scope.getPositionAlarmMessage($scope.selectedPositionAlarm.uid);
 		
 		$timeout(function () {
@@ -122,23 +131,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 			$scope.getCompaniesAlarm(); 
 		});		 
 	}
-	
-	$scope.updateSoundStatus = function(index) {
-		
-		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarmCreated[index];
-		
-		$scope.updateSoundStatus = new PositionAlarmService.updateSoundStatus();				 
-		$scope.updateSoundStatus.$positionAlarm({_csrf : angular.element('#_csrf').val(), soundStatus : 'SILENT', uid: $scope.selectedPositionAlarm.uid});		 
-	 }
-	
-	$scope.playSound = function() {
-		
-		elementLoaded = document.getElementById('alarmSound');
-		
-		if (elementLoaded != null)
-			elementLoaded.play();
-	}
-		
+			
 	$scope.getCompaniesAlarm();
 	$scope.getCompaniesPositionOffline();
     

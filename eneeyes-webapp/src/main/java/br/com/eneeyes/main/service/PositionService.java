@@ -52,7 +52,7 @@ public class PositionService implements IService<PositionDto> {
 			position.setLastUpdate(historic.getLastUpdate());
 			position.setLastValue(historic.getValue());
 			
-			AlarmType alarmType = positionAlarmService.checkAndUpdateAlarmsAndActions(position);
+			AlarmType alarmType = positionAlarmService.checkAndUpdateAlarmsAndActions(position, historic.getUid());
 			position.setAlarmType(alarmType);
 			
 			repository.save(position);

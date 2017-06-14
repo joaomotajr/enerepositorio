@@ -33,12 +33,13 @@
 									</thead>
 									<tbody>
 
-										<tr data-ng-repeat="item in dashCompaniesAlarmCreated">
+										<tr data-ng-repeat="item in dashCompaniesAlarm | filter: {alarmStatus: 'CREATED' } track by item.uid">
 											
 											<td>{{item.company_name}}</td>
 											<td>{{item.company_detector_name}}</td>
 											
-											<td style="padding-top: 13px ! important;"> <span class="label" data-ng-class="{'label-success' : item.alarmType=='NORMAL', 'label-warning' : item.alarmType=='ALERTA', 'label-default' : item.alarmType=='DETECCAO', 'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} </span></td>	
+											<td style="padding-top: 13px ! important;"> <span class="label" 
+											data-ng-class="{'label-primary' : item.alarmType=='OFF', 'label-success' : item.alarmType=='NORMAL', 'label-warning' : item.alarmType=='ALERTA', 'label-default' : item.alarmType=='DETECCAO', 'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} </span></td>	
 											<td>
 												{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
 											</td>
@@ -49,7 +50,7 @@
                                             	<span data-ng-if="item.sigmaStatus=='ON'" class="icon fa fa-exchange" style="font-size:1.4em; color: orange" title="Integração ao Sigma em fila"></span>
                                             	&nbsp;&nbsp;
 												<span data-ng-if="item.soundStatus=='OFF'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: gray" title="Alerta Sonoro não Habilitado"></span>
-                                            	<a href="#" data-ng-click="updateSoundStatus($index);" data-ng-if="item.soundStatus=='ON'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: red" title="Alerta Sonoro"></a>
+                                            	<a href="#" data-ng-click="updateSound(item.index);" data-ng-if="item.soundStatus=='ON'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: red" title="Alerta Sonoro"></a>
                                             	<span data-ng-if="item.soundStatus=='SILENT'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: green" title="Alerta Silenciado"></span>
                                             	&nbsp;&nbsp;
                                             	<span data-ng-if="item.emailStatus=='OFF'" class="icon fa fa-envelope" style="font-size:1.4em; color: gray" title="Aviso EMAIL não Habilitado"></span>
@@ -67,7 +68,7 @@
                                            		&nbsp;&nbsp; 
                                            	</td>
                                            	<td>
-                                           		<a href="#" data-ng-click="editActionCreated($index)" class="button fa fa-list-ol" style="font-size:1.6em;" title="Ações a serem Verificadas pelo Operador"></a>
+                                           		<a href="#" data-ng-click="editActionCreated(item.index)" class="button fa fa-list-ol" style="font-size:1.6em;" title="Ações a serem Verificadas pelo Operador"></a>
                                             </td>                                        						
 										</tr>										
 									</tbody>
@@ -112,7 +113,7 @@
 									</thead>
 									<tbody>
 										
-										<tr data-ng-repeat="item in dashCompaniesAlarmReaded">																
+										<tr data-ng-repeat="item in dashCompaniesAlarm | filter: {alarmStatus: 'READED' } track by item.uid">																
 												
 											<td>{{item.company_name}}</td>
 											<td>{{item.company_detector_name}}</td>
@@ -141,7 +142,7 @@
                                            		&nbsp;&nbsp;
                                            	</td>
                                            	<td>
-                                           		<a href="#" data-ng-click="editActionReaded($index)" class="button fa fa-list-ol" style="font-size:1.6em;" title="Ações a serem Verificadas pelo Operador"></a>
+                                           		<a href="#" data-ng-click="editActionReaded(item.index)" class="button fa fa-list-ol" style="font-size:1.6em;" title="Ações a serem Verificadas pelo Operador"></a>
                                             </td>        											
 										</tr>   																							
 										

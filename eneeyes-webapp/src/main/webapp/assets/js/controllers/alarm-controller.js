@@ -14,7 +14,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			alarm2 : $scope.alarmAlarm2,
 			alarm3 : $scope.alarmAlarm3,
 			companyDto : $scope.company,
-			alarmOn: angular.element('#alarmOn').hasClass('unlocked_inactive') == true ? true : false,
+			alarmOn: angular.element('#alarmOn').hasClass('locked_active') == true ? true : false,
 			alarmSigma:  $("#checkboxSigmaOnOff").prop('checked'),
 			alarmEmail:  $scope.alarmEmail,
 			alarmSound:  $("#checkboxSonoroOnOff").prop('checked'),

@@ -160,8 +160,8 @@
 							                      	<div class="row">
 								                      	<div class="col-md-9"> 
 				                                          	<div class="btn-group" id="toggle_event_editing">
-																<button type="button" class="btn btn-default locked_active">OFF</button>
-																<button type="button" class="btn bg-black unlocked_inactive">ON</button>
+																<button id="alarmOff" type="button" class="btn btn-default locked_active">OFF</button>
+																<button id="alarmOn" type="button" class="btn bg-black unlocked_inactive">ON</button>
 															</div>
 														</div>
 														<div class="col-md-3">					            				

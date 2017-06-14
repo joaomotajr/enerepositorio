@@ -6,17 +6,21 @@ angular.element(document).ready(function() {
 
 app.controller('logAlarmController', function ($scope, $timeout, $filter, ViewService, PositionAlarmMessageService) {
 
+	dashCompaniesAlarm = [];
+	
 	$scope.getCompaniesAlarm = function() {
 		                                                    
 		 $scope.listAllDashCompaniesAlarm = new ViewService.listAllDashCompaniesAlarm();		 
 		 $scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			 		 
-			 console.log($scope.listAllDashCompaniesAlarm.list);		 
+			 if($scope.listAllDashCompaniesAlarm != null && $scope.listAllDashCompaniesAlarm.list.length > 0 )
+				 $scope.dashCompaniesAlarm = $scope.listAllDashCompaniesAlarm.list
        });		 
 	}
 
 	
 	$scope.dataTableOptions = {
+					
        //TODO: move some of this into datatable directive?
        columns: [          
                 
@@ -52,7 +56,7 @@ app.controller('logAlarmController', function ($scope, $timeout, $filter, ViewSe
 		if(this.innerText=='Histórico') {
 			var uid = $(this).find("button").attr('id');		
 			
-			$scope.selectedPositionAlarm = $.grep($scope.listAllDashCompaniesAlarm.list, function (e) { return e.uid == uid ; })[0];
+			$scope.selectedPositionAlarm = $.grep($scope.dashCompaniesAlarm, function (e) { return e.uid == uid ; })[0];
 			$scope.getPositionAlarmMessage(uid);
 			
 			$timeout(function () {

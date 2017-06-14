@@ -10,7 +10,7 @@
 					
 						<div id="tableExample">
 						    <div>						        
-						        <table id='idDatatable' data-datatable data-options="dataTableOptions" data-items="listAllDashCompaniesAlarm.list"></table>
+						        <table id='idDatatable' data-datatable data-options="dataTableOptions" data-items="dashCompaniesAlarm"></table>
 						      						        
 						    </div>
 						</div>										

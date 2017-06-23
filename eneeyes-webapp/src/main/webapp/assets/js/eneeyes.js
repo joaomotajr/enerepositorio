@@ -30,6 +30,11 @@ angular.module('dependency', []).config(['$httpProvider', function ($httpProvide
         		  $('#resultDanger').hide().show('slow').delay(15000).hide('slow');        		  
         		  
         	 }
+        	 else if (rejection.status == 403) {
+        		 angular.element('body').removeClass('loading'); 
+        		 $rootScope.alertDanger = "Acesso ao Módulo ou Recurso Não Permitido!";
+        		 $('#resultDanger').hide().show('slow').delay(15000).hide('slow');
+        	 }
         	 else if (rejection.status == 404) {
         		 angular.element('body').removeClass('loading'); 
         		 $rootScope.alertDanger = "Item Requisitado Inexistente, Contate o Administrador do Sistema";
@@ -67,57 +72,6 @@ angular.module('dependency', []).config(['$httpProvider', function ($httpProvide
 
 }]);
 
-//app.directive('disallowSpaces', function() {'1'
-//	  return {
-//	    restrict: 'A',
-//
-//	    link: function($scope, $element) {
-//	      $element.bind('input', function() {
-//	        $(this).val($(this).val().replace(/ /g, ''));
-//	      });
-//	    }
-//	  };
-//})
-
-
-//app.directive('validateRange', ['$parse', function($parse) {
-//
-//    function link($scope, $element, $attrs, ngModel) {
-//        var attrRange, range = [];
-//
-//        function validate(value) {
-//            var validMin = true, validMax = true;
-//            if (typeof range[0] === 'number') {
-//                ngModel.$setValidity('min', value >= range[0]);
-//                validMin = value >= range[0];
-//            }
-//            if (typeof range[1] === 'number') {
-//                ngModel.$setValidity('max', value <= range[1]);
-//                validMax = value <= range[1];
-//            }
-//            return validMin && validMax ? value : undefined;
-//        }
-//
-//        attrRange = $attrs.validateRange.split(/,/);
-//
-//        range[0] = $parse(attrRange[0] || '')($scope);
-//        range[1] = $parse(attrRange[1] || '')($scope);
-//
-//        $scope.$watchCollection('[' + $attrs.validateRange + ']', function(vals) {
-//            range = vals;
-//            validate(ngModel.$viewValue);
-//        });
-//
-//        ngModel.$parsers.unshift(validate);
-//        ngModel.$formatters.unshift(validate);
-//    }
-//
-//    return {
-//        link: link,
-//        require: 'ngModel'
-//    };
-//    
-//}]);
 
 app.filter('companyFilter', function () {
     return function (objects, criteria) {
@@ -138,20 +92,7 @@ app.filter('companyFilter', function () {
     }
 });
 
-//app.filter('numberFixedLen', function () {
-//    return function (n, len) {
-//        var num = parseInt(n, 10);
-//        len = parseInt(len, 10);
-//        if (isNaN(num) || isNaN(len)) {
-//            return n;
-//        }
-//        num = ''+num;
-//        while (num.length < len) {
-//            num = '0'+num;
-//        }
-//        return num;
-//    };
-//});
+
 
 app.directive('bindUnsafeHtml', ['$compile', '$timeout', function ($compile, $timeout) {
     return function(scope, element, attrs) {
@@ -185,26 +126,7 @@ app.directive('bindUnsafeHtml', ['$compile', '$timeout', function ($compile, $ti
   };
 }]);
 
-//app.directive('numberOnly', function () {
-//	  return {
-//	      restrict: 'A',
-//	      require: 'ngModel',
-//	      scope: {
-//	          ngModel: '='
-//	      },
-//	      link: function (scope) {          
-//	          scope.$watch('ngModel', function(newValue,oldValue) {  
-//	              var arr = String(newValue).split("");
-//	              if (arr.length === 0) return;
-//	              if (arr.length === 1 && (arr[0] == '-' || arr[0] === '.' )) return;
-//	              if (arr.length === 2 && newValue === '-.') return;
-//	              if (isNaN(newValue)) {
-//	                  scope.ngModel = oldValue;
-//	              }
-//	          });
-//	      }
-//	  };
-//});
+
 
 app.directive('focusMe', function($timeout) {
 	  return {

@@ -189,7 +189,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 
 		$scope.loading = true;
 		
-		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' ï¿½ ' + dataFim.toLocaleString();
+		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' à ' + dataFim.toLocaleString();
 		
 		$scope.selectedButton = 100; 		
 		

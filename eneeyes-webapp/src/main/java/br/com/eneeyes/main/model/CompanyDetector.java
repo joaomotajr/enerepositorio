@@ -51,12 +51,19 @@ public class CompanyDetector {
     	this.description = dto.getDescription();    			
     	this.date = dto.getDate();    	  
     	this.local = dto.getLocal();
+    	this.serialNumber = dto.getSerialNumber();
 		this.latitude = dto.getLatitude();
-		this.longitude = dto.getLongitude();
+		this.longitude = dto.getLongitude();		
+		
+		this.deliveryDate = dto.getDeliveryDate();
+		this.garantyDays = dto.getGarantyDays();		
+		this.descriptionDelivery = dto.getDescriptionDelivery();
+		this.installDate = dto.getInstallDate();
+		this.maintenanceInterval = dto.getMaintenanceInterval();
+		this.descriptionInstall = dto.getDescriptionInstall();
 		
 		if(dto.getDetectorDto() != null)
 			this.detector = new Detector(dto.getDetectorDto());
-
     }   
 
 	@Id
@@ -67,12 +74,15 @@ public class CompanyDetector {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 	
+	@Column(name = "SERIAL_NUMBER", nullable = true)
+	private String serialNumber;
+	
 	@Column(name = "DESCRIPTION", nullable = true)
 	private String description;
 	
 	@Column(name = "DATE", nullable = true)
 	private Date date;  
-	
+		
 	@Column(name = "LOCAL", nullable = true)		
 	private String local;
 	
@@ -81,6 +91,24 @@ public class CompanyDetector {
 	
 	@Column(name = "LONGITUDE", nullable = true)		
 	private Double longitude;
+	
+	@Column(name = "DELIVERY_DATE", nullable = true)
+	private Date deliveryDate;
+	
+	@Column(name = "GARANTY_DAYS", nullable = true)
+	private Integer garantyDays;
+	
+	@Column(name = "DESCRIPTION_DELIVERY", nullable = true)
+	private String descriptionDelivery;
+	
+	@Column(name = "INSTALL_DATE", nullable = true)
+	private Date installDate;
+	
+	@Column(name = "MAINTENANCE_INTERVAL", nullable = true)
+	private Integer maintenanceInterval;
+		
+	@Column(name = "DESCRIPTION_INSTALL", nullable = true)
+	private String descriptionInstall;
   
 	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_DEVICE_ID", nullable = false)
@@ -139,6 +167,14 @@ public class CompanyDetector {
 		this.local = local;
 	}
 	
+	public final String getSerialNumber() {
+		return serialNumber;
+	}
+
+	public final void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
+	}
+	
 	public final Double getLatitude() {
 		return latitude;
 	}
@@ -170,4 +206,53 @@ public class CompanyDetector {
 	public void setDetector(Detector detector) {
 		this.detector = detector;
 	}
+	
+	public final Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public final void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public final Integer getGarantyDays() {
+		return garantyDays;
+	}
+
+	public final void setGarantyDays(Integer garantyDays) {
+		this.garantyDays = garantyDays;
+	}
+
+	public final String getDescriptionDelivery() {
+		return descriptionDelivery;
+	}
+
+	public final void setDescriptionDelivery(String descriptionDelivery) {
+		this.descriptionDelivery = descriptionDelivery;
+	}
+
+	public final Date getInstallDate() {
+		return installDate;
+	}
+
+	public final void setInstallDate(Date installDate) {
+		this.installDate = installDate;
+	}
+
+	public final Integer getMaintenanceInterval() {
+		return maintenanceInterval;
+	}
+
+	public final void setMaintenanceInterval(Integer maintenanceInterval) {
+		this.maintenanceInterval = maintenanceInterval;
+	}
+
+	public final String getDescriptionInstall() {
+		return descriptionInstall;
+	}
+
+	public final void setDescriptionInstall(String descriptionInstall) {
+		this.descriptionInstall = descriptionInstall;
+	}
+
 }

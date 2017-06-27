@@ -62,20 +62,27 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	
 	$scope.saveCompanyDetector = function() {
 		angular.element('body').addClass('loading');
-		
+						
 		var companyDetector = {
 			uid: $scope.selectedCompanyDetector.uid == undefined ? 0 : $scope.selectedCompanyDetector.uid,
 			name: $scope.selectedCompanyDetector.name.toUpperCase(),
 			companyDeviceDto: {uid : $scope.selectedCompanyDevice.uid},
 			detectorDto: {uid: $scope.selectedCompanyDetector.detectorDto.uid},
 			local: $scope.selectedCompanyDetector.local,
-			description: $scope.selectedCompanyDetector.description
+			serialNumber: $scope.selectedCompanyDetector.serialNumber,
+			description: $scope.selectedCompanyDetector.description,
+			deliveryDate : new Date($('#deliveryDate').datepicker("getDate")),
+			garantyDays: $scope.selectedCompanyDetector.garantyDays,
+			descriptionDelivery: $scope.selectedCompanyDetector.descriptionDelivery,			
+			installDate : new Date($('#installDate').datepicker("getDate")),
+			descriptionInstall : $scope.selectedCompanyDetector.descriptionInstall,
+			maintenanceInterval : $scope.selectedCompanyDetector.maintenanceInterval
 		 }
 		 
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
 		$scope.inclusaoCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){		
 			
-			//Se for um Company Detector novo ou nï¿½o associado a um Detector
+			//Se for um Company Detector novo ou não associado a um Detector
 			if($scope.selectedCompanyDetector.uid == undefined) {
 				$scope.selectedCompanyDetector = $scope.inclusaoCompanyDetector.t;
 				$scope.getCompanyDetectorAlarms();
@@ -96,6 +103,14 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		    $scope.selectedCompanyDetector.detectorDto = '';	    
 		    $scope.selectedCompanyDetector.local = '';
 		    $scope.selectedCompanyDetector.description = '';
+		    $scope.selectedCompanyDetector.serialNumber = 0;			
+			//$('#deliveryDate').text = '';
+			$scope.selectedCompanyDetector.garantyDays = 0;
+			$scope.selectedCompanyDetector.descriptionDelivery = '';;			
+			$('#installDate').text = '';
+			$scope.selectedCompanyDetector.descriptionInstall = '';;
+			$scope.selectedCompanyDetector.maintenanceInterval = 0;
+		    
 		}, 100);
 	}	
 	
@@ -129,7 +144,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 				
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
-			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
+			
+			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;			
+			reloadDates();
 			
 			//* Detector já foi associado a dispositivo checa alarmes *//
 			if($scope.selectedCompanyDetector != null) {
@@ -137,6 +154,31 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 				$scope.getPositionsNoTimer($scope.selectedCompanyDetector);
 			}
         });		 
+	}
+	
+	function reloadDates() {
+		
+		if($scope.selectedCompanyDetector.deliveryDate == null) {
+			$('#deliveryDate').datetimepicker(
+				{ defaultDate: new Date(), format:'DD/MM/YYYY' }
+			);
+		}	
+		else {
+			$('#deliveryDate').datetimepicker(
+					{ defaultDate: new Date($scope.selectedCompanyDetector.deliveryDate), format:'DD/MM/YYYY' }
+			);
+		}		
+		
+//		if($scope.selectedCompanyDetector.deliveryDate != null)
+//			$('#deliveryDate').datepicker({ defaultDate: new Date($scope.selectedCompanyDetector.deliveryDate), format:'dd/mm/yyyy' });
+//				
+//		//$("#deliveryDate").datepicker('setDate', new Date($scope.selectedCompanyDetector.deliveryDate));
+//		
+//		if($scope.selectedCompanyDetector.installDate != null)				
+//			$("#installDate").datepicker('setDate', new Date($scope.selectedCompanyDetector.installDate));
+//			
+//			//$('#installDate').datepicker({ defaultDate: new Date($scope.selectedCompanyDetector.installDate), format:'dd/mm/yyyy' });		
+		
 	}
 		
 	$scope.deviceTypes = 
@@ -146,8 +188,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		 	{ name : 'PLC', uid : 2 },
 		 	{ name : 'CONTROLADORA', uid : 3 },
 		 	{ name : 'ALARME', uid : 4 } 			  	
-		];
-	
+		];	
 
 	 $scope.initializeDetector =  function()  {
 				 
@@ -155,29 +196,13 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			google.charts.load( 'visualization', '1', { 'packages': ['gauge', 'corechart'] });				
 			loadGoogleCharts = true;
 		}
+		
+		$('#deliveryDate').datepicker( {dateFormat: 'dd-mm-yy'});		
+	 	$('#installDate').datepicker({dateFormat: 'dd-mm-yy'});
 				 		 
 		$timeout(function () {
 			
-			$('.tabDetector a').on('click', function (event) {
-			    event.preventDefault();
-			    
-			    //Limpa Timers
-			    while ($scope.$root.timer.length) {				        	
-		            $interval.cancel($scope.$root.timer.pop());				            
-		         }
-			    
-			    google.charts.setOnLoadCallback(initDrawGaugesDetector);
-			    google.charts.setOnLoadCallback(initChartLinesDetector);
-			    
-			    if ($(event.target).attr('href') == "#tabCompanyDetector_2") {			    	
-		
-			    	initGaugeTimer();
-				}
-			    else if ($(event.target).attr('href') == "#tabCompanyDetector_3") {
-			
-					initChartTimer();
-			    }			
-			});
+			initControlEvents();
 											
 			initGaugeTimer = function() {
 													
@@ -200,8 +225,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 				if(current != null) {					
 					$scope.$root.timer.push($interval(function(){
 						if($scope.$root.currentPage == "Empresas")
-							$scope.getHistorics(current, 1);     
-						
+							$scope.getHistorics(current, 1);						
 				    }, 5000));						
 				}						
 			}
@@ -215,6 +239,35 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$timeout(function () {
 			angular.element('body').removeClass('loading');			
 		}, 200);
+	 }
+	 
+	 
+	 initControlEvents = function() {
+		
+		//$('#deliveryDate').datepicker(
+		//	{ dateFormat:'dd-mm-yy', altFormat: 'yy-mm-dd'}
+		//);
+				
+					
+		$('.tabDetector a').on('click', function (event) {
+		    event.preventDefault();
+			    
+		    //Limpa Timers
+		    while ($scope.$root.timer.length) {				        	
+		    	$interval.cancel($scope.$root.timer.pop());				            
+		    }
+			    
+			google.charts.setOnLoadCallback(initDrawGaugesDetector);
+			google.charts.setOnLoadCallback(initChartLinesDetector);
+			    
+			if ($(event.target).attr('href') == "#tabCompanyDetector_2") {			    	
+				initGaugeTimer();
+			}
+			else if ($(event.target).attr('href') == "#tabCompanyDetector_3") {
+			
+				initChartTimer();
+			}			
+		});
 	 }
 	 
 	function initDatatable() {

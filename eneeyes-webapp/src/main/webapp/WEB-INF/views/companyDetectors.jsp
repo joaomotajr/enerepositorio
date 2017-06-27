@@ -38,8 +38,9 @@
 					<ul class="nav nav-tabs tabDetector">
 				       	<li class="active"><a href="#tabCompanyDetector_1" id="stepTabDetector_1" data-toggle="tab">Cadastro</a></li>
 				       	<li><a href="#tabCompanyDetector_2" id="stepTabDetector_2" data-toggle="tab">Configuração</a></li>
-				       	<li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Histórico</a></li>				       	
+				       	<li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Gráfico do Histórico</a></li>				       	
 				    	<li data-ng-hide="selectedCompanyDetector" class="pull-right"><i title="[Nenhum Detector Associado ao Dispositivo]" class="fa fa-info-circle text-red"></i></li>
+				    	<li><a href="#tabCompanyDetector_4" id="stepTabDetector_4" data-toggle="tab">Manutenção/Instalação </a></li>
 				    </ul>
 					
 					<div class="tab-content">
@@ -50,13 +51,13 @@
 					    		<form name="userForm">					    		
 									
 						    		<div class="row">				    			
-								        <div class="col-md-4">
+								        <div class="col-md-2">
 								        	<div class="form-group">
 								                <label class="control-label">Código</label>
 								                <input class="form-control" placeholder="Código do Detector" data-ng-model="selectedCompanyDetector.uid" readonly>
 								            </div>	
 								        </div>
-								        <div class="col-md-4">
+								        <div class="col-md-2">
 								            <div class="form-group">								            
 								                <label class="control-label">Identificação</label>
 								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Identificação Obrigatorio]</span>
@@ -68,8 +69,16 @@
 								                required>
 								            </div>
 								        </div>
+								        
+								        <div class="col-md-2">
+								        	<div class="form-group">
+								                <label class="control-label">Nr. de Série</label>
+								                <input class="form-control" placeholder="Nro de Série do Detector" data-ng-maxlength="24" 
+								                data-ng-model="selectedCompanyDetector.serialNumber">
+								            </div>	
+								        </div>
 										
-								        <div class="col-md-4">
+								        <div class="col-md-6">
 								            <div class="form-group">
 								                <label class="control-label">Descrição</label>
 								                <input class="form-control" placeholder="Descrição" data-ng-model="selectedCompanyDetector.description">
@@ -318,6 +327,82 @@
 					    	</div>
 				       	     
 				     	</div><!-- /.tab-content -->	
+				     	
+				     	<div class="tab-pane" id="tabCompanyDetector_4">	   
+			       			<div class="row">				            	
+			            	  	<div class="col-md-12">
+					              	<div class="panel panel-primary">						                
+						                <div class="panel-heading">
+									    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
+									   	</div>									   					               	
+						               	<div class="panel-body">
+						               		<form name="userFormMaintance">
+						               			<div class="row">				    			
+											        <div class="col-md-3">
+											        	<label class="control-label">Data de Entrega:</label>
+											        	<div class='input-group'>
+															<input type="text" class="form-control" id='deliveryDate'>
+															<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+															</span>
+									                	</div>											        											        		
+											        </div>
+											        <div class="col-md-3">
+											            <div class="form-group">								            
+											                <label class="control-label">Garantia <span style="font-size: 80%">(Dias)</span></label>
+											                
+											                <input class="form-control" type="number"
+											                	placeholder="Dias" 
+											                	data-ng-model="selectedCompanyDetector.garantyDays" name="garanty" 
+											                	title="Prazo de Garantia do Fabricante em Dias."
+											                required>
+											            </div>
+											        </div>
+													
+											        <div class="col-md-6">
+											            <div class="form-group">
+											                <label class="control-label">Detalhes sobre a Entrega: </label>
+											                <input class="form-control" placeholder="Descrição" data-ng-model="selectedCompanyDetector.descriptionDelivery">
+											            </div>
+											        </div>
+											    </div>						               		
+											    
+											    <div class="row">				    			
+											        <div class="col-md-3">
+											        	<label class="control-label">Data de Instalação:</label>
+											        	<div class='input-group'>
+															<input type="text" class="form-control" id='installDate'>
+															<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+															</span>
+									                	</div>											        											        		
+											        </div>
+											        <div class="col-md-3">
+											            <div class="form-group">								            
+											                <label class="control-label">Manutenção: <span style="font-size: 80%">(Dias)</span></label>
+											                
+											                <input class="form-control" type="number"
+											                	placeholder="Dias" 
+											                	data-ng-model="selectedCompanyDetector.maintenanceInterval" name="maintenanceInterval" 
+											                	title="Intervalo Recomendado de Manutenção/Calibração."
+											                required>
+											            </div>
+											        </div>
+													
+											        <div class="col-md-6">
+											            <div class="form-group">
+											                <label class="control-label">Detalhes Sobre a Instalação:</label>
+											                <input class="form-control" placeholder="Descrição" data-ng-model="selectedCompanyDetector.descriptionInstall">
+											            </div>
+											        </div>
+											    </div>
+						               		
+						               		</form>
+						               								               		
+					    				</div>
+					    			</div>
+					    		</div>
+					    	</div>
+				       	     
+				     	</div><!-- /.tab-content -->
 				     			     	
 				   </div>			   						
 				</div>

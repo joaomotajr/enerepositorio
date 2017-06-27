@@ -12,8 +12,15 @@ public class CompanyDetectorDto {
 	private String description;		
 	private Date date;
 	private String local;
+	private String serialNumber;	
 	private Double latitude;		
-	private Double longitude;
+	private Double longitude;	
+	private Date deliveryDate;
+	private Integer garantyDays;
+	private String descriptionDelivery;
+	private Date installDate;
+	private Integer maintenanceInterval;
+	private String descriptionInstall;
 	private CompanyDeviceDto companyDeviceDto;	
 	private DetectorDto detectorDto;	
 	
@@ -28,9 +35,16 @@ public class CompanyDetectorDto {
     	this.description = companyDetector.getDescription();
        	this.date = companyDetector.getDate();
        	this.local = companyDetector.getLocal();
+       	this.serialNumber = companyDetector.getSerialNumber();
        	this.latitude = companyDetector.getLatitude();
        	this.longitude = companyDetector.getLongitude();
-       	       	       	       	
+       	this.deliveryDate = companyDetector.getDeliveryDate();
+		this.garantyDays = companyDetector.getGarantyDays();		
+		this.descriptionDelivery = companyDetector.getDescriptionDelivery();
+		this.installDate = companyDetector.getInstallDate();
+		this.maintenanceInterval = companyDetector.getMaintenanceInterval();
+		this.descriptionInstall = companyDetector.getDescriptionInstall();
+       	
        	this.detectorDto = new DetectorDto(companyDetector.getDetector());
 	}
 		
@@ -73,6 +87,14 @@ public class CompanyDetectorDto {
 		this.local = local;
 	}
 	
+	public final String getSerialNumber() {
+		return serialNumber;
+	}
+
+	public final void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
+	}
+	
 	public final Double getLatitude() {
 		return latitude;
 	}
@@ -103,5 +125,53 @@ public class CompanyDetectorDto {
 
 	public void setCompanyDeviceDto(CompanyDeviceDto companyDeviceDto) {
 		this.companyDeviceDto = companyDeviceDto;
+	}
+	
+	public final Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public final void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public final Integer getGarantyDays() {
+		return garantyDays;
+	}
+
+	public final void setGarantyDays(Integer garantyDays) {
+		this.garantyDays = garantyDays;
+	}
+
+	public final String getDescriptionDelivery() {
+		return descriptionDelivery;
+	}
+
+	public final void setDescriptionDelivery(String descriptionDelivery) {
+		this.descriptionDelivery = descriptionDelivery;
+	}
+
+	public final Date getInstallDate() {
+		return installDate;
+	}
+
+	public final void setInstallDate(Date installDate) {
+		this.installDate = installDate;
+	}
+
+	public final Integer getMaintenanceInterval() {
+		return maintenanceInterval;
+	}
+
+	public final void setMaintenanceInterval(Integer maintenanceInterval) {
+		this.maintenanceInterval = maintenanceInterval;
+	}
+
+	public final String getDescriptionInstall() {
+		return descriptionInstall;
+	}
+
+	public final void setDescriptionInstall(String descriptionInstall) {
+		this.descriptionInstall = descriptionInstall;
 	}
 }

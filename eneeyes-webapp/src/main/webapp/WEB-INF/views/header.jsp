@@ -43,11 +43,12 @@
 	     
 	    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
 	    <link rel="stylesheet" href="/assets/css/skins/_all-skins.min.css">
-	    
+	    	    
 	    <!-- Date Picker -->
 	    <link rel="stylesheet" href="/assets/plugins/datepicker/datepicker.css">
+	    
 	    <!-- Daterange picker -->
-	    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker-bs3.css">
+<!-- 	    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker-bs3.css"> -->
 	   	
 	   	<!-- Image Notes -->
 		<style type="text/css" media="all">@import "/assets/plugins/imageNotes/css/marker.css";</style>		

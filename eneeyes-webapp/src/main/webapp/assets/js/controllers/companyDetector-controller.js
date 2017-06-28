@@ -71,10 +71,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			local: $scope.selectedCompanyDetector.local,
 			serialNumber: $scope.selectedCompanyDetector.serialNumber,
 			description: $scope.selectedCompanyDetector.description,
-			deliveryDate : new Date($('#deliveryDate').datepicker("getDate")),
+			deliveryDate : $('#deliveryDate').datepicker("getDate") == null ? null : new Date($('#deliveryDate').datepicker("getDate")),
 			garantyDays: $scope.selectedCompanyDetector.garantyDays,
 			descriptionDelivery: $scope.selectedCompanyDetector.descriptionDelivery,			
-			installDate : new Date($('#installDate').datepicker("getDate")),
+			installDate : $('#installDate').datepicker("getDate") == null ? null : new Date($('#installDate').datepicker("getDate")),
 			descriptionInstall : $scope.selectedCompanyDetector.descriptionInstall,
 			maintenanceInterval : $scope.selectedCompanyDetector.maintenanceInterval
 		 }
@@ -107,7 +107,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			//$('#deliveryDate').text = '';
 			$scope.selectedCompanyDetector.garantyDays = 0;
 			$scope.selectedCompanyDetector.descriptionDelivery = '';;			
-			$('#installDate').text = '';
+			//$('#installDate').text = '';
 			$scope.selectedCompanyDetector.descriptionInstall = '';;
 			$scope.selectedCompanyDetector.maintenanceInterval = 0;
 		    
@@ -158,26 +158,11 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	
 	function reloadDates() {
 		
-		if($scope.selectedCompanyDetector.deliveryDate == null) {
-			$('#deliveryDate').datetimepicker(
-				{ defaultDate: new Date(), format:'DD/MM/YYYY' }
-			);
-		}	
-		else {
-			$('#deliveryDate').datetimepicker(
-					{ defaultDate: new Date($scope.selectedCompanyDetector.deliveryDate), format:'DD/MM/YYYY' }
-			);
-		}		
-		
-//		if($scope.selectedCompanyDetector.deliveryDate != null)
-//			$('#deliveryDate').datepicker({ defaultDate: new Date($scope.selectedCompanyDetector.deliveryDate), format:'dd/mm/yyyy' });
-//				
-//		//$("#deliveryDate").datepicker('setDate', new Date($scope.selectedCompanyDetector.deliveryDate));
-//		
-//		if($scope.selectedCompanyDetector.installDate != null)				
-//			$("#installDate").datepicker('setDate', new Date($scope.selectedCompanyDetector.installDate));
-//			
-//			//$('#installDate').datepicker({ defaultDate: new Date($scope.selectedCompanyDetector.installDate), format:'dd/mm/yyyy' });		
+		if($scope.selectedCompanyDetector.deliveryDate != null)
+			$("#deliveryDate").datepicker('setDate', new Date($scope.selectedCompanyDetector.deliveryDate));
+
+		if($scope.selectedCompanyDetector.installDate != null)				
+			$('#installDate').datepicker('setDate', new Date($scope.selectedCompanyDetector.installDate));		
 		
 	}
 		
@@ -239,16 +224,18 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$timeout(function () {
 			angular.element('body').removeClass('loading');			
 		}, 200);
-	 }
-	 
+	 }	 
 	 
 	 initControlEvents = function() {
-		
-		//$('#deliveryDate').datepicker(
-		//	{ dateFormat:'dd-mm-yy', altFormat: 'yy-mm-dd'}
-		//);
 				
-					
+		$('#deliveryDate').datepicker(
+			{ dateFormat: 'dd/mm/yyyy' }
+		);
+		
+		$('#installDate').datepicker(
+			{ dateFormat: 'dd/mm/yyyy' }
+		);
+	
 		$('.tabDetector a').on('click', function (event) {
 		    event.preventDefault();
 			    

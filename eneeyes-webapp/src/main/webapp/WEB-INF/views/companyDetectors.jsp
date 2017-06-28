@@ -340,7 +340,7 @@
 						               			<div class="row">				    			
 											        <div class="col-md-3">
 											        	<label class="control-label">Data de Entrega:</label>
-											        	<div class='input-group'>
+											        	<div class='input-group date'>
 															<input type="text" class="form-control" id='deliveryDate'>
 															<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 															</span>
@@ -348,8 +348,7 @@
 											        </div>
 											        <div class="col-md-3">
 											            <div class="form-group">								            
-											                <label class="control-label">Garantia <span style="font-size: 80%">(Dias)</span></label>
-											                
+											                <label class="control-label">Garantia <span style="font-size: 80%">(Dias)</span></label>											                
 											                <input class="form-control" type="number"
 											                	placeholder="Dias" 
 											                	data-ng-model="selectedCompanyDetector.garantyDays" name="garanty" 
@@ -369,11 +368,12 @@
 											    <div class="row">				    			
 											        <div class="col-md-3">
 											        	<label class="control-label">Data de Instalação:</label>
-											        	<div class='input-group'>
+											        	<div class='input-group date'>
 															<input type="text" class="form-control" id='installDate'>
 															<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
 															</span>
-									                	</div>											        											        		
+									                	</div>	
+									                										                										        											        		
 											        </div>
 											        <div class="col-md-3">
 											            <div class="form-group">								            

@@ -71,10 +71,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			local: $scope.selectedCompanyDetector.local,
 			serialNumber: $scope.selectedCompanyDetector.serialNumber,
 			description: $scope.selectedCompanyDetector.description,
-			deliveryDate : new Date($('#deliveryDate').datepicker("getDate")),
+			deliveryDate : getDate($('#deliveryDate').val()), 
 			garantyDays: $scope.selectedCompanyDetector.garantyDays,
 			descriptionDelivery: $scope.selectedCompanyDetector.descriptionDelivery,			
-			installDate : new Date($('#installDate').datepicker("getDate")),
+			installDate : getDate($('#installDate').val()),
 			descriptionInstall : $scope.selectedCompanyDetector.descriptionInstall,
 			maintenanceInterval : $scope.selectedCompanyDetector.maintenanceInterval
 		 }
@@ -104,10 +104,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		    $scope.selectedCompanyDetector.local = '';
 		    $scope.selectedCompanyDetector.description = '';
 		    $scope.selectedCompanyDetector.serialNumber = 0;			
-			//$('#deliveryDate').text = '';
+		    $('#deliveryDate').val('');
 			$scope.selectedCompanyDetector.garantyDays = 0;
 			$scope.selectedCompanyDetector.descriptionDelivery = '';;			
-			$('#installDate').text = '';
+			$('#installDate').val('');
 			$scope.selectedCompanyDetector.descriptionInstall = '';;
 			$scope.selectedCompanyDetector.maintenanceInterval = 0;
 		    
@@ -158,27 +158,15 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	
 	function reloadDates() {
 		
-		if($scope.selectedCompanyDetector.deliveryDate == null) {
-			$('#deliveryDate').datetimepicker(
-				{ defaultDate: new Date(), format:'DD/MM/YYYY' }
-			);
+		if($scope.selectedCompanyDetector.deliveryDate != null) {
+			var dataAdm = new Date($scope.selectedCompanyDetector.deliveryDate);	
+	        $('#deliveryDate').val(dataAdm.getUTCDate() + "/" + (dataAdm.getUTCMonth() + 1) + "/" + dataAdm.getUTCFullYear());	
+		}
+		
+		if($scope.selectedCompanyDetector.installDate != null) {
+			var dataAdm = new Date($scope.selectedCompanyDetector.installDate);	
+	        $('#installDate').val(dataAdm.getUTCDate() + "/" + (dataAdm.getUTCMonth() + 1) + "/" + dataAdm.getUTCFullYear());	        
 		}	
-		else {
-			$('#deliveryDate').datetimepicker(
-					{ defaultDate: new Date($scope.selectedCompanyDetector.deliveryDate), format:'DD/MM/YYYY' }
-			);
-		}		
-		
-//		if($scope.selectedCompanyDetector.deliveryDate != null)
-//			$('#deliveryDate').datepicker({ defaultDate: new Date($scope.selectedCompanyDetector.deliveryDate), format:'dd/mm/yyyy' });
-//				
-//		//$("#deliveryDate").datepicker('setDate', new Date($scope.selectedCompanyDetector.deliveryDate));
-//		
-//		if($scope.selectedCompanyDetector.installDate != null)				
-//			$("#installDate").datepicker('setDate', new Date($scope.selectedCompanyDetector.installDate));
-//			
-//			//$('#installDate').datepicker({ defaultDate: new Date($scope.selectedCompanyDetector.installDate), format:'dd/mm/yyyy' });		
-		
 	}
 		
 	$scope.deviceTypes = 
@@ -197,8 +185,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			loadGoogleCharts = true;
 		}
 		
-		$('#deliveryDate').datepicker( {dateFormat: 'dd-mm-yy'});		
-	 	$('#installDate').datepicker({dateFormat: 'dd-mm-yy'});
+		$("#datemask").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
+	    $("#datemask2").inputmask("mm/dd/yyyy", { "placeholder": "mm/dd/yyyy" });
+	    $("[data-mask]").inputmask();
 				 		 
 		$timeout(function () {
 			
@@ -239,16 +228,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$timeout(function () {
 			angular.element('body').removeClass('loading');			
 		}, 200);
-	 }
-	 
+	 }	 
 	 
 	 initControlEvents = function() {
 		
-		//$('#deliveryDate').datepicker(
-		//	{ dateFormat:'dd-mm-yy', altFormat: 'yy-mm-dd'}
-		//);
-				
-					
 		$('.tabDetector a').on('click', function (event) {
 		    event.preventDefault();
 			    
@@ -269,6 +252,32 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			}			
 		});
 	 }
+	 
+	 $scope.validDeliveryDate = function ($event) {
+
+	        if ($('#deliveryDate').val().match(/[^0-9\/]/g) != null) {
+	            $scope.deliveryDateValid = true;
+	        }	        
+	        else if ($('#deliveryDate').val() == '') {
+	            $scope.deliveryDateValid = true;
+	        }
+	        else {
+	            $scope.deliveryDateValid = false;
+	        }
+	    }
+	 
+	 $scope.validInstallDate = function ($event) {
+
+	        if ($('#installDate').val().match(/[^0-9\/]/g) != null) {
+	            $scope.installDateValid = true;
+	        }
+	        else if ($('#installDate').val() == '') {
+	            $scope.installDateValid = true;
+	        }
+	        else {
+	            $scope.installDateValid = false;
+	        }
+	    }
 	 
 	function initDatatable() {
 	

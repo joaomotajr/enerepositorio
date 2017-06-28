@@ -451,7 +451,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	
 	}	
 	
-	$('dateIn').on('changeDate', function(ev){
+	$('#dateIn').on('changeDate', function(ev){
 	    $(this).datepicker('hide');
 	});
 	

@@ -82,7 +82,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
 		$scope.inclusaoCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){		
 			
-			//Se for um Company Detector novo ou não associado a um Detector
+			//Se for um Company Detector novo ou nï¿½o associado a um Detector
 			if($scope.selectedCompanyDetector.uid == undefined) {
 				$scope.selectedCompanyDetector = $scope.inclusaoCompanyDetector.t;
 				$scope.getCompanyDetectorAlarms();
@@ -148,7 +148,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;			
 			reloadDates();
 			
-			//* Detector já foi associado a dispositivo checa alarmes *//
+			//* Detector jï¿½ foi associado a dispositivo checa alarmes *//
 			if($scope.selectedCompanyDetector != null) {
 				$scope.getCompanyDetectorAlarms();
 				$scope.getPositionsNoTimer($scope.selectedCompanyDetector);
@@ -433,7 +433,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		objGauge = document.getElementById(id);
 		
 		if (objGauge == undefined) {
-			console.log('Objeto:: ' + id + "Não localizado:: " + new Date())
+			console.log('Objeto:: ' + id + "Nï¿½o localizado:: " + new Date())
 		}
 		else {
 			gauge = new google.visualization.Gauge(objGauge);
@@ -506,7 +506,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	    
 	    if ($scope.changeGraphic) {
 		    var options = {
-		          title: "Dados do Sensor na Última Hora.",
+		          title: "Dados do Sensor na ï¿½ltima Hora.",
 		          legend: {position: 'none'},
 		          'lineWidth': 0.75,
 		    	  width: 850,
@@ -531,10 +531,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	                  },
 		    		  ticks: [ 
 		    		           {v:0, f: 'Range Minimo: 0' }, 
-		    		           {v: orange, f: 'Detecção: ' + orange}, 
+		    		           {v: orange, f: 'Detecï¿½ï¿½o: ' + orange}, 
 		    		           {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		           {v: red, f: 'Evacuação: ' + red}, 
-		    		           {v: sensor.rangeMax, f: 'Range Máximo: ' + sensor.rangeMax} 
+		    		           {v: red, f: 'Evacuaï¿½ï¿½o: ' + red}, 
+		    		           {v: sensor.rangeMax, f: 'Range Mï¿½ximo: ' + sensor.rangeMax} 
 		    		        ]
 		    	  },
 		    	  //curveType: 'function',
@@ -543,7 +543,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	    }
 		else {
 			var options = {
-		          title: "Dados do Sensor na Última Hora.",
+		          title: "Dados do Sensor na ï¿½ltima Hora.",
 		          legend: {position: 'none'},
 		          'lineWidth': 0.75,
 		    	  width: 850,

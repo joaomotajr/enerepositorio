@@ -6,7 +6,7 @@
     <c:set var="authenticated" value="true"/>
 </sec:authorize>
 
-	<div class="ajax-loader"></div> 
+	<div class="ajax-loader"></div>ï¿½
     <!-- jQuery 2.1.4 -->
     <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
         

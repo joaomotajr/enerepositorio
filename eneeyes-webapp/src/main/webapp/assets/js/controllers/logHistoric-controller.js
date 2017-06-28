@@ -451,10 +451,6 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	
 	}	
 	
-	$('#dateIn').on('changeDate', function(ev){
-	    $(this).datepicker('hide');
-	});
-	
 	$scope.changeToValue = function(valor) {
 	  return valor.toString().replace(".", ",")
 	}
@@ -468,17 +464,27 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		angular.element('body').removeClass('loading');
 		
 		$('#dateIn').datetimepicker(
-			{ defaultDate: new Date(), format:'DD/MM/YYYY HH:mm:ss' }
+				{ 	defaultDate: new Date(), 
+					format:'DD/MM/YYYY HH:mm:ss',
+					autoclose: true,
+		            language: 'br'
+				}
 		);
 		$('#dateOut').datetimepicker(
-			{ defaultDate: new Date(), format:'DD/MM/YYYY HH:mm:ss' }
+			{ 	defaultDate: new Date(), 
+				format:'DD/MM/YYYY HH:mm:ss',
+				autoclose: true,
+	            language: 'br'
+			}
 		);
 		
 		$("#dateIn").on("dp.change",function (e) {
-	        //jQuery('#dateOut').data("DateTimePicker").setMinDate(e.date);
+	        $('#dateOut').data("DateTimePicker").setMinDate(e.date);
+	        $(this).data('DateTimePicker').hide();
 		});
 		$("#dateOut").on("dp.change",function (e) {
-	        //jQuery('#dateIn').data("DateTimePicker").setMaxDate(e.date);
+	        $('#dateIn').data("DateTimePicker").setMaxDate(e.date);
+	        $(this).data('DateTimePicker').hide();
 		});
 		
 	}, 1000);

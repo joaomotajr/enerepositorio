@@ -50,7 +50,14 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		$scope.alarmAlarm1 = '';
 		$scope.alarmAlarm2 = '';
 		$scope.alarmAlarm3 = '';	
-		$scope.company = '';
+		$scope.company = '';		
+		$scope.email = '';
+		$scope.email1 = '';
+		$scope.celular = '';
+		$scope.celular1 = '';
+		$scope.action1 = '';
+		$scope.action2 = '';
+		$scope.action3 = '';
 	}
 	 
 	$scope.getAlarms = function() {

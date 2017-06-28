@@ -93,8 +93,8 @@
 	                        	<input type="password" class="form-control" placeholder="Confirme a nova senha" data-ng-model="forms.changePassword.pass2">
 		                    </div>
 		                    
-	                        <span data-ng-show="forms.changePassword.errorMessage != ''" class="text-danger">{{forms.changePassword.errorMessage|translate}}</span>
-	                        <span data-ng-show="forms.changePassword.successMessage != ''" class="text-success">{{forms.changePassword.successMessage|translate}}</span>
+	                        <span data-ng-show="forms.changePassword.errorMessage != ''" class="text-danger">{{forms.changePassword.errorMessage}}</span>
+	                        <span data-ng-show="forms.changePassword.successMessage != ''" class="text-success">{{forms.changePassword.successMessage}}</span>
 	                        
 	                    </div>
 	                    

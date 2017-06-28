@@ -21,9 +21,7 @@
     
     <!-- Theme style -->
     <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="/assets/plugins/iCheck/square/blue.css">
-    
+   
     <style>
     .todo-list>li {
 	    padding: 4px ! important;
@@ -63,7 +61,7 @@
 		          		</div>
 		          
 		          		<div id="signin-error" class="alert alert-danger" style="display:none">
-							{{errorMessage | translate}}
+							{{errorMessage}}
 				  		</div>
 				  		
 			  			<div class="alert alert-warning" id="signinAlert" data-ng-show="signinAlert" style="display:none;">					        
@@ -140,17 +138,8 @@
    
    		<script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>    
     	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>    	
-    	<script src="/assets/plugins/iCheck/icheck.min.js"></script>
     	<script src="/assets/js/login.js"></script>
-    	<script>
-		      $(function () {
-		        $('input').iCheck({
-		          checkboxClass: 'icheckbox_square-blue',
-		          radioClass: 'iradio_square-blue',
-		          increaseArea: '20%' // optional
-		        });
-		      });
-		</script>
+    	
 	</body>
     <!-- END BODY -->
 </html>

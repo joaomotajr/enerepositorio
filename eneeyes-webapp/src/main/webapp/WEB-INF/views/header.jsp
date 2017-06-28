@@ -22,8 +22,7 @@
 	    	    	    
 	    <!-- Bootstrap 3.3.5 -->
 	    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
-	    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap-treeview.css">	    
-	    <link rel="stylesheet" href="/assets/plugins/bootstrap-select/bootstrap-select.min.css">	        
+	    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap-treeview.css">
 	    	    
 		<link rel="stylesheet" href="/assets/plugins/select2/select2.min.css">
 		<link rel="stylesheet" href="/assets/css/checkbox3.min.css">
@@ -34,9 +33,6 @@
 			   
 	    <!-- Font Awesome -->
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	    
-	    <!-- iCheck for checkboxes and radio inputs  -->
-    	<link rel="stylesheet" href="/assets/plugins/iCheck/all.css"> 
 	    	    
 	    <!-- Theme style -->
 	    <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
@@ -46,12 +42,7 @@
 	    	    
 	    <!-- Date Picker -->
 	    <link rel="stylesheet" href="/assets/plugins/datepicker/datepicker.css">
-	    
-	    <!-- Daterange picker -->
-<!-- 	    <link rel="stylesheet" href="/assets/plugins/daterangepicker/daterangepicker-bs3.css"> -->
-	   	
-	   	<!-- Image Notes -->
-		<style type="text/css" media="all">@import "/assets/plugins/imageNotes/css/marker.css";</style>		
+	    	   		   	
 		<link rel="stylesheet" href="/assets/plugins/jQueryUI/jquery-ui.min.css"></link>
 
 		<!-- Escpeificos -->

@@ -1,4 +1,4 @@
-var app = angular.module('eneeyes', ['ngResource', 'angular-jquery-maskedinput', 'pascalprecht.translate', 'dependency']);
+var app = angular.module('eneeyes', ['ngResource', 'dependency']);
 
 angular.module('angularDatatable', []);
 
@@ -71,27 +71,6 @@ angular.module('dependency', []).config(['$httpProvider', function ($httpProvide
   });
 
 }]);
-
-
-app.filter('companyFilter', function () {
-    return function (objects, criteria) {
-        var filterResult = new Array();
-
-        if (!criteria)
-            return null;
-
-        for (index in objects) {
-                        
-        	 if (objects[index] != null && objects[index].companyId == criteria.company.uid  ) {
-
-                 filterResult.push(objects[index]);
-             }   
-        }
-
-        return filterResult;
-    }
-});
-
 
 
 app.directive('bindUnsafeHtml', ['$compile', '$timeout', function ($compile, $timeout) {
@@ -198,58 +177,6 @@ app.directive('format', ['$filter', function($filter) {
             });
 		}
 	};
-}]);
-
-app.directive("daterangepicker", function () {
-	  return {
-		  restrict: "A",
-		  require: "ngModel",
-		  link: function (scope, elem, attrs, ngModelCtrl) {
-	      var updateModel = function (dateText) {
-	        scope.$apply(function () {
-	          ngModelCtrl.$setViewValue(dateText);
-	        });
-	      };
-	      elem.daterangepicker(
-	              {
-	                  ranges: {
-	                      'Hoje': [moment(), moment()],
-	                      'Ontem': [moment().subtract('days', 1), moment().subtract('days', 1)],
-	                      '\u00daltimos 7 Dias': [moment().subtract('days', 6), moment()],
-	                      '\u00daltimos 30 Dias': [moment().subtract('days', 29), moment()],
-	                      'Esse M\u00eas': [moment().startOf('month'), moment().endOf('month')],
-	                      'M\u00eas Passado': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
-	                  },
-	              		onSelect: function (dateText) {
-	              			updateModel(dateText);
-	              		}
-	              },
-	      function (start, end) {
-	          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-	          updateModel(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
-	      }
-	      );
-	    }
-	}
-});
-
-app.directive("datemonopicker", ['$filter', function($filter) {
-	  return {
-		  restrict: "A",
-		  require: "ngModel",
-		  link: function (scope, elem, attrs, ngModelCtrl) {
-	      var updateModel = function (dateText) {
-	        scope.$apply(function () {
-	          ngModelCtrl.$setViewValue(dateText);
-	        });
-	      };
-	      elem.datepicker()
-	      	.on('changeDate', function (ev) {
-	      		updateModel($filter('date')(ev.date, "dd/MM/yyyy"));
-	      		$(this).datepicker('hide');
-	      	});
-	    }
-	}
 }]);
 
 app.directive('popover', function($compile) { 

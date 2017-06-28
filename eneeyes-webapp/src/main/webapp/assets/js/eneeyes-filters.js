@@ -27,22 +27,21 @@ app.filter('renderHtml', function($filter) {
     }
 });
 
-app.filter('renderFriendlyDate', function($filter) {
-    return function(s, currentFormat) {
-        if (s == null) {
-            return;
+app.filter('companyFilter', function () {
+    return function (objects, criteria) {
+        var filterResult = new Array();
+
+        if (!criteria)
+            return null;
+
+        for (index in objects) {
+                        
+        	 if (objects[index] != null && objects[index].companyId == criteria.company.uid  ) {
+
+                 filterResult.push(objects[index]);
+             }   
         }
 
-        var i = s.split("/");
-
-        var d = i[0];
-        var m = i[1];
-        var y = i[2];
-
-        var p = ' ' + $filter('translate')('preposition') + ' ';
-
-        m = $filter('renderHtml')($filter('translate')('month.'+parseInt(m)));
-
-        return d + p + m + p + y;
+        return filterResult;
     }
 });

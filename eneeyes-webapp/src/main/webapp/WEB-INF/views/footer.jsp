@@ -13,8 +13,13 @@
     <!-- Easy Pin -->
     <script src="/assets/plugins/dist/jquery.easypin.js"></script>
     
+     <!-- jQuery Masketd -->
+    <script src="/assets/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="/assets/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    
     <!-- jQuery UI 1.11.4 -->
     <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>
+        
     <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
     <script src="/assets/plugins/datatables/dataTables.select.min.js"></script>         
@@ -23,9 +28,7 @@
     <script src="/assets/plugins/angular/angular.min.js"></script>
 	<script src="/assets/plugins/angular/angular-route.js"></script>
 	<script src="/assets/plugins/angular/angular-resource.js"></script>
-	<script src="/assets/plugins/angular/angular-jquery-maskedinput.js"></script>
 	<script src="/assets/plugins/angular/angular-locale_pt-br.js"></script>	
-	<script src="/assets/plugins/angular/angular-translate.min.js"></script>
 	<script src="/assets/plugins/angular/angular-options-disabled.js"></script>
 	
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -35,15 +38,9 @@
 
     <!-- Bootstrap 3.3.5 -->
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>
-
-<!--     <script src="/assets/bootstrap/js/bootstrap-inputmask.js"></script> -->    
-<!--     <script src="/assets/plugins/datepicker/bootstrap-datepicker.js"></script> -->
+    <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>    
     <script src="/assets/plugins/datepicker/moment.min.js"></script>
     <script src="/assets/plugins/datepicker/bootstrap-datetimepicker.min.js"></script>    
-    
-    <!-- iCheck -->
-    <script src="/assets/plugins/iCheck/icheck.min.js"></script>           
     
     <!-- AdminLTE App -->
     <script src="/assets/plugins/adminlte/app.min.js"></script>
@@ -58,15 +55,12 @@
     <!-- Google Gauge -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- END GLOBAL SCRIPTS -->
-    
-    <script type="text/javascript" src="/assets/plugins/pdf/jspdf.min.js"></script>
 
     <!-- PAGE LEVEL SCRIPTS -->    
     <script src="/assets/js/eneeyes.js"></script>
 	<script src="/assets/js/eneeyes-filters.js"></script>
 	<script src="/assets/js/eneeyes-services.js"></script>
 	<script src="/assets/js/eneeyes-site-controller.js"></script>
-	<script src="/assets/js/message-translate.js"></script>	 
 	<script src="/assets/js/jsFunctions.js"></script>
 	<script src="/assets/js/user-controller.js"></script>
 	<script src="/assets/js/user-perfil-controller.js"></script>
@@ -88,8 +82,7 @@
 	<script src="/assets/js/controllers/simulador-controller.js"></script>
 	<script src="/assets/js/controllers/conteudo-controller.js"></script>
 	<script src="/assets/js/controllers/logAlarm-controller.js"></script>
-	
-		
+			
 	<!-- PAGE LEVEL SERVICES -->
 	<script src="/assets/js/user-services.js"></script>
 	<script src="/assets/js/role-services.js"></script>
@@ -112,10 +105,8 @@
 	<script src="/assets/js/services/sms-service.js"></script>
 	<script src="/assets/js/services/positionAlarmMessage-service.js"></script>
 	<script src="/assets/js/services/positionAlarm-service.js"></script>
-	
-	
-	<!-- PAGE LEVEL FACTORIES -->
-	
+		
+	<!-- PAGE LEVEL FACTORIES -->	
 		
     <!-- END PAGE LEVEL SCRIPTS -->
     

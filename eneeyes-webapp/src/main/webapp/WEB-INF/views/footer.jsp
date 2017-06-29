@@ -105,6 +105,8 @@
 	<script src="/assets/js/services/sms-service.js"></script>
 	<script src="/assets/js/services/positionAlarmMessage-service.js"></script>
 	<script src="/assets/js/services/positionAlarm-service.js"></script>
+	<script src="/assets/js/services/companyDetectorMaintenanceHistoric-Service.js"></script>
+
 		
 	<!-- PAGE LEVEL FACTORIES -->	
 		

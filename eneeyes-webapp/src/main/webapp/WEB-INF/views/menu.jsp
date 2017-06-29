@@ -161,7 +161,8 @@
 			                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('gases.html', 'Gases')"><i class="fa fa-yelp"></i> Gases</a></li>					            		        
 			              	</ul>
 			            </li> 
-			            <li><a href="#" data-ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn"></i> Alarmes</a></li>              		
+			            <li><a href="#" data-ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn"></i> Alarmes</a></li>
+			            <li><a href="#" data-ng-click="LoadAjaxContent('companyDetectorMaintenance.html', 'Detectores-Calibração')"><i class="fa fa-bullhorn"></i> Calibração / Manutenção</a></li>              		
                 		
 		     		</ul>
             	</li>

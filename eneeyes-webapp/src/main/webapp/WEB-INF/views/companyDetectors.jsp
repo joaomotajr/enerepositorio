@@ -37,9 +37,9 @@
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs tabDetector">
 				       	<li class="active"><a href="#tabCompanyDetector_1" id="stepTabDetector_1" data-toggle="tab">Cadastro</a></li>
-				       	<li><a href="#tabCompanyDetector_4" id="stepTabDetector_4" data-toggle="tab">Manutenï¿½ï¿½o/Instalaï¿½ï¿½o </a></li>
-				       	<li><a href="#tabCompanyDetector_2" id="stepTabDetector_2" data-toggle="tab">Configuraï¿½ï¿½o</a></li>
-				       	<li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Grï¿½fico do Histï¿½rico</a></li>				       	
+				       	<li><a href="#tabCompanyDetector_4" id="stepTabDetector_4" data-toggle="tab">Manutenção/Instalação</a></li>
+				       	<li><a href="#tabCompanyDetector_2" id="stepTabDetector_2" data-toggle="tab">Configuração</a></li>
+				       	<li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Gráfico do Histórico</a></li>				       	
 				    	<li data-ng-hide="selectedCompanyDetector" class="pull-right"><i title="[Nenhum Detector Associado ao Dispositivo]" class="fa fa-info-circle text-red"></i></li>				    	
 				    </ul>
 					
@@ -53,35 +53,35 @@
 						    		<div class="row">				    			
 								        <div class="col-md-2">
 								        	<div class="form-group">
-								                <label class="control-label">Cï¿½digo</label>
-								                <input class="form-control" placeholder="Cï¿½digo do Detector" data-ng-model="selectedCompanyDetector.uid" readonly>
+								                <label class="control-label">Cádigo</label>
+								                <input class="form-control" placeholder="Cádigo do Detector" data-ng-model="selectedCompanyDetector.uid" readonly>
 								            </div>	
 								        </div>
 								        <div class="col-md-2">
 								            <div class="form-group">								            
-								                <label class="control-label">Identificaï¿½ï¿½o</label>
-								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Identificaï¿½ï¿½o Obrigatorio]</span>
-									            <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho Mï¿½ximo 8 caracteres</span>
+								                <label class="control-label">Identificação</label>
+								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Identificação Obrigatorio]</span>
+									            <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 8 caracteres</span>
 								                <input data-disallow-spaces id="companyDetectorName" class="form-control" style="text-transform:uppercase" 
-								                	placeholder="Identificaï¿½ï¿½o do Detector (Sem Espaï¿½os)" 
+								                	placeholder="Identificação do Detector (Sem Espaáos)" 
 								                	data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="8" name="username" 
-								                	title="Identificaï¿½ï¿½o do Detector (Sem Espaï¿½os)"
+								                	title="Identificação do Detector (Sem Espaáos)"
 								                required>
 								            </div>
 								        </div>
 								        
 								        <div class="col-md-2">
 								        	<div class="form-group">
-								                <label class="control-label">Nr. de Sï¿½rie</label>
-								                <input class="form-control" placeholder="Nro de Sï¿½rie do Detector" data-ng-maxlength="24" 
+								                <label class="control-label">Nr. de Sárie</label>
+								                <input class="form-control" placeholder="Nro de Sárie do Detector" data-ng-maxlength="24" 
 								                data-ng-model="selectedCompanyDetector.serialNumber">
 								            </div>	
 								        </div>
 										
 								        <div class="col-md-6">
 								            <div class="form-group">
-								                <label class="control-label">Descriï¿½ï¿½o</label>
-								                <input class="form-control" placeholder="Descriï¿½ï¿½o" data-ng-model="selectedCompanyDetector.description">
+								                <label class="control-label">Descrição</label>
+								                <input class="form-control" placeholder="Descrição" data-ng-model="selectedCompanyDetector.description">
 								            </div>
 								        </div>
 								    </div>
@@ -95,7 +95,7 @@
 								        </div>
 
 										<div class="col-md-6">
-											<label class="control-label">Identificaï¿½ï¿½o do Detector/Sensores</label>
+											<label class="control-label">Identificação do Detector/Sensores</label>
 											<div class="box box-primary collapsed-box">
 												<div class="box-header with-border">
 													<Label class="box-title">{{selectedCompanyDetector.detectorDto.name}}-{{selectedCompanyDetector.detectorDto.model}} Sensores: {{selectedCompanyDetector.detectorDto.sensorsDto.length}} </label>
@@ -137,71 +137,16 @@
 				    		</div>
 				    		
 				    		<div class="row">
-				    			<div class="col-md-12">						    	
-						    		<div class="box box-default collapsed-box">
-					                    <div class="box-header with-border"><strong>Lista de Detectores</strong>
-					                    	<div class="box-tools pull-right" title="Clique para Selecionar/Verificar Detector(es)">
-												<button class="btn btn-box-tool" data-widget="collapse">
-													<i class="fa fa-plus"></i>
-												</button>
-											</div>					                    
-					                    </div>					                	 
-					                    <div class="box-body">
-					                    	<div class="col-md-8">
-					                    		<div style="max-height: 300px; overflow: auto">					                    							                           
-						                         	<table id="sensorDetails" class="display">
-														<thead>
-															<tr>
-																<th></th>
-																<th>Nome</th>
-																<th>Modelo</th>																
-																<th>Aï¿½ï¿½o</th>																																						
-															</tr>
-														</thead>
-														<tbody>                                                        
-															<tr data-ng-repeat="item in detectors">
-																<td class="details-control"></td>
-																<td data-ng-class="{'selected': item.uid == selectedCompanyDetector.detectorDto.uid }">{{item.name}}</td>
-																<td data-ng-class="{'selected': item.uid == selectedCompanyDetector.detectorDto.uid }">{{item.model}}</td>																
-																<td>																	
-																	<div data-ng-if="item.uid == selectedCompanyDetector.detectorDto.uid">
-																		<button type="button" class="btn btn-danger btn-xs" data-ng-click="selecionarDetector(item)" disabled>Selecionado</button>
-																	</div>	
-																	<div data-ng-if="item.uid != selectedCompanyDetector.detectorDto.uid">
-																		<button type="button" class="btn btn-xs" data-ng-class="(selectedCompanyDetector.uid == null) ? 'btn-primary' : 'btn-default'" 
-																		data-ng-click="selecionarDetector(item)" data-ng-disabled="selectedCompanyDetector.uid != null">ï¿½ï¿½Selecionarï¿½ï¿½</button>
-																	</div>																							    								
-																</td>																		
-															</tr>                                                               
-														</tbody>
-													</table>
-												</div>    
-					                    	</div>
-					                    	
-					                    	<div class="col-md-4">							    
-											    <input type="file" id="idInputImageDetector" style='display:none'>									                						                    
-							                    <img class="profile-user-img img-responsive imgDetector" style="margin: 0 auto" 
-							                    	data-ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
-							                    	
-							                    <p class="text-muted text-center data-ng-binding">
-							                    	{{selectedCompanyDetector.detectorDto.name}}
-							                    	<span data-ng-show="selectedCompanyDetector.detectorDto.name"> - </span>
-							                    	{{selectedCompanyDetector.detectorDto.model}}
-							                    </p>
-								                					                															
-											</div>
-											
-					                    </div>
-					                    
-					                </div>							    	
-						    	</div>
+
+				    			<jsp:include page="detectorsSensorsList.jsp"/>
+				    			
 				    		</div>				    					    	
 				    	
 				       		<div class="row">
 				       			<div class="col-md-12">
-				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true">ï¿½ï¿½ï¿½Salvarï¿½ï¿½ï¿½</button>		       				
-				       				<span class="pull-right">ï¿½ï¿½ </span>
-				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">ï¿½ï¿½ï¿½Excluirï¿½ï¿½ï¿½</button>								
+				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true"> Salvar </button>		       				
+				       				<span class="pull-right"> </span>
+				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true"> Excluir </button>								
 								</div>
 							</div>						
 				    	         
@@ -289,8 +234,8 @@
 									   	</div>									   					               	
 						               	<div class="panel-body">
 						               		<input class="pull-right ng-pristine ng-untouched ng-valid" type="checkbox" style="margin-right: 30px" data-ng-model="changeGraphic">
-					               			<label data-ng-show="changeGraphic" class="pull-right">Grï¿½fico Completo&nbsp;&nbsp;</label>
-											<label data-ng-hide="changeGraphic" class="pull-right">Grï¿½fico Mediï¿½ï¿½es&nbsp;&nbsp;</label>
+					               			<label data-ng-show="changeGraphic" class="pull-right">Gráfico Completo&nbsp;&nbsp;</label>
+											<label data-ng-hide="changeGraphic" class="pull-right">Gráfico Medições&nbsp;&nbsp;</label>
 						               							               							               							               		
 						               		<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length == 1">
 						               			<ul class="nav nav-tabs" id="myTab">
@@ -341,86 +286,22 @@
 						                <div class="panel-heading">
 									    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
 									   	</div>									   					               	
-						               	<div class="panel-body">
-						               		<form name="userFormMaintance">
-						               			<div class="row">				    			
-											        <div class="col-md-3">											        	
-									                	<div class="form-group">
-															<label>Data de Entrega:</label>
-															<div class="input-group">                                                            
-																<div class="input-group-addon">
-																	<i class="fa fa-calendar" data-ng-hide='deliveryDateValid'></i>
-																	<i class="fa fa-calendar-times-o" style="color:red" data-ng-show='deliveryDateValid' title="Data Invï¿½lida"></i>                                                                 
-																</div>
-																<input id="deliveryDate" type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" data-ng-keyup="validDeliveryDate($event);">															                                                            
-															</div>
-														</div> 
-									                												        											        		
-											        </div>
-											        <div class="col-md-3">
-											            <div class="form-group">								            
-											                <label class="control-label">Garantia <span style="font-size: 80%">(Dias)</span></label>											                
-											                <input class="form-control" type="number"
-											                	placeholder="Dias" 
-											                	data-ng-model="selectedCompanyDetector.garantyDays" name="garanty" 
-											                	title="Prazo de Garantia do Fabricante em Dias."
-											                required>
-											            </div>
-											        </div>
-													
-											        <div class="col-md-6">
-											            <div class="form-group">
-											                <label class="control-label">Detalhes sobre a Entrega: </label>
-											                <input class="form-control" placeholder="Descriï¿½ï¿½o" data-ng-model="selectedCompanyDetector.descriptionDelivery">
-											            </div>
-											        </div>
-											    </div>						               		
-											    
-											    <div class="row">				    			
-											        <div class="col-md-3">											        	
-									                	<div class="form-group">
-															<label>Data de Instalaï¿½ï¿½o:</label>
-															<div class="input-group">                                                            
-																<div class="input-group-addon">
-																	<i class="fa fa-calendar" data-ng-hide='installDateValid'></i>
-																	<i class="fa fa-calendar-times-o" style="color:red" data-ng-show='installDateValid' title="Data Invï¿½lida"></i>                                                                 
-																</div>
-																<input id="installDate" type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" data-ng-keyup="validInstallDate($event);">															                                                            
-															</div>
-									                	</div>						                										        											        		
-											        </div>
-											        <div class="col-md-3">
-											            <div class="form-group">								            
-											                <label class="control-label">Manutenï¿½ï¿½o: <span style="font-size: 80%">(Dias)</span></label>
-											                
-											                <input class="form-control" type="number"
-											                	placeholder="Dias" 
-											                	data-ng-model="selectedCompanyDetector.maintenanceInterval" name="maintenanceInterval" 
-											                	title="Intervalo Recomendado de Manutenï¿½ï¿½o/Calibraï¿½ï¿½o."
-											                required>
-											            </div>
-											        </div>
-													
-											        <div class="col-md-6">
-											            <div class="form-group">
-											                <label class="control-label">Detalhes Sobre a Instalaï¿½ï¿½o:</label>
-											                <input class="form-control" placeholder="Descriï¿½ï¿½o" data-ng-model="selectedCompanyDetector.descriptionInstall">
-											            </div>
-											        </div>
-											    </div>
-						               		
-						               		</form>
-						               								               		
+						               	<div class="panel-body">						               		
+				    						<jsp:include page="companyDetectorMaintenanceForm.jsp"/>
+											<hr>
+											<jsp:include page="companyDetectorMaintenanceList.jsp"/>						               								               		
 					    				</div>
 					    			</div>
 					    		</div>
-					    	</div>
+					    		
+					    						    		
+					    	</div>					    	
 				       	     
-				       	     <div class="row">
+				       	    <div class="row">
 				       			<div class="col-md-12">
-				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true">ï¿½ï¿½ï¿½Salvarï¿½ï¿½ï¿½</button>		       				
-				       				<span class="pull-right">ï¿½ï¿½ </span>
-				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">ï¿½ï¿½ï¿½Excluirï¿½ï¿½ï¿½</button>								
+				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true"> Salvar </button>		       				
+				       				<span class="pull-right"> </span>
+				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true"> Excluir </button>								
 								</div>
 							</div>
 							
@@ -437,7 +318,7 @@
 				<div class="modal-content">                            
 					<div class="modal-body">
 						<div class="panel panel-default">
-							<div class="panel-heading" style="text-align:center">Selecione Alarme para o Sensor: <strong> {{selectedSensor.name}} </strong> - Valor Mï¿½ximo: <strong>{{selectedSensor.rangeMax}}</strong> </div>                                                                           
+							<div class="panel-heading" style="text-align:center">Selecione Alarme para o Sensor: <strong> {{selectedSensor.name}} </strong> - Valor Máximo: <strong>{{selectedSensor.rangeMax}}</strong> </div>                                                                           
 					  	</div>
 				
 						<div class="box">
@@ -460,7 +341,7 @@
 												<th>Alarme 1</th>
 												<th>Alarme 2</th>
 												<th>Alarme 3</th>
-												<th>Aï¿½ï¿½o</th>						
+												<th>Ação</th>						
 											</tr>
 										</thead>
 										<tbody>                                                        

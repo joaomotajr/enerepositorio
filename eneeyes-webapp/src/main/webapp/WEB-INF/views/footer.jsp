@@ -82,7 +82,8 @@
 	<script src="/assets/js/controllers/simulador-controller.js"></script>
 	<script src="/assets/js/controllers/conteudo-controller.js"></script>
 	<script src="/assets/js/controllers/logAlarm-controller.js"></script>
-			
+	<script src="/assets/js/controllers/companyDetectorMaintenanceHistoric-controller.js"></script>	            
+				
 	<!-- PAGE LEVEL SERVICES -->
 	<script src="/assets/js/user-services.js"></script>
 	<script src="/assets/js/role-services.js"></script>
@@ -105,6 +106,8 @@
 	<script src="/assets/js/services/sms-service.js"></script>
 	<script src="/assets/js/services/positionAlarmMessage-service.js"></script>
 	<script src="/assets/js/services/positionAlarm-service.js"></script>
+	<script src="/assets/js/services/companyDetectorMaintenanceHistoric-Service.js"></script>
+
 		
 	<!-- PAGE LEVEL FACTORIES -->	
 		

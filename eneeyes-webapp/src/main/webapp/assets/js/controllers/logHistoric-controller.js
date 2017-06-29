@@ -130,7 +130,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		if($scope.tipoGrupo == 1) {
 			//$scope.listHistoricInterval = new ViewService.listLastMonth();
 			
-			$scope.daysDiff ="ATENï¿½ï¿½O: Esta Pesquisa Nï¿½O Pode Exceder 15 dias " ;
+			$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 15 dias " ;
 			
 			$("#snoAlertBox").fadeIn();
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300) }, 3000);
@@ -159,7 +159,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		
 		if($scope.tipoGrupo == 1 && dayDiff(dataInicio, dataFim) > 15 ) {
 			
-			$scope.daysDiff ="ATENï¿½ï¿½O: Esta Pesquisa Nï¿½O Pode Exceder 15 dias " ;
+			$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 15 dias " ;
 			
 			$("#snoAlertBox").fadeIn();
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);
@@ -168,7 +168,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}		
 		else if($scope.tipoGrupo == 2 && dayDiff(dataInicio, dataFim) > 360 ) {
 			
-			$scope.daysDiff ="ATENï¿½ï¿½O: Esta Pesquisa Nï¿½O Pode Exceder 360 dias " ;
+			$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 360 dias " ;
 			
 			$("#snoAlertBox").fadeIn();
 			
@@ -189,7 +189,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 
 		$scope.loading = true;
 		
-		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' ï¿½ ' + dataFim.toLocaleString();
+		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' & ' + dataFim.toLocaleString();
 		
 		$scope.selectedButton = 100; 		
 		
@@ -218,17 +218,17 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	function setInterval(interval) {
 		
 		if ( interval == 1 )
-			return "ï¿½ltima Hora";
+			return "Última Hora";
 		else if ( interval == 6 )
-			return "ï¿½ltimas Seis Horas";
+			return "Últimas Seis Horas";
 		else if ( interval == 12 )
-			return "ï¿½ltimas Doze Horas";
+			return "Últimas Doze Horas";
 		else if ( interval == 48 )
-			return "ï¿½ltimas Dois Dias";
+			return "Últimas Dois Dias";
 		else if ( interval == 96 )
-			return "ï¿½ltimos Quatro Dias";
+			return "Útimos Quatro Dias";
 		else if ( interval == 'mes' )
-			return "ï¿½ltimo Mï¿½s";
+			return "Último Mês";
 		else 
 			return 'Desconhecido';
 				
@@ -366,7 +366,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}
 		else {
 			data.addColumn('string', 'Data');
-			data.addColumn('number', 'Mï¿½ximo');			
+			data.addColumn('number', 'Máximo');			
 			data.addColumn('number', 'Minimo');
 		}
 
@@ -409,10 +409,10 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	                  },
 		    		  ticks: [
 		    		          {v:0, f: 'Range Minimo: 0' }, 
-		    		          {v: orange, f: 'Detecï¿½ï¿½o: ' + orange}, 
+		    		          {v: orange, f: 'Deteção: ' + orange}, 
 		    		          {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		          {v: red, f: 'Evacuaï¿½ï¿½o: ' + red}, 
-		    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Mï¿½ximo: ' + $scope.selectedCompanySensor.rangeMax}
+		    		          {v: red, f: 'Evacuação: ' + red}, 
+		    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanySensor.rangeMax}
 		    		        ],
 		    	  },
 		    	  //curveType: 'function',

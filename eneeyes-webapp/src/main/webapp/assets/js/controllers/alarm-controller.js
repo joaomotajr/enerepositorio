@@ -13,7 +13,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			alarm1 : $scope.alarmAlarm1,
 			alarm2 : $scope.alarmAlarm2,
 			alarm3 : $scope.alarmAlarm3,
-			companyDto : $scope.company,
+			companyDto : $scope.selectedCompany,
 			alarmOn: angular.element('#alarmOn').hasClass('locked_active') == true ? true : false,
 			alarmSigma:  $("#checkboxSigmaOnOff").prop('checked'),
 			alarmEmail:  $scope.alarmEmail,
@@ -50,7 +50,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		$scope.alarmAlarm1 = '';
 		$scope.alarmAlarm2 = '';
 		$scope.alarmAlarm3 = '';	
-		$scope.company = '';		
+		$scope.selectedCompany = '';		
 		$scope.email = '';
 		$scope.email1 = '';
 		$scope.celular = '';
@@ -77,7 +77,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		    $scope.alarmAlarm2 = $scope.alarms[index].alarm2;
 		    $scope.alarmAlarm3 = $scope.alarms[index].alarm3;
 		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.alarms[index].unitMeterGases);
-			$scope.company = $scope.alarms[index].companyDto;
+			$scope.selectedCompany = $scope.alarms[index].companyDto;
 			$scope.email = $scope.alarms[index].email;
 			$scope.email1 = $scope.alarms[index].email1;
 			$scope.celular = $scope.alarms[index].celular;
@@ -195,19 +195,12 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 }
 	
 	$scope.getCompanys = function() {
-//		if($scope.$root.isFrom)	{
-//					 
-//			 $scope.resultCompany = new CompanyService.listOneView();		 
-//			 	$scope.resultCompany.$company({_csrf : angular.element('#_csrf').val(), id : $scope.$root.isFrom}, function(){			
-//			 	$scope.companies.push($scope.resultCompany);
-//		    });
-//		 }
-//		 else {		
-			 $scope.resultCompanies = new CompanyService.listAllView();		 
-			 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
-					 $scope.companies = $scope.resultCompanies.list;
-		        });		 
-//		}
+		
+		 $scope.resultCompanies = new CompanyService.listAllView();		 
+		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
+				 $scope.companies = $scope.resultCompanies.list;
+	     });	 
+
 	}
 	 
 	 $scope.unitMetersGases = 

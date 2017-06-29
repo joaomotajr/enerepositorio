@@ -59,9 +59,11 @@
 			        	
 			        	<div class="row">      		           
 				            <form class="form" name="userForm">
-					            <div class="col-md-12">
+					            <div class="col-md-12">					            	 
 					            	 
 					            	<div class="col-md-3">
+					            		<jsp:include page="controls/companySelect.jsp"/>
+					            		<!-- 
 						            	<div class="form-group" data-ng-hide="isFrom == 'MASTER'">				                    	
 					                    	<input class="form-control" type="text" data-ng-model="selectedCompany.name" disabled>			                        				                        							                                                                    
 					                    </div>                                                                                                                            
@@ -74,11 +76,13 @@
 					                                         <option value="">Selecione</option> 
 					                        </select>																                                                                        
 										</div>
+										 -->
 									</div>
 					            
 						            <div class="col-md-3">                                                                                                                            
 										<div class="form-group">
-											
+											<jsp:include page="controls/companyDetectorSelect.jsp"/>
+											<!-- 	
 						                	<select class="form-control" data-live-search="true" 
 					                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 					                                data-ng-options="item as item.companyDetectorName for item in companyDetectors | companyFilter:search | orderBy: 'companyDetectorName' track by item.companyDetectorId" 
@@ -86,7 +90,7 @@
 					                                         data-ng-change="changeCompanyDetector();">
 					                                         <option value="">Selecione</option> 
 					                        </select>					                                                                                
-											                                                                        
+											 -->                                                                        
 										</div>
 									</div>		
 																			

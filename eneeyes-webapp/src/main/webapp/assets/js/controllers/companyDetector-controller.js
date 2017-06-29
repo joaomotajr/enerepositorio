@@ -20,7 +20,8 @@ app.filter('gasFilter', function () {
 
 
 app.controller('companyDetectorController', function ($scope, $interval, $timeout, $filter, CompanyDeviceService, 
-		CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, PositionService, HistoricService) {
+		CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, 
+		PositionService, HistoricService, CompanyDetectorMaintenanceHistoricService) {
 
 	var loadGoogleCharts = false;
 	
@@ -147,8 +148,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;			
 			reloadDates();
+			$scope.getCompanyDetectorMaintenanceHistoric();
 			
-			//* Detector jï¿½ foi associado a dispositivo checa alarmes *//
+			//* Detector ja foi associado a dispositivo checa alarmes *//
 			if($scope.selectedCompanyDetector != null) {
 				$scope.getCompanyDetectorAlarms();
 				$scope.getPositionsNoTimer($scope.selectedCompanyDetector);
@@ -506,7 +508,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	    
 	    if ($scope.changeGraphic) {
 		    var options = {
-		          title: "Dados do Sensor na ï¿½ltima Hora.",
+		          title: "Dados do Sensor na Última Hora.",
 		          legend: {position: 'none'},
 		          'lineWidth': 0.75,
 		    	  width: 850,
@@ -531,10 +533,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	                  },
 		    		  ticks: [ 
 		    		           {v:0, f: 'Range Minimo: 0' }, 
-		    		           {v: orange, f: 'Detecï¿½ï¿½o: ' + orange}, 
+		    		           {v: orange, f: 'Deteção: ' + orange}, 
 		    		           {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		           {v: red, f: 'Evacuaï¿½ï¿½o: ' + red}, 
-		    		           {v: sensor.rangeMax, f: 'Range Mï¿½ximo: ' + sensor.rangeMax} 
+		    		           {v: red, f: 'Evacuação: ' + red}, 
+		    		           {v: sensor.rangeMax, f: 'Range Máximo: ' + sensor.rangeMax} 
 		    		        ]
 		    	  },
 		    	  //curveType: 'function',
@@ -543,7 +545,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	    }
 		else {
 			var options = {
-		          title: "Dados do Sensor na ï¿½ltima Hora.",
+		          title: "Dados do Sensor na Última Hora.",
 		          legend: {position: 'none'},
 		          'lineWidth': 0.75,
 		    	  width: 850,
@@ -696,7 +698,18 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 
 			angular.element('body').removeClass('loading');
 		});			 
-	}	
+	}
+	
+	$scope.getCompanyDetectorMaintenanceHistoric = function() {		 
+		angular.element('body').addClass('loading');		
+		$scope.companyDetectorMaintenanceHistoric = new CompanyDetectorMaintenanceHistoricService.listPorCompanyDetector();	
+		
+		$scope.companyDetectorMaintenanceHistoric.$companyDetectorMaintenanceHistoric({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
+						
+			angular.element('body').removeClass('loading');
+	                 	         	
+		});		 
+	}
 	
 	/* ------------------------------------- Inicio Processamento --------------------------------------------*/
 	

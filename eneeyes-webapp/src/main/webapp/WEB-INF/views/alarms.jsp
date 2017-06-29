@@ -112,21 +112,26 @@
 										</div>
 																	
 										<div class="col-md-3">													
-											<div class="box box-primary">				                    
+											<div class="box box-primary">																								
+												 	                    
 							                	<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Empresa</strong>
 							                		<strong class="text-red pull-right" data-ng-show="userForm.companyName.$dirty && userForm.companyName.$invalid">  Campo Obrigatório</strong>
-							                	</div>
+							                	</div>							                	
 							                	
 							                    <div class="box-body">
-							                    	<div data-ng-class="{'has-error': userForm.companyName.$dirty && userForm.companyName.$invalid}">							               
+							                    	<div data-ng-class="{'has-error': userForm.companyName.$dirty && userForm.companyName.$invalid}">
+							                    	<jsp:include page="controls/companySelect.jsp"/>							               
+							                        <!-- 
 							                        <select name="companyName" class="form-control" data-live-search="true"
 							                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 							                                data-ng-options="item as item.name for item in companies | orderBy: 'name' track by item.uid" 
 					                                           data-ng-model="company" required>
 					                                           <option value="">Selecione</option> 
-							                        </select>    
+							                        </select>
+							                         -->							                             
 							                    	</div>
-							                    </div>			                    			                            
+							                    </div>
+							                    			                    			                            
 							                </div>
 							        	</div>					
 							        	

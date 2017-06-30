@@ -286,10 +286,17 @@
 						                <div class="panel-heading">
 									    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
 									   	</div>									   					               	
+<<<<<<< HEAD
 						               	<div class="panel-body">						               		
 				    						<jsp:include page="companyDetectorMaintenanceForm.jsp"/>
 											<hr>
 											<jsp:include page="companyDetectorMaintenanceList.jsp"/>						               								               		
+=======
+						               	<div class="panel-body">						               								               		
+						               		
+					    					<jsp:include page="companyDetectorMaintenanceHistoric.jsp"/>
+						               								               		
+>>>>>>> master
 					    				</div>
 					    			</div>
 					    		</div>

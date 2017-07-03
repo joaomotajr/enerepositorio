@@ -25,6 +25,8 @@ public class CompanyDetectorMaintenanceHistoricService implements IService<Compa
 		Result<CompanyDetectorMaintenanceHistoricDto> result = new Result<CompanyDetectorMaintenanceHistoricDto>(); 	
 		
 		CompanyDetectorMaintenanceHistoric companyDetectorMaintenanceHistoric = new CompanyDetectorMaintenanceHistoric(dto);		
+		CompanyDetector companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
+		companyDetectorMaintenanceHistoric.setCompanyDetector(companyDetector);		
 		companyDetectorMaintenanceHistoric = repository.save(companyDetectorMaintenanceHistoric);
 		
 		dto.setUid(companyDetectorMaintenanceHistoric.getUid());				

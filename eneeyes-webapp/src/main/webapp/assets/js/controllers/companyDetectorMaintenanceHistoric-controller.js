@@ -1,21 +1,19 @@
 
 app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope, $timeout, $filter, ViewService, 
-		CompanyService, CompanyDetectorMaintenanceHistoricService) {
+		CompanyService, CompanyDetectorService, CompanyDetectorMaintenanceHistoricService) {
 		
 	$scope.changeCompanyDetector = function() {
-		
+		          
 		if($scope.selectedCompanyDetector == null) return;
-		$scope.getCompanyDetectorMaintenanceHistoric();
+		$scope.getOneCompanyDetector();		
 				 
 	}
 	
 	$scope.getCompanyDetectorMaintenanceHistoric = function() {		 
-		angular.element('body').addClass('loading');		
+		
 		$scope.companyDetectorMaintenanceHistoric = new CompanyDetectorMaintenanceHistoricService.listPorCompanyDetector();		
 		$scope.companyDetectorMaintenanceHistoric.$companyDetectorMaintenanceHistoric(
-				{_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.companyDetectorId}, function(){
-						
-			angular.element('body').removeClass('loading');	                 	         	
+				{_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
 		});		 
 	}
 	
@@ -50,6 +48,23 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 		 });		
 	}
 	
+	
+	$scope.getOneCompanyDetector = function() {
+		
+		$scope.resultCompanyDetector = new CompanyDetectorService.listOne();		 
+		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.companyDetectorId }, function(){			
+			
+			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;			
+
+			if($scope.selectedCompanyDetector.installDate == null)
+				$scope.msgErroInfoHistoric = "Detector Sem Data de Instalação, Verifique!"
+			else {
+				$scope.msgErroInfoHistoric = "";
+				$scope.getCompanyDetectorMaintenanceHistoric();
+			}
+        });	
+	}
+	
 	$scope.getCompanys = function() {
 		 
 		 if($scope.$root.isFrom != "MASTER")	{
@@ -64,14 +79,7 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 	        });		 
 		 }
 	 }
-	
-	$scope.historicMaintenaceTypes = 
-		 [
-		  	{ name : 'DESCONHECIDO', uid : 0 },
-		  	{ name : 'MAINTENANCE', uid :  1 },
-		  	{ name : 'CALIBRATION', uid : 2 },		  			  	
-		 ]; 
-	
+
 	$scope.getHistoricMaintenaceTypes = function (name) {
 		 
 		 for (var i = 0; i < $scope.historicMaintenaceTypes.length; i++) {
@@ -82,6 +90,67 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
         } 		 
 	 }
 	
+	$scope.validDateOne = function ($event) {
+
+        if ($('#dateOne').val().match(/[^0-9\/]/g) != null) {
+            $scope.dateOneValid = false;
+        }	        
+        else if ($('#dateOne').val() == '') {
+            $scope.dateOneValid = false;
+        }
+        else {
+            $scope.dateOneValid = true;
+        }
+    }
+	
+	$scope.validDateTwo = function ($event) {
+
+        if ($('#dateTwo').val().match(/[^0-9\/]/g) != null) {
+            $scope.dateTwoValid = false;
+        }	        
+        else if ($('#dateTwo').val() == '') {
+            $scope.dateTwoValid = false ;
+        }
+        else if ($('#dateOne').val().localeCompare($('#dateTwo').val()) != 0)
+        	$scope.dateTwoValid = false ;
+        else {
+            $scope.dateTwoValid = true;
+        }
+    }
+	
+	$scope.clearForm = function () {
+			
+	    $scope.description = '';
+	    $scope.selectedHistoricMaintenaceType = '';
+	    $('#dateOne').val('');						
+		$('#dateTwo').val('');		
+	}
+	
+	$scope.saveCompanyDetectorMaintenaceHistoric = function() {
+		angular.element('body').addClass('loading');
+						
+		var companyDetectorMaintenaceHistoric = {
+			uid: 0,			
+			description: $scope.description,			
+			date : getDate($('#dateTwo').val()),
+			historicMaintenaceType : $scope.selectedHistoricMaintenaceType.uid,
+			companyDetectorDto: {uid: $scope.selectedCompanyDetector.uid}
+		 }
+		 
+		$scope.inclusao = new CompanyDetectorMaintenanceHistoricService.save(companyDetectorMaintenaceHistoric);
+		$scope.inclusao.$companyDetectorMaintenanceHistoric({_csrf : angular.element('#_csrf').val()}, function(){		
+			
+			angular.element('body').removeClass('loading');
+			
+			$scope.companyDetectorMaintenanceHistoric.list.push($scope.inclusao.t);
+			$scope.clearForm();		
+
+		});			 
+	}
+	
+	$("#datemask").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
+    $("#datemask2").inputmask("mm/dd/yyyy", { "placeholder": "mm/dd/yyyy" });
+    $("[data-mask]").inputmask();
 	
 	$scope.getCompanys();	
 	$scope.getCompanyDetectors();

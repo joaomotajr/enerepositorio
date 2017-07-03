@@ -5,11 +5,11 @@
 			<div class="col-md-1">
 			</div>				                                                    
 			<div class="col-md-10">		 
-			
-				<div class="box box-primary" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
+				
+				<div class="box box-primary">
 					<div class="box-header">
-						<h3 class="box-title">Cadastro / Edição</h3>
-						<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
+						<h3 class="box-title">Cadastro / Edi&ccedil;&atilde;o</h3>
+						<span class="text-muted pull-right"><i class="fa fa-fa-search"></i></span>
 					</div>					
 					<div class="box-body" style="padding-bottom: 0px; !important">
 						<div class="row">
@@ -21,49 +21,120 @@
 				        		<label class="control-label">Detector: </label>
 				        		<jsp:include page="controls/companyDetectorSelect.jsp"/>				        		
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-1">
+								<label class="control-label">Detalhes: </label>							
+								<button type="button" class="btn btn-default" data-toggle="modal" 
+									title="Ver Detalhes da InstalaÃ§Ã£o" data-target="#modalMaintenanceDetail" 
+									data-ng-disabled="!selectedCompanyDetector || msgErroInfoHistoric"><i class="fa fa-eye"></i>
+								</button>							
 							</div>
-						</div>
-						<hr>
-						<div class="row">
-							<form class="form" name="userForm">
-							<div class="col-md-3"">											                
-								<label class="control-label">Tipo
-									<span class="text-red" data-ng-show="userForm.selectedHistoricMaintenaceType.$dirty && userForm.selectedHistoricMaintenaceType.$invalid">  [Campo Obrigatório]</span>
-								</label>
-								<div data-ng-class="{'has-error': userForm.selectedHistoricMaintenaceType.$dirty && userForm.selectedHistoricMaintenaceType.$invalid}">
-									<select name="selectedHistoricMaintenaceType" class="form-control" data-live-search="true" 
-											style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-												data-ng-options="item as item.name for item in historicMaintenaceTypes | orderBy: 'name' track by item.uid" 
-														 data-ng-model="selectedHistoricMaintenaceType" required>
-														 <option value="">Selecione</option> 
-									</select>									                        
-								</div>
+							<div class="col-md-5">
+								<div class="alert alert-warning" role="alert" data-ng-show="msgErroInfoHistoric" >
+					           		<button type="button" class="close" ><span data-ng-click="msgErroInfoHistoric='';">&times;</span></button>
+					           		<strong>Alerta! </strong>{{msgErroInfoHistoric}} 
+					       		</div>							
 							</div>
-							</form>							
-							
 						</div>
 						
-						<div class="col-md-12">												    
-							<div class="box box-primary collapsed-box">                
-			                	<div class="box-header with-border">
-			                		<Label class="box-title">Dados de Manutenção/Calibração</label>
-									<div class="box-tools pull-right" title="Clique para Epandir">
-										<button class="btn btn-box-tool" data-widget="collapse">
-											<i class="fa fa-plus"></i>
-										</button>
-									</div>			                		
-			                	</div>
-			                	
-			                    <div class="box-body">			                    								               
-			                        <jsp:include page="companyDetectorMaintenanceForm.jsp"/>			                    	
-			                    </div>			                    			                            
-			                </div>
-						</div>					
-						<div class="col-md-12">												                    								               
-			            	<jsp:include page="controls/companyDetectorMaintenanceList.jsp"/>			                    	
-			        	</div>	    			                    			                            
-			                
+						<hr>
+				
+						<div class="row" data-ng-class="{'disableDivOver': msgErroInfoHistoric }">				
+							<div class="col-md-6">
+								<div class="box box-primary" data-ng-class="(selectedCompanyDetector) ? 'box-primary' : 'box-danger'">
+									<div class="box-header with-border">
+										<Label class="box-title">Hist&oacute;rico de Manuten&ccedil;&atilde;o do Detector</label>
+										<div class="box-tools pull-right" title="Clique para Epandir">
+											<button class="btn btn-box-tool" data-widget="collapse">
+												<i class="fa fa-minus"></i>
+											</button>
+										</div>					
+									</div>
+									<div class="list-group" style="max-height: 250px ! important; height:auto; overflow: auto; font-size: 0.8em  ! important">									
+										<div class="box-body">																			                    								               
+					            			<jsp:include page="controls/companyDetectorMaintenanceList.jsp"/>
+					            		</div>
+				            		</div>
+				            	</div>	
+				            </div>			                    	
+				        	<div class="col-md-6">
+					        	<div class="box box-primary" data-ng-class="(selectedCompanyDetector) ? 'box-primary' : 'box-danger'">
+									<div class="box-header">
+										<h3 class="box-title">Inclus&atilde;o</h3>
+										<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
+									</div>					
+									<div class="box-body">			  			      	
+					        	
+										<form class="form" name="userForm">
+											<div class="row">
+												<div class="col-md-6">											                
+													<label class="control-label">Tipo</label>
+													<div class="input-group">
+														<div class="input-group-addon">
+															<i data-ng-if="!selectedHistoricMaintenaceType.uid" title="Escolha o Tipo de ServiÃ§o" class="fa fa-hand-o-right text-red"></i>
+															<i data-ng-if="selectedHistoricMaintenaceType.uid == '1'" title="ManutenÃ§Ã£o do Detector" class="fa fa-retweet"></i>														                                                                 
+															<i data-ng-if="selectedHistoricMaintenaceType.uid == '2'" title="CalibraÃ§Ã£o do Detector" class="fa fa-wrench"></i>
+														</div>
+														<div data-ng-class="{'has-error': !selectedHistoricMaintenaceType }" 
+															data-ng-init="historicMaintenaceTypes = [{name: 'MANUTEN&Ccedil&Atilde;O', uid :  1, icon:'fa-retweet'},{name: 'CALIBRA&Ccedil&Atilde;O', uid : 2, icon:'fa-wrench' }];">
+															<select name="nameSelectedHistoricMaintenaceType" class="form-control" data-live-search="true" 
+																	style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+																		data-ng-options="item as item.name for item in historicMaintenaceTypes | orderBy: 'name' track by item.uid" 
+																		data-ng-model="selectedHistoricMaintenaceType" required>
+																				 <option value="">Selecione</option> 
+															</select>									                        
+														</div>
+													</div>
+												</div>													
+											</div>
+											
+											
+											<div class="row">				    			
+												<div class="col-md-6">											        	
+													<div class="form-group">
+														<label class="control-label">Data:</label>
+														<div class="input-group" data-ng-class="{'has-error': !dateOneValid }">                                                            
+															<div class="input-group-addon">
+																<i class="fa fa-calendar" data-ng-show='dateOneValid'></i>
+																<i class="fa fa-calendar-times-o" style="color:red" data-ng-hide='dateOneValid' title="Data Invï¿½lida"></i>                                                                 
+															</div>
+															<input id="dateOne" type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" data-ng-keyup="validDateOne($event);">															                                                            
+														</div>
+													</div>						                										        											        		
+												</div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label class="control-label">Data: (Confirmar)</label>
+														<div class="input-group" data-ng-class="{'has-error': !dateTwoValid }">                                                            
+															<div class="input-group-addon">
+																<i class="fa fa-calendar" data-ng-show='dateTwoValid'></i>
+																<i class="fa fa-calendar-times-o" style="color:red" data-ng-hide='dateTwoValid' title="Data InvÃ¡lida"></i>                                                                 
+															</div>
+															<input id="dateTwo" type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" data-ng-keyup="validDateTwo($event);">															                                                            
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="row">				    			
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="control-label">Detalhes Sobre a Instala&ccedil;&atilde;o:</label>
+														<input class="form-control" placeholder="Descri&ccedil;&atilde;o" data-ng-model="description">
+													</div>
+												</div>
+											</div>
+										</form>
+										
+									</div>
+									
+									<div class="box-footer">
+										<button type="button"  data-ng-click="clearForm()" class="btn btn-default">Cancelar</button>                                                                
+										<button type="button"  data-ng-click="saveCompanyDetectorMaintenaceHistoric();" class="btn btn-primary" 
+											 data-ng-disabled="(selectedCompanyDetector && dateOneValid && dateTwoValid && selectedHistoricMaintenaceType && description ) ? false : true">Incluir</button>								                                                                
+									</div>
+								</div>
+				        	</div>
+				        		    			                    			                            
+			            </div>    
 					</div>	
 				</div>
 				
@@ -79,4 +150,26 @@
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<br />		
 		</div>
+		
+		<div id="modalMaintenanceDetail" class="modal">
+	    	<div class="modal-dialog modal-lg" role="document">
+	        	<div class="modal-content">
+	            	<div class="modal-header">
+	                	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                	<h4 class="modal-title" align="center">Dados de Cadastro do Detector</h4>
+	            	</div>
+	            	
+	            	<div class="modal-body disableDiv">
+	            	
+	                	 <jsp:include page="companyDetectorMaintenanceForm.jsp"/>
+	                    
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+		
 	</div>
+		
+		
+		
+	

@@ -190,11 +190,11 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 		$("#datemask").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
 	    $("#datemask2").inputmask("mm/dd/yyyy", { "placeholder": "mm/dd/yyyy" });
 	    $("[data-mask]").inputmask();
+	    
+	    initControlEvents();
 				 		 
 		$timeout(function () {
-			
-			initControlEvents();
-											
+														
 			initGaugeTimer = function() {
 													
 				var current = angular.copy($scope.selectedCompanyDetector);
@@ -257,29 +257,29 @@ app.controller('companyDetectorController', function ($scope, $interval, $timeou
 	 
 	 $scope.validDeliveryDate = function ($event) {
 
-	        if ($('#deliveryDate').val().match(/[^0-9\/]/g) != null) {
-	            $scope.deliveryDateValid = true;
-	        }	        
-	        else if ($('#deliveryDate').val() == '') {
-	            $scope.deliveryDateValid = true;
-	        }
-	        else {
-	            $scope.deliveryDateValid = false;
-	        }
-	    }
+        if ($('#deliveryDate').val().match(/[^0-9\/]/g) != null) {
+            $scope.deliveryDateValid = true;
+        }	        
+        else if ($('#deliveryDate').val() == '') {
+            $scope.deliveryDateValid = true;
+        }
+        else {
+            $scope.deliveryDateValid = false;
+        }
+    }
 	 
 	 $scope.validInstallDate = function ($event) {
 
-	        if ($('#installDate').val().match(/[^0-9\/]/g) != null) {
-	            $scope.installDateValid = true;
-	        }
-	        else if ($('#installDate').val() == '') {
-	            $scope.installDateValid = true;
-	        }
-	        else {
-	            $scope.installDateValid = false;
-	        }
-	    }
+        if ($('#installDate').val().match(/[^0-9\/]/g) != null) {
+            $scope.installDateValid = true;
+        }
+        else if ($('#installDate').val() == '') {
+            $scope.installDateValid = true;
+        }
+        else {
+            $scope.installDateValid = false;
+        }
+    }
 	 
 	function initDatatable() {
 	

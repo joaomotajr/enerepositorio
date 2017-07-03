@@ -26,13 +26,6 @@ public class CompanyDetectorController {
 		return service.save(companyDetectorDto);
 	}
 	
-//	@RequestMapping(value="/security/api/companyDetector/saveList", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
-//	@ResponseStatus(HttpStatus.OK)
-//	public BasicResult<?> saveList(@RequestBody List<CompanyDetectorDto> companyDetectorsDto) {
-//		
-//		return service.save(companyDetectorsDto);
-//	}
-	
 	@RequestMapping(value="/security/api/companyDetector/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> delete(@PathVariable Long uid) {

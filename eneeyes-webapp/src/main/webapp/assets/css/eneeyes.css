@@ -91,3 +91,13 @@
 	    padding: 4px;
 	}
 	
+	.disableDiv {
+		pointer-events: none;
+		opacity: 0.8;
+	}
+	
+	.disableDivOver {
+		pointer-events: none;
+		opacity: 0.3;
+	}
+	

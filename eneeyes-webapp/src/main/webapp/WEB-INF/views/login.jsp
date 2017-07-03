@@ -41,17 +41,17 @@
 	    <div class="login-box">
 			    
 			<div class="login-logo">
-		 		<a href="#"><b>E</b>Gas</a>
-			</div>	      	
-	      	
+		 		<a href="#"><b>E</b>-Gas</a>		 		
+			</div>
+				      	
 	      	<div id="login" class="tab-pane active">
 		      	<div class="login-box-body">
-		        	<p class="login-box-msg">Digite suas Credencias</p>
+		        	<p class="login-box-msg"><strong>Digite suas Credencias</strong></p>
 		        	
 		        	<form>		          
 		          		<div class="form-group has-feedback">
-		            		<input type="text" class="form-control" placeholder="Email/Usuário" data-ng-model="forms.signin.login" data-ng-keyup="$event.keyCode == 13 ? signin() : null">
-		            		<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+		            		<input type="text" class="form-control" placeholder="Login do Usuário" data-ng-model="forms.signin.login" data-ng-keyup="$event.keyCode == 13 ? signin() : null">
+		            		<span class="glyphicon glyphicon-user form-control-feedback"></span>
 		          		</div>
 		          
 		          		<div class="form-group has-feedback">
@@ -131,7 +131,11 @@
 
 				</div><!-- /.login-box-body -->
 			</div>		
-							
+			
+			<br>
+			<div class="login-logo">		 		
+		 		<img src="/assets/img/enesens1.png" style="pull-right; padding:5px; width: 43%;">
+			</div>				
 			
 	    </div><!-- /.login-box -->
 

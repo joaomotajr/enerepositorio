@@ -120,15 +120,7 @@
 							                	
 							                    <div class="box-body">
 							                    	<div data-ng-class="{'has-error': userForm.companyName.$dirty && userForm.companyName.$invalid}">
-							                    	<jsp:include page="controls/companySelect.jsp"/>							               
-							                        <!-- 
-							                        <select name="companyName" class="form-control" data-live-search="true"
-							                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-							                                data-ng-options="item as item.name for item in companies | orderBy: 'name' track by item.uid" 
-					                                           data-ng-model="company" required>
-					                                           <option value="">Selecione</option> 
-							                        </select>
-							                         -->							                             
+							                    		<jsp:include page="controls/companySelect.jsp"/>							                        							                             
 							                    	</div>
 							                    </div>
 							                    			                    			                            

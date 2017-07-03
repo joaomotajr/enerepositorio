@@ -286,17 +286,29 @@
 						                <div class="panel-heading">
 									    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
 									   	</div>									   					               	
-<<<<<<< HEAD
 						               	<div class="panel-body">						               		
 				    						<jsp:include page="companyDetectorMaintenanceForm.jsp"/>
 											<hr>
-											<jsp:include page="companyDetectorMaintenanceList.jsp"/>						               								               		
-=======
-						               	<div class="panel-body">						               								               		
-						               		
-					    					<jsp:include page="companyDetectorMaintenanceHistoric.jsp"/>
-						               								               		
->>>>>>> master
+											
+											<div class="col-md-8">													
+												<div>			
+													<div class="box box-primary collapsed-box">
+														<div class="box-header with-border">
+															<Label class="box-title">Histórico de Manutenção do Detector</label>
+															<div class="box-tools pull-right" title="Clique para Epandir">
+																<button class="btn btn-box-tool" data-widget="collapse">
+																	<i class="fa fa-plus"></i>
+																</button>
+															</div>					
+														</div>
+														<!-- /.box-header -->
+														<div class="box-body">											
+															<jsp:include page="controls/companyDetectorMaintenanceList.jsp"/>
+														</div>
+													</div>
+												</div>								               								               		
+											</div>
+												
 					    				</div>
 					    			</div>
 					    		</div>

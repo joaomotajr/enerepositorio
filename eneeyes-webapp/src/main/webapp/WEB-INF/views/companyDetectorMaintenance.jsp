@@ -38,7 +38,7 @@
 						
 						<hr>
 				
-						<div class="row" data-ng-class="{'disableDivOver': msgErroInfoHistoric }">				
+						<div class="row" data-ng-class="{'disableDivOver': !selectedCompanyDetector }">				
 							<div class="col-md-6">
 								<div class="box box-primary" data-ng-class="(selectedCompanyDetector) ? 'box-primary' : 'box-danger'">
 									<div class="box-header with-border">
@@ -70,12 +70,13 @@
 													<label class="control-label">Tipo</label>
 													<div class="input-group">
 														<div class="input-group-addon">
-															<i data-ng-if="!selectedHistoricMaintenaceType.uid" title="Escolha o Tipo de Serviço" class="fa fa-hand-o-right text-red"></i>
+															<i data-ng-if="!selectedHistoricMaintenaceType.uid" title="Escolha o Tipo de Serviço" class="fa fa-hand-o-right text-red"></i>															
 															<i data-ng-if="selectedHistoricMaintenaceType.uid == '1'" title="Manutenção do Detector" class="fa fa-retweet"></i>														                                                                 
 															<i data-ng-if="selectedHistoricMaintenaceType.uid == '2'" title="Calibração do Detector" class="fa fa-wrench"></i>
+															<i data-ng-if="selectedHistoricMaintenaceType.uid == '3'" title="Outros Tipos de Serviços no Detector" class="fa fa-circle"></i>
 														</div>
 														<div data-ng-class="{'has-error': !selectedHistoricMaintenaceType }" 
-															data-ng-init="historicMaintenaceTypes = [{name: 'MANUTEN&Ccedil&Atilde;O', uid :  1, icon:'fa-retweet'},{name: 'CALIBRA&Ccedil&Atilde;O', uid : 2, icon:'fa-wrench' }];">
+															data-ng-init="historicMaintenaceTypes = [{name: 'MANUTEN&Ccedil&Atilde;O', uid :  1, icon:'fa-retweet'},{name: 'CALIBRA&Ccedil&Atilde;O', uid : 2, icon:'fa-wrench' },{name: 'OUTROS', uid : 3, icon:'fa-circle' }];">
 															<select name="nameSelectedHistoricMaintenaceType" class="form-control" data-live-search="true" 
 																	style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 																		data-ng-options="item as item.name for item in historicMaintenaceTypes | orderBy: 'name' track by item.uid" 
@@ -91,11 +92,11 @@
 											<div class="row">				    			
 												<div class="col-md-6">											        	
 													<div class="form-group">
-														<label class="control-label">Data:</label>
+														<label class="control-label">Data: </label> <span style="font-size: 0.8em; color:red" data-ng-hide='dateOneMaior'> Menor que &uacute;ltima Registrada!</span> 
 														<div class="input-group" data-ng-class="{'has-error': !dateOneValid }">                                                            
 															<div class="input-group-addon">
 																<i class="fa fa-calendar" data-ng-show='dateOneValid'></i>
-																<i class="fa fa-calendar-times-o" style="color:red" data-ng-hide='dateOneValid' title="Data Inv�lida"></i>                                                                 
+																<i class="fa fa-calendar-times-o" style="color:red" data-ng-hide='dateOneValid' title="Data Inválida"></i>                                                                 
 															</div>
 															<input id="dateOne" type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" data-ng-keyup="validDateOne($event);">															                                                            
 														</div>
@@ -103,11 +104,11 @@
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="control-label">Data: (Confirmar)</label>
+														<label class="control-label">Data: (Confirmar) </label> <span style="font-size: 0.8em; color:red" data-ng-hide='dateTwoEqual'> Datas Diferentes</span>
 														<div class="input-group" data-ng-class="{'has-error': !dateTwoValid }">                                                            
 															<div class="input-group-addon">
 																<i class="fa fa-calendar" data-ng-show='dateTwoValid'></i>
-																<i class="fa fa-calendar-times-o" style="color:red" data-ng-hide='dateTwoValid' title="Data Inválida"></i>                                                                 
+																<i class="fa fa-calendar-times-o" style="color:red" data-ng-hide='dateTwoValid' title='Data Inv&oacute;lida'></i>                                                                 
 															</div>
 															<input id="dateTwo" type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" data-ng-keyup="validDateTwo($event);">															                                                            
 														</div>

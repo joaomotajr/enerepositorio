@@ -13,12 +13,10 @@
 				
 				<td>{{item.uid}}</td>
 				<td>{{item.date  | date:"dd/MM/yyyy" }}</td>
-<!-- 				<td data-ng-if="item.historicMaintenaceType == 'CALIBRATION'">CALIBRAÇÃO</td>	 -->
-<!-- 				<td data-ng-if="item.historicMaintenaceType == 'MAINTENANCE'">MANUTENÇÃO</td> -->
-<!-- 				<td data-ng-if="item.historicMaintenaceType == 'DESCONHECIDO'">OUTROS</td> -->
+				<td data-ng-if="item.historicMaintenaceType == 'DESCONHECIDO'" title="Calibração do Detector"><i class="fa fa-question-circle"></i></td>
 				<td data-ng-if="item.historicMaintenaceType == 'CALIBRATION'" title="Calibração do Detector"><i class="fa fa-retweet"></i></td>	
 				<td data-ng-if="item.historicMaintenaceType == 'MAINTENANCE'" title="Manutenção do Detector"><i class="fa fa-wrench"></i></td>
-				<td data-ng-if="item.historicMaintenaceType == 'DESCONHECIDO'" title="Serviço não catalogado no Detector"><i class="fa fa-question-circle"></i>>OUTROS</td>
+				<td data-ng-if="item.historicMaintenaceType == 'OUTROS'" title="Serviço não catalogado no Detector"><i class="fa fa-circle"></i></td>
 				
 				<td>{{item.description}}</td>									
 			</tr>                                                               

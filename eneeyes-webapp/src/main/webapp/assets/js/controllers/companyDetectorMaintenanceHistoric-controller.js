@@ -1,12 +1,18 @@
 
 app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope, $timeout, $filter, ViewService, 
 		CompanyService, CompanyDetectorService, CompanyDetectorMaintenanceHistoricService) {
-		
+
+	var lastDate = "";
+	$scope.dateTwoEqual = true;
+	$scope.dateOneMaior = true;
+	
+	
 	$scope.changeCompanyDetector = function() {
 		          
 		if($scope.selectedCompanyDetector == null) return;
-		$scope.getOneCompanyDetector();		
-				 
+		
+		$scope.companyDetectorMaintenanceHistoric = undefined;
+		$scope.getOneCompanyDetector();				 
 	}
 	
 	$scope.getCompanyDetectorMaintenanceHistoric = function() {		 
@@ -14,6 +20,10 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 		$scope.companyDetectorMaintenanceHistoric = new CompanyDetectorMaintenanceHistoricService.listPorCompanyDetector();		
 		$scope.companyDetectorMaintenanceHistoric.$companyDetectorMaintenanceHistoric(
 				{_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
+			
+			if($scope.companyDetectorMaintenanceHistoric.list != null)
+				lastDate = $scope.companyDetectorMaintenanceHistoric.list[ $scope.companyDetectorMaintenanceHistoric.list.length -1].date;
+					
 		});		 
 	}
 	
@@ -56,10 +66,16 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;			
 
-			if($scope.selectedCompanyDetector.installDate == null)
+			if($scope.selectedCompanyDetector.installDate == null) {
+				$scope.clearForm();
+				$scope.selectedCompanyDetector = undefined;				
 				$scope.msgErroInfoHistoric = "Detector Sem Data de Instalação, Verifique!"
+			}
 			else {
+				lastDate = new Date($scope.selectedCompanyDetector.installDate);
 				$scope.msgErroInfoHistoric = "";
+				reloadDates();
+				$scope.selectedCompanyDetector.companyDetectorId = $scope.selectedCompanyDetector.uid;
 				$scope.getCompanyDetectorMaintenanceHistoric();
 			}
         });	
@@ -96,10 +112,14 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
             $scope.dateOneValid = false;
         }	        
         else if ($('#dateOne').val() == '') {
-            $scope.dateOneValid = false;
+            $scope.dateOneValid = false;            
         }
+        else if (getDate( $('#dateOne').val() ) < new Date(lastDate)) {
+        	$scope.dateOneMaior = false;            
+        }        
         else {
             $scope.dateOneValid = true;
+            $scope.dateOneMaior = true;
         }
     }
 	
@@ -111,10 +131,13 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
         else if ($('#dateTwo').val() == '') {
             $scope.dateTwoValid = false ;
         }
-        else if ($('#dateOne').val().localeCompare($('#dateTwo').val()) != 0)
+        else if ($('#dateOne').val().localeCompare($('#dateTwo').val()) != 0) {
         	$scope.dateTwoValid = false ;
+        	$scope.dateTwoEqual = false;
+        }
         else {
             $scope.dateTwoValid = true;
+            $scope.dateTwoEqual = true;
         }
     }
 	
@@ -122,8 +145,29 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 			
 	    $scope.description = '';
 	    $scope.selectedHistoricMaintenaceType = '';
+	    	    	    
 	    $('#dateOne').val('');						
-		$('#dateTwo').val('');		
+		$('#dateTwo').val('');
+		
+		$('#deliveryDate').val('');
+		$scope.selectedCompanyDetector.garantyDays = 0;
+		$scope.selectedCompanyDetector.descriptionDelivery = '';			
+		$('#installDate').val('');
+		$scope.selectedCompanyDetector.descriptionInstall = '';
+		$scope.selectedCompanyDetector.maintenanceInterval = 0;
+	}
+	
+	function reloadDates() {
+		
+		if($scope.selectedCompanyDetector.deliveryDate != null) {
+			var dataAdm = new Date($scope.selectedCompanyDetector.deliveryDate);	
+	        $('#deliveryDate').val(dataAdm.getUTCDate() + "/" + (dataAdm.getUTCMonth() + 1) + "/" + dataAdm.getUTCFullYear());	
+		}
+		
+		if($scope.selectedCompanyDetector.installDate != null) {
+			var dataAdm = new Date($scope.selectedCompanyDetector.installDate);	
+	        $('#installDate').val(dataAdm.getUTCDate() + "/" + (dataAdm.getUTCMonth() + 1) + "/" + dataAdm.getUTCFullYear());	        
+		}	
 	}
 	
 	$scope.saveCompanyDetectorMaintenaceHistoric = function() {

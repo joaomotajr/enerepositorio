@@ -162,7 +162,7 @@
 			              	</ul>
 			            </li> 
 			            <li><a href="#" data-ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn"></i> Alarmes</a></li>
-			            <li><a href="#" data-ng-click="LoadAjaxContent('companyDetectorMaintenance.html', 'Detectores-Calibração')"><i class="fa fa-bullhorn"></i> Calibração / Manutenção</a></li>              		
+			            <li><a href="#" data-ng-click="LoadAjaxContent('companyDetectorMaintenance.html', 'Detectores-Calibração')"><i class="fa fa-retweet"></i> Calibração / Manutenção</a></li>              		
                 		
 		     		</ul>
             	</li>

@@ -124,7 +124,7 @@ public class CompanyDetectorMaintenanceHistoricService implements IService<Compa
 		companyDetector.setUid(uid);
 		
 		try {
-			List<CompanyDetectorMaintenanceHistoric> lista = repository.findByCompanyDetector(companyDetector);
+			List<CompanyDetectorMaintenanceHistoric> lista = repository.findByCompanyDetectorOrderByDateAsc(companyDetector);
 			
 			if (lista != null) {
 				

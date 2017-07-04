@@ -6,7 +6,7 @@ package br.com.eneeyes.main.model.enums;
  */
 
 public enum HistoricMaintenaceType {
-	DESCONHECIDO(0), MAINTENANCE(1), CALIBRATION(2);
+	DESCONHECIDO(0), MAINTENANCE(1), CALIBRATION(2), OUTROS(3);
 	
 	private final int code;
 	

@@ -9,6 +9,6 @@ import br.com.eneeyes.main.model.CompanyDetectorMaintenanceHistoric;
 
 public interface CompanyDetectorMaintenanceHistoricRepository  extends JpaRepository<CompanyDetectorMaintenanceHistoric, Long> {
 
-	List<CompanyDetectorMaintenanceHistoric> findByCompanyDetector(CompanyDetector companyDetector);
+	List<CompanyDetectorMaintenanceHistoric> findByCompanyDetectorOrderByDateAsc(CompanyDetector companyDetector);
 	
 }

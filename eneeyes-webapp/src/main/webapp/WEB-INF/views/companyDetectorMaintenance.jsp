@@ -38,7 +38,7 @@
 						
 						<hr>
 				
-						<div class="row" data-ng-class="{'disableDivOver': msgErroInfoHistoric }">				
+						<div class="row" data-ng-class="{'disableDivOver': !selectedCompanyDetector }">				
 							<div class="col-md-6">
 								<div class="box box-primary" data-ng-class="(selectedCompanyDetector) ? 'box-primary' : 'box-danger'">
 									<div class="box-header with-border">

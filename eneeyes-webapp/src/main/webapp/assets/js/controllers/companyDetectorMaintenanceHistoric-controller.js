@@ -56,10 +56,14 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;			
 
-			if($scope.selectedCompanyDetector.installDate == null)
+			if($scope.selectedCompanyDetector.installDate == null) {
+				$scope.clearForm();
+				$scope.selectedCompanyDetector = undefined;				
 				$scope.msgErroInfoHistoric = "Detector Sem Data de Instalação, Verifique!"
+			}
 			else {
 				$scope.msgErroInfoHistoric = "";
+				$scope.selectedCompanyDetector.companyDetectorId = $scope.selectedCompanyDetector.uid;
 				$scope.getCompanyDetectorMaintenanceHistoric();
 			}
         });	
@@ -122,6 +126,8 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 			
 	    $scope.description = '';
 	    $scope.selectedHistoricMaintenaceType = '';
+	    $scope.companyDetectorMaintenanceHistoric = undefined;
+	    
 	    $('#dateOne').val('');						
 		$('#dateTwo').val('');		
 	}

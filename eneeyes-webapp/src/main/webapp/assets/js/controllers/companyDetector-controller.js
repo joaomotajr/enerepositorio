@@ -19,7 +19,7 @@ app.filter('gasFilter', function () {
 });
 
 
-app.controller('companyDetectorController', function ($scope, $interval, $timeout, $filter, CompanyDeviceService, 
+app.controller('companyDetectorController', function ($scope, $interval, $rootScope, $timeout, $filter, CompanyDeviceService, 
 		CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, 
 		PositionService, HistoricService, CompanyDetectorMaintenanceHistoricService) {
 

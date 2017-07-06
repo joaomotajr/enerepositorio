@@ -2,8 +2,7 @@ app.filter('gasFilter', function () {
     return function (objects, criteria) {
         var filterResult = new Array();
 
-        //if (!criteria.unitMeterGases || !criteria.gas)
-        if (!criteria.unitMeterGases != null && !criteria.gas)
+        if (criteria && !criteria.unitMeterGases != null && !criteria.gas)
             return objects;
 
         for (index in objects) {

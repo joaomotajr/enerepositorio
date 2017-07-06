@@ -14,6 +14,9 @@ app.factory('ViewService', function($resource){
         listAllHistoricView : $resource('/security/api/view/allHistoricView',{},{
         	view : {method : 'GET'}
         }),
+        listAllDashDetectorsMaintenance : $resource('/security/api/view/allDashDetectorsMaintenanceView',{},{
+        	view : {method : 'GET'}
+        }),
         listIntervalDays : $resource('/security/api/view/findByCompanyDetectorAndSensorAndIntervalDays/:companyDetectorId/:sensorId/:dateIn/:dateOut/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', dateIn: '@dateIn', dateIn: '@dateOut' },{        
         	historic : {method : 'GET'}
         }),

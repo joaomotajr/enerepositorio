@@ -22,7 +22,11 @@
         
     <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
-    <script src="/assets/plugins/datatables/dataTables.select.min.js"></script>         
+    <script src="/assets/plugins/datatables/dataTables.select.min.js"></script>
+    
+    <!-- AdminLTE App -->
+     <script src="/assets/plugins/adminlte/app.min.js"></script>     
+    <script src="/assets/plugins/adminlte/chart.js"></script>         
 
     <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>
@@ -41,10 +45,7 @@
     <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>    
     <script src="/assets/plugins/datepicker/moment.min.js"></script>
     <script src="/assets/plugins/datepicker/bootstrap-datetimepicker.min.js"></script>    
-    
-    <!-- AdminLTE App -->
-    <script src="/assets/plugins/adminlte/app.min.js"></script>
-    <script src="/assets/plugins/adminlte/demo.js"></script>
+        
         
     <!-- Select2 -->
     <script src="/assets/plugins/select2/select2.min.js"></script>    

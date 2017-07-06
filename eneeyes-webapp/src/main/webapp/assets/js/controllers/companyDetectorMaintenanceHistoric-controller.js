@@ -21,7 +21,7 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 		$scope.companyDetectorMaintenanceHistoric.$companyDetectorMaintenanceHistoric(
 				{_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
 			
-			if($scope.companyDetectorMaintenanceHistoric.list != null)
+			if($scope.companyDetectorMaintenanceHistoric.list != null && $scope.companyDetectorMaintenanceHistoric.list.length > 0)
 				lastDate = $scope.companyDetectorMaintenanceHistoric.list[ $scope.companyDetectorMaintenanceHistoric.list.length -1].date;
 					
 		});		 

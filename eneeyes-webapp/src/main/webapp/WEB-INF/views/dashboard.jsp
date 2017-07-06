@@ -1,3 +1,48 @@
+	
+
+		
+	<style>
+		.small-box>.icon {
+	 		top: 5px ! important;
+	 		font-size: 40px ! important;
+		}
+		
+		.small-box>.inner {
+			padding: 0px !important; 
+			padding-left:10px !important; 
+			padding-right:10px !important;
+		}
+		
+		.all {
+			background: white !important;
+			color: #00c0ef !important;
+		}
+		
+		.normal {
+			background: white !important;
+			color: #00a65a !important;
+		}
+		
+		.deteccao {
+			background: white !important;
+			color: gray !important;
+		}
+		
+		.alerta {
+			background: white !important;
+			color: #f39c12 !important;
+		}
+		
+		.evacuacao {
+			background: white !important;
+			color: #dd4b39 !important;
+		}
+		
+		.off {
+			background: white !important;
+			color: black !important;
+		}
+	</style>
  	
 	<div data-ng-controller="dashController">
 		<div class="row">
@@ -6,7 +51,8 @@
 				<div class="box box-primary" style="margin-bottom: 8px;">
 				  
 					<div class="box-header with-border">
-						<h3 class="box-title">STATUS</h3>									
+						<h3 class="box-title">STATUS</h3>
+						<a href="#" class="text-muted pull-right" data-ng-click="refreshDashboard();"><i title="Refresh" class="fa fa-refresh"></i></a>									
 					</div>
 					
 					<div class="box-body">
@@ -15,102 +61,78 @@
 								<!-- small box -->
 								<div class="small-box bg-aqua">
 									<div class="inner">
-										<h3>{{sumary.devices}}</h3>
+										<h3 data-ng-bind="sumary.devices"></h3>
 										<p>Monitorados</p>
 									</div>
-									<div class="icon">
-										<i class="ion ion-bag"></i>
-									</div>
-									<a href="#" class="small-box-footer">More info <i
-										class="fa fa-arrow-circle-right"></i></a>
+									<div class="icon"><i class="fa fa-tv"></i></div>
+									<a href="#" data-ng-class="{'all': selectedStatusDashCompaniesPosition == 'ALL' }" data-ng-click="filterStatus('ALL')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
-							<!-- ./col -->
-	
+								
 							<div class="col-lg-2 col-xs-6">
 								<!-- small box -->
 								<div class="small-box bg-green">
 									<div class="inner">
-										<h3>{{sumary.normal}}</h3>
+										<h3 data-ng-bind="sumary.normal"></h3>
 										<p>Operacional</p>
 									</div>
-									<div class="icon">
-										<i class="ion ion-stats-bars"></i>
-									</div>
-									<a href="#" class="small-box-footer">More info <i
-										class="fa fa-arrow-circle-right"></i></a>
+									<div class="icon"><i class="fa fa-check"></i></div>
+									<a href="#" data-ng-class="{'normal': selectedStatusDashCompaniesPosition == 'NORMAL' }" data-ng-click="filterStatus('NORMAL')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
-							<!-- ./col -->
-	
+								
 							<div class="col-lg-2 col-xs-6">
 								<!-- small box -->
 								<div class="small-box bg-gray">
 									<div class="inner">
-										<h3>{{sumary.alarm1}}</h3>
+										<h3 data-ng-bind="sumary.alarm1"></h3>
 										<p>Detecção</p>
 									</div>
-									<div class="icon">
-										<i class="ion ion-person-add"></i>
-									</div>
-									<a href="#" class="small-box-footer">More info <i
-										class="fa fa-arrow-circle-right"></i></a>
+									<div class="icon"><i class="fa fa-battery-quarter"></i></div>
+									<a href="#" data-ng-class="{'deteccao': selectedStatusDashCompaniesPosition == 'DETECCAO' }" data-ng-click="filterStatus('DETECCAO')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
-							<!-- ./col -->
-	
+								
 							<div class="col-lg-2 col-xs-6">
 								<!-- small box -->
 								<div class="small-box bg-yellow">
 									<div class="inner">
-										<h3>{{sumary.alarm2}}</h3>
+										<h3 data-ng-bind="sumary.alarm2"></h3>
 										<p>Alerta</p>
 									</div>
-									<div class="icon">
-										<i class="ion ion-pie-graph"></i>
-									</div>
-									<a href="#" class="small-box-footer">More info <i
-										class="fa fa-arrow-circle-right"></i></a>
+									<div class="icon"><i class="fa fa-battery-half"></i></div>
+									<a href="#" data-ng-class="{'alerta': selectedStatusDashCompaniesPosition == 'ALERTA' }" data-ng-click="filterStatus('ALERTA')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
-							<!-- ./col -->
-	
+								
 							<div class="col-lg-2 col-xs-6">
 								<!-- small box -->
 								<div class="small-box bg-red">
 									<div class="inner">
-										<h3>{{sumary.alarm3}}</h3>
+										<h3 data-ng-bind="sumary.alarm3"></h3>
 										<p>Evacuação</p>
 									</div>
-									<div class="icon">
-										<i class="ion ion-pie-graph"></i>
-									</div>
-									<a href="#" class="small-box-footer">More info <i
-										class="fa fa-arrow-circle-right"></i></a>
+									<div class="icon"><i class="fa fa-battery-full"></i></div>
+									<a href="#" data-ng-class="{'evacuacao': selectedStatusDashCompaniesPosition == 'EVACUACAO' }" data-ng-click="filterStatus('EVACUACAO')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
-							<!-- ./col -->
-	
+								
 							<div class="col-lg-2 col-xs-6">
 								<!-- small box -->
 								<div class="small-box bg-black">
 									<div class="inner">
-										<h3>{{sumary.offLine}}</h3>
+										<h3 data-ng-bind="sumary.offLine"></h3>
 										<p>Off Line</p>
 									</div>
-									<div class="icon">
-										<i class="ion ion-pie-graph"></i>
-									</div>
-									<a href="#" class="small-box-footer">More info <i
-										class="fa fa-arrow-circle-right"></i></a>
+									<div class="icon" style="color:white !important"><i class="fa fa-battery-empty"></i></div>
+									<a href="#" data-ng-class="{'off': selectedStatusDashCompaniesPosition == 'OFF' }" data-ng-click="filterStatus('OFF')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
 								</div>
-							</div>
-							<!-- ./col -->
+							</div>							
 						</div>
 
 						<!-- Main row -->
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-md-8">
 	
 								<div class="box box-primary">
 									<div class="box-header with-border">
@@ -143,8 +165,8 @@
 														</tr>
 													</thead>
 													<tbody>
-
-														<tr data-ng-repeat="item in dashCompaniesPosition">																
+			<!-- 														<tr data-ng-repeat="item in dashCompaniesPosition"> -->
+														<tr data-ng-repeat="item in dashCompaniesPositionFiltered = (dashCompaniesPosition | dashCompaniesPositionFilter: selectedStatusDashCompaniesPosition)">																
 															<td>{{item.uid}}</td>
 															
 															<td>{{item.company_name}}</td>
@@ -187,11 +209,12 @@
 								</div>
 	
 							</div>
-							<!-- 
-							<div class="col-md-3">
-								<div class="box box-primary">
+							 
+							<div class="col-md-4">
+								<div class="row">
+								<div class="box box-primary" style="margin-bottom:0px">
 									<div class="box-header with-border">
-										<h3 class="box-title">MANUTENÇÃO </h3>
+										<h3 class="box-title">Calibrações Próximas: </h3>
 										<div class="box-tools pull-right">
 											<button class="btn btn-box-tool" data-widget="collapse">
 												<i class="fa fa-minus"></i>
@@ -200,57 +223,58 @@
 									</div>
 									
 									<div class="box-body">
+										<div class="list-group" style="max-height: 188px !important; height:auto; overflow: auto;">
 										<ul class="products-list product-list-in-box">
-											<li class="item">
-												<div class="product-img">
-													<img src="/assets/img/default-50x50.gif" alt="Product Image">
+											<li class="item" data-ng-repeat="item in listAllDashDetectorsMaintenance.list | orderBy : 'item.next'" style="padding: 5px 0;">
+												<div class="product-img">												         
+													<img data-ng-src="{{item.image}}" alt="Product Image" >
 												</div>
 												<div class="product-info">
-													<a href="javascript::;" class="product-title">Loga<span
-														class="label label-warning pull-right"></span></a> <span
-														class="product-description"> Sensor A1 </span>
+													<a href="#" class="product-title">Detector: {{item.company_detector_name}}<span
+														data-ng-class="{'label-danger' : item.next <= 10, 'label-warning' : (item.next > 10 && item.next <= 30), 'label-default' : item.next > 30}"
+														class="label pull-right">{{item.next}} Dias</span></a> <span
+														class="product-description"> {{item.company_name}} Unidade/Área: {{item.unit_name}}/{{item.area_name}}</span>
 												</div>
-											</li>
-										
-											<li class="item">
-												<div class="product-img">
-													<img src="/assets/img/default-50x50.gif" alt="Product Image">
-												</div>
-												<div class="product-info">
-													<a href="javascript::;" class="product-title">Nestle <span
-														class="label label-info pull-right"></span></a> <span
-														class="product-description"> Sensor A2 </span>
-												</div>
-											</li>
-											
-											<li class="item">
-												<div class="product-img">
-													<img src="/assets/img/default-50x50.gif" alt="Product Image">
-												</div>
-												<div class="product-info">
-													<a href="javascript::;" class="product-title">Vopak<span
-														class="label label-danger pull-right"></span></a> <span
-														class="product-description"> Sensor A3 </span>
-												</div>
-											</li>
-											
-											<li class="item">
-												<div class="product-img">
-													<img src="/assets/img/default-50x50.gif" alt="Product Image">
-												</div>
-												<div class="product-info">
-													<a href="javascript::;" class="product-title">Construtora
-														Quintella<span class="label label-success pull-right"></span>
-													</a> <span class="product-description"> Sensor A4 </span>
-												</div>
-											</li>
-				
+											</li>				
 										</ul>
+										</div>
+									</div>
+								
+								</div>
+								</div>
+								<div class="row">
+									<div class="box box-default">
+									    <div class="box-header with-border">
+									        <h3 class="box-title">Gráfico Status Consolidado</h3>
+									        <div class="box-tools pull-right">
+									            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+									            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+									        </div>
+									    </div><!-- /.box-header -->
+									    <div class="box-body">
+									        <div class="row">
+									            <div class="col-md-8">
+									                <div class="chart-responsive">
+									                    <canvas id="pieChart" height="155" width="269" style="width: 269px; height: 155px;"></canvas>
+									                </div><!-- ./chart-responsive -->
+									            </div><!-- /.col -->
+									            <div class="col-md-4">
+									              <ul class="chart-legend clearfix">
+									              <li><i class="fa fa-circle-o text-green"></i> Normal</li>
+									                  <li><i class="fa fa-circle-o text-red"></i> Evacuação</li>
+									                  <li><i class="fa fa-circle-o text-gray"></i> Detecção</li>
+									                  <li><i class="fa fa-circle-o text-yellow"></i> Alerta</li>									                  
+									                  <li><i class="fa fa-circle-o text-black"></i> Off</li>
+									                  <li><i class="fa fa-circle-o text-light-blue"></i> Turn Off</li>
+									              </ul>
+									            </div><!-- /.col -->
+									        </div><!-- /.row -->
+									    </div><!-- /.box-body -->									    
 									</div>
 								
 								</div>
 							</div>
-							-->
+							
 						</div>
 					</div>
       			</div>	

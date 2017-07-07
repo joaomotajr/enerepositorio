@@ -150,7 +150,7 @@
 									
 									<div class="box-body">
 										<div class="table-responsive">
-											<div style="max-height: 500px; overflow: auto">
+											<div style="max-height: 500px; overflow: auto" style="font-size=80%;">
 												<table class="table no-margin" id="dashboard">
 													<thead>
 														<tr>														
@@ -165,7 +165,6 @@
 														</tr>
 													</thead>
 													<tbody>
-			<!-- 														<tr data-ng-repeat="item in dashCompaniesPosition"> -->
 														<tr data-ng-repeat="item in dashCompaniesPositionFiltered = (dashCompaniesPosition | dashCompaniesPositionFilter: selectedStatusDashCompaniesPosition)">																
 															<td>{{item.uid}}</td>
 															
@@ -260,7 +259,7 @@
 									            </div><!-- /.col -->
 									            <div class="col-md-4">
 									              <ul class="chart-legend clearfix">
-									              <li><i class="fa fa-circle-o text-green"></i> Normal</li>
+									              <li><i class="fa fa-circle-o text-green"></i> Operacional</li>
 									                  <li><i class="fa fa-circle-o text-red"></i> Evacuação</li>
 									                  <li><i class="fa fa-circle-o text-gray"></i> Detecção</li>
 									                  <li><i class="fa fa-circle-o text-yellow"></i> Alerta</li>									                  

@@ -10,6 +10,7 @@ VIEW `dash_detectors_maintenance` AS
         `u`.`NAME` AS `unit_name`,
         `a`.`NAME` AS `area_name`,
         `cds`.`NAME` AS `company_detector_name`,
+          cds.MAINTENANCE_INTERVAL,
         `d`.`IMAGE` AS `image`,
         `cds`.`INSTALL_DATE` AS `INSTALL_DATE`,
         `z`.`LAST_DATE` AS `LAST_DATE`

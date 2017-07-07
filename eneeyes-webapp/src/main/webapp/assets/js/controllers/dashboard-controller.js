@@ -22,43 +22,54 @@ app.filter('dashCompaniesPositionFilter', function () {
 });
 
 app.controller('dashController', function ($scope, $timeout, $interval, $filter, ViewService, UserService) {
+
+	var pieChartCanvas;
+	var pieChart;
+	var PieData;
+
+	function populateDonut() {
+		PieData = 
+		  [
+			{
+			    value: $scope.sumary.normal,
+			    color: "#00a65a",
+			    highlight: "#00a65a",
+			    label: "Operacional(is)"
+			  },
+		    {
+		      value: $scope.sumary.offLine,
+		      color: "#333",
+		      highlight: "#333",
+		      label: "Off Line"
+		    },	    
+		    {
+		      value: $scope.sumary.alarm3,
+		      color: "#dd4b39",
+		      highlight: "#dd4b39",
+		      label: "Evacuação"
+		    },
+		    {
+		      value: $scope.sumary.alarm2,
+		      color: "#f39c12",
+		      highlight: "#f39c12",
+		      label: "Alerta"
+		    },
+		    {
+		      value: $scope.sumary.alarm1,
+		      color: "#d2d6de",
+		      highlight: "#d2d6de",
+		      label: "Detecção"
+		    },
+		    {
+		      value: $scope.sumary.turnOff,
+		      color: "#72afd2",
+		      highlight: "#72afd2",
+		      label: "Turn Off"
+		    }
+		  ];
+	}
 	
-		
-	  
-	  var PieData = [
-	    {
-	      value: 700,
-	      color: "#333",
-	      highlight: "#333",
-	      label: "Off Line"
-	    },	    
-	    {
-	      value: 400,
-	      color: "#dd4b39",
-	      highlight: "#dd4b39",
-	      label: "EvacuaÃ§Ã£o"
-	    },
-	    {
-	      value: 600,
-	      color: "#f39c12",
-	      highlight: "#f39c12",
-	      label: "Alerta"
-	    },
-	    {
-	      value: 300,
-	      color: "#3c8dbc",
-	      highlight: "#3c8dbc",
-	      label: "DetecÃ§Ã£o"
-	    },
-	    {
-	      value: 100,
-	      color: "#fff",
-	      highlight: "#fff",
-	      label: "Turn Off"
-	    }
-	  ];
-	  
-	  var pieOptions = {
+	var pieOptions = {
 	    //Boolean - Whether we should show a stroke on each segment
 	    segmentShowStroke: true,
 	    //String - The colour of each segment stroke
@@ -82,8 +93,8 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 	    //String - A legend template
 	    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
 	    //String - A tooltip template
-	    tooltipTemplate: "<%=value %> <%=label%> users"
-	  };
+	    tooltipTemplate: "<%=value %> Dispositivos <%=label%>"
+	};
 	
 	$scope.dashCompaniesPosition = [];
 	$scope.dashDetectorsMaintenance = [];
@@ -135,7 +146,8 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					 alarm3 : 0,
 					 normal : 0,
 					 devices: 0,
-					 offLine: 0						 
+					 offLine: 0,
+					 turnOff: 0
 			 }			 
 			 				
 			 $scope.listAllDashCompaniesPosition.list.forEach(
@@ -153,10 +165,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					else if ( offDate > 300 ) {							 
 					     $scope.sumary.offLine ++;
 					     e.offLine = true;
-					}
-					else if ( e.alarmType == "OFF" ) {
-						$scope.sumary.offLine ++;
-					}
+					}				
 					else if ( e.alarmType == "NORMAL") {
 						 
 					     $scope.sumary.normal ++;
@@ -175,7 +184,9 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					}
 				}			
 		 	);			 			 
-			 
+			
+			populateDonut();
+			
 			$scope.loading = undefined;         	         	
        });		 
 	 }
@@ -205,15 +216,15 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 	$scope.refreshDashboard();
 	$scope.getDetectorsMaintenance();
 	
-	var pieChartCanvas;
-	var pieChart;
+
     
     $interval(function() {
     	if($scope.$root == null) return;
-    	if($scope.$root.currentPage == "Dashboard" && $scope.$root.errorTimes <= 5)
-    		$scope.getCompaniesPosition();
     	
-    	pieChart.Doughnut(PieData, pieOptions);
+    	if($scope.$root.currentPage == "Dashboard" && $scope.$root.errorTimes <= 5) {
+    		$scope.getCompaniesPosition();    	
+    		pieChart.Doughnut(PieData, pieOptions);
+    	}
     }, 10000);
     
     $timeout(function () {

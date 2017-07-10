@@ -1,14 +1,35 @@
-app.filter('manufacturerFilter', function () {
+app.filter('manufacturerFilter2', function () {
     return function (objects, criteria) {
         
-        if (!criteria)
-            return objects;
+    	if (!criteria || criteria.manufacturer == null)
+            return null;
         
         var filterResult = new Array();
 
         for (index in objects) {
         
-   			 if (objects[index].manufacturerDto.uid == criteria.manufacturer.uid  ) {
+   			 if (objects[index].manufacturerDto.uid == criteria.manufacturer.uid && 
+   					 criteria.sensors.findIndex( function(item) { return item.uid === objects[index].uid }) < 0 ) {
+
+                 filterResult.push(objects[index]);
+             }
+        }
+
+        return filterResult;
+    }
+});
+
+app.filter('manufacturerFilter', function () {
+    return function (objects, criteria) {
+        
+    	if (!criteria || criteria.manufacturer == null)
+            return null;
+        
+        var filterResult = new Array();
+
+        for (index in objects) {
+        
+   			 if (objects[index].manufacturerDto.uid == criteria.manufacturer.uid) {
 
                  filterResult.push(objects[index]);
              }
@@ -31,9 +52,9 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		
 		angular.element('body').addClass('loading');
 		
-		for (var i = 0; i < $scope.newSensors.length; i++) {
-			$scope.detectorSensors.push($scope.newSensors[i]);	            	             
-         } 		 
+		for (var i = 0; i < $scope.detectorSensors.length; i++) {
+			$scope.detectorSensors[i].index = undefined;	            	             
+        } 		 
 				
 		var detector = {
 			uid: $scope.detectorUid != undefined ? $scope.detectorUid : 0,
@@ -70,16 +91,11 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	    $scope.detectorTransmitter = '';
 	    $scope.detectorImage = "/assets/img/cover.jpg";
 	    $scope.detectorSensors = [];
-	    $scope.newSensors = [];
-	    
+	    	    
 	    $scope.msgSens1 = false;
 	    $scope.msgSens2 = false;
 	    $scope.detectorNameExist = "false";
-	    
-	    $('.sort .ui-draggable').remove();
-	
 	}
-
 	 
 	$scope.getDetectors = function() {
 		 
@@ -88,10 +104,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 			 $scope.detectors = $scope.resultDetectors.list;			 
 			 
 			 $scope.clearFormDetector();			 
-			 
-			 $timeout(function () {                    
-				 $scope.inicializaLDragDrop();				 
-	         }, 1000);
+
          });		 
 	 }
 	
@@ -120,14 +133,11 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		    $scope.detectorImage = ($scope.detectors[index].image == null ? "/assets/img/cover.jpg" :  $scope.detectors[index].image);		    
 		    $scope.detectorTransmitter = $scope.detectors[index].transmitterDto;
 		    $scope.detectorSensors = $scope.detectors[index].sensorsDto;
-		    		    		    
-		    $timeout(function () {                    
-                $scope.inicializaLDragDrop();
-            }, 1000);
-		    
-		    $scope.newSensors = [];
 		    		    
 		    $timeout(function () {
+		    	$scope.search = {manufacturer: $scope.detectorManufacturer};
+		    	$scope.searchSensor = {manufacturer: $scope.detectorManufacturer , sensors: $scope.detectorSensors};
+		    	
 	            $('#modalEditDetector').modal({ show: 'false' });                        
 	        }, 200);
 	    }
@@ -151,58 +161,14 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	 $scope.getSensors = function() {
 		 
 		 $scope.resultSensors = new SensorService.listAll();		 
-		 $scope.resultSensors.$sensor({_csrf : angular.element('#_csrf').val()}, function(){			
+		 $scope.resultSensors.$sensor({_csrf : angular.element('#_csrf').val()}, function(){
+			 
+			 for (index in $scope.resultSensors.list) {
+				 $scope.resultSensors.list[index].index = index;
+			 }
+			 
 			 $scope.sensors = angular.copy($scope.resultSensors.list);	 
          });		 
-	 }
-	 
-//	 $scope.refreshDragDrop = function()
-//	 {
-//		 $scope.sensors = angular.copy($scope.resultSensors.list);
-//		 $scope.$apply();
-//		 $scope.inicializaLDragDrop();
-//	 }
-	 
-	 $scope.inicializaLDragDrop = function () {
-	
-
-		$(".sort").sortable({
-		    items: 'li',
-		    revert: 'valid',            
-		    receive: function (event, ui) {                
-		        
-		        ui.item.removeAttr("style");
-		
-		        var clazz = getClassNameWithNumberSuffix(ui.item);
-		
-		        $('.drag .' + clazz).draggable("option", "revert", true)
-		
-		        if($scope.newSensors.length > 1 || $scope.detectorSensors.length > 1) {
-					$('.sort .' + clazz).remove();	        		
-					$scope.msgSens1 = true;		
-					$scope.refreshDragDrop();
-	        	}
-		        if ($('.sort .' + clazz).length > 1) {
-		            $('.sort .' + clazz + ':not(:first)').remove();
-		            $scope.msgSens2 = true;
-		            //$scope.refreshDragDrop();
-		        }
-		        else {
-		            
-		            //Insere Tag Novo se elemento nÃo foi movido dentro da própria lista
-		            if (ui.item.find('small').length < 1) {
-		                ui.item.append('<small class="label label-success"><i class="fa fa-bolt"></i> novo</small>');
-		                $scope.addSensorDetector(ui.item[0].id);
-		            }
-		        }
-		    }
-		});
-		
-		$(".drag li").draggable({            
-		    revert : 'invalid',
-		    connectToSortable: $('ul.sort')            
-		});              
-
 	 }
 	 
 	 function getClassNameWithNumberSuffix(el) {
@@ -237,20 +203,23 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	}
 	
 	$scope.changeManufacturer = function() { 
-		 $scope.search = {manufacturer: $scope.detectorManufacturer};
+				
+		$scope.search = {manufacturer: $scope.detectorManufacturer};
+		$scope.searchSensor = {manufacturer: $scope.detectorManufacturer , sensors: $scope.detectorSensors};
+		$scope.detectorSensors = [];
+				
 	}
 	
-	 $scope.addSensorDetector = function (idSensor) {
-
-        sensorDto = {
-            uid: idSensor	            
-        }
-        $scope.newSensors.push(sensorDto);
-        $scope.$apply();
+	 $scope.addSensorDetector = function (noSortIndexindex) {
+		 
+		 $scope.detectorSensors.push($scope.sensors[noSortIndexindex]);
+		 $scope.searchSensor = {manufacturer: $scope.detectorManufacturer , sensors: $scope.detectorSensors};
+        
 	 }
 	 
 	 $scope.deleteSensor = function (index) {
-		 $scope.detectorSensors.splice(index, 1);		 
+		 $scope.detectorSensors.splice(index, 1);	 
+		 $scope.searchSensor = {manufacturer: $scope.detectorManufacturer , sensors: $scope.detectorSensors};
 	 }	 
  
 	 $scope.refreshDetectors = function() {

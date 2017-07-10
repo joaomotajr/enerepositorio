@@ -1,3 +1,22 @@
+app.filter('gasSensorFilter', function () {
+    return function (objects, criteria) {
+        
+    	if (!criteria || criteria.gases == null)
+            return null;
+        
+        var filterResult = new Array();
+
+        for (index in objects) {
+        
+   			 if (criteria.gases.findIndex( function(item) { return item.uid === objects[index].uid }) < 0 ) {
+
+                 filterResult.push(objects[index]);
+             }
+        }
+
+        return filterResult;
+    }
+});
 
 app.controller('sensorController', function ($scope, $timeout, $filter, SensorService, ManufacturerService, GasService) {
 		
@@ -12,9 +31,9 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		
 		angular.element('body').addClass('loading');
 		
-		for (var i = 0; i < $scope.newGases.length; i++) {
-			$scope.sensorGases.push($scope.newGases[i]);	            	             
-         } 		 
+		for (var i = 0; i < $scope.sensorGases.length; i++) {
+			$scope.sensorGases[i].index = undefined;	            	             
+        }
 				
 		var sensor = {
 			uid: $scope.sensorUid != undefined ? $scope.sensorUid : 0,
@@ -60,11 +79,7 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		
 		$scope.msgGas1 = false;
 	    $scope.msgGas2 = false;
-	    $scope.sensorNameExist = "false";
-	    
-		$('.sort .ui-draggable').remove();
-		
-		$scope.inicializaLDragDrop();					
+	    $scope.sensorNameExist = "false";			
 	}
 	 
 	$scope.getSensors = function() {
@@ -74,10 +89,6 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 			 $scope.sensors = $scope.resultSensors.list;
 			 			 
 			 $scope.clearFormSensor();			 
-			 
-			 $timeout(function () {                    
-				 $scope.inicializaLDragDrop();
-	         }, 1000);
          });		 
 	 }
 	
@@ -88,6 +99,12 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 			 $scope.manufacturers = $scope.resultManufacturers.list; 		 			 
         });		 
 	 }	 
+	
+	$scope.changeManufacturer = function() { 
+		$scope.searchGas = {gases: $scope.sensorGases};
+		$scope.sensorGases = [];
+				
+	}
  
 	 $scope.editSensor = function (index) {
 	        $scope.sensorUid = $scope.sensors[index].uid;
@@ -101,14 +118,9 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		    $scope.sensorRangeMin = $scope.sensors[index].rangeMin;
 		    $scope.sensorRangeUnit = $scope.sensors[index].rangeUnit;
 		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.sensors[index].unitMeterGases);
-		    		    		    
-		    $timeout(function () {                    
-                $scope.inicializaLDragDrop();
-            }, 1000);
-		    
-		    $scope.newGases = [];
-	        
+        
 	        $timeout(function () {
+	        	$scope.searchGas = {gases: $scope.sensorGases};
 	            $('#modalEditSensor').modal({ show: 'false' });                        
 	        }, 200);
 	    }
@@ -142,60 +154,16 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 	 $scope.getGases = function() {
 		 
 		 $scope.resultGases = new GasService.listAll();		 
-		 $scope.resultGases.$gas({_csrf : angular.element('#_csrf').val()}, function(){			
+		 $scope.resultGases.$gas({_csrf : angular.element('#_csrf').val()}, function(){
+			 
+			 for (index in $scope.resultGases.list) {
+				 $scope.resultGases.list[index].index = index;
+			 }
+			 
 			 $scope.gases = angular.copy($scope.resultGases.list); 		 			 
          });		 
 	 }	
 	 
-	 $scope.inicializaLDragDrop = function () {
-		 
-//		 $scope.refreshDragDrop = function()
-//		 {
-//			 $scope.gases = angular.copy($scope.resultGases.list);
-//			 $scope.$apply();
-//			 $scope.inicializaLDragDrop();
-//		 }
-
-		$(".sort").sortable({
-		    items: 'li',
-		    revert: 'valid',            
-		    receive: function (event, ui) {                
-		        
-		        ui.item.removeAttr("style");
-		
-		        var clazz = getClassNameWithNumberSuffix(ui.item);
-		
-		        $('.drag .' + clazz).draggable("option", "revert", true);
-		        
-		        if($scope.newGases.length > 0 || $scope.sensorGases.length > 0) {
-					$('.sort .' + clazz).remove();	        		
-					
-					$scope.msgGas1 = true;	
-					$scope.refreshDragDrop();
-	        	}
-		        else if ($('.sort .' + clazz).length > 1) {
-		            $('.sort .' + clazz + ':not(:first)').remove();
-		            
-		            $scope.msgGas2 = true;
-		            //$scope.refreshDragDrop();
-		        }
-		        else {
-		            
-		            //Insere Tag Novo se elemento não foi movido dentro da própria lista
-		            if (ui.item.find('small').length < 1) {
-		                ui.item.append('<small class="label label-success"><i class="fa fa-bolt"></i> novo</small>');
-		                $scope.addGasSensor(ui.item[0].id);
-		            }
-		        }
-		    }
-		});
-		
-		$(".drag li").draggable({            
-		    revert : 'invalid',
-		    connectToSortable: $('ul.sort')            
-		});              
-
-	 }
 	 
 	 function getClassNameWithNumberSuffix(el) {
         var className = null;
@@ -208,19 +176,17 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
         });
 
         return className;
-	 }
-	 
-	 $scope.addGasSensor = function (idGas) {
-
-	        gas = { uid: idGas }
-
-	        $scope.newGases.push(gas);
-	        $scope.$apply();
-	    }
-	 
-	 $scope.deleteGas = function (index) {
-		 $scope.sensorGases.splice(index, 1);		 
 	 }	 
+	 	 
+	 $scope.addGasSensor = function (noSortIndexindex) {
+		 $scope.sensorGases.push($scope.gases[noSortIndexindex]);
+		 $scope.searchGas = {gases: $scope.sensorGases};
+	 }
+		 
+	 $scope.deleteGas = function (index) {
+		 $scope.sensorGases.splice(index, 1);	 
+		 $scope.searchGas = {gases: $scope.sensorGases};
+	 }
 	 
 	 $scope.detectionTypes = 
 		 [

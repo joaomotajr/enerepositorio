@@ -49,7 +49,7 @@
 				</div>
 				
 				<div class="box-footer">						                                                                
-					<button type="button" data-ng-click="inicializaLDragDrop(); userForm.$setPristine()" class="btn btn-primary pull-right" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalEditDetector">Novo</button>
+					<button type="button" data-ng-click="clearFormDetector(); userForm.$setPristine()" class="btn btn-primary pull-right" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalEditDetector">Novo</button>
 				</div>
 			</div>
 			
@@ -154,30 +154,25 @@
 					                    
 					                    	<label class="control-label">Sensores</label>			                    	
 						                    <div style="max-height: 250px; height:auto; overflow: auto">                                                                       
-			                                    <ul class="sort todo-list" style="padding: 1px !important" data-ng-repeat="sensor in detectorSensors">
-			                                         <li id="{{sensor.uid}}" class="{{'c' + sensor.uid}}" style="padding: 4px">
-			                                             <span class="handle"><i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i></span>                                               
-			                                             <span class="text">{{sensor.name}} </span>
-			                                         
-			                                             <div class="tools">                                                        
-			                                                 <i class="fa fa-trash-o" data-ng-click="deleteSensor($index)"></i>
+			                                    <ul class="todo-list" style="padding: 1px !important" data-ng-repeat="item in detectorSensors">
+			                                         <li style="padding: 4px; border-left: 3px solid #639ed9;">			                                             
+			                                             <span class="text"><strong>Sensor:</strong> {{item.name}} - <strong>Gás</strong> {{item.gasesDto[0].name}} </span>		                                         
+			                                             <div class="pull-right">                                                        
+			                                                <a href="#" data-ng-click="deleteSensor($index)"><i class="fa  fa-arrow-right"></i></a>
 			                                             </div>
 			                                         </li>                                                                                                   
-			                                     </ul> 
-			                                     <ul data-ng-if="detectorSensors.length < 1" class="sort todo-list" style="padding: 1px !important" title="Arraste aqui para Incluir">
-			                                         <li data-ng-show="newSensors.length <= 0" style="background:rgb(60, 141, 188); border-color:lightgray;color:white;padding: 4px;"> Arraste aqui para Incluir</li>
-			                                     </ul>
-			                                </div>
-			                                								        
+			                                     </ul>			                                     
+			                                </div>			                                								        
 					                    </div>				                    
 				                    
 					                    <div class="col-sm-6">
-					                    	<label class="control-label">Lista de Sensores</label>			                    	                        
+					                    	<label class="control-label">Lista de Sensores</label><span class="pull-right"> Máximo 2 Sensores </span> 			                    	                        
 					                        <div style="max-height: 250px; height:auto; overflow: auto">				                        	                                                       
-		                                    	<ul class="drag todo-list" style="padding: 1px !important" data-ng-repeat="sensor in sensors | manufacturerFilter:search">
-		                                            <li id="{{sensor.uid}}" class="{{'c' + sensor.uid}}" style="background: #d1ddf9;">                                                        
-		                                                <span class="handle"><i class="fa fa-ellipsis-v"></i> <i class="fa fa-ellipsis-v"></i></span>
-		                                                <span class="text">{{sensor.name}}</span>
+		                                    	<ul class="todo-list" style="padding: 1px !important" data-ng-repeat="sensor in sensors | manufacturerFilter2:searchSensor track by $index">
+		                                            <li style="background: #d1ddf9; border-left: 3px solid #639ed9;">                                                        
+		                                                <a data-ng-if="detectorSensors.length < 2" href="#" data-ng-click="addSensorDetector(sensor.index)"><i class="fa fa-arrow-left"></i></a>
+		                                                <span data-ng-if="detectorSensors.length >= 2"><i class="fa fa-arrow-left"></i></span>
+		                                                <span class="text"><strong>Sensor:</strong> {{sensor.name}} - <strong>Gás: </strong> {{sensor.gasesDto[0].name}} </span>
 		                                            </li>                                
 		                                        </ul>
 		                                    </div>

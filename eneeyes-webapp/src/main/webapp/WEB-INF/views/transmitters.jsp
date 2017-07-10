@@ -12,7 +12,8 @@
 								<thead>
 									<tr>
 										<th>Nome</th>
-										<th>Modelo</th>                                                            
+										<th>Modelo</th>
+										<th>Fabricante</th>                                                            
 										<th>Editar</th>
 										<th>Excluir</th>						
 									</tr>
@@ -21,6 +22,7 @@
 									<tr  data-ng-repeat="item in transmitters">
 										<td>{{item.name}}</td>
 										<td>{{item.model}}</td>															        
+										<td>{{item.manufacturerDto.name}}</td>
 										<td>
 											<button type="button" class="btn btn-info btn-xs"  data-ng-click="editTransmitter($index)">editar</button>
 										</td>

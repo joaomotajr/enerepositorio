@@ -12,7 +12,7 @@ CREATE
     SQL SECURITY DEFINER
 VIEW `historic_view_day` AS
 SELECT 
-        FLOOR((RAND() * 99999)) AS `UID`,
+        GETFAKEID() AS `uid`,
         `historic`.`COMPANY_DETECTOR_ID` AS `COMPANY_DETECTOR_ID`,
         `historic`.`SENSOR_ID` AS `SENSOR_ID`,        
         STR_TO_DATE(DATE_FORMAT(`historic`.`LAST_UPDATE`, '%Y-%m-%d 00:00:00'), '%Y-%m-%d %H:%i:%s') AS `last_update`,

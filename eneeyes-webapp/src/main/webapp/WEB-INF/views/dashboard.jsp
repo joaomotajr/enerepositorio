@@ -150,8 +150,8 @@
 									
 									<div class="box-body">
 										<div class="table-responsive">
-											<div style="max-height: 500px; overflow: auto" style="font-size=80%;">
-												<table class="table no-margin" id="dashboard">
+											<div style="max-height: 500px; overflow: auto">
+												<table class="table table-striped" id="dashboard" style="font-size:1.0em;">
 													<thead>
 														<tr>														
 															<th>ID</th>
@@ -177,11 +177,12 @@
 															<td style="padding-top: 13px ! important;" data-ng-if="item.offLine"> <span class="label label-default offLine"> Off Line </span></td>
 
 															<td>
-																<label title="{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}"  data-ng-class="{ 
-																	'text-success' : item.alarmType=='NORMAL',
-																	'text-warning' : item.alarmType=='ALERTA', 
-																	'text-muted' : item.alarmType=='DETECCAO', 
-																	'text-danger' : item.alarmType=='EVACUACAO'}"> 
+																<label title="{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}">  
+<!-- 																	data-ng-class="{  -->
+<!-- 																	'text-success' : item.alarmType=='NORMAL', -->
+<!-- 																	'text-warning' : item.alarmType=='ALERTA',  -->
+<!-- 																	'text-muted' : item.alarmType=='DETECCAO',  -->
+<!-- 																	'text-danger' : item.alarmType=='EVACUACAO'}"  -->
 																	{{item.last_update}} atrás
 																</label>
 															</td> 
@@ -213,7 +214,7 @@
 								<div class="row">
 								<div class="box box-primary" style="margin-bottom:0px">
 									<div class="box-header with-border">
-										<h3 class="box-title">Calibrações Próximas: </h3>
+										<h3 class="box-title">CALIBRAÇÕES PRÓXIMAS </h3>
 										<div class="box-tools pull-right">
 											<button class="btn btn-box-tool" data-widget="collapse">
 												<i class="fa fa-minus"></i>
@@ -242,9 +243,9 @@
 								</div>
 								</div>
 								<div class="row">
-									<div class="box box-default">
+									<div class="box box-primary">
 									    <div class="box-header with-border">
-									        <h3 class="box-title">Gráfico Status Consolidado</h3>
+									        <h3 class="box-title">GRÁFICOS STATUS CONSOLIDADO</h3>
 									        <div class="box-tools pull-right">
 									            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 									            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>

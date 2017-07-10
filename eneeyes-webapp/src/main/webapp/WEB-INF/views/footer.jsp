@@ -6,7 +6,7 @@
     <c:set var="authenticated" value="true"/>
 </sec:authorize>
 
-	<div class="ajax-loader"></div>�
+	<div class="ajax-loader"></div>
     <!-- jQuery 2.1.4 -->
     <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
         
@@ -44,8 +44,7 @@
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/bootstrap/js/bootstrap-treeview.js"></script>    
     <script src="/assets/plugins/datepicker/moment.min.js"></script>
-    <script src="/assets/plugins/datepicker/bootstrap-datetimepicker.min.js"></script>    
-        
+    <script src="/assets/plugins/datepicker/bootstrap-datetimepicker.min.js"></script>        
         
     <!-- Select2 -->
     <script src="/assets/plugins/select2/select2.min.js"></script>    

@@ -82,7 +82,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
 		$scope.inclusaoCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){		
 			
-			//Se for um Company Detector novo ou n�o associado a um Detector
+			//Se for um Company Detector novo ou nao associado a um Detector
 			if($scope.selectedCompanyDetector.uid == undefined) {
 				$scope.selectedCompanyDetector = $scope.inclusaoCompanyDetector.t;
 				$scope.getCompanyDetectorAlarms();
@@ -434,7 +434,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		objGauge = document.getElementById(id);
 		
 		if (objGauge == undefined) {
-			console.log('Objeto:: ' + id + "N�o localizado:: " + new Date())
+			console.log('Objeto:: ' + id + "Nao localizado:: " + new Date())
 		}
 		else {
 			gauge = new google.visualization.Gauge(objGauge);

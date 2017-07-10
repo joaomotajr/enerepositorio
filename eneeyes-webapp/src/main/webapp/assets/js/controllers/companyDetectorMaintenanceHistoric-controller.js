@@ -69,7 +69,7 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 			if($scope.selectedCompanyDetector.installDate == null) {
 				$scope.clearForm();
 				$scope.selectedCompanyDetector = undefined;				
-				$scope.msgErroInfoHistoric = "Detector Sem Data de Instalaï¿½ï¿½o, Verifique!"
+				$scope.msgErroInfoHistoric = "Detector Sem Data de Instalação, Verifique!"
 			}
 			else {
 				lastDate = new Date($scope.selectedCompanyDetector.installDate);

@@ -161,6 +161,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					
 					if ( e.alarmType == "OFF" ) {
 						$scope.sumary.offLine ++;
+						$scope.sumary.turnOff ++;						
 					}
 					else if ( offDate > 300 ) {							 
 					     $scope.sumary.offLine ++;

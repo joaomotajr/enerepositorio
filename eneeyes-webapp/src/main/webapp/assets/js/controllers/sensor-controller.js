@@ -76,9 +76,6 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		$scope.sensorRangeMax = '';
 		$scope.sensorRangeMin = '';
 		$scope.sensorRangeUnit = '';
-		
-		$scope.msgGas1 = false;
-	    $scope.msgGas2 = false;
 	    $scope.sensorNameExist = "false";			
 	}
 	 

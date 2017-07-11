@@ -143,9 +143,7 @@
 		                        <div class="box box-primary box-solid">
 				                    <div class="box-header with-border ui-sortable-handle ">
 				                    	<strong><i class="fa fa-feed"></i> Sensores </strong>
-				                    	<span class="text-red" data-ng-show="detectorSensors.length == 0 && newSensors.length == 0">  [Adicionar ao Menos Um Sensor]</span>
-				                    	<span class="pull-right" data-ng-show="msgSens1">[Máximo Dois Sensores]</span>
-					                    <span class="pull-right" data-ng-show="msgSens2">["ATENÇÃO! Sensor Já Existe."]</span>
+				                    	<span class="text-red text-pull-right" data-ng-show="detectorSensors.length == 0"> <strong>[Adicionar Sensor(es)]</strong></span>				                    						                    
 				                    </div>
 				                	 
 				                    <div class="box-body">
@@ -158,7 +156,7 @@
 			                                         <li style="padding: 4px; border-left: 3px solid #639ed9;">			                                             
 			                                             <span class="text"><strong>Sensor:</strong> {{item.name}} - <strong>Gás</strong> {{item.gasesDto[0].name}} </span>		                                         
 			                                             <div class="pull-right">                                                        
-			                                                <a href="#" data-ng-click="deleteSensor($index)"><i class="fa  fa-arrow-right"></i></a>
+			                                                <a href="#" data-ng-click="deleteSensor($index)"><i class="fa fa-arrow-right"></i></a>
 			                                             </div>
 			                                         </li>                                                                                                   
 			                                     </ul>			                                     

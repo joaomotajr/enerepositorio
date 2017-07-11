@@ -167,20 +167,17 @@
 			                        
 			                        <div class="box box-primary box-solid">
 					                    <div class="box-header with-border ui-sortable-handle "><strong><i class="fa fa-yelp"></i> Gases </strong>
-					                    	<span class="text-red" data-ng-show="sensorGases.length == 0 && newGases.length == 0">  [Adicionar um Gás]</span>
-					                    	<span class="pull-right" data-ng-show="msgGas1">[Máximo um Gás]</span>
-					                    	<span class="pull-right" data-ng-show="msgGas2">["ATENÇÃO! Gás Já Existe."]</span>			                    	 
+					                    	<span class="text-red pull-right" data-ng-show="sensorGases.length == 0"><strong>[Adicionar um Gás]</strong></span>					                    				                    	 
 					                    </div>		                	 
 					                    <div class="box-body">		                    
 						                    <div class="col-sm-6">			                    
 						                    	<label class="control-label">Gases Detectáveis</label>
 							                    <div style="max-height: 250px; height:auto; overflow: auto">                                                                       
 				                                    <ul class="sort todo-list" style="padding: 1px !important" data-ng-repeat="item in sensorGases">
-				                                         <li style="padding: 4px|; border-left: 3px solid #639ed9;">
-				                                         	    
+				                                         <li style="padding: 4px; border-left: 3px solid #639ed9;">				                                         	    
 				                                            <span class="text"><strong>Gás:</strong> {{item.name}}</span>				                                         
 				                                         	<div class="pull-right">                                                        
-			                                                	<a href="#" data-ng-click="deleteGas($index)"><i class="fa  fa-arrow-right"></i></a>
+			                                                	<a href="#" data-ng-click="deleteGas($index)"><i class="fa fa-arrow-right"></i></a>
 			                                             	</div>
 				                                             
 				                                         </li>                                                                                                   
@@ -192,7 +189,7 @@
 					                    		<label class="control-label">Lista de Gases</label>		                        
 					                        	<div style="max-height: 150px; height:auto; overflow: auto">				                        	                                                       
 		                                            <ul class="todo-list" style="padding: 1px !important" data-ng-repeat="item in gases | gasSensorFilter:searchGas track by $index">
-		                                               <li style="background: #d1ddf9;">
+		                                               <li style="background: #d1ddf9; border-left: 3px solid #639ed9;">
 		                                                   
 		                                                   	<a data-ng-if="sensorGases.length < 1" href="#" data-ng-click="addGasSensor(item.index)"><i class="fa fa-arrow-left"></i></a>
 		                                                	<span data-ng-if="sensorGases.length >= 1"><i class="fa fa-arrow-left"></i></span>

@@ -63,15 +63,15 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 	 
 	$scope.clearFormSensor = function () {
 	
-		 $scope.gases = angular.copy($scope.resultGases.list);
-		 
+		$scope.gases = angular.copy($scope.resultGases.list);
+		$scope.searchGas = {gases: $scope.sensorGases};
+		
 	    $scope.sensorUid = undefined;  
 	    $scope.sensorName = '';
 	    $scope.sensorModel = '';
 	    $scope.sensorManufacturer = '';
 	    $scope.sensorDetectionType = '';	    
 	    $scope.sensorGases = [];
-	    $scope.newGases = [];
 	    $scope.gasUnitMeterGases = '';
 		$scope.sensorRangeMax = '';
 		$scope.sensorRangeMin = '';
@@ -101,7 +101,7 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 	 }	 
 	
 	$scope.changeManufacturer = function() { 
-		$scope.searchGas = {gases: $scope.sensorGases};
+		
 		$scope.sensorGases = [];
 				
 	}

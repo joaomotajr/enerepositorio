@@ -52,7 +52,7 @@
 					</div>
 					
 					<div class="box-footer">						                                                                
-						<button type="button" data-ng-click="inicializaLDragDrop(); userForm.$setPristine()" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalEditSensor">Novo</button>
+						<button type="button" data-ng-click="clearFormSensor(); userForm.$setPristine()" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalEditSensor">Novo</button>
 					</div>
 				</div>
 				

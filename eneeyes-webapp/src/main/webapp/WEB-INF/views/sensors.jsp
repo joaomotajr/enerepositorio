@@ -52,7 +52,8 @@
 					</div>
 					
 					<div class="box-footer">						                                                                
-						<button type="button" data-ng-click="clearFormSensor(); userForm.$setPristine()" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalEditSensor">Novo</button>
+						<button type="button" data-ng-click="clearFormSensor(); userForm.$setPristine()" class="btn btn-primary pull-right" 
+						data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalEditSensor">Novo</button>
 					</div>
 				</div>
 				
@@ -66,15 +67,16 @@
 		</div>
 		
 		<div id="modalEditSensor" class="modal">                
-			<div class="modal-dialog  modal-lg" role="document">
-				<div class="modal-content">                            
-					<div class="modal-body">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">                               
+					<div class="modal-body" style="padding-bottom: 5px !important">
+					
 						<div class="panel panel-default">
 							<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Edição de Sensores</strong></div>							                                                                           
 					  	</div>							
 								
 						<div class="box box-primary" data-ng-class="(sensorName || sensorModel || sensorManufacturer || sensorDetectionType) ? 'box-primary' : 'box-default'">
-						
+							
 							<div class="box-header">
 								<h3 class="box-title">Cadastro / Edição</h3>	
 								<span class="text-muted pull-right" data-ng-click="refreshSensors();"><i title="Refresh" class="fa fa-pencil-square-o"></i></span>							
@@ -203,12 +205,10 @@
 						            </div>	                 
 					            </form>							            										
 							</div>
-						</div>								
-							
-										
+						</div>		
 				  	</div>
 				  	
-				  	<div class="modal-footer">
+				  	<div class="modal-footer" style="padding: 8px;">
 						<button type="button" data-ng-click="clearFormSensor()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
 						<button type="button" data-ng-click="saveSensor();" class="btn btn-primary" data-dismiss="modal"
 							data-ng-disabled="(sensorName && sensorModel && sensorManufacturer && sensorDetectionType && (sensorGases.length != 0 || newGases.length > 0)) ? false : true">Salvar

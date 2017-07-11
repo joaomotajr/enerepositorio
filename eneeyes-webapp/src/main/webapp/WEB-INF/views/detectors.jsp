@@ -49,7 +49,8 @@
 				</div>
 				
 				<div class="box-footer">						                                                                
-					<button type="button" data-ng-click="clearFormDetector(); userForm.$setPristine()" class="btn btn-primary pull-right" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalEditDetector">Novo</button>
+					<button type="button" data-ng-click="clearFormDetector(); userForm.$setPristine()" class="btn btn-primary pull-right" 
+					data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalEditDetector">Novo</button>
 				</div>
 			</div>
 			
@@ -63,8 +64,8 @@
 	
 	<div id="modalEditDetector" class="modal">                
 		<div class="modal-dialog  modal-lg" role="document">
-			<div class="modal-content">                            
-				<div class="modal-body">					
+			<div class="modal-content">
+				<div class="modal-body" style="padding-bottom: 5px !important">					
 					<div class="panel panel-default">
 						<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Edição de Detectores</strong></div>	
 				  	</div>
@@ -143,7 +144,7 @@
 		                        <div class="box box-primary box-solid">
 				                    <div class="box-header with-border ui-sortable-handle ">
 				                    	<strong><i class="fa fa-feed"></i> Sensores </strong>
-				                    	<span class="text-red text-pull-right" data-ng-show="detectorSensors.length == 0"> <strong>[Adicionar Sensor(es)]</strong></span>				                    						                    
+				                    	<span class="text-red pull-right" data-ng-show="detectorSensors.length == 0"> <strong>[Adicionar Sensor(es)]</strong></span>				                    						                    
 				                    </div>
 				                	 
 				                    <div class="box-body">
@@ -183,7 +184,7 @@
 					</div>									
 			  	</div>
 			  	
-			  	<div class="modal-footer">
+			  	<div class="modal-footer" style="padding: 8px;">
 			  		<button type="button" data-ng-click="clearFormDetector()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
 					<button type="button" data-ng-click="saveDetector();" class="btn btn-primary" data-dismiss="modal"
 						data-ng-disabled="(detectorName && detectorModel && detectorManufacturer && detectorTransmitter && (detectorSensors.length != 0 || newSensors.length > 0)) ? false : true">Salvar

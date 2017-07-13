@@ -50,5 +50,11 @@ app.factory('ViewService', function($resource){
         listAllOffline : $resource('/security/api/view/offline/:interval/', {interval: '@interval'},{        
         	view : {method : 'GET'}
         }),
+        existsSensor : $resource('/security/api/view/existsSensorById/:id', {id: '@id'},{
+            view : {method : 'GET'}
+        }),        
+        existsSensors : $resource('/security/api/view/existsSensorsByIds/:id1/:id2', {id1: '@id1', id2: '@id2' },{                  
+            view : {method : 'GET'}
+        }),
      };
 });

@@ -32,21 +32,30 @@ angular.module('dependency', []).config(['$httpProvider', function ($httpProvide
         	 }
         	 else if (rejection.status == 403) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertDanger = "Acesso ao Módulo ou Recurso Não Permitido!";
+        		 $rootScope.alertDanger = "403 Acesso ao Módulo ou Recurso Não Permitido!";
         		 $('#resultDanger').hide().show('slow').delay(15000).hide('slow');
         	 }
         	 else if (rejection.status == 404) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertDanger = "Item Requisitado Inexistente, Contate o Administrador do Sistema";
+        		 $rootScope.alertDanger = "404 - Item Requisitado Inexistente, Contate o Administrador do Sistema.";
         		 $('#resultDanger').hide().show('slow').delay(15000).hide('slow');
+        	 }
+        	 else if (rejection.status == 405) {
+        		 angular.element('body').removeClass('loading'); 
+        		 $rootScope.alertDanger = "405 - Chamada Inválida, Contate o Administrador do Sistema.";
+        		 
+        		 $timeout(function(){
+        			 	$('#resultDanger').hide();
+	  					window.location.href='/';
+	  			 },2500);        		 
         	 }
         	 else if (rejection.status == 415) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertDanger = "Tipo de Media Insuportado, Contate o Administrador do Sistema";
+        		 $rootScope.alertDanger = "415 - Tipo de Media Insuportado, Contate o Administrador do Sistema.";
         	 }
         	 else if (rejection.status == 500) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertDanger = "Algum retorno indesejado no servidor, Contate o Administrador do Sistema";
+        		 $rootScope.alertDanger = "500 - Algum retorno indesejado no servidor, Contate o Administrador do Sistema";
         	 }
         	 else if (rejection.status > 400 && rejection.status <= 505 ) {
      		    	angular.element('body').removeClass('loading');

@@ -168,7 +168,8 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;    
 			
 			// TODO Precisa rever a busca de alarms pela área, pois não retorna o detector
-			$scope.getCompanyDetectorAlarmsArea();
+			if($scope.selectedCompanyDetectorsArea != null)
+				$scope.getCompanyDetectorAlarmsArea();
 			
         });		 
 	}

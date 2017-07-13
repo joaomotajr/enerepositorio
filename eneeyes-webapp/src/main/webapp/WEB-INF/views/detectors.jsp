@@ -1,4 +1,10 @@
- 
+ <style>
+		.disableDiv {
+			pointer-events: none;
+			opacity: 0.6;
+		}	
+			
+	</style>
 <div data-ng-controller="detectorController">
 					        											
 	<div class="row">	
@@ -67,13 +73,13 @@
 			<div class="modal-content">
 				<div class="modal-body" style="padding-bottom: 5px !important">					
 					<div class="panel panel-default">
-						<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Edição de Detectores</strong></div>	
+						<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Edi&ccedil;&atilde;o de Detectores</strong></div>	
 				  	</div>
 				  							
 					<div class="box box-primary" data-ng-class="(detectorName || detectorModel || detectorManufacturer || detectorTransmitter) ? 'box-primary' : 'box-default'">
 					
 						<div class="box-header">
-							<h3 class="box-title">Cadastro / Edição</h3>							
+							<h3 class="box-title">Cadastro / Edi&ccedil;&atilde;o</h3>							
 						</div>
 						
 						<div class="box-body">
@@ -95,9 +101,9 @@
 					                 	<div class="col-md-6">                                                                                                                                    
 											<div class="form-group">
 												<label class="control-label">Nome</label>
-												<span class="text-red" data-ng-show="detectorNameExist">Detector ja Existe</span> 
-												<span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
-										        <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
+												<span class="text-red" data-ng-show="detectorNameExist">Detector j&aacute; Existe</span> 
+												<span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigat&oacute;rio]</span>
+										        <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho M&aacute;ximo 15 caracteres</span>                                                                        
 												<input id="idDetectorName" data-ng-keydown="keypress($event)" class="form-control inputProfile" placeholder="Nome do Detector" data-ng-model="detectorName" data-ng-maxlength="15" name="username" required>                                                                        
 											</div>							
 										</div>
@@ -113,7 +119,7 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="box box-primary box-solid">				                    
-						                	<div class="box-header with-border"><strong><i class="fa fa-expand"></i> Fabricante</strong></div>
+						                	<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Fabricante</strong></div>
 						                    <div class="box-body">
 						                        <select class="form-control" data-live-search="true" 
 						                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
@@ -140,14 +146,18 @@
 						                    </div>			                    			                            
 						                </div>		     
 					                </div>
-				                </div>		     
+								</div>
+								
+								<hr style="margin-top: 5px !important; margin-bottom: 5px !important;">
+
 		                        <div class="box box-primary box-solid">
-				                    <div class="box-header with-border ui-sortable-handle ">
-				                    	<strong><i class="fa fa-feed"></i> Sensores </strong>
-				                    	<span class="text-red pull-right" data-ng-show="detectorSensors.length == 0"> <strong>[Adicionar Sensor(es)]</strong></span>				                    						                    
+				                    <div class="box-header with-border">
+				                    	<strong><i class="fa fa-feed"></i> Sensores</strong>
+										<span class="text-red pull-right" data-ng-show="detectorSensors.length == 0"> <strong>[Adicionar Sensor(es)]</strong></span>
+										<span class="text-white pull-right" data-ng-show="existSensor"> <strong>[ Altera&ccedil;&atilde;o N&atilde;o Permitida, H&aacute; Equipamentos Relacionados a Estes Sensores ]</strong></span>
 				                    </div>
 				                	 
-				                    <div class="box-body">
+				                    <div class="box-body" data-ng-class="{'disableDiv': existSensor}">
 				                    
 					                    <div class="col-sm-6">
 					                    
@@ -155,7 +165,7 @@
 						                    <div style="max-height: 250px; height:auto; overflow: auto">                                                                       
 			                                    <ul class="todo-list" style="padding: 1px !important" data-ng-repeat="item in detectorSensors">
 			                                         <li style="padding: 4px; border-left: 3px solid #639ed9;">			                                             
-			                                             <span class="text"><strong>Sensor:</strong> {{item.name}} - <strong>Gás</strong> {{item.gasesDto[0].name}} </span>		                                         
+			                                             <span class="text"><strong>Sensor:</strong> {{item.name}} - <strong>G&aacute;s</strong> {{item.gasesDto[0].name}} </span>		                                         
 			                                             <div class="pull-right">                                                        
 			                                                <a href="#" data-ng-click="deleteSensor($index)"><i class="fa fa-arrow-right"></i></a>
 			                                             </div>
@@ -165,13 +175,13 @@
 					                    </div>				                    
 				                    
 					                    <div class="col-sm-6">
-					                    	<label class="control-label">Lista de Sensores</label><span class="pull-right"> Máximo 2 Sensores </span> 			                    	                        
+					                    	<label class="control-label">Lista de Sensores</label><span class="pull-right"> M&aacute;ximo 2 Sensores </span> 			                    	                        
 					                        <div style="max-height: 250px; height:auto; overflow: auto">				                        	                                                       
 		                                    	<ul class="todo-list" style="padding: 1px !important" data-ng-repeat="sensor in sensors | manufacturerFilter2:searchSensor track by $index">
 		                                            <li style="background: #d1ddf9; border-left: 3px solid #639ed9;">                                                        
 		                                                <a data-ng-if="detectorSensors.length < 2" href="#" data-ng-click="addSensorDetector(sensor.index)"><i class="fa fa-arrow-left"></i></a>
 		                                                <span data-ng-if="detectorSensors.length >= 2"><i class="fa fa-arrow-left"></i></span>
-		                                                <span class="text"><strong>Sensor:</strong> {{sensor.name}} - <strong>Gás: </strong> {{sensor.gasesDto[0].name}} </span>
+		                                                <span class="text"><strong>Sensor:</strong> {{sensor.name}} - <strong>G&aacute;s: </strong> {{sensor.gasesDto[0].name}} </span>
 		                                            </li>                                
 		                                        </ul>
 		                                    </div>
@@ -196,6 +206,3 @@
 	</div> 
 		
 </div>
-
-    
-    

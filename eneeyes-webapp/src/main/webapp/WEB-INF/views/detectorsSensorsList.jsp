@@ -14,7 +14,7 @@
 							<thead>
 								<tr>
 									<th></th>
-									<th>Nome</th>
+									<th>Detector</th>
 									<th>Modelo</th>																
 									<th>AÁ„o</th>																																						
 								</tr>
@@ -30,7 +30,7 @@
 										</div>	
 										<div data-ng-if="item.uid != selectedCompanyDetector.detectorDto.uid">
 											<button type="button" class="btn btn-xs" data-ng-class="(selectedCompanyDetector.uid == null) ? 'btn-primary' : 'btn-default'" 
-											data-ng-click="selecionarDetector(item)" data-ng-disabled="selectedCompanyDetector.uid != null">··Selecionar··</button>
+											data-ng-click="selecionarDetector(item)" data-ng-disabled="selectedCompanyDetector.uid != null">†Selecionar†</button>
 										</div>																							    								
 									</td>																		
 								</tr>                                                               

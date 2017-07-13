@@ -50,7 +50,7 @@
 		        	
 		        	<form>		          
 		          		<div class="form-group has-feedback">
-		            		<input type="text" class="form-control" placeholder="Login do Usuário" data-ng-model="forms.signin.login" data-ng-keyup="$event.keyCode == 13 ? signin() : null">
+		            		<input type="text" class="form-control" placeholder="Login do Usu&aacute;rio" data-ng-model="forms.signin.login" data-ng-keyup="$event.keyCode == 13 ? signin() : null">
 		            		<span class="glyphicon glyphicon-user form-control-feedback"></span>
 		          		</div>
 		          
@@ -107,13 +107,13 @@
 						</div>
 						<div class="alert alert-danger passAlert" 
 							data-ng-show="!signinForm.password1.$error.required && !signinForm.password1.$error.minlength && !signinForm.password1.$error.maxlength && signinForm.password1.$error.pattern && signinForm.password1.$dirty">
-							<i class="fa fa-ban"></i><span> Precisa Uma letra Maiúscula &amp; Uma Minúscula, e Um Número ou Simbolo!</span>
+							<i class="fa fa-ban"></i><span> Precisa Uma letra Mai&aacute;scula &amp; Uma Min&uacute;scula, e Um N&uacute;mero ou Simbolo!</span>
 						</div>
 						<div class="alert alert-danger passAlert" data-ng-show="!signinForm.password1.$error.required && signinForm.password2.$error.required && signinForm.password2.$dirty"> 	
 							<i class="fa fa-ban"></i><span> Confirme sua Senha!</span>
 						</div>
 						<div class="alert alert-danger passAlert" data-ng-show="!signinForm.password2.$error.required && signinForm.password2.$error.noMatch && signinForm.password1.$dirty"> 	
-							<i class="fa fa-ban"></i><span> Senhas Não Conferem!</span>
+							<i class="fa fa-ban"></i><span> Senhas N&atilde;o Conferem!</span>
 						</div>
 						<br>						
 						
@@ -141,9 +141,7 @@
 
    
    		<script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>    
-    	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>    	
-    	<script src="/assets/js/login.js"></script>
-    	
+    	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>    	   	
 	</body>
     <!-- END BODY -->
 </html>

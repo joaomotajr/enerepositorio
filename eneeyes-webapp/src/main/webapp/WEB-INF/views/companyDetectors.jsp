@@ -1,4 +1,5 @@
- <style>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<style>
 	
 	td.details-control {		
 		background: url("/assets/plugins/datatables/images/details_open.png") no-repeat center center;		
@@ -16,7 +17,6 @@
 </style>
 
 <div class="col-md-9">
-
 	<div data-ng-controller="companyDetectorController">
 		<div class="box box-primary">
 			<div class="box-header with-border">			
@@ -37,9 +37,9 @@
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs tabDetector">
 				       	<li class="active"><a href="#tabCompanyDetector_1" id="stepTabDetector_1" data-toggle="tab">Cadastro</a></li>
-				       	<li><a href="#tabCompanyDetector_4" id="stepTabDetector_4" data-toggle="tab">Manutenção/Instalação</a></li>
-				       	<li><a href="#tabCompanyDetector_2" id="stepTabDetector_2" data-toggle="tab">Configuração</a></li>
-				       	<li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Gráfico do Histórico</a></li>				       	
+				       	<li><a href="#tabCompanyDetector_4" id="stepTabDetector_4" data-toggle="tab">Manuten&ccedil;&atilde;o/Instala&ccedil;&atilde;o</a></li>
+				       	<li><a href="#tabCompanyDetector_2" id="stepTabDetector_2" data-toggle="tab">Configura&ccedil;&atilde;o</a></li>
+				       	<li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Gr&aacute;fico do Hist&oacute;rico</a></li>				       	
 				    	<li data-ng-hide="selectedCompanyDetector" class="pull-right"><i title="[Nenhum Detector Associado ao Dispositivo]" class="fa fa-info-circle text-red"></i></li>				    	
 				    </ul>
 					
@@ -53,35 +53,35 @@
 						    		<div class="row">				    			
 								        <div class="col-md-2">
 								        	<div class="form-group">
-								                <label class="control-label">Cádigo</label>
-								                <input class="form-control" placeholder="Cádigo do Detector" data-ng-model="selectedCompanyDetector.uid" readonly>
+								                <label class="control-label">C&oacute;digo</label>
+								                <input class="form-control" placeholder="Cï¿½digo do Detector" data-ng-model="selectedCompanyDetector.uid" readonly>
 								            </div>	
 								        </div>
 								        <div class="col-md-2">
 								            <div class="form-group">								            
-								                <label class="control-label">Identificação</label>
-								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Identificação Obrigatorio]</span>
-									            <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 8 caracteres</span>
+								                <label class="control-label">Identifica&ccedil;&atilde;o</label>
+								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Identifica&ccedil;&atilde;o Obrigatorio]</span>
+									            <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho M&aacute;ximo 8 caracteres</span>
 								                <input data-disallow-spaces id="companyDetectorName" class="form-control" style="text-transform:uppercase" 
-								                	placeholder="Identificação do Detector (Sem Espaáos)" 
+								                	placeholder="Identifica&ccedil;&atilde;o do Detector (Sem Espa&ccedil;os)" 
 								                	data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="8" name="username" 
-								                	title="Identificação do Detector (Sem Espaáos)"
+								                	title="Identifica&ccedil;&atilde;o do Detector (Sem Espa&ccedil;os)"
 								                required>
 								            </div>
 								        </div>
 								        
 								        <div class="col-md-2">
 								        	<div class="form-group">
-								                <label class="control-label">Nr. de Sárie</label>
-								                <input class="form-control" placeholder="Nro de Sárie do Detector" data-ng-maxlength="24" 
+								                <label class="control-label">Nr. de S&eacute;rie</label>
+								                <input class="form-control" placeholder="Nro de S&eacute;rie do Detector" data-ng-maxlength="24" 
 								                data-ng-model="selectedCompanyDetector.serialNumber">
 								            </div>	
 								        </div>
 										
 								        <div class="col-md-6">
 								            <div class="form-group">
-								                <label class="control-label">Descrição</label>
-								                <input class="form-control" placeholder="Descrição" data-ng-model="selectedCompanyDetector.description">
+								                <label class="control-label">Descri&ccedil;&atilde;o</label>
+								                <input class="form-control" placeholder="Descri&ccedil;&atilde;o" data-ng-model="selectedCompanyDetector.description">
 								            </div>
 								        </div>
 								    </div>
@@ -95,7 +95,7 @@
 								        </div>
 
 										<div class="col-md-6">
-											<label class="control-label">Identificação do Detector/Sensores</label>
+											<label class="control-label">Identifica&ccedil;&atilde;o do Detector/Sensores</label>
 											<div class="box box-primary collapsed-box">
 												<div class="box-header with-border">
 													<Label class="box-title">{{selectedCompanyDetector.detectorDto.name}}-{{selectedCompanyDetector.detectorDto.model}} Sensores: {{selectedCompanyDetector.detectorDto.sensorsDto.length}} </label>
@@ -144,9 +144,9 @@
 				    	
 				       		<div class="row">
 				       			<div class="col-md-12">
-				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true"> Salvar </button>		       				
-				       				<span class="pull-right"> </span>
-				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true"> Excluir </button>								
+				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true">&nbsp;Salvar&nbsp;</button>		       				
+				       				<span class="pull-right">&nbsp;</span>
+				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">&nbsp;Excluir&nbsp;</button>								
 								</div>
 							</div>						
 				    	         
@@ -234,8 +234,8 @@
 									   	</div>									   					               	
 						               	<div class="panel-body">
 						               		<input class="pull-right ng-pristine ng-untouched ng-valid" type="checkbox" style="margin-right: 30px" data-ng-model="changeGraphic">
-					               			<label data-ng-show="changeGraphic" class="pull-right">Gráfico Completo&nbsp;&nbsp;</label>
-											<label data-ng-hide="changeGraphic" class="pull-right">Gráfico Medições&nbsp;&nbsp;</label>
+					               			<label data-ng-show="changeGraphic" class="pull-right">Gr&aacute;fico Completo&nbsp;&nbsp;</label>
+											<label data-ng-hide="changeGraphic" class="pull-right">Gr&aacute;fico Medi&ccedil;&atilde;es&nbsp;&nbsp;</label>
 						               							               							               							               		
 						               		<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length == 1">
 						               			<ul class="nav nav-tabs" id="myTab">
@@ -294,7 +294,7 @@
 												<div>			
 													<div class="box box-primary collapsed-box">
 														<div class="box-header with-border">
-															<Label class="box-title">Histórico de Manutenção do Detector</label>
+															<Label class="box-title">Hist&oacute;rico de Manuten&ccedil;&atilde;o do Detector</label>
 															<div class="box-tools pull-right" title="Clique para Epandir">
 																<button class="btn btn-box-tool" data-widget="collapse">
 																	<i class="fa fa-plus"></i>
@@ -318,9 +318,9 @@
 				       	     
 				       	    <div class="row">
 				       			<div class="col-md-12">
-				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true"> Salvar </button>		       				
-				       				<span class="pull-right"> </span>
-				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true"> Excluir </button>								
+				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true">Salvar</button>		       				
+				       				<span class="pull-right">&nbsp;</span>
+				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">Excluir</button>								
 								</div>
 							</div>
 							
@@ -337,7 +337,7 @@
 				<div class="modal-content">                            
 					<div class="modal-body">
 						<div class="panel panel-default">
-							<div class="panel-heading" style="text-align:center">Selecione Alarme para o Sensor: <strong> {{selectedSensor.name}} </strong> - Valor Máximo: <strong>{{selectedSensor.rangeMax}}</strong> </div>                                                                           
+							<div class="panel-heading" style="text-align:center">Selecione Alarme para o Sensor: <strong> {{selectedSensor.name}} </strong> - Valor M&aacute;ximo: <strong>{{selectedSensor.rangeMax}}</strong> </div>                                                                           
 					  	</div>
 				
 						<div class="box">
@@ -360,7 +360,7 @@
 												<th>Alarme 1</th>
 												<th>Alarme 2</th>
 												<th>Alarme 3</th>
-												<th>Ação</th>						
+												<th>A&ccedil;&atilde;o</th>						
 											</tr>
 										</thead>
 										<tbody>                                                        
@@ -397,3 +397,4 @@
 		
 	</div>	
 </div>
+<script src="/assets/js/eChartInit.js"></script>

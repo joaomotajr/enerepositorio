@@ -25,8 +25,9 @@
     <script src="/assets/plugins/datatables/dataTables.select.min.js"></script>
     
     <!-- AdminLTE App -->
-     <script src="/assets/plugins/adminlte/app.min.js"></script>     
-    <script src="/assets/plugins/adminlte/chart.js"></script>         
+    <script src="/assets/plugins/adminlte/app.min.js"></script>     
+    <script src="/assets/plugins/adminlte/chart.js"></script>
+    <script src="/assets/plugins/charts/echarts.min.js"></script>         
 
     <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>

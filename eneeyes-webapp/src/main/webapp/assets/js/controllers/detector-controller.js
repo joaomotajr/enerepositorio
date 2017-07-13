@@ -39,7 +39,7 @@ app.filter('manufacturerFilter', function () {
     }
 });
 
-app.controller('detectorController', function ($scope, $timeout, $filter, DetectorService, ManufacturerService, SensorService, TransmitterService) {
+app.controller('detectorController', function ($scope, $timeout, $filter, DetectorService, ManufacturerService, SensorService, TransmitterService, ViewService) {
 		
 	$scope.saveDetector = function() {		
 		
@@ -91,7 +91,8 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	    $scope.detectorTransmitter = '';
 	    $scope.detectorImage = "/assets/img/cover.jpg";
 	    $scope.detectorSensors = [];
-	    $scope.detectorNameExist = "false";
+		$scope.detectorNameExist = "false";
+		$scope.existSensor = undefined;
 	}
 	 
 	$scope.getDetectors = function() {
@@ -129,7 +130,9 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		    $scope.detectorModel = $scope.detectors[index].model;		    		    
 		    $scope.detectorImage = ($scope.detectors[index].image == null ? "/assets/img/cover.jpg" :  $scope.detectors[index].image);		    
 		    $scope.detectorTransmitter = $scope.detectors[index].transmitterDto;
-		    $scope.detectorSensors = $scope.detectors[index].sensorsDto;
+			$scope.detectorSensors = $scope.detectors[index].sensorsDto;
+				
+			$scope.getExistSensorInPosition($scope.detectorSensors) ;
 		    		    
 		    $timeout(function () {
 		    	$scope.search = {manufacturer: $scope.detectorManufacturer};
@@ -218,6 +221,23 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		 $scope.detectorSensors.splice(index, 1);	 
 		 $scope.searchSensor = {manufacturer: $scope.detectorManufacturer , sensors: $scope.detectorSensors};
 	 }	 
+
+	 $scope.getExistSensorInPosition = function(sensors) {
+		$scope.isExistsSensor = undefined;			
+
+		if(sensors.length > 1 ) {
+			$scope.isExistsSensor = new View.existsSensors();	
+			$scope.isExistsSensor.$view({_csrf : angular.element('#_csrf').val(), id1:sensors[0].uid, id2:sensors[1].uid}, function() {	 			 
+				$scope.existSensor = ($scope.isExistsSensor.resultType == "YES_DATA");	
+			});
+		}	
+		else {
+			$scope.isExistsSensor = new View.existsSensor();
+			$scope.isExistsSensor.$view({_csrf : angular.element('#_csrf').val(), id:sensors[0].uid }, function() {	 			 
+				$scope.existSensor = ($scope.isExistsSensor.resultType == "YES_DATA");	
+			});
+		}
+	}
  
 	 $scope.refreshDetectors = function() {
 		 $scope.getManufacturers();

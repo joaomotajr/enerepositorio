@@ -29,6 +29,13 @@ public class CompanyDetectorViewController {
 		
 		return service.findByCompanyDetector(uid);		
 	}
+	                         
+	@RequestMapping(value="/security/api/view/existsDetectorById/{uid}", method=RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> existsDetectorById(@PathVariable Long uid) {
+		
+		return service.existsDetector(uid);		
+	}	
 	
 	@RequestMapping(value="/security/api/view/existsSensorById/{uid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)

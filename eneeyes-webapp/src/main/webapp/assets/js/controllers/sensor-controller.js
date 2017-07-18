@@ -18,7 +18,7 @@ app.filter('gasSensorFilter', function () {
     }
 });
 
-app.controller('sensorController', function ($scope, $timeout, $filter, SensorService, ManufacturerService, GasService) {
+app.controller('sensorController', function ($scope, $timeout, $filter, SensorService, ManufacturerService, GasService, ViewService) {
 		
 	$scope.saveSensor = function() {
 		
@@ -104,23 +104,36 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 	}
  
 	 $scope.editSensor = function (index) {
-	        $scope.sensorUid = $scope.sensors[index].uid;
-	        
-	        $scope.sensorManufacturer = $scope.sensors[index].manufacturerDto;
-		    $scope.sensorName = $scope.sensors[index].name;
-		    $scope.sensorModel = $scope.sensors[index].model;
-		    $scope.sensorDetectionType = $scope.getDetectionTypes($scope.sensors[index].detectionType);
-		    $scope.sensorGases = $scope.sensors[index].gasesDto;
-		    $scope.sensorRangeMax = $scope.sensors[index].rangeMax;
-		    $scope.sensorRangeMin = $scope.sensors[index].rangeMin;
-		    $scope.sensorRangeUnit = $scope.sensors[index].rangeUnit;
-		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.sensors[index].unitMeterGases);
+        $scope.sensorUid = $scope.sensors[index].uid;
         
-	        $timeout(function () {
-	        	$scope.searchGas = {gases: $scope.sensorGases};
-	            $('#modalEditSensor').modal({ show: 'false' });                        
-	        }, 200);
-	    }
+        $scope.sensorManufacturer = $scope.sensors[index].manufacturerDto;
+	    $scope.sensorName = $scope.sensors[index].name;
+	    $scope.sensorModel = $scope.sensors[index].model;
+	    $scope.sensorDetectionType = $scope.getDetectionTypes($scope.sensors[index].detectionType);
+	    $scope.sensorGases = $scope.sensors[index].gasesDto;
+	    $scope.sensorRangeMax = $scope.sensors[index].rangeMax;
+	    $scope.sensorRangeMin = $scope.sensors[index].rangeMin;
+	    $scope.sensorRangeUnit = $scope.sensors[index].rangeUnit;
+	    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.sensors[index].unitMeterGases);
+    
+	    $scope.getExistSensor($scope.sensorUid) ;
+	    
+        $timeout(function () {
+        	$scope.searchGas = {gases: $scope.sensorGases};
+            $('#modalEditSensor').modal({ show: 'false' });                        
+        }, 200);
+	 }
+	 
+	 $scope.getExistSensor = function(sensorId) {
+
+		$scope.existSensor = undefined;
+
+		$scope.isExistsSensor = new ViewService.existsSensor();
+		$scope.isExistsSensor.$view({_csrf : angular.element('#_csrf').val(), id:sensorId }, function() {	 			 
+			$scope.existSensor = ($scope.isExistsSensor.resultType == "YES_DATA");	
+		});
+	}
+		
 	 
 	 $scope.deleteSensor = function(index) {
 		 

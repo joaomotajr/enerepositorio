@@ -1,7 +1,12 @@
 	<style>
 		.todo-list>li {
 		    padding: 4px;
-		}	
+		}
+		
+		.disableDiv {
+			pointer-events: none;
+			opacity: 0.6;
+		}		
 	</style>
 	 
 	<div data-ng-controller="sensorController">
@@ -42,7 +47,6 @@
 											<button type="button" class="btn btn-primary btn-xs" data-ng-click="editSensor($index)">editar</button>
 										</td>
 										<td>
-<!-- 											<button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteSensor($index)">excluir</button> -->
 											<a type="button" class="btn btn-danger btn-xs" data-popover=' do Sensor: [ {{item.name}} ]' data-confirm="deleteSensor($index)" >excluir</a>
 										</td>						
 									</tr>                                                               
@@ -168,11 +172,16 @@
 								    </div>
 			                        
 			                        <div class="box box-primary box-solid">
-					                    <div class="box-header with-border ui-sortable-handle "><strong><i class="fa fa-yelp"></i> Gases </strong>
-					                    	<span class="text-red pull-right" data-ng-show="sensorGases.length == 0"><strong>[Adicionar um Gás]</strong></span>					                    				                    	 
-					                    </div>		                	 
-					                    <div class="box-body">		                    
+					                    <div class="box-header with-border ui-sortable-handle ">
+					                    	<strong><i class="fa fa-yelp"></i> Gases</strong>
+					                    	<span class="text-red pull-right" data-ng-show="sensorGases.length == 0"><strong>[Adicionar um Gás]</strong></span>
+					                    	<span class="text-white pull-right" data-ng-show="existSensor"> <strong>[ Altera&ccedil;&atilde;o N&atilde;o Permitida, H&aacute; Equipamento(s) Relacionado(s) a Este Sensor ]</strong></span>					                    				                    	 
+					                    </div>
+					                    		                	 
+					                    <div class="box-body" data-ng-class="{'disableDiv': existSensor}">		                    
+						                    
 						                    <div class="col-sm-6">			                    
+						                    
 						                    	<label class="control-label">Gases Detectáveis</label>
 							                    <div style="max-height: 250px; height:auto; overflow: auto">                                                                       
 				                                    <ul class="sort todo-list" style="padding: 1px !important" data-ng-repeat="item in sensorGases">
@@ -201,7 +210,8 @@
 		                                           </ul>
 		                                       </div>
 						                    </div>								                            
-					                    </div>							                    			                            
+					                    </div>	
+					                    						                    			                            
 						            </div>	                 
 					            </form>							            										
 							</div>

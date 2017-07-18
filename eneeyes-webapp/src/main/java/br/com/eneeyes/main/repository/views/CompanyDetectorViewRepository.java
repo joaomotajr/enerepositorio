@@ -11,5 +11,7 @@ public interface CompanyDetectorViewRepository extends JpaRepository<CompanyDete
 	public Long countBySensorId(Long sensorId);
 	
 	public Long countBySensorIdIn(List<Long> sensorIds);
+
+	public Long countByDetectorId(Long detectorId);
 	
 }

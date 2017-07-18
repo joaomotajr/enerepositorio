@@ -35,7 +35,7 @@ public class CompanyDetectorViewService {
 				result.setMessage("Executado com sucesso.");
 			} else {				
 				result.setResultType( ResultMessageType.NO_DATA );
-				result.setMessage("Nenhuma Posição.");
+				result.setMessage("Nenhum Dado.");
 			}
 			
 		} catch (Exception e) {			
@@ -59,7 +59,31 @@ public class CompanyDetectorViewService {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.NO_DATA );
-				result.setMessage("Nenhuma Posição.");
+				result.setMessage("Nenhum Dado.");
+			}
+			
+		} catch (Exception e) {			
+			result.setResultType( ResultMessageType.ERROR );
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	public BasicResult<?> existsDetector(Long uid) {
+		Result<CompanyDetectorView> result = new Result<CompanyDetectorView>();
+			
+		try {
+			Long resp = repository.countByDetectorId(uid);
+			
+			if (resp > 0) {
+				
+				result.setResultType( ResultMessageType.YES_DATA );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.NO_DATA );
+				result.setMessage("Nenhum Dado.");
 			}
 			
 		} catch (Exception e) {			

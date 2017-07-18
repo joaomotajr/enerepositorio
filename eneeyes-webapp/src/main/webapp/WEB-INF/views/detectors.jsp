@@ -154,6 +154,7 @@
 				                    <div class="box-header with-border">
 				                    	<strong><i class="fa fa-feed"></i> Sensores</strong>
 										<span class="text-red pull-right" data-ng-show="detectorSensors.length == 0"> <strong>[Adicionar Sensor(es)]</strong></span>
+										<span class="text-white pull-right" data-ng-show="existDetector"> <strong>[ Altera&ccedil;&atilde;o N&atilde;o Permitida, H&aacute; Equipamentos Relacionados a Este Detector ]</strong></span>
 				                    </div>
 				                	 
 				                    <div class="box-body" data-ng-class="{'disableDiv': existDetector}">

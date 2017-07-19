@@ -42,7 +42,7 @@
               
             </ul><!-- /.control-sidebar-menu -->
 
-            <h3 class="control-sidebar-heading">Tasks Progress</h3>
+            <h3 class="control-sidebar-heading">Progresso de Tarefas</h3>
             <ul class="control-sidebar-menu">
               <li>
                 <a href="javascript::;">
@@ -88,47 +88,28 @@
               <h3 class="control-sidebar-heading">Configurações Gerais</h3>
               <div class="form-group">
                 <label class="control-sidebar-subheading">
-                  Report panel usage
-                  <input type="checkbox" class="pull-right" checked>
+                  Relatar Uso de Dados
+                  <input type="checkbox" class="pull-right" checked disabled>
                 </label>
                 <p>
-                  Some information about this general settings option
+                  Apenas para usuários de fora da Cetralizadora
                 </p>
               </div><!-- /.form-group -->
+              
+
+              <h3 class="control-sidebar-heading">Opções de Temporização</h3>
 
               <div class="form-group">
                 <label class="control-sidebar-subheading">
-                  Allow mail redirect
-                  <input type="checkbox" class="pull-right" checked>
-                </label>
-                <p>
-                  Other sets of options are available
-                </p>
-              </div><!-- /.form-group -->
-
-              <div class="form-group">
-                <label class="control-sidebar-subheading">
-                  Expose author name in posts
-                  <input type="checkbox" class="pull-right" checked>
-                </label>
-                <p>
-                  Allow the user to show his name in blog posts
-                </p>
-              </div><!-- /.form-group -->
-
-              <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-              <div class="form-group">
-                <label class="control-sidebar-subheading">
-                  Show me as online
-                  <input type="checkbox" class="pull-right" checked>
+                  Mostrar meu Status Online
+                  <input type="checkbox" class="pull-right" checked disabled>
                 </label>
               </div><!-- /.form-group -->
 
               <div class="form-group">
                 <label class="control-sidebar-subheading">
-                  Turn off notifications
-                  <input type="checkbox" class="pull-right">
+                  Desabilitar Notificações
+                  <input type="checkbox" class="pull-right" disabled>
                 </label>
               </div><!-- /.form-group -->
 

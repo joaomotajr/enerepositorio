@@ -12,6 +12,8 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 		if($scope.selectedCompanyDetector == null) return;
 		
 		$scope.companyDetectorMaintenanceHistoric = undefined;
+		
+		$scope.clearFormMaintenance();
 		$scope.getOneCompanyDetector();				 
 	}
 	
@@ -31,6 +33,7 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 			
 		if($scope.selectedCompany == null) return;
 		
+		$scope.clearForm();		
 		$scope.search = {company: $scope.selectedCompany};
 	}
 	
@@ -145,16 +148,23 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 			
 	    $scope.description = '';
 	    $scope.selectedHistoricMaintenaceType = '';
+	    $scope.msgErroInfoHistoric = '';
 	    	    	    
 	    $('#dateOne').val('');						
 		$('#dateTwo').val('');
 		
+	}
+	
+	$scope.clearFormMaintenance = function() {
+		
 		$('#deliveryDate').val('');
 		$scope.selectedCompanyDetector.garantyDays = 0;
 		$scope.selectedCompanyDetector.descriptionDelivery = '';			
+		
 		$('#installDate').val('');
 		$scope.selectedCompanyDetector.descriptionInstall = '';
 		$scope.selectedCompanyDetector.maintenanceInterval = 0;
+		
 	}
 	
 	function reloadDates() {

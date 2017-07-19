@@ -30,8 +30,8 @@
                    		data-ng-class="{'bg-black' : alarmesFired[1]=='OFFLINE', 'bg-green' : alarmesFired[1]=='NORMAL', 'bg-orange' : alarmesFired[1]=='ALERTA', 'bg-gray' : alarmesFired[1]=='DETECCAO', 'bg-red' : alarmesFired[1]=='EVACUACAO'}">S2</button>                  
                  	</div>
                 </div>				
-				
 			</div>		
+				
 			<div class="box-body">
 							
 				<div class="nav-tabs-custom">
@@ -54,7 +54,7 @@
 								        <div class="col-md-2">
 								        	<div class="form-group">
 								                <label class="control-label">C&oacute;digo</label>
-								                <input class="form-control" placeholder="C�digo do Detector" data-ng-model="selectedCompanyDetector.uid" readonly>
+								                <input class="form-control" placeholder="C&oacute;digo do Detector" data-ng-model="selectedCompanyDetector.uid" readonly>
 								            </div>	
 								        </div>
 								        <div class="col-md-2">
@@ -397,4 +397,4 @@
 		
 	</div>	
 </div>
-<script src="/assets/js/eChartInit.js"></script>
+<!-- <script src="/assets/js/eChartInit.js"></script> -->

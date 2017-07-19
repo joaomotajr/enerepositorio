@@ -185,26 +185,25 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 	 getTree = function() {
 		 
 		var itens = [];
+		var itemBaseLabel = "<small class='label label-default pull-right'></i>";
 		
 		//Company
-		var empresa = $scope.$root.selectedCompany.name + "<small class='label label-default pull-right'></i>" + $scope.$root.selectedCompany.unitsDto.length + "" + "</small>";
+		var empresa = $scope.$root.selectedCompany.name + itemBaseLabel + $scope.$root.selectedCompany.unitsDto.length + "" + "</small>";
 		
 		itens.push({text: empresa , type : 0, nodes: [] });
 		
 		for (var i = 0; i < $scope.$root.selectedCompany.unitsDto.length; i++) {
-			
-			//Unidades
+						
 	   		var unidade = "<i class='fa fa-building' style='font-size:1.2em;'></i> " + 
-	   			$scope.$root.selectedCompany.unitsDto[i].name + "<small class='label label-default pull-right'></i>" + 
+	   			$scope.$root.selectedCompany.unitsDto[i].name + itemBaseLabel + 
 	   			$scope.$root.selectedCompany.unitsDto[i].areasDto.length + "" +  "</small>";	   		
 			
 	   		itens[0].nodes.push({text: unidade, nodes: [], type : 1, index: i , unit : $scope.$root.selectedCompany.unitsDto[i]});
 	
 		   for (var j = 0; j < $scope.$root.selectedCompany.unitsDto[i].areasDto.length; j++) {			  			   
-			   
-			   //Áreas
+			
 			   var area = "<i class='fa fa-map-o' style='font-size:1.2em;'></i> " + 
-			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].name + "<small class='label label-default pull-right'></i>" + 
+			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].name + itemBaseLabel + 
 			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length + "" + "</small>";
 			   
 			   itens[0].nodes[i].nodes.push({text: area, nodes: [], type : 2, index: j, unitIndex: i , area: $scope.$root.selectedCompany.unitsDto[i].areasDto[j] });
@@ -214,9 +213,11 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 				   //Dispositivos
 				   if($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType == "DETECTOR") {
 				   		var device = "<i class='fa fa fa-rss' style='font-size:1.2em;'></i> DETECTOR";
-					    if ($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name != "")  
-					    	device +=	"<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name + "</small>";
-				   }
+					    if ($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name != undefined)  
+							device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name + "</small>";
+						else
+							device += "<small class='label label-success pull-right' style='vertical-align:super;font-size:0.7em'>NEW</small>";
+				   }	
 				   else {   
 					   var device = "<i class='fa fa-keyboard-o' style='font-size:1.2em;'></i> " + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
 				   }

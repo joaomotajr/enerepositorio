@@ -139,19 +139,19 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			
 	$scope.getOneCompanyDetector = function() {
 		
-		$scope.getDetectors();
+		//$scope.getDetectors();
 		$scope.search = { unitMeterGases: null, gas : null };
 				
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
 			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;			
-			reloadDates();
-			$scope.getCompanyDetectorMaintenanceHistoric();
-			
+						
 			//* Detector ja foi associado a dispositivo checa alarmes *//
 			if($scope.selectedCompanyDetector != null) {
 				$scope.getCompanyDetectorAlarms();
+				reloadDates();
+				$scope.getCompanyDetectorMaintenanceHistoric();
 				$scope.getPositionsNoTimer($scope.selectedCompanyDetector);
 			}
         });		 
@@ -507,7 +507,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	    
 	    if ($scope.changeGraphic) {
 		    var options = {
-		          title: "Dados do Sensor na Última Hora.",
+		          title: "Dados do Sensor na ï¿½ltima Hora.",
 		          legend: {position: 'none'},
 		          'lineWidth': 0.75,
 		    	  width: 850,
@@ -532,10 +532,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	                  },
 		    		  ticks: [ 
 		    		           {v:0, f: 'Range Minimo: 0' }, 
-		    		           {v: orange, f: 'Detecção: ' + orange}, 
+		    		           {v: orange, f: 'Detecï¿½ï¿½o: ' + orange}, 
 		    		           {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		           {v: red, f: 'Evacuação: ' + red}, 
-		    		           {v: sensor.rangeMax, f: 'Range Máximo: ' + sensor.rangeMax} 
+		    		           {v: red, f: 'Evacuaï¿½ï¿½o: ' + red}, 
+		    		           {v: sensor.rangeMax, f: 'Range Mï¿½ximo: ' + sensor.rangeMax} 
 		    		        ]
 		    	  },
 		    	  //curveType: 'function',
@@ -544,7 +544,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	    }
 		else {
 			var options = {
-		          title: "Dados do Sensor na última Hora.",
+		          title: "Dados do Sensor na ï¿½ltima Hora.",
 		          legend: {position: 'none'},
 		          'lineWidth': 0.75,
 		    	  width: 850,
@@ -718,13 +718,11 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		$scope.selectedArea = angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex]);	
 		$scope.selectedCompanyDevice = angular.copy($scope.selectedArea.companyDevicesDto[$scope.$root.selecteds.CompanyDeviceIndex]);
 		
+		$scope.getDetectors();
 		$scope.getAlarms();
 		
 		if ($scope.selectedCompanyDevice != null)
-			$scope.getOneCompanyDetector();
-		else {		
-			$scope.getDetectors();
-		}	
+			$scope.getOneCompanyDetector();			
 	}
 	
 	$scope.initializeDetector();

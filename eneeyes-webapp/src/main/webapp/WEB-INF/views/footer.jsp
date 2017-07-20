@@ -28,8 +28,7 @@
     <script src="/assets/plugins/adminlte/app.min.js"></script>
     <script src="/assets/plugins/adminlte/skin.js"></script>     
     <script src="/assets/plugins/adminlte/chart.js"></script>
-    <script src="/assets/plugins/charts/echarts.min.js"></script>         
-
+    
     <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>
 	<script src="/assets/plugins/angular/angular-route.js"></script>
@@ -55,7 +54,7 @@
 	<script src="http://maps.google.com/maps/api/js?key=AIzaSyBdD8N8oojiMT-FKYc92jTS4XCCLccyBzg" type="text/javascript"></script>   
 	   
     <!-- Google Gauge -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
     <!-- END GLOBAL SCRIPTS -->
 
     <!-- PAGE LEVEL SCRIPTS -->    

@@ -68,33 +68,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		    }
 		  ];
 	}
-	
-	var pieOptions = {
-	    //Boolean - Whether we should show a stroke on each segment
-	    segmentShowStroke: true,
-	    //String - The colour of each segment stroke
-	    segmentStrokeColor: "#fff",
-	    //Number - The width of each segment stroke
-	    segmentStrokeWidth: 1,
-	    //Number - The percentage of the chart that we cut out of the middle
-	    percentageInnerCutout: 50, // This is 0 for Pie charts
-	    //Number - Amount of animation steps
-	    animationSteps: 100,
-	    //String - Animation easing effect
-	    animationEasing: "easeOutBounce",
-	    //Boolean - Whether we animate the rotation of the Doughnut
-	    animateRotate: true,
-	    //Boolean - Whether we animate scaling the Doughnut from the centre
-	    animateScale: false,
-	    //Boolean - whether to make the chart responsive to window resizing
-	    responsive: true,
-	    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-	    maintainAspectRatio: false,
-	    //String - A legend template
-	    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
-	    //String - A tooltip template
-	    tooltipTemplate: "<%=value %> Dispositivos <%=label%>"
-	};
+
 	
 	$scope.dashCompaniesPosition = [];
 	$scope.dashDetectorsMaintenance = [];
@@ -140,15 +114,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 				 $scope.dashCompaniesPosition[i].last_value	= Math.round($scope.dashCompaniesPosition[i].last_value * 100) / 100 ;
 			 }
 			 
-			 $scope.sumary = {
-					 alarm1 :  0, 
-					 alarm2 : 0,
-					 alarm3 : 0,
-					 normal : 0,
-					 devices: 0,
-					 offLine: 0,
-					 turnOff: 0
-			 }			 
+			 $scope.sumary = { alarm1 : 0, alarm2 : 0, alarm3 : 0, normal : 0, devices: 0, offLine: 0, turnOff: 0 }			 
 			 				
 			 $scope.listAllDashCompaniesPosition.list.forEach(
 				 function(e) {
@@ -156,8 +122,6 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					$scope.sumary.devices ++;
 					
 					var offDate = (new Date() - new Date(e.last_update_full)) / 1000;
-					
-					// off line por mais de 5 minutos
 					
 					if ( e.alarmType == "OFF" ) {
 						$scope.sumary.offLine ++;
@@ -217,7 +181,6 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 	$scope.refreshDashboard();
 	$scope.getDetectorsMaintenance();
 	
-
     
     $interval(function() {
     	if($scope.$root == null) return;

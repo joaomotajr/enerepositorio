@@ -282,4 +282,5 @@
     	</div>    
     </div>
 
+	<script src="/assets/js/chartInit.js"></script>
     

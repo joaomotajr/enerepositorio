@@ -48,19 +48,19 @@
 								</div>
 								
 								<div class="form-group">
-									<label class="control-label">Descrição</label>                                                                        
-									<input class="form-control" placeholder="Descrição" data-ng-model="companyDescription">                                                                        
+									<label class="control-label">Descri&ccedil;&atilde;o</label>                                                                        
+									<input class="form-control" placeholder="Descri&ccedil;&atilde;o" data-ng-model="companyDescription">                                                                        
 								</div>
 							</div>
 						</div>
 						
 						<div class="box-footer">							
 							<div class="col-md-12">
-								<button type="button" data-ng-click="selCompany();" class="btn btn-success pull-right" data-ng-disabled="!companyUid">  Abrir  </button>								
-								<span class="pull-right">   </span>
-								<button type="button" data-ng-click="saveCompany();" class="btn btn-primary pull-right" data-ng-disabled="(companyName) ? false : true"> Salvar </button>
-								<span class="pull-right">   </span>												
-								<button type="button" data-ng-click="deleteCompany();" class="btn btn-danger pull-right" data-ng-disabled="!companyUid"> Excluir </button>
+								<button type="button" data-ng-click="selCompany();" class="btn btn-success pull-right" data-ng-disabled="!companyUid">&nbsp;Abrir&nbsp;</button>								
+								<span class="pull-right">&nbsp;&nbsp;</span>
+								<button type="button" data-ng-click="saveCompany();" class="btn btn-primary pull-right" data-ng-disabled="(companyName) ? false : true"> Salvar </button>
+								<span class="pull-right">&nbsp;&nbsp;</span>												
+								<button type="button" data-ng-click="deleteCompany();" class="btn btn-danger pull-right" data-ng-disabled="!companyUid"> Excluir </button>
 							</div>
 						</div> 
 					</div>
@@ -74,7 +74,7 @@
 					<div class="callout callout-info"
 				 		data-ng-show="selectedCompanyName" 
 				 		style="padding: 5px 5px 5px 25px; margin:0 0 5px 0; background-color: #3c8dbc !important; border-color: #156fa3 !important">
-				 		<button type="button" class="close" data-ng-click="selCompany();" >×</button>
+				 		<button type="button" class="close" data-ng-click="selCompany();">&nbsp;</button>
 						<h4><i class="fa fa-industry"></i> {{selectedCompanyName}}</h4>										
 					</div>				
 				</div>
@@ -100,12 +100,12 @@
 	        
 	        <div id="resultInfo" class="alert alert-info alert-dismissible col-sm-6" role="alert" data-ng-show="msgInfo" >
                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                 <strong>Atenção! </strong>{{msgInfo}} <span id="msgComplemento"></span>
+                 <strong>Atenï¿½ï¿½o! </strong>{{msgInfo}} <span id="msgComplemento"></span>
              </div>                     
              
              <div id="resultDanger" class="alert alert-danger alert-dismissible col-sm-6" role="alert" data-ng-show="msgDanger" >
                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                 <strong>Atenção! </strong>{{msgDanger}}                  
+                 <strong>Atenï¿½ï¿½o! </strong>{{msgDanger}}                  
              </div>
 				    
 		</div>

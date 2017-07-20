@@ -212,11 +212,11 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 				   
 				   //Dispositivos
 				   if($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType == "DETECTOR") {
-				   		var device = "<i class='fa fa fa-rss' style='font-size:1.2em;'></i> DETECTOR";
+				   		var device = "<i class='fa fa-rss' style='font-size:1.2em;'></i> DETECTOR";
 					    if ($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name != undefined)  
 							device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name + "</small>";
 						else
-							device += "<small class='label label-success pull-right' style='vertical-align:super;font-size:0.7em'>NEW</small>";
+							device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
 				   }	
 				   else {   
 					   var device = "<i class='fa fa-keyboard-o' style='font-size:1.2em;'></i> " + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;

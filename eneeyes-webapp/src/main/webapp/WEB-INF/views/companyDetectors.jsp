@@ -154,74 +154,49 @@
 				       	 
 				       	<div class="tab-pane" id="tabCompanyDetector_2">		     
 				       		
-				       		<div class="row">	    	
-				            	<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length > 1">
-				            	  	<div class="col-md-6">
+				       		<div class="row">	 							   
+				            	<div data-ng-repeat="sensor in selectedCompanyDetector.detectorDto.sensorsDto">
+				            	  	<div class="col-md-4">
 						              	<div class="panel panel-primary">						                
+
 							                <div class="panel-heading">
-										    	<h3 class="panel-title" style="text-align:center;">Detector: {{selectedCompanyDetector.name}}</h3>										    								
+										    	<h3 class="panel-title" style="text-align:center;"><i class="fa fa-rss"></i> Detector: {{selectedCompanyDetector.name}}</h3>										    								
 										   	</div>									   					               	
+
 							               	<div class="panel-body">
-						               			<div class="row">							            					                 		
-								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">				                				                
-										            	<div class="col-md-6">						                
-											            	<div style=" width: 100%;" id="{{'gauge_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + subItem.uid}}"></div>						            	    
-										            	</div>				                
-										            </div>							                				                				                
+						               			<div class="row">								                	
+											        <div style=" width: 100%; display: flex; justify-content: center; text-align: center;"													
+														id="{{'gauge_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + sensor.uid}}">
+													</div>												
 						                		</div>	
 						                		<div class="row">					                    				                    				                    
-								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">				                    			                    
-									                	<div class="col-md-6">
-									                    	<div class="description-block">
-									                      		<h5 class="description-header">{{subItem.name}}</h5>
-									                      		<span class="description-text">Min|Max: {{subItem.rangeMin}} | {{subItem.rangeMax}}</span>
-									                      		<h5>{{subItem.unitMeterGases}}</h5>
-								                      			<h5>{{subItem.gasesDto[0].name}}</h5>									                      		
-																<label>Alarme </label> <a href="#" data-ng-click="configAlarm($index);" title="Troca/Selecionar Alarme"><i class="fa fa-bullhorn"></i></a>
-																
-																<div data-ng-repeat="item in selectedCompanyDetectorAlarms">
-																	<div data-ng-if="item.sensorId == subItem.uid">
-																		<label class="text-red">{{item.alarmDto.name}}</label>
-																	</div>																																		
-																</div>																
-										                	</div>
-									                    </div>					                     
-								                    </div>						                    					                    					                					                  			                  
+								                	
+													<div class="description-block">																	
+														<h5 class="description-header"><i class="fa fa-bolt"></i> {{sensor.name}}</h5>
+														<span class="description-text">Range: Min|Max: {{sensor.rangeMin}} | {{sensor.rangeMax}}</span>
+														<br>
+														G&aacute;s: <strong class"text-navy">{{sensor.gasesDto[0].name}}</strong>																
+														<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="sensor.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
+														<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="sensor.unitMeterGases!='LEL_PERCENT'"> {{sensor.unitMeterGases}}</span>													
+														
+														<hr style="margin-top: 8px !important; margin-bottom: 8px !important;">							                                
+														
+														<a href="#" data-ng-click="configAlarm($index);" title="Troca/Selecionar Alarme"><i class="fa fa-bullhorn"></i> Alarme </a>																												
+														<div data-ng-repeat="alarm in selectedCompanyDetectorAlarms">
+															<div data-ng-if="alarm.sensorId == sensor.uid">
+																<label class="text-red">{{alarm.alarmDto.name}}</label>
+															</div>
+															<div data-ng-if="alarm.sensorId != sensor.uid">
+																<label class="text-red">Sem Alarme</label>
+															</div>																																		
+														</div>														
+													</div>								                    
 							                	</div>		                
 							              	</div> 				              	   
 						              	</div>
 					              	</div> 
 				              	</div>
 				              	
-				              	<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length == 1">
-				            	  	<div class="col-md-3">
-						              	<div class="panel panel-primary">						                
-							                <div class="panel-heading">
-										    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
-										   	</div>									   					               	
-							               	<div class="panel-body">
-							               		<div class="row">							            					                 		
-								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">											        	
-											        	<div style="width: 100%;" id="{{'gauge_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + subItem.uid}}"></div>											        										            					                
-										            </div>
-									            </div>							                				                				                
-							                	<div class="row">							                    				                    				                    
-								                	<div data-ng-repeat="subItem in selectedCompanyDetector.detectorDto.sensorsDto">									                	
-								                    	<div class="description-block">
-								                      		<h5 class="description-header"> {{subItem.name}}</h5>
-								                      		<span class="description-text">Min|Man: {{subItem.rangeMin}} | {{subItem.rangeMax}}</span>
-								                      		<h5>{{subItem.unitMeterGases}}</h5>
-								                      		<h5>{{subItem.gasesDto[0].name}}</h5>
-								                      		<label>Alarmes </label> <a href="#" data-ng-click="configAlarm($index);"><i class="fa fa-bullhorn"></i></a>
-								                      		
-								                      		<label class="text-red">{{selectedCompanyDetectorAlarms[0].alarmDto.name}}</label>								                      		
-									                	</div>									                    					                    
-								                    </div>						                    					                    					                					                  			                  
-								                </div>					                
-							              	</div> 			              	   
-						              	</div>
-					              	</div>
-				              	</div>					    		      						       		 
 				       		</div>			       	  	        
 				       	</div>
 				       					       	 
@@ -235,7 +210,7 @@
 						               	<div class="panel-body">
 						               		<input class="pull-right ng-pristine ng-untouched ng-valid" type="checkbox" style="margin-right: 30px" data-ng-model="changeGraphic">
 					               			<label data-ng-show="changeGraphic" class="pull-right">Gr&aacute;fico Completo&nbsp;&nbsp;</label>
-											<label data-ng-hide="changeGraphic" class="pull-right">Gr&aacute;fico Medi&ccedil;&atilde;es&nbsp;&nbsp;</label>
+											<label data-ng-hide="changeGraphic" class="pull-right">Gr&aacute;fico Medi&ccedil;&otilde;es&nbsp;&nbsp;</label>
 						               							               							               							               		
 						               		<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length == 1">
 						               			<ul class="nav nav-tabs" id="myTab">
@@ -333,7 +308,7 @@
 		</div>		
 		
 		<div id="modalAlarm" class="modal">                
-			<div class="modal-dialog" role="document">
+			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">                            
 					<div class="modal-body">
 						<div class="panel panel-default">
@@ -397,4 +372,3 @@
 		
 	</div>	
 </div>
-<!-- <script src="/assets/js/eChartInit.js"></script> -->

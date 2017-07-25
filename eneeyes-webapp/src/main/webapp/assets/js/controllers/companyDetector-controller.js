@@ -138,8 +138,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	 }	
 			
 	$scope.getOneCompanyDetector = function() {
-		
-		//$scope.getDetectors();
+
 		$scope.search = { unitMeterGases: null, gas : null };
 				
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
@@ -416,7 +415,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		var orange = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm1;
 		
 		var gaugeOptions = {
-
 			 min: sensor.rangeMin, max: sensor.rangeMax,			     
 		     redFrom: red, redTo: red == 0 ? 0 : sensor.rangeMax,
 		     yellowFrom: yellow, yellowTo: red,
@@ -426,10 +424,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		     minorTicks: 5
 		};
 					
-		var gaugeData = google.visualization.arrayToDataTable([
-          	['Label', 'Value'],          	
-          	['Id: ' + item.uid, 0],
-          ]);
+		var gaugeData = google.visualization.arrayToDataTable([ ['Label', 'Value'], ['Id: ' + item.uid, 0],]);
 	    		
 		objGauge = document.getElementById(id);
 		

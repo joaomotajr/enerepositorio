@@ -57,6 +57,12 @@
 	            		<span>Dashboard</span>	            			            		
 	            	</a>	            		            	
 	            </li>
+	            
+	            <li class="treeview">
+	            	<a href="#" data-ng-click="LoadAjaxContent('fusioncharts.html', 'Fusion-Charts')"><i class="fa fa-th text-white"></i> 
+	            		<span>FusionCharts</span>	            			            		
+	            	</a>	            		            	
+	            </li>
 	            <!--
 	            <li class="treeview">
 	            	<a href="#" data-ng-click="LoadAjaxContent('simulador.html', 'Simulador')"><i class="fa fa-circle-o"></i>
@@ -123,9 +129,8 @@
 		            	</li>
 		            		
 		            	<li class="treeview" data-ng-if="isFrom=='MASTER'">
-			            	<a href="#" data-ng-click="LoadAjaxContent('simulador.html', 'Simulador')"><i class="fa fa-circle-o"></i>
-			            	<span>Simulador</span>
-			            	<span class="label label-danger pull-right">Temp</span>
+			            	<a href="#" data-ng-click="LoadAjaxContent('simulador.html', 'Analisador-Cenários')"><i class="fa fa-cog"></i>
+			            	<span>Analisador de Cenários</span>			            	
 			            	</a>
 			            </li>		            		        
 			            

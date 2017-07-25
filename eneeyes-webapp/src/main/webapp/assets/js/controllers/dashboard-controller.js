@@ -46,7 +46,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		      value: $scope.sumary.alarm3,
 		      color: "#dd4b39",
 		      highlight: "#dd4b39",
-		      label: "Evacuação"
+		      label: "Evacuaï¿½ï¿½o"
 		    },
 		    {
 		      value: $scope.sumary.alarm2,
@@ -58,7 +58,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		      value: $scope.sumary.alarm1,
 		      color: "#d2d6de",
 		      highlight: "#d2d6de",
-		      label: "Detecção"
+		      label: "Detecï¿½ï¿½o"
 		    },
 		    {
 		      value: $scope.sumary.turnOff,
@@ -80,7 +80,8 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		$scope.listAllDashDetectorsMaintenance = new ViewService.listAllDashDetectorsMaintenance();		 
 		$scope.listAllDashDetectorsMaintenance.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			
-			$scope.listAllDashDetectorsMaintenance.list.forEach(
+			if($scope.listAllDashDetectorsMaintenance != null) {
+				$scope.listAllDashDetectorsMaintenance.list.forEach(
 					 function(e) {
 						 if(e.last_date != null) { 						 
 							 e.next = Math.ceil(Math.abs(new Date($scope.listAllDashDetectorsMaintenance.serverDate) - 
@@ -94,6 +95,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 						 }
 					}			
 			 	);	
+			}
 			
 			$scope.loading = undefined;         	         	
        });		 
@@ -105,52 +107,54 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		
 		$scope.listAllDashCompaniesPosition = new ViewService.listAllDashCompaniesPosition();		 
 		$scope.listAllDashCompaniesPosition.$view({_csrf : angular.element('#_csrf').val()}, function(){
-			 
-			 for(var i = 0; i < $scope.listAllDashCompaniesPosition.list.length; i++) {				 
+		
+			if($scope.listAllDashCompaniesPosition != null) {
+				for(var i = 0; i < $scope.listAllDashCompaniesPosition.list.length; i++) {				 
+					 
+					 $scope.dashCompaniesPosition[i] = $scope.listAllDashCompaniesPosition.list[i];
+					 $scope.dashCompaniesPosition[i].last_update_full = $scope.dashCompaniesPosition[i].last_update;
+					 $scope.dashCompaniesPosition[i].last_update = timeSince($scope.listAllDashCompaniesPosition.serverDate, $scope.dashCompaniesPosition[i].last_update);				 
+					 $scope.dashCompaniesPosition[i].last_value	= Math.round($scope.dashCompaniesPosition[i].last_value * 100) / 100 ;
+				 }
 				 
-				 $scope.dashCompaniesPosition[i] = $scope.listAllDashCompaniesPosition.list[i];
-				 $scope.dashCompaniesPosition[i].last_update_full = $scope.dashCompaniesPosition[i].last_update;
-				 $scope.dashCompaniesPosition[i].last_update = timeSince($scope.listAllDashCompaniesPosition.serverDate, $scope.dashCompaniesPosition[i].last_update);				 
-				 $scope.dashCompaniesPosition[i].last_value	= Math.round($scope.dashCompaniesPosition[i].last_value * 100) / 100 ;
-			 }
-			 
-			 $scope.sumary = { alarm1 : 0, alarm2 : 0, alarm3 : 0, normal : 0, devices: 0, offLine: 0, turnOff: 0 }			 
-			 				
-			 $scope.listAllDashCompaniesPosition.list.forEach(
-				 function(e) {
-
-					$scope.sumary.devices ++;
-					
-					var offDate = (new Date() - new Date(e.last_update_full)) / 1000;
-					
-					if ( e.alarmType == "OFF" ) {
-						$scope.sumary.offLine ++;
-						$scope.sumary.turnOff ++;						
-					}
-					else if ( offDate > 300 ) {							 
-					     $scope.sumary.offLine ++;
-					     e.offLine = true;
-					}				
-					else if ( e.alarmType == "NORMAL") {
-						 
-					     $scope.sumary.normal ++;
-					}
-					else if ( e.alarmType == "DETECCAO") {
-						$scope.sumary.alarm1 ++;			
-						 
-					}
-					else if ( e.alarmType == "ALERTA") {
-						$scope.sumary.alarm2 ++;			
-						 
-					}
-					else if ( e.alarmType == "EVACUACAO") {
-						$scope.sumary.alarm3 ++;	
-						 
-					}
-				}			
-		 	);			 			 
-			
-			populateDonut();
+				 $scope.sumary = { alarm1 : 0, alarm2 : 0, alarm3 : 0, normal : 0, devices: 0, offLine: 0, turnOff: 0 }			 
+				 				
+				 $scope.listAllDashCompaniesPosition.list.forEach(
+					 function(e) {
+	
+						$scope.sumary.devices ++;
+						
+						var offDate = (new Date() - new Date(e.last_update_full)) / 1000;
+						
+						if ( e.alarmType == "OFF" ) {
+							$scope.sumary.offLine ++;
+							$scope.sumary.turnOff ++;						
+						}
+						else if ( offDate > 300 ) {							 
+						     $scope.sumary.offLine ++;
+						     e.offLine = true;
+						}				
+						else if ( e.alarmType == "NORMAL") {
+							 
+						     $scope.sumary.normal ++;
+						}
+						else if ( e.alarmType == "DETECCAO") {
+							$scope.sumary.alarm1 ++;			
+							 
+						}
+						else if ( e.alarmType == "ALERTA") {
+							$scope.sumary.alarm2 ++;			
+							 
+						}
+						else if ( e.alarmType == "EVACUACAO") {
+							$scope.sumary.alarm3 ++;	
+							 
+						}
+					}			
+			 	);			 			 
+				
+				populateDonut();			
+			}
 			
 			$scope.loading = undefined;         	         	
        });		 
@@ -187,7 +191,10 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
     	
     	if($scope.$root.currentPage == "Dashboard" && $scope.$root.errorTimes <= 5) {
     		$scope.getCompaniesPosition();    	
-    		pieChart.Doughnut(PieData, pieOptions);
+			
+			$timeout(function () {
+    			pieChart.Doughnut(PieData, pieOptions);
+			}, 500);
     	}
     }, 10000);
     

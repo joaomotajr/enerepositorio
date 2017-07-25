@@ -49,8 +49,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	    $scope.gasUnitMeterGases = '';
 		$scope.alarmAlarm1 = '';
 		$scope.alarmAlarm2 = '';
-		$scope.alarmAlarm3 = '';	
-		$scope.selectedCompany = '';		
+		$scope.alarmAlarm3 = '';			
 		$scope.email = '';
 		$scope.email1 = '';
 		$scope.celular = '';
@@ -58,6 +57,11 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		$scope.action1 = '';
 		$scope.action2 = '';
 		$scope.action3 = '';
+
+		if($scope.$root.isFrom == "MASTER")
+			$scope.selectedCompany = ''
+		else
+			$scope.selectedCompany = $scope.companies[0];
 	}
 	 
 	$scope.getAlarms = function() {
@@ -193,15 +197,28 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
              }
          } 		 
 	 }
-	
-	$scope.getCompanys = function() {
-		
-		 $scope.resultCompanies = new CompanyService.listAllView();		 
-		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
-				 $scope.companies = $scope.resultCompanies.list;
-	     });	 
 
-	}
+	$scope.getCompanys = function() {
+		$scope.resultCompanies = new CompanyService.listAllView();		 
+		$scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
+				 $scope.companies = $scope.resultCompanies.list;
+	     });		 
+		 
+	 }
+
+	//  $scope.getOneCompany = function(companyId) {
+		 
+	// 	 $scope.listOne = new CompanyService.listOne();		 
+	// 	 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
+			 
+	// 		 $scope.selectedCompany = $scope.listOne.t;
+			 
+	// 		 $scope.companyUid = $scope.selectedCompany.uid;
+	// 		 $scope.companyName = $scope.selectedCompany.name;
+	// 		 $scope.companyDescription = $scope.selectedCompany.description;
+			 			 
+	//     });		 
+	// }
 	 
 	 $scope.unitMetersGases = 
 		 [

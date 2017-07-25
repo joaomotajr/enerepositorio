@@ -87,12 +87,12 @@
 					<div class="modal-body"style="padding-bottom: 0px; !important">
 					
 						<div class="panel panel-default">
-							<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Edição de Alarmes</strong></div>														                                                                           
+							<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Edi&ccedil;&atilde;o de Alarmes</strong></div>														                                                                           
 					  	</div>
 											
 						<div class="box box-primary" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
 							<div class="box-header">
-								<h3 class="box-title">Cadastro / Edição</h3>
+								<h3 class="box-title">Cadastro / Edi&ccedil;&atilde;o</h3>
 								<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
 							</div>					
 							<div class="box-body" style="padding-bottom: 0px; !important">
@@ -102,8 +102,8 @@
 										<div class="col-md-3">
 											<div class="box box-primary">				                    
 							                	<div class="box-header with-border"><strong>Nome</strong>
-							                		<strong class="text-red pull-right" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</strong>
-												    <strong class="text-red pull-right" data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 12 caracteres</strong>
+							                		<strong class="text-red pull-right" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigat&oacute;rio]</strong>
+												    <strong class="text-red pull-right" data-ng-show="userForm.username.$error.maxlength">Tamanho M&aacute;ximo 12 caracteres</strong>
 							                	</div>
 							                    <div class="box-body">													                                                                        
 													<input class="form-control inputProfile" placeholder="Nome do Alarme" data-ng-model="alarmName" data-ng-maxlength="15" name="username" required>                                                                       
@@ -115,7 +115,7 @@
 											<div class="box box-primary">																								
 												 	                    
 							                	<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Empresa</strong>
-							                		<strong class="text-red pull-right" data-ng-show="userForm.companyName.$dirty && userForm.companyName.$invalid">  Campo Obrigatório</strong>
+							                		<strong class="text-red pull-right" data-ng-show="userForm.companyName.$dirty && userForm.companyName.$invalid">  Campo Obrigat&oacute;rio</strong>
 							                	</div>							                	
 							                	
 							                    <div class="box-body">
@@ -149,8 +149,8 @@
 										<div class="col-md-12">                  
 					                       	<div class="box box-info" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
 					                       	
-								    			<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Limites do Alarme </strong>
-								    				<strong class="text-red pull-right" data-ng-show="(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3) && !userForm.alarmAlarm1.$pristine">  [Sequência de Valores dos Alarmes Inválida]</strong>
+								    			<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Limites do Alarme </strong>
+								    				<strong class="text-red pull-right" data-ng-show="(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3) && !userForm.alarmAlarm1.$pristine">  [Sequncia de Valores dos Alarmes Invï¿½lida]</strong>
 								    			</div>
 								    								                	 
 							                    <div class="box-body" style="padding-bottom: 0px; !important">
@@ -175,8 +175,8 @@
 												    	<div id="travar">
 												    	
 													    	<div class="col-md-3" style="padding-right: 5px !important;">															
-										                    	<label class="control-label">Gás
-										                    		<span class="text-red pull-right" data-ng-show="userForm.gasName.$dirty && userForm.gasName.$invalid">  [Campo Obrigatório]</span>
+										                    	<label class="control-label">G&aacute;s
+										                    		<span class="text-red pull-right" data-ng-show="userForm.gasName.$dirty && userForm.gasName.$invalid">  [Campo Obrigat&oacute;rio]</span>
 										                    	</label>
 										                    	<div data-ng-class="{'has-error': userForm.gasName.$dirty && userForm.gasName.$invalid}">
 											                        <select name="gasName" class="form-control" data-live-search="true" 
@@ -190,7 +190,7 @@
 											                
 											                <div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">											                
 												            	<label class="control-label">Unidade
-												            		<span class="text-red" data-ng-show="userForm.gasUnit.$dirty && userForm.gasUnit.$invalid">  [Campo Obrigatório]</span>
+												            		<span class="text-red" data-ng-show="userForm.gasUnit.$dirty && userForm.gasUnit.$invalid">  [Campo Obrigat&oacute;rio]</span>
 												            	</label>
 																<div data-ng-class="{'has-error': userForm.gasUnit.$dirty && userForm.gasUnit.$invalid}">
 																	<select name="gasUnit" class="form-control" data-live-search="true" 
@@ -205,7 +205,7 @@
 													    	<div class="col-md-2" style="padding-right: 5px !important">
 													    		<div class="form-group">
 															    	<div data-ng-class="{'has-error': userForm.alarmAlarm1.$invalid && !userForm.alarmAlarm1.$pristine}">
-														                <label class="control-label">Alarme 1 <span class="label label-default" style="font-size: 0.5em"> DETECÇÃO </span></label>
+														                <label class="control-label">Alarme 1 <span class="label label-default" style="font-size: 0.5em"> DETEC&Ccedil;&Atilde;O </span></label>
 														                <input type="number" class="form-control" name="alarmAlarm1" placeholder="Alarme 1 - Decimal" data-ng-model="alarmAlarm1" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required />
 														            </div>
 														    	</div>
@@ -214,7 +214,7 @@
 														    <div class="col-md-2" style="padding-right: 5px !important; padding-left: 5px !important">
 														    	<div class="form-group">
 													                <div data-ng-class="{'has-error': userForm.alarmAlarm2.$invalid && !userForm.alarmAlarm2.$pristine}">
-													                	<label class="control-label">Alarme 2 <span class="label label-warning" style="font-size: 0.5em"> ALERTA </span></label>
+													                	<label class="control-label">Alarme 2 <span class="label label-warning" style="font-size: 0.5em"> ALERTA </span></label>
 													                	<input type="number" class="form-control" name="alarmAlarm2" placeholder="Alarme 2 - Decimal" data-ng-model="alarmAlarm2" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required />
 													            	</div>
 													            </div>
@@ -223,7 +223,7 @@
 														    <div class="col-md-2" style="padding-left: 5px !important">
 														    	<div class="form-group">								                
 													                <div data-ng-class="{'has-error': userForm.alarmAlarm3.$invalid && !userForm.alarmAlarm3.$pristine}">
-													                	<label class="control-label">Alarme 3 <span class="label label-danger" style="font-size: 0.5em"> EVACUAÇÃO </span></label>
+													                	<label class="control-label">Alarme 3 <span class="label label-danger" style="font-size: 0.5em"> EVACUA&Ccedil;&Atilde;O </span></label>
 													                	<input type="number" class="form-control" name="alarmAlarm3" placeholder="Alarme 3 - Decimal" data-ng-model="alarmAlarm3" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required />								                							          
 													            	</div>
 													            </div>
@@ -444,14 +444,14 @@
 											            			<div class="col-md-2">										            									            				
 												            			<div class="checkbox3 checkbox-round">
 							                                            	<input type="checkbox" id="checkboxActionOff" checked>
-							                                            	<label for="checkboxActionOff">Ações a Realizar? </label>
+							                                            	<label for="checkboxActionOff">A&ccedil;&otilde;es a Realizar? </label>
 							                                          	</div>
 							                                        </div>
 							                            			<div class="travarAction">            
 								                                    	<div class="col-md-10" style="padding-left: 5px !important;">								                                        
 								                                        	<div class="entry input-group" id="">
 								                                        		<span class="input-group-addon btn-add text-white bg-gray"><i class="fa fa-bullhorn"> Alarme 1</i></span>  					
-																				<textarea class="form-control" rows="1" data-ng-model="action1" placeholder="Providências do Agente de Monitoramento se Houver alarme 1" maxlength="250"></textarea>																				                                   						
+																				<textarea class="form-control" rows="1" data-ng-model="action1" placeholder="Provid&ecirc;ncias do Agente de Monitoramento se Houver alarme 1" maxlength="250"></textarea>																				                                   						
 																			</div>
 																		</div>
 																	</div>                                        						                                        						                                         													            			
@@ -465,7 +465,7 @@
 								                                    	<div class="col-md-10" style="padding-left: 5px !important; ">								                                        
 								                                        	<div class="entry input-group" id="">
 								                                        		<span class="input-group-addon btn-add text-white bg-orange"><i class="fa fa-bullhorn"> Alarme 2</i></span>  					
-																				<textarea class="form-control" data-ng-model="action2" rows="1" placeholder="Providências do Agente de Monitoramento se Houver alarme 2" maxlength="250"></textarea>																				                                   						
+																				<textarea class="form-control" data-ng-model="action2" rows="1" placeholder="Provid&ecirc;ncias do Agente de Monitoramento se Houver alarme 2" maxlength="250"></textarea>																				                                   						
 																			</div>
 																		</div>                                        						                                        						                                         													            			
 								                                   	</div>							                                   
@@ -478,7 +478,7 @@
 								                                    	<div class="col-md-10" style="padding-left: 5px !important; ">								                                        
 								                                       		<div class="entry input-group" id="">
 							                                        			<span class="input-group-addon btn-add text-white bg-red"><i class="fa fa-bullhorn"> Alarme 3</i></span>  					
-																				<textarea class="form-control" data-ng-model="action3" rows="1" placeholder="Providências do Agente de Monitoramento se Houver alarme 3" maxlength="250"></textarea>																				                                   						
+																				<textarea class="form-control" data-ng-model="action3" rows="1" placeholder="Provid&ecirc;ncias do Agente de Monitoramento se Houver alarme 3" maxlength="250"></textarea>																				                                   						
 																			</div>
 																		</div>                                        						                                        						                                         													            			
 								                                   	</div>							                                   

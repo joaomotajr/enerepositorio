@@ -29,12 +29,17 @@
     <script src="/assets/plugins/adminlte/skin.js"></script>     
     <script src="/assets/plugins/adminlte/chart.js"></script>
     
+    <script type="text/javascript" src="/assets/plugins/fusioncharts/fusioncharts.js"></script>
+    
     <!-- GLOBAL SCRIPTS - Modificado -->
     <script src="/assets/plugins/angular/angular.min.js"></script>
 	<script src="/assets/plugins/angular/angular-route.js"></script>
 	<script src="/assets/plugins/angular/angular-resource.js"></script>
 	<script src="/assets/plugins/angular/angular-locale_pt-br.js"></script>	
 	<script src="/assets/plugins/angular/angular-options-disabled.js"></script>
+	
+	<script type="text/javascript" src="/assets/plugins/fusioncharts/angular-fusioncharts.min.js"></script>
+	<script type="text/javascript" src="/assets/plugins/fusioncharts/themes/fusioncharts.theme.fint.js"></script>
 	
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
@@ -54,7 +59,7 @@
 	<script src="http://maps.google.com/maps/api/js?key=AIzaSyBdD8N8oojiMT-FKYc92jTS4XCCLccyBzg" type="text/javascript"></script>   
 	   
     <!-- Google Gauge -->
-    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- END GLOBAL SCRIPTS -->
 
     <!-- PAGE LEVEL SCRIPTS -->    
@@ -83,7 +88,8 @@
 	<script src="/assets/js/controllers/simulador-controller.js"></script>
 	<script src="/assets/js/controllers/conteudo-controller.js"></script>
 	<script src="/assets/js/controllers/logAlarm-controller.js"></script>
-	<script src="/assets/js/controllers/companyDetectorMaintenanceHistoric-controller.js"></script>	            
+	<script src="/assets/js/controllers/companyDetectorMaintenanceHistoric-controller.js"></script>
+	<script src="/assets/js/controllers/fusioncharts-controller.js"></script>	            
 				
 	<!-- PAGE LEVEL SERVICES -->
 	<script src="/assets/js/user-services.js"></script>

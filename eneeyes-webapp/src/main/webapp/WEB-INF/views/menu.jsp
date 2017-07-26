@@ -59,8 +59,8 @@
 	            </li>
 	            
 	            <li class="treeview">
-	            	<a href="#" data-ng-click="LoadAjaxContent('fusioncharts.html', 'Fusion-Charts')"><i class="fa fa-th text-white"></i> 
-	            		<span>FusionCharts</span>	            			            		
+	            	<a href="#" data-ng-click="LoadAjaxContent('fusioncharts.html', 'Graficos')"><i class="fa fa-th text-white"></i> 
+	            		<span>Novos Graficos</span>	            			            		
 	            	</a>	            		            	
 	            </li>
 	            <!--

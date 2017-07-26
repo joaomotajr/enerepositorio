@@ -4,8 +4,8 @@ app.controller('fusionchartsController', function ($scope, $timeout, $filter) {
 	
 	$scope.dataSource = {
 		    chart: {
-		        caption: "Harry's SuperMart",
-		        subCaption: "Top 5 stores in last month by revenue",
+		        caption: "Super Mercado Harry's",
+		        subCaption: "Top 5 Vendas no ultimo mes",
 		        numberPrefix: "$",
 		        theme: "fint"
 		    },
@@ -28,7 +28,7 @@ app.controller('fusionchartsController', function ($scope, $timeout, $filter) {
 		};
 	
 	$scope.attrs = {
-		    "caption": "Sales - 2012 v 2013",
+		    "caption": "Vendas - 2012 v 2013",
 		    "numberprefix": "$",
 		    "plotgradientcolor": "",
 		    "bgcolor": "FFFFFF",
@@ -179,8 +179,8 @@ app.controller('fusionchartsController', function ($scope, $timeout, $filter) {
 	
 		$scope.myDataSource = {
 			    chart: {
-			        caption: "Age profile of website visitors",
-			        subcaption: "Last Year",
+			        caption: "Idade dos Visitantes do Site",
+			        subcaption: "Ultimo Ano",
 			        startingangle: "120",
 			        showlabels: "0",
 			        showlegend: "1",
@@ -188,7 +188,7 @@ app.controller('fusionchartsController', function ($scope, $timeout, $filter) {
 			        slicingdistance: "15",
 			        showpercentvalues: "1",
 			        showpercentintooltip: "0",
-			        plottooltext: "Age group : $label Total visit : $datavalue",
+			        plottooltext: "Grupo Idade : $label Total de Visita : $datavalue",
 			        theme: "fint"
 			    },
 			    data: [
@@ -218,7 +218,7 @@ app.controller('fusionchartsController', function ($scope, $timeout, $filter) {
 		                id: "crntYr",
 		                value: "78",
 		                showValue: "1",
-		                tooltext: "Current year's average : $value",
+		                tooltext: "Status : $value",
 		                rearExtension: "5"
 		            }]
 		        }
@@ -229,14 +229,14 @@ app.controller('fusionchartsController', function ($scope, $timeout, $filter) {
                 id: "crntYr",
                 value: "78",
                 showValue: "1",
-                tooltext: "Current year's average : $value",
+                tooltext: "Status : $value",
                 rearExtension: "5"
             }]				
 		}
 		
 		$scope.clearForm = function() {
-			
-			$scope.dados.dial[0].value = 00;
+						
+			$scope.super.dials.dial[0].value = 120			
 			
 		}
 		
@@ -267,8 +267,8 @@ app.controller('fusionchartsController', function ($scope, $timeout, $filter) {
 		
 		$scope.atributos = {
 		        
-            caption: "Server CPU Utilization",
-            subcaption: "forum.hsm.com",
+			caption: "Detector DG-90",
+	        subcaption: "Congás - Area 1",
             lowerLimit: "0",
             upperLimit: "300",
             editMode: "1",
@@ -277,10 +277,110 @@ app.controller('fusionchartsController', function ($scope, $timeout, $filter) {
             tickValueDistance: "25",
             gaugeFillMix: "{dark-30},{light-60},{dark-10}",
             gaugeFillRatio: "15",
-            theme: "fint",
+            theme: "ocean",
             valueFontSize: "14"
 		        
 		};
+		
+		
+		$scope.super = {
+	        chart: {
+	            caption: "Detector DG-99",
+	            subcaption: "Congas - Area 2",
+	            lowerLimit: "0",
+	            upperLimit: "300",
+	            editMode: "1",
+	            showValue: "1",
+	            valueBelowPivot: "1",
+	            tickValueDistance: "10",
+	            gaugeFillMix: "{dark-30},{light-60},{dark-10}",
+	            gaugeFillRatio: "15",
+	            theme: "fint",
+	            gaugeOuterRadius: "180",
+	            gaugeInnerRadius: "140",
+	            valueFontSize: "14"
+	        },
+	        colorRange: {
+	            color: [
+					{
+		                minValue: "0",
+		                maxValue: "120",
+		                code: "##6baa01"
+		            },
+					{
+		                minValue: "120",
+		                maxValue: "170",
+		                code: "#D8D8D8"
+		            }, {
+		                minValue: "170",
+		                maxValue: "200",
+		                code: "#f8bd19"
+		            }, {
+		                minValue: "200",
+		                maxValue: "300",
+		                code: "#e44a00"
+		            }]
+	        },
+	        dials: {
+	             dial: [{
+					id: "crntYr",
+					value: "78",
+					showValue: "1",
+					tooltext: "Status : $value",
+					rearExtension: "5"
+				}]
+	        }
+	    };
+		
+		
+	 $scope.cylinder = {
+            chart: {
+                theme: "fint",
+                caption: "Nivel do Tanque",
+                subcaption: "Petrobras - Litoral Note",
+                lowerLimit: "0",
+                upperLimit: "120",
+                lowerLimitDisplay: "Vazio",
+                upperLimitDisplay: "Cheio",
+                numberSuffix: " ltrs",
+                showValue: "1",
+                chartBottomMargin: "45",
+                showValue: "0"
+            },
+            value: "75",
+            annotations: {
+                origw: "400",
+                origh: "190",
+                autoscale: "1",
+                groups: [
+                    {
+                        id: "range",
+                        items: [
+                            {
+                                id: "rangeBg",                                
+                                type: "rectangle",
+                                x : "$canvasCenterX-45",
+                                y: "$chartEndY-30",
+                                tox: "$canvasCenterX +45",
+                                toy: "$chartEndY-75",
+                                fillcolor: "#6caa03"
+                            },
+                            {
+                                id: "rangeText",
+                                type: "Text",                                
+                                fontSize: "11",                                                                
+                                fillcolor: "#333333",
+                                text: "80 ltrs",
+                                x : "$chartCenterX-45",
+                                y: "$chartEndY-50"
+                            }
+                        ]
+                    }
+                ]
+            }
+            
+        };
+		
 	
 	
 	 angular.element('body').removeClass('loading');

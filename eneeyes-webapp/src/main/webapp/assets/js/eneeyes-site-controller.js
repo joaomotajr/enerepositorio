@@ -38,12 +38,13 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 			
 			$timeout(function() {
 				$("#" + tabIsOpened).trigger("click");				
-			},300);
+			},100);
 		}
 		else {
 		
 			$scope.$root.currentTabOpened = tabIsOpened;
-			angular.element('body').addClass('loading');		
+			//angular.element('body').addClass('loading');	
+
 			$http.get(url)
 	        .success(function (data) {
 	        	
@@ -52,7 +53,8 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	        	var sBody = {
 	        		name : "tab_" + num_tabs,
 	        		link : title,
-	        		body : data
+					body : data,
+					id: num_tabs				
 	        	};
 	        	
 	        	$scope.tabsShow.push(sBody);     	
@@ -63,26 +65,26 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	            
 	        })
 	        .error(function (data, status, headers, config) {
-	        	angular.element('body').removeClass('loading');
-	        	alert(config);
+				angular.element('body').removeClass('loading');
+				$rootScope.alertDanger = "config";	        	
 	        });
 		}
 	}
 	
 	$scope.removeTab = function (index) {
-		if (index == 0) return;
-		
-		$scope.$root.currentPage = "";
-		
-		$timeout(function(){
-			$("#id_tab_" + index).trigger("click");				
-		},100);
-		
-		$scope.tabsShow.splice(index, 1);
-		
-		$timeout(function(){
-			$("#id_tab_" + index).trigger("click");				
-		},100);
+			
+		if($scope.$root.currentPage == $scope.tabsShow[index].link) {
+			
+			$timeout(function(){			
+				$('#id_' + $scope.tabsShow[index - 1].name).trigger("click");				
+			}, 100);
+
+			$scope.tabsShow.splice(index, 1);				
+		}
+		else {
+
+			$scope.tabsShow.splice(index, 1);					
+		}		
 	};
 
     $scope.forms = {
@@ -139,7 +141,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
             		}		
         			else if(errorMessage == "signin.error") {
 
-            			$scope.errorMessage = 'Usuário ou Senha Inválidos!!!';
+            			$scope.errorMessage = 'Usuï¿½rio ou Senha Invï¿½lidos!!!';
 
             			angular.element('#signin-error').css('display','block');
             			angular.element('#signin-user').addClass('has-error');
@@ -177,7 +179,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
             
         	if($scope.updatePass.resultType == 'SUCCESS') {
             	
-        		$scope.successMessage = $scope.updatePass.message + " Refaça o Login";          
+        		$scope.successMessage = $scope.updatePass.message + " Refaï¿½a o Login";          
             	
             	angular.element('#formSignin').css('display','none');            	
             	angular.element('#password-success').css('display','block');

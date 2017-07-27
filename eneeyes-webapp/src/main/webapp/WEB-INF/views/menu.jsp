@@ -9,118 +9,60 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
 
-          <!-- Sidebar user panel (optional) -->
+		  <!-- Sidebar user panel (optional) 
+			<!--
 			<div class="user-panel">
 				<div class="pull-left image" data-ng-controller="SiteController">
 					<img data-ng-src="{{userImage}}" class="img-circle" alt="User Image">
 				</div>
 				<div class="pull-left info">
 					<p><sec:authentication property="principal.displayName" /></p>					
-				  	<!-- Status -->
+				  	
 				  	<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 				</div>
-			</div>	
-
+			</div>			
+			-->
+			
 			<div class="row"> 
 				
 				<a href="#" data-ng-controller="SiteController" class="logo-lg" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')">
 									 	 			 
 				 	<span class="logo-lg" >	 		
-			 			<img data-ng-if="recolheLogo" src="/assets/img/Logo_e-GAS.PNG" style="background-color: white; float: left; margin-left: 20px; padding:5px; width: 85%;"> 			 
+			 			<img data-ng-if="recolheLogo" src="/assets/img/Logo_e-GAS.PNG" style="float: left; margin-left: 20px; padding:10px; width: 85%;"> 			 
 					</span>
 					
 				</a>
 			</div>			
-			
-			
-          	<!-- search form (Optional) -->
-          	<!--
-          	<form action="#" method="get" class="sidebar-form">
-				<div class="input-group">
-					<input type="text" name="q" class="form-control" placeholder="Procurar" disabled>
-					<span class="input-group-btn">
-					<button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-					</span>
-	          </div>
-          	</form>
-          	-->
-          	<!-- /.search form -->
-        
 
 	          <!-- Sidebar Menu -->
 			<ul class="sidebar-menu">
-					        	  
-<!-- 	            <li class="header">SELECIONE</li> -->
 	            	            
 	            <li class="treeview">
 	            	<a href="#" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fa fa-th text-aqua"></i> 
 	            		<span>Dashboard</span>	            			            		
 	            	</a>	            		            	
 	            </li>
-	            
-	            <li class="treeview">
+	            	            
+				<li class="treeview" data-ng-if="isFrom=='MASTER'">
 	            	<a href="#" data-ng-click="LoadAjaxContent('fusioncharts.html', 'Graficos')"><i class="fa fa-th text-white"></i> 
 	            		<span>Novos Graficos</span>	            			            		
 	            	</a>	            		            	
 	            </li>
-	            <!--
-	            <li class="treeview">
-	            	<a href="#" data-ng-click="LoadAjaxContent('simulador.html', 'Simulador')"><i class="fa fa-circle-o"></i>
-	            	<span>Simulador</span>
-	            	<span class="label label-danger pull-right">Temp</span>
-	            	</a>
-	            </li>	
-	             
-	            <li class="treeview">
-	            	<a href="#" data-ng-click="LoadAjaxContent('datatable.html', 'datatable')"><i class="fa fa-circle-o"></i>
-	            	<span>Datatable</span>
-	            	<span class="label label-danger pull-right">Temp</span>
-	            	</a>
-	            </li>
-	             -->
-	            
-	            <!-- 
-	            <li class="treeview">
+
+				<li class="treeview">
 	            	<a href="#">
-	                <i class="fa fa-unlock-alt text-aqua"></i> <span>Segurança</span>
-	                <i class="fa fa-angle-left pull-right"></i>
-	              	</a>
-	            	<ul class="treeview-menu">			            		        
-			            <li><a href="#" data-ng-click="LoadAjaxContent('userPesquisa.html', 'Usuários')"><i class="fa fa-users"></i> Usuários</a></li>
-			            <li><a href="#" data-ng-click="LoadAjaxContent('', '')"><i class="fa fa-bullhorn"></i> Grupos de Usuários</a></li>			            	            
-	              	</ul>
-	            </li>	                                    
-	           -->
-	           
-	           <!-- 
-	          	<li class="treeview">
-	            	<a href="#"><i class="fa fa-edit"></i> <span>Cadastros</span><i class="fa fa-angle-left pull-right"></i>	</a>
-	            	<ul class="treeview-menu">
-	            		<li class="active"><a href="#" data-ng-click="LoadAjaxContent('manufacturers.html', 'Fabricantes')"><i class="fa fa-industry"></i> Fabricantes</a></li>
-	                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('controllers.html', 'Controladoras')"><i class="fa fa-tasks"></i> Controladoras</a></li>
-	                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('transmitters.html','Transmissores')"><i class="fa fa-expand"></i> Transmissores</a></li>
-	                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('sensors.html','Sensores')"><i class="fa fa-feed"></i> Sensores</a></li>
-	                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('detectors.html','Detectores')"><i class="fa fa-th-large"></i> Detectores</a></li>
-	                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('gases.html', 'Gases')"><i class="fa fa-yelp"></i> Gases</a></li>
-			            		        
-	              	</ul>
-	            </li>
-	            -->
-	            <li class="treeview">
-	            	<a href="#">
-	                <i class="fa fa-cube text-red"></i> <span>Segurança de Gás e Alarme</span>
+	                <i class="fa fa-cube text-red"></i> <span>Seguran&ccedil;a: G&aacute;s &amp; Alarme</span>
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">			            
 			            <li><a href="#" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fa fa-th text-aqua"></i><span>Dashboard</span></a></li>
 			            <li><a href="#" data-ng-click="LoadAjaxContent('logHistoric.html', 'Log-Detectores')"><i class="fa fa-files-o"></i> Log Detectores</a></li>			            	            
 	              	</ul>
-	            </li>	                  
-	            
+	            </li>	            
 	            
 	            <li class="treeview">
 	            	<a href="#">
-	                <i class="fa fa-object-group text-green"></i> <span>Segurança Conectada</span>
+	                <i class="fa fa-object-group text-green"></i> <span>Seguran&ccedil;a Conectada</span>
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">
@@ -129,8 +71,8 @@
 		            	</li>
 		            		
 		            	<li class="treeview" data-ng-if="isFrom=='MASTER'">
-			            	<a href="#" data-ng-click="LoadAjaxContent('simulador.html', 'Analisador-Cenários')"><i class="fa fa-cog"></i>
-			            	<span>Analisador de Cenários</span>			            	
+			            	<a href="#" data-ng-click="LoadAjaxContent('simulador.html', 'Analisador-Cenï¿½rios')"><i class="fa fa-cog"></i>
+			            	<span>Analisador de Cen&aacute;rios</span>			            	
 			            	</a>
 			            </li>		            		        
 			            
@@ -151,7 +93,7 @@
 	              	
               		<ul class="treeview-menu">                		
                 		<li>
-                			<a href="#" data-ng-click="LoadAjaxContent('userPesquisa.html', 'Usuários')"><i class="fa fa-users text-yellow"></i> <span>Usuários</span></a>
+                			<a href="#" data-ng-click="LoadAjaxContent('userPesquisa.html', 'Usuï¿½rios')"><i class="fa fa-users text-yellow"></i> <span>Usu&aacute;rios</span></a>
                 		</li>                		
                 		<li><a href="#" data-ng-click="LoadAjaxContent('companies.html', 'Empresas')"><i class="fa fa-industry"></i> Empresa</a></li> 
                 		
@@ -167,7 +109,7 @@
 			              	</ul>
 			            </li> 
 			            <li><a href="#" data-ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn"></i> Alarmes</a></li>
-			            <li><a href="#" data-ng-click="LoadAjaxContent('companyDetectorMaintenance.html', 'Detectores-Calibração')"><i class="fa fa-retweet"></i> Calibração / Manutenção</a></li>              		
+			            <li><a href="#" data-ng-click="LoadAjaxContent('companyDetectorMaintenance.html', 'Detectores-Calibra&ccedil;&atilde;o')"><i class="fa fa-retweet"></i> Calibra&ccedil;&atilde;o &amp; Manuten&ccedil;&atilde;o</a></li>
                 		
 		     		</ul>
             	</li>

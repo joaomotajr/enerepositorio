@@ -1,5 +1,10 @@
 @CHARSET "ISO-8859-1";
 
+
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-    ng-cloak {
+        display: none !important;
+    }
+
 	body.loading {
 		overflow: hidden;
 	}
@@ -98,6 +103,6 @@
 	
 	.disableDivOver {
 		pointer-events: none;
-		opacity: 0.3;
+		opacity: 0.6;
 	}
 	

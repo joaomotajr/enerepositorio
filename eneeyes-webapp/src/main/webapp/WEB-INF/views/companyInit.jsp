@@ -1,9 +1,8 @@
 <div data-ng-controller="companiesController">    
 	<div class="col-md-9">
-		<!--  <div class="box box-primary" ng-show="selectedCompany.unitsDto.length <= 0"> -->
 		<div class="box box-primary">
 						
-			<div class="box-header with-border"><strong style="font-size:1.4em">Inicialização do Cadastro</strong></div>
+			<div class="box-header with-border"><strong style="font-size:1.4em">Inicializaï¿½ï¿½o do Cadastro</strong></div>
 			
 			<div class="box-body">
 				<div class="col-md-6">

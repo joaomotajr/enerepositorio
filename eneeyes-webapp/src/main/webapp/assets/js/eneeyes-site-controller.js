@@ -5,7 +5,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	$scope.$root.timer = [];
 	$scope.$root.currentPage = "";
 	$scope.$root.errorTimes = 0;
-	$scope.$root.currentTabOpened = "";
+	//$scope.$root.currentTabOpened = "";
 	$scope.$root.isFrom = $('#isFrom').val();
 	$scope.$root.userImage = '/assets/img/avatar_128x128.png';
 	
@@ -31,58 +31,56 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 		
 		title= title.replace(/\s/g,'');		
 		$scope.$root.currentPage = title;
-		
-		tabIsOpened = $(".nav-tabs").find("." + title ).attr('id');
+				
+		var idTab = $scope.tabsShow.findIndex( function(e) { return e.link === title });
 					
-		if (tabIsOpened) {		
+		if (idTab > 0 ) {		
 			
 			$timeout(function() {
-				$("#" + tabIsOpened).trigger("click");				
-			},300);
+				$("#id_tab_" + $scope.tabsShow[idTab].link).trigger("click");				
+			},100);
 		}
 		else {
-		
-			$scope.$root.currentTabOpened = tabIsOpened;
-			angular.element('body').addClass('loading');		
+
 			$http.get(url)
-	        .success(function (data) {
-	        	
-	        	var num_tabs = $("div#tabs ul li").length + 1;
+	         	.success(function (data) {
 	        	
 	        	var sBody = {
-	        		name : "tab_" + num_tabs,
+	        		name : "tab_" + title,
 	        		link : title,
-	        		body : data
+					body : data			
 	        	};
 	        	
 	        	$scope.tabsShow.push(sBody);     	
 	           
 	        	$timeout(function() {
-					$("#id_tab_" + num_tabs).trigger("click");				
-				},300);
+					$("#id_tab_" + title).trigger("click");				
+				},100);
 	            
 	        })
 	        .error(function (data, status, headers, config) {
-	        	angular.element('body').removeClass('loading');
-	        	alert(config);
+
+				$rootScope.alertDanger = config;
+				angular.element('body').removeClass('loading');
+					        	
 	        });
 		}
 	}
 	
 	$scope.removeTab = function (index) {
-		if (index == 0) return;
-		
-		$scope.$root.currentPage = "";
-		
-		$timeout(function(){
-			$("#id_tab_" + index).trigger("click");				
-		},100);
-		
-		$scope.tabsShow.splice(index, 1);
-		
-		$timeout(function(){
-			$("#id_tab_" + index).trigger("click");				
-		},100);
+			
+		if($scope.$root.currentPage == $scope.tabsShow[index].link) {
+			
+			$timeout(function(){			
+				$('#id_' + $scope.tabsShow[index - 1].name).trigger("click");				
+			}, 100);
+
+			$scope.tabsShow.splice(index, 1);				
+		}
+		else {
+
+			$scope.tabsShow.splice(index, 1);					
+		}		
 	};
 
     $scope.forms = {
@@ -139,7 +137,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
             		}		
         			else if(errorMessage == "signin.error") {
 
-            			$scope.errorMessage = 'Usuário ou Senha Inválidos!!!';
+            			$scope.errorMessage = 'Usuï¿½rio ou Senha Invï¿½lidos!!!';
 
             			angular.element('#signin-error').css('display','block');
             			angular.element('#signin-user').addClass('has-error');
@@ -177,7 +175,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
             
         	if($scope.updatePass.resultType == 'SUCCESS') {
             	
-        		$scope.successMessage = $scope.updatePass.message + " Refaça o Login";          
+        		$scope.successMessage = $scope.updatePass.message + " Refaï¿½a o Login";          
             	
             	angular.element('#formSignin').css('display','none');            	
             	angular.element('#password-success').css('display','block');

@@ -24,8 +24,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 
 	var loadGoogleCharts = false;
 	
-	angular.element('body').addClass('loading');
-	
 	$scope.showDanger = function(msg) {		
 		angular.element('body').removeClass('loading');
 		 $scope.$root.msgDanger = msg ;
@@ -224,10 +222,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		}, 500);
 		   
 		$("#stepTabDetector_1").trigger("click");
-		
-		$timeout(function () {
-			angular.element('body').removeClass('loading');			
-		}, 200);
 	 }	 
 	 
 	 initControlEvents = function() {
@@ -695,14 +689,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	}
 	
 	$scope.getCompanyDetectorMaintenanceHistoric = function() {		 
-		angular.element('body').addClass('loading');		
-		$scope.companyDetectorMaintenanceHistoric = new CompanyDetectorMaintenanceHistoricService.listPorCompanyDetector();	
 		
-		$scope.companyDetectorMaintenanceHistoric.$companyDetectorMaintenanceHistoric({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
-						
-			angular.element('body').removeClass('loading');
-	                 	         	
-		});		 
+		$scope.companyDetectorMaintenanceHistoric = new CompanyDetectorMaintenanceHistoricService.listPorCompanyDetector();			
+		$scope.companyDetectorMaintenanceHistoric.$companyDetectorMaintenanceHistoric({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){});		 
 	}
 	
 	/* ------------------------------------- Inicio Processamento --------------------------------------------*/

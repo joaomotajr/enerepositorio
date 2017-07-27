@@ -32,7 +32,7 @@ angular.module('dependency', []).config(['$httpProvider', function ($httpProvide
         	 }
         	 else if (rejection.status == 403) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertDanger = "403 Acesso ao Módulo ou Recurso Não Permitido!";
+        		 $rootScope.alertDanger = "403 Acesso ao Mï¿½dulo ou Recurso Nï¿½o Permitido!";
         		 $('#resultDanger').hide().show('slow').delay(15000).hide('slow');
         	 }
         	 else if (rejection.status == 404) {
@@ -42,7 +42,7 @@ angular.module('dependency', []).config(['$httpProvider', function ($httpProvide
         	 }
         	 else if (rejection.status == 405) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertDanger = "405 - Chamada Inválida, Contate o Administrador do Sistema.";
+        		 $rootScope.alertDanger = "405 - Chamada Invï¿½lida, Contate o Administrador do Sistema.";
         		 
         		 $timeout(function(){
         			 	$('#resultDanger').hide();
@@ -245,9 +245,8 @@ app.directive('datatable', function () {
     return {
         restrict: 'E, A, C',
         link: function (scope, element, attrs, controller) {
-            //scope - directive internal scope
 
-            var dataTable = element.dataTable(scope.options); //init plugin
+            var dataTable = element.dataTable(scope.options);
             
             var mapToDatatableFormat = function (data) {
             	return data.map(scope.options.columnMap)

@@ -1,6 +1,13 @@
 <!-- <div id="content" bind-unsafe-html="ajaxcontent"></div>  -->
 
-<div data-ng-controller="conteudoController">
+<style>
+	.nav-tabs-custom>.nav-tabs>li.active>a, .nav-tabs-custom>.nav-tabs>li.active:hover>a {
+    	background-color: #f7f7f7 !important;    	
+		font-weight: 700 !important;
+	}
+</style>
+
+<div data-ng-controller="conteudoController" data-ng-cloak>
 
 	<div class="content-wrapper">
 	
@@ -19,8 +26,8 @@
 			<div class="nav-tabs-custom" id='tabs' data-ng-show="tabsShow.length > 0">
 			    <ul class="nav nav-tabs">
 			    	<li data-ng-repeat="item in tabsShow">
-				    	<a href="{{'#'+ item.name}}" id="{{'id_' + item.name}}" class="{{item.link}}" data-ng-click="fCurrentPage(item.link);"  data-toggle='tab'>{{item.link}} &nbsp; 
-				    		<button type='button' class='close' aria-label='Close' data-ng-click="removeTab($index)"><span aria-hidden='true'> &times; </span></button>
+				    	<a href="{{'#'+ item.name}}" id="{{'id_' + item.name}}" class="{{item.link}}" data-ng-click="fCurrentPage(item.link);" data-toggle='tab'>{{item.link}} &nbsp; 
+				    		<button data-ng-if="item.id != 1" type='button' class='close' aria-label='Close' data-ng-click="removeTab($index)"><span aria-hidden='true'> &times; </span></button>
 				    	</a>
 			    	</li>		        
 			    </ul>

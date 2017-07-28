@@ -71,11 +71,11 @@
 			<div class="row">
 				
 				<div class="col-md-12">								
-					<div class="callout callout-info"
-				 		data-ng-show="selectedCompanyName" 
-				 		style="padding: 5px 5px 5px 25px; margin:0 0 5px 0; background-color: #3c8dbc !important; border-color: #156fa3 !important">
-				 		<button type="button" class="close" data-ng-click="selCompany();">&nbsp;</button>
-						<h4><i class="fa fa-industry"></i> {{selectedCompanyName}}</h4>										
+					<div class="callout callout-info" data-ng-show="selectedCompanyName" style="background-color: #3c8dbc !important; border-color: #156fa3 !important">
+				 		<a href="#" class="pull-right"  data-ng-click="selCompany();"><i class="fa fa-times fa-2x"></i> </a>
+						<h4  style="margin-bottom: 0px !important;"><i class="fa fa-industry"></i> {{selectedCompanyName}}</h4>		
+						{{companyDescription}}						
+						
 					</div>				
 				</div>
 			</div>
@@ -86,7 +86,7 @@
 					<div class="form-group">			            
 			        	<input type="text" class="form-control" id="input-select-node" placeholder="Pesquisar..." />
 			        </div>					            										  
-					<div id="treeview-company" class="treeview" style="font-size:12px;line-height:0.85"></div>				
+					<div id="treeview-company" class="treeview" style="font-size:14px;line-height:0.85"></div>				
 				</div>				
 				
 				<div id="content" data-bind-unsafe-html="ajaxcontentCompany"></div>													
@@ -100,12 +100,12 @@
 	        
 	        <div id="resultInfo" class="alert alert-info alert-dismissible col-sm-6" role="alert" data-ng-show="msgInfo" >
                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                 <strong>Aten��o! </strong>{{msgInfo}} <span id="msgComplemento"></span>
+                 <strong>Aten&ccedil;&atilde;o! </strong>{{msgInfo}} <span id="msgComplemento"></span>
              </div>                     
              
              <div id="resultDanger" class="alert alert-danger alert-dismissible col-sm-6" role="alert" data-ng-show="msgDanger" >
                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                 <strong>Aten��o! </strong>{{msgDanger}}                  
+                 <strong>Aten&ccedil;&atilde;o! </strong>{{msgDanger}}                  
              </div>
 				    
 		</div>

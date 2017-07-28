@@ -44,14 +44,14 @@
 	            </li>
 	            	            
 				<li class="treeview" data-ng-if="isFrom=='MASTER'">
-	            	<a href="#" data-ng-click="LoadAjaxContent('fusioncharts.html', 'Graficos')"><i class="fa fa-th text-white"></i> 
-	            		<span>Novos Graficos</span>	            			            		
+	            	<a href="#" data-ng-click="LoadAjaxContent('fusioncharts.html', 'Gr&aacute;ficos')"><i class="fa fa-th text-white"></i> 
+	            		<span>Novos Gr&aacute;ficos</span>	            			            		
 	            	</a>	            		            	
 	            </li>
 
 				<li class="treeview">
 	            	<a href="#">
-	                <i class="fa fa-cube text-red"></i> <span>Seguran&ccedil;a: G&aacute;s &amp; Alarme</span>
+	                <i class="fa fa-cube text-red"></i> <span>Sistema: G&aacute;s &amp; Alarme</span>
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">			            
@@ -93,7 +93,7 @@
 	              	
               		<ul class="treeview-menu">                		
                 		<li>
-                			<a href="#" data-ng-click="LoadAjaxContent('userPesquisa.html', 'Usu�rios')"><i class="fa fa-users text-yellow"></i> <span>Usu&aacute;rios</span></a>
+                			<a href="#" data-ng-click="LoadAjaxContent('userPesquisa.html', 'Usu&aacute;rios')"><i class="fa fa-users text-yellow"></i> <span>Usu&aacute;rios</span></a>
                 		</li>                		
                 		<li><a href="#" data-ng-click="LoadAjaxContent('companies.html', 'Empresas')"><i class="fa fa-industry"></i> Empresa</a></li> 
                 		

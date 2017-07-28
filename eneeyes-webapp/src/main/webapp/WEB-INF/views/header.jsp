@@ -77,7 +77,7 @@
 	
 			<!-- Sidebar toggle button-->		
 			<a data-ng-controller="SiteController" href="#" class="sidebar-toggle" data-toggle="offcanvas" data-ng-click="showLogo();" role="button"> 
-				<span class="sr-only">Toggle navigation</span>
+				<span class="sr-only">Navegação</span>
 			</a>
 			
 			<div class="navbar-custom-menu">

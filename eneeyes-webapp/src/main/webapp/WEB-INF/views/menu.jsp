@@ -1,7 +1,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <sec:csrfMetaTags />
-    <!-- MENU SECTION - Modificado  -->       
+    <!-- MENU Modificado  -->       
     
     <!-- Left side column. contains the logo and sidebar -->
 	<aside class="main-sidebar">

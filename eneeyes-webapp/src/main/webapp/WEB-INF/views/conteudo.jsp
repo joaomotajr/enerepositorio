@@ -27,7 +27,9 @@
 			    <ul class="nav nav-tabs">
 			    	<li data-ng-repeat="item in tabsShow">
 				    	<a href="{{'#'+ item.name}}" id="{{'id_' + item.name}}" class="{{item.link}}" data-ng-click="fCurrentPage(item.link);" data-toggle='tab'>{{item.link}} &nbsp; 
-				    		<button data-ng-if="item.id != 1" type='button' class='close' aria-label='Close' data-ng-click="removeTab($index)"><span aria-hidden='true'> &times; </span></button>
+							<button data-ng-if="item.link != 'Dashboard'" type='button' class='close' aria-label='Close' 
+										data-ng-click="removeTab($index)"><span aria-hidden='true'> &times; </span>
+							</button>
 				    	</a>
 			    	</li>		        
 			    </ul>

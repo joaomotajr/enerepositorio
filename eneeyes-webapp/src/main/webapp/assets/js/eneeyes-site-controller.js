@@ -5,7 +5,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	$scope.$root.timer = [];
 	$scope.$root.currentPage = "";
 	$scope.$root.errorTimes = 0;
-	$scope.$root.currentTabOpened = "";
+	//$scope.$root.currentTabOpened = "";
 	$scope.$root.isFrom = $('#isFrom').val();
 	$scope.$root.userImage = '/assets/img/avatar_128x128.png';
 	
@@ -31,42 +31,38 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 		
 		title= title.replace(/\s/g,'');		
 		$scope.$root.currentPage = title;
-		
-		tabIsOpened = $(".nav-tabs").find("." + title ).attr('id');
+				
+		var idTab = $scope.tabsShow.findIndex( function(e) { return e.link === title });
 					
-		if (tabIsOpened) {		
+		if (idTab > 0 ) {		
 			
 			$timeout(function() {
-				$("#" + tabIsOpened).trigger("click");				
+				$("#id_tab_" + $scope.tabsShow[idTab].link).trigger("click");				
 			},100);
 		}
 		else {
-		
-			$scope.$root.currentTabOpened = tabIsOpened;
-			//angular.element('body').addClass('loading');	
 
 			$http.get(url)
-	        .success(function (data) {
-	        	
-	        	var num_tabs = $("div#tabs ul li").length + 1;
+	         	.success(function (data) {
 	        	
 	        	var sBody = {
-	        		name : "tab_" + num_tabs,
+	        		name : "tab_" + title,
 	        		link : title,
-					body : data,
-					id: num_tabs				
+					body : data			
 	        	};
 	        	
 	        	$scope.tabsShow.push(sBody);     	
 	           
 	        	$timeout(function() {
-					$("#id_tab_" + num_tabs).trigger("click");				
-				},300);
+					$("#id_tab_" + title).trigger("click");				
+				},100);
 	            
 	        })
 	        .error(function (data, status, headers, config) {
+
+				$rootScope.alertDanger = config;
 				angular.element('body').removeClass('loading');
-				$rootScope.alertDanger = "config";	        	
+					        	
 	        });
 		}
 	}

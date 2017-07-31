@@ -9,32 +9,7 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
 
-		  <!-- Sidebar user panel (optional) 
-			<!--
-			<div class="user-panel">
-				<div class="pull-left image" data-ng-controller="SiteController">
-					<img data-ng-src="{{userImage}}" class="img-circle" alt="User Image">
-				</div>
-				<div class="pull-left info">
-					<p><sec:authentication property="principal.displayName" /></p>					
-				  	
-				  	<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-				</div>
-			</div>			
-			-->
-			
-			<div class="row"> 
-				
-				<a href="#" data-ng-controller="SiteController" class="logo-lg" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')">
-									 	 			 
-				 	<span class="logo-lg" >	 		
-			 			<img data-ng-if="recolheLogo" src="/assets/img/Logo_e-GAS.PNG" style="float: left; margin-left: 20px; padding:10px; width: 85%;"> 			 
-					</span>
-					
-				</a>
-			</div>			
-
-	          <!-- Sidebar Menu -->
+	        <!-- Sidebar Menu -->
 			<ul class="sidebar-menu">
 	            	            
 	            <li class="treeview">
@@ -47,7 +22,7 @@
 	            	<a href="#" data-ng-click="LoadAjaxContent('fusioncharts.html', 'Gr&aacute;ficos')"><i class="fa fa-th text-white"></i> 
 	            		<span>Novos Gr&aacute;ficos</span>	            			            		
 	            	</a>	            		            	
-	            </li>
+				</li>
 
 				<li class="treeview">
 	            	<a href="#">

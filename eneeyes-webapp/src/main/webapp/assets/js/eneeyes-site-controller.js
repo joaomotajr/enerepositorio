@@ -4,8 +4,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	
 	$scope.$root.timer = [];
 	$scope.$root.currentPage = "";
-	$scope.$root.errorTimes = 0;
-	//$scope.$root.currentTabOpened = "";
+	$scope.$root.errorTimes = 0;	
 	$scope.$root.isFrom = $('#isFrom').val();
 	$scope.$root.userImage = '/assets/img/avatar_128x128.png';
 	
@@ -97,7 +96,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	    }
     };
     
-    $scope.errorMessage = '';
+    $scope.errorMessage = false;
 
     $scope.signin = function() {
 
@@ -136,17 +135,13 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
             			$scope.forms.signexpired.username = username;
             		}		
         			else if(errorMessage == "signin.error") {
-
-            			$scope.errorMessage = 'Usu�rio ou Senha Inv�lidos!!!';
-
+							
             			angular.element('#signin-error').css('display','block');
             			angular.element('#signin-user').addClass('has-error');
             			angular.element('#signin-pass').addClass('has-error');            		
             			
             		} else {
-            			angular.element('#signin-error').css('display','block');
-            			angular.element('#signin-user').addClass('has-error');
-            			angular.element('#signin-pass').addClass('has-error');
+            			angular.element('#signin-error2').css('display','block');            			
             		}
             	}
             }

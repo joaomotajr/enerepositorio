@@ -49,19 +49,22 @@
 		        	<p class="login-box-msg"><strong>Digite suas Credencias</strong></p>
 		        	
 		        	<form>		          
-		          		<div class="form-group has-feedback">
+		          		<div class="form-group has-feedback" data-ng-class="{'has-error': errorMessage}">
 		            		<input type="text" class="form-control" placeholder="Login do Usu&aacute;rio" data-ng-model="forms.signin.login" data-ng-keyup="$event.keyCode == 13 ? signin() : null">
 		            		<span class="glyphicon glyphicon-user form-control-feedback"></span>
 		          		</div>
 		          
-		          		<div class="form-group has-feedback">
+		          		<div class="form-group has-feedback" data-ng-class="{'has-error': errorMessage}">
 		            		<input type="password" class="form-control" placeholder="Senha" data-ng-model="forms.signin.credential" 
 		            			data-ng-keyup="$event.keyCode == 13 ? signin() : null">
 		            		<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 		          		</div>
 		          
 		          		<div id="signin-error" class="alert alert-danger" style="display:none">
-							{{errorMessage}}
+							<span> Usu&aacute;rio e/ou Sennha Inv&aacute;lido(s).</span>
+						</div>
+						<div id="signin-error2" class="alert alert-danger" style="display:none">
+							<span> Login n&atilde;o Permitido, Contate o administrador .</span>
 				  		</div>
 				  		
 			  			<div class="alert alert-warning" id="signinAlert" data-ng-show="signinAlert" style="display:none;">					        

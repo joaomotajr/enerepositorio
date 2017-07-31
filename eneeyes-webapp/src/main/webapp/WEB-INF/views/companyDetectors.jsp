@@ -175,7 +175,7 @@
 														<h5 class="description-header"><i class="fa fa-bolt"></i> {{sensor.name}}</h5>
 														<span class="description-text">Range: Min|Max: {{sensor.rangeMin}} | {{sensor.rangeMax}}</span>
 														<br>
-														G&aacute;s: <strong class"text-navy">{{sensor.gasesDto[0].name}}</strong>																
+														G&aacute;s: <strong class="text-navy">{{sensor.gasesDto[0].name}}</strong>																
 														<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="sensor.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
 														<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="sensor.unitMeterGases!='LEL_PERCENT'"> {{sensor.unitMeterGases}}</span>													
 														
@@ -261,6 +261,7 @@
 						                <div class="panel-heading">
 									    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
 									   	</div>									   					               	
+
 						               	<div class="panel-body">						               		
 				    						<jsp:include page="companyDetectorMaintenanceForm.jsp"/>
 											<hr>

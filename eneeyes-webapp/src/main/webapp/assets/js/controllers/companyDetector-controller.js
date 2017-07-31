@@ -687,7 +687,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			angular.element('body').removeClass('loading');
 		});			 
 	}
-	
+
 	$scope.getCompanyDetectorMaintenanceHistoric = function() {		 
 		
 		$scope.companyDetectorMaintenanceHistoric = new CompanyDetectorMaintenanceHistoricService.listPorCompanyDetector();			

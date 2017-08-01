@@ -496,7 +496,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	    
 	    if ($scope.changeGraphic) {
 		    var options = {
-		          title: "Dados do Sensor na ï¿½ltima Hora.",
+		          title: "Dados do Sensor na última Hora.",
 		          legend: {position: 'none'},
 		          'lineWidth': 0.75,
 		    	  width: 850,
@@ -521,9 +521,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	                  },
 		    		  ticks: [ 
 		    		           {v:0, f: 'Range Minimo: 0' }, 
-		    		           {v: orange, f: 'Detecï¿½ï¿½o: ' + orange}, 
+		    		           {v: orange, f: 'Deteção: ' + orange}, 
 		    		           {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		           {v: red, f: 'Evacuaï¿½ï¿½o: ' + red}, 
+		    		           {v: red, f: 'Evacuação: ' + red}, 
 		    		           {v: sensor.rangeMax, f: 'Range Mï¿½ximo: ' + sensor.rangeMax} 
 		    		        ]
 		    	  },
@@ -533,7 +533,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	    }
 		else {
 			var options = {
-		          title: "Dados do Sensor na ï¿½ltima Hora.",
+		          title: "Dados do Sensor na última Hora.",
 		          legend: {position: 'none'},
 		          'lineWidth': 0.75,
 		    	  width: 850,

@@ -15,6 +15,7 @@ public class PositionDto {
     private CompanyDetectorDto companyDetectorDto;
     private SensorDto sensorDto;
     private AlarmType alarmType;
+	private HistoricDto historicDto;
 	
 	public PositionDto() {
 		
@@ -27,7 +28,8 @@ public class PositionDto {
     	this.lastValue = position.getLastValue();    	
     	this.sensorDto = new SensorDto(position.getSensor());
     	this.alarmType = position.getAlarmType();
-    	this.companyDetectorDto = new CompanyDetectorDto(position.getCompanyDetector());  
+    	this.companyDetectorDto = new CompanyDetectorDto(position.getCompanyDetector());
+    	this.historicDto.setUid(position.getHistoric().getUid());
 	}
 	
 	public final Long getUid() {
@@ -83,6 +85,14 @@ public class PositionDto {
 		else { 
 			this.alarmType = alarmType;
 		}
+	}
+
+	public final HistoricDto getHistoricDto() {
+		return historicDto;
+	}
+
+	public final void setHistoricDto(HistoricDto historicDto) {
+		this.historicDto = historicDto;
 	}
 
 }

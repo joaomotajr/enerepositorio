@@ -21,6 +21,8 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
 
 	public List<Position> findByCompanyDetectorIn(List<CompanyDetector> lista);
 	
-	public List<Position> findByLastUpdateBetween(Date in, Date out);	
+	public List<Position> findByLastUpdateBetween(Date in, Date out);
+	
+	public List<Position> findByLastUpdateLessThan(Date date);
 	
 }

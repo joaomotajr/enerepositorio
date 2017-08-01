@@ -27,6 +27,7 @@ public class AlarmDto {
 	private String action1;
 	private String action2;
 	private String action3;
+	private String action4;
 	
 	private CompanyView companyDto;
 
@@ -55,7 +56,8 @@ public class AlarmDto {
 		this.alarmAction = alarm.getAlarmAction();
 		this.action1 = alarm.getAction1();
 		this.action2 = alarm.getAction2();
-		this.action3 = alarm.getAction3();		
+		this.action3 = alarm.getAction3();
+		this.action4 = alarm.getAction4();
 		this.companyDto = alarm.getCompany();		
 	}
 	
@@ -226,4 +228,13 @@ public class AlarmDto {
 	public final void setAction3(String action3) {
 		this.action3 = action3;
 	}
+
+	public final String getAction4() {
+		return action4;
+	}
+
+	public final void setAction4(String action4) {
+		this.action4 = action4;
+	}
+	
 }

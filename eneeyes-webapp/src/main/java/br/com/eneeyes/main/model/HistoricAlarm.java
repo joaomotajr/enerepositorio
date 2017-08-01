@@ -10,6 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.eneeyes.main.model.enums.AlarmType;
+import br.com.eneeyes.main.model.enums.EmailStatus;
+import br.com.eneeyes.main.model.enums.SigmaStatus;
+import br.com.eneeyes.main.model.enums.SmsStatus;
+import br.com.eneeyes.main.model.enums.SoundStatus;
+
 @Entity
 @Table(name = "historic_alarm")
 public class HistoricAlarm {
@@ -23,7 +29,7 @@ public class HistoricAlarm {
 	@Column(name = "UID")
 	private Long uid;
 	
-	@Column(name = "LAST_UPDATE", nullable = false)
+	@Column(name = "LAST_UPDATE", nullable = true)
 	private Date lastUpdate;
 
 	@Column(name = "VALUE", nullable = true)
@@ -35,29 +41,29 @@ public class HistoricAlarm {
 	@Column(name="SENSOR_ID", nullable = false)
 	private Long sensorId;
 	
-	@Column(name="HISTORIC_ID", nullable = false)
+	@Column(name="HISTORIC_ID", nullable = true)
 	private Long historicId;
 	
-	@Column(name = "ALARM_TYPE", nullable = false)
-	private String alarmType;	
+	@Column(name = "ALARM_TYPE", nullable = true)
+	private AlarmType alarmType;	
 	
-	@Column(name="ALARM_ON", nullable = false)
+	@Column(name="ALARM_ON", nullable = true)
 	private Boolean alarmOn;
 	
-	@Column(name="EMAIL_STATUS", nullable = false)
-	private String emailStatus;
+	@Column(name="EMAIL_STATUS", nullable = true)
+	private EmailStatus emailStatus;
 	
-	@Column(name="SMS_STATUS", nullable = false)
-	private String smsStatus;
+	@Column(name="SMS_STATUS", nullable = true)
+	private SmsStatus smsStatus;
 	
-	@Column(name="ACTION_STATUS", nullable = true)
-	private String actionStatus;
+	@Column(name="ACTION", nullable = true)
+	private String action;
 	
-	@Column(name="SOUND_STATUS", nullable = false)
-	private String soundStatus;
+	@Column(name="SOUND_STATUS", nullable = true)
+	private SoundStatus soundStatus;
 	
-	@Column(name="SIGMA_STATUS", nullable = false)
-	private String sigmaStatus;
+	@Column(name="SIGMA_STATUS", nullable = true)
+	private SigmaStatus sigmaStatus;
 		
 	public Long getUid() {
 		return uid;
@@ -98,15 +104,7 @@ public class HistoricAlarm {
 	public final void setSensorId(Long sensorId) {
 		this.sensorId = sensorId;
 	}
-	
-	public final String getAlarmType() {
-		return alarmType;
-	}
 
-	public final void setAlarmType(String alarmType) {
-		this.alarmType = alarmType;
-	}
-	
 	public final Long getHistoricId() {
 		return historicId;
 	}
@@ -114,7 +112,15 @@ public class HistoricAlarm {
 	public final void setHistoricId(Long historicId) {
 		this.historicId = historicId;
 	}
-	
+
+	public final AlarmType getAlarmType() {
+		return alarmType;
+	}
+
+	public final void setAlarmType(AlarmType alarmType) {
+		this.alarmType = alarmType;
+	}
+
 	public final Boolean getAlarmOn() {
 		return alarmOn;
 	}
@@ -122,44 +128,44 @@ public class HistoricAlarm {
 	public final void setAlarmOn(Boolean alarmOn) {
 		this.alarmOn = alarmOn;
 	}
-	
-	public final String getEmailStatus() {
+
+	public final EmailStatus getEmailStatus() {
 		return emailStatus;
 	}
 
-	public final void setEmailStatus(String emailStatus) {
+	public final void setEmailStatus(EmailStatus emailStatus) {
 		this.emailStatus = emailStatus;
 	}
 
-	public final String getSmsStatus() {
+	public final SmsStatus getSmsStatus() {
 		return smsStatus;
 	}
 
-	public final void setSmsStatus(String smsStatus) {
+	public final void setSmsStatus(SmsStatus smsStatus) {
 		this.smsStatus = smsStatus;
 	}
 
-	public final String getActionStatus() {
-		return actionStatus;
+	public final String getAction() {
+		return action;
 	}
 
-	public final void setActionStatus(String actionStatus) {
-		this.actionStatus = actionStatus;
+	public final void setAction(String action) {
+		this.action = action;
 	}
 
-	public final String getSoundStatus() {
+	public final SoundStatus getSoundStatus() {
 		return soundStatus;
 	}
 
-	public final void setSoundStatus(String soundStatus) {
+	public final void setSoundStatus(SoundStatus soundStatus) {
 		this.soundStatus = soundStatus;
 	}
 
-	public final String getSigmaStatus() {
+	public final SigmaStatus getSigmaStatus() {
 		return sigmaStatus;
 	}
 
-	public final void setSigmaStatus(String sigmaStatus) {
+	public final void setSigmaStatus(SigmaStatus sigmaStatus) {
 		this.sigmaStatus = sigmaStatus;
-	}
+	}	
 }

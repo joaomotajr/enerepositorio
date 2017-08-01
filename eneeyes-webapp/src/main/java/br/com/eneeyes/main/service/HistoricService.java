@@ -21,7 +21,6 @@ import br.com.eneeyes.main.result.Result;
 
 @Service
 public class HistoricService implements IService<HistoricDto> {
-	//private static final int PAGE_SIZE = 50;
 		
 	@Autowired
 	private HistoricRepository repository;

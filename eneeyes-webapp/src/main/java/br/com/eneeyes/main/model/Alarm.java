@@ -52,6 +52,7 @@ public class Alarm {
 		this.action1 = dto.getAction1();
 		this.action2 = dto.getAction2();
 		this.action3 = dto.getAction3();
+		this.action4 = dto.getAction4();
 		this.company = dto.getCompanyDto();		
 	}	
 	
@@ -122,6 +123,9 @@ public class Alarm {
 	
 	@Column(name = "ACTION3", nullable = true, length=300)		
 	private String action3;	
+	
+	@Column(name = "ACTION4", nullable = true, length=300)		
+	private String action4;	
 		
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_ID", nullable = false)
@@ -294,4 +298,12 @@ public class Alarm {
 	public final void setAction3(String action3) {
 		this.action3 = action3;
 	}
+
+	public final String getAction4() {
+		return action4;
+	}
+
+	public final void setAction4(String action4) {
+		this.action4 = action4;
+	}	
 }

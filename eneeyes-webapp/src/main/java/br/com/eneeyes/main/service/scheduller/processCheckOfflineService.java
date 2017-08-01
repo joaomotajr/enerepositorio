@@ -20,6 +20,8 @@ public class processCheckOfflineService {
 	
 	@Autowired
 	PositionAlarmService positionAlarmService;
+	
+	@Autowired
 	PositionService positionService;
 	
 	protected final String timestampFormat = "dd/MM/yyyy às HH:mm:ss";
@@ -38,7 +40,7 @@ public class processCheckOfflineService {
 			
 			try {				
 				 
-				positionAlarmService.checkAndUpdateAlarmsAndActions(item);
+				positionAlarmService.checkAndUpdateAlarmsAndActions(item, true);
 				 
 			} catch (Exception e) {			
 

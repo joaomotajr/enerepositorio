@@ -38,43 +38,13 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	
 	@Autowired
 	HistoricAlarmService historicAlarmService;
+	
+	public AlarmType checkAndUpdateAlarmsAndActions(Position position) {
 		
-    /** Método checar se houve violação de Alarme
-     *   @return sem retorno  						*/
-	public AlarmType checkAlarmLimits(Position position) {		
-		
-		CompanyDetector companyDetector = new CompanyDetector(position.getCompanyDetector().getUid());
-		Sensor sensor = new Sensor(position.getSensor().getUid());
-		
-		if(CompanyDetectorAlarmSingletonRepository.init()) {
-			CompanyDetectorAlarmSingletonRepository.populate(companyDetectorAlarmAlarmService.findAll());
-		}
-		
-		CompanyDetectorAlarmDto alarm = CompanyDetectorAlarmSingletonRepository.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());
-			
-		AlarmType alarmType = AlarmType.NORMAL ;
-		
-		if(alarm != null) {
-			
-			if( position.getLastValue().compareTo( new BigDecimal(alarm.getAlarmDto().getAlarm3())) > 0 ) {				
-				alarmType = AlarmType.EVACUACAO;
-			}
-			else if( position.getLastValue().compareTo( new BigDecimal(alarm.getAlarmDto().getAlarm2())) > 0 ) {				
-				alarmType = AlarmType.ALERTA;
-			}
-			else if( position.getLastValue().compareTo( new BigDecimal(alarm.getAlarmDto().getAlarm1())) > 0 ) {				
-				alarmType = AlarmType.DETECCAO;				
-			}		
-		}	
-		
-		return alarmType;		 
+		return checkAndUpdateAlarmsAndActions(position, false);
 	}
 	
-	/** Método checar se houve violação de Alarme
-	 * Criar Alarme correspondentes
-	 * Carregar Filas de eventos 
-     *   @return Tipo do Alarme */
-	public AlarmType checkAndUpdateAlarmsAndActions(Position position, Long HistoricId) {		
+	public AlarmType checkAndUpdateAlarmsAndActions(Position position, Boolean offLine) {		
 		
 		CompanyDetector companyDetector = new CompanyDetector(position.getCompanyDetector().getUid());
 		Sensor sensor = new Sensor(position.getSensor().getUid());
@@ -87,12 +57,16 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		
 		AlarmDto alarmDto = alarm.getAlarmDto();
 		
-		AlarmType alarmType = getExistsAlarm(alarmDto, position.getLastValue());
+		AlarmType alarmType = AlarmType.NORMAL;
+		if(offLine)
+			alarmType = AlarmType.OFFLINE;
+		else
+			alarmType = getExistsAlarm(alarmDto, position.getLastValue());
 		
 		if (alarmType != AlarmType.NORMAL) {
 					
 			SigmaStatus sigmaStatus = null;
-			if(alarm.getAlarmDto().getAlarmSigma() != null && alarm.getAlarmDto().getAlarmSigma())
+			if(alarmDto.getAlarmSigma() != null && alarmDto.getAlarmSigma())
 				sigmaStatus = SigmaStatus.ON;
 			else
 				sigmaStatus = SigmaStatus.OFF;
@@ -123,8 +97,8 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			else
 				soundStatus = SoundStatus.OFF;
 			
-			historicAlarmService.save(position.getLastValue(), companyDetector.getUid(), sensor.getUid(), HistoricId, alarm.getAlarmDto().getAlarmOn(), alarmType.toString(), 
-					emailStatus.toString(), smsStatus.toString(), action, soundStatus.toString(), sigmaStatus.toString());
+			historicAlarmService.save(position.getLastValue(), companyDetector.getUid(), sensor.getUid(), position.getHistoric().getUid(), alarm.getAlarmDto().getAlarmOn(), alarmType, 
+					emailStatus, smsStatus, action, soundStatus, sigmaStatus);
 			
 			if(alarm.getAlarmDto().getAlarmOn())			
 				updatePositionAlarm(position, companyDetector, sensor, alarmType, emailStatus, smsStatus, action, soundStatus, sigmaStatus);
@@ -133,17 +107,14 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 				
 		return !alarm.getAlarmDto().getAlarmOn() ? AlarmType.OFF : alarmType; 
 	}
+
 	
-	private AlarmType getExistsAlarm(AlarmDto alarm, BigDecimal lastValue ) {
+	AlarmType getExistsAlarm(AlarmDto alarm, BigDecimal lastValue ) {
 			
-		AlarmType alarmType = AlarmType.NORMAL ;
+		AlarmType alarmType = AlarmType.NORMAL;
 				
 		if(alarm != null) {
-			
-//			if(!alarm.getAlarmOn() ) {				
-//				alarmType = AlarmType.OFF;				
-//			}				
-//			else 
+
 			if( lastValue.compareTo( new BigDecimal(alarm.getAlarm3())) > 0 ) {				
 				alarmType = AlarmType.EVACUACAO;							
 			}

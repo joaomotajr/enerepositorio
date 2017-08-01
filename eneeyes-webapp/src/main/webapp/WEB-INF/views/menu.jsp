@@ -46,7 +46,7 @@
 		            	</li>
 		            		
 		            	<li class="treeview" data-ng-if="isFrom=='MASTER'">
-			            	<a href="#" data-ng-click="LoadAjaxContent('simulador.html', 'Analisador-Cen�rios')"><i class="fa fa-cog"></i>
+			            	<a href="#" data-ng-click="LoadAjaxContent('simulador.html', 'Analisador-Cen&aacute;rios')"><i class="fa fa-cog"></i>
 			            	<span>Analisador de Cen&aacute;rios</span>			            	
 			            	</a>
 			            </li>		            		        

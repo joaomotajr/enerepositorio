@@ -38,6 +38,12 @@ public class PositionService implements IService<PositionDto> {
 		return null;
 	}
 
+	/**
+	 * @param historic
+	 * @return
+	 * Atualiza posição do dispositivo, e delega checagem de limites
+	 * para possiveis providências.
+	 */
 	public BasicResult<?> updatePosition(Historic historic) {
 
 		Result<PositionDto> result = new Result<PositionDto>();
@@ -51,8 +57,9 @@ public class PositionService implements IService<PositionDto> {
 			position.setCompanyDetector(historic.getCompanyDetector());
 			position.setLastUpdate(historic.getLastUpdate());
 			position.setLastValue(historic.getValue());
+			position.setHistoric(historic);
 			
-			AlarmType alarmType = positionAlarmService.checkAndUpdateAlarmsAndActions(position, historic.getUid());
+			AlarmType alarmType = positionAlarmService.checkAndUpdateAlarmsAndActions(position);
 			position.setAlarmType(alarmType);
 			
 			repository.save(position);
@@ -70,6 +77,24 @@ public class PositionService implements IService<PositionDto> {
 		
 		return result;		
 	}	
+	
+	public BasicResult<?> updatePositionAuto(Position position) {
+
+		Result<PositionDto> result = new Result<PositionDto>();
+							
+		AlarmType alarmType = positionAlarmService.checkAndUpdateAlarmsAndActions(position, true);
+		
+		position.setLastUpdate(new Date());
+		position.setAlarmType(alarmType);
+		
+		repository.save(position);	
+					
+		result.setResultType( ResultMessageType.SUCCESS );
+		result.setMessage("Executado com sucesso.");
+				
+		
+		return result;		
+	}
 	
 	public void createInitialPosition(CompanyDetector companyDetector) {
 		
@@ -225,5 +250,22 @@ public class PositionService implements IService<PositionDto> {
 		
 		return result;	
 
+	}	
+	
+	public List<Position> listOffline() {
+			
+		Date now = new Date(); 
+		Date minutesAgo = new Date(now.getTime() - (1000 * 60 * 5));
+		
+		List<Position> list = repository.findByLastUpdateLessThan(minutesAgo);
+				
+		List<PositionDto> dto = new ArrayList<PositionDto>();
+		
+		for (Position item   : list) {					
+			dto.add(new PositionDto(item) );
+		}
+		
+		return list;
+//		return repository.findByLastUpdateLessThan(minutesAgo);
 	}
 }

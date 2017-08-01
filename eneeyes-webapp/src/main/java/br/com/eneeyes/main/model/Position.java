@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.PositionDto;
@@ -34,7 +35,8 @@ public class Position {
     	this.lastValue = dto.getLastValue();    	
     	this.sensor = new Sensor(dto.getSensorDto());
     	this.alarmType = dto.getAlarmType();
-    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());        	
+    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
+    	this.historic.setUid(dto.getHistoricDto().getUid()); 
     }
 
 	@Id
@@ -57,7 +59,11 @@ public class Position {
 	private Sensor sensor;
 	
 	@Column(name = "ALARM_TYPE", columnDefinition = "int default 0", nullable = false)
-	private AlarmType alarmType;	
+	private AlarmType alarmType;
+		
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
+	@JoinColumn(name="HISTORIC_ID", nullable = true)
+	private Historic historic;
 
 	@Enumerated(EnumType.ORDINAL) 
 	private AlarmType AlarmType() { 
@@ -111,4 +117,12 @@ public class Position {
 	public final void setAlarmType(AlarmType alarmType) {
 		this.alarmType = alarmType;
 	}
+
+	public final Historic getHistoric() {
+		return historic;
+	}
+
+	public final void setHistoric(Historic historic) {
+		this.historic = historic;
+	}	
 }

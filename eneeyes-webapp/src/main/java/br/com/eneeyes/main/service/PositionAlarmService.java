@@ -65,7 +65,6 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		else {			
 			alarmDto = companyDetectorAlarmDto.getAlarmDto();
 			alarmType = getExistsAlarm(alarmDto, position.getLastValue());
-		}
 		
 		if (alarmType != AlarmType.NORMAL && alarmType != AlarmType.OFF) {
 					

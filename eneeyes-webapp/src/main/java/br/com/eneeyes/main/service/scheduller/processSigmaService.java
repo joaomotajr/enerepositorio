@@ -12,6 +12,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +28,7 @@ import br.com.eneeyes.main.service.ws.ReceptorEventosWebService;
 import br.com.eneeyes.main.service.ws.ReceptorEventosWebService_Service;
 
 @Component
+@PropertySource("classpath:parameters.properties")
 public class processSigmaService {
 	
 	@Autowired
@@ -37,6 +40,9 @@ public class processSigmaService {
 	@Autowired
 	SiteService siteService;
 	
+	@Value("${jobs.sigmaOn.enable}")
+	private boolean sigmaOn;
+	
 	protected final String timestampFormat = "dd/MM/yyyy às HH:mm:ss";
 	
 	private Log log = LogFactory.getLog(getClass());
@@ -46,8 +52,11 @@ public class processSigmaService {
 
 	private List<QueueSigmaView> sigmaLista;
 
-	@Scheduled(fixedDelay = 60000)
+	@Scheduled(fixedDelayString = "${jobs.sigmaOn.interval}")
 	public void schedule()  {
+		
+		if(!sigmaOn) return; 
+		
 		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Sigma Service - Start Automatico :: " 
 				+ new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
 							

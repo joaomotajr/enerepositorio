@@ -3,19 +3,14 @@ package br.com.eneeyes.main.service.scheduller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import javax.ejb.Schedule;
-import javax.ejb.Singleton;
-import javax.ejb.Timeout;
-import javax.ejb.Timer;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
-@Singleton
+@Component
 public class checkDeviceCalibration {
-	
-	protected final String localhost = "127.0.0.1";
-	protected final String usernameAdmin = "SKYNET";
+		
 	protected final String segundaASexta = "Mon-Fri";
 	protected final String seteETrezeHoras = "*";
 	protected final String cadaMinuto = "*";
@@ -23,14 +18,10 @@ public class checkDeviceCalibration {
 	
 	private Log log = LogFactory.getLog(getClass());
 
-	@Schedule(dayOfWeek = segundaASexta, hour = seteETrezeHoras, minute = cadaMinuto)
+	@Scheduled(cron = "0 15 10 * * ?")
 	public void schedule() {
 		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Start Automatico :: " + new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
 	}
 	
-	@Timeout
-	public void timeout(Timer timer) {
-		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Ocorreu Timeout :: ");
-	}
 
 }

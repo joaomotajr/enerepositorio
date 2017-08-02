@@ -8,6 +8,8 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +20,7 @@ import br.com.eneeyes.main.service.PositionAlarmService;
 import br.com.eneeyes.main.service.views.QueueSmsViewService;
 
 @Component
+@PropertySource("classpath:parameters.properties")
 public class processSmsService {
 	
 	@Autowired
@@ -29,12 +32,18 @@ public class processSmsService {
 	@Autowired
 	SiteService siteService;
 	
+	@Value("${jobs.smsOn.enable}")
+	private boolean smsOn;
+	
 	protected final String timestampFormat = "dd/MM/yyyy às HH:mm:ss";
 	
 	private Log log = LogFactory.getLog(getClass());
 
-	@Scheduled(fixedDelay = 60000)
+	@Scheduled(fixedDelayString = "${jobs.smsOn.interval}")
 	public void schedule()  {
+		
+		if(!smsOn) return; 
+		
 		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ":Sms Service - Start Automatico :: " 
 				+ new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
 		

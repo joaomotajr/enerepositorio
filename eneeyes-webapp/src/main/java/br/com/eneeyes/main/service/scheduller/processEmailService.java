@@ -11,6 +11,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +23,7 @@ import br.com.eneeyes.main.service.PositionAlarmService;
 import br.com.eneeyes.main.service.views.QueueEmailViewService;
 
 @Component
+@PropertySource("classpath:parameters.properties")
 public class processEmailService {
 	
 	@Autowired
@@ -32,12 +35,18 @@ public class processEmailService {
 	@Autowired
 	SiteService siteService;
 	
+	@Value("${jobs.emailOn.enable}")
+	private boolean emailOn;
+	
 	protected final String timestampFormat = "dd/MM/yyyy às HH:mm:ss";
 	
 	private Log log = LogFactory.getLog(getClass());
 
-	@Scheduled(fixedDelay = 60000)
+	@Scheduled(fixedDelayString = "${jobs.emailOn.interval}")
 	public void schedule() {
+		
+		if(!emailOn) return; 
+		
 		log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ":Email Service - Start Automatico :: " 
 				+ new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
 		

@@ -36,6 +36,7 @@ public class DashCompaniesPosition implements Serializable {
 	private String company_detector_name;
 	private String sensor_name;
 	private Long sensor_id;
+	private Long position_id;	
 	private String gas_name;	
 
 	@Column(name = "last_value", nullable = true)
@@ -102,11 +103,20 @@ public class DashCompaniesPosition implements Serializable {
 	
 	public void setSensor_id(Long sensor_id) {
 		this.sensor_id = sensor_id;
+	}	
+	
+	public final Long getPosition_id() {
+		return position_id;
+	}
+	
+	public final void setPosition_id(Long position_id) {
+		this.position_id = position_id;
 	}
 	
 	public Double getLast_value() {
 		return last_value;
 	}
+	
 	public void setLast_value(Double last_value) {
 		this.last_value = last_value;
 	}

@@ -17,6 +17,7 @@ VIEW `dash_companies_position` AS
         `cds`.`NAME` AS `company_detector_name`,
         `s`.`NAME` AS `sensor_name`,
         `s`.`UID` AS `sensor_id`,
+        `pos`.`UID` AS `position_id`,
         `pos`.`LAST_VALUE` AS `last_value`,
         `pos`.`ALARM_TYPE` AS `alarm_type`,
         `pos`.`LAST_UPDATE` AS `last_update`,

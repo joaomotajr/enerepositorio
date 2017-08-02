@@ -39,45 +39,64 @@ public class HistoricService implements IService<HistoricDto> {
 		
 		if(position != null ) {	
 			Historic historic = new Historic();
+			
 			historic.setCompanyDetector(position.getCompanyDetector());
 			historic.setSensor(position.getSensor());		
 			historic.setLastUpdate(new Date());
-			historic.setValue(value);					
+			historic.setValue(value);
+			
+			repository.save(historic);
 		
 			try {
-				this.save(new HistoricDto(historic));
+				updatePosition(historic);				
 				ret = true;
 				
-			} catch (Exception e) {
+			} catch (Exception e) {				
 				e.printStackTrace();
 			}	
 		}
 		return ret;
 	}
-
-	@Override
-	public BasicResult<?> save(HistoricDto dto) {
-		Result<HistoricDto> result = new Result<HistoricDto>();
+	
+	public Boolean saveByPosition(Position position) {
 		
-		Historic historic = new Historic(dto);
+		Boolean ret = false;
+		
+		Historic historic = new Historic();
+		historic.setCompanyDetector(position.getCompanyDetector());
+		historic.setSensor(position.getSensor());		
 		historic.setLastUpdate(new Date());
+		historic.setValue(position.getLastValue());
+		
 		historic = repository.save(historic);
+			
 		
-		historic.setCompanyDetector(new CompanyDetector(dto.getCompanyDetectorDto()) );
-		updatePosition(historic);				
-				
-		dto.setUid(historic.getUid());
-		result.setEntity(dto);
-		
-		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Executado com sucesso.");					
-		
-		return result;
+		return ret;
 	}
+
+//	@Override
+//	public BasicResult<?> save(HistoricDto dto) {
+//		Result<HistoricDto> result = new Result<HistoricDto>();
+//		
+//		Historic historic = new Historic(dto);
+//		historic.setLastUpdate(new Date());
+//		historic = repository.save(historic);
+//		
+//		historic.setCompanyDetector(new CompanyDetector( dto.getCompanyDetectorDto()) );
+//		updatePosition(historic);				
+//				
+//		dto.setUid(historic.getUid());
+//		result.setEntity(dto);
+//		
+//		result.setResultType( ResultMessageType.SUCCESS );
+//		result.setMessage("Executado com sucesso.");					
+//		
+//		return result;
+//	}
 	
 	private void updatePosition(Historic historic) {
 
-		positionService.updatePosition(historic);
+		positionService.updatePositionAndCheckAlarmByHistoric(historic);
 	}
 
 
@@ -177,8 +196,7 @@ public class HistoricService implements IService<HistoricDto> {
 		
 		return result;
 	}
-	
-	
+		
 	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut) {
 		Result<HistoricDto> result = new Result<HistoricDto>();
 		
@@ -281,5 +299,10 @@ public class HistoricService implements IService<HistoricDto> {
 		return null;
 	}
 
+	@Override
+	public BasicResult<?> save(HistoricDto dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

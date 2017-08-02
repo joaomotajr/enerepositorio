@@ -44,7 +44,7 @@ public class PositionService implements IService<PositionDto> {
 	 * Atualiza posição do dispositivo, e delega checagem de limites
 	 * para possiveis providências.
 	 */
-	public BasicResult<?> updatePosition(Historic historic) {
+	public BasicResult<?> updatePositionAndCheckAlarmByHistoric(Historic historic) {
 
 		Result<PositionDto> result = new Result<PositionDto>();
 		
@@ -77,24 +77,6 @@ public class PositionService implements IService<PositionDto> {
 		
 		return result;		
 	}	
-	
-	public BasicResult<?> updatePositionAuto(Position position) {
-
-		Result<PositionDto> result = new Result<PositionDto>();
-							
-		AlarmType alarmType = positionAlarmService.checkAndUpdateAlarmsAndActions(position, true);
-		
-		position.setLastUpdate(new Date());
-		position.setAlarmType(alarmType);
-		
-		repository.save(position);	
-					
-		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Executado com sucesso.");
-				
-		
-		return result;		
-	}
 	
 	public void createInitialPosition(CompanyDetector companyDetector) {
 		
@@ -152,6 +134,11 @@ public class PositionService implements IService<PositionDto> {
 		
 		return result;
 	}
+	
+	public Position findByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor) {
+		
+		return repository.findByCompanyDetectorAndSensor(companyDetector, sensor);
+	}	
 	
 	public BasicResult<?> findByCompanyDetector(Long uid) {
 		Result<PositionDto> result = new Result<PositionDto>();

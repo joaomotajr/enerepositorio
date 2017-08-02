@@ -94,13 +94,4 @@ public class CompanyDetectorViewService {
 		return result;
 	}
 
-	public BasicResult<?> findByCompanyDetector(Long uid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public BasicResult<?> listAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

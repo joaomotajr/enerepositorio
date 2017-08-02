@@ -16,19 +16,6 @@ public class CompanyDetectorViewController {
 	
 	@Autowired
 	CompanyDetectorViewService service;	
-	
-	@RequestMapping(value = "/security/api/view/all", method = RequestMethod.GET, produces = "application/json")
-	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> listAll() {
-		return service.listAll();
-	}	                                            
-	
-	@RequestMapping(value="/security/api/view/obtemPorCompanyDetectorId/{uid}", method=RequestMethod.GET, produces = "application/json")
-	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDetector(@PathVariable Long uid) {
-		
-		return service.findByCompanyDetector(uid);		
-	}
 	                         
 	@RequestMapping(value="/security/api/view/existsDetectorById/{uid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)

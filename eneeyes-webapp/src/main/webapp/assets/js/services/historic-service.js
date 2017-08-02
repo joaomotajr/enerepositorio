@@ -5,13 +5,7 @@
 
 app.factory('HistoricService', function($resource){    
     
-    return {
-    	checkErro : $resource('/security/api/historicErro/delete/:id', {id: '@id'},{
-    		historic : {method : 'DELETE'}
-        }),    
-    	deletar : $resource('/security/api/historic/delete/:id', {id: '@id'},{
-    		historic : {method : 'DELETE'}
-        }),        
+    return {    	       
         listAll : $resource('/security/api/historic/all',{},{
         	historic : {method : 'GET'}
         }),

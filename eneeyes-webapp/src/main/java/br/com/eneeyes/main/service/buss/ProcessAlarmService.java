@@ -34,15 +34,15 @@ public class ProcessAlarmService {
 	private PositionRepository positionrepository;
 	
 	@Autowired
-	CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
+	private CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
 	
 	@Autowired
-	HistoricAlarmService historicAlarmService;
+	private HistoricAlarmService historicAlarmService;
 	
 	@Autowired
 	private PositionAlarmRepository positionAlarmRepository;
 	
-	Historic historic;
+	private Historic historic;
 	
 	public final Historic getHistoric() {
 		return historic;
@@ -51,20 +51,9 @@ public class ProcessAlarmService {
 	public final void setHistoric(Historic historic) {
 		this.historic = historic;
 	}
+	
+	public void Execute(Position position) {
 
-	public ProcessAlarmService() {
-		
-	}
-	
-	public ProcessAlarmService(Historic historic) {
-		
-		this.historic = historic;
-		
-	}
-	
-	public void Execute() {
-		
-		Position position = updatePositionByHistoric(historic);
 		CompanyDetectorAlarmDto companyDetectorAlarmDto = getExistAlarm(position);
 		
 		AlarmType alarmType = checkExistsAlarms(companyDetectorAlarmDto, historic.getValue());
@@ -72,11 +61,20 @@ public class ProcessAlarmService {
 		updateAlarmsAndActions(companyDetectorAlarmDto.getAlarmDto(), alarmType, position);
 	}
 	
+	public void Execute(Historic historic) {
+		
+		Position position = updatePositionByHistoric(historic);
+		Execute(position);
+		//CompanyDetectorAlarmDto companyDetectorAlarmDto = getExistAlarm(position);
+		
+		//AlarmType alarmType = checkExistsAlarms(companyDetectorAlarmDto, historic.getValue());
+		
+		//updateAlarmsAndActions(companyDetectorAlarmDto.getAlarmDto(), alarmType, position);
+	}
+	
 	private Position updatePositionByHistoric(Historic historic) {
 		
-		Position position = new Position();
-		
-		position = positionrepository.findByCompanyDetectorAndSensor(historic.getCompanyDetector(), historic.getSensor());
+		Position position = positionrepository.findByCompanyDetectorIdAndSensorId(historic.getCompanyDetector().getUid(), historic.getSensor().getUid() );
 		
 		if (position != null) {		
 			

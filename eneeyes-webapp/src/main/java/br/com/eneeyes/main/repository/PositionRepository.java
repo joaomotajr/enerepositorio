@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Position;
@@ -14,6 +15,9 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
 	public List<Position> findByCompanyDetector(CompanyDetector companyDetector);
 	
 	public Position findByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
+	
+	@Query("select p from Position p where p.companyDetector.uid = ?1 and p.sensor.uid = ?2")
+	public Position findByCompanyDetectorIdAndSensorId(Long companyDetectorId, Long sensorId);
 	
 	public Long countByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
 		

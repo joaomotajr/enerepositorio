@@ -244,15 +244,16 @@ public class PositionService implements IService<PositionDto> {
 		Date now = new Date(); 
 		Date minutesAgo = new Date(now.getTime() - (1000 * 60 * 5));
 		
-		List<Position> list = repository.findByLastUpdateLessThan(minutesAgo);
-				
-		List<PositionDto> dto = new ArrayList<PositionDto>();
+//		List<Position> list = repository.findByLastUpdateLessThan(minutesAgo);
+//				
+//		List<PositionDto> dto = new ArrayList<PositionDto>();
+//		
+//		for (Position item   : list) {					
+//			dto.add(new PositionDto(item) );
+//		}
+//		
+//		return list;
 		
-		for (Position item   : list) {					
-			dto.add(new PositionDto(item) );
-		}
-		
-		return list;
-//		return repository.findByLastUpdateLessThan(minutesAgo);
+		return repository.findByLastUpdateLessThan(minutesAgo);
 	}
 }

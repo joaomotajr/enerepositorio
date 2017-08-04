@@ -67,9 +67,9 @@ public class ProcessAlarmService {
 		
 		CompanyDetectorAlarmDto companyDetectorAlarmDto = getExistAlarm(position);
 		
-		AlarmType alarmType = checkExistsAlarms(companyDetectorAlarmDto, historic.getValue());
+		//AlarmType alarmType = checkExistsAlarms(companyDetectorAlarmDto, historic.getValue());
 		
-		updateAlarmsAndActions(companyDetectorAlarmDto.getAlarmDto(), alarmType, position);
+		//updateAlarmsAndActions(companyDetectorAlarmDto.getAlarmDto(), alarmType, position);
 	}
 	
 	private Position updatePositionByHistoric(Historic historic) {

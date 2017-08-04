@@ -11,6 +11,7 @@ import br.com.eneeyes.main.dto.CompanyDetectorAlarmDto;
 import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDetectorAlarm;
+import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.repository.CompanyDetectorAlarmRepository;
 import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
@@ -23,6 +24,9 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 	CompanyDetectorService companyDetectorService;
 	
 	@Autowired
+	PositionService positionService;
+	
+	@Autowired
 	private CompanyDetectorAlarmRepository companyDetectorAlarmRepository;
 
 	@Override
@@ -31,8 +35,11 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 		Result<CompanyDetectorAlarmDto> result = new Result<CompanyDetectorAlarmDto>();
 		CompanyDetectorAlarm companyDetectorAlarm = new CompanyDetectorAlarm(dto);
 		
-		if (companyDetectorAlarmRepository.updateAlarm(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getCompanyDetector(), companyDetectorAlarm.getId().getSensorId()) <= 0)		
+		if (companyDetectorAlarmRepository.updateAlarm(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getCompanyDetector(), companyDetectorAlarm.getId().getSensorId()) <= 0) {		
 			companyDetectorAlarm = companyDetectorAlarmRepository.save(companyDetectorAlarm);
+			
+			positionService.updatePositionAlarmType(AlarmType.NORMAL, dto.getCompanyDetectorDto().getUid(), dto.getSensorId());
+		}
 		
 		CompanyDetectorAlarmSingletonRepository.populate(findAll());
 		
@@ -48,6 +55,7 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 		CompanyDetectorAlarm companyDetectorAlarm = new CompanyDetectorAlarm(dto);
 		
 		companyDetectorAlarmRepository.deleteAlarm( companyDetectorAlarm.getCompanyDetector(), companyDetectorAlarm.getId().getSensorId());		
+		positionService.updatePositionAlarmType(AlarmType.WITHOUT, dto.getCompanyDetectorDto().getUid(), dto.getSensorId());
 		
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Excluído com sucesso.");

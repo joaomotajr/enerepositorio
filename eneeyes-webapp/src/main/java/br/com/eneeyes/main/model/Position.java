@@ -35,8 +35,7 @@ public class Position {
     	this.lastValue = dto.getLastValue();    	
     	this.sensor = new Sensor(dto.getSensorDto());
     	this.alarmType = dto.getAlarmType();
-    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
-    	this.historic.setUid(dto.getHistoricDto().getUid()); 
+    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());    	
     }
 
 	@Id
@@ -61,7 +60,7 @@ public class Position {
 	@Column(name = "ALARM_TYPE", columnDefinition = "int default 0", nullable = false)
 	private AlarmType alarmType;
 		
-	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
 	@JoinColumn(name="HISTORIC_ID", nullable = true)
 	private Historic historic;
 

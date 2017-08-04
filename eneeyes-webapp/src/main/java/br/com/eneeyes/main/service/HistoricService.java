@@ -52,7 +52,7 @@ public class HistoricService implements IService<HistoricDto> {
 			repository.save(historic);
 		
 			try {
-				updateInstances(historic);
+				processAlarmService.Execute(historic);
 				ret = true;
 				
 			} catch (Exception e) {				
@@ -73,18 +73,20 @@ public class HistoricService implements IService<HistoricDto> {
 		historic.setValue(position.getLastValue());
 		
 		historic = repository.save(historic);
+		
+		try {
+			processAlarmService.Execute(historic);
+			ret = true;
+			
+		} catch (Exception e) {				
+			e.printStackTrace();
+		}	
 			
 		
 		return ret;
 	}
 
 	
-	private void updateInstances(Historic historic) {
-
-		ProcessAlarmService alarmService = new ProcessAlarmService(historic);
-		alarmService.Execute();
-	}
-
 	@Override
 	public BasicResult<?> delete(Long uid) {
 		// TODO Auto-generated method stub

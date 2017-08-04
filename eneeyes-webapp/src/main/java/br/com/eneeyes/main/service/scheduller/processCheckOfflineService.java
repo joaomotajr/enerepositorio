@@ -15,15 +15,15 @@ import org.springframework.stereotype.Component;
 
 import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.enums.AlarmType;
-import br.com.eneeyes.main.service.HistoricService;
 import br.com.eneeyes.main.service.PositionService;
+import br.com.eneeyes.main.service.buss.ProcessAlarmService;
 
 @PropertySource("classpath:parameters.properties")
 @Component
 public class processCheckOfflineService {
 	
 	@Autowired
-	HistoricService historicService;
+	ProcessAlarmService processAlarmService;
 	
 	@Autowired
 	PositionService positionService;
@@ -51,7 +51,7 @@ public class processCheckOfflineService {
 			try {
 				
 				position.setAlarmType(AlarmType.OFFLINE);				
-				historicService.saveByPosition(position);
+				processAlarmService.Execute(position);
 				 
 			} catch (Exception e) {			
 

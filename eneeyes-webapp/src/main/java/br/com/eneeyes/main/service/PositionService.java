@@ -76,7 +76,12 @@ public class PositionService implements IService<PositionDto> {
 		}		
 		
 		return result;		
-	}	
+	}
+	
+	public void updatePositionAlarmType(AlarmType alarmType, Long companyDetectorId, Long sensorId) {
+		
+		repository.updateAlarmType(alarmType, companyDetectorId, sensorId);
+	}
 	
 	public void createInitialPosition(CompanyDetector companyDetector) {
 		
@@ -92,7 +97,7 @@ public class PositionService implements IService<PositionDto> {
 				position.setSensor(sensor);
 				position.setLastUpdate(new Date());
 				position.setLastValue(BigDecimal.ZERO);
-				position.setAlarmType(AlarmType.NORMAL);
+				position.setAlarmType(AlarmType.WITHOUT);
 				
 				repository.save(position);
 			}
@@ -244,15 +249,11 @@ public class PositionService implements IService<PositionDto> {
 		Date now = new Date(); 
 		Date minutesAgo = new Date(now.getTime() - (1000 * 60 * 5));
 		
-		List<Position> list = repository.findByLastUpdateLessThan(minutesAgo);
-				
-		List<PositionDto> dto = new ArrayList<PositionDto>();
+		List<AlarmType> withoutOrOffAlarms = new ArrayList<AlarmType>();
 		
-		for (Position item   : list) {					
-			dto.add(new PositionDto(item) );
-		}
+		withoutOrOffAlarms.add(AlarmType.WITHOUT);
+		withoutOrOffAlarms.add(AlarmType.OFF);
 		
-		return list;
-//		return repository.findByLastUpdateLessThan(minutesAgo);
+		return repository.findByLastUpdateLessThanAndAlarmTypeNotIn(minutesAgo, withoutOrOffAlarms);
 	}
 }

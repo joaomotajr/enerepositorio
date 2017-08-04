@@ -4,9 +4,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Position;
+import br.com.eneeyes.main.model.enums.AlarmType;
+import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.register.Sensor;
 
 public interface PositionRepository extends JpaRepository<Position, Long> {
@@ -14,6 +19,9 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
 	public List<Position> findByCompanyDetector(CompanyDetector companyDetector);
 	
 	public Position findByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
+	
+	@Query("select p from Position p where p.companyDetector.uid = ?1 and p.sensor.uid = ?2")
+	public Position findByCompanyDetectorIdAndSensorId(Long companyDetectorId, Long sensorId);
 	
 	public Long countByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
 		
@@ -25,4 +33,16 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
 	
 	public List<Position> findByLastUpdateLessThan(Date date);
 	
+	public List<Position> findByLastUpdateLessThanAndAlarmTypeNotIn(Date date, List<AlarmType> withoutOrOffAlarms);
+	
+	@Modifying
+	@Transactional
+	@Query("update Position p set p.alarmType = ?1 where p.companyDetector.uid = ?2 and p.sensor.uid = ?3")
+	int updateAlarmType(AlarmType alarmType, Long companyDetectorId, Long sensorId);
+	
+	@Modifying
+	@Transactional
+	@Query("update Position p set p.alarmType = ?1 where p.uid = ?2")
+	int updateAlarmType(AlarmType alarmType, Long uid);
+		
 }

@@ -173,16 +173,13 @@
 															<td>{{item.sensor_name}}</td>
 															<td>{{item.gas_name}}</td>
 															
-															<td style="padding-top: 13px ! important;" data-ng-if="!item.offLine"> <span class="label" data-ng-class="{'label-primary' : item.alarmType=='OFF', 'label-success' : item.alarmType=='NORMAL', 'label-warning' : item.alarmType=='ALERTA', 'label-default' : item.alarmType=='DETECCAO', 'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} </span></td>																						
+															<td style="padding-top: 13px ! important;" data-ng-if="!item.offLine"> 
+																<span class="label" data-ng-class="{'label-primary' : item.alarmType=='OFF', 'label-success' : item.alarmType=='NORMAL', 'label-warning' : item.alarmType=='ALERTA', 'label-default' : item.alarmType=='DETECCAO', 'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} </span>
+															</td>
 															<td style="padding-top: 13px ! important;" data-ng-if="item.offLine"> <span class="label label-default offLine"> Off Line </span></td>
 
 															<td>
 																<label title="{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}">  
-<!-- 																	data-ng-class="{  -->
-<!-- 																	'text-success' : item.alarmType=='NORMAL', -->
-<!-- 																	'text-warning' : item.alarmType=='ALERTA',  -->
-<!-- 																	'text-muted' : item.alarmType=='DETECCAO',  -->
-<!-- 																	'text-danger' : item.alarmType=='EVACUACAO'}"  -->
 																	{{item.last_update}} atrás
 																</label>
 															</td> 

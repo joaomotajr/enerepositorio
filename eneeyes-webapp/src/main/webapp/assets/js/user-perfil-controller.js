@@ -122,9 +122,7 @@ app.controller('UserPerfilController', function ($scope, $timeout, $filter, $win
 	
 	$scope.selfClose = function() {
 		
-		var currentTabId = $(".nav-tabs").find("." + $scope.currentPage ).attr('id').substr(3,6);
-    	var index = $scope.tabsShow.findIndex(function(item) {return item.name === currentTabId});
-    	
+		var index = $scope.tabsShow.findIndex( function(e) { return e.link ===  $scope.currentPage });    	
     	$scope.removeTab(index);		
 	}
 	

@@ -46,7 +46,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		      value: $scope.sumary.alarm3,
 		      color: "#dd4b39",
 		      highlight: "#dd4b39",
-		      label: "Evacua��o"
+		      label: "Evacução"
 		    },
 		    {
 		      value: $scope.sumary.alarm2,
@@ -58,7 +58,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		      value: $scope.sumary.alarm1,
 		      color: "#d2d6de",
 		      highlight: "#d2d6de",
-		      label: "Detec��o"
+		      label: "Detecção"
 		    },
 		    {
 		      value: $scope.sumary.turnOff,
@@ -124,13 +124,17 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 	
 						$scope.sumary.devices ++;
 						
-						var offDate = (new Date() - new Date(e.last_update_full)) / 1000;
+						//var offDate = (new Date() - new Date(e.last_update_full)) / 1000;
 						
-						if ( e.alarmType == "OFF" ) {
+						if ( e.alarmType == "OFF" || e.alarmType == "WITHOUT" ) {
 							$scope.sumary.offLine ++;
 							$scope.sumary.turnOff ++;						
-						}
-						else if ( offDate > 300 ) {							 
+						}						
+						// else if ( offDate > 300 ) {							 
+						//      $scope.sumary.offLine ++;
+						//      e.offLine = true;
+						// }
+						else if ( e.alarmType == "OFFLINE" ) {							 
 						     $scope.sumary.offLine ++;
 						     e.offLine = true;
 						}				

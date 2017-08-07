@@ -61,10 +61,8 @@ public class HistoricService implements IService<HistoricDto> {
 		}
 		return ret;
 	}
-	
-	public Boolean saveByPosition(Position position) {
 		
-		Boolean ret = false;
+	public Historic saveByPosition(Position position) {
 		
 		Historic historic = new Historic();
 		historic.setCompanyDetector(position.getCompanyDetector());
@@ -73,17 +71,8 @@ public class HistoricService implements IService<HistoricDto> {
 		historic.setValue(position.getLastValue());
 		
 		historic = repository.save(historic);
-		
-		try {
-			processAlarmService.Execute(historic);
-			ret = true;
-			
-		} catch (Exception e) {				
-			e.printStackTrace();
-		}	
-			
-		
-		return ret;
+	
+		return historic;
 	}
 
 	
@@ -288,8 +277,29 @@ public class HistoricService implements IService<HistoricDto> {
 
 	@Override
 	public BasicResult<?> save(HistoricDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		 Result<HistoricDto> result = new Result<HistoricDto>();
+				
+		Historic historic = new Historic(dto);
+		historic.setLastUpdate(new Date());
+		
+		historic = repository.save(historic);
+		
+		dto.setUid(historic.getUid());		
+		result.setEntity(dto);
+				
+		try {
+			processAlarmService.Execute(historic);
+			
+			result.setResultType( ResultMessageType.SUCCESS );
+			result.setMessage("Unidade Gravada com Sucesso.");
+			
+		} catch (Exception e) {
+			result.setResultType( ResultMessageType.ERROR );
+			result.setMessage("Erro ao gravar Historico.");				
+			e.printStackTrace();
+		}						
+		
+		return result;
 	}
 	
 }

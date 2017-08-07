@@ -86,7 +86,7 @@
 								<div class="small-box bg-gray">
 									<div class="inner">
 										<h3 data-ng-bind="sumary.alarm1"></h3>
-										<p>Detecção</p>
+										<p>Detec&ccedil;&atilde;o</p>
 									</div>
 									<div class="icon"><i class="fa fa-battery-quarter"></i></div>
 									<a href="#" data-ng-class="{'deteccao': selectedStatusDashCompaniesPosition == 'DETECCAO' }" data-ng-click="filterStatus('DETECCAO')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
@@ -110,7 +110,7 @@
 								<div class="small-box bg-red">
 									<div class="inner">
 										<h3 data-ng-bind="sumary.alarm3"></h3>
-										<p>Evacuação</p>
+										<p>Evacua&ccedil;&atilde;o</p>
 									</div>
 									<div class="icon"><i class="fa fa-battery-full"></i></div>
 									<a href="#" data-ng-class="{'evacuacao': selectedStatusDashCompaniesPosition == 'EVACUACAO' }" data-ng-click="filterStatus('EVACUACAO')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
@@ -136,7 +136,7 @@
 	
 								<div class="box box-primary">
 									<div class="box-header with-border">
-										<h3 class="box-title">ULTIMAS MEDIÇÕES</h3>
+										<h3 class="box-title">ULTIMAS MEDI&Ccedil;&Atilde;ES</h3>
 										<div class="box-tools pull-right">
 										
 											<label data-ng-show='loading'>Loading ...</label>		
@@ -158,9 +158,9 @@
 															<th>Empresa</th>
 															<th>Detector</th>	
 															<th>Sensor</th>
-															<th>Gás</th>
+															<th>G&atilde;s</th>
 															<th>Status</th>
-															<th>Comunicação</th>
+															<th>Comunica&ccedil;&atilde;o</th>
 															<th>Valor</th>
 														</tr>
 													</thead>
@@ -174,23 +174,31 @@
 															<td>{{item.gas_name}}</td>
 															
 															<td style="padding-top: 13px ! important;" data-ng-if="!item.offLine"> 
-																<span class="label" data-ng-class="{'label-primary' : item.alarmType=='OFF', 'label-success' : item.alarmType=='NORMAL', 'label-warning' : item.alarmType=='ALERTA', 'label-default' : item.alarmType=='DETECCAO', 'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} </span>
+																<span class="label" data-ng-class="{
+																	'label-info' : item.alarmType=='WITHOUT',
+																	'label-primary' : item.alarmType=='OFF', 
+																	'label-success' : item.alarmType=='NORMAL', 
+																	'label-warning' : item.alarmType=='ALERTA', 
+																	'label-default' : item.alarmType=='DETECCAO', 
+																	'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} </span>
 															</td>
-															<td style="padding-top: 13px ! important;" data-ng-if="item.offLine"> <span class="label label-default offLine"> Off Line </span></td>
+															<td style="padding-top: 13px ! important;" data-ng-if="item.offLine"> <span class="label label-default offLine"> Off Line </span></td>
 
 															<td>
 																<label title="{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}">  
-																	{{item.last_update}} atrás
+																	{{item.last_update}} atr&aacute;s
 																</label>
 															</td> 
 															
 															<td>
 																<label  data-ng-class="{ 
+																	'text-cyan' : item.alarmType=='OFF',
+																	'text-black' : item.alarmType=='OFFLINE',
 																	'text-success' : item.alarmType=='NORMAL',
 																	'text-warning' : item.alarmType=='ALERTA', 
 																	'text-muted' : item.alarmType=='DETECCAO', 
-																	'text-danger' : item.alarmType=='EVACUACAO'}"> 
-																	{{item.last_value}} 
+																	'text-danger' : item.alarmType=='EVACUACAO'}">&nbsp;
+																	{{item.last_value}}&nbsp;
 																	<span style="vertical-align:super;font-size:0.5em" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
 																	<span style="vertical-align:super;font-size:0.5em" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}</span>
 																</label>
@@ -211,7 +219,7 @@
 								<div class="row">
 								<div class="box box-primary" style="margin-bottom:0px">
 									<div class="box-header with-border">
-										<h3 class="box-title">CALIBRAÇÕES PRÓXIMAS </h3>
+										<h3 class="box-title">CALIBRA&Ccedil;&Atilde;ES PR&Otilde;XIMAS </h3>
 										<div class="box-tools pull-right">
 											<button class="btn btn-box-tool" data-widget="collapse">
 												<i class="fa fa-minus"></i>
@@ -230,7 +238,7 @@
 													<a href="#" class="product-title">Detector: {{item.company_detector_name}}<span
 														data-ng-class="{'label-danger' : item.next <= 10, 'label-warning' : (item.next > 10 && item.next <= 30), 'label-default' : item.next > 30}"
 														class="label pull-right">{{item.next}} Dias</span></a> <span
-														class="product-description"> {{item.company_name}} Unidade/Área: {{item.unit_name}}/{{item.area_name}}</span>
+														class="product-description"> {{item.company_name}} Unidade/&aacute;	rea: {{item.unit_name}}/{{item.area_name}}</span>
 												</div>
 											</li>				
 										</ul>
@@ -242,7 +250,7 @@
 								<div class="row">
 									<div class="box box-primary">
 									    <div class="box-header with-border">
-									        <h3 class="box-title">GRÁFICOS STATUS CONSOLIDADO</h3>
+									        <h3 class="box-title">GR&Aacute;FICOS STATUS CONSOLIDADO</h3>
 									        <div class="box-tools pull-right">
 									            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 									            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -258,8 +266,8 @@
 									            <div class="col-md-4">
 									              <ul class="chart-legend clearfix">
 									              <li><i class="fa fa-circle-o text-green"></i> Operacional</li>
-									                  <li><i class="fa fa-circle-o text-red"></i> Evacuação</li>
-									                  <li><i class="fa fa-circle-o text-gray"></i> Detecção</li>
+									                  <li><i class="fa fa-circle-o text-red"></i> Evacua&ccedil;&atilde;o</li>
+									                  <li><i class="fa fa-circle-o text-gray"></i> Detec&ccedil;&atilde;o</li>
 									                  <li><i class="fa fa-circle-o text-yellow"></i> Alerta</li>									                  
 									                  <li><i class="fa fa-circle-o text-black"></i> Off</li>
 									                  <li><i class="fa fa-circle-o text-light-blue"></i> Turn Off</li>

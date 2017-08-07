@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.enums.AlarmType;
-import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.register.Sensor;
 
 public interface PositionRepository extends JpaRepository<Position, Long> {

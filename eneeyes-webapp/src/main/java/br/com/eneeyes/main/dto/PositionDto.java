@@ -29,6 +29,7 @@ public class PositionDto {
     	this.sensorDto = new SensorDto(position.getSensor());
     	this.alarmType = position.getAlarmType();
     	this.companyDetectorDto = new CompanyDetectorDto(position.getCompanyDetector());    	
+    	this.historicDto = new HistoricDto(position.getHistoric());
 	}
 	
 	public final Long getUid() {

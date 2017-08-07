@@ -12,6 +12,7 @@ VIEW `dash_companies_position` AS
     SELECT 
         `pos`.`UID` AS `uid`,
         `c`.`NAME` AS `company_name`,
+        `c`.`UID` AS `company_id`,
         `u`.`NAME` AS `unit_name`,
         `a`.`NAME` AS `area_name`,
         `cds`.`NAME` AS `company_detector_name`,

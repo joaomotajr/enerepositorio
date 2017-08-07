@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PostUpdate;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.HistoricDto;
@@ -33,10 +34,17 @@ public class Historic {
     	this.sensor = new Sensor(dto.getSensorDto());
     	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());    	
     }
+    
+    @PostUpdate
+    public void updateHistoricId() {
+        if (getUid() != null) {
+             this.setUid(getUid());
+        }
+    }
 
-	@Id
+	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "UID")
+	@Column(name = "UID")	
 	private Long uid;
 	
 	@Column(name = "LAST_UPDATE", nullable = false)
@@ -52,7 +60,7 @@ public class Historic {
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="SENSOR_ID", nullable = false)
 	private Sensor sensor;
-	
+		
 	public Long getUid() {
 		return uid;
 	}

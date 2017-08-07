@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PostLoad;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.PositionDto;
@@ -36,6 +37,14 @@ public class Position {
     	this.sensor = new Sensor(dto.getSensorDto());
     	this.alarmType = dto.getAlarmType();
     	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());    	
+    	this.historic = new Historic(dto.getHistoricDto());
+    }
+    
+    @PostLoad
+    public void updateHistoricId() {
+        if (getHistoric() != null) {
+             this.historic.setUid(getHistoric().getUid() );
+        }
     }
 
 	@Id
@@ -63,7 +72,7 @@ public class Position {
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
 	@JoinColumn(name="HISTORIC_ID", nullable = true)
 	private Historic historic;
-
+	
 	@Enumerated(EnumType.ORDINAL) 
 	private AlarmType AlarmType() { 
 	    return alarmType; 

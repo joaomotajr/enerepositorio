@@ -29,10 +29,10 @@ public class HistoricAlarm {
 	@Column(name = "UID")
 	private Long uid;
 	
-	@Column(name = "LAST_UPDATE", nullable = true)
-	private Date lastUpdate;
+	@Column(name = "DATE", nullable = false)
+	private Date date;
 
-	@Column(name = "VALUE", nullable = true)
+	@Column(name = "VALUE", nullable = false)
 	private BigDecimal value;    	
 	
 	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
@@ -41,10 +41,10 @@ public class HistoricAlarm {
 	@Column(name="SENSOR_ID", nullable = false)
 	private Long sensorId;
 	
-	@Column(name="HISTORIC_ID", nullable = true)
+	@Column(name="HISTORIC_ID", nullable = false)
 	private Long historicId;
 	
-	@Column(name = "ALARM_TYPE", nullable = true)
+	@Column(name = "ALARM_TYPE", nullable = false)
 	private AlarmType alarmType;	
 	
 	@Column(name="ALARM_ON", nullable = true)
@@ -73,12 +73,12 @@ public class HistoricAlarm {
 		this.uid = uid;
 	}
 	
-	public final Date getLastUpdate() {
-		return lastUpdate;
+	public final Date getDate() {
+		return date;
 	}
 
-	public final void setLastUpdate(Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
+	public final void setDate(Date date) {
+		this.date = date;
 	}
 
 	public BigDecimal getValue() {

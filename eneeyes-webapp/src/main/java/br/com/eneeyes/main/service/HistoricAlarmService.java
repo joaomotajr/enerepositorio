@@ -28,7 +28,7 @@ public class HistoricAlarmService {
 		HistoricAlarm historicAlarm = new HistoricAlarm();
 		
 		historicAlarm.setUid(null);
-		historicAlarm.setLastUpdate(new Date());
+		historicAlarm.setDate(new Date());
 		historicAlarm.setCompanyDetectorId(companyDetectorId);
 		historicAlarm.setSensorId(sensorId);
 		historicAlarm.setHistoricId(historicId);
@@ -39,6 +39,21 @@ public class HistoricAlarmService {
 		historicAlarm.setAction(action);
 		historicAlarm.setSoundStatus(soundStatus);
 		historicAlarm.setSigmaStatus(sigmaStatus);
+		historicAlarm.setValue(value);	
+		
+		repository.save(historicAlarm);
+	}
+	
+	public void save(BigDecimal value, Long companyDetectorId, Long sensorId, Long historicId, AlarmType alarmType) {
+		
+		HistoricAlarm historicAlarm = new HistoricAlarm();
+		
+		historicAlarm.setUid(null);
+		historicAlarm.setDate(new Date());
+		historicAlarm.setCompanyDetectorId(companyDetectorId);
+		historicAlarm.setSensorId(sensorId);
+		historicAlarm.setHistoricId(historicId);		
+		historicAlarm.setAlarmType(alarmType);		
 		historicAlarm.setValue(value);	
 		
 		repository.save(historicAlarm);
@@ -85,7 +100,7 @@ public class HistoricAlarmService {
 			soundStatus = SoundStatus.OFF;
 		
 		historicAlarm.setUid(null);
-		historicAlarm.setLastUpdate(new Date());
+		historicAlarm.setDate(new Date());
 		historicAlarm.setCompanyDetectorId(companyDetectorId);
 		historicAlarm.setSensorId(sensorId);
 		historicAlarm.setHistoricId(historicId);

@@ -496,7 +496,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	    
 	    if ($scope.changeGraphic) {
 		    var options = {
-		          title: "Dados do Sensor na última Hora.",
+		          title: "Dados do Sensor na ï¿½ltima Hora.",
 		          legend: {position: 'none'},
 		          'lineWidth': 0.75,
 		    	  width: 850,
@@ -521,9 +521,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	                  },
 		    		  ticks: [ 
 		    		           {v:0, f: 'Range Minimo: 0' }, 
-		    		           {v: orange, f: 'Deteção: ' + orange}, 
+		    		           {v: orange, f: 'Deteï¿½ï¿½o: ' + orange}, 
 		    		           {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		           {v: red, f: 'Evacuação: ' + red}, 
+		    		           {v: red, f: 'Evacuaï¿½ï¿½o: ' + red}, 
 		    		           {v: sensor.rangeMax, f: 'Range Mï¿½ximo: ' + sensor.rangeMax} 
 		    		        ]
 		    	  },
@@ -533,7 +533,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	    }
 		else {
 			var options = {
-		          title: "Dados do Sensor na última Hora.",
+		          title: "Dados do Sensor na ï¿½ltima Hora.",
 		          legend: {position: 'none'},
 		          'lineWidth': 0.75,
 		    	  width: 850,
@@ -595,7 +595,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		$scope.selectedSensor = $scope.selectedCompanyDetector.detectorDto.sensorsDto[index];
 		
 		if($.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == $scope.selectedSensor.uid ; }).length != 0 )			
-			$scope.selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == $scope.selectedSensor.uid ; })[0].alarmDto ;		
+			$scope.selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == $scope.selectedSensor.uid ; })[0].alarmDto;		
+		else
+			$scope.selectedAlarm = undefined;
 		
 		$scope.search = { unitMeterGases: $scope.selectedSensor.unitMeterGases, gas : $scope.selectedCompanyDetector.detectorDto.sensorsDto[index].gasesDto[0].name };
 		

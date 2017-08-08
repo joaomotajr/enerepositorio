@@ -28,6 +28,10 @@ import br.com.eneeyes.main.service.CompanyDetectorAlarmService;
 import br.com.eneeyes.main.service.HistoricAlarmService;
 import br.com.eneeyes.main.service.HistoricService;
 
+/**
+ * @author f752766
+ *
+ */
 @Service
 public class ProcessAlarmService {
 	
@@ -56,7 +60,13 @@ public class ProcessAlarmService {
 		this.historic = historic;
 	}
 	
-	public void Execute(Position position) {
+	
+	/**
+	 * @param position
+	 * Executa Procedimentos para Detectores Offline, ou seja, 
+	 * sem comunicação a mais do que o tempo parametrizado.
+	 */
+	public void ExecuteOfflineProcedures(Position position) {
 		
 		CompanyDetectorAlarmDto companyDetectorAlarmDto = getExistAlarm(position.getCompanyDetector().getUid(), position.getSensor().getUid());
 					
@@ -73,6 +83,11 @@ public class ProcessAlarmService {
 		}
 	}
 	
+	/**
+	 * @param historic
+	 * Executa Procedimentos de checagem de alarmes para o detector em questão
+	 * Grava histórico do alarme vigente em qq circunstância
+	 */
 	public void Execute(Historic historic) {
 				
 		CompanyDetectorAlarmDto companyDetectorAlarmDto = getExistAlarm(historic.getCompanyDetector().getUid(), historic.getSensor().getUid());
@@ -81,10 +96,11 @@ public class ProcessAlarmService {
 		
 		Position position = updatePositionByHistoric(historic, alarmType);
 		
-		if (alarmType != AlarmType.NORMAL && alarmType != AlarmType.OFF) {
-				
+		if(alarmType == AlarmType.WITHOUT)
+			updateAlarmsAndActions(alarmType, position);
+		else
 			updateAlarmsAndActions(companyDetectorAlarmDto.getAlarmDto(), alarmType, position);
-		}
+		
 	}
 	
 	private Position updatePositionByHistoric(Historic historic, AlarmType alarmType) {
@@ -140,7 +156,7 @@ public class ProcessAlarmService {
 			}		
 		}
 		else {
-			alarmType = AlarmType.OFF;
+			alarmType = AlarmType.WITHOUT;
 		}
 		
 		return alarmType;		
@@ -156,9 +172,19 @@ public class ProcessAlarmService {
 		historicAlarmService.save(position.getLastValue(), companyDetector.getUid(), sensor.getUid(), position.getHistoric().getUid(), alarmDto.getAlarmOn(), alarmType, 
 				alarmParams.getEmailStatus(), alarmParams.getSmsStatus(), alarmParams.getAction(), alarmParams.getSoundStatus(), alarmParams.getSigmaStatus());
 		
-		if(alarmDto.getAlarmOn())			
-			updatePositionAlarm(position, companyDetector, sensor, alarmType, alarmParams.getEmailStatus(), alarmParams.getSmsStatus(), alarmParams.getAction(), alarmParams.getSoundStatus(), alarmParams.getSigmaStatus());	
+		if (alarmType != AlarmType.NORMAL && alarmType != AlarmType.OFF && alarmType != AlarmType.WITHOUT) {
 		
+			updatePositionAlarm(position, companyDetector, sensor, alarmType, alarmParams.getEmailStatus(), alarmParams.getSmsStatus(), alarmParams.getAction(), alarmParams.getSoundStatus(), alarmParams.getSigmaStatus());
+		}
+		
+	}
+	
+	private void updateAlarmsAndActions(AlarmType alarmType, Position position) {		
+		
+		CompanyDetector companyDetector = new CompanyDetector(position.getCompanyDetector().getUid());
+		Sensor sensor = new Sensor(position.getSensor().getUid());	
+				
+		historicAlarmService.save(position.getLastValue(), companyDetector.getUid(), sensor.getUid(), position.getHistoric().getUid(), alarmType);		
 	}
 	
 	/**

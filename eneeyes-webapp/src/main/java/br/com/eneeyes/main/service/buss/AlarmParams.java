@@ -96,6 +96,8 @@ public class AlarmParams {
 			action = alarm.getAction2();
 		else if(this.alarmType == AlarmType.EVACUACAO)
 			action = alarm.getAction3();
+		else if(this.alarmType == AlarmType.OFFLINE)
+			action = alarm.getAction4();
 		
 		return action;
 	}

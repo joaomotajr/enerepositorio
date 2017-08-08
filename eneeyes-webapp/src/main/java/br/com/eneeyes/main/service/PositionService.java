@@ -244,15 +244,15 @@ public class PositionService implements IService<PositionDto> {
 
 	}	
 	
-	public List<Position> listOffline() {
+	public List<Position> listOffline(Integer minutes) {
 			
 		Date now = new Date(); 
-		Date minutesAgo = new Date(now.getTime() - (1000 * 60 * 5));
+		Date minutesAgo = new Date(now.getTime() - (1000 * 60 * minutes));
 		
 		List<AlarmType> withoutOrOffAlarms = new ArrayList<AlarmType>();
 		
 		withoutOrOffAlarms.add(AlarmType.WITHOUT);
-		withoutOrOffAlarms.add(AlarmType.OFF);
+		//withoutOrOffAlarms.add(AlarmType.OFF);
 		
 		return repository.findByLastUpdateLessThanAndAlarmTypeNotIn(minutesAgo, withoutOrOffAlarms);
 	}

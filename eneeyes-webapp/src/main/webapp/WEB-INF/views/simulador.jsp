@@ -82,14 +82,13 @@
 									<div class="col-md-2">
 										<div class="form-group">
 											<label class="control-label">Valor</label>
-						                	<input class="form-control" type="number" data-ng-model="companyValor" name="companyValor" data-validate-range="0,selectedCompanySensor.rangeMax" required>
-						                	 
-											<p data-ng-show="!userForm.companyValor.$error.required && userForm.companyValor.$error.max && !userForm.companyValor.$pristine" 
-																class="help-block">Valor M&aacute;ximo : {{selectedCompanySensor.rangeMax}} </p>
-											<p data-ng-show="!userForm.companyValor.$error.required && (userForm.companyValor.$error.number || userForm.companyValor.$error.min)" 
-												class="help-block">Valor Inv&aacute;lido</p>
 											
-												<p data-ng-show="userForm.companyValor.$error.required && !userForm.companyValor.$pristine" class="help-block">Valor Obrigat&oacute;rio</p>
+												<input class="form-control" type="number" data-ng-model="companyValor" name="companyValor" min="0"  max="{{selectedCompanySensor.rangeMax}}" required>
+																                	 
+												<p data-ng-show="!userForm.companyValor.$pristine && !userForm.companyValor.$error.required && userForm.companyValor.$error.max" class="help-block text-red">Valor M&aacute;ximo : {{selectedCompanySensor.rangeMax}} </p>											
+												<p data-ng-show="!userForm.companyValor.$pristine && !userForm.companyValor.$error.required && userForm.companyValor.$error.min" class="help-block text-red">Valor Inv&aacute;lido</p>											
+												<p data-ng-show="userForm.companyValor.$error.required && !userForm.companyValor.$pristine" class="help-block text-red">Valor Obrigat&oacute;rio</p>
+											
 										</div>                                                                    
 									</div>         		
 									<div class="col-md-2">

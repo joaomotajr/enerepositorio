@@ -34,6 +34,10 @@ public class processCheckOfflineService {
 	
 	@Value("${jobs.checkOffOn.enable}")
 	private boolean checkOffEnable;
+	
+	@Value("${jobs.checkOffOn.offTime}")
+	private Integer checkOffTime;
+	
 		
 	@Scheduled(fixedDelayString = "${jobs.checkOffOn.interval}" )	
 	public void schedule() {
@@ -44,14 +48,14 @@ public class processCheckOfflineService {
 				+ new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));	
 		
 		List<Position> offlineList = new ArrayList<Position>();
-		offlineList = positionService.listOffline();
+		offlineList = positionService.listOffline(checkOffTime);
 		
 		for (Position position  : offlineList) {			
 			
 			try {
 				
 				position.setAlarmType(AlarmType.OFFLINE);				
-				processAlarmService.Execute(position);
+				processAlarmService.ExecuteOfflineProcedures(position);
 				 
 			} catch (Exception e) {			
 

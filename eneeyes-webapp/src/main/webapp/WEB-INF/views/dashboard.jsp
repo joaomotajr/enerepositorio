@@ -174,9 +174,8 @@
 															<td>{{item.gas_name}}</td>
 															
 															<td style="padding-top: 13px ! important;" data-ng-if="!item.offLine"> 
-																<span class="label" data-ng-class="{
-																	'label-info' : item.alarmType=='WITHOUT',
-																	'label-primary' : item.alarmType=='OFF', 
+																<span class="label" data-ng-class="{																	
+																	'label-primary' : item.alarmType=='OFF' || item.alarmType=='WITHOUT', 
 																	'label-success' : item.alarmType=='NORMAL', 
 																	'label-warning' : item.alarmType=='ALERTA', 
 																	'label-default' : item.alarmType=='DETECCAO', 
@@ -219,7 +218,7 @@
 								<div class="row">
 								<div class="box box-primary" style="margin-bottom:0px">
 									<div class="box-header with-border">
-										<h3 class="box-title">CALIBRA&Ccedil;&Atilde;ES PR&Otilde;XIMAS </h3>
+										<h3 class="box-title">CALIBRA&Ccedil;&Otilde;ES PR&Oacute;XIMAS </h3>
 										<div class="box-tools pull-right">
 											<button class="btn btn-box-tool" data-widget="collapse">
 												<i class="fa fa-minus"></i>
@@ -269,8 +268,8 @@
 									                  <li><i class="fa fa-circle-o text-red"></i> Evacua&ccedil;&atilde;o</li>
 									                  <li><i class="fa fa-circle-o text-gray"></i> Detec&ccedil;&atilde;o</li>
 									                  <li><i class="fa fa-circle-o text-yellow"></i> Alerta</li>									                  
-									                  <li><i class="fa fa-circle-o text-black"></i> Off</li>
-									                  <li><i class="fa fa-circle-o text-light-blue"></i> Turn Off</li>
+									                  <li><i class="fa fa-circle-o text-black"></i> Off Line</li>
+									                  <li><i class="fa fa-circle-o text-light-blue"></i> Desligado ou Sem Alarme</li>
 									              </ul>
 									            </div><!-- /.col -->
 									        </div><!-- /.row -->

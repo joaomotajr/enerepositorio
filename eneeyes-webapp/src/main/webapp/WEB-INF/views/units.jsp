@@ -20,8 +20,7 @@
 			<div class="nav-tabs-custom">
 				<ul class="nav nav-tabs tabUnit">
    					<li><a href="#tabUnit_1" id="stepTabUnit_1" data-toggle="tab">Cadastro</a></li>
-			       	<li><a href="#tabUnit_2" id="stepTabUnit_2" data-toggle="tab">Localização</a></li>
-			       	<li><a href="#tabUnit_3" id="stepTabUnit_3" data-toggle="tab">Detalhes</a></li>
+			       	<li><a href="#tabUnit_2" id="stepTabUnit_2" data-toggle="tab">Localização</a></li>			       	
 			    	<li class="pull-right"><a href="#" class="text-muted" data-ng-click="getCoordinatesUnit();" title="Validar Local."><i class="fa fa-map" data-ng-class="(mapUnitOK) ? 'mapOK' : 'mapNOK'"></i></a></li>
 			    </ul>
 							
@@ -145,13 +144,8 @@
 							<div align="center"  id="mapUnit" style="height: 400px; width: 800px"></div>
 						</div>    
 						
-			       	</div><!-- /.tab-pane -->
-			       	
-			       	<div class="tab-pane" id="tabUnit_3">			       			
-			       		
-			       		Em Construção....
-					            
-			     	</div><!-- /.tab-pane -->			     				     	
+			       	</div><!-- /.tab-pane -->	       	
+			       			     				     	
 			   	</div>	<!-- /.tab-content -->		   						
 			</div>						
 		</div>		

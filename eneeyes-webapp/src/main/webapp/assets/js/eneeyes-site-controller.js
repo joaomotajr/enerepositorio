@@ -6,6 +6,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	$scope.$root.currentPage = "";
 	$scope.$root.errorTimes = 0;	
 	$scope.$root.isFrom = $('#isFrom').val();
+	$scope.$root.userId = $('#idUsuario').val();
 	$scope.$root.userImage = '/assets/img/avatar_128x128.png';
 	
 	$scope.showLogo = function(){

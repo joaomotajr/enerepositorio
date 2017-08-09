@@ -136,7 +136,7 @@
 	
 								<div class="box box-primary">
 									<div class="box-header with-border">
-										<h3 class="box-title">ULTIMAS MEDI&Ccedil;&Atilde;ES</h3>
+										<h3 class="box-title">ULTIMAS MEDI&Ccedil;&Otilde;ES</h3>
 										<div class="box-tools pull-right">
 										
 											<label data-ng-show='loading'>Loading ...</label>		
@@ -172,16 +172,17 @@
 															<td>{{item.company_detector_name}}</td>	
 															<td>{{item.sensor_name}}</td>
 															<td>{{item.gas_name}}</td>
-															
-															<td style="padding-top: 13px ! important;" data-ng-if="!item.offLine"> 
+														
+															<td style="padding-top: 13px !important;"> 
 																<span class="label" data-ng-class="{																	
 																	'label-primary' : item.alarmType=='OFF' || item.alarmType=='WITHOUT', 
+																	'label-offline' : item.alarmType=='OFFLINE',
 																	'label-success' : item.alarmType=='NORMAL', 
 																	'label-warning' : item.alarmType=='ALERTA', 
 																	'label-default' : item.alarmType=='DETECCAO', 
-																	'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} </span>
-															</td>
-															<td style="padding-top: 13px ! important;" data-ng-if="item.offLine"> <span class="label label-default offLine"> Off Line </span></td>
+																	'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} 
+																</span>
+															</td>														
 
 															<td>
 																<label title="{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}">  

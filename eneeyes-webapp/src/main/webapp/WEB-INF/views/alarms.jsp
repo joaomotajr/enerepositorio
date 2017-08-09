@@ -60,7 +60,7 @@
 											<button type="button" class="btn btn-primary btn-xs" data-ng-click="editAlarm($index)">editar</button>
 										</td>
 										<td>
-											<a type="button" class="btn btn-danger btn-xs" data-popover=' do Alarme: [ {{item.name}} ]' data-confirm="deleteAlarm($index)" >excluir</a>
+											<a type="button" class="btn btn-danger btn-xs" data-popover=' do Alarme: [ {{item.name}} ]' data-confirm="deleteAlarm($index)">excluir</a>
 										</td>						
 									</tr>                                                               
 								</tbody>
@@ -85,17 +85,18 @@
 			<div class="modal-dialog  modal-lg" role="document">
 				<div class="modal-content">                            
 					<div class="modal-body"style="padding-bottom: 0px; !important">
-					
+						<!--
 						<div class="panel panel-default">
 							<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Edi&ccedil;&atilde;o de Alarmes</strong></div>														                                                                           
 					  	</div>
-											
-						<div class="box box-primary" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
+						-->				
+						<div class="box box-primary" style="padding-bottom: 0px !important; margin-bottom: 0px;">
 							<div class="box-header">
-								<h3 class="box-title">Cadastro / Edi&ccedil;&atilde;o</h3>
+								<h3 class="box-title">Cadastro / Edi&ccedil;&atilde;o de Alarmes</h3>
 								<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
-							</div>					
-							<div class="box-body" style="padding-bottom: 0px; !important">
+							</div>
+												
+							<div class="box-body" style="padding-bottom: 0px !important;">
 								<form class="form" name="userForm">		
 								
 									<div class="row">											
@@ -128,10 +129,10 @@
 							        	</div>					
 							        	
 							        	<div class="col-md-6">
-							        		<div class="box box-primary" style="padding-bottom: 0px; !important;">
+							        		<div class="box box-primary" style="padding-bottom: 0px !important;">
 							        			<div class="box-header with-border"><strong><i class="fa fa-rss"></i> Dispositivos Associados a este Alarme</strong></div>
 							                	
-									        	<div class="box-body" style="padding-bottom: 0px; !important; padding-top: 0px; !important;">									        		                                                                                       
+									        	<div class="box-body" style="padding-bottom: 0px !important; padding-top: 0px; !important;">									        		                                                                                       
 				                                    <div class="list-group" style="max-height: 50px ! important; height:auto; overflow: auto; font-size: 0.9em  ! important">
 				                                    	<p data-ng-show="!usedAlarms || usedAlarms.length <= 0" class="text-center">NENHUM DETECTOR ASSOCIADO</p>
 				                                        <span class="list-group-item" data-ng-repeat="item in usedAlarms">
@@ -147,13 +148,13 @@
 					                									
 									<div class="row">    
 										<div class="col-md-12">                  
-					                       	<div class="box box-info" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
+					                       	<div class="box box-info" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
 					                       	
 								    			<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Limites do Alarme </strong>
 								    				<strong class="text-red pull-right" data-ng-show="(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3) && !userForm.alarmAlarm1.$pristine">  [Sequncia de Valores dos Alarmes Inv�lida]</strong>
 								    			</div>
 								    								                	 
-							                    <div class="box-body" style="padding-bottom: 0px; !important">
+							                    <div class="box-body" style="padding-bottom: 0px !important">
 							                      	<div class="row">
 								                      	<div class="col-md-9"> 
 				                                          	<div class="btn-group" id="toggle_event_editing">
@@ -300,8 +301,7 @@
 														                    		type="text" maxlength="15" placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />													                    	
 														                  	</div>
 													                  	</div>						                                         													            			
-								                                   	</div>
-														    	
+								                                   	</div>														    	
 														    	
 														    	</div>
 														    </div>
@@ -450,8 +450,8 @@
 							                            			<div class="travarAction">            
 								                                    	<div class="col-md-10" style="padding-left: 5px !important;">								                                        
 								                                        	<div class="entry input-group" id="">
-								                                        		<span class="input-group-addon btn-add text-white bg-gray"><i class="fa fa-bullhorn"> Alarme 1</i></span>  					
-																				<textarea class="form-control" rows="1" data-ng-model="action1" placeholder="Provid&ecirc;ncias do Agente de Monitoramento se Houver alarme 1" maxlength="250"></textarea>																				                                   						
+								                                        		<span class="input-group-addon btn-add text-white bg-gray"><i class="fa fa-bullhorn">&nbsp;</i>Alarme 1</span>  					
+																				<textarea class="form-control" rows="1" data-ng-model="action1" placeholder="Provid&ecirc;ncias do Agente de Monitoramento se Houver alarme n&iacute;vel 1 (Detec&ccedil;&atilde;)" maxlength="250"></textarea>																				                                   						
 																			</div>
 																		</div>
 																	</div>                                        						                                        						                                         													            			
@@ -463,9 +463,9 @@
 												            			<div class="col-md-2">												            			
 								                                        </div>							                                        
 								                                    	<div class="col-md-10" style="padding-left: 5px !important; ">								                                        
-								                                        	<div class="entry input-group" id="">
-								                                        		<span class="input-group-addon btn-add text-white bg-orange"><i class="fa fa-bullhorn"> Alarme 2</i></span>  					
-																				<textarea class="form-control" data-ng-model="action2" rows="1" placeholder="Provid&ecirc;ncias do Agente de Monitoramento se Houver alarme 2" maxlength="250"></textarea>																				                                   						
+								                                        	<div class="entry input-group">
+								                                        		<span class="input-group-addon btn-add text-white bg-orange"><i class="fa fa-bullhorn">&nbsp;</i>Alarme 2</span>  					
+																				<textarea class="form-control" data-ng-model="action2" rows="1" placeholder="Provid&ecirc;ncias do Agente de Monitoramento se Houver alarme n&iacute;vel 2 (Alerta)" maxlength="250"></textarea>																				                                   						
 																			</div>
 																		</div>                                        						                                        						                                         													            			
 								                                   	</div>							                                   
@@ -476,13 +476,26 @@
 												            			<div class="col-md-2">												            			
 								                                        </div>							                                        
 								                                    	<div class="col-md-10" style="padding-left: 5px !important; ">								                                        
-								                                       		<div class="entry input-group" id="">
-							                                        			<span class="input-group-addon btn-add text-white bg-red"><i class="fa fa-bullhorn"> Alarme 3</i></span>  					
-																				<textarea class="form-control" data-ng-model="action3" rows="1" placeholder="Provid&ecirc;ncias do Agente de Monitoramento se Houver alarme 3" maxlength="250"></textarea>																				                                   						
+								                                       		<div class="entry input-group">
+							                                        			<span class="input-group-addon btn-add text-white bg-red"><i class="fa fa-bullhorn">&nbsp;</i>Alarme 3</span>  					
+																				<textarea class="form-control" data-ng-model="action3" rows="1" placeholder="Provid&ecirc;ncias do Agente de Monitoramento se Houver alarme 3 (Evacua&ccedil;&atilde;o)" maxlength="250"></textarea>																				                                   						
 																			</div>
 																		</div>                                        						                                        						                                         													            			
 								                                   	</div>							                                   
-								                                </div>	
+																</div>	
+																								
+																<div class="row">
+											                        <div class="col-md-12">
+												            			<div class="col-md-2">												            			
+								                                        </div>							                                        
+								                                    	<div class="col-md-10" style="padding-left: 5px !important; ">								                                        
+								                                       		<div class="entry input-group">
+							                                        			<span class="input-group-addon btn-add text-white bg-black"><i class="fa fa-bullhorn">&nbsp;</i>Off - Line</span>  					
+																				<textarea class="form-control" data-ng-model="action4" rows="1" placeholder="Provid&ecirc;ncias do Agente de Monitoramento se Dispositivo n&atilde;o Envia Dados " maxlength="250"></textarea>																				                                   						
+																			</div>
+																		</div>                                        						                                        						                                         													            			
+								                                   	</div>							                                   
+								                                </div>
 								                                						                                
 															</div>
 														</div>    								    
@@ -502,7 +515,7 @@
 				  	<div class="modal-footer">						
 						<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
 						<button type="button" data-ng-click="saveAlarm();" class="btn btn-primary" data-dismiss="modal"
-							data-ng-disabled="(emailValid && mobileValid && emailValid1 && mobileValid1 && userForm.$valid && !(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3)) ? false : true">Salvar
+							data-ng-disabled="(emailValid && mobileValid && emailValid1 && mobileValid1 && userForm.$valid && !(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3)) ? false : true">&nbsp;Salvar&nbsp;
 						</button>						                                
 				  	</div>
 				  	

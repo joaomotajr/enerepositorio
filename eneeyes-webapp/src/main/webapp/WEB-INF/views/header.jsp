@@ -101,15 +101,21 @@
 					<!-- Notifications: style can be found in dropdown.less -->
 					<li class="dropdown notifications-menu" data-ng-controller="monitorController">
 						<audio id="alarmSound" src="/assets/img/alert_01.mp3" preload="auto"></audio>
-						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning" data-ng-bind="dashCompaniesAlarm.length"></span></a>
+						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning" data-ng-bind="dashCompaniesAlarmResults.length"></span></a>
 						<ul class="dropdown-menu">
 							<li class="header">Voce tem <span data-ng-bind="dashCompaniesAlarm.length"></span> Alarmes Pendentes</li>
 							<li>								
-								<ul class="menu" data-ng-repeat="item in dashCompaniesAlarm | filter: {alarmStatus: 'CREATED' } track by item.uid">
-												
+								<!-- <ul class="menu" data-ng-repeat="item in dashCompaniesAlarm | filter: {alarmStatus: 'CREATED' } track by item.uid"> -->
+								<ul class="menu" data-ng-repeat="item in dashCompaniesAlarmResults = (dashCompaniesAlarm | filter: {alarmStatus: 'CREATED' }) ">												
 									<li>
 										<a href="#"> 
-										<i class="fa fa-bullhorn" data-ng-class="{'text-green' : item.alarmType=='NORMAL', 'text-orange' : item.alarmType=='ALERTA', 'text-gray' : item.alarmType=='DETECCAO', 'text-red' : item.alarmType=='EVACUACAO'}"></i>
+										<i class="fa fa-bullhorn" data-ng-class="{
+											'text-black':item.alarmType=='OFFLINE', 
+											'text-green':item.alarmType=='NORMAL', 
+											'text-orange':item.alarmType=='ALERTA', 
+											'text-gray':item.alarmType=='DETECCAO', 
+											'text-red':item.alarmType=='EVACUACAO'
+											}"></i>
 											{{item.company_name}} {{item.company_detector_name}} {{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
 										</a>
 									</li>									
@@ -143,9 +149,7 @@
 						<ul class="dropdown-menu">
 							<!-- User image -->
 							<li class="user-header"><img data-ng-src="{{userImage}}" class="img-circle"	alt="User Image" data-ng-controller="SiteController">
-								<p>
-									<sec:authentication property="principal.displayName" /> - Administrador do Site <small>Desde Nov. 2016</small>
-								</p>
+								<p><sec:authentication property="principal.displayName" /> - Administrador do Site <small>Desde Nov. 2016</small></p>
 							</li>
 	
 							<!-- Menu Footer-->

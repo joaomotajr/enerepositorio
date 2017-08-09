@@ -10,8 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.eneeyes.archetype.model.User;
 import br.com.eneeyes.main.dto.PositionAlarmMessageDto;
 
 /**
@@ -31,6 +33,7 @@ public class PositionAlarmMessage {
 		this.uid = dto.getUid();
 		this.message = dto.getMessage();
 		this.lastUpdate = dto.getLastUpdate();
+		this.user = new User(dto.getUserDto());
 	}
 	
 	@Id
@@ -44,6 +47,10 @@ public class PositionAlarmMessage {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="POSITION_ALARM_ID", nullable=false)
     private PositionAlarm positionAlarm;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="USER_ID", nullable=false)
+    private User user;
 	
 	@Column(name = "LAST_UPDATE", nullable = false)
 	private Date lastUpdate;
@@ -70,8 +77,16 @@ public class PositionAlarmMessage {
 
 	public final void setPositionAlarm(PositionAlarm positionAlarm) {
 		this.positionAlarm = positionAlarm;
+	}	
+
+	public final User getUser() {
+		return user;
 	}
-	
+
+	public final void setUser(User user) {
+		this.user = user;
+	}
+
 	public final Date getLastUpdate() {
 		return lastUpdate;
 	}

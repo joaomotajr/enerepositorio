@@ -1,6 +1,23 @@
-<!-- 	<audio id="alarmSound" src="/assets/img/alert_01.mp3" preload="auto"></audio> -->
-		
-	<div data-ng-controller="monitorController">
+<style>
+
+	.rui-table {		
+		border-spacing: 0;
+		font: normal 14px Arial, sans-serif;
+	}
+	.rui-table thead th {				
+		padding: 5px;
+		text-align: center;	
+		font-weight: 500;	
+	}
+	.rui-table tbody td {
+		border: solid 1px gray;
+		color: #333;
+		padding: 5px;		
+	}
+
+</style>
+
+<div data-ng-controller="monitorController">
 		<div class="row">
        		<div class="col-md-6" style="font-size: 8px !important;">
 
@@ -27,7 +44,7 @@
 											<th>Detector</th>
 											<th>Alarme</th>
 											<th>Data/hora</th>
-											<th>  Interações  </th>
+											<th>Intera&ccedil;&atilde;es</th>
 											<th>Reportar</th>											
 										</tr>
 									</thead>
@@ -38,37 +55,45 @@
 											<td>{{item.company_name}}</td>
 											<td>{{item.company_detector_name}}</td>
 											
-											<td style="padding-top: 13px ! important;"> <span class="label" 
-											data-ng-class="{'label-primary' : item.alarmType=='OFF', 'label-success' : item.alarmType=='NORMAL', 'label-warning' : item.alarmType=='ALERTA', 'label-default' : item.alarmType=='DETECCAO', 'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} </span></td>	
+											<td style="padding-top: 13px ! important;"> 
+												<span class="label" 
+													data-ng-class="{
+													'label-offline' : item.alarmType=='OFFLINE', 
+													'label-success' : item.alarmType=='NORMAL', 
+													'label-warning' : item.alarmType=='ALERTA', 
+													'label-default' : item.alarmType=='DETECCAO', 
+													'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} 
+													</span>
+												</td>	
 											<td>
 												{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
 											</td>
 											<td>
-												<span data-ng-if="item.sigmaStatus=='OFF'" class="icon fa fa-exchange" style="font-size:1.4em; color: gray" title="Sem Integração ao Sigma Habilitada"></span>
+												<span data-ng-if="item.sigmaStatus=='OFF'" class="icon fa fa-exchange" style="font-size:1.4em; color: gray" title="Sem Integra&ccedil;&atilde;o ao Sigma Habilitada"></span>
                                             	<span data-ng-if="item.sigmaStatus=='ERROR'" class="icon fa fa-exchange" style="font-size:1.4em; color: red" title="Falha ao Informar Sigma"></span>
-                                            	<span data-ng-if="item.sigmaStatus=='SENDED'" class="icon fa fa-exchange" style="font-size:1.4em; color: green" title="Integração ao Sigma Realizada"></span>
-                                            	<span data-ng-if="item.sigmaStatus=='ON'" class="icon fa fa-exchange" style="font-size:1.4em; color: orange" title="Integração ao Sigma em fila"></span>
+                                            	<span data-ng-if="item.sigmaStatus=='SENDED'" class="icon fa fa-exchange" style="font-size:1.4em; color: green" title="Integra&ccedil;&atilde;o ao Sigma Realizada"></span>
+                                            	<span data-ng-if="item.sigmaStatus=='ON'" class="icon fa fa-exchange" style="font-size:1.4em; color: orange" title="Integra&ccedil;&atilde;o ao Sigma em fila"></span>
                                             	&nbsp;&nbsp;
-												<span data-ng-if="item.soundStatus=='OFF'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: gray" title="Alerta Sonoro não Habilitado"></span>
+												<span data-ng-if="item.soundStatus=='OFF'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: gray" title="Alerta Sonoro n&atilde;o Habilitado"></span>
                                             	<a href="#" data-ng-click="updateSound(item.index);" data-ng-if="item.soundStatus=='ON'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: red" title="Alerta Sonoro"></a>
                                             	<span data-ng-if="item.soundStatus=='SILENT'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: green" title="Alerta Silenciado"></span>
                                             	&nbsp;&nbsp;
-                                            	<span data-ng-if="item.emailStatus=='OFF'" class="icon fa fa-envelope" style="font-size:1.4em; color: gray" title="Aviso EMAIL não Habilitado"></span>
+                                            	<span data-ng-if="item.emailStatus=='OFF'" class="icon fa fa-envelope" style="font-size:1.4em; color: gray" title="Aviso EMAIL n&atilde;o Habilitado"></span>
                                             	<span data-ng-if="item.emailStatus=='PENDENT'" class="icon fa fa-envelope" style="font-size:1.4em; color: orange" title="EMAIL na fila para Envio"></span>	
                                             	<span data-ng-if="item.emailStatus=='ERR_TRY_ONE'" class="icon fa fa-envelope" style="font-size:1.4em; color: red" title="Falha na 1a. Tentativa"></span>
                                             	<span data-ng-if="item.emailStatus=='ERR_TRY'" class="icon fa fa-envelope" style="font-size:1.4em; color: red" title="Falha ao Enviar Email"></span>
                                             	<span data-ng-if="item.emailStatus=='SENDED'" class="icon fa fa-envelope" style="font-size:1.4em; color: green" title="Email Enviado"></span>
                                             	&nbsp;&nbsp;                                            	
-                                            	<span data-ng-if="item.smsStatus=='OFF'"  style="font-size:1.4em; color: gray" title="Aviso de SMS não Habilitado">SMS</span>
+                                            	<span data-ng-if="item.smsStatus=='OFF'"  style="font-size:1.4em; color: gray" title="Aviso de SMS n&atilde;o Habilitado">SMS</span>
                                             	<span data-ng-if="item.smsStatus=='PENDENT'"  style="font-size:1.4em; color: orange" title="SMS na Fila para Envio">SMS</span>	
                                             	<span data-ng-if="item.smsStatus=='ERR_TRY_ONE'"  style="font-size:1.4em; color: red" title="Falha na 1a. Tentativa">SMS</span>
                                             	<span data-ng-if="item.smsStatus=='ERR_TRY'"  style="font-size:1.4em; color: red" title="Falha ao Enviar SMS">SMS</span>
                                             	<span data-ng-if="item.smsStatus=='SENDED'"  style="font-size:1.4em; color: green" title="SMS Enviado">SMS</span>
-                                            	<span data-ng-if="item.smsStatus=='READED'"  style="font-size:1.4em; color: green" title="SMS Recebido pelo Destinatário">SMS</span>	                
+                                            	<span data-ng-if="item.smsStatus=='READED'"  style="font-size:1.4em; color: green" title="SMS Recebido pelo Destinat&aacute;rio">SMS</span>	                
                                            		&nbsp;&nbsp; 
                                            	</td>
                                            	<td>
-                                           		<a href="#" data-ng-click="editActionCreated(item.index)" class="button fa fa-list-ol" style="font-size:1.6em;" title="Ações a serem Verificadas pelo Operador"></a>
+                                           		<a href="#" data-ng-click="editActionCreated(item.index)" class="button fa fa-list-ol" style="font-size:1.6em;" title="A&ccedil;&otilde;es a serem Verificadas pelo Operador"></a>
                                             </td>                                        						
 										</tr>										
 									</tbody>
@@ -85,7 +110,7 @@
 
 				<div class="box box-warning">
 					<div class="box-header with-border">
-						<h5 class="box-title">Alarmes Em Análise</h5>
+						<h5 class="box-title">Alarmes Em An&aacute;lise</h5>
 						<div class="box-tools pull-right">
 						
 							<label data-ng-show='loading'>Loading ...</label>		
@@ -107,7 +132,7 @@
 											<th>Detector</th>
 											<th>Alarme</th>
 											<th>Data/hora</th>
-											<th>  Interações  </th>
+											<th>Intera&ccedil;&atilde;es</th>
 											<th>Reportar</th>
 										</tr>
 									</thead>
@@ -117,32 +142,42 @@
 												
 											<td>{{item.company_name}}</td>
 											<td>{{item.company_detector_name}}</td>
-												<td style="padding-top: 13px ! important;"> <span class="label" data-ng-class="{'label-success' : item.alarmType=='NORMAL', 'label-warning' : item.alarmType=='ALERTA', 'label-default' : item.alarmType=='DETECCAO', 'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} </span></td>
+												<td style="padding-top: 13px ! important;"> 
+													<span class="label" 
+														data-ng-class="{
+															'label-offline' : item.alarmType=='OFFLINE', 
+															'label-success' : item.alarmType=='NORMAL', 
+															'label-warning' : item.alarmType=='ALERTA', 
+															'label-default' : item.alarmType=='DETECCAO', 
+															'label-danger' : item.alarmType=='EVACUACAO'}"> 
+																{{item.alarmType}} 
+													</span>
+												</td>
 											<td>
 												{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
 											</td>
 											<td>
-												<span data-ng-if="item.sigmaStatus=='OFF'" class="icon fa fa-exchange" style="font-size:1.4em; color: gray" title="Sem Integração ao Sigma Habilitada"></span>
+												<span data-ng-if="item.sigmaStatus=='OFF'" class="icon fa fa-exchange" style="font-size:1.4em; color: gray" title="Sem Integra&ccedil;&atilde;o ao Sigma Habilitada"></span>
                                             	<span data-ng-if="item.sigmaStatus=='ERROR'" class="icon fa fa-exchange" style="font-size:1.4em; color: red" title="Falha ao Informar Sigma"></span>
-                                            	<span data-ng-if="item.sigmaStatus=='SENDED'" class="icon fa fa-exchange" style="font-size:1.4em; color: green" title="Integração ao Sigma Realizada"></span>
-                                            	<span data-ng-if="item.sigmaStatus=='ON'" class="icon fa fa-exchange" style="font-size:1.4em; color: orange" title="Integração ao Sigma em fila"></span>
+                                            	<span data-ng-if="item.sigmaStatus=='SENDED'" class="icon fa fa-exchange" style="font-size:1.4em; color: green" title="Integra&ccedil;&atilde;o ao Sigma Realizada"></span>
+                                            	<span data-ng-if="item.sigmaStatus=='ON'" class="icon fa fa-exchange" style="font-size:1.4em; color: orange" title="Integra&ccedil;&atilde;o ao Sigma em fila"></span>
                                             	&nbsp;&nbsp;
-                                            	<span data-ng-if="item.emailStatus=='OFF'" class="icon fa fa-envelope" style="font-size:1.4em; color: gray" title="Aviso EMAIL não Habilitado"></span>
+                                            	<span data-ng-if="item.emailStatus=='OFF'" class="icon fa fa-envelope" style="font-size:1.4em; color: gray" title="Aviso EMAIL n;&atilde;o Habilitado"></span>
                                             	<span data-ng-if="item.emailStatus=='PENDENT'" class="icon fa fa-envelope" style="font-size:1.4em; color: orange" title="EMAIL na fila para Envio"></span>	
                                             	<span data-ng-if="item.emailStatus=='ERR_TRY_ONE'" class="icon fa fa-envelope" style="font-size:1.4em; color: red" title="Falha na 1a. Tentativa"></span>
                                             	<span data-ng-if="item.emailStatus=='ERR_TRY'" class="icon fa fa-envelope" style="font-size:1.4em; color: red" title="Falha ao Enviar Email"></span>
                                             	<span data-ng-if="item.emailStatus=='SENDED'" class="icon fa fa-envelope" style="font-size:1.4em; color: green" title="Email Enviado"></span>
                                             	&nbsp;&nbsp;                                            	
-                                            	<span data-ng-if="item.smsStatus=='OFF'"  style="font-size:1.4em; color: gray" title="Aviso de SMS não Habilitado">SMS</span>
+                                            	<span data-ng-if="item.smsStatus=='OFF'"  style="font-size:1.4em; color: gray" title="Aviso de SMS n;&atilde;o Habilitado">SMS</span>
                                             	<span data-ng-if="item.smsStatus=='PENDENT'"  style="font-size:1.4em; color: orange" title="SMS na Fila para Envio">SMS</span>	
                                             	<span data-ng-if="item.smsStatus=='ERR_TRY_ONE'"  style="font-size:1.4em; color: red" title="Falha na 1a. Tentativa">SMS</span>
                                             	<span data-ng-if="item.smsStatus=='ERR_TRY'"  style="font-size:1.4em; color: red" title="Falha ao Enviar SMS">SMS</span>
                                             	<span data-ng-if="item.smsStatus=='SENDED'"  style="font-size:1.4em; color: green" title="SMS Enviado">SMS</span>
-                                            	<span data-ng-if="item.smsStatus=='READED'"  style="font-size:1.4em; color: green" title="SMS Recebido pelo Destinatário">SMS</span>	                
+                                            	<span data-ng-if="item.smsStatus=='READED'"  style="font-size:1.4em; color: green" title="SMS Recebido pelo Destinat;&aacute;rio">SMS</span>	                
                                            		&nbsp;&nbsp;
                                            	</td>
                                            	<td>
-                                           		<a href="#" data-ng-click="editActionReaded(item.index)" class="button fa fa-list-ol" style="font-size:1.6em;" title="Ações a serem Verificadas pelo Operador"></a>
+                                           		<a href="#" data-ng-click="editActionReaded(item.index)" class="button fa fa-list-ol" style="font-size:1.6em;" title="A&ccedil;&otilde;es a serem Verificadas pelo Operador"></a>
                                             </td>        											
 										</tr>   																							
 										
@@ -158,20 +193,17 @@
        		
     	</div>    
     	
-    	<div class="row">
-    		<div class="col-md-6" style="font-size: 8px !important;">
+    	<div class="row">					
+			
+			<div class="col-md-6" style="font-size: 8px !important;">
 
-				<div class="box box-info">
+				<div class="box box-SUCCESS">
 					<div class="box-header with-border">
-						<h5 class="box-title">Detectores Off Line a mais de 5 minutos</h5>
-						<div class="box-tools pull-right">
-						
+						<h5 class="box-title">Alarmes Encerrados [Resolvidos].</h5>
+						<div class="box-tools pull-right">						
 							<label data-ng-show='loading'>Loading ...</label>		
-		
-							<button class="btn btn-box-tool" data-widget="collapse">
-								<i class="fa fa-minus"></i>
-							</button>
-
+							<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+							<button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
 						</div>
 					</div>					
 					
@@ -185,24 +217,53 @@
 											<th>Detector</th>
 											<th>Alarme</th>
 											<th>Data/hora</th>
-											<th>Detalhes</th>											
+											<th>Intera&ccedil;&atilde;es</th>
+											<th>Hist&oacute;rico</th>
 										</tr>
 									</thead>
 									<tbody>
 										
-										<tr data-ng-repeat="item in dashCompaniesOffline">																
+										<tr data-ng-repeat="item in dashCompaniesAlarm | filter: {alarmStatus: 'SOLVED' } track by item.uid">																
 												
 											<td>{{item.company_name}}</td>
-											<td>{{item.company_detector_name}}</td>											
-																																	
-											<td style="padding-top: 13px ! important;"> <span class="label label-default offLine"> Off Line </span></td>
-
+											<td>{{item.company_detector_name}}</td>
+												<td style="padding-top: 13px ! important;"> 
+													<span class="label" 
+														data-ng-class="{
+															'label-offline' : item.alarmType=='OFFLINE', 
+															'label-success' : item.alarmType=='NORMAL', 
+															'label-warning' : item.alarmType=='ALERTA', 
+															'label-default' : item.alarmType=='DETECCAO', 
+															'label-danger' : item.alarmType=='EVACUACAO'}"> 
+																{{item.alarmType}} 
+													</span>
+												</td>
 											<td>
 												{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
 											</td>
 											<td>
-												<span data-ng-click="editActionOffline($index)" class="button fa fa-info-circle" style="font-size:1.6em;" title="Informações sobre o Dispositivo"></span>
-											</td>											        											
+												<span data-ng-if="item.sigmaStatus=='OFF'" class="icon fa fa-exchange" style="font-size:1.4em; color: gray" title="Sem Integra&ccedil;&atilde;o ao Sigma Habilitada"></span>
+                                            	<span data-ng-if="item.sigmaStatus=='ERROR'" class="icon fa fa-exchange" style="font-size:1.4em; color: red" title="Falha ao Informar Sigma"></span>
+                                            	<span data-ng-if="item.sigmaStatus=='SENDED'" class="icon fa fa-exchange" style="font-size:1.4em; color: green" title="Integra&ccedil;&atilde;o ao Sigma Realizada"></span>
+                                            	<span data-ng-if="item.sigmaStatus=='ON'" class="icon fa fa-exchange" style="font-size:1.4em; color: orange" title="Integra&ccedil;&atilde;o ao Sigma em fila"></span>
+                                            	&nbsp;&nbsp;
+                                            	<span data-ng-if="item.emailStatus=='OFF'" class="icon fa fa-envelope" style="font-size:1.4em; color: gray" title="Aviso EMAIL n;&atilde;o Habilitado"></span>
+                                            	<span data-ng-if="item.emailStatus=='PENDENT'" class="icon fa fa-envelope" style="font-size:1.4em; color: orange" title="EMAIL na fila para Envio"></span>	
+                                            	<span data-ng-if="item.emailStatus=='ERR_TRY_ONE'" class="icon fa fa-envelope" style="font-size:1.4em; color: red" title="Falha na 1a. Tentativa"></span>
+                                            	<span data-ng-if="item.emailStatus=='ERR_TRY'" class="icon fa fa-envelope" style="font-size:1.4em; color: red" title="Falha ao Enviar Email"></span>
+                                            	<span data-ng-if="item.emailStatus=='SENDED'" class="icon fa fa-envelope" style="font-size:1.4em; color: green" title="Email Enviado"></span>
+                                            	&nbsp;&nbsp;                                            	
+                                            	<span data-ng-if="item.smsStatus=='OFF'"  style="font-size:1.4em; color: gray" title="Aviso de SMS n;&atilde;o Habilitado">SMS</span>
+                                            	<span data-ng-if="item.smsStatus=='PENDENT'"  style="font-size:1.4em; color: orange" title="SMS na Fila para Envio">SMS</span>	
+                                            	<span data-ng-if="item.smsStatus=='ERR_TRY_ONE'"  style="font-size:1.4em; color: red" title="Falha na 1a. Tentativa">SMS</span>
+                                            	<span data-ng-if="item.smsStatus=='ERR_TRY'"  style="font-size:1.4em; color: red" title="Falha ao Enviar SMS">SMS</span>
+                                            	<span data-ng-if="item.smsStatus=='SENDED'"  style="font-size:1.4em; color: green" title="SMS Enviado">SMS</span>
+                                            	<span data-ng-if="item.smsStatus=='READED'"  style="font-size:1.4em; color: green" title="SMS Recebido pelo Destinat;&aacute;rio">SMS</span>	                
+                                           		&nbsp;&nbsp;
+                                           	</td>
+                                           	<td>
+                                           		<a href="#" data-ng-click="editActionSolved(item.index)" class="button fa fa-list-ul" style="font-size:1.6em; color: black" title="A&ccedil;&otilde;es Executadas."></a>
+                                            </td>        											
 										</tr>   																							
 										
 									</tbody>
@@ -210,10 +271,9 @@
 							</div>
 						</div>						
 					</div>							
-
 				</div>
-      		
-       		</div>  
+			</div>
+				
     	</div>
     	
 		<div id="modalAction" class="modal">                
@@ -223,18 +283,16 @@
 					
 						<div class="panel panel-default">
 							<div class="panel-heading" style="text-align:center;font-size:1.5em">
-								<strong data-ng-if="!isOffline">Posicionamento de Alarmes</strong>
-								<strong data-ng-if="isOffline">Posicionamento de Dispositivo Offline </strong>								
+								<strong>Posicionamento de Alarmes</strong>																
 							</div>														                                                                           
 						</div>
 											
-						<div class="box box-primary" style="padding-bottom: 8px; !important; margin-bottom: 8px !important;">
+						<div class="box box-primary" style="padding-bottom: 8px !important; margin-bottom: 8px !important;">
 							<div class="box-header">
-								<h3 data-ng-if="!isOffline" class="box-title">Dados do Dispositivo e Alarme</h3>
-								<h3 data-ng-if="isOffline" class="box-title">Dados do Dispositivo</h3>								
+								<h3  class="box-title">Dados do Dispositivo e Alarme</h3>								
 								<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
 							</div>					
-							<div class="box-body" style="padding-bottom: 0px; !important">
+							<div class="box-body" style="padding-bottom: 0px !important;">
 								<form class="form" name="userForm">		
 								
 									<div class="row">											
@@ -244,28 +302,33 @@
 												<dl class="dl-horizontal">
 													<dt>Empresa:</dt>
 														<dd>{{selectedPositionAlarm.company_name}}</dd>
-													<dt>Unidade / Área:</dt>
+													<dt>Unidade / Area:</dt>
 														<dd>{{selectedPositionAlarm.unit_name}} / {{selectedPositionAlarm.area_name}}</dd>													
 													<dt>Detector / Sensor</dt>
 														<dd>{{selectedPositionAlarm.company_detector_name}} / {{selectedPositionAlarm.sensor_name}}</dd>
 																																							
-													<dt data-ng-if="!isOffline">Alarme: </dt>														
-														<dd data-ng-if="!isOffline" style="margin-top: 7px; margin-bottom: 7px">
+													<dt>Alarme: </dt>														
+														<dd style="margin-top: 7px; margin-bottom: 7px">
 															<span class="label"  
-																data-ng-class="{'label-success' : selectedPositionAlarm.alarmType=='NORMAL', 'label-warning' : selectedPositionAlarm.alarmType=='ALERTA', 'label-default' : selectedPositionAlarm.alarmType=='DETECCAO', 'label-danger' : selectedPositionAlarm.alarmType=='EVACUACAO'}"> {{selectedPositionAlarm.alarmType}}
+																data-ng-class="{
+																	'label-offline' : selectedPositionAlarm.alarmType=='OFFLINE',
+																	'label-success' : selectedPositionAlarm.alarmType=='NORMAL', 
+																	'label-warning' : selectedPositionAlarm.alarmType=='ALERTA', 
+																	'label-default' : selectedPositionAlarm.alarmType=='DETECCAO', 
+																	'label-danger' : selectedPositionAlarm.alarmType=='EVACUACAO'}"> {{selectedPositionAlarm.alarmType}}
 															</span>
 														</dd>													
-													<dt data-ng-if="!isOffline">Data/Hora Evento: </dt>
-														<dd data-ng-if="!isOffline">
+													<dt>Data/Hora Evento: </dt>
+														<dd>
 															{{selectedPositionAlarm.first_update  | date:'yyyy-MM-dd HH:mm:ss'}}  
 														</dd>
-													<dt>Data/Hora Ultima Medição: </dt>
+													<dt>Data/Hora Ultima Medi&ccedil;&atilde;o: </dt>
 														<dd>
 															{{selectedPositionAlarm.last_update_full  | date:'yyyy-MM-dd HH:mm:ss'}}  
 														</dd>														
-													<dt>Medições: </dt>															
+													<dt>Medi&ccedil;&atilde;es: </dt>															
 														<dd>
-															Gás: {{selectedPositionAlarm.gas_name}} | Medição: {{selectedPositionAlarm.last_value}}
+															G&aacute;s: {{selectedPositionAlarm.gas_name}} | Medi&ccedil;&atilde;o: {{selectedPositionAlarm.last_value}}
 															<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
 															<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases!='LEL_PERCENT'"> {{selectedPositionAlarm.unitMeterGases}}</span>
 														</dd>
@@ -274,32 +337,40 @@
 								            </div>
 								            
 											<hr style="margin-top: 8px !important; margin-bottom: 8px !important;">
-											<div class="box box-primary box-solid" data-ng-if="!isOffline" style="padding-bottom: 8px; !important; margin-bottom: 8px !important;">				                    
-												<div class="box-header with-border"><i class="fa fa-user"></i> Providências:
+											<div class="box box-primary box-solid" style="padding-bottom: 8px !important; margin-bottom: 8px !important;">				                    
+												<div class="box-header with-border"><i class="fa fa-user"></i> Provid&ecirc;ncias:
 												</div>
 												<div class="box-body">													                                                                        
-													<input class="form-control inputProfile" data-ng-model="selectedPositionAlarm.action" disabled>                                                                       
+													<input class="form-control inputProfile" placeholder="Nenhuma Provid&ecirc;ncia Registrada para o alarme" data-ng-model="selectedPositionAlarm.action" disabled>												
 												</div>
 											</div>											
 																						
-											<div class="box box-info box-solid" data-ng-if="selectedPositionAlarm.messages.length >0" style="padding-bottom: 8px; !important; margin-bottom: 8px !important;">				                    
-												<div class="box-header with-border"><i class="fa fa-envelope"></i> Histórico de Mensagens:
+											<div class="box box-info box-solid" data-ng-if="selectedPositionAlarm.messages.length > 0" style="padding-bottom: 8px !important; margin-bottom: 8px !important;">				                    
+												<div class="box-header with-border"><i class="fa fa-envelope"></i> Hist&oacute;rico de Mensagens:
 												</div>
 												<div class="box-body" style="font-size: 0.8em">
-													<div style="max-height: 100px; height:auto; overflow: auto">
-													<dl class="dl-horizontal" data-ng-repeat="item in selectedPositionAlarm.messages">
-																													
-														<dt>Data/Hora: {{item.lastUpdate | date:'yyyy-MM-dd HH:mm:ss'}}</dt>
-															<dd>{{item.message}}</dd>																							
-														 
-													</dl>
-													</div>                                                                    
+
+													<table class='rui-table' data-cellspacing="0" data-width="100%">
+														<thead>
+															<tr>	                
+																<th class="col-md-4">Data</th>                                                                                   
+																<th class="col-md-1">Usuario</th>
+																<th class="col-md-7">Mensagem</th>
+															</tr>                                    
+														</thead>															
+														<tbody>
+															<tr data-ng-repeat="item in selectedPositionAlarm.messages">
+																<td>{{item.lastUpdate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+																<td>{{item.userDto.displayName}}</td>
+																<td>{{item.message}}</td>															
+															</tr>
+														</tbody>	                   
+													</table>												
 												</div>
 											</div>											
 											
-											<div class="box box-info box-solid" data-ng-if="!isOffline" style="padding-bottom: 8px; !important; margin-bottom: 8px !important;">				                    
-												<div class="box-header with-border"><i class="fa fa-history"></i> Feedback:
-												</div>
+											<div data-ng-if="!onlyHistoric" class="box box-info box-solid" style="padding-bottom: 8px !important; margin-bottom: 8px !important;">				                    
+												<div class="box-header with-border"><i class="fa fa-history"></i> Feedback:</div>
 												<div class="box-body">													                                                                        
 													<input class="form-control inputProfile" data-ng-model="selectedPositionAlarm.feedback">                                                                       
 												</div>
@@ -322,16 +393,15 @@
 							data-ng-disabled="(selectedPositionAlarm.feedback) ? false : true">Encerrar Alarme
 						</button>
 						                                                                
-						<button data-ng-if="!isOffline" type="button" data-ng-click="savePositionAlarmMessage();" class="btn btn-primary" data-dismiss="modal"
+						<button type="button" data-ng-click="savePositionAlarmMessage();" class="btn btn-primary" data-dismiss="modal"
 							title="Salvar Nova Mensagem"
-							data-ng-disabled="(selectedPositionAlarm.feedback) ? false : true">Registrar Providència 
+							data-ng-disabled="(selectedPositionAlarm.feedback) ? false : true">Registrar Provid&ecirc;ncia 
 						</button>						                                
 					</div>
 					
 				</div>
 			</div>		
-		</div>
-    	
+		</div>    	
     	
     </div>
 

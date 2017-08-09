@@ -76,6 +76,15 @@
 		color: white ! important;	
 	}
 	
+	.label-offline {
+		background-color: #171717;
+	}
+	
+	.label-offline[href]:hover,
+	.label-offline[href]:focus {
+		background-color: #0f0f0f;
+	}
+	
 	imgDetector {	  
 	   	width: auto;
     	max-height: 160px;

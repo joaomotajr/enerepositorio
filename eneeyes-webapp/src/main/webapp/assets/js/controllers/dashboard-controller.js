@@ -124,31 +124,21 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 	
 						$scope.sumary.devices ++;
 						
-						//var offDate = (new Date() - new Date(e.last_update_full)) / 1000;
-						
 						if ( e.alarmType == "OFF" || e.alarmType == "WITHOUT" ) {
 							$scope.sumary.offLine ++;
 							$scope.sumary.turnOff ++;						
-						}						
-						// else if ( offDate > 300 ) {							 
-						//      $scope.sumary.offLine ++;
-						//      e.offLine = true;
-						// }
+						}
 						else if ( e.alarmType == "OFFLINE" ) {							 
-						     $scope.sumary.offLine ++;
-						     e.offLine = true;
+						     $scope.sumary.offLine ++;						 
 						}				
-						else if ( e.alarmType == "NORMAL") {
-							 
+						else if ( e.alarmType == "NORMAL") {							 
 						     $scope.sumary.normal ++;
 						}
 						else if ( e.alarmType == "DETECCAO") {
-							$scope.sumary.alarm1 ++;			
-							 
+							$scope.sumary.alarm1 ++;							 
 						}
 						else if ( e.alarmType == "ALERTA") {
-							$scope.sumary.alarm2 ++;			
-							 
+							$scope.sumary.alarm2 ++;							 
 						}
 						else if ( e.alarmType == "EVACUACAO") {
 							$scope.sumary.alarm3 ++;	

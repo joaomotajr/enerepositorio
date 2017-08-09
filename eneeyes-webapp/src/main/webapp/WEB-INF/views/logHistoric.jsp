@@ -15,7 +15,7 @@
 		
 			<div id="snoAlertBox" class="alert alert-warning" data-alert="alert">{{daysDiff}}</div>						                                                    
 			<div class="col-md-12">                                                        
-				<div class="box box-primary" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">	
+				<div class="box box-primary" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">	
 					<div class="box-header">
 					 	<h3 class="box-title">Pesquisa Historico de Detectores</h3>
 					 	<div class="box-tools pull-right">
@@ -23,7 +23,7 @@
 	                  	</div>
 					</div>
 					
-					<div class="box-body" style="padding-bottom: 0px; !important">
+					<div class="box-body" style="padding-bottom: 0px !important">
 						<div class="row">        		
 			        		<div class="col-md-12">
 				        		<div id="wizard" class="form_wizard wizard_horizontal">        		
@@ -122,7 +122,7 @@
 				
 				<div class="row">						                                                    
 					<div class="col-md-12">                                                        
-						<div class="box box-solid box-primary" style="padding-bottom: 0px; !important; margin-bottom: 0px !important;">
+						<div class="box box-solid box-primary" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
 							
 							<div class="box-header">
 								<h3 class="box-title">Selecione Intervalos Pré-Definidos ou Data de Inicio e Fim</h3>									  	
@@ -133,7 +133,7 @@
 								</div>
 							</div>			
 							
-							<div class="box-body" style="padding-bottom: 0px; !important">	
+							<div class="box-body" style="padding-bottom: 0px !important">	
 								<div class="row">
 								
 									<div class="col-md-4">																															

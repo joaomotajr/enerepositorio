@@ -23,23 +23,6 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 			elementLoaded.play();
 	}
 	
-	$scope.getCompaniesPositionOffline = function() {
-		
-		$scope.loading = true;	
-		
-		$scope.listAllOffline = new ViewService.listAllOffline();		 
-		$scope.listAllOffline.$view({_csrf : angular.element('#_csrf').val(), interval: 5}, function(){
-						 
-			 for(var i = 0; i < $scope.listAllOffline.list.length; i++) {
-								
-				 $scope.dashCompaniesOffline[i] = $scope.listAllOffline.list[i];
-				 $scope.dashCompaniesOffline[i].last_update_full = $scope.dashCompaniesOffline[i].last_update;
-				 $scope.dashCompaniesOffline[i].last_update = timeSince($scope.listAllOffline.serverDate, $scope.dashCompaniesOffline[i].last_update);				 
-				 $scope.dashCompaniesOffline[i].last_value	= Math.round($scope.dashCompaniesOffline[i].last_value * 100) / 100 ;								 
-			 }			 
-		});		 
-	 }	
-	
 	$scope.getCompaniesAlarm = function() {
 		
 		$scope.loading = true;	
@@ -74,7 +57,8 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 			uid: 0,
 			message: $scope.selectedPositionAlarm.feedback,
 			lastUpdate: null,
-			positionAlarmDto: { uid: $scope.selectedPositionAlarm.uid }
+			positionAlarmDto: { uid: $scope.selectedPositionAlarm.uid },
+			userDto : {id : $scope.$root.userId}			
 		};
 
 		$scope.inclusaoPositionAlarmMessage = new PositionAlarmMessageService.save(positionAlarmMessage);
@@ -94,7 +78,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 	
 	$scope.editActionCreated = function(index) {
 		
-		$scope.isOffline = false;
+		$scope.onlyHistoric = false;
 		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarm[index];
 		$scope.getPositionAlarmMessage($scope.selectedPositionAlarm.uid);
 		
@@ -105,7 +89,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 	
 	$scope.editActionReaded = function(index) {
 		
-		$scope.isOffline = false;
+		$scope.onlyHistoric = false;
 		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarm[index];
 		$scope.getPositionAlarmMessage($scope.selectedPositionAlarm.uid);
 		
@@ -114,10 +98,11 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
         }, 200);		
 	}
 	
-	$scope.editActionOffline = function(index) {
+	$scope.editActionSolved = function(index) {
 		
-		$scope.isOffline = true;
-		$scope.selectedPositionAlarm = $scope.dashCompaniesOffline[index];
+		$scope.onlyHistoric = true;
+		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarm[index];
+		$scope.getPositionAlarmMessage($scope.selectedPositionAlarm.uid);
 		
 		$timeout(function () {
             $('#modalAction').modal({ show: 'false' });                        
@@ -133,16 +118,12 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 	}
 			
 	$scope.getCompaniesAlarm();
-	$scope.getCompaniesPositionOffline();
-    
+	    
     $interval(function() {
     	if($scope.$root == null) return;
     	
     	if($scope.$root.errorTimes <= 5) {
-    		$scope.getCompaniesAlarm();
-    		
-    		if($scope.$root.currentPage == "Monitoramento")	
-    			$scope.getCompaniesPositionOffline();
+    		$scope.getCompaniesAlarm();    		
     	}
     }, 10000);	
     

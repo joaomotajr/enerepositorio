@@ -26,7 +26,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			alarmAction:  $scope.alarmAction,
 			action1 : $scope.action1,
 			action2 : $scope.action2,
-			action3 : $scope.action3
+			action3 : $scope.action3,
+			action4 : $scope.action4
 		}; 
 		 
 		$scope.inclusaoAlarm = new AlarmService.save(alarm);		 
@@ -57,6 +58,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		$scope.action1 = '';
 		$scope.action2 = '';
 		$scope.action3 = '';
+		$scope.action4 = '';
 
 		if($scope.$root.isFrom == "MASTER")
 			$scope.selectedCompany = ''
@@ -89,6 +91,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			$scope.action1 = $scope.alarms[index].action1;
 			$scope.action2 = $scope.alarms[index].action2;
 			$scope.action3 = $scope.alarms[index].action3;
+			$scope.action4 = $scope.alarms[index].action4;
 									
 			$("#checkboxActionOff").prop('checked', $scope.alarms[index].alarmAction);
 			showAction($scope.alarms[index].alarmAction);

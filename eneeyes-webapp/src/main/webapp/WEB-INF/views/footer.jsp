@@ -90,6 +90,7 @@
 	<script src="/assets/js/controllers/logAlarm-controller.js"></script>
 	<script src="/assets/js/controllers/companyDetectorMaintenanceHistoric-controller.js"></script>
 	<script src="/assets/js/controllers/fusioncharts-controller.js"></script>	            
+	<script src="/assets/js/controllers/general-controller.js"></script>
 				
 	<!-- PAGE LEVEL SERVICES -->
 	<script src="/assets/js/user-services.js"></script>

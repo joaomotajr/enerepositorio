@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.0"
-	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
 	
 	<persistence-unit name="eneeyes.db.production" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
@@ -36,39 +39,11 @@
 			<property name="hibernate.order_inserts" value="true" />
 			<property name="hibernate.order_updates" value="true" />
 			<property name="hibernate.cache.use_second_level_cache" value="true" />
-			<!-- <property name="hibernate.multiTenancy" value="SCHEMA"/>
-			<property name="hibernate.tenant_identifier_resolver" value="br.com.eneeyes.archetype.web.config.multitenant.SchemaResolver"/>
-			<property name="hibernate.multi_tenant_connection_provider" value="br.com.eneeyes.archetype.web.config.multitenant.MultiTenantProvider"/> -->
 		</properties>
 	</persistence-unit>
 	
 	<persistence-unit name="eneeyes.db.development" transaction-type="RESOURCE_LOCAL">
-    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-    	
-    	<!-- 
-    	<class>br.com.eneeyes.archetype.model.acl.User</class>    	
-    	<class>br.com.eneeyes.archetype.model.acl.Role</class>    	
-    	<class>br.com.eneeyes.archetype.model.acl.Permission</class>
-    	
-    	<class>br.com.eneeyes.main.model.register.Gas</class>
-    	<class>br.com.eneeyes.main.model.register.Controller</class>
-    	<class>br.com.eneeyes.main.model.register.Detector</class>
-    	<class>br.com.eneeyes.main.model.register.Manufacturer</class>
-    	<class>br.com.eneeyes.main.model.register.Sensor</class>
-    	<class>br.com.eneeyes.main.model.register.Transmitter</class>
-    	
-    	<class>br.com.eneeyes.main.model.Alarm</class>
-    	<class>br.com.eneeyes.main.model.Area</class>
-    	<class>br.com.eneeyes.main.model.Company</class>
-    	<class>br.com.eneeyes.main.model.CompanyDetector</class>
-    	<class>br.com.eneeyes.main.model.CompanyDetectorAlarm</class>
-    	<class>br.com.eneeyes.main.model.CompanyDetectorAlarmPK</class>
-    	<class>br.com.eneeyes.main.model.CompanyDevice</class>
-    	<class>br.com.eneeyes.main.model.Historic</class>
-    	<class>br.com.eneeyes.main.model.Position</class>
-    	<class>br.com.eneeyes.main.model.Unit</class>    	
-    	 -->
-    	
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>    	
 		<properties>
 			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property>
 			<property name="hibernate.connection.username" value="root"></property>
@@ -81,11 +56,7 @@
 			<property name="hibernate.jdbc.batch_size" value="100" />
 			<property name="hibernate.order_inserts" value="true" />
 			<property name="hibernate.order_updates" value="true" />
-			<property name="hibernate.cache.use_second_level_cache" value="true" />
-			<!-- <property name="hibernate.multiTenancy" value="SCHEMA"/>
-			<property name="hibernate.tenant_identifier_resolver" value="br.com.eneeyes.archetype.web.config.multitenant.SchemaResolver"/>
-			<property name="hibernate.multi_tenant_connection_provider" value="br.com.eneeyes.archetype.web.config.multitenant.MultiTenantProvider"/> -->
-			
+			<property name="hibernate.cache.use_second_level_cache" value="true" />			
 		</properties>
 	</persistence-unit>
 

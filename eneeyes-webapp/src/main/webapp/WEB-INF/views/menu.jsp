@@ -24,6 +24,12 @@
 	            	</a>	            		            	
 				</li>
 
+				<li class="treeview" data-ng-if="isFrom=='MASTER'">
+	            	<a href="#" data-ng-click="LoadAjaxContent('general.html', 'Over-View')"><i class="fa fa-th text-white"></i> 
+	            		<span>Over View</span>	            			            		
+	            	</a>	            		            	
+				</li>
+
 				<li class="treeview">
 	            	<a href="#">
 	                <i class="fa fa-cube text-red"></i> <span>Sistema: G&aacute;s &amp; Alarme</span>

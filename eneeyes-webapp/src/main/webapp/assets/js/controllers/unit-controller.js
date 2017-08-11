@@ -1,20 +1,8 @@
-app.controller('unitController', function ($scope, $timeout, $filter, UnitService, AreaService, CompanyService) {
+app.controller('unitController', function ($scope, $rootScope, $timeout, $filter, UnitService, AreaService, CompanyService) {
 
     var map;
 	var geocoder;
 	var loadGauge = false;
-	
-	$scope.showDanger = function(msg) {		
-		angular.element('body').removeClass('loading');
-		 $scope.$root.msgDanger = msg ;
-        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');	
-	}
-	
-	$scope.showInfo = function(msg) {
-		angular.element('body').removeClass('loading');            
-        $scope.$root.msgInfo = msg;
-        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
-	}
 	
 	$scope.getOneCompany = function(companyId) {
 		 
@@ -41,8 +29,8 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 						
 			$scope.clearFormUnit();						
 			$scope.getOneCompany($scope.companyUid);
-			
-			$scope.showInfo($scope.inclusaoArea.message);
+						
+			$rootScope.showGeneralMessage($scope.inclusaoArea.message, 'SUCCESS');	
 			
         });
 		 
@@ -63,10 +51,7 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 			$scope.clearFormUnit();
 			$scope.getOneCompany($scope.companyUid);
 			
-			$scope.showDanger($scope.deletar.message);
-	        
-//        }, function(data) {
-//        	$scope.showErro("Ops: " + data.statusText);
+			$rootScope.showGeneralMessage($scope.deletar.message, 'DANGER');
 		});		 
 	}
 	
@@ -124,7 +109,7 @@ app.controller('unitController', function ($scope, $timeout, $filter, UnitServic
 				$scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex] = $scope.selectedUnit;
 			}
 			
-			$scope.showInfo($scope.inclusaoUnit.message);
+			$rootScope.showGeneralMessage($scope.inclusaoUnit.message, 'SUCCESS');
 					
        });       
 	}

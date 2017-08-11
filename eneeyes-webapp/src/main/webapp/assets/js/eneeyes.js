@@ -26,36 +26,36 @@ angular.module('dependency', []).config(['$httpProvider', function ($httpProvide
         	 if (rejection.status == 0) {
         		 
         		  angular.element('body').removeClass('loading'); 
-        		  $rootScope.alertDanger = "Servidor Sem Resposta, Se o Problema Persistir Contate o Administrador do Sistema";
-        		  $('#resultDanger').hide().show('slow').delay(15000).hide('slow');        		  
+        		  $rootScope.alertServerDanger = "Servidor Sem Resposta, Se o Problema Persistir Contate o Administrador do Sistema";
+        		  $('#resultServerDanger').hide().show('slow').delay(15000).hide('slow');        		  
         		  
         	 }
         	 else if (rejection.status == 403) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertDanger = "403 Acesso ao Módulo ou Recurso Não Permitido!";
-        		 $('#resultDanger').hide().show('slow').delay(15000).hide('slow');
+        		 $rootScope.alertServerDanger = "403 Acesso ao Módulo ou Recurso Não Permitido!";
+        		 $('#resultServerDanger').hide().show('slow').delay(15000).hide('slow');
         	 }
         	 else if (rejection.status == 404) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertDanger = "404 - Item Requisitado Inexistente, Contate o Administrador do Sistema.";
-        		 $('#resultDanger').hide().show('slow').delay(15000).hide('slow');
+        		 $rootScope.alertServerDanger = "404 - Item Requisitado Inexistente, Contate o Administrador do Sistema.";
+        		 $('#resultServerDanger').hide().show('slow').delay(15000).hide('slow');
         	 }
         	 else if (rejection.status == 405) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertDanger = "405 - Chamada Inválida, Contate o Administrador do Sistema.";
+        		 $rootScope.alertServerDanger = "405 - Chamada Inválida, Contate o Administrador do Sistema.";
         		 
         		 $timeout(function(){
-        			 	$('#resultDanger').hide();
+        			 	$('#resultServerDanger').hide();
 	  					window.location.href='/';
 	  			 },2500);        		 
         	 }
         	 else if (rejection.status == 415) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertDanger = "415 - Tipo de Media Insuportado, Contate o Administrador do Sistema.";
+        		 $rootScope.alertServerDanger = "415 - Tipo de Media Insuportado, Contate o Administrador do Sistema.";
         	 }
         	 else if (rejection.status == 500) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertDanger = "500 - Algum retorno indesejado no servidor, Contate o Administrador do Sistema";
+        		 $rootScope.alertServerDanger = "500 - Algum retorno indesejado no servidor, Contate o Administrador do Sistema";
         	 }
         	 else if (rejection.status > 400 && rejection.status <= 505 ) {
      		    	angular.element('body').removeClass('loading');
@@ -69,7 +69,7 @@ angular.module('dependency', []).config(['$httpProvider', function ($httpProvide
 	  		 }
         	 else {
         		  angular.element('body').removeClass('loading'); 
-        		  $rootScope.alertDanger = rejection.statusText;
+        		  $rootScope.alertServerDanger = rejection.statusText;
         	 }
 //        	  else {
 //        		  //Propagar o erro para tratamento local

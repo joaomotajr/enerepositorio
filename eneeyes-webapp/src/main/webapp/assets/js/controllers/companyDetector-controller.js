@@ -24,18 +24,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 
 	var loadGoogleCharts = false;
 	
-	$scope.showDanger = function(msg) {		
-		angular.element('body').removeClass('loading');
-		 $scope.$root.msgDanger = msg ;
-        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');	
-	}
-	
-	$scope.showInfo = function(msg) {
-		angular.element('body').removeClass('loading');            
-        $scope.$root.msgInfo = msg;
-        $('#resultInfo').hide().show('slow').delay(1000).hide('fast');
-	}
-	
 	$scope.getOneCompany = function(companyId) {
 		 
 		 $scope.listOne = new CompanyService.listOne();		 
@@ -46,17 +34,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			 $scope.loadTreview($scope.itens);			 
 	    });		 
 	}
-
-	$scope.updateCompanyDetectorLatitudeLongitude = function(latitude, longitude, id) {
-		angular.element('body').addClass('loading');
-						 
-		$scope.updateLatitudeLongitude = new CompanyDetectorService.updateLatitudeLongitude();
-		$scope.updateLatitudeLongitude.$companyDetector({_csrf : angular.element('#_csrf').val(), latitude: latitude, longitude: longitude, id : id }, function(){		
-			
-			$scope.showInfo($scope.updateLatitudeLongitude.message);					
-
-		});			 
-	}	
 	
 	$scope.saveCompanyDetector = function() {
 		angular.element('body').addClass('loading');
@@ -82,12 +59,12 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			
 			//Se for um Company Detector novo ou nao associado a um Detector
 			if($scope.selectedCompanyDetector.uid == undefined) {
-				$scope.selectedCompanyDetector = $scope.inclusaoCompanyDetector.t;
+				$scope.selectedCompanyDetector = $scope.inclusaoCompanyDetector.t;				
 				$scope.getCompanyDetectorAlarms();
 			}		
 			
-			angular.element('body').removeClass('loading');
-			$scope.showInfo($scope.inclusaoCompanyDetector.message);		
+			angular.element('body').removeClass('loading');			
+			$rootScope.showGeneralMessage($scope.inclusaoCompanyDetector.message, 'SUCCESS');	
 
 		});			 
 	}
@@ -117,8 +94,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		$scope.deletar = new CompanyDetectorService.deletar();	
 		
 		$scope.deletar.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
-						
-			$scope.showDanger($scope.deletar.message) ;
+			$rootScope.showGeneralMessage($scope.deletar.message, 'DANGER');		
+
 			$scope.clearCompanyDetector();
 			$scope.getOneCompany($scope.companyUid);
 			
@@ -364,27 +341,30 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	
 	$scope.getPositionsNoTimer = function(currentCompanyDetector) {
 		
-		 $scope.listOnePositionNoTimer = new PositionService.listOneByCompanyDetector();		 
-		 $scope.listOnePositionNoTimer.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function() {
+		$scope.listOnePositionNoTimer = new PositionService.listOneByCompanyDetector();		 
+		$scope.listOnePositionNoTimer.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function() {
 			 
-			 for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {				
+			if ($scope.listOnePositionNoTimer.list == undefined || $scope.listOnePositionNoTimer.list.length == 0) return;
+
+			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {				
 					
 				var offDate = ((new Date() - new Date($scope.listOnePositionNoTimer.list[j].lastUpdate)) / 1000) > 300;
 				$scope.alarmesFired[j] = offDate ? "OFFLINE" : $scope.listOnePositionNoTimer.list[j].alarmType;
-			 }
+			}
 			 
-		 });
+		});
 	}
 	
 	$scope.alarmesFired = [];
 	
 	$scope.getPositions = function(currentCompanyDetector) {
 		
-		 $scope.listOnePosition = new PositionService.listOneByCompanyDetector();		 
-		 $scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function() {		
+		$scope.listOnePosition = new PositionService.listOneByCompanyDetector();		 
+		$scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function() {		
+
+			if ($scope.listOnePosition.list == undefined || $scope.listOnePosition.list.length == 0) return;
 			 
 			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
-				
 				
 				var offDate = ((new Date() - new Date($scope.listOnePosition.list[j].lastUpdate)) / 1000) > 300;
 				$scope.alarmesFired[j] = offDate ? "OFFLINE" : $scope.listOnePosition.list[j].alarmType;

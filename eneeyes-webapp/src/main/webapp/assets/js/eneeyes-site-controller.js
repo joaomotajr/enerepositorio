@@ -60,7 +60,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	        })
 	        .error(function (data, status, headers, config) {
 
-				$rootScope.alertDanger = config;
+				$rootScope.alertServerDanger = config;
 				angular.element('body').removeClass('loading');
 					        	
 	        });

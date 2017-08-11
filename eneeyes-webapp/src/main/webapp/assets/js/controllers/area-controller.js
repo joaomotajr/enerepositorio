@@ -5,18 +5,6 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 	
 	$scope.isLock = true;
     $scope.btnLockUnlock = 'Unlock';    
-		
-	$scope.showDanger = function(msg) {		
-		angular.element('body').removeClass('loading');
-		 $scope.$root.msgDanger = msg ;
-        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');	
-	}
-	
-	$scope.showInfo = function(msg) {
-		angular.element('body').removeClass('loading');            
-        $scope.$root.msgInfo = msg;
-        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
-	}
 
 	$scope.getOneCompany = function(companyId) {
 		 
@@ -34,8 +22,7 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		$("#idImageArea").toggleClass("disableDiv");
 		
 		 $scope.isLock = !$scope.isLock;
-	     $scope.btnLockUnlock = $scope.isLock ? ' Lock ' : 'Unlock';
-		
+	     $scope.btnLockUnlock = $scope.isLock ? ' Lock ' : 'Unlock';		
 	}
 	
 	$scope.saveCompanyDeviceInit = function() {
@@ -53,7 +40,8 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		        	           
 			$scope.getOneCompany($scope.companyUid);			
 			$scope.sensorDetectionType = '';			
-			$scope.showInfo($scope.inclusaoCompanyDevice.message);
+
+			$rootScope.showGeneralMessage($scope.inclusaoCompanyDevice.message, 'SUCCESS') ;
 		
 		});		 
 	 }
@@ -86,9 +74,8 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 			else {
 				$scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex] = 
 					$scope.selectedArea;
-			}
-			
-			$scope.showInfo($scope.inclusaoArea.message);		
+			}						
+			$rootScope.showGeneralMessage($scope.inclusaoArea.message, 'SUCCESS');
 		
 		});			 
 	}
@@ -121,7 +108,7 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		$scope.updateLatitudeLongitude = new CompanyDetectorService.updateLatitudeLongitude();
 		$scope.updateLatitudeLongitude.$companyDetector({_csrf : angular.element('#_csrf').val(), latitude: latitude, longitude: longitude, id : id }, function(){		
 			
-			$scope.showInfo($scope.updateLatitudeLongitude.message);		
+			$rootScope.showGeneralMessage($scope.updateLatitudeLongitude.message, 'SUCCESS');						
 		
 		});			 
 	}
@@ -157,7 +144,8 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 			$scope.clearFormArea();
 			$scope.getOneCompany($scope.companyUid);
 			
-			$scope.showDanger($scope.deletar.message);	                 	         	        
+			$rootScope.showGeneralMessage($scope.deletar.message, 'DANGER');
+			
 		});		 
 	}	
 	

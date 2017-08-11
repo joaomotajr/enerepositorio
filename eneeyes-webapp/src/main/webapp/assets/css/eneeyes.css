@@ -23,9 +23,7 @@
 		width: 100%; 	
 		background: rgba(255, 255, 255, .5) url('/assets/img/loader.gif') 50% 50% no-repeat;
 	}
-	
-	
-	<!-- Tabelas de Log Historic e Alarmes  -->
+			
 	.zui-table {
 		border: solid 1px #3c8dbc;		
 		border-collapse: collapse;
@@ -83,6 +81,18 @@
 	.label-offline[href]:hover,
 	.label-offline[href]:focus {
 		background-color: #0f0f0f;
+	}
+
+	.alert-offliine {
+		color: #171717;
+		background-color: white;
+		border-color:white;
+	}
+		.alert-danger hr {
+		border-top-color: white;
+	}
+		.alert-danger .alert-link {
+		color: #171717;		
 	}
 	
 	imgDetector {	  

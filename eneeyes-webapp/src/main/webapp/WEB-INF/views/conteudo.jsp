@@ -5,6 +5,17 @@
     	background-color: #f7f7f7 !important;    	
 		font-weight: 700 !important;
 	}
+
+	#idGeneralMessage{
+		position:absolute;
+		z-index:1400;
+		top:40%;
+		right:4%;
+		margin:0px auto;
+		text-align:center;
+		display:none;
+	}
+
 </style>
 
 <div data-ng-controller="conteudoController" data-ng-cloak>
@@ -13,12 +24,22 @@
 	
 		<section class="content-header"></section>	
 			
-		<section class="content">		
+		<section class="content">
+
+			<div id="idGeneralMessage" class="alert" 
+				data-ng-class="{																						
+					'alert-offline' : generalAlert=='OFFLINE',
+					'alert-success' : generalAlert=='SUCCESS', 
+					'alert-warning' : generalAlert=='WARNING', 
+					'alert-info' : generalAlert=='INFO', 
+					'alert-danger' : generalAlert=='DANGER'}"
+				data-alert="alert">{{generalMessage}}
+			</div>
 		
-			<div id="resultDanger" class="alert alert-danger alert-dismissable dj-hide" role="alert" data-ng-class="{'dj-hide':!alertDanger}">
+			<div id="resultServerDanger" class="alert alert-danger alert-dismissable dj-hide" role="alert" data-ng-class="{'dj-hide':!alertServerDanger}">
 				<button type="button" class="close" ><span data-ng-click="clearAlert();">&times;</span></button>
 				<h4 data-ng-cloak><i class="icon fa fa-info"></i> Ops!</h4>
-				{{alertDanger}}
+				{{alertServerDanger}}
 			</div>
 			
 			<div id="content" data-bind-unsafe-html="ajaxcontent"></div>

@@ -196,7 +196,7 @@
 											   					               	
 								               	<div class="panel-body">							            					                 										                	
 													<div class="row">								                	
-														<div style=" width: 100%; display: flex; justify-content: center; text-align: center;"
+														<div style=" width: 100%; display: flex; justify-content: center; text-align: center;">
 															<div id="{{'sensor_' + sensor.$$hashKey}}" style="height:370px;"></div>
 														</div>												
 						                			</div>								                				                				                

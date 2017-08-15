@@ -274,3 +274,26 @@ app.directive('datatable', function () {
         }
     };
 });
+
+
+app.directive("truncate", function(){
+	return {
+		scope: {
+    		text: '='			
+    	},		
+        link: function(scope, element, attribute, ctrl){
+			if(attribute.value.length > attribute.truncate)
+				element.html(attribute.value.substring(0, attribute.truncate).concat("..."));
+			else
+				element.html(attribute.value);
+        }
+    }
+});
+
+app .directive('zeros', function () {
+    return function (scope, element, attribute) {
+		var s = attribute.value + "";
+		while (s.length < attribute.zeros) s = "0" + s;
+		element.html(s);	    
+    }
+});

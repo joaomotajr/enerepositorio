@@ -34,7 +34,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 				
 		var idTab = $scope.tabsShow.findIndex( function(e) { return e.link === title });
 					
-		if (idTab > 0 ) {		
+		if (idTab >= 0 ) {		
 			
 			$timeout(function() {
 				$("#id_tab_" + $scope.tabsShow[idTab].link).trigger("click");				

@@ -1,46 +1,181 @@
-		
-	<div data-ng-controller="generalController">
+<style>
+	.selectedSquare {
+		text-decoration: none !important; 
+		color: black !important;
+		background: #d2d6de !important;
+		background-color: #d2d6de !important;
+	}
+
+</style>
+<div data-ng-controller="generalController" >
 												
-		<div class="row">				                                                    
-			<div class="col-md-12">                                                        
+	<div class="row">				                                                    
+		<div class="col-md-12">                                                        
+			
+			<div class="box box-primary">
 				
-				<div class="box box-primary">
-					<div class="box-header">
-						<h3 class="box-title">Visão Geral</h3>					  
+				<div class="box-header content-header" style="background: whitesmoke">
+					
+					<h3 class="box-title">Vis&atilde;o Empresas</h3>					  
+
+					<ol class="breadcrumb" style="top: 5px !important;">
+						<li><a href="#"><i class="fa fa-industry"></i> {{selectedCompany.companyName}}</a></li>
+						<li data-ng-show="selectedUnit"><a href="#"><i class="fa fa-building"></i> {{selectedUnit.name}}</a></li>
+						<li data-ng-show="selectedArea"><a href="#"><i class="fa fa-map-o"></i> {{selectedArea.name}}</a></li>						
+					</ol>
+					
+				</div>
+
+				<div class="box-body" style="background: whitesmoke">
+					<!-- Selected Companies -->
+					<div class="row">
+						<div class="col-md-3 col-sm-6 col-xs-12" data-ng-repeat="item in companiesSumary" >
+							<a href="#" style="text-decoration: none !important; color: black !important;" data-ng-click="selectCompany($index)">
+							<div class="info-box">
+								<span class="info-box-icon bg-navy" 
+									ng-class="{'selectedSquare': $index == selectedCompany.selected}"
+									style="padding: 1px; text-transform: uppercase; font-size: 65px; font-weight: 700">{{item.companyName.substring(0,1)}}</i></span>
+								<div class="info-box-content">										
+									<span class="info-box-number" truncate="12" value="{{item.companyName}}" />
+									<div class="col-md-9" style="padding-left: 5px !important;">
+										<span class="info-box-text">Unidades:</span>
+									</div>
+									<div class="col-md-3">
+										<span class="pull-right" zeros="2" value="{{item.units}}" />
+									</div>
+									<div class="col-md-9" style="padding-left: 5px !important;">
+										<span class="info-box-text">Areas:</span>
+									</div>
+									<div class="col-md-3">
+										<span class="pull-right" zeros="2" value="{{item.areas}}" />
+									</div>		
+									<div class="col-md-9" style="padding-left: 5px !important;">
+										<span class="info-box-text">Dispositivos:</span>
+									</div>
+									<div class="col-md-3">
+										<span class="pull-right" zeros="2" value="{{item.devices}}" />
+									</div>
+								</div>
+							</div>
+							</a>
+						</div>
+						<!-- Selected Companies Fim -->
+					</div>	
+
+					<!-- Selected Units -->
+					<div class="row" data-ng-show="selectedUnits">							
+						<div class="col-md-4 col-sm-8" data-ng-repeat="item in companyComplete">
+							<div class="box box-default box-solid">
+								<div class="box-header with-border">
+									<h3 class="box-title"><strong><i class="fa fa-building"></i>&nbsp;Unidade:</strong>&nbsp;{{item.name}}</h3>
+									<div class="box-tools pull-right">
+										<a href="#" class="btn btn-box-tool"><i class="fa fa-square-o" data-ng-click="selectUnit($index);" title="Expandir Unidade"></i></a>
+									</div>
+								</div>
+								<div class="box-body">										
+									<row>
+										<div class="col-md-2" style="padding-left: 5px !important;">
+											<strong >Endere&ccedil;o:</strong>
+										</div>
+										<div class="col-md-10">
+											<span class=" pull-right">&nbsp;{{item.address}}</span>
+										</div>										
+									</row>
+									<row>
+										<div class="col-md-2" style="padding-left: 5px !important;">
+											<strong >Cidade:</strong>
+										</div>
+										<div class="col-md-10">
+											<span class=" pull-right">&nbsp;{{item.city}}</span>
+										</div>										
+									</row>
+									<row>
+										<div class="col-md-2" style="padding-left: 5px !important;">
+											<strong>Estado:</strong>
+										</div>
+										<div class="col-md-10">
+											<span class="pull-right">&nbsp;{{item.state}}</span>
+										</div>										
+									</row>
+									<row>
+										<div class="col-md-2" style="padding-left: 5px !important;">
+											<strong>Areas:</strong>
+										</div>
+										<div class="col-md-10">
+											<span class="badge bg-black pull-right">&nbsp;{{item.areasDto.length}}</span>
+										</div>										
+									</row>									
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="box-body">
-						
-						<div id="resumo" class="row" style="margin-left: -30px; margin-right: -30px;">
-							<div class="col-lg-12">
-								<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-									<a href="#" class="menuDisable" my-link="false">
-										<div class="card red summary-inline">
-											<div class="card-body" style="padding-bottom: 8px !important">
-												<div style="float:left">
-													<i class="icon fa fa-male fa-4x"></i>
-													<br />
-													<span>{{truncar(coordenadorTi.nome, 30);}}</span>
+					<!-- Selected Units Fim -->
+					
+					<!-- Selected Unit e Areas -->
+					<div class="row">
+						<div class="col-md-12" data-ng-show="selectedUnit">
+							<div class="box box-default box-solid">
+								<div class="box-header with-border">
+									<h3 class="box-title"><strong><i class="fa fa-building"></i>&nbsp;{{selectedUnit.name}} / &Aacute;reas:</strong></h3>
+									<div class="box-tools pull-right">
+										<a href="#" class="btn btn-box-tool"><i class="fa fa-times" data-ng-click="closeSelectedUnit();" title="Fechar Unidades"></i></a>
+									</div>
+								</div>
+								
+								<div class="box-body">									
+									<div class="row" data-ng-show="selectedAreas">							
+										<div class="col-md-4 col-sm-8" data-ng-repeat="item in selectedUnit.areasDto">
+											<div class="box box-default box-solid">
+												<div class="box-header with-border">
+													<h3 class="box-title"><strong><i class="fa fa-map-o"></i>&nbsp;&Aacute;rea:</strong>&nbsp;{{item.name}}</h3>
+													<div class="box-tools pull-right">
+														<a href="#" class="btn btn-box-tool"><i class="fa fa-square-o" title="Expandir Area" data-ng-click="selectArea($index);"></i></a>
+													</div>
 												</div>
-												<div class="content">
-													<div class="title">{{coordenacao.funcionarios}}</div>
-													<div class="sub-title">Funcionários</div>
+												<div class="box-body">																			
+													<row>
+														<div class="col-md-4" style="padding-left: 5px !important;">
+															<strong>Dispositivos:</strong>
+														</div>
+														<div class="col-md-8">
+															<span class="badge bg-black pull-right">&nbsp;{{item.companyDevicesDto.length}}</span>
+														</div>										
+													</row>									
 												</div>
-												<div class="clear-both"></div>
 											</div>
 										</div>
-									</a>
-								</div>							
+									</div>
+									<div class="row">
+										<div class="col-md-12" data-ng-show="selectedArea">
+											<div class="box box-default box-solid">
+												<div class="box-header with-border">
+													<h3 class="box-title"><strong><i class="fa fa-building"></i>&nbsp;{{selectedArea.name}} / Dispositivos:</strong></h3>
+													<div class="box-tools pull-right">
+														<a href="#" class="btn btn-box-tool"><i class="fa fa-times" data-ng-click="closeSelectedArea();" title="Fechar Area"></i></a>
+													</div>
+												</div>
+												<div class="box-body">
+												</div>
+
+
+
+											</div>	
+										</div>
+									</div>
+									
+								</div>									
 							</div>
-						</div>												
-														                                                       
-					</div>
-					
-					<div class="box-footer">						                                                                
-						<button type="button" data-ng-click="" class="btn btn-primary pull-right">Novo</button>
-					</div>				
-						                                                
+						</div>
+					</div>					
+					<!-- Selected Unit e Areas Fim -->	
 				</div>
-			</div>	
-		</div>				
-				
-	</div>
+<!-- 				
+				<div class="box-footer">						                                                                
+					<button type="button" data-ng-click="" class="btn btn-primary pull-right">Novo</button>
+				</div>				 -->
+																	
+			</div>
+		</div>
+	</div>				
+			
+</div>

@@ -30,6 +30,13 @@ public class DashCompaniesPositionController {
 			return service.listByCompanyId(user.getCompany().getUid());
 	}
 	
+	@RequestMapping(value = "/security/api/view/allDashCompaniesPositionByCompanyId/{companyId}", method = RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> allDashCompaniesPositionByCompanyId(@PathVariable Long companyId) {
+		
+		return service.listByCompanyId(companyId );
+	}
+	
 	@RequestMapping(value = "/security/api/view/offline/{periodo}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listOffline(@PathVariable Integer periodo) {

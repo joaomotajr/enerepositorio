@@ -54,6 +54,19 @@ public class CompanyController {
 		
 	}	
 	
+	@RequestMapping(value = "/security/api/company/allSumaryView", method = RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> listAllSumaryView() {
+		
+		User user = SigninUtils.principal();
+		
+		if(user.getCompany()  == null)		
+			return service.listAllSumaryView();
+		else
+			return service.listOneSumaryView(user.getCompany().getUid());		
+		
+	}
+	
 	@RequestMapping(value="/security/api/company/obtemPorId/{uid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listById(@PathVariable Long uid) {

@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDto;
 import br.com.eneeyes.main.model.Company;
+import br.com.eneeyes.main.model.views.CompanySumaryView;
 import br.com.eneeyes.main.model.views.CompanyView;
 import br.com.eneeyes.main.repository.CompanyRepository;
+import br.com.eneeyes.main.repository.views.CompanySumaryViewRepository;
 import br.com.eneeyes.main.repository.views.CompanyViewRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -22,7 +24,10 @@ public class CompanyService implements IService<CompanyDto> {
 	private CompanyRepository repository;
 	
 	@Autowired
-	private CompanyViewRepository viewRepository;
+	private CompanyViewRepository companyViewRepository;
+	
+	@Autowired
+	private CompanySumaryViewRepository companySumaryViewRepository;
 	
 	public BasicResult<?> save(CompanyDto dto) {
 		
@@ -96,7 +101,33 @@ public class CompanyService implements IService<CompanyDto> {
 		Result<CompanyView> result = new Result<CompanyView>(); 	
 		
 		try {
-			List<CompanyView> lista = viewRepository.findAll();
+			List<CompanyView> lista = companyViewRepository.findAll();
+			if (lista != null) {
+								
+				result.setList(lista);
+				
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhuma Compania.");
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;	
+
+	}
+	
+	public Result<?> listAllSumaryView() {
+		
+		Result<CompanySumaryView> result = new Result<CompanySumaryView>(); 	
+		
+		try {
+			List<CompanySumaryView> lista = companySumaryViewRepository.findAll();
 			if (lista != null) {
 								
 				result.setList(lista);
@@ -149,11 +180,40 @@ public class CompanyService implements IService<CompanyDto> {
 		Result<CompanyView> result = new Result<CompanyView>();
 		
 		try {
-			CompanyView item = viewRepository.findOne(uid);
+			CompanyView item = companyViewRepository.findOne(uid);
 
 			if (item != null) {
 				
 				List<CompanyView> companiesView = new ArrayList<CompanyView>();													
+				companiesView.add(item);
+				
+				result.setList(companiesView);
+				
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhuma Compania.");
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;	
+	}
+	
+	public Result<?> listOneSumaryView(Long uid) {
+		
+		Result<CompanySumaryView> result = new Result<CompanySumaryView>();
+		
+		try {
+			CompanySumaryView item = companySumaryViewRepository.findOne(uid);
+
+			if (item != null) {
+				
+				List<CompanySumaryView> companiesView = new ArrayList<CompanySumaryView>();													
 				companiesView.add(item);
 				
 				result.setList(companiesView);

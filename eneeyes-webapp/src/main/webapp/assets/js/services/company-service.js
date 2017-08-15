@@ -11,6 +11,9 @@ app.factory('CompanyService', function($resource){
         listAllView : $resource('/security/api/company/allView',{},{
         	company : {method : 'GET'}
         }),
+        listAllSumaryView : $resource('/security/api/company/allSumaryView',{},{
+        	company : {method : 'GET'}
+        }),
         listOne : $resource('/security/api/company/obtemPorId/:id', {id: '@id'},{
         	company : {method : 'GET'}
         }),

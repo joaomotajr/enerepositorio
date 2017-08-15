@@ -40,19 +40,21 @@ public class UnitController {
 		return service.listAll();
 	}
 		
-	@RequestMapping(value="/security/api/unit/obtemPorId/{uid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/unit/getPorId/{uid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listById(@PathVariable Long uid) {
 		
 		return service.findOne(uid);		
 	}
 	
-	@RequestMapping(value="/security/api/unit/setparent/{id}/{parentId}" , method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/unit/getByCompanyId/{companyId}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public int setaParent(@PathVariable Long id, @PathVariable Long parentId) {
+	public BasicResult<?> listByCompanyId(@PathVariable Long companyId) {
 		
-		return service.setParent(id, parentId);
+		return service.listByCompany(companyId);
 	}
+	
+	
 	
 
 }

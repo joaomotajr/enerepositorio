@@ -8,6 +8,9 @@ app.factory('ViewService', function($resource){
         listAllDashCompaniesPosition : $resource('/security/api/view/allDashCompaniesPosition',{},{
         	view : {method : 'GET'}
         }),
+        listOneDashCompaniesPositionByCompanyId : $resource('/security/api/view/allDashCompaniesPositionByCompanyId/:companyId/',{ companyId: '@companyId'},{
+        	view : {method : 'GET'}
+        }),
         listAllDashCompaniesAlarm : $resource('/security/api/view/allDashCompaniesAlarm',{},{
         	view : {method : 'GET'}
         }),

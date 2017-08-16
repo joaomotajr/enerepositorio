@@ -1,7 +1,9 @@
 app.factory('ViewService', function($resource){    
     
     return {
-    	        
+        listAreaCompanyDetectorsAlarms : $resource('/security/api/view/findAreaCompanyDetectorAlarmViewByAreaId/:areaId/',{ areaId: '@areaId'},{
+        	view : {method : 'GET'}
+        }),    	        
         listAllDashCompany : $resource('/security/api/view/allDashCompany',{},{
         	view : {method : 'GET'}
         }),

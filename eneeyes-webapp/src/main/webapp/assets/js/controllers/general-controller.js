@@ -1,5 +1,5 @@
 
-app.controller('generalController', function ($scope, $timeout, $filter, CompanyService, UnitService) {
+app.controller('generalController', function ($scope, $timeout, $filter, CompanyService, UnitService, ViewService) {
 
 	$scope.selectCompany = function(index) {
 		
@@ -35,12 +35,84 @@ app.controller('generalController', function ($scope, $timeout, $filter, Company
 
 	$scope.selectArea = function(index) {
 		$scope.selectedAreas = undefined;
-		$scope.selectedArea = $scope.selectedUnit.areasDto[index];	
+		$scope.getDetectors( $scope.selectedUnit.areasDto[index].uid);
 	}
 
 	$scope.closeSelectedArea = function() {		
 		$scope.selectedArea = undefined; 
 		$scope.selectedAreas = true;
+	}
+
+	$scope.getDetectors = function(areaId) {
+
+		$scope.resultDetectors = new ViewService.listAreaCompanyDetectorsAlarms();		 
+		$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), areaId : areaId}, function(){						
+			$scope.selectedArea = $scope.resultDetectors.list;
+
+			$scope.selectedArea.forEach(
+					 function(e) {						
+						e.dataSource = $scope.getGaugeInfo(e);
+					}			
+			);
+		});
+	}	
+
+	$scope.getGaugeInfo = function(sensor) {
+
+		var red =    sensor.alarmOn == null || sensor.alarmOn == false ? 0 : sensor.alarm3;
+		var yellow = sensor.alarmOn == null || sensor.alarmOn == false ? 0 : sensor.alarm2;
+		var orange = sensor.alarmOn == null || sensor.alarmOn == false ? 0 : sensor.alarm1;
+
+		gaugeInfo = {
+			chart: {
+				caption: sensor.sensorName,
+				subcaption: "",
+				lowerLimit: sensor.rangeMin,
+				upperLimit: sensor.rangeMax,
+				editMode: "1",
+				showValue: "1",
+				valueBelowPivot: "1",
+				tickValueDistance: "10",
+				gaugeFillMix: "{dark-30},{light-60},{dark-10}",
+				gaugeFillRatio: "15",
+				theme: "fint",		
+				gaugeOuterRadius: "180",
+	            gaugeInnerRadius: "140",		
+				valueFontSize: "14"
+			},
+			colorRange: {
+				color: [
+					{
+						minValue: sensor.rangeMin,
+						maxValue: orange,
+						code: "##6baa01"
+					},
+					{
+						minValue: orange,
+						maxValue: yellow,
+						code: "#D8D8D8"
+					}, {
+						minValue: yellow,
+						maxValue: red,
+						code: "#f8bd19"
+					}, {
+						minValue: red,
+						maxValue: sensor.rangeMax,
+						code: "#e44a00"
+					}]
+			},
+			dials: {
+					dial: [{
+					id: "crntYr",
+					value: "0",
+					showValue: "1",
+					tooltext: "Status : $value",
+					rearExtension: "5"
+				}]
+			}
+		};
+
+		return gaugeInfo;
 	}
 		
 	$scope.getCompaniesSumary();	

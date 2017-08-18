@@ -1,18 +1,5 @@
 
-app.controller('companiesController', function ($scope, $timeout, $interval, $filter, CompanyService, UnitService) {
-
-		
-	$scope.showDanger = function(msg) {		
-		angular.element('body').removeClass('loading');
-		 $scope.$root.msgDanger = msg ;
-        $('#resultDanger').hide().show('slow').delay(1000).hide('slow');	
-	}
-	
-	$scope.showInfo = function(msg) {
-		angular.element('body').removeClass('loading');            
-        $scope.$root.msgInfo = msg;
-        $('#resultInfo').hide().show('slow').delay(1000).hide('slow');
-	}
+app.controller('companiesController', function ($scope, $timeout, $interval, $filter, $rootScope, CompanyService, UnitService) {
 		
 	$scope.deleteCompany = function() {
 		
@@ -25,7 +12,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
             $scope.getCompanys();   
             
             $timeout(function () { $('#selCompany').select2();}, 200);                       
-            $scope.showDanger($scope.deletar.message);
+			$rootScope.showGeneralMessage($scope.deletar.message, 'DANGER');
 			 	         
 			 	                  	         	
         }, function(data) {        	
@@ -49,8 +36,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
             $scope.getCompanys();   
             
             $timeout(function () { $('#selCompany').select2();}, 200);                       
-            $scope.showInfo($scope.inclusaoCompany.message) ;
-            
+			$rootScope.showGeneralMessage($scope.inclusaoCompany.message, 'SUCCESS');	           
                                              	
          });		 
 	 }	
@@ -154,15 +140,8 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 					    						    
 					    	$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
 					    	$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
-					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;
-				    		 
-				    		if (node.companyDevice.deviceType == "DETECTOR") {
-				    			
-				    			$timeout(function () { $scope.LoadAjaxContentCompany('companyDetectors.html'); }, 50);				    			
-				    		}
-				    		else if (node.companyDevice.deviceType == "PLC" || node.companyDevice.deviceType == "CONTROLLER") 
-				    			$scope.LoadAjaxContentCompany('companyPlcs.html');
-				    						    		
+					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;				    			
+				    		$timeout(function () { $scope.LoadAjaxContentCompany('companyDetectors.html'); }, 50);				    						    		
 				    	}
 				    }
 			     });
@@ -176,7 +155,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
         
         var selectableNodes = findSelectableNodes();        	
 
-        $('#input-select-node').on('keyup', function (e) {
+	$('#input-select-node').on('keyup', function (e) {
         	selectableNodes = findSelectableNodes();
         	$('.select-node').prop('disabled', !(selectableNodes.length >= 1));
         });
@@ -198,7 +177,8 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 	   			$scope.$root.selectedCompany.unitsDto[i].name + itemBaseLabel + 
 	   			$scope.$root.selectedCompany.unitsDto[i].areasDto.length + "" +  "</small>";	   		
 			
-	   		itens[0].nodes.push({text: unidade, nodes: [], type : 1, index: i , unit : $scope.$root.selectedCompany.unitsDto[i]});
+			   	itens[0].nodes.push({text: unidade, nodes: [], type : 1, index: i});
+				// itens[0].nodes.push({text: unidade, nodes: [], type : 1, index: i , unit : $scope.$root.selectedCompany.unitsDto[i]});
 	
 		   for (var j = 0; j < $scope.$root.selectedCompany.unitsDto[i].areasDto.length; j++) {			  			   
 			
@@ -206,7 +186,8 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].name + itemBaseLabel + 
 			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length + "" + "</small>";
 			   
-			   itens[0].nodes[i].nodes.push({text: area, nodes: [], type : 2, index: j, unitIndex: i , area: $scope.$root.selectedCompany.unitsDto[i].areasDto[j] });
+			   	itens[0].nodes[i].nodes.push({text: area, nodes: [], type : 2, index: j, unitIndex: i});
+				// itens[0].nodes[i].nodes.push({text: area, nodes: [], type : 2, index: j, unitIndex: i , area: $scope.$root.selectedCompany.unitsDto[i].areasDto[j] });
 	
 			   for (var k = 0; k < $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length; k++) {
 				   
@@ -222,7 +203,8 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 					   var device = "<i class='fa fa-keyboard-o' style='font-size:1.2em;'></i> " + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
 				   }
 				   
-				   itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : 3, index: k, areaIndex: j, unitIndex: i, companyDevice : $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k] });
+					itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : 3, index: k, areaIndex: j, unitIndex: i });
+					// itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : 3, index: k, areaIndex: j, unitIndex: i, companyDevice : $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k] });
 			   }
 		   }
 		}		 

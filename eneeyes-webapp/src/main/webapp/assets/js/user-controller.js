@@ -81,7 +81,7 @@ app.controller('UserController', function ($scope, $timeout, $filter, UserServic
         		$scope.user.cpf = $scope.user.cpf.replace(/[\.-]/g, '');
         	}
         	
-    		$scope.user.roles[0] = $scope.selectedRole;
+			$scope.user.roles[0] = $scope.selectedRole;
     		
         	$scope.update = new UserService.update($scope.user);
             $scope.update.$user({_csrf : angular.element('#_csrf').val()}, function(){

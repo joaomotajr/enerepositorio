@@ -252,8 +252,7 @@ public class PositionService implements IService<PositionDto> {
 		List<AlarmType> withoutOrOffAlarms = new ArrayList<AlarmType>();
 		
 		withoutOrOffAlarms.add(AlarmType.WITHOUT);
-		//withoutOrOffAlarms.add(AlarmType.OFF);
-		
+				
 		return repository.findByLastUpdateLessThanAndAlarmTypeNotIn(minutesAgo, withoutOrOffAlarms);
 	}
 }

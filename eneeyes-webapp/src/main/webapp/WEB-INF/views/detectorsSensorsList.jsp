@@ -1,6 +1,6 @@
 	<div class="col-md-12">						    	
-		<div class="box box-default collapsed-box">
-			<div class="box-header with-border"><strong>Lista de Detectores</strong>
+		<div class="box box-info collapsed-box">
+			<div class="box-header with-border"><strong>Lista de Detectores </strong> <a class="text-red" data-widget="collapse" data-ng-hide="selectedCompanyDetector"> ( Clique e Selecione um Detector Cadastrado)</a>
 				<div class="box-tools pull-right" title="Clique para Selecionar/Verificar Detector(es)">
 					<button class="btn btn-box-tool" data-widget="collapse">
 						<i class="fa fa-plus"></i>

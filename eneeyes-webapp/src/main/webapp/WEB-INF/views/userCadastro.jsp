@@ -41,7 +41,7 @@
 										<label for="radio5"> Empresa</label>
 									</div>
 									<div data-ng-show="isFrom == 'MASTER'" class="radio3 radio-check radio-warning radio-inline">
-										<input type="radio" id="radio6" value="2" data-ng-model="userTipo">
+										<input type="radio" id="radio6" value="2" data-ng-model="userTipo" data-ng-click="user.companyDto=null;">
 										<label for="radio6">Central</label>
 									</div>                                                                        
 								</div>									

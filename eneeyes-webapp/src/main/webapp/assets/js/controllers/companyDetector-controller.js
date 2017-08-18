@@ -60,7 +60,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			//Se for um Company Detector novo ou nao associado a um Detector
 			if($scope.selectedCompanyDetector.uid == undefined) {
 				$scope.selectedCompanyDetector = $scope.inclusaoCompanyDetector.t;				
-				$scope.getCompanyDetectorAlarms();
+				//$scope.getCompanyDetectorAlarms();
+
+				$scope.getOneCompany($scope.companyUid);
 			}		
 			
 			angular.element('body').removeClass('loading');			
@@ -146,11 +148,11 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		
 	$scope.deviceTypes = 
 		[
-		 	{ name : 'OUTROS', uid : 0 },
+		 	// { name : 'OUTROS', uid : 0 },
 		 	{ name : 'DETECTOR', uid :  1 },
-		 	{ name : 'PLC', uid : 2 },
-		 	{ name : 'CONTROLADORA', uid : 3 },
-		 	{ name : 'ALARME', uid : 4 } 			  	
+		 	// { name : 'PLC', uid : 2 },
+		 	// { name : 'CONTROLADORA', uid : 3 },
+		 	// { name : 'ALARME', uid : 4 } 			  	
 		];	
 
 	 $scope.initializeDetector =  function()  {
@@ -476,7 +478,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	    
 	    if ($scope.changeGraphic) {
 		    var options = {
-		          title: "Dados do Sensor na Última Hora.",
+		          title: "Dados do Sensor na ï¿½ltima Hora.",
 		          legend: {position: 'none'},
 		          'lineWidth': 0.75,
 		    	  width: 850,
@@ -501,10 +503,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	                  },
 		    		  ticks: [ 
 		    		           {v:0, f: 'Range Minimo: 0' }, 
-		    		           {v: orange, f: 'Deteção: ' + orange}, 
+		    		           {v: orange, f: 'Deteï¿½ï¿½o: ' + orange}, 
 		    		           {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		           {v: red, f: 'Evacuação: ' + red}, 
-		    		           {v: sensor.rangeMax, f: 'Range Máximo: ' + sensor.rangeMax} 
+		    		           {v: red, f: 'Evacuaï¿½ï¿½o: ' + red}, 
+		    		           {v: sensor.rangeMax, f: 'Range Mï¿½ximo: ' + sensor.rangeMax} 
 		    		        ]
 		    	  },
 		    	  //curveType: 'function',
@@ -513,7 +515,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	    }
 		else {
 			var options = {
-		          title: "Dados do Sensor na Última Hora.",
+		          title: "Dados do Sensor na ï¿½ltima Hora.",
 		          legend: {position: 'none'},
 		          'lineWidth': 0.75,
 		    	  width: 850,

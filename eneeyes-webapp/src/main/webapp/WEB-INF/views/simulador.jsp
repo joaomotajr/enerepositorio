@@ -23,6 +23,7 @@
 </style>
 
 <div data-ng-controller="simuladorController">
+		<br>
 		<div class="row">						                                                    
 			<div class="col-md-12">                                                        
 				<div class="box box-primary">

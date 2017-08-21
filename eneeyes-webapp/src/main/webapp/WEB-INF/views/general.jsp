@@ -5,9 +5,9 @@
 		background: #d2d6de !important;
 		background-color: #d2d6de !important;
 	}
-
 </style>
-<div data-ng-controller="generalController" >
+
+<div data-ng-controller="generalController">
 												
 	<div class="row">				                                                    
 		<div class="col-md-12">                                                        
@@ -33,27 +33,27 @@
 							<a href="#" style="text-decoration: none !important; color: black !important;" data-ng-click="selectCompany($index)">
 							<div class="info-box">
 								<span class="info-box-icon bg-navy" 
-									ng-class="{'selectedSquare': $index == selectedCompany.selected}"
-									style="padding: 1px; text-transform: uppercase; font-size: 65px; font-weight: 700">{{item.companyName.substring(0,1)}}</i></span>
+									data-ng-class="{'selectedSquare': $index == selectedCompany.selected}"
+									style="padding: 1px; text-transform: uppercase; font-size: 65px; font-weight: 700">{{item.companyName.substring(0,1)}}</span>
 								<div class="info-box-content">										
-									<span class="info-box-number" truncate="12" value="{{item.companyName}}" />
+									<span class="info-box-number" data-truncate="12" data-value="{{item.companyName}}"></span>
 									<div class="col-md-9" style="padding-left: 5px !important;">
 										<span class="info-box-text">Unidades:</span>
 									</div>
 									<div class="col-md-3">
-										<span class="pull-right" zeros="2" value="{{item.units}}" />
+										<span class="pull-right" data-zeros="2" data-value="{{item.units}}"></span>
 									</div>
 									<div class="col-md-9" style="padding-left: 5px !important;">
 										<span class="info-box-text">Areas:</span>
 									</div>
 									<div class="col-md-3">
-										<span class="pull-right" zeros="2" value="{{item.areas}}" />
+										<span class="pull-right" data-zeros="2" data-value="{{item.areas}}"></span>
 									</div>		
 									<div class="col-md-9" style="padding-left: 5px !important;">
 										<span class="info-box-text">Dispositivos:</span>
 									</div>
 									<div class="col-md-3">
-										<span class="pull-right" zeros="2" value="{{item.devices}}" />
+										<span class="pull-right" data-zeros="2" data-value="{{item.devices}}"></span>
 									</div>
 								</div>
 							</div>
@@ -73,38 +73,38 @@
 									</div>
 								</div>
 								<div class="box-body">										
-									<row>
+									<div class="row">
 										<div class="col-md-2" style="padding-left: 5px !important;">
 											<strong >Endere&ccedil;o:</strong>
 										</div>
 										<div class="col-md-10">
 											<span class=" pull-right">&nbsp;{{item.address}}</span>
 										</div>										
-									</row>
-									<row>
+									</div>
+									<div class="row">
 										<div class="col-md-2" style="padding-left: 5px !important;">
 											<strong >Cidade:</strong>
 										</div>
 										<div class="col-md-10">
 											<span class=" pull-right">&nbsp;{{item.city}}</span>
 										</div>										
-									</row>
-									<row>
+									</div>
+									<div class="row">
 										<div class="col-md-2" style="padding-left: 5px !important;">
 											<strong>Estado:</strong>
 										</div>
 										<div class="col-md-10">
 											<span class="pull-right">&nbsp;{{item.state}}</span>
 										</div>										
-									</row>
-									<row>
+									</div>
+									<div class="row">
 										<div class="col-md-2" style="padding-left: 5px !important;">
 											<strong>Areas:</strong>
 										</div>
 										<div class="col-md-10">
 											<span class="badge bg-black pull-right">&nbsp;{{item.areasDto.length}}</span>
 										</div>										
-									</row>									
+									</div>									
 								</div>
 							</div>
 						</div>
@@ -133,14 +133,14 @@
 													</div>
 												</div>
 												<div class="box-body">																			
-													<row>
+													<div class="row">
 														<div class="col-md-4" style="padding-left: 5px !important;">
 															<strong>Dispositivos:</strong>
 														</div>
 														<div class="col-md-8">
 															<span class="badge bg-black pull-right">&nbsp;{{item.companyDevicesDto.length}}</span>
 														</div>										
-													</row>									
+													</div>									
 												</div>
 											</div>
 										</div>
@@ -158,7 +158,7 @@
 												</div>
 
 												<div class="row">			       		 
-													<div ng-repeat="item in selectedArea">				              					            						              	
+													<div data-ng-repeat="item in selectedArea">				              					            						              	
 														
 														<div class="col-md-6">
 															<div class="panel panel-primary">								                
@@ -188,7 +188,7 @@
 																				<h4 class="description-header"><i class="fa fa-bolt"></i> {{item.sensorName}}</h4>
 																				<span class="description-text">Range: Min|Man: {{item.rangeMin}} | {{item.rangeMax}} </span>
 																				<br>
-																				G&aacute;s: <strong class"text-navy">{{item.gasName}}</strong>																
+																				G&aacute;s: <strong class="text-navy">{{item.gasName}}</strong>																
 																				<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
 																				<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}</span>
 																			</div>									                    					                    
@@ -210,10 +210,6 @@
 					</div>					
 					<!-- Selected Unit e Areas Fim -->	
 				</div>
-<!-- 				
-				<div class="box-footer">						                                                                
-					<button type="button" data-ng-click="" class="btn btn-primary pull-right">Novo</button>
-				</div>				 -->
 																	
 			</div>
 		</div>

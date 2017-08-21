@@ -89,7 +89,8 @@
 					<div id="treeview-company" class="treeview" style="font-size:14px;line-height:0.85"></div>				
 				</div>				
 				
-				<div id="content" data-bind-unsafe-html="ajaxcontentCompany"></div>																	    
+				<div id="content" data-bind-unsafe-html="ajaxcontentCompany"></div>		
+			</div>																    
 		</div>
 	</div>
       

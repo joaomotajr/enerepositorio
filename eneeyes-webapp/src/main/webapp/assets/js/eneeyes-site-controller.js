@@ -1,4 +1,4 @@
-app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $q, Signin, $sce, UserService) {
+app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $window, $q, Signin, $sce, UserService) {
 
 	$scope.$root.recolheLogo = true;
 	
@@ -11,6 +11,12 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	
 	$scope.showLogo = function(){
 		$scope.$root.recolheLogo = !$scope.$root.recolheLogo; 
+	}
+
+	$scope.LoadNewWindow = function(title){
+
+		$window.open("indexNewWindows.html", title, 'toolbar=0,scrollbars=1,location=0,status=0,menubar=0,resizable=1,width=1000, height=350,left=100,top=100');
+
 	}
 	
 	$scope.LoadAjaxContentCompany = function(url){

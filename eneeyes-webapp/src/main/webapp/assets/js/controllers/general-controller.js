@@ -59,60 +59,70 @@ app.controller('generalController', function ($scope, $timeout, $filter, Company
 
 	$scope.getGaugeInfo = function(sensor) {
 
-		var red =    sensor.alarmOn == null || sensor.alarmOn == false ? 0 : sensor.alarm3;
-		var yellow = sensor.alarmOn == null || sensor.alarmOn == false ? 0 : sensor.alarm2;
-		var orange = sensor.alarmOn == null || sensor.alarmOn == false ? 0 : sensor.alarm1;
+		var red =    sensor.alarmOn == null ? 0 : sensor.alarm3;
+		var yellow = sensor.alarmOn == null ? 0 : sensor.alarm2;
+		var orange = sensor.alarmOn == null ? 0 : sensor.alarm1;
 
-		gaugeInfo = {
-			chart: {
-				caption: sensor.sensorName,
-				subcaption: "",
-				lowerLimit: sensor.rangeMin,
-				upperLimit: sensor.rangeMax,
-				editMode: "1",
-				showValue: "1",
-				valueBelowPivot: "1",
-				tickValueDistance: "10",
-				gaugeFillMix: "{dark-30},{light-60},{dark-10}",
-				gaugeFillRatio: "15",
-				theme: "fint",		
-				gaugeOuterRadius: "180",
-	            gaugeInnerRadius: "140",		
-				valueFontSize: "14"
-			},
-			colorRange: {
-				color: [
-					{
-						minValue: sensor.rangeMin,
-						maxValue: orange,
-						code: "##6baa01"
-					},
-					{
-						minValue: orange,
-						maxValue: yellow,
-						code: "#D8D8D8"
-					}, {
-						minValue: yellow,
-						maxValue: red,
-						code: "#f8bd19"
-					}, {
-						minValue: red,
-						maxValue: sensor.rangeMax,
-						code: "#e44a00"
-					}]
-			},
-			dials: {
-					dial: [{
-					id: "crntYr",
-					value: "0",
-					showValue: "1",
-					tooltext: "Status : $value",
-					rearExtension: "5"
-				}]
-			}
+		properties =  {
+			caption: sensor.sensorName,
+			subcaption: "",
+			lowerLimit: sensor.rangeMin,
+			upperLimit: sensor.rangeMax,
+			editMode: "1",
+			showValue: "1",
+			valueBelowPivot: "1",
+			tickValueDistance: "5",
+			gaugeFillMix: "{dark-30},{light-60},{dark-10}",
+			gaugeFillRatio: "15",
+			theme: "fint",	
+			gaugeouterradius: "120",
+			gaugeinnerradius: "70%",					
+			valueFontSize: "14"
 		};
 
-		return gaugeInfo;
+		colors = {				
+			color: [
+			{
+				minValue: sensor.rangeMin,
+				maxValue: orange,
+				code: "##6baa01"
+			},
+			{
+				minValue: orange,
+				maxValue: yellow,
+				code: "#D8D8D8"
+			}, {
+				minValue: yellow,
+				maxValue: red,
+				code: "#f8bd19"
+			}, {
+				minValue: red,
+				maxValue: sensor.rangeMax,
+				code: "#e44a00"
+			}]		
+		}
+
+		values = {		  		  			
+			dial: [{
+				id: "crntYr",
+				value: "0",
+				showValue: "1",
+				tooltext: "Status : $value",
+				rearExtension: "5"
+			}]			
+		}
+
+		dataSource = {
+			chart: null,
+			colorRange: null,
+			dials: null
+		}
+
+		dataSource.chart = properties;
+		dataSource.colorRange = colors;
+		dataSource.dials = values;
+
+		return dataSource;
 	}
 		
 	$scope.getCompaniesSumary();	

@@ -157,22 +157,25 @@
 												<div class="box-body">
 												</div>
 
-												<div class="row">			       		 
+												<div class="row" style="margin-right: 5px !important; margin-left: 5px !important;">			       		 
 													<div data-ng-repeat="item in selectedArea">				              					            						              	
 														
-														<div class="col-md-6">
+														<div class="col-md-4">
 															<div class="panel panel-primary">								                
 																<div class="panel-heading">
-																	<h2 class="panel-title" style="text-align:center;">{{item.companyDetectorName}}</h2>							
+																	<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong> {{item.companyDetectorName}}</h2>							
 																</div>											   					               	
 																<div class="panel-body">							            					                 										                	
+																	<label class="pull-right text-muted" data-ng-if="item.alarmOn==null"><i class="fa fa-bullhorn"></i> Sem Alarme</label>
+																	<label class="pull-right text-black" title="{{item.alarmName}}" data-ng-if="item.alarmOn==false"><i class="fa fa-bullhorn"></i> Alarm Off</label>
+																	<label class="pull-right text-blue" title="{{item.alarmName}}" data-ng-if="item.alarmOn==true"><i class="fa fa-bullhorn"></i> Alarm On</label>
+
 																	<div class="row">								                	
 																		<div style=" width: 100%; display: flex; justify-content: center; text-align: center;">
-																			<!-- <div id="{{'sensor_' + item.$$hashKey}}" style="height:370px;"></div> -->
-																			
+																																						
 																			<div data-fusioncharts							
-																				data-width="400"
-																				data-height= "300"						    						    						    						    
+																				data-width="300"
+																				data-height= "200"						    						    						    						    
 																				data-type="angulargauge"						    
 																				data-theme= "fint"
 																				data-datasource="{{item.dataSource}}">
@@ -183,17 +186,18 @@
 																		
 																	</div>								                				                				                
 																	<div class="row">							                    				                    				                    
-																		<div >									                	
-																			<div class="description-block">																
-																				<h4 class="description-header"><i class="fa fa-bolt"></i> {{item.sensorName}}</h4>
-																				<span class="description-text">Range: Min|Man: {{item.rangeMin}} | {{item.rangeMax}} </span>
-																				<br>
-																				G&aacute;s: <strong class="text-navy">{{item.gasName}}</strong>																
-																				<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
-																				<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}</span>
-																			</div>									                    					                    
-																		</div>						                    					                    					                					                  			                  
-																	</div>					                
+																	
+																		<div class="description-block">																
+																			<h4 class="description-header"><i class="fa fa-bolt"></i> {{item.sensorName}}</h4>
+																			<span class="description-text">Range: Min|Man: {{item.rangeMin}} | {{item.rangeMax}} </span>
+																			<br>
+																			G&aacute;s: <strong class="text-navy">{{item.gasName}}</strong>																
+																			<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
+																			<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}</span>
+																		</div>									                    					                    
+																		
+																	</div>	
+
 																</div>
 															</div>
 														</div>

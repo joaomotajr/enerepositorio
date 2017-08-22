@@ -1,10 +1,12 @@
 package br.com.eneeyes.main.repository.singleton;
 
-import javax.enterprise.context.ApplicationScoped;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import br.com.eneeyes.main.model.register.Parameter;
 
-@ApplicationScoped
+@Component
+@Scope("singleton")
 public class ParameterSingletonRepository  {
 	
 	static Parameter parameter;

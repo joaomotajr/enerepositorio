@@ -3,8 +3,7 @@ package br.com.eneeyes.archetype.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.dto.RoleDto;
@@ -18,7 +17,7 @@ import br.com.eneeyes.main.result.Result;
 	@Service
 	public class RoleService {
 	
-	@Inject
+	@Autowired
 	private RoleRepository repository;
 				
 	public BasicResult<?> listAll()

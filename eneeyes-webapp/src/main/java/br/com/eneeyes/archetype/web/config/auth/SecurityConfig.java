@@ -20,17 +20,15 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import br.com.eneeyes.archetype.utils.CsrfHeaderFilter;
 import br.com.eneeyes.archetype.web.config.EnvDevelopment;
-import br.com.eneeyes.archetype.web.config.EnvDevelopmentForward;
-import br.com.eneeyes.archetype.web.config.EnvHomologation;
+import br.com.eneeyes.archetype.web.config.EnvDevelopmentPostgree;
 import br.com.eneeyes.archetype.web.config.EnvProduction;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled=true)
 @EnvDevelopment
-@EnvDevelopmentForward
-@EnvHomologation
 @EnvProduction
+@EnvDevelopmentPostgree
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired

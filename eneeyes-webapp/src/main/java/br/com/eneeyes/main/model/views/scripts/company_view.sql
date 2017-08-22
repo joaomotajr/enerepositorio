@@ -6,6 +6,8 @@
  		alarm
 ---------------------------------------------------------*/
 
+/* MYSQL */
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -19,10 +21,7 @@ VIEW `company_view` AS
     FROM
         `company`
         
-/*-----------
-	SIMPLE
-------------*/
-        
+/* POSTGRES */        
         
     CREATE     
 	VIEW company_view AS

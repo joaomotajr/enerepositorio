@@ -1,3 +1,4 @@
+/* MYSQL */
 
 CREATE 
     ALGORITHM = UNDEFINED 
@@ -34,9 +35,7 @@ VIEW `company_sumary_view` AS
         GROUP BY `c`.`UID` , `c`.`NAME` , `u`.`UID` , `u`.`NAME` , `a`.`UID` , `a`.`NAME`) `a`
     GROUP BY `a`.`UID`
     
-/*-----------
-	SIMPLE
-------------*/
+/* POSTGRES */
     
 CREATE 
 VIEW company_sumary_view AS

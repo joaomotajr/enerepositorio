@@ -1,3 +1,5 @@
+/* MYSQL */
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -32,9 +34,7 @@ VIEW `area_companydetector_alarm_view` AS
         LEFT JOIN `gas` `g` ON ((`a`.`GAS_ID` = `g`.`UID`)))
     ORDER BY `cdv`.`AREA_ID` , `cda`.`COMPANY_DETECTOR_ID`
     
-/*-----------
-	SIMPLE
-------------*/
+/* POSTGRES */
     
 CREATE 
 VIEW area_companydetector_alarm_view AS

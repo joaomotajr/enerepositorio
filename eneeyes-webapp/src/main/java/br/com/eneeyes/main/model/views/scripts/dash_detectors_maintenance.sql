@@ -1,3 +1,4 @@
+/* MYSQL */
 
 CREATE 
     ALGORITHM = UNDEFINED 
@@ -33,9 +34,7 @@ VIEW `dash_detectors_maintenance` AS
     WHERE
         (`cds`.`INSTALL_DATE` IS NOT NULL)
 
-/*-----------
-	SIMPLE
-------------*/        
+/* POSTGRES */
         
 CREATE     
 VIEW dash_detectors_maintenance AS

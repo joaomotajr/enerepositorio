@@ -2,6 +2,9 @@
  View Para retornar SMSs em Status pendentes para envio.
  Uso em Serviços de envio de sms: processSmsService 
 ---------------------------------------------------------*/
+
+/* MYSQL */
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -35,10 +38,7 @@ VIEW `queue_sms_view` AS
         ((`pa`.`SMS_STATUS` = 1)
             OR (`pa`.`SMS_STATUS` = 3))
             
-/*-----------
-	SIMPLE
-------------*/       
-            
+/* POSTGRES */ 
             
 CREATE     
 VIEW queue_sms_view AS

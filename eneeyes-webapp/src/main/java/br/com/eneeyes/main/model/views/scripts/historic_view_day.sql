@@ -6,6 +6,8 @@
  Tela: 	logHistoric 		
 ---------------------------------------------------------*/
 
+/* MYSQL */
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -23,11 +25,9 @@ SELECT
     FROM
         `historic`
     GROUP BY `historic`.`COMPANY_DETECTOR_ID` , `historic`.`SENSOR_ID` , DATE_FORMAT(`historic`.`LAST_UPDATE`, '%d/%m/%Y')
-    ORDER BY `historic`.`COMPANY_DETECTOR_ID` , DATE_FORMAT(`historic`.`LAST_UPDATE`, '%d/%m/%Y')
-    
-/*-----------
-	SIMPLE
-------------*/    
+    ORDER BY `historic`.`COMPANY_DETECTOR_ID` , DATE_FORMAT(`historic`.`LAST_UPDATE`, '%d/%m/%Y')  
+
+/* POSTGRES */  
     
 CREATE   
 VIEW historic_view_day AS

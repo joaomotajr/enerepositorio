@@ -5,6 +5,8 @@
  		simulador
 ---------------------------------------------------------*/
 
+/* MYSQL */
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -34,9 +36,7 @@ VIEW `dash_companies` AS
         LEFT JOIN `company_detector` `cds` ON ((`cd`.`UID` = `cds`.`COMPANY_DEVICE_ID`)))
     ORDER BY `c`.`NAME` , `u`.`NAME` , `a`.`NAME`
     
-/*-----------
-	SIMPLE
-------------*/       
+/* POSTGRES */        
     
 CREATE 
 VIEW dash_companies AS

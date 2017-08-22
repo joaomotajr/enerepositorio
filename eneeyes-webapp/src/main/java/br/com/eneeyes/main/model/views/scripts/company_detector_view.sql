@@ -1,3 +1,5 @@
+/* MYSQL */
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -17,10 +19,7 @@ VIEW `company_detector_view` AS
         JOIN `detector_sensors` `ds` ON ((`d`.`UID` = `ds`.`DETECTOR_ID`)))
         JOIN `sensor` `s` ON ((`ds`.`SENSOR_ID` = `s`.`UID`)))
 
-/*-----------
-	SIMPLE
-------------*/        
-        
+/* POSTGRES */        
         
 CREATE 
 VIEW company_detector_view AS

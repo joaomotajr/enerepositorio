@@ -6,6 +6,8 @@
  		monitor
 ---------------------------------------------------------*/
 
+/* MYSQL */
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -46,9 +48,7 @@ VIEW `dash_companies_alarm` AS
         (`pa`.`UID` IS NOT NULL)
     ORDER BY `pa`.`LAST_UPDATE` DESC
     
-/*-----------
-	SIMPLE
-------------*/    
+/* POSTGRES */    
     
 CREATE 
 VIEW dash_companies_alarm AS

@@ -3,6 +3,9 @@
  Possibilitando filtros e ordenações  
  Tela: 	logHistoric 		
 ---------------------------------------------------------*/
+
+/* MYSQL */
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -18,9 +21,7 @@ VIEW `historic_view` AS
         `historic`
     ORDER BY `historic`.`COMPANY_DETECTOR_ID` , `historic`.`LAST_UPDATE` DESC
     
-/*--------------------------------------------------------
-	SIMPLE
---------------------------------------------------------*/    
+/* POSTGRES */    
         
 CREATE         
 VIEW historic_view AS

@@ -4,6 +4,8 @@
  Tela: alarm.
 ---------------------------------------------------------*/
 
+/* MYSQL */
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -25,9 +27,7 @@ VIEW `alarm_companydetector_sensor_view` AS
         JOIN `sensor` `s` ON ((`cda`.`SENSOR_ID` = `s`.`UID`)))
     ORDER BY `cda`.`ALARM_ID`
 
-/*-----------
-  SIMPLE
-------------*/
+/* POSTGRES */
     
 CREATE 
 VIEW alarm_companydetector_sensor_view AS

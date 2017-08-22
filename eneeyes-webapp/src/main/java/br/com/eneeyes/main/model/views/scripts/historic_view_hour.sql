@@ -6,6 +6,8 @@
  Tela: 	logHistoric 		
 ---------------------------------------------------------*/
 
+/* MYSQL */
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -25,10 +27,7 @@ VIEW `historic_view_hour` AS
     GROUP BY `historic`.`COMPANY_DETECTOR_ID` , `historic`.`SENSOR_ID` , DATE_FORMAT(`historic`.`LAST_UPDATE`, '%d/%m/%Y') , HOUR(`historic`.`LAST_UPDATE`)
     ORDER BY `historic`.`COMPANY_DETECTOR_ID` , DATE_FORMAT(`historic`.`LAST_UPDATE`, '%d/%m/%Y') , HOUR(`historic`.`LAST_UPDATE`)
     
-/*-----------
-	SIMPLE
-------------*/
-    
+/* POSTGRES */    
     
 CREATE     
 VIEW historic_view_hour AS

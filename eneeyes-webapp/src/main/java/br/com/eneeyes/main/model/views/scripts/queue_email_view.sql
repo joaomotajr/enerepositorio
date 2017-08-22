@@ -3,6 +3,8 @@
  Uso em Serviços de envio de Emails: processEmailService 
 ---------------------------------------------------------*/
 
+/* MYSQL */
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -36,13 +38,9 @@ VIEW `queue_email_view` AS
         ((`pa`.`EMAIL_STATUS` = 1)
             OR (`pa`.`EMAIL_STATUS` = 3))
             
-/*-----------
-	SIMPLE
-------------*/
+/* POSTGRES */            
             
-            
-CREATE 
-    
+CREATE     
 VIEW queue_email_view AS
     SELECT 
         pa.UID AS UID,

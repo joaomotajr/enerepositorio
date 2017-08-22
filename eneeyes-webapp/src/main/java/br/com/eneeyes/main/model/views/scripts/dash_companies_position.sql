@@ -4,6 +4,9 @@
  Tela: 	dashboard
  		monitor
 ---------------------------------------------------------*/
+
+/* MYSQL */
+
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -38,10 +41,7 @@ VIEW `dash_companies_position` AS
         (`pos`.`UID` IS NOT NULL)
     ORDER BY `pos`.`LAST_UPDATE` DESC
 
-/*-----------
-	SIMPLE
-------------*/       
-    
+/* POSTGRES */    
     
 CREATE 
 VIEW dash_companies_position AS

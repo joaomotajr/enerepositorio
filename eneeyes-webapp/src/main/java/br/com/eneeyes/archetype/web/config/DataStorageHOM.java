@@ -21,7 +21,7 @@ public class DataStorageHOM extends DataStorage {
     public DataStorageHOM() {
         jdbcDriverClassName = "com.mysql.jdbc.Driver";
 
-        jdbcUrl = "jdbc:mysql://127.2.11.2:3306/eneeyes?autoReconnect=true";
+        jdbcUrl = "jdbc:mysql://localhost:3306/eneeyes?autoReconnect=true";
 
         jdbcUsername = "adminzHrLVvP";
 

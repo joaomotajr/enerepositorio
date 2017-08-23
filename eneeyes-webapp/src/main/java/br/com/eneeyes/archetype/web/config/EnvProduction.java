@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Profile("prd")
+@Profile("ga")
 public @interface EnvProduction {
 
 }

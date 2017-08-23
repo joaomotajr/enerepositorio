@@ -40,6 +40,7 @@ public class processCheckOfflineService {
 	
 		
 	@Scheduled(fixedDelayString = "${jobs.checkOffOn.interval}" )	
+//	@Scheduled(fixedDelayString = "60000" )
 	public void schedule() {
 		
 		if(!checkOffEnable) return; 
@@ -49,6 +50,7 @@ public class processCheckOfflineService {
 		
 		List<Position> offlineList = new ArrayList<Position>();
 		offlineList = positionService.listOffline(checkOffTime);
+//		offlineList = positionService.listOffline(5);
 		
 		for (Position position  : offlineList) {			
 			

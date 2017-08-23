@@ -10,8 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.dto.UserDto;
@@ -26,6 +25,9 @@ import br.com.eneeyes.main.result.Result;
 
 	@Service
 	public class UserService {
+		
+	@Autowired
+	private UserRepository repository;
 
   	public BasicResult<?> save(UserDto dto)
   	{
@@ -47,9 +49,6 @@ import br.com.eneeyes.main.result.Result;
 		
 		return result;
   	}
-
-	@Inject
-	private UserRepository repository;
 		
 	public BasicResult<?> listAll()
 	{

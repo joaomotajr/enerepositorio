@@ -2,14 +2,12 @@ package br.com.eneeyes.main.repository.singleton;
 
 import java.util.List;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import javax.enterprise.context.ApplicationScoped;
 
 import br.com.eneeyes.main.dto.CompanyDetectorAlarmDto;
 import br.com.eneeyes.main.model.CompanyDetectorAlarm;
 
-@Component
-@Scope("singleton")
+@ApplicationScoped
 public class CompanyDetectorAlarmSingletonRepository  {
 	
 	static List<CompanyDetectorAlarm> lista;

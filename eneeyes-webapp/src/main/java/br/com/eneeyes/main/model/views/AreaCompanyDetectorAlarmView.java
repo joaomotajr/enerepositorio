@@ -1,6 +1,8 @@
 package br.com.eneeyes.main.model.views;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 
@@ -51,7 +54,16 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 	private Double rangeMax;
 	
 	@Column(name = "UNIT_METER_GASES")
-	private UnitMeterGases unitMeterGases;	
+	private UnitMeterGases unitMeterGases;
+	
+	@Column(name = "last_update", nullable = true)
+	private Date lastUpdate;
+
+	@Column(name = "last_value", nullable = true)
+	private BigDecimal lastValue;
+	
+	@Column(name = "alarm_type", nullable = true)
+	private AlarmType alarmType;
 	
 	@Column(name = "alarm_name", nullable = true)
 	private String alarmName;

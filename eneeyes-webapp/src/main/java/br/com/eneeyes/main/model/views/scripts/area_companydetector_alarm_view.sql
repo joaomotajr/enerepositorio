@@ -16,6 +16,9 @@ VIEW `area_companydetector_alarm_view` AS
         `s`.`RANGE_MIN` AS `RANGE_MIN`,
         `s`.`RANGE_MAX` AS `RANGE_MAX`,
         `s`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`,
+        `p`.`LAST_VALUE` AS `LAST_VALUE`,
+        `p`.`LAST_UPDATE` AS `LAST_UPDATE`,
+        `p`.`ALARM_TYPE` AS `ALARM_TYPE`,
         `a`.`NAME` AS `ALARM_NAME`,
         `a`.`ALARM_ON` AS `ALARM_ON`,
         `a`.`ALARM_1` AS `ALARM_1`,
@@ -28,6 +31,8 @@ VIEW `area_companydetector_alarm_view` AS
         JOIN `detector` `d` ON ((`cd`.`DETECTOR_ID` = `d`.`UID`)))
         JOIN `detector_sensors` `ds` ON ((`d`.`UID` = `ds`.`DETECTOR_ID`)))
         JOIN `sensor` `s` ON ((`ds`.`SENSOR_ID` = `s`.`UID`)))
+        LEFT JOIN `position` `p` ON (((`p`.`COMPANY_DETECTOR_ID` = `cd`.`UID`)
+            AND (`p`.`SENSOR_ID` = `s`.`UID`))))
         LEFT JOIN `company_detector_alarms` `cda` ON (((`cda`.`COMPANY_DETECTOR_ID` = `cd`.`UID`)
             AND (`cda`.`SENSOR_ID` = `s`.`UID`))))
         LEFT JOIN `alarm` `a` ON ((`cda`.`ALARM_ID` = `a`.`UID`)))
@@ -49,6 +54,9 @@ VIEW area_companydetector_alarm_view AS
         s.RANGE_MIN AS RANGE_MIN,
         s.RANGE_MAX AS RANGE_MAX,
         s.UNIT_METER_GASES AS UNIT_METER_GASES,
+        `p`.`LAST_VALUE` AS `LAST_VALUE`,
+        `p`.`LAST_UPDATE` AS `LAST_UPDATE`,
+        `p`.`ALARM_TYPE` AS `ALARM_TYPE`,
         a.NAME AS ALARM_NAME,
         a.ALARM_ON AS ALARM_ON,
         a.ALARM_1 AS ALARM_1,
@@ -61,6 +69,8 @@ VIEW area_companydetector_alarm_view AS
         JOIN detector d ON (cd.DETECTOR_ID = d.UID)
         JOIN detector_sensors ds ON (d.UID = ds.DETECTOR_ID)
         JOIN sensor s ON (ds.SENSOR_ID = s.UID)
+        LEFT JOIN position pos ON (pos.COMPANY_DETECTOR_ID = cd.UID)
+            AND (pos.SENSOR_ID = s.UID)
         LEFT JOIN company_detector_alarms cda ON (cda.COMPANY_DETECTOR_ID = cd.UID)
             AND (cda.SENSOR_ID = s.UID)
         LEFT JOIN alarm a ON (cda.ALARM_ID = a.UID)

@@ -2,9 +2,7 @@ package br.com.eneeyes.main.model;
 
 
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,13 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Index;
-
-import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.register.Detector;
 
 /**
@@ -27,45 +21,11 @@ import br.com.eneeyes.main.model.register.Detector;
  */
 
 @Entity
-@Table(name = "company_detector")
-@org.hibernate.annotations.Table(
-		   appliesTo = "company_detector",
-		   indexes = {
-		      @Index(name="idxName", columnNames = "name"),
-		      @Index(name="idxCompanyDevice", columnNames = "COMPANY_DEVICE_ID"),
-		      @Index(name="idxNameDate", columnNames = {"name", "date"})
-		   }
-		)
-public class CompanyDetector {
-	public CompanyDetector() {   	
+@Table(name = "company_detector_shadow")
+public class CompanyDetectorShadow {
+	public CompanyDetectorShadow() {   	
     
-    }
-	
-    public CompanyDetector(Long uid) {    	
-    	this.uid = uid;
-    }
-    
-    public CompanyDetector(CompanyDetectorDto dto) {
-    	
-    	this.uid = dto.getUid();		
-    	this.name = dto.getName();
-    	this.description = dto.getDescription();    			
-    	this.date = dto.getDate();    	  
-    	this.local = dto.getLocal();
-    	this.serialNumber = dto.getSerialNumber();
-		this.latitude = dto.getLatitude();
-		this.longitude = dto.getLongitude();		
-		
-		this.deliveryDate = dto.getDeliveryDate();
-		this.garantyDays = dto.getGarantyDays();		
-		this.descriptionDelivery = dto.getDescriptionDelivery();
-		this.installDate = dto.getInstallDate();
-		this.maintenanceInterval = dto.getMaintenanceInterval();
-		this.descriptionInstall = dto.getDescriptionInstall();
-		
-		if(dto.getDetectorDto() != null)
-			this.detector = new Detector(dto.getDetectorDto());
-    }   
+    }	  
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -110,24 +70,14 @@ public class CompanyDetector {
 		
 	@Column(name = "DESCRIPTION_INSTALL", nullable = true)
 	private String descriptionInstall;
-  
-	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
-	@JoinColumn(name="COMPANY_DEVICE_ID", nullable = false)
-	private CompanyDevice companyDevice;
+  	
+	@Column(name="COMPANY_DEVICE_ID", nullable = false)
+	private Long companyDeviceId;
 	
-	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="DETECTOR_ID", nullable = false)
 	private Detector detector;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
-	private Set<PositionAlarm> positionAlarm;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
-	private Set<Position> position;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
-	private Set<Historic> historic;
-			
+				
 	public Long getUid() {
 		return uid;
 	}
@@ -190,16 +140,16 @@ public class CompanyDetector {
 
 	public final void setLongitude(Double longitude) {
 		this.longitude = longitude;
-	}
+	}	
 	
-	public CompanyDevice getCompanyDevice() {
-		return companyDevice;
+	public final Long getCompanyDeviceId() {
+		return companyDeviceId;
 	}
 
-	public void setCompanyDevice(CompanyDevice companyDevice) {
-		this.companyDevice = companyDevice;
+	public final void setCompanyDeviceId(Long companyDeviceId) {
+		this.companyDeviceId = companyDeviceId;
 	}
-	
+
 	public Detector getDetector() {
 		return detector;
 	}

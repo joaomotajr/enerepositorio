@@ -11,8 +11,8 @@ import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDevice;
 
 public interface CompanyDetectorRepository extends JpaRepository<CompanyDetector, Long> {
-
-	public CompanyDetector findByCompanyDevice(CompanyDevice companyDevice );
+	
+	public CompanyDetector findByCompanyDeviceUid(Long uid);
 		
 	public List<CompanyDetector> findByCompanyDeviceIn(List<CompanyDevice> companyDevice);	
 	

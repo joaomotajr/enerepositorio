@@ -26,6 +26,7 @@ public class AreaCompanyDetectorAlarmViewController {
 	@RequestMapping(value="/security/api/view/findAreaCompanyDetectorAlarmViewByAreaId/{areaId}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> findAreaCompanyDetectorAlarmViewByAreaId(@PathVariable Long areaId) {		
-		return service.listByAreaId(areaId);
+		BasicResult<?> result = service.listByAreaId(areaId); 
+		return result;
 	}
 }

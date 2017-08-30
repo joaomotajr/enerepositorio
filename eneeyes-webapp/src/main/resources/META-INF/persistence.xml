@@ -36,12 +36,12 @@
 	<persistence-unit name="eneeyes.db.homologation" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>    	
 		<properties>		
-			<property name="hibernate.connection.url" value="jdbc:postgresql://10.1.32.243:5432/enedb" />
-			<property name="hibernate.connection.username" value="postgres"></property>
-			<property name="hibernate.connection.password" value="C@ixaBD01"></property>
-			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"></property>							
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property>
+			<property name="hibernate.connection.username" value="root"></property>
+			<property name="hibernate.connection.password" value="pass"></property>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property>
 			
-			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
@@ -64,10 +64,10 @@
 	<persistence-unit name="eneeyes.db.development" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>    	
 		<properties>			
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property>			
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property>
 			<property name="hibernate.connection.username" value="root"></property>
 			<property name="hibernate.connection.password" value="pass"></property>
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"></property>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property>
 			
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.show_sql" value="true" />

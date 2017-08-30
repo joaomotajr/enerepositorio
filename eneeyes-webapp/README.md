@@ -65,7 +65,7 @@ drop table transmitter;
 drop table manufacturer;
 
 /* POPUALR PRINCIPAIS GASES */
-insert into gas (name, formula) values ('Combustible gases',	'LEL');
+insert into gas (name, cas, formula) values ('Combustible gases', '99999',	'LEL');
 insert into gas (name, cas, formula) values ('Hydrogen','1333-74-0',	'H2');
 insert into gas (name, cas, formula) values ('Oxygen','7782-44-7',	'O2');
 insert into gas (name, cas, formula) values ('Ammonia',	'7664-41-7',			'NH3');

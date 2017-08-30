@@ -161,6 +161,30 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 
 	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
 		this.unitMeterGases = unitMeterGases;
+	}	
+
+	public Date getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public BigDecimal getLastValue() {
+		return lastValue;
+	}
+
+	public void setLastValue(BigDecimal lastValue) {
+		this.lastValue = lastValue;
+	}
+
+	public AlarmType getAlarmType() {
+		return alarmType;
+	}
+
+	public void setAlarmType(AlarmType alarmType) {
+		this.alarmType = alarmType;
 	}
 
 	public final String getAlarmName() {

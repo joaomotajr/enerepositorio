@@ -105,7 +105,7 @@ app.controller('generalController', function ($scope, $timeout, $filter, Company
 		values = {		  		  			
 			dial: [{
 				id: "crntYr",
-				value: "0",
+				value: sensor.lastValue,
 				showValue: "1",
 				tooltext: "Status : $value",
 				rearExtension: "5"

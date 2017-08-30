@@ -348,7 +348,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			 
 			if ($scope.listOnePositionNoTimer.list == undefined || $scope.listOnePositionNoTimer.list.length == 0) return;
 
-			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {				
+			for (var j = 0; j < currentCompanyDetector.detector.sensors.length; j++) {				
 					
 				var offDate = ((new Date() - new Date($scope.listOnePositionNoTimer.list[j].lastUpdate)) / 1000) > 300;
 				$scope.alarmesFired[j] = offDate ? "OFFLINE" : $scope.listOnePositionNoTimer.list[j].alarmType;
@@ -366,18 +366,18 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 
 			if ($scope.listOnePosition.list == undefined || $scope.listOnePosition.list.length == 0) return;
 			 
-			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
+			for (var j = 0; j < currentCompanyDetector.detector.sensors.length; j++) {
 				
 				var offDate = ((new Date() - new Date($scope.listOnePosition.list[j].lastUpdate)) / 1000) > 300;
 				$scope.alarmesFired[j] = offDate ? "OFFLINE" : $scope.listOnePosition.list[j].alarmType;
 				
 				var item = 0;					
 				if($scope.listOnePosition.list != null && $scope.listOnePosition.list.length != 0) {									
-					item = $.grep($scope.listOnePosition.list, function (e) { return e.sensorDto.uid == currentCompanyDetector.detectorDto.sensorsDto[j].uid ; });
+					item = $.grep($scope.listOnePosition.list, function (e) { return e.sensorDto.uid == currentCompanyDetector.detector.sensors[j].uid ; });
 				}
 				
-				var id = 'gauge_companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;					
-				formatGaugeSensor(currentCompanyDetector.detectorDto.sensorsDto[j], item == 0 ? 0 : item[0], id);					
+				var id = 'gauge_companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detector.sensors[j].uid;					
+				formatGaugeSensor(currentCompanyDetector.detector.sensors[j], item == 0 ? 0 : item[0], id);					
 			}				
 			
 	    });			

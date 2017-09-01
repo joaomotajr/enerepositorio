@@ -431,20 +431,20 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			interval: interval }, function(){
 			
 			var itens = [];	
-			for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
+			for (var j = 0; j < currentCompanyDetector.detector.sensors.length; j++) {
 				
 				if($scope.listInterval.list != null && $scope.listInterval.list.length != 0) {									
 					
 					var itens = new Array();
 					for (var k = 0; k < $scope.listInterval.list.length; k++) {
 						
-						if( $scope.listInterval.list[k].sensorDto.uid == currentCompanyDetector.detectorDto.sensorsDto[j].uid)
+						if( $scope.listInterval.list[k].sensorDto.uid == currentCompanyDetector.detector.sensors[j].uid)
 							itens.push([$scope.listInterval.list[k].lastUpdate, $scope.listInterval.list[k].value ] );
 					}
 				}
 				
-				var id = 'line_companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].uid;					
-				formatLineSensor(currentCompanyDetector.detectorDto.sensorsDto[j], itens, id);					
+				var id = 'line_companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detector.sensors[j].uid;					
+				formatLineSensor(currentCompanyDetector.detector.sensors[j], itens, id);					
 			}      	
        });		
 	}	

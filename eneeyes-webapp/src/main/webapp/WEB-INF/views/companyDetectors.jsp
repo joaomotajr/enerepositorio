@@ -98,7 +98,7 @@
 											<label class="control-label">Identifica&ccedil;&atilde;o do Detector/Sensores</label>
 											<div class="box box-primary collapsed-box">
 												<div class="box-header with-border">
-													<Label class="box-title">{{selectedCompanyDetector.detectorDto.name}}-{{selectedCompanyDetector.detectorDto.model}} Sensores: {{selectedCompanyDetector.detectorDto.sensorsDto.length}} </label>
+													<Label class="box-title">{{selectedCompanyDetector.detector.name}}-{{selectedCompanyDetector.detector.model}} Sensores: {{selectedCompanyDetector.detector.sensors.length}} </label>
 													<div class="box-tools pull-right" title="Clique para mais detalhes">
 														<button class="btn btn-box-tool" data-widget="collapse">
 															<i class="fa fa-plus"></i>
@@ -121,7 +121,7 @@
 																
 																<td>{{item.uid}}</td>
 																<td>{{item.alarmType}}</td>	
-																<td>{{item.sensorDto.name}}</td>																						
+																<td>{{item.sensor.name}}</td>																						
 															</tr>                                                               
 														</tbody>
 													</table>												
@@ -144,7 +144,7 @@
 				    	
 				       		<div class="row">
 				       			<div class="col-md-12">
-				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true">&nbsp;Salvar&nbsp;</button>		       				
+				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detector.uid) ? false : true">&nbsp;Salvar&nbsp;</button>		       				
 				       				<span class="pull-right">&nbsp;</span>
 				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">&nbsp;Excluir&nbsp;</button>								
 								</div>
@@ -155,7 +155,7 @@
 				       	<div class="tab-pane" id="tabCompanyDetector_2">		     
 				       		
 				       		<div class="row">	 							   
-				            	<div data-ng-repeat="sensor in selectedCompanyDetector.detectorDto.sensorsDto">
+				            	<div data-ng-repeat="sensor in selectedCompanyDetector.detector.sensors">
 				            	  	<div class="col-md-4">
 						              	<div class="panel panel-primary">						                
 
@@ -175,7 +175,7 @@
 														<h5 class="description-header"><i class="fa fa-bolt"></i> {{sensor.name}}</h5>
 														<span class="description-text">Range: Min|Max: {{sensor.rangeMin}} | {{sensor.rangeMax}}</span>
 														<br>
-														G&aacute;s: <strong class="text-navy">{{sensor.gasesDto[0].name}}</strong>																
+														G&aacute;s: <strong class="text-navy">{{sensor.gases[0].name}}</strong>																
 														<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="sensor.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
 														<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="sensor.unitMeterGases!='LEL_PERCENT'"> {{sensor.unitMeterGases}}</span>													
 														
@@ -212,36 +212,36 @@
 					               			<label data-ng-show="changeGraphic" class="pull-right">Gr&aacute;fico Completo&nbsp;&nbsp;</label>
 											<label data-ng-hide="changeGraphic" class="pull-right">Gr&aacute;fico Medi&ccedil;&otilde;es&nbsp;&nbsp;</label>
 						               							               							               							               		
-						               		<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length == 1">
+						               		<div data-ng-if="selectedCompanyDetector.detector.sensors.length == 1">
 						               			<ul class="nav nav-tabs" id="myTab">
-												 	<li class="active"><a data-target="sensor1" data-toggle="tab">{{selectedCompanyDetector.detectorDto.sensorsDto[0].name}}</a></li>												 	
+												 	<li class="active"><a data-target="sensor1" data-toggle="tab">{{selectedCompanyDetector.detector.sensors[0].name}}</a></li>												 	
 												 												  	
 												</ul>
 									
 												<div class="tab-content">
 													<div class="tab-pane active" id="sensor1">
 													  	<div class="row">													  		
-									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[0].uid}}"></div>									               			
+									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detector.sensors[0].uid}}"></div>									               			
 									               		</div>
 								               		</div>												  	
 												</div>					               		
 						               		</div>
 						               		
-						               		<div data-ng-if="selectedCompanyDetector.detectorDto.sensorsDto.length > 1">
+						               		<div data-ng-if="selectedCompanyDetector.detector.sensors.length > 1">
 						               			<ul class="nav nav-tabs" id="myTab">
-												 	<li class="active"><a data-target="#sensor1" data-toggle="tab">{{selectedCompanyDetector.detectorDto.sensorsDto[0].name}}</a></li>
-												  	<li><a data-target="#sensor2" data-toggle="tab">{{selectedCompanyDetector.detectorDto.sensorsDto[1].name}}</a></li>										  	
+												 	<li class="active"><a data-target="#sensor1" data-toggle="tab">{{selectedCompanyDetector.detector.sensors[0].name}}</a></li>
+												  	<li><a data-target="#sensor2" data-toggle="tab">{{selectedCompanyDetector.detector.sensors[1].name}}</a></li>										  	
 												</ul>
 									
 												<div class="tab-content">
 												  	<div class="tab-pane active" id="sensor1">
 												  		<div class="row">												  															  			
-									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[0].uid}}"></div>
+									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detecto.sensors[0].uid}}"></div>
 									               		</div>
 												  	</div>
 												  	<div class="tab-pane" id="sensor2">
 												  		<div class="row">
-									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detectorDto.sensorsDto[1].uid}}"></div>
+									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detector.sensors[1].uid}}"></div>
 									               		</div>
 												  	</div>												  	
 												</div>			
@@ -294,7 +294,7 @@
 				       	     
 				       	    <div class="row">
 				       			<div class="col-md-12">
-				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true">Salvar</button>		       				
+				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detector.uid) ? false : true">Salvar</button>		       				
 				       				<span class="pull-right">&nbsp;</span>
 				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">Excluir</button>								
 								</div>
@@ -342,7 +342,7 @@
 										<tbody>                                                        
 											<tr data-ng-repeat="item in alarms | gasFilter:search">
 												<td>{{item.name}}</td>
-												<td>{{item.gasDto.name}}</td>															        
+												<td>{{item.gas.name}}</td>															        
 												<td>{{item.alarm1}}</td>
 												<td>{{item.alarm2}}</td>
 												<td>{{item.alarm3}}</td>

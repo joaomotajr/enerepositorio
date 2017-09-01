@@ -8,7 +8,7 @@ app.controller('generalController', function ($scope, $timeout, $filter, Company
 
 		 $scope.listOne = new UnitService.listOneByCompanyId();		 
 		 $scope.listOne.$unit({_csrf : angular.element('#_csrf').val(), companyId : $scope.selectedCompany.uid}, function(){			
-			$scope.selectedUnits = true; 
+			$scope.showUnits = true; 
 			$scope.selectedUnit = undefined; 
 			$scope.companyComplete = $scope.listOne.list; 				         	         	
         });		 
@@ -23,33 +23,39 @@ app.controller('generalController', function ($scope, $timeout, $filter, Company
 	}
 
 	$scope.selectUnit = function(index) {
-		$scope.selectedUnits = undefined; 
-		$scope.selectedAreas = true;
+		$scope.showUnits = undefined; 
+		$scope.showAreas = true;
 		$scope.selectedUnit = $scope.companyComplete[index];	
 	}
 
 	$scope.closeSelectedUnit = function() {
-		$scope.selectedUnits = true;  
+		$scope.showUnits = true;  
 		$scope.selectedUnit = undefined; 
+		$scope.closeSelectedArea();
 	}
 
 	$scope.selectArea = function(index) {
-		$scope.selectedAreas = undefined;
-		$scope.getDetectors( $scope.selectedUnit.areasDto[index].uid);
+		$scope.showAreas = undefined;
+		
+		$scope.selectedArea = [];
+		$scope.selectedArea.uid = $scope.selectedUnit.areasDto[index].uid;
+		$scope.selectedArea.name = $scope.selectedUnit.areasDto[index].name;	
+		 
+		$scope.getDetectors($scope.selectedArea.uid);		
 	}
 
 	$scope.closeSelectedArea = function() {		
 		$scope.selectedArea = undefined; 
-		$scope.selectedAreas = true;
+		$scope.showAreas = true;
 	}
 
 	$scope.getDetectors = function(areaId) {
 
 		$scope.resultDetectors = new ViewService.listAreaCompanyDetectorsAlarms();		 
 		$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), areaId : areaId}, function(){						
-			$scope.selectedArea = $scope.resultDetectors.list;
+			$scope.selectedArea.list = $scope.resultDetectors.list;
 
-			$scope.selectedArea.forEach(
+			$scope.selectedArea.list.forEach(
 					 function(e) {						
 						e.dataSource = $scope.getGaugeInfo(e);
 					}			

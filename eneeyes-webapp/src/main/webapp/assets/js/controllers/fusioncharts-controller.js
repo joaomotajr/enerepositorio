@@ -209,20 +209,7 @@ app.controller('fusionchartsController', function ($scope, $timeout, $filter) {
 			            value: "491000"
 			        }
 			    ]
-			}	    
-		
-		$scope.ggDataSource = {
-		  		  
-		        dials: {
-		            dial: [{
-		                id: "crntYr",
-		                value: "78",
-		                showValue: "1",
-		                tooltext: "Status : $value",
-		                rearExtension: "5"
-		            }]
-		        }
-		    }
+			}
 		
 		$scope.dados = {
 			dial: [{
@@ -240,29 +227,29 @@ app.controller('fusionchartsController', function ($scope, $timeout, $filter) {
 			
 		}
 		
-		$scope.colors = {
+		// $scope.colors = {
 				
-			 color: [
-				{
-	                minValue: "0",
-	                maxValue: "120",
-	                code: "#D8D8D8"
-	            },
-				{
-	                minValue: "120",
-	                maxValue: "170",
-	                code: "#6baa01"
-	            }, {
-	                minValue: "170",
-	                maxValue: "200",
-	                code: "#f8bd19"
-	            }, {
-	                minValue: "200",
-	                maxValue: "300",
-	                code: "#e44a00"
-	            }]
+		// 	 color: [
+		// 		{
+	    //             minValue: "0",
+	    //             maxValue: "120",
+	    //             code: "#D8D8D8"
+	    //         },
+		// 		{
+	    //             minValue: "120",
+	    //             maxValue: "170",
+	    //             code: "#6baa01"
+	    //         }, {
+	    //             minValue: "170",
+	    //             maxValue: "200",
+	    //             code: "#f8bd19"
+	    //         }, {
+	    //             minValue: "200",
+	    //             maxValue: "300",
+	    //             code: "#e44a00"
+	    //         }]
 		
-		}
+		// }
 		
 		
 		$scope.atributos = {
@@ -331,56 +318,121 @@ app.controller('fusionchartsController', function ($scope, $timeout, $filter) {
 				}]
 	        }
 	    };
+	
+
+		$scope.linearAtributos = {
+			theme: "fint",
+        	caption: "Server CPU Utilization",
+        	lowerLimit: "0",
+        	upperLimit: "300",
+        	numberSuffix: " lel%",
+        	chartBottomMargin: "20",
+        	valueFontSize: "11",
+        	valueFontBold: "0",
+        	gaugeFillMix : "{light-10},{light-70},{dark-10}",
+        	gaugeFillRatio: "40,20,40"
+
+		}
+
+		$scope.linearColors = {
+				
+			 color: [
+				{
+	                minValue: "0",
+	                maxValue: "120",
+					code: "#6baa01",
+					label: "Normal"
+									
+	            },
+				{
+	                minValue: "120",
+	                maxValue: "170",
+					code: "#D8D8D8",
+					label: "Alarme 1"
+	            }, {
+	                minValue: "170",
+	                maxValue: "200",
+					code: "#f8bd19",
+					label: "Alarme 2"
+	            }, {
+	                minValue: "200",
+	                maxValue: "300",
+					code: "#e44a00",
+					label: "Alarme 3"
+	            }]
 		
+		}
+
+		$scope.hledAtributos = {
+		        
+			caption: "Fuel Level Indicator",
+			lowerLimit: "0",
+			upperLimit: "300",
+			lowerLimitDisplay: "Min",
+			upperLimitDisplay: "Max",
+			numberSuffix: " PPM",
+			showValue: "1",
+			valueFontSize: "12",
+			origW: "400",
+			origH: "150",
+			ledSize: "3",
+			ledGap: "2",
+			manageResize: "1",
+			theme: "fint"
+		        
+		};
+
+		
+		$scope.vledValue ={ value: "92"};
 		
 	 $scope.cylinder = {
-            chart: {
-                theme: "fint",
-                caption: "Nivel do Tanque",
-                subcaption: "Petrobras - Litoral Note",
-                lowerLimit: "0",
-                upperLimit: "120",
-                lowerLimitDisplay: "Vazio",
-                upperLimitDisplay: "Cheio",
-                numberSuffix: " ltrs",
-                showValue: "1",
-                chartBottomMargin: "45",
-                showValue: "0"
-            },
-            value: "75",
-            annotations: {
-                origw: "400",
-                origh: "190",
-                autoscale: "1",
-                groups: [
-                    {
-                        id: "range",
-                        items: [
-                            {
-                                id: "rangeBg",                                
-                                type: "rectangle",
-                                x : "$canvasCenterX-45",
-                                y: "$chartEndY-30",
-                                tox: "$canvasCenterX +45",
-                                toy: "$chartEndY-75",
-                                fillcolor: "#6caa03"
-                            },
-                            {
-                                id: "rangeText",
-                                type: "Text",                                
-                                fontSize: "11",                                                                
-                                fillcolor: "#333333",
-                                text: "80 ltrs",
-                                x : "$chartCenterX-45",
-                                y: "$chartEndY-50"
-                            }
-                        ]
-                    }
-                ]
-            }
-            
-        };
+		chart: {
+			theme: "fint",
+			caption: "Nivel do Tanque",
+			subcaption: "Petrobras - Litoral Note",
+			lowerLimit: "0",
+			upperLimit: "120",
+			lowerLimitDisplay: "Vazio",
+			upperLimitDisplay: "Cheio",
+			numberSuffix: " ltrs",
+			showValue: "1",
+			chartBottomMargin: "45",
+			showValue: "0"
+		},
+		value: "75",
+		annotations: {
+			origw: "400",
+			origh: "190",
+			autoscale: "1",
+			groups: [
+				{
+					id: "range",
+					items: [
+						{
+							id: "rangeBg",                                
+							type: "rectangle",
+							x : "$canvasCenterX-45",
+							y: "$chartEndY-30",
+							tox: "$canvasCenterX +45",
+							toy: "$chartEndY-75",
+							fillcolor: "#6caa03"
+						},
+						{
+							id: "rangeText",
+							type: "Text",                                
+							fontSize: "11",                                                                
+							fillcolor: "#333333",
+							text: "80 ltrs",
+							x : "$chartCenterX-45",
+							y: "$chartEndY-50"
+						}
+					]
+				}
+			]
+		}
 		
+	};
+	
 	
 	
 	 angular.element('body').removeClass('loading');

@@ -39,15 +39,7 @@
 								</div>						
 							</div>
 							<div class="col-md-6"> 
-								<div data-fusioncharts							
-								    data-width="400"
-								    data-height= "300"
-								    data-chart="{{atributos}}"						    						    						    
-								    data-type="angulargauge"
-								    data-colorrange="{{colors}}"
-								    data-theme= "ocean"
-								    data-datasource="{{ggDataSource}}">
-								</div>
+								
 							</div>						
 						</div>
 						<div class="row">
@@ -69,7 +61,30 @@
 								    data-datasource="{{cylinder}}">
 								</div>
 							</div>
-						</div>												                                                       
+						</div>			
+						<div class="row">
+							<div class="col-md-6">
+								<div data-fusioncharts							
+								    data-width="400"
+									data-height= "200"						    						    						    						    
+									data-chart="{{linearAtributos}}"
+								    data-type="hlineargauge"						    
+									data-theme= "fint"									
+									data-colorrange="{{linearColors}}">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div data-fusioncharts							
+								    data-width="200"
+									data-height= "400"	
+									data-chart="{{hledAtributos}}"						    						    						    					    						    						    						    
+								    data-type="vled"						    																		
+									data-colorrange="{{linearColors}}">
+								</div>
+							</div>
+						</div>
+							
+
 					</div>
 					
 					<button type="button" data-ng-click="clearForm();" class="btn btn-primary pull-right">Novo</button>					

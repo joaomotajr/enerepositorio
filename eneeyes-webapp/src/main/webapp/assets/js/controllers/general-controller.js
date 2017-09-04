@@ -1,5 +1,7 @@
 
-app.controller('generalController', function ($scope, $timeout, $filter, CompanyService, UnitService, ViewService) {
+app.controller('generalController', function ($scope, $timeout, $interval, $rootScope, $filter, CompanyService, UnitService, ViewService) {
+
+	var intervals = []
 
 	$scope.selectCompany = function(index) {
 		
@@ -47,6 +49,10 @@ app.controller('generalController', function ($scope, $timeout, $filter, Company
 	$scope.closeSelectedArea = function() {		
 		$scope.selectedArea = undefined; 
 		$scope.showAreas = true;
+		
+		while(intervals.length){
+			$interval.cancel(intervals.pop());
+		}
 	}
 
 	$scope.getDetectors = function(areaId) {
@@ -60,7 +66,44 @@ app.controller('generalController', function ($scope, $timeout, $filter, Company
 						e.dataSource = $scope.getGaugeInfo(e);
 					}			
 			);
+
+			 initGaugeTimer();
 		});
+	}	
+			
+	initGaugeTimer = function() {
+		intervals.push( $interval(function(){
+
+			if($rootScope == null) return;
+			if($rootScope.currentPage == "Over-View")
+				$scope.timertDetectors($scope.selectedArea.uid);		
+		}, 5000));	
+	}
+
+	$scope.timertDetectors = function(areaId) {
+
+		$scope.resultDetectors = new ViewService.listAreaCompanyDetectorsAlarms();		 
+		$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), areaId : areaId}, function(){	
+			
+			for (var i = 0; i < $scope.resultDetectors.list.length; i++) {
+				if($scope.selectedArea.list[i].sensorId == $scope.resultDetectors.list[i].sensorId) {		
+					$scope.updateGaugeInfo($scope.selectedArea.list[i], $scope.resultDetectors.list[i]);
+				}
+			}			
+						
+		});
+	}
+
+	$scope.updateGaugeInfo = function(sensor, values) {
+
+		if(sensor.rangeMax != values.rangeMax || sensor.rangeMin != values.rangeMin || sensor.alarmName != values.alarmName) {
+			sensor.dataSource = $scope.getGaugeInfo(values);
+			console.log("houve modificação em Configurações")
+		}
+		else {
+			var value = values.lastValue > sensor.rangeMax ? sensor.rangeMax : values.lastValue;
+			sensor.dataSource.dials.dial[0].value = value;
+		}
 	}	
 
 	$scope.getGaugeInfo = function(sensor) {
@@ -108,10 +151,11 @@ app.controller('generalController', function ($scope, $timeout, $filter, Company
 			}]		
 		}
 
+		var value = sensor.lastValue > sensor.rangeMax ? sensor.rangeMax : sensor.lastValue;
 		values = {		  		  			
 			dial: [{
 				id: "crntYr",
-				value: sensor.lastValue,
+				value: value,
 				showValue: "1",
 				tooltext: "Status : $value",
 				rearExtension: "5"

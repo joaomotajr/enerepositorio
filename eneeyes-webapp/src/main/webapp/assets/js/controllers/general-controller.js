@@ -1,5 +1,5 @@
 
-app.controller('generalController', function ($scope, $timeout, $filter, CompanyService, UnitService, ViewService) {
+app.controller('generalController', function ($scope, $timeout, $interval, $rootScope, $filter, CompanyService, UnitService, ViewService) {
 
 	$scope.selectCompany = function(index) {
 		
@@ -47,6 +47,7 @@ app.controller('generalController', function ($scope, $timeout, $filter, Company
 	$scope.closeSelectedArea = function() {		
 		$scope.selectedArea = undefined; 
 		$scope.showAreas = true;
+		areaTimer = undefined;
 	}
 
 	$scope.getDetectors = function(areaId) {
@@ -60,8 +61,21 @@ app.controller('generalController', function ($scope, $timeout, $filter, Company
 						e.dataSource = $scope.getGaugeInfo(e);
 					}			
 			);
+
+			initGaugeTimer();
 		});
 	}	
+
+	areaTimer = undefined;
+	
+	initGaugeTimer = function() {
+		areaTimer =  $interval(function(){
+
+			if($rootScope == null) return;
+			if($rootScope.currentPage == "Over-View")
+				$scope.getDetectors($scope.selectedArea.uid);		
+		}, 5000);	
+	}
 
 	$scope.getGaugeInfo = function(sensor) {
 

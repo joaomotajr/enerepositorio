@@ -164,13 +164,24 @@
 																	<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong> {{item.companyDetectorName}}</h2>							
 																</div>											   					               	
 																<div class="panel-body">							            					                 										                	
-																	<label class="pull-right text-muted" data-ng-if="item.alarmOn==null"><i class="fa fa-bullhorn"></i> Sem Alarme</label>
-																	<label class="pull-right text-black" title="{{item.alarmName}}" data-ng-if="item.alarmOn==false"><i class="fa fa-bullhorn"></i> Alarm Off</label>
-																	<label class="pull-right text-blue" title="{{item.alarmName}}" data-ng-if="item.alarmOn==true"><i class="fa fa-bullhorn"></i> Alarm On</label>
+																	<div class="row">
+																		<div class="col-md-6">
+																			<label class="pull-left text-muted" data-ng-if="item.alarmType=='WITHOUT'"><i class="fa-lg fa fa-battery-empty"></i></label> 
+																			<label class="pull-left text-black" data-ng-if="item.alarmType=='OFFLINE'"><i class="fa-lg fa fa-battery-empty"></i>&nbsp;Off Line</label>
+																			<label class="pull-left text-muted" data-ng-if="item.alarmType=='DETECCAO'"><i class="fa-lg fa fa-battery-quarter"></i>&nbsp;Detec&ccedil;&atilde;o </label>
+																			<label class="pull-left text-yellow" data-ng-if="item.alarmType=='ALERTA'"><i class="fa-lg fa fa-battery-half"></i>&nbsp;Alerta</label>
+																			<label class="pull-left text-red" data-ng-if="item.alarmType=='EVACUACAO'"><i class="fa-lg fa fa-battery-full"></i>&nbsp;Evacua&ccedil;&atilde;o</label>
+																			<label class="pull-left text-green" data-ng-if="item.alarmType=='NORMAL'"><i class="fa-lg fa fa-check"></i>&nbsp;Normal</label>
+																		</div>
+																		<div class="col-md-6">
+																			<label class="pull-right text-muted" data-ng-if="item.alarmOn==null"><i class="fa-lg fa fa-bullhorn"></i> Sem Alarme</label>
+																			<label class="pull-right text-black" title="{{item.alarmName}}" data-ng-if="item.alarmOn==false"><i class="fa-lg fa fa-bullhorn"></i> Alarm Off</label>
+																			<label class="pull-right text-navy" title="{{item.alarmName}}" data-ng-if="item.alarmOn==true"><i class="fa-lg fa fa-bullhorn"></i> Alarm On</label>
+																		</div>
+																	</div>																	
 
 																	<div class="row">								                	
-																		<div style=" width: 100%; display: flex; justify-content: center; text-align: center;">
-																																						
+																		<div style=" width: 100%; display: flex; justify-content: center; text-align: center;">																																						
 																			<div data-fusioncharts							
 																				data-width="300"
 																				data-height= "200"						    						    						    						    
@@ -178,12 +189,10 @@
 																				data-theme= "fint"
 																				data-datasource="{{item.dataSource}}">
 																			</div>
-
 																		</div>																		
 																		
 																	</div>								                				                				                
-																	<div class="row">							                    				                    				                    
-																	
+																	<div class="row">																	
 																		<div class="description-block">																
 																			<h4 class="description-header"><i class="fa fa-bolt"></i> {{item.sensorName}}</h4>
 																			<span class="description-text">Range: Min|Man: {{item.rangeMin}} | {{item.rangeMax}} </span>
@@ -191,9 +200,21 @@
 																			G&aacute;s: <strong class="text-navy">{{item.gasName}}</strong>																
 																			<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
 																			<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}</span>
-																		</div>									                    					                    
-																		
-																	</div>	
+																		</div>																		
+																	</div>
+																	<br data-ng-if="!item.alarmOn">	
+
+																	<div class="row" data-ng-if="item.alarmOn" style="font-size:80%; margin-right: 0px; margin-left:0px">
+																		<div class="col-md-4" style="padding-right:5px; padding-left:0px">
+																			<label class="label-default">&nbsp;&nbsp;Detec&ccedil;&atilde;o:&nbsp; {{item.alarm1}}&nbsp;&nbsp;</label>
+																		</div>
+																		<div class="col-md-4" style="padding-right:0px; padding-left:0px">
+																			<label class="label-warning">&nbsp;&nbsp;&nbsp;&nbsp;Alerta:&nbsp;&nbsp; {{item.alarm2}}&nbsp;&nbsp;</label>
+																		</div>
+																		<div class="col-md-4" style="padding-right:5px; padding-left:0px">
+																			<label class="label-danger">&nbsp;Evacua&ccedil;&atilde;o: {{item.alarm3}}&nbsp;</label>
+																		</div>																																				
+																	</div>
 
 																</div>
 															</div>

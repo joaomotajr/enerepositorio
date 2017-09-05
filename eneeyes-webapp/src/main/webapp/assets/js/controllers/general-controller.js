@@ -103,6 +103,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		else {
 			var value = values.lastValue > sensor.rangeMax ? sensor.rangeMax : values.lastValue;
 			sensor.dataSource.dials.dial[0].value = value;
+			sensor.alarmType = values.alarmType;
 		}
 	}	
 
@@ -113,7 +114,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		var orange = sensor.alarmOn == null ? 0 : sensor.alarm1;
 
 		properties =  {
-			caption: sensor.sensorName,
+			// caption: sensor.sensorName,
 			subcaption: "",
 			lowerLimit: sensor.rangeMin,
 			upperLimit: sensor.rangeMax,

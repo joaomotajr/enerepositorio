@@ -86,7 +86,7 @@
 											
 												<input class="form-control" type="number" data-ng-model="companyValor" name="companyValor" min="0"  max="{{selectedCompanySensor.rangeMax}}" required>
 																                	 
-												<p data-ng-show="!userForm.companyValor.$pristine && !userForm.companyValor.$error.required && userForm.companyValor.$error.max" class="help-block text-red">Valor M&aacute;ximo : {{selectedCompanySensor.rangeMax}} </p>											
+												<p data-ng-show="companyValor > selectedCompanySensor.rangeMax" class="help-block text-red">Valor M&aacute;ximo : {{selectedCompanySensor.rangeMax}} </p>											
 												<p data-ng-show="!userForm.companyValor.$pristine && !userForm.companyValor.$error.required && userForm.companyValor.$error.min" class="help-block text-red">Valor Inv&aacute;lido</p>											
 												<p data-ng-show="userForm.companyValor.$error.required && !userForm.companyValor.$pristine" class="help-block text-red">Valor Obrigat&oacute;rio</p>
 											
@@ -95,7 +95,7 @@
 									<div class="col-md-2">
 										<div class="form-group">
 											<label class="control-label">A&ccedil;&atilde;o</label>
-					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-disabled="!userForm.$valid" data-ng-click="saveHistoric()">Save Historic</button>
+					        				<button type="button" class="btn btn-primary btn-xs form-control" data-ng-disabled="!userForm.$valid || (companyValor > selectedCompanySensor.rangeMax)" data-ng-click="saveHistoric()">Save Historic</button>
 					        			</div>
 					        		</div>
 			

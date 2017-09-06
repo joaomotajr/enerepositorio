@@ -114,7 +114,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		var orange = sensor.alarmOn == null ? 0 : sensor.alarm1;
 
 		properties =  {
-			// caption: sensor.sensorName,
+			caption: sensor.sensorName,
 			subcaption: "",
 			lowerLimit: sensor.rangeMin,
 			upperLimit: sensor.rangeMax,

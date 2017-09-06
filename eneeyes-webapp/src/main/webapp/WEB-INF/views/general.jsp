@@ -163,7 +163,7 @@
 																<div class="panel-heading">
 																	<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong> {{item.companyDetectorName}}</h2>							
 																</div>											   					               	
-																<div class="panel-body">							            					                 										                	
+																<div class="panel-body" style="padding-bottom: 0px; padding-top: 3px;">							            					                 										                	
 																	<div class="row">
 																		<div class="col-md-6">
 																			<label class="pull-left text-muted" data-ng-if="item.alarmType=='WITHOUT'"><i class="fa-lg fa fa-battery-empty"></i></label> 
@@ -193,8 +193,8 @@
 																		
 																	</div>								                				                				                
 																	<div class="row">																	
-																		<div class="description-block">																
-																			<h4 class="description-header"><i class="fa fa-bolt"></i> {{item.sensorName}}</h4>
+																		<div class="description-block" style="margin: 3px 0;">																
+																			<!-- <h4 class="description-header"><i class="fa fa-bolt"></i> {{item.sensorName}}</h4> -->
 																			<span class="description-text">Range: Min|Man: {{item.rangeMin}} | {{item.rangeMax}} </span>
 																			<br>
 																			G&aacute;s: <strong class="text-navy">{{item.gasName}}</strong>																
@@ -203,18 +203,21 @@
 																		</div>																		
 																	</div>
 																	<br data-ng-if="!item.alarmOn">	
-
-																	<div class="row" data-ng-if="item.alarmOn" style="font-size:80%; margin-right: 0px; margin-left:0px">
-																		<div class="col-md-4" style="padding-right:5px; padding-left:0px">
-																			<label class="label-default">&nbsp;&nbsp;Detec&ccedil;&atilde;o:&nbsp; {{item.alarm1}}&nbsp;&nbsp;</label>
-																		</div>
-																		<div class="col-md-4" style="padding-right:0px; padding-left:0px">
-																			<label class="label-warning">&nbsp;&nbsp;&nbsp;&nbsp;Alerta:&nbsp;&nbsp; {{item.alarm2}}&nbsp;&nbsp;</label>
-																		</div>
-																		<div class="col-md-4" style="padding-right:5px; padding-left:0px">
-																			<label class="label-danger">&nbsp;Evacua&ccedil;&atilde;o: {{item.alarm3}}&nbsp;</label>
-																		</div>																																				
-																	</div>
+																		
+																	<ul class="list-group" data-ng-if="item.alarmOn">																		
+																		<li class="list-group-item" style="padding: 2px 15px;">
+																			<label>Alarme Associado:</label> {{item.alarmName}}
+																		</li>
+																		<li class="list-group-item list-group-item-info" style="padding: 2px 15px;">
+																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm1}}</span> <label>Alarme1:</label> Detec&ccedil;&atilde;o
+																		</li>
+																		<li class="list-group-item list-group-item-warning" style="padding: 2px 15px;">
+																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm2}}</span> <label>Alarme2:</label> Alerta
+																		</li>
+																		<li class="list-group-item list-group-item-danger" style="padding: 2px 15px;">
+																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm3}}</span> <label>Alarme3:</label> Evacua&ccedil;&atilde;o:
+																		</li>
+																	</ul>
 
 																</div>
 															</div>

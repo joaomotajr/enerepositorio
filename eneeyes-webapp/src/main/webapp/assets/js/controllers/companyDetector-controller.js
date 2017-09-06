@@ -574,14 +574,14 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	$scope.configAlarm = function(index) {
 		
 		$scope.sensorIndex = index; 
-		$scope.selectedSensor = $scope.selectedCompanyDetector.detectorDto.sensorsDto[index];
+		$scope.selectedSensor = $scope.selectedCompanyDetector.detector.sensors[index];
 		
 		if($.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == $scope.selectedSensor.uid ; }).length != 0 )			
 			$scope.selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == $scope.selectedSensor.uid ; })[0].alarmDto;		
 		else
 			$scope.selectedAlarm = undefined;
 		
-		$scope.search = { unitMeterGases: $scope.selectedSensor.unitMeterGases, gas : $scope.selectedCompanyDetector.detectorDto.sensorsDto[index].gasesDto[0].name };
+		$scope.search = { unitMeterGases: $scope.selectedSensor.unitMeterGases, gas : $scope.selectedCompanyDetector.detector.sensors[index].gases[0].name };
 		
 		$timeout(function () {
 			$('#modalAlarm').modal({ show: 'false', backdrop: 'static', keyboard:'false' });
@@ -603,7 +603,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		
 		alarm = {
 		 		alarmDto : selectedAlarm, 
-		 		companyDetectorDto: $scope.selectedCompanyDetector, 
+		 		companyDetectorDto: {uid : $scope.selectedCompanyDetector.uid}, 
 		 		sensorId : $scope.selectedSensor.uid
 		 };
 		
@@ -638,7 +638,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 				
 		alarm = {
 		 		alarmDto : selectedAlarm, 
-		 		companyDetectorDto: $scope.selectedCompanyDetector, 
+		 		companyDetectorDto: {uid : $scope.selectedCompanyDetector.uid}, 
 		 		sensorId : $scope.selectedSensor.uid
 		 };
 		

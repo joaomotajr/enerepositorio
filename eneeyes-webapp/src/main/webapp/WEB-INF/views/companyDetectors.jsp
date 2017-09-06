@@ -236,7 +236,7 @@
 												<div class="tab-content">
 												  	<div class="tab-pane active" id="sensor1">
 												  		<div class="row">												  															  			
-									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detecto.sensors[0].uid}}"></div>
+									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detector.sensors[0].uid}}"></div>
 									               		</div>
 												  	</div>
 												  	<div class="tab-pane" id="sensor2">

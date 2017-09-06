@@ -45,7 +45,7 @@
 	</style>
  	
 	<div data-ng-controller="dashController">
-		<div class="row">
+		<div class="row" style="font-family: Helvetica Neue, Arial;">
        		<div class="col-md-12">
 
 				<div class="box box-primary" style="margin-bottom: 8px;">
@@ -57,8 +57,7 @@
 					
 					<div class="box-body">
 						<div class="row">
-							<div class="col-lg-2 col-xs-6">
-								<!-- small box -->
+							<div class="col-lg-2 col-xs-6">								
 								<div class="small-box bg-aqua">
 									<div class="inner">
 										<h3 data-ng-bind="sumary.devices"></h3>
@@ -70,7 +69,6 @@
 							</div>
 								
 							<div class="col-lg-2 col-xs-6">
-								<!-- small box -->
 								<div class="small-box bg-green">
 									<div class="inner">
 										<h3 data-ng-bind="sumary.normal"></h3>
@@ -82,7 +80,6 @@
 							</div>
 								
 							<div class="col-lg-2 col-xs-6">
-								<!-- small box -->
 								<div class="small-box bg-gray">
 									<div class="inner">
 										<h3 data-ng-bind="sumary.alarm1"></h3>
@@ -94,7 +91,6 @@
 							</div>
 								
 							<div class="col-lg-2 col-xs-6">
-								<!-- small box -->
 								<div class="small-box bg-yellow">
 									<div class="inner">
 										<h3 data-ng-bind="sumary.alarm2"></h3>
@@ -106,7 +102,6 @@
 							</div>
 								
 							<div class="col-lg-2 col-xs-6">
-								<!-- small box -->
 								<div class="small-box bg-red">
 									<div class="inner">
 										<h3 data-ng-bind="sumary.alarm3"></h3>
@@ -118,7 +113,6 @@
 							</div>
 								
 							<div class="col-lg-2 col-xs-6">
-								<!-- small box -->
 								<div class="small-box bg-black">
 									<div class="inner">
 										<h3 data-ng-bind="sumary.offLine"></h3>
@@ -156,9 +150,8 @@
 														<tr>														
 															<th>ID</th>
 															<th>Empresa</th>
-															<th>Detector</th>	
-															<th>Sensor</th>
-															<th>G&atilde;s</th>
+															<th>Detector</th>
+															<th>G&aacute;s</th>
 															<th>Status</th>
 															<th>Comunica&ccedil;&atilde;o</th>
 															<th>Valor</th>
@@ -168,9 +161,8 @@
 														<tr data-ng-repeat="item in dashCompaniesPositionFiltered = (dashCompaniesPosition | dashCompaniesPositionFilter: selectedStatusDashCompaniesPosition)">																
 															<td>{{item.uid}}</td>
 															
-															<td>{{item.company_name}}</td>
-															<td>{{item.company_detector_name}}</td>	
-															<td>{{item.sensor_name}}</td>
+															<td><span data-truncate="12" data-value="{{item.company_name}}"></span></td>															
+															<td>{{item.company_detector_name}}</td>																
 															<td>{{item.gas_name}}</td>
 														
 															<td style="padding-top: 13px !important;"> 
@@ -186,7 +178,7 @@
 
 															<td>
 																<label title="{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}">  
-																	{{item.last_update}} atr&aacute;s
+																	&agrave; {{item.last_update}}
 																</label>
 															</td> 
 															
@@ -217,37 +209,37 @@
 							 
 							<div class="col-md-4">
 								<div class="row">
-								<div class="box box-primary" style="margin-bottom:0px">
-									<div class="box-header with-border">
-										<h3 class="box-title">CALIBRA&Ccedil;&Otilde;ES PR&Oacute;XIMAS </h3>
-										<div class="box-tools pull-right">
-											<button class="btn btn-box-tool" data-widget="collapse">
-												<i class="fa fa-minus"></i>
-											</button>
+									<div class="box box-primary" style="margin-bottom:0px">
+										<div class="box-header with-border">
+											<h3 class="box-title">CALIBRA&Ccedil;&Otilde;ES PR&Oacute;XIMAS </h3>
+											<div class="box-tools pull-right">
+												<button class="btn btn-box-tool" data-widget="collapse">
+													<i class="fa fa-minus"></i>
+												</button>
+											</div>
 										</div>
+										
+										<div class="box-body">
+											<div class="list-group" style="max-height: 188px !important; height:auto; overflow: auto;">
+											<ul class="products-list product-list-in-box">
+												<li class="item" data-ng-repeat="item in listAllDashDetectorsMaintenance.list | orderBy : 'item.next'" style="padding: 5px 0;">
+													<div class="product-img">												         
+														<img data-ng-src="{{item.image}}" alt="Product Image" >
+													</div>
+													<div class="product-info">
+														<a href="#" class="product-title">Detector: {{item.company_detector_name}}<span
+															data-ng-class="{'label-danger' : item.next <= 10, 'label-warning' : (item.next > 10 && item.next <= 30), 'label-default' : item.next > 30}"
+															class="label pull-right">{{item.next}} Dias</span></a> <span
+															class="product-description"> {{item.company_name}} Unidade/&aacute;	rea: {{item.unit_name}}/{{item.area_name}}</span>
+													</div>
+												</li>				
+											</ul>
+											</div>
+										</div>									
 									</div>
-									
-									<div class="box-body">
-										<div class="list-group" style="max-height: 188px !important; height:auto; overflow: auto;">
-										<ul class="products-list product-list-in-box">
-											<li class="item" data-ng-repeat="item in listAllDashDetectorsMaintenance.list | orderBy : 'item.next'" style="padding: 5px 0;">
-												<div class="product-img">												         
-													<img data-ng-src="{{item.image}}" alt="Product Image" >
-												</div>
-												<div class="product-info">
-													<a href="#" class="product-title">Detector: {{item.company_detector_name}}<span
-														data-ng-class="{'label-danger' : item.next <= 10, 'label-warning' : (item.next > 10 && item.next <= 30), 'label-default' : item.next > 30}"
-														class="label pull-right">{{item.next}} Dias</span></a> <span
-														class="product-description"> {{item.company_name}} Unidade/&aacute;	rea: {{item.unit_name}}/{{item.area_name}}</span>
-												</div>
-											</li>				
-										</ul>
-										</div>
-									</div>
-								
-								</div>
-								</div>
-								<div class="row">
+								</div>							
+
+								<div class="row">									
 									<div class="box box-primary">
 									    <div class="box-header with-border">
 									        <h3 class="box-title">GR&Aacute;FICOS STATUS CONSOLIDADO</h3>
@@ -255,29 +247,18 @@
 									            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 									            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
 									        </div>
-									    </div><!-- /.box-header -->
+									    </div>
 									    <div class="box-body">
-									        <div class="row">
-									            <div class="col-md-8">
-									                <div class="chart-responsive">
-									                    <canvas id="pieChart" height="155" width="269" style="width: 269px; height: 155px;"></canvas>
-									                </div><!-- ./chart-responsive -->
-									            </div><!-- /.col -->
-									            <div class="col-md-4">
-									              <ul class="chart-legend clearfix">
-									              <li><i class="fa fa-circle-o text-green"></i> Operacional</li>
-									                  <li><i class="fa fa-circle-o text-red"></i> Evacua&ccedil;&atilde;o</li>
-									                  <li><i class="fa fa-circle-o text-gray"></i> Detec&ccedil;&atilde;o</li>
-									                  <li><i class="fa fa-circle-o text-yellow"></i> Alerta</li>									                  
-									                  <li><i class="fa fa-circle-o text-black"></i> Off Line</li>
-									                  <li><i class="fa fa-circle-o text-light-blue"></i> Desligado ou Sem Alarme</li>
-									              </ul>
-									            </div><!-- /.col -->
-									        </div><!-- /.row -->
-									    </div><!-- /.box-body -->									    
-									</div>
-								
+									       <div data-fusioncharts							
+												data-width="420"
+												data-height= "420"						    						    						    						    
+												data-type="doughnut2d"						    								    
+												data-datasource="{{dataSource}}">
+											</div>
+									    </div>
+									</div>								
 								</div>
+
 							</div>
 							
 						</div>

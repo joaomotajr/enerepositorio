@@ -39,6 +39,12 @@
 								</div>						
 							</div>
 							<div class="col-md-6"> 
+								<div data-fusioncharts							
+								    data-width="450"
+								    data-height= "450"						    						    						    						    
+								    data-type="doughnut2d"						    								    
+								    data-datasource="{{donutDataSource}}">
+								</div>
 								
 							</div>						
 						</div>

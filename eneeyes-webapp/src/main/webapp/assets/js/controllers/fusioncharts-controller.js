@@ -433,6 +433,50 @@ app.controller('fusionchartsController', function ($scope, $timeout, $filter) {
 		
 	};
 	
+
+	$scope.donutDataSource = {
+			    chart: {
+			     	// caption: "Split of Revenue by Product Categories",
+					// subCaption: "Last year",					
+					numberSuffix: " Det",
+					showPercentValues: "0",
+					showBorder: "0",
+					use3DLighting: "1",
+					enableSmartLabels: "1",
+					startingAngle: "310",
+					showLabels: "0",					
+					showLegend: "1",
+					defaultCenterLabel: "Total revenue: $64.08K",
+					centerLabel: "Revenue from $label: $value",
+					centerLabelBold: "1",
+					showTooltip: "0",
+					decimals: "0",
+					useDataPlotColorForLabels: "1",
+					theme: "fint"
+			    },
+			    data: [
+			        {
+						label: "Teenage",
+						color: "#f39c12",
+			            value: "1"
+			        },
+			        {
+						label: "Adult",
+						color: "#dd4b39",
+			            value: "10"
+			        },
+			        {
+						color: "#00a65a",
+			            label: "Mid-age",
+			            value: "6"
+			        },
+			        {
+						label: "Senior",
+						color: "#d2d6de",
+			            value: "9"
+			        }
+			    ]
+			}
 	
 	
 	 angular.element('body').removeClass('loading');

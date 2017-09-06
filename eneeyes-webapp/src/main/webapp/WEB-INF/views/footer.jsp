@@ -27,7 +27,7 @@
     <!-- AdminLTE App -->
     <script src="/assets/plugins/adminlte/app.min.js"></script>
     <script src="/assets/plugins/adminlte/skin.js"></script>     
-    <script src="/assets/plugins/adminlte/chart.js"></script>
+    <!-- <script src="/assets/plugins/adminlte/chart.js"></script> -->
     
     <script type="text/javascript" src="/assets/plugins/fusioncharts/fusioncharts.js"></script>
     

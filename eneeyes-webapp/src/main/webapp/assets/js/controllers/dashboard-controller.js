@@ -23,12 +23,36 @@ app.filter('dashCompaniesPositionFilter', function () {
 
 app.controller('dashController', function ($scope, $timeout, $interval, $filter, ViewService, UserService) {
 
-	var pieChartCanvas;
-	var pieChart;
-	var PieData;
+	chart = {
+		caption: "Detectores Monitorados por Status",
+		subCaption: "...",					
+		numberSuffix: " Det",
+		showPercentValues: "0",
+		showBorder: "0",
+		use3DLighting: "1",
+		enableSmartLabels: "1",
+		startingAngle: "310",
+		showLabels: "0",					
+		showLegend: "1",
+		defaultCenterLabel: "Total Monitorado: 0" ,
+		centerLabel: "Detectores em $label: $value",
+		centerLabelBold: "1",
+		showTooltip: "0",
+		decimals: "0",
+		useDataPlotColorForLabels: "1",
+		theme: "fint"
+	}
 
-	function populateDonut() {
-		PieData = 
+	$scope.dataSource = {
+		chart: chart,			
+		data: null
+	}
+
+	function populateDonut(time) {
+		$scope.dataSource.chart.defaultCenterLabel = "Total Monitorado: " + $scope.sumary.devices;
+		$scope.dataSource.chart.subCaption = "Atualizado " + time;
+
+		$scope.dataSource.data = 
 		  [
 			{
 			    value: $scope.sumary.normal,
@@ -46,7 +70,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		      value: $scope.sumary.alarm3,
 		      color: "#dd4b39",
 		      highlight: "#dd4b39",
-		      label: "Evacução"
+		      label: "Evacucao"
 		    },
 		    {
 		      value: $scope.sumary.alarm2,
@@ -58,7 +82,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		      value: $scope.sumary.alarm1,
 		      color: "#d2d6de",
 		      highlight: "#d2d6de",
-		      label: "Detecção"
+		      label: "Deteccao"
 		    },
 		    {
 		      value: $scope.sumary.turnOff,
@@ -68,7 +92,6 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		    }
 		  ];
 	}
-
 	
 	$scope.dashCompaniesPosition = [];
 	$scope.dashDetectorsMaintenance = [];
@@ -125,7 +148,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 						$scope.sumary.devices ++;
 						
 						if ( e.alarmType == "OFF" || e.alarmType == "WITHOUT" ) {
-							$scope.sumary.offLine ++;
+							// $scope.sumary.offLine ++;
 							$scope.sumary.turnOff ++;						
 						}
 						else if ( e.alarmType == "OFFLINE" ) {							 
@@ -147,7 +170,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					}			
 			 	);			 			 
 				
-				populateDonut();			
+				populateDonut(new Date($scope.listAllDashCompaniesPosition.serverDate).toLocaleTimeString() );			
 			}
 			
 			$scope.loading = undefined;         	         	
@@ -184,21 +207,9 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
     	if($scope.$root == null) return;
     	
     	if($scope.$root.currentPage == "Dashboard" && $scope.$root.errorTimes <= 5) {
-    		$scope.getCompaniesPosition();    	
-			
-			$timeout(function () {
-    			pieChart.Doughnut(PieData, pieOptions);
-			}, 500);
+    		$scope.getCompaniesPosition();  		
     	}
     }, 10000);
-    
-    $timeout(function () {
-    	pieChartCanvas = $("#pieChart").get(0).getContext("2d");
-		pieChart = new Chart(pieChartCanvas);
-    	
-    	pieChart.Doughnut(PieData, pieOptions);
-			            
-    }, 500);
     
 	
 	angular.element('body').removeClass('loading');		

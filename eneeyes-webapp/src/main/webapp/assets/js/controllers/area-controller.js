@@ -341,7 +341,7 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		var imgDipositivosArea = itens;
 		
 		var $easyInstance = $('.pin').easypin({
-			 init: { imgDipositivosArea },           
+			 init: { imgDipositivosArea: itens },           
 		    responsive: true,
             limit: limit
 		});	

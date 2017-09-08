@@ -1,27 +1,3 @@
-<style>
-	.zui-table {
-		border: solid 1px #DDEEEE;
-		border-collapse: collapse;
-		border-spacing: 0;
-		font: normal 13px Arial, sans-serif;
-	}
-	.zui-table thead th {
-		background-color: #DDEFEF;
-		border: solid 1px #DDEEEE;
-		color: #336B6B !important;
-		padding: 10px;
-		text-align: left;
-		text-shadow: 1px 1px 1px #fff;
-	}
-	.zui-table tbody td {
-		border: solid 1px #DDEEEE;
-		color: #333;
-		padding: 10px;
-		text-shadow: 1px 1px 1px #fff;
-	}
-
-</style>
-
 <div data-ng-controller="simuladorController">
 		<br>
 		<div class="row">						                                                    

@@ -123,5 +123,27 @@
 	.disableDivOver {
 		pointer-events: none;
 		opacity: 0.6;
+	
+	}
+
+	.zui-table {
+		border: solid 1px #3c8dbc;
+		border-collapse: collapse;
+		border-spacing: 0;
+		font: normal 13px Arial, sans-serif;
+	}
+	.zui-table thead th {
+		background-color: #3c8dbc;
+		border: solid 1px #3c8dbc;
+		color: white !important;
+		padding: 10px;
+		text-align: left;
+		/* text-shadow: 1px 1px 1px #fff; */
+	}
+	.zui-table tbody td {
+		border: solid 1px #3c8dbc;
+		color: #333;
+		padding: 5px;
+		/* text-shadow: 1px 1px 1px #fff; */
 	}
 	

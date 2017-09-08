@@ -41,7 +41,12 @@
 		.off {
 			background: white !important;
 			color: black !important;
+		}		
+
+		.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+			padding: 4px !important;
 		}
+		
 	</style>
  	
 	<div data-ng-controller="dashController">
@@ -126,7 +131,7 @@
 
 						<!-- Main row -->
 						<div class="row">
-							<div class="col-md-8">
+							<div class="col-md-7">
 	
 								<div class="box box-primary">
 									<div class="box-header with-border">
@@ -142,10 +147,10 @@
 										</div>
 									</div>									
 									
-									<div class="box-body">
+									<div class="box-body" style="padding: 4px !important;text-align: -webkit-center;">
 										<div class="table-responsive">
 											<div style="max-height: 500px; overflow: auto">
-												<table class="table table-striped" id="dashboard" style="font-size:1.0em;">
+												<table class="zui-table" id="dashboard" style="font-size:90%;">
 													<thead>
 														<tr>														
 															<th>ID</th>
@@ -191,8 +196,8 @@
 																	'text-muted' : item.alarmType=='DETECCAO', 
 																	'text-danger' : item.alarmType=='EVACUACAO'}">&nbsp;
 																	{{item.last_value}}&nbsp;
-																	<span style="vertical-align:super;font-size:0.5em" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
-																	<span style="vertical-align:super;font-size:0.5em" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}</span>
+																	<span style="vertical-align:super;font-size:0.65em" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
+																	<span style="vertical-align:super;font-size:0.65em" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}</span>
 																</label>
 															</td>
 														
@@ -207,9 +212,33 @@
 	
 							</div>
 							 
-							<div class="col-md-4">
+							<div class="col-md-5">
 								<div class="row">
-									<div class="box box-primary" style="margin-bottom:0px">
+
+									<div class="box box-primary">
+									    <div class="box-header with-border">
+									        <h3 class="box-title">GR&Aacute;FICOS STATUS CONSOLIDADO</h3>
+									        <div class="box-tools pull-right">
+									            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+									            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+									        </div>
+									    </div>
+									    <div class="box-body" style="text-align: -webkit-center;">
+											<div style="border:1px solid #979797;display:inline-block;padding:0 10px">
+									    	<div data-fusioncharts							
+												data-width="400"
+												data-height= "400"						    						    						    						    
+												data-type="doughnut2d"						    								    
+												data-datasource="{{dataSource}}">
+											</div>
+											</div>
+											
+									    </div>
+									</div>																
+								</div>							
+
+								<div class="row">
+										<div class="box box-primary" style="margin-bottom:0px">
 										<div class="box-header with-border">
 											<h3 class="box-title">CALIBRA&Ccedil;&Otilde;ES PR&Oacute;XIMAS </h3>
 											<div class="box-tools pull-right">
@@ -236,27 +265,8 @@
 											</ul>
 											</div>
 										</div>									
-									</div>
-								</div>							
-
-								<div class="row">									
-									<div class="box box-primary">
-									    <div class="box-header with-border">
-									        <h3 class="box-title">GR&Aacute;FICOS STATUS CONSOLIDADO</h3>
-									        <div class="box-tools pull-right">
-									            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-									            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-									        </div>
-									    </div>
-									    <div class="box-body">
-									       <div data-fusioncharts							
-												data-width="420"
-												data-height= "420"						    						    						    						    
-												data-type="doughnut2d"						    								    
-												data-datasource="{{dataSource}}">
-											</div>
-									    </div>
-									</div>								
+									</div>									
+									
 								</div>
 
 							</div>

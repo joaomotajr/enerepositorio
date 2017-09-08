@@ -39,6 +39,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		centerLabelBold: "1",
 		showTooltip: "0",
 		decimals: "0",
+		centerFontSize: "10",
 		useDataPlotColorForLabels: "1",
 		theme: "fint"
 	}
@@ -203,13 +204,13 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 	$scope.getDetectorsMaintenance();
 	
     
-    $interval(function() {
-    	if($scope.$root == null) return;
+    // $interval(function() {
+    // 	if($scope.$root == null) return;
     	
-    	if($scope.$root.currentPage == "Dashboard" && $scope.$root.errorTimes <= 5) {
-    		$scope.getCompaniesPosition();  		
-    	}
-    }, 10000);
+    // 	if($scope.$root.currentPage == "Dashboard" && $scope.$root.errorTimes <= 5) {
+    // 		$scope.getCompaniesPosition();  		
+    // 	}
+    // }, 10000);
     
 	
 	angular.element('body').removeClass('loading');		

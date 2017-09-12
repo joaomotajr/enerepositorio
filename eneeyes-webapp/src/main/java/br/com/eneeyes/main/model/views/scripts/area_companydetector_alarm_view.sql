@@ -33,7 +33,8 @@ CREATE VIEW `area_companydetector_alarm_view` AS
             AND (cda.SENSOR_ID = s.UID)
         LEFT JOIN alarm a ON (cda.ALARM_ID = a.UID)
         LEFT JOIN gas g ON (a.GAS_ID = g.UID)
-    ORDER BY cdv.AREA_ID , cda.COMPANY_DETECTOR_ID    
+        ORDER BY cdv.AREA_ID , cd.UID, S.UID
+        
     
 /* POSTGRES */
     
@@ -71,4 +72,5 @@ VIEW area_companydetector_alarm_view AS
             AND (cda.SENSOR_ID = s.UID)
         LEFT JOIN alarm a ON (cda.ALARM_ID = a.UID)
         LEFT JOIN gas g ON (a.GAS_ID = g.UID)
-    ORDER BY cdv.AREA_ID , cda.COMPANY_DETECTOR_ID    
+    ORDER BY cdv.AREA_ID , cd.UID, S.UID    
+    

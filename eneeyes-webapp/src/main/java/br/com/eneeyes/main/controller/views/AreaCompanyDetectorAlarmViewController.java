@@ -29,4 +29,11 @@ public class AreaCompanyDetectorAlarmViewController {
 		BasicResult<?> result = service.listByAreaId(areaId); 
 		return result;
 	}
+	
+	@RequestMapping(value="/security/api/view/findAreaCompanyDetectorAlarmViewByCompanyDetectorId/{companyDetectorId}", method=RequestMethod.GET, produces = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> findAreaCompanyDetectorAlarmViewByCompanyDetectorId(@PathVariable Long companyDetectorId) {		
+		BasicResult<?> result = service.listByCompanyDetectorId(companyDetectorId); 
+		return result;
+	}
 }

@@ -39,7 +39,7 @@
 				       	<li class="active"><a href="#tabCompanyDetector_1" id="stepTabDetector_1" data-toggle="tab">Cadastro</a></li>
 				       	<li><a href="#tabCompanyDetector_4" id="stepTabDetector_4" data-toggle="tab">Manuten&ccedil;&atilde;o/Instala&ccedil;&atilde;o</a></li>
 				       	<li><a href="#tabCompanyDetector_2" id="stepTabDetector_2" data-toggle="tab">Configura&ccedil;&atilde;o</a></li>
-				       	<li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Gr&aacute;fico do Hist&oacute;rico</a></li>				       	
+				       	<!-- <li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Gr&aacute;fico do Hist&oacute;rico</a></li>				       	 -->
 				    	<li data-ng-hide="selectedCompanyDetector" class="pull-right"><i title="[Nenhum Detector Associado ao Dispositivo]" class="fa fa-info-circle text-red"></i></li>				    	
 				    </ul>
 					
@@ -152,108 +152,80 @@
 				    	         
 				       	</div><!-- /.tab-pane -->
 				       	 
-				       	<div class="tab-pane" id="tabCompanyDetector_2">		     
-				       		
-				       		<div class="row">	 							   
-				            	<div data-ng-repeat="sensor in selectedCompanyDetector.detector.sensors">
-				            	  	<div class="col-md-4">
-						              	<div class="panel panel-primary">						                
-
-							                <div class="panel-heading">
-										    	<h3 class="panel-title" style="text-align:center;"><i class="fa fa-rss"></i> Detector: {{selectedCompanyDetector.name}}</h3>										    								
-										   	</div>									   					               	
-
-							               	<div class="panel-body">
-						               			<div class="row">								                	
-											        <div style=" width: 100%; display: flex; justify-content: center; text-align: center;"													
-														id="{{'gauge_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + sensor.uid}}">
-													</div>												
-						                		</div>	
-						                		<div class="row">					                    				                    				                    
-								                	
-													<div class="description-block">																	
-														<h5 class="description-header"><i class="fa fa-bolt"></i> {{sensor.name}}</h5>
-														<span class="description-text">Range: Min|Max: {{sensor.rangeMin}} | {{sensor.rangeMax}}</span>
-														<br>
-														G&aacute;s: <strong class="text-navy">{{sensor.gases[0].name}}</strong>																
-														<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="sensor.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
-														<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="sensor.unitMeterGases!='LEL_PERCENT'"> {{sensor.unitMeterGases}}</span>													
-														
-														<hr style="margin-top: 8px !important; margin-bottom: 8px !important;">							                                
-														
-														<a href="#" data-ng-click="configAlarm($index);" title="Troca/Selecionar Alarme"><i class="fa fa-bullhorn"></i> Alarme </a>																												
-														<div data-ng-repeat="alarm in selectedCompanyDetectorAlarms">
-															<div data-ng-if="alarm.sensorId == sensor.uid">
-																<label class="text-red">{{alarm.alarmDto.name}}</label>
-															</div>
-															<div data-ng-if="alarm.sensorId != sensor.uid">
-																<label class="text-red">Sem Alarme</label>
-															</div>																																		
-														</div>														
-													</div>								                    
-							                	</div>		                
-							              	</div> 				              	   
-						              	</div>
-					              	</div> 
-				              	</div>
-				              	
-				       		</div>			       	  	        
-				       	</div>
-				       					       	 
-				       	<div class="tab-pane" id="tabCompanyDetector_3">	   
-			       			<div class="row">				            	
-			            	  	<div class="col-md-12">
-					              	<div class="panel panel-primary">						                
-						                <div class="panel-heading">
-									    	<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.name}}</h3>							
-									   	</div>									   					               	
-						               	<div class="panel-body">
-						               		<input class="pull-right ng-pristine ng-untouched ng-valid" type="checkbox" style="margin-right: 30px" data-ng-model="changeGraphic">
-					               			<label data-ng-show="changeGraphic" class="pull-right">Gr&aacute;fico Completo&nbsp;&nbsp;</label>
-											<label data-ng-hide="changeGraphic" class="pull-right">Gr&aacute;fico Medi&ccedil;&otilde;es&nbsp;&nbsp;</label>
-						               							               							               							               		
-						               		<div data-ng-if="selectedCompanyDetector.detector.sensors.length == 1">
-						               			<ul class="nav nav-tabs" id="myTab">
-												 	<li class="active"><a data-target="sensor1" data-toggle="tab">{{selectedCompanyDetector.detector.sensors[0].name}}</a></li>												 	
-												 												  	
-												</ul>
+				       	<div class="tab-pane" id="tabCompanyDetector_2">
+							   
+							<div class="row" style="margin-right: 5px !important; margin-left: 5px !important;">			       		 
+								<div data-ng-repeat="item in selectedCompanyDetectorAlarms">				              					            						              	
 									
-												<div class="tab-content">
-													<div class="tab-pane active" id="sensor1">
-													  	<div class="row">													  		
-									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detector.sensors[0].uid}}"></div>									               			
-									               		</div>
-								               		</div>												  	
-												</div>					               		
-						               		</div>
-						               		
-						               		<div data-ng-if="selectedCompanyDetector.detector.sensors.length > 1">
-						               			<ul class="nav nav-tabs" id="myTab">
-												 	<li class="active"><a data-target="#sensor1" data-toggle="tab">{{selectedCompanyDetector.detector.sensors[0].name}}</a></li>
-												  	<li><a data-target="#sensor2" data-toggle="tab">{{selectedCompanyDetector.detector.sensors[1].name}}</a></li>										  	
+									<div class="col-md-5">
+										<div class="panel panel-primary">								                
+											<div class="panel-heading">
+												<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong> {{item.companyDetectorName}}</h2>							
+											</div>											   					               	
+											<div class="panel-body">							            					                 										                	
+												<div class="row">
+													<div class="col-md-6">
+														<span class="pull-left text-muted" data-ng-if="item.alarmOn==null"><i class="fa-lg fa fa-bell-slash-o" title="Sem Alarme"></i></span>
+														<span class="pull-left text-black" title="{{item.alarmName}}" data-ng-if="item.alarmOn==false"><i class="fa-lg fa fa-bell-slash" title="Alarm Off"></i></span>
+														<span class="pull-left text-navy" title="{{item.alarmName}}" data-ng-if="item.alarmOn==true"><i class="fa-lg fa fa-bell" title=" Alarm On"></i></span>
+													</div>
+													<div class="col-md-6">
+														<a href="#" class="pull-right" data-ng-click="configAlarm($index);" title="Troca/Selecionar Alarme"><i class="fa-lg fa fa-gears" title="Atribuir/Remover Alarme"></i></a>	
+													</div>
+												</div>																	
+
+												<div class="row">								                	
+													<div style=" width: 100%; display: flex; justify-content: center; text-align: center;">														
+														<div data-fusioncharts							
+															data-width="150"
+															data-height= "250"																				    						    						    					    						    						    						    															
+															data-type="vled"
+															data-datasource="{{item.dataSource}}">
+														</div>
+													</div>													
+												</div>	
+																							
+												<ul class="list-group">																		
+													<li class="list-group-item" style="padding: 0px 15px;">
+														<label>G&aacute;s:</label> 
+														<span class="pull-right">
+															{{item.gasName}}
+															<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
+															<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}															
+														</span>
+													</span>
+													</li>
+													
+													<li class="list-group-item" style="padding: 0px 15px;">
+														<label>Range: Min|Man:</label><span class="pull-right">{{item.rangeMin}} | {{item.rangeMax}}</span>
+													</li>
+													<span data-ng-if="!item.alarmOn">
+															<br><hr><br><br><hr>
+													</span>
+													<span data-ng-if="item.alarmOn">
+														<li class="list-group-item" style="padding: 0px 15px;">
+															<label>Alarme Atribu&iacute;do:</label><span class="pull-right">{{item.alarmName}}</span> 
+														</li>
+														<li class="list-group-item list-group-item-info" style="padding: 2px 15px;">
+															<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm1}}</span> <label>Alarme1:</label> Detec&ccedil;&atilde;o
+														</li>
+														<li class="list-group-item list-group-item-warning" style="padding: 2px 15px;">
+															<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm2}}</span> <label>Alarme2:</label> Alerta
+														</li>
+														<li class="list-group-item list-group-item-danger" style="padding: 2px 15px;">
+															<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm3}}</span> <label>Alarme3:</label> Evacua&ccedil;&atilde;o:
+														</li>
+													</span>
 												</ul>
+
+											</div>
+										</div>
+									</div>
 									
-												<div class="tab-content">
-												  	<div class="tab-pane active" id="sensor1">
-												  		<div class="row">												  															  			
-									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detector.sensors[0].uid}}"></div>
-									               		</div>
-												  	</div>
-												  	<div class="tab-pane" id="sensor2">
-												  		<div class="row">
-									               			<div style="max-width: 800px; overflow-x: auto; overflow-y: hidden;" id="{{'line_companyDetector_' + selectedCompanyDetector.uid + '-sensor_' + selectedCompanyDetector.detector.sensors[1].uid}}"></div>
-									               		</div>
-												  	</div>												  	
-												</div>			
-						               		</div>
-						               								               		
-					    				</div>
-					    			</div>
-					    		</div>
-					    	</div>
-				       	     
-				     	</div><!-- /.tab-content -->	
-				     	
+								</div>								       		 
+							</div>				       		 
+						</div>
+
 				     	<div class="tab-pane" id="tabCompanyDetector_4">	   
 			       			<div class="row">				            	
 			            	  	<div class="col-md-12">
@@ -276,8 +248,7 @@
 																	<i class="fa fa-plus"></i>
 																</button>
 															</div>					
-														</div>
-														<!-- /.box-header -->
+														</div>														
 														<div class="box-body">											
 															<jsp:include page="controls/companyDetectorMaintenanceList.jsp"/>
 														</div>
@@ -287,9 +258,7 @@
 												
 					    				</div>
 					    			</div>
-					    		</div>
-					    		
-					    						    		
+					    		</div>			    		
 					    	</div>					    	
 				       	     
 				       	    <div class="row">
@@ -347,10 +316,10 @@
 												<td>{{item.alarm2}}</td>
 												<td>{{item.alarm3}}</td>
 												<td>																										
-													<div data-ng-if="item.uid == selectedAlarm.uid">
+													<div data-ng-if="item.uid == selectedCompanyDetectorAlarm.alarmId">
 														<button type="button" class="btn btn-danger btn-xs" data-ng-click="removerAlarm(item.uid)">Remover</button>
 													</div>
-													<div data-ng-if="item.uid != selectedAlarm.uid">
+													<div data-ng-if="item.uid != selectedCompanyDetectorAlarm.alarmId">
 														<button type="button" class="btn btn-primary btn-xs"  data-ng-click="selecionarAlarm(item.uid, $index)">Selecionar</button>
 													</div>
 													

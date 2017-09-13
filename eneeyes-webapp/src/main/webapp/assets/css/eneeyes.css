@@ -137,13 +137,11 @@
 		border: solid 1px #3c8dbc;
 		color: white !important;
 		padding: 10px;
-		text-align: left;
-		/* text-shadow: 1px 1px 1px #fff; */
+		text-align: left;		
 	}
 	.zui-table tbody td {
 		border: solid 1px #3c8dbc;
 		color: #333;
 		padding: 5px;
-		/* text-shadow: 1px 1px 1px #fff; */
 	}
 	

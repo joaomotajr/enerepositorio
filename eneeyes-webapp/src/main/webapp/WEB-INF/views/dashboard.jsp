@@ -53,12 +53,7 @@
 		<div class="row" style="font-family: Helvetica Neue, Arial;">
        		<div class="col-md-12">
 
-				<div class="box box-primary" style="margin-bottom: 8px;">
-				  
-					<div class="box-header with-border">
-						<h3 class="box-title">STATUS</h3>
-						<a href="#" class="text-muted pull-right" data-ng-click="refreshDashboard();"><i title="Refresh" class="fa fa-refresh"></i></a>									
-					</div>
+				<div class="box box-primary">				  
 					
 					<div class="box-body">
 						<div class="row">
@@ -129,20 +124,19 @@
 							</div>							
 						</div>
 
-						<!-- Main row -->
+						<br>
+
 						<div class="row">
 							<div class="col-md-7">
 	
 								<div class="box box-primary">
 									<div class="box-header with-border">
-										<h3 class="box-title">ULTIMAS MEDI&Ccedil;&Otilde;ES</h3>
+										<label><strong>&Uacute;ltimas medi&ccedil;&otilde;es</strong></label>
 										<div class="box-tools pull-right">
 										
 											<label data-ng-show='loading'>Loading ...</label>		
-						
-											<button class="btn btn-box-tool" data-widget="collapse">
-												<i class="fa fa-minus"></i>
-											</button>
+											<button class="btn btn-box-tool" data-ng-click="refreshDashboard();"><i title="Refresh" class="fa fa-refresh"></i></button>		
+											<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 
 										</div>
 									</div>									
@@ -164,13 +158,12 @@
 													</thead>
 													<tbody>
 														<tr data-ng-repeat="item in dashCompaniesPositionFiltered = (dashCompaniesPosition | dashCompaniesPositionFilter: selectedStatusDashCompaniesPosition)">																
-															<td>{{item.uid}}</td>
-															
+															<td>{{item.uid}}</td>															
 															<td><span data-truncate="12" data-value="{{item.company_name}}"></span></td>															
 															<td>{{item.company_detector_name}}</td>																
 															<td>{{item.gas_name}}</td>
 														
-															<td style="padding-top: 13px !important;"> 
+															<td> 
 																<span class="label" data-ng-class="{																	
 																	'label-primary' : item.alarmType=='OFF' || item.alarmType=='WITHOUT', 
 																	'label-offline' : item.alarmType=='OFFLINE',
@@ -217,7 +210,7 @@
 
 									<div class="box box-primary">
 									    <div class="box-header with-border">
-									        <h3 class="box-title">GR&Aacute;FICOS STATUS CONSOLIDADO</h3>
+									        <label><strong>Gr&aacute;fico Consolidado</strong></label>
 									        <div class="box-tools pull-right">
 									            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 									            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -240,11 +233,10 @@
 								<div class="row">
 										<div class="box box-primary" style="margin-bottom:0px">
 										<div class="box-header with-border">
-											<h3 class="box-title">CALIBRA&Ccedil;&Otilde;ES PR&Oacute;XIMAS </h3>
+											<label><strong>Calibra&ccedil;&otilde;es Pr&oacute;ximas</strong></label>
 											<div class="box-tools pull-right">
-												<button class="btn btn-box-tool" data-widget="collapse">
-													<i class="fa fa-minus"></i>
-												</button>
+												<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+												<button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
 											</div>
 										</div>
 										

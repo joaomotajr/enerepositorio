@@ -93,6 +93,19 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 	    $scope.selectedCompanyName = undefined;
 	    $scope.LoadAjaxContentCompany('clear.html');
 	}
+
+	$scope.newCompany = function () {
+
+	    $scope.companyUid = 0;
+	    $scope.companyName = '';
+	    $scope.companyDescription = '';
+		$scope.selectedCompanyName = undefined;
+
+		$scope.getCompanys();
+		
+		$timeout(function () { $('#selCompany').select2(); }, 200);
+		
+	}
 	 
 	$scope.$root.selecteds = [];
 	

@@ -8,14 +8,8 @@
 				<div class="col-md-12">
 
 					<div class="box box-primary" style="margin-bottom: 8px;" data-ng-class="{'collapsed-box' : selectedCompanyName}">
-					  
-						<div class="box-header with-border">
-							<h3 class="box-title">Cadastro</h3>
-							<div class="box-tools pull-right"></div>
-						</div>
-						
-						<div class="box-body">
 							
+						<div class="box-body">							
 							<div class="col-md-6">
 								<br />
 								<div class="box box-primary">
@@ -30,23 +24,21 @@
 				                    <div class="box-body" data-ng-show="isFrom == 'MASTER'">				                    	
 				                    	 
 				                        <select id="selCompany" class="form-control select2 select2-hidden-accessible"				                        	
-				                            style="width: 100%;" 
-				                            tabindex="-1" 
-				                            aria-hidden="true">
+				                            style="width: 100%;" tabindex="-1" aria-hidden="true">
 				                            	<option value="" selected="selected">Selecione</option>                              				                            	
-				                                <option data-ng-repeat="company in companies" value="{{company.uid}}" > {{company.name}} </option>				                                                    
-				                        </select>				                        							                                                                    
+				                                <option data-ng-repeat="company in companies" value="{{company.uid}}"> {{company.name}} </option>				                                                    
+										</select>	
+										&nbsp;&nbsp;										
 				                    </div>
 				                </div>        
 		                            
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6" data-ng-show="companyUid!=undefined">
 								<br />
 								<div class="form-group">
 									<label class="control-label">Nome</label>                                                                        
 									<input id="idCompanyName" class="form-control" placeholder="Nome da Empresa" data-ng-model="companyName">                                                                        
-								</div>
-								
+								</div>								
 								<div class="form-group">
 									<label class="control-label">Descri&ccedil;&atilde;o</label>                                                                        
 									<input class="form-control" placeholder="Descri&ccedil;&atilde;o" data-ng-model="companyDescription">                                                                        
@@ -56,11 +48,13 @@
 						
 						<div class="box-footer">							
 							<div class="col-md-12">
-								<button type="button" data-ng-click="selCompany();" class="btn btn-success pull-right" data-ng-disabled="!companyUid">&nbsp;Abrir&nbsp;</button>								
+								<button type="button" data-ng-click="newCompany();" class="btn btn-success pull-right">&nbsp;&nbsp;Nova&nbsp;&nbsp;</button>
 								<span class="pull-right">&nbsp;&nbsp;</span>
-								<button type="button" data-ng-click="saveCompany();" class="btn btn-primary pull-right" data-ng-disabled="(companyName) ? false : true"> Salvar </button>
+								<button type="button" data-ng-click="selCompany();" class="btn btn-default pull-right" data-ng-disabled="!companyUid">&nbsp;&nbsp;Abrir&nbsp;&nbsp;</button>
+								<span class="pull-right">&nbsp;&nbsp;</span>
+								<button type="button" data-ng-click="saveCompany();" class="btn btn-primary pull-right" data-ng-disabled="(companyName) ? false : true">&nbsp;Salvar&nbsp;</button>
 								<span class="pull-right">&nbsp;&nbsp;</span>												
-								<button type="button" data-ng-click="deleteCompany();" class="btn btn-danger pull-right" data-ng-disabled="!companyUid"> Excluir </button>
+								<button type="button" data-ng-click="deleteCompany();" class="btn btn-danger pull-right" data-ng-disabled="!companyUid">&nbsp;Excluir&nbsp;</button>
 							</div>
 						</div> 
 					</div>

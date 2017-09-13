@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,8 +55,13 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 	@Column(name = "range_max")
 	private Double rangeMax;
 	
-	@Column(name = "UNIT_METER_GASES")
+	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
 	private UnitMeterGases unitMeterGases;
+
+	@Enumerated(EnumType.ORDINAL) 
+	private UnitMeterGases UnitMeterGases() { 
+	    return unitMeterGases; 
+	}
 	
 	@Column(name = "last_update", nullable = true)
 	private Date lastUpdate;
@@ -64,6 +71,9 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 	
 	@Column(name = "alarm_type", nullable = true)
 	private AlarmType alarmType;
+	
+	@Column(name = "alarm_id")
+	private Long alarmId;
 	
 	@Column(name = "alarm_name", nullable = true)
 	private String alarmName;
@@ -185,6 +195,14 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 
 	public void setAlarmType(AlarmType alarmType) {
 		this.alarmType = alarmType;
+	}
+
+	public final Long getAlarmId() {
+		return alarmId;
+	}
+
+	public final void setAlarmId(Long alarmId) {
+		this.alarmId = alarmId;
 	}
 
 	public final String getAlarmName() {

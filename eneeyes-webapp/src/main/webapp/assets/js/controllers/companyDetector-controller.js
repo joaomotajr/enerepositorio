@@ -20,7 +20,7 @@ app.filter('gasFilter', function () {
 
 app.controller('companyDetectorController', function ($scope, $interval, $rootScope, $timeout, $filter, CompanyDeviceService, 
 		CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, 
-		PositionService, HistoricService, CompanyDetectorMaintenanceHistoricService) {
+		CompanyDetectorMaintenanceHistoricService, ViewService) {
 
 	var loadGoogleCharts = false;
 	
@@ -60,7 +60,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			//Se for um Company Detector novo ou nao associado a um Detector
 			if($scope.selectedCompanyDetector.uid == undefined) {
 				$scope.selectedCompanyDetector = $scope.inclusaoCompanyDetector.t;				
-				//$scope.getCompanyDetectorAlarms();
 
 				$scope.getOneCompany($scope.companyUid);
 			}		
@@ -106,14 +105,14 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		});		 
 	}
 	
-	$scope.getDetectors = function() {
-		 
+	$scope.getDetectors = function() {		 
 		 $scope.resultDetectors = new DetectorService.listAll();		 
 		 $scope.resultDetectors.$detector({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.detectors = $scope.resultDetectors.list; 			 
         });		 
-	 }	
-			
+	 }
+	
+	 
 	$scope.getOneCompanyDetector = function() {
 
 		$scope.search = { unitMeterGases: null, gas : null };
@@ -125,12 +124,145 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 						
 			//* Detector ja foi associado a dispositivo checa alarmes *//
 			if($scope.selectedCompanyDetector != null) {
-				$scope.getCompanyDetectorAlarms();
+				
+				$scope.getCompanyDetectorAlarms($scope.selectedCompanyDetector.uid);
+				
 				reloadDates();
+				
 				$scope.getCompanyDetectorMaintenanceHistoric();
-				$scope.getPositionsNoTimer($scope.selectedCompanyDetector);
+				
 			}
         });		 
+	}
+
+	$scope.getCompanyDetectorAlarms = function(companyDetectorId) {
+
+		$scope.resultDetectors = new ViewService.listCompanyDetectorsAlarms();		 
+		$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), companyDetectorId : companyDetectorId}, function(){						
+			$scope.selectedCompanyDetectorAlarms = $scope.resultDetectors.list;
+
+			$scope.selectedCompanyDetectorAlarms.forEach (
+				function(e) {						
+					e.dataSource = $scope.getGaugeInfo(e);						
+				}			
+			);
+			 
+		});
+	}
+
+	$scope.getGaugeInfo = function(sensor) {
+
+		var red =    sensor.alarmOn == null ? 0 : sensor.alarm3;
+		var yellow = sensor.alarmOn == null ? 0 : sensor.alarm2;
+		var orange = sensor.alarmOn == null ? 0 : sensor.alarm1;
+
+		properties =  {
+			
+			theme: "fint",
+			caption: sensor.sensorName,
+			lowerLimit: sensor.rangeMin,
+			upperLimit: sensor.rangeMax,
+			lowerLimitDisplay: sensor.rangeMin + " Min",
+			upperLimitDisplay: sensor.rangeMax + " Max",
+			numberSuffix: " " + (sensor.unitMeterGases == "LEL_PERCENT" ? "LEL %" : sensor.unitMeterGases),			
+			
+			showValue: "1",
+			valueFontSize: "12",
+			origW: "400",
+			origH: "150",
+			ledSize: "1",
+			ledGap: "1",
+			manageResize: "1",			
+			showhovereffect: "1",
+			showValues: "0",                
+			showXAxisLine: "0",
+			showYAxisLine: "0",
+            showSecondaryLimits : "0",		
+		};
+
+		trendPoints =  {
+			point: [
+				{
+					startValue: orange,					
+					dashed: "1",
+					dashlen: "3",
+					dashgap: "3",
+					thickness: "2"
+				},
+				{
+					startValue: yellow,					
+					dashed: "1",
+					dashlen: "3",
+					dashgap: "3",
+					thickness: "2"
+				},
+				{
+					startValue: red,					
+					dashed: "1",
+					dashlen: "3",
+					dashgap: "3",
+					thickness: "2"
+				}
+			]
+		};
+
+		colors = {				
+			color: [
+			{
+				minValue: sensor.rangeMin,
+				maxValue: orange,
+				code: "#6baa01"			
+			},
+			{
+				minValue: orange,
+				maxValue: yellow,
+				code: "#D8D8D8"		
+			}, {
+				minValue: yellow,
+				maxValue: red,
+				code: "#f8bd19"		
+			}, {
+				minValue: red,
+				maxValue: sensor.rangeMax,
+				code: "#e44a00"					 	
+			}]		
+		}
+
+		colors2 = {				
+			color: [
+			{
+				minValue: sensor.rangeMin,
+				maxValue: sensor.rangeMax,
+				label : "Sem Limites de Alarmes",	
+				code: "#6baa01"
+			}]		
+		}
+
+		var value = sensor.lastValue > sensor.rangeMax ? sensor.rangeMax : sensor.lastValue;
+		values = {		  		  			
+			dial: [{
+				id: "crntYr",
+				value: value,
+				showValue: "1",
+				tooltext: "Status : $value",
+				rearExtension: "5"
+			}]			
+		}
+
+		dataSource = {
+			chart: null,
+			colorRange: null,
+			dials: null,
+			trendPoints: null
+		}
+		
+
+		dataSource.chart = properties;
+		dataSource.colorRange = (yellow == 0 || orange == 0) ? colors2 : colors;
+		dataSource.dials = values;
+		dataSource.trendPoints = trendPoints;
+
+		return dataSource;
 	}
 	
 	function reloadDates() {
@@ -156,76 +288,17 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		];	
 
 	 $scope.initializeDetector =  function()  {
-				 
-		if(! loadGoogleCharts) {				
-			google.charts.load( 'visualization', '1', { 'packages': ['gauge', 'corechart'] });				
-			loadGoogleCharts = true;
-		}
-		
+				
 		$("#datemask").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
 	    $("#datemask2").inputmask("mm/dd/yyyy", { "placeholder": "mm/dd/yyyy" });
 	    $("[data-mask]").inputmask();
-	    
-	    initControlEvents();
-				 		 
-		$timeout(function () {
-														
-			initGaugeTimer = function() {
-													
-				var current = angular.copy($scope.selectedCompanyDetector);
-				
-				if(current != null) {					
-					$scope.$root.timer.push($interval(function(){
-						if($rootScope == null) return;
-						if($rootScope.currentPage == "Empresas")
-							$scope.getPositions(current);     
-						
-				    }, 5000));						
-				}						
-			}
-			
-			initChartTimer = function() {
-				
-				var current = angular.copy($scope.selectedCompanyDetector);
-				
-				if(current != null) {					
-					$scope.$root.timer.push($interval(function(){
-						if($scope.$root.currentPage == "Empresas")
-							$scope.getHistorics(current, 1);						
-				    }, 5000));						
-				}						
-			}
-	
-			initDatatable();
-															
-		}, 500);
+	    				 		 
+		$timeout(function () { initDatatable(); }, 500);
 		   
 		$("#stepTabDetector_1").trigger("click");
 	 }	 
 	 
-	 initControlEvents = function() {
-		
-		$('.tabDetector a').on('click', function (event) {
-		    event.preventDefault();
-			    
-		    //Limpa Timers
-		    while ($scope.$root.timer.length) {				        	
-		    	$interval.cancel($scope.$root.timer.pop());				            
-		    }
-			    
-			google.charts.setOnLoadCallback(initDrawGaugesDetector);
-			google.charts.setOnLoadCallback(initChartLinesDetector);
-			    
-			if ($(event.target).attr('href') == "#tabCompanyDetector_2") {			    	
-				initGaugeTimer();
-			}
-			else if ($(event.target).attr('href') == "#tabCompanyDetector_3") {
-			
-				initChartTimer();
-			}			
-		});
-	 }
-	 
+	 	 
 	 $scope.validDeliveryDate = function ($event) {
 
         if ($('#deliveryDate').val().match(/[^0-9\/]/g) != null) {
@@ -331,237 +404,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	           '</table>'+
 	       '</div>';
 		}
-	}
-		
-	function initDrawGaugesDetector() {
-		var current = angular.copy($scope.selectedCompanyDetector);
-		
-		if(current != null) 												
-			$scope.getPositions(current);
-					    		
-	}
-	
-	$scope.getPositionsNoTimer = function(currentCompanyDetector) {
-		
-		$scope.listOnePositionNoTimer = new PositionService.listOneByCompanyDetector();		 
-		$scope.listOnePositionNoTimer.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function() {
-			 
-			if ($scope.listOnePositionNoTimer.list == undefined || $scope.listOnePositionNoTimer.list.length == 0) return;
-
-			for (var j = 0; j < currentCompanyDetector.detector.sensors.length; j++) {				
-					
-				var offDate = ((new Date() - new Date($scope.listOnePositionNoTimer.list[j].lastUpdate)) / 1000) > 300;
-				$scope.alarmesFired[j] = offDate ? "OFFLINE" : $scope.listOnePositionNoTimer.list[j].alarmType;
-			}
-			 
-		});
-	}
-	
-	$scope.alarmesFired = [];
-	
-	$scope.getPositions = function(currentCompanyDetector) {
-		
-		$scope.listOnePosition = new PositionService.listOneByCompanyDetector();		 
-		$scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : currentCompanyDetector.uid}, function() {		
-
-			if ($scope.listOnePosition.list == undefined || $scope.listOnePosition.list.length == 0) return;
-			 
-			for (var j = 0; j < currentCompanyDetector.detector.sensors.length; j++) {
-				
-				var offDate = ((new Date() - new Date($scope.listOnePosition.list[j].lastUpdate)) / 1000) > 300;
-				$scope.alarmesFired[j] = offDate ? "OFFLINE" : $scope.listOnePosition.list[j].alarmType;
-				
-				var item = 0;					
-				if($scope.listOnePosition.list != null && $scope.listOnePosition.list.length != 0) {									
-					item = $.grep($scope.listOnePosition.list, function (e) { return e.sensorDto.uid == currentCompanyDetector.detector.sensors[j].uid ; });
-				}
-				
-				var id = 'gauge_companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detector.sensors[j].uid;					
-				formatGaugeSensor(currentCompanyDetector.detector.sensors[j], item == 0 ? 0 : item[0], id);					
-			}				
-			
-	    });			
-	}
-	
-	function formatGaugeSensor(sensor, item, id) {
-		var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensor.uid ; });
-
-		var red =    selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
-		var yellow = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm2;
-		var orange = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm1;
-		
-		var gaugeOptions = {
-			 min: sensor.rangeMin, max: sensor.rangeMax,			     
-		     redFrom: red, redTo: red == 0 ? 0 : sensor.rangeMax,
-		     yellowFrom: yellow, yellowTo: red,
-		     greenFrom: orange, 
-		     greenColor: "gray",
-		     greenTo: yellow, 
-		     minorTicks: 5
-		};
-					
-		var gaugeData = google.visualization.arrayToDataTable([ ['Label', 'Value'], ['Id: ' + item.uid, 0],]);
-	    		
-		objGauge = document.getElementById(id);
-		
-		if (objGauge == undefined) {
-			console.log('Objeto:: ' + id + "Nao localizado:: " + new Date())
-		}
-		else {
-			gauge = new google.visualization.Gauge(objGauge);
-							
-		    gaugeData.setValue(0, 1 , item.lastValue);
-		    gauge.draw(gaugeData, gaugeOptions);
-		}
 	}	
-	
-	function initChartLinesDetector() {
-		var current = angular.copy($scope.selectedCompanyDetector);
-		
-		if(current != null) 												
-			$scope.getHistorics(current, 1);
-					    		
-	}
-	
-	$scope.getHistorics = function(currentCompanyDetector, interval) {
-		
-		$scope.listInterval = new HistoricService.listIntervalDetector();		
-		$scope.listInterval.$historic({_csrf : angular.element('#_csrf').val(),  
-			companyDetectorId: currentCompanyDetector.uid,			 
-			interval: interval }, function(){
-			
-			var itens = [];	
-			for (var j = 0; j < currentCompanyDetector.detector.sensors.length; j++) {
-				
-				if($scope.listInterval.list != null && $scope.listInterval.list.length != 0) {									
-					
-					var itens = new Array();
-					for (var k = 0; k < $scope.listInterval.list.length; k++) {
-						
-						if( $scope.listInterval.list[k].sensorDto.uid == currentCompanyDetector.detector.sensors[j].uid)
-							itens.push([$scope.listInterval.list[k].lastUpdate, $scope.listInterval.list[k].value ] );
-					}
-				}
-				
-				var id = 'line_companyDetector_' + currentCompanyDetector.uid + '-sensor_' + currentCompanyDetector.detector.sensors[j].uid;					
-				formatLineSensor(currentCompanyDetector.detector.sensors[j], itens, id);					
-			}      	
-       });		
-	}	
-	 
-	function formatLineSensor(sensor, value, id) {
-		
-		var selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == sensor.uid ; });
-		
-		var red =    selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
-		var yellow = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm2;
-		var orange = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm1;
-		
-		var data = new google.visualization.DataTable();
-	      
-	    data.addColumn('string', 'Date');
-	    data.addColumn('number', 'Valor');
-    
-	    var changeDate = '';  
-	    for(var i in value) {
-	    	var itemDate = new Date(value[i][0]);
-
-	    	if (changeDate != itemDate.toLocaleDateString())
-	    		value[i][0] = itemDate.toLocaleTimeString() + '\r'  + itemDate.toLocaleDateString();
-	    	else
-	    		value[i][0] = itemDate.toLocaleTimeString()
-
-	    	changeDate = itemDate.toLocaleDateString();
-		}
-	      
-	    data.addRows(value);
-	    
-	    if ($scope.changeGraphic) {
-		    var options = {
-		          title: "Dados do Sensor na �ltima Hora.",
-		          legend: {position: 'none'},
-		          'lineWidth': 0.75,
-		    	  width: 850,
-		    	  height: 400,
-		    	  hAxis: {
-		    		  title: 'Data', 
-		    		  textPosition: 'none',
-		    		  textStyle: {
-	                          'color': '#8C8C8C',
-	                              'fontName': 'Calibri',
-	                              'fontSize': 9,
-	                      },
-		    	  },
-		    	  vAxis: {
-		    		  maxValue:sensor.rangeMax,
-		              minValue:0,
-		              textStyle: {
-	                      'color': '#8C8C8C',
-	                          'fontName': 'Calibri',
-	                          'fontSize': 9,
-	                          'fontStyle' : 'bold',
-	                  },
-		    		  ticks: [ 
-		    		           {v:0, f: 'Range Minimo: 0' }, 
-		    		           {v: orange, f: 'Dete��o: ' + orange}, 
-		    		           {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		           {v: red, f: 'Evacua��o: ' + red}, 
-		    		           {v: sensor.rangeMax, f: 'Range M�ximo: ' + sensor.rangeMax} 
-		    		        ]
-		    	  },
-		    	  //curveType: 'function',
-		          pointSize:1	        
-		      };
-	    }
-		else {
-			var options = {
-		          title: "Dados do Sensor na �ltima Hora.",
-		          legend: {position: 'none'},
-		          'lineWidth': 0.75,
-		    	  width: 850,
-		    	  height: 400,
-		    	  hAxis: {
-		    		  title: 'Data', 
-		    		  textPosition: 'none',
-		    		  textStyle: {
-	                          'color': '#8C8C8C',
-	                              'fontName': 'Calibri',
-	                              'fontSize': 9,
-	                      },
-		    	  },
-		    	  vAxis: {
-		              textStyle: {
-	                      'color': '#8C8C8C',
-	                          'fontName': 'Calibri',
-	                          'fontSize': 9,
-	                          'fontStyle' : 'bold',
-	                  },
-		    	  },
-		    	  //curveType: 'function',
-		          pointSize:1	        
-		      };
-		    	
-		}
-	    
-	    var chart = new google.visualization.LineChart(document.getElementById(id));
-	    chart.draw(data, options);
-	
-	}	
-		
-	$scope.selecionarDetector = function(item) {
-		if ($scope.selectedCompanyDetector ==  undefined)
-			$scope.selectedCompanyDetector = [];
-		
-		$scope.selectedCompanyDetector.detectorDto = item;
-	}
-	
-	$scope.getCompanyDetectorAlarms = function() {
-		
-		$scope.resultCompanyDetectorAlarm = new CompanyDetectorAlarmService.listPorCompanyDetectorAlarm();		 
-		$scope.resultCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){			
-			$scope.selectedCompanyDetectorAlarms = $scope.resultCompanyDetectorAlarm.list;
-        });		 
-	}
 	
 	$scope.getAlarms = function() {
 		
@@ -572,17 +415,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	}
 	
 	$scope.configAlarm = function(index) {
-		
-		$scope.sensorIndex = index; 
-		$scope.selectedSensor = $scope.selectedCompanyDetector.detector.sensors[index];
-		
-		if($.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == $scope.selectedSensor.uid ; }).length != 0 )			
-			$scope.selectedAlarm = $.grep($scope.selectedCompanyDetectorAlarms, function (e) { return e.sensorId == $scope.selectedSensor.uid ; })[0].alarmDto;		
-		else
-			$scope.selectedAlarm = undefined;
-		
-		$scope.search = { unitMeterGases: $scope.selectedSensor.unitMeterGases, gas : $scope.selectedCompanyDetector.detector.sensors[index].gases[0].name };
-		
+
+		$scope.selectedCompanyDetectorAlarm = $scope.selectedCompanyDetectorAlarms[index];
+		$scope.search = { unitMeterGases: $scope.selectedCompanyDetectorAlarm.unitMeterGases, gas : $scope.selectedCompanyDetectorAlarm.gasName};
+
 		$timeout(function () {
 			$('#modalAlarm').modal({ show: 'false', backdrop: 'static', keyboard:'false' });
 						 
@@ -625,9 +461,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		else {
 			/* Upd TELA */
 			$scope.selectedCompanyDetectorAlarms[detectorAlarmIndex] = {alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid};
-		}
-		
-		initDrawGaugesDetector();		
+		}		
 	}
 		
 	$scope.removerAlarm = function(uid) {		

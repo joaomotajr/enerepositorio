@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -16,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by asus on 24/09/14.
@@ -25,7 +25,7 @@ public class EmailService extends Thread {
 
     Log log = LogFactory.getLog(getClass());
 
-    @Inject
+    @Autowired
     Session mailSession;
     
     private String to;

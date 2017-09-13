@@ -3,8 +3,7 @@ package br.com.eneeyes.main.service.register;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
@@ -18,7 +17,7 @@ import br.com.eneeyes.main.service.IService;
 @Service
 public class GasService implements IService<GasDto> {
 
-	@Inject
+	@Autowired
 	private GasRepository repository;
 	
 	public BasicResult<?> save(GasDto dto) {

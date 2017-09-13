@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -16,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -28,7 +28,7 @@ public class SiteService {
     
     protected final String timestampFormat = "dd/MM/yyyy às HH:mm:ss";
 
-    @Inject
+    @Autowired
     Session mailSession;
    
     public Boolean SendEmail(String[] to, String subject, String body) {

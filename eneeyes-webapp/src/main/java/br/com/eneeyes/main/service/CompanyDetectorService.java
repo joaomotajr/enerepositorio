@@ -9,10 +9,8 @@ import org.springframework.stereotype.Service;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
-import br.com.eneeyes.main.model.CompanyDetectorShadow;
 import br.com.eneeyes.main.model.CompanyDevice;
 import br.com.eneeyes.main.repository.CompanyDetectorRepository;
-import br.com.eneeyes.main.repository.CompanyDetectorShadowRepository;
 import br.com.eneeyes.main.repository.CompanyDeviceRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -22,10 +20,7 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 
 	@Autowired
 	private CompanyDetectorRepository repository;
-	
-	@Autowired
-	private CompanyDetectorShadowRepository shadowRepository;
-	
+		
 	@Autowired
 	private CompanyDeviceRepository companyDeviceRepository;
 	
@@ -149,22 +144,13 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	
 	public Result<?> findByCompanyDevice(Long uid) {
 		
-//	Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();;
-//		
-//		try {			
-//			CompanyDetector item = repository.findByCompanyDeviceUid(uid);
-//
-//			if (item != null) {
-//				result.setEntity(new CompanyDetectorDto(item));
-		
-		Result<CompanyDetectorShadow> result = new Result<CompanyDetectorShadow>();
+	Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();;
 		
 		try {			
-			CompanyDetectorShadow item = shadowRepository.findByCompanyDeviceId(uid);
+			CompanyDetector item = repository.findByCompanyDeviceUid(uid);
 
 			if (item != null) {
-				result.setEntity(item);
-				
+				result.setEntity(new CompanyDetectorDto(item));				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {

@@ -20,16 +20,7 @@
 	<div data-ng-controller="companyDetectorController">
 		<div class="box box-primary">
 			<div class="box-header with-border">			
-				<strong style="font-size:1.4em"><i class='fa fa-rss'></i> {{selectedCompanyDevice.deviceType}} <span data-ng-show="selectedCompanyDetector.name">-</span> {{selectedCompanyDetector.name}}</strong>
-				
-				<div class="box-tools pull-right">  
-					<div class="btn-group">
-                		<button data-ng-if="alarmesFired[0] != null" type="button" class="btn btn-xs" title="{{alarmesFired[0]}}"
-                		data-ng-class="{'bg-black' : alarmesFired[0]=='OFFLINE', 'bg-green' : alarmesFired[0]=='NORMAL', 'bg-orange' : alarmesFired[0]=='ALERTA', 'bg-gray' : alarmesFired[0]=='DETECCAO', 'bg-red' : alarmesFired[0]=='EVACUACAO'}">S1</button>
-                   		<button data-ng-if="alarmesFired[1] != null" type="button" class="btn btn-xs" title="{{alarmesFired[1]}}"
-                   		data-ng-class="{'bg-black' : alarmesFired[1]=='OFFLINE', 'bg-green' : alarmesFired[1]=='NORMAL', 'bg-orange' : alarmesFired[1]=='ALERTA', 'bg-gray' : alarmesFired[1]=='DETECCAO', 'bg-red' : alarmesFired[1]=='EVACUACAO'}">S2</button>                  
-                 	</div>
-                </div>				
+				<strong style="font-size:1.4em"><i class='fa fa-rss'></i> {{selectedCompanyDevice.deviceType}} <span data-ng-show="selectedCompanyDetector.name">-</span> {{selectedCompanyDetector.name}}</strong>				
 			</div>		
 				
 			<div class="box-body">
@@ -39,7 +30,6 @@
 				       	<li class="active"><a href="#tabCompanyDetector_1" id="stepTabDetector_1" data-toggle="tab">Cadastro</a></li>
 				       	<li><a href="#tabCompanyDetector_4" id="stepTabDetector_4" data-toggle="tab">Manuten&ccedil;&atilde;o/Instala&ccedil;&atilde;o</a></li>
 				       	<li><a href="#tabCompanyDetector_2" id="stepTabDetector_2" data-toggle="tab">Configura&ccedil;&atilde;o</a></li>
-				       	<!-- <li><a href="#tabCompanyDetector_3" id="stepTabDetector_3" data-toggle="tab">Gr&aacute;fico do Hist&oacute;rico</a></li>				       	 -->
 				    	<li data-ng-hide="selectedCompanyDetector" class="pull-right"><i title="[Nenhum Detector Associado ao Dispositivo]" class="fa fa-info-circle text-red"></i></li>				    	
 				    </ul>
 					
@@ -62,11 +52,12 @@
 								                <label class="control-label">Identifica&ccedil;&atilde;o</label>
 								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Identifica&ccedil;&atilde;o Obrigatorio]</span>
 									            <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho M&aacute;ximo 8 caracteres</span>
-								                <input data-disallow-spaces id="companyDetectorName" class="form-control" style="text-transform:uppercase" 
+												
+												<input data-disallow-spaces id="companyDetectorName" class="form-control" style="text-transform:uppercase" 
 								                	placeholder="Identifica&ccedil;&atilde;o do Detector (Sem Espa&ccedil;os)" 
 								                	data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="8" name="username" 
 								                	title="Identifica&ccedil;&atilde;o do Detector (Sem Espa&ccedil;os)"
-								                required>
+								                	required>
 								            </div>
 								        </div>
 								        
@@ -98,15 +89,13 @@
 											<label class="control-label">Identifica&ccedil;&atilde;o do Detector/Sensores</label>
 											<div class="box box-primary collapsed-box">
 												<div class="box-header with-border">
-													<Label class="box-title">{{selectedCompanyDetector.detector.name}}-{{selectedCompanyDetector.detector.model}} Sensores: {{selectedCompanyDetector.detector.sensors.length}} </label>
+													<Label class="box-title">{{selectedCompanyDetector.detectorDto.name}}-{{selectedCompanyDetector.detectorDto.model}} Sensores: {{selectedCompanyDetector.detectorDto.sensorsDto.length}} </label>
 													<div class="box-tools pull-right" title="Clique para mais detalhes">
 														<button class="btn btn-box-tool" data-widget="collapse">
 															<i class="fa fa-plus"></i>
 														</button>
 													</div>
-													<!-- /.box-tools -->
-												</div>
-												<!-- /.box-header -->
+												</div>												
 												<div class="box-body">
 													<table class="table table-bordered table-hover">
 														<thead>
@@ -125,11 +114,8 @@
 															</tr>                                                               
 														</tbody>
 													</table>												
-												
-												</div>
-												<!-- /.box-body -->
-											</div>
-											<!-- /.box -->
+												</div>												
+											</div>											
 										</div>													        
 								    </div>								    		    					
 					       		</form>
@@ -144,7 +130,7 @@
 				    	
 				       		<div class="row">
 				       			<div class="col-md-12">
-				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detector.uid) ? false : true">&nbsp;Salvar&nbsp;</button>		       				
+				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true">&nbsp;Salvar&nbsp;</button>		       				
 				       				<span class="pull-right">&nbsp;</span>
 				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">&nbsp;Excluir&nbsp;</button>								
 								</div>
@@ -263,7 +249,7 @@
 				       	     
 				       	    <div class="row">
 				       			<div class="col-md-12">
-				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detector.uid) ? false : true">Salvar</button>		       				
+				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true">Salvar</button>		       				
 				       				<span class="pull-right">&nbsp;</span>
 				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">Excluir</button>								
 								</div>

@@ -16,7 +16,9 @@ import br.com.eneeyes.main.model.Historic;
 import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.register.Sensor;
+import br.com.eneeyes.main.model.views.PositionView;
 import br.com.eneeyes.main.repository.PositionRepository;
+import br.com.eneeyes.main.repository.views.PositionViewRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
@@ -25,6 +27,9 @@ public class PositionService implements IService<PositionDto> {
 	
 	@Autowired
 	private PositionRepository repository;
+	
+	@Autowired
+	private PositionViewRepository repositoryView;
 	
 	@Autowired
 	PositionAlarmService positionAlarmService;	
@@ -146,23 +151,14 @@ public class PositionService implements IService<PositionDto> {
 	}	
 	
 	public BasicResult<?> findByCompanyDetector(Long uid) {
-		Result<PositionDto> result = new Result<PositionDto>();
-		
-		CompanyDetector companyDetector = new CompanyDetector();
-		companyDetector.setUid(uid);
+		Result<PositionView> result = new Result<PositionView>();
 		
 		try {
-			List<Position> lista = repository.findByCompanyDetector(companyDetector);
+			List<PositionView> lista = repositoryView.findByCompanyDetectorId(uid);
 			
-			if (lista != null) {
-				
-				List<PositionDto> dto = new ArrayList<PositionDto>();
-				
-				for (Position position   : lista) {					
-					dto.add(new PositionDto(position) );
-				}
+			if (lista != null) {				
 								
-				result.setList(dto);
+				result.setList(lista);
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {

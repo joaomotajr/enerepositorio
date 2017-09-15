@@ -1,5 +1,5 @@
 app.controller('areaController', function ($scope, $rootScope, $interval, $timeout, $filter, AreaService, CompanyDetectorService, 
-		DetectorService, CompanyDeviceService, CompanyService, PositionService, CompanyDetectorAlarmService) {
+		DetectorService, CompanyDeviceService, CompanyService, PositionService, CompanyDetectorAlarmService, ViewService) {
 
 	var loadGoogleCharts = false;
 	
@@ -154,34 +154,26 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		$scope.resultCompanyDetectorsArea = new CompanyDetectorService.listPorAreaId();		 
 		$scope.resultCompanyDetectorsArea.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid }, function(){			
 			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;    
-			
-			// TODO Precisa rever a busca de alarms pela área, pois não retorna o detector
-			if($scope.selectedCompanyDetectorsArea != null)
-				$scope.getCompanyDetectorAlarmsArea();
-			
+					
         });		 
 	}
 	
-	$scope.getCompanyDetectorAlarmsArea = function() {
+	// $scope.getCompanyDetectorArea = function() {
 		
-		$scope.resultCompanyDetectorAlarmArea = new CompanyDetectorAlarmService.listPorAreaId();		 
-		$scope.resultCompanyDetectorAlarmArea.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid}, function(){			
-			$scope.selectedCompanyDetectorAlarmsArea = $scope.resultCompanyDetectorAlarmArea.list;
-        });		 
-	}
+	// 	$scope.resultDetectors = new ViewService.listAreaCompanyDetectorsAlarms();		 
+	// 	$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), areaId : $scope.selectedArea.uid}, function(){	
+			
+	// 		$scope.selectedCompanyDetectorsArea = $scope.resultDetectors.list; 			
+						
+	// 	});
+	// }
 	 
 	 /*--------------------------------------------------------------------------   M A P S  &  E V E N T S -----------------------------------------------------------------------*/
 	 
 	 $scope.initializeArea =  function()
 	 {		 
-		 if(! loadGoogleCharts) {
-			google.charts.load('current', { 'packages': ['gauge'] });
-			loadGauge = true;
-		 }
 		 
 		 $timeout(function () {
-			 
-			google.charts.setOnLoadCallback(initDrawGaugesArea);
 			 
 			$('.tabArea a').on('click', function (event) {
 			    event.preventDefault();  
@@ -190,7 +182,7 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 			    	initializeEasyPin();			    	
 				}
 			    else if ($(event.target).attr('href') == "#tabArea_3") {
-			    	initGaugeTimerAreas();
+			    
 			    }
 			});
 			
@@ -202,20 +194,7 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 			$('#idInputImageArea').change( encodeImageFileAsURL( function(base64Img) {				
 				$scope.selectedArea.image =  base64Img;
 				$scope.$apply();					    
-			}));
-			
-			initGaugeTimerAreas = function() {
-				
-				var current = angular.copy($scope.selectedCompanyDetectorsArea);
-				
-				if(current != null) {					
-					$scope.$root.timer.push($interval(function(){
-						if($rootScope == null) return;
-						if($rootScope.currentPage == "Empresas")
-							$scope.getPositions(current);     						
-				    }, 5000));						
-				}						
-			}
+			}));					
 						
 		}, 500);
 		
@@ -224,94 +203,7 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		$timeout(function () {
 			angular.element('body').removeClass('loading');				
 		}, 200);
-	 }	  
-	 
-	function initDrawGaugesArea() {
-		var current = angular.copy($scope.selectedCompanyDetectorsArea);
-		
-		if(current != null) 												
-			$scope.getPositions(current);
-					    		
-	}
-	
-	$scope.getPositions = function() {
-		
-		$scope.listPositions = new PositionService.listByAreaId();		 
-		$scope.listPositions.$position({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid }, function(){
-			 
-			 for (var i = 0; i < $scope.selectedCompanyDetectorsArea.length; i++) {
-				 
-				currentCompanyDetector = $scope.selectedCompanyDetectorsArea[i]; 
-				
-				for (var j = 0; j < currentCompanyDetector.detectorDto.sensorsDto.length; j++) {
-					
-					var item = [];	
-					
-					if($scope.listPositions.list != null && $scope.listPositions.list.length != 0) {									
-						
-						$scope.listPositions.list.forEach(
-							function(e) {
-								if (e.companyDetectorDto.uid == currentCompanyDetector.uid &&
-									e.sensorDto.uid == currentCompanyDetector.detectorDto.sensorsDto[j].uid) {										
-									item.push(e);
-								}
-							}
-						);						
-					}
-
-					var id = 'sensor_' + currentCompanyDetector.detectorDto.sensorsDto[j].$$hashKey;				
-					formatGaugeSensor(currentCompanyDetector, currentCompanyDetector.detectorDto.sensorsDto[j], item == 0 ? 0 : item[0], id);					
-				}				
-			 }				
-			
-	    });			
-	}
-	
-	function formatGaugeSensor(detector, sensor, item, id) {
-
-		var selectedAlarm = [] ;
-		
-		$scope.selectedCompanyDetectorAlarmsArea.forEach(
-				function(e) {
-					if ( e.sensorId == sensor.uid &&
-						 e.companyDetectorDto.uid == detector.uid) {										
-						 selectedAlarm.push(e);
-					}
-				}
-			);		
-
-		var red =    selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm3;
-		var yellow = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm2;
-		var orange = selectedAlarm == null || selectedAlarm.length <= 0 ? 0 : selectedAlarm[0].alarmDto.alarm1;
-		
-		var gaugeOptions = {
-			 width: 300, height: 150,
-			 min: sensor.rangeMin, max: sensor.rangeMax,			     
-		     redFrom: red, redTo: red == 0 ? 0 : sensor.rangeMax,
-		     yellowFrom: yellow, yellowTo: red,
-		     greenFrom: orange, 
-		     greenColor: "gray",
-		     greenTo: yellow, 
-		     minorTicks: 5
-		};
-							
-		var gaugeData = google.visualization.arrayToDataTable([
-          	['Label', 'Value'],
-          	['Id: ' + item.uid, 0],
-          ]);
-	    		
-		objGauge = document.getElementById(id);
-		
-		if (objGauge == undefined) {
-			console.log('Objeto:: ' + id + "Não localizado:: " + new Date())
-		}
-		else {
-			gauge = new google.visualization.Gauge(objGauge);
-
-		    gaugeData.setValue(0, 1 , item.lastValue);
-		    gauge.draw(gaugeData, gaugeOptions);
-		}
-	}	
+	 }		
 			
 	initializeEasyPin = function() {
     	
@@ -394,8 +286,5 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		$scope.btnNewArea = true;
 		$scope.initializeArea();
 	}
-	
-	
-	/* ------------------------------------------------------------------------------------------------------- */
 		
 });

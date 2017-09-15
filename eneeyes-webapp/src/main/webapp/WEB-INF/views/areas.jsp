@@ -196,9 +196,8 @@
 											   					               	
 								               	<div class="panel-body">							            					                 										                	
 													<div class="row">								                	
-														<div style=" width: 100%; display: flex; justify-content: center; text-align: center;">
-															<div id="{{'sensor_' + sensor.$$hashKey}}" style="height:170px;"></div>
-														</div>												
+														<img class="profile-user-img img-responsive imgDetector" style="margin: 0 auto" 
+														data-ng-src="{{item.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">												
 						                			</div>								                				                				                
 								                	<div class="row">							                    				                    				                    
 									                	<div >									                	

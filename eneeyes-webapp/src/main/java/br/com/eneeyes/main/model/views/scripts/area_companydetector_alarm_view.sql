@@ -25,15 +25,16 @@ CREATE VIEW `area_companydetector_alarm_view` AS
     FROM
         company_device cdv
         JOIN company_detector cd ON (cdv.UID = cd.COMPANY_DEVICE_ID)
-        JOIN detector d ON (cd.DETECTOR_ID = d.UID)
-        JOIN detector_sensors ds ON (d.UID = ds.DETECTOR_ID)
-        JOIN sensor s ON (ds.SENSOR_ID = s.UID)
+        	JOIN detector d ON (cd.DETECTOR_ID = d.UID)
+        	JOIN detector_sensors ds ON (d.UID = ds.DETECTOR_ID)
+        JOIN sensor s ON (ds.SENSOR_ID = s.UID)        
+        	JOIN sensor_gases sg ON (s.UID = sg.SENSOR_ID)
+        	JOIN gas g ON ((sg.GASES_ID = g.UID)        
         LEFT JOIN position p ON (p.COMPANY_DETECTOR_ID = cd.UID)
             AND (p.SENSOR_ID = s.UID)
         LEFT JOIN company_detector_alarms cda ON (cda.COMPANY_DETECTOR_ID = cd.UID)
             AND (cda.SENSOR_ID = s.UID)
-        LEFT JOIN alarm a ON (cda.ALARM_ID = a.UID)
-        LEFT JOIN gas g ON (a.GAS_ID = g.UID)
+        LEFT JOIN alarm a ON (cda.ALARM_ID = a.UID)        
         ORDER BY cdv.AREA_ID , cd.UID, S.UID
         
     
@@ -63,16 +64,16 @@ VIEW area_companydetector_alarm_view AS
         a.ALARM_3 AS ALARM_3,
         g.NAME AS GAS_NAME
     FROM
-        company_device cdv
+     company_device cdv
         JOIN company_detector cd ON (cdv.UID = cd.COMPANY_DEVICE_ID)
-        JOIN detector d ON (cd.DETECTOR_ID = d.UID)
-        JOIN detector_sensors ds ON (d.UID = ds.DETECTOR_ID)
-        JOIN sensor s ON (ds.SENSOR_ID = s.UID)
+        	JOIN detector d ON (cd.DETECTOR_ID = d.UID)
+        	JOIN detector_sensors ds ON (d.UID = ds.DETECTOR_ID)
+        JOIN sensor s ON (ds.SENSOR_ID = s.UID)        
+        	JOIN sensor_gases sg ON (s.UID = sg.SENSOR_ID)
+        	JOIN gas g ON ((sg.GASES_ID = g.UID)        
         LEFT JOIN position p ON (p.COMPANY_DETECTOR_ID = cd.UID)
             AND (p.SENSOR_ID = s.UID)
         LEFT JOIN company_detector_alarms cda ON (cda.COMPANY_DETECTOR_ID = cd.UID)
             AND (cda.SENSOR_ID = s.UID)
-        LEFT JOIN alarm a ON (cda.ALARM_ID = a.UID)
-        LEFT JOIN gas g ON (a.GAS_ID = g.UID)
-    ORDER BY cdv.AREA_ID , cd.UID, S.UID    
-    
+        LEFT JOIN alarm a ON (cda.ALARM_ID = a.UID)        
+        ORDER BY cdv.AREA_ID , cd.UID, S.UID

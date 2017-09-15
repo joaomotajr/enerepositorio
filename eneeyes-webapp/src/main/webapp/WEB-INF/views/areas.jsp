@@ -187,7 +187,7 @@
 				       		 	<div ng-repeat="item in selectedCompanyDetectorsArea">				              
 					            						              	
 					              	<div ng-repeat="sensor in item.detectorDto.sensorsDto">
-					            	  	<div class="col-md-4">
+					            	  	<div class="col-md-3">
 							              	<div class="panel panel-primary">				              
 								                
 								                <div class="panel-heading">
@@ -200,7 +200,7 @@
 														data-ng-src="{{item.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">												
 						                			</div>								                				                				                
 								                	<div class="row">							                    				                    				                    
-									                	<div >									                	
+									                	<div>									                	
 									                    	<div class="description-block">																
 									                      		<h4 class="description-header"><i class="fa fa-bolt"></i> {{sensor.name}}</h4>
 									                      		<span class="description-text">Range: Min|Man: {{sensor.rangeMin}} | {{sensor.rangeMax}} </span>

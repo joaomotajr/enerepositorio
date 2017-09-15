@@ -2,7 +2,7 @@ app.filter('gasFilter', function () {
     return function (objects, criteria) {
         var filterResult = new Array();
 
-        if (criteria && !criteria.unitMeterGases != null && !criteria.gas)
+        if (!criteria ||( criteria && !criteria.unitMeterGases != null && !criteria.gas) )
             return objects;
 
         for (index in objects) {
@@ -18,8 +18,8 @@ app.filter('gasFilter', function () {
 });
 
 
-app.controller('companyDetectorController', function ($scope, $interval, $rootScope, $timeout, $filter, CompanyDeviceService, 
-		CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, 
+app.controller('companyDetectorController', function ($scope, $interval, $rootScope, $timeout, $filter, AlarmService,
+		CompanyDetectorService, DetectorService, PositionService, CompanyDetectorAlarmService, CompanyService, 
 		CompanyDetectorMaintenanceHistoricService, ViewService) {
 
 	var loadGoogleCharts = false;
@@ -108,7 +108,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	$scope.getDetectors = function() {		 
 		 $scope.resultDetectors = new DetectorService.listAll();		 
 		 $scope.resultDetectors.$detector({_csrf : angular.element('#_csrf').val()}, function(){			
-			 $scope.detectors = $scope.resultDetectors.list; 			 
+			 $scope.detectors = $scope.resultDetectors.list; 
+			 
+			 if ($scope.selectedCompanyDevice != null)
+			 	$scope.getOneCompanyDetector();			
         });		 
 	 }
 	
@@ -130,10 +133,21 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 				reloadDates();
 				
 				$scope.getCompanyDetectorMaintenanceHistoric();
+				$scope.getPositionsAndIds($scope.selectedCompanyDetector.uid) ;
 				
 			}
         });		 
 	}
+
+	$scope.getPositionsAndIds = function(companyDetectorId) {
+			
+			$scope.listOnePositionNoTimer = new PositionService.listOneByCompanyDetector();		 
+			$scope.listOnePositionNoTimer.$position({_csrf : angular.element('#_csrf').val(), id : companyDetectorId}, function() {
+				
+				console.log("OK");
+				
+			});
+		}
 
 	$scope.getCompanyDetectorAlarms = function(companyDetectorId) {
 
@@ -523,8 +537,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		$scope.getDetectors();
 		$scope.getAlarms();
 		
-		if ($scope.selectedCompanyDevice != null)
-			$scope.getOneCompanyDetector();			
+		
 	}
 	
 	$scope.initializeDetector();

@@ -268,7 +268,7 @@
 				<div class="modal-content">                            
 					<div class="modal-body">
 						<div class="panel panel-default">
-							<div class="panel-heading" style="text-align:center">Selecione Alarme para o Sensor: <strong> {{selectedSensor.name}} </strong> - Valor M&aacute;ximo: <strong>{{selectedSensor.rangeMax}}</strong> </div>                                                                           
+							<div class="panel-heading" style="text-align:center">Selecione Alarme para o Sensor: <strong> {{selectedCompanyDetectorAlarm.sensorName}} </strong> - Valor M&aacute;ximo: <strong>{{selectedCompanyDetectorAlarm.rangeMax}}</strong> </div>                                                                           
 					  	</div>
 				
 						<div class="box">
@@ -288,7 +288,7 @@
 											<tr>
 												<th>Nome</th>
 												<th>Gas</th>                                                            
-												<th>Alarme 1</th>
+											<th>Alarme 1</th>
 												<th>Alarme 2</th>
 												<th>Alarme 3</th>
 												<th>A&ccedil;&atilde;o</th>						
@@ -297,7 +297,7 @@
 										<tbody>                                                        
 											<tr data-ng-repeat="item in alarms | gasFilter:search">
 												<td>{{item.name}}</td>
-												<td>{{item.gas.name}}</td>															        
+												<td>{{item.gasDto.name}}</td>															        
 												<td>{{item.alarm1}}</td>
 												<td>{{item.alarm2}}</td>
 												<td>{{item.alarm3}}</td>
@@ -306,12 +306,10 @@
 														<button type="button" class="btn btn-danger btn-xs" data-ng-click="removerAlarm(item.uid)">Remover</button>
 													</div>
 													<div data-ng-if="item.uid != selectedCompanyDetectorAlarm.alarmId">
-														<button type="button" class="btn btn-primary btn-xs"  data-ng-click="selecionarAlarm(item.uid, $index)">Selecionar</button>
-													</div>
-													
+														<button type="button" class="btn btn-primary btn-xs"  data-ng-click="selecionarAlarm(item.uid)">Selecionar</button>
+													</div>													
 												</td>																		
-											</tr>        
-											                                                       
+											</tr>											                                                       
 										</tbody>
 									</table>
 									<p data-ng-hide="alarms.length > 0 " class="text-center">NENHUM ALARME ATENDE ESTE DETECTOR.</p>

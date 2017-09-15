@@ -2,7 +2,7 @@ app.filter('gasFilter', function () {
     return function (objects, criteria) {
         var filterResult = new Array();
 
-        if (criteria && !criteria.unitMeterGases != null && !criteria.gas)
+        if (!criteria ||( criteria && !criteria.unitMeterGases != null && !criteria.gas) )
             return objects;
 
         for (index in objects) {
@@ -18,8 +18,8 @@ app.filter('gasFilter', function () {
 });
 
 
-app.controller('companyDetectorController', function ($scope, $interval, $rootScope, $timeout, $filter, CompanyDeviceService, 
-		CompanyDetectorService, DetectorService, AlarmService, CompanyDetectorAlarmService, CompanyService, 
+app.controller('companyDetectorController', function ($scope, $interval, $rootScope, $timeout, $filter, AlarmService,
+		CompanyDetectorService, DetectorService, PositionService, CompanyDetectorAlarmService, CompanyService, 
 		CompanyDetectorMaintenanceHistoricService, ViewService) {
 
 	var loadGoogleCharts = false;
@@ -108,7 +108,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	$scope.getDetectors = function() {		 
 		 $scope.resultDetectors = new DetectorService.listAll();		 
 		 $scope.resultDetectors.$detector({_csrf : angular.element('#_csrf').val()}, function(){			
-			 $scope.detectors = $scope.resultDetectors.list; 			 
+			 $scope.detectors = $scope.resultDetectors.list; 
+			 
+			 if ($scope.selectedCompanyDevice != null)
+			 	$scope.getOneCompanyDetector();			
         });		 
 	 }
 	
@@ -130,9 +133,29 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 				reloadDates();
 				
 				$scope.getCompanyDetectorMaintenanceHistoric();
+				$scope.getPositionsAndIds($scope.selectedCompanyDetector.uid) ;
 				
 			}
         });		 
+	}
+
+	$scope.getPositionsAndIds = function(companyDetectorId) {
+			
+		$scope.listOnePositionNoTimer = new PositionService.listOneByCompanyDetector();		 
+		$scope.listOnePositionNoTimer.$position({_csrf : angular.element('#_csrf').val(), id : companyDetectorId}, function() {
+			
+			console.log("OK");
+			
+		});
+	}
+
+	$scope.selecionarDetector = function(item) {
+
+		if($scope.selectedCompanyDetector == undefined) {
+			$scope.selectedCompanyDetector = [];
+		}
+
+		$scope.selectedCompanyDetector.detectorDto = item;
 	}
 
 	$scope.getCompanyDetectorAlarms = function(companyDetectorId) {
@@ -416,6 +439,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	
 	$scope.configAlarm = function(index) {
 
+		$scope.sensorIndex = index;
 		$scope.selectedCompanyDetectorAlarm = $scope.selectedCompanyDetectorAlarms[index];
 		$scope.search = { unitMeterGases: $scope.selectedCompanyDetectorAlarm.unitMeterGases, gas : $scope.selectedCompanyDetectorAlarm.gasName};
 
@@ -425,12 +449,12 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		}, 300);
 	}
 	 
-	$scope.selecionarAlarm = function(uid, index) {
+	$scope.selecionarAlarm = function(uid) {
 		
 		/* Obtem Alarm selecionado */
 		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; })[0];
 		
-		if($scope.selectedSensor.rangeMax < selectedAlarm.alarm3) {
+		if($scope.selectedCompanyDetectorAlarm.rangeMax < selectedAlarm.alarm3) {
 			$scope.msgErroAlarm = "Alarm Selecionado excede Range Max do Sensor, Verifique";
 			return;
 		}
@@ -440,28 +464,35 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		alarm = {
 		 		alarmDto : selectedAlarm, 
 		 		companyDetectorDto: {uid : $scope.selectedCompanyDetector.uid}, 
-		 		sensorId : $scope.selectedSensor.uid
+		 		sensorId : $scope.selectedCompanyDetectorAlarm.sensorId
 		 };
-		
-		$scope.saveCompanyDetectorAlarm(alarm);		
-		$scope.mostrarAlarmTela(selectedAlarm);
-		
-		$scope.configAlarm($scope.sensorIndex); 
+
+		 $scope.inclusaoCompanyDetectorAlarm = new CompanyDetectorAlarmService.save(alarm);
+		 $scope.inclusaoCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
+ 
+			 angular.element('body').removeClass('loading');
+
+			 $scope.selectedCompanyDetectorAlarm.alarmId = selectedAlarm.uid;			 
+			 $scope.getCompanyDetectorAlarms($scope.selectedCompanyDetectorAlarm.companyDetectorId);	
+			 //$scope.configAlarm($scope.sensorIndex); 
+		 });		
 	}
 	
 	$scope.mostrarAlarmTela = function(selectedAlarm) {
 				
 		/* Verifica se o Sensor possui Alarm */
-		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(function (i) { return i.sensorId === $scope.selectedSensor.uid});
+		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(function (i) { return i.sensorId === $scope.selectedCompanyDetectorAlarm.sensorId});
+
+		
 				
-		if (detectorAlarmIndex < 0) {
-			/* Add - TELA  */
-			$scope.selectedCompanyDetectorAlarms.push({alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid});
-		}		
-		else {
-			/* Upd TELA */
-			$scope.selectedCompanyDetectorAlarms[detectorAlarmIndex] = {alarmDto :  selectedAlarm, sensorId : $scope.selectedSensor.uid};
-		}		
+		// if (detectorAlarmIndex < 0) {
+		// 	/* Add - TELA  */
+		// 	$scope.selectedCompanyDetectorAlarms.push({alarmDto :  selectedAlarm, sensorId : $scope.selectedCompanyDetectorAlarm.sensorId});
+		// }		
+		// else {
+		// 	/* Upd TELA */
+		// 	$scope.selectedCompanyDetectorAlarms[detectorAlarmIndex] = {alarmDto :  selectedAlarm, sensorId : $scope.selectedCompanyDetectorAlarm.sensorId};
+		// }		
 	}
 		
 	$scope.removerAlarm = function(uid) {		
@@ -473,37 +504,22 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		alarm = {
 		 		alarmDto : selectedAlarm, 
 		 		companyDetectorDto: {uid : $scope.selectedCompanyDetector.uid}, 
-		 		sensorId : $scope.selectedSensor.uid
+		 		sensorId : $scope.selectedCompanyDetectorAlarm.sensorId
 		 };
 		
 		$scope.deleteCompanyDetectorAlarm = new CompanyDetectorAlarmService.deletar(alarm);
 		$scope.deleteCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
 		
-			angular.element('body').removeClass('loading');
-				
-		});
-		
-		$scope.removerAlarmTela(selectedAlarm);		
+			angular.element('body').removeClass('loading');			
+			$scope.getCompanyDetectorAlarms($scope.selectedCompanyDetectorAlarm.companyDetectorId);	
+			$scope.selectedCompanyDetectorAlarm = undefined;			
+		});		
 	}
-	
-	$scope.removerAlarmTela = function(alarm) {
-				
-		var alarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex( function(item) { return item.alarmDto.uid === alarm.uid });
 		
-		$scope.selectedCompanyDetectorAlarms.splice( alarmIndex, 1);	
-		$scope.selectedAlarm = undefined;
-		initDrawGaugesDetector();
-		
-	}
-	
 	$scope.saveCompanyDetectorAlarm = function(alarm) {
 		angular.element('body').addClass('loading');
  
-		$scope.inclusaoCompanyDetectorAlarm = new CompanyDetectorAlarmService.save(alarm);
-		$scope.inclusaoCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
-
-			angular.element('body').removeClass('loading');
-		});			 
+					 
 	}
 
 	$scope.getCompanyDetectorMaintenanceHistoric = function() {		 
@@ -521,13 +537,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		$scope.selectedCompanyDevice = angular.copy($scope.selectedArea.companyDevicesDto[$scope.$root.selecteds.CompanyDeviceIndex]);
 		
 		$scope.getDetectors();
-		$scope.getAlarms();
-		
-		if ($scope.selectedCompanyDevice != null)
-			$scope.getOneCompanyDetector();			
+		$scope.getAlarms();		
 	}
 	
-	$scope.initializeDetector();
-		
-	/* ------------------------------------------------------------------------------------------------------- */
+	$scope.initializeDetector();		
 });

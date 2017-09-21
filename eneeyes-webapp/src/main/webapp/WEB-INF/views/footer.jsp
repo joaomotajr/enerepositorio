@@ -11,15 +11,19 @@
     <script src="/assets/plugins/jQuery/jQuery-2.1.4.min.js"></script>
         
     <!-- Easy Pin -->
-    <script src="/assets/plugins/dist/jquery.easypin.js"></script>
+    <script src="/assets/plugins/jquery.easypin/jquery.easypin.js"></script>
     
      <!-- jQuery Masketd -->
     <script src="/assets/plugins/input-mask/jquery.inputmask.js"></script>
     <script src="/assets/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
     
     <!-- jQuery UI 1.11.4 -->
-    <script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>
-        
+	<script src="/assets/plugins/jQueryUI/jquery-ui.js"></script>
+	
+	<!-- jQuery Sparkline -->
+	<script src="/assets/plugins/jquery.sparkline/jquery.sparkline.min.js"></script>
+	 
+	<!-- jQuery / Bootstrap :: Datatables -->
     <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="/assets/plugins/datatables/dataTables.bootstrap.min.js"></script>
     <script src="/assets/plugins/datatables/dataTables.select.min.js"></script>
@@ -27,17 +31,16 @@
     <!-- AdminLTE App -->
     <script src="/assets/plugins/adminlte/app.min.js"></script>
     <script src="/assets/plugins/adminlte/skin.js"></script>     
-    <!-- <script src="/assets/plugins/adminlte/chart.js"></script> -->
     
-    <script type="text/javascript" src="/assets/plugins/fusioncharts/fusioncharts.js"></script>
-    
-    <!-- GLOBAL SCRIPTS - Modificado -->
+    <!-- ANGULAR -->
     <script src="/assets/plugins/angular/angular.min.js"></script>
 	<script src="/assets/plugins/angular/angular-route.js"></script>
 	<script src="/assets/plugins/angular/angular-resource.js"></script>
 	<script src="/assets/plugins/angular/angular-locale_pt-br.js"></script>	
 	<script src="/assets/plugins/angular/angular-options-disabled.js"></script>
 	
+	<!-- FUSION CHARTS -->
+	<script type="text/javascript" src="/assets/plugins/fusioncharts/fusioncharts.js"></script>
 	<script type="text/javascript" src="/assets/plugins/fusioncharts/angular-fusioncharts.min.js"></script>
 	<script type="text/javascript" src="/assets/plugins/fusioncharts/themes/fusioncharts.theme.fint.js"></script>
 	
@@ -59,7 +62,7 @@
 	<script src="http://maps.google.com/maps/api/js?key=AIzaSyBdD8N8oojiMT-FKYc92jTS4XCCLccyBzg" type="text/javascript"></script>   
 	   
     <!-- Google Gauge -->
-    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- END GLOBAL SCRIPTS -->
 
     <!-- PAGE LEVEL SCRIPTS -->    

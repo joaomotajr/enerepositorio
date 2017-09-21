@@ -282,16 +282,15 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}	
 	}
 
-	$scope.getCompanys = function() {
+	// $scope.getCompanys = function() {
 		 
-		 $scope.resultCompanies = new CompanyService.listAllView();		 
-		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
-			 $scope.companies = $scope.resultCompanies.list;
-        });		 
-	}
-	
+	// 	 $scope.resultCompanies = new CompanyService.listAllView();		 
+	// 	 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
+	// 		 $scope.companies = $scope.resultCompanies.list;
+    //     });		 
+	// }	
 	 
-	 $scope.getCompanys = function() {
+	$scope.getCompanys = function() {
 		 
 		 if($scope.$root.isFrom != "MASTER")	{
 		 
@@ -303,15 +302,15 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 				 $scope.companies = $scope.resultCompanies.list;
 	        });		 
 		 }
-	 } 
+	} 
 	 
-	 $scope.getOneCompany = function(companyId) {
+	$scope.getOneCompany = function(companyId) {
 		 
-		 $scope.listOne = new CompanyService.listOne();		 
-		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
+		$scope.listOne = new CompanyService.listOne();		 
+		$scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
 			 
-			 $scope.selectedCompany = $scope.listOne.t;
-			 $scope.changeCompany();
+			$scope.selectedCompany = $scope.listOne.t;
+			$scope.changeCompany();
 	    });		 
 	}
 	

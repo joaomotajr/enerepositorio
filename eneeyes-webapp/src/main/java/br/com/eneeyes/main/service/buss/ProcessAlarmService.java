@@ -72,6 +72,7 @@ public class ProcessAlarmService {
 					
 		Historic historic = new Historic();
 		
+		position.setLastValue(new BigDecimal(-1));
 		historic = historicService.saveByPosition(position);
 		
 		AlarmType alarmType = position.getAlarmType();

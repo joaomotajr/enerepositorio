@@ -27,7 +27,6 @@ public class HistoricAlarmService {
 		
 		HistoricAlarm historicAlarm = new HistoricAlarm();
 		
-		historicAlarm.setUid(null);
 		historicAlarm.setDate(new Date());
 		historicAlarm.setCompanyDetectorId(companyDetectorId);
 		historicAlarm.setSensorId(sensorId);

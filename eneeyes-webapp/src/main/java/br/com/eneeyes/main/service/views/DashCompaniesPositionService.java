@@ -1,5 +1,6 @@
 package br.com.eneeyes.main.service.views;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
+import br.com.eneeyes.main.dto.views.DashCompaniesPositionDto;
 import br.com.eneeyes.main.model.views.DashCompaniesPosition;
 import br.com.eneeyes.main.repository.views.DashCompaniesPositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
@@ -17,17 +19,23 @@ public class DashCompaniesPositionService {
 	
 	@Autowired
 	private DashCompaniesPositionRepository repository;
-	
+
 	public Result<?> listAll() {
 		
-		Result<DashCompaniesPosition> result = new Result<DashCompaniesPosition>();
+		Result<DashCompaniesPositionDto> result = new Result<DashCompaniesPositionDto>();
 		
 		try {
 			List<DashCompaniesPosition> lista = repository.findAll();
 
 			if (lista != null) {				
+
+				List<DashCompaniesPositionDto> dto = new ArrayList<DashCompaniesPositionDto>();
 				
-				result.setList(lista);				
+				for (DashCompaniesPosition dashCompaniesPosition   : lista) {					
+					dto.add(new DashCompaniesPositionDto(dashCompaniesPosition) );
+				}
+				
+				result.setList(dto);				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
@@ -42,18 +50,24 @@ public class DashCompaniesPositionService {
 		
 		return result;	
 		
-	}
+	}	
 	
 	public Result<?> listByCompanyId(Long companyId) {
 		
-		Result<DashCompaniesPosition> result = new Result<DashCompaniesPosition>();
+		Result<DashCompaniesPositionDto> result = new Result<DashCompaniesPositionDto>();
 		
 		try {
 			List<DashCompaniesPosition> lista = repository.findByCompanyId(companyId);
 
 			if (lista != null) {				
+
+				List<DashCompaniesPositionDto> dto = new ArrayList<DashCompaniesPositionDto>();
 				
-				result.setList(lista);				
+				for (DashCompaniesPosition dashCompaniesPosition   : lista) {					
+					dto.add(new DashCompaniesPositionDto(dashCompaniesPosition) );
+				}
+				
+				result.setList(dto);				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
@@ -71,7 +85,7 @@ public class DashCompaniesPositionService {
 	}
 
 	public BasicResult<?> listOffline(Integer periodo) {
-		Result<DashCompaniesPosition> result = new Result<DashCompaniesPosition>();
+		Result<DashCompaniesPositionDto> result = new Result<DashCompaniesPositionDto>();
 		
 		try {
 			
@@ -81,8 +95,14 @@ public class DashCompaniesPositionService {
 			List<DashCompaniesPosition> lista = repository.findByLastMinutesOfLastUpdate(lastMinutes);
 
 			if (lista != null) {				
+
+				List<DashCompaniesPositionDto> dto = new ArrayList<DashCompaniesPositionDto>();
 				
-				result.setList(lista);				
+				for (DashCompaniesPosition dashCompaniesPosition   : lista) {					
+					dto.add(new DashCompaniesPositionDto(dashCompaniesPosition) );
+				}
+				
+				result.setList(dto);					
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
@@ -99,7 +119,7 @@ public class DashCompaniesPositionService {
 	}
 	
 	public BasicResult<?> listOfflineByCompanyId(Integer periodo, Long companyId) {
-		Result<DashCompaniesPosition> result = new Result<DashCompaniesPosition>();
+		Result<DashCompaniesPositionDto> result = new Result<DashCompaniesPositionDto>();
 		
 		try {
 			
@@ -109,8 +129,14 @@ public class DashCompaniesPositionService {
 			List<DashCompaniesPosition> lista = repository.findByLastMinutesOfLastUpdateAndCompanyId(lastMinutes, companyId);
 
 			if (lista != null) {				
+
+				List<DashCompaniesPositionDto> dto = new ArrayList<DashCompaniesPositionDto>();
 				
-				result.setList(lista);				
+				for (DashCompaniesPosition dashCompaniesPosition   : lista) {					
+					dto.add(new DashCompaniesPositionDto(dashCompaniesPosition) );
+				}
+				
+				result.setList(dto);				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {

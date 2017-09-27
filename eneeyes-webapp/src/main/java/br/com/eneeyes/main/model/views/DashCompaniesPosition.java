@@ -1,13 +1,14 @@
 package br.com.eneeyes.main.model.views;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
@@ -16,135 +17,81 @@ import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 @Entity
 @Table(name="dash_companies_position")
-public class DashCompaniesPosition implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class DashCompaniesPosition {
 	
-	public DashCompaniesPosition() {		
+	public DashCompaniesPosition() {	
 	
-	}
+	}	
 	
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id	
 	@Column(name = "uid")
 	private Long uid;
-
-	private Long company_id;
-	private String company_name;
-	private String unit_name;
-	private String area_name;
-	private String company_detector_name;
-	private String sensor_name;
-	private Long sensor_id;
-	private Long position_id;	
-	private String gas_name;	
-
-	@Column(name = "last_value", nullable = true)
-	private Double last_value;
 	
-	@Column(name = "alarm_type")
+	@OneToMany(
+			mappedBy="dashCompaniesPosition", 
+			fetch = FetchType.EAGER, 
+			targetEntity = PositionHistoricView.class )
+	private Set<PositionHistoricView> positionHistoricViews = new HashSet<PositionHistoricView>();
+		
+//	@OneToMany(
+//			mappedBy="dashCompaniesPosition", 
+//			fetch = FetchType.EAGER, 
+//			targetEntity = PositionHistoricView.class )
+//	private Set<ProcDashboard> procDashboards = new HashSet<ProcDashboard>();		
+//
+//	public final Set<ProcDashboard> getProcDashboards() {
+//		return procDashboards;
+//	}
+//
+//	public final void setProcDashboards(Set<ProcDashboard> procDashboards) {
+//		this.procDashboards = procDashboards;
+//	}
+
+	public final Set<PositionHistoricView> getPositionHistoricViews() {
+		return positionHistoricViews;
+	}
+
+	public final void setPositionHistoricViews(Set<PositionHistoricView> positionHistoricViews) {
+		this.positionHistoricViews = positionHistoricViews;
+	}
+
+	@Column(name = "COMPANY_ID")
+	private Long companyId;
+	
+	@Column(name = "COMPANY_NAME")
+	private String companyName;
+	
+	@Column(name = "UNIT_NAME")
+	private String unitName;
+	
+	@Column(name = "AREA_NAME")
+	private String areaName;
+	
+	@Column(name = "COMPANY_DETECTOR_NAME")
+	private String companyDetectorName;
+	
+	@Column(name = "SENSOR_NAME")
+	private String sensorName;
+	
+	@Column(name = "SENSOR_ID")
+	private Long sensorId;
+	
+	@Column(name = "POSITION_ID")
+	private Long positionId;
+	
+	@Column(name = "GAS_NAME")
+	private String gasName;	
+		
+	@Column(name = "LAST_VALUE", nullable = true)
+	private Double lastValue;
+	
+	@Column(name = "ALARM_TYPE")
 	private AlarmType alarmType;
 	
-	private Date last_update;
-		
-	public Long getUid() {
-		return uid;
-	}
-	public void setUid(Long uid) {
-		this.uid = uid;
-	}
+	@Column(name = "LAST_UPDATE")
+	private Date lastUpdate;		
 	
-	public Long getCompany_id() {
-		return company_id;
-	}
-	
-	public void setCompany_id(Long company_id) {
-		this.company_id = company_id;
-	}
-		
-	public String getCompany_name() {
-		return company_name;
-	}
-	public void setCompany_name(String company_name) {
-		this.company_name = company_name;
-	}
-		
-	public String getUnit_name() {
-		return unit_name;
-	}
-	public void setUnit_name(String unit_name) {
-		this.unit_name = unit_name;
-	}
-		
-	public String getArea_name() {
-		return area_name;
-	}
-	public void setArea_name(String area_name) {
-		this.area_name = area_name;
-	}
-		
-	public String getCompany_detector_name() {
-		return company_detector_name;
-	}
-	public void setCompany_detector_name(String company_detector_name) {
-		this.company_detector_name = company_detector_name;
-	}
-	
-	public String getSensor_name() {
-		return sensor_name;
-	}
-	public void setSensor_name(String sensor_name) {
-		this.sensor_name = sensor_name;
-	}
-	
-	public Long getSensor_id() {
-		return sensor_id;
-	}
-	
-	public void setSensor_id(Long sensor_id) {
-		this.sensor_id = sensor_id;
-	}	
-	
-	public final Long getPosition_id() {
-		return position_id;
-	}
-	
-	public final void setPosition_id(Long position_id) {
-		this.position_id = position_id;
-	}
-	
-	public Double getLast_value() {
-		return last_value;
-	}
-	
-	public void setLast_value(Double last_value) {
-		this.last_value = last_value;
-	}
-	
-	public final AlarmType getAlarmType() {
-		return alarmType;
-	}
-
-	public final void setAlarmType(AlarmType alarmType) {
-		this.alarmType = alarmType;
-	}	
-		
-	public Date getLast_update() {
-		return last_update;
-	}
-	public void setLast_update(Date last_update) {
-		this.last_update = last_update;
-	}
-	
-	public String getGas_name() {
-		return gas_name;
-	}
-	
-	public void setGas_name(String gas_name) {
-		this.gas_name = gas_name;
-	}
-	
-	@Column(name = "unit_meter_gases")
+	@Column(name = "UNIT_METER_GASES")
 	private UnitMeterGases unitMeterGases;
 	public final UnitMeterGases getUnitMeterGases() {
 		return unitMeterGases;
@@ -153,4 +100,109 @@ public class DashCompaniesPosition implements Serializable {
 	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
 		this.unitMeterGases = unitMeterGases;
 	}
+
+	public final Long getUid() {
+		return uid;
+	}
+
+	public final void setUid(Long uid) {
+		this.uid = uid;
+	}
+
+	public final Long getCompanyId() {
+		return companyId;
+	}
+
+	public final void setCompanyId(Long companyId) {
+		this.companyId = companyId;
+	}
+
+	public final String getCompanyName() {
+		return companyName;
+	}
+
+	public final void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public final String getUnitName() {
+		return unitName;
+	}
+
+	public final void setUnitName(String unitName) {
+		this.unitName = unitName;
+	}
+
+	public final String getAreaName() {
+		return areaName;
+	}
+
+	public final void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+
+	public final String getCompanyDetectorName() {
+		return companyDetectorName;
+	}
+
+	public final void setCompanyDetectorName(String companyDetectorName) {
+		this.companyDetectorName = companyDetectorName;
+	}
+
+	public final String getSensorName() {
+		return sensorName;
+	}
+
+	public final void setSensorName(String sensorName) {
+		this.sensorName = sensorName;
+	}
+
+	public final Long getSensorId() {
+		return sensorId;
+	}
+
+	public final void setSensorId(Long sensorId) {
+		this.sensorId = sensorId;
+	}
+
+	public final Long getPositionId() {
+		return positionId;
+	}
+
+	public final void setPositionId(Long positionId) {
+		this.positionId = positionId;
+	}
+
+	public final String getGasName() {
+		return gasName;
+	}
+
+	public final void setGasName(String gasName) {
+		this.gasName = gasName;
+	}
+
+	public final Double getLastValue() {
+		return lastValue;
+	}
+
+	public final void setLastValue(Double lastValue) {
+		this.lastValue = lastValue;
+	}
+
+	public final AlarmType getAlarmType() {
+		return alarmType;
+	}
+
+	public final void setAlarmType(AlarmType alarmType) {
+		this.alarmType = alarmType;
+	}
+
+	public final Date getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public final void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+	
 }

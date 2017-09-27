@@ -136,9 +136,18 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 				for(var i = 0; i < $scope.listAllDashCompaniesPosition.list.length; i++) {				 
 					 
 					 $scope.dashCompaniesPosition[i] = $scope.listAllDashCompaniesPosition.list[i];
-					 $scope.dashCompaniesPosition[i].last_update_full = $scope.dashCompaniesPosition[i].last_update;
-					 $scope.dashCompaniesPosition[i].last_update = timeSince($scope.listAllDashCompaniesPosition.serverDate, $scope.dashCompaniesPosition[i].last_update);				 
-					 $scope.dashCompaniesPosition[i].last_value	= Math.round($scope.dashCompaniesPosition[i].last_value * 100) / 100 ;
+					 $scope.dashCompaniesPosition[i].lastUpdateFull = $scope.dashCompaniesPosition[i].lastUpdate;
+					 $scope.dashCompaniesPosition[i].lastUpdate = timeSince($scope.listAllDashCompaniesPosition.serverDate, $scope.dashCompaniesPosition[i].lastUpdate);				 
+					 $scope.dashCompaniesPosition[i].lastValue	= Math.round($scope.dashCompaniesPosition[i].lastValue * 100) / 100 ;
+					 $scope.dashCompaniesPosition[i].arrayValues = $scope.dashCompaniesPosition[i].arrayValues.substring(0, $scope.dashCompaniesPosition[i].arrayValues.lastIndexOf(","));
+					 
+					//  var lastValues = "";
+					//  for(var j = 0; j <$scope.listAllDashCompaniesPosition.list[i].positionHistoricViewsDto.length; i++) {				 
+						
+					// 	lastValues = lastValues + $scope.listAllDashCompaniesPosition.list[i].positionHistoricViewsDto[j].value + ", ";					
+					// }
+
+					//$scope.dashCompaniesPosition[i].lastValues = lastValues.substring(0,lastValues.lastIndexOf(","));
 				 }
 				 
 				 $scope.sumary = { alarm1 : 0, alarm2 : 0, alarm3 : 0, normal : 0, devices: 0, offLine: 0, turnOff: 0 }			 
@@ -171,7 +180,18 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					}			
 			 	);			 			 
 				
-				populateDonut(new Date($scope.listAllDashCompaniesPosition.serverDate).toLocaleTimeString() );			
+				populateDonut(new Date($scope.listAllDashCompaniesPosition.serverDate).toLocaleTimeString() );		
+				
+				$timeout(function() {					
+				   $('.sparkbar').each(function () {
+					   var $this = $(this);
+					   $this.sparkline('html', {
+					   type: 'bar',
+					   height: $this.data('height') ? $this.data('height') : '30',
+					   barColor: $this.data('color')
+					   });
+				   }); 	
+			   }, 10);
 			}
 			
 			$scope.loading = undefined;         	         	
@@ -210,8 +230,9 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
     // 	if($scope.$root.currentPage == "Dashboard" && $scope.$root.errorTimes <= 5) {
     // 		$scope.getCompaniesPosition();  		
     // 	}
-    // }, 10000);
-    
+	// }, 10000);
+	
+
 	
 	angular.element('body').removeClass('loading');		
 	

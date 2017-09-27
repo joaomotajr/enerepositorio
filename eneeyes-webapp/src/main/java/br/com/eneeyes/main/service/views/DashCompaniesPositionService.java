@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.views.DashCompaniesPositionDto;
 import br.com.eneeyes.main.model.views.DashCompaniesPosition;
+import br.com.eneeyes.main.repository.proc.ProcTesteRepository;
 import br.com.eneeyes.main.repository.views.DashCompaniesPositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -19,10 +20,17 @@ public class DashCompaniesPositionService {
 	
 	@Autowired
 	private DashCompaniesPositionRepository repository;
+	
+	@Autowired
+	private ProcTesteRepository procTesteRepository;
 
+	@SuppressWarnings("unused")
 	public Result<?> listAll() {
 		
 		Result<DashCompaniesPositionDto> result = new Result<DashCompaniesPositionDto>();
+		
+		Integer test1 = procTesteRepository.plus1inout(10);
+		//List<ProcDashboard> teste = procDashboardRepository.dashboard(10);
 		
 		try {
 			List<DashCompaniesPosition> lista = repository.findAll();
@@ -34,7 +42,7 @@ public class DashCompaniesPositionService {
 				for (DashCompaniesPosition dashCompaniesPosition   : lista) {					
 					dto.add(new DashCompaniesPositionDto(dashCompaniesPosition) );
 				}
-				
+					
 				result.setList(dto);				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");

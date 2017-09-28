@@ -42,8 +42,8 @@ mvn jetty:run -Dspring.profiles.active="dev" -P local
 update company_device cd inner join company_detector c on (cd.uid = c.company_device_id) set cd.name = c.name;
 
 /* MYSQL */
-INSERT INTO aln_id_user(ID_, CREATE_DATE_, DISPLAYNAME_, HASH_, LOGIN_, NICKNAME_, STATUS_, CPF_) 
-VALUES (null,'2015-09-18','CK Medic','7c4a8d09ca3762af61e59520943dc26494f8941b'),'joaomotajunior@gmail.com','CK Medic','ACTIVE', '13210102813');
+	INSERT INTO aln_id_user(ID_, CREATE_DATE_, DISPLAYNAME_, HASH_, LOGIN_, NICKNAME_, STATUS_, CPF_) 
+	VALUES (null,'2017-08-17','Joao Jr',sha('123456'),'jrcowboy','Joao Jr','ACTIVE', '13210102813');
 
 /* POSTGRES */
 INSERT INTO aln_id_user(CREATE_DATE_, DISPLAYNAME_, HASH_, LOGIN_, NICKNAME_, STATUS_, CPF_) 
@@ -102,4 +102,5 @@ drop table historic_view;
 drop table queue_email_view;
 drop table queue_sigma_view;
 drop table queue_sms_view;
+drop table position_historic_view
 

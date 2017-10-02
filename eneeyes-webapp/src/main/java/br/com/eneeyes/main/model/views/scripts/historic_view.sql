@@ -14,7 +14,7 @@ VIEW `historic_view` AS
     SELECT 
         `historic`.`UID` AS `UID`,
         `historic`.`LAST_UPDATE` AS `LAST_UPDATE`,
-        `historic`.`LAST_VALUE` AS `LAST_VALUE`,
+        `historic`.`VALUE` AS `VALUE`,
         `historic`.`COMPANY_DETECTOR_ID` AS `COMPANY_DETECTOR_ID`,
         `historic`.`SENSOR_ID` AS `SENSOR_ID`
     FROM

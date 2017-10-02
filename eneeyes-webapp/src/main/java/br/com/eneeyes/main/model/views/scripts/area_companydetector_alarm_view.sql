@@ -29,7 +29,7 @@ CREATE VIEW `area_companydetector_alarm_view` AS
         	JOIN detector_sensors ds ON (d.UID = ds.DETECTOR_ID)
         JOIN sensor s ON (ds.SENSOR_ID = s.UID)        
         	JOIN sensor_gases sg ON (s.UID = sg.SENSOR_ID)
-        	JOIN gas g ON ((sg.GASES_ID = g.UID)        
+        	JOIN gas g ON (sg.GASES_ID = g.UID)        
         LEFT JOIN position p ON (p.COMPANY_DETECTOR_ID = cd.UID)
             AND (p.SENSOR_ID = s.UID)
         LEFT JOIN company_detector_alarms cda ON (cda.COMPANY_DETECTOR_ID = cd.UID)

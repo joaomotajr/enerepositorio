@@ -55,29 +55,32 @@ public class PositionService implements IService<PositionDto> {
 		
 		Position position = new Position();
 		
-		position = repository.findByCompanyDetectorAndSensor(historic.getCompanyDetector(), historic.getSensor());
+//		position = repository.findByCompanyDetectorAndSensor(historic.getCompanyDetector(), historic.getSensor());
+		PositionView positionView = repositoryView.findByCompanyDetectorIdAndSensorId(historic.getCompanyDetector().getUid(), historic.getSensor().getUid());
 		
 		if (position != null) {		
 			
-			position.setCompanyDetector(historic.getCompanyDetector());
-			position.setLastUpdate(historic.getLastUpdate());
-			position.setLastValue(historic.getValue());
-			position.setHistoric(historic);
+//			position.setCompanyDetector(historic.getCompanyDetector());
+//			position.setLastUpdate(historic.getLastUpdate());
+//			position.setLastValue(historic.getValue());
+//			position.setHistoric(historic);
+//			
+//			AlarmType alarmType = positionAlarmService.checkAndUpdateAlarmsAndActions(position);
+//			position.setAlarmType(alarmType);
+//			
+//			repository.save(position);
+//
+//			position.setCompanyDetector(historic.getCompanyDetector());
 			
-			AlarmType alarmType = positionAlarmService.checkAndUpdateAlarmsAndActions(position);
-			position.setAlarmType(alarmType);
-			
-			repository.save(position);
-
-			position.setCompanyDetector(historic.getCompanyDetector());
+			repository.updatePositionById(positionView.getAlarmType(), positionView.getLastValue(), historic, positionView.getUid()); 
 						
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Executado com sucesso.");
-		}
-		else {		
-			
-			result.setResultType( ResultMessageType.ERROR );
-			result.setMessage("Inconsistencia na Posição.");
+//		}
+//		else {		
+//			
+//			result.setResultType( ResultMessageType.ERROR );
+//			result.setMessage("Inconsistencia na Posição.");
 		}		
 		
 		return result;		
@@ -145,10 +148,10 @@ public class PositionService implements IService<PositionDto> {
 		return result;
 	}
 	
-	public Position findByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor) {
-		
-		return repository.findByCompanyDetectorAndSensor(companyDetector, sensor);
-	}	
+//	public Position findByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor) {
+//		
+//		return repository.findByCompanyDetectorAndSensor(companyDetector, sensor);
+//	}	
 	
 	public BasicResult<?> findByCompanyDetector(Long uid) {
 		Result<PositionView> result = new Result<PositionView>();

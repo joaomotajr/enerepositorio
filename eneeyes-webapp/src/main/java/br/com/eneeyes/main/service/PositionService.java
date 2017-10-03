@@ -72,7 +72,7 @@ public class PositionService implements IService<PositionDto> {
 //
 //			position.setCompanyDetector(historic.getCompanyDetector());
 			
-			repository.updatePositionById(positionView.getAlarmType(), positionView.getLastValue(), historic, positionView.getUid()); 
+			repository.updatePositionById(positionView.getAlarmType(), positionView.getLastValue(), positionView.getLastUpdate(), historic, positionView.getUid()); 
 						
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Executado com sucesso.");

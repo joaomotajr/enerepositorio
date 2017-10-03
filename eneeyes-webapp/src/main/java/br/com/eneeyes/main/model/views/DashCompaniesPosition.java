@@ -1,14 +1,10 @@
 package br.com.eneeyes.main.model.views;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
@@ -27,11 +23,11 @@ public class DashCompaniesPosition {
 	@Column(name = "uid")
 	private Long uid;
 	
-	@OneToMany(
-			mappedBy="dashCompaniesPosition", 
-			fetch = FetchType.EAGER, 
-			targetEntity = PositionHistoricView.class )
-	private Set<PositionHistoricView> positionHistoricViews = new HashSet<PositionHistoricView>();
+//	@OneToMany(
+//			mappedBy="dashCompaniesPosition", 
+//			fetch = FetchType.EAGER, 
+//			targetEntity = PositionHistoricView.class )
+//	private Set<PositionHistoricView> positionHistoricViews = new HashSet<PositionHistoricView>();
 		
 //	@OneToMany(
 //			mappedBy="dashCompaniesPosition", 
@@ -47,13 +43,13 @@ public class DashCompaniesPosition {
 //		this.procDashboards = procDashboards;
 //	}
 
-	public final Set<PositionHistoricView> getPositionHistoricViews() {
-		return positionHistoricViews;
-	}
-
-	public final void setPositionHistoricViews(Set<PositionHistoricView> positionHistoricViews) {
-		this.positionHistoricViews = positionHistoricViews;
-	}
+//	public final Set<PositionHistoricView> getPositionHistoricViews() {
+//		return positionHistoricViews;
+//	}
+//
+//	public final void setPositionHistoricViews(Set<PositionHistoricView> positionHistoricViews) {
+//		this.positionHistoricViews = positionHistoricViews;
+//	}
 
 	@Column(name = "COMPANY_ID")
 	private Long companyId;

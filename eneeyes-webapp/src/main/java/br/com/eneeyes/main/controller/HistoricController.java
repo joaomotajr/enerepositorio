@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.eneeyes.main.dto.HistoricDto;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.service.HistoricService;
+import br.com.eneeyes.main.service.views.DashCompaniesPositionService;
 
 @RestController
 public class HistoricController {
@@ -21,11 +22,20 @@ public class HistoricController {
 	@Autowired
 	HistoricService service;
 	
+	@Autowired
+	DashCompaniesPositionService service2;
+	
 	@RequestMapping(value="/api/historic/SaveByPositionUid2/{uid}/{value}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public Boolean saveByPositionUid2(@PathVariable Long uid, @PathVariable String value) {
 		
 		return service.saveByPositionUid(uid, value);
+	}
+	
+	@RequestMapping(value="/api/historic/testProcedures/{value}", method=RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> testProcedures(@PathVariable String value) {
+		return service2.testProcedure(value);        
 	}
 	
 	@RequestMapping(value="/api/historic/SaveByPositionUid/{uid}/{value}", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")

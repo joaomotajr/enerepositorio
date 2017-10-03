@@ -12,13 +12,14 @@ import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.service.PositionAlarmService;
+import br.com.eneeyes.main.service.views.DashCompaniesPositionService;
 
 @RestController
 public class PositionAlarmController {
 	
 	@Autowired
-	PositionAlarmService service;	
-	
+	PositionAlarmService service;
+		
 	@RequestMapping(value="/api/positionAlarm/{command}/", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> process(@PathVariable String command) {

@@ -4,12 +4,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
+import br.com.eneeyes.main.dto.procs.ProcDashboardDto;
 import br.com.eneeyes.main.dto.views.DashCompaniesPositionDto;
+import br.com.eneeyes.main.model.procs.ProcDashboard;
 import br.com.eneeyes.main.model.views.DashCompaniesPosition;
+import br.com.eneeyes.main.repository.procs.ProcDashboardRepository;
 import br.com.eneeyes.main.repository.views.DashCompaniesPositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -19,8 +29,32 @@ public class DashCompaniesPositionService {
 	
 	@Autowired
 	private DashCompaniesPositionRepository repository;
+	
+	@Autowired
+	private ProcDashboardRepository procDashboarRepository;
+	
+	@PersistenceContext
+	private EntityManager entityManager;
+		
+	
+	public Result<?> testProcedure(String value) {
+ 
+						
+//		List<ProcDashboard> list = procDashboarRepository.findDashBoardProcedure(value);
+//		
+		List<ProcDashboardDto> dto = new ArrayList<ProcDashboardDto>();		
+//		for (ProcDashboard procDashboard   : list) {					
+//			dto.add(new ProcDashboardDto(procDashboard) );
+//		}
+		
+		Result<ProcDashboardDto> result = new Result<ProcDashboardDto>();
+		result.setList(dto);
+		
+		return result;
+	}
+	
 
-	@SuppressWarnings("unused")
+	//@SuppressWarnings("unused")
 	public Result<?> listAll() {
 		
 		Result<DashCompaniesPositionDto> result = new Result<DashCompaniesPositionDto>();

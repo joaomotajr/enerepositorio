@@ -33,10 +33,10 @@ public class DashCompaniesPositionDto {
 		this.alarmType = dashCompaniesPosition.getAlarmType();
 		this.lastUpdate = dashCompaniesPosition.getLastUpdate();
 		
-		if(dashCompaniesPosition.getPositionHistoricViews() != null) {
-			
-			this.positionHistoricViewsDto = setPositionHistoricViewsDto(dashCompaniesPosition.getPositionHistoricViews());			
-		}		
+//		if(dashCompaniesPosition.getPositionHistoricViews() != null) {
+//			
+//			this.positionHistoricViewsDto = setPositionHistoricViewsDto(dashCompaniesPosition.getPositionHistoricViews());			
+//		}		
 		
 		for (PositionHistoricViewDto item   : this.positionHistoricViewsDto) {					
 			this.arrayValues += item.getValue().toString() != null ? item.getValue().toString() + ", " : "";

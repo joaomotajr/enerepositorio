@@ -11,11 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
-import br.com.eneeyes.main.dto.procs.ProcDashboardDto;
 import br.com.eneeyes.main.dto.views.DashCompaniesPositionDto;
-import br.com.eneeyes.main.model.procs.ProcDashboard;
 import br.com.eneeyes.main.model.views.DashCompaniesPosition;
-import br.com.eneeyes.main.repository.procs.ProcDashboardRepository;
 import br.com.eneeyes.main.repository.views.DashCompaniesPositionRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -26,31 +23,8 @@ public class DashCompaniesPositionService {
 	@Autowired
 	private DashCompaniesPositionRepository repository;
 	
-	@Autowired
-	private ProcDashboardRepository procDashboarRepository;
-	
 	@PersistenceContext
 	private EntityManager entityManager;
-		
-	
-	public Result<?> testProcedure(String value) {
- 
-		Result<ProcDashboardDto> result = new Result<ProcDashboardDto>();
-		
-		List<ProcDashboard> lista = procDashboarRepository.findAllLast();
-		
-		List<ProcDashboardDto> dto = new ArrayList<ProcDashboardDto>();
-		
-		for (ProcDashboard procDashboard   : lista) {					
-			dto.add(new ProcDashboardDto(procDashboard) );
-		}
-		
-
-		result.setList(dto);
-		
-		return result;
-	}
-	
 
 	//@SuppressWarnings("unused")
 	public Result<?> listAll() {

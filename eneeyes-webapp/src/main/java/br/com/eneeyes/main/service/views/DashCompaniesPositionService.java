@@ -5,13 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import javax.persistence.StoredProcedureQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
@@ -39,15 +35,17 @@ public class DashCompaniesPositionService {
 	
 	public Result<?> testProcedure(String value) {
  
-						
-//		List<ProcDashboard> list = procDashboarRepository.findDashBoardProcedure(value);
-//		
-		List<ProcDashboardDto> dto = new ArrayList<ProcDashboardDto>();		
-//		for (ProcDashboard procDashboard   : list) {					
-//			dto.add(new ProcDashboardDto(procDashboard) );
-//		}
-		
 		Result<ProcDashboardDto> result = new Result<ProcDashboardDto>();
+		
+		List<ProcDashboard> lista = procDashboarRepository.findAllLast();
+		
+		List<ProcDashboardDto> dto = new ArrayList<ProcDashboardDto>();
+		
+		for (ProcDashboard procDashboard   : lista) {					
+			dto.add(new ProcDashboardDto(procDashboard) );
+		}
+		
+
 		result.setList(dto);
 		
 		return result;

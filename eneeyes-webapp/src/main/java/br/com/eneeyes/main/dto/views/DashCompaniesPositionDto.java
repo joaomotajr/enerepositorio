@@ -9,7 +9,7 @@ import java.util.Set;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.views.DashCompaniesPosition;
-import br.com.eneeyes.main.model.views.PositionHistoricView;
+import br.com.eneeyes.main.model.views.PositionHistoricLastValueView;
 
 
 public class DashCompaniesPositionDto {
@@ -33,62 +33,32 @@ public class DashCompaniesPositionDto {
 		this.alarmType = dashCompaniesPosition.getAlarmType();
 		this.lastUpdate = dashCompaniesPosition.getLastUpdate();
 		
-//		if(dashCompaniesPosition.getPositionHistoricViews() != null) {
-//			
-//			this.positionHistoricViewsDto = setPositionHistoricViewsDto(dashCompaniesPosition.getPositionHistoricViews());			
-//		}		
-		
-		for (PositionHistoricViewDto item   : this.positionHistoricViewsDto) {					
-			this.arrayValues += item.getValue().toString() != null ? item.getValue().toString() + ", " : "";
+		if(dashCompaniesPosition.getPositionHistoricLastValuesView() != null) {
+			
+			this.positionHistoricLastValuesViewDto = setPositionHistoricViewsDto(dashCompaniesPosition.getPositionHistoricLastValuesView());			
 		}
 		
-//		if(dashCompaniesPosition.getProcDashboards() != null) {
-//			
-//			this.procDashboardDto = setProcDashboardDto(dashCompaniesPosition.getProcDashboards());			
-//		}
+		for (PositionHistoricLastValueViewDto item   : this.positionHistoricLastValuesViewDto) {					
+			this.arrayValues += item.getValue().toString() != null ? item.getValue().toString() + ", " : "";
+		}
 	}	
 	
-	private List<PositionHistoricViewDto> positionHistoricViewsDto = new ArrayList<PositionHistoricViewDto>();
-	
-//	private List<ProcDashboardDto> procDashboardDto = new ArrayList<ProcDashboardDto>();
-//		
-//
-//	public final List<ProcDashboardDto> getProcDashboardsDto() {
-//		return procDashboardDto;
-//	}
+	private List<PositionHistoricLastValueViewDto> positionHistoricLastValuesViewDto = new ArrayList<PositionHistoricLastValueViewDto>();
 
-//	public List<ProcDashboardDto> setProcDashboardDto(Set<ProcDashboard> procDashboards) {
-//					
-//		List<ProcDashboardDto> lista = new ArrayList<ProcDashboardDto>();
-//		
-//		if(procDashboards != null && !procDashboards.isEmpty()) {
-//		
-//			Iterator<ProcDashboard> itr = procDashboards.iterator();
-//			
-//			while (itr.hasNext()) {
-//				ProcDashboardDto dto = new ProcDashboardDto(itr.next());
-//				lista.add(dto);				
-//			}
-//		}		
-//				
-//		return lista;	
-//	}
-
-	public final List<PositionHistoricViewDto> getPositionHistoricViewsDto() {
-		return positionHistoricViewsDto;
+	public final List<PositionHistoricLastValueViewDto> getPositionHistoricViewDto() {
+		return positionHistoricLastValuesViewDto;
 	}
 
-	public List<PositionHistoricViewDto> setPositionHistoricViewsDto(Set<PositionHistoricView> positionHistoricViews) {
+	public List<PositionHistoricLastValueViewDto> setPositionHistoricViewsDto(Set<PositionHistoricLastValueView> positionHistoricLastValuesView) {
 					
-		List<PositionHistoricViewDto> lista = new ArrayList<PositionHistoricViewDto>();
+		List<PositionHistoricLastValueViewDto> lista = new ArrayList<PositionHistoricLastValueViewDto>();
 				
-		if(positionHistoricViews != null && !positionHistoricViews.isEmpty()) {
+		if(positionHistoricLastValuesView != null && !positionHistoricLastValuesView.isEmpty()) {
 					
-			Iterator<PositionHistoricView> itr = positionHistoricViews.iterator();
+			Iterator<PositionHistoricLastValueView> itr = positionHistoricLastValuesView.iterator();
 									
 			while (itr.hasNext()) {				
-				PositionHistoricViewDto dto = new PositionHistoricViewDto(itr.next());
-				//this.arrayValues += dto.getValue().toString() != null ? dto.getValue().toString() + ", " : "";
+				PositionHistoricLastValueViewDto dto = new PositionHistoricLastValueViewDto(itr.next());				//
 				lista.add(dto);				
 			}
 			

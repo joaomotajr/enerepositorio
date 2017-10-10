@@ -23,6 +23,8 @@ app.filter('dashCompaniesPositionFilter', function () {
 
 app.controller('dashController', function ($scope, $timeout, $interval, $filter, ViewService, UserService) {
 
+	firstTime = true;
+
 	chart = {
 		caption: "Detectores Monitorados por Status",
 		subCaption: "...",					
@@ -128,6 +130,12 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 	$scope.getCompaniesPosition = function() {
 		
 		$scope.loading = true;	
+
+		if (firstTime) {
+			angular.element('body').addClass('loading');		
+			firstTime = false;
+		}
+
 		
 		$scope.listAllDashCompaniesPosition = new ViewService.listAllDashCompaniesPosition();		 
 		$scope.listAllDashCompaniesPosition.$view({_csrf : angular.element('#_csrf').val()}, function(){
@@ -139,15 +147,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					 $scope.dashCompaniesPosition[i].lastUpdateFull = $scope.dashCompaniesPosition[i].lastUpdate;
 					 $scope.dashCompaniesPosition[i].lastUpdate = timeSince($scope.listAllDashCompaniesPosition.serverDate, $scope.dashCompaniesPosition[i].lastUpdate);				 
 					 $scope.dashCompaniesPosition[i].lastValue	= Math.round($scope.dashCompaniesPosition[i].lastValue * 100) / 100 ;
-					 $scope.dashCompaniesPosition[i].arrayValues = $scope.dashCompaniesPosition[i].arrayValues.substring(0, $scope.dashCompaniesPosition[i].arrayValues.lastIndexOf(","));
-					 
-					//  var lastValues = "";
-					//  for(var j = 0; j <$scope.listAllDashCompaniesPosition.list[i].positionHistoricViewsDto.length; i++) {				 
-						
-					// 	lastValues = lastValues + $scope.listAllDashCompaniesPosition.list[i].positionHistoricViewsDto[j].value + ", ";					
-					// }
-
-					//$scope.dashCompaniesPosition[i].lastValues = lastValues.substring(0,lastValues.lastIndexOf(","));
+					 $scope.dashCompaniesPosition[i].arrayValues = $scope.dashCompaniesPosition[i].arrayValues.substring(0, $scope.dashCompaniesPosition[i].arrayValues.lastIndexOf(","));				
 				 }
 				 
 				 $scope.sumary = { alarm1 : 0, alarm2 : 0, alarm3 : 0, normal : 0, devices: 0, offLine: 0, turnOff: 0 }			 
@@ -182,7 +182,8 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 				
 				populateDonut(new Date($scope.listAllDashCompaniesPosition.serverDate).toLocaleTimeString() );		
 				
-				$timeout(function() {					
+				$timeout(function() {	
+					angular.element('body').removeClass('loading');						
 				   $('.sparkbar').each(function () {
 					   var $this = $(this);
 					   $this.sparkline('html', {
@@ -221,19 +222,5 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 	}
 	
 	$scope.refreshDashboard();
-	$scope.getDetectorsMaintenance();
-	
-    
-    // $interval(function() {
-    // 	if($scope.$root == null) return;
-    	
-    // 	if($scope.$root.currentPage == "Dashboard" && $scope.$root.errorTimes <= 5) {
-    // 		$scope.getCompaniesPosition();  		
-    // 	}
-	// }, 10000);
-	
-
-	
-	angular.element('body').removeClass('loading');		
-	
+	$scope.getDetectorsMaintenance();	
 });

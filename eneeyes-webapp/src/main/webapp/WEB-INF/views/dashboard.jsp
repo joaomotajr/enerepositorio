@@ -150,7 +150,7 @@
 														<th>Status</th>
 														<th>Comunica&ccedil;&atilde;o</th>
 														<th>Valor</th>
-														<th>Dados</th>
+														<th style="text-align: center;"><i class="fa fa-bar-chart"></i></th>
 													</tr>
 												</thead>
 												<tbody>

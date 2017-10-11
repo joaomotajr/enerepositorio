@@ -12,7 +12,6 @@ import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.service.PositionAlarmService;
-import br.com.eneeyes.main.service.views.DashCompaniesPositionService;
 
 @RestController
 public class PositionAlarmController {

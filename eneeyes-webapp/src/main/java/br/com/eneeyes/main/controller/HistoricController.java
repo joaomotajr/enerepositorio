@@ -31,13 +31,7 @@ public class HistoricController {
 		
 		return service.saveByPositionUid(uid, value);
 	}
-	
-	@RequestMapping(value="/api/historic/testProcedures/{value}", method=RequestMethod.GET, produces = "application/json")
-	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> testProcedures(@PathVariable String value) {
-		return service2.testProcedure(value);        
-	}
-	
+		
 	@RequestMapping(value="/api/historic/SaveByPositionUid/{uid}/{value}", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public Boolean saveByPositionUid(@PathVariable Long uid, @PathVariable String value) {

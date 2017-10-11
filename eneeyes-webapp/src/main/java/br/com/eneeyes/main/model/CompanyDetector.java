@@ -26,6 +26,7 @@ import br.com.eneeyes.main.model.register.Detector;
  * Cadastro dos Detectores das Empresas.
  */
 
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "company_detector")
 @org.hibernate.annotations.Table(
@@ -125,8 +126,14 @@ public class CompanyDetector {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
 	private Set<Position> position;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
-	private Set<Historic> historic;
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
+//	private Set<Historic> historic;
+	
+//	@Column(name = "POSITION_ID", nullable = true)
+//	private Long positionId;
+	
+	@Column(name = "HISTORIC_ID", nullable = true)
+	private Long historicId;
 			
 	public Long getUid() {
 		return uid;

@@ -92,14 +92,15 @@ public class processSigmaService {
 		        	codigo = "2000";
 		        else if (item.getAlarmType() == AlarmType.EVACUACAO)
 		        	codigo = "3000";
-		        
-		        //String auxiliar = "47" + item.getCompany_detector_id() + item.getSensor_id();
+		        else if (item.getAlarmType() == AlarmType.OFFLINE)
+		        	codigo = "4000";
+
 		        String auxiliar = "47" + item.getCompany_detector_name().replaceAll("[^0-9]", "");
 		        
 		        eventoRecebido.setAuxiliar(auxiliar);
 		        eventoRecebido.setCodigo(codigo);
 		        eventoRecebido.setData(eventDate);
-		        eventoRecebido.setDescricaoReceptora("Teste da Enesens [LOGA]");
+		        eventoRecebido.setDescricaoReceptora("Enesens [E-Gas]");		        
 		        eventoRecebido.setEmpresa(new Long(10056));
 		        eventoRecebido.setIdCentral("9261");
 		        eventoRecebido.setParticao("001");

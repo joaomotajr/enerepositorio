@@ -14,8 +14,11 @@ public class PositionDto {
 	private BigDecimal lastValue;	
     private CompanyDetectorDto companyDetectorDto;
     private SensorDto sensorDto;
+//    private Long companyDetectorId;
+//    private Long sensorId;
     private AlarmType alarmType;
-	private HistoricDto historicDto;
+//	private HistoricDto historicDto;
+    private Long historicId;
 	
 	public PositionDto() {
 		
@@ -25,13 +28,17 @@ public class PositionDto {
 		
 		this.uid = position.getUid();
 		this.lastUpdate = position.getLastUpdate();
-    	this.lastValue = position.getLastValue();    	
-    	this.sensorDto = new SensorDto(position.getSensor());
-    	this.alarmType = position.getAlarmType();
+    	this.lastValue = position.getLastValue();
     	this.companyDetectorDto = new CompanyDetectorDto(position.getCompanyDetector());
+    	this.sensorDto = new SensorDto(position.getSensor());
+//    	this.companyDetectorId = position.getCompanyDetectorId();
+//    	this.sensorId = position.getSensorId();
+    	this.alarmType = position.getAlarmType();    	
     	
-    	if(position.getHistoric() != null)
-    		this.historicDto = new HistoricDto(position.getHistoric());
+//    	if(position.getHistoric() != null)
+//    		this.historicDto = new HistoricDto(position.getHistoric());
+    	
+    	this.historicId = position.getHistoricId();    		
 	}
 	
 	public final Long getUid() {
@@ -57,7 +64,23 @@ public class PositionDto {
 	public void setLastValue(BigDecimal lastValue) {
 		this.lastValue = lastValue;
 	}
-
+	
+//	public final Long getCompanyDetectorId() {
+//		return companyDetectorId;
+//	}
+//
+//	public final void setCompanyDetectorId(Long companyDetectorId) {
+//		this.companyDetectorId = companyDetectorId;
+//	}
+//
+//	public final Long getSensorId() {
+//		return sensorId;
+//	}
+//
+//	public final void setSensorId(Long sensorId) {
+//		this.sensorId = sensorId;
+//	}
+	
 	public CompanyDetectorDto getCompanyDetectorDto() {
 		return companyDetectorDto;
 	}
@@ -89,12 +112,20 @@ public class PositionDto {
 		}
 	}
 
-	public final HistoricDto getHistoricDto() {
-		return historicDto;
+	public final Long getHistoricId() {
+		return historicId;
 	}
 
-	public final void setHistoricDto(HistoricDto historicDto) {
-		this.historicDto = historicDto;
+	public final void setHistoricId(Long historicId) {
+		this.historicId = historicId;
 	}
+
+//	public final HistoricDto getHistoricDto() {
+//		return historicDto;
+//	}
+//
+//	public final void setHistoricDto(HistoricDto historicDto) {
+//		this.historicDto = historicDto;
+//	}
 
 }

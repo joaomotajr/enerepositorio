@@ -101,7 +101,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			else
 				soundStatus = SoundStatus.OFF;
 			
-			historicAlarmService.save(position.getLastValue(), companyDetector.getUid(), sensor.getUid(), position.getHistoric().getUid(), alarmDto.getAlarmOn(), alarmType, 
+			historicAlarmService.save(position.getLastValue(), companyDetector.getUid(), sensor.getUid(), position.getHistoricId(), alarmDto.getAlarmOn(), alarmType, 
 					emailStatus, smsStatus, action, soundStatus, sigmaStatus);
 			
 			if(alarmDto.getAlarmOn())			
@@ -159,8 +159,8 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			
 			positionAlarm =  new PositionAlarm();
 			
-			positionAlarm.setCompanyDetector(position.getCompanyDetector());
-			positionAlarm.setSensor(position.getSensor());
+			positionAlarm.setCompanyDetector(companyDetector);
+			positionAlarm.setSensor(sensor);
 			positionAlarm.setFirstUpdate(new Date());
 			positionAlarm.setLastValue(position.getLastValue());
 			positionAlarm.setAlarmStatus(AlarmStatus.CREATED);

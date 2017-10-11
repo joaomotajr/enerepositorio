@@ -14,7 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.PostLoad;
 import javax.persistence.Table;
 
@@ -33,17 +32,20 @@ public class Position {
     public Position(PositionDto dto) {
     	this.uid = dto.getUid();
     	this.lastUpdate = dto.getLastUpdate();    	
-    	this.lastValue = dto.getLastValue();    	
+    	this.lastValue = dto.getLastValue();
+    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
     	this.sensor = new Sensor(dto.getSensorDto());
-    	this.alarmType = dto.getAlarmType();
-    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());    	
-    	this.historic = new Historic(dto.getHistoricDto());
+//    	this.companyDetectorId = dto.getCompanyDetectorId();
+//    	this.sensorId = dto.getSensorId();
+    	this.alarmType = dto.getAlarmType();    	    	
+//    	this.historic = new Historic(dto.getHistoricDto());
+    	this.historicId = dto.getHistoricId();
     }
     
     @PostLoad
     public void updateHistoricId() {
-        if (getHistoric() != null) {
-             this.historic.setUid(getHistoric().getUid() );
+        if (getHistoricId() != null) {
+             this.historicId = getHistoricId();
         }
     }
 
@@ -66,12 +68,21 @@ public class Position {
 	@JoinColumn(name="SENSOR_ID", nullable = false)
 	private Sensor sensor;
 	
+//	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
+//	private Long companyDetectorId;
+//	
+//	@Column(name="SENSOR_ID", nullable = false)
+//	private Long sensorId;
+	
 	@Column(name = "ALARM_TYPE", columnDefinition = "int default 0", nullable = false)
 	private AlarmType alarmType;
 		
-	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
-	@JoinColumn(name="HISTORIC_ID", nullable = true)
-	private Historic historic;
+//	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
+//	@JoinColumn(name="HISTORIC_ID", nullable = true)
+//	private Historic historic;
+		
+	@Column(name="HISTORIC_ID", nullable = true)
+	private Long historicId;
 	
 	@Enumerated(EnumType.ORDINAL) 
 	private AlarmType AlarmType() { 
@@ -102,6 +113,22 @@ public class Position {
 		this.lastValue = lastValue;
 	}
 	
+//	public final Long getCompanyDetectorId() {
+//		return companyDetectorId;
+//	}
+//
+//	public final void setCompanyDetectorId(Long companyDetectorId) {
+//		this.companyDetectorId = companyDetectorId;
+//	}
+//
+//	public final Long getSensorId() {
+//		return sensorId;
+//	}
+//
+//	public final void setSensorId(Long sensorId) {
+//		this.sensorId = sensorId;
+//	}
+	
 	public CompanyDetector getCompanyDetector() {
 		return companyDetector;
 	}
@@ -126,11 +153,11 @@ public class Position {
 		this.alarmType = alarmType;
 	}
 
-	public final Historic getHistoric() {
-		return historic;
+	public final Long getHistoricId() {
+		return historicId;
 	}
 
-	public final void setHistoric(Historic historic) {
-		this.historic = historic;
+	public final void setHistoricId(Long historicId) {
+		this.historicId = historicId;
 	}	
 }

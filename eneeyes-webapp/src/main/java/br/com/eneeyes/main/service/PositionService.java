@@ -55,12 +55,12 @@ public class PositionService implements IService<PositionDto> {
 		
 		Position position = new Position();
 		
-		PositionView positionView = repositoryView.findByCompanyDetectorIdAndSensorId(historic.getCompanyDetector().getUid(), historic.getSensor().getUid());
+		PositionView positionView = repositoryView.findByCompanyDetectorIdAndSensorId(historic.getCompanyDetectorId(), historic.getSensorId());
 		
 		if (position != null) {		
 			
 			
-			repository.updatePositionById(positionView.getAlarmType(), positionView.getLastValue(), positionView.getLastUpdate(), historic, positionView.getUid()); 
+			repository.updatePositionById(positionView.getAlarmType(), positionView.getLastValue(), positionView.getLastUpdate(), historic.getUid(), positionView.getUid()); 
 						
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Executado com sucesso.");

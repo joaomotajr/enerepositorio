@@ -42,7 +42,6 @@ public class ProcessAlarmService {
 	
 	@Autowired
 	private PositionViewRepository positionViewRepository;
-
 	
 	@Autowired
 	private CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
@@ -110,26 +109,16 @@ public class ProcessAlarmService {
 		
 	}
 	
-	//private Position updatePositionByHistoric(Historic historic, AlarmType alarmType) {
 	private void updatePositionByHistoric(Historic historic, AlarmType alarmType) {
 		
-		//Position position = positionrepository.findByCompanyDetectorIdAndSensorId(historic.getCompanyDetector().getUid(), historic.getSensor().getUid() );
 		PositionView positionView = positionViewRepository.findByCompanyDetectorIdAndSensorId(historic.getCompanyDetector().getUid(), historic.getSensor().getUid() );
 		
 		if (positionView != null) {
 			
 			positionRepository.updatePositionById(alarmType, historic.getValue(), historic.getLastUpdate(), historic, positionView.getUid()); 
 			
-//			position.setCompanyDetector(historic.getCompanyDetector());
-//			position.setLastUpdate(historic.getLastUpdate());
-//			position.setLastValue(historic.getValue());
-//			position.setAlarmType(alarmType);
-//			position.setHistoric(historic);
-//						
-//			positionrepository.save(position);
 		}
-		
-//		return position;		
+	
 	}
 	
 	private CompanyDetectorAlarmDto getExistAlarm(Long companyDetectorId, Long sensorid) {
@@ -173,7 +162,6 @@ public class ProcessAlarmService {
 		return alarmType;		
 	}
 	
-//	private void updateAlarmsAndActions(AlarmDto alarmDto, AlarmType alarmType, Position position) {
 	private void updateAlarmsAndActions(AlarmDto alarmDto, AlarmType alarmType, Historic historic) {		
 		
 		CompanyDetector companyDetector = new CompanyDetector(historic.getCompanyDetector().getUid());
@@ -192,7 +180,6 @@ public class ProcessAlarmService {
 		
 	}
 	
-	//private void updateAlarmsAndActions(AlarmType alarmType, Position position) {
 	private void updateAlarmsAndActions(AlarmType alarmType, Historic historic) {
 		
 		CompanyDetector companyDetector = new CompanyDetector(historic.getCompanyDetector().getUid());

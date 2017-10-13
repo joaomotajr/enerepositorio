@@ -9,6 +9,17 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
 
+			<div class="row"> 
+				
+				<a href="#" data-ng-controller="SiteController" class="logo-lg ng-scope" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')">
+														
+						<span class="logo-lg">	 		
+							<!-- ngIf: recolheLogo --><img data-ng-if="recolheLogo" src="/assets/img/Logo_e-GAS.PNG" style="float: left; margin-left: 20px; padding:10px; width: 85%;" class="ng-scope"><!-- end ngIf: recolheLogo --> 			 
+					</span>
+					
+				</a>
+			</div>
+
 	        <!-- Sidebar Menu -->
 			<ul class="sidebar-menu">
 	            	            

@@ -10,18 +10,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.com.eneeyes.main.dto.views.PositionHistoricLastValueViewDto;
+import br.com.eneeyes.main.dto.views.PositionHistoricViewDto;
 
 
 @Entity
-@Table(name = "position_historic_last_value_view")
-public class PositionHistoricLastValueView {
+@Table(name = "position_historic_view")
+public class PositionHistoricView {
 
-    public PositionHistoricLastValueView() {
+    public PositionHistoricView() {
     	    	
     }     
     
-	public PositionHistoricLastValueView(PositionHistoricLastValueViewDto dto) {		
+	public PositionHistoricView(PositionHistoricViewDto dto) {		
 		this.uid = dto.getUid();
 		this.lastUpdate = dto.getLastUpdate();	
 		this.value = dto.getValue();		

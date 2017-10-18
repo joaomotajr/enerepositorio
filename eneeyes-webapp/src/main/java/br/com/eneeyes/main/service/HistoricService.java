@@ -111,9 +111,6 @@ public class HistoricService implements IService<HistoricDto> {
 	public BasicResult<?> findByCompanyDetector(Long companyDetectorId) {
 		Result<HistoricDto> result = new Result<HistoricDto>();
 		
-//		CompanyDetector companyDetector = new CompanyDetector();
-//		companyDetector.setUid(companyDetectorId);
-		
 		try {
 			//List<Historic> lista = repository.findByCompanyDetector(companyDetector);			
 			List<Historic> lista = repository.findByCompanyDetectorId(companyDetectorId);
@@ -130,9 +127,6 @@ public class HistoricService implements IService<HistoricDto> {
 	public BasicResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, Integer periodo) {
 		Result<HistoricDto> result = new Result<HistoricDto>();
 		
-//		CompanyDetector companyDetector = new CompanyDetector();
-//		companyDetector.setUid(companyDetectorId);
-		
 		Sensor sensor = new Sensor();
 		sensor.setUid(sensorId);
 		
@@ -141,7 +135,6 @@ public class HistoricService implements IService<HistoricDto> {
 			Date fim = new Date(); 
 			Date inicio = new Date(fim.getTime() - (1000 * 60 * 60 * periodo));
 			
-//			List<Historic> lista = repository.findByCompanyDetectorAndSensorAndLastUpdateBetween(companyDetector, sensor, inicio, fim);			
 			List<Historic> lista = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetween(companyDetectorId, sensorId, inicio, fim);
 			result = populateResult(lista);
 			
@@ -156,15 +149,11 @@ public class HistoricService implements IService<HistoricDto> {
 	public BasicResult<?> findByCompanyDetectorAndInterval(Long companyDetectorId, Integer periodo) {
 		Result<HistoricDto> result = new Result<HistoricDto>();
 		
-//		CompanyDetector companyDetector = new CompanyDetector();
-//		companyDetector.setUid(companyDetectorId);
-		
 		try {
 						
 			Date fim = new Date(); 
 			Date inicio = new Date(fim.getTime() - (1000 * 60 * 60 * periodo));
 			
-//			List<Historic> lista = repository.findByCompanyDetectorAndLastUpdateBetween(companyDetector, inicio, fim);			
 			List<Historic> lista = repository.findByCompanyDetectorIdAndLastUpdateBetween(companyDetectorId, inicio, fim);
 			result = populateResult(lista);
 			
@@ -178,9 +167,6 @@ public class HistoricService implements IService<HistoricDto> {
 		
 	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut) {
 		Result<HistoricDto> result = new Result<HistoricDto>();
-		
-//		CompanyDetector companyDetector = new CompanyDetector();
-//		companyDetector.setUid(companyDetectorId);
 		
 		Sensor sensor = new Sensor();
 		sensor.setUid(sensorId);
@@ -210,9 +196,6 @@ public class HistoricService implements IService<HistoricDto> {
 	public BasicResult<?> findByCompanyDetectorAndSensorLastMonth(Long companyDetectorId, Long sensorId) {
 		Result<HistoricDto> result = new Result<HistoricDto>();
 		
-//		CompanyDetector companyDetector = new CompanyDetector();
-//		companyDetector.setUid(companyDetectorId);
-		
 		Sensor sensor = new Sensor();
 		sensor.setUid(sensorId);
 		
@@ -221,7 +204,6 @@ public class HistoricService implements IService<HistoricDto> {
 			Date fim = new Date();									
 			Date inicio = addMonth(fim, -1);
 			
-//			List<Historic> lista = repository.findByCompanyDetectorAndSensorAndLastUpdateBetween(companyDetector, sensor, inicio, fim);
 			List<Historic> lista = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetween(companyDetectorId, sensorId, inicio, fim);
 			result = populateResult(lista);
 			

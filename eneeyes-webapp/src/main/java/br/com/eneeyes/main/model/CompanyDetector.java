@@ -26,7 +26,6 @@ import br.com.eneeyes.main.model.register.Detector;
  * Cadastro dos Detectores das Empresas.
  */
 
-@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "company_detector")
 @org.hibernate.annotations.Table(

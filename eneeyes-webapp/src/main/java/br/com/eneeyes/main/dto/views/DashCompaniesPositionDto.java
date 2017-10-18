@@ -9,7 +9,7 @@ import java.util.Set;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.views.DashCompaniesPosition;
-import br.com.eneeyes.main.model.views.PositionHistoricLastValueView;
+import br.com.eneeyes.main.model.views.PositionHistoricView;
 
 
 public class DashCompaniesPositionDto {
@@ -33,32 +33,37 @@ public class DashCompaniesPositionDto {
 		this.alarmType = dashCompaniesPosition.getAlarmType();
 		this.lastUpdate = dashCompaniesPosition.getLastUpdate();
 		
-		if(dashCompaniesPosition.getPositionHistoricLastValuesView() != null) {
+		if(dashCompaniesPosition.getPositionHistoricView() != null) {
 			
-			this.positionHistoricLastValuesViewDto = setPositionHistoricViewsDto(dashCompaniesPosition.getPositionHistoricLastValuesView());			
+			this.positionHistoricViewDto = setPositionHistoricViewsDto(dashCompaniesPosition.getPositionHistoricView());			
 		}
 		
-		for (PositionHistoricLastValueViewDto item   : this.positionHistoricLastValuesViewDto) {					
+		Integer count = 0;
+		for (PositionHistoricViewDto item   : this.positionHistoricViewDto) {					
 			this.arrayValues += item.getValue().toString() != null ? item.getValue().toString() + ", " : "";
+			count++;
+			
+			if (count >= 15)
+				break;	
 		}
 	}	
 	
-	private List<PositionHistoricLastValueViewDto> positionHistoricLastValuesViewDto = new ArrayList<PositionHistoricLastValueViewDto>();
+	private List<PositionHistoricViewDto> positionHistoricViewDto = new ArrayList<PositionHistoricViewDto>();
 
-	public final List<PositionHistoricLastValueViewDto> getPositionHistoricViewDto() {
-		return positionHistoricLastValuesViewDto;
+	public final List<PositionHistoricViewDto> getPositionHistoricViewDto() {
+		return positionHistoricViewDto;
 	}
 
-	public List<PositionHistoricLastValueViewDto> setPositionHistoricViewsDto(Set<PositionHistoricLastValueView> positionHistoricLastValuesView) {
+	public List<PositionHistoricViewDto> setPositionHistoricViewsDto(Set<PositionHistoricView> positionHistoricView) {
 					
-		List<PositionHistoricLastValueViewDto> lista = new ArrayList<PositionHistoricLastValueViewDto>();
+		List<PositionHistoricViewDto> lista = new ArrayList<PositionHistoricViewDto>();
 				
-		if(positionHistoricLastValuesView != null && !positionHistoricLastValuesView.isEmpty()) {
+		if(positionHistoricView != null && !positionHistoricView.isEmpty()) {
 					
-			Iterator<PositionHistoricLastValueView> itr = positionHistoricLastValuesView.iterator();
+			Iterator<PositionHistoricView> itr = positionHistoricView.iterator();
 									
 			while (itr.hasNext()) {				
-				PositionHistoricLastValueViewDto dto = new PositionHistoricLastValueViewDto(itr.next());				//
+				PositionHistoricViewDto dto = new PositionHistoricViewDto(itr.next());
 				lista.add(dto);				
 			}
 			

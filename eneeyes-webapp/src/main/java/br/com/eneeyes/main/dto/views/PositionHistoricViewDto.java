@@ -3,20 +3,20 @@ package br.com.eneeyes.main.dto.views;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import br.com.eneeyes.main.model.views.PositionHistoricLastValueView;
+import br.com.eneeyes.main.model.views.PositionHistoricView;
 
-public class PositionHistoricLastValueViewDto implements Comparable<PositionHistoricLastValueViewDto> {
+public class PositionHistoricViewDto implements Comparable<PositionHistoricViewDto> {
 	
-	public PositionHistoricLastValueViewDto() {
+	public PositionHistoricViewDto() {
 		
 	
 	}	
 	
-	public PositionHistoricLastValueViewDto(PositionHistoricLastValueView positionHistoricLastValueView) {
+	public PositionHistoricViewDto(PositionHistoricView positionHistoricView) {
 		
-		this.uid = positionHistoricLastValueView.getUid();
-		this.lastUpdate = positionHistoricLastValueView.getLastUpdate();	
-		this.value = positionHistoricLastValueView.getValue();		
+		this.uid = positionHistoricView.getUid();
+		this.lastUpdate = positionHistoricView.getLastUpdate();	
+		this.value = positionHistoricView.getValue();		
 	}	
 	
 	private DashCompaniesPositionDto dashCompaniesPositionDto;	
@@ -57,7 +57,7 @@ public class PositionHistoricLastValueViewDto implements Comparable<PositionHist
 	}
 	
 	@Override
-	public int compareTo(PositionHistoricLastValueViewDto positionHistoricViewDto) {
+	public int compareTo(PositionHistoricViewDto positionHistoricViewDto) {
 		return positionHistoricViewDto.getUid().compareTo(this.uid);		
 	}
 	

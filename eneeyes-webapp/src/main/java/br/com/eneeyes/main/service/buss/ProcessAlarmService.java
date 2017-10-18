@@ -96,7 +96,6 @@ public class ProcessAlarmService {
 	 */
 	public void Execute(Historic historic) {
 				
-//		CompanyDetectorAlarmDto companyDetectorAlarmDto = getExistAlarm(historic.getCompanyDetector().getUid(), historic.getSensor().getUid());
 		CompanyDetectorAlarmDto companyDetectorAlarmDto = getExistAlarm(historic.getCompanyDetectorId(), historic.getSensorId());
 		
 		AlarmType alarmType = checkExistsAlarms(companyDetectorAlarmDto, historic.getValue());
@@ -112,7 +111,6 @@ public class ProcessAlarmService {
 	
 	private void updatePositionByHistoric(Historic historic, AlarmType alarmType) {
 		
-//		PositionView positionView = positionViewRepository.findByCompanyDetectorIdAndSensorId(historic.getCompanyDetector().getUid(), historic.getSensor().getUid() );
 		PositionView positionView = positionViewRepository.findByCompanyDetectorIdAndSensorId(historic.getCompanyDetectorId(), historic.getSensorId());
 		
 		if (positionView != null) {
@@ -120,7 +118,6 @@ public class ProcessAlarmService {
 			positionRepository.updatePositionById(alarmType, historic.getValue(), historic.getLastUpdate(), historic.getUid(), positionView.getUid()); 
 			
 		}
-	
 	}
 	
 	private CompanyDetectorAlarmDto getExistAlarm(Long companyDetectorId, Long sensorid) {
@@ -166,9 +163,6 @@ public class ProcessAlarmService {
 	
 	private void updateAlarmsAndActions(AlarmDto alarmDto, AlarmType alarmType, Historic historic) {		
 		
-//		CompanyDetector companyDetector = new CompanyDetector(historic.getCompanyDetector().getUid());
-//		Sensor sensor = new Sensor(historic.getSensor().getUid());	
-		
 		CompanyDetector companyDetector = new CompanyDetector(historic.getCompanyDetectorId());
 		Sensor sensor = new Sensor(historic.getSensorId());
 					
@@ -186,9 +180,6 @@ public class ProcessAlarmService {
 	}
 	
 	private void updateAlarmsAndActions(AlarmType alarmType, Historic historic) {
-		
-//		CompanyDetector companyDetector = new CompanyDetector(historic.getCompanyDetector().getUid());
-//		Sensor sensor = new Sensor(historic.getSensor().getUid());	
 		
 		CompanyDetector companyDetector = new CompanyDetector(historic.getCompanyDetectorId());
 		Sensor sensor = new Sensor(historic.getSensorId());
@@ -215,10 +206,6 @@ public class ProcessAlarmService {
 		if(positionAlarm == null) {
 			
 			positionAlarm =  new PositionAlarm();
-
-			
-//			positionAlarm.setCompanyDetector(historic.getCompanyDetector());
-//			positionAlarm.setSensor(historic.getSensor());
 			positionAlarm.setCompanyDetector(companyDetector);
 			positionAlarm.setSensor(sensor);
 			positionAlarm.setFirstUpdate(new Date());

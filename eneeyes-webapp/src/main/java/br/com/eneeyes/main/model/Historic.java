@@ -15,7 +15,6 @@ import org.hibernate.annotations.Index;
 
 import br.com.eneeyes.main.dto.HistoricDto;
 
-@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "historic")
 @org.hibernate.annotations.Table(

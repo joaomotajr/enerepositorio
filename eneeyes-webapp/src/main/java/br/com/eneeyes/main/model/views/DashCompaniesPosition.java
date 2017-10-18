@@ -30,15 +30,15 @@ public class DashCompaniesPosition {
 	@OneToMany(
 			mappedBy="dashCompaniesPosition", 
 			fetch = FetchType.EAGER, 
-			targetEntity = PositionHistoricLastValueView.class )
-	private Set<PositionHistoricLastValueView> positionHistoricLastValuesView = new HashSet<PositionHistoricLastValueView>();
+			targetEntity = PositionHistoricView.class )
+	private Set<PositionHistoricView> positionHistoricView = new HashSet<PositionHistoricView>();
 
-	public final Set<PositionHistoricLastValueView> getPositionHistoricLastValuesView() {
-		return positionHistoricLastValuesView;
+	public final Set<PositionHistoricView> getPositionHistoricView() {
+		return positionHistoricView;
 	}
 
-	public final void setGroupPositionHistoricViews(Set<PositionHistoricLastValueView> positionHistoricLastValuesView) {
-		this.positionHistoricLastValuesView = positionHistoricLastValuesView;
+	public final void setGroupPositionHistoricViews(Set<PositionHistoricView> positionHistoricView) {
+		this.positionHistoricView = positionHistoricView;
 	}
 
 	@Column(name = "COMPANY_ID")

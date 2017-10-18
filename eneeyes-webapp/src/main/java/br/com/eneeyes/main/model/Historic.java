@@ -11,10 +11,20 @@ import javax.persistence.Id;
 import javax.persistence.PostUpdate;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Index;
+
 import br.com.eneeyes.main.dto.HistoricDto;
 
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "historic")
+@org.hibernate.annotations.Table(
+		   appliesTo = "historic",
+		   indexes = {
+		      @Index(name="idxHistoricDate", columnNames = "LAST_UPDATE"),		      
+		      @Index(name="idxHistoricCompanySensorAndDate", columnNames = {"COMPANY_DETECTOR_ID", "SENSOR_ID", "LAST_UPDATE"})
+		   }
+		)
 public class Historic {
 
     public Historic() {
@@ -27,9 +37,7 @@ public class Historic {
     	this.lastUpdate = dto.getLastUpdate();
     	this.value = dto.getValue();    	
     	this.companyDetectorId = dto.getCompanyDetectorId();
-    	this.sensorId = dto.getSensorId();
-//    	this.sensor = new Sensor(dto.getSensorDto());
-//    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());    	
+    	this.sensorId = dto.getSensorId();    	
     }
     
     @PostUpdate
@@ -49,17 +57,9 @@ public class Historic {
 
 	@Column(name = "VALUE", nullable = true)
 	private BigDecimal value;
-    		
-//	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-//	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
-//	private CompanyDetector companyDetector;	
 	
 	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
 	private Long companyDetectorId;
-	
-//	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-//	@JoinColumn(name="SENSOR_ID", nullable = false)
-//	private Sensor sensor;	
 	
 	@Column(name="SENSOR_ID", nullable = false)
 	private Long sensorId;
@@ -102,22 +102,5 @@ public class Historic {
 
 	public final void setSensorId(Long sensorId) {
 		this.sensorId = sensorId;
-	}
-	
-//	public CompanyDetector getCompanyDetector() {
-//		return companyDetector;
-//	}
-//
-//	public void setCompanyDetector(CompanyDetector companyDetector) {
-//		this.companyDetector = companyDetector;
-//	}
-//	
-//	public Sensor getSensor() {
-//		return sensor;
-//	}
-//
-//	public void setSensor(Sensor sensor) {
-//		this.sensor = sensor;
-//	}	
-	
+	}	
 }

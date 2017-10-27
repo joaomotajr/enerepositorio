@@ -35,7 +35,7 @@
 	            	</a>	            		            	
 				</li>
 
-				<li class="treeview" data-ng-if="isFrom=='MASTER'">
+				<li class="treeview">
 	            	<a href="#" data-ng-click="LoadAjaxContent('general.html', 'Over-View')"><i class="fa fa-th text-white"></i> 
 	            		<span>Over View</span>	            			            		
 	            	</a>	            		            	

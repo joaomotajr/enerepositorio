@@ -13,6 +13,7 @@ CREATE EVENT job_move_to_a_by_hours ON SCHEDULE
     COMMENT 'Limpa tabela Historic, deixando apenas a última hora'
     DO
 		call move_to_a_by_hours(1000, 1);
+		
      
 CREATE EVENT job_move_to_b_by_day ON SCHEDULE
       EVERY 12 HOUR
@@ -20,6 +21,22 @@ CREATE EVENT job_move_to_b_by_day ON SCHEDULE
     COMMENT 'Limpa tabela Historic, deixando apenas o último dia'
     DO
 		call move_to_b_by_day(1000, 1);
+		
+		
+CREATE EVENT job_move_to_c_by_7day ON SCHEDULE
+      EVERY 12 HOUR
+      STARTS CURRENT_TIMESTAMP + INTERVAL 5 minute
+    COMMENT 'Limpa tabela Historic, deixando apenas sete dias'
+    DO
+		call move_to_c_by_7day(1000);
+		
+		
+CREATE EVENT job_move_to_d_by_month ON SCHEDULE
+      EVERY 12 HOUR
+      STARTS CURRENT_TIMESTAMP + INTERVAL 5 minute
+    COMMENT 'Limpa tabela Historic, deixando apenas 1 mês'
+    DO
+		call move_to_d_by_month(1000);		
      
       
 	  

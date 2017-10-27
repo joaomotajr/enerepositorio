@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `move_to_a_by_hours`(_LIMIT int, _HOURS int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `move_to_d_by_month`(_LIMIT int, _MONTH int)
 BEGIN
 
 	DECLARE _now DATETIME;	
@@ -12,11 +12,13 @@ BEGIN
 	WHILE(_countRow != 0) DO
     
 		START TRANSACTION ;
-			INSERT INTO historic_a (SELECT  * FROM historic WHERE   LAST_UPDATE < _now - interval _HOURS hour LIMIT _LIMIT);			
-			DELETE FROM historic WHERE LAST_UPDATE < _now - interval _HOURS hour LIMIT _LIMIT;
+			INSERT INTO historic_b (SELECT  * FROM historic_a WHERE   LAST_UPDATE < _now - interval _MONTH month LIMIT _LIMIT);			
+			DELETE FROM historic_a WHERE LAST_UPDATE < _now - interval _MONTH month LIMIT _LIMIT;
             SET _countRow := ROW_COUNT();            			
             
             SET _total := _total + _countRow; 
+            
+            DO SLEEP(2);
 		COMMIT;    
         
 	 END WHILE;

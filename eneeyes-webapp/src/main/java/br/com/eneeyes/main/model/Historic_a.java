@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Index;
 
-@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "historic_a")
 @org.hibernate.annotations.Table(

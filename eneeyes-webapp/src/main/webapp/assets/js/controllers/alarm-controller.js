@@ -14,7 +14,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			alarm2 : $scope.alarmAlarm2,
 			alarm3 : $scope.alarmAlarm3,
 			companyDto : $scope.selectedCompany,
-			alarmOn: angular.element('#alarmOn').hasClass('locked_active') == true ? true : false,
+			alarmOn: $scope.radioModel,
 			alarmSigma:  $("#checkboxSigmaOnOff").prop('checked'),
 			alarmEmail:  $scope.alarmEmail,
 			alarmSound:  $("#checkboxSonoroOnOff").prop('checked'),
@@ -59,6 +59,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		$scope.action2 = '';
 		$scope.action3 = '';
 		$scope.action4 = '';
+		$scope.radioModel = false;
 
 		if($scope.$root.isFrom == "MASTER")
 			$scope.selectedCompany = ''
@@ -106,19 +107,20 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			$("#checkboxSmsOnOff").prop('checked', $scope.alarms[index].alarmSms); 
 			showCelular($scope.alarms[index].alarmSms);
 			
-			if( $scope.alarms[index].alarmOn != true )  
-			{
-				$("#travar").addClass("disableDiv");
+			$scope.radioModel = $scope.alarms[index].alarmOn;
+			// if( $scope.alarms[index].alarmOn != true )  
+			// {
+			// 	$("#travar").addClass("disableDiv");
 				
-				$('#toggle_event_editing button').eq(1).addClass('locked_active btn-default').removeClass('unlocked_active bg-black');
-				$('#toggle_event_editing button').eq(0).addClass('unlocked_inactive bg-black').removeClass('locked_active btn-default');
-			}				
-			else {
-				$("#travar").removeClass("disableDiv");
+			// 	$('#toggle_event_editing button').eq(1).addClass('locked_active btn-default').removeClass('unlocked_active bg-black');
+			// 	$('#toggle_event_editing button').eq(0).addClass('unlocked_inactive bg-black').removeClass('locked_active btn-default');
+			// }				
+			// else {
+			// 	$("#travar").removeClass("disableDiv");
 				
-				$('#toggle_event_editing button').eq(0).addClass('locked_active btn-default').removeClass('unlocked_active bg-black');
-				$('#toggle_event_editing button').eq(1).addClass('unlocked_inactive bg-black').removeClass('locked_active btn-default');
-			}
+			// 	$('#toggle_event_editing button').eq(0).addClass('locked_active btn-default').removeClass('unlocked_active bg-black');
+			// 	$('#toggle_event_editing button').eq(1).addClass('unlocked_inactive bg-black').removeClass('locked_active btn-default');
+			// }
 			
 			$scope.validEmail();
 			$scope.validMobile();
@@ -377,6 +379,11 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 if(!$scope.$$phase) 
 			 $scope.$apply();			
 	 }	 
+ 
+	 
+	 $scope.update = function (val) {
+		 $scope.radioModel = val;
+	 }
 	 
      /* ----------------- Processamento ------------------*/
 	 

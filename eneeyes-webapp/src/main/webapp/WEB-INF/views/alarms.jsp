@@ -157,11 +157,12 @@
 							                    <div class="box-body" style="padding-bottom: 0px !important">
 							                      	<div class="row">
 								                      	<div class="col-md-9"> 
-				                                          	<div class="btn-group" id="toggle_event_editing">
-																<button id="alarmOff" type="button" class="btn btn-default locked_active">OFF</button>
-																<button id="alarmOn" type="button" class="btn bg-black unlocked_inactive">ON</button>
-															</div>
+															<div class="btn-group">																
+																<button class="btn" ng-click="update(true);" ng-class="(radioModel) ? 'btn-success' : 'btn-default'">ON</button>																
+																<button class="btn" ng-click="update(false);" ng-class="(radioModel) ? 'btn-default' : 'btn-danger'">OFF</button>													   
+															</div>															
 														</div>
+
 														<div class="col-md-3">					            				
 									            			<div class="checkbox3 checkbox-danger checkbox-inline checkbox-check checkbox-circle checkbox-light">
 				                                            	<input type="checkbox" id="checkboxSigmaOnOff" checked>

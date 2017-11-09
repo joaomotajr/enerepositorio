@@ -22,6 +22,8 @@ BEGIN
 		COMMIT;    
         
 	 END WHILE;
+	 
+	 INSERT INTO log_event (date_time, event_name, rows_affected) values (now(), concat('MOVE TO C BY ', '7', ' Day(s)'), _total );
 
 	 SELECT _total ; 
 END

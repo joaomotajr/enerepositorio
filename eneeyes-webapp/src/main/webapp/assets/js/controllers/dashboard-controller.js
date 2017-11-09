@@ -186,10 +186,8 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					angular.element('body').removeClass('loading');						
 				   $('.sparkbar').each(function () {
 					   var $this = $(this);
-					   $this.sparkline('html', {
-					   type: 'bar',
-					   height: $this.data('height') ? $this.data('height') : '30',
-					   barColor: $this.data('color')
+					   $this.sparkline('html', {					   
+					   normalRangeMin: 0, normalRangeMax: 10
 					   });
 				   }); 	
 			   }, 10);

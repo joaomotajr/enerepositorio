@@ -185,7 +185,7 @@
 																<span style="vertical-align:super;font-size:0.65em" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}</span>
 															</label>
 														</td>													
-														<td class="col-lg-2"><div class="sparkbar" data-color="#00a65a" data-height="20">{{item.arrayValues}}</div></td>
+														<td class="col-lg-2"><div class="sparkbar">{{item.arrayValues}}</div></td>
 													</tr>													
 												</tbody>
 											</table>

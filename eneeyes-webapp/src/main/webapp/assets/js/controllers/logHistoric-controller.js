@@ -38,10 +38,9 @@ app.filter('alarmFilter', function () {
     }
 });
 
-app.controller('logHistoricController', function ($scope, $timeout, $filter, CompanyService, DetectorService, CompanyDetectorService, HistoricService, CompanyDetectorAlarmService, ViewService) {
+app.controller('logHistoricController', function ($scope, $timeout, $filter, CompanyService, DetectorService, CompanyDetectorService, HistoricViewService, ViewService, CompanyDetectorAlarmService) {
 
-	var loadGoogleCharts = false;
-	
+	var loadGoogleCharts = false;	
 	$scope.countHistoric = 0;
 	
 	function printData()
@@ -66,8 +65,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	$("#exportExcel").click(function(e) {
 	    window.open('data:application/vnd.ms-excel,' + encodeURIComponent( $('div[id$=dvData]').html()));
 	    e.preventDefault();
-	});
-	
+	});	
 	 	
 	$scope.buttonClick = function (s) { 
 		$scope.selectedButton = s 
@@ -92,31 +90,95 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
         $scope.listHistoricInterval = undefined;
         $scope.dateIn = undefined;
         $scope.dateOut = undefined;
-        $scope.tipoGrupo = 1;
-        			
+        $scope.tipoGrupo = 1;        			
 	}		
+
+	$scope.lenPage = 15;
 	
-	$scope.getHistorics = function(interval) {
+	$scope.currentPage = 0;
+	$scope.listPages = [];	
+	$scope.countPages = 0;
+
+	//var startItem = 0;
+	//var endItem = 0;
+	var lastPage = -1;
+
+	var listOfPagination = 5;
+
+	$scope.enumInterval = ({
+        UMA_HORA: "1",
+        SEIS_HORAS: "6",
+        DOZE_HORAS: "12",
+        UM_DIA: "24",
+        DOIS_DIAS: "48",
+        SETE_DIAS: "168",
+        UM_MES: "MES"
+	});	
+
+	$scope.interval = $scope.enumInterval.UMA_HORA;
+
+
+	function range(total) {
+		if(total===1) {
+			return [];
+		}
+
+		var input = 0;
+		if(total > listOfPagination) {
+			if(lastPage > Math.floor(listOfPagination/2)) {
+				input = lastPage - Math.floor(listOfPagination/2);
+			}
+			if(input + listOfPagination <= total) {
+				total = input + listOfPagination;
+			}
+			if(total - input < listOfPagination) {
+				input = total - listOfPagination;
+			}
+		}
+		return Array.apply(null, {length: total-input}).map(function(v, i){return i + input ;});
+	}
+	
+	$scope.getHistorics = function(n) {
 		
+		if (n < 0 || n > $scope.lenPage) return;
+
+		$scope.currentPage = n;
 		$scope.loading = true;
 		
-		$scope.selectedPeriodo = setInterval(interval);
-		$scope.selectedButton = interval; 
+		$scope.selectedPeriodo = setInterval($scope.interval);
+		$scope.selectedButton = $scope.interval; 
 		
 		if($scope.tipoGrupo == 1)
-			$scope.listHistoricInterval = new ViewService.listInterval();
+			$scope.listHistoricInterval = new HistoricViewService.listInterval();
 		else if($scope.tipoGrupo == 2)
-			$scope.listHistoricInterval = new ViewService.listIntervalGroupHours();
+			$scope.listHistoricInterval = new HistoricViewService.listIntervalGroupHours();
 		else if($scope.tipoGrupo == 3)
-			$scope.listHistoricInterval = new ViewService.listIntervalGroupDays();		
+			$scope.listHistoricInterval = new HistoricViewService.listIntervalGroupDays();		
 				
-		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid, interval: interval }, function(){
+		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), 
+			companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, 
+			sensorId: $scope.selectedCompanySensor.uid, 
+			interval: $scope.interval,
+			currentPage: $scope.currentPage,
+			lenPage: $scope.lenPage
+		}, function(){
+			$timeout(function () {
+						
+			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list != null > 0 && $scope.listHistoricInterval.list.length > 0) {
+				lastPage = $scope.currentPage;
+				
+				$scope.listPages = range(Math.ceil($scope.listHistoricInterval.totalList / $scope.lenPage));
+				$scope.countPages = Math.ceil($scope.listHistoricInterval.totalList / $scope.lenPage);
+
+				$scope.countHistoric = padZeros($scope.listHistoricInterval.totalList, 5);
+				
+				if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
+					$(function() { $('#btnSelDevice').click(); })  	
+			}
+
 			
-			$scope.loading = false;
-			$scope.countHistoric = padZeros($scope.listHistoricInterval.list.length,5);
-			
-			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
-				$(function() { $('#btnSelDevice').click(); })  	
+				$scope.loading = false;					
+			}, 500);
        	
        });		
 	}	
@@ -128,9 +190,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		$scope.selectedButton = 30; 
 		
 		if($scope.tipoGrupo == 1) {
-			//$scope.listHistoricInterval = new ViewService.listLastMonth();
-			
-			$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 15 dias " ;
+	
+			$scope.daysDiff ="ATENÃ‡ÃƒO: Esta Pesquisa NÃƒO Pode Exceder 15 dias " ;
 			
 			$("#snoAlertBox").fadeIn();
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300) }, 3000);
@@ -138,9 +199,9 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 			return;
 		}	
 		else if($scope.tipoGrupo == 2)
-			$scope.listHistoricInterval = new ViewService.listLastMonthGroupHours();
+			$scope.listHistoricInterval = new HistoricViewService.listLastMonthGroupHours();
 		else if($scope.tipoGrupo == 3)
-			$scope.listHistoricInterval = new ViewService.listLastMonthGroupDays();
+			$scope.listHistoricInterval = new HistoricViewService.listLastMonthGroupDays();
 		
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid }, function(){
 			
@@ -159,7 +220,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		
 		if($scope.tipoGrupo == 1 && dayDiff(dataInicio, dataFim) > 15 ) {
 			
-			$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 15 dias " ;
+			$scope.daysDiff ="ATENÃ‡ÃƒO: Esta Pesquisa NÃƒO Pode Exceder 15 dias " ;
 			
 			$("#snoAlertBox").fadeIn();
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);
@@ -168,7 +229,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}		
 		else if($scope.tipoGrupo == 2 && dayDiff(dataInicio, dataFim) > 360 ) {
 			
-			$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 360 dias " ;
+			$scope.daysDiff ="ATENÃ‡ÃƒO: Esta Pesquisa NÃƒO Pode Exceder 360 dias " ;
 			
 			$("#snoAlertBox").fadeIn();
 			
@@ -194,11 +255,11 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		$scope.selectedButton = 100; 		
 		
 		if($scope.tipoGrupo == 1)			
-			$scope.listHistoricInterval = new ViewService.listIntervalDays();
+			$scope.listHistoricInterval = new HistoricViewService.listIntervalDays();
 		else if($scope.tipoGrupo == 2)
-			$scope.listHistoricInterval = new ViewService.listIntervalDaysGroupHours();
+			$scope.listHistoricInterval = new HistoricViewService.listIntervalDaysGroupHours();
 		else if($scope.tipoGrupo == 3)
-			$scope.listHistoricInterval = new ViewService.listIntervalDaysGroupDays();
+			$scope.listHistoricInterval = new HistoricViewService.listIntervalDaysGroupDays();
 						
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(),			
 			companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, 
@@ -218,17 +279,17 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	function setInterval(interval) {
 		
 		if ( interval == 1 )
-			return "Última Hora";
+			return "Ãºltima Hora";
 		else if ( interval == 6 )
-			return "Últimas Seis Horas";
+			return "Ãºltimas Seis Horas";
 		else if ( interval == 12 )
-			return "Últimas Doze Horas";
+			return "Ãºltimas Doze Horas";
 		else if ( interval == 48 )
-			return "Últimas Dois Dias";
+			return "Ãºltimas Dois Dias";
 		else if ( interval == 96 )
-			return "Útimos Quatro Dias";
+			return "Ãºltimos Quatro Dias";
 		else if ( interval == 'mes' )
-			return "Último Mês";
+			return "Ãºltimo MÃªs";
 		else 
 			return 'Desconhecido';
 				
@@ -282,14 +343,6 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}	
 	}
 
-	// $scope.getCompanys = function() {
-		 
-	// 	 $scope.resultCompanies = new CompanyService.listAllView();		 
-	// 	 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
-	// 		 $scope.companies = $scope.resultCompanies.list;
-    //     });		 
-	// }	
-	 
 	$scope.getCompanys = function() {
 		 
 		 if($scope.$root.isFrom != "MASTER")	{
@@ -365,7 +418,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}
 		else {
 			data.addColumn('string', 'Data');
-			data.addColumn('number', 'Máximo');			
+			data.addColumn('number', 'MÃ¡ximo');			
 			data.addColumn('number', 'Minimo');
 		}
 
@@ -408,10 +461,10 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	                  },
 		    		  ticks: [
 		    		          {v:0, f: 'Range Minimo: 0' }, 
-		    		          {v: orange, f: 'Deteção: ' + orange}, 
+		    		          {v: orange, f: 'DetecÃ§Ã£o: ' + orange}, 
 		    		          {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		          {v: red, f: 'Evacuação: ' + red}, 
-		    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanySensor.rangeMax}
+		    		          {v: red, f: 'EvacuaÃ§Ã£o: ' + red}, 
+		    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Mï¿½ximo: ' + $scope.selectedCompanySensor.rangeMax}
 		    		        ],
 		    	  },
 		    	  //curveType: 'function',
@@ -487,7 +540,5 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		});
 		
 	}, 1000);
-	
-	
 	
 });

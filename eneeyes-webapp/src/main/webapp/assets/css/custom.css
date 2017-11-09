@@ -32,7 +32,7 @@
   position: absolute;
   height: 4px;
   background: #ccc;
-  top: 20px;
+  top: 15px;
   width: 100%;
   z-index: 4;
   left: 0; }
@@ -41,9 +41,9 @@
   background: #ccc; }
 
 .wizard_horizontal ul.wizard_steps li a .step_no {
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
   border-radius: 100px;
   display: block;
   margin: 0 auto 5px;

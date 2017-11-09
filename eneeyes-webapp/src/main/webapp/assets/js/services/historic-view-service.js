@@ -2,8 +2,16 @@
 app.factory('HistoricViewService', function($resource){    
     
     return {    	               
-        listIntervalDays : $resource('/security/api/historicView/findByCompanyDetectorAndSensorAndIntervalDays/:companyDetectorId/:sensorId/:dateIn/:dateOut/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', dateIn: '@dateIn', dateIn: '@dateOut' },{        
-        	historic : {method : 'GET'}
+        listIntervalDays : $resource('/security/api/historicView/findByCompanyDetectorAndSensorAndIntervalDays/:companyDetectorId/:sensorId/:dateIn/:dateOut/:currentPage/:lenPage/', 
+            {
+                companyDetectorId: '@companyDetectorId', 
+                sensorId: '@sensorId', 
+                dateIn: '@dateIn', 
+                dateIn: '@dateOut', 
+                currentPage: '@currentPage',
+                lenPage: '@lenPage'
+            },
+            { historic : {method : 'GET'}
         }),
         listInterval : $resource('/security/api/historicView/findByCompanyDetectorAndSensorAndInterval/:companyDetectorId/:sensorId/:interval/:currentPage/:lenPage/', 
             {
@@ -12,12 +20,9 @@ app.factory('HistoricViewService', function($resource){
                 interval: '@interval',
                 currentPage: '@currentPage',
                 lenPage: '@lenPage'
-
-            },{ historic : {method : 'GET'}
-        }),        
-        listLastMonth : $resource('/security/api/historicView/findByCompanyDetectorAndSensorLastMonth/:companyDetectorId/:sensorId/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId'},{        
-        	historic : {method : 'GET'}
-        }),
+            },
+            { historic : {method : 'GET'}
+        }),            
         listIntervalDaysGroupHours : $resource('/security/api/historicView/findByCompanyDetectorAndSensorAndIntervalDaysGroupHours/:companyDetectorId/:sensorId/:dateIn/:dateOut/', {companyDetectorId: '@companyDetectorId', sensorId: '@sensorId', dateIn: '@dateIn', dateIn: '@dateOut' },{        
         	historic : {method : 'GET'}
         }),

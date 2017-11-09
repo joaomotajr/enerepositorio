@@ -93,30 +93,26 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
         $scope.tipoGrupo = 1;        			
 	}		
 
-	$scope.lenPage = 15;
-	
+	$scope.lenPage = 15;	
 	$scope.currentPage = 0;
 	$scope.listPages = [];	
 	$scope.countPages = 0;
 
-	//var startItem = 0;
-	//var endItem = 0;
 	var lastPage = -1;
-
 	var listOfPagination = 5;
 
 	$scope.enumInterval = ({
-        UMA_HORA: "1",
-        SEIS_HORAS: "6",
-        DOZE_HORAS: "12",
-        UM_DIA: "24",
-        DOIS_DIAS: "48",
-        SETE_DIAS: "168",
-        UM_MES: "MES"
-	});	
+        UMA_HORA: "UMA_HORA",
+        SEIS_HORAS: "SEIS_HORAS",
+        DOZE_HORAS: "DOZE_HORAS",
+        UM_DIA: "UM_DIA",
+        DOIS_DIAS: "DOIS_DIAS",
+        SETE_DIAS: "SETE_DIAS",
+		UM_MES: "UM_MES",
+		CUSTOM: "CUSTOM"
+	});		
 
 	$scope.interval = $scope.enumInterval.UMA_HORA;
-
 
 	function range(total) {
 		if(total===1) {
@@ -137,16 +133,29 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}
 		return Array.apply(null, {length: total-input}).map(function(v, i){return i + input ;});
 	}
-	
+
 	$scope.getHistorics = function(n) {
-		
-		if (n < 0 || n > $scope.lenPage) return;
+
+		if (n < 0 || n > $scope.lenPage) return;			
 
 		$scope.currentPage = n;
 		$scope.loading = true;
-		
+
+		if($scope.interval == $scope.enumInterval.CUSTOM) {
+			
+			$scope.getHistoricInterval(n);
+		}
+		else {
+			
+			$scope.getHistoricsPreDefined(n);
+		}
+
+	}
+	
+	$scope.getHistoricsPreDefined = function(n) {
+				
 		$scope.selectedPeriodo = setInterval($scope.interval);
-		$scope.selectedButton = $scope.interval; 
+		$scope.selectedButton = $scope.interval; 		
 		
 		if($scope.tipoGrupo == 1)
 			$scope.listHistoricInterval = new HistoricViewService.listInterval();
@@ -175,44 +184,12 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 				if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
 					$(function() { $('#btnSelDevice').click(); })  	
 			}
-
 			
 				$scope.loading = false;					
-			}, 500);
-       	
-       });		
+
+			}, 500);		
+		});		
 	}	
-	
-	$scope.getLastMonth = function() {
-		
-		$scope.loading = true;
-		$scope.selectedPeriodo = setInterval('mes');
-		$scope.selectedButton = 30; 
-		
-		if($scope.tipoGrupo == 1) {
-	
-			$scope.daysDiff ="ATENﾃ�ﾃグ: Esta Pesquisa Nﾃグ Pode Exceder 15 dias " ;
-			
-			$("#snoAlertBox").fadeIn();
-			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300) }, 3000);
-			
-			return;
-		}	
-		else if($scope.tipoGrupo == 2)
-			$scope.listHistoricInterval = new HistoricViewService.listLastMonthGroupHours();
-		else if($scope.tipoGrupo == 3)
-			$scope.listHistoricInterval = new HistoricViewService.listLastMonthGroupDays();
-		
-		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, sensorId: $scope.selectedCompanySensor.uid }, function(){
-			
-			$scope.loading = false;
-			$scope.countHistoric = padZeros($scope.listHistoricInterval.list.length,5);
-			
-			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus'))
-				$(function() { $('#btnSelDevice').click(); })     	
-       	
-       });		
-	}
 	
 	function checkInterval (dataInicio, dataFim ) {
 		
@@ -220,7 +197,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		
 		if($scope.tipoGrupo == 1 && dayDiff(dataInicio, dataFim) > 15 ) {
 			
-			$scope.daysDiff ="ATENﾃ�ﾃグ: Esta Pesquisa Nﾃグ Pode Exceder 15 dias " ;
+			$scope.daysDiff ="ATENﾇﾃO: Esta Pesquisa NﾃO Pode Exceder 15 dias " ;
 			
 			$("#snoAlertBox").fadeIn();
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);
@@ -229,7 +206,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		}		
 		else if($scope.tipoGrupo == 2 && dayDiff(dataInicio, dataFim) > 360 ) {
 			
-			$scope.daysDiff ="ATENﾃ�ﾃグ: Esta Pesquisa Nﾃグ Pode Exceder 360 dias " ;
+			$scope.daysDiff ="ATENﾇﾃO: Esta Pesquisa NﾃO Pode Exceder 360 dias " ;
 			
 			$("#snoAlertBox").fadeIn();
 			
@@ -241,15 +218,13 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		return daysExceed;
 	}
 		
-	$scope.getHistoricInterval = function() {
-		
+	$scope.getHistoricInterval = function(n) {		
+
 		var dataInicio = new Date($('#dateIn').data().DateTimePicker.date._d);
 		var dataFim = new Date($('#dateOut').data().DateTimePicker.date._d);
 				
 		if(checkInterval(dataInicio, dataFim)) return;			 
 
-		$scope.loading = true;
-		
 		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' & ' + dataFim.toLocaleString();
 		
 		$scope.selectedButton = 100; 		
@@ -260,16 +235,23 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 			$scope.listHistoricInterval = new HistoricViewService.listIntervalDaysGroupHours();
 		else if($scope.tipoGrupo == 3)
 			$scope.listHistoricInterval = new HistoricViewService.listIntervalDaysGroupDays();
-						
+				
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(),			
 			companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, 
 			sensorId: $scope.selectedCompanySensor.uid,
 			dateIn: dataInicio,
-			dateOut: dataFim
+			dateOut: dataFim,
+			currentPage: $scope.currentPage,
+			lenPage: $scope.lenPage
 		}, function(){
 			
 			$scope.loading = false;
-			$scope.countHistoric = padZeros($scope.listHistoricInterval.list.length,5);
+
+			lastPage = $scope.currentPage;
+			
+			$scope.listPages = range(Math.ceil($scope.listHistoricInterval.totalList / $scope.lenPage));
+			$scope.countPages = Math.ceil($scope.listHistoricInterval.totalList / $scope.lenPage);			
+			$scope.countHistoric = padZeros($scope.listHistoricInterval.totalList, 5);
 			
 			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
 				$(function() { $('#btnSelDevice').click(); })     	
@@ -279,17 +261,17 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	function setInterval(interval) {
 		
 		if ( interval == 1 )
-			return "ﾃｺltima Hora";
+			return "ﾚltima Hora";
 		else if ( interval == 6 )
-			return "ﾃｺltimas Seis Horas";
+			return "timas Seis Horas";
 		else if ( interval == 12 )
-			return "ﾃｺltimas Doze Horas";
+			return "ﾚltimas Doze Horas";
 		else if ( interval == 48 )
-			return "ﾃｺltimas Dois Dias";
+			return "ﾚltimas Dois Dias";
 		else if ( interval == 96 )
-			return "ﾃｺltimos Quatro Dias";
+			return "ﾚltimos Quatro Dias";
 		else if ( interval == 'mes' )
-			return "ﾃｺltimo Mﾃｪs";
+			return "ﾚltimo M黌";
 		else 
 			return 'Desconhecido';
 				

@@ -1,4 +1,4 @@
-package br.com.eneeyes.main.service.views;
+package br.com.eneeyes.main.service.historic;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.model.views.HistoricViewDay;
-import br.com.eneeyes.main.repository.views.HistoricViewDayRepository;
+import br.com.eneeyes.main.repository.historic.HistoricViewDayRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 

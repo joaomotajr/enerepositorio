@@ -1,53 +1,29 @@
-package br.com.eneeyes.main.model;
+package br.com.eneeyes.main.model.historic;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PostUpdate;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Index;
 
-import br.com.eneeyes.main.dto.HistoricDto;
+import br.com.eneeyes.main.model.enums.LogOrigem;
 
 @Entity
-@Table(name = "historic")
+@Table(name = "historic_a")
 @org.hibernate.annotations.Table(
-		   appliesTo = "historic",
+		   appliesTo = "historic_a",
 		   indexes = {
-		      @Index(name="idxHistoricDate", columnNames = "LAST_UPDATE"),		      
-		      @Index(name="idxHistoricCompanySensorAndDate", columnNames = {"COMPANY_DETECTOR_ID", "SENSOR_ID", "LAST_UPDATE"})
+		      @Index(name="idxHistoricADate", columnNames = "LAST_UPDATE"),		      
+		      @Index(name="idxHistoricACompanySensorAndDate", columnNames = {"COMPANY_DETECTOR_ID", "SENSOR_ID", "LAST_UPDATE"})
 		   }
 		)
-public class Historic {
-
-    public Historic() {
-    	
-    }
-    
-    public Historic(HistoricDto dto) {
-    	
-    	this.uid = dto.getUid();
-    	this.lastUpdate = dto.getLastUpdate();
-    	this.value = dto.getValue();    	
-    	this.companyDetectorId = dto.getCompanyDetectorId();
-    	this.sensorId = dto.getSensorId();    	
-    }
-    
-    @PostUpdate
-    public void updateHistoricId() {
-        if (getUid() != null) {
-             this.setUid(getUid());
-        }
-    }
-
+public class HistoricA implements IHistoric {
+   
 	@Id	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UID")	
 	private Long uid;
 	
@@ -62,15 +38,18 @@ public class Historic {
 	
 	@Column(name="SENSOR_ID", nullable = false)
 	private Long sensorId;
-		
-	public Long getUid() {
+	
+	@Column(name = "LOG_ORIGEM", nullable = true)
+	private LogOrigem logOrigem;
+
+	public final Long getUid() {
 		return uid;
 	}
 
-	public void setUid(Long uid) {
+	public final void setUid(Long uid) {
 		this.uid = uid;
 	}
-	
+
 	public final Date getLastUpdate() {
 		return lastUpdate;
 	}
@@ -79,11 +58,11 @@ public class Historic {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public BigDecimal getValue() {
+	public final BigDecimal getValue() {
 		return value;
 	}
 
-	public void setValue(BigDecimal value) {
+	public final void setValue(BigDecimal value) {
 		this.value = value;
 	}
 
@@ -101,5 +80,14 @@ public class Historic {
 
 	public final void setSensorId(Long sensorId) {
 		this.sensorId = sensorId;
+	}
+
+	public final LogOrigem getLogOrigem() {
+		return logOrigem;
+	}
+
+	public final void setLogOrigem(LogOrigem logOrigem) {
+		this.logOrigem = logOrigem;
 	}	
+
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eneeyes.main.result.BasicResult;
-import br.com.eneeyes.main.service.views.HistoricViewDayService;
+import br.com.eneeyes.main.service.historic.HistoricViewDayService;
 
 //@PreAuthorize("hasRole('ADMINISTRATOR')")
 @RestController

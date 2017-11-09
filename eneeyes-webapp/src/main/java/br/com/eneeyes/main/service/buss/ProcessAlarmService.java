@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.dto.CompanyDetectorAlarmDto;
 import br.com.eneeyes.main.model.CompanyDetector;
-import br.com.eneeyes.main.model.Historic;
 import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
@@ -20,6 +19,7 @@ import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.enums.SigmaStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
+import br.com.eneeyes.main.model.historic.Historic;
 import br.com.eneeyes.main.model.register.Sensor;
 import br.com.eneeyes.main.model.views.PositionView;
 import br.com.eneeyes.main.repository.PositionAlarmRepository;
@@ -28,7 +28,7 @@ import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRep
 import br.com.eneeyes.main.repository.views.PositionViewRepository;
 import br.com.eneeyes.main.service.CompanyDetectorAlarmService;
 import br.com.eneeyes.main.service.HistoricAlarmService;
-import br.com.eneeyes.main.service.HistoricService;
+import br.com.eneeyes.main.service.historic.HistoricService;
 
 /**
  * @author f752766

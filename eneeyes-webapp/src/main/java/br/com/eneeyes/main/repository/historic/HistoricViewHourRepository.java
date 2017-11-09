@@ -1,4 +1,4 @@
-package br.com.eneeyes.main.repository.views;
+package br.com.eneeyes.main.repository.historic;
 
 import java.util.Date;
 import java.util.List;

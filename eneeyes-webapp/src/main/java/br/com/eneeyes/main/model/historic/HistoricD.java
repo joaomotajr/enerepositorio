@@ -1,4 +1,4 @@
-package br.com.eneeyes.main.model;
+package br.com.eneeyes.main.model.historic;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,16 +10,18 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Index;
 
+import br.com.eneeyes.main.model.enums.LogOrigem;
+
 @Entity
-@Table(name = "historic_a")
+@Table(name = "historic_d")
 @org.hibernate.annotations.Table(
-		   appliesTo = "historic_a",
+		   appliesTo = "historic_d",
 		   indexes = {
-		      @Index(name="idxHistoricADate", columnNames = "LAST_UPDATE"),		      
-		      @Index(name="idxHistoricACompanySensorAndDate", columnNames = {"COMPANY_DETECTOR_ID", "SENSOR_ID", "LAST_UPDATE"})
+		      @Index(name="idxHistoricDDate", columnNames = "LAST_UPDATE"),		      
+		      @Index(name="idxHistoricDCompanySensorAndDate", columnNames = {"COMPANY_DETECTOR_ID", "SENSOR_ID", "LAST_UPDATE"})
 		   }
 		)
-public class Historic_a {
+public class HistoricD {
    
 	@Id	
 	@Column(name = "UID")	
@@ -35,6 +37,9 @@ public class Historic_a {
 	private Long companyDetectorId;
 	
 	@Column(name="SENSOR_ID", nullable = false)
-	private Long sensorId;		
-
+	private Long sensorId;
+	
+	@Column(name = "LOG_ORIGEM", nullable = true)
+	private LogOrigem logOrigem;
+		
 }

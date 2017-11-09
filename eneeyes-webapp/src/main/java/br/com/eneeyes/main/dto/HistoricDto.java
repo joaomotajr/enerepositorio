@@ -3,7 +3,7 @@ package br.com.eneeyes.main.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import br.com.eneeyes.main.model.Historic;
+import br.com.eneeyes.main.model.historic.Historic;
 
 public class HistoricDto {
 	

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eneeyes.main.result.BasicResult;
-import br.com.eneeyes.main.service.views.HistoricViewHourService;
+import br.com.eneeyes.main.service.historic.HistoricViewHourService;
 
 @RestController
 public class HistoricViewHourController {

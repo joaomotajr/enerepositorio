@@ -37,7 +37,8 @@ public class Historic {
     	this.lastUpdate = dto.getLastUpdate();
     	this.value = dto.getValue();    	
     	this.companyDetectorId = dto.getCompanyDetectorId();
-    	this.sensorId = dto.getSensorId();    	
+    	this.sensorId = dto.getSensorId();
+    	this.logOrigem = dto.getLogOrigem();
     }
     
     @PostUpdate

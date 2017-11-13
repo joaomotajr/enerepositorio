@@ -38,7 +38,7 @@ app.filter('alarmFilter', function () {
     }
 });
 
-app.controller('logHistoricController', function ($scope, $timeout, $filter, CompanyService, DetectorService, CompanyDetectorService, HistoricViewService, ViewService, CompanyDetectorAlarmService) {
+app.controller('logHistoricController', function ($scope, $timeout, $filter, $cookieStore, CompanyService, DetectorService, CompanyDetectorService, HistoricViewService, ViewService, CompanyDetectorAlarmService) {
 
 	var loadGoogleCharts = false;	
 	$scope.countHistoric = 0;
@@ -92,14 +92,14 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
         $scope.dateOut = undefined;
         $scope.tipoGrupo = 1;        			
 	}		
-
-	$scope.lenPage = 15;	
+	
+	$scope.lenPage =  $cookieStore.get('lenPage') == null ? 15 : $cookieStore.get('lenPage');	
 	$scope.currentPage = 0;
 	$scope.listPages = [];	
 	$scope.countPages = 0;
 
 	var lastPage = -1;
-	var listOfPagination = 5;
+	var listOfPagination = 6;
 
 	$scope.enumInterval = ({
         UMA_HORA: "UMA_HORA",
@@ -155,7 +155,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	$scope.getHistoricsPreDefined = function(n) {
 				
 		$scope.selectedPeriodo = setInterval($scope.interval);
-		$scope.selectedButton = $scope.interval; 		
+		$scope.selectedButton = $scope.interval;
+		$cookieStore.put("lenPage", $scope.lenPage);
 		
 		if($scope.tipoGrupo == 1)
 			$scope.listHistoricInterval = new HistoricViewService.listInterval();
@@ -223,7 +224,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		var dataInicio = new Date($('#dateIn').data().DateTimePicker.date._d);
 		var dataFim = new Date($('#dateOut').data().DateTimePicker.date._d);
 				
-		if(checkInterval(dataInicio, dataFim)) return;			 
+		if(checkInterval(dataInicio, dataFim)) return;	
+		$cookieStore.put("lenPage", $scope.lenPage);
 
 		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' & ' + dataFim.toLocaleString();
 		
@@ -488,6 +490,10 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	$scope.changeToValue = function(valor) {
 	  return valor.toString().replace(".", ",")
 	}
+
+	$scope.setLenPage = function(len) {
+		
+	}	  
 
 	$scope.clearHistoric();
 	$scope.getCompanys();

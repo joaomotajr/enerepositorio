@@ -1,4 +1,4 @@
-var app = angular.module('eneeyes', ['ngResource', 'dependency', 'ng-fusioncharts']);
+var app = angular.module('eneeyes', ['ngResource', 'dependency', 'ng-fusioncharts', 'ngCookies']);
 
 angular.module('angularDatatable', []);
 

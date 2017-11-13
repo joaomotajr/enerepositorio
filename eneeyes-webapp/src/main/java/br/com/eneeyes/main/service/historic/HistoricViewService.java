@@ -37,7 +37,6 @@ public class HistoricViewService {
 	
 	@Autowired
 	private HistoricCRepository repositoryC;
-
 	
 	public HistoricResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
 		HistoricResult<?> result = new HistoricResult<IHistoric>();
@@ -126,36 +125,47 @@ public class HistoricViewService {
 		Date date = new Date();
 		
 		long diff = date.getTime() - dateIn.getTime();
-		long diffHours = diff / (60 * 60 * 1000);
-		int diffDays = (int) ((date.getTime() - dateIn.getTime()) / (1000 * 60 * 60 * 24));
+		long diffHoursIn = diff / (60 * 60 * 1000);
+		int diffDaysIn = (int) ((date.getTime() - dateIn.getTime()) / (1000 * 60 * 60 * 24));
+		int diffDaysOut = (int) ((date.getTime() - dateOut.getTime()) / (1000 * 60 * 60 * 24));
 		
-		if(diffHours <= 1) {
+		if(diffHoursIn <= 1) {
 			result = findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, IntervalType.UMA_HORA, currentPage, lenPage);
 		}
-		else if(diffHours <= 6) {
+		else if(diffHoursIn <= 6) {
 			result = findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, IntervalType.SEIS_HORAS, currentPage, lenPage);
 		}
-		else if(diffHours <= 12) {
+		else if(diffHoursIn <= 12) {
 			result = findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, IntervalType.DOZE_HORAS, currentPage, lenPage);
 		}
-		else if(diffHours <= 24) {
+		else if(diffHoursIn <= 24) {
 			result = findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, IntervalType.UM_DIA, currentPage, lenPage);
 		}
-		else if(diffDays <= 2) {
+		else if(diffDaysIn <= 2) {
 			result = findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, IntervalType.DOIS_DIAS, currentPage, lenPage);
 		}
-		else if(diffDays <= 7) {
+		else if(diffDaysIn <= 7) {
 			result = findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, IntervalType.SETE_DIAS, currentPage, lenPage);
 		}
-		else if(diffDays <= 30) {
+		else if(diffDaysIn <= 30) {
 			result = findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, IntervalType.UM_MES, currentPage, lenPage);
 		}
-		else {
-			diff = date.getTime() - dateOut.getTime();
+		else if (diffDaysIn > 30 && diffDaysOut > 30) {
 			
+			result = getResults(repositoryC.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
 		}
-		
-		
+		else if (diffDaysIn <= 2 && diffDaysOut <= 2) {
+			
+			result = getResults(repositoryHA.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
+		}
+		else if (diffDaysIn <= 7 && diffDaysOut <= 7) {
+			
+			result = getResults(repositoryHAB.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
+		}
+		else {
+			
+			result = getResults(repositoryHABC.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
+		}		
 		
 		return result;
 	}

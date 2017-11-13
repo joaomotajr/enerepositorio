@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.eneeyes.main.model.enums.IntervalType;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.service.historic.HistoricViewHourService;
 
@@ -17,30 +18,50 @@ import br.com.eneeyes.main.service.historic.HistoricViewHourService;
 public class HistoricViewHourController {
 	
 	@Autowired
-	HistoricViewHourService historicViewHourService;	
+	HistoricViewHourService service;	
 	
-	@RequestMapping(value = "/security/api/view/allHistoricViewGroupHours", method = RequestMethod.GET, produces = "application/json")
-	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> allHistoricView() {
-		return historicViewHourService.listAll();
-	}
+//	@RequestMapping(value = "/security/api/view/allHistoricViewGroupHours", method = RequestMethod.GET, produces = "application/json")
+//	@ResponseStatus(HttpStatus.OK)
+//	public BasicResult<?> allHistoricView() {
+//		return historicViewHourService.listAll();
+//	}
 	
-	@RequestMapping(value="/security/api/view/findByCompanyDetectorAndSensorAndIntervalGroupHours/{companyDetectorId}/{sensorId}/{interval}", method=RequestMethod.GET, produces = "application/json")			
+	
+	@RequestMapping(value="/security/api/view/findByCompanyDetectorAndSensorAndIntervalGroupHours/{companyDetectorId}/{sensorId}/{intervalType}/{currentPage}/{lenPage}",
+			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)                      
-	public BasicResult<?> findByCompanyDetectorAndSensorAndInterval(@PathVariable Long companyDetectorId, @PathVariable Long sensorId, @PathVariable Integer interval) {		
-		return historicViewHourService.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, interval);
+	public BasicResult<?> findByCompanyDetectorAndSensorAndInterval(		
+			@PathVariable Long companyDetectorId, 
+			@PathVariable Long sensorId, 
+			@PathVariable IntervalType intervalType, 
+			@PathVariable Integer currentPage, 
+			@PathVariable Integer lenPage) {		
+		return service.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, intervalType, currentPage, lenPage);
 	}
 	
-	@RequestMapping(value="/security/api/view/findByCompanyDetectorAndSensorLastMonthGroupHours/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
-	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDetectorAndSensorLastMonth(@PathVariable Long companyDetectorId, @PathVariable Long sensorId) {		
-		return historicViewHourService.findByCompanyDetectorAndSensorLastMonth(companyDetectorId, sensorId);
-	}	
+//	@RequestMapping(value="/security/api/view/findByCompanyDetectorAndSensorLastMonthGroupHours/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
+//	@ResponseStatus(HttpStatus.OK)
+//	public BasicResult<?> findByCompanyDetectorAndSensorLastMonth(@PathVariable Long companyDetectorId, @PathVariable Long sensorId) {		
+//		return historicViewHourService.findByCompanyDetectorAndSensorLastMonth(companyDetectorId, sensorId);
+//	}	
+	
+//	@RequestMapping(value="/security/api/view/findByCompanyDetectorAndSensorAndIntervalDaysGroupHours/{companyDetectorId}/{sensorId}/{dateIn}/{dateOut}", method=RequestMethod.GET, produces = "application/json")			
+//	@ResponseStatus(HttpStatus.OK)
+//	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(@PathVariable Long companyDetectorId, @PathVariable Long sensorId, @PathVariable Date dateIn, @PathVariable Date dateOut) {		
+//		return historicViewHourService.findByCompanyDetectorAndSensorAndIntervalDays(companyDetectorId, sensorId, dateIn, dateOut);
+//	}
 	
 	@RequestMapping(value="/security/api/view/findByCompanyDetectorAndSensorAndIntervalDaysGroupHours/{companyDetectorId}/{sensorId}/{dateIn}/{dateOut}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(@PathVariable Long companyDetectorId, @PathVariable Long sensorId, @PathVariable Date dateIn, @PathVariable Date dateOut) {		
-		return historicViewHourService.findByCompanyDetectorAndSensorAndIntervalDays(companyDetectorId, sensorId, dateIn, dateOut);
+	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(		
+			@PathVariable Long companyDetectorId, 
+			@PathVariable Long sensorId, 
+			@PathVariable Date dateIn, 
+			@PathVariable Date dateOut,
+			@PathVariable Integer currentPage, 
+			@PathVariable Integer lenPage) {
+		
+		return service.findByCompanyDetectorAndSensorAndIntervalHours(companyDetectorId, sensorId, dateIn, dateOut, currentPage, lenPage);
 	}
 
 }

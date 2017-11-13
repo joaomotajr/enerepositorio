@@ -179,7 +179,7 @@
 							<div class="row">
 								<form class="form" name="userForm">						 		
 									
-									<div class="col-md-5">
+									<div class="col-md-4">
 										<div class="form-group">
 											<label class="control-label">Buscar por Intervalos Pré-Definidos: </label> <br />								
 											<div class="btn-group" role="group" aria-label="Basic example">
@@ -229,7 +229,7 @@
 							</div>    
 							
 							<div class="row">
-								<div id="printHeader" class="col-md-5">
+								<div id="printHeader" class="col-md-4">
 									<div class="box box-primary">
 				
 										<div class="box-header">
@@ -274,7 +274,7 @@
 									</div>			
 								
 								</div>									        		
-								<div class="col-md-7">					        		
+								<div class="col-md-5">
 									<div style="max-height:420px; height:auto; overflow: auto">
 														
 										<table data-ng-if="tipoGrupo==1" class='zui-table' cellspacing="0" width="100%" data-ng-visible="listHistoric">					            				                            
@@ -283,7 +283,7 @@
 													<th>Data</th>
 													<th>Hora</th>	                      		
 													<th>Valor</th>
-													<th>Origem</th>			                                                                                                                            
+													<th style="padding: 1px">Origem</th>
 												</tr>
 											</thead>
 											<tbody>		
@@ -294,10 +294,10 @@
 													<td>{{item.lastUpdate | date:'HH:mm:ss' }}</td>
 													<td> {{item.value}} </td>
 													<td>
-														<span data-ng-if="item.logOrigem == 0" class="label label-success"> DISPOSITIVO</span>
-														<span data-ng-if="item.logOrigem == 1" class="label label-success"> MANUAL </span>
-														<span data-ng-if="item.logOrigem == 2" class="label label-success"> SISTEMA </span>
-														<span data-ng-if="item.logOrigem >= 3" class="label label-success"> DESCONHECIDA </span>																					
+														<span data-ng-if="item.logOrigem == 'DEVICE'"> DISPOSITIVO</span>
+														<span data-ng-if="item.logOrigem == 'MANUAL'"> ANÁLISE DE CENÁRIO </span>
+														<span data-ng-if="item.logOrigem == 'SYSTEM'"> SISTEMA</span>
+														<span data-ng-if="item.logOrigem == 'OTHER' || item.logOrigem == null"> DESCONHECIDA</span>
 													</td>
 												</tr>
 											</tbody>
@@ -323,43 +323,65 @@
 											</tbody>
 										</table>
 
-										<div class="col-md-12">
-											<div class="col-md-6">										
-												<label data-ng-show='countHistoric > 0'><span class="icon fa fa-search"> Total de Registros: </span> {{countHistoric}}</label>
-											</div>
-											<div class="col-md-6">
-												<label class"pull-right" data-ng-show='countHistoric > 0'><span class="icon fa fa-search"> Registros Por Página: </span> {{lenPage}}</label>
-											</div>
-										</div>
-
 										<p data-ng-hide="listHistoricInterval == undefined || listHistoricInterval.list.length > 0 || loading" class="text-center">NENHUM REGISTRO</p>
-										<div class="col-md-12" style="margin-bottom:15px">
-											<div>
-												<ul class="pagination inline">
-													<li data-ng-show="countPages > 0" data-ng-class="{disabled: currentPage == 0, 'cursor': currentPage != 0}">
-														<a data-ng-click="getHistorics(0)">&Lang;</a>
-													</li>
-													
-													<li data-ng-show="countPages > 0" data-ng-class="{disabled: currentPage == 0, 'cursor': currentPage != 0}">
-														<a data-ng-click="n=currentPage-1; getHistorics(n)">&lang;</a>
-													</li>
-													
-													<li data-ng-repeat="n in listPages" data-ng-class="{active: currentPage == n, 'cursor': currentPage !=n }">
-														<a data-ng-click="getHistorics(n)" data-ng-bind="n"></a>
-													</li>
-
-													<li data-ng-show="countPages > 0" data-ng-class="{disabled: currentPage == countPages-1, 'cursor': currentPage != countPages}"> 
-														<a data-ng-click="n=currentPage+1; getHistorics(n)">&rang;</a>
-													</li>
-													
-													<li data-ng-show="countPages > 0" data-ng-class="{disabled: currentPage == countPages-1, 'cursor': currentPage != countPages}">
-														<a data-ng-click=" getHistorics(countPages-1)">&Rang;</a>
-													</li>
-												</ul>
-											</div>
-										</div>
+										
 									</div>                                                         	            
-								</div>							        		
+								</div>
+								
+								<div class="col-md-3">
+									<br>						
+									<div class="row" style=" vertical-align: middle; text-align: center;">									
+										<label><span class="icon fa fa-columns"> Itens por Página:</span></label>
+									</div>
+
+									<div class="row" style=" vertical-align: middle; text-align: center;">
+										<div class="col-md-5" style="padding-left:2px; padding-right: 2px;">
+											<button class="btn btn-default" type="button" data-ng-show="countPages > 0" data-ng-class="{disabled: currentPage == 0, 'cursor': currentPage != 0}"  data-ng-click="getHistorics(0)">
+											&Lang; Primeira
+											</button>											
+										</div>
+
+										<div class="col-md-2" style="padding-left:2px; padding-right: 2px;">
+											<input type="text" class="form-control" data-ng-model="lenPage">
+										</div>
+
+										<div class="col-md-5" style="padding-left:2px; padding-right: 2px;">
+											<button class="btn btn-default" data-ng-show="countPages > 0" data-ng-class="{disabled: currentPage == countPages-1, 'cursor': currentPage != countPages}" data-ng-click=" getHistorics(countPages-1)">
+											Última &Rang;
+											</button>
+										</div>
+									</div>
+									
+									<br>
+									<hr>									
+
+									<div class="row" style=" vertical-align: middle; text-align: center;">
+										<label data-ng-show='countHistoric > 0'><span class="icon fa fa-text-width"> Total Itens da Pesquisa: </span> {{countHistoric}}</label>
+									</div>
+									<div class="row" style=" vertical-align: middle; display: inline-block; text-align: center;">										
+										<ul class="pagination inline">													
+											<li data-ng-show="countPages > 0" data-ng-class="{disabled: currentPage == 0, 'cursor': currentPage != 0}">
+												<a data-ng-click="n=currentPage-1; getHistorics(n)">&lang;</a>
+											</li>
+											
+											<li data-ng-repeat="n in listPages" data-ng-class="{active: currentPage == n, 'cursor': currentPage !=n }">
+												<a data-ng-click="getHistorics(n)" data-ng-bind="n"></a>
+											</li>
+
+											<li data-ng-show="countPages > 0" data-ng-class="{disabled: currentPage == countPages-1, 'cursor': currentPage != countPages}"> 
+												<a data-ng-click="n=currentPage+1; getHistorics(n)">&rang;</a>
+											</li>													
+										</ul>										
+									</div>
+									<div class="row">
+									<div style="vertical-align: middle; text-align: center; font-size: 05.em">
+										<label data-ng-show='countHistoric > 0'> Páginas: {{countPages}}</label>
+									</div>
+									</div>							
+									
+									<br>
+
+								</div>
 							</div>
 																			
 						</div>
@@ -445,10 +467,10 @@
 						<td data-ng-if="tipoGrupo!=1"> {{item.min_value}} </td>
 						
 						<td data-ng-if="tipoGrupo==1">
-							<span data-ng-if="item.logOrigem == 0" class="label label-success"> DISPOSITIVO</span>
-							<span data-ng-if="item.logOrigem == 1" class="label label-success"> MANUAL </span>
-							<span data-ng-if="item.logOrigem == 2" class="label label-success"> SISTEMA</span>
-							<span data-ng-if="item.logOrigem >= 3" class="label label-success"> DESCONHECIDA</span>							
+							<span data-ng-if="item.logOrigem == 'DEVICE'"> DISPOSITIVO</span>
+							<span data-ng-if="item.logOrigem == 'MANUAL'"> ANÁLISE DE CENÁRIO </span>
+							<span data-ng-if="item.logOrigem == 'SYSTEM'"> SISTEMA</span>
+							<span data-ng-if="item.logOrigem == 'OTHER' || item.logOrigem == null"> DESCONHECIDA</span>							
 						</td>						
 					</tr>	                   
 				</table>            	

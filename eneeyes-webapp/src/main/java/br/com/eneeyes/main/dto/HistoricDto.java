@@ -3,17 +3,17 @@ package br.com.eneeyes.main.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import br.com.eneeyes.main.model.enums.LogOrigem;
 import br.com.eneeyes.main.model.historic.Historic;
 
 public class HistoricDto {
 	
 	private Long uid;
 	private Date lastUpdate;
-	private BigDecimal value;	
-//    private CompanyDetectorDto companyDetectorDto;
-//    private SensorDto sensorDto;
+	private BigDecimal value;
 	private Long companyDetectorId;
     private Long sensorId;
+    private LogOrigem logOrigem;
 	
 	public HistoricDto() {
 		
@@ -24,11 +24,9 @@ public class HistoricDto {
 		this.uid = historic.getUid();
 		this.lastUpdate = historic.getLastUpdate();
     	this.value = historic.getValue();   
-//    	this.sensorDto = new SensorDto(historic.getSensor());   
-//    	this.companyDetectorDto = new CompanyDetectorDto(historic.getCompanyDetector());   
     	this.companyDetectorId = historic.getCompanyDetectorId();
     	this.sensorId = historic.getSensorId();
-    	
+    	this.logOrigem = historic.getLogOrigem();    	
 	}
 	
 	public final Long getUid() {
@@ -70,21 +68,13 @@ public class HistoricDto {
 	public final void setSensorId(Long sensorId) {
 		this.sensorId = sensorId;
 	}
-	
-//	public CompanyDetectorDto getCompanyDetectorDto() {
-//		return companyDetectorDto;
-//	}
-//
-//	public void setCompanyDetectorDto(CompanyDetectorDto companyDetectorDto) {
-//		this.companyDetectorDto = companyDetectorDto;
-//	}
-//	
-//	public final SensorDto getSensorDto() {
-//		return sensorDto;
-//	}
-//
-//	public final void setSensorDto(SensorDto sensorDto) {
-//		this.sensorDto = sensorDto;
-//	}
 
+	public final LogOrigem getLogOrigem() {
+		return logOrigem;
+	}
+
+	public final void setLogOrigem(LogOrigem logOrigem) {
+		this.logOrigem = logOrigem;
+	}	
+	
 }

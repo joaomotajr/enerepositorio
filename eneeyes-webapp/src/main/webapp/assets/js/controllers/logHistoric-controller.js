@@ -38,7 +38,7 @@ app.filter('alarmFilter', function () {
     }
 });
 
-app.controller('logHistoricController', function ($scope, $timeout, $filter, CompanyService, DetectorService, CompanyDetectorService, HistoricViewService, ViewService, CompanyDetectorAlarmService) {
+app.controller('logHistoricController', function ($scope, $timeout, $filter, $cookieStore, CompanyService, DetectorService, CompanyDetectorService, HistoricViewService, ViewService, CompanyDetectorAlarmService) {
 
 	var loadGoogleCharts = false;	
 	$scope.countHistoric = 0;
@@ -90,16 +90,18 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
         $scope.listHistoricInterval = undefined;
         $scope.dateIn = undefined;
         $scope.dateOut = undefined;
-        $scope.tipoGrupo = 1;        			
+		$scope.tipoGrupo = 1;        			
+		$scope.countPages = 0;
 	}		
-
-	$scope.lenPage = 15;	
+	
+	$scope.lenPage =  $cookieStore.get('lenPage') == null ? 15 : $cookieStore.get('lenPage');
+	$scope.lenPageValid = true;	
 	$scope.currentPage = 0;
 	$scope.listPages = [];	
 	$scope.countPages = 0;
 
 	var lastPage = -1;
-	var listOfPagination = 5;
+	var listOfPagination = 6;
 
 	$scope.enumInterval = ({
         UMA_HORA: "UMA_HORA",
@@ -136,6 +138,15 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 
 	$scope.getHistorics = function(n) {
 
+		if (!$scope.lenPageValid) {
+			
+			$scope.daysDiff ="ATENÇÃO! Quantidade de registros por página Inválido." ;			
+			$("#snoAlertBox").fadeIn();			
+			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
+			daysExceed = true;
+			return;
+		}
+
 		if (n < 0 || n > $scope.lenPage) return;			
 
 		$scope.currentPage = n;
@@ -155,7 +166,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	$scope.getHistoricsPreDefined = function(n) {
 				
 		$scope.selectedPeriodo = setInterval($scope.interval);
-		$scope.selectedButton = $scope.interval; 		
+		$scope.selectedButton = $scope.interval;
+		$cookieStore.put("lenPage", $scope.lenPage);
 		
 		if($scope.tipoGrupo == 1)
 			$scope.listHistoricInterval = new HistoricViewService.listInterval();
@@ -191,39 +203,40 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 		});		
 	}	
 	
-	function checkInterval (dataInicio, dataFim ) {
+	// function checkInterval (dataInicio, dataFim ) {
 		
-		daysExceed = false;
+	// 	daysExceed = false;
 		
-		if($scope.tipoGrupo == 1 && dayDiff(dataInicio, dataFim) > 15 ) {
+	// 	if($scope.tipoGrupo == 1 && dayDiff(dataInicio, dataFim) > 15 ) {
 			
-			$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 15 dias " ;
+	// 		$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 15 dias " ;
 			
-			$("#snoAlertBox").fadeIn();
-			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);
+	// 		$("#snoAlertBox").fadeIn();
+	// 		window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);
 			
-			daysExceed = true;
-		}		
-		else if($scope.tipoGrupo == 2 && dayDiff(dataInicio, dataFim) > 360 ) {
+	// 		daysExceed = true;
+	// 	}		
+	// 	else if($scope.tipoGrupo == 2 && dayDiff(dataInicio, dataFim) > 360 ) {
 			
-			$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 360 dias " ;
+	// 		$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 360 dias " ;
 			
-			$("#snoAlertBox").fadeIn();
+	// 		$("#snoAlertBox").fadeIn();
 			
-			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);
+	// 		window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);
 			
-			daysExceed = true;
-		}	
+	// 		daysExceed = true;
+	// 	}	
 		
-		return daysExceed;
-	}
+	// 	return daysExceed;
+	// }
 		
 	$scope.getHistoricInterval = function(n) {		
 
 		var dataInicio = new Date($('#dateIn').data().DateTimePicker.date._d);
 		var dataFim = new Date($('#dateOut').data().DateTimePicker.date._d);
 				
-		if(checkInterval(dataInicio, dataFim)) return;			 
+		// if(checkInterval(dataInicio, dataFim)) return;	
+		$cookieStore.put("lenPage", $scope.lenPage);
 
 		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' & ' + dataFim.toLocaleString();
 		
@@ -493,6 +506,32 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, Com
 	$scope.getCompanys();
 	$scope.getCompanyDetectors();
 	$scope.tipoGrupo = 1;
+
+	
+	// $("#allownumericwithoutdecimal").on("keypress keyup blur",function (event) {    
+	// 	$(this).val($(this).val().replace(/[^\d].+/, ""));
+		 
+	// 	if ((event.which < 48 || event.which > 57)) {
+	// 		 event.preventDefault();
+	// 	}
+
+	
+	$scope.changeLenPage = function() {
+		
+		if($scope.lenPage < 0 || $scope.lenPage > 2000)
+			$scope.lenPageValid = false;
+		else
+			$scope.lenPageValid = true;
+		
+	}
+	
+	$scope.validLenPage = function(e) {
+		$scope.lenPage.replace(/[^\d].+/, "");
+		
+		if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+			e.preventDefault();
+	   }
+	}
 	
 	$timeout(function(){
 		angular.element('body').removeClass('loading');

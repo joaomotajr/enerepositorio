@@ -22,19 +22,19 @@ public class HistoricViewHA implements IHistoric {
 	@Column(name = "UID")	
 	private Long uid;
 	
-	@Column(name = "LAST_UPDATE", nullable = false)
+	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
 
-	@Column(name = "VALUE", nullable = true)
+	@Column(name = "VALUE")
 	private BigDecimal value;
 	
-	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
+	@Column(name="COMPANY_DETECTOR_ID")
 	private Long companyDetectorId;
 	
-	@Column(name="SENSOR_ID", nullable = false)
+	@Column(name="SENSOR_ID")
 	private Long sensorId;
 	
-	@Column(name = "LOG_ORIGEM", nullable = true)
+	@Column(name = "LOG_ORIGEM")
 	private LogOrigem logOrigem;
 
 	public final Long getUid() {

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.HistoricDto;
 import br.com.eneeyes.main.model.Position;
+import br.com.eneeyes.main.model.enums.LogOrigem;
 import br.com.eneeyes.main.model.historic.Historic;
 import br.com.eneeyes.main.repository.historic.HistoricRepository;
 import br.com.eneeyes.main.result.BasicResult;
@@ -45,6 +46,7 @@ public class HistoricService implements IService<HistoricDto> {
 			historic.setSensorId(position.getSensor().getUid());
 			historic.setLastUpdate(new Date());
 			historic.setValue(value);
+			historic.setLogOrigem(LogOrigem.DEVICE);
 			
 			repository.save(historic);
 		
@@ -67,6 +69,7 @@ public class HistoricService implements IService<HistoricDto> {
 		historic.setSensorId(position.getSensor().getUid());
 		historic.setLastUpdate(new Date());
 		historic.setValue(position.getLastValue());
+		historic.setLogOrigem(LogOrigem.SYSTEM);
 		
 		historic = repository.save(historic);
 	
@@ -253,11 +256,11 @@ public class HistoricService implements IService<HistoricDto> {
 //		return result;	
 //
 //	}
-
-	public BasicResult<?> save(Long companyId, Long unitId, Long areaId, String companyDetectorName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//
+//	public BasicResult<?> save(Long companyId, Long unitId, Long areaId, String companyDetectorName) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	@Override
 	public BasicResult<?> save(HistoricDto dto) {

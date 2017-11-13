@@ -8,34 +8,32 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import br.com.eneeyes.main.model.enums.LogOrigem;
-
 @Entity
-@Table(name = "historic_view_bc")
-public class HistoricViewBC implements IHistoric {
+@Table(name = "historic_view_day_30")
+public class HistoricViewDay30 implements IHistoricGroup {
 
-    public HistoricViewBC() {
+    public HistoricViewDay30() {
     	
     }     
 
     @Id	
 	@Column(name = "UID")	
-	private Long uid;
-	
-	@Column(name = "LAST_UPDATE")
-	private Date lastUpdate;
-
-	@Column(name = "VALUE")
-	private BigDecimal value;
+	private Long uid;	
 	
 	@Column(name="COMPANY_DETECTOR_ID")
 	private Long companyDetectorId;
 	
 	@Column(name="SENSOR_ID")
 	private Long sensorId;
+		
+	@Column(name = "LAST_UPDATE")
+	private Date lastUpdate;
+			
+	@Column(name="MAX_VALUE")
+	private BigDecimal maxValue;
 	
-	@Column(name = "LOG_ORIGEM")
-	private LogOrigem logOrigem;
+	@Column(name="MIN_VALUE")
+	private BigDecimal minValue;
 
 	public final Long getUid() {
 		return uid;
@@ -43,22 +41,6 @@ public class HistoricViewBC implements IHistoric {
 
 	public final void setUid(Long uid) {
 		this.uid = uid;
-	}
-
-	public final Date getLastUpdate() {
-		return lastUpdate;
-	}
-
-	public final void setLastUpdate(Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
-
-	public final BigDecimal getValue() {
-		return value;
-	}
-
-	public final void setValue(BigDecimal value) {
-		this.value = value;
 	}
 
 	public final Long getCompanyDetectorId() {
@@ -77,12 +59,27 @@ public class HistoricViewBC implements IHistoric {
 		this.sensorId = sensorId;
 	}
 
-	public final LogOrigem getLogOrigem() {
-		return logOrigem;
+	public final Date getLastUpdate() {
+		return lastUpdate;
 	}
 
-	public final void setLogOrigem(LogOrigem logOrigem) {
-		this.logOrigem = logOrigem;
-	}	
+	public final void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
 
+	public final BigDecimal getMaxValue() {
+		return maxValue;
+	}
+
+	public final void setMaxValue(BigDecimal maxValue) {
+		this.maxValue = maxValue;
+	}
+
+	public final BigDecimal getMinValue() {
+		return minValue;
+	}
+
+	public final void setMinValue(BigDecimal minValue) {
+		this.minValue = minValue;
+	}
 }

@@ -34,7 +34,8 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 				value: $scope.companyValor,
 				lastUpdate: null,
 				companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId,
-				sensorId: $scope.selectedCompanySensor.uid
+				sensorId: $scope.selectedCompanySensor.uid,
+				logOrigem: 'MANUAL'
 			 }	
 		 
 		 $scope.inclusao = new HistoricService.save($scope.historic);		 

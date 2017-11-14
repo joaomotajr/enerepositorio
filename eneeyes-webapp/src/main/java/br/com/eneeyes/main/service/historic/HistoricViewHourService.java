@@ -25,15 +25,15 @@ public class HistoricViewHourService {
 	
 	@Autowired
 	private HistoricViewHour30Repository repository30;
-	
+
 	public HistoricGroupResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
 		HistoricGroupResult<?> result = new HistoricGroupResult<IHistoricGroup>();
-			
+
 		try {
 			
 			Date dataFim = new Date(); 
-			Date dataInicio = new Date(dataFim.getTime() - (1000 * 60 * 60 * intervalType.getValue()));
-			
+			Date dataInicio = new Date(dataFim.getTime() - (1000 * 60 * 60 * intervalType.getValue()));		
+
 			Page<IHistoricGroup> page = null;
 			
 			page = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dataInicio, dataFim, new PageRequest(currentPage, lenPage));
@@ -46,8 +46,8 @@ public class HistoricViewHourService {
 		}
 		
 		return result;
-	}
-	
+	}	
+
 	public HistoricGroupResult<?> getResults(Page<IHistoricGroup> page) {
 		
 		HistoricGroupResult<IHistoricGroup> result = new HistoricGroupResult<IHistoricGroup>();
@@ -80,6 +80,7 @@ public class HistoricViewHourService {
 	}
 	
 	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalHours(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
+
 		HistoricGroupResult<?> result = new HistoricGroupResult<IHistoricGroup>();
 		
 		Date date = new Date();
@@ -96,9 +97,10 @@ public class HistoricViewHourService {
 			else
 			{
 				result = getResults(repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
-			}
-			
+			}			
+
 			Page<IHistoricGroup> page = null;
+
 			page = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
 			
 			result = getResults(page);

@@ -47,7 +47,7 @@
 									<li>
 										<a href="#step-3" class="disabled" data-ng-class="(selectedCompanySensor) ? 'selected' : 'disabled'" rel="3">
 											<span class="step_no">3</span>
-											<span class="step_descr">Selecione Sensor/Gás</span>
+											<span class="step_descr">Selecione Sensor/Gï¿½s</span>
 										</a>
 									</li>
 									<li>
@@ -105,7 +105,7 @@
 					<div class="box box-solid box-primary" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
 						
 						<div class="box-header">
-							<h3 class="box-title">Selecione Intervalos Pré-Definidos ou Data de Inicio e Fim</h3>									  	
+							<h3 class="box-title">Selecione Intervalos Prï¿½-Definidos ou Data de Inicio e Fim</h3>									  	
 								
 							<div class="pull-right" style="margin-bottom: 0px ! important">   
 								<span data-ng-hide='loading' class="icon fa fa-search fa-2.0x pull-right"></span>
@@ -125,11 +125,11 @@
 												<input type="radio" id="radio5" value="1" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(1)">
 												<label for="radio5">Nenhum</label>
 											</div>
-											<div class="radio3 radio-check radio-warning radio-inline" title="NOTE: Se houve mais de um tipo de alarme na HORA, apenas o maior será Exibido">
+											<div class="radio3 radio-check radio-warning radio-inline" title="NOTE: Se houve mais de um tipo de alarme na HORA, apenas o maior serï¿½ Exibido">
 												<input type="radio" id="radio6" value="2" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(2)">
 												<label for="radio6">Hora</label>
 											</div>
-											<div class="radio3 radio-check radio-default radio-inline" title="NOTE: Se houve mais de um tipo de alarme no DIA, apenas o maior será Exibido">
+											<div class="radio3 radio-check radio-default radio-inline" title="NOTE: Se houve mais de um tipo de alarme no DIA, apenas o maior serï¿½ Exibido">
 												<input type="radio" id="radio7" value="3" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(3)">
 												<label for="radio7">Dia</label>
 											</div>
@@ -158,7 +158,7 @@
 											<div class="col-md-3" style="padding-right: 5px !important;">
 											<button id="exportRel" type="button" class="btn btn-default btn-xs form-control" 
 												data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
-											<span class="icon fa fa-file-text"></span> Relatório</button>
+											<span class="icon fa fa-file-text"></span> Relatï¿½rio</button>
 										</div>
 										<div class="col-md-3" style="padding-right: 5px !important; padding-left: 5px !important;">
 											<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="ExportaÃ§Ã£o Permitida atÃ© 500 Linhas" 
@@ -168,7 +168,7 @@
 										<div class="col-md-3" style="padding-right: 5px !important; padding-left: 5px !important;">
 										<button type="button" class="btn bg-navy btn-xs form-control" 
 											data-ng-click="showGrafico();" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
-											<span class="icon fa fa-line-chart"></span> Gráfico</button>
+											<span class="icon fa fa-line-chart"></span> Grï¿½fico</button>
 										</div>
 									</div>			        				    								
 								</div>				        			
@@ -181,22 +181,22 @@
 									
 									<div class="col-md-4">
 										<div class="form-group">
-											<label class="control-label">Buscar por Intervalos Pré-Definidos: </label> <br />								
+											<label class="control-label">Buscar por Intervalos Prï¿½-Definidos: </label> <br />								
 											<div class="btn-group" role="group" aria-label="Basic example">
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 1}" 
 														data-ng-click="interval = enumInterval.UMA_HORA; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 hora</button>
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 6}" 
-														data-ng-click="interval = enumInterval.SEIS_HORAS; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 6h</button>
+														data-ng-click="interval = enumInterval.SEIS_HORAS; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">ï¿½6h</button>
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 12}" 
-														data-ng-click="interval = enumInterval.DOZE_HORAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 12h </button>
+														data-ng-click="interval = enumInterval.DOZE_HORAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 12hï¿½</button>
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 24}" 
-														data-ng-click="interval = enumInterval.UM_DIA; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 dia </button>
+														data-ng-click="interval = enumInterval.UM_DIA; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 diaï¿½</button>
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 48}" 
-														data-ng-click="interval = enumInterval.DOIS_DIAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 2d </button>
+														data-ng-click="interval = enumInterval.DOIS_DIAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">ï¿½2dï¿½</button>
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 168}" 
-														data-ng-click="interval = enumInterval.SETE_DIAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 7d </button>
+														data-ng-click="interval = enumInterval.SETE_DIAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">ï¿½7dï¿½</button>
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 30}" 
-														data-ng-click="interval = enumInterval.UM_MES; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 30d </button>												  												  
+														data-ng-click="interval = enumInterval.UM_MES; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">ï¿½30dï¿½</button>												  												  
 											</div>
 										</div>
 									</div>
@@ -226,7 +226,7 @@
 									
 									<div class="col-md-1">
 										<div class="form-group">
-											<label class="control-label"> </label>
+											<label class="control-label">ï¿½</label>
 											<button type="button" class="btn btn-default btn-sm form-control" data-ng-class="{'btn-primary': selectedButton == 100}" data-ng-click="interval = enumInterval.CUSTOM; getHistoricInterval(0)" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">Buscar</button>
 										</div>
 									</div>
@@ -264,11 +264,11 @@
 																	<dd>{{selectedSensorAlarm.unitMeterGases}}</dd>																		
 																<dt>Range Max:</dt>
 																	<dd><strong>{{selectedCompanySensor.rangeMax}}</strong></dd>
-																<dt>Detecção:</dt>
+																<dt>Detecï¿½ï¿½o:</dt>
 																	<dd><span data-ng-show="selectedCompanySensor" class="alarm1"> {{selectedSensorAlarm.alarm1}}</span></dd>							
 																<dt>Alerta:</dt>
 																	<dd><span data-ng-show="selectedCompanySensor" class="alarm2"> {{selectedSensorAlarm.alarm2}}</span></dd>
-																<dt>Evacuação:</dt>
+																<dt>Evacuaï¿½ï¿½o:</dt>
 																	<dd><span data-ng-show="selectedCompanySensor" class="alarm3"> {{selectedSensorAlarm.alarm3}}</span></dd>
 															</dl>											                	
 															
@@ -303,10 +303,10 @@
 													<td>{{item.lastUpdate | date:'HH:mm:ss' }}</td>
 													<td> {{item.value}} </td>
 													<td>
-														<span data-ng-if="item.logOrigem == 'DEVICE'"> DISPOSITIVO</span>
-														<span data-ng-if="item.logOrigem == 'MANUAL'"> ANÁLISE DE CENÁRIO </span>
-														<span data-ng-if="item.logOrigem == 'SYSTEM'"> SISTEMA</span>
-														<span data-ng-if="item.logOrigem == 'OTHER' || item.logOrigem == null"> DESCONHECIDA</span>
+														<span data-ng-if="item.logOrigem == 'DEVICE'">ï¿½DISPOSITIVO</span>
+														<span data-ng-if="item.logOrigem == 'MANUAL'">ï¿½ANï¿½LISE DE CENï¿½RIOï¿½</span>
+														<span data-ng-if="item.logOrigem == 'SYSTEM'">ï¿½SISTEMA</span>
+														<span data-ng-if="item.logOrigem == 'OTHER' || item.logOrigem == null">ï¿½DESCONHECIDA</span>
 													</td>
 												</tr>
 											</tbody>
@@ -317,7 +317,7 @@
 												<tr>                                                                                   
 													<th>Data</th>
 													<th>Hora</th>	                      		
-													<th>Máximo</th>
+													<th>Mï¿½ximo</th>
 													<th>Minimo</th>													
 												</tr>
 											</thead>
@@ -340,7 +340,7 @@
 								<div class="col-md-3">
 									<br>						
 									<div class="row" style=" vertical-align: middle; text-align: center;">									
-										<label><span class="icon fa fa-columns"> Itens por Página:</span><span class="text-red" data-ng-show="!lenPageValid"> [0 - 2000]</span></label>
+										<label><span class="icon fa fa-columns"> Itens por Pï¿½gina:</span><span class="text-red" data-ng-show="!lenPageValid"> [0 - 2000]</span></label>
 									</div>
 
 									<div class="row" style=" vertical-align: middle; text-align: center;">
@@ -358,7 +358,7 @@
 
 										<div class="col-md-4" style="padding-left:2px; padding-right: 2px;">
 											<button class="btn btn-info" data-ng-show="countPages > 0" data-ng-class="{disabled: currentPage == countPages-1, 'cursor': currentPage != countPages}" data-ng-click=" getHistorics(countPages-1)">
-											Última &RightTriangleBar;
+											ï¿½ltima &RightTriangleBar;
 											</button>
 										</div>
 									</div>
@@ -386,7 +386,7 @@
 									</div>
 									<div class="row">
 									<div style="vertical-align: middle; text-align: center; font-size: 05.em">
-										<label data-ng-show='countHistoric > 0'> Páginas: {{countPages}}</label>
+										<label data-ng-show='countHistoric > 0'> Pï¿½ginas: {{countPages}}</label>
 									</div>
 									</div>							
 									
@@ -407,15 +407,15 @@
 			<div class="modal-content">                            
 				<div class="modal-body">
 					<div class="panel panel-default">
-						<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Gráfico do Período:</strong> {{selectedPeriodo}}</div>															                                                                           
+						<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Grï¿½fico do Perï¿½odo:</strong> {{selectedPeriodo}}</div>															                                                                           
 					</div>
 			
 					<div class="box">
 						<div class="box-header">
-							<h3 class="box-title"><strong>Gráfico do Sensor:</strong> {{selectedCompanySensor.name}} - Gás: {{selectedCompanySensor.gasesDto[0].name}} </h3>
+							<h3 class="box-title"><strong>Grï¿½fico do Sensor:</strong> {{selectedCompanySensor.name}} - Gï¿½s: {{selectedCompanySensor.gasesDto[0].name}} </h3>
 							<input class="pull-right ng-pristine ng-untouched ng-valid" type="checkbox" style="margin-right: 30px" data-ng-model="changeGraphic" data-ng-change="showGrafico();">
-							<label data-ng-show="changeGraphic" class="pull-right">Gráfico Completo&nbsp;&nbsp;</label>
-							<label data-ng-hide="changeGraphic" class="pull-right">Gráfico Medições&nbsp;&nbsp;</label>
+							<label data-ng-show="changeGraphic" class="pull-right">Grï¿½fico Completo&nbsp;&nbsp;</label>
+							<label data-ng-hide="changeGraphic" class="pull-right">Grï¿½fico Mediï¿½ï¿½es&nbsp;&nbsp;</label>
 						</div>
 						<div class="box-body">
 							<div  id="graficoHistorico" style="max-width: 900px; overflow-x: auto; overflow-y: hidden;"></div>
@@ -444,11 +444,11 @@
 					<dd><strong>{{selectedSensorAlarm.name}} / {{selectedSensorAlarm.unitMeterGases}}</strong></dd>
 				<dt>Range Max:</dt>
 					<dd><strong>{{selectedCompanySensor.rangeMax}}</strong></dd>
-				<dt>Detecção:</dt>
+				<dt>Detecï¿½ï¿½o:</dt>
 					<dd><span data-ng-show="selectedCompanySensor" class="alarm1"> {{selectedSensorAlarm.alarm1}}</span></dd>							
 				<dt>Alerta:</dt>
 					<dd><span data-ng-show="selectedCompanySensor" class="alarm2"> {{selectedSensorAlarm.alarm2}}</span></dd>
-				<dt>Evacuação:</dt>
+				<dt>Evacuaï¿½ï¿½o:</dt>
 					<dd><span data-ng-show="selectedCompanySensor" class="alarm3"> {{selectedSensorAlarm.alarm3}}</span></dd>
 			</dl>		            
 			
@@ -466,7 +466,7 @@
 							<th data-ng-if="tipoGrupo!=1">Maximo</th>
 							<th data-ng-if="tipoGrupo!=1">Minimo</th>
 							
-							<th data-ng-if="tipoGrupo==1">Origem Informação</th>			                                                                                                                            
+							<th data-ng-if="tipoGrupo==1">Origem Informaï¿½ï¿½o</th>			                                                                                                                            
 						</tr>                                    
 						<tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">
 							<td>{{item.sensorId}} </td>
@@ -478,10 +478,10 @@
 						<td data-ng-if="tipoGrupo!=1"> {{item.minValue}} </td>
 						
 						<td data-ng-if="tipoGrupo==1">
-							<span data-ng-if="item.logOrigem == 'DEVICE'"> DISPOSITIVO</span>
-							<span data-ng-if="item.logOrigem == 'MANUAL'"> ANÁLISE DE CENÁRIO </span>
-							<span data-ng-if="item.logOrigem == 'SYSTEM'"> SISTEMA</span>
-							<span data-ng-if="item.logOrigem == 'OTHER' || item.logOrigem == null"> DESCONHECIDA</span>							
+							<span data-ng-if="item.logOrigem == 'DEVICE'">ï¿½DISPOSITIVO</span>
+							<span data-ng-if="item.logOrigem == 'MANUAL'">ï¿½ANï¿½LISE DE CENï¿½RIOï¿½</span>
+							<span data-ng-if="item.logOrigem == 'SYSTEM'">ï¿½SISTEMA</span>
+							<span data-ng-if="item.logOrigem == 'OTHER' || item.logOrigem == null">ï¿½DESCONHECIDA</span>							
 						</td>						
 					</tr>	                   
 				</table>            	

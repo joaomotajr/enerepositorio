@@ -140,7 +140,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 
 		if (!$scope.lenPageValid) {
 			
-			$scope.daysDiff ="ATENÇÃO! Quantidade de registros por página Inválido." ;			
+			$scope.daysDiff ="ATENï¿½ï¿½O! Quantidade de registros por pï¿½gina Invï¿½lido." ;			
 			$("#snoAlertBox").fadeIn();			
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
 			daysExceed = true;
@@ -209,7 +209,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		
 	// 	if($scope.tipoGrupo == 1 && dayDiff(dataInicio, dataFim) > 15 ) {
 			
-	// 		$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 15 dias " ;
+	// 		$scope.daysDiff ="ATENï¿½ï¿½O: Esta Pesquisa Nï¿½O Pode Exceder 15 dias " ;
 			
 	// 		$("#snoAlertBox").fadeIn();
 	// 		window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);
@@ -218,7 +218,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	// 	}		
 	// 	else if($scope.tipoGrupo == 2 && dayDiff(dataInicio, dataFim) > 360 ) {
 			
-	// 		$scope.daysDiff ="ATENÇÃO: Esta Pesquisa NÃO Pode Exceder 360 dias " ;
+	// 		$scope.daysDiff ="ATENï¿½ï¿½O: Esta Pesquisa Nï¿½O Pode Exceder 360 dias " ;
 			
 	// 		$("#snoAlertBox").fadeIn();
 			
@@ -274,17 +274,17 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	function setInterval(interval) {
 		
 		if ( interval == 1 )
-			return "Última Hora";
+			return "ï¿½ltima Hora";
 		else if ( interval == 6 )
-			return "ùltimas Seis Horas";
+			return "ï¿½ltimas Seis Horas";
 		else if ( interval == 12 )
-			return "Últimas Doze Horas";
+			return "ï¿½ltimas Doze Horas";
 		else if ( interval == 48 )
-			return "Últimas Dois Dias";
+			return "ï¿½ltimas Dois Dias";
 		else if ( interval == 96 )
-			return "Últimos Quatro Dias";
+			return "ï¿½ltimos Quatro Dias";
 		else if ( interval == 'mes' )
-			return "Último Mês";
+			return "ï¿½ltimo Mï¿½s";
 		else 
 			return 'Desconhecido';
 				
@@ -501,6 +501,10 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	$scope.changeToValue = function(valor) {
 	  return valor.toString().replace(".", ",")
 	}
+
+	$scope.setLenPage = function(len) {
+		
+	}	  
 
 	$scope.clearHistoric();
 	$scope.getCompanys();

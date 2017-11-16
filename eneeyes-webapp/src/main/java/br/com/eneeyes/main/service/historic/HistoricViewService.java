@@ -14,9 +14,10 @@ import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.model.enums.IntervalType;
 import br.com.eneeyes.main.model.historic.IHistoric;
 import br.com.eneeyes.main.repository.historic.HistoricCRepository;
+import br.com.eneeyes.main.repository.historic.HistoricDRepository;
 import br.com.eneeyes.main.repository.historic.HistoricHABCRepository;
 import br.com.eneeyes.main.repository.historic.HistoricHABRepository;
-import br.com.eneeyes.main.repository.historic.HistoricRepository;
+import br.com.eneeyes.main.repository.historic.HistoricHARepository;
 import br.com.eneeyes.main.repository.historic.HistoricViewRepository;
 import br.com.eneeyes.main.result.HistoricResult;
 
@@ -27,7 +28,7 @@ public class HistoricViewService {
 	private HistoricViewRepository repositoryView;
 	
 	@Autowired
-	private HistoricRepository repositoryHA;
+	private HistoricHARepository repositoryHA;
 		
 	@Autowired
 	private HistoricHABRepository repositoryHAB;
@@ -37,6 +38,9 @@ public class HistoricViewService {
 	
 	@Autowired
 	private HistoricCRepository repositoryC;
+	
+	@Autowired
+	private HistoricDRepository repositoryD;
 	
 	public HistoricResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
 		HistoricResult<?> result = new HistoricResult<IHistoric>();
@@ -150,9 +154,13 @@ public class HistoricViewService {
 		else if(diffDaysIn <= 30) {
 			result = findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, IntervalType.UM_MES, currentPage, lenPage);
 		}
-		else if (diffDaysIn > 30 && diffDaysOut > 30) {
+		else if (diffDaysIn > 7 && diffDaysIn <= 30 && diffDaysOut > 7 && diffDaysOut <= 30) {
 			
 			result = getResults(repositoryC.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
+		}
+		else if (diffDaysIn > 30 && diffDaysOut > 30) {
+			
+			result = getResults(repositoryD.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
 		}
 		else if (diffDaysIn <= 2 && diffDaysOut <= 2) {
 			

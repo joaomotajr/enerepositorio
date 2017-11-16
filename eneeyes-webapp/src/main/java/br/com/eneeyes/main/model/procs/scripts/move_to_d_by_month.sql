@@ -12,7 +12,7 @@ BEGIN
 	WHILE(_countRow != 0) DO
     
 		START TRANSACTION ;
-			INSERT INTO historic_d (SELECT  * FROM historic_a WHERE   LAST_UPDATE < _now - interval _MONTH month LIMIT _LIMIT);			
+			INSERT INTO historic_d (SELECT  * FROM historic_c WHERE   LAST_UPDATE < _now - interval _MONTH month LIMIT _LIMIT);			
 			DELETE FROM historic_c WHERE LAST_UPDATE < _now - interval _MONTH month LIMIT _LIMIT;
             SET _countRow := ROW_COUNT();            			
             

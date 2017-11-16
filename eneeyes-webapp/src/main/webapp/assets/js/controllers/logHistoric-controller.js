@@ -140,7 +140,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 
 		if (!$scope.lenPageValid) {
 			
-			$scope.daysDiff ="ATENï¿½ï¿½O! Quantidade de registros por pï¿½gina Invï¿½lido." ;			
+			$scope.daysDiff ="ATENÇÃO! Quantidade de registros por página Inválido." ;			
 			$("#snoAlertBox").fadeIn();			
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
 			daysExceed = true;
@@ -273,18 +273,18 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		
 	function setInterval(interval) {
 		
-		if ( interval == 1 )
-			return "ï¿½ltima Hora";
-		else if ( interval == 6 )
-			return "ï¿½ltimas Seis Horas";
-		else if ( interval == 12 )
-			return "ï¿½ltimas Doze Horas";
-		else if ( interval == 48 )
-			return "ï¿½ltimas Dois Dias";
-		else if ( interval == 96 )
-			return "ï¿½ltimos Quatro Dias";
-		else if ( interval == 'mes' )
-			return "ï¿½ltimo Mï¿½s";
+		if ( interval == $scope.enumInterval.UMA_HORA )
+			return "última Hora";
+		else if ( interval == $scope.enumInterval.SEIS_HORAS )
+			return "últimas Seis Horas";
+		else if ( interval == $scope.enumInterval.DOZE_HORAS )
+			return "últimas Doze Horas";
+		else if ( interval == $scope.enumInterval.DOIS_DIAS )
+			return "últimas Dois Dias";
+		else if ( interval == $scope.enumInterval.SETE_DIAS )
+			return "últimos Sete Dias";
+		else if ( interval == $scope.enumInterval.UM_MES )
+			return "último Mês";
 		else 
 			return 'Desconhecido';
 				
@@ -455,11 +455,11 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	                      'fontSize': 9,
 	                  },
 		    		  ticks: [
-		    		          {v:0, f: 'Range Minimo: 0' }, 
-		    		          {v: orange, f: 'DetecÃ§Ã£o: ' + orange}, 
+		    		          {v:0, f: 'Range Mínimo: 0' }, 
+		    		          {v: orange, f: 'Detecção: ' + orange}, 
 		    		          {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		          {v: red, f: 'EvacuaÃ§Ã£o: ' + red}, 
-		    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Mï¿½ximo: ' + $scope.selectedCompanySensor.rangeMax}
+		    		          {v: red, f: 'Evacuação: ' + red}, 
+		    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanySensor.rangeMax}
 		    		        ],
 		    	  },
 		    	  //curveType: 'function',
@@ -510,15 +510,6 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	$scope.getCompanys();
 	$scope.getCompanyDetectors();
 	$scope.tipoGrupo = 1;
-
-	
-	// $("#allownumericwithoutdecimal").on("keypress keyup blur",function (event) {    
-	// 	$(this).val($(this).val().replace(/[^\d].+/, ""));
-		 
-	// 	if ((event.which < 48 || event.which > 57)) {
-	// 		 event.preventDefault();
-	// 	}
-
 	
 	$scope.changeLenPage = function() {
 		

@@ -1,43 +1,3 @@
-app.filter('alarmFilter', function () {
-    return function (objects, criteria) {
-        var filterResult = new Array();
-
-        if (!criteria)
-            return null;            
-        else if (criteria.uid == 0)
-        	return objects;
-        else if (criteria.uid == 5) {        	
-        	for (index in objects) {
-           		 if(objects[index].value >= criteria.alarm1) {
-                    filterResult.push(objects[index]);
-           		 }
-        	}
-        }
-        else if (criteria.uid == 3) {            	
-        	for (index in objects) {
-           		 if(objects[index].value >= criteria.alarm3) {
-                    filterResult.push(objects[index]);
-           		 }
-        	}
-        }
-        else if (criteria.uid == 2) {            	
-        	for (index in objects) {
-           		 if(objects[index].value >= criteria.alarm2 && objects[index].value < criteria.alarm3 ) {
-                    filterResult.push(objects[index]);
-           		 }
-        	}
-        }
-        else if (criteria.uid == 1) {            	
-        	for (index in objects) {
-           		 if(objects[index].value >= criteria.alarm1 && objects[index].value < criteria.alarm2) {
-                    filterResult.push(objects[index]);
-           		 }
-        	}
-        }
-        return filterResult;
-    }
-});
-
 app.controller('logHistoricController', function ($scope, $timeout, $filter, $cookieStore, CompanyService, DetectorService, CompanyDetectorService, HistoricViewService, ViewService, CompanyDetectorAlarmService) {
 
 	var loadGoogleCharts = false;	
@@ -147,7 +107,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 			return;
 		}
 
-		if (n < 0 || n > $scope.lenPage) return;			
+		if (n < 0 || n > $scope.countPages) return;			
 
 		$scope.currentPage = n;
 		$scope.loading = true;
@@ -202,40 +162,21 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 			}, 500);		
 		});		
 	}	
-	
-	// function checkInterval (dataInicio, dataFim ) {
-		
-	// 	daysExceed = false;
-		
-	// 	if($scope.tipoGrupo == 1 && dayDiff(dataInicio, dataFim) > 15 ) {
-			
-	// 		$scope.daysDiff ="ATEN��O: Esta Pesquisa N�O Pode Exceder 15 dias " ;
-			
-	// 		$("#snoAlertBox").fadeIn();
-	// 		window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);
-			
-	// 		daysExceed = true;
-	// 	}		
-	// 	else if($scope.tipoGrupo == 2 && dayDiff(dataInicio, dataFim) > 360 ) {
-			
-	// 		$scope.daysDiff ="ATEN��O: Esta Pesquisa N�O Pode Exceder 360 dias " ;
-			
-	// 		$("#snoAlertBox").fadeIn();
-			
-	// 		window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);
-			
-	// 		daysExceed = true;
-	// 	}	
-		
-	// 	return daysExceed;
-	// }
 		
 	$scope.getHistoricInterval = function(n) {		
 
 		var dataInicio = new Date($('#dateIn').data().DateTimePicker.date._d);
-		var dataFim = new Date($('#dateOut').data().DateTimePicker.date._d);
-				
-		// if(checkInterval(dataInicio, dataFim)) return;	
+		var dataFim = new Date($('#dateOut').data().DateTimePicker.date._d);		
+
+		if (dataFim < dataInicio) {
+			
+			$scope.daysDiff ="ATENÇÃO! Data Final Precisa ser Maior que Inicial." ;			
+			$("#snoAlertBox").fadeIn();			
+			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
+			daysExceed = true;
+			return;
+		}
+		
 		$cookieStore.put("lenPage", $scope.lenPage);
 
 		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' & ' + dataFim.toLocaleString();
@@ -273,17 +214,17 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		
 	function setInterval(interval) {
 		
-		if ( interval == 1 )
+		if ( interval == $scope.enumInterval.UMA_HORA )
 			return "�ltima Hora";
-		else if ( interval == 6 )
+		else if ( interval == $scope.enumInterval.SEIS_HORAS )
 			return "�ltimas Seis Horas";
-		else if ( interval == 12 )
+		else if ( interval == $scope.enumInterval.DOZE_HORAS )
 			return "�ltimas Doze Horas";
-		else if ( interval == 48 )
+		else if ( interval == $scope.enumInterval.DOIS_DIAS )
 			return "�ltimas Dois Dias";
-		else if ( interval == 96 )
-			return "�ltimos Quatro Dias";
-		else if ( interval == 'mes' )
+		else if ( interval == $scope.enumInterval.SETE_DIAS )
+			return "�ltimos Sete Dias";
+		else if ( interval == $scope.enumInterval.UM_MES )
 			return "�ltimo M�s";
 		else 
 			return 'Desconhecido';
@@ -321,16 +262,16 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		if (detectorAlarmIndex >= 0) {			
 			$scope.selectedSensorAlarm = $scope.selectedCompanyDetectorAlarms[detectorAlarmIndex].alarmDto ;
 						
-			$scope.filterAlarm = 
-				 [
-				  	{ name : 'TODO HISTORICO', alarm1: null, alarm2: null, alarm3: null, uid : 0 },				  	
-				  	{ name : 'DETECCAO', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 1 },
-				  	{ name : 'ALERTA', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 2 },
-				  	{ name : 'EVACUACAO', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 3 },
-				  	{ name : 'TODOS ALARMES', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: null, alarm3: null,  uid :  5 },
-				 ];
+			// $scope.filterAlarm = 
+			// 	 [
+			// 	  	{ name : 'TODO HISTORICO', alarm1: null, alarm2: null, alarm3: null, uid : 0 },				  	
+			// 	  	{ name : 'DETECCAO', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 1 },
+			// 	  	{ name : 'ALERTA', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 2 },
+			// 	  	{ name : 'EVACUACAO', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 3 },
+			// 	  	{ name : 'TODOS ALARMES', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: null, alarm3: null,  uid :  5 },
+			// 	 ];
 			
-			 $scope.selectedfilterAlarm = $scope.filterAlarm[0];			
+			//  $scope.selectedfilterAlarm = $scope.filterAlarm[0];			
 		}
 		else {
 			$scope.selectedSensorAlarm = undefined;
@@ -455,10 +396,10 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	                      'fontSize': 9,
 	                  },
 		    		  ticks: [
-		    		          {v:0, f: 'Range Minimo: 0' }, 
-		    		          {v: orange, f: 'Detecção: ' + orange}, 
+		    		          {v:0, f: 'Range M�nimo: 0' }, 
+		    		          {v: orange, f: 'Detec��o: ' + orange}, 
 		    		          {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		          {v: red, f: 'Evacuação: ' + red}, 
+		    		          {v: red, f: 'Evacua��o: ' + red}, 
 		    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range M�ximo: ' + $scope.selectedCompanySensor.rangeMax}
 		    		        ],
 		    	  },
@@ -510,15 +451,6 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	$scope.getCompanys();
 	$scope.getCompanyDetectors();
 	$scope.tipoGrupo = 1;
-
-	
-	// $("#allownumericwithoutdecimal").on("keypress keyup blur",function (event) {    
-	// 	$(this).val($(this).val().replace(/[^\d].+/, ""));
-		 
-	// 	if ((event.which < 48 || event.which > 57)) {
-	// 		 event.preventDefault();
-	// 	}
-
 	
 	$scope.changeLenPage = function() {
 		
@@ -564,6 +496,6 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	        $(this).data('DateTimePicker').hide();
 		});
 		
-	}, 1000);
+	}, 500);
 	
 });

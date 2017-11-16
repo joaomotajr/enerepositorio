@@ -1,6 +1,7 @@
 package br.com.eneeyes.main.service.historic;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -31,8 +32,16 @@ public class HistoricViewHourService {
 
 		try {
 			
-			Date dataFim = new Date(); 
-			Date dataInicio = new Date(dataFim.getTime() - (1000 * 60 * 60 * intervalType.getValue()));		
+			Date dataFim = new Date();			 
+			Date dataInicio  = new Date();
+			
+			if(intervalType ==  IntervalType.UM_MES) {
+				
+				dataInicio = addMonth(dataFim, -1);
+			}
+			else {
+				dataInicio = new Date(dataFim.getTime() - (1000 * 60 * 60 * intervalType.getValue()));
+			}
 
 			Page<IHistoricGroup> page = null;
 			
@@ -47,6 +56,15 @@ public class HistoricViewHourService {
 		
 		return result;
 	}	
+	
+	private static Date addMonth(Date date, int qtde) {
+		
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.MONTH, qtde);			
+		
+		return c.getTime();		
+	}
 
 	public HistoricGroupResult<?> getResults(Page<IHistoricGroup> page) {
 		

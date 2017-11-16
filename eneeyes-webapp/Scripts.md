@@ -4,7 +4,11 @@ SHOW EVENTS FROM enedb;
 
 SET GLOBAL event_scheduler = ON;
 
-drop EVENT myevent
+--drop EVENT myevent
+DROP EVENT job_move_to_a_by_hours;
+DROP EVENT job_move_to_b_by_day;
+DROP EVENT job_move_to_c_by_7day;
+DROP EVENT job_move_to_d_by_month;
 
 
 CREATE EVENT job_move_to_a_by_hours ON SCHEDULE
@@ -40,6 +44,17 @@ CREATE EVENT job_move_to_d_by_month ON SCHEDULE
       
 	  
 SELECT * FROM INFORMATION_SCHEMA.events;
+
+--check historic
+select max(uid), min(uid), 'h' as name from historic
+union
+select max(uid), min(uid), 'a' as name  from historic_a
+union
+select max(uid), min(uid), 'b' as name  from historic_b
+union
+select max(uid), min(uid), 'c' as name   from historic_c
+union
+select max(uid), min(uid), 'd' as name   from historic_d
 
 
 set @DATA := now() - interval 12 hour;

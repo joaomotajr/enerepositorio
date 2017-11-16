@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `move_to_b_by_day`(_LIMIT int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `move_to_c_by_7day`(_LIMIT int)
 BEGIN
 
 	DECLARE _now DATETIME;	
@@ -12,8 +12,8 @@ BEGIN
 	WHILE(_countRow != 0) DO
     
 		START TRANSACTION ;
-			INSERT INTO historic_b (SELECT  * FROM historic_a WHERE   LAST_UPDATE < _now - interval 7 day LIMIT _LIMIT);			
-			DELETE FROM historic_a WHERE LAST_UPDATE < _now - interval 7 day LIMIT _LIMIT;
+			INSERT INTO historic_c (SELECT  * FROM historic_b WHERE   LAST_UPDATE < _now - interval 7 day LIMIT _LIMIT);			
+			DELETE FROM historic_b WHERE LAST_UPDATE < _now - interval 7 day LIMIT _LIMIT;
             SET _countRow := ROW_COUNT();            			
             
             SET _total := _total + _countRow; 
@@ -22,8 +22,8 @@ BEGIN
 		COMMIT;    
         
 	 END WHILE;
-	 
-	 INSERT INTO log_event (date_time, event_name, rows_affected) values (now(), concat('MOVE TO C BY ', '7', ' Day(s)'), _total );
+     
+     INSERT INTO log_event (date_time, event_name, rows_affected) values (now(), concat('MOVE TO C BY ', '7', ' Day(s)'), _total );
 
 	 SELECT _total ; 
 END

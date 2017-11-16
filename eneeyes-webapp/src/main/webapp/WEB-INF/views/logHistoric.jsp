@@ -47,7 +47,7 @@
 									<li>
 										<a href="#step-3" class="disabled" data-ng-class="(selectedCompanySensor) ? 'selected' : 'disabled'" rel="3">
 											<span class="step_no">3</span>
-											<span class="step_descr">Selecione Sensor/GÔøΩs</span>
+											<span class="step_descr">Selecione Sensor/G&aacute;s</span>
 										</a>
 									</li>
 									<li>
@@ -105,7 +105,7 @@
 					<div class="box box-solid box-primary" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
 						
 						<div class="box-header">
-							<h3 class="box-title">Selecione Intervalos PrÔøΩ-Definidos ou Data de Inicio e Fim</h3>									  	
+							<h3 class="box-title">Selecione Intervalos Pr&eacute;-Definidos ou Data de Inicio/Fim</h3>									  	
 								
 							<div class="pull-right" style="margin-bottom: 0px ! important">   
 								<span data-ng-hide='loading' class="icon fa fa-search fa-2.0x pull-right"></span>
@@ -136,7 +136,7 @@
 										</div>                                        										
 								</div>		
 								
-								<div class="col-md-3" >
+								<!-- <div class="col-md-3" >
 									<form>												
 										<div class="col-md-4" style="padding-right: 2px !important;">	 
 											<label style="margin-top: 5px !important;" class="control-label"><span class="icon fa fa-filter"></span> FILTRAR</label>
@@ -148,7 +148,8 @@
 										</select>
 										</div>						        							    	        
 									</form>								
-								</div>
+								</div> -->
+								<div class="col-md-1" ></div>
 								
 								<div class="col-md-5" >									
 									<div class="col-md-3">
@@ -158,17 +159,17 @@
 											<div class="col-md-3" style="padding-right: 5px !important;">
 											<button id="exportRel" type="button" class="btn btn-default btn-xs form-control" 
 												data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
-											<span class="icon fa fa-file-text"></span> RelatÔøΩrio</button>
+											<span class="icon fa fa-file-text"></span> Relat&oacute;rio</button>
 										</div>
 										<div class="col-md-3" style="padding-right: 5px !important; padding-left: 5px !important;">
-											<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="Exporta√ß√£o Permitida at√© 500 Linhas" 
+											<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="ExportaÁ„o Permitida atÈ 500 Linhas" 
 												data-ng-class="((listHistoric.list || listHistoricInterval.list) && countHistoric <= 500) ? 'selected' : 'disabled'">
 											<span class="icon fa fa-file-excel-o"></span> Excel</button>
 										</div>
 										<div class="col-md-3" style="padding-right: 5px !important; padding-left: 5px !important;">
 										<button type="button" class="btn bg-navy btn-xs form-control" 
 											data-ng-click="showGrafico();" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
-											<span class="icon fa fa-line-chart"></span> GrÔøΩfico</button>
+											<span class="icon fa fa-line-chart"></span> Gr&aacute;fico</button>
 										</div>
 									</div>			        				    								
 								</div>				        			
@@ -181,22 +182,22 @@
 									
 									<div class="col-md-4">
 										<div class="form-group">
-											<label class="control-label">Buscar por Intervalos PrÔøΩ-Definidos: </label> <br />								
+											<label class="control-label">Buscar por Intervalos Pr&eacute;-Definidos: </label> <br />								
 											<div class="btn-group" role="group" aria-label="Basic example">
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 1}" 
 														data-ng-click="interval = enumInterval.UMA_HORA; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 hora</button>
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 6}" 
-														data-ng-click="interval = enumInterval.SEIS_HORAS; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">ÔøΩ6h</button>
+														data-ng-click="interval = enumInterval.SEIS_HORAS; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">6h</button>
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 12}" 
-														data-ng-click="interval = enumInterval.DOZE_HORAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 12hÔøΩ</button>
+														data-ng-click="interval = enumInterval.DOZE_HORAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true"> 12h</button>
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 24}" 
-														data-ng-click="interval = enumInterval.UM_DIA; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 diaÔøΩ</button>
+														data-ng-click="interval = enumInterval.UM_DIA; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">1 dia</button>
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 48}" 
-														data-ng-click="interval = enumInterval.DOIS_DIAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">ÔøΩ2dÔøΩ</button>
+														data-ng-click="interval = enumInterval.DOIS_DIAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">2d</button>
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 168}" 
-														data-ng-click="interval = enumInterval.SETE_DIAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">ÔøΩ7dÔøΩ</button>
+														data-ng-click="interval = enumInterval.SETE_DIAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">7d</button>
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 30}" 
-														data-ng-click="interval = enumInterval.UM_MES; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">ÔøΩ30dÔøΩ</button>												  												  
+														data-ng-click="interval = enumInterval.UM_MES; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">30d</button>												  												  
 											</div>
 										</div>
 									</div>
@@ -226,7 +227,7 @@
 									
 									<div class="col-md-1">
 										<div class="form-group">
-											<label class="control-label">ÔøΩ</label>
+											<label class="control-label">&nbsp;</label>
 											<button type="button" class="btn btn-default btn-sm form-control" data-ng-class="{'btn-primary': selectedButton == 100}" data-ng-click="interval = enumInterval.CUSTOM; getHistoricInterval(0)" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">Buscar</button>
 										</div>
 									</div>
@@ -264,11 +265,11 @@
 																	<dd>{{selectedSensorAlarm.unitMeterGases}}</dd>																		
 																<dt>Range Max:</dt>
 																	<dd><strong>{{selectedCompanySensor.rangeMax}}</strong></dd>
-																<dt>DetecÔøΩÔøΩo:</dt>
+																<dt>Detec&ccedil;&atilde;o:</dt>
 																	<dd><span data-ng-show="selectedCompanySensor" class="alarm1"> {{selectedSensorAlarm.alarm1}}</span></dd>							
 																<dt>Alerta:</dt>
 																	<dd><span data-ng-show="selectedCompanySensor" class="alarm2"> {{selectedSensorAlarm.alarm2}}</span></dd>
-																<dt>EvacuaÔøΩÔøΩo:</dt>
+																<dt>Evacua&ccedil;&atilde;o:</dt>
 																	<dd><span data-ng-show="selectedCompanySensor" class="alarm3"> {{selectedSensorAlarm.alarm3}}</span></dd>
 															</dl>											                	
 															
@@ -296,17 +297,18 @@
 				
 										<table data-ng-if="tipoGrupo==1" class='zui-table' cellspacing="0" width="100%" data-ng-visible="listHistoric">							
 											<tbody>		
-												<div data-ng-show='loading' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>										
-												<tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">	
+												<div data-ng-show='loading' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>	
+												<!-- <tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">										 -->
+												<tr data-ng-repeat="item in listHistoricInterval.list">
 													
 													<td>{{item.lastUpdate | date:'dd/MM/yyyy' }}</td>
 													<td>{{item.lastUpdate | date:'HH:mm:ss' }}</td>
 													<td> {{item.value}} </td>
 													<td>
-														<span data-ng-if="item.logOrigem == 'DEVICE'">ÔøΩDISPOSITIVO</span>
-														<span data-ng-if="item.logOrigem == 'MANUAL'">ÔøΩANÔøΩLISE DE CENÔøΩRIOÔøΩ</span>
-														<span data-ng-if="item.logOrigem == 'SYSTEM'">ÔøΩSISTEMA</span>
-														<span data-ng-if="item.logOrigem == 'OTHER' || item.logOrigem == null">ÔøΩDESCONHECIDA</span>
+														<span data-ng-if="item.logOrigem == 'DEVICE'">DISPOSITIVO</span>
+														<span data-ng-if="item.logOrigem == 'MANUAL'">AN&Aacute;ISE DE CEN&Aacute;RIO</span>
+														<span data-ng-if="item.logOrigem == 'SYSTEM'">SISTEMA</span>
+														<span data-ng-if="item.logOrigem == 'OTHER' || item.logOrigem == null">DESCONHECIDA</span>
 													</td>
 												</tr>
 											</tbody>
@@ -317,13 +319,14 @@
 												<tr>                                                                                   
 													<th>Data</th>
 													<th>Hora</th>	                      		
-													<th>MÔøΩximo</th>
+													<th>M&aacute;ximo</th>
 													<th>Minimo</th>													
 												</tr>
 											</thead>
 											<tbody>		
 												<div data-ng-show='loading' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>											               
-												<tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">							                     		
+												<!-- <tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">	 -->
+												<tr data-ng-repeat="item in listHistoricInterval.list">	
 													<td>{{item.lastUpdate | date:'dd/MM/yyyy' }}</td>
 													<td>{{item.lastUpdate | date:'HH:mm:ss' }}</td>
 													<td> {{item.maxValue}} </td>
@@ -340,7 +343,7 @@
 								<div class="col-md-3">
 									<br>						
 									<div class="row" style=" vertical-align: middle; text-align: center;">									
-										<label><span class="icon fa fa-columns"> Itens por PÔøΩgina:</span><span class="text-red" data-ng-show="!lenPageValid"> [0 - 2000]</span></label>
+										<label><span class="icon fa fa-columns"> Itens por P&aacute;gina:</span><span class="text-red" data-ng-show="!lenPageValid"> [0 - 2000]</span></label>
 									</div>
 
 									<div class="row" style=" vertical-align: middle; text-align: center;">
@@ -358,7 +361,7 @@
 
 										<div class="col-md-4" style="padding-left:2px; padding-right: 2px;">
 											<button class="btn btn-info" data-ng-show="countPages > 0" data-ng-class="{disabled: currentPage == countPages-1, 'cursor': currentPage != countPages}" data-ng-click=" getHistorics(countPages-1)">
-											ÔøΩltima &RightTriangleBar;
+											&uacute;ltima &RightTriangleBar;
 											</button>
 										</div>
 									</div>
@@ -386,7 +389,7 @@
 									</div>
 									<div class="row">
 									<div style="vertical-align: middle; text-align: center; font-size: 05.em">
-										<label data-ng-show='countHistoric > 0'> PÔøΩginas: {{countPages}}</label>
+										<label data-ng-show='countHistoric > 0'> P&aacute;ginas: {{countPages}}</label>
 									</div>
 									</div>							
 									
@@ -407,15 +410,15 @@
 			<div class="modal-content">                            
 				<div class="modal-body">
 					<div class="panel panel-default">
-						<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>GrÔøΩfico do PerÔøΩodo:</strong> {{selectedPeriodo}}</div>															                                                                           
+						<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Gr&aacute;fico do Per&iacute;odo:</strong> {{selectedPeriodo}}</div>															                                                                           
 					</div>
 			
 					<div class="box">
 						<div class="box-header">
-							<h3 class="box-title"><strong>GrÔøΩfico do Sensor:</strong> {{selectedCompanySensor.name}} - GÔøΩs: {{selectedCompanySensor.gasesDto[0].name}} </h3>
+							<h3 class="box-title"><strong>Gr&aacute;fico do Sensor:</strong> {{selectedCompanySensor.name}} - G&aacute;s: {{selectedCompanySensor.gasesDto[0].name}} </h3>
 							<input class="pull-right ng-pristine ng-untouched ng-valid" type="checkbox" style="margin-right: 30px" data-ng-model="changeGraphic" data-ng-change="showGrafico();">
-							<label data-ng-show="changeGraphic" class="pull-right">GrÔøΩfico Completo&nbsp;&nbsp;</label>
-							<label data-ng-hide="changeGraphic" class="pull-right">GrÔøΩfico MediÔøΩÔøΩes&nbsp;&nbsp;</label>
+							<label data-ng-show="changeGraphic" class="pull-right">Gr&aacute;fico Completo&nbsp;&nbsp;</label>
+							<label data-ng-hide="changeGraphic" class="pull-right">Gr&aacute;fico Medi&ccedil;&otilde;es&nbsp;&nbsp;</label>
 						</div>
 						<div class="box-body">
 							<div  id="graficoHistorico" style="max-width: 900px; overflow-x: auto; overflow-y: hidden;"></div>
@@ -433,7 +436,7 @@
 	
 		<div class="col-md-12">
 			<h1>Empresa: {{selectedCompanyDetector.company}}</h1>
-			<h2>Unidade: {{selectedCompanyDetector.unit}} - √Årea: {{selectedCompanyDetector.area}} </h2>
+			<h2>Unidade: {{selectedCompanyDetector.unit}} - &Aacute;rea: {{selectedCompanyDetector.area}} </h2>
 			<hr>
 			<h3 class="box-title"><strong>Dispositivo: </strong>  {{selectedCompanyDetector.companyDetectorName}} <span data-ng-show="selectedCompanySensor"> - </span> {{selectedCompanySensor.name}}</h3>
 						
@@ -452,7 +455,7 @@
 					<dd><span data-ng-show="selectedCompanySensor" class="alarm3"> {{selectedSensorAlarm.alarm3}}</span></dd>
 			</dl>		            
 			
-			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per√≠odo:</strong> {{selectedPeriodo}}</div>
+			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;≠odo:</strong> {{selectedPeriodo}}</div>
 			
 			<br />
 			<div id="dvData">
@@ -463,12 +466,13 @@
 							<th>Hora</th>                     	
 															
 							<th data-ng-if="tipoGrupo==1">Valor</th>
-							<th data-ng-if="tipoGrupo!=1">Maximo</th>
-							<th data-ng-if="tipoGrupo!=1">Minimo</th>
+							<th data-ng-if="tipoGrupo!=1">M&aacute;ximo</th>
+							<th data-ng-if="tipoGrupo!=1">M&iacute;nimo</th>
 							
-							<th data-ng-if="tipoGrupo==1">Origem InformaÔøΩÔøΩo</th>			                                                                                                                            
+							<th data-ng-if="tipoGrupo==1">Origem Informa&ccedil;&atilde;o</th>			                                                                                                                            
 						</tr>                                    
-						<tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">
+						<!-- <tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm"> -->
+						<tr data-ng-repeat="item in listHistoricInterval.list">
 							<td>{{item.sensorId}} </td>
 							<td>{{item.lastUpdate | date:'dd/MM/yyyy' }}</td>
 							<td>{{item.lastUpdate | date:'HH:mm:ss' }}</td>
@@ -478,10 +482,10 @@
 						<td data-ng-if="tipoGrupo!=1"> {{item.minValue}} </td>
 						
 						<td data-ng-if="tipoGrupo==1">
-							<span data-ng-if="item.logOrigem == 'DEVICE'">ÔøΩDISPOSITIVO</span>
-							<span data-ng-if="item.logOrigem == 'MANUAL'">ÔøΩANÔøΩLISE DE CENÔøΩRIOÔøΩ</span>
-							<span data-ng-if="item.logOrigem == 'SYSTEM'">ÔøΩSISTEMA</span>
-							<span data-ng-if="item.logOrigem == 'OTHER' || item.logOrigem == null">ÔøΩDESCONHECIDA</span>							
+							<span data-ng-if="item.logOrigem == 'DEVICE'">DISPOSITIVO</span>
+							<span data-ng-if="item.logOrigem == 'MANUAL'">AN&Aacute;LISE DE CEN&Aacute;RIO</span>
+							<span data-ng-if="item.logOrigem == 'SYSTEM'">SISTEMA</span>
+							<span data-ng-if="item.logOrigem == 'OTHER' || item.logOrigem == null">DESCONHECIDA</span>							
 						</td>						
 					</tr>	                   
 				</table>            	

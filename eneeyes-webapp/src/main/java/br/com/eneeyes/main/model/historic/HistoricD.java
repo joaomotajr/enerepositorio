@@ -21,7 +21,7 @@ import br.com.eneeyes.main.model.enums.LogOrigem;
 		      @Index(name="idxHistoricDCompanySensorAndDate", columnNames = {"COMPANY_DETECTOR_ID", "SENSOR_ID", "LAST_UPDATE"})
 		   }
 		)
-public class HistoricD {
+public class HistoricD implements IHistoric {
    
 	@Id	
 	@Column(name = "UID")	
@@ -41,5 +41,53 @@ public class HistoricD {
 	
 	@Column(name = "LOG_ORIGEM", nullable = true)
 	private LogOrigem logOrigem;
+
+	public final Long getUid() {
+		return uid;
+	}
+
+	public final void setUid(Long uid) {
+		this.uid = uid;
+	}
+
+	public final Date getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public final void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public final BigDecimal getValue() {
+		return value;
+	}
+
+	public final void setValue(BigDecimal value) {
+		this.value = value;
+	}
+
+	public final Long getCompanyDetectorId() {
+		return companyDetectorId;
+	}
+
+	public final void setCompanyDetectorId(Long companyDetectorId) {
+		this.companyDetectorId = companyDetectorId;
+	}
+
+	public final Long getSensorId() {
+		return sensorId;
+	}
+
+	public final void setSensorId(Long sensorId) {
+		this.sensorId = sensorId;
+	}
+
+	public final LogOrigem getLogOrigem() {
+		return logOrigem;
+	}
+
+	public final void setLogOrigem(LogOrigem logOrigem) {
+		this.logOrigem = logOrigem;
+	}	
 		
 }

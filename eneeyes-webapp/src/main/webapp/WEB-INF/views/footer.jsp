@@ -89,6 +89,7 @@
 	<script src="/assets/js/controllers/dashboard-controller.js"></script>
 	<script src="/assets/js/controllers/monitor-controller.js"></script>
 	<script src="/assets/js/controllers/logHistoric-controller.js"></script>
+	<script src="/assets/js/controllers/logHistoricAlarm-controller.js"></script>
 	<script src="/assets/js/controllers/simulador-controller.js"></script>
 	<script src="/assets/js/controllers/conteudo-controller.js"></script>
 	<script src="/assets/js/controllers/logAlarm-controller.js"></script>
@@ -113,7 +114,8 @@
 	<script src="/assets/js/services/alarm-service.js"></script>
 	<script src="/assets/js/services/companyDetectorAlarm-service.js"></script>
 	<script src="/assets/js/services/position-service.js"></script>
-	<script src="/assets/js/services/historic-service.js"></script>
+	<script src="/assets/js/services/historic-service.js"></script>	
+	<script src="/assets/js/services/historicAlarm-service.js"></script>
 	<script src="/assets/js/services/view-service.js"></script>
 	<script src="/assets/js/services/historic-view-service.js"></script>
 	<script src="/assets/js/services/sms-service.js"></script>

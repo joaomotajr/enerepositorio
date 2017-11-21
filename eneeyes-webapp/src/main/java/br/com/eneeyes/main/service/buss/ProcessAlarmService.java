@@ -102,7 +102,9 @@ public class ProcessAlarmService {
 		
 		updatePositionByHistoric(historic, alarmType);
 		
-		if(alarmType == AlarmType.WITHOUT)
+		if(alarmType == AlarmType.NORMAL)
+			return;
+		else if(alarmType == AlarmType.WITHOUT)
 			updateAlarmsAndActions(alarmType, historic);
 		else
 			updateAlarmsAndActions(companyDetectorAlarmDto.getAlarmDto(), alarmType, historic);
@@ -171,7 +173,8 @@ public class ProcessAlarmService {
 		historicAlarmService.save(historic.getValue(), companyDetector.getUid(), sensor.getUid(), historic.getUid(), alarmDto.getAlarmOn(), alarmType, 
 				alarmParams.getEmailStatus(), alarmParams.getSmsStatus(), alarmParams.getAction(), alarmParams.getSoundStatus(), alarmParams.getSigmaStatus());
 		
-		if (alarmType != AlarmType.NORMAL && alarmType != AlarmType.OFF && alarmType != AlarmType.WITHOUT) {
+		//if (alarmType != AlarmType.NORMAL && alarmType != AlarmType.OFF && alarmType != AlarmType.WITHOUT) {
+		if (alarmType != AlarmType.OFF) {
 		
 			updatePositionAlarm(historic, companyDetector, sensor, alarmType, alarmParams.getEmailStatus(), alarmParams.getSmsStatus(), 
 					alarmParams.getAction(), alarmParams.getSoundStatus(), alarmParams.getSigmaStatus());

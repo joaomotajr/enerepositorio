@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.model.Alarm;
+import br.com.eneeyes.main.model.enums.ActionType;
 import br.com.eneeyes.main.repository.AlarmRepository;
 import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
@@ -23,6 +24,9 @@ public class AlarmService implements IService<AlarmDto> {
 	@Autowired
 	CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
 	
+	@Autowired
+	LogAuditoriaService logAuditoriaService;
+	
 	public BasicResult<?> save(AlarmDto dto) {
 		
 		Result<AlarmDto> result = new Result<AlarmDto>(); 	
@@ -32,11 +36,16 @@ public class AlarmService implements IService<AlarmDto> {
 		
 		CompanyDetectorAlarmSingletonRepository.populate(companyDetectorAlarmAlarmService.findAll());
 		
+		ActionType actionType;
+		actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;		
+		
 		dto.setUid(alarm.getUid());				
 		result.setEntity(dto);
 		
 		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Executado com sucesso.");	
+		result.setMessage("Executado com sucesso.");
+		
+		logAuditoriaService.save(this.toString(), actionType, result.toString());
 		
 		return result;
 	}
@@ -53,9 +62,13 @@ public class AlarmService implements IService<AlarmDto> {
 		Result<AlarmDto> result = new Result<AlarmDto>(); 	
 		
 		try {			
+			
 			repository.delete(uid);
+			
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Alarme Excluído.");
+			
+			logAuditoriaService.save(this.toString(), ActionType.DELETE, result.toString());
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
@@ -130,7 +143,6 @@ public class AlarmService implements IService<AlarmDto> {
 		return result;	
 
 	}
-
 
 	public Result<?> findOne(Long uid) {
 		

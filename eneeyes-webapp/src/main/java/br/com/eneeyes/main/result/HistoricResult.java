@@ -2,6 +2,8 @@ package br.com.eneeyes.main.result;
 
 import java.util.List;
 
+import com.google.gson.Gson;
+
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.model.historic.IHistoric;
 
@@ -26,7 +28,7 @@ public class HistoricResult<T> extends BasicResult<T> {
 	
 	@Override
 	public String toString() {
-		return "UserResult{" + "resultType=" + getResultType() + "," + '}';
+		return "UserResult{" + "resultType=" + getResultType() + "} - " + new Gson().toJson(this) ;
 	}
 
 	public ResultMessageType getResultType() {

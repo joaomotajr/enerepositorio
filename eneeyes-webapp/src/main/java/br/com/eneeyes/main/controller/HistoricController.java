@@ -42,12 +42,6 @@ public class HistoricController {
 	public BasicResult<?> save(@RequestBody HistoricDto historicDto) {
 		
 		return service.save(historicDto);
-	}	
-
-//	@RequestMapping(value="/security/api/historic/obtemPorCompanyDetectorId/{uid}", method=RequestMethod.GET, produces = "application/json")
-//	@ResponseStatus(HttpStatus.OK)
-//	public BasicResult<?> findByCompanyDetector(@PathVariable Long uid) {		
-//		return service.findByCompanyDetector(uid);		
-//	}
+	}
 
 }

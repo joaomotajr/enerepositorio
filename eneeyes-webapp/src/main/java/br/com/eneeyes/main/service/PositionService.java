@@ -59,7 +59,6 @@ public class PositionService implements IService<PositionDto> {
 		
 		if (position != null) {		
 			
-			
 			repository.updatePositionById(positionView.getAlarmType(), positionView.getLastValue(), positionView.getLastUpdate(), historic.getUid(), positionView.getUid()); 
 						
 			result.setResultType( ResultMessageType.SUCCESS );

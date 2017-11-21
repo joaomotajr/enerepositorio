@@ -44,5 +44,4 @@ public final class SecurityContext {
 	public static void remove() {
 		currentUser.remove();
 	}
-
 }

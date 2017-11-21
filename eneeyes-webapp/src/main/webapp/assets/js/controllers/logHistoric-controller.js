@@ -100,7 +100,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 
 		if (!$scope.lenPageValid) {
 			
-			$scope.daysDiff ="ATENï¿½ï¿½O! Quantidade de registros por pï¿½gina Invï¿½lido." ;			
+			$scope.daysDiff ="ATENÇÃO! Quantidade de registros por página Inválido." ;			
 			$("#snoAlertBox").fadeIn();			
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
 			daysExceed = true;
@@ -215,17 +215,17 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	function setInterval(interval) {
 		
 		if ( interval == $scope.enumInterval.UMA_HORA )
-			return "ï¿½ltima Hora";
+			return  "última Hora";
 		else if ( interval == $scope.enumInterval.SEIS_HORAS )
-			return "ï¿½ltimas Seis Horas";
+			return "últimas Seis Horas";
 		else if ( interval == $scope.enumInterval.DOZE_HORAS )
-			return "ï¿½ltimas Doze Horas";
+			return "últimas Doze Horas";
 		else if ( interval == $scope.enumInterval.DOIS_DIAS )
-			return "ï¿½ltimas Dois Dias";
+			return "últimas Dois Dias";
 		else if ( interval == $scope.enumInterval.SETE_DIAS )
-			return "ï¿½ltimos Sete Dias";
+			return "últimos Sete Dias";
 		else if ( interval == $scope.enumInterval.UM_MES )
-			return "ï¿½ltimo Mï¿½s";
+			return "último Mês";
 		else 
 			return 'Desconhecido';
 				
@@ -361,7 +361,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	    var itens = new Array();
 	    	    
 	    for(var i in value) {
-	    	var itemDate = new Date( value[i].last_update );
+	    	var itemDate = new Date( value[i].lastUpdate );
 
 	    	changeDate = weekday[itemDate.getDay()] + ' ' + itemDate.toLocaleDateString() + ' as ' + itemDate.toLocaleTimeString();
 	    	
@@ -369,7 +369,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	    		itens.push([changeDate, value[i].value]);
 	    	}
 	    	else {
-	    		itens.push([changeDate, value[i].max_value, value[i].min_value]);
+	    		itens.push([changeDate, value[i].maxValue, value[i].minValue]);
 	    	}
 		}
 	      
@@ -396,11 +396,11 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	                      'fontSize': 9,
 	                  },
 		    		  ticks: [
-		    		          {v:0, f: 'Range Mï¿½nimo: 0' }, 
-		    		          {v: orange, f: 'Detecï¿½ï¿½o: ' + orange}, 
+		    		          {v:0, f: 'Range Mínimo: 0' }, 
+		    		          {v: orange, f: 'Detecção: ' + orange}, 
 		    		          {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		          {v: red, f: 'Evacuaï¿½ï¿½o: ' + red}, 
-		    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Mï¿½ximo: ' + $scope.selectedCompanySensor.rangeMax}
+		    		          {v: red, f: 'Evacuação: ' + red}, 
+		    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanySensor.rangeMax}
 		    		        ],
 		    	  },
 		    	  //curveType: 'function',
@@ -435,17 +435,12 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	    
 	    objChart = document.getElementById("graficoHistorico");
 	    var chart = new google.visualization.LineChart(objChart);
-	    chart.draw(data, options);
-	
+	    chart.draw(data, options);	
 	}	
 	
 	$scope.changeToValue = function(valor) {
 	  return valor.toString().replace(".", ",")
-	}
-
-	$scope.setLenPage = function(len) {
-		
-	}	  
+	} 
 
 	$scope.clearHistoric();
 	$scope.getCompanys();

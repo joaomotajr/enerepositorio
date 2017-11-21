@@ -354,7 +354,7 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	    var itens = new Array();
 	    	    
 	    for(var i in value) {
-	    	var itemDate = new Date( value[i].last_update );
+	    	var itemDate = new Date( value[i].lastUpdate );
 
 	    	changeDate = weekday[itemDate.getDay()] + ' ' + itemDate.toLocaleDateString() + ' as ' + itemDate.toLocaleTimeString();
 	    		    	
@@ -431,10 +431,6 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	$scope.changeToValue = function(valor) {
 	  return valor.toString().replace(".", ",")
 	}
-
-	// $scope.setLenPage = function(len) {
-		
-	// }	  
 
 	$scope.clearHistoric();
 	$scope.getCompanys();

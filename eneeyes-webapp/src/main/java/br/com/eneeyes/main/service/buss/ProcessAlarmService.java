@@ -15,10 +15,6 @@ import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
-import br.com.eneeyes.main.model.enums.EmailStatus;
-import br.com.eneeyes.main.model.enums.SigmaStatus;
-import br.com.eneeyes.main.model.enums.SmsStatus;
-import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.model.historic.Historic;
 import br.com.eneeyes.main.model.register.Sensor;
 import br.com.eneeyes.main.model.views.PositionView;
@@ -170,14 +166,12 @@ public class ProcessAlarmService {
 					
 		AlarmParams alarmParams = new AlarmParams(alarmDto, alarmType); 
 		
-		historicAlarmService.save(historic.getValue(), companyDetector.getUid(), sensor.getUid(), historic.getUid(), alarmDto.getAlarmOn(), alarmType, 
-				alarmParams.getEmailStatus(), alarmParams.getSmsStatus(), alarmParams.getAction(), alarmParams.getSoundStatus(), alarmParams.getSigmaStatus());
+		historicAlarmService.save(historic.getValue(), companyDetector.getUid(), sensor.getUid(), historic.getUid(), alarmDto, alarmType, alarmParams);
 		
 		//if (alarmType != AlarmType.NORMAL && alarmType != AlarmType.OFF && alarmType != AlarmType.WITHOUT) {
 		if (alarmType != AlarmType.OFF) {
-		
-			updatePositionAlarm(historic, companyDetector, sensor, alarmType, alarmParams.getEmailStatus(), alarmParams.getSmsStatus(), 
-					alarmParams.getAction(), alarmParams.getSoundStatus(), alarmParams.getSigmaStatus());
+			
+			updatePositionAlarm(historic, companyDetector, sensor, alarmType, alarmParams);
 		}
 		
 	}
@@ -196,8 +190,7 @@ public class ProcessAlarmService {
 	 * @param sensor
 	 * @param alarmType
 	 */	
-	private void updatePositionAlarm(Historic historic, CompanyDetector companyDetector, Sensor sensor, 
-				AlarmType alarmType, EmailStatus emailStatus, SmsStatus smsStatus, String action, SoundStatus soundStatus, SigmaStatus sigmaStatus) {		
+	private void updatePositionAlarm(Historic historic, CompanyDetector companyDetector, Sensor sensor,	AlarmType alarmType, AlarmParams alarmParams) {		
 				
 		List<AlarmStatus> solvedOrCancelesAlarms = new ArrayList<AlarmStatus>();
 		
@@ -216,11 +209,11 @@ public class ProcessAlarmService {
 			positionAlarm.setAlarmStatus(AlarmStatus.CREATED);
 			positionAlarm.setLastUpdate(new Date());
 			positionAlarm.setAlarmType(alarmType);
-			positionAlarm.setEmailStatus(emailStatus);
-			positionAlarm.setSmsStatus(smsStatus);
-			positionAlarm.setAction(action);
-			positionAlarm.setSoundStatus(soundStatus);
-			positionAlarm.setSigmaStatus(sigmaStatus);
+			positionAlarm.setEmailStatus(alarmParams.getEmailStatus());
+			positionAlarm.setSmsStatus(alarmParams.getSmsStatus());
+			positionAlarm.setAction(alarmParams.getAction());
+			positionAlarm.setSoundStatus(alarmParams.getSoundStatus());
+			positionAlarm.setSigmaStatus(alarmParams.getSigmaStatus());
 		}
 		else {
 			// TODO Verificar se haverá reenvio de Actions em casos de Reinscidência do mesmo alerta				

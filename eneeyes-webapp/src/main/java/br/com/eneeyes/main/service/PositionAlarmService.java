@@ -26,6 +26,7 @@ import br.com.eneeyes.main.repository.PositionAlarmRepository;
 import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
+import br.com.eneeyes.main.service.buss.AlarmParams;
 
 @Service
 public class PositionAlarmService implements IService<PositionAlarmDto> {
@@ -69,43 +70,13 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		
 		if (alarmType != AlarmType.NORMAL && alarmType != AlarmType.OFF) {
 					
-			SigmaStatus sigmaStatus = null;
-			if(alarmDto.getAlarmSigma() != null && alarmDto.getAlarmSigma())
-				sigmaStatus = SigmaStatus.ON;
-			else
-				sigmaStatus = SigmaStatus.OFF;
 			
-			EmailStatus emailStatus = null;
-			if(alarmDto.getAlarmEmail() != null && alarmDto.getAlarmEmail())
-				emailStatus = EmailStatus.PENDENT;
-			else
-				emailStatus = EmailStatus.OFF;
+			AlarmParams alarmParams = new AlarmParams(alarmDto, alarmType); 
 			
-			SmsStatus smsStatus = null;
-			if(alarmDto.getAlarmSms() != null && alarmDto.getAlarmSms())
-				smsStatus = SmsStatus.PENDENT;
-			else
-				smsStatus = SmsStatus.OFF;
-			
-			String action = null;
-			if(alarmType == AlarmType.DETECCAO)
-				action = alarmDto.getAction1();
-			else if(alarmType == AlarmType.ALERTA)
-				action = alarmDto.getAction2();
-			else if(alarmType == AlarmType.EVACUACAO)
-				action = alarmDto.getAction3();
-			
-			SoundStatus soundStatus = null;
-			if(alarmDto.getAlarmSound())
-				soundStatus = SoundStatus.ON;
-			else
-				soundStatus = SoundStatus.OFF;
-			
-			historicAlarmService.save(position.getLastValue(), companyDetector.getUid(), sensor.getUid(), position.getHistoricId(), alarmDto.getAlarmOn(), alarmType, 
-					emailStatus, smsStatus, action, soundStatus, sigmaStatus);
+			historicAlarmService.save(position.getLastValue(), companyDetector.getUid(), sensor.getUid(), position.getHistoricId(), alarmDto, alarmType, alarmParams);
 			
 			if(alarmDto.getAlarmOn())			
-				updatePositionAlarm(position, companyDetector, sensor, alarmType, emailStatus, smsStatus, action, soundStatus, sigmaStatus);
+				updatePositionAlarm(position, companyDetector, sensor, alarmType, alarmParams);
 		
 		}	
 				
@@ -145,8 +116,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	 * @param sensor
 	 * @param alarmType
 	 */
-	public void updatePositionAlarm(Position position, CompanyDetector companyDetector, Sensor sensor, 
-			AlarmType alarmType, EmailStatus emailStatus, SmsStatus smsStatus, String action, SoundStatus soundStatus, SigmaStatus sigmaStatus) {
+	public void updatePositionAlarm(Position position, CompanyDetector companyDetector, Sensor sensor, AlarmType alarmType, AlarmParams alarmParams) {
 				
 		List<AlarmStatus> solvedOrCancelesAlarms = new ArrayList<AlarmStatus>();
 		
@@ -166,11 +136,11 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			positionAlarm.setAlarmStatus(AlarmStatus.CREATED);
 			positionAlarm.setLastUpdate(new Date());
 			positionAlarm.setAlarmType(alarmType);
-			positionAlarm.setEmailStatus(emailStatus);
-			positionAlarm.setSmsStatus(smsStatus);
-			positionAlarm.setAction(action);
-			positionAlarm.setSoundStatus(soundStatus);
-			positionAlarm.setSigmaStatus(sigmaStatus);
+			positionAlarm.setEmailStatus(alarmParams.getEmailStatus());
+			positionAlarm.setSmsStatus(alarmParams.getSmsStatus());
+			positionAlarm.setAction(alarmParams.getAction());
+			positionAlarm.setSoundStatus(alarmParams.getSoundStatus());
+			positionAlarm.setSigmaStatus(alarmParams.getSigmaStatus());
 		}
 		else {
 			// TODO Verificar se haverá reenvio de Actions em casos de Reinscidência do mesmo alerta				

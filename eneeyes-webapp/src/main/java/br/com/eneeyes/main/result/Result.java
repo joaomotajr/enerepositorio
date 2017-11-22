@@ -32,10 +32,7 @@ public class Result<T> extends BasicResult<T> {
 	@Override
 	public String toString() {
 		
-		return "UserResult{" +
-				"DTO Result=" + new Gson().toJson(dto) + "," +
-				"resultType=" + getResultType() + "," +
-				"}";
+		return "DTO Result=" + new Gson().toJson(dto);
 	}
 
 	public ResultMessageType getResultType() {

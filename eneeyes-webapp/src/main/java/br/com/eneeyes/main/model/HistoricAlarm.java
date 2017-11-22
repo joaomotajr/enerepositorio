@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
@@ -64,6 +65,10 @@ public class HistoricAlarm {
 	
 	@Column(name="SIGMA_STATUS", nullable = true)
 	private SigmaStatus sigmaStatus;
+	
+	@Lob
+	@Column(name="ALARM", nullable = true)
+	private String alarm;
 		
 	public Long getUid() {
 		return uid;
@@ -167,5 +172,13 @@ public class HistoricAlarm {
 
 	public final void setSigmaStatus(SigmaStatus sigmaStatus) {
 		this.sigmaStatus = sigmaStatus;
+	}
+
+	public String getAlarm() {
+		return alarm;
+	}
+
+	public void setAlarm(String alarm) {
+		this.alarm = alarm;
 	}	
 }

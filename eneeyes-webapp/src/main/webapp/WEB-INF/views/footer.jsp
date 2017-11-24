@@ -89,6 +89,7 @@
 	<script src="/assets/js/controllers/dashboard-controller.js"></script>
 	<script src="/assets/js/controllers/monitor-controller.js"></script>
 	<script src="/assets/js/controllers/logHistoric-controller.js"></script>
+	<script src="/assets/js/controllers/logAuditoria-controller.js"></script>
 	<script src="/assets/js/controllers/logHistoricAlarm-controller.js"></script>
 	<script src="/assets/js/controllers/simulador-controller.js"></script>
 	<script src="/assets/js/controllers/conteudo-controller.js"></script>
@@ -109,6 +110,7 @@
 	<script src="/assets/js/services/company-service.js"></script>
 	<script src="/assets/js/services/unit-service.js"></script>
 	<script src="/assets/js/services/area-service.js"></script>
+	<script src="/assets/js/services/logAuditoria-service.js"></script>
 	<script src="/assets/js/services/companyDevice-service.js"></script>
 	<script src="/assets/js/services/companyDetector-service.js"></script>
 	<script src="/assets/js/services/alarm-service.js"></script>

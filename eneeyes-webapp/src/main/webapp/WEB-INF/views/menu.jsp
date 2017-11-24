@@ -70,7 +70,10 @@
 			            </li>		            		        
 			            
 			            <li class="treeview">
-			            	<a href="#" data-ng-click="LoadAjaxContent('logAlarm.html', 'Alarmes-Resportados')"><i class="fa fa-list-alt text-blue"></i><span>Alarmes Reportados</span>
+			            	<a href="#" data-ng-click="LoadAjaxContent('logAlarm.html', 'Alarmes-Reportados')"><i class="fa fa-list-alt text-blue"></i><span>Alarmes Reportados</span></a>
+						</li>
+						<li class="treeview">
+			            	<a href="#" data-ng-click="LoadAjaxContent('logAuditoria.html', 'Auditoria')"><i class="fa fa-arrows-alt text-blue"></i><span>Auditoria do Sistema</span>
 			            	<span class="label label-success pull-right">Novo</span>
 			            	</a>
 	            		</li>

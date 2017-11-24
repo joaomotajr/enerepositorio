@@ -22,21 +22,21 @@ public class LogAuditoriaController {
 	@Autowired
 	LogAuditoriaService service;	
 	
-	@RequestMapping(value="/security/api/LogAuditoria/save", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@RequestMapping(value="/security/api/logAuditoria/save", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> save(@RequestBody LogAuditoriaDto dto) {
 		
 		return service.save(dto);
 	}	
 	
-	@RequestMapping(value="/security/api/LogAuditoria/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
+	@RequestMapping(value="/security/api/logAuditoria/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> delete(@PathVariable Long uid) {
 		
 		return service.delete(uid);
 	}
 	
-	@RequestMapping(value = "/security/api/LogAuditoria/all", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/security/api/logAuditoria/all", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listAll() {
 		
@@ -49,14 +49,14 @@ public class LogAuditoriaController {
 				
 	}
 	
-	@RequestMapping(value="/security/api/LogAuditoria/obtemPorCompanyId/{companyId}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/logAuditoria/obtemPorCompanyId/{companyId}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listByCompanyId(@PathVariable Long companyId) {
 		
 		return service.listByCompanyId(companyId);		
 	}
 	
-	@RequestMapping(value="/security/api/LogAuditoria/obtemPorId/{uid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/logAuditoria/obtemPorId/{uid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listById(@PathVariable Long uid) {
 		

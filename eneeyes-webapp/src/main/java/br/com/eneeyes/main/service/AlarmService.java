@@ -13,6 +13,7 @@ import br.com.eneeyes.main.model.enums.ActionType;
 import br.com.eneeyes.main.repository.AlarmRepository;
 import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
+import br.com.eneeyes.main.result.LogResult;
 import br.com.eneeyes.main.result.Result;
 
 @Service
@@ -29,7 +30,7 @@ public class AlarmService implements IService<AlarmDto> {
 	
 	public BasicResult<?> save(AlarmDto dto) {
 		
-		Result<AlarmDto> result = new Result<AlarmDto>(); 	
+		LogResult<AlarmDto> result = new LogResult<AlarmDto>(); 	
 		
 		Alarm alarm = new Alarm(dto);		
 		alarm = repository.save(alarm);
@@ -45,7 +46,7 @@ public class AlarmService implements IService<AlarmDto> {
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Executado com sucesso.");
 		
-		logAuditoriaService.save(this.toString(), actionType, result.toString());
+		logAuditoriaService.save(this.getClass().getSimpleName(), actionType, result.toString());
 		
 		return result;
 	}

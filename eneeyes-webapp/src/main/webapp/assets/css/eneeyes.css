@@ -49,17 +49,17 @@
 		text-shadow: 1px 1px 1px #fff;
 	}
 
-	.zui-table-Danger {
+	.zui-table-danger {
 		border: solid 1px #dd4b39;		
 		border-collapse: collapse;
 		border-spacing: 0;
 		font: normal 13px Arial, sans-serif;
 	}
-	.zui-table-Danger thead tr {
+	.zui-table-danger thead tr {
 		border-radius: 5px ! important;
 	}
 	
-	.zui-table-Danger thead th {
+	.zui-table-danger thead th {
 		background-color: #dd4b39;
 		border: solid 1px #dd4b39;		 
 		color: white !important;
@@ -67,8 +67,33 @@
 		text-align: left;
 		*text-shadow: 1px 1px 1px #fff;
 	}
-	.zui-table-Danger tbody td {
+	.zui-table-danger tbody td {
 		border: solid 1px #dd4b39;
+		color: #333;
+		padding: 3px;
+		text-shadow: 1px 1px 1px #fff;
+	}
+
+	.zui-table-info {
+		border: solid 1px #00c0ef;		
+		border-collapse: collapse;
+		border-spacing: 0;
+		font: normal 13px Arial, sans-serif;
+	}
+	.zui-table-info thead tr {
+		border-radius: 5px ! important;
+	}
+	
+	.zui-table-info thead th {
+		background-color: #00c0ef;
+		border: solid 1px #00c0ef;		 
+		color: white !important;
+		padding: 3px;
+		text-align: left;
+		*text-shadow: 1px 1px 1px #fff;
+	}
+	.zui-table-info tbody td {
+		border: solid 1px #00c0ef;
 		color: #333;
 		padding: 3px;
 		text-shadow: 1px 1px 1px #fff;

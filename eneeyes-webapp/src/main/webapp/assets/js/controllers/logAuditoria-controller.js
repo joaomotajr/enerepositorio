@@ -4,12 +4,17 @@ app.controller('logAuditoriaController', function ($scope, $timeout, $filter, Lo
 	logAlarms = [];
 	
 	$scope.getLogAuditoria = function() {
+
 		                                                    
 		 $scope.listAllLogs = new LogAuditoriaService.listAll();		 
 		 $scope.listAllLogs.$logAuditoria({_csrf : angular.element('#_csrf').val()}, function(){
 			 		 
 			 if($scope.listAllLogs != null && $scope.listAllLogs.list.length > 0 )
+			 {
 				 $scope.logsAuditoria = $scope.listAllLogs.list
+				 
+			 }
+
        });		 
 	}
 	

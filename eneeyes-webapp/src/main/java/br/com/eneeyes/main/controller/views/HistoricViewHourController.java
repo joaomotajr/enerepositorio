@@ -51,7 +51,7 @@ public class HistoricViewHourController {
 //		return historicViewHourService.findByCompanyDetectorAndSensorAndIntervalDays(companyDetectorId, sensorId, dateIn, dateOut);
 //	}
 	
-	@RequestMapping(value="/security/api/historicView/findByCompanyDetectorAndSensorAndIntervalDaysGroupHours/{companyDetectorId}/{sensorId}/{dateIn}/{dateOut}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/historicView/findByCompanyDetectorAndSensorAndIntervalDaysGroupHours/{companyDetectorId}/{sensorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(		
 			@PathVariable Long companyDetectorId, 

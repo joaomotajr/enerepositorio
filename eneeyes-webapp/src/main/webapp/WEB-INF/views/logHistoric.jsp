@@ -162,7 +162,7 @@
 											<span class="icon fa fa-file-text"></span> Relat&oacute;rio</button>
 										</div>
 										<div class="col-md-3" style="padding-right: 5px !important; padding-left: 5px !important;">
-											<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="Exportação Permitida até 500 Linhas" 
+											<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="Exportaï¿½ï¿½o Permitida atï¿½ 500 Linhas" 
 												data-ng-class="((listHistoric.list || listHistoricInterval.list) && countHistoric <= 500) ? 'selected' : 'disabled'">
 											<span class="icon fa fa-file-excel-o"></span> Excel</button>
 										</div>
@@ -228,7 +228,7 @@
 									<div class="col-md-1">
 										<div class="form-group">
 											<label class="control-label">&nbsp;</label>
-											<button type="button" class="btn btn-default btn-sm form-control" data-ng-class="{'btn-primary': selectedButton == 100}" data-ng-click="interval = enumInterval.CUSTOM; getHistoricInterval(0)" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">Buscar</button>
+											<button type="button" class="btn btn-default btn-sm form-control" data-ng-class="{'btn-primary': selectedButton == 100}" data-ng-click="interval = enumInterval.CUSTOM; getHistorics(0)" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">Buscar</button>
 										</div>
 									</div>
 																			
@@ -455,7 +455,7 @@
 					<dd><span data-ng-show="selectedCompanySensor" class="alarm3"> {{selectedSensorAlarm.alarm3}}</span></dd>
 			</dl>		            
 			
-			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;­odo:</strong> {{selectedPeriodo}}</div>
+			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;ï¿½odo:</strong> {{selectedPeriodo}}</div>
 			
 			<br />
 			<div id="dvData">

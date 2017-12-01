@@ -25,13 +25,10 @@
 											<div class="col-md-5" >
 												<form>												
 													<div class="col-md-4" style="padding-right: 2px !important;">	 
-														<label style="margin-top: 5px !important;" class="control-label"><span class="icon fa fa-filter"></span> FILTRAR</label>
+														<label style="margin-top: 5px !important;" class="control-label"><span class="icon fa fa-filter"></span> PESQUISAR</label>
 													</div>
 													<div class="col-md-8" style="padding-left: 2px !important;">
-													<select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-options="item as item.name for item in filterAlarm | orderBy: 'name' track by item.uid" 
-														data-ng-model="selectedfilterAlarm">
-														<option value="">Selecione</option> 
-													</select>
+														<input 	type="text"> 
 													</div>						        							    	        
 												</form>								
 											</div>
@@ -50,12 +47,7 @@
 														<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="ExportaÃ§Ã£o Permitida atÃ© 500 Linhas" 
 															data-ng-class="((listHistoric.list || listHistoricInterval.list) && countHistoric <= 500) ? 'selected' : 'disabled'">
 														<span class="icon fa fa-file-excel-o"></span> Excel</button>
-													</div>
-													<div class="col-md-3" style="padding-right: 5px !important; padding-left: 5px !important;">
-													<button type="button" class="btn bg-navy btn-xs form-control" 
-														data-ng-click="showGrafico();" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
-														<span class="icon fa fa-line-chart"></span> Gr&aacute;fico</button>
-													</div>
+													</div>													
 												</div>			        				    								
 											</div>				        			
 										</div>
@@ -125,11 +117,11 @@
 															<tr>                                                                                 
 																<th class="col-md-1">Data</th>
 																<th class="col-md-1">Hora</th>	                      		
-																<th class="col-sm-1">Entidade</th>
-																<th class="col-sm-1">Ação</th>
-																<th class="col-sm-1">Usuário</th>
-																<th class="col-sm-1">Empresa</th>
-																<th class="col-sm-1">Origem</th>																
+																<th class="col-md-2">Entidade</th>
+																<th class="col-md-1">Ação</th>
+																<th class="col-md-2">Usuário</th>
+																<th class="col-md-2">Empresa</th>
+																<th class="col-md-1">Origem</th>																
 																
 															</tr>
 														</thead>
@@ -142,24 +134,21 @@
 															<tr data-ng-repeat="item in logsAuditoria">
 																<td class="col-md-1">{{item.dateTime | date:'dd/MM/yyyy'}}</td>
 																<td class="col-md-1">{{item.dateTime | date:'HH:mm:ss'}}</td>
-																<td class="col-sm-1">{{item.entity}}</td>
-																<td class="col-sm-1">{{item.action}}</td>
-																<td class="col-sm-1">{{item.userId}}</td>
-																<td class="col-sm-1">{{item.companyId}}</td>
-																<td class="col-sm-1">{{item.ip}}</td>		
-															
-																<!-- <td class="col-sm-1">
-																	<span data-ng-if="item.soundStatus=='OFF'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: gray" title="Alerta Sonoro n&atilde;o Habilitado"></span>
-																	<span data-ng-if="item.soundStatus=='ON'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: red" title="Alerta Sonoro"></span>
-																	<span data-ng-if="item.soundStatus=='SILENT'" class="icon fa fa-bullhorn" style="font-size:1.4em; color: green" title="Alerta Silenciado"></span>
-																</td>
-																 -->
-															
+																<td class="col-md-2">{{item.entity}}</td>
+																<td class="col-md-1">{{item.action}}</td>
+																<td class="col-md-2">{{item.userId}}</td>
+																<td class="col-md-2">
+																	<span data-ng-if="item.companyId==null">MASTER</span>
+																	<span data-ng-if="item.companyId!=null">{{item.companyId}}</span>
+																</td>																
+																<td class="col-md-1">																		
+																	<a type="button" class="btn btn-info btn-xs"  data-ng-click="details($index)">Detalhes</a>
+																</td>															
 															</tr>
 														</tbody>
 													</table>								
 		
-													<p data-ng-hide="logsAuditoria == undefined || logsAuditoria.list.length > 0 || loading" class="text-center">NENHUM REGISTRO</p>
+													<p data-ng-hide="logsAuditoria == undefined || logsAuditoria.length > 0" class="text-center">NENHUM REGISTRO</p>
 													
 												</div>                                                         	            
 											</div>

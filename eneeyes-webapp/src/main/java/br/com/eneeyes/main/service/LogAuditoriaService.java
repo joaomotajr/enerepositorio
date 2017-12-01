@@ -12,7 +12,9 @@ import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.LogAuditoriaDto;
 import br.com.eneeyes.main.model.LogAuditoria;
 import br.com.eneeyes.main.model.enums.ActionType;
+import br.com.eneeyes.main.model.views.LogAuditoriaView;
 import br.com.eneeyes.main.repository.LogAuditoriaRepository;
+import br.com.eneeyes.main.repository.views.LogAuditoriaViewRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
@@ -21,6 +23,9 @@ public class LogAuditoriaService implements IService<LogAuditoriaDto> {
 
 	@Autowired
 	private LogAuditoriaRepository repository;
+
+	@Autowired
+	private LogAuditoriaViewRepository repositoryView;
 	
 	public BasicResult<?> save(LogAuditoriaDto dto) {
 		Result<LogAuditoriaDto> result = new Result<LogAuditoriaDto>();		
@@ -104,6 +109,32 @@ public class LogAuditoriaService implements IService<LogAuditoriaDto> {
 		return result;	
 
 	}
+	
+	public Result<?> listAllView() {
+		
+		Result<LogAuditoriaView> result = new Result<LogAuditoriaView>(); 	
+		
+		try {
+			List<LogAuditoriaView> lista = repositoryView.findAll();
+
+			if (lista != null) {
+												
+				result.setList(lista);
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhuma Área.");
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;	
+
+	}
 
 	public Result<?> findOne(Long uid) {
 		
@@ -146,6 +177,32 @@ public class LogAuditoriaService implements IService<LogAuditoriaDto> {
 				}								
 				
 				result.setList(dto);				
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhum Alarme Localizado.");
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;	
+
+	}
+	
+	public Result<?> listByCompanyIdView(Long companyId) {
+		
+		Result<LogAuditoriaView> result = new Result<LogAuditoriaView>(); 	
+		
+		try {
+			List<LogAuditoriaView> lista = repositoryView.findByCompanyId(companyId);
+
+			if (lista != null) {
+				
+				result.setList(lista);				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {

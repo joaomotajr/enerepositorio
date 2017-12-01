@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.model.enums.IntervalType;
 import br.com.eneeyes.main.model.historic.IHistoricGroup;
+import br.com.eneeyes.main.repository.historic.HistoricViewDayAllRepository;
 import br.com.eneeyes.main.repository.historic.HistoricViewHour30Repository;
 import br.com.eneeyes.main.repository.historic.HistoricViewHourRepository;
 import br.com.eneeyes.main.result.BasicResult;
@@ -27,6 +28,9 @@ public class HistoricViewHourService {
 	@Autowired
 	private HistoricViewHour30Repository repository30;
 
+	@Autowired
+	private HistoricViewDayAllRepository repositoryAll;
+	
 	public HistoricGroupResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
 		HistoricGroupResult<?> result = new HistoricGroupResult<IHistoricGroup>();
 
@@ -108,18 +112,20 @@ public class HistoricViewHourService {
 			
 		try {
 			
-			if (diffDaysIn > 30 && diffDaysOut > 30) {
+			Page<IHistoricGroup> page = null;
+			
+			if (diffDaysIn >= 30 && diffDaysOut >= 30) {
 				
-				result = getResults(repository30.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
+				page = repository30.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
+			}
+			else if (diffDaysIn <= 30 && diffDaysOut <= 30) {
+		
+				page = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
 			}
 			else
 			{
-				result = getResults(repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
-			}			
-
-			Page<IHistoricGroup> page = null;
-
-			page = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
+				page = repositoryAll.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
+			}
 			
 			result = getResults(page);
 			

@@ -49,6 +49,19 @@ public class LogAuditoriaController {
 				
 	}
 	
+	@RequestMapping(value = "/security/api/logAuditoria/allView", method = RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> listAllView() {
+		
+		User user = SigninUtils.principal();
+				
+		if(user.getCompany()  == null)		
+			return service.listAllView();
+		else
+			return service.listByCompanyIdView(user.getCompany().getUid());
+				
+	}
+	
 	@RequestMapping(value="/security/api/logAuditoria/obtemPorCompanyId/{companyId}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> listByCompanyId(@PathVariable Long companyId) {

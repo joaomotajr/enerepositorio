@@ -1,43 +1,12 @@
 package br.com.eneeyes.main.result;
 
-import java.util.List;
-
-import com.google.gson.Gson;
-
-import br.com.eneeyes.archetype.web.result.ResultMessageType;
-import br.com.eneeyes.main.model.historic.IHistoric;
-
-public class HistoricResult<T> extends BasicResult<T> {
-	
-	private List<IHistoric> list;	
-	private ResultMessageType resultMessageType;
-	
+public abstract class BasicGroupResult<T> extends BasicResult<T> {	
+			
     private boolean firstPage = false;
     private boolean lastPage = false;
     private int totalList = 0;
     private int totalPage = 0;
-    private int countPages = 0;
-	
-	public List<IHistoric> getList() {
-		return list;
-	}
-
-	public void setList(List<IHistoric> resultList) {
-		this.list = resultList;
-	}		
-	
-	@Override
-	public String toString() {
-		return "UserResult{" + "resultType=" + getResultType() + "} - " + new Gson().toJson(this) ;
-	}
-
-	public ResultMessageType getResultType() {
-		return resultMessageType;
-	}
-
-	public void setResultType(ResultMessageType resultMessageType) {
-		this.resultMessageType = resultMessageType;
-	}
+    private int countPages = 0;	
 
 	public final boolean isFirstPage() {
 		return firstPage;
@@ -78,5 +47,4 @@ public class HistoricResult<T> extends BasicResult<T> {
 	public final void setCountPages(int countPages) {
 		this.countPages = countPages;
 	}	
-	
 }

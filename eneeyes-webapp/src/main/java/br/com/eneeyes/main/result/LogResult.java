@@ -6,10 +6,12 @@ public class LogResult<T> extends Result<T> {
 		
 	private T dto;
 
+	@Override
 	public T getT() {
 		return dto;
 	}
 
+	@Override
 	public void setEntity(T dto) {
 		this.dto = dto;
 	}	
@@ -17,6 +19,6 @@ public class LogResult<T> extends Result<T> {
 	@Override
 	public String toString() {
 		
-		return "DTO Result=" + new Gson().toJson(dto);
+		return new Gson().toJson(dto);
 	}	
 }

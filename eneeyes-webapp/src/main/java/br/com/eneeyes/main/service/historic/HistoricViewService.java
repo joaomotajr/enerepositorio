@@ -19,7 +19,7 @@ import br.com.eneeyes.main.repository.historic.HistoricHABCRepository;
 import br.com.eneeyes.main.repository.historic.HistoricHABRepository;
 import br.com.eneeyes.main.repository.historic.HistoricHARepository;
 import br.com.eneeyes.main.repository.historic.HistoricViewRepository;
-import br.com.eneeyes.main.result.HistoricResult;
+import br.com.eneeyes.main.result.GroupResult;
 
 @Service
 public class HistoricViewService {
@@ -42,8 +42,8 @@ public class HistoricViewService {
 	@Autowired
 	private HistoricDRepository repositoryD;
 	
-	public HistoricResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
-		HistoricResult<?> result = new HistoricResult<IHistoric>();
+	public GroupResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
+		GroupResult<?> result = new GroupResult<IHistoric>();
 			
 		try {
 						
@@ -80,9 +80,9 @@ public class HistoricViewService {
 		return result;
 	}
 	
-	private HistoricResult<?> getResults(Page<IHistoric> page) {
+	private GroupResult<?> getResults(Page<IHistoric> page) {
 		
-		HistoricResult<IHistoric> result = new HistoricResult<IHistoric>();
+		GroupResult<IHistoric> result = new GroupResult<IHistoric>();
 		
 		if (page != null) {
 			
@@ -111,9 +111,9 @@ public class HistoricViewService {
 		
 	}
 	
-	public HistoricResult<?> findByCompanyDetectorAndSensorAndIntervalDays(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
+	public GroupResult<?> findByCompanyDetectorAndSensorAndIntervalDays(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
 		
-		HistoricResult<?> result = new HistoricResult<IHistoric>();
+		GroupResult<?> result = new GroupResult<IHistoric>();
 		
 		try {
 		

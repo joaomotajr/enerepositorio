@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.eneeyes.main.model.HistoricAlarm;
 import br.com.eneeyes.main.model.enums.IntervalType;
-import br.com.eneeyes.main.result.HistoricAlarmResult;
+import br.com.eneeyes.main.result.GroupResult;
 import br.com.eneeyes.main.service.HistoricAlarmService;
 
 @RestController
@@ -24,7 +23,7 @@ public class HistoricAlarmViewController {
 	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDetectorAndSensorAndInterval/{companyDetectorId}/{sensorId}/{intervalType}/{currentPage}/{lenPage}", 
 			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)                      
-	public HistoricAlarmResult<HistoricAlarm> findByCompanyDetectorAndSensorAndInterval(
+	public GroupResult<?> findByCompanyDetectorAndSensorAndInterval(
 			@PathVariable Long companyDetectorId, 
 			@PathVariable Long sensorId, 
 			@PathVariable IntervalType intervalType, 
@@ -35,7 +34,7 @@ public class HistoricAlarmViewController {
 
 	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDetectorAndSensorAndIntervalDays/{companyDetectorId}/{sensorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public HistoricAlarmResult<HistoricAlarm> findByCompanyDetectorAndSensorAndIntervalDays(
+	public GroupResult<?> findByCompanyDetectorAndSensorAndIntervalDays(
 			@PathVariable Long companyDetectorId, 
 			@PathVariable Long sensorId, 
 			@PathVariable Date dateIn, 

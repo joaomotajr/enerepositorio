@@ -16,8 +16,7 @@ import br.com.eneeyes.main.model.historic.IHistoricGroup;
 import br.com.eneeyes.main.repository.historic.HistoricViewDay30Repository;
 import br.com.eneeyes.main.repository.historic.HistoricViewDayAllRepository;
 import br.com.eneeyes.main.repository.historic.HistoricViewDayRepository;
-import br.com.eneeyes.main.result.BasicResult;
-import br.com.eneeyes.main.result.HistoricGroupResult;
+import br.com.eneeyes.main.result.GroupResult;
 
 @Service
 public class HistoricViewDayService {
@@ -31,8 +30,8 @@ public class HistoricViewDayService {
 	@Autowired
 	private HistoricViewDayAllRepository repositoryAll;
 	
-	public HistoricGroupResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
-		HistoricGroupResult<?> result = new HistoricGroupResult<IHistoricGroup>();
+	public GroupResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
+		GroupResult<?> result = new GroupResult<IHistoricGroup>();
 			
 		try {
 			
@@ -70,9 +69,9 @@ public class HistoricViewDayService {
 		return c.getTime();		
 	}
 	
-	public HistoricGroupResult<?> getResults(Page<IHistoricGroup> page) {
+	public GroupResult<?> getResults(Page<IHistoricGroup> page) {
 		
-		HistoricGroupResult<IHistoricGroup> result = new HistoricGroupResult<IHistoricGroup>();
+		GroupResult<IHistoricGroup> result = new GroupResult<IHistoricGroup>();
 		
 		if (page != null) {
 			
@@ -101,8 +100,8 @@ public class HistoricViewDayService {
 		
 	}
 	
-	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
-		HistoricGroupResult<?> result = new HistoricGroupResult<IHistoricGroup>();
+	public GroupResult<?> findByCompanyDetectorAndSensorAndIntervalDays(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
+		GroupResult<?> result = new GroupResult<IHistoricGroup>();
 		
 		Date date = new Date();
 						

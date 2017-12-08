@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eneeyes.main.model.enums.IntervalType;
-import br.com.eneeyes.main.result.HistoricResult;
+import br.com.eneeyes.main.result.GroupResult;
 import br.com.eneeyes.main.service.historic.HistoricViewService;
 
 @RestController
@@ -23,7 +23,7 @@ public class HistoricViewController {
 	@RequestMapping(value="/security/api/historicView/findByCompanyDetectorAndSensorAndInterval/{companyDetectorId}/{sensorId}/{intervalType}/{currentPage}/{lenPage}", 
 			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)                      
-	public HistoricResult<?> findByCompanyDetectorAndSensorAndInterval(
+	public GroupResult<?> findByCompanyDetectorAndSensorAndInterval(
 			@PathVariable Long companyDetectorId, 
 			@PathVariable Long sensorId, 
 			@PathVariable IntervalType intervalType, 
@@ -34,7 +34,7 @@ public class HistoricViewController {
 
 	@RequestMapping(value="/security/api/historicView/findByCompanyDetectorAndSensorAndIntervalDays/{companyDetectorId}/{sensorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public HistoricResult<?> findByCompanyDetectorAndSensorAndIntervalDays(
+	public GroupResult<?> findByCompanyDetectorAndSensorAndIntervalDays(
 			@PathVariable Long companyDetectorId, 
 			@PathVariable Long sensorId, 
 			@PathVariable Date dateIn, 

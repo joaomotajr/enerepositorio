@@ -11,10 +11,12 @@ import br.com.eneeyes.main.dto.CompanyDetectorAlarmDto;
 import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDetectorAlarm;
+import br.com.eneeyes.main.model.enums.ActionType;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.repository.CompanyDetectorAlarmRepository;
 import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
+import br.com.eneeyes.main.result.LogResult;
 import br.com.eneeyes.main.result.Result;
 
 @Service
@@ -28,13 +30,16 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 	
 	@Autowired
 	private CompanyDetectorAlarmRepository companyDetectorAlarmRepository;
+	
+	@Autowired
+	private LogAuditoriaService logAuditoriaService;
 
 	@Override
 	public BasicResult<?> save(CompanyDetectorAlarmDto dto) {
 		
-		Result<CompanyDetectorAlarmDto> result = new Result<CompanyDetectorAlarmDto>();
+		LogResult<CompanyDetectorAlarmDto> result = new LogResult<CompanyDetectorAlarmDto>();
 		CompanyDetectorAlarm companyDetectorAlarm = new CompanyDetectorAlarm(dto);
-		
+				
 		if (companyDetectorAlarmRepository.updateAlarm(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getCompanyDetector(), companyDetectorAlarm.getId().getSensorId()) <= 0) {		
 			companyDetectorAlarm = companyDetectorAlarmRepository.save(companyDetectorAlarm);
 			
@@ -46,12 +51,14 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Executado com sucesso.");
 		
+		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.ASSOCIATED, result.toString());
+		
 		return result;
 	}
 	
 	public BasicResult<?> deletar(CompanyDetectorAlarmDto dto) {
 		
-		Result<CompanyDetectorAlarmDto> result = new Result<CompanyDetectorAlarmDto>();
+		LogResult<CompanyDetectorAlarmDto> result = new LogResult<CompanyDetectorAlarmDto>();
 		CompanyDetectorAlarm companyDetectorAlarm = new CompanyDetectorAlarm(dto);
 		
 		companyDetectorAlarmRepository.deleteAlarm( companyDetectorAlarm.getCompanyDetector(), companyDetectorAlarm.getId().getSensorId());		
@@ -59,6 +66,8 @@ public class CompanyDetectorAlarmService implements IService<CompanyDetectorAlar
 		
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Excluído com sucesso.");
+		
+		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.REMOVED, result.toString());
 		
 		return result;
 	}

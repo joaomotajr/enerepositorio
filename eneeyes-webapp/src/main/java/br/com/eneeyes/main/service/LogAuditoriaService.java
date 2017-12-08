@@ -5,17 +5,22 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import br.com.eneeyes.archetype.utils.Util;
 import br.com.eneeyes.archetype.web.config.auth.signin.SigninUtils;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.LogAuditoriaDto;
 import br.com.eneeyes.main.model.LogAuditoria;
 import br.com.eneeyes.main.model.enums.ActionType;
+import br.com.eneeyes.main.model.enums.IntervalType;
 import br.com.eneeyes.main.model.views.LogAuditoriaView;
 import br.com.eneeyes.main.repository.LogAuditoriaRepository;
 import br.com.eneeyes.main.repository.views.LogAuditoriaViewRepository;
 import br.com.eneeyes.main.result.BasicResult;
+import br.com.eneeyes.main.result.GroupResult;
 import br.com.eneeyes.main.result.Result;
 
 @Service
@@ -78,29 +83,27 @@ public class LogAuditoriaService implements IService<LogAuditoriaDto> {
 		return result;		
 	}
 
-	public Result<?> listAll() {
+	public GroupResult<?> listPreDefView(IntervalType intervalType, Integer currentPage, Integer lenPage) {
 		
-		Result<LogAuditoriaDto> result = new Result<LogAuditoriaDto>(); 	
+		GroupResult<LogAuditoriaView> result = new GroupResult<LogAuditoriaView>(); 	
 		
 		try {
-			List<LogAuditoria> lista = repository.findAll();
+			
+			Date fim = new Date(); 
+			Date inicio = new Date();
+			
+			if(intervalType ==  IntervalType.UM_MES)				
+				inicio = Util.addMonth(fim, -1);
+			else
+				inicio = new Date(fim.getTime() - (1000 * 60 * 60 * intervalType.getValue()));								
+			
+			Page<LogAuditoriaView> page = null;
+			
+			page= repositoryView.findByDateTimeBetweenPaginated(inicio, fim, new PageRequest(currentPage, lenPage));			
+			
+			result = getResults(page);	
+			
 
-			if (lista != null) {
-				
-				List<LogAuditoriaDto> dto = new ArrayList<LogAuditoriaDto>();
-				
-				for (LogAuditoria item   : lista) {					
-					dto.add(new LogAuditoriaDto(item) );
-				}
-								
-				result.setList(dto);
-				result.setResultType( ResultMessageType.SUCCESS );
-				result.setMessage("Executado com sucesso.");
-			} else {
-				result.setIsError(true);
-				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Área.");
-			}
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
@@ -110,23 +113,19 @@ public class LogAuditoriaService implements IService<LogAuditoriaDto> {
 
 	}
 	
-	public Result<?> listAllView() {
+	public GroupResult<?> listIntervalView(Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
 		
-		Result<LogAuditoriaView> result = new Result<LogAuditoriaView>(); 	
+		GroupResult<LogAuditoriaView> result = new GroupResult<LogAuditoriaView>(); 	
 		
-		try {
-			List<LogAuditoriaView> lista = repositoryView.findAll();
+		try {									
+			
+			Page<LogAuditoriaView> page = null;
+			
+			page= repositoryView.findByDateTimeBetweenPaginated(dateIn, dateOut, new PageRequest(currentPage, lenPage));			
+			
+			result = getResults(page);	
+			
 
-			if (lista != null) {
-												
-				result.setList(lista);
-				result.setResultType( ResultMessageType.SUCCESS );
-				result.setMessage("Executado com sucesso.");
-			} else {
-				result.setIsError(true);
-				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Área.");
-			}
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
@@ -134,6 +133,85 @@ public class LogAuditoriaService implements IService<LogAuditoriaDto> {
 		
 		return result;	
 
+	}
+	
+	public GroupResult<?> listPreDefByCompanyIdView(Long companyId, IntervalType intervalType, Integer currentPage, Integer lenPage ) {
+		
+		GroupResult<LogAuditoriaView> result = new GroupResult<LogAuditoriaView>();
+		
+		try {
+			Date fim = new Date(); 
+			Date inicio = new Date();
+			
+			if(intervalType ==  IntervalType.UM_MES)				
+				inicio = Util.addMonth(fim, -1);
+			else
+				inicio = new Date(fim.getTime() - (1000 * 60 * 60 * intervalType.getValue()));								
+			
+			Page<LogAuditoriaView> page = null;
+							
+			
+			page = repositoryView.findByCompanyIdAndDateTimeBetweenPaginated(companyId, inicio, fim, new PageRequest(currentPage, lenPage));								
+			
+			result = getResults(page);	
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;	
+
+	}
+	
+	public GroupResult<?> listIntervalByCompanyIdView(Long companyId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage ) {
+		
+		GroupResult<LogAuditoriaView> result = new GroupResult<LogAuditoriaView>();
+		
+		try {								
+			
+			Page<LogAuditoriaView> page = null;							
+			
+			page = repositoryView.findByCompanyIdAndDateTimeBetweenPaginated(companyId, dateIn, dateOut, new PageRequest(currentPage, lenPage));								
+			
+			result = getResults(page);	
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;	
+
+	}
+	
+	private GroupResult<LogAuditoriaView> getResults(Page<LogAuditoriaView> page) {
+		
+		GroupResult<LogAuditoriaView> result = new GroupResult<LogAuditoriaView>();
+		
+		if (page != null) {
+			
+			List<LogAuditoriaView> lista = new ArrayList<LogAuditoriaView>();
+			for (LogAuditoriaView item : page) {
+				
+				lista.add(item);					
+			}
+			
+			result.setFirstPage(page.isFirstPage());
+			result.setLastPage(page.isLastPage());
+			result.setTotalList(new Long(page.getTotalElements()).intValue());			
+			result.setCountPages(page.getTotalPages());
+			
+			result.setList(lista);
+			result.setResultType( ResultMessageType.SUCCESS );
+			result.setMessage("Executado com sucesso.");	
+		} else {
+			
+			result.setIsError(true);
+			result.setResultType( ResultMessageType.ERROR );
+			result.setMessage("Nenhum Histórico.");
+		}
+		
+		return result;
+		
 	}
 
 	public Result<?> findOne(Long uid) {
@@ -160,62 +238,5 @@ public class LogAuditoriaService implements IService<LogAuditoriaDto> {
 		
 		return result;	
 	}
-	
-	public Result<?> listByCompanyId(Long companyId) {
-		
-		Result<LogAuditoriaDto> result = new Result<LogAuditoriaDto>(); 	
-		
-		try {
-			List<LogAuditoria> lista = repository.findByCompanyId(companyId);
 
-			if (lista != null) {
-				
-				List<LogAuditoriaDto> dto = new ArrayList<LogAuditoriaDto>();
-				
-				for (LogAuditoria item : lista) {					
-					dto.add(new LogAuditoriaDto(item) );
-				}								
-				
-				result.setList(dto);				
-				result.setResultType( ResultMessageType.SUCCESS );
-				result.setMessage("Executado com sucesso.");
-			} else {
-				result.setIsError(true);
-				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhum Alarme Localizado.");
-			}
-		} catch (Exception e) {
-			result.setIsError(true);
-			result.setMessage(e.getMessage());
-		}
-		
-		return result;	
-
-	}
-	
-	public Result<?> listByCompanyIdView(Long companyId) {
-		
-		Result<LogAuditoriaView> result = new Result<LogAuditoriaView>(); 	
-		
-		try {
-			List<LogAuditoriaView> lista = repositoryView.findByCompanyId(companyId);
-
-			if (lista != null) {
-				
-				result.setList(lista);				
-				result.setResultType( ResultMessageType.SUCCESS );
-				result.setMessage("Executado com sucesso.");
-			} else {
-				result.setIsError(true);
-				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhum Alarme Localizado.");
-			}
-		} catch (Exception e) {
-			result.setIsError(true);
-			result.setMessage(e.getMessage());
-		}
-		
-		return result;	
-
-	}
 }

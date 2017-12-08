@@ -19,7 +19,7 @@ import br.com.eneeyes.main.model.HistoricAlarm;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.IntervalType;
 import br.com.eneeyes.main.repository.HistoricAlarmRepository;
-import br.com.eneeyes.main.result.HistoricAlarmResult;
+import br.com.eneeyes.main.result.GroupResult;
 import br.com.eneeyes.main.service.buss.AlarmParams;
 
 @Service
@@ -28,8 +28,8 @@ public class HistoricAlarmService {
 	@Autowired
 	private HistoricAlarmRepository repository;
 	
-	public HistoricAlarmResult<HistoricAlarm> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
-		HistoricAlarmResult<HistoricAlarm> result = new HistoricAlarmResult<HistoricAlarm>();
+	public GroupResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
+		GroupResult<?> result = new GroupResult<HistoricAlarm>();
 			
 		try {
 			
@@ -58,8 +58,8 @@ public class HistoricAlarmService {
 		return result;
 	}
 	
-	public HistoricAlarmResult<HistoricAlarm> findByCompanyDetectorAndSensorAndIntervalDays(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
-		HistoricAlarmResult<HistoricAlarm> result = new HistoricAlarmResult<HistoricAlarm>();
+	public GroupResult<?> findByCompanyDetectorAndSensorAndIntervalDays(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
+		GroupResult<?> result = new GroupResult<HistoricAlarm>();
 			
 		try {			
 			
@@ -77,9 +77,9 @@ public class HistoricAlarmService {
 		return result;
 	}
 	
-	private HistoricAlarmResult<HistoricAlarm> getResults(Page<HistoricAlarm> page) {
+	private GroupResult<?> getResults(Page<HistoricAlarm> page) {
 		
-		HistoricAlarmResult<HistoricAlarm> result = new HistoricAlarmResult<HistoricAlarm>();
+		GroupResult<HistoricAlarm> result = new GroupResult<HistoricAlarm>();
 		
 		if (page != null) {
 			

@@ -151,13 +151,13 @@
 											</div>
 										</div>			        				    								
 									</div>				        			
-								</div>
+								</div>s
 								
 								<hr style="margin-top: 5px !important; margin-bottom: 5px !important;">
 								
 								<div class="row">
 									<form class="form" name="userForm">
-										<div class="col-md-6" style="padding-right: 3px !important; padding-left: 3px !important;">
+										<div class="col-md-5" style="padding-right: 3px !important; padding-left: 3px !important;">
 											<div class="form-group">
 												<label class="control-label">Buscar por Intervalos Pr&eacute;-Definidos: </label> <br />								
 												<div class="btn-group" role="group" aria-label="Basic example">
@@ -179,7 +179,7 @@
 											</div>
 										</div>
 										
-										<div class="col-md-2" style="padding-right: 5px !important; padding-left: 3px !important;">
+										<div class="col-md-3" style="padding-right: 5px !important; padding-left: 3px !important;">
 											<div class="form-group">
 												<label class="control-label">Data inicio</label>									                	 
 
@@ -191,7 +191,7 @@
 											</div>                                                                    
 										</div>
 										
-										<div class="col-md-2" style="padding-right: 5px; padding-left: 3px;">
+										<div class="col-md-3" style="padding-right: 5px; padding-left: 3px;">
 											<div class="form-group">
 												<label class="control-label">Data Fim</label>							                	
 												<div class='input-group date' id='dateOutA'>
@@ -202,10 +202,12 @@
 											</div>                                                                    
 										</div>
 										
-										<div class="col-md-2">
+										<div class="col-md-1">
 											<div class="form-group">
 												<label class="control-label">&nbsp;</label>
-												<button type="button" class="btn btn-default btn-sm form-control" data-ng-class="{'btn-primary': selectedButton == 100}" data-ng-click="interval = enumInterval.CUSTOM; getHistoricInterval(0)" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">Buscar</button>
+												<button type="button" class="btn btn-default btn-sm form-control font-weight-bold" data-ng-class="{'btn-primary': selectedButton == 100}" data-ng-click="interval = enumInterval.CUSTOM; getHistoricInterval(0)" data-ng-disabled="(selectedCompanyDetector && selectedCompanySensor) ? false : true">
+													<i class="fa fa-search"></i>
+												</button>
 											</div>
 										</div>																			
 									</form>								

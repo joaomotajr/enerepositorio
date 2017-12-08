@@ -51,7 +51,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="#step-4" class="disabled" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'" rel="4">
+										<a href="#step-4" class="disabled" data-ng-class="(listHistoricInterval.list) ? 'selected' : 'disabled'" rel="4">
 											<span class="step_no">4</span>
 											<span class="step_descr">Pesquisar / Limpar Pesquisa</span>
 										</a>
@@ -108,8 +108,7 @@
 							<h3 class="box-title">Selecione Intervalos Pr&eacute;-Definidos ou Data de Inicio/Fim</h3>									  	
 								
 							<div class="pull-right" style="margin-bottom: 0px ! important">   
-								<span data-ng-hide='loading' class="icon fa fa-search fa-2.0x pull-right"></span>
-								<!-- <label data-ng-show='loading'><span class="icon fa fa-hourglass-half"></span> Loading...</label> -->
+								<span data-ng-hide='loading' class="icon fa fa-search fa-2.0x pull-right"></span>								
 							</div>
 						</div>			
 						
@@ -125,30 +124,17 @@
 												<input type="radio" id="radio5" value="1" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(1)">
 												<label for="radio5">Nenhum</label>
 											</div>
-											<div class="radio3 radio-check radio-warning radio-inline" title="NOTE: Se houve mais de um tipo de alarme na HORA, apenas o maior serï¿½ Exibido">
+											<div class="radio3 radio-check radio-warning radio-inline" title="NOTE: Se houve mais de um tipo de alarme na HORA, apenas o maior será Exibido">
 												<input type="radio" id="radio6" value="2" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(2)">
 												<label for="radio6">Hora</label>
 											</div>
-											<div class="radio3 radio-check radio-default radio-inline" title="NOTE: Se houve mais de um tipo de alarme no DIA, apenas o maior serï¿½ Exibido">
+											<div class="radio3 radio-check radio-default radio-inline" title="NOTE: Se houve mais de um tipo de alarme no DIA, apenas o maior será Exibido">
 												<input type="radio" id="radio7" value="3" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(3)">
 												<label for="radio7">Dia</label>
 											</div>
 										</div>                                        										
 								</div>		
-								
-								<!-- <div class="col-md-3" >
-									<form>												
-										<div class="col-md-4" style="padding-right: 2px !important;">	 
-											<label style="margin-top: 5px !important;" class="control-label"><span class="icon fa fa-filter"></span> FILTRAR</label>
-										</div>
-										<div class="col-md-8" style="padding-left: 2px !important;">
-										<select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-options="item as item.name for item in filterAlarm | orderBy: 'name' track by item.uid" 
-											data-ng-model="selectedfilterAlarm">
-											<option value="">Selecione</option> 
-										</select>
-										</div>						        							    	        
-									</form>								
-								</div> -->
+			
 								<div class="col-md-1" ></div>
 								
 								<div class="col-md-5" >									
@@ -158,17 +144,17 @@
 									<div class="form-group">
 											<div class="col-md-3" style="padding-right: 5px !important;">
 											<button id="exportRel" type="button" class="btn btn-default btn-xs form-control" 
-												data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
+												data-ng-class="(listHistoricInterval.list) ? 'selected' : 'disabled'">
 											<span class="icon fa fa-file-text"></span> Relat&oacute;rio</button>
 										</div>
 										<div class="col-md-3" style="padding-right: 5px !important; padding-left: 5px !important;">
-											<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="Exportaï¿½ï¿½o Permitida atï¿½ 500 Linhas" 
-												data-ng-class="((listHistoric.list || listHistoricInterval.list) && countHistoric <= 500) ? 'selected' : 'disabled'">
+											<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="Exportação Permitida até 500 Linhas" 
+												data-ng-class="((listHistoricInterval.list) && countHistoric <= 500) ? 'selected' : 'disabled'">
 											<span class="icon fa fa-file-excel-o"></span> Excel</button>
 										</div>
 										<div class="col-md-3" style="padding-right: 5px !important; padding-left: 5px !important;">
 										<button type="button" class="btn bg-navy btn-xs form-control" 
-											data-ng-click="showGrafico();" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'">
+											data-ng-click="showGrafico();" data-ng-class="(listHistoricInterval.list) ? 'selected' : 'disabled'">
 											<span class="icon fa fa-line-chart"></span> Gr&aacute;fico</button>
 										</div>
 									</div>			        				    								
@@ -283,7 +269,7 @@
 								
 								</div>									        		
 								<div class="col-md-5">
-									<table data-ng-if="tipoGrupo==1" class='zui-table' cellspacing="0" width="100%" data-ng-visible="listHistoric">
+									<table data-ng-if="tipoGrupo==1" class='zui-table' cellspacing="0" width="100%">
 											<thead>
 												<tr>                                                                                 
 													<th>Data</th>
@@ -295,10 +281,10 @@
 									</table>
 									<div style="max-height:420px; height:auto; overflow: auto">
 				
-										<table data-ng-if="tipoGrupo==1" class='zui-table' cellspacing="0" width="100%" data-ng-visible="listHistoric">							
+										<table data-ng-if="tipoGrupo==1" class='zui-table' cellspacing="0" width="100%">							
 											<tbody>		
 												<div data-ng-show='loading' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>	
-												<!-- <tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">										 -->
+												
 												<tr data-ng-repeat="item in listHistoricInterval.list">
 													
 													<td>{{item.lastUpdate | date:'dd/MM/yyyy' }}</td>
@@ -314,7 +300,7 @@
 											</tbody>
 										</table>								            	
 										
-										<table data-ng-if="tipoGrupo!=1" class='zui-table' cellspacing="0" width="100%" data-ng-visible="listHistoric">														            				                            
+										<table data-ng-if="tipoGrupo!=1" class='zui-table' cellspacing="0" width="100%">														            				                            
 											<thead>
 												<tr>                                                                                   
 													<th>Data</th>
@@ -325,7 +311,7 @@
 											</thead>
 											<tbody>		
 												<div data-ng-show='loading' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>											               
-												<!-- <tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">	 -->
+												
 												<tr data-ng-repeat="item in listHistoricInterval.list">	
 													<td>{{item.lastUpdate | date:'dd/MM/yyyy' }}</td>
 													<td>{{item.lastUpdate | date:'HH:mm:ss' }}</td>
@@ -455,7 +441,7 @@
 					<dd><span data-ng-show="selectedCompanySensor" class="alarm3"> {{selectedSensorAlarm.alarm3}}</span></dd>
 			</dl>		            
 			
-			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;ï¿½odo:</strong> {{selectedPeriodo}}</div>
+			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;odo:</strong> {{selectedPeriodo}}</div>
 			
 			<br />
 			<div id="dvData">
@@ -471,7 +457,7 @@
 							
 							<th data-ng-if="tipoGrupo==1">Origem Informa&ccedil;&atilde;o</th>			                                                                                                                            
 						</tr>                                    
-						<!-- <tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm"> -->
+
 						<tr data-ng-repeat="item in listHistoricInterval.list">
 							<td>{{item.sensorId}} </td>
 							<td>{{item.lastUpdate | date:'dd/MM/yyyy' }}</td>

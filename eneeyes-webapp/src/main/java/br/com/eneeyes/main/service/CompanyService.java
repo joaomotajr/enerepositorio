@@ -9,12 +9,14 @@ import org.springframework.stereotype.Service;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDto;
 import br.com.eneeyes.main.model.Company;
+import br.com.eneeyes.main.model.enums.ActionType;
 import br.com.eneeyes.main.model.views.CompanySumaryView;
 import br.com.eneeyes.main.model.views.CompanyView;
 import br.com.eneeyes.main.repository.CompanyRepository;
 import br.com.eneeyes.main.repository.views.CompanySumaryViewRepository;
 import br.com.eneeyes.main.repository.views.CompanyViewRepository;
 import br.com.eneeyes.main.result.BasicResult;
+import br.com.eneeyes.main.result.LogResult;
 import br.com.eneeyes.main.result.Result;
 
 @Service
@@ -29,9 +31,13 @@ public class CompanyService implements IService<CompanyDto> {
 	@Autowired
 	private CompanySumaryViewRepository companySumaryViewRepository;
 	
+	@Autowired
+	private LogAuditoriaService logAuditoriaService;
+	
 	public BasicResult<?> save(CompanyDto dto) {
 		
-		Result<CompanyDto> result = new Result<CompanyDto>(); 	
+		LogResult<CompanyDto> result = new LogResult<CompanyDto>(); 	
+		ActionType actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;
 		
 		Company company = new Company(dto);		
 		company = repository.save(company);
@@ -42,17 +48,21 @@ public class CompanyService implements IService<CompanyDto> {
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Empresa Gravada com sucesso.");	
 		
+		logAuditoriaService.save(this.getClass().getSimpleName(), actionType, result.toString());
+		
 		return result;
 	}
 
 	public BasicResult<?> delete(Long uid) {
 				
-		Result<CompanyDto> result = new Result<CompanyDto>(); 	
+		LogResult<CompanyDto> result = new LogResult<CompanyDto>(); 	
 		
 		try {			
 			repository.delete(uid);
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Empresa Excluída.");
+			
+			logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.DELETE, result.toString());
 			
 		} catch (Exception e) {
 			e.printStackTrace();			

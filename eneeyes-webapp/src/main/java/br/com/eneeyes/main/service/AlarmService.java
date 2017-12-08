@@ -23,10 +23,10 @@ public class AlarmService implements IService<AlarmDto> {
 	private AlarmRepository repository;
 	
 	@Autowired
-	CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
+	private CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
 	
 	@Autowired
-	LogAuditoriaService logAuditoriaService;
+	private LogAuditoriaService logAuditoriaService;
 	
 	public BasicResult<?> save(AlarmDto dto) {
 		
@@ -36,9 +36,8 @@ public class AlarmService implements IService<AlarmDto> {
 		alarm = repository.save(alarm);
 		
 		CompanyDetectorAlarmSingletonRepository.populate(companyDetectorAlarmAlarmService.findAll());
-		
-		ActionType actionType;
-		actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;		
+				
+		ActionType actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;		
 		
 		dto.setUid(alarm.getUid());				
 		result.setEntity(dto);
@@ -60,7 +59,7 @@ public class AlarmService implements IService<AlarmDto> {
 
 	public BasicResult<?> delete(Long uid) {
 				
-		Result<AlarmDto> result = new Result<AlarmDto>(); 	
+		LogResult<AlarmDto> result = new LogResult<AlarmDto>(); 	
 		
 		try {			
 			

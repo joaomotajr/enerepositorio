@@ -10,9 +10,11 @@ import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDeviceDto;
 import br.com.eneeyes.main.model.Area;
 import br.com.eneeyes.main.model.CompanyDevice;
+import br.com.eneeyes.main.model.enums.ActionType;
 import br.com.eneeyes.main.repository.AreaRepository;
 import br.com.eneeyes.main.repository.CompanyDeviceRepository;
 import br.com.eneeyes.main.result.BasicResult;
+import br.com.eneeyes.main.result.LogResult;
 import br.com.eneeyes.main.result.Result;
 
 @Service
@@ -23,6 +25,9 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 	
 	@Autowired
 	private AreaRepository areaRepository;		
+	
+	@Autowired
+	private LogAuditoriaService logAuditoriaService;
 
 	public int updateCompanyDeviceName(String name, Long uid) {
 			
@@ -30,7 +35,8 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 	}
 
 	public BasicResult<?> save(CompanyDeviceDto dto) {
-		Result<CompanyDeviceDto> result = new Result<CompanyDeviceDto>();		
+		LogResult<CompanyDeviceDto> result = new LogResult<CompanyDeviceDto>();	
+		ActionType actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;
 		
 		Area area = areaRepository.findByUid(dto.getAreaDto().getUid());
 		
@@ -44,17 +50,21 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Dispositivos Incluído/Gravado com Sucesso.");	
 		
+		logAuditoriaService.save(this.getClass().getSimpleName(), actionType, result.toString());
+		
 		return result;
 	}
 
 	public BasicResult<?> delete(Long uid) {
 				
-		Result<CompanyDeviceDto> result = new Result<CompanyDeviceDto>(); 	
+		LogResult<CompanyDeviceDto> result = new LogResult<CompanyDeviceDto>(); 	
 		
 		try {			
 			repository.delete(uid);
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Dispositivo Excluído.");
+			
+			logAuditoriaService.save(this.toString(), ActionType.DELETE, result.toString());
 			
 		} catch (Exception e) {
 			e.printStackTrace();			

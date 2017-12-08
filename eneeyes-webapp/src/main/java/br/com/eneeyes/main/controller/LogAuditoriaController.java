@@ -1,5 +1,7 @@
 package br.com.eneeyes.main.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.eneeyes.archetype.model.User;
 import br.com.eneeyes.archetype.web.config.auth.signin.SigninUtils;
 import br.com.eneeyes.main.dto.LogAuditoriaDto;
+import br.com.eneeyes.main.model.enums.IntervalType;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.service.LogAuditoriaService;
 
@@ -36,37 +39,36 @@ public class LogAuditoriaController {
 		return service.delete(uid);
 	}
 	
-	@RequestMapping(value = "/security/api/logAuditoria/all", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/security/api/logAuditoria/preDef/{intervalType}/{currentPage}/{lenPage}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> listAll() {
+	public BasicResult<?> listpreDefView(
+			@PathVariable IntervalType intervalType, 
+			@PathVariable Integer currentPage, 
+			@PathVariable Integer lenPage) {
 		
 		User user = SigninUtils.principal();
 				
 		if(user.getCompany()  == null)		
-			return service.listAll();
+			return service.listPreDefView(intervalType, currentPage, lenPage);
 		else
-			return service.listByCompanyId(user.getCompany().getUid());
+			return service.listPreDefByCompanyIdView(user.getCompany().getUid(), intervalType, currentPage, lenPage);
 				
 	}
 	
-	@RequestMapping(value = "/security/api/logAuditoria/allView", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/logAuditoria/interval/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> listAllView() {
+	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(
+			@PathVariable Date dateIn,
+			@PathVariable Date dateOut,
+			@PathVariable Integer currentPage, 
+			@PathVariable Integer lenPage) {
 		
 		User user = SigninUtils.principal();
-				
-		if(user.getCompany()  == null)		
-			return service.listAllView();
-		else
-			return service.listByCompanyIdView(user.getCompany().getUid());
-				
-	}
-	
-	@RequestMapping(value="/security/api/logAuditoria/obtemPorCompanyId/{companyId}", method=RequestMethod.GET, produces = "application/json")
-	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> listByCompanyId(@PathVariable Long companyId) {
 		
-		return service.listByCompanyId(companyId);		
+		if(user.getCompany()  == null)		
+			return service.listIntervalView(dateIn, dateOut, currentPage, lenPage);
+		else
+			return service.listIntervalByCompanyIdView(user.getCompany().getUid(), dateIn, dateOut, currentPage, lenPage);				
 	}
 	
 	@RequestMapping(value="/security/api/logAuditoria/obtemPorId/{uid}", method=RequestMethod.GET, produces = "application/json")

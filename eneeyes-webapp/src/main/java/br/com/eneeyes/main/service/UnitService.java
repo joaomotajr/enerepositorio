@@ -10,9 +10,11 @@ import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.UnitDto;
 import br.com.eneeyes.main.model.Company;
 import br.com.eneeyes.main.model.Unit;
+import br.com.eneeyes.main.model.enums.ActionType;
 import br.com.eneeyes.main.repository.CompanyRepository;
 import br.com.eneeyes.main.repository.UnitRepository;
 import br.com.eneeyes.main.result.BasicResult;
+import br.com.eneeyes.main.result.LogResult;
 import br.com.eneeyes.main.result.Result;
 
 @Service
@@ -24,8 +26,12 @@ public class UnitService implements IService<UnitDto> {
 	@Autowired
 	private CompanyRepository companyRepository;
 	
+	@Autowired
+	private LogAuditoriaService logAuditoriaService;
+	
 	public BasicResult<?> save(UnitDto dto) {
-		Result<UnitDto> result = new Result<UnitDto>();
+		LogResult<UnitDto> result = new LogResult<UnitDto>();
+		ActionType actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;
 		
 		Company company = companyRepository.findByUid(dto.getCompanyDto().getUid());
 		
@@ -37,20 +43,24 @@ public class UnitService implements IService<UnitDto> {
 		result.setEntity(dto);
 		
 		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Unidade Gravada com Sucesso.");					
+		result.setMessage("Unidade Gravada com Sucesso.");		
+		
+		logAuditoriaService.save(this.getClass().getSimpleName(), actionType, result.toString());
 		
 		return result;
 	}
 
 	public BasicResult<?> delete(Long uid) {
 				
-		Result<UnitDto> result = new Result<UnitDto>(); 	
+		LogResult<UnitDto> result = new LogResult<UnitDto>(); 	
 		
 		try {			
 			repository.delete(uid);
 			
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Unidade Excluída.");
+			
+			logAuditoriaService.save(this.toString(), ActionType.DELETE, result.toString());
 			
 		} catch (Exception e) {
 			e.printStackTrace();			

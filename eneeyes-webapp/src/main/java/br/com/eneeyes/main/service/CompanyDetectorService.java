@@ -10,9 +10,11 @@ import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDetectorDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDevice;
+import br.com.eneeyes.main.model.enums.ActionType;
 import br.com.eneeyes.main.repository.CompanyDetectorRepository;
 import br.com.eneeyes.main.repository.CompanyDeviceRepository;
 import br.com.eneeyes.main.result.BasicResult;
+import br.com.eneeyes.main.result.LogResult;
 import br.com.eneeyes.main.result.Result;
 
 @Service
@@ -28,13 +30,17 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	private CompanyDeviceService companyDeviceService;
 		
 	@Autowired
-	CompanyDetectorAlarmService companyDetectorAlarmService;
+	private CompanyDetectorAlarmService companyDetectorAlarmService;
 	
 	@Autowired
-	PositionService positionService;
+	private PositionService positionService;
+	
+	@Autowired
+	private LogAuditoriaService logAuditoriaService;
 	
 	public BasicResult<?> save(CompanyDetectorDto dto) {
-		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();		
+		LogResult<CompanyDetectorDto> result = new LogResult<CompanyDetectorDto>();
+		ActionType actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;
 		
 		CompanyDevice companyDevice = companyDeviceRepository.findOne(dto.getCompanyDeviceDto().getUid());
 		
@@ -48,7 +54,9 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 						
 		result.setEntity(new CompanyDetectorDto(companyDetector));
 		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Detector Gravado com Sucesso.");	
+		result.setMessage("Detector Gravado com Sucesso.");
+		
+		logAuditoriaService.save(this.getClass().getSimpleName(), actionType, result.toString());
 		
 		return result;
 	}
@@ -66,7 +74,7 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 
 	public BasicResult<?> delete(Long uid) {
 				
-		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>(); 	
+		LogResult<CompanyDetectorDto> result = new LogResult<CompanyDetectorDto>(); 	
 				
 		try {					
 			companyDetectorAlarmService.deleteByCompanyDetectorId(uid);
@@ -75,6 +83,8 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 			
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Detector Excluído.");
+			
+			logAuditoriaService.save(this.toString(), ActionType.DELETE, result.toString());
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
@@ -168,11 +178,13 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	
 	public BasicResult<?> updateLatitudeLongitude(Double latitude, Double longitude, Long uid) {
 		
-		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();
+		LogResult<CompanyDetectorDto> result = new LogResult<CompanyDetectorDto>();
 		repository.setLatitudeLongitude(latitude, longitude, uid);
 		
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Coordenadadas Salvas com sucesso.");
+		
+		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.UPDATE, result.toString());
 		
 		return result;	
 	}

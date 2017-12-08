@@ -16,33 +16,62 @@ public class LogAuditoriaView {
 	@Column(name = "UID")	
 	private Long uid;
 	
-	@Column(name = "DATE_TIME")
-	private Date dateTime;
-	
-	@Column(name = "ENTITY")
-	private String entity;
-	
-	@Lob
-	@Column(name = "DETAIL")
-	private String detail;
-	
 	@Column(name = "ACTION_NAME")
 	private String actionName;
 	
 	@Column(name = "USER_NAME")
 	private String userName;
 	
-	@Column(name = "COMPANY_NAME")
+	@Column(name = "DATE_TIME")
+	private Date dateTime;
+	
+	@Lob
+	@Column(name = "DETAIL")
+	private String detail;
+	
+	@Column(name = "ENTITY")
+	private String entity;
+	
+	@Column(name = "COMPANY_NAME", nullable = true)
 	private String companyName;
 	
-	@Column(name = "COMPANY_ID")
-	private Long companyId;
-	
-	@Column(name = "IP", nullable = true)
-	private String ip;
+	@Column(name = "COMPANY_ID", nullable = true)
+	private Long companyId;	
 	
 	public LogAuditoriaView() {
 		
-	}	
+	}
+
+	public Long getUid() {
+		return uid;
+	}
+
+	public String getActionName() {
+		return actionName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public Date getDateTime() {
+		return dateTime;
+	}
+
+	public String getDetail() {
+		return detail;
+	}
+
+	public String getEntity() {
+		return entity;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public Long getCompanyId() {
+		return companyId;
+	}
 	
 }

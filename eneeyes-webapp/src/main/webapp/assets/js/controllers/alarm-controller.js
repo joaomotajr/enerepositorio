@@ -1,5 +1,28 @@
 
 app.controller('alarmController', function ($scope, $timeout, $filter, AlarmService, GasService, CompanyService, ViewService) {
+
+	$('.modal')
+	.on({
+		'show.bs.modal': function() {
+			var idx = $('.modal:visible').length;
+			$(this).css('z-index', 1040 + (10 * idx));
+		},
+		'shown.bs.modal': function() {
+			var idx = ($('.modal:visible').length) - 1; // raise backdrop after animation.
+			$('.modal-backdrop').not('.stacked')
+			.css('z-index', 1039 + (10 * idx))
+			.addClass('stacked');
+		},
+		'hidden.bs.modal': function() {
+			if ($('.modal:visible').length > 0) {
+				// restore the modal-open class to the body element, so that scrolling works
+				// properly after de-stacking a modal.
+				setTimeout(function() {
+					$(document.body).addClass('modal-open');
+				}, 0);
+			}
+		}
+	});
 	
 	$scope.saveAlarm = function() {
 		
@@ -384,6 +407,16 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 $scope.update = function (val) {
 		 $scope.radioModel = val;
 	 }
+
+
+	 $scope.deviceTypes = 
+	 [		  
+		  { name : 'DETECTOR', uid :  1, disabled : false },
+		  { name : 'ELETRICIDADE', uid :  6, disabled : false },
+		  { name : 'TEMPO', uid :  7, disabled : false },
+		  { name : 'TEMPERATURA', uid :  8, disabled : false },
+		  { name : 'ANALOGICO', uid :  9, disabled : false },
+	 ];
 	 
      /* ----------------- Processamento ------------------*/
 	 

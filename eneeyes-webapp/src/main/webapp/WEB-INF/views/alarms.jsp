@@ -80,17 +80,44 @@
 			</div>                                                     
 			
 		</div>
+
+		<div id="modalDevicesConn" class="modal fade">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" align="center">Dispositivos Associados a este Alarme</h4>
+					</div>
+					
+						<div class="box box-primary">
+							<div class="box-header with-border"><strong><i class="fa fa-rss"></i> Dispositivos:</strong></div>
+							
+							<div class="box-body">									        		                                                                                       
+								<div class="list-group" style="max-height: 50px ! important; height:auto; overflow: auto; font-size: 0.9em  ! important">
+									<p data-ng-show="!usedAlarms || usedAlarms.length <= 0" class="text-center">NENHUM DETECTOR ASSOCIADO</p>
+									<span class="list-group-item" data-ng-repeat="item in usedAlarms">
+										<strong>Detector/Sensor:</strong> {{item.company_detector_name}}/{{item.sensor_name}} - <strong>Local:</strong> {{item.company_detector_local}} 			                                            
+									</span>                            
+								</div>					                                
+							</div>
+								
+						</div>								        	
+					
+					
+				</div>
+			</div>
+		</div>
 				
-		<div id="modalAlarmEdit" class="modal">                
+		<div id="modalAlarmEdit" class="modal fade">
 			<div class="modal-dialog  modal-lg" role="document">
 				<div class="modal-content">                            
-					<div class="modal-body"style="padding-bottom: 0px; !important">
+					<div class="modal-body"style="padding-bottom: 0px; padding-top: 5px;">
 						<!--
 						<div class="panel panel-default">
 							<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Edi&ccedil;&atilde;o de Alarmes</strong></div>														                                                                           
 					  	</div>
 						-->				
-						<div class="box box-primary" style="padding-bottom: 0px !important; margin-bottom: 0px;">
+						<div class="box box-primary">
 							<div class="box-header">
 								<h3 class="box-title">Cadastro / Edi&ccedil;&atilde;o de Alarmes</h3>
 								<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
@@ -100,7 +127,7 @@
 								<form class="form" name="userForm">		
 								
 									<div class="row">											
-										<div class="col-md-3">
+										<!-- <div class="col-md-3">
 											<div class="box box-primary">				                    
 							                	<div class="box-header with-border"><strong>Nome</strong>
 							                		<strong class="text-red pull-right" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigat&oacute;rio]</strong>
@@ -110,9 +137,20 @@
 													<input class="form-control inputProfile" placeholder="Nome do Alarme" data-ng-model="alarmName" data-ng-maxlength="15" name="username" required>                                                                       
 												</div>
 											</div>
+										</div> -->
+
+										<div class="col-md-3" style="padding-right: 5px !important;">	
+											<label class="control-label">Nome
+												<strong class="text-red pull-right" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigat&oacute;rio]</strong> 
+												<strong class="text-red pull-right" data-ng-show="userForm.username.$error.maxlength">Tamanho M&aacute;ximo 12 caracteres</strong>
+											</label>
+										
+											<div data-ng-class="{'has-error': userForm.username.$dirty && userForm.username.$invalid}">
+												<input class="form-control inputProfile" placeholder="Nome do Alarme" data-ng-model="alarmName" data-ng-maxlength="15" name="username" required>
+											</div>
 										</div>
 																	
-										<div class="col-md-3">													
+										<!-- <div class="col-md-3">													
 											<div class="box box-primary">																								
 												 	                    
 							                	<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Empresa</strong>
@@ -126,9 +164,44 @@
 							                    </div>
 							                    			                    			                            
 							                </div>
-							        	</div>					
+										</div> -->
+										
+										<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">	
+											<label class="control-label">Empresa
+												<strong class="text-red pull-right" data-ng-show="userForm.companyName.$dirty && userForm.companyName.$invalid">  Campo Obrigat&oacute;rio</strong>
+											</label>			
+											<div data-ng-class="{'has-error': userForm.companyName.$dirty && userForm.companyName.$invalid}">
+													<jsp:include page="controls/companySelect.jsp"/>							                        							                             
+											</div>	
+										</div>								
+
+										<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">															
+											<label class="control-label">Dispositivo
+												<span class="text-red pull-right" data-ng-show="userForm.deviceType.$dirty && userForm.deviceType.$invalid">  [Campo Obrigat&oacute;rio]</span>
+											</label>
+											<div data-ng-class="{'has-error': userForm.deviceType.$dirty && userForm.deviceType.$invalid}">               							                		
+										
+												<select name="deviceType" class="form-control" data-live-search="true" 
+													style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+													data-ng-options="item as item.name for item in deviceTypes | orderBy: 'name' track by item.uid" 
+													data-ng-model="deviceType" required>
+													<option value="">Selecione</option> 
+												</select>
+										
+											</div>
+										</div>
+
+										<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">
+											<label class="control-label">Associados : </label>							
+											<!-- <button type="button" class="form-control btn btn-default" data-toggle="modal" 
+												title="Ver Dispostivos associados a este Alarme" data-target="#modalDevicesConn" 
+												data-ng-disabled="!usedAlarms || usedAlarms.length <= 0">Listar <i class="fa fa-eye"></i>
+											</button>						 -->
+											
+											<a title="Ver Dispostivos associados a este Alarme" data-toggle="modal" href="#modalDevicesConn" class="form-control btn btn-primary"> Listar <i class="fa fa-eye"></i></a>
+										</div>
 							        	
-							        	<div class="col-md-6">
+							        	<!-- <div class="col-md-6">
 							        		<div class="box box-primary" style="padding-bottom: 0px !important;">
 							        			<div class="box-header with-border"><strong><i class="fa fa-rss"></i> Dispositivos Associados a este Alarme</strong></div>
 							                	
@@ -142,7 +215,7 @@
 									        	</div>
 									        		
 								        	</div>								        	
-							        	</div>					
+							        	</div>	-->
 										              
 					                </div>    
 					                									
@@ -151,11 +224,15 @@
 					                       	<div class="box box-info" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
 					                       	
 								    			<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Limites do Alarme </strong>
-								    				<strong class="text-red pull-right" data-ng-show="(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3) && !userForm.alarmAlarm1.$pristine">  [Sequncia de Valores dos Alarmes Invï¿½lida]</strong>
+													<strong class="text-red pull-right" data-ng-show="(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3) && !userForm.alarmAlarm1.$pristine">  [Sequência de Valores dos Alarmes Inválida]</strong>
+													<div class="btn-group  pull-right">																
+														<button class="btn btn-xs" ng-click="update(true);" ng-class="(radioModel) ? 'btn-success' : 'btn-default'">ON</button>																
+														<button class="btn btn-xs" ng-click="update(false);" ng-class="(radioModel) ? 'btn-default' : 'btn-danger'">OFF</button>													   
+													</div>															
 								    			</div>
 								    								                	 
 							                    <div class="box-body" style="padding-bottom: 0px !important">
-							                      	<div class="row">
+							                      	<!-- <div class="row">
 								                      	<div class="col-md-9"> 
 															<div class="btn-group">																
 																<button class="btn" ng-click="update(true);" ng-class="(radioModel) ? 'btn-success' : 'btn-default'">ON</button>																
@@ -170,7 +247,7 @@
 				                                          	</div>
 				                                        </div>
 													</div>
-						                            <hr style="margin-top: 5px !important; margin-bottom: 5px !important;">
+						                            <hr style="margin-top: 5px !important; margin-bottom: 5px !important;"> -->
 						                            
 												    <div class="row">
 												    	
@@ -233,12 +310,19 @@
 									                        
 									                        <div class="row">
 										                        <div class="col-md-12">
+																	<div class="col-md-6">					            				
+																		<div class="checkbox3 checkbox-danger checkbox-inline checkbox-check checkbox-circle checkbox-light">
+																			<input type="checkbox" id="checkboxSigmaOnOff" checked>
+																			<label for="checkboxSigmaOnOff">Integrar ao Sigma? </label>
+																			</div>
+																	</div>
 											            			<div class="col-md-6">					            				
 												            			<div class="checkbox3 checkbox-inline checkbox-check checkbox-round  checkbox-light">												            			
 							                                            	<input type="checkbox" id="checkboxSonoroOnOff" checked>
 							                                            	<label for="checkboxSonoroOnOff">Emitir Alarme Sonoro? </label>
 							                                          	</div>
-							                                         </div>					      
+																	 </div>	
+																	 				      
 							                 							                                               			
 											            			<!-- 
 											            			<div class="col-md-2">											            			
@@ -513,7 +597,7 @@
 										
 				  	</div>
 				  	
-				  	<div class="modal-footer">						
+				  	<div class="modal-footer" style="padding-top: 1px">						
 						<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
 						<button type="button" data-ng-click="saveAlarm();" class="btn btn-primary" data-dismiss="modal"
 							data-ng-disabled="(emailValid && mobileValid && emailValid1 && mobileValid1 && userForm.$valid && !(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3)) ? false : true">&nbsp;Salvar&nbsp;

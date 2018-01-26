@@ -2,6 +2,7 @@ package br.com.eneeyes.main.dto;
 
 import br.com.eneeyes.main.dto.register.GasDto;
 import br.com.eneeyes.main.model.Alarm;
+import br.com.eneeyes.main.model.enums.DeviceType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.views.CompanyView;
 
@@ -9,11 +10,15 @@ public class AlarmDto {
 	
 	private Long uid;	
 	private String name;	
+	private DeviceType deviceType;
 	private UnitMeterGases unitMeterGases;
 	private GasDto gasDto;			
 	private Double alarm1;
 	private Double alarm2;		
 	private Double alarm3;		
+	private Double alarm11;
+	private Double alarm22;		
+	private Double alarm33;
 	private Boolean alarmOn;
 	private Boolean alarmSigma;
 	private Boolean alarmSound;
@@ -44,6 +49,9 @@ public class AlarmDto {
 		this.alarm1 = alarm.getAlarm1();
 		this.alarm2 = alarm.getAlarm2();
 		this.alarm3 = alarm.getAlarm3();
+		this.alarm11 = alarm.getAlarm11();
+		this.alarm22 = alarm.getAlarm22();
+		this.alarm33 = alarm.getAlarm33();
 		this.alarmOn = alarm.getAlarmOn();
 		this.alarmSigma = alarm.getAlarmSigma();
 		this.alarmSound = alarm.getAlarmSound();
@@ -75,6 +83,20 @@ public class AlarmDto {
 
 	public final void setName(String name) {
 		this.name = name;
+	}
+	
+	public final DeviceType getDeviceType() {
+		return deviceType;
+	}
+	public final void setDeviceType(DeviceType deviceType) {
+		this.deviceType = deviceType;
+		
+		if (deviceType == null ) {			
+			this.deviceType = DeviceType.OUTROS;
+		}	
+		else { 
+			this.deviceType = deviceType;
+		}
 	}
 	
 	public final UnitMeterGases getUnitMeterGases() {
@@ -115,6 +137,30 @@ public class AlarmDto {
 
 	public final void setAlarm3(Double alarm3) {
 		this.alarm3 = alarm3;
+	}	
+
+	public Double getAlarm11() {
+		return alarm11;
+	}
+
+	public void setAlarm11(Double alarm11) {
+		this.alarm11 = alarm11;
+	}
+
+	public Double getAlarm22() {
+		return alarm22;
+	}
+
+	public void setAlarm22(Double alarm22) {
+		this.alarm22 = alarm22;
+	}
+
+	public Double getAlarm33() {
+		return alarm33;
+	}
+
+	public void setAlarm33(Double alarm33) {
+		this.alarm33 = alarm33;
 	}
 
 	public final Boolean getAlarmOn() {

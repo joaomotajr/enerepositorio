@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.AlarmDto;
+import br.com.eneeyes.main.model.enums.DeviceType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Gas;
 import br.com.eneeyes.main.model.views.CompanyView;
@@ -39,6 +40,9 @@ public class Alarm {
 		this.alarm1 = dto.getAlarm1();
 		this.alarm2 = dto.getAlarm2();
 		this.alarm3 = dto.getAlarm3();
+		this.alarm11 = dto.getAlarm11();
+		this.alarm22 = dto.getAlarm22();
+		this.alarm33 = dto.getAlarm33();
 		this.alarmSound = dto.getAlarmSound();
 		this.alarmEmail = dto.getAlarmEmail();				
 		this.email = dto.getEmail();
@@ -76,6 +80,14 @@ public class Alarm {
 	@JoinColumn(name="GAS_ID", nullable = false)
 	private Gas gas;		
 	
+	@Column(name = "DEVICE_TYPE", columnDefinition = "int default 0")
+	private DeviceType deviceType;
+	
+	@Enumerated(EnumType.ORDINAL) 
+	private DeviceType DeviceType() { 
+	    return deviceType; 
+	}
+	
 	@Column(name = "ALARM_1")		
 	private Double alarm1;
 	
@@ -84,6 +96,15 @@ public class Alarm {
 	
 	@Column(name = "ALARM_3")		
 	private Double alarm3;
+	
+	@Column(name = "ALARM_11", nullable = true)		
+	private Double alarm11;
+	
+	@Column(name = "ALARM_22", nullable = true)		
+	private Double alarm22;
+	
+	@Column(name = "ALARM_33", nullable = true)		
+	private Double alarm33;
 	
 	@Column(name = "ALARM_ON", nullable = true, columnDefinition = "Boolean default true")		
 	private Boolean alarmOn;
@@ -146,6 +167,19 @@ public class Alarm {
 	public final void setName(String name) {
 		this.name = name;
 	}
+	
+	public DeviceType getdeviceType() {
+		return deviceType;
+	}
+
+	public void setDeviceType(DeviceType deviceType) {		
+		if (deviceType == null ) {			
+			this.deviceType = DeviceType.OUTROS;
+		}	
+		else { 
+			this.deviceType = deviceType;
+		}
+	}
 
 	public final UnitMeterGases getUnitMeterGases() {
 		return unitMeterGases;
@@ -181,6 +215,30 @@ public class Alarm {
 
 	public final Double getAlarm3() {
 		return alarm3;
+	}	
+
+	public Double getAlarm11() {
+		return alarm11;
+	}
+
+	public void setAlarm11(Double alarm11) {
+		this.alarm11 = alarm11;
+	}
+
+	public Double getAlarm22() {
+		return alarm22;
+	}
+
+	public void setAlarm22(Double alarm22) {
+		this.alarm22 = alarm22;
+	}
+
+	public Double getAlarm33() {
+		return alarm33;
+	}
+
+	public void setAlarm33(Double alarm33) {
+		this.alarm33 = alarm33;
 	}
 
 	public final void setAlarm3(Double alarm3) {

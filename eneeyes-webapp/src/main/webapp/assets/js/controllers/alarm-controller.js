@@ -415,7 +415,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		  { name : 'ELETRICIDADE', uid :  6, disabled : false },
 		  { name : 'TEMPO', uid :  7, disabled : false },
 		  { name : 'TEMPERATURA', uid :  8, disabled : false },
-		  { name : 'ANALOGICO', uid :  9, disabled : false },
+		  { name : 'DIGITAL', uid :  9, disabled : false },
 	 ];
 	 
      /* ----------------- Processamento ------------------*/

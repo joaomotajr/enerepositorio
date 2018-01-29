@@ -26,8 +26,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import br.com.eneeyes.archetype.dto.UserDto;
 import br.com.eneeyes.main.model.views.CompanyView;
 
@@ -66,8 +64,7 @@ public class User implements Serializable {
 	inverseJoinColumns= @JoinColumn(name="ROLE_ID_", referencedColumnName="ID_"))
 	private Set<Role> roles = new HashSet<Role>();
 		
-	@Column(name="LOGIN_", unique=true, nullable=false, length=100)
-	@NotBlank
+	@Column(name="LOGIN_", unique=true, nullable=false, length=100)	
 	private String login;
 	
 	@Column(name="HASH_", nullable=false, length=40)

@@ -44,6 +44,7 @@ public class AlarmDto {
 		
 		this.uid = alarm.getUid();	
 		this.name = alarm.getName();
+		this.deviceType = alarm.getDeviceType();
 		this.unitMeterGases = alarm.getUnitMeterGases();		
 		this.gasDto = new GasDto(alarm.getGas());		
 		this.alarm1 = alarm.getAlarm1();

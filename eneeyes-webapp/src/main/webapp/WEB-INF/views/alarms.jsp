@@ -25,6 +25,11 @@
          .list-group {
             margin-bottom: 0px !important;
          }
+
+		 .multipleMessages {
+		 	color: #9f3a38;
+    		background: antiquewhite;
+		 }
 			
 	</style>
 		
@@ -172,10 +177,7 @@
 					                       	<div class="box box-info" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
 					                       	
 								    			<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Limites do Alarme </strong> &nbsp&nbsp&nbsp&nbsp&nbsp
-													<strong class="text-red" data-ng-show="(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3) && !userForm.alarmAlarm1.$pristine">  [Sequência de Valores dos Alarmes Inválida]</strong>
-
-													<strong class="text-red" data-ng-show="(alarmAlarm11 >= alarmAlarm1) && !userForm.alarmAlarm1.$pristine">  Alarme1 [Menor Que] Inválido</strong>
-													<strong class="text-red" data-ng-show="(alarmAlarm11=='' && alarmAlarm1 == '') && !userForm.alarmAlarm1.$pristine">  Alarme1 Precisa de Uma valor [Maior Que] ou [Menor Que]</strong>
+													
 
 													<div class="btn-group  pull-right">																
 														<button class="btn btn-xs" ng-click="update(true);" ng-class="(radioModel) ? 'btn-success' : 'btn-default'">ON</button>																
@@ -294,7 +296,7 @@
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
 																			<input type="text" class="form-control" name="alarmAlarm2" data-ng-model="alarmAlarm2" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" />
 																		</div>																	
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm22.$invalid && !userForm.alarmAlarm22.$pristine}" 
+																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm22.$invalid && !userForm.alarmAlarm22.$pristine || (alarmAlarm22 >= alarmAlarm2)}}" 
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
 																			<input type="text" class="form-control" name="alarmAlarm22" data-ng-model="alarmAlarm22" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" />
 																		</div>																	
@@ -309,7 +311,7 @@
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
 																			<input type="text" class="form-control" name="alarmAlarm3" data-ng-model="alarmAlarm3" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"  />
 																		</div>																	
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm33.$invalid && !userForm.alarmAlarm33.$pristine}" 
+																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm33.$invalid && !userForm.alarmAlarm33.$pristine || (alarmAlarm33 >= alarmAlarm3)}}" 
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
 																			<input type="text" class="form-control" name="alarmAlarm33" data-ng-model="alarmAlarm33" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"  />
 																		</div>																	
@@ -580,8 +582,24 @@
 					            	</div>
 					            						            		
 					            </form>
-							</div>
-						</div>
+							</div>							
+
+							<div class="ui multipleMessages">
+								<ul class="list">
+									<li class="text-red" data-ng-show="(alarmAlarm1 > alarmAlarm2) && (!userForm.alarmAlarm1.$pristine || !userForm.alarmAlarm2.$pristine) && alarmAlarm1 != '' && alarmAlarm2 != ''">  [Alarme 2 <span class="text-black"> ({{alarmAlarm2}}) </span> Deve ser maior que o Alarme 1 <span class="text-black"> ({{alarmAlarm1}}) </span>]</li>
+									<li class="text-red" data-ng-show="(alarmAlarm2 > alarmAlarm3) && (!userForm.alarmAlarm2.$pristine || !userForm.alarmAlarm3.$pristine) && alarmAlarm2 != '' && alarmAlarm3 != ''">  [Alarme 3 <span class="text-black"> ({{alarmAlarm3}}) </span> Deve ser maior que o Alarme 2 <span class="text-black"> ({{alarmAlarm2}}) </span>]</li>
+									
+									<li class="text-red" data-ng-show="(alarmAlarm11 >= alarmAlarm1) && (!userForm.alarmAlarm1.$pristine || !userForm.alarmAlarm11.$pristine) && alarmAlarm1 != '' && alarmAlarm11 != ''">  Alarme1 [Menor Que] Inválido</li>
+									<li class="text-red" data-ng-show="(alarmAlarm22 >= alarmAlarm2) && (!userForm.alarmAlarm2.$pristine || !userForm.alarmAlarm22.$pristine) && alarmAlarm2 != '' && alarmAlarm22 != ''">  Alarme2 [Menor Que] Inválido</li>
+									<li class="text-red" data-ng-show="(alarmAlarm33 >= alarmAlarm3) && (!userForm.alarmAlarm3.$pristine || !userForm.alarmAlarm33.$pristine) && alarmAlarm3 != '' && alarmAlarm33 != ''">  Alarme3 [Menor Que] Inválido</li>
+									
+									<li class="text-red" data-ng-show="(alarmAlarm11=='' && alarmAlarm1 == '') && !userForm.alarmAlarm1.$pristine">  Alarme1 Precisa de Uma valor [Maior Que] ou [Menor Que]</li>
+									<li class="text-red" data-ng-show="(alarmAlarm22=='' && alarmAlarm2 == '') && !userForm.alarmAlarm2.$pristine">  Alarme2 Precisa de Uma valor [Maior Que] ou [Menor Que]</li>
+									<li class="text-red" data-ng-show="(alarmAlarm33=='' && alarmAlarm3 == '') && !userForm.alarmAlarm3.$pristine">  Alarme3 Precisa de Uma valor [Maior Que] ou [Menor Que]</li>
+								</ul
+							></div>
+
+						</div>						
 										
 				  	</div>
 				  	

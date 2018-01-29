@@ -31,11 +31,15 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		var alarm = {
 			uid: $scope.alarmUid != undefined ? $scope.alarmUid : 0,
 			name: $scope.alarmName,
+			deviceType: $scope.deviceType.uid,
 			gasDto: $scope.alarmGas,			
 			unitMeterGases : $scope.gasUnitMeterGases.uid,
 			alarm1 : $scope.alarmAlarm1,
 			alarm2 : $scope.alarmAlarm2,
 			alarm3 : $scope.alarmAlarm3,
+			alarm11 : $scope.alarmAlarm11,
+			alarm22 : $scope.alarmAlarm22,
+			alarm33 : $scope.alarmAlarm33,
 			companyDto : $scope.selectedCompany,
 			alarmOn: $scope.radioModel,
 			alarmSigma:  $("#checkboxSigmaOnOff").prop('checked'),
@@ -68,12 +72,16 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	$scope.clearFormAlarm = function () {
 	
 	    $scope.alarmUid = undefined;  
-	    $scope.alarmName = '';	    
+		$scope.alarmName = '';	  
+		$scope.deviceType = '';  
 	    $scope.alarmGas = '';
 	    $scope.gasUnitMeterGases = '';
 		$scope.alarmAlarm1 = '';
 		$scope.alarmAlarm2 = '';
-		$scope.alarmAlarm3 = '';			
+		$scope.alarmAlarm3 = '';
+		$scope.alarmAlarm11 = '';
+		$scope.alarmAlarm22 = '';
+		$scope.alarmAlarm33 = '';			
 		$scope.email = '';
 		$scope.email1 = '';
 		$scope.celular = '';
@@ -101,11 +109,15 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 $scope.editAlarm = function (index) {
 		 
 	        $scope.alarmUid = $scope.alarms[index].uid;
-	        $scope.alarmGas = $scope.alarms[index].gasDto;
+			$scope.alarmGas = $scope.alarms[index].gasDto;
+			$scope.deviceType = $scope.getDeviceType($scope.alarms[index].deviceType);
 		    $scope.alarmName = $scope.alarms[index].name;		    
 		    $scope.alarmAlarm1 = $scope.alarms[index].alarm1;
 		    $scope.alarmAlarm2 = $scope.alarms[index].alarm2;
-		    $scope.alarmAlarm3 = $scope.alarms[index].alarm3;
+			$scope.alarmAlarm3 = $scope.alarms[index].alarm3;
+			$scope.alarmAlarm11 = $scope.alarms[index].alarm11;
+		    $scope.alarmAlarm22 = $scope.alarms[index].alarm22;
+		    $scope.alarmAlarm33 = $scope.alarms[index].alarm33;
 		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.alarms[index].unitMeterGases);
 			$scope.selectedCompany = $scope.alarms[index].companyDto;
 			$scope.email = $scope.alarms[index].email;
@@ -185,12 +197,12 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		});	 
 	 }	 
 	 
-	 $scope.getDetectionTypes = function (name) {
+	 $scope.getDeviceType = function (name) {
 		 
-		 for (var i = 0; i < $scope.detectionTypes.length; i++) {
-             if ($scope.detectionTypes[i].name == name) {
+		 for (var i = 0; i < $scope.deviceTypes.length; i++) {
+             if ($scope.deviceTypes[i].name == name) {
                  
-            	 return $scope.detectionTypes[i];
+            	 return $scope.deviceTypes[i];
              }
          } 		 
 	 }
@@ -233,20 +245,6 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	     });		 
 		 
 	 }
-
-	//  $scope.getOneCompany = function(companyId) {
-		 
-	// 	 $scope.listOne = new CompanyService.listOne();		 
-	// 	 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
-			 
-	// 		 $scope.selectedCompany = $scope.listOne.t;
-			 
-	// 		 $scope.companyUid = $scope.selectedCompany.uid;
-	// 		 $scope.companyName = $scope.selectedCompany.name;
-	// 		 $scope.companyDescription = $scope.selectedCompany.description;
-			 			 
-	//     });		 
-	// }
 	 
 	 $scope.unitMetersGases = 
 		 [

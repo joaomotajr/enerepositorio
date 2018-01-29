@@ -32,6 +32,7 @@ public class Alarm {
 		
 		this.uid = dto.getUid();
 		this.name = dto.getName();		
+		this.deviceType = dto.getDeviceType();
 		this.unitMeterGases = dto.getUnitMeterGases();
 		
 		if(dto.getGasDto() != null)
@@ -168,7 +169,7 @@ public class Alarm {
 		this.name = name;
 	}
 	
-	public DeviceType getdeviceType() {
+	public DeviceType getDeviceType() {
 		return deviceType;
 	}
 

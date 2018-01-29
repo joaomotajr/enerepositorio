@@ -2,13 +2,7 @@ package br.com.eneeyes.archetype.web.config;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorContext;
-import javax.validation.ValidatorFactory;
 
-import org.hibernate.validator.HibernateValidator;
-import org.hibernate.validator.HibernateValidatorConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -16,8 +10,6 @@ import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
-
-import br.com.eneeyes.archetype.utils.ConstraintValidatorFactoryImpl;
 
 public class DataStorage {
 
@@ -67,15 +59,6 @@ public class DataStorage {
     	JpaTransactionManager tmg = new JpaTransactionManager();
     	tmg.setEntityManagerFactory(emf);
     	return tmg;
-    }
-    
-    @Bean
-    public Validator validator(EntityManagerFactory emf) {
-    	HibernateValidatorConfiguration config = Validation.byProvider( HibernateValidator.class ).configure();
-    	ValidatorFactory factory = config.addProperty( "hibernate.validators.fail_fast", "false" ).buildValidatorFactory();
-    	ValidatorContext context = factory.usingContext();
-    	context.constraintValidatorFactory(new ConstraintValidatorFactoryImpl(emf));
-		Validator validator = context.getValidator();
-		return validator;
-    }
+    }   
+
 }

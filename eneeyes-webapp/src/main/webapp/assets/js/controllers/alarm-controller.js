@@ -42,6 +42,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			alarm33 : $scope.alarmAlarm33,
 			companyDto : $scope.selectedCompany,
 			alarmOn: $scope.radioModel,
+			alarm2On : $scope.enableAlarm2,
+			alarm3On : $scope.enableAlarm3,
 			alarmSigma:  $("#checkboxSigmaOnOff").prop('checked'),
 			alarmEmail:  $scope.alarmEmail,
 			alarmSound:  $("#checkboxSonoroOnOff").prop('checked'),
@@ -91,6 +93,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		$scope.action3 = '';
 		$scope.action4 = '';
 		$scope.radioModel = false;
+		$scope.enableAlarm2 = false;
+		$scope.enableAlarm3 = false;
 
 		if($scope.$root.isFrom == "MASTER")
 			$scope.selectedCompany = ''
@@ -143,6 +147,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			showCelular($scope.alarms[index].alarmSms);
 			
 			$scope.radioModel = $scope.alarms[index].alarmOn;
+			$scope.enableAlarm2 = $scope.alarms[index].alarm2On;
+			$scope.enableAlarm3 = $scope.alarms[index].alarm3On;
 			// if( $scope.alarms[index].alarmOn != true )  
 			// {
 			// 	$("#travar").addClass("disableDiv");
@@ -351,6 +357,77 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 
 		 if(!$scope.$$phase) 
 			 $scope.$apply();
+	 }
+
+	 $scope.alarmMessageError = [];
+	 $scope.validAlarms = function ($event) {
+		var errors = [];	    	
+		$scope.errorAlarm1  = false;
+		$scope.errorAlarm2  = false;
+		$scope.errorAlarm3  = false;
+		$scope.errorAlarm11 = false;
+		$scope.errorAlarm22 = false;
+		$scope.errorAlarm33 = false;
+
+		if( !$scope.alarmAlarm11 && !$scope.alarmAlarm1) {
+			errors.push("ALARME 1 Precisa de Uma valor [Maior Que] ou [Menor Que]");
+			$scope.errorAlarm1 = true ;
+			$scope.errorAlarm11 = true ;
+		}
+
+		if( ($scope.alarmAlarm11 && $scope.alarmAlarm1) && ($scope.alarmAlarm11 > $scope.alarmAlarm1)) {
+			errors.push("ALARME 1 Precisa de Uma valor [Menor Que] Não pode ser MAIOR");
+			$scope.errorAlarm1 = true ;
+			$scope.errorAlarm11 = true ;
+		}
+
+		if($scope.enableAlarm2) {
+
+			if( ($scope.alarmAlarm1 && $scope.alarmAlarm2) && ($scope.alarmAlarm1 > $scope.alarmAlarm2) ) {
+				errors.push("[Alarme 2 <span class='text-black'> ({{alarmAlarm2}}) </span> Deve ser maior que o Alarme 1 <span class='text-black'> ({{alarmAlarm1}}) </span>]");
+				$scope.errorAlarm1 = true ;
+				$scope.errorAlarm2 = true ;
+		   }
+
+		   if( !$scope.alarmAlarm22 && !$scope.alarmAlarm2) {
+				errors.push("ALARME 2 Precisa de Uma valor [Maior Que] E/ou [Menor Que]");
+				$scope.errorAlarm2 = true ;
+				$scope.errorAlarm22 = true ;
+			}
+
+			if( ($scope.alarmAlarm22 && $scope.alarmAlarm2) && ($scope.alarmAlarm22 > $scope.alarmAlarm2)) {
+				errors.push("ALARME 2 Precisa de Uma valor [Menor Que] Não pode ser MAIOR");
+				$scope.errorAlarm2 = true ;
+				$scope.errorAlarm22 = true ;
+			}
+		}	
+
+		if($scope.enableAlarm3) {
+		
+			if( !$scope.alarmAlarm33 && !$scope.alarmAlarm3) {
+				errors.push("ALARME 3 Precisa de Uma valor [Maior Que] E/ou [Menor Que]");
+				$scope.erroralarm3 = true ;
+				$scope.errorAlarm33 = true ;
+			}
+
+			if( ($scope.alarmAlarm33 && $scope.alarmAlarm3) && ($scope.alarmAlarm33 > $scope.alarmAlarm3)) {
+				errors.push("ALARME 3 Precisa de Uma valor [Menor Que] Não pode ser MAIOR");
+				$scope.errorAlarm3 = true ;
+				$scope.errorAlarm33 = true ;
+			}
+		}
+
+		if($scope.enableAlarm2 && $scope.enableAlarm3) {
+
+			if( ($scope.alarmAlarm2 && $scope.alarmAlarm3) && ($scope.alarmAlarm2 > $scope.alarmAlarm3) ) {
+				errors.push("[Alarme 3 <span class='text-black'> ({{alarmAlarm3}}) </span> Deve ser maior que o Alarme 2 <span class='text-black'> ({{alarmAlarm2}}) </span>]");
+				$scope.errorAlarm3 = true ;
+				$scope.errorAlarm2 = true ;
+			}
+		}
+
+		$scope.alarmMessageError = errors;
+
 	 }
 	 
 	 

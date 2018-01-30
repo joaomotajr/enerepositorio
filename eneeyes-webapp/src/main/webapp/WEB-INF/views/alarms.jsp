@@ -277,43 +277,61 @@
 																	<div class="form-group">
 																		<label class="control-label">Alarme 1 <span class="label label-default" style="font-size: 0.5em"> DETEC&Ccedil;&Atilde;O </span></label>
 																		
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm1.$invalid && !userForm.alarmAlarm1.$pristine}" 
+																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm1.$invalid && !userForm.alarmAlarm1.$pristine || errorAlarm1}" 
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
-																			<input type="text" class="form-control" name="alarmAlarm1" data-ng-model="alarmAlarm1" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" />
+																			<input type="text" class="form-control" name="alarmAlarm1" 
+																				data-ng-model="alarmAlarm1"
+																				data-ng-change="validAlarms($event);" />
 																		</div>																	
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm11.$invalid && !userForm.alarmAlarm11.$pristine || (alarmAlarm11 >= alarmAlarm1)}" 
+																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm11.$invalid && !userForm.alarmAlarm11.$pristine || errorAlarm11}" 
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
-																			<input type="text" class="form-control" name="alarmAlarm11" data-ng-model="alarmAlarm11" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" />
+																			<input type="text" class="form-control" name="alarmAlarm11" 
+																				data-ng-model="alarmAlarm11" 
+																				data-ng-change="validAlarms($event);" />
 																		</div>																	
 																	</div>
 																</div>
 																
 																<div class="col-md-2" style="padding-right: 5px !important; padding-left: 5px !important">															
 																	<div class="form-group">
-																		<label class="control-label">Alarme 2 <span class="label label-warning" style="font-size: 0.5em"> ALERTA </span></label>
+																		<input class="pull-left" type="checkbox" data-ng-model="enableAlarm2" data-ng-change="validAlarms($event);" />&nbsp
+																		<label class="control-label"> Alarme 2 <span class="label label-warning" style="font-size: 0.5em"> ALERTA </span></label>
 																		
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm2.$invalid && !userForm.alarmAlarm2.$pristine}" 
+																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm2.$invalid && !userForm.alarmAlarm2.$pristine || errorAlarm2}" 
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
-																			<input type="text" class="form-control" name="alarmAlarm2" data-ng-model="alarmAlarm2" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" />
+																			<input type="text" class="form-control" name="alarmAlarm2"
+																				data-ng-disabled="!enableAlarm2" 
+																				data-ng-model="alarmAlarm2" 
+																				data-ng-change="validAlarms($event);" />
 																		</div>																	
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm22.$invalid && !userForm.alarmAlarm22.$pristine || (alarmAlarm22 >= alarmAlarm2)}}" 
+																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm22.$invalid && !userForm.alarmAlarm22.$pristine || errorAlarm22}" 
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
-																			<input type="text" class="form-control" name="alarmAlarm22" data-ng-model="alarmAlarm22" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" />
+																			<input type="text" class="form-control" name="alarmAlarm22" 
+																				data-ng-disabled="!enableAlarm2" 
+																				data-ng-model="alarmAlarm22" 
+																				data-ng-change="validAlarms($event);" />
 																		</div>																	
 																	</div>
 																</div>
 																
 																<div class="col-md-2" style="padding-left: 5px !important">
 																	<div class="form-group">
-																		<label class="control-label">Alarme 3 <span class="label label-danger" style="font-size: 0.5em"> EVACUA&Ccedil;&Atilde;O </span></label>
+																		<input class="pull-left" type="checkbox" data-ng-model="enableAlarm3" />&nbsp
+																		<label class="control-label"> Alarme 3 <span class="label label-danger" style="font-size: 0.5em"> EVACUA&Ccedil;&Atilde;O </span></label>
 																		
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm3.$invalid && !userForm.alarmAlarm3.$pristine}" 
+																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm3.$invalid && !userForm.alarmAlarm3.$pristine || errorAlarm3}" 
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
-																			<input type="text" class="form-control" name="alarmAlarm3" data-ng-model="alarmAlarm3" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"  />
+																			<input type="text" class="form-control" name="alarmAlarm3" 
+																				data-ng-disabled="!enableAlarm3"
+																				data-ng-model="alarmAlarm3" 
+																				data-ng-change="validAlarms($event);"  />
 																		</div>																	
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm33.$invalid && !userForm.alarmAlarm33.$pristine || (alarmAlarm33 >= alarmAlarm3)}}" 
+																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm33.$invalid && !userForm.alarmAlarm33.$pristine || errorAlarm33}" 
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
-																			<input type="text" class="form-control" name="alarmAlarm33" data-ng-model="alarmAlarm33" data-ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/"  />
+																			<input type="text" class="form-control" name="alarmAlarm33" 
+																				data-ng-disabled="!enableAlarm3"
+																				data-ng-model="alarmAlarm33" 
+																				data-ng-change="validAlarms($event);" />
 																		</div>																	
 																	</div>
 																</div>
@@ -584,20 +602,11 @@
 					            </form>
 							</div>							
 
-							<div class="ui multipleMessages">
-								<ul class="list">
-									<li class="text-red" data-ng-show="(alarmAlarm1 > alarmAlarm2) && (!userForm.alarmAlarm1.$pristine || !userForm.alarmAlarm2.$pristine) && alarmAlarm1 != '' && alarmAlarm2 != ''">  [Alarme 2 <span class="text-black"> ({{alarmAlarm2}}) </span> Deve ser maior que o Alarme 1 <span class="text-black"> ({{alarmAlarm1}}) </span>]</li>
-									<li class="text-red" data-ng-show="(alarmAlarm2 > alarmAlarm3) && (!userForm.alarmAlarm2.$pristine || !userForm.alarmAlarm3.$pristine) && alarmAlarm2 != '' && alarmAlarm3 != ''">  [Alarme 3 <span class="text-black"> ({{alarmAlarm3}}) </span> Deve ser maior que o Alarme 2 <span class="text-black"> ({{alarmAlarm2}}) </span>]</li>
-									
-									<li class="text-red" data-ng-show="(alarmAlarm11 >= alarmAlarm1) && (!userForm.alarmAlarm1.$pristine || !userForm.alarmAlarm11.$pristine) && alarmAlarm1 != '' && alarmAlarm11 != ''">  Alarme1 [Menor Que] Inválido</li>
-									<li class="text-red" data-ng-show="(alarmAlarm22 >= alarmAlarm2) && (!userForm.alarmAlarm2.$pristine || !userForm.alarmAlarm22.$pristine) && alarmAlarm2 != '' && alarmAlarm22 != ''">  Alarme2 [Menor Que] Inválido</li>
-									<li class="text-red" data-ng-show="(alarmAlarm33 >= alarmAlarm3) && (!userForm.alarmAlarm3.$pristine || !userForm.alarmAlarm33.$pristine) && alarmAlarm3 != '' && alarmAlarm33 != ''">  Alarme3 [Menor Que] Inválido</li>
-									
-									<li class="text-red" data-ng-show="(alarmAlarm11=='' && alarmAlarm1 == '') && !userForm.alarmAlarm1.$pristine">  Alarme1 Precisa de Uma valor [Maior Que] ou [Menor Que]</li>
-									<li class="text-red" data-ng-show="(alarmAlarm22=='' && alarmAlarm2 == '') && !userForm.alarmAlarm2.$pristine">  Alarme2 Precisa de Uma valor [Maior Que] ou [Menor Que]</li>
-									<li class="text-red" data-ng-show="(alarmAlarm33=='' && alarmAlarm3 == '') && !userForm.alarmAlarm3.$pristine">  Alarme3 Precisa de Uma valor [Maior Que] ou [Menor Que]</li>
-								</ul
-							></div>
+							 <div class="ui multipleMessages">
+								<ul class="list" data-ng-repeat="item in alarmMessageError">
+									<li class="text-red" data-bind-unsafe-html="item" />								
+								</ul>
+							</div>
 
 						</div>						
 										
@@ -606,7 +615,7 @@
 				  	<div class="modal-footer" style="padding-top: 1px">						
 						<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
 						<button type="button" data-ng-click="saveAlarm();" class="btn btn-primary" data-dismiss="modal"
-							data-ng-disabled="(emailValid && mobileValid && emailValid1 && mobileValid1 && userForm.$valid && !(alarmAlarm1 >= alarmAlarm2 || alarmAlarm2 >= alarmAlarm3)) ? false : true">&nbsp;Salvar&nbsp;
+							data-ng-disabled="(emailValid && mobileValid && emailValid1 && mobileValid1 && userForm.$valid && !(errorAlarm1 || errorAlarm11 || errorAlarm2 || errorAlarm22 || errorAlarm3 || errorAlarm33)) ? false : true">&nbsp;Salvar&nbsp;
 						</button>						                                
 				  	</div>
 				  	

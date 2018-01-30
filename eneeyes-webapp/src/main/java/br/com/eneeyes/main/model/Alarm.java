@@ -52,6 +52,8 @@ public class Alarm {
 		this.celular = dto.getCelular();
 		this.celular1 = dto.getCelular1();
 		this.alarmOn = dto.getAlarmOn();
+		this.alarm2On = dto.getAlarm2On();
+		this.alarm3On = dto.getAlarm3On();
 		this.alarmSigma = dto.getAlarmSigma();
 		this.alarmAction = dto.getAlarmAction();
 		this.action1 = dto.getAction1();
@@ -109,6 +111,12 @@ public class Alarm {
 	
 	@Column(name = "ALARM_ON", nullable = true, columnDefinition = "Boolean default true")		
 	private Boolean alarmOn;
+	
+	@Column(name = "ALARM2_ON", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarm2On;
+	
+	@Column(name = "ALARM3_ON", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarm3On;
 	
 	@Column(name = "ALARM_SIGMA", nullable = true, columnDefinition = "Boolean default false")		
 	private Boolean alarmSigma;
@@ -252,8 +260,24 @@ public class Alarm {
 
 	public final void setAlarmOn(Boolean alarmOn) {
 		this.alarmOn = alarmOn;
-	}
+	}	
 	
+	public Boolean getAlarm2On() {
+		return alarm2On;
+	}
+
+	public void setAlarm2On(Boolean alarm2On) {
+		this.alarm2On = alarm2On;
+	}
+
+	public Boolean getAlarm3On() {
+		return alarm3On;
+	}
+
+	public void setAlarm3On(Boolean alarm3On) {
+		this.alarm3On = alarm3On;
+	}
+
 	public final Boolean getAlarmSigma() {
 		return alarmSigma;
 	}

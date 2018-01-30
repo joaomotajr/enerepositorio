@@ -49,7 +49,8 @@
 									<tr>
 										<th>Empresa</th>
 										<th>Nome</th>
-										<th>Gas</th>
+										<th>Dispositivo</th>
+										<th>Artefato</th>										
 										<th>Unit</th>                                                            
 										<th>Editar</th>
 										<th>Excluir</th>						
@@ -59,8 +60,15 @@
 									<tr data-ng-repeat="item in alarms" data-ng-class="{'danger' : item.alarmOn == false, 'success' : item.alarmOn == true}">
 										<td>{{item.companyDto.name}}</td>
 										<td>{{item.name}}</td>
-										<td>{{item.gasDto.name}}</td>															        
-										<td>{{item.unitMeterGases}}</td>
+										<td>{{item.deviceType}}</td>
+										<td>
+											<span data-ng-if="item.deviceType=='DETECTOR'">{{item.gasDto.name}}</span>
+											<span data-ng-if="item.deviceType!='DETECTOR'">{{item.deviceType}}</span>											
+										</td>
+										<td>
+											<span data-ng-if="item.deviceType=='DETECTOR'">{{item.unitMeterGases}}</span>
+											<span data-ng-if="item.deviceType!='DETECTOR'">{{item.deviceType}}</span>																						
+										</td>
 										<td>
 											<button type="button" class="btn btn-primary btn-xs" data-ng-click="editAlarm($index)">editar</button>
 										</td>
@@ -131,7 +139,7 @@
 
 										<div class="col-md-3" style="padding-right: 5px !important;">	
 											<label class="control-label">Nome
-												<strong class="text-red pull-right" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigat&oacute;rio]</strong> 
+												<strong class="text-red pull-right" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">&nbsp[Nome Obrigat&oacute;rio]</strong> 
 												<strong class="text-red pull-right" data-ng-show="userForm.username.$error.maxlength">Tamanho M&aacute;ximo 12 caracteres</strong>
 											</label>
 										
@@ -142,7 +150,7 @@
 										
 										<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">	
 											<label class="control-label">Empresa
-												<strong class="text-red pull-right" data-ng-show="userForm.companyName.$dirty && userForm.companyName.$invalid">  Campo Obrigat&oacute;rio</strong>
+												<strong class="text-red pull-right" data-ng-show="userForm.companyName.$dirty && userForm.companyName.$invalid">&nbspCampo Obrigat&oacute;rio</strong>
 											</label>			
 											<div data-ng-class="{'has-error': userForm.companyName.$dirty && userForm.companyName.$invalid}">
 													<jsp:include page="controls/companySelect.jsp"/>							                        							                             
@@ -151,7 +159,7 @@
 
 										<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">															
 											<label class="control-label">Dispositivo
-												<span class="text-red pull-right" data-ng-show="userForm.deviceType.$dirty && userForm.deviceType.$invalid">  [Campo Obrigat&oacute;rio]</span>
+												<span class="text-red pull-right" data-ng-show="userForm.deviceType.$dirty && userForm.deviceType.$invalid">&nbsp[Campo Obrigat&oacute;rio]</span>
 											</label>
 											<div data-ng-class="{'has-error': userForm.deviceType.$dirty && userForm.deviceType.$invalid}">               							                		
 										
@@ -190,59 +198,67 @@
 														<div class="row">	
 															<div  data-ng-show="deviceType.name=='DIGITAL'">																
 																<div class="col-md-6">
-																	<label><strong><i class="fa fa-flash"> </i> Cicuíto</strong></label>
-																	<div class="form-control" style="padding-top:0px">
-																	<div class="radio3 radio-check radio-default radio-inline" >
-																		<input type="radio" value="1" data-ng-model="deviceTypeDigital">
-																		<label for="radio5">Aberto</label>
-																	</div>
-																	<div data-ng-show="isFrom == 'MASTER'" class="radio3 radio-check radio-default radio-inline">
-																		<input type="radio" value="2" data-ng-model="deviceTypeDigital">
-																		<label for="radio6">Fechado</label>
-																	</div>                    
+																	<label><strong><i class="fa fa-flash"> </i> Alarmar se Cicuíto estiver:</strong></label>
+																	<div class="form-control" style="padding-top:0px">																	
+																		<div class="radio3 radio-check radio-inline">
+																			<input type="radio" id="radio11" value="1" data-ng-model="deviceTypeDigital" data-ng-init="deviceTypeDigital=1">
+																			<label for="radio11">Aberto </label>
+																		</div>
+																		<div class="radio3 radio-check radio-inline">
+																			<input type="radio" id="radio12" value="0" data-ng-model="deviceTypeDigital">
+																			<label for="radio12">Fechado </label>
+																		</div>																	
 																	</div>                                                    
 																</div>																														
 															</div>
 
-															<div data-ng-show="deviceType.name=='ELETRICIDADE'">																
+															<!-- <div data-ng-show="deviceType.name=='ELETRICIDADE'">																
 																<div class="col-md-6">
 																	<label><strong><i class="fa fa-plug"> </i> Eletricidade Medida em:</strong></label>
-																	<div class="form-control" style="padding-top:0px">
-																	<div class="radio3 radio-check radio-default radio-inline" >
-																		<input type="radio" value="1" data-ng-model="deviceTypeEletricity">
-																		<label for="radio5">Voltagem</label>
+																	<div class="form-control" style="padding-top:0px">		
+																		<div class="radio3 radio-check radio-inline">
+																			<input type="radio" id="radio13" value="1" data-ng-model="deviceTypeEletricity" data-ng-init="deviceTypeEletricity=1">
+																			<label for="radio13">Voltagem</label>
+																		</div>
+																		<div class="radio3 radio-check radio-inline">
+																			<input type="radio" id="radio14" value="0" data-ng-model="deviceTypeEletricity">
+																			<label for="radio14">Amperagem </label>
+																		</div>																				
 																	</div>
-																	<div data-ng-show="isFrom == 'MASTER'" class="radio3 radio-check radio-default radio-inline">
-																		<input type="radio" id="radio6" value="2" data-ng-model="deviceTypeEletricity">
-																		<label for="radio6">Amperagem</label>
-																	</div>                    
-																	</div>                                                    
 																</div>																														
-															</div>	
+															</div> -->
 
-															<div  data-ng-show="deviceType.name=='TEMPO'">																
+															<!-- <div  data-ng-show="deviceType.name=='TEMPO'">																
 																<div class="col-md-6">
 																	<label><strong><i class="fa fa-clock-o"> </i> Tempo Contado em:</strong></label>
 																	<div class="form-control" style="padding-top:0px">
-																		<div class="radio3 radio-check radio-default radio-inline" >
-																			<input type="radio" value="1" data-ng-model="deviceTypeTime">
-																			<label for="radio5">Minutos</label>
-																		</div>																
+																		<div class="radio3 radio-check radio-inline">
+																			<input type="radio" id="radio15" value="1" data-ng-model="deviceTypeTime" data-ng-init="deviceTypeTime=1">
+																			<label for="radio15">Segundos</label>
+																		</div>
+																		<div class="radio3 radio-check radio-inline">
+																			<input type="radio" id="radio16" value="0" data-ng-model="deviceTypeTime">
+																			<label for="radio16">Minutos</label>
+																		</div>																		
 																	</div>                                                    
 																</div>																														
-															</div>
+															</div> -->
 
-															<div data-ng-show="deviceType.name=='TEMPERATURA'">																
+															<!-- <div data-ng-show="deviceType.name=='TEMPERATURA'">																
 																<div class="col-md-6">
 																	<label><strong><i class="fa fa-thermometer"> </i> Temperatura Calculada em:</strong></label>
-																	<div class="form-control" style="padding-top:0px">
-																		<div class="radio3 radio-check radio-default radio-inline" >
-																			<input type="radio" value="1" data-ng-model="deviceTypeTemperature">
-																			<label for="radio5">Graus Centigrados</label>
-																		</div>																
+																	<div class="form-control" style="padding-top:0px">																		
+																		<div class="radio3 radio-check radio-inline">
+																			<input type="radio" id="radio17" value="1" data-ng-model="deviceTypeTemperature" data-ng-init="deviceTypeTemperature=1">
+																			<label for="radio17">Celsius</label>
+																		</div>
+																		<div class="radio3 radio-check radio-inline">
+																			<input type="radio" id="radio18" value="0" data-ng-model="deviceTypeTemperature">
+																			<label for="radio18">fahrenheit</label>
+																		</div>																																	
 																	</div>                                                    
 																</div>																														
-															</div>
+															</div> -->
 														
 															<div  data-ng-show="deviceType.name!='DIGITAL' && deviceType.name != undefined">
 																<div class="col-md-3" style="padding-right: 5px !important;" data-ng-show="deviceType.name=='DETECTOR'">
@@ -253,15 +269,20 @@
 																		<select name="gasName" class="form-control" data-live-search="true" 
 																			style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 																				data-ng-options="item as item.name for item in gases | orderBy: 'name' track by item.uid" 
-																					data-ng-model="alarmGas" required>
+																					data-ng-model="alarmGas" data-ng-required="deviceType.name=='DETECTOR'">
 																					<option value="">Selecione</option>			                                           
 																		</select>											                		
 																	</div>
-																</div>				                
-																
-																<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;" data-ng-show="deviceType.name=='DETECTOR'">											                
-																	<label class="control-label">Unidade
-																		<span class="text-red" data-ng-show="userForm.gasUnit.$dirty && userForm.gasUnit.$invalid">  [Campo Obrigat&oacute;rio]</span>
+																</div>		
+																																
+																<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">
+																	<label class="control-label">																		
+																			<strong data-ng-show="deviceType.name=='DETECTOR'"><i class="fa fa-feed"> </i> Unidade:</strong>
+																			<strong data-ng-show="deviceType.name=='ELETRICIDADE'"><i class="fa fa-plug"> </i> Eletricidade Medida em:</strong>
+																			<strong data-ng-show="deviceType.name=='TEMPO'"><i class="fa fa-clock-o"> </i> Tempo Contado em:</strong>
+																			<strong data-ng-show="deviceType.name=='TEMPERATURA'"><i class="fa fa-thermometer"> </i> Temperatura Calculada em:</strong>
+
+																			<span class="text-red" data-ng-show="userForm.gasUnit.$dirty && userForm.gasUnit.$invalid">  [Campo Obrigat&oacute;rio]</span>
 																	</label>
 																	<div data-ng-class="{'has-error': userForm.gasUnit.$dirty && userForm.gasUnit.$invalid}">
 																		<select name="gasUnit" class="form-control" data-live-search="true" 
@@ -272,6 +293,8 @@
 																		</select>									                        
 																	</div>
 																</div>	
+
+																<div class="col-md-3" data-ng-show="deviceType.name!='DETECTOR'"></div>
 															
 																<div class="col-md-2" style="padding-right: 5px !important">
 																	<div class="form-group">
@@ -345,7 +368,7 @@
 																	<div class="checkbox3 checkbox-danger checkbox-inline checkbox-check checkbox-circle checkbox-light">
 																		<input type="checkbox" id="checkboxSigmaOnOff" checked>
 																		<label for="checkboxSigmaOnOff">Integrar ao Sigma? </label>
-																		</div>
+																	</div>
 																</div>
 																<div class="col-md-6">					            				
 																	<div class="checkbox3 checkbox-inline checkbox-check checkbox-round  checkbox-light">												            			

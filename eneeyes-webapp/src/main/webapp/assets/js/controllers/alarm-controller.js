@@ -94,7 +94,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		$scope.action4 = '';
 		$scope.radioModel = false;
 		$scope.enableAlarm2 = false;
-		$scope.enableAlarm3 = false;
+		$scope.enableAlarm3 = false;		
 
 		if($scope.$root.isFrom == "MASTER")
 			$scope.selectedCompany = ''
@@ -259,7 +259,11 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		  	{ name : 'PPB', uid : 2 },
 		  	{ name : 'LEL_PERCENT', uid : 3 },
 		  	{ name : 'LEL_PERCENT_METRO', uid : 4 },
-		  	{ name : 'PERCENT_VOLUME', uid : 5 }		  	
+			{ name : 'GRAUS_CELSIUS', uid : 5 },
+			{ name : 'VOLT', uid : 6 },
+			{ name : 'AMPERE', uid : 7 },
+			{ name : 'MINUTE', uid : 8 },
+			{ name : 'SECOND', uid : 9 }
 		 ]; 
 	 
 	 $('.alarmCelularMask').keydown(function (e) {
@@ -502,6 +506,11 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 }
 	 
 	 $scope.refreshAlarms();
+
+	//  $scope.deviceTypeDigital = true;
+	//  $scope.deviceTypeEletricity = true;
+	//  $scope.deviceTypeTime = true;
+	//  $scope.deviceTypeTemperature = true;	 
 	 
 	 angular.element('body').removeClass('loading');
 		

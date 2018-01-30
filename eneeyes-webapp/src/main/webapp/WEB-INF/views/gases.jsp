@@ -4,7 +4,8 @@
 			<div class="col-md-6">                                                        
 				<div class="box box-primary"  data-ng-class="(gasName || gasCas || gasFormula || gasUnitMeterGases) ? 'box-default' : 'box-primary'">
 					<div class="box-header">
-					  <h3 class="box-title">Cadastro de Gases</h3>
+					  <h3 class="box-title">Cadastro de Gases / Meios Físicos Mensuráveis</h3>
+					  
 					</div>
 					<div class="box-body">
 						<div style="height: 500px; overflow: auto">
@@ -12,7 +13,7 @@
 								<thead>
 									<tr>
 										<th>Nome</th>
-										<th>Fórumla</th>
+										<th>Fórmula</th>
 										<th>C.A.S</th>                                                        
 										<th>Editar</th>
 										<th>Excluir</th>						
@@ -27,7 +28,6 @@
 											<button type="button" class="btn btn-info btn-xs"  data-ng-click="editGas($index)">editar</button>
 										</td>
 										<td>
-<!-- 											<button type="button" class="btn btn-danger btn-xs"  data-ng-click="deleteGas($index)">excluir</button> -->
 											<a type="button" class="btn btn-danger btn-xs" data-popover=' do Gas: [ {{item.name}} ]' data-confirm="deleteGas($index)" >excluir</a>
 										</td>						
 									</tr>                                                               

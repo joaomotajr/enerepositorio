@@ -261,15 +261,15 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		
 		return JSON.parse('{' + pinItensString + '}');;
 	}
-	
+
 	$scope.deviceTypes = 
-	[
-	 	// { name : 'OUTROS', uid : 0, disabled : true },	 	
-	 	// { name : 'PLC', uid : 2, disabled : true },
-	 	// { name : 'CONTROLADORA', uid : 3, disabled : true },
-	 	// { name : 'ALARME', uid : 4, disabled : true },
-	 	{ name : 'DETECTOR', uid :  1, disabled : false }
-	];
+	 [		  
+		  { name : 'DETECTOR', uid :  1, disabled : false },
+		  { name : 'ELETRICIDADE', uid :  6, disabled : false },
+		  { name : 'TEMPO', uid :  7, disabled : false },
+		  { name : 'TEMPERATURA', uid :  8, disabled : false },
+		  { name : 'DIGITAL', uid :  9, disabled : false },
+	 ];
 
 	/* ------------------------------------- Inicio Processamento --------------------------------------------*/
 	

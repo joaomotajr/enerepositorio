@@ -97,6 +97,7 @@
 	<script src="/assets/js/controllers/companyDetectorMaintenanceHistoric-controller.js"></script>
 	<script src="/assets/js/controllers/fusioncharts-controller.js"></script>	            
 	<script src="/assets/js/controllers/general-controller.js"></script>
+	<script src="/assets/js/controllers/generic-controller.js"></script>
 				
 	<!-- PAGE LEVEL SERVICES -->
 	<script src="/assets/js/user-services.js"></script>
@@ -124,6 +125,7 @@
 	<script src="/assets/js/services/positionAlarmMessage-service.js"></script>
 	<script src="/assets/js/services/positionAlarm-service.js"></script>
 	<script src="/assets/js/services/companyDetectorMaintenanceHistoric-Service.js"></script>
+	<script src="/assets/js/services/generic-service.js"></script>
 
 		
 	<!-- PAGE LEVEL FACTORIES -->	

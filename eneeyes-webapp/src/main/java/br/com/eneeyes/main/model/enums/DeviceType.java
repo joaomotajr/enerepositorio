@@ -6,7 +6,7 @@ package br.com.eneeyes.main.model.enums;
  */
 
 public enum DeviceType {
-	OUTROS(0), DETECTOR(1), PLC(2), CONTROLLER(3), ALARM(4), BLOCKER(5), ELETRICITY(6), TIME(7), TEMPERATURE(8), DIGITAL(9);
+	OUTROS(0), DETECTOR(1), PLC(2), CONTROLLER(3), ALARM(4), BLOCKER(5), ELETRICITY(6), TIME(7), TEMPERATURE(8), DIGITAL(9), OPEN_CLOSE(10);
 	
 	private final int code;
 	

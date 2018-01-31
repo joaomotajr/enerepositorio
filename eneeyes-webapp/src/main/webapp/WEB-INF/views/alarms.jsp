@@ -185,8 +185,6 @@
 					                       	<div class="box box-info" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
 					                       	
 								    			<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Limites do Alarme </strong> &nbsp&nbsp&nbsp&nbsp&nbsp
-													
-
 													<div class="btn-group  pull-right">																
 														<button class="btn btn-xs" ng-click="update(true);" ng-class="(radioModel) ? 'btn-success' : 'btn-default'">ON</button>																
 														<button class="btn btn-xs" ng-click="update(false);" ng-class="(radioModel) ? 'btn-default' : 'btn-danger'">OFF</button>													   
@@ -211,58 +209,10 @@
 																	</div>                                                    
 																</div>																														
 															</div>
-
-															<!-- <div data-ng-show="deviceType.name=='ELETRICIDADE'">																
-																<div class="col-md-6">
-																	<label><strong><i class="fa fa-plug"> </i> Eletricidade Medida em:</strong></label>
-																	<div class="form-control" style="padding-top:0px">		
-																		<div class="radio3 radio-check radio-inline">
-																			<input type="radio" id="radio13" value="1" data-ng-model="deviceTypeEletricity" data-ng-init="deviceTypeEletricity=1">
-																			<label for="radio13">Voltagem</label>
-																		</div>
-																		<div class="radio3 radio-check radio-inline">
-																			<input type="radio" id="radio14" value="0" data-ng-model="deviceTypeEletricity">
-																			<label for="radio14">Amperagem </label>
-																		</div>																				
-																	</div>
-																</div>																														
-															</div> -->
-
-															<!-- <div  data-ng-show="deviceType.name=='TEMPO'">																
-																<div class="col-md-6">
-																	<label><strong><i class="fa fa-clock-o"> </i> Tempo Contado em:</strong></label>
-																	<div class="form-control" style="padding-top:0px">
-																		<div class="radio3 radio-check radio-inline">
-																			<input type="radio" id="radio15" value="1" data-ng-model="deviceTypeTime" data-ng-init="deviceTypeTime=1">
-																			<label for="radio15">Segundos</label>
-																		</div>
-																		<div class="radio3 radio-check radio-inline">
-																			<input type="radio" id="radio16" value="0" data-ng-model="deviceTypeTime">
-																			<label for="radio16">Minutos</label>
-																		</div>																		
-																	</div>                                                    
-																</div>																														
-															</div> -->
-
-															<!-- <div data-ng-show="deviceType.name=='TEMPERATURA'">																
-																<div class="col-md-6">
-																	<label><strong><i class="fa fa-thermometer"> </i> Temperatura Calculada em:</strong></label>
-																	<div class="form-control" style="padding-top:0px">																		
-																		<div class="radio3 radio-check radio-inline">
-																			<input type="radio" id="radio17" value="1" data-ng-model="deviceTypeTemperature" data-ng-init="deviceTypeTemperature=1">
-																			<label for="radio17">Celsius</label>
-																		</div>
-																		<div class="radio3 radio-check radio-inline">
-																			<input type="radio" id="radio18" value="0" data-ng-model="deviceTypeTemperature">
-																			<label for="radio18">fahrenheit</label>
-																		</div>																																	
-																	</div>                                                    
-																</div>																														
-															</div> -->
-														
+													
 															<div  data-ng-show="deviceType.name!='DIGITAL' && deviceType.name != undefined">
 																<div class="col-md-3" style="padding-right: 5px !important;" data-ng-show="deviceType.name=='DETECTOR'">
-																	<label class="control-label">G&aacute;s
+																	<label class="control-label"><i class="fa fa-yelp"></i> G&aacute;s
 																		<span class="text-red pull-right" data-ng-show="userForm.gasName.$dirty && userForm.gasName.$invalid">  [Campo Obrigat&oacute;rio]</span>
 																	</label>
 																	<div data-ng-class="{'has-error': userForm.gasName.$dirty && userForm.gasName.$invalid}">
@@ -277,7 +227,7 @@
 																																
 																<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">
 																	<label class="control-label">																		
-																			<strong data-ng-show="deviceType.name=='DETECTOR'"><i class="fa fa-feed"> </i> Unidade:</strong>
+																			<strong data-ng-show="deviceType.name=='DETECTOR'"><i class="fa fa-tachometer"> </i> Unidade:</strong>
 																			<strong data-ng-show="deviceType.name=='ELETRICIDADE'"><i class="fa fa-plug"> </i> Eletricidade Medida em:</strong>
 																			<strong data-ng-show="deviceType.name=='TEMPO'"><i class="fa fa-clock-o"> </i> Tempo Contado em:</strong>
 																			<strong data-ng-show="deviceType.name=='TEMPERATURA'"><i class="fa fa-thermometer"> </i> Temperatura Calculada em:</strong>

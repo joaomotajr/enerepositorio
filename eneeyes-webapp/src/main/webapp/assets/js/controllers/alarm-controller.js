@@ -234,8 +234,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
         return className;
 	 }
 	 
-	 $scope.getUnitMetersGases = function (name) {
-		 
+	 $scope.getUnitMetersGases = function (name) {		 
 		 for (var i = 0; i < $scope.unitMetersGases.length; i++) {
              if ($scope.unitMetersGases[i].name == name) {
                  
@@ -248,8 +247,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		$scope.resultCompanies = new CompanyService.listAllView();		 
 		$scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
 				 $scope.companies = $scope.resultCompanies.list;
-	     });		 
-		 
+	     }); 
 	 }
 	 
 	 $scope.unitMetersGases = 
@@ -263,7 +261,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			{ name : 'VOLT', uid : 6 },
 			{ name : 'AMPERE', uid : 7 },
 			{ name : 'MINUTE', uid : 8 },
-			{ name : 'SECOND', uid : 9 }
+			{ name : 'SECOND', uid : 9 },
+			{ name : 'OPEN/CLOSE', uid : 10 }
 		 ]; 
 	 
 	 $('.alarmCelularMask').keydown(function (e) {
@@ -506,12 +505,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 }
 	 
 	 $scope.refreshAlarms();
-
-	//  $scope.deviceTypeDigital = true;
-	//  $scope.deviceTypeEletricity = true;
-	//  $scope.deviceTypeTime = true;
-	//  $scope.deviceTypeTemperature = true;	 
-	 
+ 
 	 angular.element('body').removeClass('loading');
 		
 		

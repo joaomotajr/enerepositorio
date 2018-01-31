@@ -36,7 +36,7 @@
 				</li>
 
 				<li class="treeview">
-	            	<a href="#" data-ng-click="LoadAjaxContent('general.html', 'Over-View')"><i class="fa fa-th text-white"></i> 
+	            	<a href="#" data-ng-click="LoadAjaxContent('general.html', 'Over-View')"><i class="fa fa-bullseye" style="color:yellow"></i> 
 	            		<span>Over View</span>	            			            		
 	            	</a>	            		            	
 				</li>
@@ -78,29 +78,29 @@
 			            	</a>
 	            		</li>
 	              	</ul>
-	            </li>
+			</li>
 	            
 	          	<li class="treeview">
 	            	<a href="#">
-	            		<i class="fa fa-lock text-white"></i>
+	            		<i class="fa fa-lock" style="color:darkcyan"></i>
 	                	<span style="font-size: 100%">Seg. de Todas as Coisas</span>
 	                	<i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	              	
               		<ul class="treeview-menu">                		
                 		<li>
-                			<a href="#" data-ng-click="LoadAjaxContent('userPesquisa.html', 'Usu&aacute;rios')"><i class="fa fa-users text-yellow"></i> <span>Usu&aacute;rios</span></a>
+                			<a href="#" data-ng-click="LoadAjaxContent('userPesquisa.html', 'Usu&aacute;rios')"><i class="fa fa-users"></i> <span>Usu&aacute;rios</span></a>
                 		</li>                		
                 		<li><a href="#" data-ng-click="LoadAjaxContent('companies.html', 'Empresas')"><i class="fa fa-industry"></i> Empresa</a></li> 
                 		
                 		<li class="treeview">
 			            	<a href="#"><i class="fa fa-edit text-green"></i> <span>Cadastros</span><i class="fa fa-angle-left pull-right"></i></a>
 			            	<ul class="treeview-menu">
-			            		<li class="active"><a href="#" data-ng-click="LoadAjaxContent('manufacturers.html', 'Fabricantes')"><i class="fa fa-industry"></i> Fabricantes</a></li>
-			                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('controllers.html', 'Controladoras')"><i class="fa fa-tasks"></i> Controladoras</a></li>
+								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('manufacturers.html', 'Fabricantes')"><i class="fa fa-industry"></i> Fabricantes</a></li>
+								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('detectors.html','Detectores')"><i class="fa fa-th-large"></i> Detectores</a></li>
+								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('generic.html','Dispositivos-Genéricos')"><i class="fa fa-simplybuilt"></i> Dispositivos-Genericos</a></li>
 			                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('transmitters.html','Transmissores')"><i class="fa fa-expand"></i> Transmissores</a></li>
-			                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('sensors.html','Sensores')"><i class="fa fa-feed"></i> Sensores</a></li>
-			                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('detectors.html','Detectores')"><i class="fa fa-th-large"></i> Detectores</a></li>
+			                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('sensors.html','Sensores')"><i class="fa fa-feed"></i> Sensores</a></li>			                    
 			                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('gases.html', 'Gases')"><i class="fa fa-yelp"></i> Gases</a></li>					            		        
 			              	</ul>
 			            </li> 

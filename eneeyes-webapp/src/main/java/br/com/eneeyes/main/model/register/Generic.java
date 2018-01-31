@@ -33,6 +33,7 @@ public class Generic {
 	public Generic(GenericDto dto) {
 		this.uid = dto.getUid();		
 		this.name = dto.getName();
+		this.deviceType = dto.getDeviceType();
 		this.unitMeter = dto.getUnitMeter();
 		this.manufacturer = new Manufacturer(dto.getManufacturerDto());
 		this.model = dto.getModel();	

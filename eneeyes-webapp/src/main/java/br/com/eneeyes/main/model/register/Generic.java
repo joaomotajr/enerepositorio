@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.register.GenericDto;
 import br.com.eneeyes.main.model.enums.DeviceType;
-import br.com.eneeyes.main.model.enums.UnitMeter;
+import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 /**
  * Created by Junior on 30/01/2018.
@@ -34,7 +34,7 @@ public class Generic {
 		this.uid = dto.getUid();		
 		this.name = dto.getName();
 		this.deviceType = dto.getDeviceType();
-		this.unitMeter = dto.getUnitMeter();
+		this.unitMeterGases = dto.getUnitMeterGases();
 		this.manufacturer = new Manufacturer(dto.getManufacturerDto());
 		this.model = dto.getModel();	
 	}
@@ -47,12 +47,12 @@ public class Generic {
 	@Column(name = "NAME", nullable = true)
 	String name;
 	
-	@Column(name = "UNIT_METER", columnDefinition = "int default 0")
-	private UnitMeter unitMeter;
+	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
+	private UnitMeterGases unitMeterGases;
 
 	@Enumerated(EnumType.ORDINAL) 
-	private UnitMeter UnitMeter() { 
-	    return unitMeter; 
+	private UnitMeterGases UnitMeterGases() { 
+	    return unitMeterGases; 
 	}
 	
 	@Column(name = "DEVICE_TYPE", columnDefinition = "int default 0")
@@ -86,12 +86,12 @@ public class Generic {
 		this.name = name;
 	}
 	
-	public final UnitMeter getUnitMeter() {
-		return unitMeter;
+	public UnitMeterGases getUnitMeterGases() {
+		return unitMeterGases;
 	}
 
-	public final void setUnitMeter(UnitMeter unitMeter) {
-		this.unitMeter = unitMeter;
+	public void setUnitMeterGases(UnitMeterGases unitMeterGases) {
+		this.unitMeterGases = unitMeterGases;
 	}
 
 	public DeviceType getDeviceType() {

@@ -262,7 +262,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			{ name : 'AMPERE', uid : 7 },
 			{ name : 'MINUTE', uid : 8 },
 			{ name : 'SECOND', uid : 9 },
-			{ name : 'OPEN/CLOSE', uid : 10 }
+			{ name : 'OPEN/CLOSE', uid : 10 },
+			{ name : 'KWH', uid : 11 }
 		 ]; 
 	 
 	 $('.alarmCelularMask').keydown(function (e) {
@@ -487,12 +488,12 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 }
 
 
-	 $scope.deviceTypes = 
-	 [		  
-		  { name : 'DETECTOR', uid :  1, disabled : false },
-		  { name : 'ELETRICIDADE', uid :  6, disabled : false },
+	 $scope.deviceTypes = 	 [		  
+		  { name : 'PLC', uid :  2, disabled : false },
+		  { name : 'CONTROLLER', uid :  3, disabled : false },
+		  { name : 'ELETRICITY', uid :  6, disabled : false },
 		  { name : 'TEMPO', uid :  7, disabled : false },
-		  { name : 'TEMPERATURA', uid :  8, disabled : false },
+		  { name : 'TEMPERATURE', uid :  8, disabled : false },
 		  { name : 'DIGITAL', uid :  9, disabled : false },
 	 ];
 	 

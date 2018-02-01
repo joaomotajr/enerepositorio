@@ -51,27 +51,28 @@
 					<form name="genericForm">
 
 						<div class="row">
-							<div class="col-md-4">							
+							<div class="col-md-4" style="padding-right: 5px !important;">							
 								<div class="form-group">    
-									<label class="control-label"><i class="fa fa-industry"></i> Fabricante
-										<span class="text-red pull-right" data-ng-show="userForm.genericManufacturer.$dirty && userForm.genericManufacturer.$invalid">&nbsp[Campo Obrigat&oacute;rio]</span>
-									</label>			                    
+									<label class="control-label"><i class="fa fa-industry"></i> Fabricante</label>
+									<span class="text-red pull-right" data-ng-show="genericForm.genericManufacturer.$dirty && genericForm.genericManufacturer.$invalid">[Obrigat&oacute;rio]</span>
+									
+									<div data-ng-class="{'has-error': genericForm.genericManufacturer.$dirty && genericForm.genericManufacturer.$invalid}">
 									<select name="genericManufacturer" class="form-control" data-live-search="true" 
 										style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 											data-ng-options="item as item.name for item in manufacturers | orderBy: 'name' track by item.uid" 
-												data-ng-model="genericManufacturer">
+												data-ng-model="genericManufacturer" required>
 											<option value="">Selecione</option> 
-									</select>			                    
+									</select>
+									</div>
 								</div>
 							</div>
 
-							<div class="col-md-4">
-								<label class="control-label"><i class="fa fa-simplybuilt"></i> Dispositivo
-									<span class="text-red pull-right" data-ng-show="userForm.deviceType.$dirty && userForm.deviceType.$invalid">&nbsp[Campo Obrigat&oacute;rio]</span>
-								</label>
-								<div data-ng-class="{'has-error': userForm.deviceType.$dirty && userForm.deviceType.$invalid}">               							                									
-									<select name="deviceType" class="form-control" data-live-search="true" 
-										style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+							<div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important;">
+								<label class="control-label"><i class="fa fa-simplybuilt"></i> Dispositivo</label>
+								<span class="text-red pull-right" data-ng-show="genericForm.deviceType.$dirty && genericForm.deviceType.$invalid">[Obrigat&oacute;rio]</span>
+								
+								<div data-ng-class="{'has-error': genericForm.deviceType.$dirty && genericForm.deviceType.$invalid}">               							                									
+									<select name="deviceType" class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 										data-ng-options="item as item.name for item in deviceTypes | orderBy: 'name' track by item.uid" 
 										data-ng-model="deviceType" required>
 										<option value="">Selecione</option> 
@@ -79,17 +80,15 @@
 								</div>
 							</div> 
 							
-							<div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important;">
-								<label class="control-label">																												
-									<strong><i class="fa fa-tachometer"> </i> Unidade:</strong>
-									<span class="text-red" data-ng-show="userForm.gasUnit.$dirty && userForm.gasUnit.$invalid">  [Campo Obrigat&oacute;rio]</span>
-								</label>
-								<div data-ng-class="{'has-error': userForm.gasUnit.$dirty && userForm.gasUnit.$invalid}">
-									<select name="gasUnit" class="form-control" data-live-search="true" 
-											style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-												data-ng-options="item as item.name for item in unitMetersGases | orderBy: 'name' track by item.uid" 
-															data-ng-model="gasUnitMeterGases" required>
-															<option value="">Selecione</option> 
+							<div class="col-md-4" style="padding-left: 5px !important;">
+								<label class="control-label"><i class="fa fa-tachometer"> </i> Unidade:</label>
+								<span class="text-red" data-ng-show="genericForm.gasUnit.$dirty && genericForm.gasUnit.$invalid">[Obrigat&oacute;rio]</span>
+
+								<div data-ng-class="{'has-error': genericForm.gasUnit.$dirty && genericForm.gasUnit.$invalid}">
+									<select name="gasUnit" class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+											data-ng-options="item as item.name for item in unitMetersGases | orderBy: 'name' track by item.uid" 
+											data-ng-model="gasUnitMeterGases" required>
+											<option value="">Selecione</option> 
 									</select>									                        
 								</div>
 							</div>
@@ -101,15 +100,19 @@
 									<label class="control-label">Nome</label>
 									<span class="text-red"  data-ng-show="genericForm.genericName.$error.required && !genericForm.genericName.$pristine">  [Nome Obrigatorio]</span>
 									<span  data-ng-show="genericForm.genericName.$error.maxlength">Até Máximo 20 caracteres</span>                                                                        
-									<input id="idGenericName" class="form-control inputProfile" placeholder="Nome do Dispositivo"  data-ng-model="genericName"  data-ng-maxlength="20" name="genericName" required>                                                                        
+									<div data-ng-class="{'has-error': genericForm.genericName.$dirty && genericForm.genericName.$invalid}">
+										<input id="idGenericName" class="form-control inputProfile" placeholder="Nome do Dispositivo"  data-ng-model="genericName"  data-ng-maxlength="20" name="genericName" required>                                                                        
+									</div>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="control-label">Modelo</label>
 									<span class="text-red"  data-ng-show="genericForm.genericModel.$error.required && !genericForm.genericModel.$pristine">  [Modelo Obrigatorio]</span>
-									<span  data-ng-show="genericForm.genericModel.$error.maxlength">Até Máximo 20 caracteres</span>                                                       
-									<input class="form-control inputProfile" placeholder="Modelo do Dispositivo"  data-ng-model="genericModel"  data-ng-maxlength="20" name="genericModel" required>                                                
+									<span  data-ng-show="genericForm.genericModel.$error.maxlength">Até Máximo 20 caracteres</span> 
+									<div data-ng-class="{'has-error': genericForm.genericModel.$dirty && genericForm.genericModel.$invalid}">
+										<input class="form-control inputProfile" placeholder="Modelo do Dispositivo" name="genericModel" data-ng-model="genericModel"  data-ng-maxlength="20" name="genericModel" required>                                                
+									</div>
 								</div>                                                                    
 							</div>
 						</div>
@@ -117,9 +120,9 @@
 					</form>						
 					
 					<div class="box-footer">
-						<button type="button"  data-ng-click="clearFormGeneric()" class="btn btn-default">Cancelar</button>                                                                
-						<button type="button"  data-ng-click="saveGeneric();" class="btn btn-primary" 
-								data-ng-disabled="(genericName && genericModel && genericManufacturer) ? false : true">&nbsp;Salar&nbsp;</button>								                                                                
+						<button type="button"  data-ng-click="clearFormGeneric(); genericForm.$setPristine()" class="btn btn-default">Cancelar</button>                                                                
+						<button type="button"  data-ng-click="saveGeneric(); genericForm.$setPristine()" class="btn btn-primary" 
+								data-ng-disabled="genericForm.$valid ? false : true">&nbsp;Salvar&nbsp;</button>								                                                                
 					</div>                           
 					
 				</div>

@@ -4,15 +4,17 @@ app.controller('genericController', function ($scope, $timeout, $filter, Generic
 		
 		angular.element('body').addClass('loading');
 		
-		var controller = {
-			uid: $scope.controllerUid != undefined ? $scope.controllerUid : 0,
-			name: $scope.controllerName,
-			manufacturerDto: $scope.controllerManufacturer,
-			model: $scope.controllerModel
+		var generic = {
+			uid: $scope.genericUid != undefined ? $scope.genericUid : 0,			
+			manufacturerDto: {uid: $scope.genericManufacturer.uid},
+			deviceType: $scope.deviceType.uid,						
+			unitMeterGases : $scope.gasUnitMeterGases.uid,
+			name: $scope.genericName,
+			model: $scope.genericModel
     	}; 
 		 
-		$scope.inclusaoGeneric = new GenericService.save(controller);		 
-		$scope.inclusaoGeneric.$controller({_csrf : angular.element('#_csrf').val()}, function()
+		$scope.inclusaoGeneric = new GenericService.save(generic);		 
+		$scope.inclusaoGeneric.$generic({_csrf : angular.element('#_csrf').val()}, function()
 		{         	
             $timeout(function () {                    
             	$scope.clearFormGeneric();
@@ -25,17 +27,20 @@ app.controller('genericController', function ($scope, $timeout, $filter, Generic
 	 
 	$scope.clearFormGeneric = function () {
 	
-	    $scope.controllerUid = undefined;
-	    $scope.controllerName = '';
-	    $scope.controllerModel = '';
-	    $scope.controllerManufacturer = '';	
+		$scope.genericUid = undefined;
+		
+		$scope.genericManufacturer = '';	
+		$scope.deviceType = '';
+		$scope.gasUnitMeterGases = '';
+		$scope.genericName = '';
+		$scope.genericModel = '';
 	}
 	 
 	$scope.getGenerics = function() {
 		 
 		 $scope.resultGenerics = new GenericService.listAll();		 
 		 $scope.resultGenerics.$generic({_csrf : angular.element('#_csrf').val()}, function(){			
-			 $scope.controllers = $scope.resultGenerics.list; 		 			 
+			 $scope.generics = $scope.resultGenerics.list; 		 			 
          });		 
 	 }
 	
@@ -48,34 +53,53 @@ app.controller('genericController', function ($scope, $timeout, $filter, Generic
 	 }	 
  
 	 $scope.editGeneric = function (index) {
-	        $scope.controllerUid = $scope.controllers[index].uid;
+	        $scope.genericUid = $scope.generics[index].uid;
 	        
-		    $scope.controllerName = $scope.controllers[index].name;
-		    $scope.controllerModel = $scope.controllers[index].model;
-		    $scope.controllerManufacturer = $scope.controllers[index].manufacturerDto;
-		    	        
+		    $scope.genericName = $scope.generics[index].name;
+		    $scope.genericModel = $scope.generics[index].model;
+			$scope.genericManufacturer = $scope.generics[index].manufacturerDto;			
+			$scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.generics[index].unitMeterGases);
+			$scope.deviceType = $scope.getDeviceType($scope.generics[index].deviceType);
+					    	        
 	        $('#idGenericName').focus();
 	    }
 	 
 	 $scope.deleteGeneric = function(index) {
 		 
-		 var uid = $scope.controllers[index].uid;		  
+		 var uid = $scope.generics[index].uid;		  
 		 
 		 $scope.deletar = new GenericService.deletar();		 
-		 $scope.deletar.$controller({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
+		 $scope.deletar.$generic({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
 		 
 			 if (!$scope.deletar.isError)
-				 $scope.controllers.splice(index, 1);
+				 $scope.generics.splice(index, 1);
 			 else {
 				 $scope.msgErro = "Erro: " + $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
 			 }
-		});
-		 
+		});		 
 	 }
 
-	 	 
-	 $scope.unitMetersGases = 
+	 $scope.getDeviceType = function (name) {
+		
+		for (var i = 0; i < $scope.deviceTypes.length; i++) {
+			if ($scope.deviceTypes[i].name == name) {
+				
+				return $scope.deviceTypes[i];
+			}
+		} 		 
+	}
+
+	 $scope.getUnitMetersGases = function (name) {		 
+		for (var i = 0; i < $scope.unitMetersGases.length; i++) {
+			if ($scope.unitMetersGases[i].name == name) {
+				
+				return $scope.unitMetersGases[i];
+			}
+		} 		 
+	}
+
+	$scope.unitMetersGases = 
 		 [
 		  	{ name : 'DESCONHECIDO', uid : 0 },
 		  	{ name : 'PPM', uid :  1 },
@@ -87,16 +111,17 @@ app.controller('genericController', function ($scope, $timeout, $filter, Generic
 			{ name : 'AMPERE', uid : 7 },
 			{ name : 'MINUTE', uid : 8 },
 			{ name : 'SECOND', uid : 9 },
-			{ name : 'OPEN/CLOSE', uid : 10 }
+			{ name : 'OPEN/CLOSE', uid : 10 },
+			{ name : 'KWH', uid : 11 }
 		 ]; 
 
 	 $scope.deviceTypes = 
 	 [		  
 		  { name : 'PLC', uid :  2, disabled : false },
-		  { name : 'CONTROLADORA', uid :  3, disabled : false },
-		  { name : 'ELETRICIDADE', uid :  6, disabled : false },
+		  { name : 'CONTROLLER', uid :  3, disabled : false },
+		  { name : 'ELETRICITY', uid :  6, disabled : false },
 		  { name : 'TEMPO', uid :  7, disabled : false },
-		  { name : 'TEMPERATURA', uid :  8, disabled : false },
+		  { name : 'TEMPERATURE', uid :  8, disabled : false },
 		  { name : 'DIGITAL', uid :  9, disabled : false },
 	 ];	
 	 

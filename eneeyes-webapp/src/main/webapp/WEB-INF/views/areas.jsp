@@ -143,7 +143,7 @@
 				       	
 				       		<div class="row">
 								<div class="col-md-2">					            
-									<label class="control-label">Detectores</label>					            
+									<label class="control-label">Dispositivos</label>					            
 								</div>
 								<div class="col-md-10">
 									<form>

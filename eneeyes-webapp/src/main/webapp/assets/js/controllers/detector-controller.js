@@ -94,7 +94,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		// $scope.detectorSensors = [];
 		$scope.detectorSensor = '';
 		$scope.detectorNameExist = "false";
-		$scope.existSensor = undefined;
+		$scope.existDetector = undefined;
 	}
 	 
 	$scope.getDetectors = function() {

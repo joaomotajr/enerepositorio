@@ -39,8 +39,8 @@ public class HistoricAlarm {
 	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
 	private Long companyDetectorId;
 
-	@Column(name="SENSOR_ID", nullable = false)
-	private Long sensorId;
+//	@Column(name="SENSOR_ID", nullable = false)
+//	private Long sensorId;
 	
 	@Column(name="HISTORIC_ID", nullable = false)
 	private Long historicId;
@@ -102,13 +102,13 @@ public class HistoricAlarm {
 		this.companyDetectorId = companyDetectorId;
 	}
 
-	public final Long getSensorId() {
-		return sensorId;
-	}
-
-	public final void setSensorId(Long sensorId) {
-		this.sensorId = sensorId;
-	}
+//	public final Long getSensorId() {
+//		return sensorId;
+//	}
+//
+//	public final void setSensorId(Long sensorId) {
+//		this.sensorId = sensorId;
+//	}
 
 	public final Long getHistoricId() {
 		return historicId;

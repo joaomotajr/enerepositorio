@@ -18,8 +18,8 @@ public class CompanyDetectorAlarmPK implements Serializable {
 	@Column(name="ALARM_ID", updatable=false, nullable=false)
 	private Long alarmId;
 	
-	@Column(name="SENSOR_ID", updatable=false, nullable=false)
-	private Long sensorId;
+//	@Column(name="SENSOR_ID", updatable=false, nullable=false)
+//	private Long sensorId;
 
 	public CompanyDetectorAlarmPK() {
 		
@@ -41,13 +41,13 @@ public class CompanyDetectorAlarmPK implements Serializable {
 		this.alarmId = alarmId;
 	}
 	
-	public final Long getSensorId() {
-		return sensorId;
-	}
-
-	public final void setSensorId(Long sensorId) {
-		this.sensorId = sensorId;
-	}
+//	public final Long getSensorId() {
+//		return sensorId;
+//	}
+//
+//	public final void setSensorId(Long sensorId) {
+//		this.sensorId = sensorId;
+//	}
 
 	public boolean equals(Object other) {
 		if (this == other) {

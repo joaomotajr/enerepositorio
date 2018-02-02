@@ -246,7 +246,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		
 		if($scope.selectedCompanyDetector == null) return;
 		
-		$scope.getOneDetector($scope.selectedCompanyDetector.detector_id);
+		// $scope.getOneDetector($scope.selectedCompanyDetector.detector_id);
 		
 		$scope.resultCompanyDetectorAlarm = new CompanyDetectorAlarmService.listPorCompanyDetectorAlarm();		 
 		$scope.resultCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.companyDetectorId}, function(){			
@@ -293,15 +293,15 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		 }
 	} 
 	 
-	$scope.getOneCompany = function(companyId) {
+	// $scope.getOneCompany = function(companyId) {
 		 
-		$scope.listOne = new CompanyService.listOne();		 
-		$scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
+	// 	$scope.listOne = new CompanyService.listOne();		 
+	// 	$scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
 			 
-			$scope.selectedCompany = $scope.listOne.t;
-			$scope.changeCompany();
-	    });		 
-	}
+	// 		$scope.selectedCompany = $scope.listOne.t;
+	// 		$scope.changeCompany();
+	//     });		 
+	// }
 	
 	$scope.changeCompany = function() { 
 		$scope.selectedSensorAlarm = undefined;

@@ -6,7 +6,11 @@
 
 /* MYSQL */
 
-CREATE 
+
+        
+    
+/* POSTGRES */
+    CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
@@ -15,14 +19,9 @@ VIEW `position_historic_view` AS
         `h`.`UID` AS `UID`,
         `p`.`UID` AS `POSITION_ID`,
         `h`.`LAST_UPDATE` AS `last_update`,
-        `h`.`VALUE` AS `VALUE`,
-        NEXT_POSITION(`p`.`UID`) AS `rank`
+        `h`.`VALUE` AS `VALUE`
     FROM
-        (`position` `p`
-        JOIN `historic_view` `h` ON (((`p`.`COMPANY_DETECTOR_ID` = `h`.`COMPANY_DETECTOR_ID`)
-            AND (`p`.`SENSOR_ID` = `h`.`SENSOR_ID`))))
+        `position` `p`
+        JOIN `historic` `h` ON (`p`.`COMPANY_DETECTOR_ID` = `h`.`COMPANY_DETECTOR_ID`)            
     ORDER BY `p`.`UID` , `h`.`UID` DESC
-        
-    
-/* POSTGRES */   
         

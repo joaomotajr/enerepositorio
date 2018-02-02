@@ -22,7 +22,7 @@ import br.com.eneeyes.main.model.enums.LogOrigem;
 		   appliesTo = "historic",
 		   indexes = {
 		      @Index(name="idxHistoricDate", columnNames = "LAST_UPDATE"),		      
-		      @Index(name="idxHistoricCompanySensorAndDate", columnNames = {"COMPANY_DETECTOR_ID", "SENSOR_ID", "LAST_UPDATE"})
+		      @Index(name="idxHistoricCompanySensorAndDate", columnNames = {"COMPANY_DETECTOR_ID", "LAST_UPDATE"})
 		   }
 		)
 public class Historic {
@@ -37,7 +37,7 @@ public class Historic {
     	this.lastUpdate = dto.getLastUpdate();
     	this.value = dto.getValue();    	
     	this.companyDetectorId = dto.getCompanyDetectorId();
-    	this.sensorId = dto.getSensorId();
+//    	this.sensorId = dto.getSensorId();
     	this.logOrigem = dto.getLogOrigem();
     }
     
@@ -62,8 +62,8 @@ public class Historic {
 	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
 	private Long companyDetectorId;
 	
-	@Column(name="SENSOR_ID", nullable = false)
-	private Long sensorId;
+//	@Column(name="SENSOR_ID", nullable = false)
+//	private Long sensorId;
 	
 	@Column(name = "LOG_ORIGEM", nullable = true, columnDefinition = "int default 0")
 	private LogOrigem logOrigem;
@@ -100,13 +100,13 @@ public class Historic {
 		this.companyDetectorId = companyDetectorId;
 	}
 
-	public final Long getSensorId() {
-		return sensorId;
-	}
-
-	public final void setSensorId(Long sensorId) {
-		this.sensorId = sensorId;
-	}
+//	public final Long getSensorId() {
+//		return sensorId;
+//	}
+//
+//	public final void setSensorId(Long sensorId) {
+//		this.sensorId = sensorId;
+//	}
 
 	public final LogOrigem getLogOrigem() {
 		return logOrigem;

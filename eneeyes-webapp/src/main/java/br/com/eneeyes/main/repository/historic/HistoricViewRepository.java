@@ -13,11 +13,11 @@ import br.com.eneeyes.main.model.historic.IHistoric;
 
 public interface HistoricViewRepository extends JpaRepository<HistoricView, Long> {
 	
-	@Query("select h from HistoricView h where h.companyDetectorId = ?1 and h.sensorId = ?2 and h.lastUpdate between ?3 and ?4 ")
-	List<IHistoric> findByCompanyDetectorIdAndSensorIdAndLastUpdateBetween(Long companyDetectorId, Long sensorId, Date inicio, Date fim);
+	@Query("select h from HistoricView h where h.companyDetectorId = ?1 and h.lastUpdate between ?2 and ?3 ")
+	List<IHistoric> findByCompanyDetectorIdAndAndLastUpdateBetween(Long companyDetectorId,  Date inicio, Date fim);
 	
 	
-	@Query("select h from HistoricView h where h.companyDetectorId = ?1 and h.sensorId = ?2 and h.lastUpdate between ?3 and ?4 ")
-	Page<IHistoric> findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(Long companyDetectorId, Long sensorId, Date inicio, Date fim, Pageable pageable);
+	@Query("select h from HistoricView h where h.companyDetectorId = ?1 and h.lastUpdate between ?2 and ?3 ")
+	Page<IHistoric> findByCompanyDetectorIdAndAndLastUpdateBetweenPaginated(Long companyDetectorId,  Date inicio, Date fim, Pageable pageable);
 	
 }

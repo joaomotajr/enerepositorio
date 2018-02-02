@@ -3,7 +3,6 @@ package br.com.eneeyes.main.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import br.com.eneeyes.main.dto.register.SensorDto;
 import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.enums.AlarmType;
 
@@ -13,7 +12,7 @@ public class PositionDto {
 	private Date lastUpdate;
 	private BigDecimal lastValue;	
     private CompanyDetectorDto companyDetectorDto;
-    private SensorDto sensorDto;
+// //    private SensorDto sensorDto;
 //    private Long companyDetectorId;
 //    private Long sensorId;
     private AlarmType alarmType;
@@ -30,7 +29,7 @@ public class PositionDto {
 		this.lastUpdate = position.getLastUpdate();
     	this.lastValue = position.getLastValue();
     	this.companyDetectorDto = new CompanyDetectorDto(position.getCompanyDetector());
-    	this.sensorDto = new SensorDto(position.getSensor());
+// //    	this.sensorDto = new SensorDto(position.getSensor());
 //    	this.companyDetectorId = position.getCompanyDetectorId();
 //    	this.sensorId = position.getSensorId();
     	this.alarmType = position.getAlarmType();    	
@@ -89,13 +88,13 @@ public class PositionDto {
 		this.companyDetectorDto = companyDetectorDto;
 	}
 	
-	public final SensorDto getSensorDto() {
-		return sensorDto;
-	}
-
-	public final void setSensorDto(SensorDto sensorDto) {
-		this.sensorDto = sensorDto;
-	}
+//	public final SensorDto getSensorDto() {
+//		return sensorDto;
+//	}
+//
+//	public final void setSensorDto(SensorDto sensorDto) {
+//		this.sensorDto = sensorDto;
+//	}
 	
 	public final AlarmType getAlarmType() {
 		return alarmType;

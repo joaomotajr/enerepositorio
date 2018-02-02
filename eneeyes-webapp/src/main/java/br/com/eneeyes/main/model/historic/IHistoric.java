@@ -24,9 +24,9 @@ public interface IHistoric {
 	
 	public void setCompanyDetectorId(Long companyDetectorId);
 
-	public Long getSensorId();
-
-	public void setSensorId(Long sensorId);
+//	public Long getSensorId();
+//
+//	public void setSensorId(Long sensorId);
 
 	public LogOrigem getLogOrigem();
 

@@ -36,9 +36,10 @@
 									<td>{{item.model}}</td>
 									<td>{{item.manufacturerDto.name}}</td>		
 									<td>{{item.transmitterDto.name}}</td>
-									<td>								
+									<!-- <td>								
 										1-{{item.sensorsDto[0].name}} <span data-ng-show="item.sensorsDto[1].name">/ 2-</span> {{item.sensorsDto[1].name}}
-									</td>
+									</td> -->
+									<td>{{item.sensorDto.name}}</td>
 									<td>			
 										<img class="direct-chat-img" data-ng-src="{{item.image}}" style="width: auto ! important; height: 25px ! important ; max-height: 25px ! important;">
 									</td>											        
@@ -150,7 +151,20 @@
 								
 								<hr style="margin-top: 5px !important; margin-bottom: 5px !important;">
 
-		                        <div class="box box-primary box-solid">
+								<div class="col-md-3">
+									<div class="form-group">
+										<label class="control-label">Sensor</label> 
+										<select class="form-control" data-live-search="true" 
+											style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+												data-ng-options="item as item.name for item in sensors | manufacturerFilter:search | orderBy: 'name' track by item.uid" 
+												   data-ng-model="detectorSensor">
+												   <option value="">Selecione</option> 
+										</select>    
+									</div>              
+									
+								</div>
+
+		                        <!-- <div class="box box-primary box-solid">
 				                    <div class="box-header with-border">
 				                    	<strong><i class="fa fa-feed"></i> Sensores</strong>
 										<span class="text-red pull-right" data-ng-show="detectorSensors.length == 0"> <strong>[Adicionar Sensor(es)]</strong></span>
@@ -187,7 +201,7 @@
 		                                    </div>
 					                    </div>			                            
 				                    </div>				                    			                            
-					            </div>					            			                 
+					            </div>					            			                  -->
 				            </form>
 							
 						</div>	
@@ -196,9 +210,13 @@
 			  	
 			  	<div class="modal-footer" style="padding: 8px;">
 			  		<button type="button" data-ng-click="clearFormDetector()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
-					<button type="button" data-ng-click="saveDetector();" class="btn btn-primary" data-dismiss="modal"
+					
+					<!-- <button type="button" data-ng-click="saveDetector();" class="btn btn-primary" data-dismiss="modal"
 						data-ng-disabled="(detectorName && detectorModel && detectorManufacturer && detectorTransmitter && (detectorSensors.length != 0 || newSensors.length > 0)) ? false : true">Salvar
-					</button>					                               
+					</button> -->
+					<button type="button" data-ng-click="saveDetector();" class="btn btn-primary" data-dismiss="modal"
+						data-ng-disabled="(detectorName && detectorModel && detectorManufacturer && detectorTransmitter && detectorSensor) ? false : true">Salvar
+					</button>					                               										
 			  	</div>
 			  	
 		  	</div>

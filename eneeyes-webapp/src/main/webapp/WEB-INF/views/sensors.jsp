@@ -39,7 +39,8 @@
 										<td>{{item.name}}</td>
 										<td>{{item.model}}</td>	
 										<td>{{item.manufacturerDto.name}}</td>
-										<td>{{item.gasesDto[0].name}}</td>
+										<!-- <td>{{item.gasesDto[0].name}}</td> -->
+										<td>{{item.gasDto.name}}</td>
 										<td>{{item.unitMeterGases}}</td>
 										<td>{{item.rangeMin}}</td>
 										<td>{{item.rangeMax}}</td>														        
@@ -117,7 +118,7 @@
 					                	<div class="col-md-6">                                                                                                                
 											<div class="form-group">
 												<label class="control-label">Nome</label>
-												<span class="text-red" data-ng-show="sensorNameExist">Sensor ja Existe</span> 
+												<span class="text-red" data-ng-show="sensorNameExist">Sensor já Existe</span> 
 												<span class="text-red" data-ng-show="sensorForm.username.$error.required && !sensorForm.username.$pristine">  [Nome Obrigatorio]</span>
 											    <span class="text-red" data-ng-show="sensorForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
 												<input id="idSensorName"  data-ng-keydown="keypress($event)" class="form-control inputProfile" placeholder="Nome do Sensor" data-ng-model="sensorName" data-ng-maxlength="15" name="username" required>                                                                        
@@ -137,19 +138,19 @@
 							    		<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Range de Detecção</strong></div>					                	 
 						                    <div class="box-body">
 											    <div class="row">
-											    	<div class="col-md-3">
+											    	<div class="col-md-2">
 												    	<div class="form-group">
 											                <label class="control-label">Min</label>
 											                <input class="form-control" placeholder="Min" data-ng-model="sensorRangeMin">
 											            </div>
 												    </div>
-												    <div class="col-md-3">
+												    <div class="col-md-2">
 												    	<div class="form-group">
 											                <label class="control-label">Máx</label>
 											                <input class="form-control" placeholder="Max" data-ng-model="sensorRangeMax">
 											            </div>
 												    </div>
-												    <div class="col-md-3">
+												    <div class="col-md-2">
 												    	<div class="form-group">
 											                <label class="control-label">Resolução</label>
 											                <input class="form-control" placeholder="Unit" data-ng-model="sensorRangeUnit">
@@ -166,12 +167,26 @@
 									                                         <option value="">Selecione</option> 
 									                        </select>               
 								                        </div>
+													</div>
+													
+													<div class="col-md-3">
+														<div class="form-group">
+															<label class="control-label">Elemento</label> 
+															<select class="form-control" data-live-search="true" 
+																style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+																	data-ng-options="item as item.name for item in gases | orderBy: 'name' track by item.uid" 
+																	   data-ng-model="sensorGas">
+																	   <option value="">Selecione</option> 
+															</select>    
+														</div>              
+								                        
 												    </div>
+
 											    </div>
 									    </div>
 								    </div>
 			                        
-			                        <div class="box box-primary box-solid">
+			                        <!-- <div class="box box-primary box-solid">
 					                    <div class="box-header with-border ui-sortable-handle ">
 					                    	<strong><i class="fa fa-yelp"></i> Gases</strong>
 					                    	<span class="text-red pull-right" data-ng-show="sensorGases.length == 0"><strong>[Adicionar um Gás]</strong></span>
@@ -212,7 +227,7 @@
 						                    </div>								                            
 					                    </div>	
 					                    						                    			                            
-						            </div>	                 
+						            </div>	                  -->
 					            </form>							            										
 							</div>
 						</div>		
@@ -220,8 +235,11 @@
 				  	
 				  	<div class="modal-footer" style="padding: 8px;">
 						<button type="button" data-ng-click="clearFormSensor()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
-						<button type="button" data-ng-click="saveSensor();" class="btn btn-primary" data-dismiss="modal"
+						<!-- <button type="button" data-ng-click="saveSensor();" class="btn btn-primary" data-dismiss="modal"
 							data-ng-disabled="(sensorName && sensorModel && sensorManufacturer && sensorDetectionType && (sensorGases.length != 0 || newGases.length > 0)) ? false : true">Salvar
+						</button> -->
+						<button type="button" data-ng-click="saveSensor();" class="btn btn-primary" data-dismiss="modal"
+							data-ng-disabled="(sensorName && sensorModel && sensorManufacturer && sensorDetectionType && sensorGas) ? false : true">Salvar
 						</button>                                
 				  	</div>
 				  	

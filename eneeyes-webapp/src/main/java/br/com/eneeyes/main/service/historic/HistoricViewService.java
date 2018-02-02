@@ -54,20 +54,24 @@ public class HistoricViewService {
 			
 			if(intervalType ==  IntervalType.UMA_HORA) {
 				
-				page= repositoryView.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, inicio, fim, new PageRequest(currentPage, lenPage));							
+//				page= repositoryView.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, inicio, fim, new PageRequest(currentPage, lenPage));
+				page= repositoryView.findByCompanyDetectorIdAndAndLastUpdateBetweenPaginated(companyDetectorId, inicio, fim, new PageRequest(currentPage, lenPage));	
 			}
 			else if(intervalType ==  IntervalType.SEIS_HORAS || intervalType ==  IntervalType.DOZE_HORAS || intervalType ==  IntervalType.UM_DIA) {
 				
-				page= repositoryHA.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, inicio, fim, new PageRequest(currentPage, lenPage));								
+//				page= repositoryHA.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, inicio, fim, new PageRequest(currentPage, lenPage));								
+				page= repositoryHA.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, inicio, fim, new PageRequest(currentPage, lenPage));
 			}
 			else if(intervalType ==  IntervalType.DOIS_DIAS || intervalType ==  IntervalType.SETE_DIAS) {
 				
-				page= repositoryHAB.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, inicio, fim, new PageRequest(currentPage, lenPage));								
+//				page= repositoryHAB.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, inicio, fim, new PageRequest(currentPage, lenPage));								
+				page= repositoryHAB.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, inicio, fim, new PageRequest(currentPage, lenPage));
 			}
 			else if(intervalType ==  IntervalType.UM_MES) {
 																	
 				inicio = Util.addMonth(fim, -1);								
-				page= repositoryHABC.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, inicio, fim, new PageRequest(currentPage, lenPage));								
+//				page= repositoryHABC.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, inicio, fim, new PageRequest(currentPage, lenPage));								
+				page= repositoryHABC.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, inicio, fim, new PageRequest(currentPage, lenPage));
 			}			
 			
 			result = getResults(page);			
@@ -126,35 +130,36 @@ public class HistoricViewService {
 			
 			if(diffHoursIn <= 24) {
 				
-				result = getResults(repositoryHA.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
+//				result = getResults(repositoryHA.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
+				result = getResults(repositoryHA.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
 			}
 			else if (diffDaysIn > 30 && diffDaysOut > 30) {
 				
-				result = getResults(repositoryD.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
+				result = getResults(repositoryD.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
 			}
 			else if (diffDaysIn <= 2 && diffDaysOut <= 2) {
 				
-				result = getResults(repositoryHA.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
+				result = getResults(repositoryHA.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
 			}
 			else if (diffDaysIn <= 7 && diffDaysOut <= 7) {
 				
-				result = getResults(repositoryHAB.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
+				result = getResults(repositoryHAB.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
 			}						
 			else if(diffDaysIn <= 7) {
 				
-				result = getResults(repositoryHAB.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
+				result = getResults(repositoryHAB.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
 			}
 			else if (diffDaysIn > 7 && diffDaysIn <= 30 && diffDaysOut > 7 && diffDaysOut <= 30) {
-				result = getResults(repositoryHABC.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
+				result = getResults(repositoryHABC.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
 			}
 			else if(diffDaysIn <= 30) {
 				
-				result = getResults(repositoryC.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
+				result = getResults(repositoryC.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
 			}
 			
 			else {
 				
-				result = getResults(repositoryHABC.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
+				result = getResults(repositoryHABC.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

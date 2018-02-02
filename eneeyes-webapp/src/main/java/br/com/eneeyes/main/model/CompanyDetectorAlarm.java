@@ -36,7 +36,7 @@ public class CompanyDetectorAlarm implements Serializable {
 		this.uid = (new CompanyDetectorAlarmPK());
 		this.uid.setAlarmId(dto.getAlarmDto().getUid());
 		this.uid.setCompanyDetectorId(dto.getCompanyDetectorDto().getUid());
-		this.uid.setSensorId(dto.getSensorId());
+//		this.uid.setSensorId(dto.getSensorId());
 
 	}
 	

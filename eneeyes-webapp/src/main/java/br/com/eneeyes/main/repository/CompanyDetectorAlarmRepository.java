@@ -18,24 +18,40 @@ public interface CompanyDetectorAlarmRepository extends JpaRepository<CompanyDet
 	
 	List<CompanyDetectorAlarm> findByCompanyDetectorIn(List<CompanyDetector> lista);
 	
-	@Query("select a from CompanyDetectorAlarm a where a.uid.companyDetectorId = ?1 and a.uid.sensorId = ?2")
-	CompanyDetectorAlarm FindByCompanyDetectorIdAndSensorId(long companyDetectorUid, long sensorUid);
+//	@Query("select a from CompanyDetectorAlarm a where a.uid.companyDetectorId = ?1 and a.uid.sensorId = ?2")
+//	CompanyDetectorAlarm FindByCompanyDetectorIdAndSensorId(long companyDetectorUid, long sensorUid);
+	
+	@Query("select a from CompanyDetectorAlarm a where a.uid.companyDetectorId = ?1")
+	CompanyDetectorAlarm FindByCompanyDetectorId(long companyDetectorUid);
+	
+//	@Modifying
+//	@Transactional
+//	@Query("update CompanyDetectorAlarm c set c.alarm = ?1 where c.companyDetector = ?2 and c.uid.sensorId = ?3")
+//	int updateAlarm(Alarm alarm, CompanyDetector companyDetector, Long sensorId);
 	
 	@Modifying
 	@Transactional
-	@Query("update CompanyDetectorAlarm c set c.alarm = ?1 where c.companyDetector = ?2 and c.uid.sensorId = ?3")
-	int updateAlarm(Alarm alarm, CompanyDetector companyDetector, Long sensorId);
+	@Query("update CompanyDetectorAlarm c set c.alarm = ?1 where c.companyDetector = ?2")
+	int updateAlarm(Alarm alarm, CompanyDetector companyDetector);
 		
+//	@Modifying
+//	@Transactional
+//	@Query("delete CompanyDetectorAlarm c where c.companyDetector = ?1 and c.uid.sensorId = ?2")
+//	int deleteAlarm(CompanyDetector companyDetector, Long sensorId);
+	
 	@Modifying
 	@Transactional
-	@Query("delete CompanyDetectorAlarm c where c.companyDetector = ?1 and c.uid.sensorId = ?2")
-	int deleteAlarm(CompanyDetector companyDetector, Long sensorId);
+	@Query("delete CompanyDetectorAlarm c where c.companyDetector = ?1")
+	int deleteAlarm(CompanyDetector companyDetector);
 	
 	@Modifying
 	@Transactional
 	@Query("delete CompanyDetectorAlarm c where c.companyDetector.uid = ?1")
 	int deleteAlarm(Long companyDetectorId);	
 	
-	@Query("select c from CompanyDetectorAlarm c where c.companyDetector = ?2 and c.uid.sensorId = ?3")
-	CompanyDetectorAlarm selectCompanyDetectorAlarmByCompanyDetectorAndSensor(CompanyDetector companyDetector, Long sensorId);
+//	@Query("select c from CompanyDetectorAlarm c where c.companyDetector = ?2 and c.uid.sensorId = ?3")
+//	CompanyDetectorAlarm selectCompanyDetectorAlarmByCompanyDetectorAndSensor(CompanyDetector companyDetector, Long sensorId);
+	
+	@Query("select c from CompanyDetectorAlarm c where c.companyDetector = ?2")
+	CompanyDetectorAlarm selectCompanyDetectorAlarmByCompanyDetector(CompanyDetector companyDetector);
 }

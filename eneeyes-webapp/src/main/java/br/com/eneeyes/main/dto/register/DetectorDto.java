@@ -1,19 +1,13 @@
 package br.com.eneeyes.main.dto.register;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
 import br.com.eneeyes.main.model.register.Detector;
-import br.com.eneeyes.main.model.register.Sensor;
 
 public class DetectorDto extends BaseDeviceDto {
 		
 	private Long uid;	
 	private TransmitterDto transmitterDto;
-	private List<SensorDto> sensorsDto = new ArrayList<SensorDto>();
+//	private List<SensorDto> sensorsDto = new ArrayList<SensorDto>();
+	private SensorDto sensorDto;
 	private String image;
 
 	public DetectorDto() {		
@@ -33,37 +27,46 @@ public class DetectorDto extends BaseDeviceDto {
 		if (detector.getTransmitter()  != null) 
 			this.transmitterDto = new TransmitterDto(detector.getTransmitter());		
 				
-		if(detector.getSensors() != null)		
-			this.sensorsDto = parseSensorsDto(detector.getSensors());		
+		this.sensorDto = new SensorDto(detector.getSensor());
+//		if(detector.getSensors() != null)		
+//			this.sensorsDto = parseSensorsDto(detector.getSensors());		
 		
 	}
 	
-	private final List<SensorDto> parseSensorsDto(Set<Sensor> sensors) {
-		List<SensorDto> lista = new ArrayList<SensorDto>();
-		
-		if(sensors != null && !sensors.isEmpty()) {
-		
-			Iterator<Sensor> itr = sensors.iterator();			
-			while (itr.hasNext()) {
-				SensorDto dto = new SensorDto(itr.next());
-				lista.add(dto);
-			}
-		}
-		
-		Collections.sort(lista);
-		return lista;
-	}
+//	private final List<SensorDto> parseSensorsDto(Set<Sensor> sensors) {
+//		List<SensorDto> lista = new ArrayList<SensorDto>();
+//		
+//		if(sensors != null && !sensors.isEmpty()) {
+//		
+//			Iterator<Sensor> itr = sensors.iterator();			
+//			while (itr.hasNext()) {
+//				SensorDto dto = new SensorDto(itr.next());
+//				lista.add(dto);
+//			}
+//		}
+//		
+//		Collections.sort(lista);
+//		return lista;
+//	}
 	
-	public final List<SensorDto> getSensorsDto() {
-		return sensorsDto;
-	}
-	
-	public final void setSensorsDto(List<SensorDto> sensorsDto) {
-		this.sensorsDto = sensorsDto;
-	}
+//	public final List<SensorDto> getSensorsDto() {
+//		return sensorsDto;
+//	}
+//	
+//	public final void setSensorsDto(List<SensorDto> sensorsDto) {
+//		this.sensorsDto = sensorsDto;
+//	}
 
 	public final Long getUid() {
 		return uid;
+	}
+
+	public SensorDto getSensorDto() {
+		return sensorDto;
+	}
+
+	public void setSensorDto(SensorDto sensorDto) {
+		this.sensorDto = sensorDto;
 	}
 
 	public final void setUid(Long uid) {

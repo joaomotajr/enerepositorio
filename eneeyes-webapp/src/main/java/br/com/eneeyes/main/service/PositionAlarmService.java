@@ -21,8 +21,8 @@ import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.enums.SigmaStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
-import br.com.eneeyes.main.model.register.Sensor;
 import br.com.eneeyes.main.repository.PositionAlarmRepository;
+import br.com.eneeyes.main.repository.singleton.AlarmSingletonRepository;
 import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
@@ -34,8 +34,11 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	@Autowired
 	private PositionAlarmRepository repository;
 	
+//	@Autowired
+//	CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
+	
 	@Autowired
-	CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
+	AlarmService alarmService;
 	
 	@Autowired
 	HistoricAlarmService historicAlarmService;
@@ -48,13 +51,18 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	public AlarmType checkAndUpdateAlarmsAndActions(Position position, Boolean offLine) {		
 		
 		CompanyDetector companyDetector = new CompanyDetector(position.getCompanyDetector().getUid());
-		Sensor sensor = new Sensor(position.getSensor().getUid());
+//		Sensor sensor = new Sensor(position.getSensor().getUid());
 		
-		if(CompanyDetectorAlarmSingletonRepository.init()) {
-			CompanyDetectorAlarmSingletonRepository.populate(companyDetectorAlarmAlarmService.findAll());
+//		if(CompanyDetectorAlarmSingletonRepository.init()) {
+//			CompanyDetectorAlarmSingletonRepository.populate(companyDetectorAlarmAlarmService.findAll());
+//		}
+		
+		if(AlarmSingletonRepository.init()) {
+			AlarmSingletonRepository.populate(alarmService.findAll());
 		}
 		
-		CompanyDetectorAlarmDto companyDetectorAlarmDto = CompanyDetectorAlarmSingletonRepository.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());
+		//CompanyDetectorAlarmDto companyDetectorAlarmDto = CompanyDetectorAlarmSingletonRepository.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());		
+		CompanyDetectorAlarmDto companyDetectorAlarmDto = CompanyDetectorAlarmSingletonRepository.findByCompanyDetector(companyDetector.getUid());
 		
 		AlarmDto alarmDto = null;
 		
@@ -73,10 +81,15 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			
 			AlarmParams alarmParams = new AlarmParams(alarmDto, alarmType); 
 			
-			historicAlarmService.save(position.getLastValue(), companyDetector.getUid(), sensor.getUid(), position.getHistoricId(), alarmDto, alarmType, alarmParams);
+			//historicAlarmService.save(position.getLastValue(), companyDetector.getUid(), sensor.getUid(), position.getHistoricId(), alarmDto, alarmType, alarmParams);
+			historicAlarmService.save(position.getLastValue(), companyDetector.getUid(), position.getHistoricId(), alarmDto, alarmType, alarmParams);
+			
+			
+//			if(alarmDto.getAlarmOn())			
+//				updatePositionAlarm(position, companyDetector, sensor, alarmType, alarmParams);
 			
 			if(alarmDto.getAlarmOn())			
-				updatePositionAlarm(position, companyDetector, sensor, alarmType, alarmParams);
+				updatePositionAlarm(position, companyDetector, alarmType, alarmParams);
 		
 		}	
 				
@@ -116,21 +129,22 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	 * @param sensor
 	 * @param alarmType
 	 */
-	public void updatePositionAlarm(Position position, CompanyDetector companyDetector, Sensor sensor, AlarmType alarmType, AlarmParams alarmParams) {
-				
+//	public void updatePositionAlarm(Position position, CompanyDetector companyDetector, Sensor sensor, AlarmType alarmType, AlarmParams alarmParams) {
+	public void updatePositionAlarm(Position position, CompanyDetector companyDetector, AlarmType alarmType, AlarmParams alarmParams) {			
 		List<AlarmStatus> solvedOrCancelesAlarms = new ArrayList<AlarmStatus>();
 		
 		solvedOrCancelesAlarms.add(AlarmStatus.SOLVED);
 		solvedOrCancelesAlarms.add(AlarmStatus.CANCELED);
 
-		PositionAlarm positionAlarm = repository.findByCompanyDetectorAndSensorAndAlarmTypeAndAlarmStatusNotIn(companyDetector, sensor, alarmType, solvedOrCancelesAlarms);
+		//PositionAlarm positionAlarm = repository.findByCompanyDetectorAndSensorAndAlarmTypeAndAlarmStatusNotIn(companyDetector, sensor, alarmType, solvedOrCancelesAlarms);
+		PositionAlarm positionAlarm = repository.findByCompanyDetectorAndAlarmTypeAndAlarmStatusNotIn(companyDetector, alarmType, solvedOrCancelesAlarms);
 		
 		if(positionAlarm == null) {
 			
 			positionAlarm =  new PositionAlarm();
 			
 			positionAlarm.setCompanyDetector(companyDetector);
-			positionAlarm.setSensor(sensor);
+//			positionAlarm.setSensor(sensor);
 			positionAlarm.setFirstUpdate(new Date());
 			positionAlarm.setLastValue(position.getLastValue());
 			positionAlarm.setAlarmStatus(AlarmStatus.CREATED);

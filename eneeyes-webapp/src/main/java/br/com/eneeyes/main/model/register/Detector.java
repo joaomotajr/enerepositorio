@@ -1,9 +1,6 @@
 package br.com.eneeyes.main.model.register;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,14 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.register.DetectorDto;
-import br.com.eneeyes.main.dto.register.SensorDto;
 
 /**
  * Created by Junior on 06/06/2016.
@@ -59,18 +54,21 @@ public class Detector {
 			}	
 		}
 		
-		if(dto.getSensorsDto() != null)
-			this.sensors = parseSensors(dto.getSensorsDto());
+		if (dto.getSensorDto() != null)
+			this.sensor = new Sensor(dto.getSensorDto());
+		
+//		if(dto.getSensorsDto() != null)
+//			this.sensors = parseSensors(dto.getSensorsDto());
 	}
 	
-	private final Set<Sensor> parseSensors(List<SensorDto> sensors) {		
-		Set<Sensor> lista = new HashSet<Sensor>();		
-		
-		for (SensorDto item   : sensors) {			
-			lista.add(new Sensor(item));			
-		}		
-		return lista;		
-	}
+//	private final Set<Sensor> parseSensors(List<SensorDto> sensors) {		
+//		Set<Sensor> lista = new HashSet<Sensor>();		
+//		
+//		for (SensorDto item   : sensors) {			
+//			lista.add(new Sensor(item));			
+//		}		
+//		return lista;		
+//	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,12 +78,16 @@ public class Detector {
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="TRANSMITTER_ID", nullable = false)
 	private Transmitter transmitter;
+	
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="SENSOR_ID", nullable = false)
+	private Sensor sensor;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-	@JoinTable(name = "detector_sensors",	 
-	joinColumns = @JoinColumn(name = "DETECTOR_ID", referencedColumnName = "UID"), 
-	inverseJoinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"))	
-	private Set<Sensor> sensors = new HashSet<Sensor>();
+//	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+//	@JoinTable(name = "detector_sensors",	 
+//	joinColumns = @JoinColumn(name = "DETECTOR_ID", referencedColumnName = "UID"), 
+//	inverseJoinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"))	
+//	private Set<Sensor> sensors = new HashSet<Sensor>();
 	
 	@Column(name = "NAME", nullable = true)
 	String name;
@@ -117,16 +119,25 @@ public class Detector {
 		this.transmitter = transmitter;
 	}
 
-	public final Set<Sensor> getSensors() {
-		return sensors;
-	}
-
-	public final void setSensores(Set<Sensor> sensors) {
-		this.sensors = sensors;
-	}
+//	public final Set<Sensor> getSensors() {
+//		return sensors;
+//	}
+//
+//	public final void setSensores(Set<Sensor> sensors) {
+//		this.sensors = sensors;
+//	}	
+	
 	
 	public final String getName() {
 		return name;
+	}
+
+	public Sensor getSensor() {
+		return sensor;
+	}
+
+	public void setSensor(Sensor sensor) {
+		this.sensor = sensor;
 	}
 
 	public final void setName(String name) {

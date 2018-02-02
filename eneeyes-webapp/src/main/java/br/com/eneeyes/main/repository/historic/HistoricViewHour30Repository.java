@@ -13,9 +13,9 @@ import br.com.eneeyes.main.model.historic.IHistoricGroup;
 
 public interface HistoricViewHour30Repository extends JpaRepository<HistoricViewHour30, Long> {
 	
-	@Query("select h from HistoricViewHour30 h where h.companyDetectorId = ?1 and h.sensorId = ?2 and h.lastUpdate between ?3 and ?4")
-	List<IHistoricGroup>findByCompanyDetectorIdAndSensorIdAndLastUpdateBetween(Long companyDetectorId, Long sensorId, Date in, Date out);
+	@Query("select h from HistoricViewHour30 h where h.companyDetectorId = ?1 and h.lastUpdate between ?2 and ?3")
+	List<IHistoricGroup>findByCompanyDetectorIdAndLastUpdateBetween(Long companyDetectorId,  Date in, Date out);
 	
-	@Query("select h from HistoricViewHour30 h where h.companyDetectorId = ?1 and h.sensorId = ?2 and h.lastUpdate between ?3 and ?4")
-	public Page<IHistoricGroup> findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(Long companyDetectorId, Long sensorId, Date in, Date out, Pageable pageable);	
+	@Query("select h from HistoricViewHour30 h where h.companyDetectorId = ?1 and h.lastUpdate between ?2 and ?3")
+	public Page<IHistoricGroup> findByCompanyDetectorIdAndLastUpdateBetweenPaginated(Long companyDetectorId,  Date in, Date out, Pageable pageable);	
 }

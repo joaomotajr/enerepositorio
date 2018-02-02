@@ -1,20 +1,15 @@
 package br.com.eneeyes.main.dto.register;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
 import br.com.eneeyes.main.model.enums.DetectionType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
-import br.com.eneeyes.main.model.register.Gas;
 import br.com.eneeyes.main.model.register.Sensor;
 
 public class SensorDto extends BaseDeviceDto implements Comparable<SensorDto> {
 	
 	private Long uid;
 	private DetectionType detectionType;
-	private List<GasDto> gasesDto = new ArrayList<GasDto>();
+//	private List<GasDto> gasesDto = new ArrayList<GasDto>();
+	private GasDto gasDto;
 	private UnitMeterGases unitMeterGases;
 	private Double rangeMax;	
 	private Double rangeMin;			
@@ -29,12 +24,14 @@ public class SensorDto extends BaseDeviceDto implements Comparable<SensorDto> {
 		
 		this.uid = sensor.getUid();
 		this.name = sensor.getName();
+		
 		this.manufacturerDto = new ManufacturerDto(sensor.getManufacturer());
 		this.model = sensor.getModel();
 		this.detectionType = sensor.getDetectionType();
 		
-		if(sensor.getGases() != null)		
-			this.gasesDto = parseGasesDto(sensor.getGases());
+		this.gasDto = new GasDto(sensor.getGas());
+//		if(sensor.getGases() != null)		
+//			this.gasesDto = parseGasesDto(sensor.getGases());
 		
 		this.unitMeterGases = sensor.getUnitMeterGases();
        	this.rangeMax = sensor.getRangeMax();
@@ -42,32 +39,41 @@ public class SensorDto extends BaseDeviceDto implements Comparable<SensorDto> {
        	this.rangeUnit = sensor.getRangeUnit();
 	}
 	
-	private final List<GasDto> parseGasesDto(Set<Gas> gases) {
-		List<GasDto> lista = new ArrayList<GasDto>();
-		
-		if(gases != null && !gases.isEmpty()) {
-		
-			Iterator<Gas> itr = gases.iterator();
-			
-			while (itr.hasNext()) {
-				GasDto dto = new GasDto(itr.next());
-				lista.add(dto);
-			}
-		}
-		
-		return lista;
-	}
+//	private final List<GasDto> parseGasesDto(Set<Gas> gases) {
+//		List<GasDto> lista = new ArrayList<GasDto>();
+//		
+//		if(gases != null && !gases.isEmpty()) {
+//		
+//			Iterator<Gas> itr = gases.iterator();
+//			
+//			while (itr.hasNext()) {
+//				GasDto dto = new GasDto(itr.next());
+//				lista.add(dto);
+//			}
+//		}
+//		
+//		return lista;
+//	}
+//	
+//	public final List<GasDto> getGasesDto() {
+//		return gasesDto;
+//	}
+//
+//	public final void setGasesDto(List<GasDto> gasesDto) {
+//		this.gasesDto = gasesDto;
+//	}
 	
-	public final List<GasDto> getGasesDto() {
-		return gasesDto;
-	}
-
-	public final void setGasesDto(List<GasDto> gasesDto) {
-		this.gasesDto = gasesDto;
-	}
 	
 	public final Long getUid() {
 		return uid;
+	}
+
+	public GasDto getGasDto() {
+		return gasDto;
+	}
+
+	public void setGasDto(GasDto gasDto) {
+		this.gasDto = gasDto;
 	}
 
 	public final void setUid(Long uid) {

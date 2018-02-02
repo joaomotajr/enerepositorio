@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.historic.Historic;
-import br.com.eneeyes.main.model.register.Sensor;
 import br.com.eneeyes.main.model.views.PositionView;
 import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.repository.views.PositionViewRepository;
@@ -55,7 +53,8 @@ public class PositionService implements IService<PositionDto> {
 		
 		Position position = new Position();
 		
-		PositionView positionView = repositoryView.findByCompanyDetectorIdAndSensorId(historic.getCompanyDetectorId(), historic.getSensorId());
+		//PositionView positionView = repositoryView.findByCompanyDetectorIdAndSensorId(historic.getCompanyDetectorId(), historic.getSensorId());
+		PositionView positionView = repositoryView.findByCompanyDetectorId(historic.getCompanyDetectorId());
 		
 		if (position != null) {		
 			
@@ -68,30 +67,40 @@ public class PositionService implements IService<PositionDto> {
 		return result;		
 	}
 	
-	public void updatePositionAlarmType(AlarmType alarmType, Long companyDetectorId, Long sensorId) {
+//	public void updatePositionAlarmType(AlarmType alarmType, Long companyDetectorId, Long sensorId) {
+	public void updatePositionAlarmType(AlarmType alarmType, Long companyDetectorId) {
 		
-		repository.updateAlarmType(alarmType, companyDetectorId, sensorId);
+		repository.updateAlarmType(alarmType, companyDetectorId);
 	}
 	
 	public void createInitialPosition(CompanyDetector companyDetector) {
-		
-		Set<Sensor> sensors = companyDetector.getDetector().getSensors();
-		
-		for (Sensor sensor   : sensors) {
-		
-			if(repository.countByCompanyDetectorAndSensor(companyDetector, sensor) == 0) {
-	
-				Position position = new Position();	
-
-				position.setCompanyDetector(companyDetector);
-				position.setSensor(sensor);
-				position.setLastUpdate(new Date());
-				position.setLastValue(BigDecimal.ZERO);
-				position.setAlarmType(AlarmType.WITHOUT);
 				
-				repository.save(position);
-			}
-		}
+		Position position = new Position();	
+		
+		position.setCompanyDetector(companyDetector);		
+		position.setLastUpdate(new Date());
+		position.setLastValue(BigDecimal.ZERO);
+		position.setAlarmType(AlarmType.WITHOUT);
+		
+		repository.save(position);		
+		
+//		Set<Sensor> sensors = companyDetector.getDetector().getSensors();
+//		
+//		for (Sensor sensor   : sensors) {
+//		
+//			if(repository.countByCompanyDetectorAndSensor(companyDetector, sensor) == 0) {
+//	
+//				Position position = new Position();	
+//
+//				position.setCompanyDetector(companyDetector);
+//				position.setSensor(sensor);
+//				position.setLastUpdate(new Date());
+//				position.setLastValue(BigDecimal.ZERO);
+//				position.setAlarmType(AlarmType.WITHOUT);
+//				
+//				repository.save(position);
+//			}
+//		}
 	}
 
 	@Override
@@ -134,11 +143,14 @@ public class PositionService implements IService<PositionDto> {
 		Result<PositionView> result = new Result<PositionView>();
 		
 		try {
-			List<PositionView> lista = repositoryView.findByCompanyDetectorId(uid);
+//			List<PositionView> lista = repositoryView.findByCompanyDetectorId(uid);
 			
-			if (lista != null) {				
+			PositionView position = repositoryView.findByCompanyDetectorId(uid);
+			
+			
+			if (position != null) {			
 								
-				result.setList(lista);
+				result.setEntity(position);
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
@@ -146,6 +158,17 @@ public class PositionService implements IService<PositionDto> {
 				result.setResultType( ResultMessageType.ERROR );
 				result.setMessage("Nenhuma Posição.");
 			}
+			
+//			if (lista != null) {				
+//								
+//				result.setList(lista);
+//				result.setResultType( ResultMessageType.SUCCESS );
+//				result.setMessage("Executado com sucesso.");
+//			} else {
+//				result.setIsError(true);
+//				result.setResultType( ResultMessageType.ERROR );
+//				result.setMessage("Nenhuma Posição.");
+//			}
 			
 		} catch (Exception e) {
 			result.setIsError(true);

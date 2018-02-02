@@ -22,7 +22,8 @@ public class CompanyDetectorDto {
 	private Integer maintenanceInterval;
 	private String descriptionInstall;
 	private CompanyDeviceDto companyDeviceDto;	
-	private DetectorDto detectorDto;	
+	private DetectorDto detectorDto;
+	private AlarmDto alarmDto;
 	
 	public CompanyDetectorDto() {
 		
@@ -46,6 +47,9 @@ public class CompanyDetectorDto {
 		this.descriptionInstall = companyDetector.getDescriptionInstall();
        	
        	this.detectorDto = new DetectorDto(companyDetector.getDetector());
+       	
+       	if (companyDetector.getAlarm()  != null) 
+       		this.alarmDto = new AlarmDto(companyDetector.getAlarm());
 	}
 		
 	public final Long getUid() {
@@ -174,4 +178,13 @@ public class CompanyDetectorDto {
 	public final void setDescriptionInstall(String descriptionInstall) {
 		this.descriptionInstall = descriptionInstall;
 	}
+
+	public AlarmDto getAlarmDto() {
+		return alarmDto;
+	}
+
+	public void setAlarmDto(AlarmDto alarmDto) {
+		this.alarmDto = alarmDto;
+	}
+	
 }

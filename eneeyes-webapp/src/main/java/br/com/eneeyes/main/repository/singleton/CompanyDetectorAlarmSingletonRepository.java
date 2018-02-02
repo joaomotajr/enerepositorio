@@ -21,21 +21,33 @@ public class CompanyDetectorAlarmSingletonRepository  {
 		lista = companyDetectorAlarm;		
 	}
 	
-	public static CompanyDetectorAlarmDto findByCompanyDetectorAndSensor(long companyDetectorUid, long sensorUid) {
-		
+	//public static CompanyDetectorAlarmDto findByCompanyDetectorAndSensor(long companyDetectorUid, long sensorUid) {
+	public static CompanyDetectorAlarmDto findByCompanyDetector(long companyDetectorUid) {	
 		CompanyDetectorAlarmDto companyDetectorAlarmDto = null;
+		
+//		if(lista != null && !lista.isEmpty()) {
+//			
+//			for (CompanyDetectorAlarm companyDetectorAlarm   : lista) {
+//				
+//				if(companyDetectorAlarm.getId().getCompanyDetectorId() == companyDetectorUid && companyDetectorAlarm.getId().getSensorId() == sensorUid) {
+//					
+//					companyDetectorAlarmDto = new CompanyDetectorAlarmDto(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getId().getSensorId());
+//					break;
+//				}
+//			}
+//		}
 		
 		if(lista != null && !lista.isEmpty()) {
 			
 			for (CompanyDetectorAlarm companyDetectorAlarm   : lista) {
 				
-				if(companyDetectorAlarm.getId().getCompanyDetectorId() == companyDetectorUid && companyDetectorAlarm.getId().getSensorId() == sensorUid) {
+				if(companyDetectorAlarm.getId().getCompanyDetectorId() == companyDetectorUid) {
 					
-					companyDetectorAlarmDto = new CompanyDetectorAlarmDto(companyDetectorAlarm.getAlarm(), companyDetectorAlarm.getId().getSensorId());
+					companyDetectorAlarmDto = new CompanyDetectorAlarmDto(companyDetectorAlarm.getAlarm());
 					break;
 				}
 			}
-		}		
+		}
 		
 		return companyDetectorAlarmDto;
 	}

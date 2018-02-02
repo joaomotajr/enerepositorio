@@ -11,7 +11,7 @@ import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.model.Alarm;
 import br.com.eneeyes.main.model.enums.ActionType;
 import br.com.eneeyes.main.repository.AlarmRepository;
-import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRepository;
+import br.com.eneeyes.main.repository.singleton.AlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.LogResult;
 import br.com.eneeyes.main.result.Result;
@@ -22,8 +22,8 @@ public class AlarmService implements IService<AlarmDto> {
 	@Autowired
 	private AlarmRepository repository;
 	
-	@Autowired
-	private CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
+//	@Autowired
+//	private CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
 	
 	@Autowired
 	private LogAuditoriaService logAuditoriaService;
@@ -35,7 +35,8 @@ public class AlarmService implements IService<AlarmDto> {
 		Alarm alarm = new Alarm(dto);		
 		alarm = repository.save(alarm);
 		
-		CompanyDetectorAlarmSingletonRepository.populate(companyDetectorAlarmAlarmService.findAll());
+//		CompanyDetectorAlarmSingletonRepository.populate(companyDetectorAlarmAlarmService.findAll());		
+		AlarmSingletonRepository.populate(repository.findAll());
 				
 		ActionType actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;		
 		
@@ -80,6 +81,11 @@ public class AlarmService implements IService<AlarmDto> {
 		return result;		
 	}
 
+	public List<Alarm> findAll() {
+		
+		return repository.findAll();		
+	}
+	
 	public Result<?> listAll() {
 		
 		Result<AlarmDto> result = new Result<AlarmDto>(); 	

@@ -6,7 +6,7 @@ import br.com.eneeyes.main.model.CompanyDetectorAlarm;
 public class CompanyDetectorAlarmDto {
 	private AlarmDto alarmDto;
 	private CompanyDetectorDto companyDetectorDto;
-	private Long sensorId;	
+//	private Long sensorId;	
 	
 	public CompanyDetectorAlarmDto() {
 		
@@ -18,21 +18,23 @@ public class CompanyDetectorAlarmDto {
 			this.companyDetectorDto = new CompanyDetectorDto(companyDetectorAlarm.getCompanyDetector());
 			
 		this.alarmDto = new AlarmDto( companyDetectorAlarm.getAlarm());
-		this.sensorId = companyDetectorAlarm.getId().getSensorId();
+//		this.sensorId = companyDetectorAlarm.getId().getSensorId();
 		
 	}
 	
-	public CompanyDetectorAlarmDto(Alarm alarm, Long sensorId) {
+//	public CompanyDetectorAlarmDto(Alarm alarm, Long sensorId) {
+	public CompanyDetectorAlarmDto(Alarm alarm) {		
 							
 		this.alarmDto =  new AlarmDto(alarm);
-		this.sensorId = sensorId;
+//		this.sensorId = sensorId;
 		
 	}
 	
-	public CompanyDetectorAlarmDto(Alarm alarm, Long sensorId, CompanyDetectorDto companyDetectorDto) {
+//	public CompanyDetectorAlarmDto(Alarm alarm, Long sensorId, CompanyDetectorDto companyDetectorDto) {
+	public CompanyDetectorAlarmDto(Alarm alarm, CompanyDetectorDto companyDetectorDto) {		
 		
 		this.alarmDto =  new AlarmDto(alarm);
-		this.sensorId = sensorId;
+//		this.sensorId = sensorId;
 		this.companyDetectorDto = companyDetectorDto;
 		
 	}
@@ -53,11 +55,11 @@ public class CompanyDetectorAlarmDto {
 		this.companyDetectorDto = companyDetectorDto;
 	}
 	
-	public final Long getSensorId() {
-		return sensorId;
-	}
-	public final void setSensorId(Long sensorId) {
-		this.sensorId = sensorId;
-	}
+//	public final Long getSensorId() {
+//		return sensorId;
+//	}
+//	public final void setSensorId(Long sensorId) {
+//		this.sensorId = sensorId;
+//	}
 		
 }

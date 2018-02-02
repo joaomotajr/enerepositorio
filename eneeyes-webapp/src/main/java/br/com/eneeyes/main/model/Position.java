@@ -19,7 +19,6 @@ import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.PositionDto;
 import br.com.eneeyes.main.model.enums.AlarmType;
-import br.com.eneeyes.main.model.register.Sensor;
 
 @Entity
 @Table(name = "position")
@@ -34,7 +33,7 @@ public class Position {
     	this.lastUpdate = dto.getLastUpdate();    	
     	this.lastValue = dto.getLastValue();
     	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
-    	this.sensor = new Sensor(dto.getSensorDto());
+// //    	this.sensor = new Sensor(dto.getSensorDto());
 //    	this.companyDetectorId = dto.getCompanyDetectorId();
 //    	this.sensorId = dto.getSensorId();
     	this.alarmType = dto.getAlarmType();    	    	
@@ -64,9 +63,9 @@ public class Position {
 	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
 	private CompanyDetector companyDetector;
 	
-	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="SENSOR_ID", nullable = false)
-	private Sensor sensor;
+//	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+//	@JoinColumn(name="SENSOR_ID", nullable = false)
+//	private Sensor sensor;
 	
 //	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
 //	private Long companyDetectorId;
@@ -137,13 +136,13 @@ public class Position {
 		this.companyDetector = companyDetector;
 	}
 	
-	public final Sensor getSensor() {
-		return sensor;
-	}
-
-	public final void setSensor(Sensor sensor) {
-		this.sensor = sensor;
-	}
+//	public final Sensor getSensor() {
+//		return sensor;
+//	}
+//
+//	public final void setSensor(Sensor sensor) {
+//		this.sensor = sensor;
+//	}
 	
 	public final AlarmType getAlarmType() {
 		return alarmType;

@@ -48,7 +48,8 @@ public class HistoricViewDayService {
 			
 			Page<IHistoricGroup> page = null;
 			
-			page = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dataInicio, dataFim, new PageRequest(currentPage, lenPage));
+//			page = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dataInicio, dataFim, new PageRequest(currentPage, lenPage));
+			page = repository.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dataInicio, dataFim, new PageRequest(currentPage, lenPage));
 			
 			result = getResults(page);
 			
@@ -114,15 +115,15 @@ public class HistoricViewDayService {
 			
 			if (diffDaysIn >= 30 && diffDaysOut >= 30) {
 				
-				page = repository30.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
+				page = repository30.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
 			}
 			else if (diffDaysIn <= 30 && diffDaysOut <= 30) {
 
-				page = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
+				page = repository.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
 			}
 			else
 			{
-				page = repositoryAll.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
+				page = repositoryAll.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
 			}			
 			
 			result = getResults(page);

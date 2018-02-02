@@ -1,9 +1,5 @@
 package br.com.eneeyes.main.model.register;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,12 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import br.com.eneeyes.main.dto.register.GasDto;
 import br.com.eneeyes.main.dto.register.SensorDto;
 import br.com.eneeyes.main.model.enums.DetectionType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
@@ -51,9 +45,12 @@ public class Sensor {
 			this.manufacturer = new Manufacturer(dto.getManufacturerDto());
 		
 		this.model = dto.getModel();
+		this.gas = new Gas(dto.getGasDto());
 		
-		if(dto.getGasesDto() != null)
-			this.gases = parseGases(dto.getGasesDto());
+//		if(dto.getGasesDto() != null)
+//			this.gases = parseGases(dto.getGasesDto());
+		
+		
 		
 		this.unitMeterGases = dto.getUnitMeterGases();
 		this.rangeMax = dto.getRangeMax();
@@ -61,14 +58,14 @@ public class Sensor {
 		this.rangeUnit = dto.getRangeUnit();
 	}	
 	
-	private final Set<Gas> parseGases(List<GasDto> gases) {		
-		Set<Gas> lista = new HashSet<Gas>();		
-		
-		for (GasDto item   : gases) {			
-			lista.add(new Gas(item));			
-		}		
-		return lista;		
-	}
+//	private final Set<Gas> parseGases(List<GasDto> gases) {		
+//		Set<Gas> lista = new HashSet<Gas>();		
+//		
+//		for (GasDto item   : gases) {			
+//			lista.add(new Gas(item));			
+//		}		
+//		return lista;		
+//	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,11 +80,15 @@ public class Sensor {
 	    return detectionType; 
 	}
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "sensor_gases",	 
-	joinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"), 
-	inverseJoinColumns = @JoinColumn(name = "GASES_ID", referencedColumnName = "UID"))	
-	private Set<Gas> gases = new HashSet<Gas>();
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="GAS_ID", nullable = false)
+	private Gas gas;
+	
+//	@ManyToMany(fetch = FetchType.EAGER)
+//	@JoinTable(name = "sensor_gases",	 
+//	joinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"), 
+//	inverseJoinColumns = @JoinColumn(name = "GASES_ID", referencedColumnName = "UID"))	
+//	private Set<Gas> gases = new HashSet<Gas>();
 	
 	@Column(name = "NAME", nullable = true)
 	String name;
@@ -132,16 +133,24 @@ public class Sensor {
 		this.detectionType = detectionType;
 	}
 	
-	public final Set<Gas> getGases() {
-		return gases;
-	}
-
-	public final void setGases(Set<Gas> gases) {
-		this.gases = gases;
-	}
+//	public final Set<Gas> getGases() {
+//		return gases;
+//	}
+//
+//	public final void setGases(Set<Gas> gases) {
+//		this.gases = gases;
+//	}
 	
 	public final String getName() {
 		return name;
+	}
+
+	public Gas getGas() {
+		return gas;
+	}
+
+	public void setGas(Gas gas) {
+		this.gas = gas;
 	}
 
 	public final void setName(String name) {

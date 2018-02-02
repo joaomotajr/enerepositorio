@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -65,6 +66,9 @@ public class CompanyDetector {
 		
 		if(dto.getDetectorDto() != null)
 			this.detector = new Detector(dto.getDetectorDto());
+		
+		if (dto.getAlarmDto()  != null) 
+       		this.alarm = new Alarm(dto.getAlarmDto());
     }   
 
 	@Id
@@ -115,9 +119,13 @@ public class CompanyDetector {
 	@JoinColumn(name="COMPANY_DEVICE_ID", nullable = false)
 	private CompanyDevice companyDevice;
 	
-	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="DETECTOR_ID", nullable = false)
 	private Detector detector;
+	
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="ALARM_ID", nullable = true)
+	private Alarm alarm;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
 	private Set<PositionAlarm> positionAlarm;
@@ -262,4 +270,12 @@ public class CompanyDetector {
 		this.descriptionInstall = descriptionInstall;
 	}
 
+	public Alarm getAlarm() {
+		return alarm;
+	}
+
+	public void setAlarm(Alarm alarm) {
+		this.alarm = alarm;
+	}
+	
 }

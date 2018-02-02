@@ -3,19 +3,14 @@ package br.com.eneeyes.main.model.views;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
-import br.com.eneeyes.main.model.register.Sensor;
 
 @Entity
 @Table(name = "position_view")
@@ -37,9 +32,9 @@ public class PositionView {
 	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
 	private Long companyDetectorId;
 	
-	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="SENSOR_ID", nullable = false)
-	private Sensor sensor;
+//	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+//	@JoinColumn(name="SENSOR_ID", nullable = false)
+//	private Sensor sensor;
 	
 	@Column(name = "ALARM_TYPE")
 	private AlarmType alarmType;		
@@ -68,9 +63,9 @@ public class PositionView {
 		return companyDetectorId;
 	}
 
-	public final Sensor getSensor() {
-		return sensor;
-	}
+//	public final Sensor getSensor() {
+//		return sensor;
+//	}
 
 	public final Long getHistoricId() {
 		return historicId;

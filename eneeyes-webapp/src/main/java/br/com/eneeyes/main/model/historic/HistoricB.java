@@ -18,7 +18,7 @@ import br.com.eneeyes.main.model.enums.LogOrigem;
 		   appliesTo = "historic_b",
 		   indexes = {
 		      @Index(name="idxHistoricBDate", columnNames = "LAST_UPDATE"),		      
-		      @Index(name="idxHistoricBCompanySensorAndDate", columnNames = {"COMPANY_DETECTOR_ID", "SENSOR_ID", "LAST_UPDATE"})
+		      @Index(name="idxHistoricBCompanySensorAndDate", columnNames = {"COMPANY_DETECTOR_ID",  "LAST_UPDATE"})
 		   }
 		)
 public class HistoricB {

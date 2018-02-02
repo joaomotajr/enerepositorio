@@ -76,7 +76,8 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		$scope.sensorRangeMax = '';
 		$scope.sensorRangeMin = '';
 		$scope.sensorRangeUnit = '';
-	    $scope.sensorNameExist = "false";			
+		$scope.sensorNameExist = "false";	
+		$scope.existSensor = undefined;		
 	}
 	 
 	$scope.getSensors = function() {

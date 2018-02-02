@@ -92,7 +92,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	    $scope.detectorImage = "/assets/img/cover.jpg";
 	    $scope.detectorSensors = [];
 		$scope.detectorNameExist = "false";
-		$scope.existSensor = undefined;
+		$scope.existDetector = undefined;
 	}
 	 
 	$scope.getDetectors = function() {

@@ -60,14 +60,16 @@
 									<tr data-ng-repeat="item in alarms" data-ng-class="{'danger' : item.alarmOn == false, 'success' : item.alarmOn == true}">
 										<td>{{item.companyDto.name}}</td>
 										<td>{{item.name}}</td>
-										<td>{{item.deviceType}}</td>
+										<td>
+											<span data-ng-if="item.deviceType!='DETECTOR'">STANDALONE</span>
+											<span data-ng-if="item.deviceType=='DETECTOR'">{{item.deviceType}}</span>											
+										</td>
 										<td>
 											<span data-ng-if="item.deviceType=='DETECTOR'">{{item.gasDto.name}}</span>
 											<span data-ng-if="item.deviceType!='DETECTOR'">{{item.deviceType}}</span>											
 										</td>
 										<td>
-											<span data-ng-if="item.deviceType=='DETECTOR'">{{item.unitMeterGases}}</span>
-											<span data-ng-if="item.deviceType!='DETECTOR'">{{item.deviceType}}</span>																						
+											<span>{{item.unitMeterGases}}</span>
 										</td>
 										<td>
 											<button type="button" class="btn btn-primary btn-xs" data-ng-click="editAlarm($index)">editar</button>

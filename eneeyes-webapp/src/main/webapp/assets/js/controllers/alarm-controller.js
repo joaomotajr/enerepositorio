@@ -489,6 +489,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 
 
 	 $scope.deviceTypes = 	 [		  
+		  { name : 'DETECTOR', uid :  1, disabled : false },
 		  { name : 'PLC', uid :  2, disabled : false },
 		  { name : 'CONTROLLER', uid :  3, disabled : false },
 		  { name : 'ELETRICITY', uid :  6, disabled : false },

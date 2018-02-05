@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.AlarmDto;
-import br.com.eneeyes.main.dto.CompanyDetectorAlarmDto;
 import br.com.eneeyes.main.dto.PositionAlarmDto;
 import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.Position;
@@ -23,7 +22,6 @@ import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.repository.PositionAlarmRepository;
 import br.com.eneeyes.main.repository.singleton.AlarmSingletonRepository;
-import br.com.eneeyes.main.repository.singleton.CompanyDetectorAlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 import br.com.eneeyes.main.service.buss.AlarmParams;
@@ -62,17 +60,17 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		}
 		
 		//CompanyDetectorAlarmDto companyDetectorAlarmDto = CompanyDetectorAlarmSingletonRepository.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());		
-		CompanyDetectorAlarmDto companyDetectorAlarmDto = CompanyDetectorAlarmSingletonRepository.findByCompanyDetector(companyDetector.getUid());
+		AlarmDto alarmDto = AlarmSingletonRepository.findByCompanyDetector(companyDetector.getUid());
 		
-		AlarmDto alarmDto = null;
+//		AlarmDto alarmDto = null;
 		
 		AlarmType alarmType = AlarmType.NORMAL;
 		if(offLine)
 			alarmType = AlarmType.OFFLINE;
-		else if(companyDetectorAlarmDto == null)
+		else if(alarmDto == null)
 			alarmType = AlarmType.OFF;
 		else {			
-			alarmDto = companyDetectorAlarmDto.getAlarmDto();
+//			alarmDto = companyDetectorAlarmDto.getAlarmDto();
 			alarmType = getExistsAlarm(alarmDto, position.getLastValue());
 		}
 		

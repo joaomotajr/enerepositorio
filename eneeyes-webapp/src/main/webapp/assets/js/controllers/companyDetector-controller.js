@@ -140,12 +140,11 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	}
 
 	$scope.getPositionsAndIds = function(companyDetectorId) {
+		
+		$scope.listOnePosition = new PositionService.listOneByCompanyDetector();		 
+		$scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : companyDetectorId}, function() {
 			
-		$scope.listOnePositionNoTimer = new PositionService.listOneByCompanyDetector();		 
-		$scope.listOnePositionNoTimer.$position({_csrf : angular.element('#_csrf').val(), id : companyDetectorId}, function() {
-			
-			console.log("OK");
-			
+			$scope.selectedCompanyDetectorPosition = $scope.listOnePosition.t;		
 		});
 	}
 
@@ -182,7 +181,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		properties =  {
 			
 			theme: "fint",
-			caption: sensor.sensorName,
+			// caption: sensor.sensorName,
 			lowerLimit: sensor.rangeMin,
 			upperLimit: sensor.rangeMax,
 			lowerLimitDisplay: sensor.rangeMin + " Min",
@@ -300,17 +299,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	        $('#installDate').val(dataAdm.getUTCDate() + "/" + (dataAdm.getUTCMonth() + 1) + "/" + dataAdm.getUTCFullYear());	        
 		}	
 	}
-		
-	$scope.deviceTypes = 
-		[
-		 	// { name : 'OUTROS', uid : 0 },
-		 	{ name : 'DETECTOR', uid :  1 },
-		 	// { name : 'PLC', uid : 2 },
-		 	// { name : 'CONTROLADORA', uid : 3 },
-		 	// { name : 'ALARME', uid : 4 } 			  	
-		];	
 
-	 $scope.initializeDetector =  function()  {
+	$scope.initializeDetector =  function()  {
 				
 		$("#datemask").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
 	    $("#datemask2").inputmask("mm/dd/yyyy", { "placeholder": "mm/dd/yyyy" });
@@ -319,10 +309,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		$timeout(function () { initDatatable(); }, 500);
 		   
 		$("#stepTabDetector_1").trigger("click");
-	 }	 
+	};	 
 	 
 	 	 
-	 $scope.validDeliveryDate = function ($event) {
+	$scope.validDeliveryDate = function ($event) {
 
         if ($('#deliveryDate').val().match(/[^0-9\/]/g) != null) {
             $scope.deliveryDateValid = true;
@@ -333,9 +323,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
         else {
             $scope.deliveryDateValid = false;
         }
-    }
+    };
 	 
-	 $scope.validInstallDate = function ($event) {
+	$scope.validInstallDate = function ($event) {
 
         if ($('#installDate').val().match(/[^0-9\/]/g) != null) {
             $scope.installDateValid = true;
@@ -346,7 +336,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
         else {
             $scope.installDateValid = false;
         }
-    }
+    };
 	 
 	function initDatatable() {
 	
@@ -374,59 +364,29 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 				}
 		});
 	 }
-	
-	function format ( d ) {
+	 function format ( d ) {
 		
-		var index = $scope.detectors.findIndex(function(item) {return item.name === d});
-		var detector = $scope.detectors[index];
+		if($scope.selectedCompanyDetector.detectorDto.sensorDto) {
+			return '<div class="slider">'+
+			'<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+				'<tr>'+ 
+					'<th>Sensor</th>'+
+					'<th>Nome</th>'+
+					'<th>G&aacutes</th>'+
+					'<th>Range</th>'+
+					'<th>Medi&ccedil;&atilde;o </th>'+
+				'</tr>'+
+				'<tr>'+ 
+					'<td>1o.</td>'+
+					'<td>'+$scope.selectedCompanyDetector.detectorDto.sensorDto.name+'</td>'+	                
+					'<td>'+$scope.selectedCompanyDetector.detectorDto.sensorDto.gasDto.name+'</td>'+
+					'<td>'+$scope.selectedCompanyDetector.detectorDto.sensorDto.rangeMin + '-' + $scope.selectedCompanyDetector.detectorDto.sensorDto.rangeMax +'</td>'+
+					'<td>'+$scope.selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases + '</td>'+
+				'</tr>'+            
+				'</table>'+
+			'</div>';		
+		}
 	
-		if(detector.sensorsDto.length == 1) {
-			return '<div class="slider">'+
-	        '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-	            '<tr>'+ 
-            		'<th>Sensor</th>'+
-            		'<th>Nome</th>'+
-            		'<th>G&aacutes</th>'+
-            		'<th>Range</th>'+
-            		'<th>Medi&ccedil;&atilde;o </th>'+
-            	'</tr>'+
-	        	'<tr>'+ 
-	        		'<td>1o.</td>'+
-	                '<td>'+detector.sensorsDto[0].name+'</td>'+	                
-	                '<td>'+detector.sensorsDto[0].gasesDto[0].name+'</td>'+
-	                '<td>'+detector.sensorsDto[0].rangeMin + '-' + +detector.sensorsDto[0].rangeMax +'</td>'+
-	                '<td>'+detector.sensorsDto[0].unitMeterGases + '</td>'+
-	            '</tr>'+            
-	           '</table>'+
-	       '</div>';		
-		}
-		else {			
-			return '<div class="slider">'+
-	        '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-	            '<tr>'+ 
-            		'<th>Sensor</th>'+
-            		'<th>Nome</th>'+
-            		'<th>G&aacute;s</th>'+
-            		'<th>Range</th>'+
-            		'<th>Medi&ccedil;&atilde;o </th>'+          		
-            	'</tr>'+
-	        	'<tr>'+ 
-	        		'<td>1o.</td>'+
-	                '<td>'+detector.sensorsDto[0].name + '</td>' +	                
-	                '<td>'+detector.sensorsDto[0].gasesDto[0].name+'</td>'+
-	                '<td>'+detector.sensorsDto[0].rangeMin + '-' + +detector.sensorsDto[0].rangeMax +'</td>'+
-	                '<td>'+detector.sensorsDto[0].unitMeterGases + '</td>'+
-	            '</tr>'+
-	            '<tr>'+
-	                '<td>2o.</td>'+
-	                '<td>'+detector.sensorsDto[1].name+'</td>'+
-	                '<td>'+detector.sensorsDto[1].gasesDto[0].name+'</td>'+
-	                '<td>'+detector.sensorsDto[1].rangeMin + '-' + +detector.sensorsDto[0].rangeMax +'</td>'+
-	                '<td>'+detector.sensorsDto[1].unitMeterGases + '</td>'+
-	            '</tr>'+
-	           '</table>'+
-	       '</div>';
-		}
 	}	
 	
 	$scope.getAlarms = function() {
@@ -435,7 +395,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		 $scope.resultAlarms.$alarm({_csrf : angular.element('#_csrf').val(), companyId : $scope.$root.selectedCompany.uid }, function(){			 
 			 $scope.alarms = $scope.resultAlarms.list;			 
         });		 
-	}
+	};
 	
 	$scope.configAlarm = function(index) {
 
@@ -447,86 +407,43 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			$('#modalAlarm').modal({ show: 'false', backdrop: 'static', keyboard:'false' });
 						 
 		}, 300);
-	}
-	 
-	$scope.selecionarAlarm = function(uid) {
-		
-		/* Obtem Alarm selecionado */
-		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; })[0];
-		
-		if($scope.selectedCompanyDetectorAlarm.rangeMax < selectedAlarm.alarm3) {
+	};
+
+	$scope.toggleAlarm = function(alarm) {
+
+		if(alarm != null && $scope.selectedCompanyDetectorAlarm.rangeMax < alarm.alarm3) {
 			$scope.msgErroAlarm = "Alarm Selecionado excede Range Max do Sensor, Verifique";
 			return;
 		}
-		
-		$scope.msgErroAlarm = undefined;
-		
-		alarm = {
-		 		alarmDto : selectedAlarm, 
-		 		companyDetectorDto: {uid : $scope.selectedCompanyDetector.uid}, 
-		 		sensorId : $scope.selectedCompanyDetectorAlarm.sensorId
-		 };
 
-		 $scope.inclusaoCompanyDetectorAlarm = new CompanyDetectorAlarmService.save(alarm);
-		 $scope.inclusaoCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
- 
-			 angular.element('body').removeClass('loading');
+		if(alarm != null) {
+			$scope.updateAlarm = new CompanyDetectorService.updateAlarm();
+			$scope.updateAlarm.$companyDetector({_csrf : angular.element('#_csrf').val(), alarmId: alarm.uid, id : $scope.selectedCompanyDetector.uid }, function(){						
+				if (!$scope.updateAlarm.isError) {
+					$scope.selectedCompanyDetectorAlarm.alarmId = alarm.uid;
+					$scope.getCompanyDetectorAlarms($scope.selectedCompanyDetector.uid);	
+				}			
+			});	
+		}
+		else {
 
-			 $scope.selectedCompanyDetectorAlarm.alarmId = selectedAlarm.uid;			 
-			 $scope.getCompanyDetectorAlarms($scope.selectedCompanyDetectorAlarm.companyDetectorId);	
-			 //$scope.configAlarm($scope.sensorIndex); 
-		 });		
-	}
+			$scope.removeAlarm = new CompanyDetectorService.removeAlarm();
+			$scope.removeAlarm.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid }, function(){						
+				if (!$scope.removeAlarm.isError) {
+					$scope.selectedCompanyDetectorAlarm.alarmId = null;			 
+					$scope.getCompanyDetectorAlarms($scope.selectedCompanyDetector.uid);	
+				}			
+			});	
+
+		}
+
+	};	 
 	
-	$scope.mostrarAlarmTela = function(selectedAlarm) {
-				
-		/* Verifica se o Sensor possui Alarm */
-		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(function (i) { return i.sensorId === $scope.selectedCompanyDetectorAlarm.sensorId});
-
-		
-				
-		// if (detectorAlarmIndex < 0) {
-		// 	/* Add - TELA  */
-		// 	$scope.selectedCompanyDetectorAlarms.push({alarmDto :  selectedAlarm, sensorId : $scope.selectedCompanyDetectorAlarm.sensorId});
-		// }		
-		// else {
-		// 	/* Upd TELA */
-		// 	$scope.selectedCompanyDetectorAlarms[detectorAlarmIndex] = {alarmDto :  selectedAlarm, sensorId : $scope.selectedCompanyDetectorAlarm.sensorId};
-		// }		
-	}
-		
-	$scope.removerAlarm = function(uid) {		
-
-		angular.element('body').addClass('loading');
-		
-		var selectedAlarm = $.grep($scope.alarms, function (e) { return e.uid == uid ; })[0];
-				
-		alarm = {
-		 		alarmDto : selectedAlarm, 
-		 		companyDetectorDto: {uid : $scope.selectedCompanyDetector.uid}, 
-		 		sensorId : $scope.selectedCompanyDetectorAlarm.sensorId
-		 };
-		
-		$scope.deleteCompanyDetectorAlarm = new CompanyDetectorAlarmService.deletar(alarm);
-		$scope.deleteCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val()}, function(){		
-		
-			angular.element('body').removeClass('loading');			
-			$scope.getCompanyDetectorAlarms($scope.selectedCompanyDetectorAlarm.companyDetectorId);	
-			$scope.selectedCompanyDetectorAlarm = undefined;			
-		});		
-	}
-		
-	$scope.saveCompanyDetectorAlarm = function(alarm) {
-		angular.element('body').addClass('loading');
- 
-					 
-	}
-
 	$scope.getCompanyDetectorMaintenanceHistoric = function() {		 
 		
 		$scope.companyDetectorMaintenanceHistoric = new CompanyDetectorMaintenanceHistoricService.listPorCompanyDetector();			
 		$scope.companyDetectorMaintenanceHistoric.$companyDetectorMaintenanceHistoric({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){});		 
-	}
+	};
 	
 	/* ------------------------------------- Inicio Processamento --------------------------------------------*/
 	

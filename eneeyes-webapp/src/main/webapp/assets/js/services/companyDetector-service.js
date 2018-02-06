@@ -24,7 +24,13 @@ app.factory('CompanyDetectorService', function($resource){
         	companyDetector : {method : 'POST'}
         }),
         updateLatitudeLongitude : $resource('/security/api/companyDetector/updateLatitudeLongitude/:latitude/:longitude/:id/', {latitude: '@latitude', longitude: '@longitude', id: '@id'}, {
-        	companyDetector : {method : 'GET'}
+        	companyDetector : {method : 'PUT'}
+		}),
+		updateAlarm : $resource('/security/api/companyDetector/updateAlarm/:alarmId/:id/', {alarmId: '@alarmId', id: '@id'}, {
+        	companyDetector : {method : 'PUT'}
+		}),
+		removeAlarm : $resource('/security/api/companyDetector/removeAlarm/:alarmId/:id/', {id: '@id'}, {
+        	companyDetector : {method : 'PUT'}
         }),
      };
 });

@@ -189,6 +189,32 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		return result;	
 	}
 	
+	public BasicResult<?> removeAlarm(Long uid) {
+		
+		LogResult<CompanyDetectorDto> result = new LogResult<CompanyDetectorDto>();
+		repository.setAlarm(null, uid);
+		
+		result.setResultType( ResultMessageType.SUCCESS );
+		result.setMessage("Alarm gravado/removido com sucesso.");
+		
+		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.UPDATE, result.toString());
+		
+		return result;	
+	}
+	
+	public BasicResult<?> updateAlarm(Long alarmId, Long uid) {
+		
+		LogResult<CompanyDetectorDto> result = new LogResult<CompanyDetectorDto>();
+		repository.setAlarm(alarmId, uid);
+		
+		result.setResultType( ResultMessageType.SUCCESS );
+		result.setMessage("Alarm gravado/removido com sucesso.");
+		
+		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.UPDATE, result.toString());
+		
+		return result;	
+	}
+	
 	public BasicResult<?> findByArea(Long uid) {
 		
 		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>(); 	

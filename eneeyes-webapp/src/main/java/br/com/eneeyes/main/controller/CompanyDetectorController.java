@@ -60,10 +60,22 @@ public class CompanyDetectorController {
 		return service.findByArea(uid);		
 	}
 	
-	@RequestMapping(value="/security/api/companyDetector/updateLatitudeLongitude/{latitude}/{longitude}/{uid}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/companyDetector/updateLatitudeLongitude/{latitude}/{longitude}/{uid}", method=RequestMethod.PUT, consumes = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> updateLatitudeLongitude(@PathVariable Double latitude, @PathVariable Double longitude, @PathVariable Long uid) {		
 		return service.updateLatitudeLongitude(latitude, longitude, uid);
 	}
-
+	
+	@RequestMapping(value="/security/api/companyDetector/updateAlarm/{alarmId}/{uid}", method=RequestMethod.PUT, consumes = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> updateAlarm(@PathVariable Long alarmId, @PathVariable Long uid) {		
+		return service.updateAlarm(alarmId, uid);
+	}
+	
+	@RequestMapping(value="/security/api/companyDetector/removeAlarm/{uid}", method=RequestMethod.PUT, consumes = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> removeAlarm(@PathVariable Long uid) {		
+		return service.removeAlarm(uid);
+	}
+	
 }

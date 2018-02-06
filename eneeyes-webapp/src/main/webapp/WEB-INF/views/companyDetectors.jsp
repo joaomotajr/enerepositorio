@@ -40,14 +40,15 @@
 				    			<div class="col-md-12">
 					    		<form name="userForm">					    		
 									
-						    		<div class="row">				    			
-								        <div class="col-md-2">
+						    		<div class="col-md-7">
+									
+								        <div class="col-md-4">
 								        	<div class="form-group">
 								                <label class="control-label">C&oacute;digo</label>
 								                <input class="form-control" placeholder="C&oacute;digo do Detector" data-ng-model="selectedCompanyDetector.uid" readonly>
 								            </div>	
 								        </div>
-								        <div class="col-md-2">
+								        <div class="col-md-4">
 								            <div class="form-group">								            
 								                <label class="control-label">Identifica&ccedil;&atilde;o</label>
 								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Identifica&ccedil;&atilde;o Obrigatorio]</span>
@@ -61,68 +62,62 @@
 								            </div>
 								        </div>
 								        
-								        <div class="col-md-2">
+								        <div class="col-md-4">
 								        	<div class="form-group">
 								                <label class="control-label">Nr. de S&eacute;rie</label>
 								                <input class="form-control" placeholder="Nro de S&eacute;rie do Detector" data-ng-maxlength="24" 
 								                data-ng-model="selectedCompanyDetector.serialNumber">
 								            </div>	
-								        </div>
-										
-								        <div class="col-md-6">
+										</div>
+																			
+								        <div class="col-md-12">
 								            <div class="form-group">
 								                <label class="control-label">Descri&ccedil;&atilde;o</label>
 								                <input class="form-control" placeholder="Descri&ccedil;&atilde;o" data-ng-model="selectedCompanyDetector.description">
 								            </div>
-								        </div>
-								    </div>
+								        </div>								    									
 									
-									<div class="row">
-								        <div class="col-md-6">
-								            <div class="form-group">
-								                <label class="control-label">Local</label>
-								                <input id="idUnitName" class="form-control" placeholder="Local" data-ng-model="selectedCompanyDetector.local">
-								            </div>
-								        </div>
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="control-label">Local</label>
+												<input id="idUnitName" class="form-control" placeholder="Local" data-ng-model="selectedCompanyDetector.local">
+											</div>
+										</div>
+									</div>
+									<div class="col-md-5">
+										<div class="panel panel-primary" data-ng-if="selectedCompanyDetector.detectorDto">
 
-										<div class="col-md-6">
-											<label class="control-label">Identifica&ccedil;&atilde;o do Detector/Sensores</label>
-											<div class="box box-primary collapsed-box">
-												<div class="box-header with-border">
-													<Label class="box-title">{{selectedCompanyDetector.detectorDto.name}}-{{selectedCompanyDetector.detectorDto.model}} Sensores: {{selectedCompanyDetector.detectorDto.sensorsDto.length}} </label>
-													<div class="box-tools pull-right" title="Clique para mais detalhes">
-														<button class="btn btn-box-tool" data-widget="collapse">
-															<i class="fa fa-plus"></i>
-														</button>
-													</div>
-												</div>												
-												<div class="box-body">
-													<table class="table table-bordered table-hover">
-														<thead>
-															<tr>					
-																<th>ID</th>
-																<th>Status</th>																
-																<th>Nome</th>																																						
-															</tr>
-														</thead>
-														<tbody>                                                        
-															<tr data-ng-repeat="item in listOnePositionNoTimer.list">
-																
-																<td>{{item.uid}}</td>
-																<td>{{item.alarmType}}</td>	
-																<td>{{item.sensor.name}}</td>																						
-															</tr>                                                               
-														</tbody>
-													</table>												
-												</div>												
-											</div>											
-										</div>													        
-								    </div>								    		    					
+											<div class="panel-heading">
+												<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.detectorDto.name}} - {{selectedCompanyDetector.detectorDto.model}}</h3>																			
+											</div>	
+
+											<div class="panel-body" style="padding-bottom: 1px">						    
+												<input type="file" id="idInputImageDetector" style='display:none'>									                						                    
+												<img class="profile-user-img img-responsive imgDetector" style="margin: 0 auto; border: none" 
+													data-ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
+																							
+												<ul class="list-group">													
+													<li class="list-group-item" style="padding: 1px 10px;">
+														<label><i class="fa fa-feed"></i>&nbsp;Sensor:&nbsp;</label>{{selectedCompanyDetector.detectorDto.sensorDto.name}}
+													</li>
+													<li class="list-group-item" style="padding: 1px 10px;">
+														<label><i class="fa fa-yelp"></i>&nbsp;Gas:&nbsp;</label>{{selectedCompanyDetector.detectorDto.sensorDto.gasDto.name}}
+													</li>
+													<li class="list-group-item" style="padding: 1px 10px;">
+														<label>Id:</label>&nbsp;{{selectedCompanyDetectorPosition.uid}}
+													</li>
+													<li class="list-group-item" style="padding: 1px 10px;" title="Data/Hora: {{selectedCompanyDetectorPosition.lastUpdate | date:'dd/MM/yyyy HH:mm'}}">
+														<label>Status:</label>&nbsp;{{selectedCompanyDetectorPosition.alarmType}}&nbsp;&nbsp;&nbsp;<label>Medi&ccedil;&atilde;o:</label>&nbsp;{{selectedCompanyDetectorPosition.lastValue}} 
+													</li>
+												</ul>
+											</div>
+										</div>																						        
+									</div>		
 					       		</form>
 					       		</div>
 				    		</div>
 				    		
-				    		<div class="row">
+				    		<div class="row" data-ng-if="!selectedCompanyDetector.detectorDto">
 
 				    			<jsp:include page="detectorsSensorsList.jsp"/>
 				    			
@@ -143,7 +138,7 @@
 							<div class="row" style="margin-right: 5px !important; margin-left: 5px !important;">			       		 
 								<div data-ng-repeat="item in selectedCompanyDetectorAlarms">				              					            						              	
 									
-									<div class="col-md-5">
+									<div class="col-md-10">
 										<div class="panel panel-primary">								                
 											<div class="panel-heading">
 												<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong> {{item.companyDetectorName}}</h2>							
@@ -160,49 +155,61 @@
 													</div>
 												</div>																	
 
-												<div class="row">								                	
-													<div style=" width: 100%; display: flex; justify-content: center; text-align: center;">														
-														<div data-fusioncharts							
-															data-width="150"
-															data-height= "250"																				    						    						    					    						    						    						    															
-															data-type="vled"
-															data-datasource="{{item.dataSource}}">
+												<div class="row">
+													<div class="col-md-12">								                	
+														<div class="col-md-6">								                	
+															<div style=" width: 100%; display: flex; justify-content: center; text-align: center;">														
+																<div data-fusioncharts							
+																	data-width="180"
+																	data-height= "260"																				    						    						    					    						    						    						    															
+																	data-type="vled"
+																	data-datasource="{{item.dataSource}}">
+																</div>
+															</div>
 														</div>
-													</div>													
+														<div class="col-md-6">
+															<br>
+															<ul class="list-group">																		
+																<li class="list-group-item" style="padding: 0px 15px;">
+																	<label>Sensor:</label><span class="pull-right">{{selectedCompanyDetector.detectorDto.sensorDto.name}}</span>
+																</li>
+																<li class="list-group-item" style="padding: 0px 15px;">
+																	<label>G&aacute;s:</label> 
+																	<span class="pull-right">
+																		{{item.gasName}}
+																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
+																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}
+																	</span>
+																</span>
+																</li>
+																
+																<li class="list-group-item" style="padding: 0px 15px;">
+																	<label>Range: Min|Man:</label><span class="pull-right">{{item.rangeMin}} | {{item.rangeMax}}</span>
+																</li>
+																<span data-ng-if="!item.alarmOn">
+																		<br><hr><br><br><hr>
+																</span>
+																<span data-ng-if="item.alarmOn">
+																	<li class="list-group-item" style="padding: 0px 15px;">
+																		<label>Alarme Atribu&iacute;do:</label><span class="pull-right">{{item.alarmName}}</span> 
+																	</li>
+																	<li class="list-group-item list-group-item-info" style="padding: 2px 15px;">
+																		<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm1}}</span> <label>Alarme1:</label> Detec&ccedil;&atilde;o
+																	</li>
+																	<li class="list-group-item list-group-item-warning" style="padding: 2px 15px;">
+																		<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm2}}</span> <label>Alarme2:</label> Alerta
+																	</li>
+																	<li class="list-group-item list-group-item-danger" style="padding: 2px 15px;">
+																		<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm3}}</span> <label>Alarme3:</label> Evacua&ccedil;&atilde;o:
+																	</li>
+																</span>
+															</ul>
+														</div>								                	
+													
+													</div>
 												</div>	
 																							
-												<ul class="list-group">																		
-													<li class="list-group-item" style="padding: 0px 15px;">
-														<label>G&aacute;s:</label> 
-														<span class="pull-right">
-															{{item.gasName}}
-															<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
-															<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}															
-														</span>
-													</span>
-													</li>
-													
-													<li class="list-group-item" style="padding: 0px 15px;">
-														<label>Range: Min|Man:</label><span class="pull-right">{{item.rangeMin}} | {{item.rangeMax}}</span>
-													</li>
-													<span data-ng-if="!item.alarmOn">
-															<br><hr><br><br><hr>
-													</span>
-													<span data-ng-if="item.alarmOn">
-														<li class="list-group-item" style="padding: 0px 15px;">
-															<label>Alarme Atribu&iacute;do:</label><span class="pull-right">{{item.alarmName}}</span> 
-														</li>
-														<li class="list-group-item list-group-item-info" style="padding: 2px 15px;">
-															<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm1}}</span> <label>Alarme1:</label> Detec&ccedil;&atilde;o
-														</li>
-														<li class="list-group-item list-group-item-warning" style="padding: 2px 15px;">
-															<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm2}}</span> <label>Alarme2:</label> Alerta
-														</li>
-														<li class="list-group-item list-group-item-danger" style="padding: 2px 15px;">
-															<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm3}}</span> <label>Alarme3:</label> Evacua&ccedil;&atilde;o:
-														</li>
-													</span>
-												</ul>
+												
 
 											</div>
 										</div>
@@ -268,7 +275,11 @@
 				<div class="modal-content">                            
 					<div class="modal-body">
 						<div class="panel panel-default">
-							<div class="panel-heading" style="text-align:center">Selecione Alarme para o Sensor: <strong> {{selectedCompanyDetectorAlarm.sensorName}} </strong> - Valor M&aacute;ximo: <strong>{{selectedCompanyDetectorAlarm.rangeMax}}</strong> </div>                                                                           
+							<div class="panel-heading" style="text-align:center; font-size: 1.3em;">
+								Alarme para o Sensor: <strong>{{selectedCompanyDetectorAlarm.sensorName}} </strong> - 
+								Artefato: <strong>{{selectedCompanyDetectorAlarm.gasName}}</strong> - 
+								Valor M&aacute;ximo: <strong>{{selectedCompanyDetectorAlarm.rangeMax}}</strong>
+							</div>
 					  	</div>
 				
 						<div class="box">
@@ -286,29 +297,40 @@
 									<table class="table table-hover">
 										<thead>
 											<tr>
+												<th>Id.</th>
 												<th>Nome</th>
-												<th>Gas</th>                                                            
-											<th>Alarme 1</th>
+												<th>Gas</th>                                                    												
+												<th>Alarme 1</th>
 												<th>Alarme 2</th>
 												<th>Alarme 3</th>
-												<th>A&ccedil;&atilde;o</th>						
+												<th>A&ccedil;&atilde;o</th>																		
 											</tr>
 										</thead>
 										<tbody>                                                        
-											<tr data-ng-repeat="item in alarms | gasFilter:search">
+											<tr data-ng-repeat="item in alarms">
+												<td>{{item.uid}}</td>
 												<td>{{item.name}}</td>
-												<td>{{item.gasDto.name}}</td>															        
+												<td>{{item.gasDto.name}}												
+													<span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
+													<span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}
+												</td>
 												<td>{{item.alarm1}}</td>
 												<td>{{item.alarm2}}</td>
 												<td>{{item.alarm3}}</td>
-												<td>																										
+												
+												<td>
+													<div data-ng-if="(item.unitMeterGases != selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases && 
+														item.gasDto.name != selectedCompanyDetector.detectorDto.sensorDto.gasDto.name)">
+														<button type="button" class="btn btn-offLine btn-xs" disabled>Incompativel</button>
+													</div>																										
 													<div data-ng-if="item.uid == selectedCompanyDetectorAlarm.alarmId">
-														<button type="button" class="btn btn-danger btn-xs" data-ng-click="removerAlarm(item.uid)">Remover</button>
+														<button type="button" class="btn btn-danger btn-xs" data-ng-click="toggleAlarm(null)">&nbsp;&nbsp;&nbsp;Remover&nbsp;&nbsp;</button>
 													</div>
-													<div data-ng-if="item.uid != selectedCompanyDetectorAlarm.alarmId">
-														<button type="button" class="btn btn-primary btn-xs"  data-ng-click="selecionarAlarm(item.uid)">Selecionar</button>
+													<div data-ng-if="(item.unitMeterGases == selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases && 
+														item.gasDto.name == selectedCompanyDetector.detectorDto.sensorDto.gasDto.name) && item.uid != selectedCompanyDetectorAlarm.alarmId">
+														<button type="button" class="btn btn-primary btn-xs" data-ng-click="toggleAlarm(item)">&nbsp;&nbsp;Selecionar&nbsp;&nbsp;</button>
 													</div>													
-												</td>																		
+												</td>													
 											</tr>											                                                       
 										</tbody>
 									</table>

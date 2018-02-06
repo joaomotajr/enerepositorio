@@ -5,7 +5,7 @@ app.filter('gasFilter', function () {
         if (!criteria ||( criteria && !criteria.unitMeterGases != null && !criteria.gas) )
             return objects;
 
-        for (index in objects) {
+        for (var index in objects) {
         	
         	if (objects[index].unitMeterGases == criteria.unitMeterGases && objects[index].gasDto.name == criteria.gas  ) {
 

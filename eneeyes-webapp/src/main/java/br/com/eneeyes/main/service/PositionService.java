@@ -75,6 +75,10 @@ public class PositionService implements IService<PositionDto> {
 	
 	public void createInitialPosition(CompanyDetector companyDetector) {
 				
+		if(repository.countByCompanyDetector(companyDetector) > 0) {
+			return;
+		}
+		
 		Position position = new Position();	
 		
 		position.setCompanyDetector(companyDetector);		

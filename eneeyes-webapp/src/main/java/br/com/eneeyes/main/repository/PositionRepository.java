@@ -19,6 +19,8 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
 //	public Position findByCompanyDetectorIdAndSensorId(Long companyDetectorId, Long sensorId);
 //	
 //	public Long countByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
+	
+	public Long countByCompanyDetector(CompanyDetector companyDetector);
 		
 	public List<Position> findByCompanyDetectorAndLastUpdateBetween(CompanyDetector companyDetector, Date in, Date out);
 

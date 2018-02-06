@@ -39,22 +39,25 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	private LogAuditoriaService logAuditoriaService;
 	
 	public BasicResult<?> save(CompanyDetectorDto dto) {
-		LogResult<CompanyDetectorDto> result = new LogResult<CompanyDetectorDto>();
-		ActionType actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;
+		LogResult<CompanyDetectorDto> result = new LogResult<CompanyDetectorDto>();		
 		
 		CompanyDevice companyDevice = companyDeviceRepository.findOne(dto.getCompanyDeviceDto().getUid());
 		
 		CompanyDetector companyDetector = new CompanyDetector(dto);
 		companyDetector.setCompanyDevice(companyDevice);				
-		companyDetector = repository.save(companyDetector);
-		
-		createInitialPosition(companyDetector);
-		
-		updateCompanyDeviceName(dto.getName(), dto.getCompanyDeviceDto().getUid());
+		companyDetector = repository.save(companyDetector);		
 						
 		result.setEntity(new CompanyDetectorDto(companyDetector));
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Detector Gravado com Sucesso.");
+		
+		ActionType actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;
+		
+		if (actionType == ActionType.CREATE) {
+			createInitialPosition(companyDetector);
+			
+			updateCompanyDeviceName(dto.getName(), dto.getCompanyDeviceDto().getUid());
+		}
 		
 		logAuditoriaService.save(this.getClass().getSimpleName(), actionType, result.toString());
 		

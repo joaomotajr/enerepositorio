@@ -293,13 +293,13 @@
 					           		<strong>Alerta! </strong>{{msgErroAlarm}} 
 					       		</div>
 							
-								<div style="height: 500px; overflow: auto">
+								<div style="height: 400px; overflow: auto">
 									<table class="table table-hover">
 										<thead>
 											<tr>
 												<th>Id.</th>
 												<th>Nome</th>
-												<th>Gas</th>                                                    												
+												<th>Artefato</th>                                                    												
 												<th>Alarme 1</th>
 												<th>Alarme 2</th>
 												<th>Alarme 3</th>
@@ -310,21 +310,22 @@
 											<tr data-ng-repeat="item in alarms">
 												<td>{{item.uid}}</td>
 												<td>{{item.name}}</td>
-												<td>{{item.gasDto.name}}												
+												<td>
+													<span data-ng-if="item.deviceType=='DETECTOR'">{{item.gasDto.name}}</span>
+													<span data-ng-if="item.deviceType!='DETECTOR'">{{item.deviceType}}</span>
 													<span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
 													<span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}
 												</td>
 												<td>{{item.alarm1}}</td>
 												<td>{{item.alarm2}}</td>
-												<td>{{item.alarm3}}</td>
-												
+												<td>{{item.alarm3}}</td>												
 												<td>
 													<div data-ng-if="(item.unitMeterGases != selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases && 
 														item.gasDto.name != selectedCompanyDetector.detectorDto.sensorDto.gasDto.name)">
 														<button type="button" class="btn btn-offLine btn-xs" disabled>Incompativel</button>
 													</div>																										
 													<div data-ng-if="item.uid == selectedCompanyDetectorAlarm.alarmId">
-														<button type="button" class="btn btn-danger btn-xs" data-ng-click="toggleAlarm(null)">&nbsp;&nbsp;&nbsp;Remover&nbsp;&nbsp;</button>
+														<button type="button" class="btn btn-danger btn-xs" data-ng-click="toggleAlarm(null)">&nbsp;&nbsp;&nbsp;Remover&nbsp;&nbsp;&nbsp;</button>
 													</div>
 													<div data-ng-if="(item.unitMeterGases == selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases && 
 														item.gasDto.name == selectedCompanyDetector.detectorDto.sensorDto.gasDto.name) && item.uid != selectedCompanyDetectorAlarm.alarmId">

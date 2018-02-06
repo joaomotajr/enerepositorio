@@ -80,7 +80,7 @@ public class Alarm {
 	}
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="GAS_ID", nullable = false)
+	@JoinColumn(name="GAS_ID", nullable = true)
 	private Gas gas;		
 	
 	@Column(name = "DEVICE_TYPE", columnDefinition = "int default 0")

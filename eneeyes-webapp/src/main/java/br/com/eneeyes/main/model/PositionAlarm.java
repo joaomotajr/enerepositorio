@@ -40,7 +40,6 @@ public class PositionAlarm {
     	this.firstUpdate = dto.getFirstUpdate();
     	this.lastUpdate = dto.getLastUpdate();    	
     	this.lastValue = dto.getLastValue();    	
-//    	this.sensor = new Sensor(dto.getSensorDto());    	
     	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
     	this.alarmType = dto.getAlarmType();
     	this.alarmStatus = dto.getAlarmStatus();
@@ -68,10 +67,6 @@ public class PositionAlarm {
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
 	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
 	private CompanyDetector companyDetector;
-	
-//	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-//	@JoinColumn(name="SENSOR_ID", nullable = false)
-//	private Sensor sensor;
 	    
 	@Column(name = "ALARM_TYPE", columnDefinition = "int default 0")
 	private AlarmType alarmType;	
@@ -216,15 +211,7 @@ public class PositionAlarm {
 
 	public void setCompanyDetector(CompanyDetector companyDetector) {
 		this.companyDetector = companyDetector;
-	}
-	
-//	public final Sensor getSensor() {
-//		return sensor;
-//	}
-
-//	public final void setSensor(Sensor sensor) {
-//		this.sensor = sensor;
-//	}
+	}	
 	
 	public Date getStatusUpdate() {
 		return statusUpdate;

@@ -33,11 +33,8 @@ public class Position {
     	this.lastUpdate = dto.getLastUpdate();    	
     	this.lastValue = dto.getLastValue();
     	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
-// //    	this.sensor = new Sensor(dto.getSensorDto());
-//    	this.companyDetectorId = dto.getCompanyDetectorId();
-//    	this.sensorId = dto.getSensorId();
-    	this.alarmType = dto.getAlarmType();    	    	
-//    	this.historic = new Historic(dto.getHistoricDto());
+    	this.alarmType = dto.getAlarmType();   	    	
+
     	this.historicId = dto.getHistoricId();
     }
     
@@ -63,22 +60,8 @@ public class Position {
 	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
 	private CompanyDetector companyDetector;
 	
-//	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-//	@JoinColumn(name="SENSOR_ID", nullable = false)
-//	private Sensor sensor;
-	
-//	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
-//	private Long companyDetectorId;
-//	
-//	@Column(name="SENSOR_ID", nullable = false)
-//	private Long sensorId;
-	
 	@Column(name = "ALARM_TYPE", columnDefinition = "int default 0", nullable = false)
 	private AlarmType alarmType;
-		
-//	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
-//	@JoinColumn(name="HISTORIC_ID", nullable = true)
-//	private Historic historic;
 		
 	@Column(name="HISTORIC_ID", nullable = true)
 	private Long historicId;
@@ -112,22 +95,6 @@ public class Position {
 		this.lastValue = lastValue;
 	}
 	
-//	public final Long getCompanyDetectorId() {
-//		return companyDetectorId;
-//	}
-//
-//	public final void setCompanyDetectorId(Long companyDetectorId) {
-//		this.companyDetectorId = companyDetectorId;
-//	}
-//
-//	public final Long getSensorId() {
-//		return sensorId;
-//	}
-//
-//	public final void setSensorId(Long sensorId) {
-//		this.sensorId = sensorId;
-//	}
-	
 	public CompanyDetector getCompanyDetector() {
 		return companyDetector;
 	}
@@ -135,14 +102,6 @@ public class Position {
 	public void setCompanyDetector(CompanyDetector companyDetector) {
 		this.companyDetector = companyDetector;
 	}
-	
-//	public final Sensor getSensor() {
-//		return sensor;
-//	}
-//
-//	public final void setSensor(Sensor sensor) {
-//		this.sensor = sensor;
-//	}
 	
 	public final AlarmType getAlarmType() {
 		return alarmType;

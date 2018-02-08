@@ -43,7 +43,6 @@ public class HistoricService implements IService<HistoricDto> {
 			Historic historic = new Historic();
 
 			historic.setCompanyDetectorId(position.getCompanyDetector().getUid());
-//			historic.setSensorId(position.getSensor().getUid());
 			historic.setLastUpdate(new Date());
 			historic.setValue(value);
 			historic.setLogOrigem(LogOrigem.DEVICE);

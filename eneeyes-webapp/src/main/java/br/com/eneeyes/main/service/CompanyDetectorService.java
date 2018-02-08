@@ -29,9 +29,6 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	@Autowired
 	private CompanyDeviceService companyDeviceService;
 		
-//	@Autowired
-//	private CompanyDetectorAlarmService companyDetectorAlarmService;
-	
 	@Autowired
 	private PositionService positionService;
 	
@@ -79,9 +76,7 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 				
 		LogResult<CompanyDetectorDto> result = new LogResult<CompanyDetectorDto>(); 	
 				
-		try {					
-//			companyDetectorAlarmService.deleteByCompanyDetectorId(uid);
-			
+		try {		
 			repository.delete(uid);
 			
 			result.setResultType( ResultMessageType.SUCCESS );

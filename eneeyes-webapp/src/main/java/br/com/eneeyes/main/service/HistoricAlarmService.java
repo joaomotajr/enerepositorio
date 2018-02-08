@@ -40,8 +40,7 @@ public class HistoricAlarmService {
 			
 			if(intervalType ==  IntervalType.UM_MES) {
 																	
-				inicio = Util.addMonth(fim, -1);								
-//				page = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, inicio, fim, new PageRequest(currentPage, lenPage));
+				inicio = Util.addMonth(fim, -1);
 				page = repository.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, inicio, fim, new PageRequest(currentPage, lenPage));
 			}
 			else
@@ -109,14 +108,11 @@ public class HistoricAlarmService {
 		
 	}
 
-		
-//	public void save(BigDecimal value, Long companyDetectorId, Long sensorId, Long historicId, AlarmDto alarmDto, AlarmType alarmType, AlarmParams alarmParams ) {
 	public void save(BigDecimal value, Long companyDetectorId, Long historicId, AlarmDto alarmDto, AlarmType alarmType, AlarmParams alarmParams ) {		
 		HistoricAlarm historicAlarm = new HistoricAlarm();
 		
 		historicAlarm.setDate(new Date());
 		historicAlarm.setCompanyDetectorId(companyDetectorId);
-//		historicAlarm.setSensorId(sensorId);
 		historicAlarm.setHistoricId(historicId);
 		historicAlarm.setAlarmOn(alarmDto.getAlarmOn());
 		historicAlarm.setAlarmType(alarmType);
@@ -131,14 +127,12 @@ public class HistoricAlarmService {
 		repository.save(historicAlarm);
 	}
 	
-//	public void save(BigDecimal value, Long companyDetectorId, Long sensorId, Long historicId, AlarmType alarmType) {
 	public void save(BigDecimal value, Long companyDetectorId, Long historicId, AlarmType alarmType) {	
 		HistoricAlarm historicAlarm = new HistoricAlarm();
 		
 		historicAlarm.setUid(null);
 		historicAlarm.setDate(new Date());
 		historicAlarm.setCompanyDetectorId(companyDetectorId);
-//		historicAlarm.setSensorId(sensorId);
 		historicAlarm.setHistoricId(historicId);		
 		historicAlarm.setAlarmType(alarmType);		
 		historicAlarm.setValue(value);	

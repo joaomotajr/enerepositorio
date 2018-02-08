@@ -15,6 +15,7 @@ import br.com.eneeyes.main.repository.singleton.AlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.LogResult;
 import br.com.eneeyes.main.result.Result;
+import br.com.eneeyes.main.service.views.CompanyDetectorAlarmViewService;
 
 @Service
 public class AlarmService implements IService<AlarmDto> {
@@ -24,6 +25,9 @@ public class AlarmService implements IService<AlarmDto> {
 	
 //	@Autowired
 //	private CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
+	
+	@Autowired
+	private CompanyDetectorAlarmViewService companyDetectorAlarmViewService;
 	
 	@Autowired
 	private LogAuditoriaService logAuditoriaService;
@@ -36,7 +40,8 @@ public class AlarmService implements IService<AlarmDto> {
 		alarm = repository.save(alarm);
 		
 //		CompanyDetectorAlarmSingletonRepository.populate(companyDetectorAlarmAlarmService.findAll());		
-		AlarmSingletonRepository.populate(repository.findAll());
+//		AlarmSingletonRepository.populate(repository.findAll());
+		AlarmSingletonRepository.populate(companyDetectorAlarmViewService.findAll());
 				
 		ActionType actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;		
 		

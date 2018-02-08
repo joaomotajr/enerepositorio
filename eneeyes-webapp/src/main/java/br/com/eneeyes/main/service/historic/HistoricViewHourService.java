@@ -47,8 +47,6 @@ public class HistoricViewHourService {
 			}
 
 			Page<IHistoricGroup> page = null;
-			
-//			page = repository.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dataInicio, dataFim, new PageRequest(currentPage, lenPage));
 			page = repository.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dataInicio, dataFim, new PageRequest(currentPage, lenPage));
 			
 			result = getResults(page);
@@ -115,8 +113,6 @@ public class HistoricViewHourService {
 			Page<IHistoricGroup> page = null;
 			
 			if (diffDaysIn >= 30 && diffDaysOut >= 30) {
-				
-//				page = repository30.findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(companyDetectorId, sensorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
 				page = repository30.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
 			}
 			else if (diffDaysIn <= 30 && diffDaysOut <= 30) {

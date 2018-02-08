@@ -25,6 +25,7 @@ import br.com.eneeyes.main.repository.singleton.AlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 import br.com.eneeyes.main.service.buss.AlarmParams;
+import br.com.eneeyes.main.service.views.CompanyDetectorAlarmViewService;
 
 @Service
 public class PositionAlarmService implements IService<PositionAlarmDto> {
@@ -37,6 +38,9 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	
 	@Autowired
 	AlarmService alarmService;
+	
+	@Autowired
+	private CompanyDetectorAlarmViewService companyDetectorAlarmViewService;
 	
 	@Autowired
 	HistoricAlarmService historicAlarmService;
@@ -56,7 +60,8 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 //		}
 		
 		if(AlarmSingletonRepository.init()) {
-			AlarmSingletonRepository.populate(alarmService.findAll());
+//			AlarmSingletonRepository.populate(alarmService.findAll());
+			AlarmSingletonRepository.populate(companyDetectorAlarmViewService.findAll());
 		}
 		
 		//CompanyDetectorAlarmDto companyDetectorAlarmDto = CompanyDetectorAlarmSingletonRepository.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());		

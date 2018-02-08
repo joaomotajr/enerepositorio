@@ -5,33 +5,32 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 
 import br.com.eneeyes.main.dto.AlarmDto;
-import br.com.eneeyes.main.model.Alarm;
+import br.com.eneeyes.main.model.views.CompanyDetectorAlarmView;
 
 @ApplicationScoped
 public class AlarmSingletonRepository  {
 	
-	static List<Alarm> lista;
+	static List<CompanyDetectorAlarmView> alarms;
 		
 	public static boolean init() {
-		return (lista == null || lista.isEmpty());			
+		return (alarms == null || alarms.isEmpty());			
 	}
 	
-	public static void populate(List<Alarm> alarm) {
+	public static void populate(List<CompanyDetectorAlarmView> alarms) {
 				
-		lista = alarm;		
+		AlarmSingletonRepository.alarms = alarms;		
 	}	
 	
-	public static AlarmDto findByCompanyDetector(long alarmUid) {	
-		AlarmDto alarmDto = null;
+	public static AlarmDto findByCompanyDetector(long compnyDetectorId) {	
+		AlarmDto alarmDto = null;		
 		
-		
-		if(lista != null && !lista.isEmpty()) {
+		if(alarms != null && !alarms.isEmpty()) {
 			
-			for (Alarm alarm   : lista) {
+			for (CompanyDetectorAlarmView companyDetectorAlarm   : alarms) {
 				
-				if(alarm.getUid() == alarmUid) {
+				if(companyDetectorAlarm.getUid() == compnyDetectorId) {
 					
-					alarmDto = new AlarmDto(alarm);
+					alarmDto = new AlarmDto(companyDetectorAlarm.getAlarm());										
 					break;
 				}
 			}

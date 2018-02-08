@@ -45,27 +45,12 @@ public class Sensor {
 			this.manufacturer = new Manufacturer(dto.getManufacturerDto());
 		
 		this.model = dto.getModel();
-		this.gas = new Gas(dto.getGasDto());
-		
-//		if(dto.getGasesDto() != null)
-//			this.gases = parseGases(dto.getGasesDto());
-		
-		
-		
+		this.gas = new Gas(dto.getGasDto());	
 		this.unitMeterGases = dto.getUnitMeterGases();
 		this.rangeMax = dto.getRangeMax();
 		this.rangeMin = dto.getRangeMin();
 		this.rangeUnit = dto.getRangeUnit();
 	}	
-	
-//	private final Set<Gas> parseGases(List<GasDto> gases) {		
-//		Set<Gas> lista = new HashSet<Gas>();		
-//		
-//		for (GasDto item   : gases) {			
-//			lista.add(new Gas(item));			
-//		}		
-//		return lista;		
-//	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,12 +68,6 @@ public class Sensor {
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="GAS_ID", nullable = false)
 	private Gas gas;
-	
-//	@ManyToMany(fetch = FetchType.EAGER)
-//	@JoinTable(name = "sensor_gases",	 
-//	joinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"), 
-//	inverseJoinColumns = @JoinColumn(name = "GASES_ID", referencedColumnName = "UID"))	
-//	private Set<Gas> gases = new HashSet<Gas>();
 	
 	@Column(name = "NAME", nullable = true)
 	String name;
@@ -132,15 +111,7 @@ public class Sensor {
 	public final void setDetectionType(DetectionType detectionType) {
 		this.detectionType = detectionType;
 	}
-	
-//	public final Set<Gas> getGases() {
-//		return gases;
-//	}
-//
-//	public final void setGases(Set<Gas> gases) {
-//		this.gases = gases;
-//	}
-	
+
 	public final String getName() {
 		return name;
 	}

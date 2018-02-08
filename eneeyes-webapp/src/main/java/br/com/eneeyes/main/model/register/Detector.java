@@ -56,20 +56,8 @@ public class Detector {
 		
 		if (dto.getSensorDto() != null)
 			this.sensor = new Sensor(dto.getSensorDto());
-		
-//		if(dto.getSensorsDto() != null)
-//			this.sensors = parseSensors(dto.getSensorsDto());
 	}
-	
-//	private final Set<Sensor> parseSensors(List<SensorDto> sensors) {		
-//		Set<Sensor> lista = new HashSet<Sensor>();		
-//		
-//		for (SensorDto item   : sensors) {			
-//			lista.add(new Sensor(item));			
-//		}		
-//		return lista;		
-//	}
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UID")
@@ -82,12 +70,6 @@ public class Detector {
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="SENSOR_ID", nullable = false)
 	private Sensor sensor;
-
-//	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
-//	@JoinTable(name = "detector_sensors",	 
-//	joinColumns = @JoinColumn(name = "DETECTOR_ID", referencedColumnName = "UID"), 
-//	inverseJoinColumns = @JoinColumn(name = "SENSOR_ID", referencedColumnName = "UID"))	
-//	private Set<Sensor> sensors = new HashSet<Sensor>();
 	
 	@Column(name = "NAME", nullable = true)
 	String name;
@@ -118,15 +100,6 @@ public class Detector {
 	public final void setTransmitter(Transmitter transmitter) {
 		this.transmitter = transmitter;
 	}
-
-//	public final Set<Sensor> getSensors() {
-//		return sensors;
-//	}
-//
-//	public final void setSensores(Set<Sensor> sensors) {
-//		this.sensors = sensors;
-//	}	
-	
 	
 	public final String getName() {
 		return name;

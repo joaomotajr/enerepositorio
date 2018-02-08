@@ -42,7 +42,7 @@ public class HistoricViewService {
 	@Autowired
 	private HistoricDRepository repositoryD;
 	
-	public GroupResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
+	public GroupResult<?> findByCompanyDetectorAndInterval(Long companyDetectorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
 		GroupResult<?> result = new GroupResult<IHistoric>();
 			
 		try {
@@ -108,7 +108,7 @@ public class HistoricViewService {
 		
 	}
 	
-	public GroupResult<?> findByCompanyDetectorAndSensorAndIntervalDays(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
+	public GroupResult<?> findByCompanyDetectorAndIntervalDays(Long companyDetectorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
 		
 		GroupResult<?> result = new GroupResult<IHistoric>();
 		

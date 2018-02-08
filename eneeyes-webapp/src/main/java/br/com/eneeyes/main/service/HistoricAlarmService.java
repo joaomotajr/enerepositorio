@@ -28,7 +28,7 @@ public class HistoricAlarmService {
 	@Autowired
 	private HistoricAlarmRepository repository;
 	
-	public GroupResult<?> findByCompanyDetectorAndSensorAndInterval(Long companyDetectorId, Long sensorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
+	public GroupResult<?> findByCompanyDetectorAndInterval(Long companyDetectorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
 		GroupResult<?> result = new GroupResult<HistoricAlarm>();
 			
 		try {
@@ -58,7 +58,7 @@ public class HistoricAlarmService {
 		return result;
 	}
 	
-	public GroupResult<?> findByCompanyDetectorAndSensorAndIntervalDays(Long companyDetectorId, Long sensorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
+	public GroupResult<?> findByCompanyDetectorAndIntervalDays(Long companyDetectorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
 		GroupResult<?> result = new GroupResult<HistoricAlarm>();
 			
 		try {			

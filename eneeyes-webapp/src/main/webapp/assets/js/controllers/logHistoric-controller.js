@@ -20,7 +20,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 
 	$('#exportRel').on('click',function(){
 		printData();
-	})	
+	});	
 	
 	$("#exportExcel").click(function(e) {
 	    window.open('data:application/vnd.ms-excel,' + encodeURIComponent( $('div[id$=dvData]').html()));
@@ -29,30 +29,29 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	 	
 	$scope.buttonClick = function (s) { 
 		$scope.selectedButton = s 
-	}
+	};
 	
 	$scope.showInfo = function(msg) {
 		angular.element('body').removeClass('loading');            
         $scope.msg = msg;
         $('#result').hide().show('slow').delay(500).hide('slow');
-	}
+	};
 	
 	$scope.clearTipoGrupo = function(grupo) {
 		$scope.listHistoricInterval = undefined;
-	}
+	};
 	
 	$scope.clearHistoric = function() {
 		
 		$scope.selectedCompany = '';
         $scope.selectedCompanyDetector = '';
         $scope.findedCompanyDetector = '';
-        $scope.selectedCompanySensor = undefined;        
         $scope.listHistoricInterval = undefined;
         $scope.dateIn = undefined;
         $scope.dateOut = undefined;
 		$scope.tipoGrupo = 1;        			
 		$scope.countPages = 0;
-	}		
+	};		
 	
 	$scope.lenPage =  $cookieStore.get('lenPage') == null ? 15 : $cookieStore.get('lenPage');
 	$scope.lenPageValid = true;	
@@ -120,8 +119,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 			
 			$scope.getHistoricsPreDefined(n);
 		}
-
-	}
+	};
 	
 	$scope.getHistoricsPreDefined = function(n) {
 				
@@ -138,7 +136,6 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 				
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), 
 			companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, 
-			sensorId: $scope.selectedCompanySensor.uid, 
 			interval: $scope.interval,
 			currentPage: $scope.currentPage,
 			lenPage: $scope.lenPage
@@ -161,7 +158,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 
 			}, 500);		
 		});		
-	}	
+	};	
 		
 	$scope.getHistoricInterval = function(n) {		
 
@@ -192,7 +189,6 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 				
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(),			
 			companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, 
-			sensorId: $scope.selectedCompanySensor.uid,
 			dateIn: dataInicio,
 			dateOut: dataFim,
 			currentPage: $scope.currentPage,
@@ -210,7 +206,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
 				$(function() { $('#btnSelDevice').click(); })     	
        });		
-	}		
+	};	
 		
 	function setInterval(interval) {
 		
@@ -237,48 +233,13 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		 $scope.listAllDashCompany.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			 $scope.companyDetectors = $scope.listAllDashCompany.list; 				         	         	
         });		 
-	 }
-	
-	$scope.changeCompanyDetector = function() {
-		
-		$scope.selectedSensorAlarm = undefined;
-		$scope.selectedCompanySensor = undefined;
-		
-		if($scope.selectedCompanyDetector == null) return;
-		
-		// $scope.getOneDetector($scope.selectedCompanyDetector.detector_id);
-		
-		$scope.resultCompanyDetectorAlarm = new CompanyDetectorAlarmService.listPorCompanyDetectorAlarm();		 
-		$scope.resultCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.companyDetectorId}, function(){			
-			$scope.selectedCompanyDetectorAlarms = $scope.resultCompanyDetectorAlarm.list;
-        });		 
-	}
-	
-	$scope.changeSensor = function() {
-		
-		if($scope.selectedCompanySensor == null) return;
-		
-		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(function (i) { return i.sensorId === $scope.selectedCompanySensor.uid});				
-		if (detectorAlarmIndex >= 0) {			
-			$scope.selectedSensorAlarm = $scope.selectedCompanyDetectorAlarms[detectorAlarmIndex].alarmDto ;
-						
-			// $scope.filterAlarm = 
-			// 	 [
-			// 	  	{ name : 'TODO HISTORICO', alarm1: null, alarm2: null, alarm3: null, uid : 0 },				  	
-			// 	  	{ name : 'DETECCAO', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 1 },
-			// 	  	{ name : 'ALERTA', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 2 },
-			// 	  	{ name : 'EVACUACAO', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: $scope.selectedSensorAlarm.alarm2, alarm3: $scope.selectedSensorAlarm.alarm3, uid : 3 },
-			// 	  	{ name : 'TODOS ALARMES', alarm1: $scope.selectedSensorAlarm.alarm1, alarm2: null, alarm3: null,  uid :  5 },
-			// 	 ];
-			
-			//  $scope.selectedfilterAlarm = $scope.filterAlarm[0];			
-		}
-		else {
-			$scope.selectedSensorAlarm = undefined;
-	     	$scope.listHistoricInterval = undefined;
-		}	
-	}
+	 };
 
+	$scope.changeCompanyDetector = function() {		
+		if($scope.selectedCompanyDetector == null) return;		
+		$scope.getOneCompanyDetector($scope.selectedCompanyDetector.companyDetectorId);
+	};	
+		
 	$scope.getCompanys = function() {
 		 
 		 if($scope.$root.isFrom != "MASTER")	{
@@ -291,39 +252,33 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 				 $scope.companies = $scope.resultCompanies.list;
 	        });		 
 		 }
-	} 
-	 
-	// $scope.getOneCompany = function(companyId) {
-		 
-	// 	$scope.listOne = new CompanyService.listOne();		 
-	// 	$scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
-			 
-	// 		$scope.selectedCompany = $scope.listOne.t;
-	// 		$scope.changeCompany();
-	//     });		 
-	// }
-	
+	}; 
+
+	$scope.getOneCompany = function(companyId) {
+		
+	   $scope.listOne = new CompanyService.listOne();		 
+	   $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
+			
+		   $scope.selectedCompany = $scope.listOne.t;
+		   $scope.changeCompany();
+	   });		 
+   }
+
 	$scope.changeCompany = function() { 
-		$scope.selectedSensorAlarm = undefined;
-		$scope.selectedCompanySensor = undefined;
-		
-		if($scope.selectedCompany == null) return;
-		
+		if($scope.selectedCompany == null) return;		
 		$scope.search = {company: $scope.selectedCompany};
-	}
-	
-	$scope.getOneDetector = function(detectorId) {
-		 
-		 $scope.listOne = new DetectorService.listOne();		 
-		 $scope.listOne.$detector({_csrf : angular.element('#_csrf').val(), id : detectorId}, function(){			
-			 $scope.findedCompanyDetector = $scope.listOne.t;
-        	         	
-        });			 
-	}
+	};
+
+	$scope.getOneCompanyDetector = function(uid) {		
+		$scope.resultCompanyDetector = new CompanyDetectorService.listOne();		 
+		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : uid }, function(){			
+			$scope.findedCompanyDetector = $scope.resultCompanyDetector.t;						
+		});		 
+	};
 	
 	$scope.changedGraphic = function() {
 		$scope.count=0;
-	}
+	};
 	
 	$scope.showGrafico = function() {
 		
@@ -337,7 +292,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		$timeout(function () {
 			$('#modalGraficoHistorico').modal({ show: 'false' });
 		}, 500);
-	}
+	};
 	
 	function formatLineSensor() {
 		var value = $scope.listHistoricInterval.list;
@@ -440,7 +395,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	
 	$scope.changeToValue = function(valor) {
 	  return valor.toString().replace(".", ",")
-	} 
+	};
 
 	$scope.clearHistoric();
 	$scope.getCompanys();

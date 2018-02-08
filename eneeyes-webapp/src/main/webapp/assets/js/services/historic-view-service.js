@@ -2,10 +2,9 @@
 app.factory('HistoricViewService', function($resource){    
     
     return {    	               
-        listIntervalDays : $resource('/security/api/historicView/findByCompanyDetectorAndSensorAndIntervalDays/:companyDetectorId/:sensorId/:dateIn/:dateOut/:currentPage/:lenPage/', 
+        listIntervalDays : $resource('/security/api/historicView/findByCompanyDetectorAndIntervalDays/:companyDetectorId/:dateIn/:dateOut/:currentPage/:lenPage/', 
             {
-                companyDetectorId: '@companyDetectorId', 
-                sensorId: '@sensorId', 
+                companyDetectorId: '@companyDetectorId',                 
                 dateIn: '@dateIn', 
                 dateIn: '@dateOut', 
                 currentPage: '@currentPage',
@@ -15,10 +14,9 @@ app.factory('HistoricViewService', function($resource){
                 historic : {method : 'GET'
             }
         }),
-        listInterval : $resource('/security/api/historicView/findByCompanyDetectorAndSensorAndInterval/:companyDetectorId/:sensorId/:interval/:currentPage/:lenPage/', 
+        listInterval : $resource('/security/api/historicView/findByCompanyDetectorAndInterval/:companyDetectorId/:interval/:currentPage/:lenPage/', 
             {
-                companyDetectorId: '@companyDetectorId', 
-                sensorId: '@sensorId', 
+                companyDetectorId: '@companyDetectorId',                 
                 interval: '@interval',
                 currentPage: '@currentPage',
                 lenPage: '@lenPage'
@@ -27,10 +25,9 @@ app.factory('HistoricViewService', function($resource){
                 historic : {method : 'GET'
             }
         }),            
-        listIntervalDaysGroupHours : $resource('/security/api/historicView/findByCompanyDetectorAndSensorAndIntervalDaysGroupHours/:companyDetectorId/:sensorId/:dateIn/:dateOut/:currentPage/:lenPage/', 
+        listIntervalDaysGroupHours : $resource('/security/api/historicView/findByCompanyDetectorAndIntervalDaysGroupHours/:companyDetectorId/:dateIn/:dateOut/:currentPage/:lenPage/', 
         {
-            companyDetectorId: '@companyDetectorId', 
-            sensorId: '@sensorId', 
+            companyDetectorId: '@companyDetectorId',             
             dateIn: '@dateIn', 
             dateIn: '@dateOut',
             currentPage: '@currentPage',
@@ -40,10 +37,9 @@ app.factory('HistoricViewService', function($resource){
                 historic : {method : 'GET'
             }
         }),
-        listIntervalGroupHours : $resource('/security/api/historicView/findByCompanyDetectorAndSensorAndIntervalGroupHours/:companyDetectorId/:sensorId/:interval/:currentPage/:lenPage/',  
+        listIntervalGroupHours : $resource('/security/api/historicView/findByCompanyDetectorAndIntervalGroupHours/:companyDetectorId/:interval/:currentPage/:lenPage/',  
             {
-                companyDetectorId: '@companyDetectorId', 
-                sensorId: '@sensorId', 
+                companyDetectorId: '@companyDetectorId',                 
                 interval: '@interval',
                 currentPage: '@currentPage',
                 lenPage: '@lenPage'
@@ -52,10 +48,9 @@ app.factory('HistoricViewService', function($resource){
                 historic : {method : 'GET'
             }
         }), 
-        listIntervalDaysGroupDays : $resource('/security/api/historicView/findByCompanyDetectorAndSensorAndIntervalDaysGroupDays/:companyDetectorId/:sensorId/:dateIn/:dateOut/:currentPage/:lenPage/', 
+        listIntervalDaysGroupDays : $resource('/security/api/historicView/findByCompanyDetectorAndIntervalDaysGroupDays/:companyDetectorId/:dateIn/:dateOut/:currentPage/:lenPage/', 
             {
-                companyDetectorId: '@companyDetectorId', 
-                sensorId: '@sensorId', 
+                companyDetectorId: '@companyDetectorId',                 
                 dateIn: '@dateIn', 
                 dateIn: '@dateOut',
                 currentPage: '@currentPage',
@@ -65,10 +60,9 @@ app.factory('HistoricViewService', function($resource){
                 historic : {method : 'GET'
             }
         }),
-        listIntervalGroupDays : $resource('/security/api/historicView/findByCompanyDetectorAndSensorAndIntervalGroupDays/:companyDetectorId/:sensorId/:interval/:currentPage/:lenPage/', 
+        listIntervalGroupDays : $resource('/security/api/historicView/findByCompanyDetectorAndIntervalGroupDays/:companyDetectorId/:interval/:currentPage/:lenPage/', 
             {
-                companyDetectorId: '@companyDetectorId', 
-                sensorId: '@sensorId', 
+                companyDetectorId: '@companyDetectorId',                 
                 interval: '@interval',
                 currentPage: '@currentPage',
                 lenPage: '@lenPage'

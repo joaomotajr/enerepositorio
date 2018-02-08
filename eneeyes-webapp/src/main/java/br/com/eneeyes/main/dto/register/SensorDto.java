@@ -8,7 +8,6 @@ public class SensorDto extends BaseDeviceDto implements Comparable<SensorDto> {
 	
 	private Long uid;
 	private DetectionType detectionType;
-//	private List<GasDto> gasesDto = new ArrayList<GasDto>();
 	private GasDto gasDto;
 	private UnitMeterGases unitMeterGases;
 	private Double rangeMax;	
@@ -23,46 +22,16 @@ public class SensorDto extends BaseDeviceDto implements Comparable<SensorDto> {
 		super();
 		
 		this.uid = sensor.getUid();
-		this.name = sensor.getName();
-		
+		this.name = sensor.getName();		
 		this.manufacturerDto = new ManufacturerDto(sensor.getManufacturer());
 		this.model = sensor.getModel();
-		this.detectionType = sensor.getDetectionType();
-		
-		this.gasDto = new GasDto(sensor.getGas());
-//		if(sensor.getGases() != null)		
-//			this.gasesDto = parseGasesDto(sensor.getGases());
-		
+		this.detectionType = sensor.getDetectionType();		
+		this.gasDto = new GasDto(sensor.getGas());	
 		this.unitMeterGases = sensor.getUnitMeterGases();
        	this.rangeMax = sensor.getRangeMax();
        	this.rangeMin = sensor.getRangeMin();
        	this.rangeUnit = sensor.getRangeUnit();
 	}
-	
-//	private final List<GasDto> parseGasesDto(Set<Gas> gases) {
-//		List<GasDto> lista = new ArrayList<GasDto>();
-//		
-//		if(gases != null && !gases.isEmpty()) {
-//		
-//			Iterator<Gas> itr = gases.iterator();
-//			
-//			while (itr.hasNext()) {
-//				GasDto dto = new GasDto(itr.next());
-//				lista.add(dto);
-//			}
-//		}
-//		
-//		return lista;
-//	}
-//	
-//	public final List<GasDto> getGasesDto() {
-//		return gasesDto;
-//	}
-//
-//	public final void setGasesDto(List<GasDto> gasesDto) {
-//		this.gasesDto = gasesDto;
-//	}
-	
 	
 	public final Long getUid() {
 		return uid;

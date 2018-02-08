@@ -36,10 +36,46 @@ public class HistoricB {
 	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
 	private Long companyDetectorId;
 	
-	@Column(name="SENSOR_ID", nullable = false)
-	private Long sensorId;
-	
 	@Column(name = "LOG_ORIGEM", nullable = true)
 	private LogOrigem logOrigem;
 		
+	public final Long getUid() {
+		return uid;
+	}
+
+	public final void setUid(Long uid) {
+		this.uid = uid;
+	}
+
+	public final Date getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public final void setLastUpdate(Date lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public final BigDecimal getValue() {
+		return value;
+	}
+
+	public final void setValue(BigDecimal value) {
+		this.value = value;
+	}
+
+	public final Long getCompanyDetectorId() {
+		return companyDetectorId;
+	}
+
+	public final void setCompanyDetectorId(Long companyDetectorId) {
+		this.companyDetectorId = companyDetectorId;
+	}
+
+	public final LogOrigem getLogOrigem() {
+		return logOrigem;
+	}
+
+	public final void setLogOrigem(LogOrigem logOrigem) {
+		this.logOrigem = logOrigem;
+	}	
 }

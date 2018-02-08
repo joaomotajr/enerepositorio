@@ -23,9 +23,6 @@ public class HistoricViewHour30 implements IHistoricGroup {
 	@Column(name="COMPANY_DETECTOR_ID")
 	private Long companyDetectorId;
 	
-	@Column(name="SENSOR_ID")
-	private Long sensorId;
-
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
 			
@@ -49,14 +46,6 @@ public class HistoricViewHour30 implements IHistoricGroup {
 
 	public final void setCompanyDetectorId(Long companyDetectorId) {
 		this.companyDetectorId = companyDetectorId;
-	}
-
-	public final Long getSensorId() {
-		return sensorId;
-	}
-
-	public final void setSensorId(Long sensorId) {
-		this.sensorId = sensorId;
 	}
 
 	public final Date getLastUpdate() {

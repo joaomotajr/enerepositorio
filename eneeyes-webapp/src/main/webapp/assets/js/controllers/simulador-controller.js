@@ -43,20 +43,17 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 	
 	$scope.changeCompanyDetector = function() {
 		
-		$scope.selectedSensorAlarm = undefined;
-		
-		if($scope.selectedCompanyDetector == null) return;
-		
+		if($scope.selectedCompanyDetector == null) return;		
 		$scope.getOneCompanyDetector($scope.selectedCompanyDetector.companyDetectorId);
 	};	
 	
 	$scope.getCompanys = function() {
-		 
-		 $scope.resultCompanies = new CompanyService.listAll();		 
-		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
-			 $scope.companies = $scope.resultCompanies.list;
-       });		 
-	};
+	
+		$scope.resultCompanies = new CompanyService.listAllView();		 
+			$scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
+			$scope.companies = $scope.resultCompanies.list;
+		});
+   };
 
 	$scope.getOneCompanyDetector = function(uid) {
 						
@@ -67,11 +64,8 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 		});		 
 	};
 
-	$scope.changeCompany = function() { 
-		$scope.selectedSensorAlarm = undefined;
-		
-		if($scope.selectedCompany == null) return;
-		
+	$scope.changeCompany = function() { 		
+		if($scope.selectedCompany == null) return;		
 		$scope.search = {company: $scope.selectedCompany};
 	};
 	

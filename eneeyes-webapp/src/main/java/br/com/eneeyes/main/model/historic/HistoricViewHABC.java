@@ -31,9 +31,6 @@ public class HistoricViewHABC implements IHistoric {
 	@Column(name="COMPANY_DETECTOR_ID")
 	private Long companyDetectorId;
 	
-	@Column(name="SENSOR_ID")
-	private Long sensorId;
-	
 	@Column(name = "LOG_ORIGEM")
 	private LogOrigem logOrigem;
 
@@ -67,14 +64,6 @@ public class HistoricViewHABC implements IHistoric {
 
 	public final void setCompanyDetectorId(Long companyDetectorId) {
 		this.companyDetectorId = companyDetectorId;
-	}
-
-	public final Long getSensorId() {
-		return sensorId;
-	}
-
-	public final void setSensorId(Long sensorId) {
-		this.sensorId = sensorId;
 	}
 
 	public final LogOrigem getLogOrigem() {

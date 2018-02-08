@@ -6,7 +6,6 @@ public class DetectorDto extends BaseDeviceDto {
 		
 	private Long uid;	
 	private TransmitterDto transmitterDto;
-//	private List<SensorDto> sensorsDto = new ArrayList<SensorDto>();
 	private SensorDto sensorDto;
 	private String image;
 
@@ -28,34 +27,8 @@ public class DetectorDto extends BaseDeviceDto {
 			this.transmitterDto = new TransmitterDto(detector.getTransmitter());		
 				
 		this.sensorDto = new SensorDto(detector.getSensor());
-//		if(detector.getSensors() != null)		
-//			this.sensorsDto = parseSensorsDto(detector.getSensors());		
 		
 	}
-	
-//	private final List<SensorDto> parseSensorsDto(Set<Sensor> sensors) {
-//		List<SensorDto> lista = new ArrayList<SensorDto>();
-//		
-//		if(sensors != null && !sensors.isEmpty()) {
-//		
-//			Iterator<Sensor> itr = sensors.iterator();			
-//			while (itr.hasNext()) {
-//				SensorDto dto = new SensorDto(itr.next());
-//				lista.add(dto);
-//			}
-//		}
-//		
-//		Collections.sort(lista);
-//		return lista;
-//	}
-	
-//	public final List<SensorDto> getSensorsDto() {
-//		return sensorsDto;
-//	}
-//	
-//	public final void setSensorsDto(List<SensorDto> sensorsDto) {
-//		this.sensorsDto = sensorsDto;
-//	}
 
 	public final Long getUid() {
 		return uid;

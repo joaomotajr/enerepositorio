@@ -20,29 +20,27 @@ public class HistoricAlarmViewController {
 	@Autowired
 	HistoricAlarmService service;	
 	
-	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDetectorAndSensorAndInterval/{companyDetectorId}/{sensorId}/{intervalType}/{currentPage}/{lenPage}", 
+	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDetectorAndSensorAndInterval/{companyDetectorId}/{intervalType}/{currentPage}/{lenPage}", 
 			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)                      
-	public GroupResult<?> findByCompanyDetectorAndSensorAndInterval(
+	public GroupResult<?> findByCompanyDetectorAndInterval(
 			@PathVariable Long companyDetectorId, 
-			@PathVariable Long sensorId, 
 			@PathVariable IntervalType intervalType, 
 			@PathVariable Integer currentPage, 
 			@PathVariable Integer lenPage) {		
-		return service.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, intervalType, currentPage, lenPage);
+		return service.findByCompanyDetectorAndInterval(companyDetectorId, intervalType, currentPage, lenPage);
 	}
 
-	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDetectorAndSensorAndIntervalDays/{companyDetectorId}/{sensorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDetectorAndSensorAndIntervalDays/{companyDetectorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
 	public GroupResult<?> findByCompanyDetectorAndSensorAndIntervalDays(
 			@PathVariable Long companyDetectorId, 
-			@PathVariable Long sensorId, 
 			@PathVariable Date dateIn, 
 			@PathVariable Date dateOut,
 			@PathVariable Integer currentPage, 
 			@PathVariable Integer lenPage) {
 		
-		return service.findByCompanyDetectorAndSensorAndIntervalDays(companyDetectorId, sensorId, dateIn, dateOut, currentPage, lenPage);
+		return service.findByCompanyDetectorAndIntervalDays(companyDetectorId, dateIn, dateOut, currentPage, lenPage);
 	}
 
 }

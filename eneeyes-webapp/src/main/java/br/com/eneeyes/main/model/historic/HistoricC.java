@@ -36,9 +36,6 @@ public class HistoricC implements IHistoric {
 	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
 	private Long companyDetectorId;
 	
-//	@Column(name= nullable = false)
-//	private Long sensorId;
-	
 	@Column(name = "LOG_ORIGEM", nullable = true)
 	private LogOrigem logOrigem;
 
@@ -74,13 +71,6 @@ public class HistoricC implements IHistoric {
 		this.companyDetectorId = companyDetectorId;
 	}
 
-//	public final Long getSensorId() {
-//		return sensorId;
-//	}
-//
-//	public final void setSensorId(Long sensorId) {
-//		this.sensorId = sensorId;
-//	}
 
 	public final LogOrigem getLogOrigem() {
 		return logOrigem;

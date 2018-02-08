@@ -12,7 +12,6 @@ public class HistoricDto {
 	private Date lastUpdate;
 	private BigDecimal value;
 	private Long companyDetectorId;
-//    private Long sensorId;
     private LogOrigem logOrigem;
 	
 	public HistoricDto() {
@@ -25,7 +24,6 @@ public class HistoricDto {
 		this.lastUpdate = historic.getLastUpdate();
     	this.value = historic.getValue();   
     	this.companyDetectorId = historic.getCompanyDetectorId();
-//    	this.sensorId = historic.getSensorId();
     	this.logOrigem = historic.getLogOrigem();    	
 	}
 	
@@ -60,14 +58,6 @@ public class HistoricDto {
 	public final void setCompanyDetectorId(Long companyDetectorId) {
 		this.companyDetectorId = companyDetectorId;
 	}
-
-//	public final Long getSensorId() {
-//		return sensorId;
-//	}
-//
-//	public final void setSensorId(Long sensorId) {
-//		this.sensorId = sensorId;
-//	}
 
 	public final LogOrigem getLogOrigem() {
 		return logOrigem;

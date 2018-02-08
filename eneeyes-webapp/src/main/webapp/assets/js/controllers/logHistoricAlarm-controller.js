@@ -59,13 +59,20 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 		
 		$scope.selectedCompany = '';
         $scope.selectedCompanyDetector = '';
-        $scope.findedCompanyDetector = '';
-        $scope.selectedCompanySensor = undefined;        
+        $scope.findedCompanyDetector = '';        
         $scope.listHistoricInterval = undefined;
         $scope.dateInA = undefined;
         $scope.dateOutA = undefined;	
 		$scope.countPages = 0;
 	}		
+
+	$scope.filterAlarm =  
+		[                         
+		{ name : 'DETECCAO',  uid : 1 }, 
+		{ name : 'ALERTA',  uid : 2 }, 
+		{ name : 'EVACUACAO',  uid : 3 }, 
+		{ name : 'OFFLINE',  uid : 4 }             
+	]; 
 	
 	$scope.lenPage =  $cookieStore.get('lenPage2') == null ? 15 : $cookieStore.get('lenPage2');
 	$scope.lenPageValid = true;	
@@ -146,7 +153,6 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 				
 		$scope.listHistoricInterval.$historicAlarm({_csrf : angular.element('#_csrf').val(), 
 			companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, 
-			sensorId: $scope.selectedCompanySensor.uid, 
 			interval: $scope.interval,
 			currentPage: $scope.currentPage,
 			lenPage: $scope.lenPage
@@ -194,7 +200,6 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 				
 		$scope.listHistoricInterval.$historicAlarm({_csrf : angular.element('#_csrf').val(),			
 			companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, 
-			sensorId: $scope.selectedCompanySensor.uid,
 			dateIn: dataInicio,
 			dateOut: dataFim,
 			currentPage: $scope.currentPage,
@@ -240,44 +245,49 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
         });		 
 	 }
 	
-	$scope.changeCompanyDetector = function() {
+	// $scope.changeCompanyDetector = function() {
 		
-		$scope.selectedSensorAlarm = undefined;
-		$scope.selectedCompanySensor = undefined;
+	// 	$scope.selectedSensorAlarm = undefined;
+	// 	$scope.selectedCompanySensor = undefined;
 		
-		if($scope.selectedCompanyDetector == null) return;
+	// 	if($scope.selectedCompanyDetector == null) return;
 		
-		$scope.getOneDetector($scope.selectedCompanyDetector.detector_id);
+	// 	$scope.getOneDetector($scope.selectedCompanyDetector.detector_id);
 		
-		$scope.resultCompanyDetectorAlarm = new CompanyDetectorAlarmService.listPorCompanyDetectorAlarm();		 
-		$scope.resultCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.companyDetectorId}, function(){			
-			$scope.selectedCompanyDetectorAlarms = $scope.resultCompanyDetectorAlarm.list;
-        });		 
-	}
+	// 	$scope.resultCompanyDetectorAlarm = new CompanyDetectorAlarmService.listPorCompanyDetectorAlarm();		 
+	// 	$scope.resultCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.companyDetectorId}, function(){			
+	// 		$scope.selectedCompanyDetectorAlarms = $scope.resultCompanyDetectorAlarm.list;
+    //     });		 
+	// }
+
+	$scope.changeCompanyDetector = function() {		
+		if($scope.selectedCompanyDetector == null) return;		
+		$scope.getOneCompanyDetector($scope.selectedCompanyDetector.companyDetectorId);
+	};	
 	
-	$scope.changeSensor = function() {
+	// $scope.changeSensor = function() {
 		
-		if($scope.selectedCompanySensor == null) return;
+	// 	if($scope.selectedCompanySensor == null) return;
 		
-		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(function (i) { return i.sensorId === $scope.selectedCompanySensor.uid});				
-		if (detectorAlarmIndex >= 0) {			
-			$scope.selectedSensorAlarm = $scope.selectedCompanyDetectorAlarms[detectorAlarmIndex].alarmDto ;
+	// 	var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(function (i) { return i.sensorId === $scope.selectedCompanySensor.uid});				
+	// 	if (detectorAlarmIndex >= 0) {			
+	// 		$scope.selectedSensorAlarm = $scope.selectedCompanyDetectorAlarms[detectorAlarmIndex].alarmDto ;
 						
-			$scope.filterAlarm = 
-				 [				  					  	
-				  	{ name : 'DETECCAO',  uid : 1 },
-				  	{ name : 'ALERTA',  uid : 2 },
-					{ name : 'EVACUACAO',  uid : 3 },
-					{ name : 'OFFLINE',  uid : 4 }				  	
-				 ];
+	// 		$scope.filterAlarm = 
+	// 			 [				  					  	
+	// 			  	{ name : 'DETECCAO',  uid : 1 },
+	// 			  	{ name : 'ALERTA',  uid : 2 },
+	// 				{ name : 'EVACUACAO',  uid : 3 },
+	// 				{ name : 'OFFLINE',  uid : 4 }				  	
+	// 			 ];
 			
-			 //$scope.selectedfilterAlarm = $scope.filterAlarm[0];			
-		}
-		else {
-			$scope.selectedSensorAlarm = undefined;
-	     	$scope.listHistoricInterval = undefined;
-		}	
-	}
+	// 		 //$scope.selectedfilterAlarm = $scope.filterAlarm[0];			
+	// 	}
+	// 	else {
+	// 		$scope.selectedSensorAlarm = undefined;
+	//      	$scope.listHistoricInterval = undefined;
+	// 	}	
+	// }
 
 	$scope.getCompanys = function() {
 		 
@@ -304,22 +314,16 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	}
 	
 	$scope.changeCompany = function() { 
-		$scope.selectedSensorAlarm = undefined;
-		$scope.selectedCompanySensor = undefined;
-		
-		if($scope.selectedCompany == null) return;
-		
+		if($scope.selectedCompany == null) return;		
 		$scope.search = {company: $scope.selectedCompany};
-	}
+	};
 	
-	$scope.getOneDetector = function(detectorId) {
-		 
-		 $scope.listOne = new DetectorService.listOne();		 
-		 $scope.listOne.$detector({_csrf : angular.element('#_csrf').val(), id : detectorId}, function(){			
-			 $scope.findedCompanyDetector = $scope.listOne.t;
-        	         	
-        });			 
-	}
+	$scope.getOneCompanyDetector = function(uid) {		
+		$scope.resultCompanyDetector = new CompanyDetectorService.listOne();		 
+		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : uid }, function(){			
+			$scope.findedCompanyDetector = $scope.resultCompanyDetector.t;						
+		});		 
+	};
 	
 	$scope.changedGraphic = function() {
 		$scope.count=0;

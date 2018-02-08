@@ -20,43 +20,28 @@ public class HistoricViewDayController {
 	
 	@Autowired
 	HistoricViewDayService service;	
-	
-//	@RequestMapping(value = "/security/api/view/allHistoricViewGroupDays", method = RequestMethod.GET, produces = "application/json")
-//	@ResponseStatus(HttpStatus.OK)
-//	public BasicResult<?> allHistoricView() {
-//		return historicViewDayService.listAll();
-//	}
-	
-	@RequestMapping(value="/security/api/historicView/findByCompanyDetectorAndSensorAndIntervalGroupDays/{companyDetectorId}/{sensorId}/{intervalType}/{currentPage}/{lenPage}",
+
+	@RequestMapping(value="/security/api/historicView/findByCompanyDetectorAndIntervalGroupDays/{companyDetectorId}/{intervalType}/{currentPage}/{lenPage}",
 			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)                      
-	public BasicResult<?> findByCompanyDetectorAndSensorAndInterval(		
+	public BasicResult<?> findByCompanyDetectorAndInterval(		
 			@PathVariable Long companyDetectorId, 
-			@PathVariable Long sensorId, 
 			@PathVariable IntervalType intervalType, 
 			@PathVariable Integer currentPage, 
 			@PathVariable Integer lenPage) {		
-		return service.findByCompanyDetectorAndSensorAndInterval(companyDetectorId, sensorId, intervalType, currentPage, lenPage);
+		return service.findByCompanyDetectorAndInterval(companyDetectorId, intervalType, currentPage, lenPage);
 	}
 	
-	
-//	@RequestMapping(value="/security/api/view/findByCompanyDetectorAndSensorLastMonthGroupDays/{companyDetectorId}/{sensorId}", method=RequestMethod.GET, produces = "application/json")			
-//	@ResponseStatus(HttpStatus.OK)
-//	public BasicResult<?> findByCompanyDetectorAndSensorLastMonth(@PathVariable Long companyDetectorId, @PathVariable Long sensorId) {		
-//		return service.findByCompanyDetectorAndSensorLastMonth(companyDetectorId, sensorId);
-//	}	
-	
-	@RequestMapping(value="/security/api/historicView/findByCompanyDetectorAndSensorAndIntervalDaysGroupDays/{companyDetectorId}/{sensorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/historicView/findByCompanyDetectorAndIntervalDaysGroupDays/{companyDetectorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(		
+	public BasicResult<?> findByCompanyDetectorAndIntervalDays(		
 			@PathVariable Long companyDetectorId, 
-			@PathVariable Long sensorId, 
 			@PathVariable Date dateIn, 
 			@PathVariable Date dateOut,
 			@PathVariable Integer currentPage, 
 			@PathVariable Integer lenPage) {
 		
-		return service.findByCompanyDetectorAndSensorAndIntervalDays(companyDetectorId, sensorId, dateIn, dateOut, currentPage, lenPage);
+		return service.findByCompanyDetectorAndIntervalDays(companyDetectorId, dateIn, dateOut, currentPage, lenPage);
 	}
 
 }

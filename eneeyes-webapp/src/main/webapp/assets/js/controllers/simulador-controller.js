@@ -1,40 +1,26 @@
-
 app.controller('simuladorController', function ($scope, $timeout, $filter, CompanyService, CompanyDetectorService, DetectorService, HistoricService, CompanyDetectorAlarmService, ViewService) {
 	
 	$scope.showInfo = function(msg) {
 		angular.element('body').removeClass('loading');            
         $scope.msg = msg;
         $('#result').hide().show('fast').delay(500).hide('fast');
-	}
+	};
 	
 	$scope.clearHistoric = function() {
 			
-		$scope.companyValor = '';
+		$scope.valor = '';
 		$scope.selectedCompany = '';
         $scope.selectedCompanyDetector = '';
-        $scope.selectedCompanySensor = '';
         $scope.selectedSensorAlarm = ''			
-	}
-		
-	$scope.saveHistoricByPostionUid = function() {
-
-		$scope.inclusao = new HistoricService.saveByPositionUid2();		 
-		$scope.inclusao.$historic({uid : 15,value : 888}, function() {         	
-       	        	
-       	$scope.showInfo('Salvo');        	
-       	$scope.companyValor = '';
-
-       });		 
-	 }
+	};
 	
 	$scope.saveHistoric = function() {
 		
 		$scope.historic = {
 				uid: 0,	
-				value: $scope.companyValor,
+				value: $scope.valor,
 				lastUpdate: null,
 				companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId,
-				sensorId: $scope.selectedCompanySensor.uid,
 				logOrigem: 'MANUAL'
 			 }	
 		 
@@ -42,10 +28,10 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 		 $scope.inclusao.$historic({_csrf : angular.element('#_csrf').val()}, function(){         	
         	        	
         	$scope.showInfo('Salvo');        	
-        	$scope.companyValor = '';
+        	$scope.valor = '';
 
         });		 
-	 }	
+	 };	
 	
 	$scope.getCompanyDetectors = function() {
 		 
@@ -53,35 +39,16 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 		 $scope.listAllDashCompany.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			 $scope.CompanyDetectors = $scope.listAllDashCompany.list;        	         	
        });		 
-	 }
+	 };
 	
 	$scope.changeCompanyDetector = function() {
 		
 		$scope.selectedSensorAlarm = undefined;
-		$scope.selectedCompanySensor = undefined;
 		
 		if($scope.selectedCompanyDetector == null) return;
 		
-		$scope.getOneDetector($scope.selectedCompanyDetector.detector_id);
-		
-		$scope.resultCompanyDetectorAlarm = new CompanyDetectorAlarmService.listPorCompanyDetectorAlarm();		 
-		$scope.resultCompanyDetectorAlarm.$companyDetectorAlarm({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.companyDetectorId}, function(){			
-			$scope.selectedCompanyDetectorAlarms = $scope.resultCompanyDetectorAlarm.list;
-        });		 
-	}
-	
-	$scope.changeSensor = function() {
-		
-		if($scope.selectedCompanySensor == null) return;
-		
-		var detectorAlarmIndex = $scope.selectedCompanyDetectorAlarms.findIndex(function (i) { return i.sensorId === $scope.selectedCompanySensor.uid});				
-		if (detectorAlarmIndex >= 0) {			
-			$scope.selectedSensorAlarm = $scope.selectedCompanyDetectorAlarms[detectorAlarmIndex].alarmDto ;
-		}
-		else {
-			$scope.selectedSensorAlarm = undefined;
-		}	
-	}
+		$scope.getOneCompanyDetector($scope.selectedCompanyDetector.companyDetectorId);
+	};	
 	
 	$scope.getCompanys = function() {
 		 
@@ -89,25 +56,24 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.companies = $scope.resultCompanies.list;
        });		 
-	}
-	
+	};
+
+	$scope.getOneCompanyDetector = function(uid) {
+						
+		$scope.resultCompanyDetector = new CompanyDetectorService.listOne();		 
+		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : uid }, function(){			
+			
+			$scope.findedCompanyDetector = $scope.resultCompanyDetector.t;						
+		});		 
+	};
+
 	$scope.changeCompany = function() { 
 		$scope.selectedSensorAlarm = undefined;
-		$scope.selectedCompanySensor = undefined;
 		
 		if($scope.selectedCompany == null) return;
 		
 		$scope.search = {company: $scope.selectedCompany};
-	}
-	
-	$scope.getOneDetector = function(detectorId) {
-		 
-		 $scope.listOne = new DetectorService.listOne();		 
-		 $scope.listOne.$detector({_csrf : angular.element('#_csrf').val(), id : detectorId}, function(){			
-			 $scope.findedCompanyDetector = $scope.listOne.t;
-       	         	
-       });			 
-	}	
+	};
 	
 	$scope.clearHistoric();
 	$scope.getCompanyDetectors();

@@ -68,7 +68,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			$rootScope.showGeneralMessage($scope.inclusaoCompanyDetector.message, 'SUCCESS');	
 
 		});			 
-	}
+	};
 	
 	$scope.clearCompanyDetector = function () {
 		$scope.selectedCompanyDetector.detectorDto.image = "/assets/img/cover.jpg"
@@ -88,7 +88,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			$scope.selectedCompanyDetector.maintenanceInterval = 0;
 		    
 		}, 100);
-	}	
+	};
 	
 	$scope.deleteCompanyDetector = function() {		 
 		angular.element('body').addClass('loading');		
@@ -103,7 +103,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			angular.element('body').removeClass('loading');
 	                 	         	
 		});		 
-	}
+	};
 	
 	$scope.getDetectors = function() {		 
 		 $scope.resultDetectors = new DetectorService.listAll();		 
@@ -137,7 +137,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 				
 			}
         });		 
-	}
+	};
 
 	$scope.getPositionsAndIds = function(companyDetectorId) {
 		
@@ -146,7 +146,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			
 			$scope.selectedCompanyDetectorPosition = $scope.listOnePosition.t;		
 		});
-	}
+	};
 
 	$scope.selecionarDetector = function(item) {
 
@@ -155,7 +155,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		}
 
 		$scope.selectedCompanyDetector.detectorDto = item;
-	}
+	};
 
 	$scope.getCompanyDetectorAlarms = function(companyDetectorId) {
 
@@ -170,7 +170,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			);
 			 
 		});
-	}
+	};
 
 	$scope.getGaugeInfo = function(sensor) {
 
@@ -285,7 +285,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		dataSource.trendPoints = trendPoints;
 
 		return dataSource;
-	}
+	};
 	
 	function reloadDates() {
 		

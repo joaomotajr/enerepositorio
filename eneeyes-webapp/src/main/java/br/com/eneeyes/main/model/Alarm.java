@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.AlarmDto;
@@ -79,7 +78,7 @@ public class Alarm {
 	    return unitMeterGases; 
 	}
 	
-	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="GAS_ID", nullable = true)
 	private Gas gas;		
 	

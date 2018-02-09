@@ -61,7 +61,7 @@
 		          		</div>
 		          
 		          		<div id="signin-error" class="alert alert-danger" style="display:none">
-							<span> Usu&aacute;rio e/ou Sennha Inv&aacute;lido(s).</span>
+							<span> Usu&aacute;rio e/ou Senha Inv&aacute;lido(s).</span>
 						</div>
 						<div id="signin-error2" class="alert alert-danger" style="display:none">
 							<span> Login n&atilde;o Permitido, Contate o administrador .</span>

@@ -77,14 +77,7 @@
 																		
 								<div class="col-md-3">
 									<div class="form-group">
-										<input class="form-control" type="text" data-ng-model="findedCompanyDetector.detectorDto.sensorDto.name" disabled>
-										<!-- <select class="form-control" 
-											style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-												data-ng-options="item as item.name for item in findedCompanyDetector.sensorsDto | orderBy: 'name' track by item.uid" 
-												data-ng-model="selectedCompanySensor"
-												data-ng-change="changeSensor();">
-												<option value="">Selecione</option> 
-										</select>		                        						                                                 -->
+										<input class="form-control" type="text" data-ng-model="findedCompanyDetector.detectorDto.sensorDto.name" disabled>										
 									</div>									                                                                                     
 								</div>
 		
@@ -231,8 +224,7 @@
 				
 										<div class="box-header">
 											<h4 class="box-title">
-											<strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{findedCompanyDetector.detectorDto.name}})
-											<span data-ng-show="findedCompanyDetector.detectorDto.sensorDto"> - </span> {{findedCompanyDetector.detectorDto.sensorDto.name}}</h4>											 	
+											<strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{findedCompanyDetector.detectorDto.name}})																						 	
 										</div>
 										
 										<div class="box-body">
@@ -242,13 +234,15 @@
 														
 														<div class="box-header with-border">
 															<i class="fa fa-bell-o"></i>
-															<h3 class="box-title">Detalhes do Sensor:</h3>
+															<h3 class="box-title">Detalhes do Sensor/alarme:</h3>
 														</div>
 														
 														<div class="box-body" style="border: darkgray; border-style: double;  background-color: transparent;">
 																																
 															<dl class="dl-horizontal">
-																<dt>Alarme:</dt>
+																<dt>Sensor (nome):</dt>
+																	<dd>{{findedCompanyDetector.detectorDto.sensorDto.name}}</dd>
+																<dt>Alarme (nome):</dt>
 																	<dd>{{findedCompanyDetector.alarmDto.name}}</dd>
 																<dt>Unidade:</dt>
 																	<dd>{{findedCompanyDetector.detectorDto.sensorDto.unitMeterGases}}</dd>																		
@@ -427,12 +421,13 @@
 			<h1>Empresa: {{selectedCompanyDetector.company}}</h1>
 			<h2>Unidade: {{selectedCompanyDetector.unit}} - &Aacute;rea: {{selectedCompanyDetector.area}} </h2>
 			<hr>
-			<h3 class="box-title"><strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} 
-				<span data-ng-show="findedCompanyDetector.detectorDto.sensorDto"> - </span> {{findedCompanyDetector.detectorDto.sensorDto.name}}</h3>
-						
-			<i class="fa fa-bell-o"></i> <h3 class="box-title">Detalhes do Sensor:</h3>                       
+			<h3 class="box-title"><strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{findedCompanyDetector.detectorDto.name}})
+									
+			<i class="fa fa-bell-o"></i> <h3 class="box-title">Detalhes do Sensor/alarme:</h3>                       
 																					
 			<dl class="dl-horizontal">
+				<dt>Sensor (nome):</dt>
+					<dd>{{findedCompanyDetector.detectorDto.sensorDto.name}}</dd>
 				<dt>Nome do Alarme / Unidade de Medida:</dt>
 					<dd><strong>{{findedCompanyDetector.alarmDto.name}} / {{findedCompanyDetector.alarmDto.unitMeterGases}}</strong></dd>
 				<dt>Range Max:</dt>

@@ -57,7 +57,9 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 		
 	$scope.clearHistoric = function() {
 		
-		$scope.selectedCompany = '';
+		if($scope.$root.isFrom == "MASTER")		
+			$scope.selectedCompany = '';
+			
         $scope.selectedCompanyDetector = '';
         $scope.findedCompanyDetector = '';        
         $scope.listHistoricInterval = undefined;

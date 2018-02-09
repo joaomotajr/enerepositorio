@@ -18,10 +18,10 @@ public interface HistoricAlarmRepository extends JpaRepository<HistoricAlarm, Lo
 //	@Query("select h from HistoricAlarm h where h.companyDetectorId = ?1 and h.date between ?3 and ?4")
 //	public Page<HistoricAlarm> findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(Long companyDetectorId, Long sensorId, Date in, Date out, Pageable pageable);
 	
-	@Query("select h from HistoricAlarm h where h.companyDetectorId = ?1 and h.date between ?3 and ?4")
+	@Query("select h from HistoricAlarm h where h.companyDetectorId = ?1 and h.date between ?2 and ?2")
 	public List<HistoricAlarm> findByCompanyDetectorIdAndLastUpdateBetween(Long companyDetectorId,  Date in, Date out);
 	
-	@Query("select h from HistoricAlarm h where h.companyDetectorId = ?1 and h.date between ?3 and ?4")
+	@Query("select h from HistoricAlarm h where h.companyDetectorId = ?1 and h.date between ?2 and ?3")
 	public Page<HistoricAlarm> findByCompanyDetectorIdAndLastUpdateBetweenPaginated(Long companyDetectorId, Date in, Date out, Pageable pageable);
 	
 }

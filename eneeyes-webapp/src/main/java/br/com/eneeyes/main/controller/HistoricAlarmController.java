@@ -1,4 +1,4 @@
-package br.com.eneeyes.main.controller.views;
+package br.com.eneeyes.main.controller;
 
 import java.util.Date;
 
@@ -15,12 +15,12 @@ import br.com.eneeyes.main.result.GroupResult;
 import br.com.eneeyes.main.service.HistoricAlarmService;
 
 @RestController
-public class HistoricAlarmViewController {
+public class HistoricAlarmController {
 	
 	@Autowired
 	HistoricAlarmService service;	
 	
-	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDetectorAndSensorAndInterval/{companyDetectorId}/{intervalType}/{currentPage}/{lenPage}", 
+	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDetectorAndInterval/{companyDetectorId}/{intervalType}/{currentPage}/{lenPage}", 
 			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)                      
 	public GroupResult<?> findByCompanyDetectorAndInterval(
@@ -31,7 +31,7 @@ public class HistoricAlarmViewController {
 		return service.findByCompanyDetectorAndInterval(companyDetectorId, intervalType, currentPage, lenPage);
 	}
 
-	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDetectorAndSensorAndIntervalDays/{companyDetectorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDetectorAndIntervalDays/{companyDetectorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
 	public GroupResult<?> findByCompanyDetectorAndSensorAndIntervalDays(
 			@PathVariable Long companyDetectorId, 

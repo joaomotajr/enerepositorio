@@ -6,7 +6,7 @@ app.factory('HistoricAlarmService', function($resource){
             {
                 companyDetectorId: '@companyDetectorId', 
                 dateIn: '@dateIn', 
-                dateIn: '@dateOut', 
+                dateOut: '@dateOut', 
                 currentPage: '@currentPage',
                 lenPage: '@lenPage'
             },

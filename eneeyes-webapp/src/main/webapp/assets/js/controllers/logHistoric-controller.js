@@ -43,7 +43,9 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	
 	$scope.clearHistoric = function() {
 		
-		$scope.selectedCompany = '';
+		if($scope.$root.isFrom == "MASTER")
+			$scope.selectedCompany = '';
+
         $scope.selectedCompanyDetector = '';
         $scope.findedCompanyDetector = '';
         $scope.listHistoricInterval = undefined;

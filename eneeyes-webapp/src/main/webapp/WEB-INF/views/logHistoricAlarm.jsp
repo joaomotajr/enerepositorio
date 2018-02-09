@@ -145,7 +145,7 @@
 											</div>
 										</div>			        				    								
 									</div>				        			
-								</div>s
+								</div>
 								
 								<hr style="margin-top: 5px !important; margin-bottom: 5px !important;">
 								
@@ -200,7 +200,7 @@
 											<div class="form-group">
 												<label class="control-label">&nbsp;</label>
 												<button type="button" class="btn btn-default btn-sm form-control font-weight-bold" data-ng-class="{'btn-primary': selectedButton == 100}" 
-												data-ng-click="interval = enumInterval.CUSTOM; getHistoricInterval(0)" data-ng-disabled="(findedCompanyDetector.detectorDto.sensorDto ? false : true">
+												data-ng-click="interval = enumInterval.CUSTOM; getHistoricInterval(0)" data-ng-disabled="findedCompanyDetector.detectorDto.sensorDto ? false : true">
 													<i class="fa fa-search"></i>
 												</button>
 											</div>
@@ -295,8 +295,7 @@
 										<div class="box box-default">
 									
 											<div class="box-header">
-												<strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{findedCompanyDetector.detectorDto.name}})
-												<span data-ng-show="findedCompanyDetector.detectorDto.sensorDto"> - </span> {{findedCompanyDetector.detectorDto.sensorDto.name}}</h4>											 	
+												<strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{findedCompanyDetector.detectorDto.name}})												
 											</div>
 											
 											<div class="box-body">
@@ -306,12 +305,13 @@
 															
 															<div class="box-header with-border">
 																<i class="fa fa-bell-o"></i>
-																<h3 class="box-title">Detalhes do Sensor:</h3>
+																<h3 class="box-title">Sensor/alarme:</h3>
 															</div>
 															
-															<div class="box-body" style="border: darkgray; border-style: double;  background-color: transparent;">
-																																	
+															<div class="box-body" style="border: darkgray; border-style: double;  background-color: transparent;">																																	
 																<dl class="dl-horizontal">
+																	<dt style="width: 90px">Sensor:</dt>
+																	<dd style="margin-left: 120px;">{{findedCompanyDetector.detectorDto.sensorDto.name}}</dd>
 																	<dt style="width: 90px">Alarme:</dt>
 																		<dd style="margin-left: 120px;">{{findedCompanyDetector.alarmDto.name}}</dd>
 																	<dt style="width: 90px">Unidade:</dt>
@@ -432,14 +432,14 @@
 		<div class="col-md-12">
 			<h1>Empresa: {{selectedCompanyDetector.company}}</h1>
 			<h2>Unidade: {{selectedCompanyDetector.unit}} - &Aacute;rea: {{selectedCompanyDetector.area}} </h2>
-			<hr>
-
-			<h3 class="box-title"><strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} 
-				<span data-ng-show="findedCompanyDetector.detectorDto.sensorDto"> - </span> {{findedCompanyDetector.detectorDto.sensorDto.name}}</h3>
-						
+			<hr>			
+			<h3 class="box-title"><strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{findedCompanyDetector.detectorDto.name}})
+					
 			<i class="fa fa-bell-o"></i> <h3 class="box-title">Detalhes do Sensor:</h3>                       
 																					
 			<dl class="dl-horizontal">
+				<dt>Sensor (nome):</dt>
+					<dd>{{findedCompanyDetector.detectorDto.sensorDto.name}}</dd>
 				<dt>Nome do Alarme / Unidade de Medida:</dt>
 					<dd><strong>{{findedCompanyDetector.alarmDto.name}} / {{findedCompanyDetector.alarmDto.unitMeterGases}}</strong></dd>
 				<dt>Range Max:</dt>
@@ -452,7 +452,7 @@
 					<dd><span data-ng-show="findedCompanyDetector.detectorDto.sensorDto" class="alarm3"> {{findedCompanyDetector.alarmDto.alarm3}}</span></dd>
 			</dl>		            
 			
-			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;Â­odo:</strong> {{selectedPeriodo}}</div>
+			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;­odo:</strong> {{selectedPeriodo}}</div>
 			
 			<br />
 			<div id="dvData">

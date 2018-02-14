@@ -7,7 +7,12 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		
 		 $scope.deletar = new CompanyService.deletar();		 
 		 $scope.deletar.$company({_csrf : angular.element('#_csrf').val(), id : $scope.companyUid}, function(){			
-			 
+			
+			if($scope.deletar.isError) {
+				$rootScope.showGeneralMessage($scope.deletar.message, 'DANGER');
+				return;
+			}
+			
 		 	$scope.clearFormCompany();
             $scope.getCompanys();   
             

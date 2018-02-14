@@ -22,15 +22,7 @@ public interface PositionAlarmRepository extends JpaRepository<PositionAlarm, Lo
 	
 	public PositionAlarm findByUid(Long uid);
 	
-//	public PositionAlarm findByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
-	
-//	public PositionAlarm findByCompanyDetectorAndSensorAndAlarmType(CompanyDetector companyDetector, Sensor sensor, AlarmType alarmType);
-	
-//	public PositionAlarm findByCompanyDetectorAndSensorAndAlarmTypeAndAlarmStatusNotIn(CompanyDetector companyDetector, Sensor sensor, AlarmType alarmType, List<AlarmStatus> solvedOrCancelesAlarms);
-	
 	public PositionAlarm findByCompanyDetectorAndAlarmTypeAndAlarmStatusNotIn(CompanyDetector companyDetector, AlarmType alarmType, List<AlarmStatus> solvedOrCancelesAlarms);
-	
-//	public Long countByCompanyDetectorAndSensor(CompanyDetector companyDetector, Sensor sensor);
 	
 	public Long countByCompanyDetector(CompanyDetector companyDetector);
 	

@@ -11,6 +11,7 @@ import br.com.eneeyes.main.dto.UnitDto;
 import br.com.eneeyes.main.model.Company;
 import br.com.eneeyes.main.model.Unit;
 import br.com.eneeyes.main.model.enums.ActionType;
+import br.com.eneeyes.main.repository.AreaRepository;
 import br.com.eneeyes.main.repository.CompanyRepository;
 import br.com.eneeyes.main.repository.UnitRepository;
 import br.com.eneeyes.main.result.BasicResult;
@@ -27,13 +28,16 @@ public class UnitService implements IService<UnitDto> {
 	private CompanyRepository companyRepository;
 	
 	@Autowired
+	private AreaRepository areaRepository;
+	
+	@Autowired
 	private LogAuditoriaService logAuditoriaService;
 	
 	public BasicResult<?> save(UnitDto dto) {
 		LogResult<UnitDto> result = new LogResult<UnitDto>();
 		ActionType actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;
 		
-		Company company = companyRepository.findByUid(dto.getCompanyDto().getUid());
+		Company company = companyRepository.findOne(dto.getCompanyDto().getUid());
 		
 		Unit unit = new Unit(dto);
 		unit.setCompany(company);		
@@ -52,22 +56,31 @@ public class UnitService implements IService<UnitDto> {
 
 	public BasicResult<?> delete(Long uid) {
 				
-		LogResult<UnitDto> result = new LogResult<UnitDto>(); 	
+		LogResult<UnitDto> result = new LogResult<UnitDto>();
 		
-		try {			
-			repository.delete(uid);
-			
-			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Unidade Excluída.");
-			
-			logAuditoriaService.save(this.toString(), ActionType.DELETE, result.toString());
-			
-		} catch (Exception e) {
-			e.printStackTrace();			
+		Long areas = areaRepository.countByUnit(new Unit(uid));
+		
+		if (areas > 0) {
 			result.setIsError(true);
-			result.setMessage(e.getMessage());
-		}		
+			result.setResultType( ResultMessageType.ERROR_CONSIST );
+			result.setMessage("Existe Area(s) Nessa Companhia!");
+		}
+		else {			
 		
+			try {			
+				repository.delete(uid);
+				
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Unidade Excluída.");
+				
+				logAuditoriaService.save(this.toString(), ActionType.DELETE, result.toString());
+				
+			} catch (Exception e) {
+				e.printStackTrace();			
+				result.setIsError(true);
+				result.setMessage(e.getMessage());
+			}		
+		}
 		return result;		
 	}
 

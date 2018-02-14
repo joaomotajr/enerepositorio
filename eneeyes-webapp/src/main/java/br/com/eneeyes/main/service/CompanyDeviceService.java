@@ -38,7 +38,7 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 		LogResult<CompanyDeviceDto> result = new LogResult<CompanyDeviceDto>();	
 		ActionType actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;
 		
-		Area area = areaRepository.findByUid(dto.getAreaDto().getUid());
+		Area area = areaRepository.findOne(dto.getAreaDto().getUid());
 		
 		CompanyDevice companyDevice = new CompanyDevice(dto);
 		companyDevice.setArea(area);

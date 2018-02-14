@@ -34,6 +34,11 @@ public class Area {
     	
     }
     
+    public Area(Long uid) {
+    	
+    	this.uid = uid;
+    }
+    
     public Area(AreaDto dto) {
     	
     	this.uid = dto.getUid();		

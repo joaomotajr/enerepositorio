@@ -23,6 +23,10 @@ public class Company {
 		
 	}
 	
+	public Company(Long companyId) {
+		this.uid = companyId;
+	}
+	
 	public Company(CompanyDto dto) {
 		this.uid = dto.getUid();
 		this.name = dto.getName();

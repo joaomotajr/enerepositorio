@@ -13,6 +13,7 @@ import br.com.eneeyes.main.model.enums.ActionType;
 import br.com.eneeyes.main.model.views.CompanySumaryView;
 import br.com.eneeyes.main.model.views.CompanyView;
 import br.com.eneeyes.main.repository.CompanyRepository;
+import br.com.eneeyes.main.repository.UnitRepository;
 import br.com.eneeyes.main.repository.views.CompanySumaryViewRepository;
 import br.com.eneeyes.main.repository.views.CompanyViewRepository;
 import br.com.eneeyes.main.result.BasicResult;
@@ -24,6 +25,9 @@ public class CompanyService implements IService<CompanyDto> {
 
 	@Autowired
 	private CompanyRepository repository;
+	
+	@Autowired
+	private UnitRepository unitRepository;
 	
 	@Autowired
 	private CompanyViewRepository companyViewRepository;
@@ -56,19 +60,29 @@ public class CompanyService implements IService<CompanyDto> {
 	public BasicResult<?> delete(Long uid) {
 				
 		LogResult<CompanyDto> result = new LogResult<CompanyDto>(); 	
+		Long units = unitRepository.countByCompany(new Company(uid));
 		
-		try {			
-			repository.delete(uid);
-			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Empresa Excluída.");
-			
-			logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.DELETE, result.toString());
-			
-		} catch (Exception e) {
-			e.printStackTrace();			
+		if (units > 0) {
 			result.setIsError(true);
-			result.setMessage(e.getMessage());
-		}		
+			result.setResultType( ResultMessageType.ERROR_CONSIST );
+			result.setMessage("Existe Unidade(s) Nessa Companhia!");
+		}
+		else {
+			
+			try {			
+				repository.delete(uid);
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Empresa Excluída.");
+				
+				logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.DELETE, result.toString());
+				
+			} catch (Exception e) {
+				e.printStackTrace();			
+				result.setIsError(true);
+				result.setMessage(e.getMessage());
+			}			
+			
+		}
 		
 		return result;		
 	}

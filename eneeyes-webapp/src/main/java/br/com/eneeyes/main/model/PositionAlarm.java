@@ -138,7 +138,7 @@ public class PositionAlarm {
 	@Column(name = "ACTION", nullable = true, length=300)		
 	private String action;	
 		
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="positionAlarm", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="positionAlarm", cascade = CascadeType.REMOVE)
 	private Set<PositionAlarmMessage> positionAlarmMessages = new HashSet<PositionAlarmMessage>();
 	
 	@Column(name = "SOUND_STATUS", columnDefinition = "int default 0" , nullable = true)

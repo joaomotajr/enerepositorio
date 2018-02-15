@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.CompanyDetectorMaintenanceHistoricDto;
-import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDetectorMaintenanceHistoric;
 import br.com.eneeyes.main.repository.CompanyDetectorMaintenanceHistoricRepository;
 import br.com.eneeyes.main.result.BasicResult;
@@ -25,8 +24,8 @@ public class CompanyDetectorMaintenanceHistoricService implements IService<Compa
 		Result<CompanyDetectorMaintenanceHistoricDto> result = new Result<CompanyDetectorMaintenanceHistoricDto>(); 	
 		
 		CompanyDetectorMaintenanceHistoric companyDetectorMaintenanceHistoric = new CompanyDetectorMaintenanceHistoric(dto);		
-		CompanyDetector companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
-		companyDetectorMaintenanceHistoric.setCompanyDetector(companyDetector);		
+//		CompanyDetector companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
+//		companyDetectorMaintenanceHistoric.setCompanyDetector(companyDetector);		
 		companyDetectorMaintenanceHistoric = repository.save(companyDetectorMaintenanceHistoric);
 		
 		dto.setUid(companyDetectorMaintenanceHistoric.getUid());				
@@ -120,11 +119,8 @@ public class CompanyDetectorMaintenanceHistoricService implements IService<Compa
 	public BasicResult<?> findByCompanyDetectorId(Long uid) {
 		Result<CompanyDetectorMaintenanceHistoricDto> result = new Result<CompanyDetectorMaintenanceHistoricDto>();
 		
-		CompanyDetector companyDetector = new CompanyDetector();
-		companyDetector.setUid(uid);
-		
 		try {
-			List<CompanyDetectorMaintenanceHistoric> lista = repository.findByCompanyDetectorOrderByDateAsc(companyDetector);
+			List<CompanyDetectorMaintenanceHistoric> lista = repository.findByCompanyDetectorId(uid);
 			
 			if (lista != null) {
 				

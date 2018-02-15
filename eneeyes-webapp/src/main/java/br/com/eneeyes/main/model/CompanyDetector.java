@@ -133,12 +133,6 @@ public class CompanyDetector {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
 	private Set<Position> position;
 	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
-//	private Set<Historic> historic;
-	
-//	@Column(name = "POSITION_ID", nullable = true)
-//	private Long positionId;
-	
 	@Column(name = "HISTORIC_ID", nullable = true)
 	private Long historicId;
 			

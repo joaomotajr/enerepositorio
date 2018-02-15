@@ -13,7 +13,7 @@ import br.com.eneeyes.main.model.Alarm;
 
 
 @Entity
-@Table(name="company_detector_alarm_view")
+@Table(name="companydetector_alarm_view")
 public class CompanyDetectorAlarmView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

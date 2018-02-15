@@ -10,81 +10,34 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `companydetector_alarm_view` AS
+VIEW `area_companydetector_alarm_view` AS
     SELECT 
-        `cd`.`UID`,
-        `a`.`UID` AS `alarm_id`,
+        GETFAKEID() AS `UID`,
+        `cdv`.`AREA_ID` AS `AREA_ID`,
+        `cd`.`UID` AS `COMPANY_DETECTOR_ID`,
+        `s`.`UID` AS `SENSOR_ID`,
+        `cd`.`NAME` AS `COMPANY_DETECTOR_NAME`,
+        `cd`.`LOCAL` AS `COMPANY_DETECTOR_LOCAL`,
+        `s`.`NAME` AS `SENSOR_NAME`,
+        `s`.`RANGE_MIN` AS `RANGE_MIN`,
+        `s`.`RANGE_MAX` AS `RANGE_MAX`,
+        `s`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`,
+        `p`.`LAST_VALUE` AS `LAST_VALUE`,
+        `p`.`LAST_UPDATE` AS `LAST_UPDATE`,
+        `p`.`ALARM_TYPE` AS `ALARM_TYPE`,
+        `a`.`UID` AS `ALARM_ID`,
+        `a`.`NAME` AS `ALARM_NAME`,
+        `a`.`ALARM_ON` AS `ALARM_ON`,
         `a`.`ALARM_1` AS `ALARM_1`,
         `a`.`ALARM_2` AS `ALARM_2`,
         `a`.`ALARM_3` AS `ALARM_3`,
-        `a`.`ALARM_OFF` AS `ALARM_OFF`,
-        `a`.`NAME` AS `NAME`,
-        `a`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`,
-        `a`.`GAS_ID` AS `GAS_ID`,
-        `a`.`ACTION1` AS `ACTION1`,
-        `a`.`ACTION2` AS `ACTION2`,
-        `a`.`ACTION3` AS `ACTION3`,
-        `a`.`ALARM_ACTION` AS `ALARM_ACTION`,
-        `a`.`ALARM_EMAIL` AS `ALARM_EMAIL`,
-        `a`.`ALARM_ON` AS `ALARM_ON`,
-        `a`.`ALARM_SMS` AS `ALARM_SMS`,
-        `a`.`CELULAR` AS `CELULAR`,
-        `a`.`EMAIL` AS `EMAIL`,
-        `a`.`COMPANY_ID` AS `COMPANY_ID`,
-        `a`.`ALARM_SOUND` AS `ALARM_SOUND`,
-        `a`.`ALARM_SIGMA` AS `ALARM_SIGMA`,
-        `a`.`CELULAR1` AS `CELULAR1`,
-        `a`.`EMAIL1` AS `EMAIL1`,
-        `a`.`ACTION4` AS `ACTION4`,
-        `a`.`ALARM_11` AS `ALARM_11`,
-        `a`.`ALARM_22` AS `ALARM_22`,
-        `a`.`ALARM_33` AS `ALARM_33`,
-        `a`.`DEVICE_TYPE` AS `DEVICE_TYPE`,
-        `a`.`ALARM2_ON` AS `ALARM2_ON`,
-        `a`.`ALARM3_ON` AS `ALARM3_ON`
+        `g`.`NAME` AS `GAS_NAME`
     FROM
-        (`company_detector` `cd`
-        JOIN `alarm` `a` ON ((`cd`.`ALARM_ID` = `a`.`UID`)))
-    ORDER BY `cd`.`UID`
-
-/* POSTGRES */    
-CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = root@localhost 
-    SQL SECURITY DEFINER
-VIEW companydetector_alarm_view AS
-    SELECT 
-        cd.UID,
-        a.UID AS alarm_id,
-        a.ALARM_1 AS ALARM_1,
-        a.ALARM_2 AS ALARM_2,
-        a.ALARM_3 AS ALARM_3,
-        a.ALARM_OFF AS ALARM_OFF,
-        a.NAME AS NAME,
-        a.UNIT_METER_GASES AS UNIT_METER_GASES,
-        a.GAS_ID AS GAS_ID,
-        a.ACTION1 AS ACTION1,
-        a.ACTION2 AS ACTION2,
-        a.ACTION3 AS ACTION3,
-        a.ALARM_ACTION AS ALARM_ACTION,
-        a.ALARM_EMAIL AS ALARM_EMAIL,
-        a.ALARM_ON AS ALARM_ON,
-        a.ALARM_SMS AS ALARM_SMS,
-        a.CELULAR AS CELULAR,
-        a.EMAIL AS EMAIL,
-        a.COMPANY_ID AS COMPANY_ID,
-        a.ALARM_SOUND AS ALARM_SOUND,
-        a.ALARM_SIGMA AS ALARM_SIGMA,
-        a.CELULAR1 AS CELULAR1,
-        a.EMAIL1 AS EMAIL1,
-        a.ACTION4 AS ACTION4,
-        a.ALARM_11 AS ALARM_11,
-        a.ALARM_22 AS ALARM_22,
-        a.ALARM_33 AS ALARM_33,
-        a.DEVICE_TYPE AS DEVICE_TYPE,
-        a.ALARM2_ON AS ALARM2_ON,
-        a.ALARM3_ON AS ALARM3_ON
-    FROM
-        company_detector cd
-        JOIN alarm a ON cd.ALARM_ID = a.UID
-    ORDER BY cd.UID
+        ((((((`company_device` `cdv`
+        JOIN `company_detector` `cd` ON ((`cdv`.`UID` = `cd`.`COMPANY_DEVICE_ID`)))
+        JOIN `detector` `d` ON ((`cd`.`DETECTOR_ID` = `d`.`UID`)))
+        JOIN `sensor` `s` ON ((`d`.`SENSOR_ID` = `s`.`UID`)))
+        JOIN `gas` `g` ON ((`s`.`GAS_ID` = `g`.`UID`)))
+        LEFT JOIN `alarm` `a` ON ((`cd`.`ALARM_ID` = `a`.`UID`)))
+        LEFT JOIN `position` `p` ON ((`p`.`COMPANY_DETECTOR_ID` = `cd`.`UID`)))
+    ORDER BY `cdv`.`AREA_ID` , `cd`.`UID` , `s`.`UID`

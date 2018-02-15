@@ -105,14 +105,15 @@ app.controller('genericController', function ($scope, $timeout, $filter, Generic
 		  	{ name : 'PPM', uid :  1 },
 		  	{ name : 'PPB', uid : 2 },
 		  	{ name : 'LEL_PERCENT', uid : 3 },
-		  	{ name : 'LEL_PERCENT_METRO', uid : 4 },
-			{ name : 'GRAUS_CELSIUS', uid : 5 },
-			{ name : 'VOLT', uid : 6 },
-			{ name : 'AMPERE', uid : 7 },
-			{ name : 'MINUTE', uid : 8 },
-			{ name : 'SECOND', uid : 9 },
-			{ name : 'OPEN/CLOSE', uid : 10 },
-			{ name : 'KWH', uid : 11 }
+			{ name : 'LEL_PERCENT_METRO', uid : 4 },
+			{ name : 'PERCENT_VOLUME', uid : 5 },
+			{ name : 'GRAUS_CELSIUS', uid : 6 },
+			{ name : 'VOLT', uid : 7 },
+			{ name : 'AMPERE', uid : 8 },
+			{ name : 'MINUTE', uid : 9 },
+			{ name : 'SECOND', uid : 10 },			
+			{ name : 'KWH', uid : 11 },
+			{ name : 'OPEN/CLOSE', uid : 12 }
 		 ]; 
 
 	 $scope.deviceTypes = 

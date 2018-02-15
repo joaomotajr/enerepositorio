@@ -15,8 +15,7 @@ public interface HistoricViewRepository extends JpaRepository<HistoricView, Long
 	
 	@Query("select h from HistoricView h where h.companyDetectorId = ?1 and h.lastUpdate between ?2 and ?3 ")
 	List<IHistoric> findByCompanyDetectorIdAndAndLastUpdateBetween(Long companyDetectorId,  Date inicio, Date fim);
-	
-	
+		
 	@Query("select h from HistoricView h where h.companyDetectorId = ?1 and h.lastUpdate between ?2 and ?3 ")
 	Page<IHistoric> findByCompanyDetectorIdAndAndLastUpdateBetweenPaginated(Long companyDetectorId,  Date inicio, Date fim, Pageable pageable);
 	

@@ -10,7 +10,8 @@ public class CompanyDetectorMaintenanceHistoricDto {
 	private Long uid;
 	private Date date;
 	private String description;
-	private CompanyDetectorDto companyDetectorDto;
+//	private CompanyDetectorDto companyDetectorDto;
+	private Long companyDetectorId;
 	private HistoricMaintenaceType historicMaintenaceType;
 	
 	public CompanyDetectorMaintenanceHistoricDto() {
@@ -23,6 +24,7 @@ public class CompanyDetectorMaintenanceHistoricDto {
 		this.date = model.getDate();		
 		this.description = model.getDescription();
 		this.historicMaintenaceType = model.getHistoricMaintenaceType();
+		this.companyDetectorId = model.getCompanyDetectorId();
 	}
 
 	public final Long getUid() {
@@ -49,16 +51,24 @@ public class CompanyDetectorMaintenanceHistoricDto {
 		this.description = description;
 	}
 	
-	public CompanyDetectorDto getCompanyDetectorDto() {
-		return companyDetectorDto;
-	}
-	
-	public void setCompanyDetectorDto(CompanyDetectorDto companyDetectorDto) {
-		this.companyDetectorDto = companyDetectorDto;
-	}
-	
+//	public CompanyDetectorDto getCompanyDetectorDto() {
+//		return companyDetectorDto;
+//	}
+//	
+//	public void setCompanyDetectorDto(CompanyDetectorDto companyDetectorDto) {
+//		this.companyDetectorDto = companyDetectorDto;
+//	}
+		
 	public final HistoricMaintenaceType getHistoricMaintenaceType() {
 		return historicMaintenaceType;
+	}
+
+	public Long getCompanyDetectorId() {
+		return companyDetectorId;
+	}
+
+	public void setCompanyDetectorId(Long companyDetectorId) {
+		this.companyDetectorId = companyDetectorId;
 	}
 
 	public final void setHistoricMaintenaceType(HistoricMaintenaceType historicMaintenaceType) {

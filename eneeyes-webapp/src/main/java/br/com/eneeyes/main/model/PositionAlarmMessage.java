@@ -2,6 +2,7 @@ package br.com.eneeyes.main.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,7 +45,7 @@ public class PositionAlarmMessage {
 	@Column(name = "MESSAGE", nullable = true, length=300)		
 	private String message;	
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.DETACH)
 	@JoinColumn(name="POSITION_ALARM_ID", nullable=false)
     private PositionAlarm positionAlarm;
 	

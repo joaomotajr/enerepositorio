@@ -17,6 +17,5 @@ public interface HistoricViewDayRepository extends JpaRepository<HistoricViewDay
 	List<IHistoricGroup>findByCompanyDetectorIdAndLastUpdateBetween(Long companyDetectorId,  Date in, Date out);
 	
 	@Query("select h from HistoricViewDay h where h.companyDetectorId = ?1 and h.lastUpdate between ?2 and ?3")
-	public Page<IHistoricGroup> findByCompanyDetectorIdAndLastUpdateBetweenPaginated(Long companyDetectorId,  Date in, Date out, Pageable pageable);
-	
+	public Page<IHistoricGroup> findByCompanyDetectorIdAndLastUpdateBetweenPaginated(Long companyDetectorId,  Date in, Date out, Pageable pageable);	
 }

@@ -6,33 +6,27 @@
 /* MYSQL */
 CREATE 
     ALGORITHM = UNDEFINED 
-    DEFINER = root@localhost 
+    DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW queue_sms_view AS
+VIEW `queue_sigma_view` AS
     SELECT 
-        pa.UID AS UID,
-        pa.Sms_STATUS AS SMS_STATUS,
-        a.NAME AS ALARM_NAME,
-        pa.LAST_UPDATE AS LAST_UPDATE,
-        pa.LAST_VALUE AS LAST_VALUE,
-        pa.ALARM_TYPE AS ALARM_TYPE,
-        a.NAME AS NAME,
-        a.CELULAR AS CELULAR,
-        a.CELULAR1 AS CELULAR1,
-        cd.UID AS COMPANY_DETECTOR_ID,
-        cd.NAME AS COMPANY_DETECTOR_NAME,
-        s.uID AS SENSOR_ID,
-        g.NAME AS GAS_NAME,
-        s.UNIT_METER_GASES AS UNIT_METER_GASES
+        `pa`.`UID` AS `UID`,
+        `pa`.`SIGMA_STATUS` AS `SIGMA_STATUS`,
+        `a`.`NAME` AS `ALARM_NAME`,
+        `pa`.`LAST_UPDATE` AS `LAST_UPDATE`,
+        `pa`.`LAST_VALUE` AS `LAST_VALUE`,
+        `pa`.`ALARM_TYPE` AS `ALARM_TYPE`,
+        `a`.`NAME` AS `NAME`,
+        `a`.`CELULAR` AS `CELULAR`,
+        `cd`.`UID` AS `COMPANY_DETECTOR_ID`,
+        `cd`.`NAME` AS `COMPANY_DETECTOR_NAME`,
+        `s`.`UID` AS `SENSOR_ID`
     FROM
-        position_alarm pa
-        JOIN company_detector_alarms cda ON pa.COMPANY_DETECTOR_ID = cda.COMPANY_DETECTOR_ID            
-        JOIN company_detector cd ON cda.COMPANY_DETECTOR_ID = cd.UID
-        JOIN detector d ON (cd.DETECTOR_ID = d.UID)
-        JOIN sensor s ON d.SENSOR_ID = s.UID        
-        JOIN gas g ON s.GAS_ID = g.UID
-        JOIN alarm a ON cda.ALARM_ID = a.UID
-        
+        (((((`position_alarm` `pa`
+        JOIN `company_detector` `cd` ON ((`cd`.`UID` = `pa`.`COMPANY_DETECTOR_ID`)))
+        JOIN `detector` `d` ON ((`cd`.`DETECTOR_ID` = `d`.`UID`)))
+        JOIN `sensor` `s` ON ((`d`.`SENSOR_ID` = `s`.`UID`)))
+        JOIN `gas` `g` ON ((`s`.`GAS_ID` = `g`.`UID`)))
+        JOIN `alarm` `a` ON ((`cd`.`ALARM_ID` = `a`.`UID`)))
     WHERE
-        pa.Sms_STATUS = 1
-            OR pa.Sms_STATUS = 3
+        (`pa`.`SIGMA_STATUS` = 1)

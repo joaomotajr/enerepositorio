@@ -2,10 +2,11 @@
 app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope, $timeout, $filter, ViewService, 
 		CompanyService, CompanyDetectorService, CompanyDetectorMaintenanceHistoricService) {
 
+
 	var lastDate = "";
 	$scope.dateTwoEqual = true;
 	$scope.dateOneMaior = true;
-	
+	$scope.companyDetectorMaintenanceHistoric = [];
 	
 	$scope.changeCompanyDetector = function() {
 		          
@@ -72,7 +73,7 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 			if($scope.selectedCompanyDetector.installDate == null) {
 				$scope.clearForm();
 				$scope.selectedCompanyDetector = undefined;				
-				$scope.msgErroInfoHistoric = "Detector Sem Data de Instalação, Verifique!"
+				$scope.msgErroInfoHistoric = "Detector Sem Data de Instalaï¿½ï¿½o, Verifique!"
 			}
 			else {
 				lastDate = new Date($scope.selectedCompanyDetector.installDate);
@@ -188,7 +189,7 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 			description: $scope.description,			
 			date : getDate($('#dateTwo').val()),
 			historicMaintenaceType : $scope.selectedHistoricMaintenaceType.uid,
-			companyDetectorDto: {uid: $scope.selectedCompanyDetector.uid}
+			companyDetectorId: $scope.selectedCompanyDetector.uid
 		 }
 		 
 		$scope.inclusao = new CompanyDetectorMaintenanceHistoricService.save(companyDetectorMaintenaceHistoric);

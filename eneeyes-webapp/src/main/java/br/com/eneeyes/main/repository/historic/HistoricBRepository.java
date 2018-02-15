@@ -12,13 +12,7 @@ import br.com.eneeyes.main.model.historic.HistoricB;
 import br.com.eneeyes.main.model.historic.IHistoric;
 
 public interface HistoricBRepository extends JpaRepository<HistoricB, Long> {
-	
-//	@Query("select h from HistoricB h where h.companyDetectorId = ?1 and h.sensorId = ?2 and h.lastUpdate between ?3 and ?4")
-//	public List<IHistoric> findByCompanyDetectorIdAndSensorIdAndLastUpdateBetween(Long companyDetectorId, Long sensorId, Date in, Date out);
-//	
-//	@Query("select h from HistoricB h where h.companyDetectorId = ?1 and h.sensorId = ?2 and h.lastUpdate between ?3 and ?4")
-//	public Page<IHistoric> findByCompanyDetectorIdAndSensorIdAndLastUpdateBetweenPaginated(Long companyDetectorId, Long sensorId, Date in, Date out, Pageable pageable);
-	
+
 	@Query("select h from HistoricB h where h.companyDetectorId = ?1 and h.lastUpdate between ?2 and ?2")
 	public List<IHistoric> findByCompanyDetectorIdAndLastUpdateBetween(Long companyDetectorId, Date in, Date out);
 	

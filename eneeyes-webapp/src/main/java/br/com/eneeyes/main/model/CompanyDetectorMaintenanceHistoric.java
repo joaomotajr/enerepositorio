@@ -2,17 +2,13 @@ package br.com.eneeyes.main.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.CompanyDetectorMaintenanceHistoricDto;
@@ -33,6 +29,7 @@ public class CompanyDetectorMaintenanceHistoric {
 		this.description = dto.getDescription();
 		this.date = dto.getDate();
 		this.historicMaintenaceType = dto.getHistoricMaintenaceType();
+		this.companyDetectorId = dto.getCompanyDetectorId();
 	}
 	
 	@Id
@@ -46,9 +43,13 @@ public class CompanyDetectorMaintenanceHistoric {
 	@Column(name = "DESCRIPTION", nullable = true)
 	private String description;
 	
-	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
-	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
-	private CompanyDetector companyDetector;
+//	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.LAZY)
+//	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
+//	private CompanyDetector companyDetector;
+	
+	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
+	private Long companyDetectorId;
+	
 	
 	@Column(name = "HISTORIC_MAINTENACE_TYPE", columnDefinition = "int default 1")
 	private HistoricMaintenaceType historicMaintenaceType;
@@ -82,16 +83,24 @@ public class CompanyDetectorMaintenanceHistoric {
 		this.description = description;
 	}
 	
-	public CompanyDetector getCompanyDetector() {
-		return companyDetector;
-	}
-
-	public void setCompanyDetector(CompanyDetector companyDetector) {
-		this.companyDetector = companyDetector;
-	}
-	
+//	public CompanyDetector getCompanyDetector() {
+//		return companyDetector;
+//	}
+//
+//	public void setCompanyDetector(CompanyDetector companyDetector) {
+//		this.companyDetector = companyDetector;
+//	}
+		
 	public final HistoricMaintenaceType getHistoricMaintenaceType() {
 		return historicMaintenaceType;
+	}
+
+	public Long getCompanyDetectorId() {
+		return companyDetectorId;
+	}
+
+	public void setCompanyDetectorId(Long companyDetectorId) {
+		this.companyDetectorId = companyDetectorId;
 	}
 
 	public final void setHistoricMaintenaceType(HistoricMaintenaceType historicMaintenaceType) {

@@ -11,7 +11,6 @@ import br.com.eneeyes.main.dto.UnitDto;
 import br.com.eneeyes.main.model.Company;
 import br.com.eneeyes.main.model.Unit;
 import br.com.eneeyes.main.model.enums.ActionType;
-import br.com.eneeyes.main.repository.AreaRepository;
 import br.com.eneeyes.main.repository.CompanyRepository;
 import br.com.eneeyes.main.repository.UnitRepository;
 import br.com.eneeyes.main.result.BasicResult;
@@ -26,9 +25,6 @@ public class UnitService implements IService<UnitDto> {
 	
 	@Autowired
 	private CompanyRepository companyRepository;
-	
-	@Autowired
-	private AreaRepository areaRepository;
 	
 	@Autowired
 	private LogAuditoriaService logAuditoriaService;
@@ -56,31 +52,22 @@ public class UnitService implements IService<UnitDto> {
 
 	public BasicResult<?> delete(Long uid) {
 				
-		LogResult<UnitDto> result = new LogResult<UnitDto>();
+		LogResult<UnitDto> result = new LogResult<UnitDto>(); 	
 		
-		Long areas = areaRepository.countByUnit(new Unit(uid));
-		
-		if (areas > 0) {
+		try {			
+			repository.delete(uid);
+			
+			result.setResultType( ResultMessageType.SUCCESS );
+			result.setMessage("Unidade Excluída.");
+			
+			logAuditoriaService.save(this.toString(), ActionType.DELETE, result.toString());
+			
+		} catch (Exception e) {
+			e.printStackTrace();			
 			result.setIsError(true);
-			result.setResultType( ResultMessageType.ERROR_CONSIST );
-			result.setMessage("Existe Area(s) Nessa Companhia!");
-		}
-		else {			
+			result.setMessage(e.getMessage());
+		}		
 		
-			try {			
-				repository.delete(uid);
-				
-				result.setResultType( ResultMessageType.SUCCESS );
-				result.setMessage("Unidade Excluída.");
-				
-				logAuditoriaService.save(this.toString(), ActionType.DELETE, result.toString());
-				
-			} catch (Exception e) {
-				e.printStackTrace();			
-				result.setIsError(true);
-				result.setMessage(e.getMessage());
-			}		
-		}
 		return result;		
 	}
 

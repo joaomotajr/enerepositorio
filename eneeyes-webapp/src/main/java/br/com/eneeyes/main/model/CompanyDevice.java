@@ -25,11 +25,6 @@ public class CompanyDevice {
 	
 	}
 	
-	public CompanyDevice(Long uid) {
-		
-		this.uid = uid;
-	}
-	
 	public CompanyDevice(CompanyDeviceDto dto) {
 		
 		this.uid = dto.getUid();

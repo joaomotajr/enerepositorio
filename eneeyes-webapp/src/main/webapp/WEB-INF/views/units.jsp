@@ -126,7 +126,7 @@
 							<div class="col-md-6">
 								<label>Incluir Área</label>						
 								<div class="entry input-group">					
-							        <input type="text" class="form-control" placeholder="Digite o Nome da Área" data-ng-model="areaNameInit">
+							        <input type="text" class="form-control" placeholder="Digite o Nome da Área" data-ng-model="areaNameInit">
 							        <span class="input-group-btn">
 							        <button class="btn btn-info btn-flat" type="button" data-ng-click="saveAreaInit();">OK</button>
 							        </span>

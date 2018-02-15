@@ -27,7 +27,7 @@ app.filter('manufacturerFilter', function () {
         
         var filterResult = new Array();
 
-        for (index in objects) {
+        for (var index in objects) {
         
    			 if (objects[index].manufacturerDto.uid == criteria.manufacturer.uid) {
 
@@ -178,7 +178,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		
 		$scope.resultSensors = new SensorService.listAll();	
 		$scope.resultSensors.$sensor({_csrf : angular.element('#_csrf').val()}, function(){		
-			$scope.sensors = $scope.resultSensors.list
+			$scope.sensors = $scope.resultSensors.list;
 	   });		 
 	}
 	 
@@ -213,13 +213,13 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		 }		
 	}
 	
-	// $scope.changeManufacturer = function() { 
+	 $scope.changeManufacturer = function() { 
 				
-	// 	$scope.search = {manufacturer: $scope.detectorManufacturer};
-	// 	$scope.searchSensor = {manufacturer: $scope.detectorManufacturer , sensors: $scope.detectorSensors};
-	// 	$scope.detectorSensors = [];
+	 	$scope.search = {manufacturer: $scope.detectorManufacturer};
+	 	//$scope.searchSensor = {manufacturer: $scope.detectorManufacturer , sensors: $scope.detectorSensors};
+	 	//$scope.detectorSensors = [];
 				
-	// }
+	 }
 	
 	//  $scope.addSensorDetector = function (noSortIndexindex) {
 		 

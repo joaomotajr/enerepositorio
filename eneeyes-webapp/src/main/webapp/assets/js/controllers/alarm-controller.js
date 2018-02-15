@@ -69,7 +69,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	         }, 500);           
 
 		});		 
-	 }
+	 };
 		 
 	$scope.clearFormAlarm = function () {
 	
@@ -100,7 +100,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			$scope.selectedCompany = ''
 		else
 			$scope.selectedCompany = $scope.companies[0];
-	}
+	};
 	 
 	$scope.getAlarms = function() {
 		 
@@ -108,7 +108,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 $scope.resultAlarms.$alarm({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.alarms = $scope.resultAlarms.list;			 
          });		 
-	 }	 
+	 };	 
 	
 	 $scope.editAlarm = function (index) {
 		 
@@ -175,7 +175,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			$timeout(function () {
 	            $('#modalAlarmEdit').modal({ show: 'false' });                        
 	        }, 200);
-	 }
+	 };
 	 
 	$scope.usedAlarms = function(alarmId) {
 		 
@@ -184,7 +184,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
  			 
 			 $scope.usedAlarms = $scope.resultUsedAlarms.list;
 		});		 		 
-	 }
+	 };
 	 
 	 $scope.deleteAlarm = function(index) {
 		 
@@ -201,7 +201,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			 }
 
 		});	 
-	 }	 
+	 };	 
 	 
 	 $scope.getDeviceType = function (name) {
 		 
@@ -211,7 +211,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
             	 return $scope.deviceTypes[i];
              }
          } 		 
-	 }
+	 };
 	 
 	 $scope.getGases = function() {
 		 
@@ -219,7 +219,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 $scope.resultGases.$gas({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.gases = $scope.resultGases.list; 		 			 
          });		 
-	 }	
+	 };
 	 
 	 function getClassNameWithNumberSuffix(el) {
         var className = null;
@@ -241,30 +241,31 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
             	 return $scope.unitMetersGases[i];
              }
          } 		 
-	 }
+	 };
 
 	$scope.getCompanys = function() {
 		$scope.resultCompanies = new CompanyService.listAllView();		 
 		$scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
 				 $scope.companies = $scope.resultCompanies.list;
 	     }); 
-	 }
-	 
-	 $scope.unitMetersGases = 
-		 [
+	 };	
+
+	$scope.unitMetersGases = 
+	 [
 		  	{ name : 'DESCONHECIDO', uid : 0 },
 		  	{ name : 'PPM', uid :  1 },
 		  	{ name : 'PPB', uid : 2 },
 		  	{ name : 'LEL_PERCENT', uid : 3 },
-		  	{ name : 'LEL_PERCENT_METRO', uid : 4 },
-			{ name : 'GRAUS_CELSIUS', uid : 5 },
-			{ name : 'VOLT', uid : 6 },
-			{ name : 'AMPERE', uid : 7 },
-			{ name : 'MINUTE', uid : 8 },
-			{ name : 'SECOND', uid : 9 },
-			{ name : 'OPEN/CLOSE', uid : 10 },
-			{ name : 'KWH', uid : 11 }
-		 ]; 
+			{ name : 'LEL_PERCENT_METRO', uid : 4 },
+			{ name : 'PERCENT_VOLUME', uid : 5 },
+			{ name : 'GRAUS_CELSIUS', uid : 6 },
+			{ name : 'VOLT', uid : 7 },
+			{ name : 'AMPERE', uid : 8 },
+			{ name : 'MINUTE', uid : 9 },
+			{ name : 'SECOND', uid : 10 },			
+			{ name : 'KWH', uid : 11 },
+			{ name : 'OPEN/CLOSE', uid : 12 }
+	 ]; 
 	 
 	 $('.alarmCelularMask').keydown(function (e) {
 			var key = e.charCode || e.keyCode || 0;
@@ -324,6 +325,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 $("#checkboxEmailOnOff").click(function(e, parameters) {		 
 		 showEmail($(this).prop("checked"));
      });	 
+	 
 	 function showEmail (checked) {
 		 
 		 $(".checkboxEmail").prop('checked', checked);
@@ -337,6 +339,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 $scope.alarmEmail = checked;
 		 $scope.validEmail();
 	 }
+
 	 $scope.validEmail = function ($event) {	    	
 
 		 if (!$("#checkboxEmailOnOff").prop('checked') || validateEmail( $scope.email )) {
@@ -361,7 +364,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 
 		 if(!$scope.$$phase) 
 			 $scope.$apply();
-	 }
+	 };
 
 	 $scope.alarmMessageError = [];
 	 $scope.validAlarms = function ($event) {
@@ -432,12 +435,13 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 
 		$scope.alarmMessageError = errors;
 
-	 }
+	 };
 	 
 	 
 	 $("#checkboxSmsOnOff").click(function(e, parameters) {		 
 		 showCelular($(this).prop("checked"));         
      });
+	 
 	 function showCelular(checked) {
 		 
 		 $(".checkboxSms").prop('checked', checked);
@@ -451,7 +455,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 $scope.alarmCelular = checked;
 		 
 		 $scope.validMobile();
-	 }	 
+	 }	
+
 	 $scope.validMobile = function ($event) {		 
 	 
 		 $scope.mobileValid =  (!$("#checkboxSmsOnOff").prop('checked') || ($scope.celular != null && $scope.celular.length == 15));
@@ -485,8 +490,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 
 	 $scope.update = function (val) {
 		 $scope.radioModel = val;
-	 }
-
+	 };
 
 	 $scope.deviceTypes = 	 [		  
 		  { name : 'DETECTOR', uid :  1, disabled : false },
@@ -504,7 +508,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 $scope.getAlarms();	 
 		 $scope.getGases();
 		 $scope.getCompanys();
-	 }
+	 };
 	 
 	 $scope.refreshAlarms();
  

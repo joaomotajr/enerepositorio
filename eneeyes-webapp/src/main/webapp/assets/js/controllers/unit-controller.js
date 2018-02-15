@@ -53,11 +53,11 @@ app.controller('unitController', function ($scope, $rootScope, $timeout, $filter
 			
 			$rootScope.showGeneralMessage($scope.deletar.message, 'DANGER');
 		});		 
-	}
+	};
 	
 	$scope.clearFormUnit = function () {
 		
-		$scope.selectedUnit.uid = undefined
+		$scope.selectedUnit.uid = undefined;
 	    $scope.selectedUnit.name = '';	    
 		$scope.selectedUnit.email  = '';
 		$scope.selectedUnit.address  = '';
@@ -74,7 +74,7 @@ app.controller('unitController', function ($scope, $rootScope, $timeout, $filter
 		$scope.areaNameInit = undefined;
 	 
 		$('#idUnitName').select();
-	}
+	};
 	
 	$scope.saveUnit = function() {
 		angular.element('body').addClass('loading');				 

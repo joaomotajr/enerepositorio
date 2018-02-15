@@ -42,7 +42,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			uid: $scope.selectedCompanyDetector.uid == undefined ? 0 : $scope.selectedCompanyDetector.uid,
 			name: $scope.selectedCompanyDetector.name.toUpperCase(),
 			companyDeviceDto: {uid : $scope.selectedCompanyDevice.uid},
-			detectorDto: {uid: $scope.selectedCompanyDetector.detectorDto.uid},
+			detectorDto: {uid: $scope.selectedCompanyDetector.detectorDto.uid},			
 			local: $scope.selectedCompanyDetector.local,
 			serialNumber: $scope.selectedCompanyDetector.serialNumber,
 			description: $scope.selectedCompanyDetector.description,
@@ -52,7 +52,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			installDate : getDate($('#installDate').val()),
 			descriptionInstall : $scope.selectedCompanyDetector.descriptionInstall,
 			maintenanceInterval : $scope.selectedCompanyDetector.maintenanceInterval
-		 }
+		 };
+
+		 if ($scope.selectedCompanyDetectorAlarm != null && $scope.selectedCompanyDetectorAlarm.alarmId != null) 
+		 	companyDetector.alarmDto = {uid: $scope.selectedCompanyDetectorAlarm.alarmId};
 		 
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
 		$scope.inclusaoCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){		
@@ -129,7 +132,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			if($scope.selectedCompanyDetector != null) {
 				
 				$scope.getCompanyDetectorMaintenanceHistoric();
-				$scope.getCompanyDetectorAlarms($scope.selectedCompanyDetector.uid);
+				$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.uid);
 				$scope.getPositionsAndIds($scope.selectedCompanyDetector.uid) ;
 
 				reloadDates();			
@@ -155,26 +158,31 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		$scope.selectedCompanyDetector.detectorDto = item;
 	};
 
-	$scope.getCompanyDetectorAlarms = function(companyDetectorId) {
+	$scope.getCompanyDetectorAlarm = function(companyDetectorId) {
 
 		$scope.resultDetectors = new ViewService.listCompanyDetectorsAlarms();		 
 		$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), companyDetectorId : companyDetectorId}, function(){						
 			$scope.selectedCompanyDetectorAlarms = $scope.resultDetectors.list;
 
-			$scope.selectedCompanyDetectorAlarms.forEach (
-				function(e) {						
-					e.dataSource = $scope.getGaugeInfo(e);						
-				}			
-			);
+			$scope.selectedCompanyDetectorAlarm = $scope.resultDetectors.list[0];
+			$scope.selectedCompanyDetectorAlarm.dataSource = getGaugeInfo($scope.selectedCompanyDetectorAlarm);
 			 
 		});
 	};
 
-	$scope.getGaugeInfo = function(sensor) {
+	getGaugeInfo = function(sensor) {
 
 		var red =    sensor.alarmOn == null ? 0 : sensor.alarm3;
 		var yellow = sensor.alarmOn == null ? 0 : sensor.alarm2;
 		var orange = sensor.alarmOn == null ? 0 : sensor.alarm1;
+		var unitMeter;
+		
+		if(sensor.unitMeterGases == "LEL_PERCENT") 
+			unitMeter = "LEL %"; 
+		else if(sensor.unitMeterGases == "PERCENT_VOLUME") 
+			unitMeter = "VOL %"; 
+		else	
+			unitMeter = sensor.unitMeterGases;
 
 		properties =  {
 			
@@ -184,7 +192,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			upperLimit: sensor.rangeMax,
 			lowerLimitDisplay: sensor.rangeMin + " Min",
 			upperLimitDisplay: sensor.rangeMax + " Max",
-			numberSuffix: " " + (sensor.unitMeterGases == "LEL_PERCENT" ? "LEL %" : sensor.unitMeterGases),			
+			numberSuffix: " " + (unitMeter),			
 			
 			showValue: "1",
 			valueFontSize: "12",
@@ -357,34 +365,32 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 					tr.removeClass("shown");
 				}
 				else {
-					row.child( format(row.data()[1]) ).show();
+					row.child( format(row[0]) ).show();
 					tr.addClass("shown");
 				}
 		});
 	 }
 	 function format ( d ) {
-		
-		if($scope.selectedCompanyDetector.detectorDto.sensorDto) {
-			return '<div class="slider">'+
-			'<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-				'<tr>'+ 
-					'<th>Sensor</th>'+
-					'<th>Nome</th>'+
-					'<th>G&aacutes</th>'+
-					'<th>Range</th>'+
-					'<th>Medi&ccedil;&atilde;o </th>'+
-				'</tr>'+
-				'<tr>'+ 
-					'<td>1o.</td>'+
-					'<td>'+$scope.selectedCompanyDetector.detectorDto.sensorDto.name+'</td>'+	                
-					'<td>'+$scope.selectedCompanyDetector.detectorDto.sensorDto.gasDto.name+'</td>'+
-					'<td>'+$scope.selectedCompanyDetector.detectorDto.sensorDto.rangeMin + '-' + $scope.selectedCompanyDetector.detectorDto.sensorDto.rangeMax +'</td>'+
-					'<td>'+$scope.selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases + '</td>'+
-				'</tr>'+            
-				'</table>'+
-			'</div>';		
-		}
-	
+		var item = $scope.detectors[d];
+
+		return '<div class="slider">'+
+		'<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+			'<tr>'+ 
+				'<th>Sensor</th>'+
+				'<th>Nome</th>'+
+				'<th>G&aacutes</th>'+
+				'<th>Range</th>'+
+				'<th>Medi&ccedil;&atilde;o </th>'+
+			'</tr>'+
+			'<tr>'+ 
+				'<td>1o.</td>'+
+				'<td>'+item.sensorDto.name+'</td>'+	                
+				'<td>'+item.sensorDto.gasDto.name+'</td>'+
+				'<td>'+item.sensorDto.rangeMin + '-' + item.sensorDto.rangeMax +'</td>'+
+				'<td>'+item.sensorDto.unitMeterGases + '</td>'+
+			'</tr>'+            
+			'</table>'+
+		'</div>';
 	}	
 	
 	$scope.getAlarms = function() {
@@ -397,8 +403,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	
 	$scope.configAlarm = function(index) {
 
-		$scope.sensorIndex = index;
-		$scope.selectedCompanyDetectorAlarm = $scope.selectedCompanyDetectorAlarms[index];
+		// $scope.sensorIndex = index;
+		// $scope.selectedCompanyDetectorAlarm = $scope.selectedCompanyDetectorAlarms[index];
+		
 		$scope.search = { unitMeterGases: $scope.selectedCompanyDetectorAlarm.unitMeterGases, gas : $scope.selectedCompanyDetectorAlarm.gasName};
 
 		$timeout(function () {
@@ -419,7 +426,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			$scope.updateAlarm.$companyDetector({_csrf : angular.element('#_csrf').val(), alarmId: alarm.uid, id : $scope.selectedCompanyDetector.uid }, function(){						
 				if (!$scope.updateAlarm.isError) {
 					$scope.selectedCompanyDetectorAlarm.alarmId = alarm.uid;
-					$scope.getCompanyDetectorAlarms($scope.selectedCompanyDetector.uid);	
+					$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.uid);	
 				}			
 			});	
 		}
@@ -429,7 +436,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			$scope.removeAlarm.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid }, function(){						
 				if (!$scope.removeAlarm.isError) {
 					$scope.selectedCompanyDetectorAlarm.alarmId = null;			 
-					$scope.getCompanyDetectorAlarms($scope.selectedCompanyDetector.uid);	
+					$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.uid);	
 				}			
 			});	
 

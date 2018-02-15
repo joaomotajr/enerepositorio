@@ -19,9 +19,6 @@ import br.com.eneeyes.main.result.Result;
 
 @Service
 public class AreaService implements IService<AreaDto> {
-	
-//	@Autowired
-//	private CompanyDeviceRepository companyDeviceRepository;
 
 	@Autowired
 	private AreaRepository repository;
@@ -55,30 +52,21 @@ public class AreaService implements IService<AreaDto> {
 
 	public BasicResult<?> delete(Long uid) {
 				
-		LogResult<AreaDto> result = new LogResult<AreaDto>();
+		LogResult<AreaDto> result = new LogResult<AreaDto>(); 	
 		
-//		Long devices = companyDeviceRepository.countByArea(new Area(uid));
-//		
-//		if (devices > 0) {
-//			result.setIsError(true);
-//			result.setResultType( ResultMessageType.ERROR_CONSIST );
-//			result.setMessage("Existe Dispositivos(s) Nessa Área!");
-//		}
-//		else {			
+		try {			
+			repository.delete(uid);
+			result.setResultType( ResultMessageType.SUCCESS );
+			result.setMessage("Área Excluída.");
 			
-			try {			
-				repository.delete(uid);
-				result.setResultType( ResultMessageType.SUCCESS );
-				result.setMessage("Área Excluída.");
-				
-				logAuditoriaService.save(this.toString(), ActionType.DELETE, result.toString());
-				
-			} catch (Exception e) {
-				e.printStackTrace();			
-				result.setIsError(true);
-				result.setMessage(e.getMessage());
-			}		
-//		}
+			logAuditoriaService.save(this.toString(), ActionType.DELETE, result.toString());
+			
+		} catch (Exception e) {
+			e.printStackTrace();			
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}		
+		
 		return result;		
 	}
 

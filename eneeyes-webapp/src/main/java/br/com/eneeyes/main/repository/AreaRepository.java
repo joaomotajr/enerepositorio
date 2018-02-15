@@ -6,12 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import br.com.eneeyes.main.model.Area;
-import br.com.eneeyes.main.model.Unit;
 
 public interface AreaRepository extends JpaRepository<Area, Long> {
 
 	@Query("select a from Area a where a.unit.uid = ?1")
 	public List<Area> findByUnitID(Long idUnit);		
 
-	public Long countByUnit(Unit unit);
 }

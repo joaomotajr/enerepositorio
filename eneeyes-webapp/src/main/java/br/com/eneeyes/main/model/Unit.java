@@ -33,11 +33,7 @@ public class Unit {
 	
 	public Unit() {
 		
-	}
-	
-	public Unit(Long uid) {
-		this.uid = uid;
-	}
+	} 
 	
 	public Unit(UnitDto dto) {
 		

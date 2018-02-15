@@ -6,10 +6,11 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Subselect;
 
 @Entity
-@Table(name = "historic_view_hour_all")
+@Subselect("select * from historic_view_hour_all")
 public class HistoricViewHourAll implements IHistoricGroup {
 
     public HistoricViewHourAll() {

@@ -3,10 +3,11 @@ package br.com.eneeyes.main.model.views;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Subselect;
 
 @Entity
-@Table(name = "company_view")
+@Subselect("select * from company_view")
 public class CompanyView {
 
     public CompanyView() {

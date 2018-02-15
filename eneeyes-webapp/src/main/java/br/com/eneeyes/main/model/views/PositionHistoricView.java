@@ -8,13 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.dto.views.PositionHistoricViewDto;
 
-
 @Entity
-@Table(name = "position_historic_view")
+@Subselect("select * from position_historic_view")
 public class PositionHistoricView {
 
     public PositionHistoricView() {

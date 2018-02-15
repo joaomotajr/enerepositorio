@@ -5,11 +5,11 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
+import org.hibernate.annotations.Subselect;
 
 @Entity
-@Table(name="alarm_companydetector_sensor_view")
+@Subselect("select * from alarm_companydetector_sensor_view")
 public class AlarmCompanyDetectorSensorView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

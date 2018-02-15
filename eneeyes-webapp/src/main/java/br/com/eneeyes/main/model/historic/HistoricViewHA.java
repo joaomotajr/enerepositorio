@@ -6,12 +6,13 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.LogOrigem;
 
 @Entity
-@Table(name = "historic_view_ha")
+@Subselect("select * from historic_view_ha")
 public class HistoricViewHA implements IHistoric {
 
     public HistoricViewHA() {

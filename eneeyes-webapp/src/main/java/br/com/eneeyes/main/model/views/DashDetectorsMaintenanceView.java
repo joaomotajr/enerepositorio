@@ -6,11 +6,12 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Subselect;
 
 
 @Entity
-@Table(name="dash_detectors_maintenance")
+@Subselect("select * from dash_detectors_maintenance")
 public class DashDetectorsMaintenanceView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

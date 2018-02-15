@@ -6,7 +6,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
@@ -16,9 +17,8 @@ import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
-
 @Entity
-@Table(name="dash_companies_alarm")
+@Subselect("select * from dash_companies_alarm")
 public class DashCompaniesAlarm implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

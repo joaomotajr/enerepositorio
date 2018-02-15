@@ -8,12 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
 
 @Entity
-@Table(name = "position_view")
+@Subselect("select * from position_view")
 public class PositionView {
 
     public PositionView() {    	

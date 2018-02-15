@@ -7,15 +7,15 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
-
 @Entity
-@Table(name="queue_sms_view")
+@Subselect("select * from queue_sms_view")
 public class QueueSmsView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

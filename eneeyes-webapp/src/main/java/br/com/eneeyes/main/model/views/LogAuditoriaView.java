@@ -6,10 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Subselect;
 
 @Entity
-@Table(name = "log_auditoria_view")
+@Subselect("select * from log_auditoria_view")
 public class LogAuditoriaView {
    
 	@Id	

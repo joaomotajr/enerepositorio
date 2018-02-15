@@ -18,7 +18,7 @@ import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
 
 @Entity
-@Table(name = "historic_alarm")
+@Table(name="historic_alarm")
 public class HistoricAlarm {
 
     public HistoricAlarm() {

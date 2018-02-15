@@ -7,14 +7,14 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.SigmaStatus;
 
-
 @Entity
-@Table(name="queue_sigma_view")
+@Subselect("select * from queue_sigma_view")
 public class QueueSigmaView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

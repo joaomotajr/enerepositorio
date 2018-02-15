@@ -7,13 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.Alarm;
 
-
 @Entity
-@Table(name="companydetector_alarm_view")
+@Subselect("select * from companydetector_alarm_view")
 public class CompanyDetectorAlarmView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

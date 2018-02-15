@@ -6,10 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Subselect;
 
 @Entity
-@Table(name="dash_companies")
+@Subselect("select * from dash_companies")
 @NamedQuery(name="DashCompany.findAll", query="SELECT d FROM DashCompany d")
 public class DashCompany implements Serializable {
 	private static final long serialVersionUID = 1L;

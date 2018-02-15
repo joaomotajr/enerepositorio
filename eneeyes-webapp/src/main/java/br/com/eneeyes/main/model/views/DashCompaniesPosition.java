@@ -9,14 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
+
+import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
-
 @Entity
-@Table(name="dash_companies_position")
+@Subselect("select * from dash_companies_position")
 public class DashCompaniesPosition {
 	
 	public DashCompaniesPosition() {	

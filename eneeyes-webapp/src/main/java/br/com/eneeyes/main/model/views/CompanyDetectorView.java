@@ -5,11 +5,11 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
+import org.hibernate.annotations.Subselect;
 
 @Entity
-@Table(name="company_detector_view")
+@Subselect("select * from company_detector_view")
 public class CompanyDetectorView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

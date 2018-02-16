@@ -31,7 +31,7 @@
 			       			<div class="row">
 						        <div class="col-md-6">
 						            <div class="form-group">
-						                <label class="control-label">Nome</label>
+						                <label class="control-label">Nome *</label>
 						                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigatorio]</span>
 						                <span data-ng-show="userForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>
 						                <input id="idUnitName" class="form-control" placeholder="Nome do Unidade / Matriz" data-ng-model="selectedUnit.name" data-ng-maxlength="15" name="username" required>

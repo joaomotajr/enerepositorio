@@ -60,7 +60,7 @@
 				    		<div class="row">
 						        <div class="col-md-6">
 						            <div class="form-group">
-						                <label class="control-label">Nome</label>
+						                <label class="control-label">Nome *</label>
 						                <input id="idAreaName" class="form-control" placeholder="Nome da Area / Matriz" ng-model="selectedArea.name">
 						            </div>
 						        </div>					
@@ -131,7 +131,7 @@
 				                        </select>
 				                                       
 								        <span class="input-group-btn">
-								        <button class="btn btn-info btn-flat" type="button" ng-disabled="sensorDetectionType.name != 'DETECTOR'" ng-click="saveCompanyDeviceInit();">OK</button>
+								        <button class="btn btn-info btn-flat" type="button" ng-click="saveCompanyDeviceInit();">OK</button>
 								        </span>
 									</div>
 								</div>

@@ -50,7 +50,7 @@
 								        </div>
 								        <div class="col-md-4">
 								            <div class="form-group">								            
-								                <label class="control-label">Identifica&ccedil;&atilde;o</label>
+								                <label class="control-label">Identifica&ccedil;&atilde;o *</label>
 								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Identifica&ccedil;&atilde;o Obrigatorio]</span>
 									            <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho M&aacute;ximo 8 caracteres</span>
 												

@@ -36,9 +36,6 @@
 									<td>{{item.model}}</td>
 									<td>{{item.manufacturerDto.name}}</td>		
 									<td>{{item.transmitterDto.name}}</td>
-									<!-- <td>								
-										1-{{item.sensorsDto[0].name}} <span data-ng-show="item.sensorsDto[1].name">/ 2-</span> {{item.sensorsDto[1].name}}
-									</td> -->
 									<td>{{item.sensorDto.name}}</td>
 									<td>			
 										<img class="direct-chat-img" data-ng-src="{{item.image}}" style="width: auto ! important; height: 25px ! important ; max-height: 25px ! important;">
@@ -101,7 +98,7 @@
 									<div class="row">
 					                 	<div class="col-md-6">                                                                                                                                    
 											<div class="form-group">
-												<label class="control-label">Nome</label>
+												<label class="control-label">Nome *</label>
 												<span class="text-red" data-ng-show="detectorNameExist">Detector j&aacute; Existe</span> 
 												<span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Nome Obrigat&oacute;rio]</span>
 										        <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho M&aacute;ximo 15 caracteres</span>                                                                        
@@ -110,7 +107,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label class="control-label">Modelo</label>                                                       
+												<label class="control-label">Modelo *</label>                                                       
 												<input class="form-control inputProfile" placeholder="Modelo do Detector" data-ng-model="detectorModel">                                                
 											</div>
 										</div>							
@@ -118,9 +115,9 @@
 								</div>
 								
 								<div class="row">
-									<div class="col-md-6">
+										<div class="col-md-4" style=" padding-left: 5px !important">
 										<div class="box box-primary box-solid">				                    
-						                	<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Fabricante</strong></div>
+						                	<div class="box-header with-border"><strong><i class="fa fa-industry"></i> Fabricante *</strong></div>
 						                    <div class="box-body">
 						                        <select class="form-control" data-live-search="true" 
 						                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
@@ -133,9 +130,9 @@
 						                </div>
 					                </div>
 					                
-					                <div class="col-md-6">
+					                <div class="col-md-4" style="padding-right: 5px !important; padding-left: 5px !important">															
 						                <div class="box box-primary box-solid">
-						                    <div class="box-header with-border"><strong><i class="fa fa-expand"></i> Transmissor</strong></div>
+						                    <div class="box-header with-border"><strong><i class="fa fa-expand"></i> Transmissor *</strong></div>
 						                	 
 						                    <div class="box-body">
 						                        <select class="form-control" data-live-search="true" 
@@ -146,24 +143,26 @@
 						                        </select>    
 						                    </div>			                    			                            
 						                </div>		     
-					                </div>
+									</div>
+
+									<div class="col-md-4" style="padding-right: 5px !important;">
+						                <div class="box box-danger box-solid">
+						                    <div class="box-header with-border"><strong><i class="fa fa-feed"></i> Sensor *</strong></div>
+						                	 
+						                    <div class="box-body">
+						                        <select class="form-control" data-live-search="true" 
+						                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+													data-ng-options="item as item.name for item in sensors | manufacturerFilter:search | orderBy: 'name' track by item.uid" 
+													data-ng-model="detectorSensor">	 
+				                                    <option value="">Selecione</option> 
+						                        </select>    
+						                    </div>			                    			                            
+						                </div>		     
+									</div>	
 								</div>
 								
 								<hr style="margin-top: 5px !important; margin-bottom: 5px !important;">
-
-								<div class="col-md-3">
-									<div class="form-group">
-										<label class="control-label">Sensor</label> 
-										<select class="form-control" data-live-search="true" 
-											style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-												data-ng-options="item as item.name for item in sensors | manufacturerFilter:search | orderBy: 'name' track by item.uid" 
-												   data-ng-model="detectorSensor">
-												   <option value="">Selecione</option> 
-										</select>    
-									</div>              
-									
-								</div>
-
+								
 		                        <!-- <div class="box box-primary box-solid">
 				                    <div class="box-header with-border">
 				                    	<strong><i class="fa fa-feed"></i> Sensores</strong>

@@ -36,7 +36,7 @@
 							<div class="col-md-6" data-ng-show="companyUid!=undefined">
 								<br />
 								<div class="form-group">
-									<label class="control-label">Nome</label>                                                                        
+									<label class="control-label">Nome *</label>                                                                        
 									<input id="idCompanyName" class="form-control" placeholder="Nome da Empresa" data-ng-model="companyName">                                                                        
 								</div>								
 								<div class="form-group">

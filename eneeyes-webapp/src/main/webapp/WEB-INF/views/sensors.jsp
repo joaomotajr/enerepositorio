@@ -93,7 +93,7 @@
 									<div class="row">
 										<div class="col-md-6">    					                	 
 						                    <div class="form-group">
-						                    	<label class="control-label">Fabricantes</label> 
+						                    	<label class="control-label">Fabricante *</label> 
 						                        <select class="form-control" data-live-search="true" 
 						                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 						                                data-ng-options="item as item.name for item in manufacturers | orderBy: 'name' track by item.uid" 
@@ -104,7 +104,7 @@
 						                </div>
 						                <div class="col-md-6">
 							                <div class="form-group">
-									            <label class="control-label">Tipo de Detecção</label>
+									            <label class="control-label">Tipo de Detecção *</label>
 												<select class="form-control" data-live-search="true" 
 						                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 						                                data-ng-options="item as item.name for item in detectionTypes | orderBy: 'name' track by item.uid" 
@@ -117,7 +117,7 @@
 					                <div class="row">
 					                	<div class="col-md-6">                                                                                                                
 											<div class="form-group">
-												<label class="control-label">Nome</label>
+												<label class="control-label">Nome *</label>
 												<span class="text-red" data-ng-show="sensorNameExist">Sensor já Existe</span> 
 												<span class="text-red" data-ng-show="sensorForm.username.$error.required && !sensorForm.username.$pristine">  [Nome Obrigatorio]</span>
 											    <span class="text-red" data-ng-show="sensorForm.username.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
@@ -126,7 +126,7 @@
 										</div>							
 										<div class="col-md-6">
 											<div class="form-group">
-												<label class="control-label">Modelo</label>
+												<label class="control-label">Modelo *</label>
 												<span class="text-red" data-ng-show="sensorForm.controllerModel.$error.required && !sensorForm.controllerModel.$pristine">  [Modelo Obrigatorio]</span>
 										        <span data-ng-show="sensorFormForm.controllerModel.$error.maxlength">Até Máximo 20 caracteres</span>                                                       
 												<input class="form-control inputProfile" placeholder="Modelo do Sensor" data-ng-model="sensorModel">                                                
@@ -135,7 +135,7 @@
 									</div>
 			                        
 			                       	<div class="box box-primary box-solid">
-							    		<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Range de Detecção</strong></div>					                	 
+							    		<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Range de Detecção *</strong></div>					                	 
 						                    <div class="box-body">
 											    <div class="row">
 											    	<div class="col-md-2">
@@ -171,7 +171,7 @@
 													
 													<div class="col-md-3">
 														<div class="form-group">
-															<label class="control-label">Elemento</label> 
+															<label class="control-label">Elemento (Gás)</label> 
 															<select class="form-control" data-live-search="true" 
 																style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 																	data-ng-options="item as item.name for item in gases | orderBy: 'name' track by item.uid" 

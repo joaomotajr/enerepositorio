@@ -155,7 +155,22 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 					    	$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
 					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;				    			
 				    		$timeout(function () { $scope.LoadAjaxContentCompany('companyDetectors.html'); }, 50);				    						    		
-				    	}
+						}
+						else if(node.type == 6) {				    		 
+					    						    
+					    	$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
+					    	$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
+					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;				    			
+				    		$timeout(function () { $scope.LoadAjaxContentCompany('companyGenerics.html'); }, 50);				    						    		
+						}
+						else {
+
+							$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
+					    	$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
+					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;				    			
+				    		$timeout(function () { $scope.LoadAjaxContentCompany('underConstruction.html'); }, 50);
+
+						}
 				    }
 			     });
 			};
@@ -184,6 +199,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		
 		itens.push({text: empresa , type : 0, nodes: [] });
 		
+		//unidades
 		for (var i = 0; i < $scope.$root.selectedCompany.unitsDto.length; i++) {
 						
 	   		var unidade = "<i class='fa fa-building' style='font-size:1.2em;'></i> " + 
@@ -191,34 +207,50 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 	   			$scope.$root.selectedCompany.unitsDto[i].areasDto.length + "" +  "</small>";	   		
 			
 			   	itens[0].nodes.push({text: unidade, nodes: [], type : 1, index: i});
-				// itens[0].nodes.push({text: unidade, nodes: [], type : 1, index: i , unit : $scope.$root.selectedCompany.unitsDto[i]});
-	
+			
+			//area
 		   for (var j = 0; j < $scope.$root.selectedCompany.unitsDto[i].areasDto.length; j++) {			  			   
 			
-			   var area = "<i class='fa fa-map-o' style='font-size:1.2em;'></i> " + 
+			   	var area = "<i class='fa fa-map-o' style='font-size:1.2em;'></i> " + 
 			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].name + itemBaseLabel + 
 			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length + "" + "</small>";
 			   
 			   	itens[0].nodes[i].nodes.push({text: area, nodes: [], type : 2, index: j, unitIndex: i});
-				// itens[0].nodes[i].nodes.push({text: area, nodes: [], type : 2, index: j, unitIndex: i , area: $scope.$root.selectedCompany.unitsDto[i].areasDto[j] });
-	
-			   for (var k = 0; k < $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length; k++) {
-				   
-				   //Dispositivos
-				   if($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType == "DETECTOR") {
+			
+				//Dispositivos
+			   	for (var k = 0; k < $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length; k++) {
+					//Detector  
+					if($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType == "DETECTOR") {
 				   		var device = "<i class='fa fa-rss' style='font-size:1.2em;'></i> DETECTOR";
 					    if ($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name != undefined)  
-							device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name + "</small>";
+							device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" +
+							$scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name + "</small>";
 						else
 							device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
-				   }	
-				   else {   
-					   var device = "<i class='fa fa-keyboard-o' style='font-size:1.2em;'></i> " + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
-				   }
-				   
-					itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : 3, index: k, areaIndex: j, unitIndex: i });
-					// itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : 3, index: k, areaIndex: j, unitIndex: i, companyDevice : $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k] });
-			   }
+						
+							itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : 3, index: k, areaIndex: j, unitIndex: i });	
+					}
+					//Eletricidade
+					else if($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType == "ELETRICITY") {
+					
+						var device = "<i class='fa fa-flash' style='font-size:1.2em;'></i> ELETRICITY";
+						 
+						if ($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name != undefined)  
+							device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" +
+						 	$scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name + "</small>";
+					 	else
+						 	device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
+					 
+						 itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : 6, index: k, areaIndex: j, unitIndex: i });	
+					}	
+				   	else {   
+						var device = "<i class='fa fa-keyboard-o' style='font-size:1.2em;'></i> " + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
+
+						itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : -1, index: k, areaIndex: j, unitIndex: i });	
+				   	}			   
+					
+					
+			   	}
 		   }
 		}		 
 		

@@ -157,16 +157,6 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 					
         });		 
 	}
-	
-	// $scope.getCompanyDetectorArea = function() {
-		
-	// 	$scope.resultDetectors = new ViewService.listAreaCompanyDetectorsAlarms();		 
-	// 	$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), areaId : $scope.selectedArea.uid}, function(){	
-			
-	// 		$scope.selectedCompanyDetectorsArea = $scope.resultDetectors.list; 			
-						
-	// 	});
-	// }
 	 
 	 /*--------------------------------------------------------------------------   M A P S  &  E V E N T S -----------------------------------------------------------------------*/
 	 

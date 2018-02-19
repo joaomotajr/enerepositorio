@@ -254,13 +254,13 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 
 	$scope.deviceTypes = 
 	[		  
-		{ name : 'DETECTOR', uid :  1, disabled : false },
-		 { name : 'PLC', uid :  2, disabled : false },
-		 { name : 'CONTROLLER', uid :  3, disabled : false },
-		 { name : 'ELETRICITY', uid :  6, disabled : false },
-		 { name : 'TEMPO', uid :  7, disabled : false },
-		 { name : 'TEMPERATURE', uid :  8, disabled : false },
-		 { name : 'DIGITAL', uid :  9, disabled : false },
+		{ name : 'DETECTOR', uid :  1, label: 'DETECTOR', disabled : false },
+		 { name : 'PLC', uid :  2, label: 'PLC', disabled : false },
+		 { name : 'CONTROLLER', uid :  3, label: 'CONTROLADORA', disabled : false },
+		 { name : 'ELETRICITY', uid :  6, label: 'TENSÃO', disabled : false },
+		 { name : 'TIME', uid :  7, label: 'TEMPO', disabled : false },
+		 { name : 'TEMPERATURE', uid :  8, label: 'TEMPERATURA', disabled : false },
+		 { name : 'DIGITAL', uid :  9,label: 'DIGITAL', disabled : false },
 	];
 
 	/* ------------------------------------- Inicio Processamento --------------------------------------------*/

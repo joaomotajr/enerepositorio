@@ -52,8 +52,6 @@ public class PositionService implements IService<PositionDto> {
 		Result<PositionDto> result = new Result<PositionDto>();
 		
 		Position position = new Position();
-		
-		//PositionView positionView = repositoryView.findByCompanyDetectorIdAndSensorId(historic.getCompanyDetectorId(), historic.getSensorId());
 		PositionView positionView = repositoryView.findByCompanyDetectorId(historic.getCompanyDetectorId());
 		
 		if (position != null) {		
@@ -66,8 +64,7 @@ public class PositionService implements IService<PositionDto> {
 		
 		return result;		
 	}
-	
-//	public void updatePositionAlarmType(AlarmType alarmType, Long companyDetectorId, Long sensorId) {
+
 	public void updatePositionAlarmType(AlarmType alarmType, Long companyDetectorId) {
 		
 		repository.updateAlarmType(alarmType, companyDetectorId);
@@ -86,25 +83,8 @@ public class PositionService implements IService<PositionDto> {
 		position.setLastValue(BigDecimal.ZERO);
 		position.setAlarmType(AlarmType.WITHOUT);
 		
-		repository.save(position);		
-		
-//		Set<Sensor> sensors = companyDetector.getDetector().getSensors();
-//		
-//		for (Sensor sensor   : sensors) {
-//		
-//			if(repository.countByCompanyDetectorAndSensor(companyDetector, sensor) == 0) {
-//	
-//				Position position = new Position();	
-//
-//				position.setCompanyDetector(companyDetector);
-//				position.setSensor(sensor);
-//				position.setLastUpdate(new Date());
-//				position.setLastValue(BigDecimal.ZERO);
-//				position.setAlarmType(AlarmType.WITHOUT);
-//				
-//				repository.save(position);
-//			}
-//		}
+		repository.save(position);	
+
 	}
 
 	@Override
@@ -147,7 +127,6 @@ public class PositionService implements IService<PositionDto> {
 		Result<PositionView> result = new Result<PositionView>();
 		
 		try {
-//			List<PositionView> lista = repositoryView.findByCompanyDetectorId(uid);
 			
 			PositionView position = repositoryView.findByCompanyDetectorId(uid);
 			
@@ -162,17 +141,6 @@ public class PositionService implements IService<PositionDto> {
 				result.setResultType( ResultMessageType.ERROR );
 				result.setMessage("Nenhuma Posição.");
 			}
-			
-//			if (lista != null) {				
-//								
-//				result.setList(lista);
-//				result.setResultType( ResultMessageType.SUCCESS );
-//				result.setMessage("Executado com sucesso.");
-//			} else {
-//				result.setIsError(true);
-//				result.setResultType( ResultMessageType.ERROR );
-//				result.setMessage("Nenhuma Posição.");
-//			}
 			
 		} catch (Exception e) {
 			result.setIsError(true);

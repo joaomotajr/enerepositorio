@@ -84,6 +84,7 @@
 	<script src="/assets/js/controllers/unit-controller.js"></script>
 	<script src="/assets/js/controllers/area-controller.js"></script>
 	<script src="/assets/js/controllers/companyDetector-controller.js"></script>	
+	<script src="/assets/js/controllers/companyGeneric-controller.js"></script>
 	<script src="/assets/js/controllers/alarm-controller.js"></script>
 	<script src="/assets/js/controllers/manufacturer-controller.js"></script>
 	<script src="/assets/js/controllers/dashboard-controller.js"></script>
@@ -114,6 +115,7 @@
 	<script src="/assets/js/services/logAuditoria-service.js"></script>
 	<script src="/assets/js/services/companyDevice-service.js"></script>
 	<script src="/assets/js/services/companyDetector-service.js"></script>
+	<script src="/assets/js/services/companyGeneric-service.js"></script>
 	<script src="/assets/js/services/alarm-service.js"></script>
 	<script src="/assets/js/services/companyDetectorAlarm-service.js"></script>
 	<script src="/assets/js/services/position-service.js"></script>
@@ -126,7 +128,6 @@
 	<script src="/assets/js/services/positionAlarm-service.js"></script>
 	<script src="/assets/js/services/companyDetectorMaintenanceHistoric-Service.js"></script>
 	<script src="/assets/js/services/generic-service.js"></script>
-
 		
 	<!-- PAGE LEVEL FACTORIES -->	
 		

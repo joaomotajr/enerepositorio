@@ -125,7 +125,7 @@
 								        
 								        <select class="form-control" data-live-search="true" 
 				                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-				                                ng-options="item as item.name for item in deviceTypes | orderBy: 'name' track by item.uid" 
+				                                ng-options="item as item.label for item in deviceTypes | orderBy: 'name' track by item.uid" 
 				                                         ng-model="sensorDetectionType">
 				                                         <option value="">Selecione</option> 
 				                        </select>

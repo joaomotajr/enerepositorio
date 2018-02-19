@@ -1,4 +1,4 @@
-app.controller('simuladorController', function ($scope, $timeout, $filter, CompanyService, CompanyDetectorService, DetectorService, HistoricService, CompanyDetectorAlarmService, ViewService) {
+app.controller('simuladorController', function ($scope, $timeout, $filter, CompanyService, HistoricService, ViewService, CompanyDeviceService) {
 	
 	$scope.showInfo = function(msg) {
 		angular.element('body').removeClass('loading');            
@@ -20,7 +20,7 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 				uid: 0,	
 				value: $scope.valor,
 				lastUpdate: null,
-				companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId,
+				companyDeviceId: $scope.selectedCompanyDetector.companyDeviceId,
 				logOrigem: 'MANUAL'
 			 }	
 		 
@@ -43,8 +43,8 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 	
 	$scope.changeCompanyDetector = function() {
 		
-		if($scope.selectedCompanyDetector == null) return;		
-		$scope.getOneCompanyDetector($scope.selectedCompanyDetector.companyDetectorId);
+		if($scope.selectedCompanyDetector == null) return;
+		$scope.getCompanyDevice($scope.selectedCompanyDetector.companyDeviceId);
 	};	
 	
 	$scope.getCompanys = function() {
@@ -53,15 +53,15 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 			$scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
 			$scope.companies = $scope.resultCompanies.list;
 		});
-   };
+   	};
 
-	$scope.getOneCompanyDetector = function(uid) {
-						
-		$scope.resultCompanyDetector = new CompanyDetectorService.listOne();		 
-		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : uid }, function(){			
-			
-			$scope.findedCompanyDetector = $scope.resultCompanyDetector.t;						
-		});		 
+	$scope.getCompanyDevice = function(uid) {
+		$scope.resultCompanyDevice = new CompanyDeviceService.listOne();
+		$scope.resultCompanyDevice.$companyDevice({_csrf : angular.element('#_csrf').val(), id : uid }, function(){						
+			if (!$scope.resultCompanyDevice.isError) {
+				$scope.findedCompanyDevice = $scope.resultCompanyDevice.t;			
+			}			
+		});
 	};
 
 	$scope.changeCompany = function() { 		

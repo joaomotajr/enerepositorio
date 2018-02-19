@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.eneeyes.main.model.CompanyDetector;
+import br.com.eneeyes.main.model.CompanyDevice;
 import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
 import br.com.eneeyes.main.model.enums.AlarmType;
@@ -18,13 +18,13 @@ import br.com.eneeyes.main.model.enums.SoundStatus;
 
 public interface PositionAlarmRepository extends JpaRepository<PositionAlarm, Long> {
 	
-	public List<PositionAlarm> findByCompanyDetector(CompanyDetector companyDetector);
+	public List<PositionAlarm> findByCompanyDevice(CompanyDevice companyDevice);
 	
 	public PositionAlarm findByUid(Long uid);
 	
-	public PositionAlarm findByCompanyDetectorAndAlarmTypeAndAlarmStatusNotIn(CompanyDetector companyDetector, AlarmType alarmType, List<AlarmStatus> solvedOrCancelesAlarms);
+	public PositionAlarm findByCompanyDeviceAndAlarmTypeAndAlarmStatusNotIn(CompanyDevice companyDevice, AlarmType alarmType, List<AlarmStatus> solvedOrCancelesAlarms);
 	
-	public Long countByCompanyDetector(CompanyDetector companyDetector);
+	public Long countByCompanyDevice(CompanyDevice companyDevice);
 	
 	@Modifying
 	@Transactional

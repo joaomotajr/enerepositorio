@@ -31,6 +31,9 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 	@Column(name = "area_id")
 	private Long areaId;	
 	
+	@Column(name = "company_device_id")
+	private Long companyDeviceId;
+	
 	@Column(name = "company_detector_id")
 	private Long companyDetectorId;
 	
@@ -112,6 +115,14 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 
 	public final void setCompanyDetectorId(Long companyDetectorId) {
 		this.companyDetectorId = companyDetectorId;
+	}	
+
+	public Long getCompanyDeviceId() {
+		return companyDeviceId;
+	}
+
+	public void setCompanyDeviceId(Long companyDeviceId) {
+		this.companyDeviceId = companyDeviceId;
 	}
 
 	public final Long getSensorId() {

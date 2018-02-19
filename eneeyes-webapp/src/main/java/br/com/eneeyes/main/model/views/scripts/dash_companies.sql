@@ -14,52 +14,36 @@ CREATE
 VIEW `dash_companies` AS
     SELECT 
         `c`.`UID` AS `company_id`,
+        `cdv`.`UID` AS `company_device_id`,
         `c`.`NAME` AS `company`,
         `u`.`NAME` AS `unit`,
         `u`.`UID` AS `unit_id`,
         `a`.`NAME` AS `area`,
         `a`.`UID` AS `area_id`,
+        `s`.`NAME` AS `sensor_Name`,
+        `d`.`NAME` AS `detector_Name`,
+        `s`.`RANGE_MAX` AS `rangeMax`,        
         (CASE
-            WHEN (`cd`.`DEVICE_TYPE` = '1') THEN 'DETECTOR'
-            WHEN ISNULL(`cd`.`DEVICE_TYPE`) THEN 'NENHUM'
+            WHEN (`cdv`.`DEVICE_TYPE` = '1') THEN 'DETECTOR'
+            WHEN (`cdv`.`DEVICE_TYPE` = '2') THEN '´PLC'
+            WHEN (`cdv`.`DEVICE_TYPE` = '6') THEN 'ELETRICITY'
+            WHEN (`cdv`.`DEVICE_TYPE` = '7') THEN 'TIME'
+            WHEN (`cdv`.`DEVICE_TYPE` = '8') THEN 'TEMPERATURE'
+            WHEN (`cdv`.`DEVICE_TYPE` = '9') THEN 'DIGITAL'
+            WHEN (`cdv`.`DEVICE_TYPE` = '10') THEN 'OPEN_CLOSE'
+            WHEN ISNULL(`cdv`.`DEVICE_TYPE`) THEN 'NENHUM'
             ELSE 'OUTROS'
         END) AS `device`,
-        `cd`.`DEVICE_TYPE` AS `device_type`,
-        `cds`.`NAME` AS `companyDetectorName`,
-        `cds`.`UID` AS `companyDetector_id`,
-        `cds`.`DETECTOR_ID` AS `detector_id`
+        `cdv`.`DEVICE_TYPE` AS `device_type`,
+        `cd`.`NAME` AS `companyDetector_name`,
+        `cd`.`UID` AS `companyDetector_id`,
+        `cd`.`DETECTOR_ID` AS `detector_id`
     FROM
-        ((((`company` `c`
+        ((((((`company` `c`
         LEFT JOIN `unit` `u` ON ((`c`.`UID` = `u`.`COMPANY_ID`)))
         LEFT JOIN `area` `a` ON ((`u`.`UID` = `a`.`UNIT_ID`)))
-        LEFT JOIN `company_device` `cd` ON ((`a`.`UID` = `cd`.`AREA_ID`)))
-        LEFT JOIN `company_detector` `cds` ON ((`cd`.`UID` = `cds`.`COMPANY_DEVICE_ID`)))
+        LEFT JOIN `company_device` `cdv` ON ((`a`.`UID` = `cdv`.`AREA_ID`)))
+        LEFT JOIN `company_detector` `cd` ON ((`cdv`.`UID` = `cd`.`COMPANY_DEVICE_ID`)))
+        JOIN `detector` `d` ON ((`d`.`UID` = `cd`.`DETECTOR_ID`)))
+        JOIN `sensor` `s` ON ((`s`.`UID` = `d`.`SENSOR_ID`)))
     ORDER BY `c`.`NAME` , `u`.`NAME` , `a`.`NAME`
-    
-/* POSTGRES */        
-    
-CREATE 
-VIEW dash_companies AS
-    SELECT 
-        c.UID AS company_id,
-        c.NAME AS company,
-        u.NAME AS unit,
-        u.UID AS unit_id,
-        a.NAME AS area,
-        a.UID AS area_id,
-        (CASE
-            WHEN (cd.DEVICE_TYPE = '1') THEN 'DETECTOR'
-            WHEN (cd.DEVICE_TYPE IS NULL) THEN 'NENHUM'
-            ELSE 'OUTROS'
-        END) AS device,
-        cd.DEVICE_TYPE AS device_type,
-        cds.NAME AS companyDetectorName,
-        cds.UID AS companyDetector_id,
-        cds.DETECTOR_ID AS detector_id
-    FROM
-        ((((company c
-        LEFT JOIN unit u ON ((c.UID = u.COMPANY_ID)))
-        LEFT JOIN area a ON ((u.UID = a.UNIT_ID)))
-        LEFT JOIN company_device cd ON ((a.UID = cd.AREA_ID)))
-        LEFT JOIN company_detector cds ON ((cd.UID = cds.COMPANY_DEVICE_ID)))
-    ORDER BY c.NAME , u.NAME , a.NAME

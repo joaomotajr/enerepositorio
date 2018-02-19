@@ -10,6 +10,9 @@ app.factory('ViewService', function($resource){
         listCompanyDetectorsAlarms : $resource('/security/api/view/findAreaCompanyDetectorAlarmViewByCompanyDetectorId/:companyDetectorId/',{ companyDetectorId: '@companyDetectorId'},{
         	view : {method : 'GET'}
         }),
+        listCompanyDeviceAlarms : $resource('/security/api/view/findAreaCompanyDeviceAlarmViewByCompanyDetectorId/:companyDetectorId/',{ companyDeviceId: '@companyDeviceId'},{
+        	view : {method : 'GET'}
+        }),
         listAllDashCompany : $resource('/security/api/view/allDashCompany',{},{
         	view : {method : 'GET'}
         }),

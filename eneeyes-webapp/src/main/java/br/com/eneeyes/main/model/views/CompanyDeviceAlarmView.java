@@ -13,11 +13,11 @@ import org.hibernate.annotations.Subselect;
 import br.com.eneeyes.main.model.Alarm;
 
 @Entity
-@Subselect("select * from companydetector_alarm_view")
-public class CompanyDetectorAlarmView implements Serializable {
+@Subselect("select * from companydevice_alarm_view")
+public class CompanyDeviceAlarmView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	public CompanyDetectorAlarmView() {		
+	public CompanyDeviceAlarmView() {		
 	
 	}
 	

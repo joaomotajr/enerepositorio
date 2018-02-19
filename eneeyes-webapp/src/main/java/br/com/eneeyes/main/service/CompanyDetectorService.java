@@ -51,7 +51,7 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		ActionType actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;
 		
 		if (actionType == ActionType.CREATE) {
-			createInitialPosition(companyDetector);
+			createInitialPosition(companyDetector.getCompanyDevice());
 			
 			updateCompanyDeviceName(dto.getName(), dto.getCompanyDeviceDto().getUid());
 		}
@@ -61,9 +61,9 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		return result;
 	}
 	
-	private void createInitialPosition(CompanyDetector companyDetector) {
+	private void createInitialPosition(CompanyDevice companyDevice) {
 				
-		positionService.createInitialPosition(companyDetector);		
+		positionService.createInitialPosition(companyDevice);		
 
 	}
 	
@@ -181,32 +181,6 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 		
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Coordenadadas Salvas com sucesso.");
-		
-		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.UPDATE, result.toString());
-		
-		return result;	
-	}
-	
-	public BasicResult<?> removeAlarm(Long uid) {
-		
-		LogResult<CompanyDetectorDto> result = new LogResult<CompanyDetectorDto>();
-		repository.setAlarm(null, uid);
-		
-		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Alarm gravado/removido com sucesso.");
-		
-		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.UPDATE, result.toString());
-		
-		return result;	
-	}
-	
-	public BasicResult<?> updateAlarm(Long alarmId, Long uid) {
-		
-		LogResult<CompanyDetectorDto> result = new LogResult<CompanyDetectorDto>();
-		repository.setAlarm(alarmId, uid);
-		
-		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Alarm gravado/removido com sucesso.");
 		
 		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.UPDATE, result.toString());
 		

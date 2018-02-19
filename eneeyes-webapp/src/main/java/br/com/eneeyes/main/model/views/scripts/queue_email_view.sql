@@ -26,12 +26,13 @@ VIEW `queue_email_view` AS
         `g`.`NAME` AS `GAS_NAME`,
         `s`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`
     FROM
-        (((((`position_alarm` `pa`
-        JOIN `company_detector` `cd` ON ((`cd`.`UID` = `pa`.`COMPANY_DETECTOR_ID`)))
+        ((((((`position_alarm` `pa`
+        JOIN `company_device` `cdv` ON ((`cdv`.`UID` = `pa`.`COMPANY_DEVICE_ID`)))
+        JOIN `company_detector` `cd` ON ((`cd`.`COMPANY_DEVICE_ID` = `cdv`.`UID`)))
         JOIN `detector` `d` ON ((`cd`.`DETECTOR_ID` = `d`.`UID`)))
         JOIN `sensor` `s` ON ((`d`.`SENSOR_ID` = `s`.`UID`)))
         JOIN `gas` `g` ON ((`s`.`GAS_ID` = `g`.`UID`)))
-        JOIN `alarm` `a` ON ((`cd`.`ALARM_ID` = `a`.`UID`)))
+        JOIN `alarm` `a` ON ((`cdv`.`ALARM_ID` = `a`.`UID`)))
     WHERE
         ((`pa`.`EMAIL_STATUS` = 1)
             OR (`pa`.`EMAIL_STATUS` = 3))

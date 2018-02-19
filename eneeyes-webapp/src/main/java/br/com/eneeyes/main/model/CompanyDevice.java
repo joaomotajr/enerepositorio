@@ -1,5 +1,7 @@
 package br.com.eneeyes.main.model;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.CompanyDeviceDto;
@@ -25,11 +27,20 @@ public class CompanyDevice {
 	
 	}
 	
+	public CompanyDevice(Long uid) {
+		
+		this.uid = uid;
+		
+	}
+	
 	public CompanyDevice(CompanyDeviceDto dto) {
 		
 		this.uid = dto.getUid();
 		this.deviceType = dto.getDeviceType();
 		this.name = dto.getName();
+		
+		if (dto.getAlarmDto()  != null) 
+			this.alarm = new Alarm(dto.getAlarmDto());
 	}
 
 	@Id
@@ -48,9 +59,16 @@ public class CompanyDevice {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="AREA_ID", nullable=false)
     private Area area;
-		
-	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "companyDevice")
-	private CompanyDetector companyDetector;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDevice", cascade = CascadeType.REMOVE)
+	private Set<PositionAlarm> positionAlarm;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDevice", cascade = CascadeType.REMOVE)
+	private Set<Position> position;
+	
+	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="ALARM_ID", nullable = true)
+	private Alarm alarm;
 	
 	@Column(name = "NAME", nullable = true)
 	private String name;
@@ -91,4 +109,13 @@ public class CompanyDevice {
 	public final void setName(String name) {
 		this.name = name;
 	}
+
+	public Alarm getAlarm() {
+		return alarm;
+	}
+
+	public void setAlarm(Alarm alarm) {
+		this.alarm = alarm;
+	}
+	
 }

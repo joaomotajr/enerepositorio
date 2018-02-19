@@ -42,7 +42,7 @@ public class HistoricViewService {
 	@Autowired
 	private HistoricDRepository repositoryD;
 	
-	public GroupResult<?> findByCompanyDetectorAndInterval(Long companyDetectorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
+	public GroupResult<?> findByCompanyDeviceAndInterval(Long companyDeviceId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
 		GroupResult<?> result = new GroupResult<IHistoric>();
 			
 		try {
@@ -53,18 +53,18 @@ public class HistoricViewService {
 			Page<IHistoric> page = null;
 			
 			if(intervalType ==  IntervalType.UMA_HORA) {
-				page= repositoryView.findByCompanyDetectorIdAndAndLastUpdateBetweenPaginated(companyDetectorId, inicio, fim, new PageRequest(currentPage, lenPage));	
+				page= repositoryView.findByCompanyDeviceIdAndAndLastUpdateBetweenPaginated(companyDeviceId, inicio, fim, new PageRequest(currentPage, lenPage));	
 			}
 			else if(intervalType ==  IntervalType.SEIS_HORAS || intervalType ==  IntervalType.DOZE_HORAS || intervalType ==  IntervalType.UM_DIA) {
-				page= repositoryHA.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, inicio, fim, new PageRequest(currentPage, lenPage));
+				page= repositoryHA.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, inicio, fim, new PageRequest(currentPage, lenPage));
 			}
 			else if(intervalType ==  IntervalType.DOIS_DIAS || intervalType ==  IntervalType.SETE_DIAS) {
-				page= repositoryHAB.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, inicio, fim, new PageRequest(currentPage, lenPage));
+				page= repositoryHAB.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, inicio, fim, new PageRequest(currentPage, lenPage));
 			}
 			else if(intervalType ==  IntervalType.UM_MES) {
 																	
 				inicio = Util.addMonth(fim, -1);								
-				page= repositoryHABC.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, inicio, fim, new PageRequest(currentPage, lenPage));
+				page= repositoryHABC.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, inicio, fim, new PageRequest(currentPage, lenPage));
 			}			
 			
 			result = getResults(page);			
@@ -108,7 +108,7 @@ public class HistoricViewService {
 		
 	}
 	
-	public GroupResult<?> findByCompanyDetectorAndIntervalDays(Long companyDetectorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
+	public GroupResult<?> findByCompanyDeviceAndIntervalDays(Long companyDeviceId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
 		
 		GroupResult<?> result = new GroupResult<IHistoric>();
 		
@@ -123,35 +123,35 @@ public class HistoricViewService {
 			
 			if(diffHoursIn <= 24) {
 
-				result = getResults(repositoryHA.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
+				result = getResults(repositoryHA.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
 			}
 			else if (diffDaysIn > 30 && diffDaysOut > 30) {
 				
-				result = getResults(repositoryD.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
+				result = getResults(repositoryD.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
 			}
 			else if (diffDaysIn <= 2 && diffDaysOut <= 2) {
 				
-				result = getResults(repositoryHA.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
+				result = getResults(repositoryHA.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
 			}
 			else if (diffDaysIn <= 7 && diffDaysOut <= 7) {
 				
-				result = getResults(repositoryHAB.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
+				result = getResults(repositoryHAB.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
 			}						
 			else if(diffDaysIn <= 7) {
 				
-				result = getResults(repositoryHAB.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
+				result = getResults(repositoryHAB.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
 			}
 			else if (diffDaysIn > 7 && diffDaysIn <= 30 && diffDaysOut > 7 && diffDaysOut <= 30) {
-				result = getResults(repositoryHABC.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
+				result = getResults(repositoryHABC.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
 			}
 			else if(diffDaysIn <= 30) {
 				
-				result = getResults(repositoryC.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
+				result = getResults(repositoryC.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));
 			}
 			
 			else {
 				
-				result = getResults(repositoryHABC.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
+				result = getResults(repositoryHABC.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage)));			
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

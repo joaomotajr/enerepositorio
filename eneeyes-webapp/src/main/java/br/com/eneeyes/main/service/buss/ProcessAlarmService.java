@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.main.dto.AlarmDto;
-import br.com.eneeyes.main.model.CompanyDetector;
+import br.com.eneeyes.main.model.CompanyDevice;
 import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
@@ -22,7 +22,7 @@ import br.com.eneeyes.main.repository.singleton.AlarmSingletonRepository;
 import br.com.eneeyes.main.repository.views.PositionViewRepository;
 import br.com.eneeyes.main.service.HistoricAlarmService;
 import br.com.eneeyes.main.service.historic.HistoricService;
-import br.com.eneeyes.main.service.views.CompanyDetectorAlarmViewService;
+import br.com.eneeyes.main.service.views.CompanyDeviceAlarmViewService;
 
 /**
  * @author f752766
@@ -44,7 +44,7 @@ public class ProcessAlarmService {
 	private HistoricService historicService;
 	
 	@Autowired
-	private CompanyDetectorAlarmViewService companyDetectorAlarmViewService;
+	private CompanyDeviceAlarmViewService companyDeviceAlarmViewService;
 		
 	@Autowired
 	private PositionAlarmRepository positionAlarmRepository;
@@ -67,7 +67,7 @@ public class ProcessAlarmService {
 	 */
 	public void ExecuteOfflineProcedures(Position position) {
 		
-		AlarmDto alarmDto = getExistAlarm(position.getCompanyDetector().getUid());					
+		AlarmDto alarmDto = getExistAlarm(position.getCompanyDevice().getUid());					
 		
 		Historic historic = new Historic();		
 		position.setLastValue(new BigDecimal(-1));
@@ -91,7 +91,7 @@ public class ProcessAlarmService {
 	 */
 	public void Execute(Historic historic) {
 		
-		AlarmDto alarmDto = getExistAlarm(historic.getCompanyDetectorId());
+		AlarmDto alarmDto = getExistAlarm(historic.getCompanyDeviceId());
 
 		AlarmType alarmType = checkExistsAlarms(alarmDto, historic.getValue());
 		
@@ -109,7 +109,7 @@ public class ProcessAlarmService {
 	
 	private void updatePositionByHistoric(Historic historic, AlarmType alarmType) {
 
-		PositionView positionView = positionViewRepository.findByCompanyDetectorId(historic.getCompanyDetectorId());
+		PositionView positionView = positionViewRepository.findByCompanyDeviceId(historic.getCompanyDeviceId());
 		
 		if (positionView != null) {
 			
@@ -118,15 +118,15 @@ public class ProcessAlarmService {
 		}
 	}
 	
-	private AlarmDto getExistAlarm(Long companyDetectorId) {
+	private AlarmDto getExistAlarm(Long companyDeviceId) {
 		
-		CompanyDetector companyDetector = new CompanyDetector(companyDetectorId);
+		CompanyDevice companyDevice = new CompanyDevice(companyDeviceId);
 		
 		if(AlarmSingletonRepository.init()) {			
-			AlarmSingletonRepository.populate(companyDetectorAlarmViewService.findAll());
+			AlarmSingletonRepository.populate(companyDeviceAlarmViewService.findAll());
 		}
 		
-		return AlarmSingletonRepository.findByCompanyDetector(companyDetector.getUid());
+		return AlarmSingletonRepository.findByCompanyDevice(companyDevice.getUid());
 		
 	}
 					
@@ -157,43 +157,43 @@ public class ProcessAlarmService {
 	
 	private void updateAlarmsAndActions(AlarmDto alarmDto, AlarmType alarmType, Historic historic) {		
 		
-		CompanyDetector companyDetector = new CompanyDetector(historic.getCompanyDetectorId());					
+		CompanyDevice companyDevice = new CompanyDevice(historic.getCompanyDeviceId());					
 		AlarmParams alarmParams = new AlarmParams(alarmDto, alarmType); 
 		
-		historicAlarmService.save(historic.getValue(), companyDetector.getUid(), historic.getUid(), alarmDto, alarmType, alarmParams);
+		historicAlarmService.save(historic.getValue(), companyDevice.getUid(), historic.getUid(), alarmDto, alarmType, alarmParams);
 		
 		if (alarmType != AlarmType.OFF) {
-			updatePositionAlarm(historic, companyDetector, alarmType, alarmParams);
+			updatePositionAlarm(historic, companyDevice, alarmType, alarmParams);
 		}
 		
 	}
 	
 	private void updateAlarmsAndActions(AlarmType alarmType, Historic historic) {
 		
-		CompanyDetector companyDetector = new CompanyDetector(historic.getCompanyDetectorId());
-		historicAlarmService.save(historic.getValue(), companyDetector.getUid(), historic.getUid(), alarmType);
+		CompanyDevice companyDevice = new CompanyDevice(historic.getCompanyDeviceId());
+		historicAlarmService.save(historic.getValue(), companyDevice.getUid(), historic.getUid(), alarmType);
 	}
 	
 	/**
 	 * @param position
-	 * @param companyDetector
+	 * @param companyDevice
 	 * @param sensor
 	 * @param alarmType
 	 */	
 		
-	private void updatePositionAlarm(Historic historic, CompanyDetector companyDetector, AlarmType alarmType, AlarmParams alarmParams) {		
+	private void updatePositionAlarm(Historic historic, CompanyDevice companyDevice, AlarmType alarmType, AlarmParams alarmParams) {		
 				
 		List<AlarmStatus> solvedOrCancelesAlarms = new ArrayList<AlarmStatus>();
 		
 		solvedOrCancelesAlarms.add(AlarmStatus.SOLVED);
 		solvedOrCancelesAlarms.add(AlarmStatus.CANCELED);
 
-		PositionAlarm positionAlarm = positionAlarmRepository.findByCompanyDetectorAndAlarmTypeAndAlarmStatusNotIn(companyDetector, alarmType, solvedOrCancelesAlarms);
+		PositionAlarm positionAlarm = positionAlarmRepository.findByCompanyDeviceAndAlarmTypeAndAlarmStatusNotIn(companyDevice, alarmType, solvedOrCancelesAlarms);
 		
 		if(positionAlarm == null) {
 			
 			positionAlarm =  new PositionAlarm();
-			positionAlarm.setCompanyDetector(companyDetector);
+			positionAlarm.setCompanyDevice(companyDevice);
 			positionAlarm.setFirstUpdate(new Date());
 			positionAlarm.setLastValue(historic.getValue());
 			positionAlarm.setAlarmStatus(AlarmStatus.CREATED);

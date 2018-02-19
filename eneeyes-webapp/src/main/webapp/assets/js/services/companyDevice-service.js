@@ -17,5 +17,11 @@ app.factory('CompanyDeviceService', function($resource){
         save : $resource('/security/api/companyDevice/save',{},{
         	companyDevice : {method : 'POST'}
         }),
+        updateAlarm : $resource('/security/api/companyDevice/updateAlarm/:alarmId/:id/', {alarmId: '@alarmId', id: '@id'}, {
+        	companyDevice : {method : 'PUT'}
+        }),
+        removeAlarm : $resource('/security/api/companyDevice/removeAlarm/:alarmId/:id/', {id: '@id'}, {
+              companyDevice : {method : 'PUT'}
+        }),
      };
 });

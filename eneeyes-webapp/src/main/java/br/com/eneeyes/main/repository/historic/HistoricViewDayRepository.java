@@ -13,9 +13,9 @@ import br.com.eneeyes.main.model.historic.IHistoricGroup;
 
 public interface HistoricViewDayRepository extends JpaRepository<HistoricViewDay, Long> {
 		
-	@Query("select h from HistoricViewDay h where h.companyDetectorId = ?1 and h.lastUpdate between ?2 and ?3")
-	List<IHistoricGroup>findByCompanyDetectorIdAndLastUpdateBetween(Long companyDetectorId,  Date in, Date out);
+	@Query("select h from HistoricViewDay h where h.companyDeviceId = ?1 and h.lastUpdate between ?2 and ?3")
+	List<IHistoricGroup>findByCompanyDeviceIdAndLastUpdateBetween(Long companyDeviceId,  Date in, Date out);
 	
-	@Query("select h from HistoricViewDay h where h.companyDetectorId = ?1 and h.lastUpdate between ?2 and ?3")
-	public Page<IHistoricGroup> findByCompanyDetectorIdAndLastUpdateBetweenPaginated(Long companyDetectorId,  Date in, Date out, Pageable pageable);	
+	@Query("select h from HistoricViewDay h where h.companyDeviceId = ?1 and h.lastUpdate between ?2 and ?3")
+	public Page<IHistoricGroup> findByCompanyDeviceIdAndLastUpdateBetweenPaginated(Long companyDeviceId,  Date in, Date out, Pageable pageable);	
 }

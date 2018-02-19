@@ -30,12 +30,8 @@ public class PositionView {
 	@Column(name = "LAST_VALUE")
 	private BigDecimal lastValue;    
 	
-	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
-	private Long companyDetectorId;
-	
-//	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-//	@JoinColumn(name="SENSOR_ID", nullable = false)
-//	private Sensor sensor;
+	@Column(name="COMPANY_DEVICE_ID", nullable = false)
+	private Long companyDeviceId;
 	
 	@Column(name = "ALARM_TYPE")
 	private AlarmType alarmType;		
@@ -60,13 +56,9 @@ public class PositionView {
 		return lastValue;
 	}
 
-	public final Long getCompanyDetectorId() {
-		return companyDetectorId;
+	public final Long getCompanyDeviceId() {
+		return companyDeviceId;
 	}
-
-//	public final Sensor getSensor() {
-//		return sensor;
-//	}
 
 	public final Long getHistoricId() {
 		return historicId;

@@ -12,13 +12,13 @@ import br.com.eneeyes.main.model.historic.Historic;
 
 public interface HistoricRepository extends JpaRepository<Historic, Long> {
 			
-	public List<Historic> findByCompanyDetectorId(Long companyDetectorId);	
+	public List<Historic> findByCompanyDeviceId(Long companyDeviceId);	
 		
-	@Query("select h from Historic h where h.companyDetectorId = ?1 and h.lastUpdate between ?2 and ?3 ")
-	public List<Historic> findByCompanyDetectorIdAndAndLastUpdateBetween(Long companyDetectorId,  Date in, Date out);
+	@Query("select h from Historic h where h.companyDeviceId = ?1 and h.lastUpdate between ?2 and ?3 ")
+	public List<Historic> findByCompanyDeviceIdAndAndLastUpdateBetween(Long companyDeviceId,  Date in, Date out);
 	
-	@Query("select h from Historic h where h.companyDetectorId = ?1 and h.lastUpdate between ?2 and ?3 ")
-	public Page<Historic> findByCompanyDetectorIdAndAndLastUpdateBetweenPaginated(Long companyDetectorId,  Date in, Date out, Pageable pageable);
+	@Query("select h from Historic h where h.companyDeviceId = ?1 and h.lastUpdate between ?2 and ?3 ")
+	public Page<Historic> findByCompanyDeviceIdAndAndLastUpdateBetweenPaginated(Long companyDeviceId,  Date in, Date out, Pageable pageable);
 	
 		
 }

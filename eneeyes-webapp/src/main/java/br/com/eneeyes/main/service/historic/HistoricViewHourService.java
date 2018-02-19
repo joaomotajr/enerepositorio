@@ -30,7 +30,7 @@ public class HistoricViewHourService {
 	@Autowired
 	private HistoricViewDayAllRepository repositoryAll;
 	
-	public GroupResult<?> findByCompanyDetectorAndInterval(Long companyDetectorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
+	public GroupResult<?> findByCompanyDeviceAndInterval(Long companyDeviceId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
 		GroupResult<?> result = new GroupResult<IHistoricGroup>();
 
 		try {
@@ -47,7 +47,7 @@ public class HistoricViewHourService {
 			}
 
 			Page<IHistoricGroup> page = null;
-			page = repository.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dataInicio, dataFim, new PageRequest(currentPage, lenPage));
+			page = repository.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dataInicio, dataFim, new PageRequest(currentPage, lenPage));
 			
 			result = getResults(page);
 			
@@ -99,7 +99,7 @@ public class HistoricViewHourService {
 		
 	}
 	
-	public GroupResult<?> findByCompanyDetectorAndIntervalHours(Long companyDetectorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
+	public GroupResult<?> findByCompanyDeviceAndIntervalHours(Long companyDeviceId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
 
 		GroupResult<?> result = new GroupResult<IHistoricGroup>();
 		
@@ -113,15 +113,15 @@ public class HistoricViewHourService {
 			Page<IHistoricGroup> page = null;
 			
 			if (diffDaysIn >= 30 && diffDaysOut >= 30) {
-				page = repository30.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
+				page = repository30.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
 			}
 			else if (diffDaysIn <= 30 && diffDaysOut <= 30) {
 		
-				page = repository.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
+				page = repository.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
 			}
 			else
 			{
-				page = repositoryAll.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
+				page = repositoryAll.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
 			}
 			
 			result = getResults(page);

@@ -32,7 +32,7 @@ public class Position {
     	this.uid = dto.getUid();
     	this.lastUpdate = dto.getLastUpdate();    	
     	this.lastValue = dto.getLastValue();
-    	this.companyDetector = new CompanyDetector(dto.getCompanyDetectorDto());
+    	this.companyDevice = new CompanyDevice(dto.getCompanyDeviceDto());
     	this.alarmType = dto.getAlarmType();   	    	
 
     	this.historicId = dto.getHistoricId();
@@ -57,8 +57,8 @@ public class Position {
 	private BigDecimal lastValue;
     		
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="COMPANY_DETECTOR_ID", nullable = false)
-	private CompanyDetector companyDetector;
+	@JoinColumn(name="COMPANY_DEVICE_ID", nullable = false)
+	private CompanyDevice companyDevice;
 	
 	@Column(name = "ALARM_TYPE", columnDefinition = "int default 0", nullable = false)
 	private AlarmType alarmType;
@@ -95,12 +95,12 @@ public class Position {
 		this.lastValue = lastValue;
 	}
 	
-	public CompanyDetector getCompanyDetector() {
-		return companyDetector;
+	public CompanyDevice getCompanyDevice() {
+		return companyDevice;
 	}
 
-	public void setCompanyDetector(CompanyDetector companyDetector) {
-		this.companyDetector = companyDetector;
+	public void setCompanyDevice(CompanyDevice companyDevice) {
+		this.companyDevice = companyDevice;
 	}
 	
 	public final AlarmType getAlarmType() {

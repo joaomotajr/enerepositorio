@@ -1,4 +1,4 @@
-app.controller('logHistoricController', function ($scope, $timeout, $filter, $cookieStore, CompanyService, DetectorService, CompanyDetectorService, HistoricViewService, ViewService, CompanyDetectorAlarmService) {
+app.controller('logHistoricController', function ($scope, $timeout, $filter, $cookieStore, CompanyService, CompanyDeviceService, HistoricViewService, ViewService) {
 
 	var loadGoogleCharts = false;	
 	$scope.countHistoric = 0;
@@ -137,7 +137,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 			$scope.listHistoricInterval = new HistoricViewService.listIntervalGroupDays();		
 				
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), 
-			companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, 
+			companyDeviceId: $scope.selectedCompanyDetector.companyDeviceId, 
 			interval: $scope.interval,
 			currentPage: $scope.currentPage,
 			lenPage: $scope.lenPage
@@ -190,7 +190,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 			$scope.listHistoricInterval = new HistoricViewService.listIntervalDaysGroupDays();
 				
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(),			
-			companyDetectorId: $scope.selectedCompanyDetector.companyDetectorId, 
+			companyDeviceId: $scope.selectedCompanyDetector.companyDeviceId, 
 			dateIn: dataInicio,
 			dateOut: dataFim,
 			currentPage: $scope.currentPage,
@@ -238,8 +238,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	 };
 
 	$scope.changeCompanyDetector = function() {		
-		if($scope.selectedCompanyDetector == null) return;		
-		$scope.getOneCompanyDetector($scope.selectedCompanyDetector.companyDetectorId);
+		if($scope.selectedCompanyDetector == null) return;
+		$scope.getCompanyDevice($scope.selectedCompanyDetector.companyDeviceId);
 	};	
 		
 	$scope.getCompanys = function() {
@@ -271,11 +271,13 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		$scope.search = {company: $scope.selectedCompany};
 	};
 
-	$scope.getOneCompanyDetector = function(uid) {		
-		$scope.resultCompanyDetector = new CompanyDetectorService.listOne();		 
-		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : uid }, function(){			
-			$scope.findedCompanyDetector = $scope.resultCompanyDetector.t;						
-		});		 
+	$scope.getCompanyDevice = function(uid) {
+		$scope.resultCompanyDevice = new CompanyDeviceService.listOne();
+		$scope.resultCompanyDevice.$companyDevice({_csrf : angular.element('#_csrf').val(), id : uid }, function(){						
+			if (!$scope.resultCompanyDevice.isError) {
+				$scope.findedCompanyDevice = $scope.resultCompanyDevice.t;			
+			}			
+		});
 	};
 	
 	$scope.changedGraphic = function() {

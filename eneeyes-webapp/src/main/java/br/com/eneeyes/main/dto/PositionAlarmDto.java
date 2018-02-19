@@ -17,8 +17,7 @@ public class PositionAlarmDto {
 	private Date firstUpdate;
 	private Date lastUpdate;
 	private BigDecimal lastValue;	
-    private CompanyDetectorDto companyDetectorDto;
-//    private SensorDto sensorDto;
+    private CompanyDeviceDto companyDeviceDto;
     private AlarmType alarmType;    
     private AlarmStatus alarmStatus;
     private Date statusUpdate;
@@ -38,8 +37,7 @@ public class PositionAlarmDto {
 		this.firstUpdate = positionAlarm.getFirstUpdate();
 		this.lastUpdate = positionAlarm.getLastUpdate();
     	this.lastValue = positionAlarm.getLastValue();    	
-//    	this.sensorDto = new SensorDto(positionAlarm.getSensor());
-    	this.companyDetectorDto = new CompanyDetectorDto(positionAlarm.getCompanyDetector());
+    	this.companyDeviceDto = new CompanyDeviceDto(positionAlarm.getCompanyDevice());
     	this.alarmType = positionAlarm.getAlarmType();
     	this.alarmStatus = positionAlarm.getAlarmStatus();
     	this.statusUpdate = positionAlarm.getStatusUpdate();
@@ -82,21 +80,13 @@ public class PositionAlarmDto {
 		this.lastValue = lastValue;
 	}
 
-	public CompanyDetectorDto getCompanyDetectorDto() {
-		return companyDetectorDto;
+	public CompanyDeviceDto getCompanyDeviceDto() {
+		return companyDeviceDto;
 	}
 
-	public void setCompanyDetectorDto(CompanyDetectorDto companyDetectorDto) {
-		this.companyDetectorDto = companyDetectorDto;
+	public void setCompanyDeviceDto(CompanyDeviceDto companyDeviceDto) {
+		this.companyDeviceDto = companyDeviceDto;
 	}
-	
-//	public final SensorDto getSensorDto() {
-//		return sensorDto;
-//	}
-//
-//	public final void setSensorDto(SensorDto sensorDto) {
-//		this.sensorDto = sensorDto;
-//	}
 	
 	public final AlarmType getAlarmType() {
 		return alarmType;

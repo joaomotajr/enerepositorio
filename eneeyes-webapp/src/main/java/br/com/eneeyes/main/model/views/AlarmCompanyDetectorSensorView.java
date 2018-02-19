@@ -21,7 +21,8 @@ public class AlarmCompanyDetectorSensorView implements Serializable {
 	@Column(name = "uid")
 	private Long uid;
 	
-	private Long alarm_id;	
+	private Long alarm_id;
+	private Long company_device_id;
 	private Long company_detector_id;
 	private Long sensor_id;
 	private String company_detector_name;
@@ -51,8 +52,16 @@ public class AlarmCompanyDetectorSensorView implements Serializable {
 	
 	public void setCompany_detector_id(Long company_detector_id) {
 		this.company_detector_id = company_detector_id;
-	}
+	}	
 	
+	public Long getCompany_device_id() {
+		return company_device_id;
+	}
+
+	public void setCompany_device_id(Long company_device_id) {
+		this.company_device_id = company_device_id;
+	}
+
 	public Long getSensor_id() {
 		return sensor_id;
 	}

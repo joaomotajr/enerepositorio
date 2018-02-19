@@ -10,16 +10,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.eneeyes.main.model.CompanyDetector;
+import br.com.eneeyes.main.model.CompanyDevice;
 import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.enums.AlarmType;
 
 public interface PositionRepository extends JpaRepository<Position, Long> {
 
-	public Long countByCompanyDetector(CompanyDetector companyDetector);
+	public Long countByCompanyDevice(CompanyDevice companyDevice);
 		
-	public List<Position> findByCompanyDetectorAndLastUpdateBetween(CompanyDetector companyDetector, Date in, Date out);
+	public List<Position> findByCompanyDeviceAndLastUpdateBetween(CompanyDevice companyDevice, Date in, Date out);
 
-	public List<Position> findByCompanyDetectorIn(List<CompanyDetector> lista);
+	public List<Position> findByCompanyDeviceIn(List<CompanyDetector> lista);
 	
 	public List<Position> findByLastUpdateLessThanAndAlarmTypeNotIn(Date date, List<AlarmType> withoutOrOffAlarms);
 	

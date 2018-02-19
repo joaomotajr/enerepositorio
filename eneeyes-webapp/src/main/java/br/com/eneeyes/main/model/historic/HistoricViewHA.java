@@ -29,8 +29,8 @@ public class HistoricViewHA implements IHistoric {
 	@Column(name = "VALUE")
 	private BigDecimal value;
 	
-	@Column(name="COMPANY_DETECTOR_ID")
-	private Long companyDetectorId;
+	@Column(name="COMPANY_DEVICE_ID")
+	private Long companyDeviceId;
 	
 	@Column(name = "LOG_ORIGEM")
 	private LogOrigem logOrigem;
@@ -59,12 +59,12 @@ public class HistoricViewHA implements IHistoric {
 		this.value = value;
 	}
 
-	public final Long getCompanyDetectorId() {
-		return companyDetectorId;
+	public final Long getCompanyDeviceId() {
+		return companyDeviceId;
 	}
 
-	public final void setCompanyDetectorId(Long companyDetectorId) {
-		this.companyDetectorId = companyDetectorId;
+	public final void setCompanyDeviceId(Long companyDeviceId) {
+		this.companyDeviceId = companyDeviceId;
 	}
 	
 	public final LogOrigem getLogOrigem() {

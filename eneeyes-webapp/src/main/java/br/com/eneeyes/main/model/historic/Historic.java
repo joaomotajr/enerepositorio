@@ -22,7 +22,7 @@ import br.com.eneeyes.main.model.enums.LogOrigem;
 		   appliesTo = "historic",
 		   indexes = {
 		      @Index(name="idxHistoricDate", columnNames = "LAST_UPDATE"),		      
-		      @Index(name="idxHistoricCompanySensorAndDate", columnNames = {"COMPANY_DETECTOR_ID", "LAST_UPDATE"})
+		      @Index(name="idxHistoricCompanyDeviceAndDate", columnNames = {"COMPANY_DEVICE_ID", "LAST_UPDATE"})
 		   }
 		)
 public class Historic {
@@ -36,7 +36,7 @@ public class Historic {
     	this.uid = dto.getUid();
     	this.lastUpdate = dto.getLastUpdate();
     	this.value = dto.getValue();    	
-    	this.companyDetectorId = dto.getCompanyDetectorId();
+    	this.companyDeviceId = dto.getCompanyDeviceId();
     	this.logOrigem = dto.getLogOrigem();
     }
     
@@ -58,8 +58,8 @@ public class Historic {
 	@Column(name = "VALUE", nullable = true)
 	private BigDecimal value;
 	
-	@Column(name="COMPANY_DETECTOR_ID", nullable = false)
-	private Long companyDetectorId;
+	@Column(name="COMPANY_DEVICE_ID", nullable = false)
+	private Long companyDeviceId;
 	
 	@Column(name = "LOG_ORIGEM", nullable = true, columnDefinition = "int default 0")
 	private LogOrigem logOrigem;
@@ -88,12 +88,12 @@ public class Historic {
 		this.value = value;
 	}
 
-	public final Long getCompanyDetectorId() {
-		return companyDetectorId;
+	public final Long getCompanyDeviceId() {
+		return companyDeviceId;
 	}
 
-	public final void setCompanyDetectorId(Long companyDetectorId) {
-		this.companyDetectorId = companyDetectorId;
+	public final void setCompanyDeviceId(Long companyDeviceId) {
+		this.companyDeviceId = companyDeviceId;
 	}
 
 	public final LogOrigem getLogOrigem() {

@@ -58,18 +58,6 @@ public class CompanyGenericController {
 	public BasicResult<?> listByAreaId(@PathVariable Long uid) {
 		
 		return service.findByArea(uid);		
-	}
-	
-	@RequestMapping(value="/security/api/companyGeneric/updateAlarm/{alarmId}/{uid}", method=RequestMethod.PUT, consumes = "application/json")			
-	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> updateAlarm(@PathVariable Long alarmId, @PathVariable Long uid) {		
-		return service.updateAlarm(alarmId, uid);
-	}
-	
-	@RequestMapping(value="/security/api/companyGeneric/removeAlarm/{uid}", method=RequestMethod.PUT, consumes = "application/json")			
-	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> removeAlarm(@PathVariable Long uid) {		
-		return service.removeAlarm(uid);
-	}
+	}	
 	
 }

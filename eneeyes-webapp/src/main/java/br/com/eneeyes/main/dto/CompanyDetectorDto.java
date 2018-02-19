@@ -23,7 +23,7 @@ public class CompanyDetectorDto {
 	private String descriptionInstall;
 	private CompanyDeviceDto companyDeviceDto;	
 	private DetectorDto detectorDto;
-	private AlarmDto alarmDto;
+//	private AlarmDto alarmDto;
 	
 	public CompanyDetectorDto() {
 		
@@ -48,8 +48,8 @@ public class CompanyDetectorDto {
        	
        	this.detectorDto = new DetectorDto(companyDetector.getDetector());
        	
-       	if (companyDetector.getAlarm()  != null) 
-       		this.alarmDto = new AlarmDto(companyDetector.getAlarm());
+//       	if (companyDetector.getAlarm()  != null) 
+//       		this.alarmDto = new AlarmDto(companyDetector.getAlarm());
 	}
 		
 	public final Long getUid() {
@@ -179,12 +179,12 @@ public class CompanyDetectorDto {
 		this.descriptionInstall = descriptionInstall;
 	}
 
-	public AlarmDto getAlarmDto() {
-		return alarmDto;
-	}
-
-	public void setAlarmDto(AlarmDto alarmDto) {
-		this.alarmDto = alarmDto;
-	}
+//	public AlarmDto getAlarmDto() {
+//		return alarmDto;
+//	}
+//
+//	public void setAlarmDto(AlarmDto alarmDto) {
+//		this.alarmDto = alarmDto;
+//	}
 	
 }

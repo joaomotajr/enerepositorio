@@ -1,5 +1,4 @@
 /* MYSQL */
-
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -8,6 +7,7 @@ VIEW `area_companydetector_alarm_view` AS
     SELECT 
         GETFAKEID() AS `UID`,
         `cdv`.`AREA_ID` AS `AREA_ID`,
+        `cdv`.`UID` AS `COMPANY_DEvice_ID`,
         `cd`.`UID` AS `COMPANY_DETECTOR_ID`,
         `s`.`UID` AS `SENSOR_ID`,
         `cd`.`NAME` AS `COMPANY_DETECTOR_NAME`,
@@ -32,6 +32,6 @@ VIEW `area_companydetector_alarm_view` AS
         JOIN `detector` `d` ON ((`cd`.`DETECTOR_ID` = `d`.`UID`)))
         JOIN `sensor` `s` ON ((`d`.`SENSOR_ID` = `s`.`UID`)))
         JOIN `gas` `g` ON ((`s`.`GAS_ID` = `g`.`UID`)))
-        LEFT JOIN `alarm` `a` ON ((`cd`.`ALARM_ID` = `a`.`UID`)))
-        LEFT JOIN `position` `p` ON ((`p`.`COMPANY_DETECTOR_ID` = `cd`.`UID`)))
+        LEFT JOIN `alarm` `a` ON ((`cdv`.`ALARM_ID` = `a`.`UID`)))
+        LEFT JOIN `position` `p` ON ((`p`.`COMPANY_DEVICE_ID` = `cdv`.`UID`)))
     ORDER BY `cdv`.`AREA_ID` , `cd`.`UID` , `s`.`UID`

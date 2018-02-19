@@ -33,6 +33,32 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 			
 		return repository.updateCompanyDeviceName(name, uid);		
 	}
+	
+	public BasicResult<?> removeAlarm(Long uid) {
+		
+		LogResult<CompanyDeviceDto> result = new LogResult<CompanyDeviceDto>();	
+		repository.setAlarm(null, uid);
+		
+		result.setResultType( ResultMessageType.SUCCESS );
+		result.setMessage("Alarm gravado/removido com sucesso.");
+		
+		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.UPDATE, result.toString());
+		
+		return result;	
+	}
+	
+	public BasicResult<?> updateAlarm(Long alarmId, Long uid) {
+		
+		LogResult<CompanyDeviceDto> result = new LogResult<CompanyDeviceDto>();	
+		repository.setAlarm(alarmId, uid);
+		
+		result.setResultType( ResultMessageType.SUCCESS );
+		result.setMessage("Alarm gravado/removido com sucesso.");
+		
+		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.UPDATE, result.toString());
+		
+		return result;	
+	}
 
 	public BasicResult<?> save(CompanyDeviceDto dto) {
 		LogResult<CompanyDeviceDto> result = new LogResult<CompanyDeviceDto>();	

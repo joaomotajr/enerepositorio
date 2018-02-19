@@ -21,27 +21,27 @@ public class HistoricViewDayController {
 	@Autowired
 	HistoricViewDayService service;	
 
-	@RequestMapping(value="/security/api/historicView/findByCompanyDetectorAndIntervalGroupDays/{companyDetectorId}/{intervalType}/{currentPage}/{lenPage}",
+	@RequestMapping(value="/security/api/historicView/findByCompanyDeviceAndIntervalGroupDays/{companyDeviceId}/{intervalType}/{currentPage}/{lenPage}",
 			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)                      
-	public BasicResult<?> findByCompanyDetectorAndInterval(		
-			@PathVariable Long companyDetectorId, 
+	public BasicResult<?> findByCompanyDeviceAndInterval(		
+			@PathVariable Long companyDeviceId, 
 			@PathVariable IntervalType intervalType, 
 			@PathVariable Integer currentPage, 
 			@PathVariable Integer lenPage) {		
-		return service.findByCompanyDetectorAndInterval(companyDetectorId, intervalType, currentPage, lenPage);
+		return service.findByCompanyDeviceAndInterval(companyDeviceId, intervalType, currentPage, lenPage);
 	}
 	
-	@RequestMapping(value="/security/api/historicView/findByCompanyDetectorAndIntervalDaysGroupDays/{companyDetectorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/historicView/findByCompanyDeviceAndIntervalDaysGroupDays/{companyDeviceId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDetectorAndIntervalDays(		
-			@PathVariable Long companyDetectorId, 
+	public BasicResult<?> findByCompanyDeviceAndIntervalDays(		
+			@PathVariable Long companyDeviceId, 
 			@PathVariable Date dateIn, 
 			@PathVariable Date dateOut,
 			@PathVariable Integer currentPage, 
 			@PathVariable Integer lenPage) {
 		
-		return service.findByCompanyDetectorAndIntervalDays(companyDetectorId, dateIn, dateOut, currentPage, lenPage);
+		return service.findByCompanyDeviceAndIntervalDays(companyDeviceId, dateIn, dateOut, currentPage, lenPage);
 	}
 
 }

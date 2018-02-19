@@ -10,5 +10,7 @@ public interface AreaCompanyDetectorAlarmViewRepository extends JpaRepository<Ar
 		
 	List<AreaCompanyDetectorAlarmView> findByCompanyDetectorId(Long companyDetectorId);	
 	
+	List<AreaCompanyDetectorAlarmView> findByCompanyDeviceId(Long companyDeviceId);
+	
 	List<AreaCompanyDetectorAlarmView> findByAreaId(Long AreaId);
 }

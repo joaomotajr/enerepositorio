@@ -11,12 +11,8 @@ public class PositionDto {
 	private Long uid;
 	private Date lastUpdate;
 	private BigDecimal lastValue;	
-    private CompanyDetectorDto companyDetectorDto;
-// //    private SensorDto sensorDto;
-//    private Long companyDetectorId;
-//    private Long sensorId;
+    private CompanyDeviceDto companyDeviceDto;
     private AlarmType alarmType;
-//	private HistoricDto historicDto;
     private Long historicId;
 	
 	public PositionDto() {
@@ -28,14 +24,8 @@ public class PositionDto {
 		this.uid = position.getUid();
 		this.lastUpdate = position.getLastUpdate();
     	this.lastValue = position.getLastValue();
-    	this.companyDetectorDto = new CompanyDetectorDto(position.getCompanyDetector());
-// //    	this.sensorDto = new SensorDto(position.getSensor());
-//    	this.companyDetectorId = position.getCompanyDetectorId();
-//    	this.sensorId = position.getSensorId();
+    	this.companyDeviceDto = new CompanyDeviceDto(position.getCompanyDevice());
     	this.alarmType = position.getAlarmType();    	
-    	
-//    	if(position.getHistoric() != null)
-//    		this.historicDto = new HistoricDto(position.getHistoric());
     	
     	this.historicId = position.getHistoricId();    		
 	}
@@ -64,37 +54,13 @@ public class PositionDto {
 		this.lastValue = lastValue;
 	}
 	
-//	public final Long getCompanyDetectorId() {
-//		return companyDetectorId;
-//	}
-//
-//	public final void setCompanyDetectorId(Long companyDetectorId) {
-//		this.companyDetectorId = companyDetectorId;
-//	}
-//
-//	public final Long getSensorId() {
-//		return sensorId;
-//	}
-//
-//	public final void setSensorId(Long sensorId) {
-//		this.sensorId = sensorId;
-//	}
-	
-	public CompanyDetectorDto getCompanyDetectorDto() {
-		return companyDetectorDto;
+	public CompanyDeviceDto getCompanyDeviceDto() {
+		return companyDeviceDto;
 	}
 
-	public void setCompanyDetectorDto(CompanyDetectorDto companyDetectorDto) {
-		this.companyDetectorDto = companyDetectorDto;
+	public void setCompanyDeviceDto(CompanyDeviceDto companyDeviceDto) {
+		this.companyDeviceDto = companyDeviceDto;
 	}
-	
-//	public final SensorDto getSensorDto() {
-//		return sensorDto;
-//	}
-//
-//	public final void setSensorDto(SensorDto sensorDto) {
-//		this.sensorDto = sensorDto;
-//	}
 	
 	public final AlarmType getAlarmType() {
 		return alarmType;
@@ -118,13 +84,4 @@ public class PositionDto {
 	public final void setHistoricId(Long historicId) {
 		this.historicId = historicId;
 	}
-
-//	public final HistoricDto getHistoricDto() {
-//		return historicDto;
-//	}
-//
-//	public final void setHistoricDto(HistoricDto historicDto) {
-//		this.historicDto = historicDto;
-//	}
-
 }

@@ -45,5 +45,17 @@ public class CompanyDeviceController {
 		
 		return service.findOne(uid);		
 	}
+	
+	@RequestMapping(value="/security/api/companyDevice/updateAlarm/{alarmId}/{uid}", method=RequestMethod.PUT, consumes = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> updateAlarm(@PathVariable Long alarmId, @PathVariable Long uid) {		
+		return service.updateAlarm(alarmId, uid);
+	}
+	
+	@RequestMapping(value="/security/api/companyDevice/removeAlarm/{uid}", method=RequestMethod.PUT, consumes = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> removeAlarm(@PathVariable Long uid) {		
+		return service.removeAlarm(uid);
+	}
 
 }

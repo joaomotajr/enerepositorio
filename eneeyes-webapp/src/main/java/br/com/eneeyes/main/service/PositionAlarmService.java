@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.dto.PositionAlarmDto;
-import br.com.eneeyes.main.model.CompanyDetector;
+import br.com.eneeyes.main.model.CompanyDevice;
 import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.PositionAlarm;
 import br.com.eneeyes.main.model.enums.AlarmStatus;
@@ -25,7 +25,7 @@ import br.com.eneeyes.main.repository.singleton.AlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 import br.com.eneeyes.main.service.buss.AlarmParams;
-import br.com.eneeyes.main.service.views.CompanyDetectorAlarmViewService;
+import br.com.eneeyes.main.service.views.CompanyDeviceAlarmViewService;
 
 @Service
 public class PositionAlarmService implements IService<PositionAlarmDto> {
@@ -40,7 +40,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	AlarmService alarmService;
 	
 	@Autowired
-	private CompanyDetectorAlarmViewService companyDetectorAlarmViewService;
+	private CompanyDeviceAlarmViewService companyDetectorAlarmViewService;
 	
 	@Autowired
 	HistoricAlarmService historicAlarmService;
@@ -52,30 +52,22 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	
 	public AlarmType checkAndUpdateAlarmsAndActions(Position position, Boolean offLine) {		
 		
-		CompanyDetector companyDetector = new CompanyDetector(position.getCompanyDetector().getUid());
-//		Sensor sensor = new Sensor(position.getSensor().getUid());
-		
-//		if(CompanyDetectorAlarmSingletonRepository.init()) {
-//			CompanyDetectorAlarmSingletonRepository.populate(companyDetectorAlarmAlarmService.findAll());
-//		}
+//		CompanyDetector companyDetector = new CompanyDetector(position.getCompanyDetector().getUid());
+		CompanyDevice companyDevice = new CompanyDevice(position.getCompanyDevice().getUid());
 		
 		if(AlarmSingletonRepository.init()) {
-//			AlarmSingletonRepository.populate(alarmService.findAll());
 			AlarmSingletonRepository.populate(companyDetectorAlarmViewService.findAll());
 		}
 		
-		//CompanyDetectorAlarmDto companyDetectorAlarmDto = CompanyDetectorAlarmSingletonRepository.findByCompanyDetectorAndSensor(companyDetector.getUid(), sensor.getUid());		
-		AlarmDto alarmDto = AlarmSingletonRepository.findByCompanyDetector(companyDetector.getUid());
 		
-//		AlarmDto alarmDto = null;
+		AlarmDto alarmDto = AlarmSingletonRepository.findByCompanyDevice(companyDevice.getUid());
 		
 		AlarmType alarmType = AlarmType.NORMAL;
 		if(offLine)
 			alarmType = AlarmType.OFFLINE;
 		else if(alarmDto == null)
 			alarmType = AlarmType.OFF;
-		else {			
-//			alarmDto = companyDetectorAlarmDto.getAlarmDto();
+		else {
 			alarmType = getExistsAlarm(alarmDto, position.getLastValue());
 		}
 		
@@ -83,16 +75,11 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 					
 			
 			AlarmParams alarmParams = new AlarmParams(alarmDto, alarmType); 
-			
-			//historicAlarmService.save(position.getLastValue(), companyDetector.getUid(), sensor.getUid(), position.getHistoricId(), alarmDto, alarmType, alarmParams);
-			historicAlarmService.save(position.getLastValue(), companyDetector.getUid(), position.getHistoricId(), alarmDto, alarmType, alarmParams);
-			
-			
-//			if(alarmDto.getAlarmOn())			
-//				updatePositionAlarm(position, companyDetector, sensor, alarmType, alarmParams);
-			
+
+			historicAlarmService.save(position.getLastValue(), companyDevice.getUid(), position.getHistoricId(), alarmDto, alarmType, alarmParams);
+
 			if(alarmDto.getAlarmOn())			
-				updatePositionAlarm(position, companyDetector, alarmType, alarmParams);
+				updatePositionAlarm(position, companyDevice, alarmType, alarmParams);
 		
 		}	
 				
@@ -132,22 +119,19 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	 * @param sensor
 	 * @param alarmType
 	 */
-//	public void updatePositionAlarm(Position position, CompanyDetector companyDetector, Sensor sensor, AlarmType alarmType, AlarmParams alarmParams) {
-	public void updatePositionAlarm(Position position, CompanyDetector companyDetector, AlarmType alarmType, AlarmParams alarmParams) {			
+	public void updatePositionAlarm(Position position, CompanyDevice companyDevice, AlarmType alarmType, AlarmParams alarmParams) {			
 		List<AlarmStatus> solvedOrCancelesAlarms = new ArrayList<AlarmStatus>();
 		
 		solvedOrCancelesAlarms.add(AlarmStatus.SOLVED);
 		solvedOrCancelesAlarms.add(AlarmStatus.CANCELED);
 
-		//PositionAlarm positionAlarm = repository.findByCompanyDetectorAndSensorAndAlarmTypeAndAlarmStatusNotIn(companyDetector, sensor, alarmType, solvedOrCancelesAlarms);
-		PositionAlarm positionAlarm = repository.findByCompanyDetectorAndAlarmTypeAndAlarmStatusNotIn(companyDetector, alarmType, solvedOrCancelesAlarms);
+		PositionAlarm positionAlarm = repository.findByCompanyDeviceAndAlarmTypeAndAlarmStatusNotIn(companyDevice, alarmType, solvedOrCancelesAlarms);
 		
 		if(positionAlarm == null) {
 			
 			positionAlarm =  new PositionAlarm();
 			
-			positionAlarm.setCompanyDetector(companyDetector);
-//			positionAlarm.setSensor(sensor);
+			positionAlarm.setCompanyDevice(companyDevice);
 			positionAlarm.setFirstUpdate(new Date());
 			positionAlarm.setLastValue(position.getLastValue());
 			positionAlarm.setAlarmStatus(AlarmStatus.CREATED);
@@ -263,11 +247,14 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	public BasicResult<?> findByCompanyDetector(Long uid) {
 		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
 		
-		CompanyDetector companyDetector = new CompanyDetector();
-		companyDetector.setUid(uid);
+//		CompanyDetector companyDetector = new CompanyDetector();
+//		companyDetector.setUid(uid);
+		
+		CompanyDevice companyDevice = new CompanyDevice();
+		companyDevice.setUid(uid);
 		
 		try {
-			List<PositionAlarm> lista = repository.findByCompanyDetector(companyDetector);
+			List<PositionAlarm> lista = repository.findByCompanyDevice(companyDevice);
 			
 			if (lista != null) {
 				

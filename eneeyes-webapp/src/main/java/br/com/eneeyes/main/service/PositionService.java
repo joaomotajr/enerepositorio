@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.PositionDto;
 import br.com.eneeyes.main.model.CompanyDetector;
+import br.com.eneeyes.main.model.CompanyDevice;
 import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.historic.Historic;
@@ -52,7 +53,7 @@ public class PositionService implements IService<PositionDto> {
 		Result<PositionDto> result = new Result<PositionDto>();
 		
 		Position position = new Position();
-		PositionView positionView = repositoryView.findByCompanyDetectorId(historic.getCompanyDetectorId());
+		PositionView positionView = repositoryView.findByCompanyDeviceId(historic.getCompanyDeviceId());
 		
 		if (position != null) {		
 			
@@ -70,15 +71,15 @@ public class PositionService implements IService<PositionDto> {
 		repository.updateAlarmType(alarmType, companyDetectorId);
 	}
 	
-	public void createInitialPosition(CompanyDetector companyDetector) {
+	public void createInitialPosition(CompanyDevice companyDevice) {
 				
-		if(repository.countByCompanyDetector(companyDetector) > 0) {
+		if(repository.countByCompanyDevice(companyDevice) > 0) {
 			return;
 		}
 		
 		Position position = new Position();	
 		
-		position.setCompanyDetector(companyDetector);		
+		position.setCompanyDevice(companyDevice);		
 		position.setLastUpdate(new Date());
 		position.setLastValue(BigDecimal.ZERO);
 		position.setAlarmType(AlarmType.WITHOUT);
@@ -128,7 +129,7 @@ public class PositionService implements IService<PositionDto> {
 		
 		try {
 			
-			PositionView position = repositoryView.findByCompanyDetectorId(uid);
+			PositionView position = repositoryView.findByCompanyDeviceId(uid);
 			
 			
 			if (position != null) {			
@@ -156,7 +157,7 @@ public class PositionService implements IService<PositionDto> {
 		List<CompanyDetector> lista = companyDetectorService.findByAreaId(uid);
 		
 		try {
-			List<Position> postions = repository.findByCompanyDetectorIn(lista);
+			List<Position> postions = repository.findByCompanyDeviceIn(lista);
 			
 			if (lista != null) {
 				

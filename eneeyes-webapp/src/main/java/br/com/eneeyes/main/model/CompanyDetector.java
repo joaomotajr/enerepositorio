@@ -2,7 +2,6 @@ package br.com.eneeyes.main.model;
 
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -67,8 +65,8 @@ public class CompanyDetector {
 		if(dto.getDetectorDto() != null)
 			this.detector = new Detector(dto.getDetectorDto());
 		
-		if (dto.getAlarmDto()  != null) 
-       		this.alarm = new Alarm(dto.getAlarmDto());
+//		if (dto.getAlarmDto()  != null) 
+//       		this.alarm = new Alarm(dto.getAlarmDto());
     }   
 
 	@Id
@@ -123,15 +121,15 @@ public class CompanyDetector {
 	@JoinColumn(name="DETECTOR_ID", nullable = false)
 	private Detector detector;
 	
-	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="ALARM_ID", nullable = true)
-	private Alarm alarm;
+//	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+//	@JoinColumn(name="ALARM_ID", nullable = true)
+//	private Alarm alarm;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
-	private Set<PositionAlarm> positionAlarm;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
-	private Set<Position> position;
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
+//	private Set<PositionAlarm> positionAlarm;
+//	
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
+//	private Set<Position> position;
 	
 	@Column(name = "HISTORIC_ID", nullable = true)
 	private Long historicId;
@@ -264,12 +262,12 @@ public class CompanyDetector {
 		this.descriptionInstall = descriptionInstall;
 	}
 
-	public Alarm getAlarm() {
-		return alarm;
-	}
-
-	public void setAlarm(Alarm alarm) {
-		this.alarm = alarm;
-	}
+//	public Alarm getAlarm() {
+//		return alarm;
+//	}
+//
+//	public void setAlarm(Alarm alarm) {
+//		this.alarm = alarm;
+//	}
 	
 }

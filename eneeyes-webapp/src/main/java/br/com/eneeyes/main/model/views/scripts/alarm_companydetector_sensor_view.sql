@@ -21,8 +21,9 @@ VIEW `alarm_companydetector_sensor_view` AS
         `s`.`NAME` AS `SENSOR_NAME`,
         `s`.`RANGE_MAX` AS `RANGE_MAX`
     FROM
-        (((`alarm` `a`
-        JOIN `company_detector` `cd` ON ((`a`.`UID` = `cd`.`ALARM_ID`)))
+        ((((`alarm` `a`
+        JOIN `company_device` `cdv` ON ((`a`.`UID` = `cdv`.`ALARM_ID`)))
+        JOIN `company_detector` `cd` ON ((`cdv`.`UID` = `cd`.`COMPANY_DEVICE_ID`)))
         JOIN `detector` `d` ON ((`cd`.`DETECTOR_ID` = `d`.`UID`)))
         JOIN `sensor` `s` ON ((`d`.`SENSOR_ID` = `s`.`UID`)))
     ORDER BY `a`.`UID`

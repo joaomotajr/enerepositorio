@@ -28,7 +28,7 @@ public class HistoricAlarmService {
 	@Autowired
 	private HistoricAlarmRepository repository;
 	
-	public GroupResult<?> findByCompanyDetectorAndInterval(Long companyDetectorId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
+	public GroupResult<?> findByCompanyDeviceAndInterval(Long companyDeviceId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
 		GroupResult<?> result = new GroupResult<HistoricAlarm>();
 			
 		try {
@@ -41,11 +41,11 @@ public class HistoricAlarmService {
 			if(intervalType ==  IntervalType.UM_MES) {
 																	
 				inicio = Util.addMonth(fim, -1);
-				page = repository.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, inicio, fim, new PageRequest(currentPage, lenPage));
+				page = repository.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, inicio, fim, new PageRequest(currentPage, lenPage));
 			}
 			else
 			{
-				page= repository.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, inicio, fim, new PageRequest(currentPage, lenPage));
+				page= repository.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, inicio, fim, new PageRequest(currentPage, lenPage));
 			}
 			
 			result = getResults(page);			
@@ -58,14 +58,14 @@ public class HistoricAlarmService {
 		return result;
 	}
 	
-	public GroupResult<?> findByCompanyDetectorAndIntervalDays(Long companyDetectorId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
+	public GroupResult<?> findByCompanyDeviceAndIntervalDays(Long companyDeviceId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
 		GroupResult<?> result = new GroupResult<HistoricAlarm>();
 			
 		try {			
 			
 			Page<HistoricAlarm> page = null;																	
 											
-			page = repository.findByCompanyDetectorIdAndLastUpdateBetweenPaginated(companyDetectorId, dateIn, dateOut, new PageRequest(currentPage, lenPage));			
+			page = repository.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage));			
 			
 			result = getResults(page);			
 			
@@ -108,11 +108,11 @@ public class HistoricAlarmService {
 		
 	}
 
-	public void save(BigDecimal value, Long companyDetectorId, Long historicId, AlarmDto alarmDto, AlarmType alarmType, AlarmParams alarmParams ) {		
+	public void save(BigDecimal value, Long companyDeviceId, Long historicId, AlarmDto alarmDto, AlarmType alarmType, AlarmParams alarmParams ) {		
 		HistoricAlarm historicAlarm = new HistoricAlarm();
 		
 		historicAlarm.setDate(new Date());
-		historicAlarm.setCompanyDetectorId(companyDetectorId);
+		historicAlarm.setCompanyDeviceId(companyDeviceId);
 		historicAlarm.setHistoricId(historicId);
 		historicAlarm.setAlarmOn(alarmDto.getAlarmOn());
 		historicAlarm.setAlarmType(alarmType);
@@ -127,12 +127,12 @@ public class HistoricAlarmService {
 		repository.save(historicAlarm);
 	}
 	
-	public void save(BigDecimal value, Long companyDetectorId, Long historicId, AlarmType alarmType) {	
+	public void save(BigDecimal value, Long companyDeviceId, Long historicId, AlarmType alarmType) {	
 		HistoricAlarm historicAlarm = new HistoricAlarm();
 		
 		historicAlarm.setUid(null);
 		historicAlarm.setDate(new Date());
-		historicAlarm.setCompanyDetectorId(companyDetectorId);
+		historicAlarm.setCompanyDeviceId(companyDeviceId);
 		historicAlarm.setHistoricId(historicId);		
 		historicAlarm.setAlarmType(alarmType);		
 		historicAlarm.setValue(value);	

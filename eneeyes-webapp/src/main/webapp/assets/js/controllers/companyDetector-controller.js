@@ -19,7 +19,7 @@ app.filter('gasFilter', function () {
 
 
 app.controller('companyDetectorController', function ($scope, $interval, $rootScope, $timeout, $filter, AlarmService,
-		CompanyDetectorService, DetectorService, PositionService, CompanyDetectorAlarmService, CompanyService, 
+		CompanyDetectorService, CompanyDeviceService, DetectorService, PositionService, CompanyService, 
 		CompanyDetectorMaintenanceHistoricService, ViewService) {
 
 	var loadGoogleCharts = false;
@@ -402,9 +402,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	};
 	
 	$scope.configAlarm = function(index) {
-
-		// $scope.sensorIndex = index;
-		// $scope.selectedCompanyDetectorAlarm = $scope.selectedCompanyDetectorAlarms[index];
 		
 		$scope.search = { unitMeterGases: $scope.selectedCompanyDetectorAlarm.unitMeterGases, gas : $scope.selectedCompanyDetectorAlarm.gasName};
 
@@ -422,8 +419,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		}
 
 		if(alarm != null) {
-			$scope.updateAlarm = new CompanyDetectorService.updateAlarm();
-			$scope.updateAlarm.$companyDetector({_csrf : angular.element('#_csrf').val(), alarmId: alarm.uid, id : $scope.selectedCompanyDetector.uid }, function(){						
+			$scope.updateAlarm = new CompanyDeviceService.updateAlarm();
+			$scope.updateAlarm.$companyDevice({_csrf : angular.element('#_csrf').val(), alarmId: alarm.uid, id : $scope.selectedCompanyDevice.uid }, function(){						
 				if (!$scope.updateAlarm.isError) {
 					$scope.selectedCompanyDetectorAlarm.alarmId = alarm.uid;
 					$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.uid);	
@@ -432,8 +429,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		}
 		else {
 
-			$scope.removeAlarm = new CompanyDetectorService.removeAlarm();
-			$scope.removeAlarm.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid }, function(){						
+			$scope.removeAlarm = new CompanyDeviceService.removeAlarm();
+			$scope.removeAlarm.$companyDevice({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){						
 				if (!$scope.removeAlarm.isError) {
 					$scope.selectedCompanyDetectorAlarm.alarmId = null;			 
 					$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.uid);	

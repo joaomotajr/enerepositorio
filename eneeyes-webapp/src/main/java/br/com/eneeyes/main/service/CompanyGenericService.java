@@ -51,7 +51,7 @@ public class CompanyGenericService implements IService<CompanyGenericDto> {
 		ActionType actionType = dto.getUid() == null || dto.getUid() == 0 ? ActionType.CREATE : ActionType.UPDATE;
 		
 		if (actionType == ActionType.CREATE) {
-			createInitialPosition(companyGeneric);
+			createInitialPosition(companyGeneric.getCompanyDevice());
 			
 			updateCompanyDeviceName(dto.getName(), dto.getCompanyDeviceDto().getUid());
 		}
@@ -61,9 +61,9 @@ public class CompanyGenericService implements IService<CompanyGenericDto> {
 		return result;
 	}
 	
-	private void createInitialPosition(CompanyGeneric companyDetector) {
+	private void createInitialPosition(CompanyDevice companyDevice) {
 				
-		positionService.createInitialPosition(companyDetector);		
+		positionService.createInitialPosition(companyDevice);		
 
 	}
 	
@@ -173,33 +173,7 @@ public class CompanyGenericService implements IService<CompanyGenericDto> {
 		
 		return result;	
 	}	
-	
-	public BasicResult<?> removeAlarm(Long uid) {
 		
-		LogResult<CompanyGenericDto> result = new LogResult<CompanyGenericDto>();
-		repository.setAlarm(null, uid);
-		
-		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Alarm gravado/removido com sucesso.");
-		
-		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.UPDATE, result.toString());
-		
-		return result;	
-	}
-	
-	public BasicResult<?> updateAlarm(Long alarmId, Long uid) {
-		
-		LogResult<CompanyGenericDto> result = new LogResult<CompanyGenericDto>();
-		repository.setAlarm(alarmId, uid);
-		
-		result.setResultType( ResultMessageType.SUCCESS );
-		result.setMessage("Alarm gravado/removido com sucesso.");
-		
-		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.UPDATE, result.toString());
-		
-		return result;	
-	}
-	
 	public BasicResult<?> findByArea(Long uid) {
 		
 		Result<CompanyGenericDto> result = new Result<CompanyGenericDto>(); 	

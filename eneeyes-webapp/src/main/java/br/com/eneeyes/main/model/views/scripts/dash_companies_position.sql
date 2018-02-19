@@ -18,7 +18,7 @@ VIEW `dash_companies_position` AS
         `c`.`UID` AS `company_id`,
         `u`.`NAME` AS `unit_name`,
         `a`.`NAME` AS `area_name`,
-        `cds`.`NAME` AS `company_detector_name`,
+        `cd`.`NAME` AS `company_detector_name`,
         `s`.`NAME` AS `sensor_name`,
         `s`.`UID` AS `sensor_id`,
         `pos`.`UID` AS `position_id`,
@@ -31,10 +31,10 @@ VIEW `dash_companies_position` AS
         ((((((((`company` `c`
         LEFT JOIN `unit` `u` ON ((`c`.`UID` = `u`.`COMPANY_ID`)))
         LEFT JOIN `area` `a` ON ((`u`.`UID` = `a`.`UNIT_ID`)))
-        LEFT JOIN `company_device` `cd` ON ((`a`.`UID` = `cd`.`AREA_ID`)))
-        LEFT JOIN `company_detector` `cds` ON ((`cd`.`UID` = `cds`.`COMPANY_DEVICE_ID`)))
-        LEFT JOIN `position` `pos` ON ((`cds`.`UID` = `pos`.`COMPANY_DETECTOR_ID`)))
-        LEFT JOIN `detector` `d` ON ((`cds`.`DETECTOR_ID` = `d`.`UID`)))
+        LEFT JOIN `company_device` `cdv` ON ((`a`.`UID` = `cdv`.`AREA_ID`)))
+        LEFT JOIN `company_detector` `cd` ON ((`cdv`.`UID` = `cd`.`COMPANY_DEVICE_ID`)))
+        LEFT JOIN `position` `pos` ON ((`cdv`.`UID` = `pos`.`COMPANY_DEVICE_ID`)))
+        LEFT JOIN `detector` `d` ON ((`cd`.`DETECTOR_ID` = `d`.`UID`)))
         LEFT JOIN `sensor` `s` ON ((`d`.`SENSOR_ID` = `s`.`UID`)))
         LEFT JOIN `gas` `g` ON ((`s`.`GAS_ID` = `g`.`UID`)))
     WHERE

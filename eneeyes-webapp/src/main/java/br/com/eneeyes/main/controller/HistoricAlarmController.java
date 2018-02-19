@@ -20,27 +20,27 @@ public class HistoricAlarmController {
 	@Autowired
 	HistoricAlarmService service;	
 	
-	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDetectorAndInterval/{companyDetectorId}/{intervalType}/{currentPage}/{lenPage}", 
+	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDeviceAndInterval/{companyDetectorId}/{intervalType}/{currentPage}/{lenPage}", 
 			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)                      
-	public GroupResult<?> findByCompanyDetectorAndInterval(
-			@PathVariable Long companyDetectorId, 
+	public GroupResult<?> findByCompanyDeviceAndInterval(
+			@PathVariable Long companyDeviceId, 
 			@PathVariable IntervalType intervalType, 
 			@PathVariable Integer currentPage, 
 			@PathVariable Integer lenPage) {		
-		return service.findByCompanyDetectorAndInterval(companyDetectorId, intervalType, currentPage, lenPage);
+		return service.findByCompanyDeviceAndInterval(companyDeviceId, intervalType, currentPage, lenPage);
 	}
 
-	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDetectorAndIntervalDays/{companyDetectorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDeviceAndIntervalDays/{companyDetectorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public GroupResult<?> findByCompanyDetectorAndSensorAndIntervalDays(
-			@PathVariable Long companyDetectorId, 
+	public GroupResult<?> findByCompanyDeviceAndSensorAndIntervalDays(
+			@PathVariable Long companyDeviceId, 
 			@PathVariable Date dateIn, 
 			@PathVariable Date dateOut,
 			@PathVariable Integer currentPage, 
 			@PathVariable Integer lenPage) {
 		
-		return service.findByCompanyDetectorAndIntervalDays(companyDetectorId, dateIn, dateOut, currentPage, lenPage);
+		return service.findByCompanyDeviceAndIntervalDays(companyDeviceId, dateIn, dateOut, currentPage, lenPage);
 	}
 
 }

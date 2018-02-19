@@ -20,27 +20,27 @@ public class HistoricViewHourController {
 	@Autowired
 	HistoricViewHourService service;	
   
-	@RequestMapping(value="/security/api/historicView/findByCompanyDetectorAndIntervalGroupHours/{companyDetectorId}/{intervalType}/{currentPage}/{lenPage}",
+	@RequestMapping(value="/security/api/historicView/findByCompanyDeviceAndIntervalGroupHours/{companyDeviceId}/{intervalType}/{currentPage}/{lenPage}",
 			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)                      
-	public BasicResult<?> findByCompanyDetectorAndInterval(		
-			@PathVariable Long companyDetectorId, 
+	public BasicResult<?> findByCompanyDeviceAndInterval(		
+			@PathVariable Long companyDeviceId, 
 			@PathVariable IntervalType intervalType, 
 			@PathVariable Integer currentPage, 
 			@PathVariable Integer lenPage) {		
-		return service.findByCompanyDetectorAndInterval(companyDetectorId, intervalType, currentPage, lenPage);
+		return service.findByCompanyDeviceAndInterval(companyDeviceId, intervalType, currentPage, lenPage);
 	}
 	
-	@RequestMapping(value="/security/api/historicView/findByCompanyDetectorAndIntervalDaysGroupHours/{companyDetectorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/historicView/findByCompanyDeviceAndIntervalDaysGroupHours/{companyDeviceId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDetectorAndSensorAndIntervalDays(		
-			@PathVariable Long companyDetectorId, 
+	public BasicResult<?> findByCompanyDeviceAndSensorAndIntervalDays(		
+			@PathVariable Long companyDeviceId, 
 			@PathVariable Date dateIn, 
 			@PathVariable Date dateOut,
 			@PathVariable Integer currentPage, 
 			@PathVariable Integer lenPage) {
 		
-		return service.findByCompanyDetectorAndIntervalHours(companyDetectorId, dateIn, dateOut, currentPage, lenPage);
+		return service.findByCompanyDeviceAndIntervalHours(companyDeviceId, dateIn, dateOut, currentPage, lenPage);
 	}
 
 }

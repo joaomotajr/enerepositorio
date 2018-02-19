@@ -2,7 +2,6 @@ package br.com.eneeyes.main.model;
 
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -60,9 +58,7 @@ public class CompanyGeneric {
 		if(dto.getGenericDto() != null)
 			this.generic = new Generic(dto.getGenericDto());
 		
-		if (dto.getAlarmDto()  != null) 
-       		this.alarm = new Alarm(dto.getAlarmDto());
-    }   
+	}   
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -91,16 +87,6 @@ public class CompanyGeneric {
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="GENERIC_ID", nullable = false)
 	private Generic generic;
-	
-	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="ALARM_ID", nullable = true)
-	private Alarm alarm;
-	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyGeneric", cascade = CascadeType.REMOVE)
-//	private Set<PositionAlarm> positionAlarm;
-//	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyGeneric", cascade = CascadeType.REMOVE)
-//	private Set<Position> position;
 	
 	@Column(name = "HISTORIC_ID", nullable = true)
 	private Long historicId;
@@ -159,14 +145,6 @@ public class CompanyGeneric {
 
 	public void setCompanyDevice(CompanyDevice companyDevice) {
 		this.companyDevice = companyDevice;
-	}
-	
-	public Alarm getAlarm() {
-		return alarm;
-	}
-
-	public void setAlarm(Alarm alarm) {
-		this.alarm = alarm;
 	}
 
 	public Generic getGeneric() {

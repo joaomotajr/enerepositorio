@@ -91,4 +91,29 @@ public class AreaCompanyDetectorAlarmViewService {
 		
 		return result;
 	}
+	
+	public Result<?> listByCompanyDeviceId(Long companyDeviceId) {
+		
+		Result<AreaCompanyDetectorAlarmView> result = new Result<AreaCompanyDetectorAlarmView>();	
+		
+		try {
+			List<AreaCompanyDetectorAlarmView> lista = repository.findByCompanyDeviceId(companyDeviceId);
+
+			if (lista != null) {
+									
+				result.setList(lista);
+				result.setResultType( ResultMessageType.SUCCESS );
+				result.setMessage("Executado com sucesso.");
+			} else {
+				result.setIsError(true);
+				result.setResultType( ResultMessageType.ERROR );
+				result.setMessage("Nenhum Dispositivo.");
+			}
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;
+	}
 }

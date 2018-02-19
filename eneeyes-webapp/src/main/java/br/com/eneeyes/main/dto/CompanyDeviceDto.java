@@ -9,20 +9,25 @@ public class CompanyDeviceDto implements Comparable<CompanyDeviceDto> {
 	private DeviceType deviceType;
 	private AreaDto areaDto;
 	private String name;
+	private AlarmDto alarmDto;
 
 	public CompanyDeviceDto() {
 		
 	}
 	
-	public CompanyDeviceDto(CompanyDevice companyDevice) {
-		this.uid = companyDevice.getUid();
-		this.deviceType = companyDevice.getdeviceType();
-		this.name = companyDevice.getName();
+	public CompanyDeviceDto(CompanyDevice e) {
+		this.uid = e.getUid();
+		this.deviceType = e.getdeviceType();
+		this.name = e.getName();
+		
+		if (e.getAlarm()  != null) 
+       		this.alarmDto = new AlarmDto(e.getAlarm());
 	}
 	
 	public final Long getUid() {
 		return uid;
 	}
+	
 	public final void setUid(Long uid) {
 		this.uid = uid;
 	}
@@ -30,7 +35,9 @@ public class CompanyDeviceDto implements Comparable<CompanyDeviceDto> {
 	public final DeviceType getDeviceType() {
 		return deviceType;
 	}
-	public final void setDeviceType(DeviceType deviceType) {
+	
+	public
+	final void setDeviceType(DeviceType deviceType) {
 		this.deviceType = deviceType;
 		
 		if (deviceType == null ) {			
@@ -60,5 +67,15 @@ public class CompanyDeviceDto implements Comparable<CompanyDeviceDto> {
 
 	public final void setName(String name) {
 		this.name = name;
-	}	
+	}
+
+	public AlarmDto getAlarmDto() {
+		return alarmDto;
+	}
+
+	public void setAlarmDto(AlarmDto alarmDto) {
+		this.alarmDto = alarmDto;
+	}
+	
+	
 }

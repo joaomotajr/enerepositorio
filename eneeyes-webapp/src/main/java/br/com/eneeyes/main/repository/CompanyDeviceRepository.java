@@ -19,4 +19,9 @@ public interface CompanyDeviceRepository  extends JpaRepository<CompanyDevice, L
 	@Query("update CompanyDevice c set c.name = ?1  where c.uid = ?2 ")
 	int updateCompanyDeviceName(String name, Long uid);
 	
+	@Modifying
+	@Transactional	
+	@Query("update CompanyDevice cd set cd.alarm.uid = ?1 where cd.uid = ?2")
+	int setAlarm(Long alarm_id, Long uid);
+	
 }

@@ -16,7 +16,6 @@ public class CompanyGenericDto {
 	
 	private CompanyDeviceDto companyDeviceDto;
 	private GenericDto genericDto;
-	private AlarmDto alarmDto;
 	
 	public CompanyGenericDto() {
 		
@@ -32,9 +31,7 @@ public class CompanyGenericDto {
        	this.serialNumber = e.getSerialNumber();       	
        	
        	this.genericDto = new GenericDto(e.getGeneric());
-       	
-       	if (e.getAlarm()  != null) 
-       		this.alarmDto = new AlarmDto(e.getAlarm());
+       
 	}
 		
 	public final Long getUid() {
@@ -83,14 +80,6 @@ public class CompanyGenericDto {
 	public final void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
 	}	
-	
-	public AlarmDto getAlarmDto() {
-		return alarmDto;
-	}
-
-	public void setAlarmDto(AlarmDto alarmDto) {
-		this.alarmDto = alarmDto;
-	}
 
 	public GenericDto getGenericDto() {
 		return genericDto;

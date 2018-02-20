@@ -46,11 +46,11 @@ public class PositionController {
 		return service.findOne(uid);		
 	}                                             
 	
-	@RequestMapping(value="/security/api/position/obtemPorCompanyDetectorId/{uid}", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/security/api/position/obtemPorCompanyDeviceId/{uid}", method=RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDetector(@PathVariable Long uid) {
+	public BasicResult<?> findByCompanyDevice(@PathVariable Long uid) {
 		
-		return service.findByCompanyDetector(uid);		
+		return service.findByCompanyDevice(uid);		
 	}
 	
 	@RequestMapping(value="/security/api/position/obtemPorAreaId/{uid}", method=RequestMethod.GET, produces = "application/json")

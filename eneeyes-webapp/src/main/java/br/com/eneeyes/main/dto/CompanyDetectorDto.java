@@ -48,8 +48,8 @@ public class CompanyDetectorDto {
        	
        	this.detectorDto = new DetectorDto(companyDetector.getDetector());
        	
-//       	if (companyDetector.getAlarm()  != null) 
-//       		this.alarmDto = new AlarmDto(companyDetector.getAlarm());
+       	if (companyDetector.getCompanyDevice()  != null) 
+       		this.companyDeviceDto = new CompanyDeviceDto(companyDetector.getCompanyDevice());
 	}
 		
 	public final Long getUid() {

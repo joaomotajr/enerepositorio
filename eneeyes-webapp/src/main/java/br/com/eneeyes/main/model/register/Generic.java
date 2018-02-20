@@ -35,7 +35,10 @@ public class Generic {
 		this.name = dto.getName();
 		this.deviceType = dto.getDeviceType();
 		this.unitMeterGases = dto.getUnitMeterGases();
-		this.manufacturer = new Manufacturer(dto.getManufacturerDto());
+		
+		if (dto.getManufacturerDto() != null)
+			this.manufacturer = new Manufacturer(dto.getManufacturerDto());
+		
 		this.model = dto.getModel();	
 	}
 	

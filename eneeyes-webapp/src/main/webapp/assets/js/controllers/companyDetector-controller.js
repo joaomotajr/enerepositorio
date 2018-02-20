@@ -33,7 +33,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			 $scope.itens = getTree();
 			 $scope.loadTreview($scope.itens);			 
 	    });		 
-	}
+	};
 	
 	$scope.saveCompanyDetector = function() {
 		angular.element('body').addClass('loading');
@@ -53,9 +53,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			descriptionInstall : $scope.selectedCompanyDetector.descriptionInstall,
 			maintenanceInterval : $scope.selectedCompanyDetector.maintenanceInterval
 		 };
-
-		 if ($scope.selectedCompanyDetectorAlarm != null && $scope.selectedCompanyDetectorAlarm.alarmId != null) 
-		 	companyDetector.alarmDto = {uid: $scope.selectedCompanyDetectorAlarm.alarmId};
 		 
 		$scope.inclusaoCompanyDetector = new CompanyDetectorService.save(companyDetector);
 		$scope.inclusaoCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val()}, function(){		
@@ -74,7 +71,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	};
 	
 	$scope.clearCompanyDetector = function () {
-		$scope.selectedCompanyDetector.detectorDto.image = "/assets/img/cover.jpg"
+		$scope.selectedCompanyDetector.detectorDto.image = "/assets/img/cover.jpg";
 		$timeout(function () {						
 		    $scope.selectedCompanyDetector.uid = undefined;
 		    $scope.selectedCompanyDetector.name = '';
@@ -116,8 +113,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			 if ($scope.selectedCompanyDevice != null)
 			 	$scope.getOneCompanyDetector();			
         });		 
-	 }
-	
+	 };	
 	 
 	$scope.getOneCompanyDetector = function() {
 
@@ -132,18 +128,18 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			if($scope.selectedCompanyDetector != null) {
 				
 				$scope.getCompanyDetectorMaintenanceHistoric();
-				$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.uid);
-				$scope.getPositionsAndIds($scope.selectedCompanyDetector.uid) ;
-
+				$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.companyDeviceDto.uid);
+				$scope.getPositionsAndIds($scope.selectedCompanyDetector.companyDeviceDto.uid);
+				
 				reloadDates();			
 			}
         });		 
 	};
 
-	$scope.getPositionsAndIds = function(companyDetectorId) {
+	$scope.getPositionsAndIds = function(companyDeviceId) {
 		
-		$scope.listOnePosition = new PositionService.listOneByCompanyDetector();		 
-		$scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : companyDetectorId}, function() {
+		$scope.listOnePosition = new PositionService.listOneByCompanyDevice();		 
+		$scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : companyDeviceId}, function() {
 			
 			$scope.selectedCompanyDetectorPosition = $scope.listOnePosition.t;		
 		});
@@ -158,10 +154,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		$scope.selectedCompanyDetector.detectorDto = item;
 	};
 
-	$scope.getCompanyDetectorAlarm = function(companyDetectorId) {
+	$scope.getCompanyDetectorAlarm = function(companyDeviceId) {
 
-		$scope.resultDetectors = new ViewService.listCompanyDetectorsAlarms();		 
-		$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), companyDetectorId : companyDetectorId}, function(){						
+		$scope.resultDetectors = new ViewService.listCompanyDeviceAlarms();		 
+		$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), companyDeviceId : companyDeviceId}, function(){						
 			$scope.selectedCompanyDetectorAlarms = $scope.resultDetectors.list;
 
 			$scope.selectedCompanyDetectorAlarm = $scope.resultDetectors.list[0];
@@ -423,7 +419,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			$scope.updateAlarm.$companyDevice({_csrf : angular.element('#_csrf').val(), alarmId: alarm.uid, id : $scope.selectedCompanyDevice.uid }, function(){						
 				if (!$scope.updateAlarm.isError) {
 					$scope.selectedCompanyDetectorAlarm.alarmId = alarm.uid;
-					$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.uid);	
+					$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.companyDeviceDto.uid);	
 				}			
 			});	
 		}
@@ -433,12 +429,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			$scope.removeAlarm.$companyDevice({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){						
 				if (!$scope.removeAlarm.isError) {
 					$scope.selectedCompanyDetectorAlarm.alarmId = null;			 
-					$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.uid);	
+					$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.companyDeviceDto.uid);	
 				}			
-			});	
-
+			});
 		}
-
 	};	 
 	
 	$scope.getCompanyDetectorMaintenanceHistoric = function() {		 

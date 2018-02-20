@@ -29,9 +29,8 @@ public class CompanyGenericDto {
        	this.date = e.getDate();
        	this.local = e.getLocal();
        	this.serialNumber = e.getSerialNumber();       	
-       	
-       	this.genericDto = new GenericDto(e.getGeneric());
-       
+       	this.genericDto = new GenericDto(e.getGeneric());       	
+       	this.companyDeviceDto = new CompanyDeviceDto(e.getCompanyDevice());       
 	}
 		
 	public final Long getUid() {

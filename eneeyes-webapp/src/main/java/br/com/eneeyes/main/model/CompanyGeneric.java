@@ -58,6 +58,9 @@ public class CompanyGeneric {
 		if(dto.getGenericDto() != null)
 			this.generic = new Generic(dto.getGenericDto());
 		
+		if (dto.getCompanyDeviceDto()  != null) 
+       		this.companyDevice = new CompanyDevice(dto.getCompanyDeviceDto());
+		
 	}   
 
 	@Id

@@ -88,8 +88,7 @@
 										<div class="panel panel-primary" data-ng-if="selectedCompanyDetectorPosition.uid">
 
 											<div class="panel-heading">
-												<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.detectorDto.name}} - {{selectedCompanyDetector.detectorDto.model}}</h3>
-												<a class="text-muted pull-right cursor" data-ng-click="selectedCompanyDetector.detectorDto=null;"><i class="fa fa-times"></i></a>
+												<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.detectorDto.name}} - {{selectedCompanyDetector.detectorDto.model}}</h3>												
 											</div>	
 
 											<div class="panel-body" style="padding-bottom: 1px">						    

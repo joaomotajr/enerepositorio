@@ -65,8 +65,8 @@ public class CompanyDetector {
 		if(dto.getDetectorDto() != null)
 			this.detector = new Detector(dto.getDetectorDto());
 		
-//		if (dto.getAlarmDto()  != null) 
-//       		this.alarm = new Alarm(dto.getAlarmDto());
+		if (dto.getCompanyDeviceDto()  != null) 
+       		this.companyDevice = new CompanyDevice(dto.getCompanyDeviceDto());
     }   
 
 	@Id

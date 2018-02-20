@@ -20,7 +20,7 @@ public class HistoricAlarmController {
 	@Autowired
 	HistoricAlarmService service;	
 	
-	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDeviceAndInterval/{companyDetectorId}/{intervalType}/{currentPage}/{lenPage}", 
+	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDeviceAndInterval/{companyDeviceId}/{intervalType}/{currentPage}/{lenPage}", 
 			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)                      
 	public GroupResult<?> findByCompanyDeviceAndInterval(
@@ -31,7 +31,7 @@ public class HistoricAlarmController {
 		return service.findByCompanyDeviceAndInterval(companyDeviceId, intervalType, currentPage, lenPage);
 	}
 
-	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDeviceAndIntervalDays/{companyDetectorId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/historicAlarm/findByCompanyDeviceAndIntervalDays/{companyDeviceId}/{dateIn}/{dateOut}/{currentPage}/{lenPage}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
 	public GroupResult<?> findByCompanyDeviceAndSensorAndIntervalDays(
 			@PathVariable Long companyDeviceId, 

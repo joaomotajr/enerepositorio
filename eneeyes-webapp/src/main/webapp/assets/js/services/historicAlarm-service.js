@@ -2,9 +2,9 @@
 app.factory('HistoricAlarmService', function($resource){    
     
     return {    	
-        listIntervalDays : $resource('/security/api/historicAlarm/findByCompanyDetectorAndIntervalDays/:companyDetectorId/:dateIn/:dateOut/:currentPage/:lenPage/', 
+        listIntervalDays : $resource('/security/api/historicAlarm/findByCompanyDeviceAndIntervalDays/:companyDeviceId/:dateIn/:dateOut/:currentPage/:lenPage/', 
             {
-                companyDetectorId: '@companyDetectorId', 
+                companyDeviceId: '@companyDeviceId', 
                 dateIn: '@dateIn', 
                 dateOut: '@dateOut', 
                 currentPage: '@currentPage',
@@ -14,9 +14,9 @@ app.factory('HistoricAlarmService', function($resource){
                 historicAlarm : {method : 'GET'
             }
         }),
-        listInterval : $resource('/security/api/historicAlarm/findByCompanyDetectorAndInterval/:companyDetectorId/:interval/:currentPage/:lenPage/', 
+        listInterval : $resource('/security/api/historicAlarm/findByCompanyDeviceAndInterval/:companyDeviceId/:interval/:currentPage/:lenPage/', 
             {
-                companyDetectorId: '@companyDetectorId', 
+                companyDeviceId: '@companyDeviceId', 
                 interval: '@interval',
                 currentPage: '@currentPage',
                 lenPage: '@lenPage'

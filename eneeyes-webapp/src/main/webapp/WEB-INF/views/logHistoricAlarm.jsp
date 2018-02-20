@@ -77,7 +77,7 @@
 																		
 								<div class="col-md-3">
 									<div class="form-group">
-										<input class="form-control" type="text" data-ng-model="findedCompanyDetector.detectorDto.sensorDto.name" disabled>									
+										<input class="form-control" type="text" data-ng-model="selectedCompanyDetector.sensorName" disabled>									
 									</div>									                                                                                     
 								</div>
 		
@@ -156,19 +156,19 @@
 												<label class="control-label">Buscar por Intervalos Pr&eacute;-Definidos: </label> <br />								
 												<div class="btn-group" role="group" aria-label="Basic example">
 														<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 1}" 
-															data-ng-click="interval = enumInterval.UMA_HORA; getHistorics(0);" data-ng-disabled="(findedCompanyDetector.detectorDto.sensorDto) ? false : true">1 hora</button>
+															data-ng-click="interval = enumInterval.UMA_HORA; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">1 hora</button>
 														<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 6}" 
-															data-ng-click="interval = enumInterval.SEIS_HORAS; getHistorics(0);" data-ng-disabled="(findedCompanyDetector.detectorDto.sensorDto) ? false : true">6h</button>
+															data-ng-click="interval = enumInterval.SEIS_HORAS; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">6h</button>
 														<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 12}" 
-															data-ng-click="interval = enumInterval.DOZE_HORAS; getHistorics(0);"  data-ng-disabled="(findedCompanyDetector.detectorDto.sensorDto) ? false : true"> 12h</button>
+															data-ng-click="interval = enumInterval.DOZE_HORAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true"> 12h</button>
 														<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 24}" 
-															data-ng-click="interval = enumInterval.UM_DIA; getHistorics(0);"  data-ng-disabled="(findedCompanyDetector.detectorDto.sensorDto) ? false : true">1 dia</button>
+															data-ng-click="interval = enumInterval.UM_DIA; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">1 dia</button>
 														<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 48}" 
-															data-ng-click="interval = enumInterval.DOIS_DIAS; getHistorics(0);"  data-ng-disabled="(findedCompanyDetector.detectorDto.sensorDto) ? false : true">2d</button>
+															data-ng-click="interval = enumInterval.DOIS_DIAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">2d</button>
 														<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 168}" 
-															data-ng-click="interval = enumInterval.SETE_DIAS; getHistorics(0);"  data-ng-disabled="(findedCompanyDetector.detectorDto.sensorDto) ? false : true">7d</button>
+															data-ng-click="interval = enumInterval.SETE_DIAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">7d</button>
 														<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 30}" 
-															data-ng-click="interval = enumInterval.UM_MES; getHistorics(0);" data-ng-disabled="(findedCompanyDetector.detectorDto.sensorDto) ? false : true">30d</button>												  												  
+															data-ng-click="interval = enumInterval.UM_MES; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">30d</button>												  												  
 												</div>
 											</div>
 										</div>
@@ -200,7 +200,7 @@
 											<div class="form-group">
 												<label class="control-label">&nbsp;</label>
 												<button type="button" class="btn btn-default btn-sm form-control font-weight-bold" data-ng-class="{'btn-primary': selectedButton == 100}" 
-												data-ng-click="interval = enumInterval.CUSTOM; getHistoricInterval(0)" data-ng-disabled="findedCompanyDetector.detectorDto.sensorDto ? false : true">
+												data-ng-click="interval = enumInterval.CUSTOM; getHistoricInterval(0)" data-ng-disabled="selectedCompanyDetector.sensorName ? false : true">
 													<i class="fa fa-search"></i>
 												</button>
 											</div>
@@ -295,7 +295,7 @@
 										<div class="box box-default">
 									
 											<div class="box-header">
-												<strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{findedCompanyDetector.detectorDto.name}})												
+												<strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{selectedCompanyDetector.detectorName}})
 											</div>
 											
 											<div class="box-body">
@@ -310,20 +310,22 @@
 															
 															<div class="box-body" style="border: darkgray; border-style: double;  background-color: transparent;">																																	
 																<dl class="dl-horizontal">
-																	<dt style="width: 90px">Sensor:</dt>
-																	<dd style="margin-left: 120px;">{{findedCompanyDetector.detectorDto.sensorDto.name}}</dd>
-																	<dt style="width: 90px">Alarme:</dt>
-																		<dd style="margin-left: 120px;">{{findedCompanyDetector.alarmDto.name}}</dd>
-																	<dt style="width: 90px">Unidade:</dt>
-																		<dd style="margin-left: 120px;">{{findedCompanyDetector.detectorDto.sensorDto.unitMeterGases}}</dd>																		
-																	<dt style="width: 90px">Range Max:</dt>
-																		<dd style="margin-left: 120px;"><strong>{{findedCompanyDetector.detectorDto.sensorDto.rangeMax}}</strong></dd>
-																	<dt style="width: 90px">Detec&ccedil;&atilde;o:</dt>
-																		<dd style="margin-left: 120px;"><span data-ng-show="findedCompanyDetector.alarmDto" class="alarm1"> {{findedCompanyDetector.alarmDto.alarm1}}</span></dd>							
-																	<dt style="width: 90px">Alerta:</dt>
-																		<dd style="margin-left: 120px;"><span data-ng-show="findedCompanyDetector.alarmDto" class="alarm2"> {{findedCompanyDetector.alarmDto.alarm2}}</span></dd>
-																	<dt style="width: 90px">Evacua&ccedil;&atilde;o:</dt>
-																		<dd style="margin-left: 120px;"><span data-ng-show="findedCompanyDetector.alarmDto" class="alarm3"> {{findedCompanyDetector.alarmDto.alarm3}}</span></dd>
+																	<dt>Sensor (nome):</dt>
+																		<dd>{{selectedCompanyDetector.sensorName}}</dd>
+																	<dt>Alarme (nome):</dt>
+																		<dd>{{findedCompanyDevice.alarmDto.name}}</dd>
+																	<dt>Unidade:</dt>
+																		<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases == 'LEL_PERCENT'">LEL%</dd>
+																		<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases == 'PERCENT_VOLUME'">VOL%</dd>
+																		<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases != 'LEL_PERCENT' && findedCompanyDevice.alarmDto.unitMeterGases != 'PERCENT_VOLUME'">{{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>																	
+																	<dt>Range Max:</dt>
+																		<dd><strong>{{selectedCompanyDetector.rangeMax}}</strong></dd>
+																	<dt>Detec&ccedil;&atilde;o:</dt>
+																		<dd><span data-ng-show="findedCompanyDevice.alarmDto" class="alarm1"> {{findedCompanyDevice.alarmDto.alarm1}}</span></dd>							
+																	<dt>Alerta:</dt>
+																		<dd><span data-ng-show="findedCompanyDevice.alarmDto" class="alarm2"> {{findedCompanyDevice.alarmDto.alarm2}}</span></dd>
+																	<dt>Evacua&ccedil;&atilde;o:</dt>
+																		<dd><span data-ng-show="findedCompanyDevice.alarmDto" class="alarm3"> {{findedCompanyDevice.alarmDto.alarm3}}</span></dd>
 																</dl>											                	
 																
 															</div>
@@ -410,7 +412,7 @@
 			
 					<div class="box">
 						<div class="box-header">
-							<h3 class="box-title"><strong>Gr&aacute;fico do Sensor:</strong> {{findedCompanyDetector.detectorDto.sensorDto.name}} - G&aacute;s: {{findedCompanyDetector.detectorDto.sensorDto.gasDto.name}} </h3>
+							<h3 class="box-title"><strong>Gr&aacute;fico do Sensor:</strong> {{selectedCompanyDetector.sensorName}} - G&aacute;s: {{findedCompanyDevice.alarmDto.gasDto.gasDto.name}} </h3>
 							<input class="pull-right ng-pristine ng-untouched ng-valid" type="checkbox" style="margin-right: 30px" data-ng-model="changeGraphic" data-ng-change="showGrafico();">
 							<label data-ng-show="changeGraphic" class="pull-right">Gr&aacute;fico Completo&nbsp;&nbsp;</label>
 							<label data-ng-hide="changeGraphic" class="pull-right">Gr&aacute;fico Medi&ccedil;&otilde;es&nbsp;&nbsp;</label>
@@ -432,25 +434,27 @@
 		<div class="col-md-12">
 			<h1>Empresa: {{selectedCompanyDetector.company}}</h1>
 			<h2>Unidade: {{selectedCompanyDetector.unit}} - &Aacute;rea: {{selectedCompanyDetector.area}} </h2>
-			<hr>			
-			<h3 class="box-title"><strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{findedCompanyDetector.detectorDto.name}})
+			<hr>						
+			<h3 class="box-title"><strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{selectedCompanyDetector.detectorName}})
 					
 			<i class="fa fa-bell-o"></i> <h3 class="box-title">Detalhes do Sensor:</h3>                       
 																					
 			<dl class="dl-horizontal">
 				<dt>Sensor (nome):</dt>
-					<dd>{{findedCompanyDetector.detectorDto.sensorDto.name}}</dd>
+					<dd>{{selectedCompanyDetector.sensorName}}</dd>
 				<dt>Nome do Alarme / Unidade de Medida:</dt>
-					<dd><strong>{{findedCompanyDetector.alarmDto.name}} / {{findedCompanyDetector.alarmDto.unitMeterGases}}</strong></dd>
+					<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='LEL_PERCENT'">{{findedCompanyDevice.alarmDto.name}} / LEL%</dd>
+					<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='PERCENT_VOLUME'">{{findedCompanyDevice.alarmDto.name}} / VOL%</dd>
+					<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases!='LEL_PERCENT' && findedCompanyDevice.alarmDto.unitMeterGases!='PERCENT_VOLUME'">{{findedCompanyDevice.alarmDto.name}} / {{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>																	
 				<dt>Range Max:</dt>
-					<dd><strong>{{findedCompanyDetector.detectorDto.sensorDto.rangeMax}}</strong></dd>
+					<dd><strong>{{selectedCompanyDetector.rangeMax}}</strong></dd>
 				<dt>Detecrição:</dt>
-					<dd><span data-ng-show="findedCompanyDetector.detectorDto.sensorDto" class="alarm1"> {{findedCompanyDetector.alarmDto.alarm1}}</span></dd>							
+					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm1" class="alarm1"> {{findedCompanyDevice.alarmDto.alarm1}}</span></dd>							
 				<dt>Alerta:</dt>
-					<dd><span data-ng-show="findedCompanyDetector.detectorDto.sensorDto" class="alarm2"> {{findedCompanyDetector.alarmDto.alarm2}}</span></dd>
+					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm2" class="alarm2"> {{findedCompanyDevice.alarmDto.alarm2}}</span></dd>
 				<dt>Evacuação:</dt>
-					<dd><span data-ng-show="findedCompanyDetector.detectorDto.sensorDto" class="alarm3"> {{findedCompanyDetector.alarmDto.alarm3}}</span></dd>
-			</dl>		            
+					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm3" class="alarm3"> {{findedCompanyDevice.alarmDto.alarm3}}</span></dd>
+			</dl>			            
 			
 			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;­odo:</strong> {{selectedPeriodo}}</div>
 			

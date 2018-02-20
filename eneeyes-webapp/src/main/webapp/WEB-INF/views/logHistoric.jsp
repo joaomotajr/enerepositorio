@@ -224,7 +224,7 @@
 				
 										<div class="box-header">
 											<h4 class="box-title">
-											<strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{selectedCompanyDetector.detectorName}})																						 	
+											<strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{selectedCompanyDetector.detectorName}})
 										</div>
 										
 										<div class="box-body">

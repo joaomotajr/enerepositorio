@@ -30,17 +30,27 @@ public class AreaCompanyDetectorAlarmViewController {
 		return result;
 	}
 	
-	@RequestMapping(value="/security/api/view/findAreaCompanyDetectorAlarmViewByCompanyDetectorId/{companyDetectorId}", method=RequestMethod.GET, produces = "application/json")			
-	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findAreaCompanyDetectorAlarmViewByCompanyDetectorId(@PathVariable Long companyDetectorId) {		
-		BasicResult<?> result = service.listByCompanyDetectorId(companyDetectorId); 
-		return result;
-	}
+//	@RequestMapping(value="/security/api/view/findAreaCompanyDetectorAlarmViewByCompanyDetectorId/{companyDetectorId}", method=RequestMethod.GET, produces = "application/json")			
+//	@ResponseStatus(HttpStatus.OK)
+//	public BasicResult<?> findAreaCompanyDetectorAlarmViewByCompanyDetectorId(@PathVariable Long companyDetectorId) {		
+//		BasicResult<?> result = service.listByCompanyDetectorId(companyDetectorId); 
+//		return result;
+//	}
 	
-	@RequestMapping(value="/security/api/view/findAreaCompanyDeviceAlarmViewByCompanyDetectorId/{companyDetectorId}", method=RequestMethod.GET, produces = "application/json")			
+//	@RequestMapping(value="/security/api/view/findAreaCompanyGenericAlarmViewByCompanyDeviceId/{companyDeviceId}", 
+//			method=RequestMethod.GET, produces = "application/json")			
+//	@ResponseStatus(HttpStatus.OK)
+//	public BasicResult<?> findAreaCompanyGenericAlarmViewByCompanyDeviceId(@PathVariable Long companyDeviceId) {		
+//		BasicResult<?> result = service.listByCompanyDeviceId(companyDeviceId); 
+//		return result;
+//	}
+
+	@RequestMapping(value="/security/api/view/findAreaCompanyDeviceAlarmViewByCompanyDeviceId/{companyDeviceId}", 
+			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findAreaCompanyDeviceAlarmViewByCompanyDetectorId(@PathVariable Long companyDeviceId) {		
+	public BasicResult<?> findAreaCompanyDeviceAlarmViewByCompanyDeviceId(@PathVariable Long companyDeviceId) {		
 		BasicResult<?> result = service.listByCompanyDeviceId(companyDeviceId); 
 		return result;
 	}
 }
+

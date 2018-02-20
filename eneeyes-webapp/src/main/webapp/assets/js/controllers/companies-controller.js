@@ -128,35 +128,35 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 				    	
 				    	$scope.$root.selecteds.push({unitIndex: 0, areaIndex : 0, companyDetectorIndex: 0});
 				    	
-				    	if(node.type == 0 && $scope.$root.selectedCompany.unitsDto.length <= 0) {				    		 
+				    	if(node.type == 'COMPANY' && $scope.$root.selectedCompany.unitsDto.length <= 0) {				    		 
 
 				    		 $timeout(function () {$scope.LoadAjaxContentCompany('units.html');}, 50);				    		 
 				    	}
-				    	else if(node.type == 0 ) {
+				    	else if(node.type == 'COMPANY' ) {
 				    		
 				    		$timeout(function () {$scope.LoadAjaxContentCompany('company.html');}, 200);				    		 
 				    	}
-				    	else if(node.type == 1) {
+				    	else if(node.type == 'UNIT') {
 				    		
 				    		$scope.$root.selecteds.unitIndex = node.index;				    		
 				    		$timeout(function () {$scope.LoadAjaxContentCompany('units.html');}, 50);
 				    		
 				    	}
-				    	else if(node.type == 2) {
+				    	else if(node.type == 'AREA') {
 				    		
 				    		$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
 					    	$scope.$root.selecteds.areaIndex = node.index;					    	
 					    	$timeout(function () {$scope.LoadAjaxContentCompany('areas.html');}, 50);	
 					    	
 				    	}
-				    	else if(node.type == 3) {				    		 
+				    	else if(node.type == 'DETECTOR') {				    		 
 					    						    
 					    	$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
 					    	$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
 					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;				    			
 				    		$timeout(function () { $scope.LoadAjaxContentCompany('companyDetectors.html'); }, 50);				    						    		
 						}
-						else if(node.type == 6) {				    		 
+						else if(node.type == 'ELETRICITY' || node.type == 'TEMPERATURE' || node.type == 'TIME' ) {				    		 
 					    						    
 					    	$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
 					    	$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
@@ -197,7 +197,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		//Company
 		var empresa = $scope.$root.selectedCompany.name + itemBaseLabel + $scope.$root.selectedCompany.unitsDto.length + "" + "</small>";
 		
-		itens.push({text: empresa , type : 0, nodes: [] });
+		itens.push({text: empresa , type : 'COMPANY', nodes: [] });
 		
 		//unidades
 		for (var i = 0; i < $scope.$root.selectedCompany.unitsDto.length; i++) {
@@ -206,7 +206,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 	   			$scope.$root.selectedCompany.unitsDto[i].name + itemBaseLabel + 
 	   			$scope.$root.selectedCompany.unitsDto[i].areasDto.length + "" +  "</small>";	   		
 			
-			   	itens[0].nodes.push({text: unidade, nodes: [], type : 1, index: i});
+			   	itens[0].nodes.push({text: unidade, nodes: [], type : 'UNIT', index: i});
 			
 			//area
 		   for (var j = 0; j < $scope.$root.selectedCompany.unitsDto[i].areasDto.length; j++) {			  			   
@@ -215,46 +215,65 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].name + itemBaseLabel + 
 			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length + "" + "</small>";
 			   
-			   	itens[0].nodes[i].nodes.push({text: area, nodes: [], type : 2, index: j, unitIndex: i});
-			
+			   	itens[0].nodes[i].nodes.push({text: area, nodes: [], type : 'AREA', index: j, unitIndex: i});
+
 				//Dispositivos
 			   	for (var k = 0; k < $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length; k++) {
-					//Detector  
-					if($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType == "DETECTOR") {
-				   		var device = "<i class='fa fa-rss' style='font-size:1.2em;'></i> DETECTOR";
-					    if ($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name != undefined)  
-							device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" +
-							$scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name + "</small>";
-						else
-							device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
-						
-							itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : 3, index: k, areaIndex: j, unitIndex: i });	
-					}
-					//Eletricidade
-					else if($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType == "ELETRICITY") {
 					
-						var device = "<i class='fa fa-flash' style='font-size:1.2em;'></i> ELETRICITY";
-						 
-						if ($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name != undefined)  
-							device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" +
-						 	$scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].name + "</small>";
-					 	else
-						 	device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
-					 
-						 itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : 6, index: k, areaIndex: j, unitIndex: i });	
-					}	
-				   	else {   
-						var device = "<i class='fa fa-keyboard-o' style='font-size:1.2em;'></i> " + $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
+					var device = getDevices($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k]);
+					var type = $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
 
-						itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : -1, index: k, areaIndex: j, unitIndex: i });	
-				   	}			   
-					
-					
+					itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : type, index: k, areaIndex: j, unitIndex: i });					
 			   	}
 		   }
 		}		 
 		
 		return itens;
+	 };
+
+	 function getDevices(detalhe) {
+			
+		//Detector  
+		if(detalhe.deviceType == "DETECTOR") {
+			device = "<i class='fa fa-rss' style='font-size:1.2em;'></i> DETECTOR"
+			
+			if (detalhe.name == undefined)
+				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
+			else				
+				device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";		
+				
+		}
+		//Eletricidade
+		else if(detalhe.deviceType == "ELETRICITY") {
+		
+			device = "<i class='fa fa-plug' style='font-size:1.2em;'></i> TENS&Atilde;O";						 
+			device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";		 	
+		}
+		//Temperatura
+		else if(detalhe.deviceType == "TEMPERATURE") {
+			
+			device = "<i class='fa fa-thermometer' style='font-size:1.2em;'></i> TEMPERATURA";						 
+			
+			if (detalhe.name == undefined)
+				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
+			else
+				device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";			
+		}
+		//Tempo
+		else if(detalhe.deviceType == "TIME") {
+			
+			device = "<i class='fa fa-fa-clock-o' style='font-size:1.2em;'></i> TEMPO";				
+			
+			if (detalhe.name == undefined)
+				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
+			else		 
+				device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";			
+		}	
+		else {   
+			device = "<i class='fa fa-keyboard-o' style='font-size:1.2em;'></i> " + detalhe.deviceType;			
+		}			
+		
+		return device;
 	 }
 	 
 	 $scope.getCompanys = function() {

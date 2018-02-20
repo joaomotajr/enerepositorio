@@ -31,8 +31,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		var alarm = {
 			uid: $scope.alarmUid != undefined ? $scope.alarmUid : 0,
 			name: $scope.alarmName,
-			deviceType: $scope.deviceType.uid,
-			gasDto: $scope.alarmGas,			
+			deviceType: $scope.deviceType.uid,						
 			unitMeterGases : $scope.gasUnitMeterGases.uid,
 			alarm1 : $scope.alarmAlarm1,
 			alarm2 : $scope.alarmAlarm2,
@@ -58,6 +57,9 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			action3 : $scope.action3,
 			action4 : $scope.action4
 		}; 
+		
+		if($scope.alarmGas)
+			alarm.gasDto = $scope.alarmGas;
 		 
 		$scope.inclusaoAlarm = new AlarmService.save(alarm);		 
 		$scope.inclusaoAlarm.$alarm({_csrf : angular.element('#_csrf').val()}, function()

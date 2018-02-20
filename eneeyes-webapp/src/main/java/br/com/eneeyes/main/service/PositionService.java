@@ -124,7 +124,7 @@ public class PositionService implements IService<PositionDto> {
 		return result;
 	}
 	
-	public BasicResult<?> findByCompanyDetector(Long uid) {
+	public BasicResult<?> findByCompanyDevice(Long uid) {
 		Result<PositionView> result = new Result<PositionView>();
 		
 		try {

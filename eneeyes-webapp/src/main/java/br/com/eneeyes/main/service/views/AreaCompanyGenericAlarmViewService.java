@@ -6,22 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
-import br.com.eneeyes.main.model.views.AreaCompanyDetectorAlarmView;
-import br.com.eneeyes.main.repository.views.AreaCompanyDetectorAlarmViewRepository;
+import br.com.eneeyes.main.model.views.AreaCompanyGenericAlarmView;
+import br.com.eneeyes.main.repository.views.AreaCompanyGenericAlarmViewRepository;
 import br.com.eneeyes.main.result.Result;
 
 @Service
-public class AreaCompanyDetectorAlarmViewService {
+public class AreaCompanyGenericAlarmViewService {
 	
 	@Autowired
-	private AreaCompanyDetectorAlarmViewRepository repository;
+	private AreaCompanyGenericAlarmViewRepository repository;
 	
 	public Result<?> listAll() {
 		
-		Result<AreaCompanyDetectorAlarmView> result = new Result<AreaCompanyDetectorAlarmView>();
+		Result<AreaCompanyGenericAlarmView> result = new Result<AreaCompanyGenericAlarmView>();
 		
 		try {
-			List<AreaCompanyDetectorAlarmView> lista = repository.findAll();
+			List<AreaCompanyGenericAlarmView> lista = repository.findAll();
 
 			if (lista != null) {				
 				
@@ -31,7 +31,7 @@ public class AreaCompanyDetectorAlarmViewService {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Posição.");
+				result.setMessage("Nenhum Dispositivo.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);
@@ -44,10 +44,10 @@ public class AreaCompanyDetectorAlarmViewService {
 	
 	public Result<?> listByAreaId(Long areaId) {
 		
-		Result<AreaCompanyDetectorAlarmView> result = new Result<AreaCompanyDetectorAlarmView>();	
+		Result<AreaCompanyGenericAlarmView> result = new Result<AreaCompanyGenericAlarmView>();	
 		
 		try {
-			List<AreaCompanyDetectorAlarmView> lista = repository.findByAreaId(areaId);
+			List<AreaCompanyGenericAlarmView> lista = repository.findByAreaId(areaId);
 
 			if (lista != null) {
 									
@@ -69,10 +69,10 @@ public class AreaCompanyDetectorAlarmViewService {
 	
 	public Result<?> listByCompanyDeviceId(Long companyDeviceId) {
 		
-		Result<AreaCompanyDetectorAlarmView> result = new Result<AreaCompanyDetectorAlarmView>();	
+		Result<AreaCompanyGenericAlarmView> result = new Result<AreaCompanyGenericAlarmView>();	
 		
 		try {
-			List<AreaCompanyDetectorAlarmView> lista = repository.findByCompanyDeviceId(companyDeviceId);
+			List<AreaCompanyGenericAlarmView> lista = repository.findByCompanyDeviceId(companyDeviceId);
 
 			if (lista != null) {
 									

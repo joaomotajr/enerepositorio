@@ -9,28 +9,28 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eneeyes.main.result.BasicResult;
-import br.com.eneeyes.main.service.views.AreaCompanyDetectorAlarmViewService;
+import br.com.eneeyes.main.service.views.AreaCompanyGenericAlarmViewService;
 
 @RestController
-public class AreaCompanyDetectorAlarmViewController {
+public class AreaCompanyGenericAlarmViewController {
 	
 	@Autowired
-	AreaCompanyDetectorAlarmViewService service;	
+	AreaCompanyGenericAlarmViewService service;	
 	
-	@RequestMapping(value = "/security/api/view/allAreaCompanyDetectorAlarmView", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/security/api/view/allAreaCompanyGenericAlarmView", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> allAlarmCompanyDetectorSensorView() {
+	public BasicResult<?> allAlarmCompanyGenericSensorView() {
 		return service.listAll();
 	}
 
-	@RequestMapping(value="/security/api/view/findAreaCompanyDetectorAlarmViewByAreaId/{areaId}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/view/findAreaCompanyGenericAlarmViewByAreaId/{areaId}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findAreaCompanyDetectorAlarmViewByAreaId(@PathVariable Long areaId) {		
+	public BasicResult<?> findAreaCompanyGenericAlarmViewByAreaId(@PathVariable Long areaId) {		
 		BasicResult<?> result = service.listByAreaId(areaId); 
 		return result;
 	}
 		
-	@RequestMapping(value="/security/api/view/findAreaCompanyDetectorAlarmViewByCompanyDeviceId/{companyDeviceId}", 
+	@RequestMapping(value="/security/api/view/findAreaCompanyGenericAlarmViewByCompanyDeviceId/{companyDeviceId}", 
 			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> findAreaCompanyGenericAlarmViewByCompanyDeviceId(@PathVariable Long companyDeviceId) {		

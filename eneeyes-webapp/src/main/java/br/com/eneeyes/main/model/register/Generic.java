@@ -39,7 +39,9 @@ public class Generic {
 		if (dto.getManufacturerDto() != null)
 			this.manufacturer = new Manufacturer(dto.getManufacturerDto());
 		
-		this.model = dto.getModel();	
+		this.model = dto.getModel();
+		this.rangeMin = dto.getRangeMax();
+		this.rangeMax = dto.getRangeMin();
 	}
 	
 	@Id
@@ -72,6 +74,12 @@ public class Generic {
 
 	@Column(name = "MODEL", nullable = true)
 	String model;
+	
+	@Column(name = "RANGE_MAX", nullable = true)		
+	private Double rangeMax;
+	
+	@Column(name = "RANGE_MIN", nullable = true)		
+	private Double rangeMin;
 	
 	public final Long getUid() {
 		return uid;
@@ -120,6 +128,23 @@ public class Generic {
 	public final void setModel(String model) {
 		this.model = model;
 	}
+
+	public Double getRangeMax() {
+		return rangeMax;
+	}
+
+	public void setRangeMax(Double rangeMax) {
+		this.rangeMax = rangeMax;
+	}
+
+	public Double getRangeMin() {
+		return rangeMin;
+	}
+
+	public void setRangeMin(Double rangeMin) {
+		this.rangeMin = rangeMin;
+	}
+	
 }
 
 

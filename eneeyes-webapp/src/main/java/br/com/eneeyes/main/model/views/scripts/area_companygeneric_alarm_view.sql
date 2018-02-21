@@ -1,4 +1,3 @@
-/* MYSQL */
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -9,7 +8,9 @@ VIEW `area_companygeneric_alarm_view` AS
         `cdv`.`AREA_ID` AS `AREA_ID`,
         `cdv`.`UID` AS `COMPANY_DEvice_ID`,
         `cg`.`UID` AS `COMPANY_GENERIC_ID`,
-        `g`.`UID` AS `generic_ID`,
+        `g`.`UID` AS `GENERIC_ID`,
+        `g`.`RANGE_MAX` AS `RANGE_MAX`,
+        `g`.`RANGE_MIN` AS `RANGE_MIN`,
         `cg`.`NAME` AS `COMPANY_GENERIC_NAME`,
         `cg`.`LOCAL` AS `COMPANY_GENERIC_LOCAL`,
         `g`.`NAME` AS `GENERIC_NAME`,
@@ -29,4 +30,4 @@ VIEW `area_companygeneric_alarm_view` AS
         JOIN `generic` `g` ON ((`cg`.`GENERIC_ID` = `g`.`UID`)))
         LEFT JOIN `alarm` `a` ON ((`cdv`.`ALARM_ID` = `a`.`UID`)))
         LEFT JOIN `position` `p` ON ((`p`.`COMPANY_DEVICE_ID` = `cdv`.`UID`)))
-    ORDER BY `cdv`.`AREA_ID` , `cg`.`UID` , `g`.`UID` 
+    ORDER BY `cdv`.`AREA_ID` , `cg`.`UID` , `g`.`UID`

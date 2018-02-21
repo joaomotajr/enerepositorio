@@ -51,7 +51,7 @@
 					<form name="genericForm">
 
 						<div class="row">
-							<div class="col-md-4" style="padding-right: 5px !important;">							
+							<div class="col-md-6" style="padding-right: 5px !important;">							
 								<div class="form-group">    
 									<label class="control-label"><i class="fa fa-industry"></i> Fabricante</label>
 									<span class="text-red pull-right" data-ng-show="genericForm.genericManufacturer.$dirty && genericForm.genericManufacturer.$invalid">[Obrigat&oacute;rio]</span>
@@ -67,7 +67,7 @@
 								</div>
 							</div>
 
-							<div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important;">
+							<div class="col-md-6" style="padding-left: 5px !important; padding-right: 5px !important;">
 								<label class="control-label"><i class="fa fa-simplybuilt"></i> Dispositivo</label>
 								<span class="text-red pull-right" data-ng-show="genericForm.deviceType.$dirty && genericForm.deviceType.$invalid">[Obrigat&oacute;rio]</span>
 								
@@ -78,22 +78,44 @@
 										<option value="">Selecione</option> 
 									</select>							
 								</div>
-							</div> 
-							
-							<div class="col-md-4" style="padding-left: 5px !important;">
-								<label class="control-label"><i class="fa fa-tachometer"> </i> Unidade:</label>
-								<span class="text-red" data-ng-show="genericForm.gasUnit.$dirty && genericForm.gasUnit.$invalid">[Obrigat&oacute;rio]</span>
+							</div>	
+														
+						</div> 	
+						
+						<div class="box box-primary box-solid">
+							<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Range de Detecção *</strong></div>					                	 
+								<div class="box-body">
+									<div class="row">
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="control-label">Min</label>
+												<input class="form-control" placeholder="Min" data-ng-model="genericRangeMin">
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-group">
+												<label class="control-label">Máx</label>
+												<input class="form-control" placeholder="Max" data-ng-model="genericRangeMax">
+											</div>
+										</div>
 
-								<div data-ng-class="{'has-error': genericForm.gasUnit.$dirty && genericForm.gasUnit.$invalid}">
-									<select name="gasUnit" class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-											data-ng-options="item as item.name for item in unitMetersGases | orderBy: 'name' track by item.uid" 
-											data-ng-model="gasUnitMeterGases" required>
-											<option value="">Selecione</option> 
-									</select>									                        
-								</div>
+										<div class="col-md-6" style="padding-left: 5px !important;">
+											<label class="control-label"><i class="fa fa-tachometer"> </i> Unidade:</label>
+											<span class="text-red" data-ng-show="genericForm.gasUnit.$dirty && genericForm.gasUnit.$invalid">[Obrigat&oacute;rio]</span>
+			
+											<div data-ng-class="{'has-error': genericForm.gasUnit.$dirty && genericForm.gasUnit.$invalid}">
+												<select name="gasUnit" class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+														data-ng-options="item as item.name for item in unitMetersGases | orderBy: 'name' track by item.uid" 
+														data-ng-model="gasUnitMeterGases" required>
+														<option value="">Selecione</option> 
+												</select>									                        
+											</div>
+										</div>										
+
+									</div>
 							</div>
-							
-						</div> 							        
+						</div>
+						
 						<div class="row">
 							<div class="col-md-6">                                                                                                                            
 								<div class="form-group">

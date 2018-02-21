@@ -10,7 +10,9 @@ app.controller('genericController', function ($scope, $timeout, $filter, Generic
 			deviceType: $scope.deviceType.uid,						
 			unitMeterGases : $scope.gasUnitMeterGases.uid,
 			name: $scope.genericName,
-			model: $scope.genericModel
+			model: $scope.genericModel,
+			rangeMax: $scope.genericRangeMax,
+			rangeMin: $scope.genericRangeMin,
     	}; 
 		 
 		$scope.inclusaoGeneric = new GenericService.save(generic);		 
@@ -58,7 +60,10 @@ app.controller('genericController', function ($scope, $timeout, $filter, Generic
 		    $scope.genericName = $scope.generics[index].name;
 		    $scope.genericModel = $scope.generics[index].model;
 			$scope.genericManufacturer = $scope.generics[index].manufacturerDto;			
+			$scope.genericRangeMin = $scope.generics[index].rangeMin;
+			$scope.genericRangeMax = $scope.generics[index].rangeMax;
 			$scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.generics[index].unitMeterGases);
+
 			$scope.deviceType = $scope.getDeviceType($scope.generics[index].deviceType);
 					    	        
 	        $('#idGenericName').focus();

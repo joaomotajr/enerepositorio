@@ -102,6 +102,10 @@
 													</li>
 													<li class="list-group-item" style="padding: 1px 10px;">
 														<label><i class="fa fa-yelp"></i>&nbsp;Gas:&nbsp;</label>{{selectedCompanyDetector.detectorDto.sensorDto.gasDto.name}}
+														<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases == 'LEL_PERCENT'">LEL%</span>
+														<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases == 'PERCENT_VOLUME'">VOL%</span>
+														<spqn style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases != 'LEL_PERCENT' 
+														&& selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases != 'PERCENT_VOLUME'">{{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>
 													</li>
 													<li class="list-group-item" style="padding: 1px 10px;">
 														<label>Id:</label>&nbsp;{{selectedCompanyDetectorPosition.uid}}
@@ -177,8 +181,10 @@
 																	<label>G&aacute;s:</label> 
 																	<span class="pull-right">
 																		{{selectedCompanyDetectorAlarm.gasName}}
-																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetectorAlarm.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
-																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetectorAlarm.unitMeterGases!='LEL_PERCENT'"> {{selectedCompanyDetectorAlarm.unitMeterGases}}
+																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetectorAlarm.unitMeterGases == 'LEL_PERCENT'">LEL%</span>
+																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetectorAlarm.unitMeterGases == 'PERCENT_VOLUME'">VOL%</span>
+																		<spqn style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetectorAlarm.unitMeterGases != 'LEL_PERCENT' 
+																				&& selectedCompanyDetectorAlarm.unitMeterGases != 'PERCENT_VOLUME'">{{selectedCompanyDetectorAlarm.unitMeterGases}}</dd>
 																	</span>
 																</span>
 																</li>

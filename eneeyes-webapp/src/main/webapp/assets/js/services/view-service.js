@@ -6,15 +6,12 @@ app.factory('ViewService', function($resource){
        }),
         listAreaCompanyDetectorsAlarms : $resource('/security/api/view/findAreaCompanyDetectorAlarmViewByAreaId/:areaId/',{ areaId: '@areaId'},{
         	view : {method : 'GET'}
-        }),    	        
-        // listCompanyDetectorsAlarms : $resource('/security/api/view/findAreaCompanyDetectorAlarmViewByCompanyDetectorId/:companyDetectorId/',{ companyDetectorId: '@companyDetectorId'},{
-        // 	view : {method : 'GET'}
-        // }),
-        // listCompanyGenericAlarms : $resource('/security/api/view/findAreaCompanyGenericAlarmViewByCompanyDeviceId/:companyDeviceId/',{ companyDeviceId: '@companyDeviceId'},{
-        // 	view : {method : 'GET'}
-        // }),
-        listCompanyDeviceAlarms : $resource('/security/api/view/findAreaCompanyDeviceAlarmViewByCompanyDeviceId/:companyDeviceId/',{ companyDeviceId: '@companyDeviceId'},{
+        }),       
+        listCompanyGenericAlarms : $resource('/security/api/view/findAreaCompanyGenericAlarmViewByCompanyDeviceId/:companyDeviceId/',{ companyDeviceId: '@companyDeviceId'},{
         	view : {method : 'GET'}
+        }),
+        listCompanyDetectorsAlarms : $resource('/security/api/view/findAreaCompanyDetectorAlarmViewByCompanyDeviceId/:companyDeviceId/',{ companyDeviceId: '@companyDeviceId'},{
+         	view : {method : 'GET'}
         }),
         listAllDashCompany : $resource('/security/api/view/allDashCompany',{},{
         	view : {method : 'GET'}

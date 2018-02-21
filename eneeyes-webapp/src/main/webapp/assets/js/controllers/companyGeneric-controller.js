@@ -113,7 +113,7 @@ app.controller('companyGenericController', function ($scope, $interval, $rootSco
 
 	$scope.getCompanyDetectorAlarm = function(companyDeviceId) {
 		
-		$scope.resultDetectors = new ViewService.listCompanyDeviceAlarms();		 
+		$scope.resultDetectors = new ViewService.listCompanyGenericAlarms();		 
 		$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), companyDeviceId : companyDeviceId}, function(){						
 			$scope.selectedCompanyGenericAlarms = $scope.resultDetectors.list;
 

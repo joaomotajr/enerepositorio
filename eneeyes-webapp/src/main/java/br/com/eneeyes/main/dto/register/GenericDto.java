@@ -8,18 +8,22 @@ public class GenericDto extends BaseDeviceDto {
 	private Long uid;		
 	private UnitMeterGases unitMeterGases;
 	private DeviceType deviceType;
+	private Double rangeMax;			
+	private Double rangeMin;
 	
 	public GenericDto() {
 		
 	}
-	public GenericDto(Generic generic) {
+	public GenericDto(Generic e) {
 		
-		this.uid = generic.getUid();
-		this.name = generic.getName();
-		this.unitMeterGases = generic.getUnitMeterGases();
-		this.deviceType = generic.getDeviceType();
-		this.manufacturerDto = new ManufacturerDto(generic.getManufacturer());
-		this.model = generic.getModel();
+		this.uid = e.getUid();
+		this.name = e.getName();
+		this.unitMeterGases = e.getUnitMeterGases();
+		this.deviceType = e.getDeviceType();
+		this.manufacturerDto = new ManufacturerDto(e.getManufacturer());
+		this.model = e.getModel();
+		this.rangeMin = e.getRangeMax();
+		this.rangeMax = e.getRangeMin();
 	}
 
 	public final Long getUid() {
@@ -33,14 +37,33 @@ public class GenericDto extends BaseDeviceDto {
 	public UnitMeterGases getUnitMeterGases() {
 		return unitMeterGases;
 	}
+	
 	public void setUnitMeterGases(UnitMeterGases unitMeterGases) {
 		this.unitMeterGases = unitMeterGases;
 	}
+	
 	public DeviceType getDeviceType() {
 		return deviceType;
 	}
 	
 	public void setDeviceType(DeviceType deviceType) {
 		this.deviceType = deviceType;
-	}	
+	}
+	
+	public Double getRangeMax() {
+		return rangeMax;
+	}
+	
+	public void setRangeMax(Double rangeMax) {
+		this.rangeMax = rangeMax;
+	}
+	
+	public Double getRangeMin() {
+		return rangeMin;
+	}
+	
+	public void setRangeMin(Double rangeMin) {
+		this.rangeMin = rangeMin;
+	}
+	
 }

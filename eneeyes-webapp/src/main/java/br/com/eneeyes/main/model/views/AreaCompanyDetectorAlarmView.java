@@ -6,15 +6,17 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
+import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 @Entity
-@Subselect("select * from area_companydevice_alarm_view")
-//@Subselect("select * from area_companydetector_alarm_view")
+@Subselect("select * from area_companydetector_alarm_view")
 public class AreaCompanyDetectorAlarmView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -32,34 +34,34 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 	@Column(name = "company_device_id")
 	private Long companyDeviceId;
 	
-//	@Column(name = "company_detector_id")
-//	private Long companyDetectorId;
-//	
-//	@Column(name = "sensor_id")
-//	private Long sensorId;
-//	
-//	@Column(name = "company_detector_name")
-//	private String companyDetectorName;
-//	
-//	@Column(name = "company_detector_local", nullable = true)
-//	private String companyDetectorLocal;
-//	
-//	@Column(name = "sensor_name")
-//	private String sensorName;
-//	
-//	@Column(name = "range_min")
-//	private Double rangeMin;
-//	
-//	@Column(name = "range_max")
-//	private Double rangeMax;
-//	
-//	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
-//	private UnitMeterGases unitMeterGases;
-//
-//	@Enumerated(EnumType.ORDINAL) 
-//	private UnitMeterGases UnitMeterGases() { 
-//	    return unitMeterGases; 
-//	}
+	@Column(name = "company_detector_id")
+	private Long companyDetectorId;
+	
+	@Column(name = "sensor_id")
+	private Long sensorId;
+	
+	@Column(name = "company_detector_name")
+	private String companyDetectorName;
+	
+	@Column(name = "company_detector_local", nullable = true)
+	private String companyDetectorLocal;
+	
+	@Column(name = "sensor_name")
+	private String sensorName;
+	
+	@Column(name = "range_min")
+	private Double rangeMin;
+	
+	@Column(name = "range_max")
+	private Double rangeMax;
+	
+	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
+	private UnitMeterGases unitMeterGases;
+
+	@Enumerated(EnumType.ORDINAL) 
+	private UnitMeterGases UnitMeterGases() { 
+	    return unitMeterGases; 
+	}
 	
 	@Column(name = "last_value", nullable = true)
 	private BigDecimal lastValue;
@@ -88,8 +90,8 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 	@Column(name = "alarm_3", nullable = true)	
 	private Double alarm3;
 	
-//	@Column(name = "gas_name", nullable = true)
-//	private String gasName;
+	@Column(name = "gas_name", nullable = true)
+	private String gasName;
 
 	public final Long getUid() {
 		return uid;
@@ -107,13 +109,13 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 		this.areaId = areaId;
 	}
 
-//	public final Long getCompanyDetectorId() {
-//		return companyDetectorId;
-//	}
-//
-//	public final void setCompanyDetectorId(Long companyDetectorId) {
-//		this.companyDetectorId = companyDetectorId;
-//	}	
+	public final Long getCompanyDetectorId() {
+		return companyDetectorId;
+	}
+
+	public final void setCompanyDetectorId(Long companyDetectorId) {
+		this.companyDetectorId = companyDetectorId;
+	}	
 
 	public Long getCompanyDeviceId() {
 		return companyDeviceId;
@@ -123,61 +125,61 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 		this.companyDeviceId = companyDeviceId;
 	}
 
-//	public final Long getSensorId() {
-//		return sensorId;
-//	}
-//
-//	public final void setSensorId(Long sensorId) {
-//		this.sensorId = sensorId;
-//	}
-//
-//	public final String getCompanyDetectorName() {
-//		return companyDetectorName;
-//	}
-//
-//	public final void setCompanyDetectorName(String companyDetectorName) {
-//		this.companyDetectorName = companyDetectorName;
-//	}
-//
-//	public final String getCompanyDetectorLocal() {
-//		return companyDetectorLocal;
-//	}
-//
-//	public final void setCompanyDetectorLocal(String companyDetectorLocal) {
-//		this.companyDetectorLocal = companyDetectorLocal;
-//	}
-//
-//	public final String getSensorName() {
-//		return sensorName;
-//	}
-//
-//	public final void setSensorName(String sensorName) {
-//		this.sensorName = sensorName;
-//	}
-//
-//	public final Double getRangeMin() {
-//		return rangeMin;
-//	}
-//
-//	public final void setRangeMin(Double rangeMin) {
-//		this.rangeMin = rangeMin;
-//	}
-//
-//	public final Double getRangeMax() {
-//		return rangeMax;
-//	}
-//
-//	public final void setRangeMax(Double rangeMax) {
-//		this.rangeMax = rangeMax;
-//	}
-//
-//	public final UnitMeterGases getUnitMeterGases() {
-//		return unitMeterGases;
-//	}
-//
-//	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-//		this.unitMeterGases = unitMeterGases;
-//	}	
+	public final Long getSensorId() {
+		return sensorId;
+	}
+
+	public final void setSensorId(Long sensorId) {
+		this.sensorId = sensorId;
+	}
+
+	public final String getCompanyDetectorName() {
+		return companyDetectorName;
+	}
+
+	public final void setCompanyDetectorName(String companyDetectorName) {
+		this.companyDetectorName = companyDetectorName;
+	}
+
+	public final String getCompanyDetectorLocal() {
+		return companyDetectorLocal;
+	}
+
+	public final void setCompanyDetectorLocal(String companyDetectorLocal) {
+		this.companyDetectorLocal = companyDetectorLocal;
+	}
+
+	public final String getSensorName() {
+		return sensorName;
+	}
+
+	public final void setSensorName(String sensorName) {
+		this.sensorName = sensorName;
+	}
+
+	public final Double getRangeMin() {
+		return rangeMin;
+	}
+
+	public final void setRangeMin(Double rangeMin) {
+		this.rangeMin = rangeMin;
+	}
+
+	public final Double getRangeMax() {
+		return rangeMax;
+	}
+
+	public final void setRangeMax(Double rangeMax) {
+		this.rangeMax = rangeMax;
+	}
+
+	public final UnitMeterGases getUnitMeterGases() {
+		return unitMeterGases;
+	}
+
+	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
+		this.unitMeterGases = unitMeterGases;
+	}	
 
 	public Date getLastUpdate() {
 		return lastUpdate;
@@ -251,12 +253,12 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 		this.alarm3 = alarm3;
 	}
 
-//	public final String getGasName() {
-//		return gasName;
-//	}
-//
-//	public final void setGasName(String gasName) {
-//		this.gasName = gasName;
-//	}	
+	public final String getGasName() {
+		return gasName;
+	}
+
+	public final void setGasName(String gasName) {
+		this.gasName = gasName;
+	}	
 	
 }

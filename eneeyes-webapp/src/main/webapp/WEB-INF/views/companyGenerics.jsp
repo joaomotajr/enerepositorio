@@ -186,11 +186,11 @@
 															item.deviceType != selectedCompanyGeneric.companyDeviceDto.deviceType)">
 															<button type="button" class="btn btn-offLine btn-xs" disabled>Incompativel</button>
 														</div>																										
-														<div data-ng-if="item.uid == selectedCompanyGeneric.companyDeviceDto.alarmDto.uid">
+														<div data-ng-if="item.uid == selectedCompanyGenericAlarm.alarmId">
 															<button type="button" class="btn btn-danger btn-xs" data-ng-click="toggleAlarm(null)">&nbsp;&nbsp;&nbsp;Remover&nbsp;&nbsp;&nbsp;</button>
 														</div>
 														<div data-ng-if="(item.unitMeterGases == selectedCompanyGeneric.genericDto.unitMeterGases && 
-															item.deviceType == selectedCompanyGeneric.companyDeviceDto.deviceType) && item.uid != selectedCompanyGeneric.companyDeviceDto.alarmDto.uid">
+															item.deviceType == selectedCompanyGeneric.companyDeviceDto.deviceType) && item.uid != selectedCompanyGenericAlarm.alarmId">
 															<button type="button" class="btn btn-primary btn-xs" data-ng-click="toggleAlarm(item)">&nbsp;&nbsp;Selecionar&nbsp;&nbsp;</button>
 														</div>													
 													</td>													

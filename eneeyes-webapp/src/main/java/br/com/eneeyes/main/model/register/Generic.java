@@ -40,8 +40,8 @@ public class Generic {
 			this.manufacturer = new Manufacturer(dto.getManufacturerDto());
 		
 		this.model = dto.getModel();
-		this.rangeMin = dto.getRangeMax();
-		this.rangeMax = dto.getRangeMin();
+		this.rangeMax = dto.getRangeMax();
+		this.rangeMin = dto.getRangeMin();
 	}
 	
 	@Id

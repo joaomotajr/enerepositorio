@@ -53,7 +53,7 @@
 										<div class="form-group">
 											<label class="control-label">Valor</label>
 											
-												<input class="form-control" type="number" data-ng-model="valor" name="valor" min="0"  max="{{selectedCompanyDetector.rangeMax}}" required>
+												<input class="form-control" type="number" data-ng-model="valor" name="valor" min="-100"  max="{{selectedCompanyDetector.rangeMax}}" required>
 																                	 
 												<p data-ng-show="valor > selectedCompanyDetector.rangeMax" class="help-block text-red">Valor M&aacute;ximo : {{selectedCompanyDetector.rangeMax}} </p>											
 												<p data-ng-show="!userForm.valor.$pristine && !userForm.valor.$error.required && userForm.valor.$error.min" class="help-block text-red">Valor Inv&aacute;lido</p>											

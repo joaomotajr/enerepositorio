@@ -36,6 +36,8 @@ app.controller('genericController', function ($scope, $timeout, $filter, Generic
 		$scope.gasUnitMeterGases = '';
 		$scope.genericName = '';
 		$scope.genericModel = '';
+		$scope.genericRangeMin = '';
+		$scope.genericRangeMax = '';
 	}
 	 
 	$scope.getGenerics = function() {

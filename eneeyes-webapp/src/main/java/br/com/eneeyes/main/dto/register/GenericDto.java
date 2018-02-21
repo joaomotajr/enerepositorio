@@ -22,8 +22,8 @@ public class GenericDto extends BaseDeviceDto {
 		this.deviceType = e.getDeviceType();
 		this.manufacturerDto = new ManufacturerDto(e.getManufacturer());
 		this.model = e.getModel();
-		this.rangeMin = e.getRangeMax();
-		this.rangeMax = e.getRangeMin();
+		this.rangeMax = e.getRangeMax();
+		this.rangeMin = e.getRangeMin();
 	}
 
 	public final Long getUid() {

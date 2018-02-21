@@ -138,13 +138,15 @@ public class ProcessAlarmService {
 			if( !alarm.getAlarmOn()) {
 				alarmType = AlarmType.OFF;
 			}				
-			else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm3())) > 0 ) {				
+			else if(alarm.getAlarm3On() && lastValue.compareTo( new BigDecimal(alarm.getAlarm3())) > 0 ) {				
 				alarmType = AlarmType.EVACUACAO;							
 			}
-			else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm2())) > 0 ) {				
+			else if(alarm.getAlarm2On() && lastValue.compareTo( new BigDecimal(alarm.getAlarm2())) > 0) {
 				alarmType = AlarmType.ALERTA;
 			}
-			else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm1())) > 0 ) {				
+			else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm1())) > 0 || 
+					(alarm.getAlarm11() != 0 && lastValue.compareTo( new BigDecimal(alarm.getAlarm11())) < 0 )
+				) {				
 				alarmType = AlarmType.DETECCAO;
 			}		
 		}

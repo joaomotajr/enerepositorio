@@ -198,7 +198,7 @@
 														<div class="row">	
 															<div  data-ng-show="deviceType.name=='DIGITAL'">																
 																<div class="col-md-6">
-																	<label><strong><i class="fa fa-flash"> </i> Alarmar se Cicuíto estiver:</strong></label>
+																	<label><strong><i class="fa fa-flash"> </i> Alarmar se Cicuï¿½to estiver:</strong></label>
 																	<div class="form-control" style="padding-top:0px">																	
 																		<div class="radio3 radio-check radio-inline">
 																			<input type="radio" id="radio11" value="1" data-ng-model="deviceTypeDigital" data-ng-init="deviceTypeDigital=1">
@@ -272,20 +272,20 @@
 																		<input class="pull-left" type="checkbox" data-ng-model="enableAlarm2" data-ng-change="validAlarms($event);" />&nbsp
 																		<label class="control-label"> Alarme 2 <span class="label label-warning" style="font-size: 0.5em"> ALERTA </span></label>
 																		
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm2.$invalid && !userForm.alarmAlarm2.$pristine || errorAlarm2}" 
+																		<div class="col-md-12" data-ng-class="{'has-error': userForm.alarmAlarm2.$invalid && !userForm.alarmAlarm2.$pristine || errorAlarm2}" 
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
 																			<input type="text" class="form-control" name="alarmAlarm2"
 																				data-ng-disabled="!enableAlarm2" 
 																				data-ng-model="alarmAlarm2" 
 																				data-ng-change="validAlarms($event);" />
 																		</div>																	
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm22.$invalid && !userForm.alarmAlarm22.$pristine || errorAlarm22}" 
+																		<!-- <div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm22.$invalid && !userForm.alarmAlarm22.$pristine || errorAlarm22}" 
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
 																			<input type="text" class="form-control" name="alarmAlarm22" 
 																				data-ng-disabled="!enableAlarm2" 
 																				data-ng-model="alarmAlarm22" 
 																				data-ng-change="validAlarms($event);" />
-																		</div>																	
+																		</div>																	 -->
 																	</div>
 																</div>
 																
@@ -294,20 +294,20 @@
 																		<input class="pull-left" type="checkbox" data-ng-model="enableAlarm3" />&nbsp
 																		<label class="control-label"> Alarme 3 <span class="label label-danger" style="font-size: 0.5em"> EVACUA&Ccedil;&Atilde;O </span></label>
 																		
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm3.$invalid && !userForm.alarmAlarm3.$pristine || errorAlarm3}" 
+																		<div class="col-md-12" data-ng-class="{'has-error': userForm.alarmAlarm3.$invalid && !userForm.alarmAlarm3.$pristine || errorAlarm3}" 
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
 																			<input type="text" class="form-control" name="alarmAlarm3" 
 																				data-ng-disabled="!enableAlarm3"
 																				data-ng-model="alarmAlarm3" 
 																				data-ng-change="validAlarms($event);"  />
 																		</div>																	
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm33.$invalid && !userForm.alarmAlarm33.$pristine || errorAlarm33}" 
+																		<!-- <div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm33.$invalid && !userForm.alarmAlarm33.$pristine || errorAlarm33}" 
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
 																			<input type="text" class="form-control" name="alarmAlarm33" 
 																				data-ng-disabled="!enableAlarm3"
 																				data-ng-model="alarmAlarm33" 
 																				data-ng-change="validAlarms($event);" />
-																		</div>																	
+																		</div>																	 -->
 																	</div>
 																</div>
 															</div>

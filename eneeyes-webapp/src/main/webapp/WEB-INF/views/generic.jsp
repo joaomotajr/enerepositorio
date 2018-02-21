@@ -42,7 +42,7 @@
 		</div>                                                      
 															
 		<div class="col-sm-6">
-			<div class="box box-primary"  data-ng-class="(genericName || genericModel || genericManufacturer) ? 'box-primary' : 'box-default'">
+			<div class="box box-primary"  data-ng-class="(genericName || genericModel || genericManufacturer || genericRangeMin || genericRangeMax) ? 'box-primary' : 'box-default'">
 				<div class="box-header">
 					<h3 class="box-title">Cadastro / Edição</h3>
 					<a href="#" class="text-muted pull-right"  data-ng-click="refreshGenerics();"><i title="Refresh" class="fa fa-refresh"></i></a>
@@ -89,13 +89,13 @@
 										<div class="col-md-3">
 											<div class="form-group">
 												<label class="control-label">Min</label>
-												<input class="form-control" placeholder="Min" data-ng-model="genericRangeMin">
+												<input class="form-control" placeholder="Min" data-ng-model="genericRangeMin" required>
 											</div>
 										</div>
 										<div class="col-md-3">
 											<div class="form-group">
 												<label class="control-label">Máx</label>
-												<input class="form-control" placeholder="Max" data-ng-model="genericRangeMax">
+												<input class="form-control" placeholder="Max" data-ng-model="genericRangeMax" required>
 											</div>
 										</div>
 

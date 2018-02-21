@@ -18,24 +18,22 @@ public class DashCompaniesPositionDto {
 	
 	}	
 	
-	public DashCompaniesPositionDto(DashCompaniesPosition dashCompaniesPosition) {
+	public DashCompaniesPositionDto(DashCompaniesPosition e) {
 		
-		this.uid = dashCompaniesPosition.getUid();
-		this.companyId = dashCompaniesPosition.getCompanyId();
-		this.companyName = dashCompaniesPosition.getCompanyName();
-		this.areaName = dashCompaniesPosition.getAreaName();
-		this.companyDetectorName = dashCompaniesPosition.getCompanyDetectorName();
-		this.sensorName = dashCompaniesPosition.getSensorName();		
-		this.sensorId = dashCompaniesPosition.getSensorId();
-		this.positionId = dashCompaniesPosition.getPositionId();
-		this.gasName = dashCompaniesPosition.getGasName();
-		this.lastValue = dashCompaniesPosition.getLastValue();
-		this.alarmType = dashCompaniesPosition.getAlarmType();
-		this.lastUpdate = dashCompaniesPosition.getLastUpdate();
+		this.uid = e.getUid();
+		this.companyId = e.getCompanyId();
+		this.companyName = e.getCompanyName();
+		this.areaName = e.getAreaName();
+		this.companyDeviceName = e.getCompanyDeviceName();	
+		this.positionId = e.getPositionId();
+		this.artefact = e.getArtefact();
+		this.lastValue = e.getLastValue();
+		this.alarmType = e.getAlarmType();
+		this.lastUpdate = e.getLastUpdate();
 		
-		if(dashCompaniesPosition.getPositionHistoricView() != null) {
+		if(e.getPositionHistoricView() != null) {
 			
-			this.positionHistoricViewDto = setPositionHistoricViewsDto(dashCompaniesPosition.getPositionHistoricView());			
+			this.positionHistoricViewDto = setPositionHistoricViewsDto(e.getPositionHistoricView());			
 		}
 		
 		Integer count = 0;
@@ -78,11 +76,9 @@ public class DashCompaniesPositionDto {
 	private String companyName;	
 	private String unitName;	
 	private String areaName;	
-	private String companyDetectorName;	
-	private String sensorName;	
-	private Long sensorId;	
+	private String companyDeviceName;
 	private Long positionId;	
-	private String gasName;	
+	private String artefact;
 	private Double lastValue;	
 	private AlarmType alarmType;	
 	private Date lastUpdate;
@@ -135,29 +131,13 @@ public class DashCompaniesPositionDto {
 	public final void setAreaName(String areaName) {
 		this.areaName = areaName;
 	}
-
-	public final String getCompanyDetectorName() {
-		return companyDetectorName;
+	
+	public String getCompanyDeviceName() {
+		return companyDeviceName;
 	}
 
-	public final void setCompanyDetectorName(String companyDetectorName) {
-		this.companyDetectorName = companyDetectorName;
-	}
-
-	public final String getSensorName() {
-		return sensorName;
-	}
-
-	public final void setSensorName(String sensorName) {
-		this.sensorName = sensorName;
-	}
-
-	public final Long getSensorId() {
-		return sensorId;
-	}
-
-	public final void setSensorId(Long sensorId) {
-		this.sensorId = sensorId;
+	public void setCompanyDeviceName(String companyDeviceName) {
+		this.companyDeviceName = companyDeviceName;
 	}
 
 	public final Long getPositionId() {
@@ -166,14 +146,6 @@ public class DashCompaniesPositionDto {
 
 	public final void setPositionId(Long positionId) {
 		this.positionId = positionId;
-	}
-
-	public final String getGasName() {
-		return gasName;
-	}
-
-	public final void setGasName(String gasName) {
-		this.gasName = gasName;
 	}
 
 	public final Double getLastValue() {
@@ -199,6 +171,12 @@ public class DashCompaniesPositionDto {
 	public final void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	
-	
+
+	public String getArtefact() {
+		return artefact;
+	}
+
+	public void setArtefact(String artefact) {
+		this.artefact = artefact;
+	}	
 }

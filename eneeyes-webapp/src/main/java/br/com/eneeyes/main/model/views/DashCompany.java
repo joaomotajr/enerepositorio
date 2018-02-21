@@ -10,7 +10,7 @@ import javax.persistence.NamedQuery;
 import org.hibernate.annotations.Subselect;
 
 @Entity
-@Subselect("select * from dash_companies")
+@Subselect("select * from dash_companies2")
 @NamedQuery(name="DashCompany.findAll", query="SELECT d FROM DashCompany d")
 public class DashCompany implements Serializable {
 	private static final long serialVersionUID = 1L;

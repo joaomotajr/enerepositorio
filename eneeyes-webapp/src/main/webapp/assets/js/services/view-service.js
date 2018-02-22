@@ -4,15 +4,21 @@ app.factory('ViewService', function($resource){
        listAllDashDetectorsMaintenance : $resource('/security/api/view/allDashDetectorsMaintenanceView',{},{
            view : {method : 'GET'}
        }),
-        listAreaCompanyDetectorsAlarms : $resource('/security/api/view/findAreaCompanyDetectorAlarmViewByAreaId/:areaId/',{ areaId: '@areaId'},{
+        // listAreaCompanyDetectorsAlarms : $resource('/security/api/view/findAreaCompanyDeviceAlarmViewByAreaId/:areaId/',{ areaId: '@areaId'},{
+        // 	view : {method : 'GET'}
+        // }),
+        listAreaCompanyDeviceAlarms : $resource('/security/api/view/findAreaCompanyDeviceAlarmViewByAreaId/:areaId/',{ areaId: '@areaId'},{
         	view : {method : 'GET'}
-        }),       
-        listCompanyGenericAlarms : $resource('/security/api/view/findAreaCompanyGenericAlarmViewByCompanyDeviceId/:companyDeviceId/',{ companyDeviceId: '@companyDeviceId'},{
+        }),   
+        listCompanyDeviceAlarms : $resource('/security/api/view/findAreaCompanyDeviceAlarmViewByCompanyDeviceId/:companyDeviceId/',{ companyDeviceId: '@companyDeviceId'},{
         	view : {method : 'GET'}
-        }),
-        listCompanyDetectorsAlarms : $resource('/security/api/view/findAreaCompanyDetectorAlarmViewByCompanyDeviceId/:companyDeviceId/',{ companyDeviceId: '@companyDeviceId'},{
-         	view : {method : 'GET'}
-        }),
+        }),    
+        // listCompanyGenericAlarms : $resource('/security/api/view/findAreaCompanyGenericAlarmViewByCompanyDeviceId/:companyDeviceId/',{ companyDeviceId: '@companyDeviceId'},{
+        // 	view : {method : 'GET'}
+        // }),
+        // listCompanyDetectorsAlarms : $resource('/security/api/view/findAreaCompanyDetectorAlarmViewByCompanyDeviceId/:companyDeviceId/',{ companyDeviceId: '@companyDeviceId'},{
+        //  	view : {method : 'GET'}
+        // }),
         listAllDashCompany : $resource('/security/api/view/allDashCompany',{},{
         	view : {method : 'GET'}
         }),
@@ -37,8 +43,5 @@ app.factory('ViewService', function($resource){
         existsSensor : $resource('/security/api/view/existsSensorById/:id', {id: '@id'},{
             view : {method : 'GET'}
         }),        
-        existsSensors : $resource('/security/api/view/existsSensorsByIds/:id1/:id2', {id1: '@id1', id2: '@id2' },{                  
-            view : {method : 'GET'}
-        }),
      };
 });

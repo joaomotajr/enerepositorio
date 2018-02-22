@@ -158,10 +158,8 @@
 														<td>{{item.uid}}</td>															
 														<td><span data-truncate="12" data-value="{{item.companyName}}"></span></td>															
 														<td>{{item.companyDeviceName}}</td>																
-														<td>{{item.artefact}}
-															<span style="vertical-align:super;font-size:0.65em" data-ng-if="item.unitMeterGases=='LEL_PERCENT'">LEL%</span>
-															<span style="vertical-align:super;font-size:0.65em" data-ng-if="item.unitMeterGases=='PERCENT_VOLUME'">VOL%</span>
-															<span style="vertical-align:super;font-size:0.65em" data-ng-if="item.unitMeterGases!='LEL_PERCENT' && item.unitMeterGases!='PERCENT_VOLUME'">{{item.unitMeterGases}}</span>
+														<td>
+															<jsp:include page="controls/reduzMeters.jsp"/>
 														</td>													
 														<td> 
 															<span class="label" data-ng-class="{																	

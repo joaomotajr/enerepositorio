@@ -84,7 +84,7 @@ app.controller('companyGenericController', function ($scope, $interval, $rootSco
 
 	$scope.toggleAlarm = function(alarm) {
 		
-		if(alarm != null && $scope.selectedCompanyGenericAlarm.rangeMax < alarm.alarm3) {
+		if(alarm != null && $scope.selectedCompanyDeviceAlarm.rangeMax < alarm.alarm3) {
 			$scope.msgErroAlarm = "Alarm Selecionado excede Range Max do Sensor, Verifique";
 			return;
 		}
@@ -93,8 +93,8 @@ app.controller('companyGenericController', function ($scope, $interval, $rootSco
 			$scope.updateAlarm = new CompanyDeviceService.updateAlarm();
 			$scope.updateAlarm.$companyDevice({_csrf : angular.element('#_csrf').val(), alarmId: alarm.uid, id : $scope.selectedCompanyDevice.uid }, function(){						
 				if (!$scope.updateAlarm.isError) {
-					$scope.selectedCompanyGenericAlarm.alarmId = alarm.uid;
-					$scope.getCompanyGenericAlarm($scope.selectedCompanyGeneric.companyDeviceDto.uid);	
+					$scope.selectedCompanyDeviceAlarm.alarmId = alarm.uid;
+					$scope.getCompanyDeviceAlarm($scope.selectedCompanyGeneric.companyDeviceDto.uid);	
 				}			
 			});	
 		}
@@ -103,8 +103,8 @@ app.controller('companyGenericController', function ($scope, $interval, $rootSco
 			$scope.removeAlarm = new CompanyDeviceService.removeAlarm();
 			$scope.removeAlarm.$companyDevice({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){						
 				if (!$scope.removeAlarm.isError) {
-					$scope.selectedCompanyGenericAlarm.alarmId = null;			 
-					$scope.getCompanyGenericAlarm($scope.selectedCompanyGeneric.companyDeviceDto.uid);	
+					$scope.selectedCompanyDeviceAlarm.alarmId = null;			 
+					$scope.getCompanyDeviceAlarm($scope.selectedCompanyGeneric.companyDeviceDto.uid);	
 				}			
 			});
 		}
@@ -131,7 +131,7 @@ app.controller('companyGenericController', function ($scope, $interval, $rootSco
 			
 			if($scope.selectedCompanyGeneric != null) {								
 				$scope.getPositionsAndIds($scope.selectedCompanyDevice.uid);
-				$scope.getCompanyGenericAlarm($scope.selectedCompanyGeneric.companyDeviceDto.uid);
+				$scope.getCompanyDeviceAlarm($scope.selectedCompanyGeneric.companyDeviceDto.uid);
 			}
 		});		 
 	};
@@ -154,16 +154,15 @@ app.controller('companyGenericController', function ($scope, $interval, $rootSco
 		$scope.selectedCompanyGeneric.genericDto = item;
 	};
 
-	$scope.getCompanyGenericAlarm = function(companyDeviceId) {
+	$scope.getCompanyDeviceAlarm = function(companyDeviceId) {
 		
-		$scope.resultDetectors = new ViewService.listCompanyGenericAlarms();		 
-		$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), companyDeviceId : companyDeviceId}, function(){						
-			$scope.selectedCompanyGenericAlarms = $scope.resultDetectors.list;
+		$scope.resultDevices = new ViewService.listCompanyDeviceAlarms();		 
+		$scope.resultDevices.$view({_csrf : angular.element('#_csrf').val(), companyDeviceId : companyDeviceId}, function(){						
+			$scope.selectedCompanyDeviceAlarms = $scope.resultDevices.list;
 
-			$scope.selectedCompanyGenericAlarm = $scope.resultDetectors.list[0];				
+			$scope.selectedCompanyDeviceAlarm = $scope.resultDevices.list[0];				
 		});
 	};
-		
 	
 	/* ------------------------------------- Inicio Processamento --------------------------------------------*/
 	

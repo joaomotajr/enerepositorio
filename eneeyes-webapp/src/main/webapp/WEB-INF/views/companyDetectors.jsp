@@ -140,19 +140,19 @@
 				       	<div class="tab-pane" id="tabCompanyDetector_2">
 							   
 							<div class="row" style="margin-right: 5px !important; margin-left: 5px !important;">			       		 
-								<div data-ng-repeat="item in selectedCompanyDetectorAlarms">
+								<div data-ng-repeat="item in selectedCompanyDeviceAlarms">
 									
 									<div class="col-md-10">
 										<div class="panel panel-primary">								                
 											<div class="panel-heading">
-												<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong> {{selectedCompanyDetectorAlarm.companyDetectorName}}</h2>							
+												<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong> {{selectedCompanyDeviceAlarm.companyDetectorName}}</h2>							
 											</div>											   					               	
 											<div class="panel-body">							            					                 										                	
 												<div class="row">
 													<div class="col-md-6">
-														<span class="pull-left text-muted" data-ng-if="selectedCompanyDetectorAlarm.alarmOn==null"><i class="fa-lg fa fa-bell-slash-o" title="Sem Alarme"></i></span>
-														<span class="pull-left text-black" title="{{selectedCompanyDetectorAlarm.alarmName}}" data-ng-if="selectedCompanyDetectorAlarm.alarmOn==false"><i class="fa-lg fa fa-bell-slash" title="Alarm Off"></i></span>
-														<span class="pull-left text-navy" title="{{selectedCompanyDetectorAlarm.alarmName}}" data-ng-if="selectedCompanyDetectorAlarm.alarmOn==true"><i class="fa-lg fa fa-bell" title=" Alarm On"></i></span>
+														<span class="pull-left text-muted" data-ng-if="selectedCompanyDeviceAlarm.alarmOn==null"><i class="fa-lg fa fa-bell-slash-o" title="Sem Alarme"></i></span>
+														<span class="pull-left text-black" title="{{selectedCompanyDeviceAlarm.alarmName}}" data-ng-if="selectedCompanyDeviceAlarm.alarmOn==false"><i class="fa-lg fa fa-bell-slash" title="Alarm Off"></i></span>
+														<span class="pull-left text-navy" title="{{selectedCompanyDeviceAlarm.alarmName}}" data-ng-if="selectedCompanyDeviceAlarm.alarmOn==true"><i class="fa-lg fa fa-bell" title=" Alarm On"></i></span>
 													</div>
 													<div class="col-md-6">
 														<a href="#" class="pull-right" data-ng-click="configAlarm($index);" title="Troca/Selecionar Alarme"><i class="fa-lg fa fa-gears" title="Atribuir/Remover Alarme"></i></a>	
@@ -167,7 +167,7 @@
 																	data-width="180"
 																	data-height= "260"																				    						    						    					    						    						    						    															
 																	data-type="vled"
-																	data-datasource="{{selectedCompanyDetectorAlarm.dataSource}}">
+																	data-datasource="{{selectedCompanyDeviceAlarm.dataSource}}">
 																</div>
 															</div>
 														</div>
@@ -180,33 +180,33 @@
 																<li class="list-group-item" style="padding: 0px 15px;">
 																	<label>G&aacute;s:</label> 
 																	<span class="pull-right">
-																		{{selectedCompanyDetectorAlarm.gasName}}
-																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetectorAlarm.unitMeterGases == 'LEL_PERCENT'">LEL%</span>
-																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetectorAlarm.unitMeterGases == 'PERCENT_VOLUME'">VOL%</span>
-																		<spqn style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetectorAlarm.unitMeterGases != 'LEL_PERCENT' 
-																				&& selectedCompanyDetectorAlarm.unitMeterGases != 'PERCENT_VOLUME'">{{selectedCompanyDetectorAlarm.unitMeterGases}}</dd>
+																		{{selectedCompanyDeviceAlarm.gasName}}
+																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDeviceAlarm.unitMeterGases == 'LEL_PERCENT'">LEL%</span>
+																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDeviceAlarm.unitMeterGases == 'PERCENT_VOLUME'">VOL%</span>
+																		<spqn style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDeviceAlarm.unitMeterGases != 'LEL_PERCENT' 
+																				&& selectedCompanyDeviceAlarm.unitMeterGases != 'PERCENT_VOLUME'">{{selectedCompanyDeviceAlarm.unitMeterGases}}</dd>
 																	</span>
 																</span>
 																</li>
 																
 																<li class="list-group-item" style="padding: 0px 15px;">
-																	<label>Range: Min|Man:</label><span class="pull-right">{{selectedCompanyDetectorAlarm.rangeMin}} | {{selectedCompanyDetectorAlarm.rangeMax}}</span>
+																	<label>Range: Min|Man:</label><span class="pull-right">{{selectedCompanyDeviceAlarm.rangeMin}} | {{selectedCompanyDeviceAlarm.rangeMax}}</span>
 																</li>
-																<span data-ng-if="!selectedCompanyDetectorAlarm.alarmOn">
+																<span data-ng-if="!selectedCompanyDeviceAlarm.alarmOn">
 																		<br><hr><br><br><hr>
 																</span>
-																<span data-ng-if="selectedCompanyDetectorAlarm.alarmOn">
+																<span data-ng-if="selectedCompanyDeviceAlarm.alarmOn">
 																	<li class="list-group-item" style="padding: 0px 15px;">
-																		<label>Alarme Atribu&iacute;do:</label><span class="pull-right">{{selectedCompanyDetectorAlarm.alarmName}}</span> 
+																		<label>Alarme Atribu&iacute;do:</label><span class="pull-right">{{selectedCompanyDeviceAlarm.alarmName}}</span> 
 																	</li>
 																	<li class="list-group-item list-group-item-info" style="padding: 2px 15px;">
-																		<span class="badge"><i class="fa fa-angle-right"></i> {{selectedCompanyDetectorAlarm.alarm1}}</span> <label>Alarme1:</label> Detec&ccedil;&atilde;o
+																		<span class="badge"><i class="fa fa-angle-right"></i> {{selectedCompanyDeviceAlarm.alarm1}}</span> <label>Alarme1:</label> Detec&ccedil;&atilde;o
 																	</li>
 																	<li class="list-group-item list-group-item-warning" style="padding: 2px 15px;">
-																		<span class="badge"><i class="fa fa-angle-right"></i> {{selectedCompanyDetectorAlarm.alarm2}}</span> <label>Alarme2:</label> Alerta
+																		<span class="badge"><i class="fa fa-angle-right"></i> {{selectedCompanyDeviceAlarm.alarm2}}</span> <label>Alarme2:</label> Alerta
 																	</li>
 																	<li class="list-group-item list-group-item-danger" style="padding: 2px 15px;">
-																		<span class="badge"><i class="fa fa-angle-right"></i> {{selectedCompanyDetectorAlarm.alarm3}}</span> <label>Alarme3:</label> Evacua&ccedil;&atilde;o:
+																		<span class="badge"><i class="fa fa-angle-right"></i> {{selectedCompanyDeviceAlarm.alarm3}}</span> <label>Alarme3:</label> Evacua&ccedil;&atilde;o:
 																	</li>
 																</span>
 															</ul>
@@ -278,9 +278,9 @@
 					<div class="modal-body">
 						<div class="panel panel-default">
 							<div class="panel-heading" style="text-align:center; font-size: 1.3em;">
-								Alarme para o Sensor: <strong>{{selectedCompanyDetectorAlarm.sensorName}} </strong> - 
-								Artefato: <strong>{{selectedCompanyDetectorAlarm.gasName}}</strong> - 
-								Valor M&aacute;ximo: <strong>{{selectedCompanyDetectorAlarm.rangeMax}}</strong>
+								Alarme para o Sensor: <strong>{{selectedCompanyDeviceAlarm.sensorName}} </strong> - 
+								Artefato: <strong>{{selectedCompanyDeviceAlarm.gasName}}</strong> - 
+								Valor M&aacute;ximo: <strong>{{selectedCompanyDeviceAlarm.rangeMax}}</strong>
 							</div>
 					  	</div>
 				
@@ -312,12 +312,7 @@
 											<tr data-ng-repeat="item in alarms">
 												<td>{{item.uid}}</td>
 												<td>{{item.name}}</td>
-												<td>
-													<span data-ng-if="item.deviceType=='DETECTOR'">{{item.gasDto.name}}</span>
-													<span data-ng-if="item.deviceType!='DETECTOR'">{{item.deviceType}}</span>
-													<span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
-													<span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}
-												</td>
+												<td><jsp:include page="controls/reduzMeters.jsp"/></td>
 												<td>{{item.alarm1}}</td>
 												<td>{{item.alarm2}}</td>
 												<td>{{item.alarm3}}</td>												
@@ -326,11 +321,11 @@
 														item.gasDto.name != selectedCompanyDetector.detectorDto.sensorDto.gasDto.name)">
 														<button type="button" class="btn btn-offLine btn-xs" disabled>Incompativel</button>
 													</div>																										
-													<div data-ng-if="item.uid == selectedCompanyDetectorAlarm.alarmId">
+													<div data-ng-if="item.uid == selectedCompanyDeviceAlarm.alarmId">
 														<button type="button" class="btn btn-danger btn-xs" data-ng-click="toggleAlarm(null)">&nbsp;&nbsp;&nbsp;Remover&nbsp;&nbsp;&nbsp;</button>
 													</div>
 													<div data-ng-if="(item.unitMeterGases == selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases && 
-														item.gasDto.name == selectedCompanyDetector.detectorDto.sensorDto.gasDto.name) && item.uid != selectedCompanyDetectorAlarm.alarmId">
+														item.gasDto.name == selectedCompanyDetector.detectorDto.sensorDto.gasDto.name) && item.uid != selectedCompanyDeviceAlarm.alarmId">
 														<button type="button" class="btn btn-primary btn-xs" data-ng-click="toggleAlarm(item)">&nbsp;&nbsp;Selecionar&nbsp;&nbsp;</button>
 													</div>													
 												</td>													

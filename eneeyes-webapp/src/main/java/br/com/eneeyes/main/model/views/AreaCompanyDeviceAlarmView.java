@@ -16,11 +16,11 @@ import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 @Entity
-@Subselect("select * from area_companydetector_alarm_view2")
-public class AreaCompanyDetectorAlarmView implements Serializable {
+@Subselect("select * from area_companydevice_alarm_view")
+public class AreaCompanyDeviceAlarmView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	public AreaCompanyDetectorAlarmView() {		
+	public AreaCompanyDeviceAlarmView() {		
 	
 	}	
 	
@@ -36,9 +36,6 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 	
 	@Column(name = "company_detector_id")
 	private Long companyDetectorId;
-	
-//	@Column(name = "sensor_id")
-//	private Long sensorId;
 	
 	@Column(name = "company_detector_name")
 	private String companyDetectorName;
@@ -90,81 +87,38 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 	@Column(name = "alarm_3", nullable = true)	
 	private Double alarm3;
 	
-//	@Column(name = "gas_name", nullable = true)
-//	private String gasName;
-	
 	private String artefact;
 
 	public final Long getUid() {
 		return uid;
 	}
 
-	public final void setUid(Long uid) {
-		this.uid = uid;
-	}
-
 	public final Long getAreaId() {
 		return areaId;
-	}
-
-	public final void setAreaId(Long areaId) {
-		this.areaId = areaId;
 	}
 
 	public final Long getCompanyDetectorId() {
 		return companyDetectorId;
 	}
 
-	public final void setCompanyDetectorId(Long companyDetectorId) {
-		this.companyDetectorId = companyDetectorId;
-	}	
-
 	public Long getCompanyDeviceId() {
 		return companyDeviceId;
 	}
 
-	public void setCompanyDeviceId(Long companyDeviceId) {
-		this.companyDeviceId = companyDeviceId;
-	}
-
-//	public final Long getSensorId() {
-//		return sensorId;
-//	}
-//
-//	public final void setSensorId(Long sensorId) {
-//		this.sensorId = sensorId;
-//	}
-
 	public final String getCompanyDetectorName() {
 		return companyDetectorName;
-	}
-
-	public final void setCompanyDetectorName(String companyDetectorName) {
-		this.companyDetectorName = companyDetectorName;
 	}
 
 	public final String getCompanyDetectorLocal() {
 		return companyDetectorLocal;
 	}
 
-	public final void setCompanyDetectorLocal(String companyDetectorLocal) {
-		this.companyDetectorLocal = companyDetectorLocal;
-	}
-
 	public final String getSensorName() {
 		return sensorName;
 	}
 
-	public final void setSensorName(String sensorName) {
-		this.sensorName = sensorName;
-	}
-
 	public final Double getRangeMin() {
 		return rangeMin;
-	}
-
-	public final void setRangeMin(Double rangeMin) {
-		this.rangeMin = rangeMin;
 	}
 
 	public final Double getRangeMax() {
@@ -179,96 +133,44 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 		return unitMeterGases;
 	}
 
-	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-		this.unitMeterGases = unitMeterGases;
-	}	
-
 	public Date getLastUpdate() {
 		return lastUpdate;
-	}
-
-	public void setLastUpdate(Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
 	}
 
 	public BigDecimal getLastValue() {
 		return lastValue;
 	}
 
-	public void setLastValue(BigDecimal lastValue) {
-		this.lastValue = lastValue;
-	}
-
 	public AlarmType getAlarmType() {
 		return alarmType;
-	}
-
-	public void setAlarmType(AlarmType alarmType) {
-		this.alarmType = alarmType;
 	}
 
 	public final Long getAlarmId() {
 		return alarmId;
 	}
 
-	public final void setAlarmId(Long alarmId) {
-		this.alarmId = alarmId;
-	}
-
 	public final String getAlarmName() {
 		return alarmName;
-	}
-
-	public final void setAlarmName(String alarmName) {
-		this.alarmName = alarmName;
 	}
 
 	public final Boolean getAlarmOn() {
 		return alarmOn;
 	}
 
-	public final void setAlarmOn(Boolean alarmOn) {
-		this.alarmOn = alarmOn;
-	}
-
 	public final Double getAlarm1() {
 		return alarm1;
-	}
-
-	public final void setAlarm1(Double alarm1) {
-		this.alarm1 = alarm1;
 	}
 
 	public final Double getAlarm2() {
 		return alarm2;
 	}
 
-	public final void setAlarm2(Double alarm2) {
-		this.alarm2 = alarm2;
-	}
-
 	public final Double getAlarm3() {
 		return alarm3;
-	}
-
-	public final void setAlarm3(Double alarm3) {
-		this.alarm3 = alarm3;
 	}
 
 	public String getArtefact() {
 		return artefact;
 	}
-
-	public void setArtefact(String artefact) {
-		this.artefact = artefact;
-	}
-
-//	public final String getGasName() {
-//		return gasName;
-//	}
-//
-//	public final void setGasName(String gasName) {
-//		this.gasName = gasName;
-//	}		
 	
 }

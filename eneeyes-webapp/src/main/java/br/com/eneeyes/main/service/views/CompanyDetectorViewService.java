@@ -1,8 +1,5 @@
 package br.com.eneeyes.main.service.views;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,34 +14,6 @@ public class CompanyDetectorViewService {
 	
 	@Autowired
 	private CompanyDetectorViewRepository repository;
-	
-	public BasicResult<?> existsSensor(Long uid1, Long uid2) {
-		Result<CompanyDetectorView> result = new Result<CompanyDetectorView>();
-		
-		List<Long> sensorIds = new ArrayList<Long>();
-		
-		sensorIds.add(uid1);
-		sensorIds.add(uid2);
-				
-		try {
-			Long resp = repository.countBySensorIdIn(sensorIds);
-			
-			if (resp > 0) {
-				
-				result.setResultType( ResultMessageType.YES_DATA );
-				result.setMessage("Executado com sucesso.");
-			} else {				
-				result.setResultType( ResultMessageType.NO_DATA );
-				result.setMessage("Nenhum Dado.");
-			}
-			
-		} catch (Exception e) {			
-			result.setResultType( ResultMessageType.ERROR );
-			result.setMessage(e.getMessage());
-		}
-		
-		return result;
-	}
 	
 	public BasicResult<?> existsSensor(Long uid) {
 		Result<CompanyDetectorView> result = new Result<CompanyDetectorView>();

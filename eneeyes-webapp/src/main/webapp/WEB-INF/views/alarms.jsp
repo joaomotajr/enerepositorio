@@ -2,35 +2,21 @@
 	<style>
 		.todo-list>li {
 		    padding: 4px;
-		}
-		
+		}		
 		.disableDiv {
 			pointer-events: none;
 			opacity: 0.5;
-		}
-		
+		}		
 		.row {
 			padding-bottom: 5px !important;
-		}
-		
+		}		
 		.box {
 			margin-bottom: 5px !important;
 		}
-		
-		.list-group-item {                    
-            padding: 5px 15px !important;
-            border: none !important;
-         }
-         
-         .list-group {
-            margin-bottom: 0px !important;
-         }
-
 		 .multipleMessages {
 		 	color: #9f3a38;
     		background: antiquewhite;
-		 }
-			
+		 }			
 	</style>
 		
 	<div data-ng-controller="alarmController as alarmController">
@@ -108,9 +94,11 @@
 							<div class="box-header with-border"><strong><i class="fa fa-rss"></i> Dispositivos:</strong></div>
 							
 							<div class="box-body">									        		                                                                                       
-								<div class="list-group" style="max-height: 50px ! important; height:auto; overflow: auto; font-size: 0.9em  ! important">
+								<!-- <div class="list-group" style="max-height: 50px ! important; height:auto; overflow: auto; font-size: 0.9em  ! important"> -->
+								<div style="max-height: 50px ! important; height:auto; overflow: auto; font-size: 0.9em  ! important">
 									<p data-ng-show="!usedAlarms || usedAlarms.length <= 0" class="text-center">NENHUM DETECTOR ASSOCIADO</p>
-									<span class="list-group-item" data-ng-repeat="item in usedAlarms">
+									<!-- <span class="list-group-item" data-ng-repeat="item in usedAlarms"> -->
+									<span data-ng-repeat="item in usedAlarms">
 										<strong>Detector/Sensor:</strong> {{item.company_detector_name}}/{{item.sensor_name}} - <strong>Local:</strong> {{item.company_detector_local}} 			                                            
 									</span>                            
 								</div>					                                
@@ -230,9 +218,9 @@
 																<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">
 																	<label class="control-label">																		
 																			<strong data-ng-show="deviceType.name=='DETECTOR'"><i class="fa fa-tachometer"> </i> Unidade:</strong>
-																			<strong data-ng-show="deviceType.name=='ELETRICIDADE'"><i class="fa fa-plug"> </i> Eletricidade Medida em:</strong>
-																			<strong data-ng-show="deviceType.name=='TEMPO'"><i class="fa fa-clock-o"> </i> Tempo Contado em:</strong>
-																			<strong data-ng-show="deviceType.name=='TEMPERATURA'"><i class="fa fa-thermometer"> </i> Temperatura Calculada em:</strong>
+																			<strong data-ng-show="deviceType.name=='ELETRICITY'"><i class="fa fa-plug"> </i> Eletricidade Medida em:</strong>
+																			<strong data-ng-show="deviceType.name=='TIME'"><i class="fa fa-clock-o"> </i> Tempo Contado em:</strong>
+																			<strong data-ng-show="deviceType.name=='TEMPERATURE'"><i class="fa fa-thermometer"> </i> Temperatura Calculada em:</strong>
 
 																			<span class="text-red" data-ng-show="userForm.gasUnit.$dirty && userForm.gasUnit.$invalid">  [Campo Obrigat&oacute;rio]</span>
 																	</label>

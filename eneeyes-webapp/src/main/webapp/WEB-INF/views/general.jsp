@@ -185,7 +185,7 @@
 																			<div data-fusioncharts							
 																				data-width="300"
 																				data-height= "200"						    						    						    						    
-																				data-type="angulargauge"						    
+																				data-type="{{item.dataType}}"
 																				data-theme= "fint"
 																				data-datasource="{{item.dataSource}}">
 																			</div>
@@ -193,13 +193,10 @@
 																		
 																	</div>								                				                				                
 																	<div class="row">																	
-																		<div class="description-block" style="margin: 3px 0;">																
-																			<!-- <h4 class="description-header"><i class="fa fa-bolt"></i> {{item.sensorName}}</h4> -->
+																		<div class="description-block" style="margin: 3px 0;">																																			
 																			<span class="description-text">Range: Min|Man: {{item.rangeMin}} | {{item.rangeMax}} </span>
 																			<br>
-																			Artefato: <strong class="text-navy">{{item.artefact}}</strong>																
-																			<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
-																			<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}</span>
+																			<jsp:include page="controls/reduzMeters.jsp"/>
 																		</div>																		
 																	</div>
 																	<br data-ng-if="!item.alarmOn">	

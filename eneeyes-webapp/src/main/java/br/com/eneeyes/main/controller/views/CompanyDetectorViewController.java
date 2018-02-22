@@ -30,12 +30,4 @@ public class CompanyDetectorViewController {
 		
 		return service.existsSensor(uid);		
 	}	
-	
-	@RequestMapping(value="/security/api/view/existsSensorsByIds/{uid1}/{uid2}",  method=RequestMethod.GET, produces = "application/json")
-	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> existsSensors(@PathVariable Long uid1, @PathVariable Long uid2) {
-		
-		return service.existsSensor(uid1, uid2);
-	}
-
 }

@@ -128,7 +128,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			if($scope.selectedCompanyDetector != null) {
 				
 				$scope.getCompanyDetectorMaintenanceHistoric();
-				$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.companyDeviceDto.uid);
+				$scope.getCompanyDeviceAlarm($scope.selectedCompanyDetector.companyDeviceDto.uid);
 				$scope.getPositionsAndIds($scope.selectedCompanyDetector.companyDeviceDto.uid);
 				
 				reloadDates();			
@@ -154,15 +154,14 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		$scope.selectedCompanyDetector.detectorDto = item;
 	};
 
-	$scope.getCompanyDetectorAlarm = function(companyDeviceId) {
+	$scope.getCompanyDeviceAlarm = function(companyDeviceId) {
 
-		$scope.resultDetectors = new ViewService.listCompanyDetectorsAlarms();		 
-		$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), companyDeviceId : companyDeviceId}, function(){						
-			$scope.selectedCompanyDetectorAlarms = $scope.resultDetectors.list;
+		$scope.resultDevices = new ViewService.listCompanyDeviceAlarms();		 
+		$scope.resultDevices.$view({_csrf : angular.element('#_csrf').val(), companyDeviceId : companyDeviceId}, function(){						
+			$scope.selectedCompanyDeviceAlarms = $scope.resultDevices.list;			
+			$scope.selectedCompanyDeviceAlarm = $scope.resultDevices.list[0];	
 
-			$scope.selectedCompanyDetectorAlarm = $scope.resultDetectors.list[0];
-			$scope.selectedCompanyDetectorAlarm.dataSource = getGaugeInfo($scope.selectedCompanyDetectorAlarm);
-			 
+			$scope.selectedCompanyDeviceAlarm.dataSource = getGaugeInfo($scope.selectedCompanyDeviceAlarm);			 
 		});
 	};
 
@@ -250,7 +249,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 				maxValue: sensor.rangeMax,
 				code: "#e44a00"					 	
 			}]		
-		}
+		};
 
 		colors2 = {				
 			color: [
@@ -260,7 +259,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 				label : "Sem Limites de Alarmes",	
 				code: "#6baa01"
 			}]		
-		}
+		};
 
 		var value = sensor.lastValue > sensor.rangeMax ? sensor.rangeMax : sensor.lastValue;
 		values = {		  		  			
@@ -399,7 +398,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	
 	$scope.configAlarm = function(index) {
 		
-		$scope.search = { unitMeterGases: $scope.selectedCompanyDetectorAlarm.unitMeterGases, gas : $scope.selectedCompanyDetectorAlarm.gasName};
+		$scope.search = { unitMeterGases: $scope.selectedCompanyDeviceAlarm.unitMeterGases, gas : $scope.selectedCompanyDeviceAlarm.gasName};
 
 		$timeout(function () {
 			$('#modalAlarm').modal({ show: 'false', backdrop: 'static', keyboard:'false' });
@@ -409,7 +408,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 
 	$scope.toggleAlarm = function(alarm) {
 
-		if(alarm != null && $scope.selectedCompanyDetectorAlarm.rangeMax < alarm.alarm3) {
+		if(alarm != null && $scope.selectedCompanyDeviceAlarm.rangeMax < alarm.alarm3) {
 			$scope.msgErroAlarm = "Alarm Selecionado excede Range Max do Sensor, Verifique";
 			return;
 		}
@@ -418,8 +417,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			$scope.updateAlarm = new CompanyDeviceService.updateAlarm();
 			$scope.updateAlarm.$companyDevice({_csrf : angular.element('#_csrf').val(), alarmId: alarm.uid, id : $scope.selectedCompanyDevice.uid }, function(){						
 				if (!$scope.updateAlarm.isError) {
-					$scope.selectedCompanyDetectorAlarm.alarmId = alarm.uid;
-					$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.companyDeviceDto.uid);	
+					$scope.selectedCompanyDeviceAlarm.alarmId = alarm.uid;
+					$scope.getCompanyDeviceAlarm($scope.selectedCompanyDetector.companyDeviceDto.uid);	
 				}			
 			});	
 		}
@@ -428,8 +427,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			$scope.removeAlarm = new CompanyDeviceService.removeAlarm();
 			$scope.removeAlarm.$companyDevice({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){						
 				if (!$scope.removeAlarm.isError) {
-					$scope.selectedCompanyDetectorAlarm.alarmId = null;			 
-					$scope.getCompanyDetectorAlarm($scope.selectedCompanyDetector.companyDeviceDto.uid);	
+					$scope.selectedCompanyDeviceAlarm.alarmId = null;			 
+					$scope.getCompanyDeviceAlarm($scope.selectedCompanyDetector.companyDeviceDto.uid);	
 				}			
 			});
 		}

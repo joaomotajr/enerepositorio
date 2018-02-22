@@ -111,7 +111,7 @@
 							
 								<div class="col-md-4">																															
 									<div class="col-md-3" style="padding-right: 2px !important;">	
-										<label style="margin-top: 5px !important;" title="Mostrando Máximo e Mínimo"><span class="icon fa fa-object-group"></span> Agrupar</label>
+										<label style="margin-top: 5px !important;" title="Mostrando Mï¿½ximo e Mï¿½nimo"><span class="icon fa fa-object-group"></span> Agrupar</label>
 									</div>
 									<div class="col-md-9" style="padding-right: 5px; padding-left: 5px; background:gray; border-color:lightgray; border-radius: 2px 2px 2px 2px; color:white">
 											<div class="radio3 radio-check radio-success radio-inline">
@@ -133,7 +133,7 @@
 								
 								<div class="col-md-5" >									
 									<div class="col-md-3">
-										<label style="margin-top: 2px !important; padding-right: 5px !important;" title="Mostrando Máximo e Mínimo"><span class="icon fa fa-caret"></span>Exibir/Exportar</label>
+										<label style="margin-top: 2px !important; padding-right: 5px !important;" title="Mostrando Mï¿½ximo e Mï¿½nimo"><span class="icon fa fa-caret"></span>Exibir/Exportar</label>
 									</div>										        	
 									<div class="form-group">
 											<div class="col-md-3" style="padding-right: 5px !important;">
@@ -142,7 +142,7 @@
 											<span class="icon fa fa-file-text"></span> Relat&oacute;rio</button>
 										</div>
 										<div class="col-md-3" style="padding-right: 5px !important; padding-left: 5px !important;">
-											<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="Exportação Permitida até 500 Linhas" 
+											<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="Exportaï¿½ï¿½o Permitida atï¿½ 500 Linhas" 
 												data-ng-class="((listHistoricInterval.list) && countHistoric <= 500) ? 'selected' : 'disabled'">
 											<span class="icon fa fa-file-excel-o"></span> Excel</button>
 										</div>
@@ -245,9 +245,12 @@
 																<dt>Alarme (nome):</dt>
 																	<dd>{{findedCompanyDevice.alarmDto.name}}</dd>
 																<dt>Unidade:</dt>
-																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases == 'LEL_PERCENT'">LEL%</dd>
-																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases == 'PERCENT_VOLUME'">VOL%</dd>
-																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases != 'LEL_PERCENT' && findedCompanyDevice.alarmDto.unitMeterGases != 'PERCENT_VOLUME'">{{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>																	
+																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='LEL_PERCENT_METRO'"> LEL%m</dd>
+																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='GRAUS_CELSIUS'"> °C</dd>
+																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='LEL_PERCENT'">LEL%</dd>
+																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='PERCENT_VOLUME'">VOL%</dd>
+																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases!='LEL_PERCENT' &&  findedCompanyDevice.alarmDto.unitMeterGases!='PERCENT_VOLUME' && findedCompanyDevice.alarmDto.unitMeterGases!='GRAUS_CELSIUS' && findedCompanyDevice.alarmDto.unitMeterGases!='LEL_PERCENT_METRO'">
+																		{{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>
 																<dt>Range Max:</dt>
 																	<dd><strong>{{selectedCompanyDetector.rangeMax}}</strong></dd>
 																<dt>Detec&ccedil;&atilde;o:</dt>
@@ -436,11 +439,11 @@
 					<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases!='LEL_PERCENT' && findedCompanyDevice.alarmDto.unitMeterGases!='PERCENT_VOLUME'">{{findedCompanyDevice.alarmDto.name}} / {{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>																	
 				<dt>Range Max:</dt>
 					<dd><strong>{{selectedCompanyDetector.rangeMax}}</strong></dd>
-				<dt>Detecrição:</dt>
+				<dt>Detecriï¿½ï¿½o:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm1" class="alarm1"> {{findedCompanyDevice.alarmDto.alarm1}}</span></dd>							
 				<dt>Alerta:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm2" class="alarm2"> {{findedCompanyDevice.alarmDto.alarm2}}</span></dd>
-				<dt>Evacuação:</dt>
+				<dt>Evacuaï¿½ï¿½o:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm3" class="alarm3"> {{findedCompanyDevice.alarmDto.alarm3}}</span></dd>
 			</dl>		            
 			

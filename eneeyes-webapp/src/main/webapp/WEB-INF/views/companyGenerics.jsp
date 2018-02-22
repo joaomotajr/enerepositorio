@@ -152,7 +152,7 @@
 							   
 							<div class="panel panel-primary">								                
 								<div class="panel-heading">
-									<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong> {{selectedCompanyGenericAlarm.companyDetectorName}}</h2>							
+									<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong> {{selectedCompanyDeviceAlarm.companyDetectorName}}</h2>							
 								</div>											   					               	
 								<div class="panel-body">
 									<div style="height: 400px; overflow: auto">
@@ -173,10 +173,7 @@
 													<td>{{item.uid}}</td>
 													<td>{{item.name}}</td>
 													<td>
-														<span data-ng-if="item.deviceType=='DETECTOR'">{{item.gasDto.name}}</span>
-														<span data-ng-if="item.deviceType!='DETECTOR'">{{item.deviceType}}</span>
-														<span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
-														<span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}
+														<jsp:include page="controls/reduzMeters.jsp"/>
 													</td>
 													<td>{{item.alarm1}}</td>
 													<td>{{item.alarm2}}</td>
@@ -186,11 +183,11 @@
 															item.deviceType != selectedCompanyGeneric.companyDeviceDto.deviceType)">
 															<button type="button" class="btn btn-offLine btn-xs" disabled>Incompativel</button>
 														</div>																										
-														<div data-ng-if="item.uid == selectedCompanyGenericAlarm.alarmId">
+														<div data-ng-if="item.uid == selectedCompanyDeviceAlarm.alarmId">
 															<button type="button" class="btn btn-danger btn-xs" data-ng-click="toggleAlarm(null)">&nbsp;&nbsp;&nbsp;Remover&nbsp;&nbsp;&nbsp;</button>
 														</div>
 														<div data-ng-if="(item.unitMeterGases == selectedCompanyGeneric.genericDto.unitMeterGases && 
-															item.deviceType == selectedCompanyGeneric.companyDeviceDto.deviceType) && item.uid != selectedCompanyGenericAlarm.alarmId">
+															item.deviceType == selectedCompanyGeneric.companyDeviceDto.deviceType) && item.uid != selectedCompanyDeviceAlarm.alarmId">
 															<button type="button" class="btn btn-primary btn-xs" data-ng-click="toggleAlarm(item)">&nbsp;&nbsp;Selecionar&nbsp;&nbsp;</button>
 														</div>													
 													</td>													

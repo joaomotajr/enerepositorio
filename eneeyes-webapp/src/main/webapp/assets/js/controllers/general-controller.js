@@ -1,4 +1,3 @@
-
 app.controller('generalController', function ($scope, $timeout, $interval, $rootScope, $filter, CompanyService, UnitService, ViewService) {
 
 	var intervals = []
@@ -43,7 +42,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		$scope.selectedArea.uid = $scope.selectedUnit.areasDto[index].uid;
 		$scope.selectedArea.name = $scope.selectedUnit.areasDto[index].name;	
 		 
-		$scope.getDetectors($scope.selectedArea.uid);		
+		$scope.getDevices($scope.selectedArea.uid);		
 	}
 
 	$scope.closeSelectedArea = function() {		
@@ -55,15 +54,34 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		}
 	}
 
-	$scope.getDetectors = function(areaId) {
+	$scope.getDevices = function(areaId) {
 
-		$scope.resultDetectors = new ViewService.listAreaCompanyDetectorsAlarms();		 
-		$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), areaId : areaId}, function(){						
-			$scope.selectedArea.list = $scope.resultDetectors.list;
+		$scope.resultDevices = new ViewService.listAreaCompanyDeviceAlarms();		 
+		$scope.resultDevices.$view({_csrf : angular.element('#_csrf').val(), areaId : areaId}, function(){						
+			$scope.selectedArea.list = $scope.resultDevices.list;
 
 			$scope.selectedArea.list.forEach(
-					 function(e) {						
-						e.dataSource = $scope.getGaugeInfo(e);
+					function(e) {						
+					e.dataSource = $scope.getGaugeInfo(e);
+					if(e.artefact == "TEMPERATURE") {
+						e.dataType = "thermometer";
+						e.width=300;
+						e.height=200;
+					}	
+					else if(e.artefact == "TIME") {
+						e.dataType = "bulb";
+						e.width=300;
+						e.height=200;
+					}
+					else if(e.artefact == "ELETRICITY") {
+						e.dataType = "hlineargauge";
+						e.width=300;
+						e.height=200;
+					}
+					else
+						e.dataType = "angulargauge";
+						e.width=300;
+						e.height=200;
 					}			
 			);
 
@@ -76,18 +94,18 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 
 			if($rootScope == null) return;
 			if($rootScope.currentPage == "Over-View")
-				$scope.timertDetectors($scope.selectedArea.uid);		
+				$scope.timertDevices($scope.selectedArea.uid);		
 		}, 5000));	
 	}
 
-	$scope.timertDetectors = function(areaId) {
+	$scope.timertDevices = function(areaId) {
+		
+		$scope.resultDevices = new ViewService.listAreaCompanyDeviceAlarms();	
+		$scope.resultDevices.$view({_csrf : angular.element('#_csrf').val(), areaId : areaId}, function(){
 
-		$scope.resultDetectors = new ViewService.listAreaCompanyDetectorsAlarms();		 
-		$scope.resultDetectors.$view({_csrf : angular.element('#_csrf').val(), areaId : areaId}, function(){	
-			
-			for (var i = 0; i < $scope.resultDetectors.list.length; i++) {
-				if($scope.selectedArea.list[i].sensorId == $scope.resultDetectors.list[i].sensorId) {		
-					$scope.updateGaugeInfo($scope.selectedArea.list[i], $scope.resultDetectors.list[i]);
+			for (var i = 0; i < $scope.resultDevices.list.length; i++) {
+				if($scope.selectedArea.list[i].sensorId == $scope.resultDevices.list[i].sensorId) {		
+					$scope.updateGaugeInfo($scope.selectedArea.list[i], $scope.resultDevices.list[i]);
 				}
 			}			
 						
@@ -97,62 +115,65 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 	$scope.updateGaugeInfo = function(sensor, values) {
 
 		if(sensor.rangeMax != values.rangeMax || sensor.rangeMin != values.rangeMin || sensor.alarmName != values.alarmName) {
-			sensor.dataSource = $scope.getGaugeInfo(values);
-			console.log("houve modificaÃ§Ã£o em ConfiguraÃ§Ãµes")
+			sensor.dataSource = $scope.getGaugeInfo(values);			
 		}
 		else {
 			var value = values.lastValue > sensor.rangeMax ? sensor.rangeMax : values.lastValue;
-			sensor.dataSource.dials.dial[0].value = value;
 			sensor.alarmType = values.alarmType;
+
+			if(sensor.artefact == "TEMPERATURE" || sensor.artefact == "TIME")				
+				dataSource.value = value;			
+			else
+				sensor.dataSource.dials.dial[0].value = value;
 		}
 	}	
 
-	$scope.getGaugeInfo = function(sensor) {
+	$scope.getGaugeInfo = function(e) {
 
-		var red =    sensor.alarmOn == null ? 0 : sensor.alarm3;
-		var yellow = sensor.alarmOn == null ? 0 : sensor.alarm2;
-		var orange = sensor.alarmOn == null ? 0 : sensor.alarm1;
+		var red =    e.alarmOn == null ? 0 : e.alarm3;
+		var yellow = e.alarmOn == null ? 0 : e.alarm2;
+		var orange = e.alarmOn == null ? 0 : e.alarm1;
 
 		properties =  {
-			caption: sensor.sensorName,
+			caption: e.sensorName,
 			subcaption: "",
-			lowerLimit: sensor.rangeMin,
-			upperLimit: sensor.rangeMax,
+			lowerLimit: e.rangeMin,
+			upperLimit: e.rangeMax,
 			editMode: "1",
-			showValue: "1",
+			showValue: "1",			
 			valueBelowPivot: "1",
-			tickValueDistance: "5",
-			gaugeFillMix: "{dark-30},{light-60},{dark-10}",
-			gaugeFillRatio: "15",
-			theme: "fint",	
-			gaugeouterradius: "120",
-			gaugeinnerradius: "70%",					
+			tickValueDistance: "5",			
+			theme: "fint",									
 			valueFontSize: "14"
 		};
 
 		colors = {				
 			color: [
 			{
-				minValue: sensor.rangeMin,
+				minValue: e.rangeMin,
 				maxValue: orange,
-				code: "##6baa01"
+				code: "##6baa01",
+				label: (e.artefact == "TIME" ? "Porta Fechada" : "Normal")
 			},
 			{
 				minValue: orange,
 				maxValue: yellow,
-				code: "#D8D8D8"
+				code: "#D8D8D8",
+				label: (e.artefact == "TIME" ? "Porta Aberta" : "Detecção")
 			}, {
 				minValue: yellow,
 				maxValue: red,
-				code: "#f8bd19"
+				code: "#f8bd19",
+				label: (e.artefact == "TIME" ? "Porta Aberta" : "Alerta")
 			}, {
 				minValue: red,
-				maxValue: sensor.rangeMax,
-				code: "#e44a00"
+				maxValue: e.rangeMax,
+				code: "#e44a00",
+				label: (e.artefact == "TIME" ? "Porta Aberta" : "Evacuação")
 			}]		
-		}
+		};
 
-		var value = sensor.lastValue > sensor.rangeMax ? sensor.rangeMax : sensor.lastValue;
+		var value = e.lastValue > e.rangeMax ? e.rangeMax : e.lastValue;
 		values = {		  		  			
 			dial: [{
 				id: "crntYr",
@@ -161,20 +182,48 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 				tooltext: "Status : $value",
 				rearExtension: "5"
 			}]			
-		}
+		};
 
 		dataSource = {
 			chart: null,
 			colorRange: null,
 			dials: null
-		}
-
+		};
+		
 		dataSource.chart = properties;
 		dataSource.colorRange = colors;
 		dataSource.dials = values;
 
+		if(e.artefact == "TEMPERATURE") {
+			dataSource.chart.numberSuffix = '°C';
+			dataSource.value = value;
+			dataSource.annotations = {showbelow: 0};
+		}
+		else if(e.artefact == "TIME") {
+			dataSource.chart.placeValuesInside=1;
+			dataSource.chart.numberSuffix = ' Mins';
+			dataSource.value = value;
+			dataSource.annotations = {showbelow: 1};
+			dataSource.chart.subcaption = value > 0 ? "PORTA ABERTA À" : "PORTA FECHADA";
+		}
+		else if(e.artefact == "ELETRICITY") {
+			 dataSource.chart.lowerLimitDisplay = e.rangeMin + " Min";
+			 dataSource.chart.upperLimitDisplay = e.rangeMax + " Max";			
+			// dataSource.chart.gaugeouterradius="120";
+			// dataSource.chart.gaugeinnerradius="70%";
+			// dataSource.chart.gaugeFillRatio="15";
+			// dataSource.chart.gaugeStartAngle=90;
+			// dataSource.chart.gaugeEndAngle=90;
+		}
+		else {
+			dataSource.chart.gaugeFillMix="{dark-30},{light-60},{dark-10}";
+			dataSource.chart.gaugeFillRatio="15";
+			dataSource.chart.gaugeouterradius="120";
+			dataSource.chart.gaugeinnerradius="70%";
+		}
+
 		return dataSource;
-	}
+	};
 		
 	$scope.getCompaniesSumary();	
 	

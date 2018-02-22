@@ -53,24 +53,12 @@ public class DashCompaniesPosition {
 	@Column(name = "AREA_NAME")
 	private String areaName;
 	
-//	@Column(name = "COMPANY_DETECTOR_NAME")
-//	private String companyDetectorName;
-	
 	@Column(name = "COMPANY_DEVICE_NAME")
 	private String companyDeviceName;
 	
-//	@Column(name = "SENSOR_NAME")
-//	private String sensorName;
-//	
-//	@Column(name = "SENSOR_ID")
-//	private Long sensorId;
-	
 	@Column(name = "POSITION_ID")
 	private Long positionId;
-	
-//	@Column(name = "GAS_NAME")
-//	private String gasName;	
-	
+
 	@Column(name = "ARTEFACT")
 	private String artefact;
 		
@@ -133,30 +121,6 @@ public class DashCompaniesPosition {
 		this.areaName = areaName;
 	}	
 
-//	public final String getCompanyDetectorName() {
-//		return companyDetectorName;
-//	}
-//
-//	public final void setCompanyDetectorName(String companyDetectorName) {
-//		this.companyDetectorName = companyDetectorName;
-//	}
-
-//	public final String getSensorName() {
-//		return sensorName;
-//	}
-//
-//	public final void setSensorName(String sensorName) {
-//		this.sensorName = sensorName;
-//	}
-//
-//	public final Long getSensorId() {
-//		return sensorId;
-//	}
-//
-//	public final void setSensorId(Long sensorId) {
-//		this.sensorId = sensorId;
-//	}
-
 	public String getCompanyDeviceName() {
 		return companyDeviceName;
 	}
@@ -172,14 +136,6 @@ public class DashCompaniesPosition {
 	public final void setPositionId(Long positionId) {
 		this.positionId = positionId;
 	}
-
-//	public final String getGasName() {
-//		return gasName;
-//	}
-//
-//	public final void setGasName(String gasName) {
-//		this.gasName = gasName;
-//	}
 
 	public final Double getLastValue() {
 		return lastValue;

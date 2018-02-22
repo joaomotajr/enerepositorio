@@ -1,23 +1,3 @@
-// app.filter('gasSensorFilter', function () {
-//     return function (objects, criteria) {
-        
-//     	if (!criteria || criteria.gases == null)
-//             return null;
-        
-//         var filterResult = new Array();
-
-//         for (index in objects) {
-        
-//    			 if (criteria.gases.findIndex( function(item) { return item.uid === objects[index].uid }) < 0 ) {
-
-//                  filterResult.push(objects[index]);
-//              }
-//         }
-
-//         return filterResult;
-//     }
-// });
-
 app.controller('sensorController', function ($scope, $timeout, $filter, SensorService, ManufacturerService, GasService, ViewService) {
 		
 	$scope.saveSensor = function() {
@@ -30,10 +10,6 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 		}
 		
 		angular.element('body').addClass('loading');
-		
-		// for (var i = 0; i < $scope.sensorGases.length; i++) {
-		// 	$scope.sensorGases[i].index = undefined;	            	             
-        // }
 				
 		var sensor = {
 			uid: $scope.sensorUid != undefined ? $scope.sensorUid : 0,
@@ -41,7 +17,6 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 			manufacturerDto: $scope.sensorManufacturer,
 			model: $scope.sensorModel,
 			detectionType: $scope.sensorDetectionType.uid,
-			// gasesDto: $scope.sensorGases,
 			gasDto: $scope.sensorGas,
 			unitMeterGases : $scope.gasUnitMeterGases.uid,
 			rangeMax : $scope.sensorRangeMax,
@@ -72,7 +47,6 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 	    $scope.sensorModel = '';
 	    $scope.sensorManufacturer = '';
 	    $scope.sensorDetectionType = '';	    
-		// $scope.sensorGases = [];
 		$scope.sensorGas = '';
 	    $scope.gasUnitMeterGases = '';
 		$scope.sensorRangeMax = '';
@@ -99,12 +73,6 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 			 $scope.manufacturers = $scope.resultManufacturers.list; 		 			 
         });		 
 	 }	 
-	
-	// $scope.changeManufacturer = function() { 
-		
-	// 	$scope.sensorGases = [];
-				
-	// }
  
 	 $scope.editSensor = function (index) {
         $scope.sensorUid = $scope.sensors[index].uid;
@@ -113,7 +81,6 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 	    $scope.sensorName = $scope.sensors[index].name;
 	    $scope.sensorModel = $scope.sensors[index].model;
 	    $scope.sensorDetectionType = $scope.getDetectionTypes($scope.sensors[index].detectionType);
-		// $scope.sensorGases = $scope.sensors[index].gasesDto;
 		$scope.sensorGas = $scope.sensors[index].gasDto;
 	    $scope.sensorRangeMax = $scope.sensors[index].rangeMax;
 	    $scope.sensorRangeMin = $scope.sensors[index].rangeMin;
@@ -163,20 +130,7 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
             	 return $scope.detectionTypes[i];
              }
          } 		 
-	 }
-	 
-	//  $scope.getGases = function() {
-		 
-	// 	 $scope.resultGases = new GasService.listAll();		 
-	// 	 $scope.resultGases.$gas({_csrf : angular.element('#_csrf').val()}, function(){
-			 
-	// 		 for (index in $scope.resultGases.list) {
-	// 			 $scope.resultGases.list[index].index = index;
-	// 		 }
-			 
-	// 		 $scope.gases = angular.copy($scope.resultGases.list); 		 			 
-    //      });		 
-	//  }	
+	 }	
 
 	 $scope.getGases = function() {
 		
@@ -198,16 +152,6 @@ app.controller('sensorController', function ($scope, $timeout, $filter, SensorSe
 
         return className;
 	 }	 
-	 	 
-	//  $scope.addGasSensor = function (noSortIndexindex) {
-	// 	 $scope.sensorGases.push($scope.gases[noSortIndexindex]);
-	// 	 $scope.searchGas = {gases: $scope.sensorGases};
-	//  }
-		 
-	//  $scope.deleteGas = function (index) {
-	// 	 $scope.sensorGases.splice(index, 1);	 
-	// 	 $scope.searchGas = {gases: $scope.sensorGases};
-	//  }
 	 
 	 $scope.detectionTypes = 
 		 [

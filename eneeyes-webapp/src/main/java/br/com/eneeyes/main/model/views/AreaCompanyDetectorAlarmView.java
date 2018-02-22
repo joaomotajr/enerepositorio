@@ -16,7 +16,7 @@ import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 @Entity
-@Subselect("select * from area_companydetector_alarm_view")
+@Subselect("select * from area_companydetector_alarm_view2")
 public class AreaCompanyDetectorAlarmView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -37,8 +37,8 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 	@Column(name = "company_detector_id")
 	private Long companyDetectorId;
 	
-	@Column(name = "sensor_id")
-	private Long sensorId;
+//	@Column(name = "sensor_id")
+//	private Long sensorId;
 	
 	@Column(name = "company_detector_name")
 	private String companyDetectorName;
@@ -90,8 +90,10 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 	@Column(name = "alarm_3", nullable = true)	
 	private Double alarm3;
 	
-	@Column(name = "gas_name", nullable = true)
-	private String gasName;
+//	@Column(name = "gas_name", nullable = true)
+//	private String gasName;
+	
+	private String artefact;
 
 	public final Long getUid() {
 		return uid;
@@ -125,13 +127,13 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 		this.companyDeviceId = companyDeviceId;
 	}
 
-	public final Long getSensorId() {
-		return sensorId;
-	}
-
-	public final void setSensorId(Long sensorId) {
-		this.sensorId = sensorId;
-	}
+//	public final Long getSensorId() {
+//		return sensorId;
+//	}
+//
+//	public final void setSensorId(Long sensorId) {
+//		this.sensorId = sensorId;
+//	}
 
 	public final String getCompanyDetectorName() {
 		return companyDetectorName;
@@ -253,12 +255,20 @@ public class AreaCompanyDetectorAlarmView implements Serializable {
 		this.alarm3 = alarm3;
 	}
 
-	public final String getGasName() {
-		return gasName;
+	public String getArtefact() {
+		return artefact;
 	}
 
-	public final void setGasName(String gasName) {
-		this.gasName = gasName;
-	}	
+	public void setArtefact(String artefact) {
+		this.artefact = artefact;
+	}
+
+//	public final String getGasName() {
+//		return gasName;
+//	}
+//
+//	public final void setGasName(String gasName) {
+//		this.gasName = gasName;
+//	}		
 	
 }

@@ -5,7 +5,7 @@
 app.factory('CompanyGenericService', function($resource){    
     
     return {
-    	deletar : $resource('/security/api/companyDetector/delete/:id', {id: '@id'},{
+    	deletar : $resource('/security/api/companyGeneric/delete/:id', {id: '@id'},{
     		companyGeneric : {method : 'DELETE'}
         }),        
         listAll : $resource('/security/api/companyGeneric/all',{},{

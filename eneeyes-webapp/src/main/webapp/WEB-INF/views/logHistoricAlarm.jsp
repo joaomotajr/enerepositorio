@@ -290,7 +290,7 @@
 							</div>
 
 							<div class="col-md-3">
-								<div class="row" data-ng-show="findedCompanyDetector.detectorDto.sensorDto">
+								<div class="row">
 									<div class="col-md-12">
 										<div class="box box-default">
 									
@@ -305,27 +305,27 @@
 															
 															<div class="box-header with-border">
 																<i class="fa fa-bell-o"></i>
-																<h3 class="box-title">Sensor/alarme:</h3>
+																<h3 class="box-title">Sensor/Alarme:</h3>
 															</div>
 															
 															<div class="box-body" style="border: darkgray; border-style: double;  background-color: transparent;">																																	
 																<dl class="dl-horizontal">
-																	<dt>Sensor (nome):</dt>
-																		<dd>{{selectedCompanyDetector.sensorName}}</dd>
-																	<dt>Alarme (nome):</dt>
-																		<dd>{{findedCompanyDevice.alarmDto.name}}</dd>
-																	<dt>Unidade:</dt>
-																		<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases == 'LEL_PERCENT'">LEL%</dd>
-																		<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases == 'PERCENT_VOLUME'">VOL%</dd>
-																		<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases != 'LEL_PERCENT' && findedCompanyDevice.alarmDto.unitMeterGases != 'PERCENT_VOLUME'">{{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>																	
-																	<dt>Range Max:</dt>
-																		<dd><strong>{{selectedCompanyDetector.rangeMax}}</strong></dd>
-																	<dt>Detec&ccedil;&atilde;o:</dt>
-																		<dd><span data-ng-show="findedCompanyDevice.alarmDto" class="alarm1"> {{findedCompanyDevice.alarmDto.alarm1}}</span></dd>							
-																	<dt>Alerta:</dt>
-																		<dd><span data-ng-show="findedCompanyDevice.alarmDto" class="alarm2"> {{findedCompanyDevice.alarmDto.alarm2}}</span></dd>
-																	<dt>Evacua&ccedil;&atilde;o:</dt>
-																		<dd><span data-ng-show="findedCompanyDevice.alarmDto" class="alarm3"> {{findedCompanyDevice.alarmDto.alarm3}}</span></dd>
+																	<dt style="width: 90px">Sensor (nome):</dt>
+																		<dd style="margin-left: 120px;">{{selectedCompanyDetector.sensorName}}</dd>
+																	<dt style="width: 90px">Alarme (nome):</dt>
+																		<dd style="margin-left: 120px;">{{findedCompanyDevice.alarmDto.name}}</dd>
+																	<dt style="width: 90px">Unidade:</dt>
+																		<dd style="margin-left: 120px;" data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases == 'LEL_PERCENT'">LEL%</dd>
+																		<dd style="margin-left: 120px;" data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases == 'PERCENT_VOLUME'">VOL%</dd>
+																		<dd style="margin-left: 120px;" data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases != 'LEL_PERCENT' && findedCompanyDevice.alarmDto.unitMeterGases != 'PERCENT_VOLUME'">{{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>																	
+																	<dt style="width: 90px">Range Max:</dt>
+																		<dd style="margin-left: 120px;"><strong>{{selectedCompanyDetector.rangeMax}}</strong></dd>
+																	<dt style="width: 90px">Detec&ccedil;&atilde;o:</dt>
+																		<dd style="margin-left: 120px;"><span data-ng-show="findedCompanyDevice.alarmDto" class="alarm1"> {{findedCompanyDevice.alarmDto.alarm1}}</span></dd>							
+																	<dt style="width: 90px">Alerta:</dt>
+																		<dd style="margin-left: 120px;"><span data-ng-show="findedCompanyDevice.alarmDto" class="alarm2"> {{findedCompanyDevice.alarmDto.alarm2}}</span></dd>
+																	<dt style="width: 90px">Evacua&ccedil;&atilde;o:</dt>
+																		<dd style="margin-left: 120px;"><span data-ng-show="findedCompanyDevice.alarmDto" class="alarm3"> {{findedCompanyDevice.alarmDto.alarm3}}</span></dd>
 																</dl>											                	
 																
 															</div>
@@ -448,15 +448,15 @@
 					<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases!='LEL_PERCENT' && findedCompanyDevice.alarmDto.unitMeterGases!='PERCENT_VOLUME'">{{findedCompanyDevice.alarmDto.name}} / {{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>																	
 				<dt>Range Max:</dt>
 					<dd><strong>{{selectedCompanyDetector.rangeMax}}</strong></dd>
-				<dt>Detecrição:</dt>
+				<dt>Detecriï¿½ï¿½o:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm1" class="alarm1"> {{findedCompanyDevice.alarmDto.alarm1}}</span></dd>							
 				<dt>Alerta:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm2" class="alarm2"> {{findedCompanyDevice.alarmDto.alarm2}}</span></dd>
-				<dt>Evacuação:</dt>
+				<dt>Evacuaï¿½ï¿½o:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm3" class="alarm3"> {{findedCompanyDevice.alarmDto.alarm3}}</span></dd>
 			</dl>			            
 			
-			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;­odo:</strong> {{selectedPeriodo}}</div>
+			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;ï¿½odo:</strong> {{selectedPeriodo}}</div>
 			
 			<br />
 			<div id="dvData">

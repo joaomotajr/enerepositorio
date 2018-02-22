@@ -32,7 +32,7 @@ app.controller('companyGenericController', function ($scope, $interval, $rootSco
 	};
 	
 	$scope.clearCompanyGeneric = function () {
-		$scope.selectedCompanyGeneric.detectorDto.image = "/assets/img/cover.jpg";
+		
 		$timeout(function () {						
 		    $scope.selectedCompanyGeneric.uid = undefined;
 		    $scope.selectedCompanyGeneric.name = '';
@@ -43,6 +43,21 @@ app.controller('companyGenericController', function ($scope, $interval, $rootSco
 		}, 100);
 	};
 	
+	$scope.deleteCompanyGeneric = function() {		 
+		angular.element('body').addClass('loading');		
+		$scope.deletar = new CompanyGenericService.deletar();	
+		
+		$scope.deletar.$companyGeneric({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyGeneric.uid}, function(){
+			$rootScope.showGeneralMessage($scope.deletar.message, 'DANGER');		
+
+			$scope.clearCompanyGeneric();
+			$scope.getOneCompany($scope.companyUid);
+			
+			angular.element('body').removeClass('loading');
+	                 	         	
+		});		 
+	};
+
 	$scope.getOneCompany = function(companyId) {
 		 
 		 $scope.listOne = new CompanyService.listOne();		 

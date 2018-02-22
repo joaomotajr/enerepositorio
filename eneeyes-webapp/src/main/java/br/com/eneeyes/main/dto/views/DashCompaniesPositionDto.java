@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
+import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.views.DashCompaniesPosition;
 import br.com.eneeyes.main.model.views.PositionHistoricView;
 
@@ -30,6 +31,7 @@ public class DashCompaniesPositionDto {
 		this.lastValue = e.getLastValue();
 		this.alarmType = e.getAlarmType();
 		this.lastUpdate = e.getLastUpdate();
+		this.unitMeterGases = e.getUnitMeterGases();
 		
 		if(e.getPositionHistoricView() != null) {
 			
@@ -83,6 +85,7 @@ public class DashCompaniesPositionDto {
 	private AlarmType alarmType;	
 	private Date lastUpdate;
 	private String arrayValues = "";
+	private UnitMeterGases unitMeterGases;
 		
 	public final String getArrayValues() {
 		return arrayValues;
@@ -178,5 +181,14 @@ public class DashCompaniesPositionDto {
 
 	public void setArtefact(String artefact) {
 		this.artefact = artefact;
+	}
+
+	public UnitMeterGases getUnitMeterGases() {
+		return unitMeterGases;
+	}
+
+	public void setUnitMeterGases(UnitMeterGases unitMeterGases) {
+		this.unitMeterGases = unitMeterGases;
 	}	
+	
 }

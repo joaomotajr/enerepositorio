@@ -140,13 +140,12 @@
 								<div class="box-body" style="padding: 4px !important;text-align: -webkit-center;">
 									<div class="table-responsive">
 										<div style="max-height: 500px; overflow: auto">
-											<table class="zui-table" id="dashboard" style="font-size:90%;">
+											<table class="zui-table" id="dashboard" style="font-size:95%;">
 												<thead>
 													<tr>														
 														<th>ID</th>
 														<th>Empresa</th>
-														<th>Detector</th>
-														<!-- <th>G&aacute;s</th> -->
+														<th>Detector</th>						
 														<th>Artefato</th>
 														<th>Status</th>
 														<th>Comunica&ccedil;&atilde;o</th>
@@ -159,7 +158,11 @@
 														<td>{{item.uid}}</td>															
 														<td><span data-truncate="12" data-value="{{item.companyName}}"></span></td>															
 														<td>{{item.companyDeviceName}}</td>																
-														<td>{{item.artefact}}</td>													
+														<td>{{item.artefact}}
+															<span style="vertical-align:super;font-size:0.65em" data-ng-if="item.unitMeterGases=='LEL_PERCENT'">LEL%</span>
+															<span style="vertical-align:super;font-size:0.65em" data-ng-if="item.unitMeterGases=='PERCENT_VOLUME'">VOL%</span>
+															<span style="vertical-align:super;font-size:0.65em" data-ng-if="item.unitMeterGases!='LEL_PERCENT' && item.unitMeterGases!='PERCENT_VOLUME'">{{item.unitMeterGases}}</span>
+														</td>													
 														<td> 
 															<span class="label" data-ng-class="{																	
 																'label-primary' : item.alarmType=='OFF' || item.alarmType=='WITHOUT', 
@@ -170,25 +173,10 @@
 																'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} 
 															</span>
 														</td>
-														<td>
-															<label title="{{item.lastUpdateFull | date:'dd/MM/yyyy HH:mm'}}">&agrave; {{item.lastUpdate}}</label>
-														</td> 														
-														<td>
-															<label  data-ng-class="{ 
-																'text-cyan' : item.alarmType=='OFF',
-																'text-black' : item.alarmType=='OFFLINE',
-																'text-success' : item.alarmType=='NORMAL',
-																'text-warning' : item.alarmType=='ALERTA', 
-																'text-muted' : item.alarmType=='DETECCAO', 
-																'text-danger' : item.alarmType=='EVACUACAO'}">&nbsp;
-																{{item.lastValue}}&nbsp;
-																<span style="vertical-align:super;font-size:0.65em" data-ng-if="item.unitMeterGases=='LEL_PERCENT'">LEL%</span>
-																<span style="vertical-align:super;font-size:0.65em" data-ng-if="item.unitMeterGases=='PERCENT_VOLUME'">VOL%</span>
-																<span style="vertical-align:super;font-size:0.65em" data-ng-if="item.unitMeterGases!='LEL_PERCENT' && item.unitMeterGases!='PERCENT_VOLUME'">{{item.unitMeterGases}}</span>
-															</label>
-														</td>													
+														<td><label title="{{item.lastUpdateFull | date:'dd/MM/yyyy HH:mm'}}">&agrave; {{item.lastUpdate}}</label></td>
+														<td><label>{{item.lastValue}}</label></td>
 														<td class="col-lg-2"><div class="sparkbar">{{item.arrayValues}}</div></td>
-													</tr>													
+													</tr>
 												</tbody>
 											</table>
 										</div>

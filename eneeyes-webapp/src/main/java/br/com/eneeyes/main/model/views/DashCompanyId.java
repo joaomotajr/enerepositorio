@@ -11,10 +11,10 @@ public class DashCompanyId implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name = "company_id")
-	private Long company_id;
+	private Long companyId;
 	
-	@Column(name = "companyDetector_id")
-	private Long companyDetector_id;
+	@Column(name = "company_Device_id")
+	private Long companyDeviceId;
 	
 	
 	@Override
@@ -22,9 +22,9 @@ public class DashCompanyId implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((company_id == null) ? 0 : company_id.hashCode());
+				+ ((companyId == null) ? 0 : companyId.hashCode());
 		result = prime * result
-				+ ((companyDetector_id == null) ? 0 : companyDetector_id.hashCode());
+				+ ((companyDeviceId == null) ? 0 : companyDeviceId.hashCode());
 		return result;
 	}
 
@@ -37,15 +37,15 @@ public class DashCompanyId implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		DashCompanyId other = (DashCompanyId) obj;
-		if (company_id == null) {
-			if (other.company_id != null)
+		if (companyId == null) {
+			if (other.companyId != null)
 				return false;
-		} else if (!company_id.equals(other.company_id))
+		} else if (!companyId.equals(other.companyId))
 			return false;
-		if (companyDetector_id == null) {
-			if (other.companyDetector_id != null)
+		if (companyDeviceId == null) {
+			if (other.companyDeviceId != null)
 				return false;
-		} else if (!companyDetector_id.equals(other.companyDetector_id))
+		} else if (!companyDeviceId.equals(other.companyDeviceId))
 			return false;
 		return true;
 	}

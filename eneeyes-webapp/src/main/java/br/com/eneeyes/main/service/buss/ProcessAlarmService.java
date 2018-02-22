@@ -145,7 +145,7 @@ public class ProcessAlarmService {
 				alarmType = AlarmType.ALERTA;
 			}
 			else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm1())) > 0 || 
-					(alarm.getAlarm11() != 0 && lastValue.compareTo( new BigDecimal(alarm.getAlarm11())) < 0 )
+					(alarm.getAlarm11() != null && alarm.getAlarm11() != 0 && lastValue.compareTo( new BigDecimal(alarm.getAlarm11())) < 0 )
 				) {				
 				alarmType = AlarmType.DETECCAO;
 			}		

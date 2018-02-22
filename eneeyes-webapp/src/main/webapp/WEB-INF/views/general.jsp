@@ -197,7 +197,7 @@
 																			<!-- <h4 class="description-header"><i class="fa fa-bolt"></i> {{item.sensorName}}</h4> -->
 																			<span class="description-text">Range: Min|Man: {{item.rangeMin}} | {{item.rangeMax}} </span>
 																			<br>
-																			G&aacute;s: <strong class="text-navy">{{item.gasName}}</strong>																
+																			Artefato: <strong class="text-navy">{{item.artefact}}</strong>																
 																			<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
 																			<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.unitMeterGases!='LEL_PERCENT'"> {{item.unitMeterGases}}</span>
 																		</div>																		

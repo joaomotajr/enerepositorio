@@ -176,6 +176,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			unitMeter = "LEL %"; 
 		else if(sensor.unitMeterGases == "PERCENT_VOLUME") 
 			unitMeter = "VOL %"; 
+		else if(sensor.unitMeterGases == "LEL_PERCENT_METRO") 
+			unitMeter = "LEL %m"; 
 		else	
 			unitMeter = sensor.unitMeterGases;
 

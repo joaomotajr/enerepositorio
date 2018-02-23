@@ -3,7 +3,7 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `area_companydetector_alarm_view2` AS
+VIEW `area_companydevice_alarm_view2` AS
     SELECT 
         GETFAKEID() AS `UID`,
         `cdv`.`AREA_ID` AS `AREA_ID`,
@@ -22,6 +22,7 @@ VIEW `area_companydetector_alarm_view2` AS
         `a`.`NAME` AS `ALARM_NAME`,
         `a`.`ALARM_ON` AS `ALARM_ON`,
         `a`.`ALARM_1` AS `ALARM_1`,
+        `a`.`ALARM_11` AS `ALARM_11`,
         `a`.`ALARM_2` AS `ALARM_2`,
         `a`.`ALARM_3` AS `ALARM_3`,
         `g`.`NAME` AS `ARTEFACT`
@@ -51,6 +52,7 @@ VIEW `area_companydetector_alarm_view2` AS
         `a`.`NAME` AS `ALARM_NAME`,
         `a`.`ALARM_ON` AS `ALARM_ON`,
         `a`.`ALARM_1` AS `ALARM_1`,
+        `a`.`ALARM_11` AS `ALARM_11`,
         `a`.`ALARM_2` AS `ALARM_2`,
         `a`.`ALARM_3` AS `ALARM_3`,
         (CASE

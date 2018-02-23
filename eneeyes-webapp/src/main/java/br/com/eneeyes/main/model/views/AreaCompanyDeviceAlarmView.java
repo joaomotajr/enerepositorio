@@ -81,6 +81,9 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 	@Column(name = "alarm_1", nullable = true)	
 	private Double alarm1;
 	
+	@Column(name = "alarm_11", nullable = true)	
+	private Double alarm11;
+	
 	@Column(name = "alarm_2", nullable = true)	
 	private Double alarm2;		
 	
@@ -159,6 +162,10 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 
 	public final Double getAlarm1() {
 		return alarm1;
+	}
+	
+	public final Double getAlarm11() {
+		return alarm11;
 	}
 
 	public final Double getAlarm2() {

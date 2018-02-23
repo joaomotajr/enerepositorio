@@ -205,8 +205,10 @@
 																		<li class="list-group-item" style="padding: 2px 15px;">
 																			<label>Alarme Associado:</label> {{item.alarmName}}
 																		</li>
-																		<li class="list-group-item list-group-item-info" style="padding: 2px 15px;">
-																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm1}}</span> <label>Alarme1:</label> Detec&ccedil;&atilde;o
+																		<li class="list-group-item list-group-item-info" style="padding: 2px 15px;">																			
+																			<span class="badge" data-ng-if="item.alarm11"><i class="fa fa-angle-left"></i> {{item.alarm11}}</span>
+																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm1}}</span>
+																			 <label>Alarme1:</label> Detec&ccedil;&atilde;o
 																		</li>
 																		<li class="list-group-item list-group-item-warning" style="padding: 2px 15px;">
 																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm2}}</span> <label>Alarme2:</label> Alerta

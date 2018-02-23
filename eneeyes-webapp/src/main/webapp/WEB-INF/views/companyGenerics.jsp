@@ -155,7 +155,7 @@
 									<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong> {{selectedCompanyDeviceAlarm.companyDetectorName}}</h2>							
 								</div>											   					               	
 								<div class="panel-body">
-									<div style="height: 400px; overflow: auto">
+									<div style="height: 250px; overflow: auto">
 										<table class="table table-hover">
 											<thead>
 												<tr>
@@ -175,11 +175,11 @@
 													<td>
 														<jsp:include page="controls/reduzMeters.jsp"/>
 													</td>
-													<td>{{item.alarm1}}</td>
+													<td>{{item.alarm1}} <span data-ng-if="item.alarm11">/{{item.alarm11}}</span></td>													
 													<td>{{item.alarm2}}</td>
 													<td>{{item.alarm3}}</td>												
 													<td>
-														<div data-ng-if="(item.unitMeterGases != selectedCompanyGeneric.genericDto.unitMeterGases && 
+														<div data-ng-if="(item.unitMeterGases != selectedCompanyGeneric.genericDto.unitMeterGases || 
 															item.deviceType != selectedCompanyGeneric.companyDeviceDto.deviceType)">
 															<button type="button" class="btn btn-offLine btn-xs" disabled>Incompativel</button>
 														</div>																										

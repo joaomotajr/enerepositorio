@@ -122,7 +122,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			sensor.alarmType = values.alarmType;
 
 			if(sensor.artefact == "TEMPERATURE" || sensor.artefact == "TIME")				
-				dataSource.value = value;			
+				sensor.dataSource.value = value;			
 			else
 				sensor.dataSource.dials.dial[0].value = value;
 		}
@@ -153,23 +153,23 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 				minValue: e.rangeMin,
 				maxValue: orange,
 				code: "##6baa01",
-				label: (e.artefact == "TIME" ? "Porta Fechada" : "Normal")
+				label: (e.artefact == "TIME" ? "Porta Fechada" : "")
 			},
 			{
 				minValue: orange,
 				maxValue: yellow,
 				code: "#D8D8D8",
-				label: (e.artefact == "TIME" ? "Porta Aberta" : "Detecção")
+				label: (e.artefact == "TIME" ? "Porta Aberta" : "")
 			}, {
 				minValue: yellow,
 				maxValue: red,
 				code: "#f8bd19",
-				label: (e.artefact == "TIME" ? "Porta Aberta" : "Alerta")
+				label: (e.artefact == "TIME" ? "Porta Aberta" : "")
 			}, {
 				minValue: red,
 				maxValue: e.rangeMax,
 				code: "#e44a00",
-				label: (e.artefact == "TIME" ? "Porta Aberta" : "Evacuação")
+				label: (e.artefact == "TIME" ? "Porta Aberta" : "")
 			}]		
 		};
 

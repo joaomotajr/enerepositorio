@@ -1,7 +1,7 @@
 
 <span data-ng-if="item.artefact">{{item.artefact}}</span>
 
-<span data-ng-if="!item.artefact && item.deviceType=='DETECTOR'">{{item.gasDto.name}}</span>
+<span data-ng-if="!item.artefact && item.deviceType=='DETECTOR'">Gás: {{item.gasDto.name}}</span>
 <span data-ng-if="!item.artefact && item.deviceType!='DETECTOR'">{{item.deviceType}}</span>
 
 <span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases=='LEL_PERCENT_METRO'"> LEL%m</span>

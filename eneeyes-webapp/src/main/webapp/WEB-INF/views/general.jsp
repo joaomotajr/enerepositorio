@@ -161,7 +161,15 @@
 														<div class="col-md-4">
 															<div class="panel panel-primary">								                
 																<div class="panel-heading">
-																	<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong> {{item.companyDetectorName}}</h2>							
+																	<h2 class="panel-title" style="text-align:center;">
+																		<strong>
+																		<i data-ng-if="item.artefact=='TEMPERATURE'" class="fa fa-thermometer" style="font-size:1.2em;"></i>
+																		<i data-ng-if="item.artefact=='ELETRICITY'" class="fa fa-plug" style="font-size:1.2em;"></i>
+																		<i data-ng-if="item.artefact=='TIME'" class="fa fa-clock-o" style="font-size:1.2em;"></i>
+																		<i data-ng-if="item.sensorName!='GENERIC'" class="fa fa-rss" style="font-size:1.2em;"></i>
+																		</strong> 
+																		{{item.companyDetectorName}}
+																	</h2>
 																</div>											   					               	
 																<div class="panel-body" style="padding-bottom: 0px; padding-top: 3px;">							            					                 										                	
 																	<div class="row">
@@ -199,11 +207,11 @@
 																			<jsp:include page="controls/reduzMeters.jsp"/>
 																		</div>																		
 																	</div>
-																	<br data-ng-if="!item.alarmOn">	
+																	
 																		
-																	<ul class="list-group" data-ng-if="item.alarmOn">																		
+																	<ul class="list-group">																		
 																		<li class="list-group-item" style="padding: 2px 15px;">
-																			<label>Alarme Associado:</label> {{item.alarmName}}
+																			<label>Alarme Associado:</label> {{item.alarmName}} <span data-ng-if="!item.alarmOn">Nenhum</span>
 																		</li>
 																		<li class="list-group-item list-group-item-info" style="padding: 2px 15px;">																			
 																			<span class="badge" data-ng-if="item.alarm11"><i class="fa fa-angle-left"></i> {{item.alarm11}}</span>

@@ -1,9 +1,8 @@
-/* MYSQL */
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `area_companydevice_alarm_view2` AS
+VIEW `area_companydevice_alarm_view` AS
     SELECT 
         GETFAKEID() AS `UID`,
         `cdv`.`AREA_ID` AS `AREA_ID`,
@@ -25,7 +24,8 @@ VIEW `area_companydevice_alarm_view2` AS
         `a`.`ALARM_11` AS `ALARM_11`,
         `a`.`ALARM_2` AS `ALARM_2`,
         `a`.`ALARM_3` AS `ALARM_3`,
-        `g`.`NAME` AS `ARTEFACT`
+        `g`.`NAME` AS `GAS_NAME`,
+        'GAS' AS `ARTEFACT`
     FROM
         ((((((`company_device` `cdv`
         JOIN `company_detector` `cd` ON ((`cdv`.`UID` = `cd`.`COMPANY_DEVICE_ID`)))
@@ -55,6 +55,7 @@ VIEW `area_companydevice_alarm_view2` AS
         `a`.`ALARM_11` AS `ALARM_11`,
         `a`.`ALARM_2` AS `ALARM_2`,
         `a`.`ALARM_3` AS `ALARM_3`,
+        NULL AS `GAS_NAME`,
         (CASE
             WHEN (`g`.`DEVICE_TYPE` = '1') THEN 'DETECTOR'
             WHEN (`g`.`DEVICE_TYPE` = '2') THEN '´PLC'
@@ -72,4 +73,4 @@ VIEW `area_companydevice_alarm_view2` AS
         JOIN `company_generic` `cg` ON ((`cdv`.`UID` = `cg`.`COMPANY_DEVICE_ID`)))
         JOIN `generic` `g` ON ((`cg`.`GENERIC_ID` = `g`.`UID`)))
         LEFT JOIN `alarm` `a` ON ((`cdv`.`ALARM_ID` = `a`.`UID`)))
-        LEFT JOIN `position` `p` ON ((`p`.`COMPANY_DEVICE_ID` = `cdv`.`UID`)))cd`.`UID` , `s`.`UID`
+        LEFT JOIN `position` `p` ON ((`p`.`COMPANY_DEVICE_ID` = `cdv`.`UID`)))

@@ -104,7 +104,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		$scope.resultDevices.$view({_csrf : angular.element('#_csrf').val(), areaId : areaId}, function(){
 
 			for (var i = 0; i < $scope.resultDevices.list.length; i++) {
-				if($scope.selectedArea.list[i].sensorId == $scope.resultDevices.list[i].sensorId) {		
+				if($scope.selectedArea.list[i].companyDeviceId == $scope.resultDevices.list[i].dcompanyDeviceId) {		
 					$scope.updateGaugeInfo($scope.selectedArea.list[i], $scope.resultDevices.list[i]);
 				}
 			}			
@@ -114,18 +114,20 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 
 	$scope.updateGaugeInfo = function(sensor, values) {
 
-		if(sensor.rangeMax != values.rangeMax || sensor.rangeMin != values.rangeMin || sensor.alarmName != values.alarmName) {
-			sensor.dataSource = $scope.getGaugeInfo(values);			
-		}
-		else {
+		 if(sensor.rangeMax != values.rangeMax || sensor.rangeMin != values.rangeMin || sensor.alarmName != values.alarmName) {
+		 	sensor.dataSource = $scope.getGaugeInfo(values);			
+		 }
+		 else {
 			var value = values.lastValue > sensor.rangeMax ? sensor.rangeMax : values.lastValue;
 			sensor.alarmType = values.alarmType;
 
 			if(sensor.artefact == "TEMPERATURE" || sensor.artefact == "TIME")				
 				sensor.dataSource.value = value;			
+			else if(sensor.artefact == "ELETRICITY")				
+				sensor.dataSource.pointers = {pointer: [{value: value}]};
 			else
-				sensor.dataSource.dials.dial[0].value = value;
-		}
+			 	sensor.dataSource.dials.dial[0].value = value;
+		 }
 	}	
 
 	$scope.getGaugeInfo = function(e) {
@@ -184,6 +186,8 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			}]			
 		};
 
+		pointers = {pointer: [{value: value	}]};
+
 		dataSource = {
 			chart: null,
 			colorRange: null,
@@ -209,6 +213,10 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		else if(e.artefact == "ELETRICITY") {
 			 dataSource.chart.lowerLimitDisplay = e.rangeMin + " Min";
 			 dataSource.chart.upperLimitDisplay = e.rangeMax + " Max";			
+			 dataSource.annotations = {showbelow: 1};
+			 
+			 dataSource.pointers = {pointer: [{value: value	}]};
+			 
 			// dataSource.chart.gaugeouterradius="120";
 			// dataSource.chart.gaugeinnerradius="70%";
 			// dataSource.chart.gaugeFillRatio="15";

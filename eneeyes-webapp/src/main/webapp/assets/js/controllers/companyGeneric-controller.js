@@ -42,7 +42,24 @@ app.controller('companyGenericController', function ($scope, $interval, $rootSco
 		    $scope.selectedCompanyGeneric.description = '';	    
 		}, 100);
 	};
+
 	
+	$scope.deleteCompanyDevice = function() {		 
+		angular.element('body').addClass('loading');		
+		$scope.deletar = new CompanyDeviceService.deletar();	
+		
+		$scope.deletar.$companyDevice({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid}, function(){
+			$rootScope.showGeneralMessage($scope.deletar.message, 'DANGER');		
+
+			$scope.generics = [];
+			$scope.selectedCompanyGeneric = undefined;
+			$scope.getOneCompany($scope.companyUid);
+			
+			angular.element('body').removeClass('loading');
+	                 	         	
+		});		 
+	};
+
 	$scope.deleteCompanyGeneric = function() {		 
 		angular.element('body').addClass('loading');		
 		$scope.deletar = new CompanyGenericService.deletar();	

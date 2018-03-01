@@ -108,20 +108,22 @@
 										</div>	
 
 										<div data-ng-if="!selectedCompanyGenericPosition.uid">
+											<label class="control-label">Selecione Dispositivo Compatível *</label>
 											<table class="table table-bordered table-hover">
 												<thead>
-													<tr>
-														<th></th>
+													<tr>														
 														<th>Dispositivo</th>
-														<th>Modelo</th>																
+														<th>Modelo</th>
+														<th>Unidade</th>																
 														<th>Ação</th>																																						
 													</tr>
 												</thead>
 												<tbody>                                                        
-													<tr data-ng-repeat="item in generics">
-														<td class="details-control"></td>
+													<tr data-ng-repeat="item in generics | filter: {deviceType: selectedCompanyDevice.deviceType }">
+														
 														<td data-ng-class="{'selected': item.uid == selectedCompanyGeneric.genericDto.uid }">{{item.name}}</td>
-														<td data-ng-class="{'selected': item.uid == selectedCompanyGeneric.genericDto.uid }">{{item.model}}</td>																
+														<td data-ng-class="{'selected': item.uid == selectedCompanyGeneric.genericDto.uid }">{{item.model}}</td>
+														<td data-ng-class="{'selected': item.uid == selectedCompanyGeneric.genericDto.uid }">{{item.unitMeterGases}}</td>
 														<td>																	
 															<div data-ng-if="item.uid == selectedCompanyGeneric.genericDto.uid">
 																<button type="button" class="btn btn-danger btn-xs" data-ng-click="selecionarGeneric(item)" disabled>Selecionado</button>
@@ -134,6 +136,7 @@
 													</tr>                                                               
 												</tbody>
 											</table>
+											<p data-ng-show="generics == undefined || generics.list.length == 0" class="text-center">Nenhum Dispositivo Compatível</p>
 										</div>									
 								</div>
 				    		</div>				    			    					    	
@@ -142,7 +145,8 @@
 				       			<div class="col-md-12">
 				       				<button type="button" data-ng-click="saveCompanyGeneric();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyGeneric.name && selectedCompanyGeneric.genericDto.uid) ? false : true">&nbsp;Salvar&nbsp;</button>		       				
 				       				<span class="pull-right">&nbsp;</span>
-				       				<button type="button" data-ng-click="deleteCompanyGeneric();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyGeneric.uid) ? false : true">&nbsp;Excluir&nbsp;</button>								
+									   <button type="button" data-ng-click="deleteCompanyGeneric();" class="btn btn-danger pull-right" data-ng-if=selectedCompanyGeneric.uid">&nbsp;Excluir&nbsp;</button>
+									   <button type="button" data-ng-click="deleteCompanyDevice();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDevice.uid) ? false : true">&nbsp;Excluir&nbsp;</button>
 								</div>
 							</div>						
 				    	         

@@ -6,7 +6,7 @@ package br.com.eneeyes.main.model.enums;
  */
 
 public enum UnitMeterGases {
-	DESCONHECIDO(0), PPM(1), PPB(2), LEL_PERCENT(3), LEL_PERCENT_METRO(4), PERCENT_VOLUME(5), GRAUS_CELSIUS(6), VOLT(7), AMPERE(8), MINUTE(9), SECOND(10), KWH(11);
+	DESCONHECIDO(0), PPM(1), PPB(2), LEL_PERCENT(3), LEL_PERCENT_METRO(4), PERCENT_VOLUME(5), GRAUS_CELSIUS(6), VOLT(7), AMPERE(8), MINUTE(9), SECOND(10), KWH(11), OPEN_CLOSE(12);
 	
 	private final int code;
 	

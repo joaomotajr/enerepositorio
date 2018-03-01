@@ -186,7 +186,7 @@
 														<div class="row">	
 															<div  data-ng-show="deviceType.name=='DIGITAL'">																
 																<div class="col-md-6">
-																	<label><strong><i class="fa fa-flash"> </i> Alarmar se Cicu�to estiver:</strong></label>
+																	<label><strong><i class="fa fa-flash"> </i> Alarmar se Circuito estiver:</strong></label>
 																	<div class="form-control" style="padding-top:0px">																	
 																		<div class="radio3 radio-check radio-inline">
 																			<input type="radio" id="radio11" value="1" data-ng-model="deviceTypeDigital" data-ng-init="deviceTypeDigital=1">

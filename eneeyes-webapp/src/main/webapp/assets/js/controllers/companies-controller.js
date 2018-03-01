@@ -156,7 +156,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;				    			
 				    		$timeout(function () { $scope.LoadAjaxContentCompany('companyDetectors.html'); }, 50);				    						    		
 						}
-						else if(node.type == 'ELETRICITY' || node.type == 'TEMPERATURE' || node.type == 'TIME' ) {				    		 
+						else if(node.type == 'ELETRICITY' || node.type == 'TEMPERATURE' || node.type == 'TIME' || node.type == 'DIGITAL' ) {				    		 
 					    						    
 					    	$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
 					    	$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
@@ -247,7 +247,11 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		else if(detalhe.deviceType == "ELETRICITY") {
 		
 			device = "<i class='fa fa-plug' style='font-size:1.2em;'></i> TENS&Atilde;O";						 
-			device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";		 	
+
+			if (detalhe.name == undefined)
+				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
+			else
+				device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";		 	
 		}
 		//Temperatura
 		else if(detalhe.deviceType == "TEMPERATURE") {
@@ -262,13 +266,23 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		//Tempo
 		else if(detalhe.deviceType == "TIME") {
 			
-			device = "<i class='fa fa-fa-clock-o' style='font-size:1.2em;'></i> TEMPO";				
+			device = "<i class='fa fa-clock-o' style='font-size:1.2em;'></i> TEMPO";				
 			
 			if (detalhe.name == undefined)
 				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
 			else		 
 				device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";			
-		}	
+		}
+		//DIGITAL
+		else if(detalhe.deviceType == "DIGITAL") {
+			
+			device = "<i class='fa fa-flash' style='font-size:1.2em;'></i> DIGITAL";				
+			
+			if (detalhe.name == undefined)
+				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
+			else		 
+				device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";			
+		}			
 		else {   
 			device = "<i class='fa fa-keyboard-o' style='font-size:1.2em;'></i> " + detalhe.deviceType;			
 		}			

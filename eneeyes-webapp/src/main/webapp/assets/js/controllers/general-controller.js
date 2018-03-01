@@ -68,7 +68,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 						e.width=300;
 						e.height=200;
 					}	
-					else if(e.artefact == "TIME") {
+					else if(e.artefact == "TIME" || e.artefact == "DIGITAL") {
 						e.dataType = "bulb";
 						e.width=300;
 						e.height=200;
@@ -104,7 +104,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		$scope.resultDevices.$view({_csrf : angular.element('#_csrf').val(), areaId : areaId}, function(){
 
 			for (var i = 0; i < $scope.resultDevices.list.length; i++) {
-				if($scope.selectedArea.list[i].companyDeviceId == $scope.resultDevices.list[i].dcompanyDeviceId) {		
+				if($scope.selectedArea.list[i].companyDeviceId == $scope.resultDevices.list[i].companyDeviceId) {		
 					$scope.updateGaugeInfo($scope.selectedArea.list[i], $scope.resultDevices.list[i]);
 				}
 			}			
@@ -155,23 +155,23 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 				minValue: e.rangeMin,
 				maxValue: orange,
 				code: "##6baa01",
-				label: (e.artefact == "TIME" ? "Porta Fechada" : "")
+				label: (e.artefact == "TIME" ? "Fechada" : "")
 			},
 			{
 				minValue: orange,
 				maxValue: yellow,
 				code: "#D8D8D8",
-				label: (e.artefact == "TIME" ? "Porta Aberta" : "")
+				label: (e.artefact == "TIME" ? "Aberta" : "")
 			}, {
 				minValue: yellow,
 				maxValue: red,
 				code: "#f8bd19",
-				label: (e.artefact == "TIME" ? "Porta Aberta" : "")
+				label: (e.artefact == "TIME" ? "Aberta" : "")
 			}, {
 				minValue: red,
 				maxValue: e.rangeMax,
 				code: "#e44a00",
-				label: (e.artefact == "TIME" ? "Porta Aberta" : "")
+				label: (e.artefact == "TIME" ? "Aberta" : "")
 			}]		
 		};
 

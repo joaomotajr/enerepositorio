@@ -167,6 +167,7 @@
 																		<i data-ng-if="item.artefact=='ELETRICITY'" class="fa fa-plug" style="font-size:1.2em;"></i>
 																		<i data-ng-if="item.artefact=='TIME'" class="fa fa-clock-o" style="font-size:1.2em;"></i>
 																		<i data-ng-if="item.sensorName!='GENERIC'" class="fa fa-rss" style="font-size:1.2em;"></i>
+																		<i data-ng-if="item.sensorName=='DIGITAL'" class="fa fa-flash" style="font-size:1.2em;"></i>																		
 																		</strong> 
 																		{{item.companyDetectorName}}
 																	</h2>

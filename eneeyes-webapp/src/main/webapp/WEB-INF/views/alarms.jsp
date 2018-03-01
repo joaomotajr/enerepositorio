@@ -189,11 +189,11 @@
 																	<label><strong><i class="fa fa-flash"> </i> Alarmar se Circuito estiver:</strong></label>
 																	<div class="form-control" style="padding-top:0px">																	
 																		<div class="radio3 radio-check radio-inline">
-																			<input type="radio" id="radio11" value="1" data-ng-model="deviceTypeDigital" data-ng-init="deviceTypeDigital=1">
+																			<input type="radio" id="radio11" value="1" data-ng-model="deviceTypeDigital" data-ng-click="gasUnitMeterGases.uid=12; alarmAlarm1=1" >																			
 																			<label for="radio11">Aberto </label>
 																		</div>
 																		<div class="radio3 radio-check radio-inline">
-																			<input type="radio" id="radio12" value="0" data-ng-model="deviceTypeDigital">
+																			<input type="radio" id="radio12" value="0" data-ng-model="deviceTypeDigital" data-ng-click="gasUnitMeterGases.uid=12; alarmAlarm1=0">
 																			<label for="radio12">Fechado </label>
 																		</div>																	
 																	</div>                                                    

@@ -27,7 +27,12 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	$scope.saveAlarm = function() {
 		
 		angular.element('body').addClass('loading');
-							
+		
+		if($scope.deviceType.name == 'DIGITAL') {
+			$scope.gasUnitMeterGases.uid = 12;
+			$scope.alarmAlarm1= $scope.deviceTypeDigital;
+		}		
+		
 		var alarm = {
 			uid: $scope.alarmUid != undefined ? $scope.alarmUid : 0,
 			name: $scope.alarmName,
@@ -118,7 +123,10 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			$scope.alarmGas = $scope.alarms[index].gasDto;
 			$scope.deviceType = $scope.getDeviceType($scope.alarms[index].deviceType);
 		    $scope.alarmName = $scope.alarms[index].name;		    
-		    $scope.alarmAlarm1 = $scope.alarms[index].alarm1;
+			$scope.alarmAlarm1 = $scope.alarms[index].alarm1;
+			if($scope.deviceType.name == 'DIGITAL') {				
+				$scope.deviceTypeDigital = $scope.alarms[index].alarm1;
+			}
 		    $scope.alarmAlarm2 = $scope.alarms[index].alarm2;
 			$scope.alarmAlarm3 = $scope.alarms[index].alarm3;
 			$scope.alarmAlarm11 = $scope.alarms[index].alarm11;
@@ -266,7 +274,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			{ name : 'MINUTE', uid : 9 },
 			{ name : 'SECOND', uid : 10 },			
 			{ name : 'KWH', uid : 11 },
-			{ name : 'OPEN/CLOSE', uid : 12 }
+			{ name : 'OPEN_CLOSE', uid : 12 }
 	 ]; 
 	 
 	 $('.alarmCelularMask').keydown(function (e) {
@@ -384,7 +392,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			$scope.errorAlarm11 = true ;
 		}
 
-		if( ($scope.alarmAlarm11 && $scope.alarmAlarm1) && ($scope.alarmAlarm11 > $scope.alarmAlarm1)) {
+		if( ($scope.alarmAlarm11 && $scope.alarmAlarm1) && (Number($scope.alarmAlarm11) > Number($scope.alarmAlarm1))) {
 			errors.push("ALARME 1 Precisa de Uma valor [Menor Que] Não pode ser MAIOR");
 			$scope.errorAlarm1 = true ;
 			$scope.errorAlarm11 = true ;
@@ -392,7 +400,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 
 		if($scope.enableAlarm2) {
 
-			if( ($scope.alarmAlarm1 && $scope.alarmAlarm2) && ($scope.alarmAlarm1 > $scope.alarmAlarm2) ) {
+			if( ($scope.alarmAlarm1 && $scope.alarmAlarm2) && (Number($scope.alarmAlarm1) > Number($scope.alarmAlarm2) )) {
 				errors.push("[Alarme 2 <span class='text-black'> ({{alarmAlarm2}}) </span> Deve ser maior que o Alarme 1 <span class='text-black'> ({{alarmAlarm1}}) </span>]");
 				$scope.errorAlarm1 = true ;
 				$scope.errorAlarm2 = true ;
@@ -404,7 +412,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 				$scope.errorAlarm22 = true ;
 			}
 
-			if( ($scope.alarmAlarm22 && $scope.alarmAlarm2) && ($scope.alarmAlarm22 > $scope.alarmAlarm2)) {
+			if( ($scope.alarmAlarm22 && $scope.alarmAlarm2) && (Number($scope.alarmAlarm22) > Number($scope.alarmAlarm2))) {
 				errors.push("ALARME 2 Precisa de Uma valor [Menor Que] Não pode ser MAIOR");
 				$scope.errorAlarm2 = true ;
 				$scope.errorAlarm22 = true ;
@@ -419,7 +427,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 				$scope.errorAlarm33 = true ;
 			}
 
-			if( ($scope.alarmAlarm33 && $scope.alarmAlarm3) && ($scope.alarmAlarm33 > $scope.alarmAlarm3)) {
+			if( ($scope.alarmAlarm33 && $scope.alarmAlarm3) && (Number($scope.alarmAlarm33) > Number($scope.alarmAlarm3))) {
 				errors.push("ALARME 3 Precisa de Uma valor [Menor Que] Não pode ser MAIOR");
 				$scope.errorAlarm3 = true ;
 				$scope.errorAlarm33 = true ;
@@ -428,7 +436,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 
 		if($scope.enableAlarm2 && $scope.enableAlarm3) {
 
-			if( ($scope.alarmAlarm2 && $scope.alarmAlarm3) && ($scope.alarmAlarm2 > $scope.alarmAlarm3) ) {
+			if( ($scope.alarmAlarm2 && $scope.alarmAlarm3) && (Number($scope.alarmAlarm2) > Number($scope.alarmAlarm3))) {
 				errors.push("[Alarme 3 <span class='text-black'> ({{alarmAlarm3}}) </span> Deve ser maior que o Alarme 2 <span class='text-black'> ({{alarmAlarm2}}) </span>]");
 				$scope.errorAlarm3 = true ;
 				$scope.errorAlarm2 = true ;

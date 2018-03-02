@@ -158,29 +158,11 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			
 			$scope.radioModel = $scope.alarms[index].alarmOn;
 			$scope.enableAlarm2 = $scope.alarms[index].alarm2On;
-			$scope.enableAlarm3 = $scope.alarms[index].alarm3On;
-			// if( $scope.alarms[index].alarmOn != true )  
-			// {
-			// 	$("#travar").addClass("disableDiv");
-				
-			// 	$('#toggle_event_editing button').eq(1).addClass('locked_active btn-default').removeClass('unlocked_active bg-black');
-			// 	$('#toggle_event_editing button').eq(0).addClass('unlocked_inactive bg-black').removeClass('locked_active btn-default');
-			// }				
-			// else {
-			// 	$("#travar").removeClass("disableDiv");
-				
-			// 	$('#toggle_event_editing button').eq(0).addClass('locked_active btn-default').removeClass('unlocked_active bg-black');
-			// 	$('#toggle_event_editing button').eq(1).addClass('unlocked_inactive bg-black').removeClass('locked_active btn-default');
-			// }
+			$scope.enableAlarm3 = $scope.alarms[index].alarm3On;			
 			
 			$scope.validEmail();
 			$scope.validMobile();
-			
-			$scope.resultUsedAlarms = new ViewService.listAlarmCompanyDetectorSensorView();		 
-			 $scope.resultUsedAlarms.$view({_csrf : angular.element('#_csrf').val(), alarmId : $scope.alarms[index].uid}, function(){			
-	 			 
-				 $scope.usedAlarms = $scope.resultUsedAlarms.list;
-			});
+			$scope.usedAlarms($scope.alarms[index].uid);
 			
 			$timeout(function () {
 	            $('#modalAlarmEdit').modal({ show: 'false' });                        
@@ -189,7 +171,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 
 	$scope.usedAlarms = function(alarmId) {
 		 
-		 $scope.resultUsedAlarms = new ViewService.listAlarmCompanyDetectorSensorView();		 
+		 $scope.resultUsedAlarms = new ViewService.listAlarmCompanyDeviceView();		 
 		 $scope.resultUsedAlarms.$view({_csrf : angular.element('#_csrf').val(), alarmId : alarmId}, function(){			
  			 
 			 $scope.usedAlarms = $scope.resultUsedAlarms.list;

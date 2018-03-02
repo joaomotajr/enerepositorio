@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eneeyes.main.result.BasicResult;
-import br.com.eneeyes.main.service.views.AlarmCompanyDetectorSensorViewService;
+import br.com.eneeyes.main.service.views.AlarmCompanyDeviceViewService;
 
 @RestController
-public class AlarmCompanyDetectorSensorViewController {
+public class AlarmCompanyDeviceViewController {
 	
 	@Autowired
-	AlarmCompanyDetectorSensorViewService service;	
+	AlarmCompanyDeviceViewService service;	
 	
-	@RequestMapping(value = "/security/api/view/allAlarmCompanyDetectorSensorView", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/security/api/view/allAlarmCompanyDeviceView", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> allAlarmCompanyDetectorSensorView() {
+	public BasicResult<?> allAlarmCompanyDeviceView() {
 		return service.listAll();
 	}
 
-	@RequestMapping(value="/security/api/view/findAlarmCompanyDetectorSensorViewByAlarmId/{alarmId}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/view/findAlarmCompanyDeviceViewByAlarmId/{alarmId}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findAlarmCompanyDetectorSensorViewByAlarmId(@PathVariable Long alarmId) {		
+	public BasicResult<?> findAlarmCompanyDeviceViewByAlarmId(@PathVariable Long alarmId) {		
 		return service.listByAlarmId(alarmId);
 	}
 }

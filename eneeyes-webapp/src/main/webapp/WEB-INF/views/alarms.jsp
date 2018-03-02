@@ -94,13 +94,28 @@
 							<div class="box-header with-border"><strong><i class="fa fa-rss"></i> Dispositivos:</strong></div>
 							
 							<div class="box-body">									        		                                                                                       
-								<!-- <div class="list-group" style="max-height: 50px ! important; height:auto; overflow: auto; font-size: 0.9em  ! important"> -->
-								<div style="max-height: 50px ! important; height:auto; overflow: auto; font-size: 0.9em  ! important">
+								
+								<div style="max-height: 200px ! important; height:auto; overflow: auto; font-size: 0.9em  ! important">
 									<p data-ng-show="!usedAlarms || usedAlarms.length <= 0" class="text-center">NENHUM DETECTOR ASSOCIADO</p>
-									<!-- <span class="list-group-item" data-ng-repeat="item in usedAlarms"> -->
-									<span data-ng-repeat="item in usedAlarms">
-										<strong>Detector/Sensor:</strong> {{item.company_detector_name}}/{{item.sensor_name}} - <strong>Local:</strong> {{item.company_detector_local}} 			                                            
-									</span>                            
+									
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>Identificacao</th>
+												<th>Dispositivo</th>
+												<th>Local</th>
+												
+											</tr>
+										</thead>
+										<tbody>                                                        
+											<tr data-ng-repeat="item in usedAlarms">
+												<td>{{item.companyDetectorName}}</td>
+												<td>{{item.deviceName}}</td>
+												<td>{{item.companyDetectorLocal}}</td>
+											</tr>                                                               
+										</tbody>
+									</table>	
+
 								</div>					                                
 							</div>
 								

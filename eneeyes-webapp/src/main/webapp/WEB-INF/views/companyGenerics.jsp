@@ -145,12 +145,13 @@
 				       			<div class="col-md-12">
 				       				<button type="button" data-ng-click="saveCompanyGeneric();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyGeneric.name && selectedCompanyGeneric.genericDto.uid) ? false : true">&nbsp;Salvar&nbsp;</button>
 				       				<span class="pull-right">&nbsp;</span>
-									   <button type="button" data-ng-click="deleteCompanyGeneric();" class="btn btn-danger pull-right" data-ng-if="selectedCompanyGeneric.uid">&nbsp;Excluir&nbsp;</button>
-									   <button type="button" data-ng-click="deleteCompanyDevice();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDevice.uid) ? false : true">&nbsp;Excluir&nbsp;</button>
+									   	<button type="button" data-ng-click="deleteCompanyGeneric();" class="btn btn-danger pull-right" data-ng-if="selectedCompanyGeneric.uid">&nbsp;Excluir&nbsp;</button>
+									   	<button type="button" data-ng-click="deleteCompanyDevice();"  class="btn btn-danger pull-right" data-ng-if="!selectedCompanyGeneric.uid" data-ng-disabled="(selectedCompanyDevice.uid ) ? false : true">&nbsp;Excluir&nbsp;
+										</button>
 								</div>
 							</div>						
 				    	         
-				       	</div><!-- /.tab-pane -->
+				       	</div><!-- /.tab-pane --> && !selectedCompanyDevice.uid
 				       	 
 				       	<div class="tab-pane" id="tabCompanyGeneric_2">
 							   

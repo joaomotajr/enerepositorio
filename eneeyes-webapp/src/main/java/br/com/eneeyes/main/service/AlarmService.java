@@ -23,9 +23,6 @@ public class AlarmService implements IService<AlarmDto> {
 	@Autowired
 	private AlarmRepository repository;
 	
-//	@Autowired
-//	private CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
-	
 	@Autowired
 	private CompanyDeviceAlarmViewService companyDetectorAlarmViewService;
 	

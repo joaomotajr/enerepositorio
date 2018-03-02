@@ -13,9 +13,11 @@ import br.com.eneeyes.main.model.CompanyDevice;
 import br.com.eneeyes.main.model.enums.ActionType;
 import br.com.eneeyes.main.repository.AreaRepository;
 import br.com.eneeyes.main.repository.CompanyDeviceRepository;
+import br.com.eneeyes.main.repository.singleton.AlarmSingletonRepository;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.LogResult;
 import br.com.eneeyes.main.result.Result;
+import br.com.eneeyes.main.service.views.CompanyDeviceAlarmViewService;
 
 @Service
 public class CompanyDeviceService implements IService<CompanyDeviceDto> {
@@ -28,6 +30,9 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 	
 	@Autowired
 	private LogAuditoriaService logAuditoriaService;
+	
+	@Autowired
+	private CompanyDeviceAlarmViewService companyDetectorAlarmViewService;
 
 	public int updateCompanyDeviceName(String name, Long uid) {
 			
@@ -42,6 +47,8 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Alarm gravado/removido com sucesso.");
 		
+		AlarmSingletonRepository.populate(companyDetectorAlarmViewService.findAll());
+		
 		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.UPDATE, result.toString());
 		
 		return result;	
@@ -54,6 +61,8 @@ public class CompanyDeviceService implements IService<CompanyDeviceDto> {
 		
 		result.setResultType( ResultMessageType.SUCCESS );
 		result.setMessage("Alarm gravado/removido com sucesso.");
+		
+		AlarmSingletonRepository.populate(companyDetectorAlarmViewService.findAll());
 		
 		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.UPDATE, result.toString());
 		

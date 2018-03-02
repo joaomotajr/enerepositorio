@@ -4,21 +4,12 @@ app.factory('ViewService', function($resource){
        listAllDashDetectorsMaintenance : $resource('/security/api/view/allDashDetectorsMaintenanceView',{},{
            view : {method : 'GET'}
        }),
-        // listAreaCompanyDetectorsAlarms : $resource('/security/api/view/findAreaCompanyDeviceAlarmViewByAreaId/:areaId/',{ areaId: '@areaId'},{
-        // 	view : {method : 'GET'}
-        // }),
         listAreaCompanyDeviceAlarms : $resource('/security/api/view/findAreaCompanyDeviceAlarmViewByAreaId/:areaId/',{ areaId: '@areaId'},{
         	view : {method : 'GET'}
         }),   
         listCompanyDeviceAlarms : $resource('/security/api/view/findAreaCompanyDeviceAlarmViewByCompanyDeviceId/:companyDeviceId/',{ companyDeviceId: '@companyDeviceId'},{
         	view : {method : 'GET'}
         }),    
-        // listCompanyGenericAlarms : $resource('/security/api/view/findAreaCompanyGenericAlarmViewByCompanyDeviceId/:companyDeviceId/',{ companyDeviceId: '@companyDeviceId'},{
-        // 	view : {method : 'GET'}
-        // }),
-        // listCompanyDetectorsAlarms : $resource('/security/api/view/findAreaCompanyDetectorAlarmViewByCompanyDeviceId/:companyDeviceId/',{ companyDeviceId: '@companyDeviceId'},{
-        //  	view : {method : 'GET'}
-        // }),
         listAllDashCompany : $resource('/security/api/view/allDashCompany',{},{
         	view : {method : 'GET'}
         }),
@@ -31,7 +22,7 @@ app.factory('ViewService', function($resource){
         listAllDashCompaniesAlarm : $resource('/security/api/view/allDashCompaniesAlarm',{},{
         	view : {method : 'GET'}
         }),               
-        listAlarmCompanyDetectorSensorView : $resource('/security/api/view/findAlarmCompanyDetectorSensorViewByAlarmId/:alarmId/', {alarmId: '@alarmId'},{        
+        listAlarmCompanyDeviceView : $resource('/security/api/view/findAlarmCompanyDeviceViewByAlarmId/:alarmId/', {alarmId: '@alarmId'},{        
         	view : {method : 'GET'}
         }),
         listAllOffline : $resource('/security/api/view/offline/:interval/', {interval: '@interval'},{        

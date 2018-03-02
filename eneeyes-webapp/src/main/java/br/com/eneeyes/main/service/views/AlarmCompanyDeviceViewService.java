@@ -6,22 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
-import br.com.eneeyes.main.model.views.AlarmCompanyDetectorSensorView;
-import br.com.eneeyes.main.repository.views.AlarmCompanyDetectorSensorViewRepository;
+import br.com.eneeyes.main.model.views.AlarmCompanyDeviceView;
+import br.com.eneeyes.main.repository.views.AlarmCompanyDeviceViewRepository;
 import br.com.eneeyes.main.result.Result;
 
 @Service
-public class AlarmCompanyDetectorSensorViewService {
+public class AlarmCompanyDeviceViewService {
 	
 	@Autowired
-	private AlarmCompanyDetectorSensorViewRepository repository;
+	private AlarmCompanyDeviceViewRepository repository;
 	
 	public Result<?> listAll() {
 		
-		Result<AlarmCompanyDetectorSensorView> result = new Result<AlarmCompanyDetectorSensorView>();
+		Result<AlarmCompanyDeviceView> result = new Result<AlarmCompanyDeviceView>();
 		
 		try {
-			List<AlarmCompanyDetectorSensorView> lista = repository.findAll();
+			List<AlarmCompanyDeviceView> lista = repository.findAll();
 
 			if (lista != null) {				
 				
@@ -44,10 +44,10 @@ public class AlarmCompanyDetectorSensorViewService {
 	
 	public Result<?> listByAlarmId(Long alarmId) {
 		
-		Result<AlarmCompanyDetectorSensorView> result = new Result<AlarmCompanyDetectorSensorView>();
+		Result<AlarmCompanyDeviceView> result = new Result<AlarmCompanyDeviceView>();
 		
 		try {
-			List<AlarmCompanyDetectorSensorView> lista = repository.findByAlarmId(alarmId);
+			List<AlarmCompanyDeviceView> lista = repository.findByAlarmId(alarmId);
 
 			if (lista != null) {				
 				

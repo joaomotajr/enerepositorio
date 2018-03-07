@@ -143,7 +143,7 @@
 											<table class="zui-table" id="dashboard" style="font-size:95%;">
 												<thead>
 													<tr>														
-														<th>ID</th>
+														<th>&nbsp;&nbsp;<i class="fa fa-tags" style="font-size:1.2em;"></i>&nbsp;</th>
 														<th>Empresa</th>
 														<th>Detector</th>						
 														<th>Artefato</th>
@@ -155,7 +155,14 @@
 												</thead>
 												<tbody>
 													<tr data-ng-repeat="item in dashCompaniesPositionFiltered = (dashCompaniesPosition | dashCompaniesPositionFilter: selectedStatusDashCompaniesPosition)">																
-														<td>{{item.uid}}</td>															
+														<td>&nbsp;<strong>
+															<i data-ng-if="item.artefact=='TEMPERATURE'" class="fa fa-thermometer" style="font-size:1.2em;"></i>
+															<i data-ng-if="item.artefact=='ELETRICITY'" class="fa fa-plug" style="font-size:1.2em;"></i>
+															<i data-ng-if="item.artefact=='TIME'" class="fa fa-clock-o" style="font-size:1.2em;"></i>
+															<i data-ng-if="item.artefact!='TEMPERATURE' && item.artefact!='ELETRICITY' && item.artefact!='TIME' && item.artefact!='DIGITAL'" class="fa fa-rss" style="font-size:1.2em;"></i>
+															<i data-ng-if="item.artefact=='DIGITAL'" class="fa fa-flash" style="font-size:1.2em;"></i>																		
+															</strong>&nbsp; 
+														</td>
 														<td><span data-truncate="12" data-value="{{item.companyName}}"></span></td>															
 														<td>{{item.companyDeviceName}}</td>																
 														<td>

@@ -104,9 +104,8 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		$scope.resultDevices.$view({_csrf : angular.element('#_csrf').val(), areaId : areaId}, function(){
 
 			for (var i = 0; i < $scope.resultDevices.list.length; i++) {
-				if($scope.selectedArea.list[i].companyDeviceId == $scope.resultDevices.list[i].companyDeviceId) {		
-					$scope.updateGaugeInfo($scope.selectedArea.list[i], $scope.resultDevices.list[i]);
-				}
+				value = $.grep($scope.resultDevices.list, function (e) { return e.companyDeviceId == $scope.selectedArea.list[i].companyDeviceId; })[0];
+				$scope.updateGaugeInfo($scope.selectedArea.list[i], value);
 			}			
 						
 		});
@@ -121,8 +120,20 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			var value = values.lastValue > sensor.rangeMax ? sensor.rangeMax : values.lastValue;
 			sensor.alarmType = values.alarmType;
 
-			if(sensor.artefact == "TEMPERATURE" || sensor.artefact == "TIME")				
+			if(sensor.artefact == "TEMPERATURE")
 				sensor.dataSource.value = value;			
+			else if	(sensor.artefact == "TIME") {				
+				if (values.lastValue < 0) {
+					sensor.dataSource.value = values.lastValue;		
+					sensor.dataSource.chart.numberSuffix = "";
+					sensor.dataSource.chart.subcaption = "OFFLINE";	
+				}
+				else {
+					sensor.dataSource.value = values.lastValue;		
+					sensor.dataSource.chart.numberSuffix = ' Segundos';
+					sensor.dataSource.chart.subcaption = value > 0 ? "PORTA ABERTA À" : "PORTA FECHADA";	
+				}
+			}
 			else if(sensor.artefact == "ELETRICITY")				
 				sensor.dataSource.pointers = {pointer: [{value: value}]};
 			else
@@ -205,10 +216,11 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		}
 		else if(e.artefact == "TIME") {
 			dataSource.chart.placeValuesInside=1;
-			dataSource.chart.numberSuffix = ' Mins';
+			dataSource.chart.numberSuffix = ' Segundos';
 			dataSource.value = value;
 			dataSource.annotations = {showbelow: 1};
 			dataSource.chart.subcaption = value > 0 ? "PORTA ABERTA À" : "PORTA FECHADA";
+			
 		}
 		else if(e.artefact == "ELETRICITY") {
 			 dataSource.chart.lowerLimitDisplay = e.rangeMin + " Min";
@@ -216,12 +228,6 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			 dataSource.annotations = {showbelow: 1};
 			 
 			 dataSource.pointers = {pointer: [{value: value	}]};
-			 
-			// dataSource.chart.gaugeouterradius="120";
-			// dataSource.chart.gaugeinnerradius="70%";
-			// dataSource.chart.gaugeFillRatio="15";
-			// dataSource.chart.gaugeStartAngle=90;
-			// dataSource.chart.gaugeEndAngle=90;
 		}
 		else {
 			dataSource.chart.gaugeFillMix="{dark-30},{light-60},{dark-10}";

@@ -3,14 +3,15 @@ package br.com.eneeyes.main.repository.singleton;
 import javax.enterprise.context.ApplicationScoped;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.main.service.historic.HistoricService;
 
+@Service
 @ApplicationScoped
 public class TimeSingletonService  {
 	
-	@Autowired
-	static
+	@Autowired	
 	HistoricService service;
 	
 	public static final String OPEN = "1";
@@ -20,7 +21,7 @@ public class TimeSingletonService  {
 	public static Long COUNT_TIMER = new Long(0);
 	public static Long DOOR_OPEN_COUNT_TIMER = new Long(0);
 		
-	public static String process(Long uid, String value) {
+	public String process(Long uid, String value) {
 		
 		String result="";
 		
@@ -28,12 +29,12 @@ public class TimeSingletonService  {
 		if(!STATIC.equals(value)) {
 			
 			if(value.equals(CLOSE)) {
-				//service.saveByPositionUid(uid, new Long(0).toString());
+				service.saveByPositionUid(uid, new Long(0).toString());
 				result = "Send DOOR CLOSED TO E-Gas";
 				DOOR_OPEN_COUNT_TIMER = System.currentTimeMillis();
 			}	
 			else {
-				//service.saveByPositionUid(uid, new Long(1).toString());
+				service.saveByPositionUid(uid, new Long(100000).toString());
 				result = "Send DOOR OPENED TO E-Gas";
 			}
 			COUNT_TIMER = System.currentTimeMillis();			 
@@ -45,12 +46,13 @@ public class TimeSingletonService  {
 			if((System.currentTimeMillis() - COUNT_TIMER) > INTERVAL_SEND_TIME) {
 			
 				if(STATIC.equals(OPEN)) {
-					Long timeOpened = System.currentTimeMillis() - DOOR_OPEN_COUNT_TIMER;
-					//service.saveByPositionUid(uid, timeOpened.toString());		
-					result = "Send OPEN DOOR " + (timeOpened) + "to E-Gas";					
+					result = "Send OPEN DOOR " + (System.currentTimeMillis() - DOOR_OPEN_COUNT_TIMER) / 1000 + " segs to E-Gas";
+					Long timeOpened = (System.currentTimeMillis() - DOOR_OPEN_COUNT_TIMER) * 100000;
+					service.saveByPositionUid(uid, timeOpened.toString());		
+										
 				}
 				else {					
-					//service.saveByPositionUid(uid, new Long(0).toString());
+					service.saveByPositionUid(uid, new Long(0).toString());
 					DOOR_OPEN_COUNT_TIMER = System.currentTimeMillis();
 					result = "Send DOOR CLOSE to E-GAS";
 				}

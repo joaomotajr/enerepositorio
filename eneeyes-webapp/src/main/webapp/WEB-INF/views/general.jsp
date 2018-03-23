@@ -202,9 +202,9 @@
 																		
 																	</div>								                				                				                
 																	<div class="row">																	
-																		<div class="description-block" style="margin: 3px 0;">																																			
-																			<span class="description-text">Range: Min|Man: {{item.rangeMin}} | {{item.rangeMax}} </span>
-																			<br>
+																		<div class="description-block" style="margin: 3px 0;">																													
+																			<span class="description-text">Lat&ecirc;ncia: </span> <span style="font-size:0.8em;color:gray">{{item.latencia}}</span><br>
+																			<span class="description-text">Range: Min|Man: {{item.rangeMin}} | {{item.rangeMax}} </span><br>	
 																			<jsp:include page="controls/reduzMeters.jsp"/>
 																		</div>																		
 																	</div>

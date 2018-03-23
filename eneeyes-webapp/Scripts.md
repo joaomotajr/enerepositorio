@@ -1,8 +1,7 @@
 set global event_scheduler = ON
 
 SHOW EVENTS FROM enedb;
-
-SET GLOBAL event_scheduler = ON;
+SELECT * FROM INFORMATION_SCHEMA.EVENTS
 
 --drop EVENT myevent
 DROP EVENT job_move_to_a_by_hours;

@@ -49,7 +49,7 @@
                         <configuration>
                             <scanIntervalSeconds>1</scanIntervalSeconds>
                             <httpConnector>
-                                <port>8090</port>
+                                <port>8070</port>
                             </httpConnector>
                         </configuration>
                     </plugin>

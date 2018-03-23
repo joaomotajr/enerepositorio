@@ -105,13 +105,13 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 
 			for (var i = 0; i < $scope.resultDevices.list.length; i++) {
 				value = $.grep($scope.resultDevices.list, function (e) { return e.companyDeviceId == $scope.selectedArea.list[i].companyDeviceId; })[0];
-				$scope.updateGaugeInfo($scope.selectedArea.list[i], value);
+				$scope.updateGaugeInfo($scope.selectedArea.list[i], value, $scope.resultDevices.serverDate);
 			}			
 						
 		});
 	}
 
-	$scope.updateGaugeInfo = function(sensor, values) {
+	$scope.updateGaugeInfo = function(sensor, values, serverDate) {
 
 		 if(sensor.rangeMax != values.rangeMax || sensor.rangeMin != values.rangeMin || sensor.alarmName != values.alarmName) {
 		 	sensor.dataSource = $scope.getGaugeInfo(values);			
@@ -119,6 +119,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		 else {
 			var value = values.lastValue > sensor.rangeMax ? sensor.rangeMax : values.lastValue;
 			sensor.alarmType = values.alarmType;
+			sensor.latencia = timeSince(serverDate, values.lastUpdate);
 
 			if(sensor.artefact == "TEMPERATURE")
 				sensor.dataSource.value = value;			
@@ -219,7 +220,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			dataSource.chart.numberSuffix = ' Segundos';
 			dataSource.value = value;
 			dataSource.annotations = {showbelow: 1};
-			dataSource.chart.subcaption = value > 0 ? "PORTA ABERTA À" : "PORTA FECHADA";
+			// dataSource.chart.subcaption = value > 0 ? "PORTA ABERTA À" : "PORTA FECHADA";
 			
 		}
 		else if(e.artefact == "ELETRICITY") {

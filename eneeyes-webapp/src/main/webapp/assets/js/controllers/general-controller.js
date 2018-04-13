@@ -131,7 +131,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 				}
 				else {
 					sensor.dataSource.value = values.lastValue;		
-					sensor.dataSource.chart.numberSuffix = ' Segundos';
+					sensor.dataSource.chart.numberSuffix = transformMedition(sensor.unitMeterGases);
 					sensor.dataSource.chart.subcaption = value > 0 ? "PORTA ABERTA À" : "PORTA FECHADA";	
 				}
 			}
@@ -140,7 +140,13 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			else
 			 	sensor.dataSource.dials.dial[0].value = value;
 		 }
-	}	
+	};
+	
+	function transformMedition(unitMeterGases) {
+		if(unitMeterGases == 'SECOND')
+			return " Segundos";
+
+	}
 
 	$scope.getGaugeInfo = function(e) {
 
@@ -149,7 +155,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		var orange = e.alarmOn == null ? 0 : e.alarm1;
 
 		properties =  {
-			caption: e.sensorName,
+			caption: e.sensorName + "- ID " + e.uid,
 			subcaption: "",
 			lowerLimit: e.rangeMin,
 			upperLimit: e.rangeMax,
@@ -217,10 +223,9 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		}
 		else if(e.artefact == "TIME") {
 			dataSource.chart.placeValuesInside=1;
-			dataSource.chart.numberSuffix = ' Segundos';
+			// dataSource.chart.numberSuffix = ' Segundos';
 			dataSource.value = value;
 			dataSource.annotations = {showbelow: 1};
-			// dataSource.chart.subcaption = value > 0 ? "PORTA ABERTA À" : "PORTA FECHADA";
 			
 		}
 		else if(e.artefact == "ELETRICITY") {

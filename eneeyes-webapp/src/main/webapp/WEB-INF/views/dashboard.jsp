@@ -115,7 +115,7 @@
 									<p>Off Line</p>
 								</div>
 								<div class="icon" style="color:white !important"><i class="fa fa-battery-empty"></i></div>
-								<a href="#" data-ng-class="{'off': selectedStatusDashCompaniesPosition == 'OFF' }" data-ng-click="filterStatus('OFF')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
+								<a href="#" data-ng-class="{'off': selectedStatusDashCompaniesPosition == 'OFFLINE' }" data-ng-click="filterStatus('OFFLINE')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>							
 					</div>
@@ -144,6 +144,7 @@
 												<thead>
 													<tr>														
 														<th>&nbsp;&nbsp;<i class="fa fa-tags" style="font-size:1.2em;"></i>&nbsp;</th>
+														<th>ID</th>
 														<th>Empresa</th>
 														<th>Detector</th>						
 														<th>Artefato</th>
@@ -163,8 +164,9 @@
 															<i data-ng-if="item.artefact=='DIGITAL'" class="fa fa-flash" style="font-size:1.2em;"></i>																		
 															</strong>&nbsp; 
 														</td>
-														<td><span data-truncate="12" data-value="{{item.companyName}}"></span></td>															
-														<td>{{item.companyDeviceName}}</td>																
+														<td>{{item.positionId}}</td>
+														<td><span data-truncate="12" data-value="{{item.companyName}}"></span></td>
+														<td>{{item.companyDeviceName}}</td>
 														<td>
 															<jsp:include page="controls/reduzMeters.jsp"/>
 														</td>													

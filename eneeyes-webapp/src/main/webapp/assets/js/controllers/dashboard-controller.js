@@ -5,15 +5,10 @@ app.filter('dashCompaniesPositionFilter', function () {
         if (!criteria || criteria == 0 || criteria == 'ALL' )
             return objects;
 
-        for (index in objects) {
+        for (var index in objects) {
             
-        	if (criteria == 'OFF') {
-                if (objects[index].offLine) {
-                    filterResult.push(objects[index]);
-                }
-            }
-            else if (objects[index].alarmType == criteria) {
-                    filterResult.push(objects[index]);                
+        	if (objects[index].alarmType == criteria) {
+            	filterResult.push(objects[index]);                
             }            
         }
                 

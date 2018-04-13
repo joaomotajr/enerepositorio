@@ -23,10 +23,13 @@ public class TimeSingletonService  {
 		
 	public String process(Long uid, String value) {
 		
+		if(!(value.equals("0") ^ value.equals("1")))
+			return "Wrong Value Params Incorreto ::: 0-> CLOSED / 1-> OPENED";
+		
 		String result="";
 		
 		//Mudou Status Devolve 0 para Fechado e 1 para Aberto
-		if(!STATIC.equals(value)) {
+		if(!STATIC.equals(value.equals("0") ? CLOSE:OPEN)) {
 			
 			if(value.equals(CLOSE)) {
 				service.saveByPositionUid(uid, new Long(0).toString());
@@ -66,7 +69,7 @@ public class TimeSingletonService  {
 			
 			
 		}
-		STATIC = value;
+		STATIC = value.equals("0") ? CLOSE:OPEN;
 		return result;			
 	}
 	

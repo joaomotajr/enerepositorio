@@ -64,6 +64,16 @@ drop table detector;
 drop table transmitter;
 drop table manufacturer;
 
+/* LIMPAR TABELAS DADOS HISTORICOS*/
+truncate table historic;
+truncate table historic_alarm;
+truncate table historic_a;
+truncate table historic_b;
+truncate table historic_c;
+truncate table historic_d;
+truncate table log_auditoria;
+truncate table log_events;
+
 /* POPUALR PRINCIPAIS GASES */
 insert into gas (name, cas, formula) values ('Combustible gases', '99999',	'LEL');
 insert into gas (name, cas, formula) values ('Hydrogen','1333-74-0',	'H2');

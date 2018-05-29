@@ -15,8 +15,7 @@ VIEW `historic_view` AS
         `historic`.`UID` AS `UID`,
         `historic`.`LAST_UPDATE` AS `LAST_UPDATE`,
         `historic`.`VALUE` AS `VALUE`,
-        `historic`.`COMPANY_DEVICE_ID`,
-        `historic`.`SENSOR_ID` AS `SENSOR_ID`
+        `historic`.`COMPANY_DEVICE_ID`
     FROM
         `historic`
     ORDER BY `historic`.`COMPANY_DEVICE_ID` , `historic`.`LAST_UPDATE` DESC

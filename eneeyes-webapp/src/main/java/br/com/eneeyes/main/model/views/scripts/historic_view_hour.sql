@@ -15,8 +15,7 @@ CREATE
 VIEW `historic_view_hour` AS
     SELECT 
         GETFAKEID() AS `uid`,
-        COMPANY_DEVICE_ID,
-        `historic`.`SENSOR_ID` AS `SENSOR_ID`,
+        COMPANY_DEVICE_ID,        
         STR_TO_DATE(DATE_FORMAT(`historic`.`LAST_UPDATE`, '%Y-%m-%d %H:00:00'), '%Y-%m-%d %H:%i:%s') AS `last_update`,
         COUNT(0) AS `ticks`,
         MAX(`historic`.`VALUE`) AS `value`,
@@ -24,6 +23,6 @@ VIEW `historic_view_hour` AS
         MIN(`historic`.`VALUE`) AS `min_value`
     FROM
         `historic`
-    GROUP BY `historic`.`COMPANY_DEVICE_ID` , `historic`.`SENSOR_ID` , DATE_FORMAT(`historic`.`LAST_UPDATE`, '%d/%m/%Y') , HOUR(`historic`.`LAST_UPDATE`)
+    GROUP BY `historic`.`COMPANY_DEVICE_ID` , DATE_FORMAT(`historic`.`LAST_UPDATE`, '%d/%m/%Y') , HOUR(`historic`.`LAST_UPDATE`)
     ORDER BY `historic`.`COMPANY_DEVICE_ID` , DATE_FORMAT(`historic`.`LAST_UPDATE`, '%d/%m/%Y') , HOUR(`historic`.`LAST_UPDATE`)
     

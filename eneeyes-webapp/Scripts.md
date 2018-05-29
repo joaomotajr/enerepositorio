@@ -13,7 +13,7 @@ DROP EVENT job_move_to_d_by_month;
 CREATE EVENT job_move_to_a_by_minutes ON SCHEDULE
       EVERY 5 MINUTE
       STARTS CURRENT_TIMESTAMP + INTERVAL 1 minute
-    COMMENT 'Limpa tabela Historic, deixando apenas 10 minutos'
+    COMMENT 'Limpa tabela Historic, deixando apenas 20 minutos'
     DO
 		call move_to_a_by_minutes(1000, 20);
 
@@ -62,6 +62,17 @@ select max(uid), min(uid), 'c' as name   from historic_c
 union
 select max(uid), min(uid), 'd' as name   from historic_d
 
+
+--check historic
+select max(last_update), min(last_update), 'h' as name from historic
+union
+select max(last_update), min(last_update), 'a' as name  from historic_a
+union
+select max(last_update), min(last_update), 'b' as name  from historic_b
+union
+select max(last_update), min(last_update), 'c' as name   from historic_c
+union
+select max(last_update), min(last_update), 'd' as name   from historic_d
 
 set @DATA := now() - interval 12 hour;
 

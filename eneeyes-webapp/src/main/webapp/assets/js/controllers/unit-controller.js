@@ -1,4 +1,4 @@
-app.controller('unitController', function ($scope, $rootScope, $timeout, $filter, UnitService, AreaService, CompanyService) {
+app.controller('unitController', function ($scope, $rootScope, $timeout, UnitService, AreaService, CompanyService) {
 
     var map;
 	var geocoder;

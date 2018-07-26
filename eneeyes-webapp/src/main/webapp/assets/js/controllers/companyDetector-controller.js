@@ -18,7 +18,7 @@ app.filter('gasFilter', function () {
 });
 
 
-app.controller('companyDetectorController', function ($scope, $interval, $rootScope, $timeout, $filter, AlarmService,
+app.controller('companyDetectorController', function ($scope, $interval, $rootScope, $timeout, AlarmService,
 		CompanyDetectorService, CompanyDeviceService, DetectorService, PositionService, CompanyService, 
 		CompanyDetectorMaintenanceHistoricService, ViewService) {
 

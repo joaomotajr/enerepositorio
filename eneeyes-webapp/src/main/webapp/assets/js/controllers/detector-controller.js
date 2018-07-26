@@ -1,23 +1,3 @@
-// app.filter('manufacturerFilter2', function () {
-//     return function (objects, criteria) {
-        
-//     	if (!criteria || criteria.manufacturer == null)
-//             return null;
-        
-//         var filterResult = new Array();
-
-//         for (index in objects) {
-        
-//    			 if (objects[index].manufacturerDto.uid == criteria.manufacturer.uid && 
-//    					 criteria.sensors.findIndex( function(item) { return item.uid === objects[index].uid }) < 0 ) {
-
-//                  filterResult.push(objects[index]);
-//              }
-//         }
-
-//         return filterResult;
-//     }
-// });
 
 app.filter('manufacturerFilter', function () {
     return function (objects, criteria) {
@@ -26,15 +6,12 @@ app.filter('manufacturerFilter', function () {
             return null;
         
         var filterResult = new Array();
-
         for (var index in objects) {
         
    			 if (objects[index].manufacturerDto.uid == criteria.manufacturer.uid) {
-
                  filterResult.push(objects[index]);
              }
         }
-
         return filterResult;
     }
 });
@@ -50,11 +27,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 			 return;
 		}
 		
-		angular.element('body').addClass('loading');
-		
-		// for (var i = 0; i < $scope.detectorSensors.length; i++) {
-		// 	$scope.detectorSensors[i].index = undefined;	            	             
-        // } 		 
+		angular.element('body').addClass('loading'); 
 				
 		var detector = {
 			uid: $scope.detectorUid != undefined ? $scope.detectorUid : 0,
@@ -63,7 +36,6 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 			transmitterDto: $scope.detectorTransmitter,
 			model: $scope.detectorModel,
 			image: $scope.detectorImage,
-			// sensorsDto: $scope.detectorSensors
 			sensorDto: $scope.detectorSensor,
     	}; 
 		 
@@ -91,7 +63,6 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	    $scope.detectorManufacturer = '';
 	    $scope.detectorTransmitter = '';
 	    $scope.detectorImage = "/assets/img/cover.jpg";
-		// $scope.detectorSensors = [];
 		$scope.detectorSensor = '';
 		$scope.detectorNameExist = "false";
 		$scope.existDetector = undefined;
@@ -132,7 +103,6 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		    $scope.detectorModel = $scope.detectors[index].model;		    		    
 		    $scope.detectorImage = ($scope.detectors[index].image == null ? "/assets/img/cover.jpg" :  $scope.detectors[index].image);		    
 		    $scope.detectorTransmitter = $scope.detectors[index].transmitterDto;
-			// $scope.detectorSensors = $scope.detectors[index].sensorsDto;
 			$scope.detectorSensor = $scope.detectors[index].sensorDto;
 				
 			$scope.getExistDetector($scope.detectorUid) ;
@@ -159,20 +129,8 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 				 console.log($scope.deletar.systemMessage); 
 			 }         	         	
 		});		 
-	 }	 
-	 
-	//  $scope.getSensors = function() {
-		 
-	// 	 $scope.resultSensors = new SensorService.listAll();		 
-	// 	 $scope.resultSensors.$sensor({_csrf : angular.element('#_csrf').val()}, function(){
-			 
-	// 		 for (index in $scope.resultSensors.list) {
-	// 			 $scope.resultSensors.list[index].index = index;
-	// 		 }
-			 
-	// 		 $scope.sensors = angular.copy($scope.resultSensors.list);	 
-    //      });		 
-	//  }
+	 };	 
+
 
 	 $scope.getSensors = function() {
 		
@@ -180,20 +138,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		$scope.resultSensors.$sensor({_csrf : angular.element('#_csrf').val()}, function(){		
 			$scope.sensors = $scope.resultSensors.list;
 	   });		 
-	}
-	 
-	 function getClassNameWithNumberSuffix(el) {
-        var className = null;
-        var regexp = /\w+\d+/;
-        $($(el).attr('class').split(' ')).each(function () {
-            if (regexp.test(this)) {
-                className = this;
-                return false;
-            }
-        });
-
-        return className;
-	 }	 
+	}; 
 	 
 	$scope.loadEvents = function() {
 		
@@ -211,34 +156,20 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 			 event.preventDefault();
 			$('#idInputImageDetector').trigger('click');
 		 }		
-	}
+	};
 	
 	 $scope.changeManufacturer = function() { 
 				
-	 	$scope.search = {manufacturer: $scope.detectorManufacturer};
-	 	//$scope.searchSensor = {manufacturer: $scope.detectorManufacturer , sensors: $scope.detectorSensors};
-	 	//$scope.detectorSensors = [];
-				
-	 }
-	
-	//  $scope.addSensorDetector = function (noSortIndexindex) {
-		 
-	// 	 $scope.detectorSensors.push($scope.sensors[noSortIndexindex]);
-	// 	 $scope.searchSensor = {manufacturer: $scope.detectorManufacturer , sensors: $scope.detectorSensors};
-        
-	//  }
+	 	$scope.search = {manufacturer: $scope.detectorManufacturer};				
+	 };
 	 
-	//  $scope.deleteSensor = function (index) {
-	// 	 $scope.detectorSensors.splice(index, 1);	 
-	// 	 $scope.searchSensor = {manufacturer: $scope.detectorManufacturer , sensors: $scope.detectorSensors};
-	//  }	 
 
-	 $scope.getExistDetector = function(detectorId) {
+	$scope.getExistDetector = function(detectorId) {
 		$scope.existDetector = undefined;
-		
+			
 		$scope.isDetectorSensor = new ViewService.existsDetector();	
 		$scope.isDetectorSensor.$view({_csrf : angular.element('#_csrf').val(), id:detectorId}, function() {	 			 
-			$scope.existDetector = ($scope.isDetectorSensor.resultType == "YES_DATA");	
+				$scope.existDetector = ($scope.isDetectorSensor.resultType == "YES_DATA");	
 		});
 	}
  
@@ -251,7 +182,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	 }
 	 
 	 $scope.keypress = function($event) {
-	    $scope.lastKey = $event.keyCode
+	    $scope.lastKey = $event.keyCode;
 	    $scope.detectorNameExist = "false";
 	  };
 	 

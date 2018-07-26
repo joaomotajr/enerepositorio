@@ -500,9 +500,6 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 $scope.getCompanys();
 	 };
 	 
-	 $scope.refreshAlarms();
- 
-	 angular.element('body').removeClass('loading');
-		
-		
+	 $scope.refreshAlarms(); 
+	 angular.element('body').removeClass('loading');		
 });

@@ -246,7 +246,7 @@
 																	<dd>{{findedCompanyDevice.alarmDto.name}}</dd>
 																<dt>Unidade:</dt>
 																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='LEL_PERCENT_METRO'"> LEL%m</dd>
-																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='GRAUS_CELSIUS'"> °C</dd>
+																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='GRAUS_CELSIUS'"> &deg;C</dd>
 																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='LEL_PERCENT'">LEL%</dd>
 																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='PERCENT_VOLUME'">VOL%</dd>
 																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases!='LEL_PERCENT' &&  findedCompanyDevice.alarmDto.unitMeterGases!='PERCENT_VOLUME' && findedCompanyDevice.alarmDto.unitMeterGases!='GRAUS_CELSIUS' && findedCompanyDevice.alarmDto.unitMeterGases!='LEL_PERCENT_METRO'">
@@ -273,7 +273,8 @@
 								<div class="col-md-5">
 									<table data-ng-if="tipoGrupo==1" class='zui-table' cellspacing="0" width="100%">
 											<thead>
-												<tr>                                                                                 
+												<tr>
+													<th>Id</th>                                                                                 
 													<th>Data</th>
 													<th>Hora</th>	                      		
 													<th>Valor</th>
@@ -288,7 +289,7 @@
 												<div data-ng-show='loading' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>	
 												
 												<tr data-ng-repeat="item in listHistoricInterval.list">
-													
+													<td>{{item.uid}}</td>
 													<td>{{item.lastUpdate | date:'dd/MM/yyyy' }}</td>
 													<td>{{item.lastUpdate | date:'HH:mm:ss' }}</td>
 													<td> {{item.value}} </td>

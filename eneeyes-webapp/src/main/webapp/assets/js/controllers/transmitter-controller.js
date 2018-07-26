@@ -1,6 +1,5 @@
 
-app.controller('transmitterController', function ($scope, $timeout, $filter, TransmitterService, ManufacturerService) {
-	    
+app.controller('transmitterController', function ($scope, $timeout, $filter, TransmitterService, ManufacturerService) {	    
 	
 	$scope.saveTransmitter = function() {		
 		
@@ -8,7 +7,7 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 		
 		if ( exists >= 0 && $scope.transmitterUid == undefined) {
 			  $scope.transmitterNameExist = "true";
-			  return
+			  return;
 		}
 		
 		angular.element('body').addClass('loading');
@@ -29,13 +28,10 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
                 $scope.getTransmitters();
 	            
 	            angular.element('body').removeClass('loading');				 
-	         }, 500);
-                     	
-//		}, function(data) {
-//			angular.element('body').removeClass('loading');
-//			$scope.msgErro = "Erro: " + data.statusText;
+	         }, 500);                     	
+
 		});			 
-	 }
+	 };
 	 
 	$scope.clearFormTransmitter = function () {
 	
@@ -44,7 +40,7 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 	    $scope.transmitterModel = '';
 	    $scope.transmitterManufacturer = '';
 	    $scope.transmitterCommProtocol = '';
-	}
+	};
 
 	 
 	$scope.getTransmitters = function() {
@@ -53,7 +49,7 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 		 $scope.resultTransmitters.$transmitter({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.transmitters = $scope.resultTransmitters.list; 		 			 
          });		 
-	 }
+	 };
 	
 	$scope.getManufacturers = function() {
 		 
@@ -61,19 +57,19 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 		 $scope.resultManufacturers.$manufacturer({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.manufacturers = $scope.resultManufacturers.list; 		 			 
         });		 
-	 }	 
+	 };	 
  
 	 $scope.editTransmitter = function (index) {
-	        $scope.transmitterUid = $scope.transmitters[index].uid;
-	        
-		    $scope.transmitterName = $scope.transmitters[index].name;
-		    $scope.transmitterModel = $scope.transmitters[index].model;
-		    $scope.transmitterManufacturer = $scope.transmitters[index].manufacturerDto;	
-		    $scope.transmitterCommProtocol = $scope.getCommProtocols($scope.transmitters[index].commProtocol);
-		    
+		$scope.transmitterUid = $scope.transmitters[index].uid;
+		
+		$scope.transmitterName = $scope.transmitters[index].name;
+		$scope.transmitterModel = $scope.transmitters[index].model;
+		$scope.transmitterManufacturer = $scope.transmitters[index].manufacturerDto;	
+		$scope.transmitterCommProtocol = $scope.getCommProtocols($scope.transmitters[index].commProtocol);
+		
 		    	        
-	        $('#idTransmitterName').focus();
-	    }
+	    $('#idTransmitterName').focus();
+	};
 	 
 	 $scope.deleteTransmitter = function(index) {
 		 
@@ -87,11 +83,8 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 				 $scope.msgErroTransmitter = $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage);
 			 }
-         	         	
-//		 }, function(data) {		
-//			 $scope.msgErro = "Erro: " + data.statusText;
 		});		 
-	 }	 
+	 } ;
 	 
 	 $scope.getCommProtocols = function (name) {
 		 
@@ -101,7 +94,7 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
             	 return $scope.commProtocols[i];
              }
          } 		 
-	 }
+	 };
 	 
 	 $scope.commProtocols = 
 		 [
@@ -119,7 +112,7 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 		 ]; 
 	 
 	 $scope.keypress = function($event) {
-	    $scope.lastKey = $event.keyCode
+	    $scope.lastKey = $event.keyCode;
 	    $scope.transmitterNameExist = "false";
 	  };
 		  	 

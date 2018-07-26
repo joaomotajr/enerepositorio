@@ -1,4 +1,4 @@
-app.controller('simuladorController', function ($scope, $timeout, $filter, CompanyService, HistoricService, ViewService, CompanyDeviceService) {
+app.controller('simuladorController', function ($scope, $timeout, CompanyService, HistoricService, ViewService, CompanyDeviceService) {
 	
 	$scope.showInfo = function(msg) {
 		angular.element('body').removeClass('loading');            
@@ -11,18 +11,18 @@ app.controller('simuladorController', function ($scope, $timeout, $filter, Compa
 		$scope.valor = '';
 		$scope.selectedCompany = '';
         $scope.selectedCompanyDetector = '';
-        $scope.selectedSensorAlarm = ''			
+        $scope.selectedSensorAlarm = '';		
 	};
 	
 	$scope.saveHistoric = function() {
 		
 		$scope.historic = {
-				uid: 0,	
-				value: $scope.valor,
-				lastUpdate: null,
-				companyDeviceId: $scope.selectedCompanyDetector.companyDeviceId,
-				logOrigem: 'MANUAL'
-			 }	
+			uid: 0,	
+			value: $scope.valor,
+			lastUpdate: null,
+			companyDeviceId: $scope.selectedCompanyDetector.companyDeviceId,
+			logOrigem: 'MANUAL'
+		};	
 		 
 		 $scope.inclusao = new HistoricService.save($scope.historic);		 
 		 $scope.inclusao.$historic({_csrf : angular.element('#_csrf').val()}, function(){         	

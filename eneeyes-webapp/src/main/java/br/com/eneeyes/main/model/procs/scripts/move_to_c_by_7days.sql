@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `move_to_c_by_7day`(_LIMIT int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `move_to_c_by_days`(_LIMIT int)
 BEGIN
 
 	DECLARE _now DATETIME;	
@@ -22,8 +22,8 @@ BEGIN
 		COMMIT;    
         
 	 END WHILE;
-     
-     INSERT INTO log_event (date_time, event_name, rows_affected) values (now(), concat('MOVE TO C BY ', '7', ' Day(s)'), _total );
+          
+     INSERT INTO log_event (date_time, event_name, rows_affected) values (_now, concat('MOVE TO C BY ', _DAYS, ' Day(s)'), _total );
 
 	 SELECT _total ; 
 END

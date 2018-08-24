@@ -6,7 +6,7 @@ app.factory('HistoricViewService', function($resource){
             {
                 companyDeviceId: '@companyDeviceId',                 
                 dateIn: '@dateIn', 
-                dateIn: '@dateOut', 
+                dateOut: '@dateOut', 
                 currentPage: '@currentPage',
                 lenPage: '@lenPage'
             },
@@ -29,7 +29,7 @@ app.factory('HistoricViewService', function($resource){
         {
             companyDeviceId: '@companyDeviceId',             
             dateIn: '@dateIn', 
-            dateIn: '@dateOut',
+            dateOut: '@dateOut',
             currentPage: '@currentPage',
             lenPage: '@lenPage' 
             },
@@ -52,7 +52,7 @@ app.factory('HistoricViewService', function($resource){
             {
                 companyDeviceId: '@companyDeviceId',                 
                 dateIn: '@dateIn', 
-                dateIn: '@dateOut',
+                dateOut: '@dateOut',
                 currentPage: '@currentPage',
                 lenPage: '@lenPage' 
             },

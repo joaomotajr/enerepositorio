@@ -15,7 +15,7 @@ app.factory('LogAuditoriaService', function($resource){
         listInterval : $resource('/security/api/logAuditoria/interval/:dateIn/:dateOut/:currentPage/:lenPage/',
         {
             dateIn: '@dateIn', 
-            dateIn: '@dateOut', 
+            dateOut: '@dateOut', 
             currentPage: '@currentPage',
             lenPage: '@lenPage'
         },{

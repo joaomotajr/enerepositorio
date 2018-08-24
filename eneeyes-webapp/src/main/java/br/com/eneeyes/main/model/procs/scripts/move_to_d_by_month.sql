@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `move_to_d_by_month`(_LIMIT int, _MONTH int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `move_to_d_by_months`(_LIMIT int, _MONTH int)
 BEGIN
 
 	DECLARE _now DATETIME;	

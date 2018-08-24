@@ -21,7 +21,7 @@ BEGIN
         
 	 END WHILE;
 	 
-	 INSERT INTO log_event (date_time, event_name, rows_affected) values (now(), concat('MOVE TO A BY ', _HOURS, ' Hour(s)'), _total );
+	 INSERT INTO log_event (date_time, event_name, rows_affected) values (_now , concat('MOVE TO A BY ', _HOURS, ' Hour(s)'), _total );
 
 	 SELECT _total ; 
 END

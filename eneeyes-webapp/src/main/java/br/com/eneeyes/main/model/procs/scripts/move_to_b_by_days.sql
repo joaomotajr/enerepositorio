@@ -1,4 +1,4 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `move_to_b_by_day`(_LIMIT int, _DAYS int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `move_to_b_by_days`(_LIMIT int, _DAYS int)
 BEGIN
 
 	DECLARE _now DATETIME;	

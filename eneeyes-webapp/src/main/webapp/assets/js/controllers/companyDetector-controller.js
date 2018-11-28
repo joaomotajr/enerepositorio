@@ -121,18 +121,15 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 				
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), 
-			id : $scope.selectedCompanyDevice.uid }, function(){			
+			id : $scope.selectedCompanyDevice.uid }, function(){
 			
-			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;			
-						
+			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;									
 			//* Detector ja foi associado a dispositivo checa alarmes *//
 			if($scope.selectedCompanyDetector != null) {
-				
+				reloadDates();
 				$scope.getCompanyDetectorMaintenanceHistoric();
 				$scope.getCompanyDeviceAlarm($scope.selectedCompanyDetector.companyDeviceDto.uid);
-				$scope.getPositionsAndIds($scope.selectedCompanyDetector.companyDeviceDto.uid);
-				
-				reloadDates();			
+				$scope.getPositionsAndIds($scope.selectedCompanyDetector.companyDeviceDto.uid);											
 			}
         });		 
 	};
@@ -440,11 +437,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	$scope.getCompanyDetectorMaintenanceHistoric = function() {		 
 		
 		$scope.companyDetectorMaintenanceHistoric = new CompanyDetectorMaintenanceHistoricService.listPorCompanyDetector();		
-		$scope.companyDetectorMaintenanceHistoric.$companyDetectorMaintenanceHistoric(
-				{_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
-			
-				console.log("OK");
-		});		 
+		$scope.companyDetectorMaintenanceHistoric.$companyDetectorMaintenanceHistoric({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid});		 
 	}
 	
 	/* ------------------------------------- Inicio Processamento --------------------------------------------*/

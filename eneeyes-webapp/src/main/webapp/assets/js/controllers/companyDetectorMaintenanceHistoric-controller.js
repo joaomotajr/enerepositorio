@@ -10,7 +10,7 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 	
 	$scope.changeCompanyDetector = function() {
 		          
-		if($scope.selectedCompanyDetector == null) return;
+		if($scope.optionCompanyDetector == null) return;
 		
 		$scope.companyDetectorMaintenanceHistoric = undefined;
 		
@@ -65,8 +65,9 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 	
 	$scope.getOneCompanyDetector = function() {
 		
-		$scope.resultCompanyDetector = new CompanyDetectorService.listOne();		 
-		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.companyDetectorId }, function(){			
+		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
+		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), 
+			id : $scope.optionCompanyDetector.companyDeviceId }, function(){			
 			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;			
 
@@ -157,6 +158,8 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 	}
 	
 	$scope.clearFormMaintenance = function() {
+		
+		if($scope.selecteCompanyDetector == null) return;
 		
 		$('#deliveryDate').val('');
 		$scope.selectedCompanyDetector.garantyDays = 0;

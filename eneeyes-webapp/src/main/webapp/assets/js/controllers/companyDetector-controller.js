@@ -120,7 +120,8 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		$scope.search = { unitMeterGases: null, gas : null };
 				
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
-		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){			
+		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), 
+			id : $scope.selectedCompanyDevice.uid }, function(){			
 			
 			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;			
 						

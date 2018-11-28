@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
+import br.com.eneeyes.main.model.enums.DeviceType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 
 @Entity
@@ -33,6 +34,14 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 	
 	@Column(name = "company_device_id")
 	private Long companyDeviceId;
+	
+	@Column(name = "DEVICE_TYPE", columnDefinition = "int default 0")
+	private DeviceType deviceType;
+	
+	@Enumerated(EnumType.ORDINAL) 
+	private DeviceType DeviceType() { 
+	    return deviceType; 
+	}
 	
 	@Column(name = "company_detector_id")
 	private Long companyDetectorId;
@@ -91,6 +100,9 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 	private Double alarm3;
 	
 	private String artefact;
+	
+	@Column(name = "gas_name")
+	private String gasName;
 
 	public final Long getUid() {
 		return uid;
@@ -106,6 +118,19 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 
 	public Long getCompanyDeviceId() {
 		return companyDeviceId;
+	}
+	
+	public DeviceType getdeviceType() {
+		return deviceType;
+	}
+
+	public void setDeviceType(DeviceType deviceType) {		
+		if (deviceType == null ) {			
+			this.deviceType = DeviceType.OUTROS;
+		}	
+		else { 
+			this.deviceType = deviceType;
+		}
 	}
 
 	public final String getCompanyDetectorName() {
@@ -179,5 +204,9 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 	public String getArtefact() {
 		return artefact;
 	}
-	
+
+	public String getGasName() {
+		return gasName;
+	}
+		
 }

@@ -149,15 +149,14 @@
 									   	<button type="button" data-ng-click="deleteCompanyDevice();"  class="btn btn-danger pull-right" data-ng-if="!selectedCompanyGeneric.uid" data-ng-disabled="(selectedCompanyDevice.uid ) ? false : true">&nbsp;Excluir&nbsp;
 										</button>
 								</div>
-							</div>						
+							</div>					
 				    	         
-				       	</div><!-- /.tab-pane --> && !selectedCompanyDevice.uid
+						</div>
 				       	 
-				       	<div class="tab-pane" id="tabCompanyGeneric_2">
-							   
+				       	<div class="tab-pane" id="tabCompanyGeneric_2">							   
 							<div class="panel panel-primary">								                
 								<div class="panel-heading">
-									<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong> {{selectedCompanyDeviceAlarm.companyDetectorName}}</h2>							
+									<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong>Alarmes para o Dispositivo: {{selectedCompanyGeneric.name}} / Tipo {{selectedCompanyGeneric.deviceType}} </h2>							
 								</div>											   					               	
 								<div class="panel-body">
 									<div style="height: 250px; overflow: auto">

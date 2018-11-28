@@ -181,11 +181,11 @@
 																<li class="list-group-item" style="padding: 0px 15px;">
 																	<label>G&aacute;s:</label> 
 																	<span class="pull-right">
-																		{{selectedCompanyDeviceAlarm.artefact}}
+																		{{selectedCompanyDeviceAlarm.gasName}}
 																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDeviceAlarm.unitMeterGases=='LEL_PERCENT_METRO'"> LEL%m</span>
 																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDeviceAlarm.unitMeterGases == 'LEL_PERCENT'">LEL%</span>
 																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDeviceAlarm.unitMeterGases == 'PERCENT_VOLUME'">VOL%</span>
-																		<spqn style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDeviceAlarm.unitMeterGases != 'LEL_PERCENT' 
+																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDeviceAlarm.unitMeterGases != 'LEL_PERCENT' 
 																				&& selectedCompanyDeviceAlarm.unitMeterGases != 'PERCENT_VOLUME' && selectedCompanyDeviceAlarm.unitMeterGases != 'LEL_PERCENT_METRO'">{{selectedCompanyDeviceAlarm.unitMeterGases}}</dd>
 																	</span>
 																</span>
@@ -304,7 +304,7 @@
 										<thead>
 											<tr>
 												<th>Id.</th>
-												<th>Alarm Id.</th>
+												<!-- <th>Alarm Id.</th> -->
 												<th>Nome</th>
 												<th>Artefato</th>                                                    												
 												<th>Alarme 1</th>
@@ -316,7 +316,7 @@
 										<tbody>                                                        
 											<tr data-ng-repeat="item in alarms">
 												<td>{{item.uid}}</td>
-												<td>{{item.alarmId}}</td>
+												<!-- <td>{{item.alarmId}}</td> -->
 												<td>{{item.name}}</td>
 												<td><jsp:include page="controls/reduzMeters.jsp"/></td>												
 												<td>{{item.alarm1}} <span data-ng-if="item.alarm11">/{{item.alarm11}}</span></td>

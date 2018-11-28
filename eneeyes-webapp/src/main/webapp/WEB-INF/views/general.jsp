@@ -38,18 +38,18 @@
 
 								<div class="info-box-content">										
 									<span class="info-box-number" data-truncate="12" data-value="{{item.companyName}}"></span>
-									<row class="col-md-12"  style="padding-left: 5px !important;">										
+									<div class="col-md-12"  style="padding-left: 5px !important;">										
 										<span>Unidades:</span>										
 										<span class="pull-right" data-zeros="2" data-value="{{item.units}}"></span>										
-									</row>
-									<row class="col-md-12"  style="padding-left: 5px !important;">	
+									</div>
+									<div class="col-md-12"  style="padding-left: 5px !important;">	
 										<span>&Aacute;rea:</span>										
 										<span class="pull-right" data-zeros="2" data-value="{{item.areas}}"></span>									
-									</row>
-									<row class="col-md-12"  style="padding-left: 5px !important;">										
+									</div>
+									<div class="col-md-12"  style="padding-left: 5px !important;">										
 										<span>Dispositivos:</span>									
 										<span class="pull-right" data-zeros="2" data-value="{{item.devices}}"></span>								
-									</row>
+									</div>
 								</div>
 								
 							</div>

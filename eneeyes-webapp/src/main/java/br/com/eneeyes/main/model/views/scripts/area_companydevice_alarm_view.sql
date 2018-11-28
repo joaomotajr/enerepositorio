@@ -4,12 +4,13 @@ CREATE
     SQL SECURITY DEFINER
 VIEW `area_companydevice_alarm_view` AS
     SELECT 
-        GETFAKEID() AS `UID`,
+        `p`.`UID` AS `UID`,
         `cdv`.`AREA_ID` AS `AREA_ID`,
         `cdv`.`UID` AS `COMPANY_DEvice_ID`,
         `cd`.`UID` AS `COMPANY_DETECTOR_ID`,
         `cd`.`NAME` AS `COMPANY_DETECTOR_NAME`,
         `cd`.`LOCAL` AS `COMPANY_DETECTOR_LOCAL`,
+        `cdv`.`DEVICE_TYPE` AS `device_type`,
         `s`.`NAME` AS `SENSOR_NAME`,
         `s`.`RANGE_MIN` AS `RANGE_MIN`,
         `s`.`RANGE_MAX` AS `RANGE_MAX`,
@@ -35,9 +36,10 @@ VIEW `area_companydevice_alarm_view` AS
         LEFT JOIN `alarm` `a` ON ((`cdv`.`ALARM_ID` = `a`.`UID`)))
         LEFT JOIN `position` `p` ON ((`p`.`COMPANY_DEVICE_ID` = `cdv`.`UID`))) 
     UNION SELECT 
-        GETFAKEID() AS `UID`,
+        `p`.`UID` AS `UID`,
         `cdv`.`AREA_ID` AS `AREA_ID`,
         `cdv`.`UID` AS `COMPANY_DEvice_ID`,
+        `cdv`.`DEVICE_TYPE` AS `device_type`,
         `cg`.`UID` AS `COMPANY_DETECTOR_ID`,
         `cg`.`NAME` AS `COMPANY_DETECTOR_NAME`,
         `cg`.`LOCAL` AS `COMPANY_DETECTOR_LOCAL`,

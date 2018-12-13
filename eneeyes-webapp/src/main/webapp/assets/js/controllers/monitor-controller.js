@@ -30,8 +30,10 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
 		$scope.listAllDashCompaniesAlarm = new ViewService.listAllDashCompaniesAlarm();		 
 		$scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			
-			if(!$scope.listAllDashCompaniesAlarm.list)
+			if(!$scope.listAllDashCompaniesAlarm.list) {
+				$scope.loading = false;	
 				return;
+			}
 
 			for(var i = 0; i < $scope.listAllDashCompaniesAlarm.list.length; i++) {
 				
@@ -125,8 +127,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, $filt
     	if($scope.$root.errorTimes <= 5) {
     		$scope.getCompaniesAlarm();    		
     	}
-    }, 10000);	
-    
+    }, 10000);	    
 	
 	angular.element('body').removeClass('loading');		
 	

@@ -123,19 +123,16 @@
 				    		</div>
 				    		
 				    		<div class="row" data-ng-if="!selectedCompanyDetectorPosition.uid">
-
-				    			<jsp:include page="detectorsSensorsList.jsp"/>
-				    			
-				    		</div>				    					    	
-				    	
+				    			<jsp:include page="detectorsSensorsList.jsp"/>				    			
+							</div>
+											    	
 				       		<div class="row">
 				       			<div class="col-md-12">
 				       				<button type="button" data-ng-click="saveCompanyDetector();" class="btn btn-primary pull-right" data-ng-disabled="(selectedCompanyDetector.name && selectedCompanyDetector.detectorDto.uid) ? false : true">&nbsp;Salvar&nbsp;</button>		       				
 				       				<span class="pull-right">&nbsp;</span>
 				       				<button type="button" data-ng-click="deleteCompanyDetector();" class="btn btn-danger pull-right" data-ng-disabled="(selectedCompanyDetector.uid) ? false : true">&nbsp;Excluir&nbsp;</button>								
 								</div>
-							</div>						
-				    	         
+							</div>				    	         
 				       	</div><!-- /.tab-pane -->
 				       	 
 				       	<div class="tab-pane" id="tabCompanyDetector_2">

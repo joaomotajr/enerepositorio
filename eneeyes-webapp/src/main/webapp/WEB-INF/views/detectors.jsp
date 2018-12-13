@@ -159,48 +159,8 @@
 						                    </div>			                    			                            
 						                </div>		     
 									</div>	
-								</div>
-								
-								<hr style="margin-top: 5px !important; margin-bottom: 5px !important;">
-								
-		                        <!-- <div class="box box-primary box-solid">
-				                    <div class="box-header with-border">
-				                    	<strong><i class="fa fa-feed"></i> Sensores</strong>
-										<span class="text-red pull-right" data-ng-show="detectorSensors.length == 0"> <strong>[Adicionar Sensor(es)]</strong></span>
-										<span class="text-white pull-right" data-ng-show="existDetector"> <strong>[ Altera&ccedil;&atilde;o N&atilde;o Permitida, H&aacute; Equipamentos Relacionados a Este Detector ]</strong></span>
-				                    </div>
-				                	 
-				                    <div class="box-body" data-ng-class="{'disableDiv': existDetector}">
-				                    
-					                    <div class="col-sm-6">
-					                    
-					                    	<label class="control-label">Sensores</label>			                    	
-						                    <div style="max-height: 250px; height:auto; overflow: auto">                                                                       
-			                                    <ul class="todo-list" style="padding: 1px !important" data-ng-repeat="item in detectorSensors">
-			                                         <li style="padding: 4px; border-left: 3px solid #639ed9;">			                                             
-			                                             <span class="text"><strong>Sensor:</strong> {{item.name}} - <strong>G&aacute;s</strong> {{item.gasesDto[0].name}} </span>		                                         
-			                                             <div class="pull-right">                                                        
-			                                                <a href="#" data-ng-click="deleteSensor($index)"><i class="fa fa-arrow-right"></i></a>
-			                                             </div>
-			                                         </li>                                                                                                   
-			                                     </ul>			                                     
-			                                </div>			                                								        
-					                    </div>				                    
-				                    
-					                    <div class="col-sm-6">
-					                    	<label class="control-label">Lista de Sensores</label><span class="pull-right"> M&aacute;ximo 2 Sensores </span> 			                    	                        
-					                        <div style="max-height: 250px; height:auto; overflow: auto">				                        	                                                       
-		                                    	<ul class="todo-list" style="padding: 1px !important" data-ng-repeat="sensor in sensors | manufacturerFilter2:searchSensor track by $index">
-		                                            <li style="background: #d1ddf9; border-left: 3px solid #639ed9;">                                                        
-		                                                <a data-ng-if="detectorSensors.length < 2" href="#" data-ng-click="addSensorDetector(sensor.index)"><i class="fa fa-arrow-left"></i></a>
-		                                                <span data-ng-if="detectorSensors.length >= 2"><i class="fa fa-arrow-left"></i></span>
-		                                                <span class="text"><strong>Sensor:</strong> {{sensor.name}} - <strong>G&aacute;s: </strong> {{sensor.gasesDto[0].name}} </span>
-		                                            </li>                                
-		                                        </ul>
-		                                    </div>
-					                    </div>			                            
-				                    </div>				                    			                            
-					            </div>					            			                  -->
+								</div>								
+								<hr style="margin-top: 5px !important; margin-bottom: 5px !important;">												            			                  
 				            </form>
 							
 						</div>	
@@ -208,11 +168,8 @@
 			  	</div>
 			  	
 			  	<div class="modal-footer" style="padding: 8px;">
-			  		<button type="button" data-ng-click="clearFormDetector()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
-					
-					<!-- <button type="button" data-ng-click="saveDetector();" class="btn btn-primary" data-dismiss="modal"
-						data-ng-disabled="(detectorName && detectorModel && detectorManufacturer && detectorTransmitter && (detectorSensors.length != 0 || newSensors.length > 0)) ? false : true">Salvar
-					</button> -->
+			  		<button type="button" data-ng-click="clearFormDetector()" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
 					<button type="button" data-ng-click="saveDetector();" class="btn btn-primary" data-dismiss="modal"
 						data-ng-disabled="(detectorName && detectorModel && detectorManufacturer && detectorTransmitter && detectorSensor) ? false : true">Salvar
 					</button>					                               										

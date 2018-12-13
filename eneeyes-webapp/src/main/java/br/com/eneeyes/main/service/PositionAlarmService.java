@@ -33,9 +33,6 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	@Autowired
 	private PositionAlarmRepository repository;
 	
-//	@Autowired
-//	CompanyDetectorAlarmService companyDetectorAlarmAlarmService;
-	
 	@Autowired
 	AlarmService alarmService;
 	
@@ -45,20 +42,16 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	@Autowired
 	HistoricAlarmService historicAlarmService;
 	
-	public AlarmType checkAndUpdateAlarmsAndActions(Position position) {
-		
+	public AlarmType checkAndUpdateAlarmsAndActions(Position position) {		
 		return checkAndUpdateAlarmsAndActions(position, false);
 	}
 	
 	public AlarmType checkAndUpdateAlarmsAndActions(Position position, Boolean offLine) {		
-		
-//		CompanyDetector companyDetector = new CompanyDetector(position.getCompanyDetector().getUid());
-		CompanyDevice companyDevice = new CompanyDevice(position.getCompanyDevice().getUid());
-		
+
+		CompanyDevice companyDevice = new CompanyDevice(position.getCompanyDevice().getUid());		
 		if(AlarmSingletonRepository.init()) {
 			AlarmSingletonRepository.populate(companyDetectorAlarmViewService.findAll());
-		}
-		
+		}		
 		
 		AlarmDto alarmDto = AlarmSingletonRepository.findByCompanyDevice(companyDevice.getUid());
 		
@@ -71,26 +64,20 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			alarmType = getExistsAlarm(alarmDto, position.getLastValue());
 		}
 		
-		if (alarmType != AlarmType.NORMAL && alarmType != AlarmType.OFF) {
-					
-			
-			AlarmParams alarmParams = new AlarmParams(alarmDto, alarmType); 
-
+		if (alarmType != AlarmType.NORMAL && alarmType != AlarmType.OFF) {			
+			AlarmParams alarmParams = new AlarmParams(alarmDto, alarmType);
 			historicAlarmService.save(position.getLastValue(), companyDevice.getUid(), position.getHistoricId(), alarmDto, alarmType, alarmParams);
 
 			if(alarmDto.getAlarmOn())			
-				updatePositionAlarm(position, companyDevice, alarmType, alarmParams);
-		
-		}	
-				
+				updatePositionAlarm(position, companyDevice, alarmType, alarmParams);		
+		}				
 		return alarmType; 
 	}
 
 	
 	AlarmType getExistsAlarm(AlarmDto alarm, BigDecimal lastValue ) {
 			
-		AlarmType alarmType = AlarmType.NORMAL;
-				
+		AlarmType alarmType = AlarmType.NORMAL;				
 		if(alarm != null) {
 			
 			if( !alarm.getAlarmOn()) {
@@ -245,11 +232,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 	}
 
 	public BasicResult<?> findByCompanyDetector(Long uid) {
-		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
-		
-//		CompanyDetector companyDetector = new CompanyDetector();
-//		companyDetector.setUid(uid);
-		
+		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();		
 		CompanyDevice companyDevice = new CompanyDevice();
 		companyDevice.setUid(uid);
 		
@@ -258,8 +241,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			
 			if (lista != null) {
 				
-				List<PositionAlarmDto> dto = new ArrayList<PositionAlarmDto>();
-				
+				List<PositionAlarmDto> dto = new ArrayList<PositionAlarmDto>();				
 				for (PositionAlarm positionAlarm   : lista) {					
 					dto.add(new PositionAlarmDto(positionAlarm) );
 				}
@@ -290,8 +272,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 
 			if (lista != null) {
 				
-				List<PositionAlarmDto> dto = new ArrayList<PositionAlarmDto>();
-				
+				List<PositionAlarmDto> dto = new ArrayList<PositionAlarmDto>();				
 				for (PositionAlarm positionAlarm   : lista) {					
 					dto.add(new PositionAlarmDto(positionAlarm) );
 				}

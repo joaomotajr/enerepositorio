@@ -10,10 +10,8 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 	
 	$scope.changeCompanyDetector = function() {
 		          
-		if($scope.optionCompanyDetector == null) return;
-		
-		$scope.companyDetectorMaintenanceHistoric = undefined;
-		
+		if($scope.selectedCompanyDetector == null) return;		
+		$scope.companyDetectorMaintenanceHistoric = undefined;		
 		$scope.clearFormMaintenance();
 		$scope.getOneCompanyDetector();				 
 	}
@@ -22,11 +20,10 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 		
 		$scope.companyDetectorMaintenanceHistoric = new CompanyDetectorMaintenanceHistoricService.listPorCompanyDetector();		
 		$scope.companyDetectorMaintenanceHistoric.$companyDetectorMaintenanceHistoric(
-				{_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDetector.uid}, function(){
+				{_csrf : angular.element('#_csrf').val(), id : $scope.selectedMaintenanceCompanyDetector.uid}, function(){
 			
 			if($scope.companyDetectorMaintenanceHistoric.list != null && $scope.companyDetectorMaintenanceHistoric.list.length > 0)
-				lastDate = $scope.companyDetectorMaintenanceHistoric.list[ $scope.companyDetectorMaintenanceHistoric.list.length -1].date;
-					
+				lastDate = $scope.companyDetectorMaintenanceHistoric.list[ $scope.companyDetectorMaintenanceHistoric.list.length -1].date;					
 		});		 
 	}
 	
@@ -43,19 +40,16 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 		 $scope.listOne = new CompanyService.listOne();		 
 		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
 			 
-			 $scope.selectedCompany = $scope.listOne.t;
-			 
+			 $scope.selectedCompany = $scope.listOne.t;			 
 			 $scope.companyUid = $scope.selectedCompany.uid;
 			 $scope.companyName = $scope.selectedCompany.name;
-			 $scope.companyDescription = $scope.selectedCompany.description;
-			 
+			 $scope.companyDescription = $scope.selectedCompany.description;			 
 			 $scope.search = {company: $scope.selectedCompany};
 					 			 
 	    });		 
 	}
 	
-	$scope.getCompanyDetectors = function() {
-				 
+	$scope.getCompanyDetectors = function() {				 
 		 $scope.listAllDashCompany = new ViewService.listAllDashCompany();		 
 		 $scope.listAllDashCompany.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			 $scope.companyDetectors = $scope.listAllDashCompany.list; 				         	         	
@@ -63,24 +57,23 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 	}
 	
 	
-	$scope.getOneCompanyDetector = function() {
-		
+	$scope.getOneCompanyDetector = function() {		
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), 
-			id : $scope.optionCompanyDetector.companyDeviceId }, function(){			
+			id : $scope.selectedCompanyDetector.companyDeviceId }, function(){			
 			
-			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;			
+			$scope.selectedMaintenanceCompanyDetector = $scope.resultCompanyDetector.t;
 
-			if($scope.selectedCompanyDetector.installDate == null) {
+			if($scope.selectedMaintenanceCompanyDetector.installDate == null) {
 				$scope.clearForm();
-				$scope.selectedCompanyDetector = undefined;				
-				$scope.msgErroInfoHistoric = "Detector Sem Data de Instala��o, Verifique!"
+				$scope.selectedMaintenanceCompanyDetector = undefined;				
+				$scope.msgErroInfoHistoric = "Detector Sem Data de Instalação, Verifique!";
 			}
 			else {
-				lastDate = new Date($scope.selectedCompanyDetector.installDate);
+				lastDate = new Date($scope.selectedMaintenanceCompanyDetector.installDate);
 				$scope.msgErroInfoHistoric = "";
 				reloadDates();
-				$scope.selectedCompanyDetector.companyDetectorId = $scope.selectedCompanyDetector.uid;
+				$scope.selectedMaintenanceCompanyDetector.companyDetectorId = $scope.selectedMaintenanceCompanyDetector.uid;
 				$scope.getCompanyDetectorMaintenanceHistoric();
 			}
         });	
@@ -162,24 +155,24 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 		if($scope.selecteCompanyDetector == null) return;
 		
 		$('#deliveryDate').val('');
-		$scope.selectedCompanyDetector.garantyDays = 0;
-		$scope.selectedCompanyDetector.descriptionDelivery = '';			
+		$scope.selectedMaintenanceCompanyDetector.garantyDays = 0;
+		$scope.selectedMaintenanceCompanyDetector.descriptionDelivery = '';			
 		
 		$('#installDate').val('');
-		$scope.selectedCompanyDetector.descriptionInstall = '';
-		$scope.selectedCompanyDetector.maintenanceInterval = 0;
+		$scope.selectedMaintenanceCompanyDetector.descriptionInstall = '';
+		$scope.selectedMaintenanceCompanyDetector.maintenanceInterval = 0;
 		
 	}
 	
 	function reloadDates() {
 		
-		if($scope.selectedCompanyDetector.deliveryDate != null) {
-			var dataAdm = new Date($scope.selectedCompanyDetector.deliveryDate);	
+		if($scope.selectedMaintenanceCompanyDetector.deliveryDate != null) {
+			var dataAdm = new Date($scope.selectedMaintenanceCompanyDetector.deliveryDate);	
 	        $('#deliveryDate').val(dataAdm.getUTCDate() + "/" + (dataAdm.getUTCMonth() + 1) + "/" + dataAdm.getUTCFullYear());	
 		}
 		
-		if($scope.selectedCompanyDetector.installDate != null) {
-			var dataAdm = new Date($scope.selectedCompanyDetector.installDate);	
+		if($scope.selectedMaintenanceCompanyDetector.installDate != null) {
+			var dataAdm = new Date($scope.selectedMaintenanceCompanyDetector.installDate);	
 	        $('#installDate').val(dataAdm.getUTCDate() + "/" + (dataAdm.getUTCMonth() + 1) + "/" + dataAdm.getUTCFullYear());	        
 		}	
 	}
@@ -192,7 +185,7 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 			description: $scope.description,			
 			date : getDate($('#dateTwo').val()),
 			historicMaintenaceType : $scope.selectedHistoricMaintenaceType.uid,
-			companyDetectorId: $scope.selectedCompanyDetector.uid
+			companyDetectorId: $scope.selectedMaintenanceCompanyDetector.uid
 		 }
 		 
 		$scope.inclusao = new CompanyDetectorMaintenanceHistoricService.save(companyDetectorMaintenaceHistoric);

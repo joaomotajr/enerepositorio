@@ -162,14 +162,12 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			
 			$scope.validEmail();
 			$scope.validMobile();
-			$scope.usedAlarms($scope.alarms[index].uid);
-			
-			$timeout(function () {
-	            $('#modalAlarmEdit').modal({ show: 'false' });                        
-	        }, 200);
+			usedAlarms($scope.alarms[index].uid);
+									
+			angular.element('#modalAlarmEdit').modal('toggle');
 	 };
 	 
-	$scope.usedAlarms = function(alarmId) {
+	function usedAlarms(alarmId) {
 		 
 		 $scope.resultUsedAlarms = new ViewService.listAlarmCompanyDeviceView();		 
 		 $scope.resultUsedAlarms.$view({_csrf : angular.element('#_csrf').val(), alarmId : alarmId}, function(){			
@@ -213,18 +211,18 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
          });		 
 	 };
 	 
-	 function getClassNameWithNumberSuffix(el) {
-        var className = null;
-        var regexp = /\w+\d+/;
-        $($(el).attr('class').split(' ')).each(function () {
-            if (regexp.test(this)) {
-                className = this;
-                return false;
-            }
-        });
+	//  function getClassNameWithNumberSuffix(el) {
+    //     var className = null;
+    //     var regexp = /\w+\d+/;
+    //     $($(el).attr('class').split(' ')).each(function () {
+    //         if (regexp.test(this)) {
+    //             className = this;
+    //             return false;
+    //         }
+    //     });
 
-        return className;
-	 }
+    //     return className;
+	//  }
 	 
 	 $scope.getUnitMetersGases = function (name) {		 
 		 for (var i = 0; i < $scope.unitMetersGases.length; i++) {
@@ -274,7 +272,6 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 					$phone.val($phone.val() + '-');
 				}
 			}
-
 			return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));
 		})
 		

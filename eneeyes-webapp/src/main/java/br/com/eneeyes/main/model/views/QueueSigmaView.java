@@ -18,8 +18,7 @@ import br.com.eneeyes.main.model.enums.SigmaStatus;
 public class QueueSigmaView implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	public QueueSigmaView() {		
-	
+	public QueueSigmaView() {	
 	}	
 	
 	@Id
@@ -33,6 +32,7 @@ public class QueueSigmaView implements Serializable {
 	private String celular;
 	private Long company_detector_id;
 	private String company_detector_name;
+	private String company_detector_local;
 	private Long sensor_id;
 	private BigDecimal last_value;
 	private Date last_Update;	
@@ -89,6 +89,14 @@ public class QueueSigmaView implements Serializable {
 		this.company_detector_name = company_detector_name;
 	}
 	
+	public String getCompany_detector_local() {
+		return company_detector_local;
+	}
+
+	public void setCompany_detector_local(String company_detector_local) {
+		this.company_detector_local = company_detector_local;
+	}
+	
 	public Long getSensor_id() {
 		return sensor_id;
 	}
@@ -119,6 +127,5 @@ public class QueueSigmaView implements Serializable {
 
 	public final void setAlarmType(AlarmType alarmType) {
 		this.alarmType = alarmType;
-	}
-	
+	}	
 }

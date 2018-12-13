@@ -52,20 +52,8 @@
 	</head>
 
 	<!-- HEADER SECTION -->
-
 	<header class="main-header">
-			
-		<!-- Logo -->
-
-		<!--
-		<a href="#" class="logo" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')">
-			<span class="logo-mini"><b>ENE</b></span>			
-		 	<span class="logo-lg">	 		
-				 < src="/assets/img/enesens_light.png" style="float: left; padding:5px; width: 43%;"> 							  			 	
-			</span>			
-		</a>
-		-->
-
+		
 		<a href="#" class="logo" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')">
 			<span class="logo-mini"><b>ENE</b></span>			
 			<span class="logo-lg" style="color:#ECF0F1 !important; font-size: 30px !important; font-weight: 700 !important;"></i> ENESENS 		
@@ -101,29 +89,34 @@
 					<!-- Notifications: style can be found in dropdown.less -->
 					<li class="dropdown notifications-menu" data-ng-controller="monitorController">
 						<audio id="alarmSound" src="/assets/img/alert_01.mp3" preload="auto"></audio>
-						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning" data-ng-bind="dashCompaniesAlarmResults.length"></span></a>
+						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning" data-ng-bind="dashCompaniesAlarmResults.length"></span></a>						
 						<ul class="dropdown-menu">
-							<li class="header">Voce tem <span data-ng-bind="dashCompaniesAlarm.length"></span> Alarmes Pendentes</li>
-							<li>								
-								<!-- <ul class="menu" data-ng-repeat="item in dashCompaniesAlarm | filter: {alarmStatus: 'CREATED' } track by item.uid"> -->
-								<ul class="menu" data-ng-repeat="item in dashCompaniesAlarmResults = (dashCompaniesAlarm | filter: {alarmStatus: 'CREATED' }) ">												
-									<li>
-										<a href="#"> 
-										<i class="fa fa-bullhorn" data-ng-class="{
-											'text-black':item.alarmType=='OFFLINE', 
-											'text-green':item.alarmType=='NORMAL', 
-											'text-orange':item.alarmType=='ALERTA', 
-											'text-gray':item.alarmType=='DETECCAO', 
-											'text-red':item.alarmType=='EVACUACAO'
-											}"></i>
-											{{item.company_name}} {{item.company_detector_name}} {{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
-										</a>
-									</li>									
-									
-								</ul>
+							<li class="header text-center">Você tem <b data-ng-bind="dashCompaniesAlarm.length"></b> Alarmes Pendentes</li>
+							<hr style="margin-top: 2px !important; margin-bottom: 2px !important;">
+							<li>
+								<div style="max-height: 250px; height:auto; overflow: auto">
+									<ul class="menu">
+										<li data-ng-repeat="item in dashCompaniesAlarmResults = (dashCompaniesAlarm | filter: {alarmStatus: 'CREATED' })">
+											<a href="#"> 
+											<i class="fa fa-bullhorn" data-ng-class="{
+												'text-black':item.alarmType=='OFFLINE', 
+												'text-green':item.alarmType=='NORMAL', 
+												'text-orange':item.alarmType=='ALERTA', 
+												'text-gray':item.alarmType=='DETECCAO', 
+												'text-red':item.alarmType=='EVACUACAO'
+												}"></i>
+												{{item.company_name}} {{item.company_detector_name}} {{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
+											</a>
+										</li>										
+									</ul>
+								</div>
 							</li>
-							<li class="footer"><a href="#" data-ng-click="LoadAjaxContent('monitor.html', 'Monitoramento')">Ver todos</a></li>
+							<hr style="margin-top: 2px !important; margin-bottom: 2px !important;">
+							<li class="footer text-center">
+								<a href="#" data-ng-click="LoadAjaxContent('monitor.html', 'Monitoramento')">Ver todos</a>
+							</li>
 						</ul>
+						
 					</li>					
 					
 					<li class="dropdown tasks-menu">

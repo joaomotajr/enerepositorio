@@ -22,6 +22,7 @@ VIEW `queue_email_view` AS
         `a`.`EMAIL1` AS `EMAIL1`,
         `cd`.`UID` AS `COMPANY_DETECTOR_ID`,
         `cd`.`NAME` AS `COMPANY_DETECTOR_NAME`,
+        `cd`.`LOCAL` AS `COMPANY_DETECTOR_LOCAL`,
         `s`.`UID` AS `SENSOR_ID`,
         `g`.`NAME` AS `GAS_NAME`,
         `s`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`

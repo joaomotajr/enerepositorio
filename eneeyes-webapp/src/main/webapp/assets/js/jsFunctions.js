@@ -5,10 +5,10 @@
 	        var reader  = new FileReader();
 	        reader.onloadend = function () {
 	            cb(reader.result);
-	        }
+	        };
 	        reader.readAsDataURL(file);
-	    }		    
-	}
+	    };
+	};
 	
 	getDate = function (data, end) {
 
@@ -53,11 +53,8 @@
     }
 
 	function timeSinceLocal(date) {
-
 	    var seconds = Math.floor((new Date() - date) / 1000);
-
 	    var interval = Math.floor(seconds / 31536000);
-
 	    if (interval > 1) {
 	        return interval + " anos";
 	    }
@@ -81,11 +78,8 @@
 	}
 	
 	function timeSince(dateIn, date) {
-
 	    var seconds = Math.floor((new Date(dateIn) - date) / 1000);
-
 	    var interval = Math.floor(seconds / 31536000);
-
 	    if (interval > 1) {
 	        return interval + " anos";
 	    }
@@ -107,6 +101,31 @@
 	    }
 	    return Math.floor(seconds) + " segundos";
 	}
+
+	function timeSinceAbrev(dateIn, date) {
+	    var seconds = Math.floor((new Date(dateIn) - date) / 1000);
+	    var interval = Math.floor(seconds / 31536000);
+	    if (interval > 1) {
+	        return interval + " anos";
+	    }
+	    interval = Math.floor(seconds / 2592000);
+	    if (interval > 1) {
+	        return interval + " meses";
+	    }
+	    interval = Math.floor(seconds / 86400);
+	    if (interval > 1) {
+	        return interval + " dias";
+	    }
+	    interval = Math.floor(seconds / 3600);
+	    if (interval > 1) {
+	        return interval + " hs";
+	    }
+	    interval = Math.floor(seconds / 60);
+	    if (interval > 1) {
+	        return interval + " mins";
+	    }
+	    return Math.floor(seconds) + " segs";
+	}
 	
 	function padZeros(num, size) {
 	    var s = num + "";
@@ -123,11 +142,11 @@
 	
 	weekday[0]="Domingo";
 	weekday[1]="Segunda-Feira";
-	weekday[2]="Terça-Feira";
+	weekday[2]="TerÃ§a-Feira";
 	weekday[3]="Quarta-Feira";
 	weekday[4]="Quinta-Feira";
 	weekday[5]="Sexta-Feira";
-	weekday[6]="Sábado";
+	weekday[6]="SÃ¡bado";
 	
 	function dayDiff(first, second) {
 	    return Math.round((second-first)/(1000*60*60*24));

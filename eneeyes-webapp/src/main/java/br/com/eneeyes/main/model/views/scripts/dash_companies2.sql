@@ -37,6 +37,7 @@ VIEW `dash_companies2` AS
         END) AS `device`,
         `cdv`.`DEVICE_TYPE` AS `device_type`,
         `cd`.`NAME` AS `companyDetector_name`,
+        `cd`.`LOCAL` AS `companyDetector_local`,
         `cd`.`UID` AS `companyDetector_id`,
         `d`.`UID` AS `detector_id`
     FROM
@@ -72,6 +73,7 @@ VIEW `dash_companies2` AS
         END) AS `device`,
         `cdv`.`DEVICE_TYPE` AS `device_type`,
         `cg`.`NAME` AS `companyDetector_name`,
+        `cg`.`LOCAL` AS `companyDetector_local`,
         `cg`.`UID` AS `companyDetector_id`,
         `g`.`UID` AS `detector_id`
     FROM

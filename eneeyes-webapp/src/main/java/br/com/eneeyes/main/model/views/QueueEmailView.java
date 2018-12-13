@@ -35,6 +35,7 @@ public class QueueEmailView implements Serializable {
 	private String email1;
 	private Long company_detector_id;
 	private String company_detector_name;
+	private String company_detector_local;
 	private Long sensor_id;
 	private BigDecimal last_value;
 	private Date last_Update;
@@ -101,8 +102,16 @@ public class QueueEmailView implements Serializable {
 
 	public final void setCompany_detector_name(String company_detector_name) {
 		this.company_detector_name = company_detector_name;
-	}
+	}	
 	
+	public String getCompany_detector_local() {
+		return company_detector_local;
+	}
+
+	public void setCompany_detector_local(String company_detector_local) {
+		this.company_detector_local = company_detector_local;
+	}
+
 	public Long getSensor_id() {
 		return sensor_id;
 	}

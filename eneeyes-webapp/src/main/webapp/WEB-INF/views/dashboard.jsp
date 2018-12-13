@@ -119,24 +119,18 @@
 							</div>
 						</div>							
 					</div>
-
 					<br>
-
 					<div class="row">
-						<div class="col-md-7">
-
+						<div class="col-md-8">
 							<div class="box box-primary">
 								<div class="box-header with-border">
 									<label><strong>&Uacute;ltimas medi&ccedil;&otilde;es</strong></label>
-									<div class="box-tools pull-right">
-									
+									<div class="box-tools pull-right">									
 										<label data-ng-show='loading'>Loading ...</label>		
 										<button class="btn btn-box-tool" data-ng-click="refreshDashboard();"><i title="Refresh" class="fa fa-refresh"></i></button>		
 										<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-
 									</div>
-								</div>									
-								
+								</div>								
 								<div class="box-body" style="padding: 4px !important;text-align: -webkit-center;">
 									<div class="table-responsive">
 										<div style="max-height: 500px; overflow: auto">
@@ -144,10 +138,26 @@
 												<thead>
 													<tr>														
 														<th>&nbsp;&nbsp;<i class="fa fa-tags" style="font-size:1.2em;"></i>&nbsp;</th>
-														<th>ID</th>
-														<th>Empresa</th>
-														<th>Detector</th>						
-														<th>Artefato</th>
+														<!-- <th>ID</th> -->
+														<th>
+															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('companyName')">
+																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
+																	data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'companyName' && orderOptions != '-companyName'}"></i>
+															</span>Empresa
+														</th>
+														<th>
+															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('companyDeviceName')">
+																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
+																	data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'companyDeviceName' && orderOptions != '-companyDeviceName'}"></i>
+															</span>Device
+														</th>						
+														<th>
+															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('artefact')">
+																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
+																	data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'artefact' && orderOptions != '-artefact'}"></i>
+															</span>
+															Artefato
+														</th>
 														<th>Status</th>
 														<th>Comunica&ccedil;&atilde;o</th>
 														<th>Valor</th>
@@ -155,7 +165,7 @@
 													</tr>
 												</thead>
 												<tbody>
-													<tr data-ng-repeat="item in dashCompaniesPositionFiltered = (dashCompaniesPosition | dashCompaniesPositionFilter: selectedStatusDashCompaniesPosition)">																
+													<tr data-ng-repeat="item in dashCompaniesPositionFiltered = (dashCompaniesPosition | dashCompaniesPositionFilter: selectedStatusDashCompaniesPosition) | orderBy: orderOptions">
 														<td>&nbsp;<strong>
 															<i data-ng-if="item.artefact=='TEMPERATURE'" class="fa fa-thermometer" style="font-size:1.2em;"></i>
 															<i data-ng-if="item.artefact=='ELETRICITY'" class="fa fa-plug" style="font-size:1.2em;"></i>
@@ -164,14 +174,14 @@
 															<i data-ng-if="item.artefact=='DIGITAL'" class="fa fa-flash" style="font-size:1.2em;"></i>																		
 															</strong>&nbsp; 
 														</td>
-														<td>{{item.positionId}}</td>
+														<!-- <td>{{item.positionId}}</td> -->
 														<td><span data-truncate="12" data-value="{{item.companyName}}"></span></td>
 														<td>{{item.companyDeviceName}}</td>
 														<td>
 															<jsp:include page="controls/reduzMeters.jsp"/>
 														</td>													
 														<td> 
-															<span class="label" data-ng-class="{																	
+															<span class="label" style="font-size:50%" data-ng-class="{																	
 																'label-primary' : item.alarmType=='OFF' || item.alarmType=='WITHOUT', 
 																'label-offline' : item.alarmType=='OFFLINE',
 																'label-success' : item.alarmType=='NORMAL', 
@@ -181,8 +191,11 @@
 															</span>
 														</td>
 														<td><label title="{{item.lastUpdateFull | date:'dd/MM/yyyy HH:mm'}}">&agrave; {{item.lastUpdate}}</label></td>
-														<td><label>{{item.lastValue}}</label></td>
-														<td class="col-lg-2"><div class="sparkbar">{{item.arrayValues}}</div></td>
+														<td>
+															<label data-ng-if="item.alarmType=='OFFLINE'">-</label>
+															<label data-ng-if="item.alarmType!='OFFLINE'">{{item.lastValue}}</label>
+														</td>
+														<td class="col-md-2"><div class="sparkbar">{{item.arrayValues}}</div></td>
 													</tr>
 												</tbody>
 											</table>
@@ -193,9 +206,8 @@
 
 						</div>
 							
-						<div class="col-md-5">
+						<div class="col-md-4">
 							<div class="row">
-
 								<div class="box box-primary">
 									<div class="box-header with-border">
 										<label><strong>Gr&aacute;fico Consolidado</strong></label>
@@ -205,21 +217,20 @@
 										</div>
 									</div>
 									<div class="box-body" style="text-align: -webkit-center;">
-										<div style="border:1px solid #979797;display:inline-block;padding:0 10px">
-										<div data-fusioncharts							
-											data-width="400"
-											data-height= "400"						    						    						    						    
-											data-type="doughnut2d"						    								    
-											data-datasource="{{dataSource}}">
-										</div>
-										</div>
-										
+										<div>
+											<div data-fusioncharts							
+												data-width="400"
+												data-height= "400"						    						    						    						    
+												data-type="doughnut2d"						    								    
+												data-datasource="{{dataSource}}">
+											</div>
+										</div>										
 									</div>
 								</div>																
 							</div>							
 
 							<div class="row">
-									<div class="box box-primary" style="margin-bottom:0px">
+								<div class="box box-primary" style="margin-bottom:0px">
 									<div class="box-header with-border">
 										<label><strong>Calibra&ccedil;&otilde;es Pr&oacute;ximas</strong></label>
 										<div class="box-tools pull-right">

@@ -18,7 +18,7 @@
 					<label class="control-label">Garantia <span style="font-size: 80%">(Dias)</span></label>											                
 					<input class="form-control" type="number"
 						placeholder="Dias" 
-						data-ng-model="selectedCompanyDetector.garantyDays" name="garanty" 
+						data-ng-model="selectedMaintenanceCompanyDetector.garantyDays" name="garanty" 
 						title="Prazo de Garantia do Fabricante em Dias."
 					required>
 				</div>
@@ -27,7 +27,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label">Detalhes sobre a Entrega: </label>
-					<input class="form-control" placeholder="Descrição" data-ng-model="selectedCompanyDetector.descriptionDelivery">
+					<input class="form-control" placeholder="Descrição" data-ng-model="selectedMaintenanceCompanyDetector.descriptionDelivery">
 				</div>
 			</div>
 		</div>						               		
@@ -51,7 +51,7 @@
 					
 					<input class="form-control" type="number" style="background:azure" 
 						placeholder="Dias" 
-						data-ng-model="selectedCompanyDetector.maintenanceInterval" name="maintenanceInterval" 
+						data-ng-model="selectedMaintenanceCompanyDetector.maintenanceInterval" name="maintenanceInterval" 
 						title="Intervalo Recomendado de Manutenção/Calibração."
 					required>
 				</div>
@@ -60,7 +60,7 @@
 			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label">Detalhes Sobre a Instalação:</label>
-					<input class="form-control" placeholder="Descrição" data-ng-model="selectedCompanyDetector.descriptionInstall">
+					<input class="form-control" placeholder="Descrição" data-ng-model="selectedMaintenanceCompanyDetector.descriptionInstall">
 				</div>
 			</div>
 		</div>

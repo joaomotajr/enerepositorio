@@ -114,3 +114,12 @@ drop table queue_sigma_view;
 drop table queue_sms_view;
 drop table position_historic_view
 
+
+/* Falta criar controle pra não cortar tempo de abertura pela metade
+   Criar o Job para chamada
+   Criar campo em parametro e limpar  a partir de cada  
+   usar a view se historic completa  								*/
+
+truncate table enedb.historic_open;
+call curdemo(5000);
+SELECT * FROM enedb.historic_open;

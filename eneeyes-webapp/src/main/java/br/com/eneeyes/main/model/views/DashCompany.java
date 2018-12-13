@@ -24,15 +24,6 @@ public class DashCompany implements Serializable {
 	public final void setDashCompanyId(DashCompanyId dashCompanyId) {
 		this.dashCompanyId = dashCompanyId;
 	}
-		
-//	@Column(name="companyDetector_id", nullable=false, insertable=false, updatable=false)
-//	private Long companyDetectorId;	
-//	public final Long getCompanyDetectorId() {
-//		return companyDetectorId;
-//	}
-//	public final void setCompanyDetectorId(Long companyDetectorId) {
-//		this.companyDetectorId = companyDetectorId;
-//	}
 
 	@Column(name="company_id", nullable=false, insertable=false, updatable=false)
 	private Long companyId;	
@@ -89,7 +80,14 @@ public class DashCompany implements Serializable {
 	public final String getCompanyDetectorName() {
 		return companyDetectorName;
 	}
-		
+	
+	@Column(name="companyDetector_local")
+	private String companyDetectorLocal;
+			
+	public String getCompanyDetectorLocal() {
+		return companyDetectorLocal;
+	}
+
 	@Column(name="sensor_name")
 	private String sensorName;	
 	
@@ -110,16 +108,6 @@ public class DashCompany implements Serializable {
 	public Double getRangeMax() {
 		return rangeMax;
 	}	
-
-//	private Long detector_id;	
-//	
-//	public final Long getDetector_id() {
-//		return detector_id;
-//	}
-//	
-//	public final void setDetector_id(Long detector_id) {
-//		this.detector_id = detector_id;
-//	}
 	
 	@Column(name="device_type", nullable=true)
 	private int deviceType;
@@ -127,5 +115,4 @@ public class DashCompany implements Serializable {
 	public final int getDeviceType() {
 		return deviceType;
 	}
-
 }

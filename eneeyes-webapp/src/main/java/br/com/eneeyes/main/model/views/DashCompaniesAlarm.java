@@ -35,8 +35,7 @@ public class DashCompaniesAlarm implements Serializable {
 	private String unit_name;
 	private String area_name;
 	private String company_detector_name;
-//	private String sensor_name;
-//	private Long sensor_id;
+	private String company_detector_local;
 	private Double last_value;
 		
 	@Column(name = "alarm_type")
@@ -59,7 +58,6 @@ public class DashCompaniesAlarm implements Serializable {
 	
 	private Date first_update;
 	private Date last_update;
-//	private String gas_name;
 	private String artefact;
 	
 	@Column(name = "unit_meter_gases")
@@ -115,21 +113,13 @@ public class DashCompaniesAlarm implements Serializable {
 		this.company_detector_name = company_detector_name;
 	}
 	
-//	public String getSensor_name() {
-//		return sensor_name;
-//	}
-//	
-//	public void setSensor_name(String sensor_name) {
-//		this.sensor_name = sensor_name;
-//	}
-	
-//	public Long getSensor_id() {
-//		return sensor_id;
-//	}
-//	
-//	public void setSensor_id(Long sensor_id) {
-//		this.sensor_id = sensor_id;
-//	}
+	public String getCompany_detector_local() {
+		return company_detector_local;
+	}
+
+	public void setCompany_detector_local(String company_detector_local) {
+		this.company_detector_local = company_detector_local;
+	}
 	
 	public Double getLast_value() {
 		return last_value;
@@ -201,14 +191,6 @@ public class DashCompaniesAlarm implements Serializable {
 	public void setLast_update(Date last_update) {
 		this.last_update = last_update;
 	}
-	
-//	public String getGas_name() {
-//		return gas_name;
-//	}
-//	
-//	public void setGas_name(String gas_name) {
-//		this.gas_name = gas_name;
-//	}
 		
 	public String getArtefact() {
 		return artefact;
@@ -233,5 +215,4 @@ public class DashCompaniesAlarm implements Serializable {
 	public final void setAction(String action) {
 		this.action = action;
 	}
-
 }

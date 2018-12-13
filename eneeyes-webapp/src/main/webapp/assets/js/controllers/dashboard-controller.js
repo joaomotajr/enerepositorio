@@ -10,8 +10,7 @@ app.filter('dashCompaniesPositionFilter', function () {
         	if (objects[index].alarmType == criteria) {
             	filterResult.push(objects[index]);                
             }            
-        }
-                
+        }                
         return filterResult;
     }
 });
@@ -19,6 +18,20 @@ app.filter('dashCompaniesPositionFilter', function () {
 app.controller('dashController', function ($scope, $timeout, $interval, $filter, ViewService, UserService) {
 
 	firstTime = true;
+	
+	$scope.orderOptions = "none";
+	$scope.row = "ASC";
+
+	$scope.toggleQuestao = function(field) {
+		if ($scope.row == "ASC") {
+			$scope.orderOptions = "-" + field;
+			$scope.row = "DESC";
+		}
+		else if ($scope.row == "DESC") {
+			$scope.orderOptions = field;
+			$scope.row = "ASC";
+		}
+	};
 
 	chart = {
 		caption: "Detectores Monitorados por Status",
@@ -94,10 +107,8 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 	$scope.dashCompaniesPosition = [];
 	$scope.dashDetectorsMaintenance = [];
 	
-	$scope.getDetectorsMaintenance = function() {
-		
-		$scope.loading = true;	
-		
+	$scope.getDetectorsMaintenance = function() {	
+		$scope.loading = true;		
 		$scope.listAllDashDetectorsMaintenance = new ViewService.listAllDashDetectorsMaintenance();		 
 		$scope.listAllDashDetectorsMaintenance.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			
@@ -116,22 +127,18 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 						 }
 					}			
 			 	);	
-			}
-			
+			}			
 			$scope.loading = undefined;         	         	
        });		 
 	}
 	
-	$scope.getCompaniesPosition = function() {
-		
-		$scope.loading = true;	
-
+	$scope.getCompaniesPosition = function() {		
+		$scope.loading = true;
 		if (firstTime) {
 			angular.element('body').addClass('loading');		
 			firstTime = false;
 		}
 
-		
 		$scope.listAllDashCompaniesPosition = new ViewService.listAllDashCompaniesPosition();		 
 		$scope.listAllDashCompaniesPosition.$view({_csrf : angular.element('#_csrf').val()}, function(){
 		
@@ -140,7 +147,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					 
 					 $scope.dashCompaniesPosition[i] = $scope.listAllDashCompaniesPosition.list[i];
 					 $scope.dashCompaniesPosition[i].lastUpdateFull = $scope.dashCompaniesPosition[i].lastUpdate;
-					 $scope.dashCompaniesPosition[i].lastUpdate = timeSince($scope.listAllDashCompaniesPosition.serverDate, $scope.dashCompaniesPosition[i].lastUpdate);				 
+					 $scope.dashCompaniesPosition[i].lastUpdate = timeSinceAbrev($scope.listAllDashCompaniesPosition.serverDate, $scope.dashCompaniesPosition[i].lastUpdate);				 
 					 $scope.dashCompaniesPosition[i].lastValue	= Math.round($scope.dashCompaniesPosition[i].lastValue * 100) / 100 ;
 					 $scope.dashCompaniesPosition[i].arrayValues = $scope.dashCompaniesPosition[i].arrayValues.substring(0, $scope.dashCompaniesPosition[i].arrayValues.lastIndexOf(","));				
 				 }
@@ -169,14 +176,12 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 							$scope.sumary.alarm2 ++;							 
 						}
 						else if ( e.alarmType == "EVACUACAO") {
-							$scope.sumary.alarm3 ++;	
-							 
+							$scope.sumary.alarm3 ++;							 
 						}
 					}			
 			 	);			 			 
 				
-				populateDonut(new Date($scope.listAllDashCompaniesPosition.serverDate).toLocaleTimeString() );		
-				
+				populateDonut(new Date($scope.listAllDashCompaniesPosition.serverDate).toLocaleTimeString());				
 				$timeout(function() {	
 					angular.element('body').removeClass('loading');						
 				   $('.sparkbar').each(function () {
@@ -186,8 +191,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					   });
 				   }); 	
 			   }, 10);
-			}
-			
+			}			
 			$scope.loading = undefined;         	         	
        });		 
 	 }
@@ -196,8 +200,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		var idUsuario = $('#idUsuario').val();
 		
     	$scope.userImage = new UserService.listOne();
-        $scope.userImage.$user({_csrf : angular.element('#_csrf').val(), id : idUsuario }, function(){
-       	
+        $scope.userImage.$user({_csrf : angular.element('#_csrf').val(), id : idUsuario }, function(){       	
         	$timeout(function () {
         		if($scope.userImage.t.image != null)
         			$scope.$root.userImage = $scope.userImage.t.image;	            

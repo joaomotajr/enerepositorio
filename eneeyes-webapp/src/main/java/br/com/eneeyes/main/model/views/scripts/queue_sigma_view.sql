@@ -20,6 +20,7 @@ VIEW `queue_sigma_view` AS
         `a`.`CELULAR` AS `CELULAR`,
         `cd`.`UID` AS `COMPANY_DETECTOR_ID`,
         `cd`.`NAME` AS `COMPANY_DETECTOR_NAME`,
+        `cd`.`LOCAL` AS `COMPANY_DETECTOR_LOCAL`,
         `s`.`UID` AS `SENSOR_ID`
     FROM
         ((((((`position_alarm` `pa`

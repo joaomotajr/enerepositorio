@@ -44,17 +44,14 @@
 											<th>Detector</th>
 											<th>Alarme</th>
 											<th>Data/hora</th>
-											<th>Intera&ccedil;&atilde;es</th>
+											<th>Itera&ccedil;&atilde;es</th>
 											<th>Reportar</th>											
 										</tr>
 									</thead>
 									<tbody>
-
-										<tr data-ng-repeat="item in dashCompaniesAlarm | filter: {alarmStatus: 'CREATED' } track by item.uid">
-											
+										<tr data-ng-repeat="item in dashCompaniesAlarm | filter: {alarmStatus: 'CREATED' } track by item.uid">											
 											<td>{{item.company_name}}</td>
-											<td>{{item.company_detector_name}}</td>
-											
+											<td>{{item.company_detector_name}}</td>											
 											<td style="padding-top: 13px ! important;"> 
 												<span class="label" 
 													data-ng-class="{
@@ -65,9 +62,7 @@
 													'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} 
 													</span>
 												</td>	
-											<td>
-												{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
-											</td>
+											<td>{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}</td>
 											<td>
 												<span data-ng-if="item.sigmaStatus=='OFF'" class="icon fa fa-exchange" style="font-size:1.4em; color: gray" title="Sem Integra&ccedil;&atilde;o ao Sigma Habilitada"></span>
                                             	<span data-ng-if="item.sigmaStatus=='ERROR'" class="icon fa fa-exchange" style="font-size:1.4em; color: red" title="Falha ao Informar Sigma"></span>
@@ -132,7 +127,7 @@
 											<th>Detector</th>
 											<th>Alarme</th>
 											<th>Data/hora</th>
-											<th>Intera&ccedil;&atilde;es</th>
+											<th>Itera&ccedil;&atilde;es</th>
 											<th>Reportar</th>
 										</tr>
 									</thead>
@@ -217,7 +212,7 @@
 											<th>Detector</th>
 											<th>Alarme</th>
 											<th>Data/hora</th>
-											<th>Intera&ccedil;&atilde;es</th>
+											<th>Itera&ccedil;&atilde;es</th>
 											<th>Hist&oacute;rico</th>
 										</tr>
 									</thead>
@@ -304,9 +299,10 @@
 														<dd>{{selectedPositionAlarm.company_name}}</dd>
 													<dt>Unidade / Area:</dt>
 														<dd>{{selectedPositionAlarm.unit_name}} / {{selectedPositionAlarm.area_name}}</dd>													
-													<dt>Detector / Sensor</dt>
-														<dd>{{selectedPositionAlarm.company_detector_name}} / {{selectedPositionAlarm.sensor_name}}</dd>
-																																							
+													<dt>Dispositivo</dt>
+														<dd>{{selectedPositionAlarm.company_detector_name}}</dd>
+													<dt data-ng-if="selectedPositionAlarm.company_detector_local">Local</dt>
+														<dd data-ng-if="selectedPositionAlarm.company_detector_local">{{selectedPositionAlarm.company_detector_local}}</dd>
 													<dt>Alarme: </dt>														
 														<dd style="margin-top: 7px; margin-bottom: 7px">
 															<span class="label"  
@@ -326,7 +322,7 @@
 														<dd>
 															{{selectedPositionAlarm.last_update_full  | date:'yyyy-MM-dd HH:mm:ss'}}  
 														</dd>														
-													<dt>Medi&ccedil;&atilde;es: </dt>															
+													<dt>Medi&ccedil;&otilde;es: </dt>															
 														<dd>
 															G&aacute;s: {{selectedPositionAlarm.gas_name}} | Medi&ccedil;&atilde;o: {{selectedPositionAlarm.last_value}}
 															<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases=='LEL_PERCENT'"> LEL%</span>

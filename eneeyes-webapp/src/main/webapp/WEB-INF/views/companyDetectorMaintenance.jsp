@@ -11,7 +11,7 @@
 						<h3 class="box-title">Cadastro / Edi&ccedil;&atilde;o</h3>
 						<span class="text-muted pull-right"><i class="fa fa-fa-search"></i></span>
 					</div>					
-					<div class="box-body" style="padding-bottom: 0px; !important">
+					<div class="box-body" style="padding-bottom: 0px !important;">
 						<div class="row">
 							<div class="col-md-3">
 								<label class="control-label">Empresa: </label>

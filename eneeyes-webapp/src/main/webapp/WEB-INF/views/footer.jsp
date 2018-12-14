@@ -39,6 +39,7 @@
 	<script src="/assets/plugins/angular/angular-locale_pt-br.js"></script>	
 	<script src="/assets/plugins/angular/angular-options-disabled.js"></script>
 	<script src="/assets/plugins/angular/angular-cookies.min.js"></script>	
+	<script src="/assets/plugins/angular/angular-ui-mask/mask.min.js"></script>
 	
 	<!-- FUSION CHARTS -->
 	<script type="text/javascript" src="/assets/plugins/fusioncharts/fusioncharts.js"></script>

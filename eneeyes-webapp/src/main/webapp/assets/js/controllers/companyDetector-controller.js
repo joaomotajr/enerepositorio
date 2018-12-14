@@ -156,8 +156,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 
 		$scope.resultDevices = new ViewService.listCompanyDeviceAlarms();		 
 		$scope.resultDevices.$view({_csrf : angular.element('#_csrf').val(), companyDeviceId : companyDeviceId}, function(){						
-			$scope.selectedCompanyDeviceAlarms = $scope.resultDevices.list;			
-			$scope.selectedCompanyDeviceAlarm = $scope.resultDevices.list[0];	
+			
+			$scope.selectedCompanyDeviceAlarms = [];
+			$scope.selectedCompanyDeviceAlarms.push($scope.resultDevices.t);
+			$scope.selectedCompanyDeviceAlarm = $scope.resultDevices.t;		
 
 			$scope.selectedCompanyDeviceAlarm.dataSource = getGaugeInfo($scope.selectedCompanyDeviceAlarm);			 
 		});

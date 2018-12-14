@@ -8,7 +8,7 @@ import br.com.eneeyes.main.model.views.AreaCompanyDeviceAlarmView;
 
 public interface AreaCompanyDeviceAlarmViewRepository extends JpaRepository<AreaCompanyDeviceAlarmView, Long> {
 	
-	List<AreaCompanyDeviceAlarmView> findByCompanyDeviceId(Long companyDeviceId);
+	AreaCompanyDeviceAlarmView findByCompanyDeviceId(Long companyDeviceId);
 	
 	List<AreaCompanyDeviceAlarmView> findByAreaId(Long AreaId);
 }

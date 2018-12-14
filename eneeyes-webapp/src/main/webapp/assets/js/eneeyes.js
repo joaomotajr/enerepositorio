@@ -1,4 +1,4 @@
-var app = angular.module('eneeyes', ['ngResource', 'dependency', 'ng-fusioncharts', 'ngCookies']);
+var app = angular.module('eneeyes', ['ngResource', 'dependency', 'ng-fusioncharts', 'ngCookies', 'ui.mask']);
 
 angular.module('angularDatatable', []);
 
@@ -32,7 +32,7 @@ angular.module('dependency', []).config(['$httpProvider', function ($httpProvide
         	 }
         	 else if (rejection.status == 403) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertServerDanger = "403 Acesso ao Módulo ou Recurso Não Permitido!";
+        		 $rootScope.alertServerDanger = "403 Acesso ao Mï¿½dulo ou Recurso Nï¿½o Permitido!";
         		 $('#resultServerDanger').hide().show('slow').delay(15000).hide('slow');
         	 }
         	 else if (rejection.status == 404) {
@@ -42,7 +42,7 @@ angular.module('dependency', []).config(['$httpProvider', function ($httpProvide
         	 }
         	 else if (rejection.status == 405) {
         		 angular.element('body').removeClass('loading'); 
-        		 $rootScope.alertServerDanger = "405 - Chamada Inválida, Contate o Administrador do Sistema.";
+        		 $rootScope.alertServerDanger = "405 - Chamada Invï¿½lida, Contate o Administrador do Sistema.";
         		 
         		 $timeout(function(){
         			 	$('#resultServerDanger').hide();

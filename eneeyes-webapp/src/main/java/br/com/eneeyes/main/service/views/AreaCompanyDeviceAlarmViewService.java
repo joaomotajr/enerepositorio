@@ -72,11 +72,10 @@ public class AreaCompanyDeviceAlarmViewService {
 		Result<AreaCompanyDeviceAlarmView> result = new Result<AreaCompanyDeviceAlarmView>();	
 		
 		try {
-			List<AreaCompanyDeviceAlarmView> lista = repository.findByCompanyDeviceId(companyDeviceId);
+			AreaCompanyDeviceAlarmView areaCompanyDeviceAlarmView = repository.findByCompanyDeviceId(companyDeviceId);
 
-			if (lista != null) {
-									
-				result.setList(lista);
+			if (areaCompanyDeviceAlarmView != null) {									
+				result.setEntity(areaCompanyDeviceAlarmView);
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {

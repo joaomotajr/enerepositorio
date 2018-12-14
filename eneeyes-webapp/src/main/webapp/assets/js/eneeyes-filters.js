@@ -34,9 +34,28 @@ app.filter('companyFilter', function () {
         if (!criteria)
             return null;
 
-        for (index in objects) {
+        for (var index in objects) {
                         
         	 if (objects[index] != null && objects[index].companyId == criteria.company.uid  ) {
+
+                 filterResult.push(objects[index]);
+             }   
+        }
+
+        return filterResult;
+    }
+});
+
+app.filter('detectorFilter', function () {
+    return function (objects, criteria) {
+        var filterResult = new Array();
+
+        if (!criteria)
+            return null;
+
+        for (var index in objects) {
+                        
+        	 if (objects[index] != null && objects[index].device == criteria.deviceType  ) {
 
                  filterResult.push(objects[index]);
              }   

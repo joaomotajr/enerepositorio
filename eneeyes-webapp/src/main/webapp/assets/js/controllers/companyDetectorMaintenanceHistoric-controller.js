@@ -33,7 +33,8 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 		
 		$scope.clearForm();		
 		$scope.search = {company: $scope.selectedCompany};
-	}
+		$scope.search2 = {deviceType: 'DETECTOR'};
+	};
 	
 	$scope.getOneCompany = function(companyId) {
 		 
@@ -62,12 +63,19 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), 
 			id : $scope.selectedCompanyDetector.companyDeviceId }, function(){			
 			
-			$scope.selectedCompanyDetector = $scope.resultCompanyDetector.t;
+			// Não subistuí o objeto por que o formulario separdo possui o mesmo nome dava conflito
+			$scope.selectedCompanyDetector.uid = $scope.resultCompanyDetector.t.uid;
+			$scope.selectedCompanyDetector.installDate = $scope.resultCompanyDetector.t.installDate;
+			$scope.selectedCompanyDetector.deliveryDate = $scope.resultCompanyDetector.t.deliveryDate;
+			$scope.selectedCompanyDetector.descriptionDelivery = $scope.resultCompanyDetector.t.descriptionDelivery;
+			$scope.selectedCompanyDetector.descriptionInstall = $scope.resultCompanyDetector.t.descriptionInstall;
+			$scope.selectedCompanyDetector.garantyDays = $scope.resultCompanyDetector.t.garantyDays;
+			$scope.selectedCompanyDetector.maintenanceInterval = $scope.resultCompanyDetector.t.maintenanceInterval;
 
 			if($scope.selectedCompanyDetector.installDate == null) {
 				$scope.clearForm();
 				$scope.selectedCompanyDetector = undefined;				
-				$scope.msgErroInfoHistoric = "Detector Sem Data de InstalaÃ§Ã£o, Verifique!";
+				$scope.msgErroInfoHistoric = "Detector Sem Data de Instalalção, Verifique!";
 			}
 			else {
 				lastDate = new Date($scope.selectedCompanyDetector.installDate);
@@ -86,6 +94,7 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
 			 $scope.getOneCompany($scope.$root.isFrom);
 		 }
 		 else {		
+			 $scope.selectedCompany = null;
 			 $scope.resultCompanies = new CompanyService.listAllView();		 
 			 	$scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
 				 $scope.companies = $scope.resultCompanies.list;
@@ -204,7 +213,7 @@ app.controller('CompanyDetectorMaintenanceHistoricController', function ($scope,
     $("[data-mask]").inputmask();
 	
 	$scope.getCompanys();	
-	$scope.getCompanyDetectors();
-		
+	// $scope.getCompanyDetectors();
+			
 	angular.element('body').removeClass('loading');	
 });

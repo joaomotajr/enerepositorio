@@ -38,8 +38,7 @@ public class AreaCompanyDeviceAlarmViewService {
 			result.setMessage(e.getMessage());
 		}
 		
-		return result;	
-		
+		return result;		
 	}
 	
 	public Result<?> listByAreaId(Long areaId) {

@@ -324,7 +324,7 @@
 														</dd>														
 													<dt>Medi&ccedil;&otilde;es: </dt>															
 														<dd>
-															G&aacute;s: {{selectedPositionAlarm.gas_name}} | Medi&ccedil;&atilde;o: {{selectedPositionAlarm.last_value}}
+															G&aacute;s: {{selectedPositionAlarm.artefact}} | Medi&ccedil;&atilde;o: {{selectedPositionAlarm.last_value}}
 															<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
 															<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases!='LEL_PERCENT'"> {{selectedPositionAlarm.unitMeterGases}}</span>
 														</dd>

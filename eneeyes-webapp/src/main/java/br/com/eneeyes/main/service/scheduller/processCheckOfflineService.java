@@ -52,19 +52,13 @@ public class processCheckOfflineService {
 		
 		for (Position position  : offlineList) {			
 			
-			try {
-				
+			try {				
 				position.setAlarmType(AlarmType.OFFLINE);				
 				processAlarmService.ExecuteOfflineProcedures(position);
 				 
-			} catch (Exception e) {			
-
+			} catch (Exception e) {
 				e.printStackTrace();
-			}				
-			
-		}
-		
+			}			
+		}		
 	}
-
-
 }

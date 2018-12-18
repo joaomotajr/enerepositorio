@@ -47,7 +47,7 @@ public class SiteService {
 		   
 		   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to[0]));  
 		   
-		   if(to[1] != null)
+		   if(to[1] != null && !to[1].equals(""))
 			   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to[1]));
 	
 		   transport.connect();  

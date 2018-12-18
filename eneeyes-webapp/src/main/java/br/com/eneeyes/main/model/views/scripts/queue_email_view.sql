@@ -25,10 +25,17 @@ VIEW `queue_email_view` AS
         `cd`.`LOCAL` AS `COMPANY_DETECTOR_LOCAL`,
         `s`.`UID` AS `SENSOR_ID`,
         `g`.`NAME` AS `GAS_NAME`,
-        `s`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`
+        `s`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`,
+        `c`.`NAME` AS `company_name`,
+        `u`.`NAME` AS `unit_name`,
+        `area`.`NAME` AS `area_name`,
+        `area`.`LOCAL` AS `area_local`
     FROM
-        ((((((`position_alarm` `pa`
+        (((((((((`position_alarm` `pa`
         JOIN `company_device` `cdv` ON ((`cdv`.`UID` = `pa`.`COMPANY_DEVICE_ID`)))
+        JOIN `area` ON ((`cdv`.`AREA_ID` = `area`.`UID`)))
+        JOIN `unit` `u` ON ((`area`.`UNIT_ID` = `u`.`UID`)))
+        JOIN `company` `c` ON ((`u`.`COMPANY_ID` = `c`.`UID`)))
         JOIN `company_detector` `cd` ON ((`cd`.`COMPANY_DEVICE_ID` = `cdv`.`UID`)))
         JOIN `detector` `d` ON ((`cd`.`DETECTOR_ID` = `d`.`UID`)))
         JOIN `sensor` `s` ON ((`d`.`SENSOR_ID` = `s`.`UID`)))

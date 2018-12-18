@@ -78,9 +78,13 @@ public class ProcessAlarmService {
 		position.setHistoricId(historic.getUid());			
 		
 		updatePositionByHistoric(historic, alarmType);			
-		
-		if(alarmDto != null) {	
-			updateAlarmsAndActions(alarmDto, alarmType, historic);
+				
+		if(alarmDto != null) {
+			//Alarm de OffLine com feedback desabilitado
+			if(alarmType == AlarmType.OFFLINE && !alarmDto.getAlarmOffLineOn())
+				updateAlarmsAndActions(alarmType, historic);
+			else
+				updateAlarmsAndActions(alarmDto, alarmType, historic);
 		}
 	}
 	
@@ -211,10 +215,7 @@ public class ProcessAlarmService {
 			// TODO Verificar se haverá reenvio de Actions em casos de Reinscidência do mesmo alerta				
 			positionAlarm.setLastUpdate(new Date());
 			positionAlarm.setLastValue(historic.getValue());				
-		}
-		
+		}		
 		positionAlarmRepository.save(positionAlarm);			
-	}
-	
-	
+	}	
 }

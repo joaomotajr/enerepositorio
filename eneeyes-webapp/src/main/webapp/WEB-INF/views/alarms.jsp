@@ -111,7 +111,7 @@
 											<tr data-ng-repeat="item in usedAlarms">
 												<td>{{item.companyDetectorName}}</td>
 												<td>{{item.deviceName}}</td>
-												<td>{{item.companyDetectorLocal}}</td>
+												<td>{{item.companyDeviceLocal}}</td>
 											</tr>                                                               
 										</tbody>
 									</table>	
@@ -319,16 +319,22 @@
 														<div class="row">
 																
 															<div class="col-md-12">
-																<div class="col-md-6">					            				
-																	<div class="checkbox3 checkbox-danger checkbox-inline checkbox-check checkbox-circle checkbox-light">
+																<div class="col-md-3">					            				
+																	<div class="checkbox3 checkbox-inline checkbox-check checkbox-round checkbox-light">
 																		<input type="checkbox" id="checkboxSigmaOnOff" checked>
-																		<label for="checkboxSigmaOnOff">Integrar ao Sigma? </label>
+																		<label for="checkboxSigmaOnOff">Integra&ccedil;&atilde;o Sigma?</label>
+																	</div>
+																</div>
+																<div class="col-md-3">
+																	<div class="checkbox3 checkbox-inline checkbox-check checkbox-round checkbox-light">												            			
+																		<input type="checkbox" id="checkboxOfflineOnOff" checked>
+																		<label for="checkboxOfflineOnOff">Habilitar Alarme OFFLine?</label>
 																	</div>
 																</div>
 																<div class="col-md-6">					            				
-																	<div class="checkbox3 checkbox-inline checkbox-check checkbox-round  checkbox-light">												            			
+																	<div class="checkbox3 checkbox-inline checkbox-check checkbox-round checkbox-light">												            			
 																		<input type="checkbox" id="checkboxSonoroOnOff" checked>
-																		<label for="checkboxSonoroOnOff">Emitir Alarme Sonoro? </label>
+																		<label for="checkboxSonoroOnOff">Emitir Alarme Sonoro?</label>
 																	</div>
 																</div>																	
 															</div>	

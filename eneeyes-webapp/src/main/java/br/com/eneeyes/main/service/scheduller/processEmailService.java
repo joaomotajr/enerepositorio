@@ -56,11 +56,20 @@ public class processEmailService {
 		for (QueueEmailView item   : queueLista) {			
 			
 			String emails[] = {item.getEmail(), item.getEmail1()}  ;
+			String areaLocal = (item.getArea_local() != null && !item.getArea_local().equals("")) ? " / " + item.getArea_local() : "/ Local não Informado";
+			String detectorLocal = (item.getCompany_detector_local() != null && !item.getCompany_detector_local().equals("")) ? item.getCompany_detector_local() : "Não Informado";
 						
-			String key ="Detector: " + item.getCompany_detector_name() + 
-					"<br> Tipo de Alarme: " + item.getAlarmType().toString() + 
-					"<br> Data/Hora: " + item.getLast_Update() + 
-					"<hr> Gas: " + item.getGas_name() + " - Medição: " + item.getLast_value() + " "  + item.getUnitMeterGases();
+			String key = "ALARME DE: <span style='color:red; font-size: 1.2em'>" + item.getAlarmType().toString() + "</span></b><br>" + 
+					"<h3>" + item.getCompany_name() + "</h3>" +
+					"Unidade: " + item.getUnit_name()  + "<br>" +
+					"Área: " + item.getArea_name() + areaLocal +
+					"<hr>" +
+					"<h3><u>INFORMAÇÕES DO ALERTA</u></h3>" +					
+					"<b>Detector:</b> " + item.getCompany_detector_name() + "<br>" +
+					"<b>Local:</b> " + detectorLocal + "<br>" + 					 
+					"<b>Data/Hora:</b> " + item.getLast_Update() +
+					"<hr>" + 
+					"<i><span style='font-size: 1.2em; font-weight: bold'>" + item.getGas_name() + " - Medição: " + item.getLast_value() + " "  + item.getUnitMeterGases() + "</span></i>";
 			
 			String urlTemplate = this.getClass().getClassLoader().getResource("/templates/alarme.html").toString().replace("file:", "");
 			String msg = "";
@@ -87,6 +96,4 @@ public class processEmailService {
 			}
 		}	
 	}
-
-
 }

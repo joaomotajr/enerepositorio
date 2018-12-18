@@ -26,8 +26,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	
 	$scope.saveAlarm = function() {
 		
-		angular.element('body').addClass('loading');
-		
+		angular.element('body').addClass('loading');		
 		if($scope.deviceType.name == 'DIGITAL') {
 			$scope.gasUnitMeterGases.uid = 12;
 			$scope.alarmAlarm1= $scope.deviceTypeDigital;
@@ -44,6 +43,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			alarm11 : $scope.alarmAlarm11,
 			alarm22 : $scope.alarmAlarm22,
 			alarm33 : $scope.alarmAlarm33,
+			alarmOffLineOn: $("#checkboxOfflineOnOff").prop('checked'),
 			companyDto : $scope.selectedCompany,
 			alarmOn: $scope.radioModel,
 			alarm2On : $scope.enableAlarm2,
@@ -117,54 +117,56 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
          });		 
 	 };	 
 	
-	 $scope.editAlarm = function (index) {
+	$scope.editAlarm = function (index) {
 		 
-	        $scope.alarmUid = $scope.alarms[index].uid;
-			$scope.alarmGas = $scope.alarms[index].gasDto;
-			$scope.deviceType = $scope.getDeviceType($scope.alarms[index].deviceType);
-		    $scope.alarmName = $scope.alarms[index].name;		    
-			$scope.alarmAlarm1 = $scope.alarms[index].alarm1;
-			if($scope.deviceType.name == 'DIGITAL') {				
-				$scope.deviceTypeDigital = $scope.alarms[index].alarm1;
-			}
-		    $scope.alarmAlarm2 = $scope.alarms[index].alarm2;
-			$scope.alarmAlarm3 = $scope.alarms[index].alarm3;
-			$scope.alarmAlarm11 = $scope.alarms[index].alarm11;
-		    $scope.alarmAlarm22 = $scope.alarms[index].alarm22;
-		    $scope.alarmAlarm33 = $scope.alarms[index].alarm33;
-		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.alarms[index].unitMeterGases);
-			$scope.selectedCompany = $scope.alarms[index].companyDto;
-			$scope.email = $scope.alarms[index].email;
-			$scope.email1 = $scope.alarms[index].email1;
-			$scope.celular = $scope.alarms[index].celular;
-			$scope.celular1 = $scope.alarms[index].celular1;
-			$scope.action1 = $scope.alarms[index].action1;
-			$scope.action2 = $scope.alarms[index].action2;
-			$scope.action3 = $scope.alarms[index].action3;
-			$scope.action4 = $scope.alarms[index].action4;
-									
-			$("#checkboxActionOff").prop('checked', $scope.alarms[index].alarmAction);
-			showAction($scope.alarms[index].alarmAction);
-			
-			$("#checkboxSigmaOnOff").prop('checked', $scope.alarms[index].alarmSigma);
-			
-			$("#checkboxSonoroOnOff").prop('checked', $scope.alarms[index].alarmSound);
-			
-			$("#checkboxEmailOnOff").prop('checked', $scope.alarms[index].alarmEmail); 
-			showEmail($scope.alarms[index].alarmEmail);
-			
-			$("#checkboxSmsOnOff").prop('checked', $scope.alarms[index].alarmSms); 
-			showCelular($scope.alarms[index].alarmSms);
-			
-			$scope.radioModel = $scope.alarms[index].alarmOn;
-			$scope.enableAlarm2 = $scope.alarms[index].alarm2On;
-			$scope.enableAlarm3 = $scope.alarms[index].alarm3On;			
-			
-			$scope.validEmail();
-			$scope.validMobile();
-			usedAlarms($scope.alarms[index].uid);
-									
-			angular.element('#modalAlarmEdit').modal('toggle');
+		$scope.alarmUid = $scope.alarms[index].uid;
+		$scope.alarmGas = $scope.alarms[index].gasDto;
+		$scope.deviceType = $scope.getDeviceType($scope.alarms[index].deviceType);
+		$scope.alarmName = $scope.alarms[index].name;		    
+		$scope.alarmAlarm1 = $scope.alarms[index].alarm1;
+		if($scope.deviceType.name == 'DIGITAL') {				
+			$scope.deviceTypeDigital = $scope.alarms[index].alarm1;
+		}
+		$scope.alarmAlarm2 = $scope.alarms[index].alarm2;
+		$scope.alarmAlarm3 = $scope.alarms[index].alarm3;
+		$scope.alarmAlarm11 = $scope.alarms[index].alarm11;
+		$scope.alarmAlarm22 = $scope.alarms[index].alarm22;
+		$scope.alarmAlarm33 = $scope.alarms[index].alarm33;
+		$scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.alarms[index].unitMeterGases);
+		$scope.selectedCompany = $scope.alarms[index].companyDto;
+		$scope.email = $scope.alarms[index].email;
+		$scope.email1 = $scope.alarms[index].email1;
+		$scope.celular = $scope.alarms[index].celular;
+		$scope.celular1 = $scope.alarms[index].celular1;
+		$scope.action1 = $scope.alarms[index].action1;
+		$scope.action2 = $scope.alarms[index].action2;
+		$scope.action3 = $scope.alarms[index].action3;
+		$scope.action4 = $scope.alarms[index].action4;
+								
+		$("#checkboxActionOff").prop('checked', $scope.alarms[index].alarmAction);
+		showAction($scope.alarms[index].alarmAction);
+		
+		$("#checkboxSigmaOnOff").prop('checked', $scope.alarms[index].alarmSigma);
+
+		$("#checkboxOfflineOnOff").prop('checked', $scope.alarms[index].alarmOffLineOn);
+				
+		$("#checkboxSonoroOnOff").prop('checked', $scope.alarms[index].alarmSound);
+		
+		$("#checkboxEmailOnOff").prop('checked', $scope.alarms[index].alarmEmail); 
+		showEmail($scope.alarms[index].alarmEmail);
+		
+		$("#checkboxSmsOnOff").prop('checked', $scope.alarms[index].alarmSms); 
+		showCelular($scope.alarms[index].alarmSms);
+		
+		$scope.radioModel = $scope.alarms[index].alarmOn;
+		$scope.enableAlarm2 = $scope.alarms[index].alarm2On;
+		$scope.enableAlarm3 = $scope.alarms[index].alarm3On;			
+		
+		$scope.validEmail();
+		$scope.validMobile();
+		usedAlarms($scope.alarms[index].uid);
+								
+		angular.element('#modalAlarmEdit').modal('toggle');
 	 };
 	 
 	function usedAlarms(alarmId) {

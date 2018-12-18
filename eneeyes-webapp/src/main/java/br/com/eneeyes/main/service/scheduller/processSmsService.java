@@ -51,13 +51,20 @@ public class processSmsService {
 		smsLista = service.findAll();
 		
 		for (QueueSmsView item   : smsLista) {
-						
-			String msg ="SISTEMA DE MONITORAMENTO ENESENS: Detector: " + item.getCompany_detector_name() 
-				+ " / Tipo de Alarme: " + item.getAlarmType().toString() 
-				+ " -  Data/Hora: " + item.getLast_Update()
-				+ " Gas: " + item.getGas_name() + " - Medição: " + item.getLast_value() + " "  + item.getUnitMeterGases();
 			
-			Boolean ok = siteService.SendSms(item.getCelular(), msg) && item.getCelular1() == null ? true : siteService.SendSms(item.getCelular1(), msg) ;
+			String areaLocal = (item.getArea_local() != null && !item.getArea_local().equals("")) ? " / " + item.getArea_local() : "";
+			String detectorLocal = (item.getCompany_detector_local() != null && !item.getCompany_detector_local().equals("")) ? item.getCompany_detector_local() : "Não Informado";
+			
+			SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+						
+			String msg ="MONITORAMENTO ENESENS: "
+			+ "\r\nALARME: " + item.getAlarmType().toString()
+			+ "\r\n" + item.getCompany_name() + " | " + item.getUnit_name()  + " | " + areaLocal
+			+ "\r\nDetector: " + item.getCompany_detector_name()
+			+ "\r\nLocal: " + detectorLocal 
+			+ "\r\nData/Hora: " + fmt.format(item.getLast_Update())
+			+ "\r\nGas: " + item.getGas_name() + " - Medição: " + item.getLast_value() + " "  + item.getUnitMeterGases();
+						Boolean ok = siteService.SendSms(item.getCelular(), msg) && item.getCelular1() == null ? true : siteService.SendSms(item.getCelular1(), msg) ;
 			
 			if (ok)
 				positionAlarmService.updateSmsStatus(item.getUid(), SmsStatus.SENDED);
@@ -67,9 +74,6 @@ public class processSmsService {
 				else
 					positionAlarmService.updateSmsStatus(item.getUid(), SmsStatus.ERR_TRY_ONE);
 			}
-		}						
-		
+		}		
 	}
-
-
 }

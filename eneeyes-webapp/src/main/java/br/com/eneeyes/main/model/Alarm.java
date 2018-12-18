@@ -53,6 +53,7 @@ public class Alarm {
 		this.alarmOn = dto.getAlarmOn();
 		this.alarm2On = dto.getAlarm2On();
 		this.alarm3On = dto.getAlarm3On();
+		this.alarmOffLineOn = dto.getAlarmOffLineOn();
 		this.alarmSigma = dto.getAlarmSigma();
 		this.alarmAction = dto.getAlarmAction();
 		this.action1 = dto.getAction1();
@@ -116,6 +117,9 @@ public class Alarm {
 	
 	@Column(name = "ALARM3_ON", nullable = true, columnDefinition = "Boolean default false")		
 	private Boolean alarm3On;
+	
+	@Column(name = "ALARMOFFLINE_ON", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarmOffLineOn;
 	
 	@Column(name = "ALARM_SIGMA", nullable = true, columnDefinition = "Boolean default false")		
 	private Boolean alarmSigma;
@@ -275,6 +279,14 @@ public class Alarm {
 
 	public void setAlarm3On(Boolean alarm3On) {
 		this.alarm3On = alarm3On;
+	}	
+
+	public Boolean getAlarmOffLineOn() {
+		return alarmOffLineOn;
+	}
+
+	public void setAlarmOffLineOn(Boolean alarmOffLineOn) {
+		this.alarmOffLineOn = alarmOffLineOn;
 	}
 
 	public final Boolean getAlarmSigma() {

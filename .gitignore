@@ -1,0 +1,4 @@
+
+*.prefs
+
+eneeyes-webapp/src/main/resources/parameters\.properties

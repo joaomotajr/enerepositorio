@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import br.com.eneeyes.archetype.services.SiteService;
+import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.views.QueueSmsView;
 import br.com.eneeyes.main.service.PositionAlarmService;
@@ -54,6 +55,7 @@ public class processSmsService {
 			
 			String areaLocal = (item.getArea_local() != null && !item.getArea_local().equals("")) ? " / " + item.getArea_local() : "";
 			String detectorLocal = (item.getCompany_detector_local() != null && !item.getCompany_detector_local().equals("")) ? item.getCompany_detector_local() : "Não Informado";
+			String medicao = (item.getAlarmType() == AlarmType.OFFLINE) ? " " : " - Medição: " + item.getLast_value() + " ";
 			
 			SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 						
@@ -63,7 +65,7 @@ public class processSmsService {
 			+ "\r\nDetector: " + item.getCompany_detector_name()
 			+ "\r\nLocal: " + detectorLocal 
 			+ "\r\nData/Hora: " + fmt.format(item.getLast_Update())
-			+ "\r\nGas: " + item.getGas_name() + " - Medição: " + item.getLast_value() + " "  + item.getUnitMeterGases();
+			+ "\r\nGas: " + item.getGas_name() + medicao  + item.getUnitMeterGases();
 						Boolean ok = siteService.SendSms(item.getCelular(), msg) && item.getCelular1() == null ? true : siteService.SendSms(item.getCelular1(), msg) ;
 			
 			if (ok)

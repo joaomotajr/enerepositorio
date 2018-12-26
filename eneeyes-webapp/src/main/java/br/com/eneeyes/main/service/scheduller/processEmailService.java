@@ -17,6 +17,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import br.com.eneeyes.archetype.services.SiteService;
+import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.views.QueueEmailView;
 import br.com.eneeyes.main.service.PositionAlarmService;
@@ -58,6 +59,7 @@ public class processEmailService {
 			String emails[] = {item.getEmail(), item.getEmail1()}  ;
 			String areaLocal = (item.getArea_local() != null && !item.getArea_local().equals("")) ? " / " + item.getArea_local() : "/ Local não Informado";
 			String detectorLocal = (item.getCompany_detector_local() != null && !item.getCompany_detector_local().equals("")) ? item.getCompany_detector_local() : "Não Informado";
+			String medicao = (item.getAlarmType() == AlarmType.OFFLINE) ? " " : " - Medição: " + item.getLast_value() + " ";
 						
 			String key = "ALARME DE: <span style='color:red; font-size: 1.2em'>" + item.getAlarmType().toString() + "</span></b><br>" + 
 					"<h3>" + item.getCompany_name() + "</h3>" +
@@ -69,7 +71,7 @@ public class processEmailService {
 					"<b>Local:</b> " + detectorLocal + "<br>" + 					 
 					"<b>Data/Hora:</b> " + item.getLast_Update() +
 					"<hr>" + 
-					"<i><span style='font-size: 1.2em; font-weight: bold'>" + item.getGas_name() + " - Medição: " + item.getLast_value() + " "  + item.getUnitMeterGases() + "</span></i>";
+					"<i><span style='font-size: 1.2em; font-weight: bold'>" + item.getGas_name() + medicao  + item.getUnitMeterGases() + "</span></i>";
 			
 			String urlTemplate = this.getClass().getClassLoader().getResource("/templates/alarme.html").toString().replace("file:", "");
 			String msg = "";

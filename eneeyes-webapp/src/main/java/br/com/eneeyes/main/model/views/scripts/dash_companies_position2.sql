@@ -57,6 +57,7 @@ VIEW `dash_companies_position2` AS
             WHEN (`g`.`DEVICE_TYPE` = '8') THEN 'TEMPERATURE'
             WHEN (`g`.`DEVICE_TYPE` = '9') THEN 'DIGITAL'
             WHEN (`g`.`DEVICE_TYPE` = '10') THEN 'OPEN_CLOSE'
+            WHEN (`g`.`DEVICE_TYPE` = '11') THEN 'FLOW'
             WHEN ISNULL(`g`.`DEVICE_TYPE`) THEN 'NENHUM'
             ELSE 'OUTROS'
         END) AS `artefact`,

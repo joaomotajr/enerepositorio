@@ -32,7 +32,7 @@ VIEW `dash_companies2` AS
             WHEN (`cdv`.`DEVICE_TYPE` = '8') THEN 'TEMPERATURE'
             WHEN (`cdv`.`DEVICE_TYPE` = '9') THEN 'DIGITAL'
             WHEN (`cdv`.`DEVICE_TYPE` = '10') THEN 'OPEN_CLOSE'
-            WHEN (`g`.`DEVICE_TYPE` = '11') THEN 'FLOW'
+            WHEN (`cdv`.`DEVICE_TYPE` = '11') THEN 'FLOW'
             WHEN ISNULL(`cdv`.`DEVICE_TYPE`) THEN 'NENHUM'
             ELSE 'OUTROS'
         END) AS `device`,

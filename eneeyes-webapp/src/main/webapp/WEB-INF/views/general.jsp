@@ -163,6 +163,8 @@
 																<div class="panel-heading">
 																	<h2 class="panel-title" style="text-align:center;">
 																		<strong>
+																		<i data-ng-if="item.artefact=='FLOW'" class="fa fa-database" style="font-size:1.2em;"></i>
+
 																		<i data-ng-if="item.artefact=='TEMPERATURE'" class="fa fa-thermometer" style="font-size:1.2em;"></i>
 																		<i data-ng-if="item.artefact=='ELETRICITY'" class="fa fa-plug" style="font-size:1.2em;"></i>
 																		<i data-ng-if="item.artefact=='TIME'" class="fa fa-clock-o" style="font-size:1.2em;"></i>

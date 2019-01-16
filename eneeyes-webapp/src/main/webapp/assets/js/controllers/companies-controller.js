@@ -156,7 +156,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;				    			
 				    		$timeout(function () { $scope.LoadAjaxContentCompany('companyDetectors.html'); }, 50);				    						    		
 						}
-						else if(node.type == 'ELETRICITY' || node.type == 'TEMPERATURE' || node.type == 'TIME' || node.type == 'DIGITAL' ) {				    		 
+						else if(node.type == 'ELETRICITY' || node.type == 'TEMPERATURE' || node.type == 'TIME' || node.type == 'DIGITAL' || node.type == 'FLOW' ) {				    		 
 					    						    
 					    	$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
 					    	$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
@@ -277,6 +277,16 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		else if(detalhe.deviceType == "DIGITAL") {
 			
 			device = "<i class='fa fa-flash' style='font-size:1.2em;'></i> DIGITAL";				
+			
+			if (detalhe.name == undefined)
+				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
+			else		 
+				device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";			
+		}
+		//VAZ√ÉO
+		else if(detalhe.deviceType == "FLOW") {
+			
+			device = "<i class='fa fa-database' style='font-size:1.2em;'></i> VAZ√O";
 			
 			if (detalhe.name == undefined)
 				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";

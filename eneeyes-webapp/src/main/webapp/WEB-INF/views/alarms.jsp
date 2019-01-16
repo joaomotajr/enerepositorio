@@ -236,6 +236,7 @@
 																			<strong data-ng-show="deviceType.name=='ELETRICITY'"><i class="fa fa-plug"> </i> Eletricidade Medida em:</strong>
 																			<strong data-ng-show="deviceType.name=='TIME'"><i class="fa fa-clock-o"> </i> Tempo Contado em:</strong>
 																			<strong data-ng-show="deviceType.name=='TEMPERATURE'"><i class="fa fa-thermometer"> </i> Temperatura Calculada em:</strong>
+																			<strong data-ng-show="deviceType.name=='FLOW'"><i class="fa fa-database"> </i> Vazão Medida em:</strong>
 
 																			<span class="text-red" data-ng-show="userForm.gasUnit.$dirty && userForm.gasUnit.$invalid">  [Campo Obrigat&oacute;rio]</span>
 																	</label>

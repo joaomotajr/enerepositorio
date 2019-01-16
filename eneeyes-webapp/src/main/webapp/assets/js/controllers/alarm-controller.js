@@ -213,19 +213,6 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
          });		 
 	 };
 	 
-	//  function getClassNameWithNumberSuffix(el) {
-    //     var className = null;
-    //     var regexp = /\w+\d+/;
-    //     $($(el).attr('class').split(' ')).each(function () {
-    //         if (regexp.test(this)) {
-    //             className = this;
-    //             return false;
-    //         }
-    //     });
-
-    //     return className;
-	//  }
-	 
 	 $scope.getUnitMetersGases = function (name) {		 
 		 for (var i = 0; i < $scope.unitMetersGases.length; i++) {
              if ($scope.unitMetersGases[i].name == name) {
@@ -256,7 +243,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			{ name : 'MINUTE', uid : 9 },
 			{ name : 'SECOND', uid : 10 },			
 			{ name : 'KWH', uid : 11 },
-			{ name : 'OPEN_CLOSE', uid : 12 }
+			{ name : 'OPEN_CLOSE', uid : 12 },
+			{ name : 'M3_HOUR', uid : 13 }
 	 ]; 
 	 
 	 $('.alarmCelularMask').keydown(function (e) {
@@ -489,6 +477,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		  { name : 'TIME', uid :  7, disabled : false },
 		  { name : 'TEMPERATURE', uid :  8, disabled : false },
 		  { name : 'DIGITAL', uid :  9, disabled : false },
+		  { name : 'FLOW', uid :  11, disabled : false },
 	 ];
 	 
      /* ----------------- Processamento ------------------*/

@@ -147,7 +147,7 @@
 										<div class="col-md-12" data-ng-show="selectedArea.list">
 											<div class="box box-default box-solid">
 												<div class="box-header with-border">
-													<h3 class="box-title"><strong><i class="fa fa-map-o"></i>&nbsp; {{selectedArea.name}} </strong> <i class="fa fa-caret-right" /> Dispositivos:</h3>
+													<h3 class="box-title"><strong><i class="fa fa-map-o"></i>&nbsp; {{selectedArea.name}} </strong> <i class="fa fa-caret-right"></i> Dispositivos:</h3>
 													<div class="box-tools pull-right">
 														<a href="#" class="btn btn-box-tool"><i class="fa-lg fa fa-times" data-ng-click="closeSelectedArea();" title="Fechar Area"></i></a>
 													</div>
@@ -164,7 +164,6 @@
 																	<h2 class="panel-title" style="text-align:center;">
 																		<strong>
 																		<i data-ng-if="item.artefact=='FLOW'" class="fa fa-database" style="font-size:1.2em;"></i>
-
 																		<i data-ng-if="item.artefact=='TEMPERATURE'" class="fa fa-thermometer" style="font-size:1.2em;"></i>
 																		<i data-ng-if="item.artefact=='ELETRICITY'" class="fa fa-plug" style="font-size:1.2em;"></i>
 																		<i data-ng-if="item.artefact=='TIME'" class="fa fa-clock-o" style="font-size:1.2em;"></i>

@@ -120,7 +120,8 @@ app.controller('genericController', function ($scope, $timeout, $filter, Generic
 			{ name : 'MINUTE', uid : 9 },
 			{ name : 'SECOND', uid : 10 },			
 			{ name : 'KWH', uid : 11 },
-			{ name : 'OPEN/CLOSE', uid : 12 }
+			{ name : 'OPEN/CLOSE', uid : 12 },
+			{ name : 'M3_HOUR', uid : 13 }
 		 ]; 
 
 	 $scope.deviceTypes = 

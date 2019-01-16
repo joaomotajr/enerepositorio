@@ -2,8 +2,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 
 	var intervals = []
 
-	$scope.selectCompany = function(index) {
-		
+	$scope.selectCompany = function(index) {		
 		$scope.selectedCompany = $scope.companiesSumary[index];
 		$scope.selectedCompany.selected = index;
 
@@ -15,8 +14,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
         });		 
 	}		
 
-	$scope.getCompaniesSumary = function() {
-		 
+	$scope.getCompaniesSumary = function() {		 
 		 $scope.resultCompanies = new CompanyService.listAllSumaryView();		 
 		 $scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.companiesSumary = $scope.resultCompanies.list;
@@ -40,10 +38,9 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		
 		$scope.selectedArea = [];
 		$scope.selectedArea.uid = $scope.selectedUnit.areasDto[index].uid;
-		$scope.selectedArea.name = $scope.selectedUnit.areasDto[index].name;	
-		 
+		$scope.selectedArea.name = $scope.selectedUnit.areasDto[index].name;		 
 		$scope.getDevices($scope.selectedArea.uid);		
-	}
+	};
 
 	$scope.closeSelectedArea = function() {		
 		$scope.selectedArea = undefined; 
@@ -52,7 +49,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		while(intervals.length){
 			$interval.cancel(intervals.pop());
 		}
-	}
+	};
 
 	$scope.getDevices = function(areaId) {
 
@@ -167,12 +164,12 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			subcaption: "",
 			lowerLimit: e.rangeMin,
 			upperLimit: e.rangeMax,
-			// editMode: "1",
+			editMode: "1",
 			showValue: "1",			
-			// valueBelowPivot: "1",
-			// tickValueDistance: "5",			
+			valueBelowPivot: "1",
+			tickValueDistance: "5",			
 			theme: "fint",										
-			// valueFontSize: "14"
+			valueFontSize: "14"
 		};
 
 		colors = {				
@@ -225,72 +222,33 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		dataSource.dials = values;
 
 		if(e.artefact == "TEMPERATURE") {
-			dataSource.chart.numberSuffix = 'C';
+			dataSource.chart.numberSuffix = '°C';
 			dataSource.value = value;
 			dataSource.annotations = {showbelow: 0};
 		}
 		else if(e.artefact == "TIME") {
 			dataSource.chart.placeValuesInside=1;
-			// dataSource.chart.numberSuffix = ' Segundos';
 			dataSource.value = value;
-			dataSource.annotations = {showbelow: 1};
-			
+			dataSource.annotations = {showbelow: 1};			
 		}
 		else if(e.artefact == "ELETRICITY") {
 			 dataSource.chart.lowerLimitDisplay = e.rangeMin + " Min";
 			 dataSource.chart.upperLimitDisplay = e.rangeMax + " Max";			
-			 dataSource.annotations = {showbelow: 1};
-			 
+			 dataSource.annotations = {showbelow: 1};			 
 			 dataSource.pointers = {pointer: [{value: value	}]};
 		}
 		else if(e.artefact == "FLOW") {
 			dataSource.chart.lowerLimitDisplay = e.rangeMin + " Min";
 			dataSource.chart.upperLimitDisplay = e.rangeMax + " Max";			
-			dataSource.chart.numberSuffix = " ltrs";
-			dataSource.chart.showValue = "0";
-			dataSource.chart.chartBottomMargin = "45"	
-					
-			dataSource.annotations = {
-				origw: "400",
-				origh: "190",
-				autoscale: "1",
-				groups: [
-					{
-						id: "range",
-						items: [
-							{
-								id: "rangeBg",                                
-								type: "rectangle",
-								x : "$canvasCenterX-45",
-								y: "$chartEndY-30",
-								tox: "$canvasCenterX +45",
-								toy: "$chartEndY-75",
-								fillcolor: "#6caa03"
-							},
-							{
-								id: "rangeText",
-								type: "Text",                                
-								fontSize: "11",                                                                
-								fillcolor: "#333333",
-								text: "80 ltrs",
-								x : "$chartCenterX-45",
-								y: "$chartEndY-50"
-							}
-						]
-					}
-				]
-			};
+			dataSource.chart.numberSuffix = " m³/hour";				
 	   }
 		else {
 			dataSource.chart.gaugeFillMix="{dark-30},{light-60},{dark-10}";
 			dataSource.chart.gaugeFillRatio="15";
 			dataSource.chart.gaugeouterradius="120";
-			dataSource.chart.gaugeinnerradius="70%";
+			dataSource.chart.gaugeinnerradius="70%";		
 		}
-
 		return dataSource;
-	};
-		
+	};		
 	$scope.getCompaniesSumary();	
-	
 });

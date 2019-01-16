@@ -23,7 +23,7 @@ BEGIN
         
 	 END WHILE;
           
-     INSERT INTO log_event (date_time, event_name, rows_affected) values (_now, concat('MOVE TO C BY ', _DAYS, ' Day(s)'), _total );
+     INSERT INTO log_event (date_time, event_name, rows_affected) values (_now, concat('MOVE TO C BY ', '7', ' Day(s)'), _total );
 
 	 SELECT _total ; 
 END

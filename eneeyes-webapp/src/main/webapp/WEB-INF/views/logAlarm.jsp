@@ -68,16 +68,20 @@
 														<dd data-ng-if="!isOffline">
 															{{selectedPositionAlarm.first_update  | date:'yyyy-MM-dd HH:mm:ss'}}  
 														</dd>
-													<dt>Data/Hora Ultima Medição: </dt>
+													<dt>Data/Hora Última Medição: </dt>
 														<dd>
 															{{selectedPositionAlarm.last_update  | date:'yyyy-MM-dd HH:mm:ss'}}  
-														</dd>														
-													<dt>Medições: </dt>															
-														<dd>
-															Gás: {{selectedPositionAlarm.gas_name}} | Medição: {{selectedPositionAlarm.last_value}}
-															<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
-															<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases!='LEL_PERCENT'"> {{selectedPositionAlarm.unitMeterGases}}</span>
 														</dd>
+														
+													<dt>Artefato/Medi&ccedil;&atilde;o: </dt>															
+														<dd>
+															{{selectedPositionAlarm.artefact}}
+															<span data-ng-if="selectedPositionAlarm.last_value>0">
+																| Medi&ccedil;&atilde;o: {{selectedPositionAlarm.last_value}}
+																<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
+																<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases!='LEL_PERCENT'"> {{selectedPositionAlarm.unitMeterGases}}</span>
+															</span>
+														</dd>																										
 													<dt>Alertas Emitidos: </dt>
 														<dd>Sonoro: 
 															<span data-ng-if="selectedPositionAlarm.soundStatus=='OFF'" class="icon fa fa-bullhorn" style="color: gray" title="Alerta Sonoro não Habilitado"></span>

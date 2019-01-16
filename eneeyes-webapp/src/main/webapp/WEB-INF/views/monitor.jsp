@@ -106,14 +106,11 @@
 				<div class="box box-warning">
 					<div class="box-header with-border">
 						<h5 class="box-title">Alarmes Em An&aacute;lise</h5>
-						<div class="box-tools pull-right">
-						
-							<label data-ng-show='loading'>Loading ...</label>		
-		
+						<div class="box-tools pull-right">						
+							<label data-ng-show='loading'>Loading ...</label>
 							<button class="btn btn-box-tool" data-widget="collapse">
 								<i class="fa fa-minus"></i>
 							</button>
-
 						</div>
 					</div>					
 					
@@ -293,7 +290,7 @@
 									<div class="row">											
 										<div class="col-md-12">
 										
-											<div class="box-body" style="background-color: #e7e7e7">											                												                	 
+											<div class="box-body" style="padding-bottom: 0px; background-color: #e7e7e7">											                												                	 
 												<dl class="dl-horizontal">
 													<dt>Empresa:</dt>
 														<dd>{{selectedPositionAlarm.company_name}}</dd>
@@ -322,13 +319,15 @@
 														<dd>
 															{{selectedPositionAlarm.last_update_full  | date:'yyyy-MM-dd HH:mm:ss'}}  
 														</dd>														
-													<dt>Medi&ccedil;&otilde;es: </dt>															
+													<dt>Artefato/Medi&ccedil;&atilde;o: </dt>															
 														<dd>
-															G&aacute;s: {{selectedPositionAlarm.artefact}} | Medi&ccedil;&atilde;o: {{selectedPositionAlarm.last_value}}
-															<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
-															<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases!='LEL_PERCENT'"> {{selectedPositionAlarm.unitMeterGases}}</span>
-														</dd>
-													
+															{{selectedPositionAlarm.artefact}}
+															<span data-ng-if="selectedPositionAlarm.last_value>0">
+																| Medi&ccedil;&atilde;o: {{selectedPositionAlarm.last_value}}
+																<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
+																<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases!='LEL_PERCENT'"> {{selectedPositionAlarm.unitMeterGases}}</span>
+															</span>
+														</dd>													
 							                  	</dl>								                	
 								            </div>
 								            

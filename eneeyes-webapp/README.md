@@ -74,7 +74,41 @@ truncate table historic_d;
 truncate table log_auditoria;
 truncate table log_events;
 
-/* POPUALR PRINCIPAIS GASES */
+
+/* POPULAR UNIDADES DE MEDIDA */
+insert into unit_meter values (0, 'DESCONHECIDO', 'Desconhecido');
+insert into unit_meter values (1, 'PPM', 'Partes por Milhão');
+insert into unit_meter values (2, 'PPB', 'PPB');
+insert into unit_meter values (3, 'LEL_PERCENT', 'Percentual LEL');
+insert into unit_meter values (4, 'LEL_PERCENT_METRO', 'Percentual LEL por metro');
+insert into unit_meter values (5, 'PERCENT_VOLUME', 'Percentual Volume');
+insert into unit_meter values (6, 'GRAUS_CELSIUS', 'Graus Celsius');
+insert into unit_meter values (7, 'VOLT', 'Volt');
+insert into unit_meter values (8, 'AMPERE', 'Ampere');
+insert into unit_meter values (9, 'MINUTE', 'Minuto');
+insert into unit_meter values (10, 'SECOND', 'Segundo');
+insert into unit_meter values (11, 'KWH', 'KWH');
+insert into unit_meter values (12, 'OPEN_CLOSE', 'Aberto ou Fechado');
+insert into unit_meter values (13, 'M3_HOUR', 'Metros Cúbicos por Hora');
+insert into unit_meter values (14, 'M3_MIN', 'Metros Cúbicos por Minuto');
+
+/* POPULAR TIPOS DE DISPOSITIVO*/
+insert into device_type values (0,'OUTROS', 'Outros');
+insert into device_type values (1,'DETECTOR', 'Detector');
+insert into device_type values (2,'PLC', 'PLC');
+insert into device_type values (3,'CONTROLLER', 'Controladora');
+insert into device_type values (4,'ALARM', 'Alarme');
+insert into device_type values (5,'BLOCKER', 'Bloqueador');
+insert into device_type values (6,'ELETRICITY', 'Eletricidade');
+insert into device_type values (7,'TIME', 'Tempo');
+insert into device_type values (8,'TEMPERATURE', 'Temperatura');
+insert into device_type values (9,'DIGITAL', 'Digital');
+insert into device_type values (10,'OPEN_CLOSE', 'Abre ou Fecha');
+insert into device_type values (11,'LIQUID_LEVEL', 'Nível de Água');
+insert into device_type values (12,'LIQUID_PRESSURE', 'Pressão da Água');
+insert into device_type values (13,'LIQUID_FLOW', 'Vazão da Água');
+
+/* POPULAR PRINCIPAIS GASES */
 insert into gas (name, cas, formula) values ('Combustible gases', '99999',	'LEL');
 insert into gas (name, cas, formula) values ('Hydrogen','1333-74-0',	'H2');
 insert into gas (name, cas, formula) values ('Oxygen','7782-44-7',	'O2');

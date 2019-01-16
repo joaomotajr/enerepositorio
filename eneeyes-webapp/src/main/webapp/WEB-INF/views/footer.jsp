@@ -129,6 +129,8 @@
 	<script src="/assets/js/services/positionAlarm-service.js"></script>
 	<script src="/assets/js/services/companyDetectorMaintenanceHistoric-Service.js"></script>
 	<script src="/assets/js/services/generic-service.js"></script>
+	<script src="/assets/js/services/unitMeter-service.js"></script>
+	<script src="/assets/js/services/deviceType-service.js"></script>
 		
 	<!-- PAGE LEVEL FACTORIES -->	
 		

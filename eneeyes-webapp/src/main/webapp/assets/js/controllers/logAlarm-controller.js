@@ -14,7 +14,7 @@ app.controller('logAlarmController', function ($scope, $timeout, $filter, ViewSe
 		 $scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			 		 
 			 if($scope.listAllDashCompaniesAlarm != null && $scope.listAllDashCompaniesAlarm.list.length > 0 )
-				 $scope.dashCompaniesAlarm = $scope.listAllDashCompaniesAlarm.list
+				 $scope.dashCompaniesAlarm = $scope.listAllDashCompaniesAlarm.list;
        });		 
 	}
 
@@ -34,7 +34,7 @@ app.controller('logAlarmController', function ($scope, $timeout, $filter, ViewSe
            { title: "Ação" }
        ],
        columnMap: function (p) { //thing I made up
-                   return [null, p.company_name, p.unit_name, p.company_detector_name+'/'+p.sensor_name, p.alarmType, p.alarmStatus, new Date(p.first_update).toLocaleString(),
+                   return [null, p.company_name, p.unit_name, p.company_detector_name, p.alarmType, p.alarmStatus, new Date(p.first_update).toLocaleString(),
                     "<button id='" + p.uid + "' class='btn btn-default btn-xs'>Histórico</button>"]
        },
        columnDefs: [ {

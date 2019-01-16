@@ -129,6 +129,7 @@ app.controller('genericController', function ($scope, $timeout, $filter, Generic
 		  { name : 'TIME', uid :  7, disabled : false },
 		  { name : 'TEMPERATURE', uid :  8, disabled : false },
 		  { name : 'DIGITAL', uid :  9, disabled : false },
+		  { name : 'FLOW', uid :  11, disabled : false },
 	 ];	
 	 
 	 $scope.refreshGenerics = function() {

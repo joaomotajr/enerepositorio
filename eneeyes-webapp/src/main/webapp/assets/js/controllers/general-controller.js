@@ -78,6 +78,11 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 						e.width=300;
 						e.height=200;
 					}
+					else if(e.artefact == "FLOW") {
+						e.dataType = "cylinder";						
+						e.width=200;
+						e.height=350;
+					}
 					else
 						e.dataType = "angulargauge";
 						e.width=300;
@@ -122,7 +127,10 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			sensor.latencia = timeSince(serverDate, values.lastUpdate);
 
 			if(sensor.artefact == "TEMPERATURE")
-				sensor.dataSource.value = value;			
+				sensor.dataSource.value = value;
+			else if	(sensor.artefact == "FLOW") {
+				sensor.dataSource.value = value;
+			}
 			else if	(sensor.artefact == "TIME") {				
 				if (values.lastValue < 0) {
 					sensor.dataSource.value = values.lastValue;		
@@ -132,7 +140,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 				else {
 					sensor.dataSource.value = values.lastValue;		
 					sensor.dataSource.chart.numberSuffix = transformMedition(sensor.unitMeterGases);
-					sensor.dataSource.chart.subcaption = value > 0 ? "PORTA ABERTA À" : "PORTA FECHADA";	
+					sensor.dataSource.chart.subcaption = value > 0 ? "PORTA ABERTA ï¿½" : "PORTA FECHADA";	
 				}
 			}
 			else if(sensor.artefact == "ELETRICITY")				
@@ -159,12 +167,12 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			subcaption: "",
 			lowerLimit: e.rangeMin,
 			upperLimit: e.rangeMax,
-			editMode: "1",
+			// editMode: "1",
 			showValue: "1",			
-			valueBelowPivot: "1",
-			tickValueDistance: "5",			
-			theme: "fint",									
-			valueFontSize: "14"
+			// valueBelowPivot: "1",
+			// tickValueDistance: "5",			
+			theme: "fint",										
+			// valueFontSize: "14"
 		};
 
 		colors = {				
@@ -217,7 +225,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		dataSource.dials = values;
 
 		if(e.artefact == "TEMPERATURE") {
-			dataSource.chart.numberSuffix = '°C';
+			dataSource.chart.numberSuffix = 'C';
 			dataSource.value = value;
 			dataSource.annotations = {showbelow: 0};
 		}
@@ -235,6 +243,44 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			 
 			 dataSource.pointers = {pointer: [{value: value	}]};
 		}
+		else if(e.artefact == "FLOW") {
+			dataSource.chart.lowerLimitDisplay = e.rangeMin + " Min";
+			dataSource.chart.upperLimitDisplay = e.rangeMax + " Max";			
+			dataSource.chart.numberSuffix = " ltrs";
+			dataSource.chart.showValue = "0";
+			dataSource.chart.chartBottomMargin = "45"	
+					
+			dataSource.annotations = {
+				origw: "400",
+				origh: "190",
+				autoscale: "1",
+				groups: [
+					{
+						id: "range",
+						items: [
+							{
+								id: "rangeBg",                                
+								type: "rectangle",
+								x : "$canvasCenterX-45",
+								y: "$chartEndY-30",
+								tox: "$canvasCenterX +45",
+								toy: "$chartEndY-75",
+								fillcolor: "#6caa03"
+							},
+							{
+								id: "rangeText",
+								type: "Text",                                
+								fontSize: "11",                                                                
+								fillcolor: "#333333",
+								text: "80 ltrs",
+								x : "$chartCenterX-45",
+								y: "$chartEndY-50"
+							}
+						]
+					}
+				]
+			};
+	   }
 		else {
 			dataSource.chart.gaugeFillMix="{dark-30},{light-60},{dark-10}";
 			dataSource.chart.gaugeFillRatio="15";

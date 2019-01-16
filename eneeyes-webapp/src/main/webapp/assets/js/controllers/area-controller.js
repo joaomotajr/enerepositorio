@@ -259,6 +259,7 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		 { name : 'TIME', uid :  7, label: 'TEMPO', disabled : false },
 		 { name : 'TEMPERATURE', uid :  8, label: 'TEMPERATURA', disabled : false },
 		 { name : 'DIGITAL', uid :  9,label: 'DIGITAL', disabled : false },
+		 { name : 'FLOW', uid :  11, label: 'VAZÂO', disabled : false },
 	];
 
 	/* ------------------------------------- Inicio Processamento --------------------------------------------*/

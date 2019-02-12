@@ -20,19 +20,20 @@ VIEW `dash_companies_alarm2` AS
         `u`.`NAME` AS `unit_name`,
         `a`.`NAME` AS `area_name`,
         `cd`.`NAME` AS `company_detector_name`,
-        `cd`.`LOCAL` AS `company_detector_local`,
+        `cd`.`LOCAL` AS `COMPANY_DETECTOR_LOCAL`,
         `pa`.`LAST_VALUE` AS `last_value`,
         `pa`.`LAST_UPDATE` AS `last_update`,
         `pa`.`FIRST_UPDATE` AS `first_update`,
         `pa`.`ALARM_TYPE` AS `alarm_type`,
         `pa`.`SIGMA_STATUS` AS `sigma_status`,
         `pa`.`EMAIL_STATUS` AS `email_status`,
-        `pa`.`SMS_STATUS` AS `sms_status`,
+        `pa`.`Sms_STATUS` AS `sms_status`,
         `pa`.`ALARM_STATUS` AS `alarm_status`,
         `pa`.`SOUND_STATUS` AS `sound_status`,
         `pa`.`ACTION` AS `action`,
-        `g`.`NAME` AS `artefact`,
-        `s`.`UNIT_METER_GASES` AS `unit_meter_gases`
+        `g`.`NAME` AS `GAS_NAME`,
+        `s`.`UNIT_METER_GASES` AS `unit_meter_gases`,
+        `cdv`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`
     FROM
         ((((((((`company` `c`
         JOIN `unit` `u` ON ((`c`.`UID` = `u`.`COMPANY_ID`)))
@@ -52,30 +53,20 @@ VIEW `dash_companies_alarm2` AS
         `u`.`NAME` AS `unit_name`,
         `a`.`NAME` AS `area_name`,
         `cg`.`NAME` AS `company_detector_name`,
-        `cg`.`LOCAL` AS `company_detector_local`,
+        `cg`.`LOCAL` AS `COMPANY_DETECTOR_LOCAL`,
         `pa`.`LAST_VALUE` AS `last_value`,
         `pa`.`LAST_UPDATE` AS `last_update`,
         `pa`.`FIRST_UPDATE` AS `first_update`,
         `pa`.`ALARM_TYPE` AS `alarm_type`,
         `pa`.`SIGMA_STATUS` AS `sigma_status`,
         `pa`.`EMAIL_STATUS` AS `email_status`,
-        `pa`.`SMS_STATUS` AS `sms_status`,
+        `pa`.`Sms_STATUS` AS `sms_status`,
         `pa`.`ALARM_STATUS` AS `alarm_status`,
         `pa`.`SOUND_STATUS` AS `sound_status`,
         `pa`.`ACTION` AS `action`,
-        (CASE
-            WHEN (`g`.`DEVICE_TYPE` = '1') THEN 'DETECTOR'
-            WHEN (`g`.`DEVICE_TYPE` = '2') THEN '´PLC'
-            WHEN (`g`.`DEVICE_TYPE` = '6') THEN 'ELETRICITY'
-            WHEN (`g`.`DEVICE_TYPE` = '7') THEN 'TIME'
-            WHEN (`g`.`DEVICE_TYPE` = '8') THEN 'TEMPERATURE'
-            WHEN (`g`.`DEVICE_TYPE` = '9') THEN 'DIGITAL'
-            WHEN (`g`.`DEVICE_TYPE` = '10') THEN 'OPEN_CLOSE'
-            WHEN (`g`.`DEVICE_TYPE` = '11') THEN 'FLOW'
-            WHEN ISNULL(`g`.`DEVICE_TYPE`) THEN 'NENHUM'
-            ELSE 'OUTROS'
-        END) AS `artefact`,
-        `g`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`
+        NULL AS `GAS_NAME`,
+        `g`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`,
+        `cdv`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`
     FROM
         ((((((`company` `c`
         JOIN `unit` `u` ON ((`c`.`UID` = `u`.`COMPANY_ID`)))

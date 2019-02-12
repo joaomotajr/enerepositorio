@@ -10,7 +10,7 @@ VIEW `area_companydevice_alarm_view` AS
         `cd`.`UID` AS `COMPANY_DETECTOR_ID`,
         `cd`.`NAME` AS `COMPANY_DETECTOR_NAME`,
         `cd`.`LOCAL` AS `COMPANY_DETECTOR_LOCAL`,
-        `cdv`.`DEVICE_TYPE` AS `device_type`,
+        `cdv`.`DEVICE_TYPE_ID` AS `device_type_id`,
         `s`.`NAME` AS `SENSOR_NAME`,
         `s`.`RANGE_MIN` AS `RANGE_MIN`,
         `s`.`RANGE_MAX` AS `RANGE_MAX`,
@@ -25,8 +25,7 @@ VIEW `area_companydevice_alarm_view` AS
         `a`.`ALARM_11` AS `ALARM_11`,
         `a`.`ALARM_2` AS `ALARM_2`,
         `a`.`ALARM_3` AS `ALARM_3`,
-        `g`.`NAME` AS `GAS_NAME`,
-        'GAS' AS `ARTEFACT`
+        `g`.`NAME` AS `GAS_NAME`
     FROM
         ((((((`company_device` `cdv`
         JOIN `company_detector` `cd` ON ((`cdv`.`UID` = `cd`.`COMPANY_DEVICE_ID`)))
@@ -39,10 +38,10 @@ VIEW `area_companydevice_alarm_view` AS
         `p`.`UID` AS `UID`,
         `cdv`.`AREA_ID` AS `AREA_ID`,
         `cdv`.`UID` AS `COMPANY_DEvice_ID`,
-        `cdv`.`DEVICE_TYPE` AS `device_type`,
         `cg`.`UID` AS `COMPANY_DETECTOR_ID`,
         `cg`.`NAME` AS `COMPANY_DETECTOR_NAME`,
         `cg`.`LOCAL` AS `COMPANY_DETECTOR_LOCAL`,
+        `cdv`.`DEVICE_TYPE_ID` AS `device_type_id`,
         'GENERIC' AS `SENSOR_NAME`,
         `g`.`RANGE_MIN` AS `RANGE_MIN`,
         `g`.`RANGE_MAX` AS `RANGE_MAX`,
@@ -57,20 +56,7 @@ VIEW `area_companydevice_alarm_view` AS
         `a`.`ALARM_11` AS `ALARM_11`,
         `a`.`ALARM_2` AS `ALARM_2`,
         `a`.`ALARM_3` AS `ALARM_3`,
-        NULL AS `GAS_NAME`,
-        (CASE
-            WHEN (`g`.`DEVICE_TYPE` = '1') THEN 'DETECTOR'
-            WHEN (`g`.`DEVICE_TYPE` = '2') THEN '´PLC'
-            WHEN (`g`.`DEVICE_TYPE` = '3') THEN 'CONTROLLER'
-            WHEN (`g`.`DEVICE_TYPE` = '6') THEN 'ELETRICITY'
-            WHEN (`g`.`DEVICE_TYPE` = '7') THEN 'TIME'
-            WHEN (`g`.`DEVICE_TYPE` = '8') THEN 'TEMPERATURE'
-            WHEN (`g`.`DEVICE_TYPE` = '9') THEN 'DIGITAL'
-            WHEN (`g`.`DEVICE_TYPE` = '10') THEN 'OPEN_CLOSE'
-            WHEN (`g`.`DEVICE_TYPE` = '11') THEN 'FLOW'
-            WHEN ISNULL(`g`.`DEVICE_TYPE`) THEN 'NENHUM'
-            ELSE 'OUTROS'
-        END) AS `ARTEFACT`
+        NULL AS `GAS_NAME`
     FROM
         ((((`company_device` `cdv`
         JOIN `company_generic` `cg` ON ((`cdv`.`UID` = `cg`.`COMPANY_DEVICE_ID`)))

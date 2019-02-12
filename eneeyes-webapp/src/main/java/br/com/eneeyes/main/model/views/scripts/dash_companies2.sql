@@ -24,28 +24,18 @@ VIEW `dash_companies2` AS
         `d`.`NAME` AS `detector_name`,
         `s`.`RANGE_MAX` AS `RANGE_MAX`,
         `s`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`,
-        (CASE
-            WHEN (`cdv`.`DEVICE_TYPE` = '1') THEN 'DETECTOR'
-            WHEN (`cdv`.`DEVICE_TYPE` = '2') THEN '´PLC'
-            WHEN (`cdv`.`DEVICE_TYPE` = '6') THEN 'ELETRICITY'
-            WHEN (`cdv`.`DEVICE_TYPE` = '7') THEN 'TIME'
-            WHEN (`cdv`.`DEVICE_TYPE` = '8') THEN 'TEMPERATURE'
-            WHEN (`cdv`.`DEVICE_TYPE` = '9') THEN 'DIGITAL'
-            WHEN (`cdv`.`DEVICE_TYPE` = '10') THEN 'OPEN_CLOSE'
-            WHEN (`cdv`.`DEVICE_TYPE` = '11') THEN 'FLOW'
-            WHEN ISNULL(`cdv`.`DEVICE_TYPE`) THEN 'NENHUM'
-            ELSE 'OUTROS'
-        END) AS `device`,
-        `cdv`.`DEVICE_TYPE` AS `device_type`,
+        `dt`.`TYPE` AS `device`,
+        `dt`.`UID` AS `device_type`,
         `cd`.`NAME` AS `companyDetector_name`,
         `cd`.`LOCAL` AS `companyDetector_local`,
         `cd`.`UID` AS `companyDetector_id`,
         `d`.`UID` AS `detector_id`
     FROM
-        ((((((`company` `c`
+        (((((((`company` `c`
         LEFT JOIN `unit` `u` ON ((`c`.`UID` = `u`.`COMPANY_ID`)))
         LEFT JOIN `area` `a` ON ((`u`.`UID` = `a`.`UNIT_ID`)))
         LEFT JOIN `company_device` `cdv` ON ((`a`.`UID` = `cdv`.`AREA_ID`)))
+        JOIN `device_type` `dt` ON ((`cdv`.`DEVICE_TYPE_ID` = `dt`.`UID`)))
         LEFT JOIN `company_detector` `cd` ON ((`cdv`.`UID` = `cd`.`COMPANY_DEVICE_ID`)))
         JOIN `detector` `d` ON ((`d`.`UID` = `cd`.`DETECTOR_ID`)))
         JOIN `sensor` `s` ON ((`s`.`UID` = `d`.`SENSOR_ID`))) 
@@ -61,26 +51,17 @@ VIEW `dash_companies2` AS
         `g`.`NAME` AS `detector_name`,
         `g`.`RANGE_MAX` AS `RANGE_MAX`,
         `g`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`,
-        (CASE
-            WHEN (`cdv`.`DEVICE_TYPE` = '1') THEN 'DETECTOR'
-            WHEN (`cdv`.`DEVICE_TYPE` = '2') THEN '´PLC'
-            WHEN (`cdv`.`DEVICE_TYPE` = '6') THEN 'ELETRICITY'
-            WHEN (`cdv`.`DEVICE_TYPE` = '7') THEN 'TIME'
-            WHEN (`cdv`.`DEVICE_TYPE` = '8') THEN 'TEMPERATURE'
-            WHEN (`cdv`.`DEVICE_TYPE` = '9') THEN 'DIGITAL'
-            WHEN (`cdv`.`DEVICE_TYPE` = '10') THEN 'OPEN_CLOSE'
-            WHEN ISNULL(`cdv`.`DEVICE_TYPE`) THEN 'NENHUM'
-            ELSE 'OUTROS'
-        END) AS `device`,
-        `cdv`.`DEVICE_TYPE` AS `device_type`,
+        `dt`.`TYPE` AS `device`,
+        `dt`.`UID` AS `device_type`,
         `cg`.`NAME` AS `companyDetector_name`,
         `cg`.`LOCAL` AS `companyDetector_local`,
         `cg`.`UID` AS `companyDetector_id`,
         `g`.`UID` AS `detector_id`
     FROM
-        (((((`company` `c`
+        ((((((`company` `c`
         LEFT JOIN `unit` `u` ON ((`c`.`UID` = `u`.`COMPANY_ID`)))
         LEFT JOIN `area` `a` ON ((`u`.`UID` = `a`.`UNIT_ID`)))
         LEFT JOIN `company_device` `cdv` ON ((`a`.`UID` = `cdv`.`AREA_ID`)))
+        JOIN `device_type` `dt` ON ((`cdv`.`DEVICE_TYPE_ID` = `dt`.`UID`)))
         LEFT JOIN `company_generic` `cg` ON ((`cdv`.`UID` = `cg`.`COMPANY_DEVICE_ID`)))
         JOIN `generic` `g` ON ((`g`.`UID` = `cg`.`GENERIC_ID`)))

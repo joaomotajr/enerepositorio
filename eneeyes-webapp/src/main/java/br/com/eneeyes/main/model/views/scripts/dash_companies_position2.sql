@@ -23,7 +23,8 @@ VIEW `dash_companies_position2` AS
         `pos`.`LAST_VALUE` AS `last_value`,
         `pos`.`ALARM_TYPE` AS `alarm_type`,
         `pos`.`LAST_UPDATE` AS `last_update`,
-        `g`.`NAME` AS `artefact`,
+        `cdv`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`,
+        `g`.`NAME` AS `GAS_NAME`,
         `s`.`UNIT_METER_GASES` AS `unit_meter_gases`
     FROM
         ((((((((`company` `c`
@@ -49,18 +50,8 @@ VIEW `dash_companies_position2` AS
         `pos`.`LAST_VALUE` AS `last_value`,
         `pos`.`ALARM_TYPE` AS `alarm_type`,
         `pos`.`LAST_UPDATE` AS `last_update`,
-        (CASE
-            WHEN (`g`.`DEVICE_TYPE` = '1') THEN 'DETECTOR'
-            WHEN (`g`.`DEVICE_TYPE` = '2') THEN '´PLC'
-            WHEN (`g`.`DEVICE_TYPE` = '6') THEN 'ELETRICITY'
-            WHEN (`g`.`DEVICE_TYPE` = '7') THEN 'TIME'
-            WHEN (`g`.`DEVICE_TYPE` = '8') THEN 'TEMPERATURE'
-            WHEN (`g`.`DEVICE_TYPE` = '9') THEN 'DIGITAL'
-            WHEN (`g`.`DEVICE_TYPE` = '10') THEN 'OPEN_CLOSE'
-            WHEN (`g`.`DEVICE_TYPE` = '11') THEN 'FLOW'
-            WHEN ISNULL(`g`.`DEVICE_TYPE`) THEN 'NENHUM'
-            ELSE 'OUTROS'
-        END) AS `artefact`,
+        `cdv`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`,
+        NULL AS `GAS_NAME`,
         `g`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`
     FROM
         ((((((`company` `c`

@@ -10,7 +10,6 @@ public class CompanyDetectorMaintenanceHistoricDto {
 	private Long uid;
 	private Date date;
 	private String description;
-//	private CompanyDetectorDto companyDetectorDto;
 	private Long companyDetectorId;
 	private HistoricMaintenaceType historicMaintenaceType;
 	
@@ -50,14 +49,6 @@ public class CompanyDetectorMaintenanceHistoricDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-//	public CompanyDetectorDto getCompanyDetectorDto() {
-//		return companyDetectorDto;
-//	}
-//	
-//	public void setCompanyDetectorDto(CompanyDetectorDto companyDetectorDto) {
-//		this.companyDetectorDto = companyDetectorDto;
-//	}
 		
 	public final HistoricMaintenaceType getHistoricMaintenaceType() {
 		return historicMaintenaceType;

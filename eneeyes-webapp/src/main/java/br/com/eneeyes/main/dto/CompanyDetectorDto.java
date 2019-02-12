@@ -23,7 +23,6 @@ public class CompanyDetectorDto {
 	private String descriptionInstall;
 	private CompanyDeviceDto companyDeviceDto;	
 	private DetectorDto detectorDto;
-//	private AlarmDto alarmDto;
 	
 	public CompanyDetectorDto() {
 		
@@ -177,14 +176,5 @@ public class CompanyDetectorDto {
 
 	public final void setDescriptionInstall(String descriptionInstall) {
 		this.descriptionInstall = descriptionInstall;
-	}
-
-//	public AlarmDto getAlarmDto() {
-//		return alarmDto;
-//	}
-//
-//	public void setAlarmDto(AlarmDto alarmDto) {
-//		this.alarmDto = alarmDto;
-//	}
-	
+	}	
 }

@@ -8,7 +8,7 @@
 							<i class="fa fa-calendar" data-ng-hide='deliveryDateValid'></i>
 							<i class="fa fa-calendar-times-o" style="color:red" data-ng-show='deliveryDateValid' title="Data Inválida"></i>                                                                 
 						</div>
-						<input id="deliveryDate" data-ng-model="selectedCompanyDetector.deliveryDate2"  type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" data-ng-keyup="validDeliveryDate($event);">															                                                            
+						<input id="deliveryDate" data-ng-model="selectedCompanyDetector.deliveryDate"  type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" data-ng-keyup="validDeliveryDate($event);">															                                                            
 					</div>
 				</div>																															
 			</div>
@@ -40,7 +40,7 @@
 							<i class="fa fa-calendar" data-ng-hide='installDateValid'></i>
 							<i class="fa fa-calendar-times-o" style="color:red" data-ng-show='installDateValid' title="Data Inválida"></i>                                                                 
 						</div>
-						<input id="installDate" type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" data-ng-keyup="validInstallDate($event);">															                                                            
+						<input data-ng-model="selectedCompanyDetector.installDate"  type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" data-ng-keyup="validInstallDate($event);">															                                                            
 					</div>
 				</div>						                										        											        		
 			</div>

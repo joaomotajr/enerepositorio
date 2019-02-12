@@ -1,14 +1,9 @@
 <div data-ng-controller="companiesController">
-
 	<div class="row">
-	    <div class="col-md-12">
-	    				
-			<div class="row">
-						
+	    <div class="col-md-12">	    				
+			<div class="row">						
 				<div class="col-md-12">
-
-					<div class="box box-primary" style="margin-bottom: 8px;" data-ng-class="{'collapsed-box' : selectedCompanyName}">
-							
+					<div class="box box-primary" style="margin-bottom: 8px;" data-ng-class="{'collapsed-box' : selectedCompanyName}">							
 						<div class="box-body">							
 							<div class="col-md-6">
 								<br />
@@ -62,32 +57,27 @@
 				</div>
 			</div>		
 			
-			<div class="row">
-				
+			<div class="row">				
 				<div class="col-md-12">								
 					<div class="callout callout-info" data-ng-show="selectedCompanyName" style="background-color: #3c8dbc !important; border-color: #156fa3 !important">
 				 		<a href="#" class="pull-right"  data-ng-click="selCompany();"><i class="fa fa-times fa-2x"></i> </a>
 						<h4  style="margin-bottom: 0px !important;"><i class="fa fa-industry"></i> {{selectedCompanyName}}</h4>		
 						{{companyDescription}}						
-						
 					</div>				
 				</div>
 			</div>
 			
-			<div class="row" data-ng-show="selectedCompanyName">		
-				 					
+			<div class="row" data-ng-show="selectedCompanyName">				 					
 				<div class="col-md-3" style="height: 500px; overflow: auto">				
 					<div class="form-group">			            
 			        	<input type="text" class="form-control" id="input-select-node" placeholder="Pesquisar..." />
 			        </div>					            										  
 					<div id="treeview-company" class="treeview" style="font-size:14px;line-height:0.85"></div>				
 				</div>				
-				
 				<div id="content" data-bind-unsafe-html="ajaxcontentCompany"></div>		
 			</div>																    
 		</div>
-	</div>
-      
+	</div>      
 </div>
 
     

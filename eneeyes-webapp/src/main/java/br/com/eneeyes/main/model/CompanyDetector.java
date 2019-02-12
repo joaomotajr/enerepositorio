@@ -121,16 +121,6 @@ public class CompanyDetector {
 	@JoinColumn(name="DETECTOR_ID", nullable = false)
 	private Detector detector;
 	
-//	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-//	@JoinColumn(name="ALARM_ID", nullable = true)
-//	private Alarm alarm;
-	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
-//	private Set<PositionAlarm> positionAlarm;
-//	
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "companyDetector", cascade = CascadeType.REMOVE)
-//	private Set<Position> position;
-	
 	@Column(name = "HISTORIC_ID", nullable = true)
 	private Long historicId;
 			
@@ -260,14 +250,5 @@ public class CompanyDetector {
 
 	public final void setDescriptionInstall(String descriptionInstall) {
 		this.descriptionInstall = descriptionInstall;
-	}
-
-//	public Alarm getAlarm() {
-//		return alarm;
-//	}
-//
-//	public void setAlarm(Alarm alarm) {
-//		this.alarm = alarm;
-//	}
-	
+	}	
 }

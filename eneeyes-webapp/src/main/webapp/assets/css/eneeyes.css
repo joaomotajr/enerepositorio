@@ -149,12 +149,29 @@
 		color: #171717;		
 	}
 	
-	imgDetector {	  
+	.imgDetector {	  
 	   	width: auto;
     	max-height: 160px;
     	height: 160px;
     	background-size: cover;
     	background-position: 50% 50%;
+	}
+
+	.imgGraphic {	  
+		width: auto;
+		max-width: 250px;
+		height: auto;
+		max-height: 250px;		
+		background-size: cover;
+		background-position: 50% 50%;
+	}
+
+	.imgGraphicList {	  
+		width: 225px;		
+		height: 156;
+		vertical-align: middle;
+		background-size: cover;
+		background-position: 50% 50%;
 	}
 	
 	.imgUser {	  

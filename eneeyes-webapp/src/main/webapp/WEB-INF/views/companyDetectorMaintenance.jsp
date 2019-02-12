@@ -30,7 +30,7 @@
 							<div class="col-md-1">
 								<label class="control-label">Detalhes: </label>							
 								<button type="button" class="btn btn-default" data-toggle="modal" 
-									title="Ver Detalhes da InstalaÃ§Ã£o" data-target="#modalMaintenanceDetail" 
+									title="Ver Detalhes da Instalação" data-target="#modalMaintenanceDetail" 
 									data-ng-disabled="!selectedCompanyDetector || msgErroInfoHistoric"><i class="fa fa-eye"></i>
 								</button>							
 							</div>
@@ -76,10 +76,10 @@
 													<label class="control-label">Tipo</label>
 													<div class="input-group">
 														<div class="input-group-addon">
-															<i data-ng-if="!selectedHistoricMaintenaceType.uid" title="Escolha o Tipo de ServiÃ§o" class="fa fa-hand-o-right text-red"></i>															
-															<i data-ng-if="selectedHistoricMaintenaceType.uid == '1'" title="ManutenÃ§Ã£o do Detector" class="fa fa-retweet"></i>														                                                                 
-															<i data-ng-if="selectedHistoricMaintenaceType.uid == '2'" title="CalibraÃ§Ã£o do Detector" class="fa fa-wrench"></i>
-															<i data-ng-if="selectedHistoricMaintenaceType.uid == '3'" title="Outros Tipos de ServiÃ§os no Detector" class="fa fa-circle"></i>
+															<i data-ng-if="!selectedHistoricMaintenaceType.uid" title="Escolha o Tipo de Serviço" class="fa fa-hand-o-right text-red"></i>															
+															<i data-ng-if="selectedHistoricMaintenaceType.uid == '1'" title="Manutenção do Detector" class="fa fa-retweet"></i>														                                                                 
+															<i data-ng-if="selectedHistoricMaintenaceType.uid == '2'" title="Calibração do Detector" class="fa fa-wrench"></i>
+															<i data-ng-if="selectedHistoricMaintenaceType.uid == '3'" title="Outros Tipos de Serviços no Detector" class="fa fa-circle"></i>
 														</div>
 														<div data-ng-class="{'has-error': !selectedHistoricMaintenaceType }" 
 															data-ng-init="historicMaintenaceTypes = [{name: 'MANUTEN&Ccedil&Atilde;O', uid :  1, icon:'fa-retweet'},{name: 'CALIBRA&Ccedil&Atilde;O', uid : 2, icon:'fa-wrench' },{name: 'OUTROS', uid : 3, icon:'fa-circle' }];">
@@ -102,7 +102,7 @@
 														<div class="input-group" data-ng-class="{'has-error': !dateOneValid }">                                                            
 															<div class="input-group-addon">
 																<i class="fa fa-calendar" data-ng-show='dateOneValid'></i>
-																<i class="fa fa-calendar-times-o" style="color:red" data-ng-hide='dateOneValid' title="Data InvÃ¡lida"></i>                                                                 
+																<i class="fa fa-calendar-times-o" style="color:red" data-ng-hide='dateOneValid' title="Data Inválida"></i>                                                                 
 															</div>
 															<input id="dateOne" type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" data-ng-keyup="validDateOne($event);">															                                                            
 														</div>

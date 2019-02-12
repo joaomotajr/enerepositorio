@@ -3,9 +3,13 @@ package br.com.eneeyes.main.model.views;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Subselect;
 
@@ -16,6 +20,7 @@ import br.com.eneeyes.main.model.enums.SigmaStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
+import br.com.eneeyes.main.model.state.DeviceType;
 
 @Entity
 @Subselect("select * from dash_companies_alarm2")
@@ -35,6 +40,11 @@ public class DashCompaniesAlarm implements Serializable {
 	private String unit_name;
 	private String area_name;
 	private String company_detector_name;
+	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="DEVICE_TYPE_ID", nullable = false)
+	private DeviceType deviceType;
+	
 	private String company_detector_local;
 	private Double last_value;
 		
@@ -58,161 +68,95 @@ public class DashCompaniesAlarm implements Serializable {
 	
 	private Date first_update;
 	private Date last_update;
-	private String artefact;
-	
-	@Column(name = "unit_meter_gases")
-	private UnitMeterGases unitMeterGases;
-
 	private String action;
-		
+	
+	@Column(name = "GAS_NAME")
+	private String gasName;
+	
+	@Column(name = "UNIT_METER_GASES")
+	private UnitMeterGases unitMeterGases;	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public Long getUid() {
 		return uid;
 	}
-	
-	public void setUid(Long uid) {
-		this.uid = uid;
-	}
-	
+
 	public Long getCompany_id() {
 		return company_id;
 	}
-	
-	public void setCompany_id(Long company_id) {
-		this.company_id = company_id;
-	}
-		
+
 	public String getCompany_name() {
 		return company_name;
 	}
-	
-	public void setCompany_name(String company_name) {
-		this.company_name = company_name;
-	}
-		
+
 	public String getUnit_name() {
 		return unit_name;
 	}
-	
-	public void setUnit_name(String unit_name) {
-		this.unit_name = unit_name;
-	}
-		
+
 	public String getArea_name() {
 		return area_name;
 	}
-	
-	public void setArea_name(String area_name) {
-		this.area_name = area_name;
-	}
-		
+
 	public String getCompany_detector_name() {
 		return company_detector_name;
 	}
-	
-	public void setCompany_detector_name(String company_detector_name) {
-		this.company_detector_name = company_detector_name;
-	}
-	
+
 	public String getCompany_detector_local() {
 		return company_detector_local;
 	}
 
-	public void setCompany_detector_local(String company_detector_local) {
-		this.company_detector_local = company_detector_local;
-	}
-	
 	public Double getLast_value() {
 		return last_value;
 	}
-	
-	public void setLast_value(Double last_value) {
-		this.last_value = last_value;
-	}
-	
-	public final AlarmType getAlarmType() {
+
+	public AlarmType getAlarmType() {
 		return alarmType;
 	}
 
-	public final void setAlarmType(AlarmType alarmType) {
-		this.alarmType = alarmType;
+	public EmailStatus getEmailStatus() {
+		return emailStatus;
 	}
-	
-	public final SigmaStatus getSigmaStatus() {
+
+	public SigmaStatus getSigmaStatus() {
 		return sigmaStatus;
 	}
 
-	public final void setSigmaStatus(SigmaStatus sigmaStatus) {
-		this.sigmaStatus = sigmaStatus;
-	}
-	
-	public final EmailStatus getEmailStatus() {
-		return emailStatus;
-	}
-	
-	public final void setEmailStatus(EmailStatus emailStatus) {
-		this.emailStatus = emailStatus;
-	}
-	
-	public final SmsStatus getSmsStatus() {
+	public SmsStatus getSmsStatus() {
 		return smsStatus;
 	}
-	
-	public final void setSmsStatus(SmsStatus smsStatus) {
-		this.smsStatus = smsStatus;
-	}
-	
-	public final SoundStatus getSoundStatus() {
+
+	public SoundStatus getSoundStatus() {
 		return soundStatus;
 	}
 
-	public final void setSoundStatus(SoundStatus soundStatus) {
-		this.soundStatus = soundStatus;
-	}
-	
-	public final AlarmStatus getAlarmStatus() {
+	public AlarmStatus getAlarmStatus() {
 		return alarmStatus;
 	}
 
-	public final void setAlarmStatus(AlarmStatus alarmStatus) {
-		this.alarmStatus = alarmStatus;
-	}
-	
-	public final Date getFirst_update() {
+	public Date getFirst_update() {
 		return first_update;
 	}
-	public final void setFirst_update(Date first_update) {
-		this.first_update = first_update;
-	}
-	
+
 	public Date getLast_update() {
 		return last_update;
 	}
 	
-	public void setLast_update(Date last_update) {
-		this.last_update = last_update;
-	}
-		
-	public String getArtefact() {
-		return artefact;
-	}
-
-	public void setArtefact(String artefact) {
-		this.artefact = artefact;
-	}
-
-	public final UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
-	}
-
-	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-		this.unitMeterGases = unitMeterGases;
-	}
-	
-	public final String getAction() {
+	public String getAction() {
 		return action;
 	}
+
+	public String getGasName() {
+		return gasName;
+	}
+
+	public UnitMeterGases getUnitMeterGases() {
+		return unitMeterGases;
+	}
 	
-	public final void setAction(String action) {
-		this.action = action;
+	public DeviceType getDeviceType() {
+		return deviceType;
 	}
 }

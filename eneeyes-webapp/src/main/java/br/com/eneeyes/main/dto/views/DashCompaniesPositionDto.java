@@ -9,6 +9,7 @@ import java.util.Set;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
+import br.com.eneeyes.main.model.state.DeviceType;
 import br.com.eneeyes.main.model.views.DashCompaniesPosition;
 import br.com.eneeyes.main.model.views.PositionHistoricView;
 
@@ -26,12 +27,13 @@ public class DashCompaniesPositionDto {
 		this.companyName = e.getCompanyName();
 		this.areaName = e.getAreaName();
 		this.companyDeviceName = e.getCompanyDeviceName();	
-		this.positionId = e.getPositionId();
-		this.artefact = e.getArtefact();
+		this.deviceType = e.getDeviceType();
+		this.positionId = e.getPositionId();		
 		this.lastValue = e.getLastValue();
 		this.alarmType = e.getAlarmType();
-		this.lastUpdate = e.getLastUpdate();
-		this.unitMeterGases = e.getUnitMeterGases();
+		this.lastUpdate = e.getLastUpdate();		
+		this.gasName = e.getGasName();
+		this.unitMeterGases = e.getUnitMeterGases();		
 		
 		if(e.getPositionHistoricView() != null) {
 			
@@ -39,12 +41,14 @@ public class DashCompaniesPositionDto {
 		}
 		
 		Integer count = 0;
-		for (PositionHistoricViewDto item   : this.positionHistoricViewDto) {					
-			this.arrayValues += item.getValue().toString() != null ? item.getValue().toString() + ", " : "";
-			count++;
+		for (PositionHistoricViewDto item   : this.positionHistoricViewDto) {
+			if(item.getValue() != null) {
+				this.arrayValues += item.getValue().toString() != null ? item.getValue().toString() + ", " : "";
+				count++;
 			
-			if (count >= 15)
-				break;	
+				if (count >= 15)
+					break;	
+			}
 		}
 	}	
 	
@@ -79,12 +83,13 @@ public class DashCompaniesPositionDto {
 	private String unitName;	
 	private String areaName;	
 	private String companyDeviceName;
+	private DeviceType deviceType;
 	private Long positionId;	
-	private String artefact;
 	private Double lastValue;	
 	private AlarmType alarmType;	
 	private Date lastUpdate;
 	private String arrayValues = "";
+	private String gasName;
 	private UnitMeterGases unitMeterGases;
 		
 	public final String getArrayValues() {
@@ -175,20 +180,30 @@ public class DashCompaniesPositionDto {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public String getArtefact() {
-		return artefact;
-	}
-
-	public void setArtefact(String artefact) {
-		this.artefact = artefact;
-	}
-
 	public UnitMeterGases getUnitMeterGases() {
 		return unitMeterGases;
 	}
 
 	public void setUnitMeterGases(UnitMeterGases unitMeterGases) {
 		this.unitMeterGases = unitMeterGases;
+	}
+
+	public DeviceType getDeviceType() {
+		return deviceType;
+	}
+
+	public void setDeviceType(DeviceType deviceType) {
+		this.deviceType = deviceType;
+	}
+
+	public String getGasName() {
+		return gasName;
+	}
+
+	public void setGasName(String gasName) {
+		this.gasName = gasName;
 	}	
+	
+	
 	
 }

@@ -1,5 +1,5 @@
 
-app.controller('alarmController', function ($scope, $timeout, $filter, AlarmService, GasService, CompanyService, ViewService) {
+app.controller('alarmController', function ($scope, $timeout, DeviceTypeService, AlarmService, GasService, CompanyService, ViewService) {
 
 	$('.modal')
 	.on({
@@ -8,15 +8,13 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			$(this).css('z-index', 1040 + (10 * idx));
 		},
 		'shown.bs.modal': function() {
-			var idx = ($('.modal:visible').length) - 1; // raise backdrop after animation.
+			var idx = ($('.modal:visible').length) - 1;
 			$('.modal-backdrop').not('.stacked')
 			.css('z-index', 1039 + (10 * idx))
 			.addClass('stacked');
 		},
 		'hidden.bs.modal': function() {
-			if ($('.modal:visible').length > 0) {
-				// restore the modal-open class to the body element, so that scrolling works
-				// properly after de-stacking a modal.
+			if ($('.modal:visible').length > 0) {			
 				setTimeout(function() {
 					$(document.body).addClass('modal-open');
 				}, 0);
@@ -27,15 +25,15 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	$scope.saveAlarm = function() {
 		
 		angular.element('body').addClass('loading');		
-		if($scope.deviceType.name == 'DIGITAL') {
+		if($scope.deviceType.type == 'DIGITAL') {
 			$scope.gasUnitMeterGases.uid = 12;
 			$scope.alarmAlarm1= $scope.deviceTypeDigital;
-		}		
-		
+		}
+				
 		var alarm = {
 			uid: $scope.alarmUid != undefined ? $scope.alarmUid : 0,
 			name: $scope.alarmName,
-			deviceType: $scope.deviceType.uid,						
+			deviceType : {uid: $scope.deviceType.uid},
 			unitMeterGases : $scope.gasUnitMeterGases.uid,
 			alarm1 : $scope.alarmAlarm1,
 			alarm2 : $scope.alarmAlarm2,
@@ -73,8 +71,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 				$scope.clearFormAlarm();
 	            $scope.getAlarms();                     	
 	            angular.element('body').removeClass('loading');				 
-	         }, 500);           
-
+	         }, 500);
 		});		 
 	 };
 		 
@@ -121,10 +118,10 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 
 		$scope.alarmUid = $scope.alarms[index].uid;
 		$scope.alarmGas = $scope.alarms[index].gasDto;
-		$scope.deviceType = $scope.getDeviceType($scope.alarms[index].deviceType);
+		$scope.deviceType = $scope.alarms[index].deviceType;
 		$scope.alarmName = $scope.alarms[index].name;		    
 		$scope.alarmAlarm1 = $scope.alarms[index].alarm1;
-		if($scope.deviceType.name == 'DIGITAL') {				
+		if ($scope.deviceType.type == 'DIGITAL') {				
 			$scope.deviceTypeDigital = $scope.alarms[index].alarm1;
 		}
 		$scope.alarmAlarm2 = $scope.alarms[index].alarm2;
@@ -147,11 +144,8 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		showAction($scope.alarms[index].alarmAction);
 		
 		$("#checkboxSigmaOnOff").prop('checked', $scope.alarms[index].alarmSigma);
-
-		$("#checkboxOfflineOnOff").prop('checked', $scope.alarms[index].alarmOffLineOn);
-				
-		$("#checkboxSonoroOnOff").prop('checked', $scope.alarms[index].alarmSound);
-		
+		$("#checkboxOfflineOnOff").prop('checked', $scope.alarms[index].alarmOffLineOn);				
+		$("#checkboxSonoroOnOff").prop('checked', $scope.alarms[index].alarmSound);		
 		$("#checkboxEmailOnOff").prop('checked', $scope.alarms[index].alarmEmail); 
 		showEmail($scope.alarms[index].alarmEmail);
 		
@@ -191,20 +185,16 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 				 $scope.msgErro = "Erro: " + $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
 			 }
-
 		});	 
 	 };	 
 	 
-	 $scope.getDeviceType = function (name) {
-		 
-		 for (var i = 0; i < $scope.deviceTypes.length; i++) {
-             if ($scope.deviceTypes[i].name == name) {
-                 
-            	 return $scope.deviceTypes[i];
-             }
-         } 		 
-	 };
-	 
+	 $scope.getDeviceTypes = function() {		 
+		$scope.listAllDeviceType = new DeviceTypeService.listAllDeviceType();		 
+		$scope.listAllDeviceType.$deviceType({_csrf : angular.element('#_csrf').val()}, function(){			
+			$scope.deviceTypes = $scope.listAllDeviceType.list;
+	   });		 
+	};
+
 	 $scope.getGases = function() {
 		 
 		 $scope.resultGases = new GasService.listAll();		 
@@ -215,8 +205,7 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 	 
 	 $scope.getUnitMetersGases = function (name) {		 
 		 for (var i = 0; i < $scope.unitMetersGases.length; i++) {
-             if ($scope.unitMetersGases[i].name == name) {
-                 
+             if ($scope.unitMetersGases[i].name == name) {                 
             	 return $scope.unitMetersGases[i];
              }
          } 		 
@@ -244,7 +233,9 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 			{ name : 'SECOND', uid : 10 },			
 			{ name : 'KWH', uid : 11 },
 			{ name : 'OPEN_CLOSE', uid : 12 },
-			{ name : 'M3_HOUR', uid : 13 }
+			{ name : 'M3_HOUR', uid : 13 },
+			{ name : 'M3', uid : 14 },
+			{ name : 'METERS', uid : 15 }
 	 ]; 
 	 
 	 $('.alarmCelularMask').keydown(function (e) {
@@ -464,30 +455,20 @@ app.controller('alarmController', function ($scope, $timeout, $filter, AlarmServ
 		 
 		 if(!$scope.$$phase) 
 			 $scope.$apply();			
-	 }	 
- 
+	 } 
 	 
 	 $scope.update = function (val) {
 		 $scope.radioModel = val;
 	 };
-
-	 $scope.deviceTypes = 	 [		  
-		  { name : 'DETECTOR', uid :  1, disabled : false },
-		  { name : 'ELETRICITY', uid :  6, disabled : false },
-		  { name : 'TIME', uid :  7, disabled : false },
-		  { name : 'TEMPERATURE', uid :  8, disabled : false },
-		  { name : 'DIGITAL', uid :  9, disabled : false },
-		  { name : 'FLOW', uid :  11, disabled : false },
-	 ];
 	 
-     /* ----------------- Processamento ------------------*/
-	 
+     /* ----------------- Processamento ------------------*/	 
 	 $scope.refreshAlarms = function() {
 		 $scope.getAlarms();	 
 		 $scope.getGases();
 		 $scope.getCompanys();
 	 };
 	 
+	 $scope.getDeviceTypes();
 	 $scope.refreshAlarms(); 
 	 angular.element('body').removeClass('loading');		
 });

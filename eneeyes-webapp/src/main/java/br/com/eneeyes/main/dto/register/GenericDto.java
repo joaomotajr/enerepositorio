@@ -1,8 +1,8 @@
 package br.com.eneeyes.main.dto.register;
 
-import br.com.eneeyes.main.model.enums.DeviceType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Generic;
+import br.com.eneeyes.main.model.state.DeviceType;
 
 public class GenericDto extends BaseDeviceDto {
 	private Long uid;		
@@ -10,6 +10,7 @@ public class GenericDto extends BaseDeviceDto {
 	private DeviceType deviceType;
 	private Double rangeMax;			
 	private Double rangeMin;
+	private String image;
 	
 	public GenericDto() {
 		
@@ -24,6 +25,11 @@ public class GenericDto extends BaseDeviceDto {
 		this.model = e.getModel();
 		this.rangeMax = e.getRangeMax();
 		this.rangeMin = e.getRangeMin();
+		
+		if (e.getImage() != null) {
+			byte[] image = e.getImage();
+			this.image = new String(image);
+		}
 	}
 
 	public final Long getUid() {
@@ -64,6 +70,13 @@ public class GenericDto extends BaseDeviceDto {
 	
 	public void setRangeMin(Double rangeMin) {
 		this.rangeMin = rangeMin;
-	}
+	}	
 	
+	public final String getImage() {
+		return image;
+	}
+
+	public final void setImage(String image) {
+		this.image = image;
+	}
 }

@@ -1,5 +1,7 @@
 package br.com.eneeyes.main.model.register;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,12 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.register.GenericDto;
-import br.com.eneeyes.main.model.enums.DeviceType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
+import br.com.eneeyes.main.model.state.DeviceType;
 
 /**
  * Created by Junior on 30/01/2018.
@@ -42,6 +45,17 @@ public class Generic {
 		this.model = dto.getModel();
 		this.rangeMax = dto.getRangeMax();
 		this.rangeMin = dto.getRangeMin();
+		
+		if (dto.getImage() != null) {
+			try {
+					
+				byte[] image = null;
+				image = dto.getImage().getBytes("US-ASCII");
+				this.setImage(image);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}	
+		}
 	}
 	
 	@Id
@@ -60,13 +74,9 @@ public class Generic {
 	    return unitMeterGases; 
 	}
 	
-	@Column(name = "DEVICE_TYPE", columnDefinition = "int default 0")
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="DEVICE_TYPE_ID", nullable = false)
 	private DeviceType deviceType;
-
-	@Enumerated(EnumType.ORDINAL) 
-	private DeviceType DeviceType() { 
-	    return deviceType; 
-	}
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="MANUFACTURER_ID", nullable = false)
@@ -80,6 +90,10 @@ public class Generic {
 	
 	@Column(name = "RANGE_MIN", nullable = true)		
 	private Double rangeMin;
+	
+	@Lob
+	@Column(name = "IMAGE", nullable = true)
+	byte[] image;
 	
 	public final Long getUid() {
 		return uid;
@@ -145,6 +159,13 @@ public class Generic {
 		this.rangeMin = rangeMin;
 	}
 	
+	public final byte[] getImage() {
+		return image;
+	}
+
+	public final void setImage(byte[] image) {
+		this.image = image;
+	}
 }
 
 

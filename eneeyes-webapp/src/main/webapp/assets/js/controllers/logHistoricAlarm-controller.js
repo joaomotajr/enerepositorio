@@ -5,7 +5,7 @@ app.filter('alarmFilter', function () {
         if (!criteria)
 			return objects;
         else {          	 
-        	for (index in objects) {          
+        	for (var index in objects) {          
         		if(objects[index].alarmType == criteria.name) { 		 
                     filterResult.push(objects[index]);
         		}           		 
@@ -121,7 +121,7 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 
 		if (!$scope.lenPageValid) {
 			
-			$scope.daysDiff ="ATENï¿½ï¿½O! Quantidade de registros por pï¿½gina Invï¿½lido." ;			
+			$scope.daysDiff ="ATENÇÃO! Quantidade de registros por página Inválido.";
 			$("#snoAlertBox").fadeIn();			
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
 			daysExceed = true;
@@ -149,8 +149,7 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 		$scope.selectedButton = $scope.interval;
 		$cookieStore.put("lenPage2", $scope.lenPage);
 				
-		$scope.listHistoricInterval = new HistoricAlarmService.listInterval();		
-				
+		$scope.listHistoricInterval = new HistoricAlarmService.listInterval();						
 		$scope.listHistoricInterval.$historicAlarm({_csrf : angular.element('#_csrf').val(), 
 			companyDeviceId: $scope.selectedCompanyDetector.companyDeviceId, 
 			interval: $scope.interval,
@@ -184,7 +183,7 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 		
 		if (dataFim < dataInicio) {
 			
-			$scope.daysDiff ="ATENÇÃO! Data Final Precisa ser Maior que Inicial." ;			
+			$scope.daysDiff ="ATENÇÃO! Data Final Precisa ser Maior que Inicial.";
 			$("#snoAlertBox").fadeIn();			
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
 			daysExceed = true;
@@ -233,12 +232,10 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 		else if ( interval == $scope.enumInterval.UM_MES )
 			return "último Mês";
 		else 
-			return 'Desconhecido';
-				
+			return 'Desconhecido';				
 	}
 	
-	$scope.getCompanyDetectors = function() {
-		 
+	$scope.getCompanyDetectors = function() {		 
 		 $scope.listAllDashCompany = new ViewService.listAllDashCompany();		 
 		 $scope.listAllDashCompany.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			 $scope.companyDetectors = $scope.listAllDashCompany.list; 				         	         	
@@ -252,8 +249,7 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 
 	$scope.getCompanys = function() {
 		 
-		 if($scope.$root.isFrom != "MASTER")	{
-		 
+		 if($scope.$root.isFrom != "MASTER") {		 
 			 $scope.getOneCompany($scope.$root.isFrom);
 		 }
 		 else {		
@@ -267,8 +263,7 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	$scope.getOneCompany = function(companyId) {
 		 
 		$scope.listOne = new CompanyService.listOne();		 
-		$scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
-			 
+		$scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function() {
 			$scope.selectedCompany = $scope.listOne.t;
 			$scope.changeCompany();
 	    });		 
@@ -309,17 +304,15 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	function formatLineSensor() {
 		var value = $scope.listHistoricInterval.list;
 		
-		var red =     $scope.selectedSensorAlarm == null  ? 0 :  $scope.selectedSensorAlarm.alarm3;
-		var yellow =  $scope.selectedSensorAlarm == null  ? 0 :  $scope.selectedSensorAlarm.alarm2;
-		var orange =  $scope.selectedSensorAlarm == null  ? 0 :  $scope.selectedSensorAlarm.alarm1;
+		var red =     $scope.findedCompanyDevice == null  ? 0 :  $scope.findedCompanyDevice.alarmDto.alarm3;
+		var yellow =  $scope.findedCompanyDevice == null  ? 0 :  $scope.findedCompanyDevice.alarmDto.alarm2;
+		var orange =  $scope.findedCompanyDevice == null  ? 0 :  $scope.findedCompanyDevice.alarmDto.alarm1;
 		
-		var data = new google.visualization.DataTable();
-	    	
+		var data = new google.visualization.DataTable();	    	
 		data.addColumn('string', 'Data');
 		data.addColumn('number', 'Valor');
 		
-	    var itens = new Array();
-	    	    
+	    var itens = new Array();	    	    
 	    for(var i in value) {
 	    	var itemDate = new Date( value[i].date );
 	    	changeDate = weekday[itemDate.getDay()] + ' ' + itemDate.toLocaleDateString() + ' as ' + itemDate.toLocaleTimeString();
@@ -328,9 +321,10 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 		}
 	      
 	    data.addRows(itens);
-	    
+		var options = {}; 
+		
 	    if ($scope.changeGraphic) {
-		    var options = {
+		    options = {
 	          
 		          legend: {position: 'none'},
 		          width: 900,
@@ -341,7 +335,7 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 		    		  textPosition: 'none'	    	  
 		    	  },
 		    	  vAxis: {	    		  
-		    		  maxValue: $scope.selectedCompanySensor.rangeMax,
+		    		  maxValue: $scope.selectedCompanyDetector.rangeMax,
 		              minValue: 0,
 		    		  textStyle: {
 	                      'color': '#8C8C8C',
@@ -350,11 +344,11 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	                      'fontSize': 9,
 	                  },
 		    		  ticks: [
-		    		          {v:0, f: 'Range Mï¿½nimo: 0' }, 
-		    		          {v: orange, f: 'Detecï¿½ï¿½o: ' + orange}, 
+		    		          {v:0, f: 'Range Minimo: 0' }, 
+		    		          {v: orange, f: 'Detecção: ' + orange}, 
 		    		          {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		          {v: red, f: 'Evacuaï¿½ï¿½o: ' + red}, 
-		    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Mï¿½ximo: ' + $scope.selectedCompanySensor.rangeMax}
+		    		          {v: red, f: 'Evacuação: ' + red}, 
+		    		          {v: $scope.selectedCompanyDetector.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanyDetector.rangeMax}
 		    		        ],
 		    	  },
 		    	  //curveType: 'function',
@@ -363,7 +357,7 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	    }    
 		else
 			{
-			   var options = {
+			   options = {
 				          
 		          legend: {position: 'none'},
 		          width: 900,
@@ -390,7 +384,6 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	    objChart = document.getElementById("graficoHistorico");
 	    var chart = new google.visualization.LineChart(objChart);
 	    chart.draw(data, options);
-	
 	}	
 	
 	$scope.changeToValue = function(valor) {
@@ -443,8 +436,6 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 		$("#dateOutA").on("dp.change",function (e) {
 	        $('#dateInA').data("DateTimePicker").setMaxDate(e.date);
 	        $(this).data('DateTimePicker').hide();
-		});
-		
-	}, 500);
-	
+		});		
+	}, 500);	
 });

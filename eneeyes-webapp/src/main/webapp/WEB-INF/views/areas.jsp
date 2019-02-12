@@ -18,15 +18,8 @@
 
 <div class="easy-modal" style="display:none;" modal-position="">
     <form>
-        <h3>Dispositivo</h3>
-        
-        <input type="hidden" class="form-control" name="content" placeholder="type">	        
-        <!-- 
-        <select name="uid" class="form-control" id="selCompanyDetector">
-        	<option value="" >Selecione</option>
-		    <option value={{item.uid}} ng-repeat="item in selectedCompanyDetectorsArea">{{item.name}}</option>			    
-		</select>
-		 -->
+        <h3>Dispositivo</h3>        
+        <input type="hidden" class="form-control" name="content" placeholder="type">
 		 <label>Detector</label>
 		 <label>Range</label>
 		 <label>Unidade</label>
@@ -51,7 +44,7 @@
 				       	<li class="active"><a href="#tabArea_1" id="stepTabArea_1" data-toggle="tab">Cadastro</a></li>
 				       	<li><a href="#tabArea_2" id="stepTabArea_2" data-toggle="tab">Local</a></li>
 				       	<li><a href="#tabArea_3" id="stepTabArea_3" data-toggle="tab">Dispositivos</a></li>
-				    	<li title="Trocar Imagem da ï¿½rea" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
+				    	<li title="Trocar Imagem da Área" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
 				    </ul>
 					
 					<div class="tab-content">
@@ -125,8 +118,8 @@
 								        
 								        <select class="form-control" data-live-search="true" 
 				                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-				                                ng-options="item as item.label for item in deviceTypes | orderBy: 'name' track by item.uid" 
-				                                         ng-model="sensorDetectionType">
+				                                ng-options="item as item.description for item in deviceTypes | orderBy: 'type' track by item.uid" 
+				                                         ng-model="selectedDeviceType">
 				                                         <option value="">Selecione</option> 
 				                        </select>
 				                                       
@@ -135,12 +128,10 @@
 								        </span>
 									</div>
 								</div>
-							</div>
-				    	         
-				       	</div><!-- /.tab-pane -->
+							</div>				    	         
+				       	</div>
 				       	
-				       	<div class="tab-pane" id="tabArea_2">
-				       	
+				       	<div class="tab-pane" id="tabArea_2">				       	
 				       		<div class="row">
 								<div class="col-md-2">					            
 									<label class="control-label">Dispositivos</label>					            
@@ -159,7 +150,7 @@
 				                      		<img class="direct-chat-img" ng-src="{{item.detectorDto.image}}" style="width: auto ! important; height: 30px ! important ; max-height: 30px ! important;">
 				                      		<div class="direct-chat-text" style="font-size: 0.7em; margin-right: 40px;"  >
 				                        		{{item.name}}
-				                      		</div><!-- /.direct-chat-text -->
+				                      		</div>
 				                    	</div>
 									</div>														           					            
 								</div>
@@ -177,23 +168,18 @@
 										&nbsp;{{btnLockUnlock}}
 									</button>								
 								</div>					    	
-							</div>
-				       		         
-				       	</div><!-- /.tab-pane -->
+							</div>				       		         
+				       	</div>
 				       	
-				       	<div class="tab-pane" id="tabArea_3">
-				       					       					       		 
+				       	<div class="tab-pane" id="tabArea_3">				       					       					       		 
 				       		<div class="row">			       		 
-				       		 	<div ng-repeat="item in selectedCompanyDetectorsArea">				              
-					            						              	
-					              	<div ng-repeat="sensor in item.detectorDto.sensorsDto">
+				       		 	<div ng-repeat="item in selectedCompanyDetectorsArea">										
+					              	
 					            	  	<div class="col-md-3">
-							              	<div class="panel panel-primary">				              
-								                
+							              	<div class="panel panel-primary">								                
 								                <div class="panel-heading">
 											    	<h2 class="panel-title" style="text-align:center;">{{item.name}}</h2>							
-											   	</div>
-											   					               	
+											   	</div>											   					               	
 								               	<div class="panel-body">							            					                 										                	
 													<div class="row">								                	
 														<img class="profile-user-img img-responsive imgDetector" style="margin: 0 auto" 
@@ -202,29 +188,24 @@
 								                	<div class="row">							                    				                    				                    
 									                	<div>									                	
 									                    	<div class="description-block">																
-									                      		<h4 class="description-header"><i class="fa fa-bolt"></i> {{sensor.name}}</h4>
-									                      		<span class="description-text">Range: Min|Man: {{sensor.rangeMin}} | {{sensor.rangeMax}} </span>
+									                      		<h4 class="description-header"><i class="fa fa-bolt"></i> {{item.detectorDto.sensorDto.name}}</h4>
+									                      		<span class="description-text">Range: Min|Man: {{item.detectorDto.sensorDto.rangeMin}} | {{item.detectorDto.sensorDto.rangeMax}} </span>
 																<br>
-																G&aacute;s: <strong class"text-navy">{{sensor.gasesDto[0].name}}</strong>																
-																<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="sensor.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
-																<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="sensor.unitMeterGases!='LEL_PERCENT'"> {{sensor.unitMeterGases}}</span>
+																G&aacute;s: <strong class="text-navy">{{item.detectorDto.sensorDto.gasDto.name}}</strong>																
+																<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.sensorDto.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
+																<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.sensorDto.unitMeterGases!='LEL_PERCENT'"> {{item.detectorDto.sensorDto.unitMeterGases}}</span>
 										                	</div>									                    					                    
 									                    </div>						                    					                    					                					                  			                  
 									                </div>					                
 								              	</div>
-
 							              	</div>
 						              	</div>
-					              	</div>				              	
-					              	              				              
-					          	</div> <!-- Repeat Detectores -->		            
-								       		 
-				       		 </div>  
-				       		 	        
-				     	</div> <!-- /.tab-content -->			     	
-				   </div>			   						
-				</div>
-							
+					              	
+					          	</div>								       		 
+				       		</div>				       		 	        
+				     	</div>
+				    </div>			   						
+				</div>							
 			</div>
 		</div>			
 	</div>	

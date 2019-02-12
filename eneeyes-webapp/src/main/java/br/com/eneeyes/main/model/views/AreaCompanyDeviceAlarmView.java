@@ -4,17 +4,21 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
-import br.com.eneeyes.main.model.enums.DeviceType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
+import br.com.eneeyes.main.model.state.DeviceType;
 
 @Entity
 @Subselect("select * from area_companydevice_alarm_view")
@@ -35,13 +39,9 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 	@Column(name = "company_device_id")
 	private Long companyDeviceId;
 	
-	@Column(name = "DEVICE_TYPE", columnDefinition = "int default 0")
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="DEVICE_TYPE_ID", nullable = false)
 	private DeviceType deviceType;
-	
-	@Enumerated(EnumType.ORDINAL) 
-	private DeviceType DeviceType() { 
-	    return deviceType; 
-	}
 	
 	@Column(name = "company_detector_id")
 	private Long companyDetectorId;
@@ -98,8 +98,7 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 	
 	@Column(name = "alarm_3", nullable = true)	
 	private Double alarm3;
-	
-	private String artefact;
+		
 	
 	@Column(name = "gas_name")
 	private String gasName;
@@ -122,15 +121,6 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 	
 	public DeviceType getdeviceType() {
 		return deviceType;
-	}
-
-	public void setDeviceType(DeviceType deviceType) {		
-		if (deviceType == null ) {			
-			this.deviceType = DeviceType.OUTROS;
-		}	
-		else { 
-			this.deviceType = deviceType;
-		}
 	}
 
 	public final String getCompanyDetectorName() {
@@ -201,12 +191,7 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 		return alarm3;
 	}
 
-	public String getArtefact() {
-		return artefact;
-	}
-
 	public String getGasName() {
 		return gasName;
-	}
-		
+	}		
 }

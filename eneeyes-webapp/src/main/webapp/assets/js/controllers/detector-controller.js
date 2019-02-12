@@ -189,7 +189,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 	 $scope.refreshDetectors();
 	 angular.element('body').removeClass('loading');
 	 
-	 $timeout(function () {                    
+	 $timeout(function () {
 		 $scope.loadEvents();
 	 }, 500);
 });

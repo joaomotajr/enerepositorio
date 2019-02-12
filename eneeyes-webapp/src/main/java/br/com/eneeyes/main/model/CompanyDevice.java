@@ -5,8 +5,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,10 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.CompanyDeviceDto;
-import br.com.eneeyes.main.model.enums.DeviceType;
+import br.com.eneeyes.main.model.state.DeviceType;
 
 @Entity
 @Table(name = "company_device")
@@ -48,13 +47,9 @@ public class CompanyDevice {
 	@Column(name = "UID")
 	private Long uid;
 	
-	@Column(name = "DEVICE_TYPE", columnDefinition = "int default 0")
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="DEVICE_TYPE_ID", nullable = false)	
 	private DeviceType deviceType;
-	
-	@Enumerated(EnumType.ORDINAL) 
-	private DeviceType DeviceType() { 
-	    return deviceType; 
-	}
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="AREA_ID", nullable=false)
@@ -81,17 +76,12 @@ public class CompanyDevice {
 		this.uid = uid;
 	}
 	
-	public DeviceType getdeviceType() {
+	public DeviceType getDeviceType() {
 		return deviceType;
 	}
 
-	public void setDeviceType(DeviceType deviceType) {		
-		if (deviceType == null ) {			
-			this.deviceType = DeviceType.OUTROS;
-		}	
-		else { 
-			this.deviceType = deviceType;
-		}
+	public void setDeviceType(DeviceType deviceType) {
+		this.deviceType = deviceType;
 	}
 	
 	public final Area getArea() {

@@ -65,7 +65,7 @@
 								<div class="box-header with-border">
 									<h3 class="box-title"><strong><i class="fa fa-building"></i>&nbsp;Unidade:</strong>&nbsp;{{item.name}}</h3>
 									<div class="box-tools pull-right">
-										<a data-ng-if="item.areasDto.length" href="#" class="btn btn-box-tool"><i class="fa-lg fa fa-square-o" data-ng-click="selectUnit($index);" title="Expandir Unidade"></i></a>
+										<a data-ng-if="item.areasDto.length" href="#" class="btn btn-box-tool"><i class="fa-2x fa fa-square-o" data-ng-click="selectUnit($index);" title="Expandir Unidade"></i></a>
 										<span data-ng-if="!item.areasDto.length" style="cursor:not-allowed" class="btn-box-tool"><i class="fa-lg fa fa-ban" title="Unidade Vazia" disabled></i></span>									
 									</div>
 								</div>
@@ -156,20 +156,12 @@
 												</div>
 
 												<div class="row" style="margin-right: 5px !important; margin-left: 5px !important;">			       		 
-													<div data-ng-repeat="item in selectedArea.list">				              					            						              	
-														
+													<div data-ng-repeat="item in selectedArea.list">														
 														<div class="col-md-4">
 															<div class="panel panel-primary">								                
 																<div class="panel-heading">
 																	<h2 class="panel-title" style="text-align:center;">
-																		<strong>
-																		<i data-ng-if="item.artefact=='FLOW'" class="fa fa-database" style="font-size:1.2em;"></i>
-																		<i data-ng-if="item.artefact=='TEMPERATURE'" class="fa fa-thermometer" style="font-size:1.2em;"></i>
-																		<i data-ng-if="item.artefact=='ELETRICITY'" class="fa fa-plug" style="font-size:1.2em;"></i>
-																		<i data-ng-if="item.artefact=='TIME'" class="fa fa-clock-o" style="font-size:1.2em;"></i>
-																		<i data-ng-if="item.sensorName!='GENERIC'" class="fa fa-rss" style="font-size:1.2em;"></i>
-																		<i data-ng-if="item.sensorName=='DIGITAL'" class="fa fa-flash" style="font-size:1.2em;"></i>																		
-																		</strong> 
+																		<strong><i class="fa" data-ng-class="item.deviceType.symbol" style="font-size:115%;"></i></strong> 
 																		{{item.companyDetectorName}}
 																	</h2>
 																</div>											   					               	
@@ -205,17 +197,16 @@
 																	<div class="row">																	
 																		<div class="description-block" style="margin: 3px 0;">																													
 																			<span class="description-text">Lat&ecirc;ncia: </span> <span style="font-size:0.8em;color:gray">{{item.latencia}}</span><br>
-																			<span class="description-text">Range: Min|Man: {{item.rangeMin}} | {{item.rangeMax}} </span><br>	
+																			<span class="description-text">Range: Min|M&aacute;x: {{item.rangeMin}} | {{item.rangeMax}} </span><br>	
 																			<jsp:include page="controls/reduzMeters.jsp"/>
 																		</div>																		
-																	</div>
-																	
+																	</div>																	
 																		
 																	<ul class="list-group">																		
 																		<li class="list-group-item" style="padding: 2px 15px;">
 																			<label>Alarme Associado:</label> {{item.alarmName}} <span data-ng-if="!item.alarmOn">Nenhum</span>
 																		</li>
-																		<li class="list-group-item list-group-item-info" style="padding: 2px 15px;">																			
+																		<li class="list-group-item list-group-item-secondary" style="padding: 2px 15px;">																			
 																			<span class="badge" data-ng-if="item.alarm11"><i class="fa fa-angle-left"></i> {{item.alarm11}}</span>
 																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm1}}</span>
 																			 <label>Alarme1:</label> Detec&ccedil;&atilde;o
@@ -227,24 +218,19 @@
 																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm3}}</span> <label>Alarme3:</label> Evacua&ccedil;&atilde;o:
 																		</li>
 																	</ul>
-
 																</div>
 															</div>
-														</div>
-														
+														</div>														
 													</div>								       		 
 												</div>
 											</div>	
 										</div>
-									</div>
-									
+									</div>									
 								</div>									
 							</div>
 						</div>
 					</div>					
-					<!-- Selected Unit e Areas Fim -->	
-				</div>
-																	
+				</div>																	
 			</div>
 		</div>
 	</div>				

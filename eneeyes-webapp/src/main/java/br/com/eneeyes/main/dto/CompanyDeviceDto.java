@@ -1,7 +1,7 @@
 package br.com.eneeyes.main.dto;
 
 import br.com.eneeyes.main.model.CompanyDevice;
-import br.com.eneeyes.main.model.enums.DeviceType;
+import br.com.eneeyes.main.model.state.DeviceType;
 
 public class CompanyDeviceDto implements Comparable<CompanyDeviceDto> {
 
@@ -17,7 +17,7 @@ public class CompanyDeviceDto implements Comparable<CompanyDeviceDto> {
 	
 	public CompanyDeviceDto(CompanyDevice e) {
 		this.uid = e.getUid();
-		this.deviceType = e.getdeviceType();
+		this.deviceType = e.getDeviceType();
 		this.name = e.getName();
 		
 		if (e.getAlarm()  != null) 
@@ -30,24 +30,16 @@ public class CompanyDeviceDto implements Comparable<CompanyDeviceDto> {
 	
 	public final void setUid(Long uid) {
 		this.uid = uid;
-	}
+	}	
 	
-	public final DeviceType getDeviceType() {
+	public DeviceType getDeviceType() {
 		return deviceType;
 	}
-	
-	public
-	final void setDeviceType(DeviceType deviceType) {
+
+	public void setDeviceType(DeviceType deviceType) {
 		this.deviceType = deviceType;
-		
-		if (deviceType == null ) {			
-			this.deviceType = DeviceType.OUTROS;
-		}	
-		else { 
-			this.deviceType = deviceType;
-		}
 	}
-	
+
 	public final AreaDto getAreaDto() {
 		return areaDto;
 	}

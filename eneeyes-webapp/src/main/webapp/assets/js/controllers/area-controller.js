@@ -1,5 +1,5 @@
 app.controller('areaController', function ($scope, $rootScope, $interval, $timeout, $filter, AreaService, CompanyDetectorService, 
-		DetectorService, CompanyDeviceService, CompanyService, PositionService, CompanyDetectorAlarmService, ViewService) {
+		CompanyDeviceService, CompanyService, DeviceTypeService) {
 
 	var loadGoogleCharts = false;
 	
@@ -31,7 +31,7 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		
 		var companyDevice = {
 			uid: 0,
-			deviceType: $scope.sensorDetectionType.uid,
+			deviceType : {uid: $scope.selectedDeviceType.uid},
 			areaDto: {uid : $scope.selectedArea.uid}				
 		};
 		
@@ -39,7 +39,7 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		$scope.inclusaoCompanyDevice.$companyDevice({_csrf : angular.element('#_csrf').val()}, function(){         	
 		        	           
 			$scope.getOneCompany($scope.companyUid);			
-			$scope.sensorDetectionType = '';			
+			$scope.selectedDeviceType = '';			
 
 			$rootScope.showGeneralMessage($scope.inclusaoCompanyDevice.message, 'SUCCESS') ;
 		
@@ -118,8 +118,7 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		$scope.clearFormArea();
 	}
 	
-	$scope.clearFormArea = function () {
-		
+	$scope.clearFormArea = function () {		
 		$scope.selectedArea.uid = undefined;
 		$scope.selectedArea.name = '';		
 		$scope.selectedArea.description = '';
@@ -127,12 +126,10 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		$scope.selectedArea.latitude = '';
 		$scope.selectedArea.longitude = '';
 		$scope.selectedArea.classified = false;		
-		
 		$scope.areaNameInit = undefined;
-		$scope.sensorDetectionType = '';
- 
+		$scope.sensorDetectionType = ''; 
 		$('#idAreaName').select();
-	}
+	};
 	
 	$scope.deleteArea = function() 
 	{		 
@@ -144,19 +141,17 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 			$scope.clearFormArea();
 			$scope.getOneCompany($scope.companyUid);
 			
-			$rootScope.showGeneralMessage($scope.deletar.message, 'DANGER');
-			
+			$rootScope.showGeneralMessage($scope.deletar.message, 'DANGER');			
 		});		 
-	}	
+	};	
 	
 	$scope.getCompanyDetectorArea = function() {
 		
 		$scope.resultCompanyDetectorsArea = new CompanyDetectorService.listPorAreaId();		 
 		$scope.resultCompanyDetectorsArea.$companyDetector({_csrf : angular.element('#_csrf').val(), id : $scope.selectedArea.uid }, function(){			
-			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;    
-					
+			$scope.selectedCompanyDetectorsArea = $scope.resultCompanyDetectorsArea.list;					
         });		 
-	}
+	};
 	 
 	 /*--------------------------------------------------------------------------   M A P S  &  E V E N T S -----------------------------------------------------------------------*/
 	 
@@ -252,15 +247,12 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		return JSON.parse('{' + pinItensString + '}');;
 	}
 
-	$scope.deviceTypes = 
-	[		  
-		{ name : 'DETECTOR', uid :  1, label: 'DETECTOR', disabled : false },
-		 { name : 'ELETRICITY', uid :  6, label: 'TENSAO', disabled : false },
-		 { name : 'TIME', uid :  7, label: 'TEMPO', disabled : false },
-		 { name : 'TEMPERATURE', uid :  8, label: 'TEMPERATURA', disabled : false },
-		 { name : 'DIGITAL', uid :  9,label: 'DIGITAL', disabled : false },
-		 { name : 'FLOW', uid :  11, label: 'VAZÂO', disabled : false },
-	];
+	$scope.getDeviceTypes = function() {		 
+		$scope.listAllDeviceType = new DeviceTypeService.listAllDeviceType();		 
+		$scope.listAllDeviceType.$deviceType({_csrf : angular.element('#_csrf').val()}, function(){			
+			$scope.deviceTypes = $scope.listAllDeviceType.list;
+	   });		 
+	};
 
 	/* ------------------------------------- Inicio Processamento --------------------------------------------*/
 	
@@ -275,6 +267,7 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		$scope.getCompanyDetectorArea();		
 
 		$scope.btnNewArea = true;
+		$scope.getDeviceTypes();
 		$scope.initializeArea();
 	}
 		

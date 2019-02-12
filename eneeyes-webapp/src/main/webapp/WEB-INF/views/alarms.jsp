@@ -1,4 +1,3 @@
-
 	<style>
 		.todo-list>li {
 		    padding: 4px;
@@ -47,12 +46,12 @@
 										<td>{{item.companyDto.name}}</td>
 										<td>{{item.name}}</td>
 										<td>
-											<span data-ng-if="item.deviceType!='DETECTOR'">STANDALONE</span>
-											<span data-ng-if="item.deviceType=='DETECTOR'">{{item.deviceType}}</span>											
+											<span data-ng-if="item.deviceType.type!='DETECTOR'">STANDALONE</span>
+											<span data-ng-if="item.deviceType.type=='DETECTOR'">{{item.deviceType.type}}</span>											
 										</td>
 										<td>
-											<span data-ng-if="item.deviceType=='DETECTOR'">{{item.gasDto.name}}</span>
-											<span data-ng-if="item.deviceType!='DETECTOR'">{{item.deviceType}}</span>											
+											<span data-ng-if="item.deviceType.type=='DETECTOR'">{{item.gasDto.name}}</span>
+											<span data-ng-if="item.deviceType.type!='DETECTOR'">{{item.deviceType.type}}</span>											
 										</td>
 										<td>
 											<span>{{item.unitMeterGases}}</span>
@@ -87,41 +86,34 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" align="center">Dispositivos Associados a este Alarme</h4>
+						<h4 class="modal-title" style="text-align:center">Dispositivos Associados a este Alarme</h4>
 					</div>
 					
-						<div class="box box-primary">
-							<div class="box-header with-border"><strong><i class="fa fa-rss"></i> Dispositivos:</strong></div>
-							
-							<div class="box-body">									        		                                                                                       
-								
-								<div style="max-height: 200px ! important; height:auto; overflow: auto; font-size: 0.9em  ! important">
-									<p data-ng-show="!usedAlarms || usedAlarms.length <= 0" class="text-center">NENHUM DETECTOR ASSOCIADO</p>
-									
-									<table class="table table-hover">
-										<thead>
-											<tr>
-												<th>Identificacao</th>
-												<th>Dispositivo</th>
-												<th>Local</th>
-												
-											</tr>
-										</thead>
-										<tbody>                                                        
-											<tr data-ng-repeat="item in usedAlarms">
-												<td>{{item.companyDetectorName}}</td>
-												<td>{{item.deviceName}}</td>
-												<td>{{item.companyDeviceLocal}}</td>
-											</tr>                                                               
-										</tbody>
-									</table>	
-
-								</div>					                                
-							</div>
-								
-						</div>								        	
-					
-					
+					<div class="box box-primary">
+						<div class="box-header with-border"><strong>Dispositivos:</strong></div>
+						
+						<div class="box-body">								
+							<div style="max-height: 200px ! important; height:auto; overflow: auto; font-size: 0.9em  ! important">
+								<p data-ng-show="!usedAlarms || usedAlarms.length <= 0" class="text-center">NENHUM DETECTOR ASSOCIADO</p>									
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th>Identificacao</th>
+											<th>Dispositivo</th>
+											<th>Local</th>												
+										</tr>
+									</thead>
+									<tbody>                                                        
+										<tr data-ng-repeat="item in usedAlarms">
+											<td>{{item.companyDetectorName}}</td>
+											<td>{{item.deviceName}}</td>
+											<td>{{item.companyDeviceLocal}}</td>
+										</tr>                                                               
+									</tbody>
+								</table>
+							</div>					                                
+						</div>								
+					</div>					
 				</div>
 			</div>
 		</div>
@@ -166,15 +158,13 @@
 											<label class="control-label">Dispositivo
 												<span class="text-red pull-right" data-ng-show="userForm.deviceType.$dirty && userForm.deviceType.$invalid">&nbsp[Campo Obrigat&oacute;rio]</span>
 											</label>
-											<div data-ng-class="{'has-error': userForm.deviceType.$dirty && userForm.deviceType.$invalid}">               							                		
-										
+											<div data-ng-class="{'has-error': userForm.deviceType.$dirty && userForm.deviceType.$invalid}">										
 												<select name="deviceType" class="form-control" data-live-search="true" 
 													style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-													data-ng-options="item as item.name for item in deviceTypes | orderBy: 'name' track by item.uid" 
+													data-ng-options="item as item.description for item in deviceTypes | orderBy: 'type' track by item.uid" 
 													data-ng-model="deviceType" required>
-													<option value="">Selecione</option> 
-												</select>
-										
+													<option value="">Selecione</option>
+												</select>										
 											</div>
 										</div>
 
@@ -199,9 +189,10 @@
 							                    <div class="box-body" style="padding-bottom: 0px !important">						                            	
 													<div id="travar">
 														<div class="row">	
-															<div  data-ng-show="deviceType.name=='DIGITAL'">																
-																<div class="col-md-6">
-																	<label><strong><i class="fa fa-flash"> </i> Alarmar se Circuito estiver:</strong></label>
+															<!-- Digital -->
+															<div  data-ng-show="deviceType.type=='DIGITAL'">																
+																<div class="col-md-4">
+																	<label><strong><i class="fa" data-ng-class="deviceType.symbol"> </i> Alarmar se Circuito estiver:</strong></label>
 																	<div class="form-control" style="padding-top:0px">																	
 																		<div class="radio3 radio-check radio-inline">
 																			<input type="radio" id="radio11" value="1" data-ng-model="deviceTypeDigital" data-ng-click="gasUnitMeterGases.uid=12; alarmAlarm1=1" >																			
@@ -215,30 +206,26 @@
 																</div>																														
 															</div>
 													
-															<div  data-ng-show="deviceType.name!='DIGITAL' && deviceType.name != undefined">
-																<div class="col-md-3" style="padding-right: 5px !important;" data-ng-show="deviceType.name=='DETECTOR'">
+															
+															<div data-ng-show="deviceType.type!='DIGITAL' && deviceType.type != undefined">
+																<div class="col-md-3" style="padding-right: 5px !important;" data-ng-show="deviceType.type=='DETECTOR'">
 																	<label class="control-label"><i class="fa fa-yelp"></i> G&aacute;s
-																		<span class="text-red pull-right" data-ng-show="userForm.gasName.$dirty && userForm.gasName.$invalid">  [Campo Obrigat&oacute;rio]</span>
+																		<span class="text-red pull-right" data-ng-show="userForm.gasName.$dirty && userForm.gasName.$invalid"> [Obrigat&oacute;rio]</span>
 																	</label>
 																	<div data-ng-class="{'has-error': userForm.gasName.$dirty && userForm.gasName.$invalid}">
 																		<select name="gasName" class="form-control" data-live-search="true" 
 																			style="width: 100%;" tabindex="-1" aria-hidden="true"                              
 																				data-ng-options="item as item.name for item in gases | orderBy: 'name' track by item.uid" 
-																					data-ng-model="alarmGas" data-ng-required="deviceType.name=='DETECTOR'">
+																					data-ng-model="alarmGas" data-ng-required="deviceType.type=='DETECTOR'">
 																					<option value="">Selecione</option>			                                           
 																		</select>											                		
 																	</div>
 																</div>		
 																																
-																<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">
-																	<label class="control-label">																		
-																			<strong data-ng-show="deviceType.name=='DETECTOR'"><i class="fa fa-tachometer"> </i> Unidade:</strong>
-																			<strong data-ng-show="deviceType.name=='ELETRICITY'"><i class="fa fa-plug"> </i> Eletricidade Medida em:</strong>
-																			<strong data-ng-show="deviceType.name=='TIME'"><i class="fa fa-clock-o"> </i> Tempo Contado em:</strong>
-																			<strong data-ng-show="deviceType.name=='TEMPERATURE'"><i class="fa fa-thermometer"> </i> Temperatura Calculada em:</strong>
-																			<strong data-ng-show="deviceType.name=='FLOW'"><i class="fa fa-database"> </i> Vazão Medida em:</strong>
-
-																			<span class="text-red" data-ng-show="userForm.gasUnit.$dirty && userForm.gasUnit.$invalid">  [Campo Obrigat&oacute;rio]</span>
+																<div class="col-md-3" style="padding-right: 5px !important;">
+																	<label class="control-label">
+																		<strong data-ng-show="deviceType.type!='DIGITAL'"><i class="fa" data-ng-class="deviceType.symbol"> </i> Unid. Medida:</strong>
+																		<span class="text-red" data-ng-show="userForm.gasUnit.$dirty && userForm.gasUnit.$invalid"> [Obrigat&oacute;rio]</span>
 																	</label>
 																	<div data-ng-class="{'has-error': userForm.gasUnit.$dirty && userForm.gasUnit.$invalid}">
 																		<select name="gasUnit" class="form-control" data-live-search="true" 
@@ -250,7 +237,7 @@
 																	</div>
 																</div>	
 
-																<div class="col-md-3" data-ng-show="deviceType.name!='DETECTOR'"></div>
+																<div class="col-md-3" data-ng-show="deviceType.type!='DETECTOR'"></div>
 															
 																<div class="col-md-2" style="padding-right: 5px !important">
 																	<div class="form-group">
@@ -420,8 +407,7 @@
 																																						
 																		</div>
 																	</div>						                                         													            			
-																</div>
-															
+																</div>													
 															
 															</div>
 														</div>
@@ -535,7 +521,7 @@
 																</div>                                        						                                        						                                         													            			
 															</div>							                                   
 														</div>
-														<div class="travarAction">    
+														<div class="travarAction" data-ng-show="deviceType.type!='DIGITAL'">
 															<div class="row" style="padding-bottom: 5px !important">
 																<div class="col-md-12">
 																	<div class="col-md-2">												            			
@@ -573,17 +559,13 @@
 																		</div>
 																	</div>                                        						                                        						                                         													            			
 																</div>							                                   
-															</div>
-																													
-														</div>
-														    								    
+															</div>																													
+														</div>														    								    
 												    </div>
 										    	</div>
 										    </div>	
-									    </div>	
-									    		            			                 
-					            	</div>
-					            						            		
+									    </div>
+					            	</div>					            						            		
 					            </form>
 							</div>							
 
@@ -592,9 +574,7 @@
 									<li class="text-red" data-bind-unsafe-html="item" />								
 								</ul>
 							</div>
-
-						</div>						
-										
+						</div>										
 				  	</div>
 				  	
 				  	<div class="modal-footer" style="padding-top: 1px">						
@@ -602,8 +582,7 @@
 						<button type="button" data-ng-click="saveAlarm();" class="btn btn-primary" data-dismiss="modal"
 							data-ng-disabled="(emailValid && mobileValid && emailValid1 && mobileValid1 && userForm.$valid && !(errorAlarm1 || errorAlarm11 || errorAlarm2 || errorAlarm22 || errorAlarm3 || errorAlarm33)) ? false : true">&nbsp;Salvar&nbsp;
 						</button>						                                
-				  	</div>
-				  	
+				  	</div>				  	
 			  	</div>
 			</div>		
 		</div>

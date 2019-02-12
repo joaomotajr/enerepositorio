@@ -130,9 +130,9 @@ app.controller('deviceTypeController', function ($scope, $timeout, DeviceTypeSer
 			graphicType: 'Termometro',
 			type:'THERMOMETERDISPLAY'
 		}, {
-			img: '/assets/img/graphic_types/Vertical_LEDs.png',
-			graphicType: 'Leds Verticais',
-			type:'VERTICALLEDS'
+			img: '/assets/img/graphic_types/Vertical_Bullet_Graph.png',
+			graphicType: 'Bala Vertical',
+			type:'VBULLET'
 		}
 	];
 

@@ -20,7 +20,7 @@
 	<div data-ng-controller="companyGenericController">
 		<div class="box box-primary">
 			<div class="box-header with-border">			
-				<strong style="font-size:1.4em"><i class='fa fa-rss'></i> {{selectedCompanyDevice.deviceType}} <span data-ng-show="selectedCompanyGeneric.name">-</span> {{selectedCompanyGeneric.name}}</strong>				
+				<strong style="font-size:1.4em"><i class="fa" data-ng-class="selectedCompanyDevice.deviceType.symbol"></i> {{selectedCompanyDevice.deviceType.type}} <span data-ng-show="selectedCompanyGeneric.name">-</span> {{selectedCompanyGeneric.name}}</strong>
 			</div>		
 				
 			<div class="box-body">
@@ -83,19 +83,23 @@
 								</div>
 								<div class="col-md-6">
 										
-										<div class="panel panel-primary" data-ng-if="selectedCompanyGenericPosition.uid">
-
+										<div class="panel panel-primary" data-ng-cloak data-ng-if="selectedCompanyGenericPosition.uid">
 											<div class="panel-heading">
 												<h3 class="panel-title" style="text-align:center;">{{selectedCompanyGeneric.genericDto.name}} - {{selectedCompanyGeneric.genericDto.model}}</h3>												
-											</div>	
-
+											</div>
 											<div class="panel-body" style="padding-bottom: 1px">						    																							
 												<ul class="list-group">													
 													<li class="list-group-item" style="padding: 1px 8px;">
-														<label><i class="fa fa-feed"></i>&nbsp;Dispositivo:&nbsp;</label>{{selectedCompanyGeneric.genericDto.deviceType}}
+														<label>Dispositivo:&nbsp;</label>{{selectedCompanyGeneric.genericDto.deviceType.description}}
 													</li>													
 													<li class="list-group-item" style="padding: 1px 8px;">
-															<label><i class="fa fa-feed"></i>&nbsp;Medi&ccedil;&atilde;o: em:&nbsp;</label>{{selectedCompanyGeneric.genericDto.unitMeterGases}}
+															<label>Medi&ccedil;&atilde;o em:&nbsp;</label>
+															<span data-ng-if="selectedCompanyGeneric.genericDto.unitMeterGases=='M3_HOUR'"> m³/hora</span>
+															<span data-ng-if="selectedCompanyGeneric.genericDto.unitMeterGases=='M3'"> m³</span>
+															<span 
+																data-ng-if="selectedCompanyGeneric.genericDto.unitMeterGases!='M3_HOUR' && 
+																			selectedCompanyGeneric.genericDto.unitMeterGases!='M3'">{{selectedCompanyGeneric.genericDto.unitMeterGases}}</span>
+
 														</li>
 													<li class="list-group-item" style="padding: 1px 8px;">
 														<label>Id:</label>&nbsp;{{selectedCompanyGenericPosition.uid}}
@@ -107,7 +111,7 @@
 											</div>
 										</div>	
 
-										<div data-ng-if="!selectedCompanyGenericPosition.uid">
+										<div data-ng-if="!selectedCompanyGenericPosition.uid" data-ng-cloak>
 											<label class="control-label">Selecione Dispositivo Compatível * [{{filtered.length}}] </label>
 											<table class="table table-bordered table-hover">
 												<thead>
@@ -119,8 +123,7 @@
 													</tr>
 												</thead>
 												<tbody>                                                        
-													<tr data-ng-repeat="item in filtered = (generics | filter: {deviceType: selectedCompanyDevice.deviceType})">
-														
+													<tr data-ng-repeat="item in filtered = (generics | filter: {deviceType: {type: selectedCompanyDevice.deviceType.type}})">
 														<td data-ng-class="{'selected': item.uid == selectedCompanyGeneric.genericDto.uid }">{{item.name}}</td>
 														<td data-ng-class="{'selected': item.uid == selectedCompanyGeneric.genericDto.uid }">{{item.model}}</td>
 														<td data-ng-class="{'selected': item.uid == selectedCompanyGeneric.genericDto.uid }">{{item.unitMeterGases}}</td>
@@ -156,9 +159,13 @@
 				       	<div class="tab-pane" id="tabCompanyGeneric_2">							   
 							<div class="panel panel-primary">								                
 								<div class="panel-heading">
-									<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong>Alarmes para o Dispositivo: {{selectedCompanyGeneric.name}} / Tipo {{selectedCompanyGeneric.deviceType}} </h2>							
+									<h2 class="panel-title" style="text-align:center;"><strong><i class="fa" data-ng-class="selectedCompanyDevice.deviceType.symbol"></i></strong> Alarmes para o Dispositivo: {{selectedCompanyGeneric.name}} / Tipo {{selectedCompanyGeneric.deviceType.description}} </h2>							
 								</div>											   					               	
 								<div class="panel-body">
+									<div class="alert alert-warning" role="alert" data-ng-show="msgErroAlarm" >
+										<button type="button" class="close" ><span data-ng-click="msgErroAlarm='';">&times;</span></button>
+										<strong>Alerta! </strong>{{msgErroAlarm}} 
+									</div>
 									<div style="height: 250px; overflow: auto">
 										<table class="table table-hover">
 											<thead>
@@ -183,15 +190,14 @@
 													<td>{{item.alarm2}}</td>
 													<td>{{item.alarm3}}</td>												
 													<td>
-														<div data-ng-if="(item.unitMeterGases != selectedCompanyGeneric.genericDto.unitMeterGases || 
-															item.deviceType != selectedCompanyGeneric.companyDeviceDto.deviceType)">
+														<div data-ng-if="(item.unitMeterGases != selectedCompanyGeneric.genericDto.unitMeterGases || item.deviceType.type != selectedCompanyGeneric.companyDeviceDto.deviceType.type)">
 															<button type="button" class="btn btn-offLine btn-xs" disabled>Incompativel</button>
 														</div>																										
 														<div data-ng-if="item.uid == selectedCompanyDeviceAlarm.alarmId">
 															<button type="button" class="btn btn-danger btn-xs" data-ng-click="toggleAlarm(null)">&nbsp;&nbsp;&nbsp;Remover&nbsp;&nbsp;&nbsp;</button>
 														</div>
 														<div data-ng-if="(item.unitMeterGases == selectedCompanyGeneric.genericDto.unitMeterGases && 
-															item.deviceType == selectedCompanyGeneric.companyDeviceDto.deviceType) && item.uid != selectedCompanyDeviceAlarm.alarmId">
+															item.deviceType.type == selectedCompanyGeneric.companyDeviceDto.deviceType.type) && item.uid != selectedCompanyDeviceAlarm.alarmId">
 															<button type="button" class="btn btn-primary btn-xs" data-ng-click="toggleAlarm(item)">&nbsp;&nbsp;Selecionar&nbsp;&nbsp;</button>
 														</div>													
 													</td>													

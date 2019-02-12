@@ -93,8 +93,8 @@
 											</button>
 											<ul class="dropdown-menu list-inline" role="menu" style="width: 100%;height: 40vh;overflow-y: auto; text-align: center;">
 												<li data-ng-repeat="i in images" data-ng-click="changeGraphic(i);" style="padding: 5px; border-style: double;" >
-													<span class="cursor" title="{{i.graphicType}}"></span>	
-													<img class="cursor  imgGraphicList img-thumbnail" ng-src="{{i.img}}" />												
+													<span class="cursor" ng-bind="i.graphicType"></span><br>
+													<img class="cursor imgGraphicList img-thumbnail" ng-src="{{i.img}}" />												
 												</li>
 											</ul>
 										</div>										

@@ -11,12 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.AlarmDto;
-import br.com.eneeyes.main.model.enums.DeviceType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Gas;
+import br.com.eneeyes.main.model.state.DeviceType;
 import br.com.eneeyes.main.model.views.CompanyView;
 
 @Entity
@@ -83,13 +84,9 @@ public class Alarm {
 	@JoinColumn(name="GAS_ID", nullable = true)
 	private Gas gas;		
 	
-	@Column(name = "DEVICE_TYPE", columnDefinition = "int default 0")
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="DEVICE_TYPE_ID", nullable = false)
 	private DeviceType deviceType;
-	
-	@Enumerated(EnumType.ORDINAL) 
-	private DeviceType DeviceType() { 
-	    return deviceType; 
-	}
 	
 	@Column(name = "ALARM_1")		
 	private Double alarm1;
@@ -184,13 +181,8 @@ public class Alarm {
 		return deviceType;
 	}
 
-	public void setDeviceType(DeviceType deviceType) {		
-		if (deviceType == null ) {			
-			this.deviceType = DeviceType.OUTROS;
-		}	
-		else { 
-			this.deviceType = deviceType;
-		}
+	public void setDeviceType(DeviceType deviceType) {
+		this.deviceType = deviceType;		
 	}
 
 	public final UnitMeterGases getUnitMeterGases() {

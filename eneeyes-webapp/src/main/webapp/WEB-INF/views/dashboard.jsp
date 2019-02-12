@@ -152,9 +152,9 @@
 															</span>Device
 														</th>						
 														<th>
-															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('artefact')">
+															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('deviceType.type')">
 																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
-																	data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'artefact' && orderOptions != '-artefact'}"></i>
+																	data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'deviceType.type' && orderOptions != '-deviceType.type'}"></i>
 															</span>
 															Artefato
 														</th>
@@ -166,17 +166,7 @@
 												</thead>
 												<tbody>
 													<tr data-ng-repeat="item in dashCompaniesPositionFiltered = (dashCompaniesPosition | dashCompaniesPositionFilter: selectedStatusDashCompaniesPosition) | orderBy: orderOptions">
-														<td>&nbsp;<strong>
-															<i data-ng-if="item.artefact=='FLOW'" class="fa fa-database" style="font-size:1.2em;"></i>
-															<i data-ng-if="item.artefact=='TEMPERATURE'" class="fa fa-thermometer" style="font-size:1.2em;"></i>
-															<i data-ng-if="item.artefact=='ELETRICITY'" class="fa fa-plug" style="font-size:1.2em;"></i>
-															<i data-ng-if="item.artefact=='TIME'" class="fa fa-clock-o" style="font-size:1.2em;"></i>
-															<i data-ng-if="item.artefact=='DIGITAL'" class="fa fa-flash" style="font-size:1.2em;"></i>
-															<i data-ng-if="item.artefact!='FLOW' && item.artefact!='TEMPERATURE' && item.artefact!='ELETRICITY' && item.artefact!='TIME' && item.artefact!='DIGITAL'" class="fa fa-rss" style="font-size:1.2em;"></i>
-															
-															</strong>&nbsp; 
-														</td>
-														<!-- <td>{{item.positionId}}</td> -->
+														<td>&nbsp;<strong><i class="fa" data-ng-class="item.deviceType.symbol" style="font-size:115%;"></i></strong>&nbsp;</td>														
 														<td><span data-truncate="12" data-value="{{item.companyName}}"></span></td>
 														<td>{{item.companyDeviceName}}</td>
 														<td>

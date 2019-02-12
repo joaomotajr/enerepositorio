@@ -20,7 +20,7 @@
 	<div data-ng-controller="companyDetectorController">
 		<div class="box box-primary">
 			<div class="box-header with-border">			
-				<strong style="font-size:1.4em"><i class='fa fa-rss'></i> {{selectedCompanyDevice.deviceType}} <span data-ng-show="selectedCompanyDetector.name">-</span> {{selectedCompanyDetector.name}}</strong>				
+				<strong style="font-size:1.4em"><i class="fa" data-ng-class="selectedCompanyDevice.deviceType.symbol"></i> {{selectedCompanyDevice.deviceType.type}} <span data-ng-show="selectedCompanyDetector.name">-</span> {{selectedCompanyDetector.name}}</strong>				
 			</div>		
 				
 			<div class="box-body">
@@ -143,7 +143,7 @@
 									<div class="col-md-10">
 										<div class="panel panel-primary">								                
 											<div class="panel-heading">
-												<h2 class="panel-title" style="text-align:center;"><strong><i class="fa fa-rss" style="font-size:1.2em;"></i></strong> {{selectedCompanyDeviceAlarm.companyDetectorName}}</h2>							
+												<h2 class="panel-title" style="text-align:center;"><strong><i class="fa" data-ng-class="selectedCompanyDevice.deviceType.symbol"></i></strong> {{selectedCompanyDeviceAlarm.companyDetectorName}}</h2>							
 											</div>											   					               	
 											<div class="panel-body">							            					                 										                	
 												<div class="row">
@@ -280,7 +280,7 @@
 						<div class="panel panel-default">
 							<div class="panel-heading" style="text-align:center; font-size: 1.3em;">
 								Alarme para o Sensor: <strong>{{selectedCompanyDeviceAlarm.sensorName}} </strong> - 
-								Artefato: <strong>{{selectedCompanyDeviceAlarm.artefact}}</strong> - 
+								Artefato: <strong>Gas: {{selectedPositionAlarm.gasName}}</strong> - 
 								Valor M&aacute;ximo: <strong>{{selectedCompanyDeviceAlarm.rangeMax}}</strong>
 							</div>
 					  	</div>
@@ -301,7 +301,6 @@
 										<thead>
 											<tr>
 												<th>Id.</th>
-												<!-- <th>Alarm Id.</th> -->
 												<th>Nome</th>
 												<th>Artefato</th>                                                    												
 												<th>Alarme 1</th>
@@ -312,8 +311,7 @@
 										</thead>
 										<tbody>                                                        
 											<tr data-ng-repeat="item in alarms">
-												<td>{{item.uid}}</td>
-												<!-- <td>{{item.alarmId}}</td> -->
+												<td>{{item.uid}}</td>												
 												<td>{{item.name}}</td>
 												<td><jsp:include page="controls/reduzMeters.jsp"/></td>												
 												<td>{{item.alarm1}} <span data-ng-if="item.alarm11">/{{item.alarm11}}</span></td>

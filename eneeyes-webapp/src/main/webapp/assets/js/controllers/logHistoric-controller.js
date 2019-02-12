@@ -101,7 +101,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 
 		if (!$scope.lenPageValid) {
 			
-			$scope.daysDiff ="ATENÇÃO! Quantidade de registros por página Inválido." ;			
+			$scope.daysDiff ="ATENÇÃO! Quantidade de registros por página Inválido.";	
 			$("#snoAlertBox").fadeIn();			
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
 			daysExceed = true;
@@ -169,7 +169,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 
 		if (dataFim < dataInicio) {
 			
-			$scope.daysDiff ="ATENÃ‡ÃƒO! Data Final Precisa ser Maior que Inicial." ;			
+			$scope.daysDiff ="ATENÇÃO! Data Final Precisa ser Maior que Inicial.";
 			$("#snoAlertBox").fadeIn();			
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
 			daysExceed = true;
@@ -225,8 +225,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		else if ( interval == $scope.enumInterval.UM_MES )
 			return "último Mês";
 		else 
-			return 'Desconhecido';
-				
+			return 'Desconhecido';				
 	}
 	
 	$scope.getCompanyDetectors = function() {
@@ -301,9 +300,9 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	function formatLineSensor() {
 		var value = $scope.listHistoricInterval.list;
 		
-		var red =     $scope.selectedSensorAlarm == null  ? 0 :  $scope.selectedSensorAlarm.alarm3;
-		var yellow =  $scope.selectedSensorAlarm == null  ? 0 :  $scope.selectedSensorAlarm.alarm2;
-		var orange =  $scope.selectedSensorAlarm == null  ? 0 :  $scope.selectedSensorAlarm.alarm1;
+		var red =     $scope.findedCompanyDevice == null  ? 0 :  $scope.findedCompanyDevice.alarmDto.alarm3;
+		var yellow =  $scope.findedCompanyDevice == null  ? 0 :  $scope.findedCompanyDevice.alarmDto.alarm2;
+		var orange =  $scope.findedCompanyDevice == null  ? 0 :  $scope.findedCompanyDevice.alarmDto.alarm1;
 		
 		var data = new google.visualization.DataTable();
 	      
@@ -313,8 +312,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		}
 		else {
 			data.addColumn('string', 'Data');
-			data.addColumn('number', 'MÃ¡ximo');			
-			data.addColumn('number', 'Minimo');
+			data.addColumn('number', 'Máximo');			
+			data.addColumn('number', 'Mínimo');
 		}
 
 	    var itens = new Array();
@@ -346,7 +345,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		    		  textPosition: 'none'	    	  
 		    	  },
 		    	  vAxis: {	    		  
-		    		  maxValue: $scope.selectedCompanySensor.rangeMax,
+		    		  maxValue: $scope.selectedCompanyDetector.rangeMax,
 		              minValue: 0,
 		    		  textStyle: {
 	                      'color': '#8C8C8C',
@@ -355,11 +354,11 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	                      'fontSize': 9,
 	                  },
 		    		  ticks: [
-		    		          {v:0, f: 'Range Mínimo: 0' }, 
-		    		          {v: orange, f: 'Detecção: ' + orange}, 
+		    		          {v:0, f: 'Range MÃ¡nimo: 0' }, 
+		    		          {v: orange, f: 'Detecçãoo: ' + orange}, 
 		    		          {v: yellow, f: 'Alerta: ' + yellow}, 
 		    		          {v: red, f: 'Evacuação: ' + red}, 
-		    		          {v: $scope.selectedCompanySensor.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanySensor.rangeMax}
+		    		          {v: $scope.selectedCompanyDetector.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanyDetector.rangeMax}
 		    		        ],
 		    	  },
 		    	  //curveType: 'function',

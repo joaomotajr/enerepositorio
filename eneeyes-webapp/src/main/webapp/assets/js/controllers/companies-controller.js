@@ -46,9 +46,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		if ($(this).val() == null || $(this).val() == "" )
 		{
 			$scope.clearFormCompany();			
-		}
-		else {
-			
+		} else {			
 			$scope.getOneCompany($(this).val());
 		}	    		
 	});
@@ -62,8 +60,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 			 
 			 $scope.companyUid = $scope.selectedCompany.uid;
 			 $scope.companyName = $scope.selectedCompany.name;
-			 $scope.companyDescription = $scope.selectedCompany.description;
-			 			 
+			 $scope.companyDescription = $scope.selectedCompany.description;			 			 
 	    });		 
 	}
 	
@@ -75,12 +72,9 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 			$scope.selectedCompanyName = $scope.companyName;
 			$scope.itens = getTree();
 			$scope.loadTreview($scope.itens);
-		}		
-		else 
-		{
+		} else {
 			$scope.clearFormCompany();					
-			$scope.getCompanys();
-			
+			$scope.getCompanys();			
 			$timeout(function () { $('#selCompany').select2(); }, 200);
 		}		
 	}
@@ -101,82 +95,51 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 	    $scope.companyDescription = '';
 		$scope.selectedCompanyName = undefined;
 
-		$scope.getCompanys();
-		
-		$timeout(function () { $('#selCompany').select2(); }, 200);
-		
+		$scope.getCompanys();		
+		$timeout(function () { $('#selCompany').select2(); }, 200);		
 	}
 	 
-	$scope.$root.selecteds = [];
-	
-	$scope.loadTreview = function(data) {
-		
-		 var initSelectableTree = function() {
-			 return $('#treeview-company').treeview({
-					data: data,		
-					expandIcon: 'glyphicon glyphicon-chevron-right',
-			        collapseIcon: 'glyphicon glyphicon-chevron-down',			          
-				    onNodeSelected: function(event, node) {
-				    				    	
-				    	//Clear Timer(s)
-				    	while ($scope.$root.timer.length) {				        	
-				            $interval.cancel($scope.$root.timer.pop());				            
-				         }
-				    	
-				    	//Força atualização de conteudo
-				    	$scope.LoadAjaxContentCompany('clear.html');
-				    	
-				    	$scope.$root.selecteds.push({unitIndex: 0, areaIndex : 0, companyDetectorIndex: 0});
-				    	
-				    	if(node.type == 'COMPANY' && $scope.$root.selectedCompany.unitsDto.length <= 0) {				    		 
-
-				    		 $timeout(function () {$scope.LoadAjaxContentCompany('units.html');}, 50);				    		 
-				    	}
-				    	else if(node.type == 'COMPANY' ) {
-				    		
-				    		$timeout(function () {$scope.LoadAjaxContentCompany('company.html');}, 200);				    		 
-				    	}
-				    	else if(node.type == 'UNIT') {
-				    		
-				    		$scope.$root.selecteds.unitIndex = node.index;				    		
-				    		$timeout(function () {$scope.LoadAjaxContentCompany('units.html');}, 50);
-				    		
-				    	}
-				    	else if(node.type == 'AREA') {
-				    		
-				    		$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
-					    	$scope.$root.selecteds.areaIndex = node.index;					    	
-					    	$timeout(function () {$scope.LoadAjaxContentCompany('areas.html');}, 50);	
-					    	
-				    	}
-				    	else if(node.type == 'DETECTOR') {				    		 
-					    						    
-					    	$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
-					    	$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
-					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;				    			
-				    		$timeout(function () { $scope.LoadAjaxContentCompany('companyDetectors.html'); }, 50);				    						    		
-						}
-						else if(node.type == 'ELETRICITY' || node.type == 'TEMPERATURE' || node.type == 'TIME' || node.type == 'DIGITAL' || node.type == 'FLOW' ) {				    		 
-					    						    
-					    	$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
-					    	$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
-					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;				    			
-				    		$timeout(function () { $scope.LoadAjaxContentCompany('companyGenerics.html'); }, 50);				    						    		
-						}
-						else {
-
-							$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
-					    	$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
-					    	$scope.$root.selecteds.CompanyDeviceIndex = node.index;				    			
-				    		$timeout(function () { $scope.LoadAjaxContentCompany('underConstruction.html'); }, 50);
-
-						}
-				    }
-			     });
-			};
+	$scope.$root.selecteds = [];	
+	$scope.loadTreview = function(data) {		
+		var initSelectableTree = function() {
+			return $('#treeview-company').treeview({
+				data: data,		
+				expandIcon: 'glyphicon glyphicon-chevron-right',
+			    collapseIcon: 'glyphicon glyphicon-chevron-down',			          
+				onNodeSelected: function(event, node) {				    				    	
+				    //Clear Timer(s)
+					while ($scope.$root.timer.length) {				        	
+						$interval.cancel($scope.$root.timer.pop());				            
+					}										
+					$scope.LoadAjaxContentCompany('clear.html');					
+					$scope.$root.selecteds.push({unitIndex: 0, areaIndex : 0, companyDetectorIndex: 0});					
+					if(node.type == 'COMPANY' && $scope.$root.selectedCompany.unitsDto.length <= 0) {
+						$timeout(function () {$scope.LoadAjaxContentCompany('units.html');}, 50);
+					} else if(node.type == 'COMPANY' ) {						
+						$timeout(function () {$scope.LoadAjaxContentCompany('company.html');}, 200);					}
+					else if(node.type == 'UNIT') {						
+						$scope.$root.selecteds.unitIndex = node.index;				    		
+						$timeout(function () {$scope.LoadAjaxContentCompany('units.html');}, 50);						
+					} else if(node.type == 'AREA') {						
+						$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
+						$scope.$root.selecteds.areaIndex = node.index;					    	
+						$timeout(function () {$scope.LoadAjaxContentCompany('areas.html');}, 50);
+					} else if(node.type == 'DETECTOR') {												
+						$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
+						$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
+						$scope.$root.selecteds.CompanyDeviceIndex = node.index;				    			
+						$timeout(function () { $scope.LoadAjaxContentCompany('companyDetectors.html'); }, 50);
+					} else {
+						$scope.$root.selecteds.unitIndex = node.unitIndex;					    	
+						$scope.$root.selecteds.areaIndex = node.areaIndex;					    	
+						$scope.$root.selecteds.CompanyDeviceIndex = node.index;				    			
+						$timeout(function () { $scope.LoadAjaxContentCompany('companyGenerics.html'); }, 50);
+					}					
+			    }
+		    });
+		};
 			
-		var $selectableTree = initSelectableTree();
-		
+		var $selectableTree = initSelectableTree();		
         var findSelectableNodes = function() {
         	return $selectableTree.treeview('search', [ $('#input-select-node').val(), { ignoreCase: false, exactMatch: false } ]);
         };
@@ -187,7 +150,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
         	selectableNodes = findSelectableNodes();
         	$('.select-node').prop('disabled', !(selectableNodes.length >= 1));
         });
-	 }
+	 };
 	 
 	 getTree = function() {
 		 
@@ -197,113 +160,44 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		//Company
 		var empresa = $scope.$root.selectedCompany.name + itemBaseLabel + $scope.$root.selectedCompany.unitsDto.length + "" + "</small>";
 		
-		itens.push({text: empresa , type : 'COMPANY', nodes: [] });
+		itens.push({text: empresa , type : 'COMPANY', nodes: [] });		
 		
 		//unidades
-		for (var i = 0; i < $scope.$root.selectedCompany.unitsDto.length; i++) {
-						
+		for (var i = 0; i < $scope.$root.selectedCompany.unitsDto.length; i++) {						
 	   		var unidade = "<i class='fa fa-building' style='font-size:1.2em;'></i> " + 
 	   			$scope.$root.selectedCompany.unitsDto[i].name + itemBaseLabel + 
-	   			$scope.$root.selectedCompany.unitsDto[i].areasDto.length + "" +  "</small>";	   		
-			
-			   	itens[0].nodes.push({text: unidade, nodes: [], type : 'UNIT', index: i});
-			
+	   			$scope.$root.selectedCompany.unitsDto[i].areasDto.length + "" +  "</small>";
+			   	itens[0].nodes.push({text: unidade, nodes: [], type : 'UNIT', index: i});			
 			//area
-		   for (var j = 0; j < $scope.$root.selectedCompany.unitsDto[i].areasDto.length; j++) {			  			   
-			
+		   for (var j = 0; j < $scope.$root.selectedCompany.unitsDto[i].areasDto.length; j++) {			
 			   	var area = "<i class='fa fa-map-o' style='font-size:1.2em;'></i> " + 
 			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].name + itemBaseLabel + 
-			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length + "" + "</small>";
-			   
+			   		$scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length + "" + "</small>";			   
 			   	itens[0].nodes[i].nodes.push({text: area, nodes: [], type : 'AREA', index: j, unitIndex: i});
 
 				//Dispositivos
-			   	for (var k = 0; k < $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length; k++) {
-					
+			   	for (var k = 0; k < $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto.length; k++) {					
 					var device = getDevices($scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k]);
-					var type = $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
-
-					itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : type, index: k, areaIndex: j, unitIndex: i });					
+					var deviceType = $scope.$root.selectedCompany.unitsDto[i].areasDto[j].companyDevicesDto[k].deviceType;
+					itens[0].nodes[i].nodes[j].nodes.push({text: device,  type : deviceType.type, index: k, areaIndex: j, unitIndex: i });					
 			   	}
 		   }
-		}		 
-		
+		}		
 		return itens;
 	 };
 
 	 function getDevices(detalhe) {
-			
-		//Detector  
-		if(detalhe.deviceType == "DETECTOR") {
-			device = "<i class='fa fa-rss' style='font-size:1.2em;'></i> DETECTOR"
-			
-			if (detalhe.name == undefined)
-				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
-			else				
-				device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";		
-				
-		}
-		//Eletricidade
-		else if(detalhe.deviceType == "ELETRICITY") {
-		
-			device = "<i class='fa fa-plug' style='font-size:1.2em;'></i> TENS&Atilde;O";						 
-
-			if (detalhe.name == undefined)
-				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
-			else
-				device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";		 	
-		}
-		//Temperatura
-		else if(detalhe.deviceType == "TEMPERATURE") {
-			
-			device = "<i class='fa fa-thermometer' style='font-size:1.2em;'></i> TEMPERATURA";						 
-			
-			if (detalhe.name == undefined)
-				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
-			else
-				device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";			
-		}
-		//Tempo
-		else if(detalhe.deviceType == "TIME") {
-			
-			device = "<i class='fa fa-clock-o' style='font-size:1.2em;'></i> TEMPO";				
-			
-			if (detalhe.name == undefined)
-				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
-			else		 
-				device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";			
-		}
-		//DIGITAL
-		else if(detalhe.deviceType == "DIGITAL") {
-			
-			device = "<i class='fa fa-flash' style='font-size:1.2em;'></i> DIGITAL";				
-			
-			if (detalhe.name == undefined)
-				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
-			else		 
-				device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";			
-		}
-		//VAZÃO
-		else if(detalhe.deviceType == "FLOW") {
-			
-			device = "<i class='fa fa-database' style='font-size:1.2em;'></i> VAZ�O";
-			
-			if (detalhe.name == undefined)
-				device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
-			else		 
-				device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";			
-		}			
-		else {   
-			device = "<i class='fa fa-keyboard-o' style='font-size:1.2em;'></i> " + detalhe.deviceType;			
-		}			
-		
+		device = "<span title=" + detalhe.deviceType.description + "><i class='fa " + detalhe.deviceType.symbol + "' style='font-size:1.2em;'></i> </span>";
+		if (detalhe.name == undefined)
+			device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
+		else				
+			device += "<small class='label label-default pull-right' style='vertical-align:super;font-size:0.7em'>" + detalhe.name + "</small>";			
 		return device;
 	 }
 	 
 	 $scope.getCompanys = function() {
 		 
-		 if($scope.$root.isFrom != "MASTER")	{
-		 
+		 if($scope.$root.isFrom != "MASTER") {		 
 			 $scope.getOneCompany($scope.$root.isFrom);
 		 }
 		 else {		
@@ -312,7 +206,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 				 $scope.companies = $scope.resultCompanies.list;
 	        });		 
 		 }
-	 } 
+	 }; 
 	
 	 $scope.getCompanys();
 	 	
@@ -320,6 +214,5 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		angular.element('body').removeClass('loading');
 	 }, 500);	
 	
-	 $(".select2").select2();
-		
+	 $(".select2").select2();		
 });

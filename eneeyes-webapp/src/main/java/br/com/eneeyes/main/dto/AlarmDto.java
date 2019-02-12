@@ -2,8 +2,8 @@ package br.com.eneeyes.main.dto;
 
 import br.com.eneeyes.main.dto.register.GasDto;
 import br.com.eneeyes.main.model.Alarm;
-import br.com.eneeyes.main.model.enums.DeviceType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
+import br.com.eneeyes.main.model.state.DeviceType;
 import br.com.eneeyes.main.model.views.CompanyView;
 
 public class AlarmDto {
@@ -98,17 +98,11 @@ public class AlarmDto {
 	public final DeviceType getDeviceType() {
 		return deviceType;
 	}
-	public final void setDeviceType(DeviceType deviceType) {
-		this.deviceType = deviceType;
-		
-		if (deviceType == null ) {			
-			this.deviceType = DeviceType.OUTROS;
-		}	
-		else { 
-			this.deviceType = deviceType;
-		}
-	}
 	
+	public void setDeviceType(DeviceType deviceType) {
+		this.deviceType = deviceType;
+	}
+
 	public final UnitMeterGases getUnitMeterGases() {
 		return unitMeterGases;
 	}

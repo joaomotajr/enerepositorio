@@ -4,16 +4,20 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
+import br.com.eneeyes.main.model.state.DeviceType;
 
 @Entity
 @Subselect("select * from dash_companies_position2")
@@ -55,13 +59,14 @@ public class DashCompaniesPosition {
 	
 	@Column(name = "COMPANY_DEVICE_NAME")
 	private String companyDeviceName;
+			
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="DEVICE_TYPE_ID", nullable = false)
+	private DeviceType deviceType;
 	
 	@Column(name = "POSITION_ID")
-	private Long positionId;
-
-	@Column(name = "ARTEFACT")
-	private String artefact;
-		
+	private Long positionId;	
+			
 	@Column(name = "LAST_VALUE", nullable = true)
 	private Double lastValue;
 	
@@ -71,101 +76,61 @@ public class DashCompaniesPosition {
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;		
 	
+	@Column(name = "GAS_NAME")
+	private String gasName;
+		
 	@Column(name = "UNIT_METER_GASES")
 	private UnitMeterGases unitMeterGases;
-	public final UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
-	}
 
-	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-		this.unitMeterGases = unitMeterGases;
-	}
-
-	public final Long getUid() {
+	public Long getUid() {
 		return uid;
 	}
 
-	public final void setUid(Long uid) {
-		this.uid = uid;
-	}
-
-	public final Long getCompanyId() {
+	public Long getCompanyId() {
 		return companyId;
 	}
 
-	public final void setCompanyId(Long companyId) {
-		this.companyId = companyId;
-	}
-
-	public final String getCompanyName() {
+	public String getCompanyName() {
 		return companyName;
 	}
 
-	public final void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
-	public final String getUnitName() {
+	public String getUnitName() {
 		return unitName;
 	}
 
-	public final void setUnitName(String unitName) {
-		this.unitName = unitName;
-	}
-
-	public final String getAreaName() {
+	public String getAreaName() {
 		return areaName;
 	}
-
-	public final void setAreaName(String areaName) {
-		this.areaName = areaName;
-	}	
-
+	
 	public String getCompanyDeviceName() {
 		return companyDeviceName;
 	}
 
-	public void setCompanyDeviceName(String companyDeviceName) {
-		this.companyDeviceName = companyDeviceName;
-	}
-
-	public final Long getPositionId() {
+	public Long getPositionId() {
 		return positionId;
 	}
 
-	public final void setPositionId(Long positionId) {
-		this.positionId = positionId;
-	}
-
-	public final Double getLastValue() {
+	public Double getLastValue() {
 		return lastValue;
 	}
 
-	public final void setLastValue(Double lastValue) {
-		this.lastValue = lastValue;
-	}
-
-	public final AlarmType getAlarmType() {
+	public AlarmType getAlarmType() {
 		return alarmType;
 	}
 
-	public final void setAlarmType(AlarmType alarmType) {
-		this.alarmType = alarmType;
-	}
-
-	public final Date getLastUpdate() {
+	public Date getLastUpdate() {
 		return lastUpdate;
 	}
 
-	public final void setLastUpdate(Date lastUpdate) {
-		this.lastUpdate = lastUpdate;
+	public String getGasName() {
+		return gasName;
 	}
 
-	public String getArtefact() {
-		return artefact;
+	public UnitMeterGases getUnitMeterGases() {
+		return unitMeterGases;
 	}
 
-	public void setArtefact(String artefact) {
-		this.artefact = artefact;
+	public DeviceType getDeviceType() {
+		return deviceType;
 	}	
 }

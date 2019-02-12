@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
+import br.com.eneeyes.main.dto.state.DeviceTypeDto;
 import br.com.eneeyes.main.model.state.DeviceType;
 import br.com.eneeyes.main.repository.state.DeviceTypeRepository;
+import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.result.Result;
 
 @Service
@@ -36,10 +38,39 @@ public class DeviceTypeService {
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
-		}
+		}		
+		return result;		
+	}
+	
+	public BasicResult<?> save(DeviceTypeDto dto) {
 		
-		return result;	
+		Result<DeviceTypeDto> result = new Result<DeviceTypeDto>();		
+		DeviceType manufacturer = new DeviceType(dto);		
+		manufacturer = repository.save(manufacturer);
 		
-	}	
+		dto.setUid(manufacturer.getUid());				
+		result.setEntity(dto);
+		
+		result.setResultType( ResultMessageType.SUCCESS );
+		result.setMessage("Executado com sucesso.");	
+		
+		return result;
+	}
 
+	public BasicResult<?> delete(Long uid) {
+				
+		Result<DeviceTypeDto> result = new Result<DeviceTypeDto>();		
+		try {			
+			repository.delete(uid);
+			result.setResultType( ResultMessageType.SUCCESS );
+			result.setMessage("Empresa Excluída.");
+			
+		} catch (Exception e) {
+			e.printStackTrace();			
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}		
+		return result;		
+	}
 }
+

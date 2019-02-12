@@ -33,7 +33,7 @@ public class HistoricAlarm {
 	@Column(name = "DATE", nullable = false)
 	private Date date;
 
-	@Column(name = "VALUE", nullable = false)
+	@Column(name = "VALUE", nullable = true)
 	private BigDecimal value;    	
 	
 	@Column(name="COMPANY_DEVICE_ID", nullable = false)

@@ -70,7 +70,7 @@ public class ProcessAlarmService {
 		AlarmDto alarmDto = getExistAlarm(position.getCompanyDevice().getUid());					
 		
 		Historic historic = new Historic();		
-		position.setLastValue(new BigDecimal(-1));
+		position.setLastValue(null);
 		
 		historic = historicService.saveByPosition(position);		
 		

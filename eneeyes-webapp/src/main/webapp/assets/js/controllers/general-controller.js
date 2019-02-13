@@ -84,6 +84,9 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 						e.dataType = "vbullet";
 						e.width=300;
 						e.height=150;
+					} else if(e.deviceType.graphicType == "SPEEDOMETER") {
+						e.dataType = "angulargauge";
+						
 					}			
 				});
 
@@ -145,16 +148,16 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		var orange = e.alarmOn == null ? 0 : e.alarm1;
 
 		properties =  {
-			caption: "ID " + e.uid,
+			caption: "Medição de " + e.deviceType.description,
 			subcaption: "",
 			lowerLimit: e.rangeMin,
 			upperLimit: e.rangeMax,
 			editMode: "1",
 			showValue: "1",			
 			valueBelowPivot: "1",
-			tickValueDistance: "5",			
-			theme: "fint",										
-			valueFontSize: "14"
+			tickValueDistance: "5",
+			valueFontSize: "14",
+			theme: "ocean"	
 		};
 
 		colors = {				
@@ -188,7 +191,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 				id: "crntYr",
 				value: value,
 				showValue: "1",
-				tooltext: "Status : $value",
+				tooltext: "Status : $value",				
 				rearExtension: "5"
 			}]			
 		};
@@ -206,30 +209,35 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			dataSource.chart.placeValuesInside=1;
 			dataSource.value = value;
 			dataSource.annotations = {showbelow: 1};			
-		} else if(e.deviceType.graphicType == "LINEARSCALE") {
-			 dataSource.chart.lowerLimitDisplay = e.rangeMin + " Min";
-			 dataSource.chart.upperLimitDisplay = e.rangeMax + " Max";			
+		} else if(e.deviceType.graphicType == "LINEARSCALE") {			
 			 dataSource.annotations = {showbelow: 1};			 
 			 dataSource.pointers = {pointer: [{value: value	}]};
-		} else if(e.deviceType.graphicType == "CYLINDERFILL") {
-			dataSource.chart.lowerLimitDisplay = e.rangeMin + " Min";
-			dataSource.chart.upperLimitDisplay = e.rangeMax + " Max";
-		} else if(e.deviceType.graphicType == "VBULLET") {
-			dataSource.chart.lowerLimitDisplay = e.rangeMin + " Min";
-			dataSource.chart.upperLimitDisplay = e.rangeMax + " Max";			
+		} else if(e.deviceType.graphicType == "CYLINDERFILL") {			
+		} else if(e.deviceType.graphicType == "VBULLET") {			
 	   	} else if(e.deviceType.graphicType == "RATINGMETER") {			
 			dataSource.chart.gaugeFillMix = "{dark-30},{light-60},{dark-10}";
 			dataSource.chart.gaugeFillRatio = "15";
 			dataSource.chart.gaugeouterradius = "120";
-			dataSource.chart.gaugeinnerradius = "70%";		
+			dataSource.chart.gaugeinnerradius = "65%";
+		} else if(e.deviceType.graphicType == "SPEEDOMETER") {
+			dataSource.chart.captionpadding = "35";
+			dataSource.chart.origw = "335";
+			dataSource.chart.origh =  "335";
+			dataSource.chart.gaugeinnerradius = "70%";
+			dataSource.chart.gaugeouterradius = "120";
+			dataSource.chart.gaugestartangle = "270";
+			dataSource.chart.gaugeendangle = "-25";			
+			dataSource.chart.valuefontsize = "14";			
+			dataSource.chart.majortmnumber = "13";							
+			dataSource.chart.minortmnumber = "1";
 		}
 
-		dataSource.chart.numberSuffix = getMeters(e.unitMeterGases);
+		dataSource.chart.numberSuffix = $scope.getMeters(e.unitMeterGases);
 
 		return dataSource;
 	};		
 
-	function getMeters(unit) {
+	 $scope.getMeters = function(unit) {
 		if (unit == 'VOLT') { 
 			return ' V';
 		} else if(unit == 'GRAUS_CELSIUS') {
@@ -254,7 +262,17 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			return " KWT";
 		} else if(unit == 'METERS') {
 			return " ms";
-		} 
+		} else if(unit == 'LEL_PERCENT_METRO') {
+			return " lel% m";
+		} else if(unit == 'LEL_PERCENT') {
+			return " lel%";
+		} else if(unit == 'PERCENT_VOLUME') {
+			return " vol%";
+		} else if(unit == 'METERS') {
+			return " ms";
+		} else {
+			return unit;
+		}
 	}
 
 	$scope.getCompaniesSumary();	

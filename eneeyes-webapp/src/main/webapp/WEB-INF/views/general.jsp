@@ -182,39 +182,44 @@
 																		</div>
 																	</div>																	
 
-																	<div class="row">								                	
+																	<div class="row">								              
+																		<!-- justify-content: flex-end	                	 -->  	
 																		<div style=" width: 100%; display: flex; justify-content: center; text-align: center;">																																						
 																			<div data-fusioncharts							
 																				data-width="300"
 																				data-height= "200"						    						    						    						    
 																				data-type="{{item.dataType}}"
-																				data-theme= "fint"
+																				data-theme= "ocean"
 																				data-datasource="{{item.dataSource}}">
 																			</div>
 																		</div>																		
-																		
-																	</div>								                				                				                
+																	</div>	
+																				                				                				                
 																	<div class="row">																	
 																		<div class="description-block" style="margin: 3px 0;">																													
-																			<span class="description-text">Lat&ecirc;ncia: </span> <span style="font-size:0.8em;color:gray">{{item.latencia}}</span><br>
-																			<span class="description-text">Range: Min|M&aacute;x: {{item.rangeMin}} | {{item.rangeMax}} </span><br>	
-																			<jsp:include page="controls/reduzMeters.jsp"/>
+																			<span class="description-text">Limites do Dispositivo: </span>{{item.rangeMin}} a {{item.rangeMax}}
+																			<span style="vertical-align:super;font-size:0.8em;color:gray" data-ng-bind="getMeters(item.unitMeterGases)"></span>
+																			<hr style="margin-top: 0px; margin-bottom: 0px; margin-left: 50px; margin-right: 50px; border-top-color: lightgray">
+																			<span class="description-text">Lat&ecirc;ncia: </span> <span style="font-size:0.9em;color:gray">{{item.latencia}}</span>
 																		</div>																		
 																	</div>																	
 																		
 																	<ul class="list-group">																		
-																		<li class="list-group-item" style="padding: 2px 15px;">
-																			<label>Alarme Associado:</label> {{item.alarmName}} <span data-ng-if="!item.alarmOn">Nenhum</span>
+																		<li class="list-group-item" style="padding: 0px 15px;">
+																			<label>Identificador:</label><span class="pull-right">{{item.uid}}</span>
 																		</li>
-																		<li class="list-group-item list-group-item-secondary" style="padding: 2px 15px;">																			
+																		<li class="list-group-item" style="padding: 0px 15px;">
+																			<label>Alarme Associado:</label><span class="pull-right">{{item.alarmName}}</span><span class="pull-right" data-ng-if="!item.alarmOn">Nenhum</span>
+																		</li>
+																		<li class="list-group-item list-group-item-secondary" style="padding: 0px 15px;">																			
 																			<span class="badge" data-ng-if="item.alarm11"><i class="fa fa-angle-left"></i> {{item.alarm11}}</span>
 																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm1}}</span>
-																			 <label>Alarme1:</label> Detec&ccedil;&atilde;o
+																				<label>Alarme1:</label> Detec&ccedil;&atilde;o
 																		</li>
-																		<li class="list-group-item list-group-item-warning" style="padding: 2px 15px;">
+																		<li class="list-group-item list-group-item-warning" style="padding: 0px 15px;">
 																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm2}}</span> <label>Alarme2:</label> Alerta
 																		</li>
-																		<li class="list-group-item list-group-item-danger" style="padding: 2px 15px;">
+																		<li class="list-group-item list-group-item-danger" style="padding: 0px 15px;">
 																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm3}}</span> <label>Alarme3:</label> Evacua&ccedil;&atilde;o:
 																		</li>
 																	</ul>

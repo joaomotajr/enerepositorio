@@ -137,8 +137,7 @@
 											<table class="zui-table" id="dashboard" style="font-size:95%;">
 												<thead>
 													<tr>														
-														<th>&nbsp;&nbsp;<i class="fa fa-tags" style="font-size:1.2em;"></i>&nbsp;</th>
-														<!-- <th>ID</th> -->
+														<th>&nbsp;&nbsp;<i class="fa fa-tags" style="font-size:1.2em;"></i>&nbsp;</th>														
 														<th>
 															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('companyName')">
 																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
@@ -160,7 +159,7 @@
 														</th>
 														<th>Status</th>
 														<th>Comunica&ccedil;&atilde;o</th>
-														<th>Valor</th>
+														<th>Medi&ccedil;&atilde;o</th>
 														<th style="text-align: center;"><i class="fa fa-bar-chart"></i></th>
 													</tr>
 												</thead>
@@ -172,14 +171,18 @@
 														<td>
 															<jsp:include page="controls/reduzMeters.jsp"/>
 														</td>													
-														<td> 
-															<span class="label" style="font-size:50%" data-ng-class="{																	
-																'label-primary' : item.alarmType=='OFF' || item.alarmType=='WITHOUT', 
+														<td style="text-shadow:  0px 20px 20px #999;"> 
+															<span class="label" style="font-size:65%" data-ng-class="{																	
+																'label-primary' : item.alarmType=='WITHOUT', 
+																'label-info' : item.alarmType=='OFF',
 																'label-offline' : item.alarmType=='OFFLINE',
 																'label-success' : item.alarmType=='NORMAL', 
 																'label-warning' : item.alarmType=='ALERTA', 
 																'label-default' : item.alarmType=='DETECCAO', 
-																'label-danger' : item.alarmType=='EVACUACAO'}"> {{item.alarmType}} 
+																'label-danger' : item.alarmType=='EVACUACAO'}">
+																<span data-ng-if="item.alarmType=='WITHOUT'">S/ ALARME</span>
+																<span data-ng-if="item.alarmType=='OFF'">ALARME OFF</span>
+																<span data-ng-if="item.alarmType!='WITHOUT' && item.alarmType!='OFF'">{{item.alarmType}}</span>																  
 															</span>
 														</td>
 														<td><label title="{{item.lastUpdateFull | date:'dd/MM/yyyy HH:mm'}}">&agrave; {{item.lastUpdate}}</label></td>

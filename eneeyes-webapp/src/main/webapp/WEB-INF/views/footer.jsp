@@ -45,6 +45,7 @@
 	<script type="text/javascript" src="/assets/plugins/fusioncharts/fusioncharts.js"></script>
 	<script type="text/javascript" src="/assets/plugins/fusioncharts/angular-fusioncharts.min.js"></script>
 	<script type="text/javascript" src="/assets/plugins/fusioncharts/themes/fusioncharts.theme.fint.js"></script>
+	<script type="text/javascript" src="/assets/plugins/fusioncharts/themes/fusioncharts.theme.ocean.js"></script>
 	
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>

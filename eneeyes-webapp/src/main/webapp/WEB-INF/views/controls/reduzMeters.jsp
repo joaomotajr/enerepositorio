@@ -10,15 +10,19 @@
 <span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
 <span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases=='PERCENT_VOLUME'"> VOL%</span>
 <span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases=='GRAUS_CELSIUS'"> °C</span>
-<span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases=='M3_HOUR'"> m³/hora</span>
+<span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases=='M3_HOUR'"> m³ / Hora</span>
 <span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases=='M3'"> m³</span>
+<span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases=='METERS'"> metros</span>
+<span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-if="item.unitMeterGases=='SECOND'"> segs</span>
 <span style="vertical-align:super;font-size:0.6em;color:gray" 
     data-ng-if="item.unitMeterGases!='M3_HOUR' && 
                 item.unitMeterGases!='M3' &&
                 item.unitMeterGases!='LEL_PERCENT' && 
                 item.unitMeterGases!='PERCENT_VOLUME' && 
                 item.unitMeterGases!='GRAUS_CELSIUS' && 
-                item.unitMeterGases!='LEL_PERCENT_METRO'">{{item.unitMeterGases}}</span>
+                item.unitMeterGases!='LEL_PERCENT_METRO' &&
+                item.unitMeterGases!='METERS' &&
+                item.unitMeterGases!='SECOND'">{{item.unitMeterGases}}</span>
 
 
 

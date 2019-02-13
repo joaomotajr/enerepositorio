@@ -241,8 +241,7 @@
 															
 																<div class="col-md-2" style="padding-right: 5px !important">
 																	<div class="form-group">
-																		<label class="control-label">Alarme 1 <span class="label label-default" style="font-size: 0.5em"> DETEC&Ccedil;&Atilde;O </span></label>
-																		
+																		<label class="control-label">Alarme 1 <span class="label label-default" style="font-size: 0.5em"> DETEC&Ccedil;&Atilde;O </span></label>																		
 																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm1.$invalid && !userForm.alarmAlarm1.$pristine || errorAlarm1}" 
 																			style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
 																			<input type="text" class="form-control" name="alarmAlarm1" 
@@ -513,7 +512,7 @@
 																</div>
 																<div class="travarAction">            
 																	<div class="col-md-10" style="padding-left: 5px !important;">								                                        
-																		<div class="entry input-group" id="">
+																		<div class="entry input-group">
 																			<span class="input-group-addon btn-add text-white bg-gray"><i class="fa fa-bullhorn">&nbsp;</i>Alarme 1</span>  					
 																			<textarea class="form-control" rows="1" data-ng-model="action1" placeholder="Provid&ecirc;ncias do Agente de Monitoramento se Houver alarme n&iacute;vel 1 (Detec&ccedil;&atilde;)" maxlength="250"></textarea>																				                                   						
 																		</div>

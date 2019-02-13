@@ -81,7 +81,7 @@
 									
 									<div data-ng-class="{'has-error': genericForm.deviceType.$dirty && genericForm.deviceType.$invalid}">               							                									
 										<select name="deviceType" class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-											data-ng-options="item as item.type for item in deviceTypes | orderBy: 'type' track by item.uid" 
+											data-ng-options="item as item.description for item in deviceTypes | orderBy: 'type' track by item.uid" 
 											data-ng-model="deviceType" required>
 											<option value="">Selecione</option> 
 										</select>							

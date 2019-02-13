@@ -69,7 +69,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 			    value: $scope.sumary.normal,
 			    color: "#00a65a",
 			    highlight: "#00a65a",
-			    label: "Operacional(is)"
+			    label: "Operação"
 			  },
 		    {
 		      value: $scope.sumary.offLine,
@@ -81,7 +81,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		      value: $scope.sumary.alarm3,
 		      color: "#dd4b39",
 		      highlight: "#dd4b39",
-		      label: "Evacucao"
+		      label: "Evacução"
 		    },
 		    {
 		      value: $scope.sumary.alarm2,
@@ -93,13 +93,13 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		      value: $scope.sumary.alarm1,
 		      color: "#d2d6de",
 		      highlight: "#d2d6de",
-		      label: "Deteccao"
+		      label: "Detecção"
 		    },
 		    {
 		      value: $scope.sumary.turnOff,
 		      color: "#72afd2",
 		      highlight: "#72afd2",
-		      label: "Turn Off"
+		      label: "S/Alarme"
 		    }
 		  ];
 	}

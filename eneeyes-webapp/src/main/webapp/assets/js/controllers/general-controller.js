@@ -60,39 +60,28 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			$scope.selectedArea.list.forEach(
 					function(e) {						
 					e.dataSource = $scope.getGaugeInfo(e);
-					if (e.deviceType.graphicType == "THERMOMETERDISPLAY") {
-						e.dataType = "thermometer";
-						e.width=300;
-						e.height=200;
-					} else if(e.deviceType.graphicType == "BULBINDICATOR") {
-						e.dataType = "bulb";
-						e.width=300;
-						e.height=200;
-					} else if(e.deviceType.graphicType == "LINEARSCALE") {
-						e.dataType = "hlineargauge";
-						e.width=300;
-						e.height=200;
-					} else if(e.deviceType.graphicType == "CYLINDERFILL") {
-						e.dataType = "cylinder";						
-						e.width=200;
-						e.height=350;
-					} else if(e.deviceType.graphicType == "RATINGMETER") {
-						e.dataType = "angulargauge";
-						e.width=300;
-						e.height=200;
-					} else if(e.deviceType.graphicType == "VBULLET") {
-						e.dataType = "vbullet";
-						e.width=300;
-						e.height=150;
-					} else if(e.deviceType.graphicType == "SPEEDOMETER") {
-						e.dataType = "angulargauge";
-						
-					}			
+					e.dataType = selectGraphicType(e.deviceType.graphicType);
 				});
 
 			 initGaugeTimer();
 		});
-	}	
+	};
+
+	function selectGraphicType(gp) {
+		if (gp == "THERMOMETERDISPLAY") {
+			return "thermometer";			
+		} else if(gp == "BULBINDICATOR") {
+			return "bulb";			
+		} else if(gp == "LINEARSCALE") {
+			return "hlineargauge";						
+		} else if(gp == "CYLINDERFILL") {
+			return "cylinder";			
+		} else if(gp == "VBULLET") {
+			return "vbullet";			
+		} else if(gp == "RATINGMETER" || gp == "SPEEDOMETER" || gp == "QUARTERGAUGE" || gp == "LINEARSCALE") {
+			return "angulargauge";
+		}
+	}
 			
 	initGaugeTimer = function() {
 		intervals.push( $interval(function(){
@@ -161,40 +150,20 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		};
 
 		colors = {				
-			color: [
-			{
-				minValue: e.rangeMin,
-				maxValue: orange,
-				code: "##6baa01",
-				label: (e.deviceType.type == "TIME" ? "Fechada" : "")
-			}, {
-				minValue: orange,
-				maxValue: yellow,
-				code: "#D8D8D8",
-				label: (e.deviceType.type == "TIME" ? "Aberta" : "")
-			}, {
-				minValue: yellow,
-				maxValue: red,
-				code: "#f8bd19",
-				label: (e.deviceType.type == "TIME" ? "Aberta" : "")
-			}, {
-				minValue: red,
-				maxValue: e.rangeMax,
-				code: "#e44a00",
-				label: (e.deviceType.type == "TIME" ? "Aberta" : "")
-			}]		
+			color: 
+				[{
+					minValue: e.rangeMin, maxValue: orange, code: "##6baa01", label: (e.deviceType.type == "TIME" ? "Fechada" : "")
+				}, {
+					minValue: orange, maxValue: yellow, code: "#D8D8D8", label: (e.deviceType.type == "TIME" ? "Aberta" : "")
+				}, {
+					minValue: yellow, maxValue: red, code: "#f8bd19", label: (e.deviceType.type == "TIME" ? "Aberta" : "")
+				}, { 
+					minValue: red, maxValue: e.rangeMax, code: "#e44a00", label: (e.deviceType.type == "TIME" ? "Aberta" : "")
+				}]		
 		};
 
 		var value = e.lastValue > e.rangeMax ? e.rangeMax : e.lastValue;
-		values = {		  		  			
-			dial: [{
-				id: "crntYr",
-				value: value,
-				showValue: "1",
-				tooltext: "Status : $value",				
-				rearExtension: "5"
-			}]			
-		};
+		values = { dial: [{ id: "crntYr", value: value, showValue: "1", tooltext: "Status : $value", rearExtension: "5" }]};
 
 		pointers = {pointer: [{value: value	}]};
 		dataSource = { chart: null, colorRange: null, dials: null};		
@@ -203,37 +172,59 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		dataSource.dials = values;
 
 		if(e.deviceType.graphicType == "THERMOMETERDISPLAY") {
+			dataSource.chart.gaugeFillMix = "{dark-30},{light-60},{dark-10}";
+			dataSource.chart.width=300;
+			dataSource.chart.height=200;
 			dataSource.value = value;
 			dataSource.annotations = {showbelow: 0};
 		} else if(e.deviceType.graphicType == "BULBINDICATOR") {
+			dataSource.chart.width=300;
+			dataSource.chart.height=200;
 			dataSource.chart.placeValuesInside=1;
 			dataSource.value = value;
 			dataSource.annotations = {showbelow: 1};			
 		} else if(e.deviceType.graphicType == "LINEARSCALE") {			
 			 dataSource.annotations = {showbelow: 1};			 
 			 dataSource.pointers = {pointer: [{value: value	}]};
-		} else if(e.deviceType.graphicType == "CYLINDERFILL") {			
-		} else if(e.deviceType.graphicType == "VBULLET") {			
+		} else if(e.deviceType.graphicType == "CYLINDERFILL") {		
+			dataSource.chart.gaugeFillMix = "{dark-30},{light-60},{dark-10}";
+			dataSource.chart.width =200;
+			dataSource.chart.height = 350;	
+		} else if(e.deviceType.graphicType == "VBULLET") {				
 	   	} else if(e.deviceType.graphicType == "RATINGMETER") {			
 			dataSource.chart.gaugeFillMix = "{dark-30},{light-60},{dark-10}";
+			dataSource.chart.origw = "300";
+			dataSource.chart.origh =  "200";
 			dataSource.chart.gaugeFillRatio = "15";
 			dataSource.chart.gaugeouterradius = "120";
 			dataSource.chart.gaugeinnerradius = "65%";
 		} else if(e.deviceType.graphicType == "SPEEDOMETER") {
+			dataSource.chart.gaugeFillMix = "{dark-30},{light-60},{dark-10}";
 			dataSource.chart.captionpadding = "35";
 			dataSource.chart.origw = "335";
 			dataSource.chart.origh =  "335";
-			dataSource.chart.gaugeinnerradius = "70%";
+			dataSource.chart.gaugeinnerradius = "65%";
 			dataSource.chart.gaugeouterradius = "120";
 			dataSource.chart.gaugestartangle = "270";
 			dataSource.chart.gaugeendangle = "-25";			
 			dataSource.chart.valuefontsize = "14";			
 			dataSource.chart.majortmnumber = "13";							
 			dataSource.chart.minortmnumber = "1";
+		} else if(e.deviceType.graphicType == "QUARTERGAUGE") {
+			dataSource.chart.gaugeFillMix = "{dark-30},{light-60},{dark-10}";
+			dataSource.chart.captionontop = "0";
+			dataSource.chart.origw = "380";
+			dataSource.chart.origh =  "250";			
+			dataSource.chart.gaugeinnerradius = "70%";
+			dataSource.chart.gaugeouterradius = "190";
+			dataSource.chart.gaugestartangle = "135";
+			dataSource.chart.gaugeoriginx = "190";
+			dataSource.chart.gaugeoriginy = "220";
+			dataSource.chart.gaugeendangle = "45";			
+			dataSource.chart.valuefontsize = "12";			
 		}
 
 		dataSource.chart.numberSuffix = $scope.getMeters(e.unitMeterGases);
-
 		return dataSource;
 	};		
 

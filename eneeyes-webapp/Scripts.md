@@ -84,17 +84,16 @@ set @DATA := now() - interval 12 hour;
 
 insert into historic_a values (NULL, 9,  @DATA, 3, 100);
 
-
-INSERT INTO device_type values (0,'OUTROS','Outros','fa-exclamation-triangle',3);
-INSERT INTO device_type values (1,'DETECTOR','Detector','fa-th-large',4);
-INSERT INTO device_type values (2,'PLC','PLC','fa-laptop',4);
-INSERT INTO device_type values (3,'CONTROLLER','Controladora','fa-server',0);
-INSERT INTO device_type values (4,'ALARM','Alarme','fa-bullhorn',4);
-INSERT INTO device_type values (5,'BLOCKER','Bloqueador','fa-stop',0);
-INSERT INTO device_type values (6,'ELETRICITY','Eletricidade','fa-plug',2);
-INSERT INTO device_type values (7,'TIME','Tempo','fa-clock-o',0);
-INSERT INTO device_type values (8,'THERMOMETER','Temperatura','fa-thermometer',6);
-INSERT INTO device_type values (9,'DIGITAL','Digital','fa-flash',0);
-INSERT INTO device_type values (11,'VOLUME','Volume','fa-flask',8);
-INSERT INTO device_type values (12,'PRESSURE','Pressão','fa-compress',5);
-INSERT INTO device_type values (13,'FLOW','Vazão','fa-database',1);
+INSERT INTO device_type (uid, type, descritpion, symbol, ghaphicType)  values (0,'OUTROS','Outros','fa-exclamation-triangle',3);
+INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (1,'DETECTOR','Detector','fa-th-large',4);
+INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (2,'PLC','PLC','fa-laptop',4);
+INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (3,'CONTROLLER','Controladora','fa-server',0);
+INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (4,'ALARM','Alarme','fa-bullhorn',4);
+INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (5,'BLOCKER','Bloqueador','fa-stop',0);
+INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (6,'ELETRICITY','Eletricidade','fa-plug',2);
+INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (7,'TIME','Tempo','fa-clock-o',0);
+INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (8,'THERMOMETER','Temperatura','fa-thermometer',6);
+INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (9,'DIGITAL','Digital','fa-flash',0);
+INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (11,'VOLUME','Volume','fa-flask',8);
+INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (12,'PRESSURE','Pressão','fa-compress',5);
+INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (13,'FLOW','Vazão','fa-database',1);

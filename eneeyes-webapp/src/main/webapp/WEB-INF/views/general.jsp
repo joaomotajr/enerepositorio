@@ -187,7 +187,7 @@
 																		<div style=" width: 100%; display: flex; justify-content: center; text-align: center;">																																						
 																			<div data-fusioncharts							
 																				data-width="300"
-																				data-height= "200"						    						    						    						    
+																				data-height= "220"						    						    						    						    
 																				data-type="{{item.dataType}}"
 																				data-theme= "ocean"
 																				data-datasource="{{item.dataSource}}">

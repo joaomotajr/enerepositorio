@@ -6,6 +6,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.eneeyes.archetype.web.result.ResultMessage;
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
 import br.com.eneeyes.main.dto.HistoricDto;
 import br.com.eneeyes.main.model.Position;
@@ -58,6 +59,40 @@ public class HistoricService implements IService<HistoricDto> {
 			}	
 		}
 		return ret;
+	}
+	
+	public ResultMessage saveByPositionIOT(Long uid, String strValue) {
+		
+		BigDecimal value = new BigDecimal(strValue);		
+		value = value.divide(new BigDecimal(100000));
+		
+		ResultMessage rs = new ResultMessage();
+		rs.setMessage("PROCESSADO");
+						
+		Position position = positionService.findByUid(uid);
+		
+		if (position != null ) {	
+			Historic historic = new Historic();
+
+			historic.setCompanyDeviceId(position.getCompanyDevice().getUid());
+			historic.setLastUpdate(new Date());
+			historic.setValue(value);
+			historic.setLogOrigem(LogOrigem.DEVICE);
+			
+			repository.save(historic);
+		
+			try {
+				processAlarmService.Execute(historic);
+				rs.setType(ResultMessageType.SUCCESS);
+				
+			} catch (Exception e) {
+				rs.setType(ResultMessageType.ERROR);				
+			}	
+		} else {
+			rs.setType(ResultMessageType.NO_DATA);
+		}		
+		
+		return rs;
 	}
 		
 	public Historic saveByPosition(Position position) {

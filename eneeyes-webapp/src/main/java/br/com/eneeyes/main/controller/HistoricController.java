@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.eneeyes.archetype.web.result.ResultMessage;
 import br.com.eneeyes.main.dto.HistoricDto;
 import br.com.eneeyes.main.result.BasicResult;
 import br.com.eneeyes.main.service.historic.HistoricService;
@@ -24,6 +25,13 @@ public class HistoricController {
 	public Boolean saveByPositionUid2(@PathVariable Long uid, @PathVariable String value) {
 		
 		return service.saveByPositionUid(uid, value);
+	}
+	
+	@RequestMapping(value="/api/historic/SaveByPositionIOT/{uid}/{value}", method=RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public ResultMessage saveByPositionIOT(@PathVariable Long uid, @PathVariable String value) {
+		
+		return service.saveByPositionIOT(uid, value);
 	}
 	
 	@RequestMapping(value="/api/historic/SaveByPositionUid/{uid}/{value}", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")

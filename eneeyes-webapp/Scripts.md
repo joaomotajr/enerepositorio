@@ -97,3 +97,9 @@ INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (9
 INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (11,'VOLUME','Volume','fa-flask',8);
 INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (12,'PRESSURE','Pressão','fa-compress',5);
 INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (13,'FLOW','Vazão','fa-database',1);
+
+update company_device set DEVICE_TYPE_ID = device_type;
+alter table company_device drop column device_type;
+
+update generic set DEVICE_TYPE_ID = device_type;
+alter table generic drop column device_type

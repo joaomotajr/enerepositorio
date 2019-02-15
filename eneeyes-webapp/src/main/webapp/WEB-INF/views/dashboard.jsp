@@ -1,3 +1,4 @@
+
 <style>
 	.small-box>.icon {
 		top: 5px ! important;
@@ -42,22 +43,150 @@
 
 	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
 		padding: 4px !important;
+	}
+
+
+	.info-box-min {
+		min-height: 80px;
+	}
+
+	.info-box-content-min {
+		margin-left: 70px;
+		padding-bottom: 8px;
+	}
+
+	.info-box-icon-min {
+		height: 90px;
+    	width: 70px;
+		line-height: 80px;
+		line-height: 80px;
+	}
+
+	.info-box-icon-min>i {
+		padding-top: 25%;
+		font-size: 35px;
 	}		
+
+	.col-lg-6, .col-xs-6 {
+		padding-right: 5px;
+    	padding-left: 5px;
+	}
+
+	.bg-blackness {
+		background-color: #444343;
+	}
 </style>
  	
 <div data-ng-controller="dashController">
 	<div class="row" style="font-family: Helvetica Neue, Arial;">
 		<div class="col-md-12">
 
-			<div class="box box-primary">				  
+			<div class="box box-primary">
 				
 				<div class="box-body">
 					<div class="row">
-						<div class="col-lg-2 col-xs-6">								
+						<div class="col-lg-2 col-xs-6">
+							<div class="info-box info-box-min bg-aqua">
+								<span class="info-box-icon info-box-icon-min"><i class="fa fa-tv"></i></span>
+								<div class="info-box-content info-box-content-min">
+									<span class="info-box-text">Monitorados</span>
+									<span class="info-box-number" data-ng-bind="sumary.devices"></span>
+									<div class="progress">
+										<div class="progress-bar" style="width:100%"></div>
+									</div>
+									<span class="progress-description">
+										Todos Dispositivos
+									</span>
+								</div>
+							</div>											
+						</div>
+							
+						<div class="col-lg-2 col-xs-6">
+							<div class="info-box info-box-min bg-green">
+								<span class="info-box-icon info-box-icon-min"><i class="fa fa-check"></i></span>
+								<div class="info-box-content info-box-content-min">
+									<span class="info-box-text">Operacional</span>
+									<span class="info-box-number" data-ng-bind="sumary.normal.value"></span>
+									<div class="progress">
+											<div class="progress-bar" ng-style="{'width' : sumary.normal.percent + '%' }"></div>
+									</div>
+									<span class="progress-description">
+										Em Funcionamento
+									</span>
+								</div>
+							</div>						
+						</div>
+							
+						<div class="col-lg-2 col-xs-6">
+							<div class="info-box info-box-min bg-gray">
+								<span class="info-box-icon info-box-icon-min"><i class="fa fa-battery-quarter"></i></span>
+								<div class="info-box-content info-box-content-min">
+									<span class="info-box-text">Detec&ccedil;&atilde;o</span>
+									<span class="info-box-number" data-ng-bind="sumary.alarm1.value"></span>
+									<div class="progress">
+										<div class="progress-bar" ng-style="{'width' : sumary.alarm1.percent + '%' }"></div>
+									</div>
+									<span class="progress-description">
+										Alarme N&iacute;vel I
+									</span>
+								</div>
+							</div>						
+						</div>
+							
+						<div class="col-lg-2 col-xs-6">
+							<div class="info-box info-box-min bg-yellow">
+								<span class="info-box-icon info-box-icon-min"><i class="fa fa-battery-half"></i></span>
+								<div class="info-box-content info-box-content-min">
+									<span class="info-box-text">Alerta</span>
+									<span class="info-box-number" data-ng-bind="sumary.alarm2.value"></span>
+									<div class="progress">
+										<div class="progress-bar" ng-style="{'width' : sumary.alarm2.percent + '%' }"></div>
+									</div>
+									<span class="progress-description">
+										Alarme N&iacute;vel II
+									</span>
+								</div>
+							</div>						
+						</div>
+							
+						<div class="col-lg-2 col-xs-6">
+							<div class="info-box info-box-min bg-red">
+								<span class="info-box-icon info-box-icon-min"><i class="fa fa-battery-full"></i></span>
+								<div class="info-box-content info-box-content-min">
+									<span class="info-box-text">Evacua&ccedil;&atilde;o</span>
+									<span class="info-box-number" data-ng-bind="sumary.alarm3.value"></span>
+									<div class="progress">
+										<div class="progress-bar" ng-style="{'width' : sumary.alarm3.percent + '%' }"></div>
+									</div>
+									<span class="progress-description">
+										Alarme N&iacute;vel II
+									</span>
+								</div>
+							</div>						
+						</div>
+							
+						<div class="col-lg-2 col-xs-6">
+							<div class="info-box info-box-min bg-black bg-blackness">
+								<span class="info-box-icon info-box-icon-min"><i class="fa fa-battery-empty"></i></span>
+								<div class="info-box-content info-box-content-min">
+									<span class="info-box-text">Off Line</span>
+									<span class="info-box-number" data-ng-bind="sumary.offLine.value"></span>
+									<div class="progress">
+											<div class="progress-bar" ng-style="{'width' : sumary.offLine.percent + '%' }"></div>
+									</div>
+									<span class="progress-description">
+										Sem Comunica&ccedil;&atilde;o
+									</span>
+								</div>
+							</div>						
+						</div>							
+					</div>
+					<!-- <div class="row">														
+						<div class="col-lg-2 col-xs-6">
 							<div class="small-box bg-aqua">
 								<div class="inner">
 									<h3 data-ng-bind="sumary.devices"></h3>
-									<p>Monitorados</p>
+									<p>Monitorados</p>									
 								</div>
 								<div class="icon"><i class="fa fa-tv"></i></div>
 								<a href="#" data-ng-class="{'all': selectedStatusDashCompaniesPosition == 'ALL' }" data-ng-click="filterStatus('ALL')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
@@ -67,7 +196,7 @@
 						<div class="col-lg-2 col-xs-6">
 							<div class="small-box bg-green">
 								<div class="inner">
-									<h3 data-ng-bind="sumary.normal"></h3>
+									<h3 data-ng-bind="sumary.normal.value"></h3>
 									<p>Operacional</p>
 								</div>
 								<div class="icon"><i class="fa fa-check"></i></div>
@@ -78,7 +207,7 @@
 						<div class="col-lg-2 col-xs-6">
 							<div class="small-box bg-gray">
 								<div class="inner">
-									<h3 data-ng-bind="sumary.alarm1"></h3>
+									<h3 data-ng-bind="sumary.alarm1.value"></h3>
 									<p>Detec&ccedil;&atilde;o</p>
 								</div>
 								<div class="icon"><i class="fa fa-battery-quarter"></i></div>
@@ -86,10 +215,10 @@
 							</div>
 						</div>
 							
-						<div class="col-lg-2 col-xs-6">
+						<div class="col-lg-2 col-xs-6">					
 							<div class="small-box bg-yellow">
 								<div class="inner">
-									<h3 data-ng-bind="sumary.alarm2"></h3>
+									<h3 data-ng-bind="sumary.alarm2.value"></h3>
 									<p>Alerta</p>
 								</div>
 								<div class="icon"><i class="fa fa-battery-half"></i></div>
@@ -100,7 +229,7 @@
 						<div class="col-lg-2 col-xs-6">
 							<div class="small-box bg-red">
 								<div class="inner">
-									<h3 data-ng-bind="sumary.alarm3"></h3>
+									<h3 data-ng-bind="sumary.alarm3.value"></h3>
 									<p>Evacua&ccedil;&atilde;o</p>
 								</div>
 								<div class="icon"><i class="fa fa-battery-full"></i></div>
@@ -108,17 +237,17 @@
 							</div>
 						</div>
 							
-						<div class="col-lg-2 col-xs-6">
+						<div class="col-lg-2 col-xs-6">	
 							<div class="small-box bg-black">
 								<div class="inner">
-									<h3 data-ng-bind="sumary.offLine"></h3>
+									<h3 data-ng-bind="sumary.offLine.value"></h3>
 									<p>Off Line</p>
 								</div>
 								<div class="icon" style="color:white !important"><i class="fa fa-battery-empty"></i></div>
 								<a href="#" data-ng-class="{'off': selectedStatusDashCompaniesPosition == 'OFFLINE' }" data-ng-click="filterStatus('OFFLINE')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>							
-					</div>
+					</div> -->
 					<br>
 					<div class="row">
 						<div class="col-md-8">

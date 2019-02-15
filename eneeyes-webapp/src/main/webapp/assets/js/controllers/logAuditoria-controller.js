@@ -86,18 +86,14 @@ app.controller('logAuditoriaController', function ($scope, $timeout, $filter, $c
 			$timeout(function () {
 				if($scope.listPreDefLogs != null && $scope.listPreDefLogs.list.length > 0 )
 				{
-					lastPage = $scope.currentPage;
-					
+					lastPage = $scope.currentPage;					
 					$scope.listPages = range(Math.ceil($scope.listPreDefLogs.totalList / $scope.lenPage));
 					$scope.countPages = Math.ceil($scope.listPreDefLogs.totalList / $scope.lenPage);
 					$scope.countAuditoria = padZeros($scope.listPreDefLogs.totalList, 5);
 
-					$scope.logsAuditoria = $scope.listPreDefLogs.list
-					
+					$scope.logsAuditoria = $scope.listPreDefLogs.list;					
 				}
-
-				$scope.loading = false;					
-
+				$scope.loading = false;
 			}, 500);
        });		 
 	}

@@ -1,6 +1,6 @@
 app.filter('dashCompaniesPositionFilter', function () {
     return function (objects, criteria) {
-        var filterResult = new Array();
+        var filterResult = [];
 
         if (!criteria || criteria == 0 || criteria == 'ALL' )
             return objects;
@@ -64,44 +64,36 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		$scope.dataSource.chart.subCaption = "Atualizado " + time;
 
 		$scope.dataSource.data = 
-		  [
-			{
-			    value: $scope.sumary.normal,
+		 		[{
+					value: $scope.sumary.normal.value,
 			    color: "#00a65a",
 			    highlight: "#00a65a",
 			    label: "Operação"
-			  },
-		    {
-		      value: $scope.sumary.offLine,
+			  }, {
+					value: $scope.sumary.offLine.value,
 		      color: "#333",
 		      highlight: "#333",
 		      label: "Off Line"
-		    },	    
-		    {
-		      value: $scope.sumary.alarm3,
+		    }, {
+					value: $scope.sumary.alarm3.value,
 		      color: "#dd4b39",
 		      highlight: "#dd4b39",
 		      label: "Evacução"
-		    },
-		    {
-		      value: $scope.sumary.alarm2,
+		    }, {
+					value: $scope.sumary.alarm2.value,
 		      color: "#f39c12",
 		      highlight: "#f39c12",
 		      label: "Alerta"
-		    },
-		    {
-		      value: $scope.sumary.alarm1,
+		    }, {
+					value: $scope.sumary.alarm1.value,
 		      color: "#d2d6de",
 		      highlight: "#d2d6de",
 		      label: "Detecção"
-		    },
-		    {
-		      value: $scope.sumary.turnOff,
-		      color: "#72afd2",
+		    }, {
+					value: $scope.sumary.turnOff.value,
 		      highlight: "#72afd2",
 		      label: "S/Alarme"
-		    }
-		  ];
+		    }];
 	}
 	
 	$scope.dashCompaniesPosition = [];
@@ -119,8 +111,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 							 e.next = Math.ceil(Math.abs(new Date($scope.listAllDashDetectorsMaintenance.serverDate) - 
 									 new Date(e.last_date + e.maintenance_interval*24*60*60*1000)) / (1000 * 3600 * 24));
 							 e.final_date = new Date(e.last_date + e.maintenance_interval*24*60*60*1000);
-						 }
-						 else {
+						 } else {
 							 e.next = Math.ceil(Math.abs(new Date($scope.listAllDashDetectorsMaintenance.serverDate) - 
 									new Date(e.install_date + e.maintenance_interval*24*60*60*1000)) / (1000 * 3600 * 24));
 							 e.final_date = new Date(e.install_date + e.maintenance_interval*24*60*60*1000); 
@@ -129,8 +120,8 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 			 	);	
 			}			
 			$scope.loading = undefined;         	         	
-       });		 
-	}
+    });		 
+	};
 	
 	$scope.getCompaniesPosition = function() {		
 		$scope.loading = true;
@@ -151,32 +142,41 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					 $scope.dashCompaniesPosition[i].lastValue	= Math.round($scope.dashCompaniesPosition[i].lastValue * 100) / 100 ;
 					 $scope.dashCompaniesPosition[i].arrayValues = $scope.dashCompaniesPosition[i].arrayValues.substring(0, $scope.dashCompaniesPosition[i].arrayValues.lastIndexOf(","));				
 				 }
-				 
-				 $scope.sumary = { alarm1 : 0, alarm2 : 0, alarm3 : 0, normal : 0, devices: 0, offLine: 0, turnOff: 0 }			 
+
+				$scope.sumary = 
+					{
+						alarm1: {value: 0, percent: 0}, 
+						alarm2: {value: 0, percent: 0}, 
+						alarm3: {value: 0, percent: 0},
+						normal: {value: 0, percent: 0},
+						devices: {value: 0, percent: 0},
+						offLine: {value: 0, percent: 0},
+						turnOff: {value: 0, percent: 0} 
+				};
+
+				if ($scope.listAllDashCompaniesPosition.list)
+					$scope.sumary.devices = $scope.listAllDashCompaniesPosition.list.length;
 				 				
-				 $scope.listAllDashCompaniesPosition.list.forEach(
-					 function(e) {
-	
-						$scope.sumary.devices ++;
-						
+				$scope.listAllDashCompaniesPosition.list.forEach(
+					 function(e) {													
 						if ( e.alarmType == "OFF" || e.alarmType == "WITHOUT" ) {
-							// $scope.sumary.offLine ++;
-							$scope.sumary.turnOff ++;						
-						}
-						else if ( e.alarmType == "OFFLINE" ) {							 
-						     $scope.sumary.offLine ++;						 
-						}				
-						else if ( e.alarmType == "NORMAL") {							 
-						     $scope.sumary.normal ++;
-						}
-						else if ( e.alarmType == "DETECCAO") {
-							$scope.sumary.alarm1 ++;							 
-						}
-						else if ( e.alarmType == "ALERTA") {
-							$scope.sumary.alarm2 ++;							 
-						}
-						else if ( e.alarmType == "EVACUACAO") {
-							$scope.sumary.alarm3 ++;							 
+							$scope.sumary.turnOff.value ++;
+							$scope.sumary.turnOff.percent = ($scope.sumary.turnOff.value * 100) / $scope.sumary.devices;
+						} else if ( e.alarmType == "OFFLINE" ) {							 
+							$scope.sumary.offLine.value ++;
+							$scope.sumary.offLine.percent = ($scope.sumary.offLine.value * 100) / $scope.sumary.devices;
+						}	else if ( e.alarmType == "NORMAL") {							 
+							$scope.sumary.normal.value ++;
+							$scope.sumary.normal.percent = ($scope.sumary.normal.value * 100) / $scope.sumary.devices;
+						} else if ( e.alarmType == "DETECCAO") {
+							$scope.sumary.alarm1.value ++;
+							$scope.sumary.alarm1.percent = ($scope.sumary.alarm1.value * 100) / $scope.sumary.devices;
+						} else if ( e.alarmType == "ALERTA") {
+							$scope.sumary.alarm2.value ++;
+							$scope.sumary.alarm2.percent = ($scope.sumary.alarm2.value * 100) / $scope.sumary.devices;
+						} else if ( e.alarmType == "EVACUACAO") {
+							$scope.sumary.alarm3.value ++;
+							$scope.sumary.alarm3.percent = ($scope.sumary.alarm3.value * 100) / $scope.sumary.devices;
 						}
 					}			
 			 	);			 			 
@@ -216,6 +216,14 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		$scope.getCompaniesPosition();		
 		$scope.pesquisaUser();
 	}
+
+	$interval(function() {
+		if($scope.$root == null) return;
+		
+		if($scope.$root.currentPage == "Dashboard" && $scope.$root.errorTimes <= 5) {
+			$scope.getCompaniesPosition();  		
+		}
+	}, 10000);
 	
 	$scope.refreshDashboard();
 	$scope.getDetectorsMaintenance();	

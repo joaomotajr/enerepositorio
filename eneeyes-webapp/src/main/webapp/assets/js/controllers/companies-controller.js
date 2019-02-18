@@ -187,7 +187,8 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 	 };
 
 	 function getDevices(detalhe) {
-		device = "<span title=" + detalhe.deviceType.description + "><i class='fa " + detalhe.deviceType.symbol + "' style='font-size:1.2em;'></i> </span>";
+		device = "<span title=" + detalhe.deviceType.type + "><i class='fa " + detalhe.deviceType.symbol + "' style='font-size:1.2em;'></i></span>" +
+		"&nbsp;<span style='font-weight: 600; font-family: Helvetica Neue,Helvetica,Arial,sans-serif'>" + detalhe.deviceType.description + "</span>";
 		if (detalhe.name == undefined)
 			device += "<small class='label label-danger pull-right' style='vertical-align:super;font-size:0.7em'>SEM ID</small>";
 		else				

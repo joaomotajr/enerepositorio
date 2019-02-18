@@ -1,3 +1,8 @@
+<style>
+	.list-group-item {
+		padding-right: 5px !important;
+	}
+</style>
 <div data-ng-controller="companiesController">
 	<div class="row">
 	    <div class="col-md-12">	    				

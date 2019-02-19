@@ -18,7 +18,13 @@
 	    </style>
 	    
 	    <!-- Tell the browser to be responsive to screen width -->
-	    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		
+		<!-- Theme style -->
+	    <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
+	     
+	    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+	    <link rel="stylesheet" href="/assets/css/skins/_all-skins.min.css">
 	    	    	    
 	    <!-- Bootstrap 3.3.5 -->
 	    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
@@ -32,13 +38,7 @@
 		<link rel="stylesheet" href="/assets/plugins/datatables/select.dataTables.min.css">
 			   
 	    <!-- Font Awesome -->
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	    	    
-	    <!-- Theme style -->
-	    <link rel="stylesheet" href="/assets/css/AdminLTE.min.css">
-	     
-	    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
-	    <link rel="stylesheet" href="/assets/css/skins/_all-skins.min.css">
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">	    
 	    	    
 	    <!-- Date Picker -->
 	    <link rel="stylesheet" href="/assets/plugins/datepicker/datepicker.css">
@@ -91,7 +91,7 @@
 						<audio id="alarmSound" src="/assets/img/alert_01.mp3" preload="auto"></audio>
 						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning" data-ng-bind="dashCompaniesAlarmResults.length"></span></a>						
 						<ul class="dropdown-menu">
-							<li class="header text-center">Você tem <b data-ng-bind="dashCompaniesAlarm.length"></b> Alarmes Pendentes</li>
+							<li class="header text-center">Vocï¿½ tem <b data-ng-bind="dashCompaniesAlarm.length"></b> Alarmes Pendentes</li>
 							<hr style="margin-top: 2px !important; margin-bottom: 2px !important;">
 							<li>
 								<div style="max-height: 250px; height:auto; overflow: auto">

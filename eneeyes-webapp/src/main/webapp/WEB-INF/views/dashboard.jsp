@@ -14,37 +14,48 @@
 	.all {
 		background: white !important;
 		color: #00c0ef !important;
+		border-style: solid;
+    	border-color:#00c0ef !important;
 	}
 	
 	.normal {
 		background: white !important;
 		color: #00a65a !important;
+		border-style: solid;
+    	border-color:#00a65a !important;
 	}
 	
 	.deteccao {
 		background: white !important;
 		color: gray !important;
+		border-style: solid;
+    	border-color:gray !important;
 	}
 	
 	.alerta {
 		background: white !important;
 		color: #f39c12 !important;
+		border-style: solid;
+    	border-color:#f39c12 !important;
 	}
 	
 	.evacuacao {
 		background: white !important;
 		color: #dd4b39 !important;
+		border-style: solid;
+    	border-color: #dd4b39 !important;
 	}
 	
 	.off {
 		background: white !important;
 		color: black !important;
+		border-style: solid;
+    	border-color: black !important;
 	}		
 
 	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
 		padding: 4px !important;
 	}
-
 
 	.info-box-min {
 		min-height: 80px;
@@ -87,14 +98,14 @@
 					<div class="row">
 						<div class="col-lg-2 col-xs-6">
 							<div class="info-box info-box-min bg-aqua">
-								<span class="info-box-icon info-box-icon-min"><i class="fa fa-tv"></i></span>
+								<span class="info-box-icon info-box-icon-min cursor" data-ng-class="{'all': selectedStatusDashCompaniesPosition == 'ALL' }" data-ng-click="filterStatus('ALL')"><i class="fa fa-tv"></i></span>
 								<div class="info-box-content info-box-content-min">
 									<span class="info-box-text">Monitorados</span>
 									<span class="info-box-number" data-ng-bind="sumary.devices"></span>
 									<div class="progress">
 										<div class="progress-bar" style="width:100%"></div>
 									</div>
-									<span class="progress-description">
+									<span class="progress-description">											
 										Todos Dispositivos
 									</span>
 								</div>
@@ -103,12 +114,12 @@
 							
 						<div class="col-lg-2 col-xs-6">
 							<div class="info-box info-box-min bg-green">
-								<span class="info-box-icon info-box-icon-min"><i class="fa fa-check"></i></span>
+								<span class="info-box-icon info-box-icon-min cursor" data-ng-class="{'normal': selectedStatusDashCompaniesPosition == 'NORMAL' }" data-ng-click="filterStatus('NORMAL')"><i class="fa fa-check"></i></span>
 								<div class="info-box-content info-box-content-min">
 									<span class="info-box-text">Operacional</span>
 									<span class="info-box-number" data-ng-bind="sumary.normal.value"></span>
 									<div class="progress">
-											<div class="progress-bar" ng-style="{'width' : sumary.normal.percent + '%' }"></div>
+										<div class="progress-bar" ng-style="{'width' : sumary.normal.percent + '%' }"></div>
 									</div>
 									<span class="progress-description">
 										Em Funcionamento
@@ -119,7 +130,7 @@
 							
 						<div class="col-lg-2 col-xs-6">
 							<div class="info-box info-box-min bg-gray">
-								<span class="info-box-icon info-box-icon-min"><i class="fa fa-battery-quarter"></i></span>
+								<span class="info-box-icon info-box-icon-min cursor" data-ng-class="{'deteccao': selectedStatusDashCompaniesPosition == 'DETECCAO'}" data-ng-click="filterStatus('DETECCAO')"><i class="fa fa-battery-quarter"></i></span>
 								<div class="info-box-content info-box-content-min">
 									<span class="info-box-text">Detec&ccedil;&atilde;o</span>
 									<span class="info-box-number" data-ng-bind="sumary.alarm1.value"></span>
@@ -135,7 +146,7 @@
 							
 						<div class="col-lg-2 col-xs-6">
 							<div class="info-box info-box-min bg-yellow">
-								<span class="info-box-icon info-box-icon-min"><i class="fa fa-battery-half"></i></span>
+								<span class="info-box-icon info-box-icon-min cursor" data-ng-class="{'alerta': selectedStatusDashCompaniesPosition == 'ALERTA'}" data-ng-click="filterStatus('ALERTA')"><i class="fa fa-battery-half"></i></span>
 								<div class="info-box-content info-box-content-min">
 									<span class="info-box-text">Alerta</span>
 									<span class="info-box-number" data-ng-bind="sumary.alarm2.value"></span>
@@ -151,7 +162,7 @@
 							
 						<div class="col-lg-2 col-xs-6">
 							<div class="info-box info-box-min bg-red">
-								<span class="info-box-icon info-box-icon-min"><i class="fa fa-battery-full"></i></span>
+								<span class="info-box-icon info-box-icon-min cursor" data-ng-class="{'evacuacao': selectedStatusDashCompaniesPosition == 'EVACUACAO' }" data-ng-click="filterStatus('EVACUACAO')"><i class="fa fa-battery-full"></i></span>
 								<div class="info-box-content info-box-content-min">
 									<span class="info-box-text">Evacua&ccedil;&atilde;o</span>
 									<span class="info-box-number" data-ng-bind="sumary.alarm3.value"></span>
@@ -159,7 +170,7 @@
 										<div class="progress-bar" ng-style="{'width' : sumary.alarm3.percent + '%' }"></div>
 									</div>
 									<span class="progress-description">
-										Alarme N&iacute;vel II
+										Alarme N&iacute;vel III
 									</span>
 								</div>
 							</div>						
@@ -167,7 +178,7 @@
 							
 						<div class="col-lg-2 col-xs-6">
 							<div class="info-box info-box-min bg-black bg-blackness">
-								<span class="info-box-icon info-box-icon-min"><i class="fa fa-battery-empty"></i></span>
+								<span class="info-box-icon info-box-icon-min cursor" data-ng-class="{'off': selectedStatusDashCompaniesPosition == 'OFFLINE' }" data-ng-click="filterStatus('OFFLINE')"><i class="fa fa-battery-empty"></i></span>
 								<div class="info-box-content info-box-content-min">
 									<span class="info-box-text">Off Line</span>
 									<span class="info-box-number" data-ng-bind="sumary.offLine.value"></span>
@@ -263,10 +274,10 @@
 								<div class="box-body" style="padding: 4px !important;text-align: -webkit-center;">
 									<div class="table-responsive">
 										<div style="max-height: 500px; overflow: auto">
-											<table class="zui-table" id="dashboard" style="font-size:95%;">
+											<table class="table table-bordered" style="font-size:95%;">
 												<thead>
 													<tr>														
-														<th>&nbsp;&nbsp;<i class="fa fa-tags" style="font-size:1.2em;"></i>&nbsp;</th>														
+														<th style="text-align:center; vertical-align: middle;">&nbsp;&nbsp;<i class="fa fa-tags"></i></i>&nbsp;&nbsp;</th>
 														<th>
 															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('companyName')">
 																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
@@ -289,19 +300,19 @@
 														<th>Status</th>
 														<th>Comunica&ccedil;&atilde;o</th>
 														<th>Medi&ccedil;&atilde;o</th>
-														<th style="text-align: center;"><i class="fa fa-bar-chart"></i></th>
+														<th style="text-align: center; font-size:1.1em; vertical-align: middle;"><i class="fa fa-bar-chart"></i></th>
 													</tr>
 												</thead>
 												<tbody>
 													<tr data-ng-repeat="item in dashCompaniesPositionFiltered = (dashCompaniesPosition | dashCompaniesPositionFilter: selectedStatusDashCompaniesPosition) | orderBy: orderOptions">
-														<td>&nbsp;<strong><i class="fa" data-ng-class="item.deviceType.symbol" style="font-size:115%;"></i></strong>&nbsp;</td>														
+														<td style="text-align:center; vertical-align: middle; color: #575757;">&nbsp;&nbsp;<i class="fa" data-ng-class="item.deviceType.symbol" ></i>&nbsp;&nbsp;</td>
 														<td><span data-truncate="12" data-value="{{item.companyName}}"></span></td>
 														<td>{{item.companyDeviceName}}</td>
 														<td>
 															<jsp:include page="controls/reduzMeters.jsp"/>
 														</td>													
-														<td style="text-shadow:  0px 20px 20px #999;"> 
-															<span class="label" style="font-size:65%" data-ng-class="{																	
+														<td style="text-shadow:  0px 20px 20px #999;vertical-align: middle;"> 
+															<span class="label" style="font-size:65%;" data-ng-class="{																	
 																'label-primary' : item.alarmType=='WITHOUT', 
 																'label-info' : item.alarmType=='OFF',
 																'label-offline' : item.alarmType=='OFFLINE',

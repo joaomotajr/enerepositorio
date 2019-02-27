@@ -34,6 +34,13 @@ public class HistoricController {
 		return service.saveByPositionIOT(uid, value);
 	}
 	
+	@RequestMapping(value="/api/historic/SaveByPositionRetroIOT/{uid}/{value}/{date}", method=RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public ResultMessage saveByPositionRetroIOT(@PathVariable Long uid, @PathVariable String value, @PathVariable Long date) {
+		
+		return service.saveByPositionRetroIOT(uid, value, date);
+	}
+	
 	@RequestMapping(value="/api/historic/SaveByPositionUid/{uid}/{value}", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public Boolean saveByPositionUid(@PathVariable Long uid, @PathVariable String value) {

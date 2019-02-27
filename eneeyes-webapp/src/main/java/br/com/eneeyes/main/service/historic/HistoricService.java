@@ -94,6 +94,40 @@ public class HistoricService implements IService<HistoricDto> {
 		
 		return rs;
 	}
+	
+public ResultMessage saveByPositionRetroIOT(Long uid, String strValue, Long date) {
+		
+		BigDecimal value = new BigDecimal(strValue);		
+		value = value.divide(new BigDecimal(100000));
+		
+		ResultMessage rs = new ResultMessage();
+		rs.setMessage("PROCESSADO");
+						
+		Position position = positionService.findByUid(uid);
+		
+		if (position != null ) {	
+			Historic historic = new Historic();
+
+			historic.setCompanyDeviceId(position.getCompanyDevice().getUid());
+			historic.setLastUpdate(new Date(date));
+			historic.setValue(value);
+			historic.setLogOrigem(LogOrigem.DEVICE);
+			
+			repository.save(historic);
+		
+			try {
+				processAlarmService.Execute(historic);
+				rs.setType(ResultMessageType.SUCCESS);
+				
+			} catch (Exception e) {
+				rs.setType(ResultMessageType.ERROR);				
+			}	
+		} else {
+			rs.setType(ResultMessageType.NO_DATA);
+		}		
+		
+		return rs;
+	}
 		
 	public Historic saveByPosition(Position position) {
 		

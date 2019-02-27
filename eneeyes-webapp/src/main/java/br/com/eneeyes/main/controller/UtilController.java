@@ -34,5 +34,14 @@ public class UtilController {
 		return engine.eval(foo).toString();
 		
 	}
+	
+	@RequestMapping(value="/api/util/time", method=RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public UtilDateTime time() throws ScriptException {
+		
+		UtilDateTime udt = new UtilDateTime();		
+		return udt;	
+		 		
+	}
 
 }

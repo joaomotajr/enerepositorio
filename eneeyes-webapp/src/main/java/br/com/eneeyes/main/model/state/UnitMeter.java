@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.eneeyes.main.dto.state.UnitMeterDto;
+
 /**
  * Created by Junior on 06/06/2016.
  * Cadastro de PLC's e Controladoras
@@ -21,14 +23,20 @@ public class UnitMeter {
 	public UnitMeter() {
 		
 	}	
+	
+	public UnitMeter(UnitMeterDto dto) {
+		this.uid = dto.getUid();
+		this.meter = dto.getMeter();
+		this.description = dto.getDescription();
+	}
 		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UID")
 	private Long uid;
 	
-	@Column(name = "SIGLA", nullable = true)
-	String sigla;
+	@Column(name = "METER", nullable = true)
+	String meter;
 	
 	@Column(name = "DESCRIPTION", nullable = true)
 	private String description;
@@ -39,14 +47,14 @@ public class UnitMeter {
 
 	public void setUid(Long uid) {
 		this.uid = uid;
+	}	
+
+	public String getMeter() {
+		return meter;
 	}
 
-	public String getSigla() {
-		return sigla;
-	}
-
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setMeter(String meter) {
+		this.meter = meter;
 	}
 
 	public String getDescription() {
@@ -55,8 +63,7 @@ public class UnitMeter {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	
+	}	
 }
 
 

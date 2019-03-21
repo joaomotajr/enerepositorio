@@ -49,32 +49,26 @@
 						<h3 class="box-title">Cadastro / Edição</h3>
 					</div>
 					<div class="box-body">
-						<form class="form">					
-			                 							                                                                                                                                    
-							<div data-ng-class="{'has-error': gasNameExist=='true'}">
+						<form class="form">			                 							                                                                                                                                    
+							<div class="form-group" data-ng-class="{'has-error': gasNameExist=='true'}">
 								<label class="control-label">Nome</label>           
 								<span data-ng-show="gasNameExist">Gas já Existe</span>                                                             
 								<input data-ng-keydown="keypress($event)" id="idGasName" class="form-control inputProfile" placeholder="Nome do Gas"  data-ng-model="gasName">                                                                        
-							</div>
-		
+							</div>		
 							<div class="form-group">
 								<label class="control-label">Número CAS</label>                                                       
 								<input class="form-control inputProfile" placeholder="C A S"  data-ng-model="gasCas">                                                
-							</div>
-							
+							</div>							
 							<div class="form-group">
 								<label class="control-label">Fórmula</label>                                                       
 								<input class="form-control inputProfile" placeholder="Fórmula do Gás"  data-ng-model="gasFormula">                                                
-							</div>
-			                       			                 
-			            </form>	
-						
+							</div>			                       			                 
+			      </form>						
 						<div class="box-footer">
 							<button type="button"  data-ng-click="clearFormGas()" class="btn btn-default">Cancelar</button>                                                                
 							<button type="button"  data-ng-click="saveGas();" class="btn btn-primary" 
 								 data-ng-disabled="(gasName && gasCas && gasFormula) ? false : true">Salvar</button>								                                                                
-						</div>					      
-						
+						</div>						
 					</div>
 				</div>
 			</div>					

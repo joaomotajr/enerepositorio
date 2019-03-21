@@ -45,10 +45,10 @@ public class DeviceTypeService {
 	public BasicResult<?> save(DeviceTypeDto dto) {
 		
 		Result<DeviceTypeDto> result = new Result<DeviceTypeDto>();		
-		DeviceType manufacturer = new DeviceType(dto);		
-		manufacturer = repository.save(manufacturer);
+		DeviceType deviceType = new DeviceType(dto);		
+		deviceType = repository.save(deviceType);
 		
-		dto.setUid(manufacturer.getUid());				
+		dto.setUid(deviceType.getUid());				
 		result.setEntity(dto);
 		
 		result.setResultType( ResultMessageType.SUCCESS );

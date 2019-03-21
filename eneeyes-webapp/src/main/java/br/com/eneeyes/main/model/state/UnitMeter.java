@@ -26,8 +26,8 @@ public class UnitMeter {
 	
 	public UnitMeter(UnitMeterDto dto) {
 		this.uid = dto.getUid();
-		this.meter = dto.getMeter();
 		this.description = dto.getDescription();
+		this.symbol = dto.getSymbol();
 	}
 		
 	@Id
@@ -35,12 +35,12 @@ public class UnitMeter {
 	@Column(name = "UID")
 	private Long uid;
 	
-	@Column(name = "METER", nullable = true)
-	String meter;
-	
 	@Column(name = "DESCRIPTION", nullable = true)
-	private String description;
-
+	String description;
+	
+	@Column(name = "SYMBOL", nullable = false)
+	private String symbol;
+		
 	public Long getUid() {
 		return uid;
 	}
@@ -49,14 +49,6 @@ public class UnitMeter {
 		this.uid = uid;
 	}	
 
-	public String getMeter() {
-		return meter;
-	}
-
-	public void setMeter(String meter) {
-		this.meter = meter;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -64,6 +56,14 @@ public class UnitMeter {
 	public void setDescription(String description) {
 		this.description = description;
 	}	
+
+	public String getSymbol() {
+		return symbol;
+	}
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
+	}		
 }
 
 

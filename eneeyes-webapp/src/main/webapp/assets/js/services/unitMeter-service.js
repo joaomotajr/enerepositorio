@@ -1,6 +1,6 @@
 app.factory('UnitMeterService', function($resource){
     return {
-        listAllUnitMeter : $resource('/security/api/state/allUnitMeter',{},{
+        listAllUnitMeter : $resource('/security/api/state/UnitMeter/allUnitMeter',{},{
         	unitMeter : {method : 'GET'}
         }),
         deletaUnitMeter : $resource('/security/api/state/UnitMeter/delete/:id', {id: '@id'},{

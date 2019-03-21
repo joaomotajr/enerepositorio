@@ -63,7 +63,7 @@
 								<label class="control-label">Fórmula</label>                                                       
 								<input class="form-control inputProfile" placeholder="Fórmula do Gás"  data-ng-model="gasFormula">                                                
 							</div>			                       			                 
-			      </form>						
+			      		</form>
 						<div class="box-footer">
 							<button type="button"  data-ng-click="clearFormGas()" class="btn btn-default">Cancelar</button>                                                                
 							<button type="button"  data-ng-click="saveGas();" class="btn btn-primary" 

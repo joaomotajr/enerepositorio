@@ -101,6 +101,7 @@
 	<script src="/assets/js/controllers/fusioncharts-controller.js"></script>	            
 	<script src="/assets/js/controllers/general-controller.js"></script>
 	<script src="/assets/js/controllers/generic-controller.js"></script>
+	<script src="/assets/js/controllers/unitMeter-controller.js"></script>
 	<script src="/assets/js/controllers/deviceType-controller.js"></script>
 				
 	<!-- PAGE LEVEL SERVICES -->

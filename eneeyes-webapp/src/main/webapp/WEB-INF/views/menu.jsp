@@ -94,6 +94,7 @@
 			                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('sensors.html','Sensores')"><i class="fa fa-feed"></i> Sensores</a></li>			                    
 								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('gases.html', 'Gases')"><i class="fa fa-yelp"></i> Gases</a></li>
 								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('deviceType.html', 'Dipositivos')"><i class="fa fa-microchip"></i> Dispositivos</a></li>
+								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('unitMeter.html', 'Unidades')"><i class="fa fa-balance-scale"></i> Unidades</a></li>
 			              	</ul>
 			            </li> 
 			            <li><a href="#" data-ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn"></i> Alarmes</a></li>

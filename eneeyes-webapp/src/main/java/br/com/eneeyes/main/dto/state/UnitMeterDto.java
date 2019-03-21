@@ -4,17 +4,17 @@ import br.com.eneeyes.main.model.state.UnitMeter;
 
 public class UnitMeterDto {
 	private Long uid;
-	private String meter;
 	private String description;
-		
+	private String symbol;
+			
 	public UnitMeterDto() {
 		
 	}
 	
 	public UnitMeterDto(UnitMeter e) {		
 		this.uid = e.getUid();
-		this.meter = e.getMeter();
-		this.description = e.getDescription();		
+		this.description = e.getDescription();
+		this.symbol = e.getSymbol();		
 	}
 
 	public final Long getUid() {
@@ -25,20 +25,19 @@ public class UnitMeterDto {
 		this.uid = uid;
 	}
 
-	public String getMeter() {
-		return meter;
-	}
-
-	public void setMeter(String meter) {
-		this.meter = meter;
-	}
-
 	public String getDescription() {
 		return description;
+	}
+	
+	public String getSymbol() {
+		return symbol;
+	}
+	
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-		
+	}		
 }

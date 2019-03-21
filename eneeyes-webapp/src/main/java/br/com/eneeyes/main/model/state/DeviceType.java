@@ -29,7 +29,7 @@ public class DeviceType {
 		this.uid = dto.getUid();
 		this.type = dto.getType();	
 		this.description = dto.getDescription();
-		this.symbol = dto.getSymbol();		
+		this.symbol = dto.getSymbol();
 		this.graphicType = dto.getGraphicType();
 	}
 		

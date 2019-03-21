@@ -1,4 +1,4 @@
-app.controller('genericController', function ($scope, $timeout, DeviceTypeService, GenericService, ManufacturerService) {
+app.controller('genericController', function ($scope, $timeout, DeviceTypeService, UnitMeterService, GenericService, ManufacturerService) {
 	
 	$scope.saveGeneric = function() {
 
@@ -13,8 +13,8 @@ app.controller('genericController', function ($scope, $timeout, DeviceTypeServic
 		var generic = {
 			uid: $scope.genericUid != undefined ? $scope.genericUid : 0,			
 			manufacturerDto: {uid: $scope.genericManufacturer.uid},					
-			deviceType : {uid: $scope.deviceType.uid},
-			unitMeterGases : $scope.gasUnitMeterGases.uid,
+			deviceType: {uid: $scope.deviceType.uid},			
+			unitMeter: {uid: $scope.unitMeter.uid}, 
 			name: $scope.genericName,
 			model: $scope.genericModel,
 			image: $scope.genericImage,
@@ -38,7 +38,7 @@ app.controller('genericController', function ($scope, $timeout, DeviceTypeServic
 		$scope.genericUid = undefined;		
 		$scope.genericManufacturer = '';	
 		$scope.deviceType = '';
-		$scope.gasUnitMeterGases = '';
+		$scope.unitMeter = '';
 		$scope.genericName = '';
 		$scope.genericModel = '';
 		$scope.genericRangeMin = '';
@@ -86,8 +86,8 @@ app.controller('genericController', function ($scope, $timeout, DeviceTypeServic
 		$scope.genericManufacturer = $scope.generics[index].manufacturerDto;			
 		$scope.genericRangeMin = $scope.generics[index].rangeMin;
 		$scope.genericRangeMax = $scope.generics[index].rangeMax;
-		$scope.gasUnitMeterGases = $scope.getUnitMetersGases($scope.generics[index].unitMeterGases);
-		$scope.deviceType = $scope.generics[index].deviceType;					    	        
+		$scope.deviceType = $scope.generics[index].deviceType;
+		$scope.unitMeter = $scope.generics[index].unitMeter;
 	    $('#idGenericName').focus();
 	};
 	 
@@ -103,57 +103,35 @@ app.controller('genericController', function ($scope, $timeout, DeviceTypeServic
 				 console.log($scope.deletar.systemMessage); 
 			 }
 		});		 
-	 }
-
-	 $scope.getDeviceType = function (name) {
-		
-		for (var i = 0; i < $scope.deviceTypes.length; i++) {
-			if ($scope.deviceTypes[i].name == name) {				
-				return $scope.deviceTypes[i];
-			}
-		} 		 
-	};
-
-	$scope.getUnitMetersGases = function (name) {		 
-		for (var i = 0; i < $scope.unitMetersGases.length; i++) {
-			if ($scope.unitMetersGases[i].name == name) {				
-				return $scope.unitMetersGases[i];
-			}
-		} 		 
-	};
-
-	$scope.unitMetersGases = 
-	[
-	  	{ name : 'DESCONHECIDO', uid : 0 },
-	  	{ name : 'PPM', uid :  1 },
-	  	{ name : 'PPB', uid : 2 },
-	  	{ name : 'LEL_PERCENT', uid : 3 },
-		{ name : 'LEL_PERCENT_METRO', uid : 4 },
-		{ name : 'PERCENT_VOLUME', uid : 5 },
-		{ name : 'GRAUS_CELSIUS', uid : 6 },
-		{ name : 'VOLT', uid : 7 },
-		{ name : 'AMPERE', uid : 8 },
-		{ name : 'MINUTE', uid : 9 },
-		{ name : 'SECOND', uid : 10 },			
-		{ name : 'KWH', uid : 11 },
-		{ name : 'OPEN/CLOSE', uid : 12 },
-		{ name : 'M3_HOUR', uid : 13 },
-		{ name : 'M3', uid : 14 },
-		{ name : 'METERS', uid : 15 }
-	]; 
+	 }; 
 
 	$scope.getDeviceTypes = function() {		 
 		$scope.listAllDeviceType = new DeviceTypeService.listAllDeviceType();		 
 		$scope.listAllDeviceType.$deviceType({_csrf : angular.element('#_csrf').val()}, function(){			
 			$scope.deviceTypes = $scope.listAllDeviceType.list;
 	   });		 
-	};	
+	};
+	
+	$scope.getUnitMeters = function() {		 
+		$scope.listAllUnitMeter = new UnitMeterService.listAllUnitMeter();		 
+		$scope.listAllUnitMeter.$unitMeter({_csrf : angular.element('#_csrf').val()}, function(){			
+			$scope.unitMeters = $scope.listAllUnitMeter.list;
+	   });		 
+	};
 	 
 	$scope.refreshGenerics = function() {
 		$scope.getGenerics();
 		$scope.getManufacturers();
 		$scope.getDeviceTypes();
+		$scope.getUnitMeters();
 		$scope.genericImage = "/assets/img/cover.jpg";
+	};
+	
+	$scope.unitMeterChange = function() {
+		if($scope.unitMeter.uid==0) {
+			$scope.genericRangeMin = 0;
+			$scope.genericRangeMax = 1;
+		}
 	};
 	 
 	$scope.refreshGenerics();

@@ -24,8 +24,8 @@
 								<td>&nbsp;<i class="fa" data-ng-class="item.deviceType.symbol" style="font-size:125%;"></i>&nbsp;</td>
 								<td>{{item.name}}</td>
 								<td>{{item.model}}</td>															        
-								<td><button type="button" class="btn btn-info btn-xs"  data-ng-click="editGeneric($index)">editar</button></td>
-								<td><button type="button" class="btn btn-danger btn-xs"  data-ng-click="deleteGeneric($index)">excluir</button></td>						
+								<td><button type="button" class="btn btn-info btn-xs"   data-ng-click="editGeneric($index)">editar</button></td>
+								<td><button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteGeneric($index)">excluir</button></td>						
 							</tr>                                                               
 						</tbody>
 					</table>                                                       
@@ -94,29 +94,30 @@
 							<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Range de Detec&ccedil;&atilde;o *</strong></div>					                	 
 							<div class="box-body">
 								<div class="row">
+									<div class="col-md-6">
+										<label class="control-label"><i class="fa fa-balance-scale"> </i> Unidade:</label>
+										<span class="text-red pull-right" data-ng-show="genericForm.unitMeter.$dirty && genericForm.unitMeter.$invalid">[Obrigat&oacute;rio]</span>
+										
+										<div data-ng-class="{'has-error': genericForm.unitMeter.$dirty && genericForm.unitMeter.$invalid}"> 
+											<select name="unitMeter" class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-change="unitMeterChange();"
+												data-ng-options="item as item.description for item in unitMeters | orderBy: 'symbol' track by item.uid" 
+												data-ng-model="unitMeter" required>
+												<option value="">Selecione</option> 
+											</select>
+										</div>
+									</div>
 									<div class="col-md-3">
 										<div class="form-group">
 											<label class="control-label">Min</label>
-											<input class="form-control" placeholder="Min" data-ng-model="genericRangeMin" required>
+											<input class="form-control" placeholder="Min" data-ng-model="genericRangeMin" data-ng-disabled="unitMeter.uid==0" required>
 										</div>
 									</div>
 									<div class="col-md-3">
 										<div class="form-group">
 											<label class="control-label">M&aacute;x</label>
-											<input class="form-control" placeholder="Max" data-ng-model="genericRangeMax" required>
+											<input class="form-control" placeholder="Max" data-ng-model="genericRangeMax" data-ng-disabled="unitMeter.uid==0" required>
 										</div>
-									</div>
-									<div class="col-md-6" style="padding-left: 5px !important;">
-										<label class="control-label"><i class="fa fa-tachometer"> </i> Unidade:</label>
-										<span class="text-red" data-ng-show="genericForm.gasUnit.$dirty && genericForm.gasUnit.$invalid">[Obrigat&oacute;rio]</span>			
-										<div data-ng-class="{'has-error': genericForm.gasUnit.$dirty && genericForm.gasUnit.$invalid}">
-											<select name="gasUnit" class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-													data-ng-options="item as item.name for item in unitMetersGases | orderBy: 'name' track by item.uid" 
-													data-ng-model="gasUnitMeterGases" required>
-													<option value="">Selecione</option> 
-											</select>									                        
-										</div>
-									</div>
+									</div>									
 								</div>
 							</div>
 						</div>

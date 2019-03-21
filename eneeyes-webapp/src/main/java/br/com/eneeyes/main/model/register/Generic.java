@@ -1,12 +1,10 @@
-package br.com.eneeyes.main.model.register;
+    package br.com.eneeyes.main.model.register;
 
 import java.io.UnsupportedEncodingException;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +17,7 @@ import javax.persistence.Table;
 import br.com.eneeyes.main.dto.register.GenericDto;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.state.DeviceType;
+import br.com.eneeyes.main.model.state.UnitMeter;
 
 /**
  * Created by Junior on 30/01/2018.
@@ -37,7 +36,7 @@ public class Generic {
 		this.uid = dto.getUid();		
 		this.name = dto.getName();
 		this.deviceType = dto.getDeviceType();
-		this.unitMeterGases = dto.getUnitMeterGases();
+		this.unitMeter = dto.getUnitMeter();
 		
 		if (dto.getManufacturerDto() != null)
 			this.manufacturer = new Manufacturer(dto.getManufacturerDto());
@@ -68,11 +67,10 @@ public class Generic {
 	
 	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
 	private UnitMeterGases unitMeterGases;
-
-	@Enumerated(EnumType.ORDINAL) 
-	private UnitMeterGases UnitMeterGases() { 
-	    return unitMeterGases; 
-	}
+	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="UNIT_METER_ID", nullable = false)
+	private UnitMeter unitMeter;
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="DEVICE_TYPE_ID", nullable = false)
@@ -117,6 +115,14 @@ public class Generic {
 
 	public void setUnitMeterGases(UnitMeterGases unitMeterGases) {
 		this.unitMeterGases = unitMeterGases;
+	}
+
+	public UnitMeter getUnitMeter() {
+		return unitMeter;
+	}
+
+	public void setUnitMeter(UnitMeter unitMeter) {
+		this.unitMeter = unitMeter;
 	}
 
 	public DeviceType getDeviceType() {
@@ -167,5 +173,3 @@ public class Generic {
 		this.image = image;
 	}
 }
-
-

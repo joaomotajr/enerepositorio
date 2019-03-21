@@ -1,12 +1,12 @@
 package br.com.eneeyes.main.dto.register;
 
-import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Generic;
 import br.com.eneeyes.main.model.state.DeviceType;
+import br.com.eneeyes.main.model.state.UnitMeter;
 
 public class GenericDto extends BaseDeviceDto {
 	private Long uid;		
-	private UnitMeterGases unitMeterGases;
+	private UnitMeter unitMeter;
 	private DeviceType deviceType;
 	private Double rangeMax;			
 	private Double rangeMin;
@@ -19,7 +19,7 @@ public class GenericDto extends BaseDeviceDto {
 		
 		this.uid = e.getUid();
 		this.name = e.getName();
-		this.unitMeterGases = e.getUnitMeterGases();
+		this.unitMeter = e.getUnitMeter();
 		this.deviceType = e.getDeviceType();
 		this.manufacturerDto = new ManufacturerDto(e.getManufacturer());
 		this.model = e.getModel();
@@ -40,18 +40,16 @@ public class GenericDto extends BaseDeviceDto {
 		this.uid = uid;
 	}
 	
-	public UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
-	}
-	
-	public void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-		this.unitMeterGases = unitMeterGases;
-	}
-	
 	public DeviceType getDeviceType() {
 		return deviceType;
 	}
 	
+	public UnitMeter getUnitMeter() {
+		return unitMeter;
+	}
+	public void setUnitMeter(UnitMeter unitMeter) {
+		this.unitMeter = unitMeter;
+	}
 	public void setDeviceType(DeviceType deviceType) {
 		this.deviceType = deviceType;
 	}

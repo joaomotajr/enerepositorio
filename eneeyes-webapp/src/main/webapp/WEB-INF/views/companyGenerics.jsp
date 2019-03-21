@@ -93,12 +93,8 @@
 														<label>Dispositivo:&nbsp;</label>{{selectedCompanyGeneric.genericDto.deviceType.description}}
 													</li>													
 													<li class="list-group-item" style="padding: 1px 8px;">
-															<label>Medi&ccedil;&atilde;o em:&nbsp;</label>
-															<span data-ng-if="selectedCompanyGeneric.genericDto.unitMeterGases=='M3_HOUR'"> m³/hora</span>
-															<span data-ng-if="selectedCompanyGeneric.genericDto.unitMeterGases=='M3'"> m³</span>
-															<span 
-																data-ng-if="selectedCompanyGeneric.genericDto.unitMeterGases!='M3_HOUR' && 
-																			selectedCompanyGeneric.genericDto.unitMeterGases!='M3'">{{selectedCompanyGeneric.genericDto.unitMeterGases}}</span>
+															<label>Medi&ccedil;&atilde;o em:&nbsp;</label>															
+															{{selectedCompanyGeneric.genericDto.unitMeter.symbol}} ({{selectedCompanyGeneric.genericDto.unitMeter.description}})
 
 														</li>
 													<li class="list-group-item" style="padding: 1px 8px;">
@@ -126,7 +122,7 @@
 													<tr data-ng-repeat="item in filtered = (generics | filter: {deviceType: {type: selectedCompanyDevice.deviceType.type}})">
 														<td data-ng-class="{'selected': item.uid == selectedCompanyGeneric.genericDto.uid }">{{item.name}}</td>
 														<td data-ng-class="{'selected': item.uid == selectedCompanyGeneric.genericDto.uid }">{{item.model}}</td>
-														<td data-ng-class="{'selected': item.uid == selectedCompanyGeneric.genericDto.uid }">{{item.unitMeterGases}}</td>
+														<td data-ng-class="{'selected': item.uid == selectedCompanyGeneric.genericDto.uid }">{{item.unitMeter.symbol}}</td>
 														<td>																	
 															<div data-ng-if="item.uid == selectedCompanyGeneric.genericDto.uid">
 																<button type="button" class="btn btn-danger btn-xs" data-ng-click="selecionarGeneric(item)" disabled>Selecionado</button>
@@ -184,19 +180,20 @@
 													<td>{{item.uid}}</td>
 													<td>{{item.name}}</td>
 													<td>
-														<jsp:include page="controls/reduzMeters.jsp"/>
+														<span data-ng-bind="item.deviceType.description"></span>
+														<span style="vertical-align:super;font-size:0.6em;color:gray" data-ng-bind="item.unitMeter.symbol"></span>														
 													</td>
 													<td>{{item.alarm1}} <span data-ng-if="item.alarm11">/{{item.alarm11}}</span></td>													
 													<td>{{item.alarm2}}</td>
-													<td>{{item.alarm3}}</td>												
+													<td>{{item.alarm3}}</td>
 													<td>
-														<div data-ng-if="(item.unitMeterGases != selectedCompanyGeneric.genericDto.unitMeterGases || item.deviceType.type != selectedCompanyGeneric.companyDeviceDto.deviceType.type)">
+														<div data-ng-if="(item.unitMeter.uid != selectedCompanyGeneric.genericDto.unitMeter.uid || item.deviceType.type != selectedCompanyGeneric.companyDeviceDto.deviceType.type)">
 															<button type="button" class="btn btn-offLine btn-xs" disabled>Incompativel</button>
 														</div>																										
 														<div data-ng-if="item.uid == selectedCompanyDeviceAlarm.alarmId">
 															<button type="button" class="btn btn-danger btn-xs" data-ng-click="toggleAlarm(null)">&nbsp;&nbsp;&nbsp;Remover&nbsp;&nbsp;&nbsp;</button>
 														</div>
-														<div data-ng-if="(item.unitMeterGases == selectedCompanyGeneric.genericDto.unitMeterGases && 
+														<div data-ng-if="(item.unitMeter.uid == selectedCompanyGeneric.genericDto.unitMeter.uid && 
 															item.deviceType.type == selectedCompanyGeneric.companyDeviceDto.deviceType.type) && item.uid != selectedCompanyDeviceAlarm.alarmId">
 															<button type="button" class="btn btn-primary btn-xs" data-ng-click="toggleAlarm(item)">&nbsp;&nbsp;Selecionar&nbsp;&nbsp;</button>
 														</div>													

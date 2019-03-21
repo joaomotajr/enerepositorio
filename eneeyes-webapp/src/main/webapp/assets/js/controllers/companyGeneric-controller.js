@@ -98,9 +98,7 @@ app.controller('companyGenericController', function ($scope, $interval, $rootSco
 					$scope.getCompanyDeviceAlarm($scope.selectedCompanyGeneric.companyDeviceDto.uid);	
 				}			
 			});	
-		}
-		else {
-
+		} else {
 			$scope.removeAlarm = new CompanyDeviceService.removeAlarm();
 			$scope.removeAlarm.$companyDevice({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function(){						
 				if (!$scope.removeAlarm.isError) {
@@ -120,13 +118,9 @@ app.controller('companyGenericController', function ($scope, $interval, $rootSco
 	   });		 
 	};
 
-	$scope.getOneCompanyGeneric = function() {
-		
-		$scope.search = { unitMeterGases: null, gas : null };
-				
+	$scope.getOneCompanyGeneric = function() {						
 		$scope.resultCompanyGeneric = new CompanyGenericService.listPorCompanyDevice();		 
-		$scope.resultCompanyGeneric.$companyGeneric({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function() {
-			
+		$scope.resultCompanyGeneric.$companyGeneric({_csrf : angular.element('#_csrf').val(), id : $scope.selectedCompanyDevice.uid }, function() {			
 			$scope.selectedCompanyGeneric = $scope.resultCompanyGeneric.t;			
 			if($scope.selectedCompanyGeneric != null) {								
 				$scope.getPositionsAndIds($scope.selectedCompanyDevice.uid);
@@ -158,9 +152,7 @@ app.controller('companyGenericController', function ($scope, $interval, $rootSco
 			$scope.selectedCompanyDeviceAlarm = $scope.resultDevices.t;		
 		});
 	};
-	
-	/* ------------------------------------- Inicio Processamento --------------------------------------------*/
-	
+		
 	if($scope.$root.selecteds.unitIndex != undefined) {		
 		$scope.selectedUnit = angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex]);
 		$scope.selectedArea = angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex]);	

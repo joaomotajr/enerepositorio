@@ -19,20 +19,20 @@ public class DeviceTypeController {
 	@Autowired
 	DeviceTypeService service;	
 	
-	@RequestMapping(value = "/security/api/state/allDeviceType", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/security/api/state/DeviceType/allDeviceType", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> allDeviceType() {
 		return service.listAll();
 	}
 
-	@RequestMapping(value="/security/api/state/save", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@RequestMapping(value="/security/api/state/DeviceType/save", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> save(@RequestBody DeviceTypeDto deviceTypeDto) {
 		
 		return service.save(deviceTypeDto);
 	}
 	
-	@RequestMapping(value="/security/api/state/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
+	@RequestMapping(value="/security/api/state/DeviceType/delete/{uid}", method=RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> delete(@PathVariable Long uid) {
 		

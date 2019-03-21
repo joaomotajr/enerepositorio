@@ -24,7 +24,7 @@ public class UtilController {
 		return engine.eval(foo).toString();		
 	}
 			
-	@RequestMapping(value="/api/util/calc2", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@RequestMapping(value="/security/api/util/calc2", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public String calc2(@RequestBody Formula formula) throws ScriptException {
 		

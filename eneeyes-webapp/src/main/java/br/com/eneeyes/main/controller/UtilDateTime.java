@@ -14,7 +14,7 @@ public class UtilDateTime {
 		 this.day = c.get(Calendar.DAY_OF_MONTH);
 		 this.mon = c.get(Calendar.MONTH)+1;
 		 this.year = c.get(Calendar.YEAR);
-		 this.hour = c.get(Calendar.HOUR);
+		 this.hour = c.get(Calendar.HOUR_OF_DAY);
 		 this.min = c.get(Calendar.MINUTE);
 	}
 

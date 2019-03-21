@@ -89,7 +89,7 @@
 			            	<ul class="treeview-menu">
 								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('manufacturers.html', 'Fabricantes')"><i class="fa fa-industry"></i> Fabricantes</a></li>
 								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('detectors.html','Detectores')"><i class="fa fa-th-large"></i> Detectores</a></li>
-								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('generic.html','Genéricos')"><i class="fa fa-simplybuilt"></i> Genéricos</a></li>
+								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('generic.html','Genericos')"><i class="fa fa-simplybuilt"></i> Genericos</a></li>
 			                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('transmitters.html','Transmissores')"><i class="fa fa-expand"></i> Transmissores</a></li>
 			                    <li class="active"><a href="#" data-ng-click="LoadAjaxContent('sensors.html','Sensores')"><i class="fa fa-feed"></i> Sensores</a></li>			                    
 								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('gases.html', 'Gases')"><i class="fa fa-yelp"></i> Gases</a></li>

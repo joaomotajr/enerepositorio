@@ -2,7 +2,7 @@
 	<div  data-ng-controller="gasController">						
 		<div class="row">				                                                    
 			<div class="col-md-6">                                                        
-				<div class="box box-primary"  data-ng-class="(gasName || gasCas || gasFormula || gasUnitMeterGases) ? 'box-default' : 'box-primary'">
+				<div class="box box-primary"  data-ng-class="(gasName || gasCas || gasFormula) ? 'box-default' : 'box-primary'">
 					<div class="box-header">
 					  <h3 class="box-title">Cadastro de Gases / Meios Físicos Mensuráveis</h3>
 					  
@@ -44,7 +44,7 @@
 			</div>                                                      
 																
 			<div class="col-sm-6">
-				<div class="box box-primary"  data-ng-class="(gasName || gasCas || gasFormula || gasUnitMeterGases) ? 'box-primary' : 'box-default'">
+				<div class="box box-primary"  data-ng-class="(gasName || gasCas || gasFormula) ? 'box-primary' : 'box-default'">
 					<div class="box-header">
 						<h3 class="box-title">Cadastro / Edição</h3>
 					</div>

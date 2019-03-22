@@ -31,8 +31,7 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 		});		 
 	 }
 		 
-	$scope.clearFormGas = function () {
-	
+	$scope.clearFormGas = function () {	
 	    $scope.gasUid = undefined;
 	    $scope.gasName = '';
 	    $scope.gasCas = '';
@@ -40,8 +39,7 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 	    $scope.gasNameExist = "false";
 	}
 	 
-	$scope.getGases = function() {
-		 
+	$scope.getGases = function() {		 
 		 $scope.resultGases = new GasService.listAll();		 
 		 $scope.resultGases.$gas({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.gases = $scope.resultGases.list; 		 			 
@@ -49,13 +47,10 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 	 }	
  
 	 $scope.editGas = function (index) {
-	        $scope.gasUid = $scope.gases[index].uid;
-	        
+	        $scope.gasUid = $scope.gases[index].uid;	        
 		    $scope.gasName = $scope.gases[index].name;
 		    $scope.gasCas = $scope.gases[index].cas;
-		    $scope.gasFormula = $scope.gases[index].formula;   
-		    $scope.gasUnitMeterGases = $scope.getUnitMetersGases('DESCONHECIDO');
-		    		
+		    $scope.gasFormula = $scope.gases[index].formula;		    		
 	        $('#idGasName').focus();
 	    }
 	 
@@ -64,30 +59,18 @@ app.controller('gasController', function ($scope, $timeout, $filter, GasService)
 		 var uid = $scope.gases[index].uid;		  
 		 
 		 $scope.deletar = new GasService.deletar();		 
-		 $scope.deletar.$gas({_csrf : angular.element('#_csrf').val(), id : uid}, function(){
-			 
+		 $scope.deletar.$gas({_csrf : angular.element('#_csrf').val(), id : uid}, function() {			 
 			 if (!$scope.deletar.isError)
 				 $scope.gases.splice(index, 1);
 			 else {
 				 $scope.msgErroGas = $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage); 
-			 }        	         	
-
+			 }
 		});		 
-	 }	 
-	 
-	 $scope.getUnitMetersGases = function (name) {
-		 
-		 for (var i = 0; i < $scope.unitMetersGases.length; i++) {
-             if ($scope.unitMetersGases[i].name == name) {
-                 
-            	 return $scope.unitMetersGases[i];
-             }
-         } 		 
-	 }
+	 };
 	 
 	 $scope.keypress = function($event) {
-	    $scope.lastKey = $event.keyCode
+	    $scope.lastKey = $event.keyCode;
 	    $scope.gasNameExist = "false";
 	  };
 	 

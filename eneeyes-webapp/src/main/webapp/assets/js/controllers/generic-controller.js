@@ -14,7 +14,7 @@ app.controller('genericController', function ($scope, $timeout, DeviceTypeServic
 			uid: $scope.genericUid != undefined ? $scope.genericUid : 0,			
 			manufacturerDto: {uid: $scope.genericManufacturer.uid},					
 			deviceType: {uid: $scope.deviceType.uid},			
-			unitMeter: {uid: $scope.unitMeter.uid}, 
+			unitMeter: {uid: $scope.unitMeter.uid},
 			name: $scope.genericName,
 			model: $scope.genericModel,
 			image: $scope.genericImage,

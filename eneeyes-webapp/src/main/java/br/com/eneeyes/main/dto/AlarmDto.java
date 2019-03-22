@@ -4,6 +4,7 @@ import br.com.eneeyes.main.dto.register.GasDto;
 import br.com.eneeyes.main.model.Alarm;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.state.DeviceType;
+import br.com.eneeyes.main.model.state.UnitMeter;
 import br.com.eneeyes.main.model.views.CompanyView;
 
 public class AlarmDto {
@@ -11,7 +12,7 @@ public class AlarmDto {
 	private Long uid;	
 	private String name;	
 	private DeviceType deviceType;
-	private UnitMeterGases unitMeterGases;
+	private UnitMeter unitMeter;
 	private GasDto gasDto;			
 	private Double alarm1;
 	private Double alarm2;		
@@ -48,7 +49,7 @@ public class AlarmDto {
 		this.uid = alarm.getUid();	
 		this.name = alarm.getName();
 		this.deviceType = alarm.getDeviceType();
-		this.unitMeterGases = alarm.getUnitMeterGases();
+		this.unitMeter = alarm.getUnitMeter();
 		
 		if(alarm.getGas() != null)
 			this.gasDto = new GasDto(alarm.getGas());
@@ -102,13 +103,13 @@ public class AlarmDto {
 	public void setDeviceType(DeviceType deviceType) {
 		this.deviceType = deviceType;
 	}
-
-	public final UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
+	
+	public UnitMeter getUnitMeter() {
+		return unitMeter;
 	}
 
-	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-		this.unitMeterGases = unitMeterGases;
+	public void setUnitMeter(UnitMeter unitMeter) {
+		this.unitMeter = unitMeter;
 	}
 
 	public final GasDto getGasDto() {

@@ -149,7 +149,7 @@
 					<div class="box-footer">
 						<button type="button" data-ng-click="clearFormGeneric(); genericForm.$setPristine()" class="btn btn-default">Cancelar</button>                                                                
 						<button type="button" data-ng-click="saveGeneric(); genericForm.$setPristine()" class="btn btn-primary" 
-								data-ng-disabled="genericForm.$valid ? false : true">&nbsp;Salvar&nbsp;</button>								                                                                
+								data-ng-disabled="genericForm.$valid ? false : true">&nbsp;Salvar&nbsp;</button>
 					</div>					
 				</div>
 			</div>

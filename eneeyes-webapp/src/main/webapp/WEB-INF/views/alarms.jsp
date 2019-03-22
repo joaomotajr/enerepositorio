@@ -1,26 +1,6 @@
-	<style>
-		.todo-list>li {
-		    padding: 4px;
-		}		
-		.disableDiv {
-			pointer-events: none;
-			opacity: 0.5;
-		}		
-		.row {
-			padding-bottom: 5px !important;
-		}		
-		.box {
-			margin-bottom: 5px !important;
-		}
-		 .multipleMessages {
-		 	color: #9f3a38;
-    		background: antiquewhite;
-		 }			
-	</style>
-		
-	<div data-ng-controller="alarmController as alarmController">
-												
-		<div class="row">				                                                    
+
+	<div data-ng-controller="alarmController as alarmController">												
+		<div class="row">
 			<div class="col-md-10">                                                        
 				<div class="box box-primary" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
 					<div class="box-header">
@@ -33,10 +13,9 @@
 								<thead>
 									<tr>
 										<th>Empresa</th>
-										<th>Nome</th>
-										<th>Dispositivo</th>
+										<th>Nome</th>										
 										<th>Artefato</th>										
-										<th>Unit</th>                                                            
+										<th>Unidade</th>                                                            
 										<th>Editar</th>
 										<th>Excluir</th>						
 									</tr>
@@ -44,30 +23,19 @@
 								<tbody>                                                        
 									<tr data-ng-repeat="item in alarms" data-ng-class="{'danger' : item.alarmOn == false, 'success' : item.alarmOn == true}">
 										<td>{{item.companyDto.name}}</td>
-										<td>{{item.name}}</td>
-										<td>
-											<span data-ng-if="item.deviceType.type!='DETECTOR'">STANDALONE</span>
-											<span data-ng-if="item.deviceType.type=='DETECTOR'">{{item.deviceType.type}}</span>											
-										</td>
+										<td>{{item.name}}</td>										
 										<td>
 											<span data-ng-if="item.deviceType.type=='DETECTOR'">{{item.gasDto.name}}</span>
-											<span data-ng-if="item.deviceType.type!='DETECTOR'">{{item.deviceType.type}}</span>											
+											<span data-ng-if="item.deviceType.type!='DETECTOR'">{{item.deviceType.description}}</span>
 										</td>
-										<td>
-											<span>{{item.unitMeterGases}}</span>
-										</td>
-										<td>
-											<button type="button" class="btn btn-primary btn-xs" data-ng-click="editAlarm($index)">editar</button>
-										</td>
-										<td>
-											<a type="button" class="btn btn-danger btn-xs" data-popover=' do Alarme: [ {{item.name}} ]' data-confirm="deleteAlarm($index)">excluir</a>
-										</td>						
+										<td><span>{{item.unitMeter.symbol}}</span></td>
+										<td><button type="button" class="btn btn-primary btn-xs" data-ng-click="editAlarm($index)">editar</button></td>
+										<td><a type="button" class="btn btn-danger btn-xs" data-popover=' do Alarme: [ {{item.name}} ]' data-confirm="deleteAlarm($index)">excluir</a></td>						
 									</tr>                                                               
 								</tbody>
 							</table>
 						</div>                                                       
-					</div>
-					
+					</div>					
 					<div class="box-footer">						                                                                
 						<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-primary pull-right" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalAlarmEdit">Novo</button>
 					</div>
@@ -80,7 +48,6 @@
 			</div>                                                     
 			
 		</div>
-
 		<div id="modalDevicesConn" class="modal fade">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -95,7 +62,7 @@
 						<div class="box-body">								
 							<div style="max-height: 200px ! important; height:auto; overflow: auto; font-size: 0.9em  ! important">
 								<p data-ng-show="!usedAlarms || usedAlarms.length <= 0" class="text-center">NENHUM DETECTOR ASSOCIADO</p>									
-								<table class="table table-hover">
+								<table data-ng-hide="!usedAlarms || usedAlarms.length <= 0" class="table table-hover">
 									<thead>
 										<tr>
 											<th>Identificacao</th>
@@ -116,8 +83,7 @@
 					</div>					
 				</div>
 			</div>
-		</div>
-				
+		</div>				
 		<div id="modalAlarmEdit" class="modal fade">
 			<div class="modal-dialog  modal-lg" role="document">
 				<div class="modal-content">                            
@@ -130,33 +96,29 @@
 							</div>
 												
 							<div class="box-body" style="padding-bottom: 0px !important;">
-								<form class="form" name="userForm">		
-								
+								<form class="form" name="userForm">								
 									<div class="row">
-
 										<div class="col-md-3" style="padding-right: 5px !important;">	
 											<label class="control-label">Nome
-												<strong class="text-red pull-right" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">&nbsp[Nome Obrigat&oacute;rio]</strong> 
-												<strong class="text-red pull-right" data-ng-show="userForm.username.$error.maxlength">Tamanho M&aacute;ximo 12 caracteres</strong>
+												<strong class="text-red pull-right" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">&nbsp[Obrigat&oacute;rio]</strong> 
+												<strong class="text-red pull-right" data-ng-show="userForm.username.$error.maxlength">&nbsp [M&aacute;ximo 12 caracteres]</strong>
 											</label>
 										
 											<div data-ng-class="{'has-error': userForm.username.$dirty && userForm.username.$invalid}">
 												<input class="form-control inputProfile" placeholder="Nome do Alarme" data-ng-model="alarmName" data-ng-maxlength="15" name="username" required>
 											</div>
 										</div>										
-										
 										<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">	
 											<label class="control-label">Empresa
-												<strong class="text-red pull-right" data-ng-show="userForm.companyName.$dirty && userForm.companyName.$invalid">&nbspCampo Obrigat&oacute;rio</strong>
+												<strong class="text-red pull-right" data-ng-show="userForm.companyName.$dirty && userForm.companyName.$invalid">&nbsp[Obrigat&oacute;rio]</strong>
 											</label>			
 											<div data-ng-class="{'has-error': userForm.companyName.$dirty && userForm.companyName.$invalid}">
 													<jsp:include page="controls/companySelect.jsp"/>							                        							                             
 											</div>	
-										</div>								
-
+										</div>
 										<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">															
 											<label class="control-label">Dispositivo
-												<span class="text-red pull-right" data-ng-show="userForm.deviceType.$dirty && userForm.deviceType.$invalid">&nbsp[Campo Obrigat&oacute;rio]</span>
+												<span class="text-red pull-right" data-ng-show="userForm.deviceType.$dirty && userForm.deviceType.$invalid">&nbsp[Obrigat&oacute;rio]</span>
 											</label>
 											<div data-ng-class="{'has-error': userForm.deviceType.$dirty && userForm.deviceType.$invalid}">										
 												<select name="deviceType" class="form-control" data-live-search="true" 
@@ -167,12 +129,10 @@
 												</select>										
 											</div>
 										</div>
-
-										<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">
-											<label class="control-label">Associados : </label>											
+										<div data-ng-class="{'disableDiv': !usedAlarms || usedAlarms.length <=0}" class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">
+											<label class="control-label">Dispositivos Associados: {{usedAlarms.length}} </label>
 											<a title="Ver Dispostivos associados a este Alarme" data-toggle="modal" href="#modalDevicesConn" class="form-control btn btn-primary"> Listar <i class="fa fa-eye"></i></a>
-										</div>
-										              
+										</div>										              
 					                </div>    
 					                									
 									<div class="row">    
@@ -184,31 +144,12 @@
 														<button class="btn btn-xs" ng-click="update(true);" ng-class="(radioModel) ? 'btn-success' : 'btn-default'">ON</button>																
 														<button class="btn btn-xs" ng-click="update(false);" ng-class="(radioModel) ? 'btn-default' : 'btn-danger'">OFF</button>													   
 													</div>															
-								    			</div>
-								    								                	 
+								    			</div>								    								                	 
 							                    <div class="box-body" style="padding-bottom: 0px !important">						                            	
 													<div id="travar">
-														<div class="row">	
-															<!-- Digital -->
-															<div  data-ng-show="deviceType.type=='DIGITAL'">																
-																<div class="col-md-4">
-																	<label><strong><i class="fa" data-ng-class="deviceType.symbol"> </i> Alarmar se Circuito estiver:</strong></label>
-																	<div class="form-control" style="padding-top:0px">																	
-																		<div class="radio3 radio-check radio-inline">
-																			<input type="radio" id="radio11" value="1" data-ng-model="deviceTypeDigital" data-ng-click="gasUnitMeterGases.uid=12; alarmAlarm1=1" >																			
-																			<label for="radio11">Aberto </label>
-																		</div>
-																		<div class="radio3 radio-check radio-inline">
-																			<input type="radio" id="radio12" value="0" data-ng-model="deviceTypeDigital" data-ng-click="gasUnitMeterGases.uid=12; alarmAlarm1=0">
-																			<label for="radio12">Fechado </label>
-																		</div>																	
-																	</div>                                                    
-																</div>																														
-															</div>
-													
-															
-															<div data-ng-show="deviceType.type!='DIGITAL' && deviceType.type != undefined">
-																<div class="col-md-3" style="padding-right: 5px !important;" data-ng-show="deviceType.type=='DETECTOR'">
+														<div class="row">															
+															<div data-ng-show="deviceType.type != undefined">
+																<div class="col-md-3" data-ng-show="deviceType.type=='DETECTOR'" style="padding-right: 5px !important;">
 																	<label class="control-label"><i class="fa fa-yelp"></i> G&aacute;s
 																		<span class="text-red pull-right" data-ng-show="userForm.gasName.$dirty && userForm.gasName.$invalid"> [Obrigat&oacute;rio]</span>
 																	</label>
@@ -218,93 +159,104 @@
 																				data-ng-options="item as item.name for item in gases | orderBy: 'name' track by item.uid" 
 																					data-ng-model="alarmGas" data-ng-required="deviceType.type=='DETECTOR'">
 																					<option value="">Selecione</option>			                                           
-																		</select>											                		
+																		</select>
 																	</div>
-																</div>		
-																																
+																</div>
+																<div class="col-md-3" data-ng-show="deviceType.type!='DETECTOR'" style="padding-right: 5px !important;">
+																	<label class="control-label"><i class="fa" data-ng-class="deviceType.symbol"> </i> {{deviceType.type}}</label>																	
+																	<input type="text"  class="form-control" data-ng-model="deviceType.description" disabled />																	
+																</div>																																
 																<div class="col-md-3" style="padding-right: 5px !important;">
 																	<label class="control-label">
-																		<strong data-ng-show="deviceType.type!='DIGITAL'"><i class="fa" data-ng-class="deviceType.symbol"> </i> Unid. Medida:</strong>
-																		<span class="text-red" data-ng-show="userForm.gasUnit.$dirty && userForm.gasUnit.$invalid"> [Obrigat&oacute;rio]</span>
+																		<strong><i class="fa fa-tachometer"></i> Unid. Medida:</strong>
+																		<span class="text-red" data-ng-show="userForm.unitMeter.$dirty && userForm.unitMeter.$invalid"> [Obrigat&oacute;rio]</span>
 																	</label>
-																	<div data-ng-class="{'has-error': userForm.gasUnit.$dirty && userForm.gasUnit.$invalid}">
-																		<select name="gasUnit" class="form-control" data-live-search="true" 
-																				style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-																					data-ng-options="item as item.name for item in unitMetersGases | orderBy: 'name' track by item.uid" 
-																								data-ng-model="gasUnitMeterGases" required>
-																								<option value="">Selecione</option> 
-																		</select>									                        
+																	<div data-ng-class="{'has-error': userForm.unitMeter.$dirty && userForm.unitMeter.$invalid}">
+																		<select name="unitMeter" class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-change="unitMeterChange();"
+																			data-ng-options="item as item.description for item in unitMeters | orderBy: 'symbol' track by item.uid" 
+																			data-ng-model="unitMeter" required>
+																			<option value="">Selecione</option> 
+																		</select>
 																	</div>
-																</div>	
-
-																<div class="col-md-3" data-ng-show="deviceType.type!='DETECTOR'"></div>
-															
-																<div class="col-md-2" style="padding-right: 5px !important">
-																	<div class="form-group">
-																		<label class="control-label">Alarme 1 <span class="label label-default" style="font-size: 0.5em"> DETEC&Ccedil;&Atilde;O </span></label>																		
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm1.$invalid && !userForm.alarmAlarm1.$pristine || errorAlarm1}" 
-																			style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
-																			<input type="text" class="form-control" name="alarmAlarm1" 
-																				data-ng-model="alarmAlarm1"
-																				data-ng-change="validAlarms($event);" />
+																</div>																
+																<div class="col-md-6" data-ng-show="unitMeter.uid==0">																	
+																	<label><strong><i class="fa" data-ng-class="deviceType.symbol"> </i> Alarmar se Circuito estiver:</strong></label>
+																	<div class="form-control" style="padding-top:0px">																	
+																		<div class="radio3 radio-check radio-inline">
+																			<input type="radio" id="radio11" value="1" data-ng-model="deviceTypeDigital" data-ng-click="alarmAlarm1=1" >																			
+																			<label for="radio11">Aberto </label>
+																		</div>
+																		<div class="radio3 radio-check radio-inline">
+																			<input type="radio" id="radio12" value="0" data-ng-model="deviceTypeDigital" data-ng-click="alarmAlarm1=0">
+																			<label for="radio12">Fechado </label>
 																		</div>																	
-																		<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm11.$invalid && !userForm.alarmAlarm11.$pristine || errorAlarm11}" 
-																			style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
-																			<input type="text" class="form-control" name="alarmAlarm11" 
-																				data-ng-model="alarmAlarm11" 
-																				data-ng-change="validAlarms($event);" />
-																		</div>																	
-																	</div>
-																</div>
-																
-																<div class="col-md-2" style="padding-right: 5px !important; padding-left: 5px !important">															
-																	<div class="form-group">
-																		<input class="pull-left" type="checkbox" data-ng-model="enableAlarm2" data-ng-change="validAlarms($event);" />&nbsp
-																		<label class="control-label"> Alarme 2 <span class="label label-warning" style="font-size: 0.5em"> ALERTA </span></label>
-																		
-																		<div class="col-md-12" data-ng-class="{'has-error': userForm.alarmAlarm2.$invalid && !userForm.alarmAlarm2.$pristine || errorAlarm2}" 
-																			style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
-																			<input type="text" class="form-control" name="alarmAlarm2"
-																				data-ng-disabled="!enableAlarm2" 
-																				data-ng-model="alarmAlarm2" 
-																				data-ng-change="validAlarms($event);" />
-																		</div>																	
-																		<!-- <div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm22.$invalid && !userForm.alarmAlarm22.$pristine || errorAlarm22}" 
-																			style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
-																			<input type="text" class="form-control" name="alarmAlarm22" 
-																				data-ng-disabled="!enableAlarm2" 
-																				data-ng-model="alarmAlarm22" 
-																				data-ng-change="validAlarms($event);" />
-																		</div>																	 -->
-																	</div>
-																</div>
-																
-																<div class="col-md-2" style="padding-left: 5px !important">
-																	<div class="form-group">
-																		<input class="pull-left" type="checkbox" data-ng-model="enableAlarm3" />&nbsp
-																		<label class="control-label"> Alarme 3 <span class="label label-danger" style="font-size: 0.5em"> EVACUA&Ccedil;&Atilde;O </span></label>
-																		
-																		<div class="col-md-12" data-ng-class="{'has-error': userForm.alarmAlarm3.$invalid && !userForm.alarmAlarm3.$pristine || errorAlarm3}" 
-																			style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
-																			<input type="text" class="form-control" name="alarmAlarm3" 
-																				data-ng-disabled="!enableAlarm3"
-																				data-ng-model="alarmAlarm3" 
-																				data-ng-change="validAlarms($event);"  />
-																		</div>																	
-																		<!-- <div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm33.$invalid && !userForm.alarmAlarm33.$pristine || errorAlarm33}" 
-																			style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
-																			<input type="text" class="form-control" name="alarmAlarm33" 
-																				data-ng-disabled="!enableAlarm3"
-																				data-ng-model="alarmAlarm33" 
-																				data-ng-change="validAlarms($event);" />
-																		</div>																	 -->
+																	</div>																	
+																</div>															
+																<div data-ng-hide="unitMeter.uid==0">
+																	<div class="col-md-2" style="padding-right: 2px !important">
+																		<div class="form-group">
+																			<label class="control-label">Alarme 1 <span class="label label-default" style="font-size: 0.5em"> DETEC&Ccedil;&Atilde;O </span></label>																		
+																			<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm1.$invalid && !userForm.alarmAlarm1.$pristine || errorAlarm1}" 
+																				style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
+																				<input type="text" class="form-control" name="alarmAlarm1" 
+																					data-ng-model="alarmAlarm1"
+																					data-ng-change="validAlarms($event);" />
+																			</div>																	
+																			<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm11.$invalid && !userForm.alarmAlarm11.$pristine || errorAlarm11}" 
+																				style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
+																				<input type="text" class="form-control" name="alarmAlarm11" 
+																					data-ng-model="alarmAlarm11" 
+																					data-ng-change="validAlarms($event);" />
+																			</div>																	
+																		</div>
+																	</div>																	
+																	<div class="col-md-2" style="padding-right: 2px !important; padding-left: 2px !important">															
+																		<div class="form-group">
+																			<input class="pull-left" type="checkbox" data-ng-model="enableAlarm2" data-ng-change="validAlarms($event);" />&nbsp
+																			<label class="control-label"> Alarme 2 <span class="label label-warning" style="font-size: 0.5em"> ALERTA </span></label>
+																			
+																			<div class="col-md-12" data-ng-class="{'has-error': userForm.alarmAlarm2.$invalid && !userForm.alarmAlarm2.$pristine || errorAlarm2}" 
+																				style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
+																				<input type="text" class="form-control" name="alarmAlarm2"
+																					data-ng-disabled="!enableAlarm2" 
+																					data-ng-model="alarmAlarm2" 
+																					data-ng-change="validAlarms($event);" />
+																			</div>																	
+																			<!-- <div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm22.$invalid && !userForm.alarmAlarm22.$pristine || errorAlarm22}" 
+																				style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
+																				<input type="text" class="form-control" name="alarmAlarm22" 
+																					data-ng-disabled="!enableAlarm2" 
+																					data-ng-model="alarmAlarm22" 
+																					data-ng-change="validAlarms($event);" />
+																			</div>-->
+																		</div>
+																	</div>																	
+																	<div class="col-md-2" style="padding-left: 2px !important;padding-right: 2px !important;">
+																		<div class="form-group">
+																			<input class="pull-left" type="checkbox" data-ng-model="enableAlarm3" />&nbsp
+																			<label class="control-label"> Alarme 3 <span class="label label-danger" style="font-size: 0.5em"> EVACUA&Ccedil;&Atilde;O </span></label>
+																			
+																			<div class="col-md-12" data-ng-class="{'has-error': userForm.alarmAlarm3.$invalid && !userForm.alarmAlarm3.$pristine || errorAlarm3}" 
+																				style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
+																				<input type="text" class="form-control" name="alarmAlarm3" 
+																					data-ng-disabled="!enableAlarm3"
+																					data-ng-model="alarmAlarm3" 
+																					data-ng-change="validAlarms($event);" />
+																			</div>																	
+																			<!-- <div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm33.$invalid && !userForm.alarmAlarm33.$pristine || errorAlarm33}" 
+																				style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
+																				<input type="text" class="form-control" name="alarmAlarm33" 
+																					data-ng-disabled="!enableAlarm3"
+																					data-ng-model="alarmAlarm33" 
+																					data-ng-change="validAlarms($event);" />
+																			</div>-->
+																		</div>
 																	</div>
 																</div>
 															</div>
 														</div>
 														<hr style="margin-top: 8px !important; margin-bottom: 8px !important;">
-														<div class="row">
-																
+														<div class="row">																
 															<div class="col-md-12">
 																<div class="col-md-3">					            				
 																	<div class="checkbox3 checkbox-inline checkbox-check checkbox-round checkbox-light">
@@ -507,7 +459,7 @@
 																<div class="col-md-2">										            									            				
 																	<div class="checkbox3 checkbox-round">
 																		<input type="checkbox" id="checkboxActionOff" checked>
-																		<label for="checkboxActionOff">A&ccedil;&otilde;es a Realizar? </label>
+																		<label for="checkboxActionOff">A&ccedil;&otilde;es? </label>
 																	</div>
 																</div>
 																<div class="travarAction">            
@@ -566,8 +518,7 @@
 									    </div>
 					            	</div>					            						            		
 					            </form>
-							</div>							
-
+							</div>
 							 <div class="ui multipleMessages">
 								<ul class="list" data-ng-repeat="item in alarmMessageError">
 									<li class="text-red" data-bind-unsafe-html="item" />								
@@ -584,8 +535,7 @@
 				  	</div>				  	
 			  	</div>
 			</div>		
-		</div>
-				
+		</div>				
 	</div>
 
     

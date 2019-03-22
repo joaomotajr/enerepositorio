@@ -3,8 +3,6 @@ package br.com.eneeyes.main.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +13,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.AlarmDto;
-import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Gas;
 import br.com.eneeyes.main.model.state.DeviceType;
+import br.com.eneeyes.main.model.state.UnitMeter;
 import br.com.eneeyes.main.model.views.CompanyView;
 
 @Entity
@@ -33,7 +31,7 @@ public class Alarm {
 		this.uid = dto.getUid();
 		this.name = dto.getName();		
 		this.deviceType = dto.getDeviceType();
-		this.unitMeterGases = dto.getUnitMeterGases();
+		this.unitMeter = dto.getUnitMeter();
 		
 		if(dto.getGasDto() != null)
 			this.gas = new Gas(dto.getGasDto());		
@@ -70,15 +68,11 @@ public class Alarm {
 	private Long uid;
 	
 	@Column(name = "NAME", nullable = false)
-	private String name;
+	private String name;	
 	
-	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
-	private UnitMeterGases unitMeterGases;
-
-	@Enumerated(EnumType.ORDINAL) 
-	private UnitMeterGases UnitMeterGases() { 
-	    return unitMeterGases; 
-	}
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="UNIT_METER_ID", nullable = false)
+	private UnitMeter unitMeter;
 	
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="GAS_ID", nullable = true)
@@ -185,14 +179,14 @@ public class Alarm {
 		this.deviceType = deviceType;		
 	}
 
-	public final UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
+	public UnitMeter getUnitMeter() {
+		return unitMeter;
 	}
 
-	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-		this.unitMeterGases = unitMeterGases;
+	public void setUnitMeter(UnitMeter unitMeter) {
+		this.unitMeter = unitMeter;
 	}
-	
+
 	public final Gas getGas() {
 		return gas;
 	}

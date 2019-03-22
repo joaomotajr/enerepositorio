@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import br.com.eneeyes.main.dto.register.SensorDto;
 import br.com.eneeyes.main.model.enums.DetectionType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
+import br.com.eneeyes.main.model.state.UnitMeter;
 
 /**
  * Created by Junior on 06/06/2016.
@@ -46,7 +47,7 @@ public class Sensor {
 		
 		this.model = dto.getModel();
 		this.gas = new Gas(dto.getGasDto());	
-		this.unitMeterGases = dto.getUnitMeterGases();
+		this.unitMeter = dto.getUnitMeter();
 		this.rangeMax = dto.getRangeMax();
 		this.rangeMin = dto.getRangeMin();
 		this.rangeUnit = dto.getRangeUnit();
@@ -79,18 +80,14 @@ public class Sensor {
 	@Column(name = "MODEL", nullable = true)
 	String model;
 	
-	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
-	private UnitMeterGases unitMeterGases;
-
-	@Enumerated(EnumType.ORDINAL) 
-	private UnitMeterGases UnitMeterGases() { 
-	    return unitMeterGases; 
-	}
-	
-	@Column(name = "RANGE_MAX", nullable = true)		
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="UNIT_METER_ID", nullable = false)
+	private UnitMeter unitMeter;
+		
+	@Column(name = "RANGE_MAX", nullable = false)		
 	private Double rangeMax;
 	
-	@Column(name = "RANGE_MIN", nullable = true)		
+	@Column(name = "RANGE_MIN", nullable = false)		
 	private Double rangeMin;
 	
 	@Column(name = "RANGE_UNIT", nullable = true)		
@@ -143,15 +140,15 @@ public class Sensor {
 	public final void setModel(String model) {
 		this.model = model;
 	}
-	
-	public final UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
+		
+	public UnitMeter getUnitMeter() {
+		return unitMeter;
 	}
-	
-	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-		this.unitMeterGases = unitMeterGases;
+
+	public void setUnitMeter(UnitMeter unitMeter) {
+		this.unitMeter = unitMeter;
 	}
-	
+
 	public final Double getRangeMax() {
 		return rangeMax;
 	}

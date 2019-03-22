@@ -3,13 +3,14 @@ package br.com.eneeyes.main.dto.register;
 import br.com.eneeyes.main.model.enums.DetectionType;
 import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Sensor;
+import br.com.eneeyes.main.model.state.UnitMeter;
 
 public class SensorDto extends BaseDeviceDto implements Comparable<SensorDto> {
 	
 	private Long uid;
 	private DetectionType detectionType;
 	private GasDto gasDto;
-	private UnitMeterGases unitMeterGases;
+	private UnitMeter unitMeter;
 	private Double rangeMax;	
 	private Double rangeMin;			
 	private Double rangeUnit;
@@ -27,7 +28,7 @@ public class SensorDto extends BaseDeviceDto implements Comparable<SensorDto> {
 		this.model = sensor.getModel();
 		this.detectionType = sensor.getDetectionType();		
 		this.gasDto = new GasDto(sensor.getGas());	
-		this.unitMeterGases = sensor.getUnitMeterGases();
+		this.unitMeter = sensor.getUnitMeter();
        	this.rangeMax = sensor.getRangeMax();
        	this.rangeMin = sensor.getRangeMin();
        	this.rangeUnit = sensor.getRangeUnit();
@@ -64,12 +65,12 @@ public class SensorDto extends BaseDeviceDto implements Comparable<SensorDto> {
 		}
 	}
 	
-	public final UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
+	public final UnitMeter getUnitMeter() {
+		return unitMeter;
 	}
 	
-	public final void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-		this.unitMeterGases = unitMeterGases;
+	public final void setUnitMeter(UnitMeter unitMeter) {
+		this.unitMeter = unitMeter;
 	}
 	
 	public final Double getRangeMax() {

@@ -4,15 +4,19 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.SmsStatus;
-import br.com.eneeyes.main.model.enums.UnitMeterGases;
+import br.com.eneeyes.main.model.state.UnitMeter;
 
 @Entity
 @Subselect("select * from queue_sms_view")
@@ -47,9 +51,10 @@ public class QueueSmsView implements Serializable {
 	private AlarmType alarmType;
 	
 	private String gas_name;
-	
-	@Column(name = "unit_meter_gases")
-	private UnitMeterGases unitMeterGases;
+		
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="UNIT_METER_ID", nullable = false)
+	private UnitMeter unitMeter;	
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -123,7 +128,7 @@ public class QueueSmsView implements Serializable {
 		return gas_name;
 	}
 
-	public UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
+	public UnitMeter getUnitMeter() {
+		return unitMeter;
 	}	
 }

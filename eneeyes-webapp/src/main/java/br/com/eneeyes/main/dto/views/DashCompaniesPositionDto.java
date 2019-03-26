@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
-import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.state.DeviceType;
+import br.com.eneeyes.main.model.state.UnitMeter;
 import br.com.eneeyes.main.model.views.DashCompaniesPosition;
 import br.com.eneeyes.main.model.views.PositionHistoricView;
 
@@ -33,7 +33,7 @@ public class DashCompaniesPositionDto {
 		this.alarmType = e.getAlarmType();
 		this.lastUpdate = e.getLastUpdate();		
 		this.gasName = e.getGasName();
-		this.unitMeterGases = e.getUnitMeterGases();		
+		this.unitMeter = e.getUnitMeter();		
 		
 		if(e.getPositionHistoricView() != null) {
 			
@@ -90,7 +90,7 @@ public class DashCompaniesPositionDto {
 	private Date lastUpdate;
 	private String arrayValues = "";
 	private String gasName;
-	private UnitMeterGases unitMeterGases;
+	private UnitMeter unitMeter;
 		
 	public final String getArrayValues() {
 		return arrayValues;
@@ -180,12 +180,12 @@ public class DashCompaniesPositionDto {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
+	public UnitMeter getUnitMeter() {
+		return unitMeter;
 	}
 
-	public void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-		this.unitMeterGases = unitMeterGases;
+	public void setUnitMeter(UnitMeter unitMeter) {
+		this.unitMeter = unitMeter;
 	}
 
 	public DeviceType getDeviceType() {

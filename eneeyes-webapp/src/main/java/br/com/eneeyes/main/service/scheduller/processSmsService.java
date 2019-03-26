@@ -65,7 +65,7 @@ public class processSmsService {
 			+ "\r\nDetector: " + item.getCompany_detector_name()
 			+ "\r\nLocal: " + detectorLocal 
 			+ "\r\nData/Hora: " + fmt.format(item.getLast_Update())
-			+ "\r\nGas: " + item.getGas_name() + medicao  + item.getUnitMeterGases();
+			+ "\r\nGas: " + item.getGas_name() + medicao  + item.getUnitMeter().getSymbol();
 						Boolean ok = siteService.SendSms(item.getCelular(), msg) && item.getCelular1() == null ? true : siteService.SendSms(item.getCelular1(), msg) ;
 			
 			if (ok)

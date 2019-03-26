@@ -71,7 +71,7 @@ public class processEmailService {
 					"<b>Local:</b> " + detectorLocal + "<br>" + 					 
 					"<b>Data/Hora:</b> " + item.getLast_Update() +
 					"<hr>" + 
-					"<i><span style='font-size: 1.2em; font-weight: bold'>" + item.getGas_name() + medicao  + item.getUnitMeterGases() + "</span></i>";
+					"<i><span style='font-size: 1.2em; font-weight: bold'>" + item.getGas_name() + medicao  + item.getUnitMeter().getSymbol() + "</span></i>";
 			
 			String urlTemplate = this.getClass().getClassLoader().getResource("/templates/alarme.html").toString().replace("file:", "");
 			String msg = "";

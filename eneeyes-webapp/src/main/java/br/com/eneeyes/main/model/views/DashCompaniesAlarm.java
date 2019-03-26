@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Subselect;
@@ -19,8 +20,8 @@ import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.enums.SigmaStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
-import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.state.DeviceType;
+import br.com.eneeyes.main.model.state.UnitMeter;
 
 @Entity
 @Subselect("select * from dash_companies_alarm2")
@@ -73,8 +74,10 @@ public class DashCompaniesAlarm implements Serializable {
 	@Column(name = "GAS_NAME")
 	private String gasName;
 	
-	@Column(name = "UNIT_METER_GASES")
-	private UnitMeterGases unitMeterGases;	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@MapsId
+	@JoinColumn(name="UNIT_METER_ID", nullable = false)
+	private UnitMeter unitMeter;		
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -152,8 +155,8 @@ public class DashCompaniesAlarm implements Serializable {
 		return gasName;
 	}
 
-	public UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
+	public UnitMeter getUnitMeter() {
+		return unitMeter;
 	}
 	
 	public DeviceType getDeviceType() {

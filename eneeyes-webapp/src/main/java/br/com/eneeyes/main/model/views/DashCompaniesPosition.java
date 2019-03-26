@@ -16,8 +16,8 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
-import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.state.DeviceType;
+import br.com.eneeyes.main.model.state.UnitMeter;
 
 @Entity
 @Subselect("select * from dash_companies_position2")
@@ -79,8 +79,9 @@ public class DashCompaniesPosition {
 	@Column(name = "GAS_NAME")
 	private String gasName;
 		
-	@Column(name = "UNIT_METER_GASES")
-	private UnitMeterGases unitMeterGases;
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="UNIT_METER_ID", nullable = false)
+	private UnitMeter unitMeter;	
 
 	public Long getUid() {
 		return uid;
@@ -126,8 +127,8 @@ public class DashCompaniesPosition {
 		return gasName;
 	}
 
-	public UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
+	public UnitMeter getUnitMeter() {
+		return unitMeter;
 	}
 
 	public DeviceType getDeviceType() {

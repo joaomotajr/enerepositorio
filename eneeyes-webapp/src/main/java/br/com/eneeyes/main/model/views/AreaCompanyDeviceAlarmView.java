@@ -7,8 +7,6 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,8 +15,8 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
-import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.state.DeviceType;
+import br.com.eneeyes.main.model.state.UnitMeter;
 
 @Entity
 @Subselect("select * from area_companydevice_alarm_view")
@@ -61,14 +59,10 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 	@Column(name = "range_max")
 	private Double rangeMax;
 	
-	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
-	private UnitMeterGases unitMeterGases;
-
-	@Enumerated(EnumType.ORDINAL) 
-	private UnitMeterGases UnitMeterGases() { 
-	    return unitMeterGases; 
-	}
-	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="UNIT_METER_ID", nullable = false)
+	private UnitMeter unitMeter;
+			
 	@Column(name = "last_value", nullable = true)
 	private BigDecimal lastValue;
 	
@@ -147,8 +141,8 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 		this.rangeMax = rangeMax;
 	}
 
-	public final UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
+	public final UnitMeter getUnitMeter() {
+		return unitMeter;
 	}
 
 	public Date getLastUpdate() {

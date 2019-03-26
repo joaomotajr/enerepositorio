@@ -1,23 +1,3 @@
-app.filter('gasFilter', function () {
-    return function (objects, criteria) {
-        var filterResult = new Array();
-
-        if (!criteria ||( criteria && !criteria.unitMeterGases != null && !criteria.gas) )
-            return objects;
-
-        for (var index in objects) {
-        	
-        	if (objects[index].unitMeterGases == criteria.unitMeterGases && objects[index].gasDto.name == criteria.gas  ) {
-
-        		filterResult.push(objects[index]);
-            }   
-        }
-
-        return filterResult;
-    }
-});
-
-
 app.controller('companyDetectorController', function ($scope, $interval, $rootScope, $timeout, AlarmService,
 		CompanyDetectorService, CompanyDeviceService, DetectorService, PositionService, CompanyService, 
 		CompanyDetectorMaintenanceHistoricService, ViewService) {
@@ -107,17 +87,16 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	
 	$scope.getDetectors = function() {		 
 		 $scope.resultDetectors = new DetectorService.listAll();		 
-		 $scope.resultDetectors.$detector({_csrf : angular.element('#_csrf').val()}, function(){			
+		 $scope.resultDetectors.$detector({_csrf : angular.element('#_csrf').val()}, function() {			
 			 $scope.detectors = $scope.resultDetectors.list; 
 			 
 			 if ($scope.selectedCompanyDevice != null)
 			 	$scope.getOneCompanyDetector();			
         });		 
-	 };	
+	};	
 	 
 	$scope.getOneCompanyDetector = function() {
-
-		$scope.search = { unitMeterGases: null, gas : null };
+		$scope.search = { unitMeter: null, gas : null };
 				
 		$scope.resultCompanyDetector = new CompanyDetectorService.listPorCompanyDevice();		 
 		$scope.resultCompanyDetector.$companyDetector({_csrf : angular.element('#_csrf').val(), 
@@ -134,8 +113,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
         });		 
 	};
 
-	$scope.getPositionsAndIds = function(companyDeviceId) {
-		
+	$scope.getPositionsAndIds = function(companyDeviceId) {		
 		$scope.listOnePosition = new PositionService.listOneByCompanyDevice();		 
 		$scope.listOnePosition.$position({_csrf : angular.element('#_csrf').val(), id : companyDeviceId}, function() {
 			
@@ -170,26 +148,15 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		var red =    sensor.alarmOn == null ? 0 : sensor.alarm3;
 		var yellow = sensor.alarmOn == null ? 0 : sensor.alarm2;
 		var orange = sensor.alarmOn == null ? 0 : sensor.alarm1;
-		var unitMeter;
 		
-		if(sensor.unitMeterGases == "LEL_PERCENT") 
-			unitMeter = "LEL %"; 
-		else if(sensor.unitMeterGases == "PERCENT_VOLUME") 
-			unitMeter = "VOL %"; 
-		else if(sensor.unitMeterGases == "LEL_PERCENT_METRO") 
-			unitMeter = "LEL %m"; 
-		else	
-			unitMeter = sensor.unitMeterGases;
-
-		properties =  {
-			
+		properties =  {			
 			theme: "fint",
 			// caption: sensor.sensorName,
 			lowerLimit: sensor.rangeMin,
 			upperLimit: sensor.rangeMax,
 			lowerLimitDisplay: sensor.rangeMin + " Min",
 			upperLimitDisplay: sensor.rangeMax + " Max",
-			numberSuffix: " " + (unitMeter),			
+			numberSuffix: " " + (sensor.unitMeter.symbol),			
 			
 			showValue: "1",
 			valueFontSize: "12",
@@ -206,30 +173,26 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		};
 
 		trendPoints =  {
-			point: [
-				{
+			point: [{
 					startValue: orange,					
 					dashed: "1",
 					dashlen: "3",
 					dashgap: "3",
 					thickness: "2"
-				},
-				{
+				}, {
 					startValue: yellow,					
 					dashed: "1",
 					dashlen: "3",
 					dashgap: "3",
 					thickness: "2"
-				},
-				{
+				}, {
 					startValue: red,					
 					dashed: "1",
 					dashlen: "3",
 					dashgap: "3",
 					thickness: "2"
-				}
-			]
-		};
+				}]
+			};
 
 		colors = {				
 			color: [
@@ -237,8 +200,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 				minValue: sensor.rangeMin,
 				maxValue: orange,
 				code: "#6baa01"			
-			},
-			{
+			}, {
 				minValue: orange,
 				maxValue: yellow,
 				code: "#D8D8D8"		
@@ -254,13 +216,12 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		};
 
 		colors2 = {				
-			color: [
-			{
+			color: [{
 				minValue: sensor.rangeMin,
 				maxValue: sensor.rangeMax,
 				label : "Sem Limites de Alarmes",	
 				code: "#6baa01"
-			}]		
+			}]
 		};
 
 		var value = sensor.lastValue > sensor.rangeMax ? sensor.rangeMax : sensor.lastValue;
@@ -272,15 +233,14 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 				tooltext: "Status : $value",
 				rearExtension: "5"
 			}]			
-		}
+		};
 
 		dataSource = {
 			chart: null,
 			colorRange: null,
 			dials: null,
 			trendPoints: null
-		}
-		
+		};		
 
 		dataSource.chart = properties;
 		dataSource.colorRange = (yellow == 0 || orange == 0) ? colors2 : colors;
@@ -295,16 +255,14 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		if($scope.selectedCompanyDetector.deliveryDate != null) {
 			var dataAdm = new Date($scope.selectedCompanyDetector.deliveryDate);	
 	        $('#deliveryDate').val(dataAdm.getUTCDate() + "/" + (dataAdm.getUTCMonth() + 1) + "/" + dataAdm.getUTCFullYear());	
-		}
-		
+		}		
 		if($scope.selectedCompanyDetector.installDate != null) {
 			var dataAdm = new Date($scope.selectedCompanyDetector.installDate);	
 	        $('#installDate').val(dataAdm.getUTCDate() + "/" + (dataAdm.getUTCMonth() + 1) + "/" + dataAdm.getUTCFullYear());	        
 		}	
 	}
 
-	$scope.initializeDetector =  function()  {
-				
+	$scope.initializeDetector =  function()  {				
 		$("#datemask").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
 	    $("#datemask2").inputmask("mm/dd/yyyy", { "placeholder": "mm/dd/yyyy" });
 	    $("[data-mask]").inputmask();
@@ -384,7 +342,7 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 				'<td>'+item.sensorDto.name+'</td>'+	                
 				'<td>'+item.sensorDto.gasDto.name+'</td>'+
 				'<td>'+item.sensorDto.rangeMin + '-' + item.sensorDto.rangeMax +'</td>'+
-				'<td>'+item.sensorDto.unitMeterGases + '</td>'+
+				'<td>'+item.sensorDto.unitMeter.symbol + '</td>'+
 			'</tr>'+            
 			'</table>'+
 		'</div>';
@@ -400,11 +358,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	
 	$scope.configAlarm = function(index) {
 		
-		$scope.search = { unitMeterGases: $scope.selectedCompanyDeviceAlarm.unitMeterGases, gas : $scope.selectedCompanyDeviceAlarm.gasName};
-
+		$scope.search = { unitMeter: $scope.selectedCompanyDeviceAlarm.unitMeter.symbol, gas : $scope.selectedCompanyDeviceAlarm.gasName};
 		$timeout(function () {
-			$('#modalAlarm').modal({ show: 'false', backdrop: 'static', keyboard:'false' });
-						 
+			$('#modalAlarm').modal({ show: 'false', backdrop: 'static', keyboard:'false' });						 
 		}, 300);
 	};
 

@@ -251,12 +251,7 @@
 																<dt>Alarme (nome):</dt>
 																	<dd>{{findedCompanyDevice.alarmDto.name}}</dd>
 																<dt>Unidade:</dt>
-																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='LEL_PERCENT_METRO'"> LEL%m</dd>
-																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='GRAUS_CELSIUS'"> &deg;C</dd>
-																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='LEL_PERCENT'">LEL%</dd>
-																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='PERCENT_VOLUME'">VOL%</dd>
-																	<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases!='LEL_PERCENT' &&  findedCompanyDevice.alarmDto.unitMeterGases!='PERCENT_VOLUME' && findedCompanyDevice.alarmDto.unitMeterGases!='GRAUS_CELSIUS' && findedCompanyDevice.alarmDto.unitMeterGases!='LEL_PERCENT_METRO'">
-																		{{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>
+																<dd data-ng-bind="findedCompanyDevice.alarmDto.unitMeter.symbol"></dd>
 																<dt>Range Max:</dt>
 																	<dd><strong>{{selectedCompanyDetector.rangeMax}}</strong></dd>
 																<dt>Detec&ccedil;&atilde;o:</dt>
@@ -441,9 +436,7 @@
 				<dt>Sensor (nome):</dt>
 					<dd>{{selectedCompanyDetector.sensorName}}</dd>
 				<dt>Nome do Alarme / Unidade de Medida:</dt>
-					<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='LEL_PERCENT'">{{findedCompanyDevice.alarmDto.name}} / LEL%</dd>
-					<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='PERCENT_VOLUME'">{{findedCompanyDevice.alarmDto.name}} / VOL%</dd>
-					<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases!='LEL_PERCENT' && findedCompanyDevice.alarmDto.unitMeterGases!='PERCENT_VOLUME'">{{findedCompanyDevice.alarmDto.name}} / {{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>																	
+					<dd>{{findedCompanyDevice.alarmDto.name}} / {{findedCompanyDevice.alarmDto.unitMeter.symbol}}</dd>					
 				<dt>Range Max:</dt>
 					<dd><strong>{{selectedCompanyDetector.rangeMax}}</strong></dd>
 				<dt>Detecri��o:</dt>

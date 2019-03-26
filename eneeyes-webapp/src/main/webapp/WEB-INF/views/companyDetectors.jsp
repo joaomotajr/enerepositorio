@@ -102,11 +102,7 @@
 													</li>
 													<li class="list-group-item" style="padding: 1px 10px;">
 														<label><i class="fa fa-yelp"></i>&nbsp;Gas:&nbsp;</label>{{selectedCompanyDetector.detectorDto.sensorDto.gasDto.name}}
-														<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDeviceAlarm.unitMeterGases=='LEL_PERCENT_METRO'"> LEL%m</span>
-														<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases == 'LEL_PERCENT'">LEL%</span>
-														<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases == 'PERCENT_VOLUME'">VOL%</span>
-														<spqn style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases != 'LEL_PERCENT' 
-														&& selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases != 'PERCENT_VOLUME' && selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases != 'PERCENT_VOLUME_METRO'">{{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>
+														<span style="vertical-align:super;font-size:0.6em;color:orange"> {{selectedCompanyDetector.detectorDto.sensorDto.unitMeter.symbol}}</span>
 													</li>
 													<li class="list-group-item" style="padding: 1px 10px;">
 														<label>Id:</label>&nbsp;{{selectedCompanyDetectorPosition.uid}}
@@ -179,11 +175,7 @@
 																	<label>G&aacute;s:</label> 
 																	<span class="pull-right">
 																		{{selectedCompanyDeviceAlarm.gasName}}
-																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDeviceAlarm.unitMeterGases=='LEL_PERCENT_METRO'"> LEL%m</span>
-																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDeviceAlarm.unitMeterGases == 'LEL_PERCENT'">LEL%</span>
-																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDeviceAlarm.unitMeterGases == 'PERCENT_VOLUME'">VOL%</span>
-																		<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="selectedCompanyDeviceAlarm.unitMeterGases != 'LEL_PERCENT' 
-																				&& selectedCompanyDeviceAlarm.unitMeterGases != 'PERCENT_VOLUME' && selectedCompanyDeviceAlarm.unitMeterGases != 'LEL_PERCENT_METRO'">{{selectedCompanyDeviceAlarm.unitMeterGases}}</dd>
+																		<span style="vertical-align:super;font-size:0.6em;color:orange"> {{selectedCompanyDeviceAlarm.unitMeter.symbol}}</span>
 																	</span>
 																</span>
 																</li>
@@ -287,7 +279,8 @@
 				
 						<div class="box">
 							<div class="box-header">
-							  <h3 class="box-title">Cadastro de Alarmes</h3><span class="pull-right"> ({{selectedCompanyDeviceAlarm.alarmId}}) [{{selectedCompanyDetector.detectorDto.sensorDto.gasDto.name}} / {{selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases}}]</span>
+							  <h3 class="box-title">Cadastro de Alarmes</h3>
+							  <span class="pull-right"> ({{selectedCompanyDeviceAlarm.alarmId}}) [{{selectedCompanyDetector.detectorDto.sensorDto.gasDto.name}} / {{selectedCompanyDetector.detectorDto.sensorDto.unitMeter.symbol}}]</span>
 							</div>
 							<div class="box-body">
 								
@@ -318,14 +311,14 @@
 												<td>{{item.alarm2}}</td>
 												<td>{{item.alarm3}}</td>												
 												<td>
-													<div data-ng-if="(item.unitMeterGases != selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases ||
+													<div data-ng-if="(item.unitMeter.uid != selectedCompanyDetector.detectorDto.sensorDto.unitMeter.uid ||
 														item.gasDto.name != selectedCompanyDetector.detectorDto.sensorDto.gasDto.name)">
 														<button type="button" class="btn btn-offLine btn-xs" disabled>Incompativel</button>
 													</div>																										
 													<div data-ng-if="item.uid == selectedCompanyDeviceAlarm.alarmId">
 														<button type="button" class="btn btn-danger btn-xs" data-ng-click="toggleAlarm(null)">&nbsp;&nbsp;&nbsp;Remover&nbsp;&nbsp;&nbsp;</button>
 													</div>
-													<div data-ng-if="(item.unitMeterGases == selectedCompanyDetector.detectorDto.sensorDto.unitMeterGases && 
+													<div data-ng-if="(item.unitMeter.uid == selectedCompanyDetector.detectorDto.sensorDto.unitMeter.uid && 
 														item.gasDto.name == selectedCompanyDetector.detectorDto.sensorDto.gasDto.name) && item.uid != selectedCompanyDeviceAlarm.alarmId">
 														<button type="button" class="btn btn-primary btn-xs" data-ng-click="toggleAlarm(item)">&nbsp;&nbsp;Selecionar&nbsp;&nbsp;</button>
 													</div>													

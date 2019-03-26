@@ -1,6 +1,6 @@
 app.controller('generalController', function ($scope, $timeout, $interval, $rootScope, $filter, CompanyService, UnitService, ViewService) {
 
-	var intervals = []
+	var intervals = [];
 
 	$scope.selectCompany = function(index) {		
 		$scope.selectedCompany = $scope.companiesSumary[index];
@@ -34,8 +34,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 	};
 
 	$scope.selectArea = function(index) {
-		$scope.showAreas = undefined;
-		
+		$scope.showAreas = undefined;		
 		$scope.selectedArea = [];
 		$scope.selectedArea.uid = $scope.selectedUnit.areasDto[index].uid;
 		$scope.selectedArea.name = $scope.selectedUnit.areasDto[index].name;		 
@@ -52,7 +51,6 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 	};
 
 	$scope.getDevices = function(areaId) {
-
 		$scope.resultDevices = new ViewService.listAreaCompanyDeviceAlarms();		 
 		$scope.resultDevices.$view({_csrf : angular.element('#_csrf').val(), areaId : areaId}, function(){						
 			$scope.selectedArea.list = $scope.resultDevices.list;
@@ -61,9 +59,8 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 					function(e) {						
 					e.dataSource = $scope.getGaugeInfo(e);
 					e.dataType = selectGraphicType(e.deviceType.graphicType);
-				});
-
-			 initGaugeTimer();
+			});
+			initGaugeTimer();
 		});
 	};
 
@@ -84,8 +81,7 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 	}
 			
 	initGaugeTimer = function() {
-		intervals.push( $interval(function(){
-
+		intervals.push( $interval(function() {
 			if($rootScope == null) return;
 			if($rootScope.currentPage == "Over-View")
 				$scope.timertDevices($scope.selectedArea.uid);		
@@ -224,47 +220,9 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 			dataSource.chart.valuefontsize = "12";			
 		}
 
-		dataSource.chart.numberSuffix = $scope.getMeters(e.unitMeterGases);
+		dataSource.chart.numberSuffix = " " + e.unitMeter.symbol;
 		return dataSource;
-	};		
-
-	 $scope.getMeters = function(unit) {
-		if (unit == 'VOLT') { 
-			return ' V';
-		} else if(unit == 'GRAUS_CELSIUS') {
-			return ' °C';
-		} else if(unit == 'WATTS') {
-			return ' W';
-		} else if(unit == 'KWATTS') {
-			return ' kW';
-		} else if(unit == 'FAHRENHEIT') {
-			return ' °F';
-		} else if(unit == 'M3_HOUR') {
-			return ' m³/hora';
-		} else if(unit == 'SECOND') {
-			return " Segundos";
-		} else if(unit == 'M3') {
-			return ' m³';
-		} else if(unit == 'MINUTE') {
-			return " Minutos";
-		} else if(unit == 'AMPERE') {
-			return " Amps";
-		} else if(unit == 'KWT') {
-			return " KWT";
-		} else if(unit == 'METERS') {
-			return " ms";
-		} else if(unit == 'LEL_PERCENT_METRO') {
-			return " lel% m";
-		} else if(unit == 'LEL_PERCENT') {
-			return " lel%";
-		} else if(unit == 'PERCENT_VOLUME') {
-			return " vol%";
-		} else if(unit == 'METERS') {
-			return " ms";
-		} else {
-			return unit;
-		}
-	}
+	};			
 
 	$scope.getCompaniesSumary();	
 });

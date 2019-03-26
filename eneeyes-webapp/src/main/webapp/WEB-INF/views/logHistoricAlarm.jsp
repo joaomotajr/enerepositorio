@@ -245,7 +245,7 @@
 															<span class="label label-danger" data-ng-if="!item.alarmOn">OFF</span>														
 														</td>													
 
-														<td class="col-sm-1">
+														<td class="col-sm-1" style="text-shadow:  0px 20px 20px #999;vertical-align: middle;">
 															<span class="label"  
 																data-ng-class="{
 																	'label-offline' : item.alarmType=='OFFLINE',
@@ -321,12 +321,7 @@
 																	<dt style="width: 90px">Alarme (nome):</dt>
 																		<dd style="margin-left: 120px;">{{findedCompanyDevice.alarmDto.name}}</dd>
 																	<dt style="width: 90px">Unidade:</dt>																		
-																		<dd style="margin-left: 120px;" data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='LEL_PERCENT_METRO'"> LEL%m</dd>
-																		<dd style="margin-left: 120px;" data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='GRAUS_CELSIUS'"> �C</dd>
-																		<dd style="margin-left: 120px;" data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='LEL_PERCENT'">LEL%</dd>
-																		<dd style="margin-left: 120px;" data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='PERCENT_VOLUME'">VOL%</dd>
-																		<dd style="margin-left: 120px;" data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases!='LEL_PERCENT' &&  findedCompanyDevice.alarmDto.unitMeterGases!='PERCENT_VOLUME' && findedCompanyDevice.alarmDto.unitMeterGases!='GRAUS_CELSIUS' && findedCompanyDevice.alarmDto.unitMeterGases!='LEL_PERCENT_METRO'">
-																			{{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>
+																		<dd style="margin-left: 120px;"> {{findedCompanyDevice.alarmDto.unitMeter.symbol}}</dd>																		
 																	<dt style="width: 90px">Range Max:</dt>
 																		<dd style="margin-left: 120px;"><strong>{{selectedCompanyDetector.rangeMax}}</strong></dd>
 																	<dt style="width: 90px">Detec&ccedil;&atilde;o:</dt>
@@ -438,53 +433,44 @@
 		</div>		
 	</div>
 
-	<div id="printTable" style="visibility:hidden" >
-	
+	<div id="printTable" style="visibility:hidden">	
 		<div class="col-md-12">
 			<h1>Empresa: {{selectedCompanyDetector.company}}</h1>
 			<h2>Unidade: {{selectedCompanyDetector.unit}} - &Aacute;rea: {{selectedCompanyDetector.area}} </h2>
 			<hr>						
-			<h3 class="box-title"><strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{selectedCompanyDetector.detectorName}})
-					
-			<i class="fa fa-bell-o"></i> <h3 class="box-title">Detalhes do Sensor:</h3>                       
-																					
+			<h3 class="box-title"><strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{selectedCompanyDetector.detectorName}})					
+			<i class="fa fa-bell-o"></i> <h3 class="box-title">Detalhes do Sensor:</h3>																					
 			<dl class="dl-horizontal">
 				<dt>Sensor (nome):</dt>
 					<dd>{{selectedCompanyDetector.sensorName}}</dd>
 				<dt>Nome do Alarme / Unidade de Medida:</dt>
-					<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='LEL_PERCENT'">{{findedCompanyDevice.alarmDto.name}} / LEL%</dd>
-					<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases=='PERCENT_VOLUME'">{{findedCompanyDevice.alarmDto.name}} / VOL%</dd>
-					<dd data-ng-if="findedCompanyDevice.alarmDto.unitMeterGases!='LEL_PERCENT' && findedCompanyDevice.alarmDto.unitMeterGases!='PERCENT_VOLUME'">{{findedCompanyDevice.alarmDto.name}} / {{findedCompanyDevice.alarmDto.unitMeterGases}}</dd>																	
+					<dd style="margin-left: 120px;"> {{findedCompanyDevice.alarmDto.unitMeter.symbol}}</dd>					
 				<dt>Range Max:</dt>
 					<dd><strong>{{selectedCompanyDetector.rangeMax}}</strong></dd>
-				<dt>Detecri��o:</dt>
+				<dt>Detecri&ccedil;&atilde;:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm1" class="alarm1"> {{findedCompanyDevice.alarmDto.alarm1}}</span></dd>							
 				<dt>Alerta:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm2" class="alarm2"> {{findedCompanyDevice.alarmDto.alarm2}}</span></dd>
-				<dt>Evacua��o:</dt>
+				<dt>Evacua&ccedil;&atilde;o:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm3" class="alarm3"> {{findedCompanyDevice.alarmDto.alarm3}}</span></dd>
-			</dl>			            
-			
-			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;�odo:</strong> {{selectedPeriodo}}</div>
-			
+			</dl>			
+			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;�odo:</strong> {{selectedPeriodo}}</div>			
 			<br />
 			<div id="dvData">
 				<table class='zui-table' data-cellspacing="0" data-width="100%">	                   
 					<tr>	                
-							<th>ID</th>                                                                                   
-							<th>Data</th>
-							<th>Hora</th>                     	
-															
-							<th data-ng-if="tipoGrupo==1">Valor</th>
-							<th data-ng-if="tipoGrupo!=1">M&aacute;ximo</th>
-							<th data-ng-if="tipoGrupo!=1">M&iacute;nimo</th>
-							
-							<th data-ng-if="tipoGrupo==1">Origem Informa&ccedil;&atilde;o</th>			                                                                                                                            
-						</tr>                                    
-						<tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">
-							<td>{{item.sensorId}} </td>
-							<td>{{item.lastUpdate | date:'dd/MM/yyyy' }}</td>
-							<td>{{item.lastUpdate | date:'HH:mm:ss' }}</td>
+						<th>ID</th>                                                                                   
+						<th>Data</th>
+						<th>Hora</th>														
+						<th data-ng-if="tipoGrupo==1">Valor</th>
+						<th data-ng-if="tipoGrupo!=1">M&aacute;ximo</th>
+						<th data-ng-if="tipoGrupo!=1">M&iacute;nimo</th>						
+						<th data-ng-if="tipoGrupo==1">Origem Informa&ccedil;&atilde;o</th>			                                                                                                                            
+					</tr>                                    
+					<tr data-ng-repeat="item in listHistoricInterval.list | alarmFilter:selectedfilterAlarm">
+						<td>{{item.sensorId}} </td>
+						<td>{{item.lastUpdate | date:'dd/MM/yyyy' }}</td>
+						<td>{{item.lastUpdate | date:'HH:mm:ss' }}</td>
 
 						<td data-ng-if="tipoGrupo==1"> {{changeToValue(item.value)}} </td>						
 						<td data-ng-if="tipoGrupo!=1"> {{item.maxValue}} </td>

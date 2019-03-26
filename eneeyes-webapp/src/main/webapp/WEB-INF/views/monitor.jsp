@@ -325,8 +325,7 @@
 															<span data-ng-if="selectedPositionAlarm.deviceType.type=='DETECTOR'">Gás: {{selectedPositionAlarm.gasName}}</span>
 															<span data-ng-if="selectedPositionAlarm.last_value>0">
 																| Medi&ccedil;&atilde;o: {{selectedPositionAlarm.last_value}}
-																<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
-																<span style="vertical-align:super;font-size:0.5em" data-ng-if="selectedPositionAlarm.unitMeterGases!='LEL_PERCENT'"> {{selectedPositionAlarm.unitMeterGases}}</span>
+																<span style="vertical-align:super;font-size:0.5em"> {{selectedPositionAlarm.unitMeter.symbol}}</span>																
 															</span>
 														</dd>													
 							                  	</dl>								                	

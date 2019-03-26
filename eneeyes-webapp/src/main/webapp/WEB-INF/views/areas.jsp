@@ -44,7 +44,7 @@
 				       	<li class="active"><a href="#tabArea_1" id="stepTabArea_1" data-toggle="tab">Cadastro</a></li>
 				       	<li><a href="#tabArea_2" id="stepTabArea_2" data-toggle="tab">Local</a></li>
 				       	<li><a href="#tabArea_3" id="stepTabArea_3" data-toggle="tab">Dispositivos</a></li>
-				    	<li title="Trocar Imagem da Área" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
+				    	<li title="Trocar Imagem da ï¿½rea" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
 				    </ul>
 					
 					<div class="tab-content">
@@ -192,8 +192,7 @@
 									                      		<span class="description-text">Range: Min|Man: {{item.detectorDto.sensorDto.rangeMin}} | {{item.detectorDto.sensorDto.rangeMax}} </span>
 																<br>
 																G&aacute;s: <strong class="text-navy">{{item.detectorDto.sensorDto.gasDto.name}}</strong>																
-																<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.sensorDto.unitMeterGases=='LEL_PERCENT'"> LEL%</span>
-																<span style="vertical-align:super;font-size:0.6em;color:orange" data-ng-if="item.sensorDto.unitMeterGases!='LEL_PERCENT'"> {{item.detectorDto.sensorDto.unitMeterGases}}</span>
+																<span style="vertical-align:super;font-size:0.6em;color:orange"> {{item.detectorDto.sensorDto.unitMeter.symbol}}</span>																
 										                	</div>									                    					                    
 									                    </div>						                    					                    					                					                  			                  
 									                </div>					                

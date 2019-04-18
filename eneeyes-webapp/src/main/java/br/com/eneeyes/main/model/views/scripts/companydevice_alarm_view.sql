@@ -11,7 +11,6 @@ VIEW `companydevice_alarm_view` AS
         `a`.`ALARM_3` AS `ALARM_3`,
         `a`.`ALARM_OFF` AS `ALARM_OFF`,
         `a`.`NAME` AS `NAME`,
-        `a`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`,
         `a`.`GAS_ID` AS `GAS_ID`,
         `a`.`ACTION1` AS `ACTION1`,
         `a`.`ACTION2` AS `ACTION2`,
@@ -31,10 +30,11 @@ VIEW `companydevice_alarm_view` AS
         `a`.`ALARM_11` AS `ALARM_11`,
         `a`.`ALARM_22` AS `ALARM_22`,
         `a`.`ALARM_33` AS `ALARM_33`,
-        `a`.`DEVICE_TYPE` AS `DEVICE_TYPE`,
+        `dt`.`TYPE` AS `DEVICE_TYPE`,
         `a`.`ALARM2_ON` AS `ALARM2_ON`,
         `a`.`ALARM3_ON` AS `ALARM3_ON`
     FROM
-        (`company_device` `cdv`
+        ((`company_device` `cdv`
         JOIN `alarm` `a` ON ((`cdv`.`ALARM_ID` = `a`.`UID`)))
+        JOIN `device_type` `dt` ON ((`a`.`DEVICE_TYPE_ID` = `dt`.`UID`)))
     ORDER BY `cdv`.`UID`

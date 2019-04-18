@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import org.hibernate.annotations.Subselect;
 
 @Entity
-@Subselect("select * from dash_companies2")
+@Subselect("select * from dash_companies")
 public class DashCompany implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -69,7 +69,7 @@ public class DashCompany implements Serializable {
 		return areaId;
 	}
 
-	private String device;	
+	private String device;
 	public final String getDevice() {
 		return device;
 	}

@@ -45,9 +45,13 @@ public class QueueEmailView implements Serializable {
 	private String area_name;
 	private String area_local;
 	
-	private Long sensor_id;
 	private BigDecimal last_value;
 	private Date last_Update;
+	
+	private String device;	
+	
+	@Column(name="device_type")
+	private int deviceType;
 	
 	@Column(name = "alarm_type")
 	private AlarmType alarmType;
@@ -110,10 +114,6 @@ public class QueueEmailView implements Serializable {
 		return area_local;
 	}
 
-	public Long getSensor_id() {
-		return sensor_id;
-	}
-
 	public BigDecimal getLast_value() {
 		return last_value;
 	}
@@ -134,4 +134,11 @@ public class QueueEmailView implements Serializable {
 		return unitMeter;
 	}
 	
+	public final String getDevice() {
+		return device;
+	}
+	
+	public final int getDeviceType() {
+		return deviceType;
+	}
 }

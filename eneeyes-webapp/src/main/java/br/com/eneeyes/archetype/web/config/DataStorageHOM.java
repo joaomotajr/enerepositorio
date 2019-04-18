@@ -20,11 +20,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class DataStorageHOM extends DataStorage {
     public DataStorageHOM() {
         jdbcDriverClassName = "com.mysql.jdbc.Driver";
-
         jdbcUrl = "jdbc:mysql://localhost:3306/eneeyes?autoReconnect=true";
-
         jdbcUsername = "adminzHrLVvP";
-
         jdbcPassword = "SetuX19VtSNE";
     }
 

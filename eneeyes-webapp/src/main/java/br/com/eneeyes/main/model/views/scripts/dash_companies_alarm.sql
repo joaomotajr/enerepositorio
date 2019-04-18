@@ -12,7 +12,7 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `dash_companies_alarm2` AS
+VIEW `dash_companies_alarm` AS
     SELECT 
         `pa`.`UID` AS `uid`,
         `c`.`NAME` AS `company_name`,
@@ -32,7 +32,7 @@ VIEW `dash_companies_alarm2` AS
         `pa`.`SOUND_STATUS` AS `sound_status`,
         `pa`.`ACTION` AS `action`,
         `g`.`NAME` AS `GAS_NAME`,
-        `s`.`UNIT_METER_GASES` AS `unit_meter_gases`,
+        `s`.`UNIT_METER_ID` AS `UNIT_METER_ID`,
         `cdv`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`
     FROM
         ((((((((`company` `c`
@@ -65,7 +65,7 @@ VIEW `dash_companies_alarm2` AS
         `pa`.`SOUND_STATUS` AS `sound_status`,
         `pa`.`ACTION` AS `action`,
         NULL AS `GAS_NAME`,
-        `g`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`,
+        `g`.`UNIT_METER_ID` AS `UNIT_METER_id`,
         `cdv`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`
     FROM
         ((((((`company` `c`

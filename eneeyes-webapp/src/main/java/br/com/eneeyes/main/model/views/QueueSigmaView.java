@@ -33,99 +33,56 @@ public class QueueSigmaView implements Serializable {
 	private Long company_detector_id;
 	private String company_detector_name;
 	private String company_detector_local;
-	private Long sensor_id;
 	private BigDecimal last_value;
 	private Date last_Update;	
 	
 	@Column(name = "alarm_type")
 	private AlarmType alarmType;
 	
+	@Column(name="device_type")
+	private int deviceType;		
+	
 	public Long getUid() {
 		return uid;
-	}
-	
-	public void setUid(Long uid) {
-		this.uid = uid;
 	}
 	
 	public final SigmaStatus getSigmaStatus() {
 		return sigmaStatus;
 	}
-
-	public final void setSigmaStatus(SigmaStatus sigmaStatus) {
-		this.sigmaStatus = sigmaStatus;
-	}
-
 	
 	public final String getAlarm_name() {
 		return alarm_name;
 	}
-
-	public final void setAlarm_name(String alarm_name) {
-		this.alarm_name = alarm_name;
-	}	
 	
 	public final String getCelular() {
 		return celular;
 	}
-
-	public final void setCelular(String celular) {
-		this.celular = celular;
-	}
 	
 	public Long getCompany_detector_id() {
 		return company_detector_id;
-	}
-	
-	public void setCompany_detector_id(Long company_detector_id) {
-		this.company_detector_id = company_detector_id;
-	}
-	
+	}	
+
 	public final String getCompany_detector_name() {
 		return company_detector_name;
-	}
-
-	public final void setCompany_detector_name(String company_detector_name) {
-		this.company_detector_name = company_detector_name;
 	}
 	
 	public String getCompany_detector_local() {
 		return company_detector_local;
-	}
-
-	public void setCompany_detector_local(String company_detector_local) {
-		this.company_detector_local = company_detector_local;
-	}
-	
-	public Long getSensor_id() {
-		return sensor_id;
-	}
-	
-	public void setSensor_id(Long sensor_id) {
-		this.sensor_id = sensor_id;
 	}
 	
 	public final BigDecimal getLast_value() {
 		return last_value;
 	}
 
-	public final void setLast_value(BigDecimal last_value) {
-		this.last_value = last_value;
-	}
-
 	public final Date getLast_Update() {
 		return last_Update;
-	}
-
-	public final void setLast_Update(Date last_Update) {
-		this.last_Update = last_Update;
 	}
 	
 	public final AlarmType getAlarmType() {
 		return alarmType;
 	}
-
-	public final void setAlarmType(AlarmType alarmType) {
-		this.alarmType = alarmType;
-	}	
+	
+	public final int getDeviceType() {
+		return deviceType;
+	}
 }

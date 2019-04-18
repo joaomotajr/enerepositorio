@@ -43,13 +43,16 @@ public class QueueSmsView implements Serializable {
 	private String unit_name;
 	private String area_name;
 	private String area_local;
-	private Long sensor_id;
 	private BigDecimal last_value;
-	private Date last_Update;	
+	private Date last_Update;
+	private String device;	
+	
+	@Column(name="device_type")
+	private int deviceType;
 	
 	@Column(name = "alarm_type")
 	private AlarmType alarmType;
-	
+		
 	private String gas_name;
 		
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
@@ -108,10 +111,6 @@ public class QueueSmsView implements Serializable {
 		return area_local;
 	}
 
-	public Long getSensor_id() {
-		return sensor_id;
-	}
-
 	public BigDecimal getLast_value() {
 		return last_value;
 	}
@@ -130,5 +129,13 @@ public class QueueSmsView implements Serializable {
 
 	public UnitMeter getUnitMeter() {
 		return unitMeter;
-	}	
+	}
+	
+	public final String getDevice() {
+		return device;
+	}
+	
+	public final int getDeviceType() {
+		return deviceType;
+	}
 }

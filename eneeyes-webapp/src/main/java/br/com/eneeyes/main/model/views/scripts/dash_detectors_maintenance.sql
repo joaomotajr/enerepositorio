@@ -1,5 +1,3 @@
-/* MYSQL */
-
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 

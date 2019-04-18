@@ -18,11 +18,8 @@ public class DataStorageDEV extends DataStorage {
 
     public DataStorageDEV() {
         jdbcDriverClassName = "com.mysql.jdbc.Driver";
-
         jdbcUrl = "jdbc:mysql://localhost:3306/eneeyes?autoReconnect=true";
-
         jdbcUsername = "root";
-
         jdbcPassword = "";
     }
 

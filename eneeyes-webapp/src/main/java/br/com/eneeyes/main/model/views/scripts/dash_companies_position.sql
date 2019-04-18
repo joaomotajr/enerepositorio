@@ -10,7 +10,7 @@ CREATE
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
     SQL SECURITY DEFINER
-VIEW `dash_companies_position2` AS
+VIEW `dash_companies_position` AS
     SELECT 
         `pos`.`UID` AS `uid`,
         `c`.`NAME` AS `company_name`,
@@ -25,15 +25,16 @@ VIEW `dash_companies_position2` AS
         `pos`.`LAST_UPDATE` AS `last_update`,
         `cdv`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`,
         `g`.`NAME` AS `GAS_NAME`,
-        `s`.`UNIT_METER_GASES` AS `unit_meter_gases`
+        `um`.`UID` AS `unit_meter_id`
     FROM
-        ((((((((`company` `c`
+        (((((((((`company` `c`
         JOIN `unit` `u` ON ((`c`.`UID` = `u`.`COMPANY_ID`)))
         JOIN `area` `a` ON ((`u`.`UID` = `a`.`UNIT_ID`)))
         JOIN `company_device` `cdv` ON ((`a`.`UID` = `cdv`.`AREA_ID`)))
         JOIN `company_detector` `cd` ON ((`cdv`.`UID` = `cd`.`COMPANY_DEVICE_ID`)))
         JOIN `detector` `d` ON ((`d`.`UID` = `cd`.`DETECTOR_ID`)))
         LEFT JOIN `sensor` `s` ON ((`d`.`SENSOR_ID` = `s`.`UID`)))
+        JOIN `unit_meter` `um` ON ((`s`.`UNIT_METER_ID` = `um`.`UID`)))
         LEFT JOIN `gas` `g` ON ((`s`.`GAS_ID` = `g`.`UID`)))
         LEFT JOIN `position` `pos` ON ((`cdv`.`UID` = `pos`.`COMPANY_DEVICE_ID`)))
     WHERE
@@ -52,14 +53,15 @@ VIEW `dash_companies_position2` AS
         `pos`.`LAST_UPDATE` AS `last_update`,
         `cdv`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`,
         NULL AS `GAS_NAME`,
-        `g`.`UNIT_METER_GASES` AS `UNIT_METER_GASES`
+        `um`.`UID` AS `unit_meter_id`
     FROM
-        ((((((`company` `c`
+        (((((((`company` `c`
         JOIN `unit` `u` ON ((`c`.`UID` = `u`.`COMPANY_ID`)))
         JOIN `area` `a` ON ((`u`.`UID` = `a`.`UNIT_ID`)))
         JOIN `company_device` `cdv` ON ((`a`.`UID` = `cdv`.`AREA_ID`)))
         JOIN `company_generic` `cg` ON ((`cdv`.`UID` = `cg`.`COMPANY_DEVICE_ID`)))
         JOIN `generic` `g` ON ((`g`.`UID` = `cg`.`GENERIC_ID`)))
+        JOIN `unit_meter` `um` ON ((`g`.`UNIT_METER_ID` = `um`.`UID`)))
         LEFT JOIN `position` `pos` ON ((`cdv`.`UID` = `pos`.`COMPANY_DEVICE_ID`)))
     WHERE
         (`pos`.`UID` IS NOT NULL)

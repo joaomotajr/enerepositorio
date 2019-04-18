@@ -17,22 +17,3 @@ VIEW `company_detector_view` AS
         ((`company_detector` `cd`
         JOIN `detector` `d` ON ((`cd`.`DETECTOR_ID` = `d`.`UID`)))
         JOIN `sensor` `s` ON ((`d`.`SENSOR_ID` = `s`.`UID`)))
-
-/* POSTGRES */        
-        
-CREATE 
-VIEW company_detector_view AS
-    SELECT 
-        row_number() OVER () AS UID,
-        cd.UID AS company_Detector_id,
-        cd.NAME AS company_Detector_name,
-        d.UID AS detector_id,
-        d.NAME AS detector_name,
-        s.UID AS sensor_id,
-        s.NAME AS sensor_name
-    FROM
-        company_detector cd
-        JOIN detector d ON (cd.DETECTOR_ID = d.UID)
-        --JOIN detector_sensors ds ON (d.UID = ds.DETECTOR_ID)
-        --JOIN sensor s ON (ds.SENSOR_ID = s.UID)        
-        JOIN sensor s ON (d.SENSOR_ID = s.UID)

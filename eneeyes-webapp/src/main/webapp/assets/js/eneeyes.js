@@ -287,10 +287,10 @@ app.directive("truncate", function(){
 			else
 				element.html(attribute.value);
         }
-    }
+    };
 });
 
-app .directive('zeros', function () {
+app.directive('zeros', function () {
     return function (scope, element, attribute) {
 		var s = attribute.value + "";
 		while (s.length < attribute.zeros) s = "0" + s;

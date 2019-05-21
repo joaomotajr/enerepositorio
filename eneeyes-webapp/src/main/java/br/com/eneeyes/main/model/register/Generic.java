@@ -15,7 +15,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.register.GenericDto;
-import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.state.DeviceType;
 import br.com.eneeyes.main.model.state.UnitMeter;
 
@@ -65,8 +64,8 @@ public class Generic {
 	@Column(name = "NAME", nullable = true)
 	String name;
 	
-	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
-	private UnitMeterGases unitMeterGases;
+//	@Column(name = "UNIT_METER_GASES", columnDefinition = "int default 0")
+//	private UnitMeterGases unitMeterGases;
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="UNIT_METER_ID", nullable = false)
@@ -109,13 +108,13 @@ public class Generic {
 		this.name = name;
 	}
 	
-	public UnitMeterGases getUnitMeterGases() {
-		return unitMeterGases;
-	}
-
-	public void setUnitMeterGases(UnitMeterGases unitMeterGases) {
-		this.unitMeterGases = unitMeterGases;
-	}
+//	public UnitMeterGases getUnitMeterGases() {
+//		return unitMeterGases;
+//	}
+//
+//	public void setUnitMeterGases(UnitMeterGases unitMeterGases) {
+//		this.unitMeterGases = unitMeterGases;
+//	}
 
 	public UnitMeter getUnitMeter() {
 		return unitMeter;

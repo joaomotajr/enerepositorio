@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
-import br.com.eneeyes.main.model.state.DeviceType;
-import br.com.eneeyes.main.model.state.UnitMeter;
 import br.com.eneeyes.main.model.views.DashCompaniesPosition;
 import br.com.eneeyes.main.model.views.PositionHistoricView;
 
@@ -33,7 +31,11 @@ public class DashCompaniesPositionDto {
 		this.alarmType = e.getAlarmType();
 		this.lastUpdate = e.getLastUpdate();		
 		this.gasName = e.getGasName();
-		this.unitMeter = e.getUnitMeter();		
+		this.unitMeterSymbol = e.getUnitMeterSymbol();
+		this.unitMeterDescription = e.getUnitMeterDescription();
+		this.deviceType = e.getDeviceType();
+		this.deviceSymbol = e.getDeviceSymbol();
+		this.deviceDescription = e.getDeviceDescription();
 		
 		if(e.getPositionHistoricView() != null) {
 			
@@ -83,14 +85,18 @@ public class DashCompaniesPositionDto {
 	private String unitName;	
 	private String areaName;	
 	private String companyDeviceName;
-	private DeviceType deviceType;
+	private String deviceType;
+	private String deviceSymbol;
+	private String deviceDescription;
 	private Long positionId;	
 	private Double lastValue;	
 	private AlarmType alarmType;	
 	private Date lastUpdate;
 	private String arrayValues = "";
 	private String gasName;
-	private UnitMeter unitMeter;
+	private String unitMeterDescription;
+	private String unitMeterSymbol;
+
 		
 	public final String getArrayValues() {
 		return arrayValues;
@@ -180,30 +186,31 @@ public class DashCompaniesPositionDto {
 		this.lastUpdate = lastUpdate;
 	}
 
-	public UnitMeter getUnitMeter() {
-		return unitMeter;
-	}
-
-	public void setUnitMeter(UnitMeter unitMeter) {
-		this.unitMeter = unitMeter;
-	}
-
-	public DeviceType getDeviceType() {
-		return deviceType;
-	}
-
-	public void setDeviceType(DeviceType deviceType) {
-		this.deviceType = deviceType;
-	}
-
 	public String getGasName() {
 		return gasName;
 	}
 
 	public void setGasName(String gasName) {
 		this.gasName = gasName;
+	}
+
+	public String getDeviceType() {
+		return deviceType;
+	}
+
+	public String getUnitMeterDescription() {
+		return unitMeterDescription;
+	}
+
+	public String getUnitMeterSymbol() {
+		return unitMeterSymbol;
+	}
+
+	public String getDeviceSymbol() {
+		return deviceSymbol;
+	}
+
+	public String getDeviceDescription() {
+		return deviceDescription;
 	}	
-	
-	
-	
 }

@@ -103,3 +103,8 @@ alter table company_device drop column device_type;
 
 update generic set DEVICE_TYPE_ID = device_type;
 alter table generic drop column device_type
+
+
+<property name="hibernate.connection.url" value="jdbc:mysql://177.144.134.145:8096/enedb?autoReconnect=true"></property>
+<property name="hibernate.connection.username" value="root"></property>
+<property name="hibernate.connection.password" value="pass"></property>

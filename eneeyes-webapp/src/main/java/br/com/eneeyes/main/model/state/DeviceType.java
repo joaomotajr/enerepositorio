@@ -90,5 +90,3 @@ public class DeviceType {
 		this.graphicType = graphicType;
 	}	
 }
-
-

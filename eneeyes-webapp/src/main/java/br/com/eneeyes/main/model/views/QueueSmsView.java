@@ -4,19 +4,14 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.SmsStatus;
-import br.com.eneeyes.main.model.state.UnitMeter;
 
 @Entity
 @Subselect("select * from queue_sms_view")
@@ -32,7 +27,6 @@ public class QueueSmsView implements Serializable {
 
 	@Column(name = "sms_status")
 	private SmsStatus smsStatus;
-
 	private String alarm_name;
 	private String celular;
 	private String celular1;
@@ -45,20 +39,21 @@ public class QueueSmsView implements Serializable {
 	private String area_local;
 	private BigDecimal last_value;
 	private Date last_Update;
-	private String device;	
-	
+		
 	@Column(name="device_type")
-	private int deviceType;
+	private String deviceType;
 	
 	@Column(name = "alarm_type")
 	private AlarmType alarmType;
 		
 	private String gas_name;
-		
-	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="UNIT_METER_ID", nullable = false)
-	private UnitMeter unitMeter;	
-
+			
+	@Column(name="UNIT_METER_DESCRIPTION")
+	private String unitMeterDescription;	
+	
+	@Column(name="UNIT_METER_SYMBOL")
+	private String unitMeterSymbol;
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -126,16 +121,16 @@ public class QueueSmsView implements Serializable {
 	public String getGas_name() {
 		return gas_name;
 	}
-
-	public UnitMeter getUnitMeter() {
-		return unitMeter;
-	}
 	
-	public final String getDevice() {
-		return device;
-	}
-	
-	public final int getDeviceType() {
+	public String getDeviceType() {
 		return deviceType;
+	}
+
+	public String getUnitMeterDescription() {
+		return unitMeterDescription;
+	}
+
+	public String getUnitMeterSymbol() {
+		return unitMeterSymbol;
 	}
 }

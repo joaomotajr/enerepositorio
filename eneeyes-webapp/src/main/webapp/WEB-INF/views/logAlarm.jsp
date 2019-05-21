@@ -36,14 +36,14 @@
 							</div>														                                                                           
 						</div>
 											
-						<div class="box box-primary" style="padding-bottom: 8px; !important; margin-bottom: 8px !important;">
+						<div class="box box-primary" style="padding-bottom: 8px !important; margin-bottom: 8px !important;">
 							
 							<div class="box-header">
 								<h3 class="box-title">Dados do Dispositivo e Alarme</h3>							
 								<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
 							</div>		
 										
-							<div class="box-body" style="padding-bottom: 0px; !important">
+							<div class="box-body" style="padding-bottom: 0px !important">
 								<form class="form" name="userForm">		
 								
 									<div class="row">											
@@ -75,11 +75,11 @@
 														
 													<dt>Artefato/Medi&ccedil;&atilde;o: </dt>															
 														<dd>
-															<span data-ng-if="selectedPositionAlarm.deviceType.type!='DETECTOR'">{{selectedPositionAlarm.deviceType.description}}</span>
-															<span data-ng-if="selectedPositionAlarm.deviceType.type=='DETECTOR'">Gás: {{selectedPositionAlarm.gasName}}</span>															
+															<span data-ng-if="selectedPositionAlarm.deviceType !='DETECTOR'">{{selectedPositionAlarm.deviceDescription}}</span>
+															<span data-ng-if="selectedPositionAlarm.deviceType =='DETECTOR'">Gás: {{selectedPositionAlarm.gasName}}</span>															
 															<span data-ng-if="selectedPositionAlarm.last_value>0">
 																| Medi&ccedil;&atilde;o: {{selectedPositionAlarm.last_value}}
-																<span style="vertical-align:super;font-size:0.5em"> {{selectedPositionAlarm.unitMeter.symbol}}</span>																
+																<span style="vertical-align:super;font-size:0.5em"> {{selectedPositionAlarm.unitMeterSymbol}}</span>																
 															</span>
 														</dd>																										
 													<dt>Alertas Emitidos: </dt>

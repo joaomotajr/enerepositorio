@@ -3,14 +3,9 @@ package br.com.eneeyes.main.model.views;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Subselect;
 
@@ -20,11 +15,9 @@ import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.enums.SigmaStatus;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.enums.SoundStatus;
-import br.com.eneeyes.main.model.state.DeviceType;
-import br.com.eneeyes.main.model.state.UnitMeter;
 
 @Entity
-@Subselect("select * from dash_companies_alarm2")
+@Subselect("select * from dash_companies_alarm")
 public class DashCompaniesAlarm implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -41,10 +34,15 @@ public class DashCompaniesAlarm implements Serializable {
 	private String unit_name;
 	private String area_name;
 	private String company_detector_name;
+		
+	@Column(name="DEVICE_TYPE")
+	private String deviceType;
+		
+	@Column(name="DEVICE_SYMBOL")
+	private String deviceSymbol;
 	
-	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="DEVICE_TYPE_ID", nullable = false)
-	private DeviceType deviceType;
+	@Column(name="DEVICE_DESCRIPTION")
+	private String deviceDescription;
 	
 	private String company_detector_local;
 	private Double last_value;
@@ -74,10 +72,11 @@ public class DashCompaniesAlarm implements Serializable {
 	@Column(name = "GAS_NAME")
 	private String gasName;
 	
-	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@MapsId
-	@JoinColumn(name="UNIT_METER_ID", nullable = false)
-	private UnitMeter unitMeter;		
+	@Column(name="UNIT_METER_DESCRIPTION")
+	private String unitMeterDescription;	
+	
+	@Column(name="UNIT_METER_SYMBOL")
+	private String unitMeterSymbol;	
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -155,11 +154,24 @@ public class DashCompaniesAlarm implements Serializable {
 		return gasName;
 	}
 
-	public UnitMeter getUnitMeter() {
-		return unitMeter;
-	}
-	
-	public DeviceType getDeviceType() {
+	public String getDeviceType() {
 		return deviceType;
 	}
+
+	public String getUnitMeterDescription() {
+		return unitMeterDescription;
+	}
+
+	public String getUnitMeterSymbol() {
+		return unitMeterSymbol;
+	}
+
+	public String getDeviceSymbol() {
+		return deviceSymbol;
+	}
+
+	public String getDeviceDescription() {
+		return deviceDescription;
+	}
+	
 }

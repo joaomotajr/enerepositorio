@@ -71,7 +71,14 @@ public class processEmailService {
 					"<b>Local:</b> " + detectorLocal + "<br>" + 					 
 					"<b>Data/Hora:</b> " + item.getLast_Update() +
 					"<hr>" + 
-					"<i><span style='font-size: 1.2em; font-weight: bold'>" + item.getGas_name() + medicao  + item.getUnitMeter().getSymbol() + "</span></i>";
+					"<i><span style='font-size: 1.2em; font-weight: bold'>"
+					+ "\r\nArtefato: " + item.getDeviceType() + medicao  + item.getUnitMeterSymbol();
+					
+					if(item.getGas_name() != null &&  !item.getGas_name().equalsIgnoreCase("NONE")) {
+						key += item.getGas_name() + medicao  + item.getUnitMeterSymbol() + "</span></i>"; 
+					} else {
+						key += "</span></i>";
+					}
 			
 			String urlTemplate = this.getClass().getClassLoader().getResource("/templates/alarme.html").toString().replace("file:", "");
 			String msg = "";

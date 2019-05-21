@@ -291,9 +291,9 @@
 															</span>Device
 														</th>						
 														<th>
-															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('deviceType.type')">
+															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('deviceType')">
 																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
-																	data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'deviceType.type' && orderOptions != '-deviceType.type'}"></i>
+																	data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'deviceType' && orderOptions != '-deviceType'}"></i>
 															</span>
 															Artefato
 														</th>
@@ -305,7 +305,7 @@
 												</thead>
 												<tbody>
 													<tr data-ng-repeat="item in dashCompaniesPositionFiltered = (dashCompaniesPosition | dashCompaniesPositionFilter: selectedStatusDashCompaniesPosition) | orderBy: orderOptions">
-														<td style="text-align:center; vertical-align: middle; color: #575757;">&nbsp;&nbsp;<i class="fa" data-ng-class="item.deviceType.symbol" ></i>&nbsp;&nbsp;</td>
+														<td style="text-align:center; vertical-align: middle; color: #575757;">&nbsp;&nbsp;<i class="fa" data-ng-class="item.deviceSymbol" ></i>&nbsp;&nbsp;</td>
 														<td><span data-truncate="12" data-value="{{item.companyName}}"></span></td>
 														<td>{{item.companyDeviceName}}</td>
 														<td>

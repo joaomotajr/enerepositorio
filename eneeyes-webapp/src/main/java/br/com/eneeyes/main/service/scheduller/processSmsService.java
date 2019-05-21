@@ -54,8 +54,8 @@ public class processSmsService {
 		for (QueueSmsView item   : smsLista) {
 			
 			String areaLocal = (item.getArea_local() != null && !item.getArea_local().equals("")) ? " / " + item.getArea_local() : "";
-			String detectorLocal = (item.getCompany_detector_local() != null && !item.getCompany_detector_local().equals("")) ? item.getCompany_detector_local() : "Não Informado";
-			String medicao = (item.getAlarmType() == AlarmType.OFFLINE) ? " " : " - Medição: " + item.getLast_value() + " ";
+			String detectorLocal = (item.getCompany_detector_local() != null && !item.getCompany_detector_local().equals("")) ? item.getCompany_detector_local() : "Nao Informado";
+			String medicao = (item.getAlarmType() == AlarmType.OFFLINE) ? " " : " - Medicao: " + item.getLast_value() + " ";
 			
 			SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 						
@@ -65,8 +65,11 @@ public class processSmsService {
 			+ "\r\nDetector: " + item.getCompany_detector_name()
 			+ "\r\nLocal: " + detectorLocal 
 			+ "\r\nData/Hora: " + fmt.format(item.getLast_Update())
-			+ "\r\nGas: " + item.getGas_name() + medicao  + item.getUnitMeter().getSymbol();
-						Boolean ok = siteService.SendSms(item.getCelular(), msg) && item.getCelular1() == null ? true : siteService.SendSms(item.getCelular1(), msg) ;
+			+ "\r\nArtefato: " + item.getDeviceType() + medicao  + item.getUnitMeterSymbol();
+			if(item.getGas_name() != null &&  !item.getGas_name().equalsIgnoreCase("NONE")) {
+				msg += "\r\nGas: " + item.getGas_name();
+			}
+			Boolean ok = siteService.SendSms(item.getCelular(), msg) && item.getCelular1() == null ? true : siteService.SendSms(item.getCelular1(), msg) ;
 			
 			if (ok)
 				positionAlarmService.updateSmsStatus(item.getUid(), SmsStatus.SENDED);

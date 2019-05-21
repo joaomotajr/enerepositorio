@@ -469,10 +469,10 @@
 							<td>{{item.lastUpdate | date:'dd/MM/yyyy' }}</td>
 							<td>{{item.lastUpdate | date:'HH:mm:ss' }}</td>
 
-						<td data-ng-if="tipoGrupo==1"> {{changeToValue(item.value)}} </td>						
-						<td data-ng-if="tipoGrupo!=1"> {{item.maxValue}} </td>
-						<td data-ng-if="tipoGrupo!=1"> {{item.minValue}} </td>
-						
+						<td data-ng-show="tipoGrupo==1"> {{changeToValue(item.value)}} </td>						
+						<td data-ng-show="tipoGrupo!=1"> {{item.maxValue}} </td>
+						<td data-ng-show="tipoGrupo!=1"> {{item.minValue}} </td>
+												
 						<td data-ng-if="tipoGrupo==1">
 							<span data-ng-if="item.logOrigem == 'DEVICE'">DISPOSITIVO</span>
 							<span data-ng-if="item.logOrigem == 'MANUAL'">AN&Aacute;LISE DE CEN&Aacute;RIO</span>

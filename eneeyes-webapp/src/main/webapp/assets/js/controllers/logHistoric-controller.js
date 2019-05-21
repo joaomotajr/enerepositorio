@@ -397,7 +397,12 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	}	
 	
 	$scope.changeToValue = function(valor) {
-	  return valor.toString().replace(".", ",")
+		if (!valor) {			
+			valor = "-";
+			return valor;
+		} else {
+	  		return valor.toString().replace(".", ",");
+		}
 	};
 
 	$scope.clearHistoric();

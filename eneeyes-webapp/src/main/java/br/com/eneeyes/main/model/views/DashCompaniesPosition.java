@@ -4,23 +4,18 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
-import br.com.eneeyes.main.model.state.DeviceType;
-import br.com.eneeyes.main.model.state.UnitMeter;
 
 @Entity
-@Subselect("select * from dash_companies_position2")
+@Subselect("select * from dash_companies_position")
 public class DashCompaniesPosition {
 	
 	public DashCompaniesPosition() {	
@@ -59,10 +54,15 @@ public class DashCompaniesPosition {
 	
 	@Column(name = "COMPANY_DEVICE_NAME")
 	private String companyDeviceName;
-			
-	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="DEVICE_TYPE_ID", nullable = false)
-	private DeviceType deviceType;
+	
+	@Column(name="DEVICE_TYPE")
+	private String deviceType;
+	
+	@Column(name="DEVICE_SYMBOL")
+	private String deviceSymbol;
+	
+	@Column(name="DEVICE_DESCRIPTION")
+	private String deviceDescription;
 	
 	@Column(name = "POSITION_ID")
 	private Long positionId;	
@@ -77,11 +77,13 @@ public class DashCompaniesPosition {
 	private Date lastUpdate;		
 	
 	@Column(name = "GAS_NAME")
-	private String gasName;
-		
-	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="UNIT_METER_ID", nullable = false)
-	private UnitMeter unitMeter;	
+	private String gasName;		
+	
+	@Column(name="UNIT_METER_DESCRIPTION")
+	private String unitMeterDescription;	
+	
+	@Column(name="UNIT_METER_SYMBOL")
+	private String unitMeterSymbol;
 
 	public Long getUid() {
 		return uid;
@@ -127,11 +129,23 @@ public class DashCompaniesPosition {
 		return gasName;
 	}
 
-	public UnitMeter getUnitMeter() {
-		return unitMeter;
+	public String getDeviceType() {
+		return deviceType;
 	}
 
-	public DeviceType getDeviceType() {
-		return deviceType;
+	public String getUnitMeterDescription() {
+		return unitMeterDescription;
+	}
+
+	public String getUnitMeterSymbol() {
+		return unitMeterSymbol;
+	}
+
+	public String getDeviceSymbol() {
+		return deviceSymbol;
+	}
+
+	public String getDeviceDescription() {
+		return deviceDescription;
 	}	
 }

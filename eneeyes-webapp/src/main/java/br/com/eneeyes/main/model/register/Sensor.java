@@ -16,7 +16,6 @@ import javax.persistence.Table;
 
 import br.com.eneeyes.main.dto.register.SensorDto;
 import br.com.eneeyes.main.model.enums.DetectionType;
-import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.state.UnitMeter;
 
 /**

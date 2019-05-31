@@ -23,14 +23,18 @@ VIEW `dash_companies_position` AS
         `pos`.`LAST_VALUE` AS `last_value`,
         `pos`.`ALARM_TYPE` AS `alarm_type`,
         `pos`.`LAST_UPDATE` AS `last_update`,
-        `cdv`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`,
         `g`.`NAME` AS `GAS_NAME`,
-        `um`.`UID` AS `unit_meter_id`
+        `um`.`DESCRIPTION` AS `unit_meter_description`,
+        `um`.`SYMBOL` AS `unit_meter_symbol`,
+        `dt`.`TYPE` AS `device_type`,
+        `dt`.`DESCRIPTION` AS `device_description`,
+        `dt`.`SYMBOL` AS `device_symbol`
     FROM
-        (((((((((`company` `c`
+        ((((((((((`company` `c`
         JOIN `unit` `u` ON ((`c`.`UID` = `u`.`COMPANY_ID`)))
         JOIN `area` `a` ON ((`u`.`UID` = `a`.`UNIT_ID`)))
         JOIN `company_device` `cdv` ON ((`a`.`UID` = `cdv`.`AREA_ID`)))
+        JOIN `device_type` `dt` ON ((`cdv`.`DEVICE_TYPE_ID` = `dt`.`UID`)))
         JOIN `company_detector` `cd` ON ((`cdv`.`UID` = `cd`.`COMPANY_DEVICE_ID`)))
         JOIN `detector` `d` ON ((`d`.`UID` = `cd`.`DETECTOR_ID`)))
         LEFT JOIN `sensor` `s` ON ((`d`.`SENSOR_ID` = `s`.`UID`)))
@@ -51,14 +55,18 @@ VIEW `dash_companies_position` AS
         `pos`.`LAST_VALUE` AS `last_value`,
         `pos`.`ALARM_TYPE` AS `alarm_type`,
         `pos`.`LAST_UPDATE` AS `last_update`,
-        `cdv`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`,
         NULL AS `GAS_NAME`,
-        `um`.`UID` AS `unit_meter_id`
+        `um`.`DESCRIPTION` AS `unit_meter_description`,
+        `um`.`SYMBOL` AS `unit_meter_symbol`,
+        `dt`.`TYPE` AS `device_type`,
+        `dt`.`DESCRIPTION` AS `device_description`,
+        `dt`.`SYMBOL` AS `device_symbol`
     FROM
-        (((((((`company` `c`
+        ((((((((`company` `c`
         JOIN `unit` `u` ON ((`c`.`UID` = `u`.`COMPANY_ID`)))
         JOIN `area` `a` ON ((`u`.`UID` = `a`.`UNIT_ID`)))
         JOIN `company_device` `cdv` ON ((`a`.`UID` = `cdv`.`AREA_ID`)))
+        JOIN `device_type` `dt` ON ((`cdv`.`DEVICE_TYPE_ID` = `dt`.`UID`)))
         JOIN `company_generic` `cg` ON ((`cdv`.`UID` = `cg`.`COMPANY_DEVICE_ID`)))
         JOIN `generic` `g` ON ((`g`.`UID` = `cg`.`GENERIC_ID`)))
         JOIN `unit_meter` `um` ON ((`g`.`UNIT_METER_ID` = `um`.`UID`)))

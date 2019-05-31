@@ -62,7 +62,7 @@
 						<audio id="alarmSound" src="/assets/img/alert_01.mp3" preload="auto"></audio>
 						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning" data-ng-bind="dashCompaniesAlarmResults.length"></span></a>
 						<ul class="dropdown-menu">
-							<li class="header">Voce tem <span data-ng-bind="dashCompaniesAlarm.length"></span> Alarmes Pendentes</li>
+							<li class="header">Você tem <span data-ng-bind="dashCompaniesAlarm.length"></span> Alarmes Pendentes</li>
 							<li>								
 								<!-- <ul class="menu" data-ng-repeat="item in dashCompaniesAlarm | filter: {alarmStatus: 'CREATED' } track by item.uid"> -->
 								<ul class="menu" data-ng-repeat="item in dashCompaniesAlarmResults = (dashCompaniesAlarm | filter: {alarmStatus: 'CREATED' }) ">												

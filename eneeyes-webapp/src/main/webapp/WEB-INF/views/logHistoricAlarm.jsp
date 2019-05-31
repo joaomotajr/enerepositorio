@@ -454,7 +454,7 @@
 				<dt>Evacua&ccedil;&atilde;o:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm3" class="alarm3"> {{findedCompanyDevice.alarmDto.alarm3}}</span></dd>
 			</dl>			
-			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;�odo:</strong> {{selectedPeriodo}}</div>			
+			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;odo:</strong> {{selectedPeriodo}}</div>			
 			<br />
 			<div id="dvData">
 				<table class='zui-table' data-cellspacing="0" data-width="100%">	                   

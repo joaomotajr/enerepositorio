@@ -2,6 +2,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 
 	var loadGoogleCharts = false;	
 	$scope.countHistoric = 0;
+	var companyDetectors = [];
 	
 	function printData()
 	{
@@ -46,6 +47,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		if($scope.$root.isFrom == "MASTER")
 			$scope.selectedCompany = '';
 
+		$scope.selectedUnit = '';
+		$scope.selectedArea = '';		
         $scope.selectedCompanyDetector = '';
         $scope.findedCompanyDetector = '';
         $scope.listHistoricInterval = undefined;
@@ -99,8 +102,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 
 	$scope.getHistorics = function(n) {
 
-		if (!$scope.lenPageValid) {
-			
+		if (!$scope.lenPageValid) {			
 			$scope.daysDiff ="ATENÇÃO! Quantidade de registros por página Inválido.";	
 			$("#snoAlertBox").fadeIn();			
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
@@ -113,12 +115,10 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		$scope.currentPage = n;
 		$scope.loading = true;
 
-		if($scope.interval == $scope.enumInterval.CUSTOM) {
-			
+		if($scope.interval == $scope.enumInterval.CUSTOM) {			
 			$scope.getHistoricInterval(n);
 		}
-		else {
-			
+		else {			
 			$scope.getHistoricsPreDefined(n);
 		}
 	};
@@ -177,9 +177,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		}
 		
 		$cookieStore.put("lenPage", $scope.lenPage);
-
-		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' & ' + dataFim.toLocaleString();
-		
+		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' & ' + dataFim.toLocaleString();		
 		$scope.selectedButton = 100; 		
 		
 		if($scope.tipoGrupo == 1)			
@@ -198,9 +196,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		}, function(){
 			
 			$scope.loading = false;
-
-			lastPage = $scope.currentPage;
-			
+			lastPage = $scope.currentPage;			
 			$scope.listPages = range(Math.ceil($scope.listHistoricInterval.totalList / $scope.lenPage));
 			$scope.countPages = Math.ceil($scope.listHistoricInterval.totalList / $scope.lenPage);			
 			$scope.countHistoric = padZeros($scope.listHistoricInterval.totalList, 5);
@@ -228,26 +224,17 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 			return 'Desconhecido';				
 	}
 	
-	$scope.getCompanyDetectors = function() {
-		 
+	$scope.getCompanyDetectors = function() {		 
 		 $scope.listAllDashCompany = new ViewService.listAllDashCompany();		 
 		 $scope.listAllDashCompany.$view({_csrf : angular.element('#_csrf').val()}, function(){
-			 $scope.companyDetectors = $scope.listAllDashCompany.list; 				         	         	
+			companyDetectors = $scope.listAllDashCompany.list; 				         	         	
         });		 
 	 };
-
-	$scope.changeCompanyDetector = function() {		
-		if($scope.selectedCompanyDetector == null) return;
-		$scope.getCompanyDevice($scope.selectedCompanyDetector.companyDeviceId);
-	};	
 		
-	$scope.getCompanys = function() {
-		 
-		 if($scope.$root.isFrom != "MASTER")	{
-		 
+	$scope.getCompanys = function() {		 
+		 if($scope.$root.isFrom != "MASTER") {		 
 			 $scope.getOneCompany($scope.$root.isFrom);
-		 }
-		 else {		
+		 } else {		
 			 $scope.resultCompanies = new CompanyService.listAllView();		 
 			 	$scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
 				 $scope.companies = $scope.resultCompanies.list;
@@ -255,19 +242,90 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		 }
 	}; 
 
-	$scope.getOneCompany = function(companyId) {
-		
+	$scope.getOneCompany = function(companyId) {		
 	   $scope.listOne = new CompanyService.listOne();		 
-	   $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
-			
+	   $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function() {			
 		   $scope.selectedCompany = $scope.listOne.t;
 		   $scope.changeCompany();
 	   });		 
-   }
+   	};
 
-	$scope.changeCompany = function() { 
-		if($scope.selectedCompany == null) return;		
-		$scope.search = {company: $scope.selectedCompany};
+	$scope.changeCompany = function() {		
+		clearSteps(1);
+		if($scope.selectedCompany == null) return;	
+		$scope.searchUnit($scope.selectedCompany);
+	};
+		
+	$scope.searchUnit = function(company) {		
+		$scope.units = [];
+		companyDetectors.forEach( function (i) {
+			if (i.companyId == company.uid && !unitRepeat($scope.units, i)) {
+				$scope.units.push(i);
+			}
+		});
+		if($scope.units.length==1) {
+			$scope.selectedUnit = $scope.units[0];
+			$scope.changeUnit();
+		}
+	};
+
+	function unitRepeat(itens, item) {
+		var units = itens.filter(function(i) {
+				return (i.companyId == item.companyId && i.unitId == item.unitId);
+			}
+		);
+		return units.length > 0;
+	}
+
+	$scope.changeUnit = function() { 
+		clearSteps(2);
+		if($scope.selectedUnit == null) return;
+		$scope.searchArea($scope.selectedCompany, $scope.selectedUnit.unitId);
+	};
+	
+	$scope.searchArea = function(company, unitId) {
+		$scope.areas = [];
+		companyDetectors.forEach( function (i) {
+			if (i.companyId == company.uid && i.unitId == unitId  && !areaRepeat($scope.areas, i)) {
+				$scope.areas.push(i);
+			}
+		});
+		if($scope.areas.length==1) {
+			$scope.selectedArea = $scope.areas[0];
+			$scope.changeArea();
+		}
+	};
+
+	function areaRepeat(itens, item) {
+		var areas = itens.filter(function(i) {
+				return (i.companyId == item.companyId && i.unitId == item.unitId && i.areaId == item.areaId);
+			}
+		);
+		return areas.length > 0;
+	}	
+
+	$scope.changeArea = function() { 
+		clearSteps(3);
+		if($scope.selectedArea == null) return;
+		$scope.searchCompanyDetector ($scope.selectedCompany, $scope.selectedUnit.unitId, $scope.selectedUnit.areaId);
+	};
+
+	$scope.searchCompanyDetector = function(company, unitId, areaId) {
+		$scope.companyDetectors = [];
+		companyDetectors.forEach( function (i) {
+			if (i.companyId == company.uid && i.unitId == unitId && i.areaId == areaId) {
+				$scope.companyDetectors.push(i);
+			}
+		});	
+		if($scope.companyDetectors.length==1) {
+			$scope.selectedCompanyDetector = $scope.companyDetectors[0];
+			$scope.changeCompanyDetector();
+		}	
+	};
+
+	$scope.changeCompanyDetector = function() {		
+		if($scope.selectedCompanyDetector == null) return;
+		$scope.getCompanyDevice($scope.selectedCompanyDetector.companyDeviceId);
 	};
 
 	$scope.getCompanyDevice = function(uid) {
@@ -278,6 +336,21 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 			}			
 		});
 	};
+
+	function clearSteps(step) {
+		if (step == 1) {
+			$scope.units = [];			
+			$scope.selectedUnit = '';			
+		}
+		if (step == 1 || step == 2) {
+			$scope.areas = [];
+			$scope.selectedArea = '';
+		}
+		if (step == 1 || step == 2 || step == 3) {
+			$scope.companyDetectors = [];
+			$scope.selectedCompanyDetector = '';
+		}		
+	}
 	
 	$scope.changedGraphic = function() {
 		$scope.count=0;
@@ -309,33 +382,29 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		if($scope.tipoGrupo == 1) {
 			data.addColumn('string', 'Data');
 			data.addColumn('number', 'Valor');
-		}
-		else {
+		} else {
 			data.addColumn('string', 'Data');
 			data.addColumn('number', 'Máximo');			
 			data.addColumn('number', 'Mínimo');
 		}
 
-	    var itens = new Array();
+	    var itens = [];
 	    	    
 	    for(var i in value) {
 	    	var itemDate = new Date( value[i].lastUpdate );
-
-	    	changeDate = weekday[itemDate.getDay()] + ' ' + itemDate.toLocaleDateString() + ' as ' + itemDate.toLocaleTimeString();
-	    	
+	    	changeDate = weekday[itemDate.getDay()] + ' ' + itemDate.toLocaleDateString() + ' as ' + itemDate.toLocaleTimeString();	    	
 	    	if($scope.tipoGrupo == 1) {
 	    		itens.push([changeDate, value[i].value]);
-	    	}
-	    	else {
+	    	} else {
 	    		itens.push([changeDate, value[i].maxValue, value[i].minValue]);
 	    	}
 		}
 	      
 	    data.addRows(itens);
-	    
-	    if ($scope.changeGraphic) {
-		    var options = {
-	          
+		
+		var options; 
+	    if ($scope.changeGraphic) {			
+		    options = {	          
 		          legend: {position: 'none'},
 		          width: 900,
 		          height: 450,
@@ -364,11 +433,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		    	  //curveType: 'function',
 		          pointSize:1
 		      };
-	    }    
-		else
-			{
-			   var options = {
-				          
+	    } else {
+			   options = {				          
 		          legend: {position: 'none'},
 		          width: 900,
 		          height: 450,
@@ -377,8 +443,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		    		  baselineColor: '#fbf6a7',
 		    		  textPosition: 'none'	    	  
 		    	  },
-		    	  vAxis: {	    		  
-		    		  
+		    	  vAxis: {		    		  
 		    		  textStyle: {
 	                      'color': '#8C8C8C',
 	                      'fontName': 'Calibri',
@@ -410,26 +475,23 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	$scope.getCompanyDetectors();
 	$scope.tipoGrupo = 1;
 	
-	$scope.changeLenPage = function() {
-		
+	$scope.changeLenPage = function() {		
 		if($scope.lenPage < 0 || $scope.lenPage > 2000)
 			$scope.lenPageValid = false;
 		else
 			$scope.lenPageValid = true;
 		
-	}
+	};
 	
 	$scope.validLenPage = function(e) {
-		$scope.lenPage.replace(/[^\d].+/, "");
-		
+		$scope.lenPage.replace(/[^\d].+/, "");		
 		if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
 			e.preventDefault();
 	   }
 	}
 	
 	$timeout(function(){
-		angular.element('body').removeClass('loading');
-		
+		angular.element('body').removeClass('loading');		
 		$('#dateIn').datetimepicker(
 				{ 	defaultDate: new Date(), 
 					format:'DD/MM/YYYY HH:mm:ss',
@@ -443,8 +505,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 				autoclose: true,
 	            language: 'br'
 			}
-		);
-		
+		);		
 		$("#dateIn").on("dp.change",function (e) {
 	        $('#dateOut').data("DateTimePicker").setMinDate(e.date);
 	        $(this).data('DateTimePicker').hide();
@@ -452,8 +513,6 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		$("#dateOut").on("dp.change",function (e) {
 	        $('#dateIn').data("DateTimePicker").setMaxDate(e.date);
 	        $(this).data('DateTimePicker').hide();
-		});
-		
-	}, 500);
-	
+		});		
+	}, 500);	
 });

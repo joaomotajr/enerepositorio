@@ -18,13 +18,7 @@ public class DashCompany implements Serializable {
 	
 	@EmbeddedId
 	private DashCompanyId dashCompanyId;
-	public final DashCompanyId getDashCompanyId() {
-		return dashCompanyId;
-	}
-	public final void setDashCompanyId(DashCompanyId dashCompanyId) {
-		this.dashCompanyId = dashCompanyId;
-	}
-
+	
 	@Column(name="company_id", nullable=false, insertable=false, updatable=false)
 	private Long companyId;	
 	public final Long getCompanyId() {

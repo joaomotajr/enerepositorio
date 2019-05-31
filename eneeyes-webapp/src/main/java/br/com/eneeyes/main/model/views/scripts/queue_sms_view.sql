@@ -28,9 +28,10 @@ VIEW `queue_sms_view` AS
         `u`.`NAME` AS `unit_name`,
         `area`.`NAME` AS `area_name`,
         `area`.`LOCAL` AS `area_local`,
-        `um`.`UID` AS `unit_meter_id`,
-        `dt`.`TYPE` AS `device`,
-        `dt`.`UID` AS `device_type`
+        `um`.`DESCRIPTION` AS `unit_meter_description`,
+        `um`.`SYMBOL` AS `unit_meter_symbol`,
+        `dt`.`TYPE` AS `device_type`,
+        `dt`.`SYMBOL` AS `device_symbol`
     FROM
         (((((((((((`position_alarm` `pa`
         JOIN `company_device` `cdv` ON ((`cdv`.`UID` = `pa`.`COMPANY_DEVICE_ID`)))
@@ -65,9 +66,10 @@ VIEW `queue_sms_view` AS
         `u`.`NAME` AS `unit_name`,
         `area`.`NAME` AS `area_name`,
         `area`.`LOCAL` AS `area_local`,
-        `um`.`UID` AS `unit_meter_id`,
-        `dt`.`TYPE` AS `device`,
-        `dt`.`UID` AS `device_type`
+        `um`.`DESCRIPTION` AS `unit_meter_description`,
+        `um`.`SYMBOL` AS `unit_meter_symbol`,
+        `dt`.`TYPE` AS `device_type`,
+        `dt`.`SYMBOL` AS `device_symbol`
     FROM
         (((((((((`position_alarm` `pa`
         JOIN `company_device` `cdv` ON ((`cdv`.`UID` = `pa`.`COMPANY_DEVICE_ID`)))

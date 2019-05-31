@@ -16,7 +16,6 @@ public class DashCompanyId implements Serializable {
 	@Column(name = "company_Device_id")
 	private Long companyDeviceId;
 	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

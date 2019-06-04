@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.model.register.Gas;
 import br.com.eneeyes.main.model.state.DeviceType;
+import br.com.eneeyes.main.model.state.PerfilAlarm;
 import br.com.eneeyes.main.model.state.UnitMeter;
 import br.com.eneeyes.main.model.views.CompanyView;
 
@@ -85,11 +86,23 @@ public class Alarm {
 	@Column(name = "ALARM_1")		
 	private Double alarm1;
 	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="PERFIL_ALARM_ID1", nullable = false)
+	private PerfilAlarm perfilAlarm1;	
+	
 	@Column(name = "ALARM_2")		
 	private Double alarm2;
 	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="PERFIL_ALARM_ID2", nullable = false)
+	private PerfilAlarm perfilAlarm2;
+	
 	@Column(name = "ALARM_3")		
 	private Double alarm3;
+	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="PERFIL_ALARM_ID3", nullable = false)
+	private PerfilAlarm perfilAlarm3;
 	
 	@Column(name = "ALARM_11", nullable = true)		
 	private Double alarm11;
@@ -385,5 +398,29 @@ public class Alarm {
 
 	public final void setAction4(String action4) {
 		this.action4 = action4;
+	}
+
+	public PerfilAlarm getPerfilAlarm1() {
+		return perfilAlarm1;
+	}
+
+	public void setPerfilAlarm1(PerfilAlarm perfilAlarm1) {
+		this.perfilAlarm1 = perfilAlarm1;
+	}
+
+	public PerfilAlarm getPerfilAlarm2() {
+		return perfilAlarm2;
+	}
+
+	public void setPerfilAlarm2(PerfilAlarm perfilAlarm2) {
+		this.perfilAlarm2 = perfilAlarm2;
+	}
+
+	public PerfilAlarm getPerfilAlarm3() {
+		return perfilAlarm3;
+	}
+
+	public void setPerfilAlarm3(PerfilAlarm perfilAlarm3) {
+		this.perfilAlarm3 = perfilAlarm3;
 	}	
 }

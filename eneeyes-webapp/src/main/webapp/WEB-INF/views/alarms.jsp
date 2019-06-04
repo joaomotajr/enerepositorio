@@ -193,63 +193,77 @@
 																	</div>																	
 																</div>															
 																<div data-ng-hide="unitMeter.uid==0">
-																	<div class="col-md-2" style="padding-right: 2px !important">
+																	<div class="col-md-2" style="padding-right: 1px !important">
 																		<div class="form-group">
-																			<label class="control-label">Alarme 1 <span class="label label-default" style="font-size: 0.5em"> DETEC&Ccedil;&Atilde;O </span></label>																		
-																			<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm1.$invalid && !userForm.alarmAlarm1.$pristine || errorAlarm1}" 
-																				style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
-																				<input type="text" class="form-control" name="alarmAlarm1" 
-																					data-ng-model="alarmAlarm1"
-																					data-ng-change="validAlarms($event);" />
-																			</div>																	
-																			<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm11.$invalid && !userForm.alarmAlarm11.$pristine || errorAlarm11}" 
-																				style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
-																				<input type="text" class="form-control" name="alarmAlarm11" 
-																					data-ng-model="alarmAlarm11" 
-																					data-ng-change="validAlarms($event);" />
-																			</div>																	
+																				<label class="control-label">Alarme 1
+																					<span class="label label-default cursor" data-ng-click="changePerfilAlarm1(true)" style="font-size: 0.6em" data-ng-bind="perfilAlarm1.type"></span>
+																					<span class="label label-default cursor" data-ng-click="changePerfilAlarm1(true)" style="font-size: 0.6em" data-ng-show="!perfilAlarm1">DETEC&Ccedil;&Atilde;O</span>
+																				</label>
+																				
+																				<select name="unitMeter" data-ng-show="showPerfilAlarm1" data-ng-change="changePerfilAlarm1(false)" 
+																					class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true"
+																					data-ng-options="item as item.type for item in perfilAlarms | orderBy: 'type' track by item.uid" 
+																					data-ng-model="perfilAlarm1">
+																					<option value="">Selecione</option> 
+																				</select>
+
+																				<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm1.$invalid && !userForm.alarmAlarm1.$pristine || errorAlarm1}" 
+																					style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
+																					<input type="text" class="form-control" name="alarmAlarm1" 
+																						data-ng-model="alarmAlarm1"
+																						data-ng-change="validAlarms($event);" />
+																				</div>
+
+																				<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm11.$invalid && !userForm.alarmAlarm11.$pristine || errorAlarm11}" 
+																					style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
+																					<input type="text" class="form-control" name="alarmAlarm11" 
+																						data-ng-model="alarmAlarm11" 
+																						data-ng-change="validAlarms($event);" />
+																				</div>																	
 																		</div>
 																	</div>																	
-																	<div class="col-md-2" style="padding-right: 2px !important; padding-left: 2px !important">															
+																	<div class="col-md-2" style="padding-right: 1px !important; padding-left: 1px !important">															
 																		<div class="form-group">
-																			<input class="pull-left" type="checkbox" data-ng-model="enableAlarm2" data-ng-change="validAlarms($event);" />&nbsp
-																			<label class="control-label"> Alarme 2 <span class="label label-warning" style="font-size: 0.5em"> ALERTA </span></label>
+																			<input class="pull-left" type="checkbox" data-ng-model="enableAlarm2" data-ng-change="validAlarms($event);"/>
+																			<label class="control-label">Alarme 2
+																				<span class="label label-warning cursor" data-ng-click="changePerfilAlarm2(true)" style="font-size: 0.6em" data-ng-bind="perfilAlarm2.type"></span>
+																				<span class="label label-warning cursor" data-ng-click="changePerfilAlarm2(true)" style="font-size: 0.6em" data-ng-show="!perfilAlarm2">ALERTA</span>
+																			</label>
 																			
+																			<select name="unitMeter" data-ng-show="showPerfilAlarm2" data-ng-change="changePerfilAlarm2(false)" 
+																				class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true"
+																				data-ng-options="item as item.type for item in perfilAlarms | orderBy: 'type' track by item.uid" 
+																				data-ng-model="perfilAlarm2">
+																				<option value="">Selecione</option> 
+																			</select>
+
 																			<div class="col-md-12" data-ng-class="{'has-error': userForm.alarmAlarm2.$invalid && !userForm.alarmAlarm2.$pristine || errorAlarm2}" 
 																				style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
 																				<input type="text" class="form-control" name="alarmAlarm2"
-																					data-ng-disabled="!enableAlarm2" 
-																					data-ng-model="alarmAlarm2" 
-																					data-ng-change="validAlarms($event);" />
-																			</div>																	
-																			<!-- <div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm22.$invalid && !userForm.alarmAlarm22.$pristine || errorAlarm22}" 
-																				style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
-																				<input type="text" class="form-control" name="alarmAlarm22" 
-																					data-ng-disabled="!enableAlarm2" 
-																					data-ng-model="alarmAlarm22" 
-																					data-ng-change="validAlarms($event);" />
-																			</div>-->
+																					data-ng-disabled="!enableAlarm2" data-ng-model="alarmAlarm2" data-ng-change="validAlarms($event);" />
+																			</div>
 																		</div>
 																	</div>																	
-																	<div class="col-md-2" style="padding-left: 2px !important;padding-right: 2px !important;">
+																	<div class="col-md-2" style="padding-left: 1px !important;padding-right: 1px !important;">
 																		<div class="form-group">
-																			<input class="pull-left" type="checkbox" data-ng-model="enableAlarm3" />&nbsp
-																			<label class="control-label"> Alarme 3 <span class="label label-danger" style="font-size: 0.5em"> EVACUA&Ccedil;&Atilde;O </span></label>
-																			
+																			<input class="pull-left" type="checkbox" data-ng-model="enableAlarm3"/>
+																			<label class="control-label">Alarme 3 
+																				<span class="label label-danger cursor" data-ng-click="changePerfilAlarm3(true)" style="font-size: 0.6em" data-ng-bind="perfilAlarm3.type"></span>
+																				<span class="label label-danger cursor" data-ng-click="changePerfilAlarm3(true)" style="font-size: 0.6em" data-ng-show="!perfilAlarm3"> EVACUA&Ccedil;&Atilde;O</span>
+																			</label>
+
+																			<select name="unitMeter" data-ng-show="showPerfilAlarm3" data-ng-change="changePerfilAlarm3(false)" 
+																				class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true"
+																				data-ng-options="item as item.type for item in perfilAlarms | orderBy: 'type' track by item.uid" 
+																				data-ng-model="perfilAlarm3">
+																				<option value="">Selecione</option> 
+																			</select>
+
 																			<div class="col-md-12" data-ng-class="{'has-error': userForm.alarmAlarm3.$invalid && !userForm.alarmAlarm3.$pristine || errorAlarm3}" 
 																				style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
 																				<input type="text" class="form-control" name="alarmAlarm3" 
-																					data-ng-disabled="!enableAlarm3"
-																					data-ng-model="alarmAlarm3" 
-																					data-ng-change="validAlarms($event);" />
-																			</div>																	
-																			<!-- <div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm33.$invalid && !userForm.alarmAlarm33.$pristine || errorAlarm33}" 
-																				style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
-																				<input type="text" class="form-control" name="alarmAlarm33" 
-																					data-ng-disabled="!enableAlarm3"
-																					data-ng-model="alarmAlarm33" 
-																					data-ng-change="validAlarms($event);" />
-																			</div>-->
+																					data-ng-disabled="!enableAlarm3" data-ng-model="alarmAlarm3" data-ng-change="validAlarms($event);" />
+																			</div>
 																		</div>
 																	</div>
 																</div>

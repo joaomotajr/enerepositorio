@@ -1,5 +1,5 @@
 
-app.controller('alarmController', function ($scope, $timeout, DeviceTypeService, AlarmService, GasService, CompanyService, ViewService, UnitMeterService) {
+app.controller('alarmController', function ($scope, $timeout, DeviceTypeService, AlarmService, GasService, CompanyService, ViewService, UnitMeterService, PerfilAlarmService) {
 
 	$('.modal')
 	.on({
@@ -72,7 +72,10 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		});		 
 	 };
 		 
-	$scope.clearFormAlarm = function () {	
+	$scope.clearFormAlarm = function () {
+		$scope.showPerfilAlarm1 = false;
+		$scope.showPerfilAlarm2 = false;
+		$scope.showPerfilAlarm3 = false;
 	    $scope.alarmUid = undefined;  
 		$scope.alarmName = '';	  
 		$scope.deviceType = '';  
@@ -94,7 +97,7 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		$scope.action4 = '';
 		$scope.radioModel = false;
 		$scope.enableAlarm2 = false;
-		$scope.enableAlarm3 = false;		
+		$scope.enableAlarm3 = false;
 
 		if($scope.$root.isFrom == "MASTER")
 			$scope.selectedCompany = '';
@@ -102,16 +105,46 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 			$scope.selectedCompany = $scope.companies[0];
 	};
 	 
-	$scope.getAlarms = function() {
-		 
+	$scope.getAlarms = function() {		 
 		 $scope.resultAlarms = new AlarmService.listAll();		 
 		 $scope.resultAlarms.$alarm({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.alarms = $scope.resultAlarms.list;			 
          });		 
 	 };	 
+
+	 $scope.changePerfilAlarm1 = function(show) {
+		 if (show) {
+			$scope.showPerfilAlarm1 = true;
+		//  } else if ($scope.perfilAlarm1) {
+		 } else {
+			$scope.showPerfilAlarm1 = false;	 
+		 }
+	 };
+
+	 $scope.changePerfilAlarm2 = function(show) {
+		if (show) {
+		   $scope.showPerfilAlarm2 = true;
+	   //  } else if ($scope.perfilAlarm1) {
+		} else {
+		   $scope.showPerfilAlarm2 = false;	 
+		}
+	};
+
+	$scope.changePerfilAlarm3 = function(show) {
+		if (show) {
+		   $scope.showPerfilAlarm3 = true;
+	   //  } else if ($scope.perfilAlarm1) {
+		} else {
+		   $scope.showPerfilAlarm3 = false;	 
+		}
+	};
 	
 	$scope.editAlarm = function (index) {
-		 
+		
+		$scope.showPerfilAlarm1 = false;
+		$scope.showPerfilAlarm2 = false;
+		$scope.showPerfilAlarm3 = false;
+
 		$scope.alarmUid = $scope.alarms[index].uid;
 		$scope.alarmGas = $scope.alarms[index].gasDto;
 		$scope.deviceType = $scope.alarms[index].deviceType;
@@ -166,18 +199,15 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		 
 			$timeout(function () {				
 				$scope.usedAlarms = $scope.resultUsedAlarms.list;
-	         }, 500);
-			 
+	         }, 500);			 
 		});		 		 
 	}
 	 
 	$scope.deleteAlarm = function(index) {
 		 
-		 var uid = $scope.alarms[index].uid;		  
-		 
+		 var uid = $scope.alarms[index].uid;		 
 		 $scope.deletar = new AlarmService.deletar();		 
-		 $scope.deletar.$alarm({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
-			 			 
+		 $scope.deletar.$alarm({_csrf : angular.element('#_csrf').val(), id : uid}, function() {			 			 
 			 if (!$scope.deletar.isError)
 				 $scope.alarms.splice(index, 1);
 			 else {
@@ -194,8 +224,7 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 	   });		 
 	};
 
-	 $scope.getGases = function() {
-		 
+	 $scope.getGases = function() {		 
 		 $scope.resultGases = new GasService.listAll();		 
 		 $scope.resultGases.$gas({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.gases = $scope.resultGases.list; 		 			 
@@ -212,7 +241,6 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 	 $('.alarmCelularMask').keydown(function (e) {
 			var key = e.charCode || e.keyCode || 0;
 			$phone = $(this);
-
 			if (key !== 8 && key !== 9) {
 				if ($phone.val().length === 3) {
 					$phone.val($phone.val() + ')');
@@ -232,16 +260,14 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 			
 			if ($phone.val().length === 0) {
 				$phone.val('(');
-			}
-			else {
+			} else {
 				var val = $phone.val();
 				$phone.val('').val(val);
 			}
 		})
 		
 		.blur(function () {
-			$phone = $(this);
-			
+			$phone = $(this);			
 			if ($phone.val() === '(') {
 				$phone.val('');
 			}
@@ -267,14 +293,11 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 	 
 	function showEmail (checked) {
 		 
-		$(".checkboxEmail").prop('checked', checked);
-		 
+		$(".checkboxEmail").prop('checked', checked);		 
 		$("#alarmEmail").prop('disabled', !checked );         
-		$("#alarmEmail").prop('readonly', !checked); 
-		 
+		$("#alarmEmail").prop('readonly', !checked);
 		$("#alarmEmail1").prop('disabled', !checked );         
-		$("#alarmEmail1").prop('readonly', !checked);
-		 		 
+		$("#alarmEmail1").prop('readonly', !checked);		 		 
 		$scope.alarmEmail = checked;
 		$scope.validEmail();
 	}
@@ -324,19 +347,16 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		}
 
 		if($scope.enableAlarm2) {
-
 			if( ($scope.alarmAlarm1 && $scope.alarmAlarm2) && (Number($scope.alarmAlarm1) > Number($scope.alarmAlarm2) )) {
 				errors.push("[Alarme 2 <span class='text-black'> ({{alarmAlarm2}}) </span> Deve ser maior que o Alarme 1 <span class='text-black'> ({{alarmAlarm1}}) </span>]");
 				$scope.errorAlarm1 = true ;
 				$scope.errorAlarm2 = true ;
 		   }
-
 		   if( !$scope.alarmAlarm22 && !$scope.alarmAlarm2) {
 				errors.push("ALARME 2 Precisa de Uma valor [Maior Que] E/ou [Menor Que]");
 				$scope.errorAlarm2 = true ;
 				$scope.errorAlarm22 = true ;
 			}
-
 			if( ($scope.alarmAlarm22 && $scope.alarmAlarm2) && (Number($scope.alarmAlarm22) > Number($scope.alarmAlarm2))) {
 				errors.push("ALARME 2 Precisa de Uma valor [Menor Que] Não pode ser MAIOR");
 				$scope.errorAlarm2 = true ;
@@ -424,6 +444,13 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 			$scope.genericRangeMax = 1;
 		}
 	};
+
+	$scope.getPerfilAlarms = function() {		 
+		$scope.listAllPerfilAlarm = new PerfilAlarmService.listAllPerfilAlarm();		 
+		$scope.listAllPerfilAlarm.$perfilAlarm({_csrf : angular.element('#_csrf').val()}, function(){			
+			$scope.perfilAlarms = $scope.listAllPerfilAlarm.list;
+	   });		 
+	};
 	      
 	$scope.refreshAlarms = function() {
 		$scope.getDeviceTypes();
@@ -431,6 +458,7 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		$scope.getAlarms();	 
 		$scope.getGases();
 		$scope.getCompanys();
+		$scope.getPerfilAlarms();
 	};	 
 	 
 	 $scope.refreshAlarms(); 

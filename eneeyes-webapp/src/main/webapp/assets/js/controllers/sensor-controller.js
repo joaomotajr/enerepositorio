@@ -149,12 +149,7 @@ app.controller('sensorController', function ($scope, $timeout, SensorService, Ma
             }
         } 		 
 	};
-	 
-	$scope.keypress = function($event) {
-		$scope.lastKey = $event.keyCode;
-		$scope.sensorNameExist = "false";
-	};
-	 
+		 
 	$scope.refreshSensors = function() {
 		$scope.getSensors();
 		$scope.getManufacturers();

@@ -38,7 +38,9 @@
 		<link rel="stylesheet" href="/assets/plugins/datatables/select.dataTables.min.css">
 			   
 	    <!-- Font Awesome -->
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">	    
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">	     -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+  		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
 	    	    
 	    <!-- Date Picker -->
 	    <link rel="stylesheet" href="/assets/plugins/datepicker/datepicker.css">

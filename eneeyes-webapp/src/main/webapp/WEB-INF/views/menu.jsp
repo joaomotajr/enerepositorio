@@ -23,17 +23,17 @@
 	        <!-- Sidebar Menu -->
 			<ul class="sidebar-menu">	            	            
 	            <li class="treeview">
-	            	<a href="#" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fa fa-th text-aqua"></i> 
+	            	<a href="#" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fas fa-chalkboard-teacher text-aqua"></i> 
 	            		<span>Dashboard</span>	            			            		
 	            	</a>	            		            	
 	            </li>	            	            
-				<li class="treeview" data-ng-if="isFrom=='MASTER'">
+				<!-- <li class="treeview" data-ng-if="isFrom=='MASTER'">
 	            	<a href="#" data-ng-click="LoadAjaxContent('fusioncharts.html', 'Gr&aacute;ficos')"><i class="fa fa-th text-white"></i> 
 	            		<span>Novos Gr&aacute;ficos</span>	            			            		
 	            	</a>	            		            	
-				</li>
+				</li> -->
 				<li class="treeview">
-	            	<a href="#" data-ng-click="LoadAjaxContent('general.html', 'Over-View')"><i class="fa fa-bullseye" style="color:yellow"></i> 
+	            	<a href="#" data-ng-click="LoadAjaxContent('general.html', 'Over-View')"><i class="fas fa-street-view text-yellow"></i> 
 	            		<span>Over View</span>	            			            		
 	            	</a>	            		            	
 				</li>
@@ -42,10 +42,10 @@
 	                <i class="fa fa-cube text-red"></i> <span>Sistema: G&aacute;s &amp; Alarme</span>
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
-	            	<ul class="treeview-menu">			            
-			            <li><a href="#" data-ng-click="LoadAjaxContent('dashboard.html', 'Dashboard')"><i class="fa fa-th text-aqua"></i><span>Dashboard</span></a></li>
-						<li><a href="#" data-ng-click="LoadAjaxContent('logHistoric.html', 'Log-Detectores')"><i class="fa fa-files-o"></i> Log Dispositivos</a></li>			            	            
-						<li><a href="#" data-ng-click="LoadAjaxContent('logHistoricAlarm.html', 'Log-Alarmes')"><i class="fa fa-files-o"></i> Log Alarmes</a></li>
+	            	<ul class="treeview-menu">
+						<li><a href="#" data-ng-click="LoadAjaxContent('logHistoric.html', 'Log-Detectores')"><i class="fas fa-file-signature"></i> Log Dispositivos</a></li>			            	            
+						<li><a href="#" data-ng-click="LoadAjaxContent('logHistoricAlarm.html', 'Log-Alarmes')"><i class="fas fa-file-audio"></i> Log Alarmes</a></li>
+						<!-- <li><a href="#" data-ng-click="LoadAjaxContent('logAnalytical.html', 'Analise-Comparativa')"><i class="fas fa-shekel-sign"></i> Análise Comparativa</a></li> -->
 	              	</ul>
 	            </li>	            
 	            <li class="treeview">
@@ -75,7 +75,7 @@
 	            
 	          	<li class="treeview">
 	            	<a href="#">
-	            		<i class="fa fa-lock" style="color:darkcyan"></i>
+	            		<i class="fa fa-lock text-aqua" ></i>
 	                	<span style="font-size: 100%">Seg. de Todas as Coisas</span>
 	                	<i class="fa fa-angle-left pull-right"></i>
 	              	</a>	              	
@@ -95,6 +95,7 @@
 								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('gases.html', 'Gases')"><i class="fa fa-yelp"></i> Gases</a></li>
 								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('deviceType.html', 'Dipositivos')"><i class="fa fa-microchip"></i> Dispositivos</a></li>
 								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('unitMeter.html', 'Unidades')"><i class="fa fa-balance-scale"></i> Unidades</a></li>
+								<li class="active"><a href="#" data-ng-click="LoadAjaxContent('perfilAlarm.html', 'Perfis-Alarme')"><i class="fas fa-walking"></i> Perfis de Alarme</a></li>
 			              	</ul>
 			            </li> 
 			            <li><a href="#" data-ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn"></i> Alarmes</a></li>

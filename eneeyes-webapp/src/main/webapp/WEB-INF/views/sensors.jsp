@@ -101,8 +101,8 @@
 											<span class="text-red pull-right" data-ng-show="sensorNameExist">Sensor já Existe</span> 
 											<span class="text-red pull-right" data-ng-show="sensorForm.sensorName.$error.required && !sensorForm.sensorName.$pristine">  [Nome Obrigatorio]</span>
 											<span class="text-red pull-right" data-ng-show="sensorForm.sensorName.$error.maxlength">Tamanho Máximo 15 caracteres</span>                                                                        
-											<input id="idSensorName"  data-ng-keydown="keypress($event)" class="form-control inputProfile" placeholder="Nome do Sensor" data-ng-model="sensorName" 
-												data-ng-maxlength="15" name="sensorName" required>                                                                        
+											<input id="idSensorName" class="form-control inputProfile" placeholder="Nome do Sensor" data-ng-model="sensorName" 
+												data-ng-maxlength="15" name="sensorName" required>
 										</div>
 									</div>							
 									<div class="col-md-6">

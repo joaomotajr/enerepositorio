@@ -50,7 +50,7 @@
 								<div class="form-group">
 									<label class="control-label">Tipo</label>          
 									<span class="text-red" data-ng-show="deviceTypeNameExist">Dispositivo já Existe</span>                                                               
-									<input id="deviceTypeType" data-ng-keydown="keypress($event)" class="form-control inputProfile" placeholder="Tipo do Dispostivo"  data-ng-model="deviceTypeType">                                                                        
+									<input id="deviceTypeType" class="form-control inputProfile" placeholder="Tipo do Dispostivo"  data-ng-model="deviceTypeType">                                                                        
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -70,8 +70,7 @@
 									</button>
 									<ul class="dropdown-menu list-inline" role="menu" style="width: 100%;height: 40vh;overflow-y: auto; text-align: center;">
 										<li data-ng-repeat="i in symbols | orderBy: 'id'" data-ng-click="changeSymbol(i.id);" style="padding: 10px;" >
-											<span class="cursor fa fa-2x" title="{{i.id}}" data-ng-class="i.id"></span>
-											<!-- <br> <span style="font-size: 0.8em">{{i.id}}</span> -->
+											<span class="cursor fa-2x" title="{{i.id}}" data-ng-class="i.id"></span>
 										</li>
 									</ul>
 								</div>

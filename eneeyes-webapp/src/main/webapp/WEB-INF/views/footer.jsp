@@ -46,6 +46,7 @@
 	<script type="text/javascript" src="/assets/plugins/fusioncharts/angular-fusioncharts.min.js"></script>
 	<script type="text/javascript" src="/assets/plugins/fusioncharts/themes/fusioncharts.theme.fint.js"></script>
 	<script type="text/javascript" src="/assets/plugins/fusioncharts/themes/fusioncharts.theme.ocean.js"></script>
+	<!-- <script type="text/javascript" src="/assets/plugins/fusioncharts/fusioncharts.timeseries.js"></script> -->
 	
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
@@ -103,6 +104,8 @@
 	<script src="/assets/js/controllers/generic-controller.js"></script>
 	<script src="/assets/js/controllers/unitMeter-controller.js"></script>
 	<script src="/assets/js/controllers/deviceType-controller.js"></script>
+	<script src="/assets/js/controllers/perfilAlarm-controller.js"></script>
+	<!-- <script src="/assets/js/controllers/logAnalytical-controller.js"></script> -->
 				
 	<!-- PAGE LEVEL SERVICES -->
 	<script src="/assets/js/user-services.js"></script>
@@ -133,6 +136,7 @@
 	<script src="/assets/js/services/companyDetectorMaintenanceHistoric-Service.js"></script>
 	<script src="/assets/js/services/generic-service.js"></script>
 	<script src="/assets/js/services/unitMeter-service.js"></script>
+	<script src="/assets/js/services/perfilAlarm-service.js"></script>
 	<script src="/assets/js/services/deviceType-service.js"></script>
 		
 	<!-- PAGE LEVEL FACTORIES -->	

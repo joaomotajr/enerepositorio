@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Index;
+
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.enums.SigmaStatus;
@@ -19,6 +21,13 @@ import br.com.eneeyes.main.model.enums.SoundStatus;
 
 @Entity
 @Table(name="historic_alarm")
+@org.hibernate.annotations.Table(
+		   appliesTo = "historic_alarm",
+		   indexes = {
+		      @Index(name="idxHistoricAlarmDate", columnNames = "DATE"),		      
+		      @Index( name="idxHistoricAlarmCompanyDeviceAndDate",    columnNames = { "COMPANY_DEVICE_ID", "DATE"} )
+		   }
+		)
 public class HistoricAlarm {
 
     public HistoricAlarm() {

@@ -1,4 +1,4 @@
-app.controller('logHistoricController', function ($scope, $timeout, $filter, $cookieStore, CompanyService, CompanyDeviceService, HistoricViewService, ViewService) {
+app.controller('logHistoricController', function ($scope, $timeout, $cookieStore, CompanyService, CompanyDeviceService, HistoricViewService, ViewService) {
 
 	var loadGoogleCharts = false;	
 	$scope.countHistoric = 0;
@@ -9,13 +9,11 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	
 	   var divToPrint = document.getElementById("printTable");
 	   	   
-	   divToPrint.style.visibility = "visible";
-	   
+	   divToPrint.style.visibility = "visible";	   
 	   newWin= window.open("");
 	   newWin.document.write(divToPrint.outerHTML);
 	   newWin.print();
-	   newWin.close();
-	   
+	   newWin.close();	   
 	   divToPrint.style.visibility = "hidden";
 	}
 
@@ -29,7 +27,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	});	
 	 	
 	$scope.buttonClick = function (s) { 
-		$scope.selectedButton = s 
+		$scope.selectedButton = s; 
 	};
 	
 	$scope.showInfo = function(msg) {
@@ -48,8 +46,11 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 			$scope.selectedCompany = '';
 
 		$scope.selectedUnit = '';
+		$scope.units = '';
 		$scope.selectedArea = '';		
-        $scope.selectedCompanyDetector = '';
+		$scope.areas = '';
+		$scope.selectedCompanyDetector = '';
+		$scope.companyDetectors = '';
         $scope.findedCompanyDetector = '';
         $scope.listHistoricInterval = undefined;
         $scope.dateIn = undefined;
@@ -103,7 +104,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	$scope.getHistorics = function(n) {
 
 		if (!$scope.lenPageValid) {			
-			$scope.daysDiff ="ATENÇÃO! Quantidade de registros por página Inválido.";	
+			$scope.daysDiff ="ATENÇÃO! Quantidade de registros por página inválido.";	
 			$("#snoAlertBox").fadeIn();			
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
 			daysExceed = true;
@@ -117,8 +118,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 
 		if($scope.interval == $scope.enumInterval.CUSTOM) {			
 			$scope.getHistoricInterval(n);
-		}
-		else {			
+		} else {			
 			$scope.getHistoricsPreDefined(n);
 		}
 	};
@@ -145,30 +145,25 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 			$timeout(function () {
 						
 			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list != null > 0 && $scope.listHistoricInterval.list.length > 0) {
-				lastPage = $scope.currentPage;
-				
+				lastPage = $scope.currentPage;				
 				$scope.listPages = range(Math.ceil($scope.listHistoricInterval.totalList / $scope.lenPage));
 				$scope.countPages = Math.ceil($scope.listHistoricInterval.totalList / $scope.lenPage);
-
 				$scope.countHistoric = padZeros($scope.listHistoricInterval.totalList, 5);
 				
 				if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
 					$(function() { $('#btnSelDevice').click(); })  	
-			}
-			
-				$scope.loading = false;					
-
+			}			
+			$scope.loading = false;
 			}, 500);		
 		});		
-	};	
+	};
 		
 	$scope.getHistoricInterval = function(n) {		
 
 		var dataInicio = new Date($('#dateIn').data().DateTimePicker.date._d);
 		var dataFim = new Date($('#dateOut').data().DateTimePicker.date._d);		
 
-		if (dataFim < dataInicio) {
-			
+		if (dataFim < dataInicio) {			
 			$scope.daysDiff ="ATENÇÃO! Data Final Precisa ser Maior que Inicial.";
 			$("#snoAlertBox").fadeIn();			
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
@@ -206,20 +201,19 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
        });		
 	};	
 		
-	function setInterval(interval) {
-		
+	function setInterval(interval) {		
 		if ( interval == $scope.enumInterval.UMA_HORA )
-			return  "última Hora";
+			return  "Última Hora";
 		else if ( interval == $scope.enumInterval.SEIS_HORAS )
-			return "últimas Seis Horas";
+			return "Últimas Seis Horas";
 		else if ( interval == $scope.enumInterval.DOZE_HORAS )
-			return "últimas Doze Horas";
+			return "Últimas Doze Horas";
 		else if ( interval == $scope.enumInterval.DOIS_DIAS )
-			return "últimas Dois Dias";
+			return "Últimas Dois Dias";
 		else if ( interval == $scope.enumInterval.SETE_DIAS )
-			return "últimos Sete Dias";
+			return "Últimos Sete Dias";
 		else if ( interval == $scope.enumInterval.UM_MES )
-			return "último Mês";
+			return "Último Mês";
 		else 
 			return 'Desconhecido';				
 	}
@@ -386,6 +380,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 			data.addColumn('string', 'Data');
 			data.addColumn('number', 'Máximo');			
 			data.addColumn('number', 'Mínimo');
+			data.addColumn('number', 'Média');
+			data.addColumn('number', 'Soma');
 		}
 
 	    var itens = [];
@@ -396,7 +392,7 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	    	if($scope.tipoGrupo == 1) {
 	    		itens.push([changeDate, value[i].value]);
 	    	} else {
-	    		itens.push([changeDate, value[i].maxValue, value[i].minValue]);
+	    		itens.push([changeDate, value[i].maxValue, value[i].minValue, value[i].avgValue, value[i].sumValue]);
 	    	}
 		}
 	      
@@ -415,7 +411,9 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 		    	  },
 		    	  vAxis: {	    		  
 		    		  maxValue: $scope.selectedCompanyDetector.rangeMax,
-		              minValue: 0,
+					  minValue: 0,
+					  avgValue: 0,
+					  sumValue: 0,
 		    		  textStyle: {
 	                      'color': '#8C8C8C',
 	                      'fontName': 'Calibri',
@@ -423,8 +421,8 @@ app.controller('logHistoricController', function ($scope, $timeout, $filter, $co
 	                      'fontSize': 9,
 	                  },
 		    		  ticks: [
-		    		          {v:0, f: 'Range MÃ¡nimo: 0' }, 
-		    		          {v: orange, f: 'Detecçãoo: ' + orange}, 
+		    		          {v:0, f: 'Range Máximo: 0' }, 
+		    		          {v: orange, f: 'Detecção: ' + orange}, 
 		    		          {v: yellow, f: 'Alerta: ' + yellow}, 
 		    		          {v: red, f: 'Evacuação: ' + red}, 
 		    		          {v: $scope.selectedCompanyDetector.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanyDetector.rangeMax}

@@ -19,18 +19,12 @@ public interface IHistoric {
 	public BigDecimal getValue() ;
 
 	public void setValue(BigDecimal value) ;
-
-	//public Long getCompanyDetectorId() ;
 	
 	public Long getCompanyDeviceId() ;
-	
-	//public void setCompanyDetectorId(Long companyDetectorId);
 	
 	public void setCompanyDeviceId(Long companyDeviceId);
 
 	public LogOrigem getLogOrigem();
 
 	public void setLogOrigem(LogOrigem logOrigem);
-	
-
 }

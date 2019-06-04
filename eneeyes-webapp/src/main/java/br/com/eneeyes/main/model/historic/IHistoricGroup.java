@@ -20,17 +20,16 @@ public interface IHistoricGroup {
 	public BigDecimal getMinValue();
 	
 	public void setMinValue(BigDecimal value);
-
-//	public Long getCompanyDetectorId() ;
+	
+	public BigDecimal getAvgValue();
+	
+	public void setAvgValue(BigDecimal value);
+	
+	public BigDecimal getSumValue();
+	
+	public void setSumValue(BigDecimal value);	
 	
 	public Long getCompanyDeviceId() ;
 	
-	//public void setCompanyDetectorId(Long companyDetectorId);
-	
-	public void setCompanyDeviceId(Long companyDeviceId);
-
-//	public Long getSensorId();
-//
-//	public void setSensorId(Long sensorId);
-	
+	public void setCompanyDeviceId(Long companyDeviceId);	
 }

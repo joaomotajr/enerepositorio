@@ -1,7 +1,6 @@
 app.controller('SiteController', function ($scope, $http, $filter, $interval, $timeout, $window, $q, Signin, $sce, UserService) {
 
-	$scope.$root.recolheLogo = true;
-	
+	$scope.$root.recolheLogo = true;	
 	$scope.$root.timer = [];
 	$scope.$root.currentPage = "";
 	$scope.$root.errorTimes = 0;	
@@ -9,15 +8,14 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 	$scope.$root.userId = $('#idUsuario').val();
 	$scope.$root.userImage = '/assets/img/avatar_128x128.png';
 	
-	$scope.showLogo = function(){
+	$scope.showLogo = function() {
 		$scope.$root.recolheLogo = !$scope.$root.recolheLogo; 
-	}
+	};
 
-	$scope.LoadNewWindow = function(title){
-
-		$window.open("indexNewWindows.html", title, 'toolbar=0,scrollbars=1,location=0,status=0,menubar=0,resizable=1,width=1000, height=350,left=100,top=100');
-
-	}
+	$scope.LoadNewWindow = function(title) {
+		$window.open("indexNewWindows.html", title, 
+		'toolbar=0,scrollbars=1,location=0,status=0,menubar=0,resizable=1,width=1000, height=350,left=100,top=100');
+	};
 	
 	$scope.LoadAjaxContentCompany = function(url){
 		$http.get(url)
@@ -36,10 +34,10 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 		if($scope.$root.currentPage == title) return;
 		
 		title= title.replace(/\s/g,'');		
-		$scope.$root.currentPage = title;
-				
-		var idTab = $scope.tabsShow.findIndex( function(e) { return e.link === title });
-					
+		$scope.$root.currentPage = title;				
+		var idTab = $scope.tabsShow.findIndex( function(e) { 
+			return e.link === title; 
+		});					
 		if (idTab >= 0 ) {		
 			
 			$timeout(function() {
@@ -49,43 +47,33 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
 		else {
 
 			$http.get(url)
-	         	.success(function (data) {
-	        	
+	         	.success(function (data) {	        	
 	        	var sBody = {
 	        		name : "tab_" + title,
 	        		link : title,
 					body : data			
-	        	};
-	        	
-	        	$scope.tabsShow.push(sBody);     	
-	           
+	        	};	        	
+	        	$scope.tabsShow.push(sBody);	           
 	        	$timeout(function() {
 					$("#id_tab_" + title).trigger("click");				
-				},100);
-	            
+				}, 100);	            
 	        })
 	        .error(function (data, status, headers, config) {
-
 				$rootScope.alertServerDanger = config;
-				angular.element('body').removeClass('loading');
-					        	
+				angular.element('body').removeClass('loading');					        	
 	        });
 		}
 	}
 	
-	$scope.removeTab = function (index) {
-			
-		if($scope.$root.currentPage == $scope.tabsShow[index].link) {
-			
+	$scope.removeTab = function (index) {			
+		if($scope.$root.currentPage == $scope.tabsShow[index].link) {			
 			$timeout(function(){			
 				$('#id_' + $scope.tabsShow[index - 1].name).trigger("click");				
 			}, 100);
-
 			$scope.tabsShow.splice(index, 1);				
 		}
 		else {
-
-			$scope.tabsShow.splice(index, 1);					
+			$scope.tabsShow.splice(index, 1);
 		}		
 	};
 
@@ -106,7 +94,6 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
     $scope.errorMessage = false;
 
     $scope.signin = function() {
-
         angular.element('html').addClass('loading');
         angular.element('#signin-error').css('display','none');
         angular.element('#signin-user').removeClass('has-error');
@@ -117,10 +104,8 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
             credential : $scope.forms.signin.credential,
         });
         $scope.result.$save({_csrf : angular.element('#_csrf').val()}, function(){
-            if($scope.result.resultType == 'SUCCESS') {
-            	
-                window.location.href = '/';
-                
+            if($scope.result.resultType == 'SUCCESS') {            	
+                window.location.href = '/';                
             } else {
             	if($scope.result.errorMessages != null && $scope.result.errorMessages.length > 0) {
             		$scope.errorMessage = $scope.result.errorMessages[0].message;
@@ -130,23 +115,17 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
             		var userId = $scope.errorMessage.split('#')[1];
             		var username = $scope.errorMessage.split('#')[2];
             		
-            		if(errorMessage == 'signin.new') {
-            			
+            		if(errorMessage == 'signin.new') {            			
             			angular.element('#formSignin').css('display','block');
-            			angular.element('#signinAlert').css('display','block');
-            			
+            			angular.element('#signinAlert').css('display','block');            			
             			$scope.signinAlert = true;
-            			$scope.showNewPass = false;
-            			
+            			$scope.showNewPass = false;            			
             			$scope.forms.signexpired.userId = userId;
             			$scope.forms.signexpired.username = username;
-            		}		
-        			else if(errorMessage == "signin.error") {
-							
+            		} else if(errorMessage == "signin.error") {							
             			angular.element('#signin-error').css('display','block');
             			angular.element('#signin-user').addClass('has-error');
-            			angular.element('#signin-pass').addClass('has-error');            		
-            			
+            			angular.element('#signin-pass').addClass('has-error');            			
             		} else {
             			angular.element('#signin-error2').css('display','block');            			
             		}
@@ -171,42 +150,30 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         angular.element('#password-error').css('display','none');
 
         $scope.updatePass = new UserService.updatePass($scope.forms.signexpired);
-        $scope.updatePass.$user({_csrf : angular.element('#_csrf').val()},function(){
-        	
-        	angular.element('html').removeClass('loading');
-            
-        	if($scope.updatePass.resultType == 'SUCCESS') {
-            	
-        		$scope.successMessage = $scope.updatePass.message + " Refa�a o Login";          
-            	
+        $scope.updatePass.$user({_csrf : angular.element('#_csrf').val()},function(){        	
+        	angular.element('html').removeClass('loading');            
+        	if($scope.updatePass.resultType == 'SUCCESS') {            	
+        		$scope.successMessage = $scope.updatePass.message + " Refa�a o Login";                      	
             	angular.element('#formSignin').css('display','none');            	
-            	angular.element('#password-success').css('display','block');
-    			
-            	$scope.forms.signexpired = [];
-            	
+            	angular.element('#password-success').css('display','block');    			
+            	$scope.forms.signexpired = [];            	
             	angular.element('html').removeClass('loading');
             
             	$timeout(function(){
             		angular.element('#password-success').css('display','none');
             		$scope.forms.signin.credential = $scope.forms.signexpired.confirm;
             		$scope.forms.signin.credential = '';
-            		$scope.showNewPass = false;            		
-										
-				},5000);
-            
-            } else {
-            	
+            		$scope.showNewPass = false;										
+				}, 5000);            
+            } else {            	
             	$scope.errorMessage = 'Erro ao Atualizar Senha!!!';
-
     			angular.element('#signin-error').css('display','block');
     			angular.element('#signin-user').addClass('has-error');
-    			angular.element('#signin-pass').addClass('has-error');            		
-            	            	
+    			angular.element('#signin-pass').addClass('has-error');
             }        
-		});    	
-    	
-    }
+		});   	
+    };
 
 	angular.element('body').addClass('loading');
-	$scope.LoadAjaxContent('dashboard.html', 'Dashboard');
+	$scope.LoadAjaxContent('dashboard.html', 'Dashboard');	
 });

@@ -156,7 +156,7 @@
 							
 								<div class="col-md-4">																															
 									<div class="col-md-3" style="padding-right: 2px !important;">	
-										<label style="margin-top: 5px !important;" title="Mostrando Máximo e Mínimo"><span class="icon fa fa-object-group"></span> Agrupar</label>
+										<label style="margin-top: 5px !important;" title="Mostrando Máximo e Mí­nimo"><span class="icon fa fa-object-group"></span> Agrupar</label>
 									</div>
 									<div class="col-md-9" style="padding-right: 5px; padding-left: 5px; background:gray; border-color:lightgray; border-radius: 2px 2px 2px 2px; color:white">
 											<div class="radio3 radio-check radio-success radio-inline">
@@ -178,7 +178,7 @@
 								
 								<div class="col-md-5" >									
 									<div class="col-md-3">
-										<label style="margin-top: 2px !important; padding-right: 5px !important;" title="Mostrando Máximo e Máximo"><span class="icon fa fa-caret"></span>Exibir/Exportar</label>
+										<label style="margin-top: 2px !important; padding-right: 5px !important;" title="Mostrando Máximo e Mínimo"><span class="icon fa fa-caret"></span>Exibir/Exportar</label>
 									</div>										        	
 									<div class="form-group">
 											<div class="col-md-3" style="padding-right: 5px !important;">
@@ -222,7 +222,7 @@
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 168}" 
 														data-ng-click="interval = enumInterval.SETE_DIAS; getHistorics(0);"  data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">7d</button>
 													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 30}" 
-														data-ng-click="interval = enumInterval.UM_MES; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">30d</button>												  												  
+														data-ng-click="interval = enumInterval.UM_MES; getHistorics(0);" data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">30d</button>													
 											</div>
 										</div>
 									</div>
@@ -332,7 +332,7 @@
 													<td>{{item.uid}}</td>
 													<td>{{item.lastUpdate | date:'dd/MM/yyyy' }}</td>
 													<td>{{item.lastUpdate | date:'HH:mm:ss' }}</td>
-													<td> {{item.value}} </td>
+													<td> {{item.value | number:2}} </td>
 													<td>
 														<span data-ng-if="item.logOrigem == 'DEVICE'">DISPOSITIVO</span>
 														<span data-ng-if="item.logOrigem == 'MANUAL'">AN&Aacute;LISE DE CEN&Aacute;RIO</span>
@@ -349,7 +349,9 @@
 													<th>Data</th>
 													<th>Hora</th>	                      		
 													<th>M&aacute;ximo</th>
-													<th>Minimo</th>													
+													<th>Minimo</th>
+													<th>Média</th>
+													<th>Soma</th>
 												</tr>
 											</thead>
 											<tbody>		
@@ -358,8 +360,10 @@
 												<tr data-ng-repeat="item in listHistoricInterval.list">	
 													<td>{{item.lastUpdate | date:'dd/MM/yyyy' }}</td>
 													<td>{{item.lastUpdate | date:'HH:mm:ss' }}</td>
-													<td> {{item.maxValue}} </td>
-													<td> {{item.minValue}} </td>													
+													<td> {{item.maxValue | number:2}} </td>
+													<td> {{item.minValue | number:2}} </td>
+													<td> {{item.avgValue | number:2}} </td>
+													<td> {{item.sumValue | number:2}} </td>
 												</tr>
 											</tbody>
 										</table>

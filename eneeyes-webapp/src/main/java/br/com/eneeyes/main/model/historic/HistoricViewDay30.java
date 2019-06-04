@@ -32,6 +32,12 @@ public class HistoricViewDay30 implements IHistoricGroup {
 	
 	@Column(name="MIN_VALUE")
 	private BigDecimal minValue;
+	
+	@Column(name="AVG_VALUE")
+	private BigDecimal avgValue;
+	
+	@Column(name="SUM_VALUE")
+	private BigDecimal sumValue;
 
 	public final Long getUid() {
 		return uid;
@@ -72,4 +78,20 @@ public class HistoricViewDay30 implements IHistoricGroup {
 	public final void setMinValue(BigDecimal minValue) {
 		this.minValue = minValue;
 	}
+
+	public BigDecimal getAvgValue() {
+		return avgValue;
+	}
+
+	public void setAvgValue(BigDecimal avgValue) {
+		this.avgValue = avgValue;
+	}
+
+	public BigDecimal getSumValue() {
+		return sumValue;
+	}
+
+	public void setSumValue(BigDecimal sumValue) {
+		this.sumValue = sumValue;
+	}	
 }

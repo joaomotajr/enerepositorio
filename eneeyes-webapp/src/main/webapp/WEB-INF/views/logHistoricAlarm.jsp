@@ -39,20 +39,32 @@
 										</a>
 									</li>
 									<li>
-										<a href="#step-2" class="disabled" data-ng-class="(selectedCompanyDetector) ? 'selected' : 'disabled'" rel="2">
+										<a href="#step-2" class="disabled" data-ng-class="(selectedUnit) ? 'selected' : 'disabled'" rel="2">
 											<span class="step_no">2</span>
+											<span class="step_descr">Selecione Unidade</span>
+										</a>
+									</li>
+									<li>
+										<a href="#step-3" class="disabled" data-ng-class="(selectedArea) ? 'selected' : 'disabled'" rel="3">
+											<span class="step_no">3</span>
+											<span class="step_descr">Selecione Área</span>
+										</a>
+									</li>
+									<li>
+										<a href="#step-4" class="disabled" data-ng-class="(selectedCompanyDetector) ? 'selected' : 'disabled'" rel="4">
+											<span class="step_no">4</span>
 											<span class="step_descr">Selecione Detector</span>
 										</a>
 									</li>
 									<li>
-										<a href="#step-3" class="disabled" data-ng-class="(selectedCompanyDetector) ? 'selected' : 'disabled'" rel="3">
-											<span class="step_no">3</span>
+										<a href="#step-5" class="disabled" data-ng-class="(selectedCompanyDetector) ? 'selected' : 'disabled'" rel="5">
+											<span class="step_no">5</span>
 											<span class="step_descr">Sensor/G&aacute;s</span>
 										</a>
 									</li>
 									<li>
-										<a href="#step-4" class="disabled" data-ng-class="(listHistoric.list || listHistoricInterval.list) ? 'selected' : 'disabled'" rel="4">
-											<span class="step_no">4</span>
+										<a href="#step-6" class="disabled" data-ng-class="(listHistoricInterval.list) ? 'selected' : 'disabled'" rel="6">
+											<span class="step_no">6</span>
 											<span class="step_descr">Pesquisar / Limpar Pesquisa</span>
 										</a>
 									</li>
@@ -63,40 +75,65 @@
 					
 					<div class="row">      		           
 						<form class="form" name="userForm">
-							<div class="col-md-12">					            	 
-									
-								<div class="col-md-3">
-									<jsp:include page="controls/companySelect.jsp"/>					            		
+							<div class="col-md-12">								
+								<div class="col-md-2">
+									<jsp:include page="controls/companySelect.jsp"/>
+								</div>							
+								<div class="col-md-2">                                                                                                                            
+									<div class="form-group" data-ng-hide="units.length==1">	
+										<select class="form-control" data-live-search="true" 
+											style="width: 100%;" tabindex="-1" aria-hidden="true"											
+											data-ng-options="item as item.unit for item in units | orderBy: 'unit' track by item.unitId" 
+											data-ng-model="selectedUnit" 
+											data-ng-change="changeUnit();">
+											<option value="">Selecione</option> 
+										</select>
+									</div>
+									<div class="form-group" data-ng-show="units.length==1">	
+										<input class="form-control" type="text" data-ng-model="selectedUnit.unit" disabled>			                        				                        							                                                                    
+									</div>
 								</div>
-							
-								<div class="col-md-3">                                                                                                                            
-									<div class="form-group">
+								<div class="col-md-2">                                                                                                                            
+									<div class="form-group" data-ng-hide="areas.length==1">
 										<select class="form-control" data-live-search="true" 
 											style="width: 100%;" tabindex="-1" aria-hidden="true"                              
-											data-ng-options="item as item.companyDetectorName for item in companyDetectors | companyFilter:search | orderBy: 'companyDetectorName' track by item.companyDeviceId" 
+											data-ng-options="item as item.area for item in areas | orderBy: 'area' track by item.areaId" 
+											data-ng-model="selectedArea" 
+											data-ng-change="changeArea();">
+											<option value="">Selecione</option> 
+										</select>
+									</div>
+									<div class="form-group" data-ng-show="areas.length==1">
+										<input class="form-control" type="text" data-ng-model="selectedArea.area" disabled>			                        				                        							                                                                    
+									</div>
+								</div>
+								<div class="col-md-2">                                                                                                                            
+									<div class="form-group" data-ng-hide="companyDetectors.length==1">
+										<select class="form-control" data-live-search="true" 
+											style="width: 100%;" tabindex="-1" aria-hidden="true"                              
+											data-ng-options="item as item.companyDetectorName for item in companyDetectors | orderBy: 'companyDetectorName' track by item.companyDeviceId" 
 											data-ng-model="selectedCompanyDetector" 
 											data-ng-change="changeCompanyDetector();">
 											<option value="">Selecione</option> 
 										</select>
 									</div>
-								</div>		
-																		
-								<div class="col-md-3">
-									<div class="form-group">
-										<input class="form-control" type="text" data-ng-model="selectedCompanyDetector.sensorName" disabled>									
-									</div>									                                                                                     
+									<div class="form-group" data-ng-show="companyDetectors.length==1">
+										<input class="form-control" type="text" data-ng-model="selectedCompanyDetector.companyDetectorName" disabled>			                        				                        							                                                                    
+									</div>
 								</div>
-		
-								<div class="col-md-3">
+								<div class="col-md-2">
+									<div class="form-group">
+										<input class="form-control" type="text" data-ng-model="selectedCompanyDetector.sensorName" disabled>										
+									</div>									                                                                                     
+								</div>		
+								<div class="col-md-2">
 									<div class="form-group">
 										<button type="button" class="btn btn-default btn-xs form-control" data-ng-click="clearHistoric()">Limpar Pesquisa</button>
 									</div>
-								</div>
+								</div>								
 							</div>	        		
-						</form>				        	
-						
-					</div>
-					
+						</form>						
+					</div>					
 				</div>
 			</div>	
 			

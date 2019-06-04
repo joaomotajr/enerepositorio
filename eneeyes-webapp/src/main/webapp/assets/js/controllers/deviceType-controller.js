@@ -77,7 +77,9 @@ app.controller('deviceTypeController', function ($scope, $timeout, DeviceTypeSer
 	 };
 	 
 	 $scope.refreshDeviceTypes = function() {
-		 $scope.getDeviceTypes();	
+		$scope.symbols = faSymbols;
+		$scope.clearFormDeviceType();
+		$scope.getDeviceTypes();	
 	 };
 
 	 $scope.getGraphiType = function (type) {		 
@@ -124,9 +126,6 @@ app.controller('deviceTypeController', function ($scope, $timeout, DeviceTypeSer
 		}
 	];
 
-	 $scope.getDeviceTypes();	 
-	 $scope.clearFormDeviceType();
-	 angular.element('body').removeClass('loading');
-
-	 $scope.symbols = faSymbols;
+	$scope.refreshDeviceTypes();	 
+	angular.element('body').removeClass('loading');	 
 });

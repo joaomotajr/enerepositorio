@@ -41,7 +41,7 @@
 			<div class="box box-primary"  data-ng-class="(perfilAlarmType || perfilAlarmDescription || perfilAlarmSymbol) ? 'box-primary' : 'box-default'">
 				<div class="box-header">
 					<h3 class="box-title">Cadastro / Edição</h3>
-					<a href="#" class="text-muted pull-right"  data-ng-click="refreshPerfilAlarm();"><i title="Refresh" class="fa fa-refresh"></i></a>
+					<span class="text-muted pull-right cursor" data-ng-click="refreshPerfilAlarms();"><i title="Refresh" class="fa fa-refresh"></i></span>
 				</div>
 				<div class="box-body">
 					<form class="form" name="perfilAlarmForm">									                 							     

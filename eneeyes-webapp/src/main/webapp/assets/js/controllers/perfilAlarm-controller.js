@@ -67,8 +67,10 @@ app.controller('perfilAlarmController', function ($scope, $timeout, PerfilAlarmS
 		});		 
 	 };	
 	 
-	 $scope.refreshPerfilAlarms = function() {
-		 $scope.getPerfilAlarms();	
+	 $scope.refreshPerfilAlarms = function() {				
+		$scope.symbols = faSymbols;
+		$scope.clearFormPerfilAlarm();
+		$scope.getPerfilAlarms();
 	 };
 
 	 $scope.getGraphiType = function (type) {		 
@@ -77,11 +79,8 @@ app.controller('perfilAlarmController', function ($scope, $timeout, PerfilAlarmS
 				return $scope.images[i];
 			}
 		} 		 
-	};		
-
-	 $scope.getPerfilAlarms();	 
-	 $scope.clearFormPerfilAlarm();
-	 angular.element('body').removeClass('loading');	
-	 
-	 $scope.symbols = faSymbols;
+	};
+	
+	$scope.refreshPerfilAlarms();
+	angular.element('body').removeClass('loading');	
 });

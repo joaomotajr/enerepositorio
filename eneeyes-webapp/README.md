@@ -8,3 +8,9 @@ Estrutura do Sistema:
  
 * COMANDO PARA EXECUCAO DA APLICACAO
 mvn jetty:run -Dspring.profiles.active="dev" -P local
+
+--Backup windows command line
+C:\Program Files\MySQL\MySQL Server 5.7\bin>mysqldump eneloga > c:\TEMP\eneloga.sql -h localhost -u root -p
+
+--restore windows command line
+C:\Program Files\MySQL\MySQL Server 5.7\bin>mysql -h localhost -u root -p enenew < c:\TEMP\eneloga.sql

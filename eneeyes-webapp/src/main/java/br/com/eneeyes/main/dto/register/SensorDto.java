@@ -1,7 +1,6 @@
 package br.com.eneeyes.main.dto.register;
 
 import br.com.eneeyes.main.model.enums.DetectionType;
-import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.register.Sensor;
 import br.com.eneeyes.main.model.state.UnitMeter;
 

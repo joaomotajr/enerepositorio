@@ -1,6 +1,5 @@
 package br.com.eneeyes.main.dto.state;
 
-import br.com.eneeyes.main.model.enums.GraphicType;
 import br.com.eneeyes.main.model.state.DeviceType;
 
 public class PerfilAlarmDto {

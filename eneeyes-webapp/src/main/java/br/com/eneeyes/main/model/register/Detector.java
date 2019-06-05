@@ -76,7 +76,7 @@ public class Detector {
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="MANUFACTURER_ID", nullable = false)
-	private Manufacturer manufacturer;	
+	private Manufacturer manufacturer;
 	
 	@Column(name = "MODEL", nullable = true)
 	String model;

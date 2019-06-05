@@ -2,7 +2,6 @@ package br.com.eneeyes.main.dto;
 
 import br.com.eneeyes.main.dto.register.GasDto;
 import br.com.eneeyes.main.model.Alarm;
-import br.com.eneeyes.main.model.enums.UnitMeterGases;
 import br.com.eneeyes.main.model.state.DeviceType;
 import br.com.eneeyes.main.model.state.UnitMeter;
 import br.com.eneeyes.main.model.views.CompanyView;

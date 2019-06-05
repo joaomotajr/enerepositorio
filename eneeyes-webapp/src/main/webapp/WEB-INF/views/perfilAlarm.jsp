@@ -19,12 +19,12 @@
 								</tr>
 							</thead>
 							<tbody>                                                        
-								<tr  data-ng-repeat="item in perfilAlarms">
+								<tr  data-ng-repeat="item in perfilAlarms" data-ng-class="{'bg-info': item.uid==1 || item.uid==2 || item.uid==3}">
 									<td>{{item.type}}</td>
 									<td>{{item.description}}</td>															        
 									<td><i class="fa" data-ng-class="item.symbol" style="margin: auto; font-size: 150%"></i></td>
-									<td><button type="button" class="btn btn-info btn-xs"  data-ng-click="editPerfilAlarm($index)">editar</button></td>
-									<td><a type="button" class="btn btn-danger btn-xs" data-popover=' do Tipo: [ {{item.type}} ]' data-confirm="deletePerfilAlarm($index)" >excluir</a></td>						
+									<td><button type="button" class="btn btn-primary btn-xs" data-ng-click="editPerfilAlarm($index)">editar</button></td>
+									<td><a data-ng-disabled="item.uid==1 || item.uid==2 || item.uid==3" type="button" class="btn btn-danger btn-xs" data-popover=' do Tipo: [ {{item.type}} ]' data-confirm="deletePerfilAlarm($index)" >excluir</a></td>						
 								</tr>                                                               
 							</tbody>
 						</table>
@@ -52,7 +52,7 @@
 									<span class="text-red" data-ng-show="perfilAlarmNameExist">Titulo já Existe</span>
 									<span class="text-red pull-right" data-ng-show="perfilAlarmForm.perfilAlarmTitulo.$error.required && !perfilAlarmForm.perfilAlarmTitulo.$pristine">[Titulo Obrigatorio]</span>
 									<span class="text-red pull-right" data-ng-show="perfilAlarmForm.perfilAlarmTitulo.$error.maxlength">Tamanho Máximo 15 caracteres</span>
-									<input name="perfilAlarmTitulo" id="perfilAlarmTitulo" class="form-control inputProfile" 
+									<input name="perfilAlarmTitulo" id="perfilAlarmTitulo" class="form-control inputProfile" data-ng-disabled="perfilAlarmUid==1 || perfilAlarmUid==2 || perfilAlarmUid==3"
 									placeholder="Título do Alarme"  data-ng-model="perfilAlarmType" data-ng-maxlength="15" required> 
 								</div>
 							</div>

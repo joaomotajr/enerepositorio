@@ -1,8 +1,10 @@
 package br.com.eneeyes.main.dto;
 
 import br.com.eneeyes.main.dto.register.GasDto;
+import br.com.eneeyes.main.dto.state.PerfilAlarmDto;
 import br.com.eneeyes.main.model.Alarm;
 import br.com.eneeyes.main.model.state.DeviceType;
+import br.com.eneeyes.main.model.state.PerfilAlarm;
 import br.com.eneeyes.main.model.state.UnitMeter;
 import br.com.eneeyes.main.model.views.CompanyView;
 
@@ -35,9 +37,11 @@ public class AlarmDto {
 	private String action1;
 	private String action2;
 	private String action3;
-	private String action4;
-	
+	private String action4;	
 	private CompanyView companyDto;
+	private PerfilAlarmDto perfilAlarmDto1;	
+	private PerfilAlarmDto perfilAlarmDto2;	
+	private PerfilAlarmDto perfilAlarmDto3;	
 
 	public AlarmDto() {
 		
@@ -76,7 +80,16 @@ public class AlarmDto {
 		this.action2 = alarm.getAction2();
 		this.action3 = alarm.getAction3();
 		this.action4 = alarm.getAction4();
-		this.companyDto = alarm.getCompany();		
+		this.companyDto = alarm.getCompany();
+		
+		if(alarm.getPerfilAlarm1() != null)
+			this.perfilAlarmDto1 = new PerfilAlarmDto(alarm.getPerfilAlarm1());
+		
+		if(alarm.getPerfilAlarm2() != null)
+			this.perfilAlarmDto2 = new PerfilAlarmDto(alarm.getPerfilAlarm2());
+		
+		if(alarm.getPerfilAlarm3() != null)
+			this.perfilAlarmDto3 = new PerfilAlarmDto(alarm.getPerfilAlarm3());
 	}
 	
 	public final Long getUid() {
@@ -310,5 +323,28 @@ public class AlarmDto {
 	public final void setAction4(String action4) {
 		this.action4 = action4;
 	}
-	
+
+	public PerfilAlarmDto getPerfilAlarmDto1() {
+		return perfilAlarmDto1;
+	}
+
+	public void setPerfilAlarmDto1(PerfilAlarmDto perfilAlarmDto1) {
+		this.perfilAlarmDto1 = perfilAlarmDto1;
+	}
+
+	public PerfilAlarmDto getPerfilAlarmDto2() {
+		return perfilAlarmDto2;
+	}
+
+	public void setPerfilAlarmDto2(PerfilAlarmDto perfilAlarmDto2) {
+		this.perfilAlarmDto2 = perfilAlarmDto2;
+	}
+
+	public PerfilAlarmDto getPerfilAlarmDto3() {
+		return perfilAlarmDto3;
+	}
+
+	public void setPerfilAlarmDto3(PerfilAlarmDto perfilAlarmDto3) {
+		this.perfilAlarmDto3 = perfilAlarmDto3;
+	}			
 }

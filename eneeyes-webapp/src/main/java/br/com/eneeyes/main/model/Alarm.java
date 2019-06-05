@@ -60,7 +60,19 @@ public class Alarm {
 		this.action2 = dto.getAction2();
 		this.action3 = dto.getAction3();
 		this.action4 = dto.getAction4();
-		this.company = dto.getCompanyDto();		
+		this.company = dto.getCompanyDto();
+		
+		if(dto.getPerfilAlarmDto1() != null)
+			this.perfilAlarm1 = new PerfilAlarm(dto.getPerfilAlarmDto1());
+		
+		if(dto.getPerfilAlarmDto2() != null)
+			this.perfilAlarm2 = new PerfilAlarm(dto.getPerfilAlarmDto2());
+		
+		if(dto.getPerfilAlarmDto3() != null)
+			this.perfilAlarm3 = new PerfilAlarm(dto.getPerfilAlarmDto3());
+		
+	
+		
 	}	
 	
 	@Id

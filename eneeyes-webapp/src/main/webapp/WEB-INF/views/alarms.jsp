@@ -83,7 +83,8 @@
 					</div>					
 				</div>
 			</div>
-		</div>				
+		</div>
+
 		<div id="modalAlarmEdit" class="modal fade">
 			<div class="modal-dialog  modal-lg" role="document">
 				<div class="modal-content">                            
@@ -100,8 +101,8 @@
 									<div class="row">
 										<div class="col-md-3" style="padding-right: 5px !important;">	
 											<label class="control-label">Nome
-												<strong class="text-red pull-right" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">&nbsp[Obrigat&oacute;rio]</strong> 
-												<strong class="text-red pull-right" data-ng-show="userForm.username.$error.maxlength">&nbsp [M&aacute;ximo 12 caracteres]</strong>
+												<strong class="text-red pull-right" style="font-stretch: extra-condensed;" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">&nbsp[Obrigat&oacute;rio]</strong> 
+												<strong class="text-red pull-right" style="font-stretch: extra-condensed;" data-ng-show="userForm.username.$error.maxlength">&nbsp [M&aacute;ximo 12 caracteres]</strong>
 											</label>
 										
 											<div data-ng-class="{'has-error': userForm.username.$dirty && userForm.username.$invalid}">
@@ -110,7 +111,7 @@
 										</div>										
 										<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">	
 											<label class="control-label">Empresa
-												<strong class="text-red pull-right" data-ng-show="userForm.companyName.$dirty && userForm.companyName.$invalid">&nbsp[Obrigat&oacute;rio]</strong>
+												<strong class="text-red pull-right" style="font-stretch: extra-condensed;" data-ng-show="userForm.companyName.$dirty && userForm.companyName.$invalid">&nbsp[Obrigat&oacute;rio]</strong>
 											</label>			
 											<div data-ng-class="{'has-error': userForm.companyName.$dirty && userForm.companyName.$invalid}">
 													<jsp:include page="controls/companySelect.jsp"/>							                        							                             
@@ -118,7 +119,7 @@
 										</div>
 										<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">															
 											<label class="control-label">Dispositivo
-												<span class="text-red pull-right" data-ng-show="userForm.deviceType.$dirty && userForm.deviceType.$invalid">&nbsp[Obrigat&oacute;rio]</span>
+												<span class="text-red pull-right" style="font-stretch: extra-condensed;" data-ng-show="userForm.deviceType.$dirty && userForm.deviceType.$invalid">&nbsp[Obrigat&oacute;rio]</span>
 											</label>
 											<div data-ng-class="{'has-error': userForm.deviceType.$dirty && userForm.deviceType.$invalid}">										
 												<select name="deviceType" class="form-control" data-live-search="true" 
@@ -151,7 +152,7 @@
 															<div data-ng-show="deviceType.type != undefined">
 																<div class="col-md-3" data-ng-show="deviceType.type=='DETECTOR'" style="padding-right: 5px !important;">
 																	<label class="control-label"><i class="fa fa-yelp"></i> G&aacute;s
-																		<span class="text-red pull-right" data-ng-show="userForm.gasName.$dirty && userForm.gasName.$invalid"> [Obrigat&oacute;rio]</span>
+																		<span class="text-red pull-right" style="font-stretch: extra-condensed;" data-ng-show="userForm.gasName.$dirty && userForm.gasName.$invalid"> [Obrigat&oacute;rio]</span>
 																	</label>
 																	<div data-ng-class="{'has-error': userForm.gasName.$dirty && userForm.gasName.$invalid}">
 																		<select name="gasName" class="form-control" data-live-search="true" 
@@ -168,11 +169,11 @@
 																</div>																																
 																<div class="col-md-3" style="padding-right: 5px !important;">
 																	<label class="control-label">
-																		<strong><i class="fa fa-tachometer"></i> Unid. Medida:</strong>
-																		<span class="text-red" data-ng-show="userForm.unitMeter.$dirty && userForm.unitMeter.$invalid"> [Obrigat&oacute;rio]</span>
+																		<strong><i class="fa fa-tachometer"></i> Unidade:</strong>
+																		<span class="text-red" style="font-stretch: extra-condensed;" data-ng-show="userForm.unitMeterName.$dirty && userForm.unitMeterName.$invalid"> [Obrigat&oacute;rio]</span>
 																	</label>
-																	<div data-ng-class="{'has-error': userForm.unitMeter.$dirty && userForm.unitMeter.$invalid}">
-																		<select name="unitMeter" class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-change="unitMeterChange();"
+																	<div data-ng-class="{'has-error': userForm.unitMeterName.$dirty && userForm.unitMeterName.$invalid}">
+																		<select name="unitMeterName" class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-change="unitMeterChange();"
 																			data-ng-options="item as item.description for item in unitMeters | orderBy: 'symbol' track by item.uid" 
 																			data-ng-model="unitMeter" required>
 																			<option value="">Selecione</option> 
@@ -180,7 +181,7 @@
 																	</div>
 																</div>																
 																<div class="col-md-6" data-ng-show="unitMeter.uid==0">																	
-																	<label><strong><i class="fa" data-ng-class="deviceType.symbol"> </i> Alarmar se Circuito estiver:</strong></label>
+																	<label><strong><i class="fa" data-ng-class="deviceType.symbol"> </i> Alarmar se circuito estiver:</strong></label>
 																	<div class="form-control" style="padding-top:0px">																	
 																		<div class="radio3 radio-check radio-inline">
 																			<input type="radio" id="radio11" value="1" data-ng-model="deviceTypeDigital" data-ng-click="alarmAlarm1=1" >																			
@@ -195,42 +196,40 @@
 																<div data-ng-hide="unitMeter.uid==0">
 																	<div class="col-md-2" style="padding-right: 1px !important">
 																		<div class="form-group">
-																				<label class="control-label">Alarme 1
-																					<span class="label label-default cursor" data-ng-click="changePerfilAlarm1(true)" style="font-size: 0.6em" data-ng-bind="perfilAlarm1.type"></span>
-																					<span class="label label-default cursor" data-ng-click="changePerfilAlarm1(true)" style="font-size: 0.6em" data-ng-show="!perfilAlarm1">DETEC&Ccedil;&Atilde;O</span>
-																				</label>
-																				
-																				<select name="unitMeter" data-ng-show="showPerfilAlarm1" data-ng-change="changePerfilAlarm1(false)" 
-																					class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true"
-																					data-ng-options="item as item.type for item in perfilAlarms | orderBy: 'type' track by item.uid" 
-																					data-ng-model="perfilAlarm1">
-																					<option value="">Selecione</option> 
-																				</select>
+																			<label class="control-label">																				
+																				<span data-ng-class="{'text-red': errorPerfil1}" style="font-stretch: condensed;" >Alarme 1</span>
+																				<span class="label label-default cursor" title="Perfil de Alerta do Alarme 1" data-ng-click="changePerfilAlarm1(true)" style="font-size: 0.6em" data-ng-bind="perfilAlarm1.type"></span>
+																				<span class="label label-default cursor" title="Perfil de Alerta do Alarme 1" data-ng-click="changePerfilAlarm1(true)" style="font-size: 0.6em" data-ng-show="!perfilAlarm1">Selecionar</span>																				
+																			</label>
+																			
+																			<select data-ng-show="showPerfilAlarm1" data-ng-change="validAlarms($event); changePerfilAlarm1(false)" 
+																				class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true"
+																				data-ng-options="item as item.type for item in perfilAlarms | orderBy: 'type' track by item.uid" 
+																				data-ng-model="perfilAlarm1">
+																				<option value="">Selecione</option> 
+																			</select>
 
-																				<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm1.$invalid && !userForm.alarmAlarm1.$pristine || errorAlarm1}" 
-																					style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
-																					<input type="text" class="form-control" name="alarmAlarm1" 
-																						data-ng-model="alarmAlarm1"
-																						data-ng-change="validAlarms($event);" />
-																				</div>
+																			<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm1.$invalid && !userForm.alarmAlarm1.$pristine || errorAlarm1}" 
+																				style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
+																				<input type="text" class="form-control" name="alarmAlarm1" data-ng-model="alarmAlarm1" data-ng-change="validAlarms($event);" />
+																			</div>
 
-																				<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm11.$invalid && !userForm.alarmAlarm11.$pristine || errorAlarm11}" 
-																					style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
-																					<input type="text" class="form-control" name="alarmAlarm11" 
-																						data-ng-model="alarmAlarm11" 
-																						data-ng-change="validAlarms($event);" />
-																				</div>																	
+																			<div class="col-md-6" data-ng-class="{'has-error': userForm.alarmAlarm11.$invalid && !userForm.alarmAlarm11.$pristine || errorAlarm11}" 
+																				style="padding-right: 1px !important; padding-left: 1px !important" title="Menor Que">
+																				<input type="text" class="form-control" name="alarmAlarm11" data-ng-model="alarmAlarm11" data-ng-change="validAlarms($event);" />
+																			</div>																	
 																		</div>
 																	</div>																	
 																	<div class="col-md-2" style="padding-right: 1px !important; padding-left: 1px !important">															
 																		<div class="form-group">
 																			<input class="pull-left" type="checkbox" data-ng-model="enableAlarm2" data-ng-change="validAlarms($event);"/>
-																			<label class="control-label">Alarme 2
-																				<span class="label label-warning cursor" data-ng-click="changePerfilAlarm2(true)" style="font-size: 0.6em" data-ng-bind="perfilAlarm2.type"></span>
-																				<span class="label label-warning cursor" data-ng-click="changePerfilAlarm2(true)" style="font-size: 0.6em" data-ng-show="!perfilAlarm2">ALERTA</span>
+																			<label class="control-label">
+																				<span data-ng-class="{'text-red': errorPerfil2}" style="font-stretch: condensed;">Alarme 2</span>
+																				<span class="label label-warning cursor" title="Perfil de Alerta do Alarme 2" data-ng-click="changePerfilAlarm2(true)" style="font-size: 0.6em" data-ng-bind="perfilAlarm2.type"></span>
+																				<span class="label label-warning cursor" title="Perfil de Alerta do Alarme 2"data-ng-click="changePerfilAlarm2(true)" style="font-size: 0.6em" data-ng-show="!perfilAlarm2">Selecionar</span>
 																			</label>
 																			
-																			<select name="unitMeter" data-ng-show="showPerfilAlarm2" data-ng-change="changePerfilAlarm2(false)" 
+																			<select name="unitMeter" data-ng-show="showPerfilAlarm2" data-ng-change="validAlarms($event); changePerfilAlarm2(false)" 
 																				class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true"
 																				data-ng-options="item as item.type for item in perfilAlarms | orderBy: 'type' track by item.uid" 
 																				data-ng-model="perfilAlarm2">
@@ -239,20 +238,20 @@
 
 																			<div class="col-md-12" data-ng-class="{'has-error': userForm.alarmAlarm2.$invalid && !userForm.alarmAlarm2.$pristine || errorAlarm2}" 
 																				style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
-																				<input type="text" class="form-control" name="alarmAlarm2"
-																					data-ng-disabled="!enableAlarm2" data-ng-model="alarmAlarm2" data-ng-change="validAlarms($event);" />
+																				<input type="text" class="form-control" name="alarmAlarm2" data-ng-disabled="!enableAlarm2" data-ng-model="alarmAlarm2" data-ng-change="validAlarms($event);" />
 																			</div>
 																		</div>
 																	</div>																	
 																	<div class="col-md-2" style="padding-left: 1px !important;padding-right: 1px !important;">
 																		<div class="form-group">
 																			<input class="pull-left" type="checkbox" data-ng-model="enableAlarm3"/>
-																			<label class="control-label">Alarme 3 
-																				<span class="label label-danger cursor" data-ng-click="changePerfilAlarm3(true)" style="font-size: 0.6em" data-ng-bind="perfilAlarm3.type"></span>
-																				<span class="label label-danger cursor" data-ng-click="changePerfilAlarm3(true)" style="font-size: 0.6em" data-ng-show="!perfilAlarm3"> EVACUA&Ccedil;&Atilde;O</span>
+																			<label class="control-label">
+																				<span data-ng-class="{'text-red': errorPerfil3}" style="font-stretch: condensed;">Alarme 3</span> 
+																				<span class="label label-danger cursor" title="Perfil de Alerta do Alarme 3" data-ng-click="changePerfilAlarm3(true)" style="font-size: 0.6em" data-ng-bind="perfilAlarm3.type"></span>
+																				<span class="label label-danger cursor" title="Perfil de Alerta do Alarme 3" data-ng-click="changePerfilAlarm3(true)" style="font-size: 0.6em" data-ng-show="!perfilAlarm3">Selecionar</span>
 																			</label>
 
-																			<select name="unitMeter" data-ng-show="showPerfilAlarm3" data-ng-change="changePerfilAlarm3(false)" 
+																			<select name="unitMeter" data-ng-show="showPerfilAlarm3" data-ng-change="validAlarms($event); changePerfilAlarm3(false)" 
 																				class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true"
 																				data-ng-options="item as item.type for item in perfilAlarms | orderBy: 'type' track by item.uid" 
 																				data-ng-model="perfilAlarm3">
@@ -261,8 +260,7 @@
 
 																			<div class="col-md-12" data-ng-class="{'has-error': userForm.alarmAlarm3.$invalid && !userForm.alarmAlarm3.$pristine || errorAlarm3}" 
 																				style="padding-right: 1px !important; padding-left: 1px !important" title="Maior Que">	
-																				<input type="text" class="form-control" name="alarmAlarm3" 
-																					data-ng-disabled="!enableAlarm3" data-ng-model="alarmAlarm3" data-ng-change="validAlarms($event);" />
+																				<input type="text" class="form-control" name="alarmAlarm3" data-ng-disabled="!enableAlarm3" data-ng-model="alarmAlarm3" data-ng-change="validAlarms($event);" />
 																			</div>
 																		</div>
 																	</div>
@@ -339,9 +337,7 @@
 														
 														<div class="row">
 															<div class="col-md-12">
-																<div class="col-md-2">												            		
-																</div>
-																
+																<div class="col-md-2"></div>																
 																<div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important">
 																	<div data-ng-class="{'has-error': !emailValid1}">	
 																		<div class="input-group">								                                        	
@@ -354,11 +350,8 @@
 																				data-ng-change="validEmail($event);">
 																		</div>
 																	</div>						                                         												            			
-																</div>
-																
-																<div class="col-md-2">												            			
-																</div>
-																
+																</div>																
+																<div class="col-md-2"></div>																
 																<div class="col-md-4" style="padding-left: 5px !important;">
 																	<div data-ng-class="{'has-error': !mobileValid1}">	
 																		<div class="input-group">
@@ -368,12 +361,10 @@
 																			<input class="form-control alarmCelularMask" 
 																				id="alarmCelular1" 
 																				data-ng-model="celular1" 
-																				type="text" maxlength="15" placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />
-																																						
+																				type="text" maxlength="15" placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />																																						
 																		</div>
-																	</div>						                                         													            			
-																</div>													
-															
+																	</div>
+																</div>
 															</div>
 														</div>
 																									
@@ -489,8 +480,7 @@
 														<div class="travarAction" data-ng-show="deviceType.type!='DIGITAL'">
 															<div class="row" style="padding-bottom: 5px !important">
 																<div class="col-md-12">
-																	<div class="col-md-2">												            			
-																	</div>							                                        
+																	<div class="col-md-2"></div>							                                        
 																	<div class="col-md-10" style="padding-left: 5px !important; ">								                                        
 																		<div class="entry input-group">
 																			<span class="input-group-addon btn-add text-white bg-orange"><i class="fa fa-bullhorn">&nbsp;</i>Alarme 2</span>  					
@@ -502,8 +492,7 @@
 															
 															<div class="row">
 																<div class="col-md-12">
-																	<div class="col-md-2">												            			
-																	</div>							                                        
+																	<div class="col-md-2"></div>							                                        
 																	<div class="col-md-10" style="padding-left: 5px !important; ">								                                        
 																		<div class="entry input-group">
 																			<span class="input-group-addon btn-add text-white bg-red"><i class="fa fa-bullhorn">&nbsp;</i>Alarme 3</span>  					
@@ -515,8 +504,7 @@
 																							
 															<div class="row">
 																<div class="col-md-12">
-																	<div class="col-md-2">												            			
-																	</div>							                                        
+																	<div class="col-md-2"></div>							                                        
 																	<div class="col-md-10" style="padding-left: 5px !important; ">								                                        
 																		<div class="entry input-group">
 																			<span class="input-group-addon btn-add text-white bg-black"><i class="fa fa-bullhorn">&nbsp;</i>Off - Line</span>  					
@@ -544,7 +532,7 @@
 				  	<div class="modal-footer" style="padding-top: 1px">						
 						<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
 						<button type="button" data-ng-click="saveAlarm();" class="btn btn-primary" data-dismiss="modal"
-							data-ng-disabled="(emailValid && mobileValid && emailValid1 && mobileValid1 && userForm.$valid && !(errorAlarm1 || errorAlarm11 || errorAlarm2 || errorAlarm22 || errorAlarm3 || errorAlarm33)) ? false : true">&nbsp;Salvar&nbsp;
+							data-ng-disabled="(emailValid && mobileValid && emailValid1 && mobileValid1 && userForm.$valid && !(errorAlarm1 || errorAlarm11 || errorAlarm2 || errorAlarm22 || errorAlarm3 || errorAlarm33 || errorPerfil1 || errorPerfil2 || errorPerfil3)) ? false : true">&nbsp;Salvar&nbsp;
 						</button>						                                
 				  	</div>				  	
 			  	</div>

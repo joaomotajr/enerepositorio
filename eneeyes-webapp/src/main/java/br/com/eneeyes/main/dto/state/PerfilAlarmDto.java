@@ -1,6 +1,6 @@
 package br.com.eneeyes.main.dto.state;
 
-import br.com.eneeyes.main.model.state.DeviceType;
+import br.com.eneeyes.main.model.state.PerfilAlarm;
 
 public class PerfilAlarmDto {
 	private Long uid;
@@ -12,7 +12,7 @@ public class PerfilAlarmDto {
 		
 	}
 	
-	public PerfilAlarmDto(DeviceType e) {		
+	public PerfilAlarmDto(PerfilAlarm e) {		
 		this.uid = e.getUid();
 		this.type = e.getType();
 		this.description = e.getDescription();

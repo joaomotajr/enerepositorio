@@ -79,32 +79,3 @@ union
 select max(last_update), min(last_update), 'c' as name   from historic_c
 union
 select max(last_update), min(last_update), 'd' as name   from historic_d
-
-set @DATA := now() - interval 12 hour;
-
-insert into historic_a values (NULL, 9,  @DATA, 3, 100);
-
-INSERT INTO device_type (uid, type, descritpion, symbol, ghaphicType)  values (0,'OUTROS','Outros','fa-exclamation-triangle',3);
-INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (1,'DETECTOR','Detector','fa-th-large',4);
-INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (2,'PLC','PLC','fa-laptop',4);
-INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (3,'CONTROLLER','Controladora','fa-server',0);
-INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (4,'ALARM','Alarme','fa-bullhorn',4);
-INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (5,'BLOCKER','Bloqueador','fa-stop',0);
-INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (6,'ELETRICITY','Eletricidade','fa-plug',2);
-INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (7,'TIME','Tempo','fa-clock-o',0);
-INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (8,'THERMOMETER','Temperatura','fa-thermometer',6);
-INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (9,'DIGITAL','Digital','fa-flash',0);
-INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (11,'VOLUME','Volume','fa-flask',8);
-INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (12,'PRESSURE','Pressão','fa-compress',5);
-INSERT INTO device_type (uid, type, description, symbol, graphicType)  values (13,'FLOW','Vazão','fa-database',1);
-
-update company_device set DEVICE_TYPE_ID = device_type;
-alter table company_device drop column device_type;
-
-update generic set DEVICE_TYPE_ID = device_type;
-alter table generic drop column device_type
-
-
-<property name="hibernate.connection.url" value="jdbc:mysql://177.144.134.145:8096/enedb?autoReconnect=true"></property>
-<property name="hibernate.connection.username" value="root"></property>
-<property name="hibernate.connection.password" value="pass"></property>

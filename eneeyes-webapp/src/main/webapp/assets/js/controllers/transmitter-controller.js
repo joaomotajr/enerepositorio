@@ -10,8 +10,7 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 			  return;
 		}
 		
-		angular.element('body').addClass('loading');
-		
+		angular.element('body').addClass('loading');		
 		var transmitter = {
 			uid: $scope.transmitterUid != undefined ? $scope.transmitterUid : 0,
 			name: $scope.transmitterName,
@@ -28,13 +27,11 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
                 $scope.getTransmitters();
 	            
 	            angular.element('body').removeClass('loading');				 
-	         }, 500);                     	
-
+	         }, 500);
 		});			 
 	 };
 	 
-	$scope.clearFormTransmitter = function () {
-	
+	$scope.clearFormTransmitter = function () {	
 	    $scope.transmitterUid = undefined;
 	    $scope.transmitterName = '';
 	    $scope.transmitterModel = '';
@@ -43,16 +40,14 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 	};
 
 	 
-	$scope.getTransmitters = function() {
-		 
+	$scope.getTransmitters = function() {		 
 		 $scope.resultTransmitters = new TransmitterService.listAll();		 
 		 $scope.resultTransmitters.$transmitter({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.transmitters = $scope.resultTransmitters.list; 		 			 
          });		 
 	 };
 	
-	$scope.getManufacturers = function() {
-		 
+	$scope.getManufacturers = function() {		 
 		 $scope.resultManufacturers = new ManufacturerService.listAll();		 
 		 $scope.resultManufacturers.$manufacturer({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.manufacturers = $scope.resultManufacturers.list; 		 			 
@@ -60,21 +55,16 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 	 };	 
  
 	 $scope.editTransmitter = function (index) {
-		$scope.transmitterUid = $scope.transmitters[index].uid;
-		
+		$scope.transmitterUid = $scope.transmitters[index].uid;		
 		$scope.transmitterName = $scope.transmitters[index].name;
 		$scope.transmitterModel = $scope.transmitters[index].model;
 		$scope.transmitterManufacturer = $scope.transmitters[index].manufacturerDto;	
-		$scope.transmitterCommProtocol = $scope.getCommProtocols($scope.transmitters[index].commProtocol);
-		
-		    	        
+		$scope.transmitterCommProtocol = $scope.getCommProtocols($scope.transmitters[index].commProtocol);	    	        
 	    $('#idTransmitterName').focus();
 	};
 	 
-	 $scope.deleteTransmitter = function(index) {
-		 
-		 var uid = $scope.transmitters[index].uid;		  
-		 
+	 $scope.deleteTransmitter = function(index) {		 
+		 var uid = $scope.transmitters[index].uid;		  		 
 		 $scope.deletar = new TransmitterService.deletar();		 
 		 $scope.deletar.$transmitter({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
 			 if (!$scope.deletar.isError)
@@ -86,11 +76,9 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 		});		 
 	 } ;
 	 
-	 $scope.getCommProtocols = function (name) {
-		 
+	 $scope.getCommProtocols = function (name) {		 
 		 for (var i = 0; i < $scope.commProtocols.length; i++) {
-             if ($scope.commProtocols[i].name == name) {
-                 
+             if ($scope.commProtocols[i].name == name) {                 
             	 return $scope.commProtocols[i];
              }
          } 		 
@@ -117,11 +105,11 @@ app.controller('transmitterController', function ($scope, $timeout, $filter, Tra
 	  };
 		  	 
 	 $scope.refreshTransmitters = function() {
+		$scope.getTransmitters();
 		 $scope.getManufacturers();	
-	 } 
+	 }
 	 
-	 $scope.getTransmitters();
-	 $scope.getManufacturers();	
+	 $scope.refreshTransmitters();	
 	 angular.element('body').removeClass('loading');
 	
 });

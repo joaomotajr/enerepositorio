@@ -24,7 +24,7 @@
 										<td>{{item.model}}</td>															        
 										<td>{{item.manufacturerDto.name}}</td>
 										<td>
-											<button type="button" class="btn btn-info btn-xs"  data-ng-click="editTransmitter($index)">editar</button>
+											<button type="button" class="btn btn-primary btn-xs"  data-ng-click="editTransmitter($index)">editar</button>
 										</td>
 										<td>
 											<button type="button" class="btn btn-danger btn-xs"  data-ng-click="deleteTransmitter($index)">excluir</button>

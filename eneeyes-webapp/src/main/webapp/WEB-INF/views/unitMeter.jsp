@@ -17,10 +17,10 @@
 								</tr>
 							</thead>
 							<tbody>                                                        
-								<tr  data-ng-repeat="item in unitMeters">
+								<tr  data-ng-repeat="item in unitMeters" data-ng-class="{'bg-info': item.uid==0}">
 									<td>{{item.symbol}}</td>
 									<td>{{item.description}}</td>									
-									<td><button type="button" class="btn btn-info btn-xs" data-ng-disabled="item.uid==0"  data-ng-click="editUnitMeter($index)">editar</button></td>
+									<td><button type="button" class="btn btn-primary btn-xs" data-ng-disabled="item.uid==0"  data-ng-click="editUnitMeter($index)">editar</button></td>
 									<td><a type="button" class="btn btn-danger btn-xs" data-ng-disabled="item.uid==0" data-popover=' da Unidade: [ {{item.description}} ]' data-confirm="deleteUnitMeter($index)" >excluir</a></td>						
 								</tr>                                                               
 							</tbody>

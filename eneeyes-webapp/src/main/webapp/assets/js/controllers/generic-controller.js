@@ -118,7 +118,7 @@ app.controller('genericController', function ($scope, $timeout, DeviceTypeServic
 			$scope.unitMeters = $scope.listAllUnitMeter.list;
 	   });		 
 	};
-	 
+	
 	$scope.refreshGenerics = function() {
 		$scope.getGenerics();
 		$scope.getManufacturers();

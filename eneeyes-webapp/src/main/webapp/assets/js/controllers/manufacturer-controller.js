@@ -27,23 +27,17 @@ app.controller('manufacturerController', function ($scope, $timeout, $filter, Ma
 	            
 	            angular.element('body').removeClass('loading');				 
 	         }, 500);
-			
-//		}, function(data) {
-//			angular.element('body').removeClass('loading');
-//			$scope.msgErro = "Erro: " + data.statusText;
 		});
 	
 	 }
 	 
-	$scope.clearFormManufacturer = function () {
-	
+	$scope.clearFormManufacturer = function () {	
 	    $scope.manufacturerUid = undefined;
 	    $scope.manufacturerName = '';
 	    $scope.manufacturerInitials = '';	    
 	}
 
-	$scope.getManufacturers = function() {
-		 
+	$scope.getManufacturers = function() {		 
 		 $scope.resultManufacturers = new ManufacturerService.listAll();		 
 		 $scope.resultManufacturers.$manufacturer({_csrf : angular.element('#_csrf').val()}, function(){			
 			 $scope.manufacturers = $scope.resultManufacturers.list; 		 			 
@@ -51,18 +45,14 @@ app.controller('manufacturerController', function ($scope, $timeout, $filter, Ma
 	 }	 
  
 	 $scope.editManufacturer = function (index) {
-	        $scope.manufacturerUid = $scope.manufacturers[index].uid;
-	        
+	        $scope.manufacturerUid = $scope.manufacturers[index].uid;	        
 		    $scope.manufacturerName = $scope.manufacturers[index].name;
-		    $scope.manufacturerInitials = $scope.manufacturers[index].initials;		    	    
-		    	        
+		    $scope.manufacturerInitials = $scope.manufacturers[index].initials;		    	        
 	        $('#idManufacturerName').focus();
 	    }
 	 
-	 $scope.deleteManufacturer = function(index) {
-		 
-		 var uid = $scope.manufacturers[index].uid;		  
-		 
+	 $scope.deleteManufacturer = function(index) {		 
+		 var uid = $scope.manufacturers[index].uid;		 
 		 $scope.deletar = new ManufacturerService.deletar();		 
 		 $scope.deletar.$manufacturer({_csrf : angular.element('#_csrf').val(), id : uid}, function(){			
 			 if (!$scope.deletar.isError)
@@ -71,9 +61,6 @@ app.controller('manufacturerController', function ($scope, $timeout, $filter, Ma
 				 $scope.msgErroManufacturer = $scope.deletar.message;
 				 console.log($scope.deletar.systemMessage);
 			 }
-         	         	
-//		 }, function(data) {		
-//			 $scope.msgErro = "Erro: " + data.statusText;
 		});		 
 	 }
 	 
@@ -82,10 +69,10 @@ app.controller('manufacturerController', function ($scope, $timeout, $filter, Ma
 	    $scope.manufacturerNameExist = "false";
 	  };
 	 
-	 $scope.refreshManufacturers = function() {
+	 $scope.refreshManufacturer = function() {
 		 $scope.getManufacturers();	
 	 } 
 
-	 $scope.getManufacturers();	 
+	 $scope.refreshManufacturer();	 
 	 angular.element('body').removeClass('loading');	
 });

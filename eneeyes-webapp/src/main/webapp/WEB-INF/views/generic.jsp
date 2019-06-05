@@ -24,7 +24,7 @@
 								<td>&nbsp;<i class="fa" data-ng-class="item.deviceType.symbol" style="font-size:125%;"></i>&nbsp;</td>
 								<td>{{item.name}}</td>
 								<td>{{item.model}}</td>															        
-								<td><button type="button" class="btn btn-info btn-xs"   data-ng-click="editGeneric($index)">editar</button></td>
+								<td><button type="button" class="btn btn-primary btn-xs"   data-ng-click="editGeneric($index)">editar</button></td>
 								<td><button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteGeneric($index)">excluir</button></td>						
 							</tr>                                                               
 						</tbody>
@@ -41,7 +41,7 @@
 			<div class="box box-primary"  data-ng-class="(genericName || genericModel || genericManufacturer || genericRangeMin || genericRangeMax) ? 'box-primary' : 'box-default'">
 				<div class="box-header">
 					<h3 class="box-title">Cadastro / Edi&ccedil;&atilde;o</h3>
-					<a href="#" class="text-muted pull-right"  data-ng-click="refreshGenerics();"><i title="Refresh" class="fa fa-refresh"></i></a>
+					<span class="text-muted pull-right cursor" data-ng-click="refreshGenerics();"><i title="Refresh" class="fa fa-refresh"></i></span>
 				</div>
 				<div class="box-body">
 					<form name="genericForm">
@@ -53,8 +53,7 @@
 										<img class="profile-user-img img-responsive img-circle imgDetector" style="margin: 0 auto" alt="Imagem do Perfil" 
 											data-ng-src="{{genericImage}}" onError="this.src='/assets/img/cover.jpg'">
 										<p class="text-muted text-center data-ng-binding">{{genericName}} - {{genericModel}} </p>                    
-										<a href="#" class="icon fa fa-photo fa-2.0x pull-right" data-ng-click="addPhoto();" title="Trocar foto"></a>
-																									
+										<a href="#" class="icon fa fa-photo fa-2.0x pull-right" data-ng-click="addPhoto();" title="Trocar foto"></a>																									
 									</div>
 								</div>															
 							</div>						

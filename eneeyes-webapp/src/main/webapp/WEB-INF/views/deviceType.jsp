@@ -23,7 +23,7 @@
 									<td>{{item.type}}</td>
 									<td>{{item.description}}</td>															        
 									<td><i class="fa" data-ng-class="item.symbol" style="margin: auto; font-size: 150%"></i></td>
-									<td><button type="button" class="btn btn-info btn-xs"  data-ng-click="editDeviceType($index)">editar</button></td>
+									<td><button type="button" class="btn btn-primary btn-xs"  data-ng-click="editDeviceType($index)">editar</button></td>
 									<td><a type="button" class="btn btn-danger btn-xs" data-popover=' do Tipo: [ {{item.type}} ]' data-confirm="deleteDeviceType($index)" >excluir</a></td>						
 								</tr>                                                               
 							</tbody>

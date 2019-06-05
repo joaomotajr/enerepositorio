@@ -25,7 +25,7 @@
 										<td>{{item.formula}}</td>
 										<td>{{item.cas}}</td>																        
 										<td>
-											<button type="button" class="btn btn-info btn-xs"  data-ng-click="editGas($index)">editar</button>
+											<button type="button" class="btn btn-primary btn-xs"  data-ng-click="editGas($index)">editar</button>
 										</td>
 										<td>
 											<a type="button" class="btn btn-danger btn-xs" data-popover=' do Gas: [ {{item.name}} ]' data-confirm="deleteGas($index)" >excluir</a>

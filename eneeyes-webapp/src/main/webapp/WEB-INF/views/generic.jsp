@@ -1,8 +1,6 @@
  
-<div  data-ng-controller="genericController">
-					
-	<div class="row">	
-																	
+<div  data-ng-controller="genericController">					
+	<div class="row">																	
 		<div class="col-md-6">                                                        
 			<div class="box box-primary"  data-ng-class="(genericName || genericModel || genericManufacturer) ? 'box-default' : 'box-primary'">
 				<div class="box-header">
@@ -25,7 +23,9 @@
 								<td>{{item.name}}</td>
 								<td>{{item.model}}</td>															        
 								<td><button type="button" class="btn btn-primary btn-xs"   data-ng-click="editGeneric($index)">editar</button></td>
-								<td><button type="button" class="btn btn-danger btn-xs" data-ng-click="deleteGeneric($index)">excluir</button></td>						
+								<td>									
+									<a type="button" class="btn btn-danger btn-xs" data-popover=' do Dispositivo: [ {{item.name}} ]' data-confirm="deleteGeneric($index)" >excluir</a>
+								</td>
 							</tr>                                                               
 						</tbody>
 					</table>                                                       
@@ -153,8 +153,7 @@
 				</div>
 			</div>
 		</div>			
-	</div>	  
-		
+	</div>		
 </div>
 
     

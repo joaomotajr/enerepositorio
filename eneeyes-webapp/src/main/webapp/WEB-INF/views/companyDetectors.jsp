@@ -23,98 +23,89 @@
 				<strong style="font-size:1.4em"><i class="fa" data-ng-class="selectedCompanyDevice.deviceType.symbol"></i> {{selectedCompanyDevice.deviceType.type}} <span data-ng-show="selectedCompanyDetector.name">-</span> {{selectedCompanyDetector.name}}</strong>				
 			</div>		
 				
-			<div class="box-body">
-							
+			<div class="box-body">								
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs tabDetector">
 				       	<li class="active"><a href="#tabCompanyDetector_1" id="stepTabDetector_1" data-toggle="tab">Cadastro</a></li>
 				       	<li><a href="#tabCompanyDetector_4" id="stepTabDetector_4" data-toggle="tab">Manuten&ccedil;&atilde;o/Instala&ccedil;&atilde;o</a></li>
 				       	<li><a href="#tabCompanyDetector_2" id="stepTabDetector_2" data-toggle="tab">Configura&ccedil;&atilde;o</a></li>
 				    	<li data-ng-hide="selectedCompanyDetector" class="pull-right"><i title="[Nenhum Detector Associado ao Dispositivo]" class="fa fa-info-circle text-red"></i></li>				    	
-				    </ul>
-					
-					<div class="tab-content">
-				    	
+				    </ul>					
+					<div class="tab-content">				    	
 				    	<div class="tab-pane active" id="tabCompanyDetector_1">
 				    		<div class="row">
 				    			<div class="col-md-12">
-					    		<form name="userForm">					    		
-									
-						    		<div class="col-md-7">
-									
-								        <div class="col-md-4">
-								        	<div class="form-group">
-								                <label class="control-label">C&oacute;digo</label>
-								                <input class="form-control" placeholder="C&oacute;digo do Detector" data-ng-model="selectedCompanyDetector.uid" readonly>
-								            </div>	
-								        </div>
-								        <div class="col-md-4">
-								            <div class="form-group">								            
-								                <label class="control-label">Identifica&ccedil;&atilde;o *</label>
-								                <span class="text-red" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">  [Identifica&ccedil;&atilde;o Obrigatorio]</span>
-									            <span class="text-red" data-ng-show="userForm.username.$error.maxlength">Tamanho M&aacute;ximo 8 caracteres</span>
-												
-												<input data-disallow-spaces id="companyDetectorName" class="form-control" style="text-transform:uppercase" 
-								                	placeholder="Identifica&ccedil;&atilde;o do Detector (Sem Espa&ccedil;os)" 
-								                	data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="8" name="username" 
-								                	title="Identifica&ccedil;&atilde;o do Detector (Sem Espa&ccedil;os)"
-								                	required>
-								            </div>
-								        </div>
-								        
-								        <div class="col-md-4">
-								        	<div class="form-group">
-								                <label class="control-label">Nr. de S&eacute;rie</label>
-								                <input class="form-control" placeholder="Nro de S&eacute;rie do Detector" data-ng-maxlength="24" 
-								                data-ng-model="selectedCompanyDetector.serialNumber">
-								            </div>	
-										</div>
-																			
-								        <div class="col-md-12">
-								            <div class="form-group">
-								                <label class="control-label">Descri&ccedil;&atilde;o</label>
-								                <input class="form-control" placeholder="Descri&ccedil;&atilde;o" data-ng-model="selectedCompanyDetector.description">
-								            </div>
-								        </div>								    									
-									
-										<div class="col-md-12">
-											<div class="form-group">
-												<label class="control-label">Local</label>
-												<input id="idUnitName" class="form-control" placeholder="Local" data-ng-model="selectedCompanyDetector.local">
+									<form name="cdForm">
+										<div class="col-md-7">									
+											<div class="col-md-3">
+												<div class="form-group">
+													<label class="control-label">C&oacute;digo</label>
+													<input class="form-control" placeholder="C&oacute;digo do Detector" data-ng-model="selectedCompanyDetector.uid" readonly>
+												</div>	
+											</div>
+											<div class="col-md-5">
+												<div class="form-group">								            
+													<label class="control-label">Identifica&ccedil;&atilde;o *</label>
+													<span class="text-red" style="font-stretch: extra-condensed;" data-ng-show="cdForm.cdId.$error.required && !cdForm.cdId.$pristine"> [Obrigat&oacute;rio]</span>
+													<span class="text-red" style="font-stretch: extra-condensed;" data-ng-show="cdForm.cdId.$error.maxlength"> At&eacute; 8 digitos</span>
+													<input data-disallow-spaces id="cdId" class="form-control" style="text-transform:uppercase" 
+														placeholder="Identifica&ccedil;&atilde;o do Detector (Sem Espa&ccedil;os)" 
+														data-ng-model="selectedCompanyDetector.name" data-ng-maxlength="8" name="cdId" 
+														title="Identifica&ccedil;&atilde;o do Detector (Sem Espa&ccedil;os)"
+														required>
+												</div>
+											</div>								        
+											<div class="col-md-4">
+												<div class="form-group">
+													<label class="control-label">Nr. de S&eacute;rie</label>
+													<input class="form-control" placeholder="Nro de S&eacute;rie do Detector" data-ng-maxlength="24" 
+													data-ng-model="selectedCompanyDetector.serialNumber">
+												</div>	
+											</div>																			
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="control-label">Descri&ccedil;&atilde;o</label>
+													<input class="form-control" placeholder="Descri&ccedil;&atilde;o" data-ng-model="selectedCompanyDetector.description">
+												</div>
+											</div>									
+											<div class="col-md-12">
+												<div class="form-group">
+													<label class="control-label">Local</label>
+													<input id="idUnitName" class="form-control" placeholder="Local" data-ng-model="selectedCompanyDetector.local">
+												</div>
 											</div>
 										</div>
-									</div>
-									<div class="col-md-5">
-										<div class="panel panel-primary" data-ng-if="selectedCompanyDetectorPosition.uid">
+										<div class="col-md-5">
+											<div class="panel panel-primary" data-ng-if="selectedCompanyDetectorPosition.uid">
 
-											<div class="panel-heading">
-												<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.detectorDto.name}} - {{selectedCompanyDetector.detectorDto.model}}</h3>												
-											</div>	
+												<div class="panel-heading">
+													<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.detectorDto.name}} - {{selectedCompanyDetector.detectorDto.model}}</h3>												
+												</div>	
 
-											<div class="panel-body" style="padding-bottom: 1px">						    
-												<input type="file" id="idInputImageDetector" style='display:none'>									                						                    
-												<img class="profile-user-img img-responsive imgDetector" style="margin: 0 auto; border: none" 
-													data-ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
-																							
-												<ul class="list-group">													
-													<li class="list-group-item" style="padding: 1px 10px;">
-														<label><i class="fa fa-feed"></i>&nbsp;Sensor:&nbsp;</label>{{selectedCompanyDetector.detectorDto.sensorDto.name}}
-													</li>
-													<li class="list-group-item" style="padding: 1px 10px;">
-														<label><i class="fa fa-yelp"></i>&nbsp;Gas:&nbsp;</label>{{selectedCompanyDetector.detectorDto.sensorDto.gasDto.name}}
-														<span style="vertical-align:super;font-size:0.6em;color:orange"> {{selectedCompanyDetector.detectorDto.sensorDto.unitMeter.symbol}}</span>
-													</li>
-													<li class="list-group-item" style="padding: 1px 10px;">
-														<label>Id:</label>&nbsp;{{selectedCompanyDetectorPosition.uid}}
-													</li>
-													<li class="list-group-item" style="padding: 1px 10px;" title="Data/Hora: {{selectedCompanyDetectorPosition.lastUpdate | date:'dd/MM/yyyy HH:mm'}}">
-														<label>Status:</label>&nbsp;{{selectedCompanyDetectorPosition.alarmType}}&nbsp;&nbsp;&nbsp;<label>Medi&ccedil;&atilde;o:</label>&nbsp;{{selectedCompanyDetectorPosition.lastValue}} 
-													</li>
-												</ul>
-											</div>
-										</div>																						        
-									</div>		
-					       		</form>
+												<div class="panel-body" style="padding-bottom: 1px">						    
+													<input type="file" id="idInputImageDetector" style='display:none'>									                						                    
+													<img class="profile-user-img img-responsive imgDetector" style="margin: 0 auto; border: none" 
+														data-ng-src="{{selectedCompanyDetector.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">
+																								
+													<ul class="list-group">													
+														<li class="list-group-item" style="padding: 1px 10px;">
+															<label><i class="fa fa-feed"></i>&nbsp;Sensor:&nbsp;</label>{{selectedCompanyDetector.detectorDto.sensorDto.name}}
+														</li>
+														<li class="list-group-item" style="padding: 1px 10px;">
+															<label><i class="fa fa-yelp"></i>&nbsp;Gas:&nbsp;</label>{{selectedCompanyDetector.detectorDto.sensorDto.gasDto.name}}
+															<span style="vertical-align:super;font-size:0.6em;color:orange"> {{selectedCompanyDetector.detectorDto.sensorDto.unitMeter.symbol}}</span>
+														</li>
+														<li class="list-group-item" style="padding: 1px 10px;">
+															<label>Id:</label>&nbsp;{{selectedCompanyDetectorPosition.uid}}
+														</li>
+														<li class="list-group-item" style="padding: 1px 10px;" title="Data/Hora: {{selectedCompanyDetectorPosition.lastUpdate | date:'dd/MM/yyyy HH:mm'}}">
+															<label>Status:</label>&nbsp;{{selectedCompanyDetectorPosition.alarmType}}&nbsp;&nbsp;&nbsp;<label>Medi&ccedil;&atilde;o:</label>&nbsp;{{selectedCompanyDetectorPosition.lastValue}} 
+														</li>
+													</ul>
+												</div>
+											</div>																						        
+										</div>
+									</form>
 					       		</div>
 				    		</div>
 				    		

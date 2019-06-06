@@ -47,70 +47,72 @@
 				    	<li title="Trocar Imagem da �rea" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
 				    </ul>
 					
-					<div class="tab-content">
-								    	
+					<div class="tab-content">								    	
 				    	<div class="tab-pane active" id="tabArea_1">
-				    		<div class="row">
-						        <div class="col-md-6">
-						            <div class="form-group">
-						                <label class="control-label">Nome *</label>
-						                <input id="idAreaName" class="form-control" placeholder="Nome da Area / Matriz" ng-model="selectedArea.name">
-						            </div>
-						        </div>					
-						        <div class="col-md-6">
-						            <div class="form-group">
-						                <label class="control-label">Descri&ccedil;&atilde;o</label>
-						                <input class="form-control" placeholder="Descri&ccedil;&atilde;o" ng-model="selectedArea.description">
-						            </div>
-						        </div>
-						    </div>
-							
-							<div class="row">
-						        <div class="col-md-8">
-						            <div class="form-group">
-						                <label class="control-label">Local</label>
-						                <input id="idUnitName" class="form-control" placeholder="Local" ng-model="selectedArea.local">
-						            </div>
-						        </div>
-						
-						        <div class="col-md-4">
-						        	<label class="control-label">Area Classificada</label>
-					                <div class="form-group">				                 	
-	      								<label><input type="radio" ng-model="selectedArea.classified" value="1" />&nbsp; Sim</label>        
-					                 	<label><input type="radio" ng-model="selectedArea.classified" value="0" />&nbsp;	N&atilde;o</label>						                
-					                </div>
-						        						            
-						        </div>
-						    </div>
-							
-							<div class="row">							
-						        <div class="col-md-4">
-						            <div class="form-group">
-						                <label class="control-label">Latitude:</label>
-						                <input id="idUnitName" class="form-control" placeholder="Latitude" ng-model="selectedArea.longitude">
-						            </div>
-						        </div>
-						
-						        <div class="col-md-4">
-						        	<div class="form-group">
-						                <label class="control-label">Longitude:</label>
-						                <input class="form-control" placeholder="Longitude" ng-model="selectedArea.latitude">
-						            </div>					            
-						        </div>
-						
-						        <div class="col-md-4"></div>
-							</div>				
-				       		
-				       		<div class="row">
-				       			<div class="col-md-12">
-				       				<button type="button" ng-click="newArea();" ng-show="btnNewArea" class="btn btn-success pull-right">&nbsp;&nbsp;Nova&nbsp;&nbsp;&nbsp;&nbsp;</button>								
-									<span class="pull-right">&nbsp;&nbsp;</span>
-				       				<button type="button" ng-click="saveArea();" class="btn btn-primary pull-right" ng-disabled="(selectedArea.name) ? false : true">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>		       				
-				       				<span class="pull-right">&nbsp;&nbsp;</span>
-				       				<button type="button" ng-click="deleteArea();" class="btn btn-danger pull-right" ng-disabled="(selectedArea.uid) ? false : true">&nbsp;&nbsp;Excluir&nbsp;&nbsp;</button>								
+							<form name="areaForm">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label">Nome *</label>
+											<span style="font-stretch: extra-condensed;" class="text-red" data-ng-show="areaForm.areaName.$error.required && !areaForm.areaName.$pristine">  [Nome Obrigat&oacute;rio]</span>
+											<span style="font-stretch: extra-condensed;" class="text-red" data-ng-show="areaForm.areaName.$error.maxlength">Tamanho M&aacute;ximo 20 caracteres</span>
+											<input id="idAreaName" class="form-control" placeholder="Nome da Area / Matriz" ng-model="selectedArea.name" data-ng-maxlength="20" required name="areaName" >
+										</div>
+									</div>					
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label">Descri&ccedil;&atilde;o</label>
+											<input class="form-control" placeholder="Descri&ccedil;&atilde;o" ng-model="selectedArea.description">
+										</div>
+									</div>
 								</div>
-							</div>												
+								
+								<div class="row">
+									<div class="col-md-8">
+										<div class="form-group">
+											<label class="control-label">Local</label>
+											<input id="idUnitName" class="form-control" placeholder="Local" ng-model="selectedArea.local">
+										</div>
+									</div>
+							
+									<div class="col-md-4">
+										<label class="control-label">Area Classificada</label>
+										<div class="form-group">				                 	
+											<label><input type="radio" ng-model="selectedArea.classified" value="1" />&nbsp;Sim</label>        
+											<label><input type="radio" ng-model="selectedArea.classified" value="0" />&nbsp;N&atilde;o</label>						                
+										</div>
 																		
+									</div>
+								</div>
+								
+								<div class="row">							
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="control-label">Latitude:</label>
+											<input id="idUnitName" class="form-control" placeholder="Latitude" ng-model="selectedArea.longitude">
+										</div>
+									</div>
+							
+									<div class="col-md-4">
+										<div class="form-group">
+											<label class="control-label">Longitude:</label>
+											<input class="form-control" placeholder="Longitude" ng-model="selectedArea.latitude">
+										</div>					            
+									</div>
+							
+									<div class="col-md-4"></div>
+								</div>				
+								
+								<div class="row">
+									<div class="col-md-12">
+										<button type="button" ng-click="newArea();" ng-show="btnNewArea" class="btn btn-success pull-right">&nbsp;&nbsp;Nova&nbsp;&nbsp;&nbsp;&nbsp;</button>								
+										<span class="pull-right">&nbsp;&nbsp;</span>
+										<button type="button" ng-click="saveArea();" class="btn btn-primary pull-right" ng-disabled="!areaForm.$valid">&nbsp;&nbsp;Salvar&nbsp;&nbsp;</button>		       				
+										<span class="pull-right">&nbsp;&nbsp;</span>
+										<button type="button" ng-click="deleteArea();" class="btn btn-danger pull-right" ng-disabled="(selectedArea.uid) ? false : true">&nbsp;&nbsp;Excluir&nbsp;&nbsp;</button>								
+									</div>
+								</div>
+							</form>
 							<div class="row">
 								<div class="col-md-6">
 									<label>Incluir Dispositivo</label>						
@@ -160,8 +162,7 @@
 										<div  id="idImageArea">																					    		    
 											<img src="{{selectedArea.image}}" style="width: 1000px; height: 400px; max-height: 400px;" onError="this.src='/assets/img/cover.jpg'" class="pin" easypin-id="imgDipositivosArea" />
 										</div>									
-									</div>
-									
+									</div>									
 									<button type="button" ng-click="lockImageArea();" class="btn btn-sm btn-primary">
 										<i ng-hide="!isLock" class="fa fa-lock"></i>
 										<i ng-hide="isLock" class="fa fa-unlock"></i>

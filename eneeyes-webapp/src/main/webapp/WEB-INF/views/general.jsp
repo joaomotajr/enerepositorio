@@ -29,30 +29,36 @@
 				<div class="box-body" style="background: whitesmoke">
 					<!-- Selected Companies -->
 					<div class="row">
-						<div class="col-md-3" data-ng-repeat="item in companiesSumary" >
+						<div class="col-md-4" data-ng-repeat="item in companiesSumary" >
 							<a href="#" style="text-decoration: none !important; color: black !important;" data-ng-click="selectCompany($index)">
-							<div class="info-box">
-								<span class="info-box-icon bg-navy" 
-									data-ng-class="{'selectedSquare': $index == selectedCompany.selected}"
-									style="padding: 1px; text-transform: uppercase; font-size: 65px; font-weight: 700">{{item.companyName.substring(0,1)}}</span>
 
-								<div class="info-box-content">										
-									<span class="info-box-number" data-truncate="12" data-value="{{item.companyName}}"></span>
-									<div class="col-md-12"  style="padding-left: 5px !important;">										
-										<span>Unidades:</span>										
-										<span class="pull-right" data-zeros="2" data-value="{{item.units}}"></span>										
-									</div>
-									<div class="col-md-12"  style="padding-left: 5px !important;">	
-										<span>&Aacute;rea:</span>										
-										<span class="pull-right" data-zeros="2" data-value="{{item.areas}}"></span>									
-									</div>
-									<div class="col-md-12"  style="padding-left: 5px !important;">										
-										<span>Dispositivos:</span>									
-										<span class="pull-right" data-zeros="2" data-value="{{item.devices}}"></span>								
-									</div>
-								</div>
-								
-							</div>
+								<div class="info-box">										
+									<span class="info-box-icon bg-black" data-ng-if="item.companyImage" data-ng-class="($index == selectedCompany.selected) ? 'bg-white' : 'bg-black'">
+										<img class="profile-user-img img-responsive img-circle " style="margin: 0 auto" alt="Imagem do Perfil" 
+										data-ng-src="{{item.companyImage}}" onError="companyImage">									
+									</span>
+									<span data-ng-if="!item.companyImage" class="info-box-icon bg-navy" data-ng-class="{'selectedSquare': $index == selectedCompany.selected}"
+										style="padding: 1px; text-transform: uppercase; font-size: 65px; font-weight: 700">{{item.companyName.substring(0,1)}}</span>
+									<div class="info-box-content">									  
+									  	
+										<span data-truncate="15" class="info-box-number" data-value="{{item.companyName}}"></span>
+									  	<span class="info-box-text">
+											<span>Unidades:</span>										
+											<span class="pull-right" data-zeros="2" data-value="{{item.units}}"></span>										
+									  	</span>
+										  <span class="info-box-text">
+											<span>&Aacute;rea:</span>										
+											<span class="pull-right" data-zeros="2" data-value="{{item.areas}}"></span>									
+										</span>
+										<span class="info-box-text">
+											<span>Dispositivos:</span>									
+											<span class="pull-right" data-zeros="2" data-value="{{item.devices}}"></span>								
+										</span>
+										
+
+									</div>								
+								</div>							
+
 							</a>
 						</div>
 						<!-- Selected Companies Fim -->

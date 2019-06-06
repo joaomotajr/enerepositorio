@@ -1,5 +1,6 @@
 package br.com.eneeyes.main.model;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,7 +28,17 @@ public class Company {
 	public Company(CompanyDto dto) {
 		this.uid = dto.getUid();
 		this.name = dto.getName();
-		this.description = dto.getDescription();
+		this.description = dto.getDescription();	
+
+		if (dto.getImage() != null) {
+			try {					
+				byte[] image = null;
+				image = dto.getImage().getBytes("US-ASCII");
+				this.setImage(image);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}	
+		}
 	}
 	
 	@Id
@@ -45,6 +57,11 @@ public class Company {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "company", cascade = CascadeType.ALL)
 	private Set<Alarm> alarms = new HashSet<Alarm>();
+	
+	@Lob
+	@Column(name = "IMAGE", nullable = true)
+	byte[] image;	
+
 	
 	public final Long getUid() {
 		return uid;
@@ -76,5 +93,13 @@ public class Company {
 
 	public final void setUnits(Set<Unit> units) {
 		this.units = units;
+	}
+	
+	public final byte[] getImage() {
+		return image;
+	}
+
+	public final void setImage(byte[] image) {
+		this.image = image;
 	}
 }

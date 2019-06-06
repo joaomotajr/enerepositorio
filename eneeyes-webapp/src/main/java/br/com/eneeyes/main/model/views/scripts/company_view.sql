@@ -7,7 +7,6 @@
 ---------------------------------------------------------*/
 
 /* MYSQL */
-
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -17,18 +16,7 @@ VIEW `company_view` AS
         `company`.`UID` AS `UID`,
         `company`.`NAME` AS `NAME`,
         `company`.`DESCRIPTION` AS `DESCRIPTION`,
-        `company`.`UID` AS `COMPANY_ID`
+        `company`.`UID` AS `company_id`,
+        `company`.`IMAGE` AS `image`
     FROM
         `company`
-        
-/* POSTGRES */        
-        
-    CREATE     
-	VIEW company_view AS
-    SELECT 
-        company.UID AS UID,
-        company.NAME AS NAME,
-        company.DESCRIPTION AS DESCRIPTION,
-        company.UID AS COMPANY_ID
-    FROM
-        company

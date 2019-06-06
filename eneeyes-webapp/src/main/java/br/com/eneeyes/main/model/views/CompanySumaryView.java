@@ -21,6 +21,9 @@ public class CompanySumaryView {
 	@Column(name = "COMPANY_NAME")	
 	private String companyName;
 	
+	@Column(name = "COMPANY_IMAGE")	
+	private String companyImage;
+	
 	private Integer units;
 	private Integer areas;
 	private Integer devices;
@@ -28,33 +31,24 @@ public class CompanySumaryView {
 	public final Long getUid() {
 		return uid;
 	}
-	public final void setUid(Long uid) {
-		this.uid = uid;
-	}
+	
 	public final String getCompanyName() {
 		return companyName;
 	}
-	public final void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
+	
 	public final Integer getUnits() {
 		return units;
 	}
-	public final void setUnits(Integer units) {
-		this.units = units;
-	}
+	
 	public final Integer getAreas() {
 		return areas;
 	}
-	public final void setAreas(Integer areas) {
-		this.areas = areas;
-	}
+	
 	public final Integer getDevices() {
 		return devices;
 	}
-	public final void setDevices(Integer devices) {
-		this.devices = devices;
-	}
 	
-	
+	public String getCompanyImage() {
+		return companyImage;
+	}	
 }

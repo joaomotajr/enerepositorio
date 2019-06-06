@@ -223,6 +223,6 @@ app.controller('generalController', function ($scope, $timeout, $interval, $root
 		dataSource.chart.numberSuffix = " " + e.unitMeter.symbol;
 		return dataSource;
 	};			
-
+	$scope.detectorImage = "/assets/img/cover.jpg";
 	$scope.getCompaniesSumary();	
 });

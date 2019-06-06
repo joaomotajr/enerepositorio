@@ -12,21 +12,19 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
             $scope.getCompanys();   
             
             $timeout(function () { $('#selCompany').select2();}, 200);                       
-			$rootScope.showGeneralMessage($scope.deletar.message, 'DANGER');
-			 	         
-			 	                  	         	
+			$rootScope.showGeneralMessage($scope.deletar.message, 'DANGER');			 	                  	         	
         }, function(data) {        	
         	$scope.show("Ops:: " + statusText);
 		 });		 
 	}
 	
-	$scope.saveCompany = function() {
-		
+	$scope.saveCompany = function() {		
 		angular.element('body').addClass('loading');		
 		var company = {
 			uid: $scope.companyUid != undefined ? $scope.companyUid : 0,
 			name: $scope.companyName,
-			description: $scope.companyDescription		
+			description: $scope.companyDescription,
+			image: $scope.companyImage,		
     	}; 
 		 
 		$scope.inclusaoCompany = new CompanyService.save(company);		 
@@ -41,8 +39,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
          });		 
 	 }	
 		
-	$('#selCompany').on('change', function () {
-		
+	$('#selCompany').on('change', function () {		
 		if ($(this).val() == null || $(this).val() == "" )
 		{
 			$scope.clearFormCompany();			
@@ -54,20 +51,18 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 	$scope.getOneCompany = function(companyId) {
 		 
 		 $scope.listOne = new CompanyService.listOne();		 
-		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function(){			
-			 
-			 $scope.selectedCompany = $scope.listOne.t;
-			 
+		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function() {			 
+			 $scope.selectedCompany = $scope.listOne.t;			 
 			 $scope.companyUid = $scope.selectedCompany.uid;
 			 $scope.companyName = $scope.selectedCompany.name;
-			 $scope.companyDescription = $scope.selectedCompany.description;			 			 
+			 $scope.companyDescription = $scope.selectedCompany.description;
+			 $scope.companyImage = ($scope.selectedCompany.image == null ? "/assets/img/cover.jpg" :  $scope.selectedCompany.image);
 	    });		 
 	}
 	
 	$scope.selCompany = function() {
 				
-		if ($scope.selectedCompanyName == undefined)
-		{
+		if ($scope.selectedCompanyName == undefined) {
 			$scope.$root.selectedCompany = $scope.selectedCompany; 
 			$scope.selectedCompanyName = $scope.companyName;
 			$scope.itens = getTree();
@@ -79,13 +74,13 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		}		
 	}
 	
-	$scope.clearFormCompany = function () {
-	
+	$scope.clearFormCompany = function () {	
 	    $scope.companyUid = undefined;
 	    $scope.companyName = '';
 	    $scope.companyDescription = '';
 	    $scope.selectedCompanyName = undefined;
-	    $scope.LoadAjaxContentCompany('clear.html');
+		$scope.LoadAjaxContentCompany('clear.html');
+		$scope.companyImage = "/assets/img/cover.jpg";		
 	}
 
 	$scope.newCompany = function () {
@@ -208,12 +203,24 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 	        });		 
 		 }
 	 }; 
-	
-	 $scope.getCompanys();
+	 
+	$scope.getCompanys();
+		 
+	$scope.loadEvents = function() {		
+		$('#idInputImageCompany').change( encodeImageFileAsURL( function(base64Img) {		    
+		    $scope.companyImage =  base64Img;
+			$scope.$apply();		    
+		}));		   
+		 $scope.addPhoto = function() {
+			 event.preventDefault();
+			$('#idInputImageCompany').trigger('click');
+		 }		
+	};
 	 	
-	 $timeout(function(){
+	$timeout(function(){		
+		$scope.loadEvents();		
 		angular.element('body').removeClass('loading');
-	 }, 500);	
+	}, 500);	
 	
-	 $(".select2").select2();		
+	$(".select2").select2();		
 });

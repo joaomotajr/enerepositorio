@@ -19,6 +19,7 @@ public class CompanyDto {
 	private String name;
 	private String description;	
 	private List<UnitDto> unitsDto = new ArrayList<UnitDto>();
+	private String image;
 	
 	public CompanyDto() {
 		
@@ -29,11 +30,14 @@ public class CompanyDto {
 		this.name = company.getName();
 		this.description = company.getDescription();
 		
-		if(company.getUnits() != null) {
-			
-			this.unitsDto = setUnitsDto(company.getUnits());
-		
+		if(company.getUnits() != null) {			
+			this.unitsDto = setUnitsDto(company.getUnits());		
 		}
+		
+		if (company.getImage() != null) {
+			byte[] image = company.getImage();
+			this.image = new String(image);
+		}	
 	}
 	
 	public final Long getUid() {
@@ -59,18 +63,14 @@ public class CompanyDto {
 	
 	private List<UnitDto> setUnitsDto(Set<Unit> units) {
 		
-		List<UnitDto> lista = new ArrayList<UnitDto>();
-		
-		if(units != null && !units.isEmpty()) {
-		
-			Iterator<Unit> itr = units.iterator();
-			
+		List<UnitDto> lista = new ArrayList<UnitDto>();		
+		if(units != null && !units.isEmpty()) {		
+			Iterator<Unit> itr = units.iterator();			
 			while (itr.hasNext()) {
 				UnitDto dto = new UnitDto(itr.next());
 				lista.add(dto);				
 			}
-		}
-		
+		}		
 		Collections.sort(lista);		
 		return lista;
 	}
@@ -78,4 +78,12 @@ public class CompanyDto {
 	public final List<UnitDto> getUnitsDto() {
 		return unitsDto;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}	
 }

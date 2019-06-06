@@ -16,6 +16,7 @@ import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.state.DeviceType;
+import br.com.eneeyes.main.model.state.PerfilAlarm;
 import br.com.eneeyes.main.model.state.UnitMeter;
 
 @Entity
@@ -91,11 +92,22 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 	private Double alarm2;		
 	
 	@Column(name = "alarm_3", nullable = true)	
-	private Double alarm3;
-		
+	private Double alarm3;		
 	
 	@Column(name = "gas_name")
 	private String gasName;
+	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="PERFIL_ALARM_ID1", nullable = false)
+	private PerfilAlarm perfilAlarm1;	
+		
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="PERFIL_ALARM_ID2", nullable = false)
+	private PerfilAlarm perfilAlarm2;
+		
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="PERFIL_ALARM_ID3", nullable = false)
+	private PerfilAlarm perfilAlarm3;
 
 	public final Long getUid() {
 		return uid;
@@ -187,5 +199,17 @@ public class AreaCompanyDeviceAlarmView implements Serializable {
 
 	public String getGasName() {
 		return gasName;
+	}
+
+	public PerfilAlarm getPerfilAlarm1() {
+		return perfilAlarm1;
+	}
+
+	public PerfilAlarm getPerfilAlarm2() {
+		return perfilAlarm2;
+	}
+
+	public PerfilAlarm getPerfilAlarm3() {
+		return perfilAlarm3;
 	}		
 }

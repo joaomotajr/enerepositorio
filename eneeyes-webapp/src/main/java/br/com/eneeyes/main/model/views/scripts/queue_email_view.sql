@@ -3,8 +3,6 @@
  Uso em Serviços de envio de Emails: processEmailService 
 ---------------------------------------------------------*/
 
-/* MYSQL */
-
 CREATE 
     ALGORITHM = UNDEFINED 
     DEFINER = `root`@`localhost` 
@@ -28,9 +26,12 @@ VIEW `queue_email_view` AS
         `u`.`NAME` AS `unit_name`,
         `area`.`NAME` AS `area_name`,
         `area`.`LOCAL` AS `area_local`,
-        `um`.`UID` AS `unit_meter_id`,
-        `dt`.`TYPE` AS `device`,
-        `dt`.`UID` AS `device_type`
+        `um`.`DESCRIPTION` AS `unit_meter_description`,
+        `um`.`SYMBOL` AS `unit_meter_symbol`,
+        `dt`.`TYPE` AS `device_type`,
+        `a`.`PERFIL_ALARM_ID1` AS `perfil_alarm_id1`,
+        `a`.`PERFIL_ALARM_ID2` AS `perfil_alarm_id2`,
+        `a`.`PERFIL_ALARM_ID3` AS `perfil_alarm_id3`
     FROM
         (((((((((((`position_alarm` `pa`
         JOIN `company_device` `cdv` ON ((`cdv`.`UID` = `pa`.`COMPANY_DEVICE_ID`)))
@@ -65,9 +66,12 @@ VIEW `queue_email_view` AS
         `u`.`NAME` AS `unit_name`,
         `area`.`NAME` AS `area_name`,
         `area`.`LOCAL` AS `area_local`,
-        `um`.`UID` AS `unit_meter_id`,
-        `dt`.`TYPE` AS `device`,
-        `dt`.`UID` AS `device_type`
+        `um`.`DESCRIPTION` AS `unit_meter_description`,
+        `um`.`SYMBOL` AS `unit_meter_symbol`,
+        `dt`.`TYPE` AS `device_type`,
+        `a`.`PERFIL_ALARM_ID1` AS `perfil_alarm_id1`,
+        `a`.`PERFIL_ALARM_ID2` AS `perfil_alarm_id2`,
+        `a`.`PERFIL_ALARM_ID3` AS `perfil_alarm_id3`
     FROM
         (((((((((`position_alarm` `pa`
         JOIN `company_device` `cdv` ON ((`cdv`.`UID` = `pa`.`COMPANY_DEVICE_ID`)))

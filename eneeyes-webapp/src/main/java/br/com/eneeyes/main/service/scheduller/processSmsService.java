@@ -58,9 +58,19 @@ public class processSmsService {
 			String medicao = (item.getAlarmType() == AlarmType.OFFLINE) ? " " : " - Medicao: " + item.getLast_value() + " ";
 			
 			SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			
+			String alarm;			
+			if(item.getAlarmType() == AlarmType.DETECCAO) 
+				alarm = item.getPerfilAlarm1().getType();
+			else if(item.getAlarmType() == AlarmType.ALERTA)
+				alarm = item.getPerfilAlarm2().getType();
+			else if(item.getAlarmType() == AlarmType.EVACUACAO)
+				alarm = item.getPerfilAlarm3().getType();
+			else
+				alarm = item.getAlarmType().toString();
 						
 			String msg ="MONITORAMENTO ENESENS: "
-			+ "\r\nALARME: " + item.getAlarmType().toString()
+			+ "\r\nALARME: " + alarm
 			+ "\r\n" + item.getCompany_name() + " | " + item.getUnit_name()  + " | " + areaLocal
 			+ "\r\nDetector: " + item.getCompany_detector_name()
 			+ "\r\nLocal: " + detectorLocal 

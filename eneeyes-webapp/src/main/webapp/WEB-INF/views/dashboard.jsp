@@ -132,13 +132,13 @@
 							<div class="info-box info-box-min bg-gray">
 								<span class="info-box-icon info-box-icon-min cursor" data-ng-class="{'deteccao': selectedStatusDashCompaniesPosition == 'DETECCAO'}" data-ng-click="filterStatus('DETECCAO')"><i class="fa fa-battery-quarter"></i></span>
 								<div class="info-box-content info-box-content-min">
-									<span class="info-box-text">Detec&ccedil;&atilde;o</span>
+									<span class="info-box-text">N&Iacute;VEL I</span>
 									<span class="info-box-number" data-ng-bind="sumary.alarm1.value"></span>
 									<div class="progress">
 										<div class="progress-bar" ng-style="{'width' : sumary.alarm1.percent + '%' }"></div>
 									</div>
 									<span class="progress-description">
-										Alarme N&iacute;vel I
+										Alarme Superior 1º Limite
 									</span>
 								</div>
 							</div>						
@@ -148,13 +148,13 @@
 							<div class="info-box info-box-min bg-yellow">
 								<span class="info-box-icon info-box-icon-min cursor" data-ng-class="{'alerta': selectedStatusDashCompaniesPosition == 'ALERTA'}" data-ng-click="filterStatus('ALERTA')"><i class="fa fa-battery-half"></i></span>
 								<div class="info-box-content info-box-content-min">
-									<span class="info-box-text">Alerta</span>
+										<span class="info-box-text">N&Iacute;VEL II</span>
 									<span class="info-box-number" data-ng-bind="sumary.alarm2.value"></span>
 									<div class="progress">
 										<div class="progress-bar" ng-style="{'width' : sumary.alarm2.percent + '%' }"></div>
 									</div>
 									<span class="progress-description">
-										Alarme N&iacute;vel II
+										Alarme Superior 2º  Limite
 									</span>
 								</div>
 							</div>						
@@ -164,13 +164,13 @@
 							<div class="info-box info-box-min bg-red">
 								<span class="info-box-icon info-box-icon-min cursor" data-ng-class="{'evacuacao': selectedStatusDashCompaniesPosition == 'EVACUACAO' }" data-ng-click="filterStatus('EVACUACAO')"><i class="fa fa-battery-full"></i></span>
 								<div class="info-box-content info-box-content-min">
-									<span class="info-box-text">Evacua&ccedil;&atilde;o</span>
+										<span class="info-box-text">N&Iacute;VEL III</span>
 									<span class="info-box-number" data-ng-bind="sumary.alarm3.value"></span>
 									<div class="progress">
 										<div class="progress-bar" ng-style="{'width' : sumary.alarm3.percent + '%' }"></div>
 									</div>
 									<span class="progress-description">
-										Alarme N&iacute;vel III
+											Alarme Superior 3º Limite
 									</span>
 								</div>
 							</div>						

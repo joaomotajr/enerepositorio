@@ -12,18 +12,14 @@
 	<div class="row">				                                                    
 		<div class="col-md-12">                                                        
 			
-			<div class="box box-primary">
-				
-				<div class="box-header content-header" style="background: whitesmoke">
-					
-					<h3 class="box-title">Vis&atilde;o Empresas</h3>					  
-
+			<div class="box box-primary">				
+				<div class="box-header content-header" style="background: whitesmoke">					
+					<h3 class="box-title">Vis&atilde;o Empresas</h3>
 					<ol class="breadcrumb" style="top: 5px !important;">
 						<li><a data-ng-click="closeSelectedUnit()" href="#"><i class="fa-lg fa fa-industry"></i> {{selectedCompany.companyName}}</a></li>
 						<li data-ng-show="selectedUnit"><a data-ng-click="closeSelectedArea()" href="#"><i class="fa-lg fa fa-building"></i> {{selectedUnit.name}}</a></li>
 						<li data-ng-show="selectedArea.list"><a href="#"><i class="fa-lg fa fa-map-o"></i> {{selectedArea.name}}</a></li>						
-					</ol>
-					
+					</ol>					
 				</div>
 
 				<div class="box-body" style="background: whitesmoke">
@@ -54,11 +50,8 @@
 											<span>Dispositivos:</span>									
 											<span class="pull-right" data-zeros="2" data-value="{{item.devices}}"></span>								
 										</span>
-										
-
-									</div>								
-								</div>							
-
+									</div>
+								</div>
 							</a>
 						</div>
 						<!-- Selected Companies Fim -->
@@ -77,36 +70,20 @@
 								</div>
 								<div class="box-body">										
 									<div class="row">
-										<div class="col-md-2">
-											<strong >Endere&ccedil;o:</strong>
-										</div>
-										<div class="col-md-10">
-											<span class=" pull-right">&nbsp;{{item.address}}</span>
-										</div>										
+										<div class="col-md-2"><strong >Endere&ccedil;o:</strong></div>
+										<div class="col-md-10"><span class=" pull-right">&nbsp;{{item.address}}</span></div>										
 									</div>
 									<div class="row">
-										<div class="col-md-2">
-											<strong >Cidade:</strong>
-										</div>
-										<div class="col-md-10">
-											<span class=" pull-right">&nbsp;{{item.city}}</span>
-										</div>										
+										<div class="col-md-2"><strong >Cidade:</strong></div>
+										<div class="col-md-10"><span class=" pull-right">&nbsp;{{item.city}}</span></div>										
 									</div>
 									<div class="row">
-										<div class="col-md-2">
-											<strong>Estado:</strong>
-										</div>
-										<div class="col-md-10">
-											<span class="pull-right">&nbsp;{{item.state}}</span>
-										</div>										
+										<div class="col-md-2"><strong>Estado:</strong></div>
+										<div class="col-md-10"><span class="pull-right">&nbsp;{{item.state}}</span></div>										
 									</div>
 									<div class="row">
-										<div class="col-md-2">
-											<strong>Areas:</strong>
-										</div>
-										<div class="col-md-10">
-											<span class="badge bg-black pull-right">&nbsp;{{item.areasDto.length}}</span>
-										</div>										
+										<div class="col-md-2"><strong>Areas:</strong></div>
+										<div class="col-md-10"><span class="badge bg-black pull-right">&nbsp;{{item.areasDto.length}}</span></div>										
 									</div>									
 								</div>
 							</div>
@@ -138,12 +115,8 @@
 												</div>
 												<div class="box-body">																			
 													<div class="row">
-														<div class="col-md-4">
-															<strong>Dispositivos:</strong>
-														</div>
-														<div class="col-md-8">
-															<span class="badge bg-black pull-right">&nbsp;{{item.companyDevicesDto.length}}</span>
-														</div>										
+														<div class="col-md-4"><strong>Dispositivos:</strong></div>
+														<div class="col-md-8"><span class="badge bg-black pull-right">&nbsp;{{item.companyDevicesDto.length}}</span></div>										
 													</div>									
 												</div>
 											</div>
@@ -166,9 +139,9 @@
 														<div class="col-md-4">
 															<div class="panel panel-primary">								                
 																<div class="panel-heading">
-																	<h2 class="panel-title" style="text-align:center;">
-																		<strong><i class="fa" data-ng-class="item.deviceType.symbol" style="font-size:115%;"></i></strong> 
-																		{{item.companyDetectorName}}
+																	<h2 class="panel-title">
+																		<span><strong><i class="fa" data-ng-class="item.deviceType.symbol"></i></strong>&nbsp; {{item.companyDetectorName}}</span>
+																		<span class="pull-right">ID: {{item.uid}}</span>
 																	</h2>
 																</div>											   					               	
 																<div class="panel-body" style="padding-bottom: 0px; padding-top: 3px;">							            					                 										                	
@@ -188,8 +161,7 @@
 																		</div>
 																	</div>																	
 
-																	<div class="row">								              
-																		<!-- justify-content: flex-end	                	 -->  	
+																	<div class="row">
 																		<div style=" width: 100%; display: flex; justify-content: center; text-align: center;">																																						
 																			<div data-fusioncharts							
 																				data-width="300"
@@ -204,29 +176,28 @@
 																	<div class="row">																	
 																		<div class="description-block" style="margin: 3px 0;">																													
 																			<span class="description-text">Limites do Dispositivo: </span>{{item.rangeMin}} a {{item.rangeMax}}&nbsp;
-																			<span style="vertical-align:super;font-size:0.8em;color:gray" data-ng-bind="getMeters(item.unitMeter.symbol)"></span>
+																			<span style="vertical-align:super;font-size:0.8em;color:gray" data-ng-bind="item.unitMeter.symbol"></span>
 																			<hr style="margin-top: 0px; margin-bottom: 0px; margin-left: 50px; margin-right: 50px; border-top-color: lightgray">
 																			<span class="description-text">Lat&ecirc;ncia: </span> <span style="font-size:0.9em;color:gray">{{item.latencia}}</span>
 																		</div>																		
 																	</div>																	
-																		
+																	<br>	
 																	<ul class="list-group">																		
-																		<li class="list-group-item" style="padding: 0px 15px;">
-																			<label>Identificador:</label><span class="pull-right">{{item.uid}}</span>
-																		</li>
-																		<li class="list-group-item" style="padding: 0px 15px;">
+																		<li class="list-group-item" style="padding: 3px 10px; font-size: 1.2em">
 																			<label>Alarme Associado:</label><span class="pull-right">{{item.alarmName}}</span><span class="pull-right" data-ng-if="!item.alarmOn">Nenhum</span>
 																		</li>
-																		<li class="list-group-item list-group-item-secondary" style="padding: 0px 15px;">																			
-																			<span class="badge" data-ng-if="item.alarm11"><i class="fa fa-angle-left"></i> {{item.alarm11}}</span>
-																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm1}}</span>
-																				<label>Alarme1:</label> Detec&ccedil;&atilde;o
+																		<li class="list-group-item list-group-item-secondary" style="padding: 2px 10px;" title="{{item.perfilAlarm1.description}}">																			
+																			<span class="badge" data-ng-if="item.alarm11 || item.alarm11==0"><i class="fa fa-angle-left"></i> {{item.alarm11}} {{item.unitMeter.symbol}}</span>
+																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm1}} {{item.unitMeter.symbol}}</span>
+																				<i data-ng-class="item.perfilAlarm1.symbol"></i> {{item.perfilAlarm1.type}}
 																		</li>
-																		<li class="list-group-item list-group-item-warning" style="padding: 0px 15px;">
-																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm2}}</span> <label>Alarme2:</label> Alerta
+																		<li class="list-group-item list-group-item-warning" style="padding: 2px 10px;" title="{{item.perfilAlarm2.description}}">
+																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm2}} {{item.unitMeter.symbol}}</span> 
+																				<i data-ng-class="item.perfilAlarm2.symbol"></i> {{item.perfilAlarm2.type}}
 																		</li>
-																		<li class="list-group-item list-group-item-danger" style="padding: 0px 15px;">
-																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm3}}</span> <label>Alarme3:</label> Evacua&ccedil;&atilde;o:
+																		<li class="list-group-item list-group-item-danger" style="padding: 2px 10px;" title="{{item.perfilAlarm3.description}}">
+																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm3}} {{item.unitMeter.symbol}}</span>
+																				<i data-ng-class="item.perfilAlarm3.symbol"></i> {{item.perfilAlarm3.type}}
 																		</li>
 																	</ul>
 																</div>

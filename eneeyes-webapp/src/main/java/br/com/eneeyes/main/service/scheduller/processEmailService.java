@@ -60,8 +60,18 @@ public class processEmailService {
 			String areaLocal = (item.getArea_local() != null && !item.getArea_local().equals("")) ? " / " + item.getArea_local() : "/ Local não Informado";
 			String detectorLocal = (item.getCompany_detector_local() != null && !item.getCompany_detector_local().equals("")) ? item.getCompany_detector_local() : "Não Informado";
 			String medicao = (item.getAlarmType() == AlarmType.OFFLINE) ? " " : " - Medição: " + item.getLast_value() + " ";
+			
+			String alarm;			
+			if(item.getAlarmType() == AlarmType.DETECCAO) 
+				alarm = item.getPerfilAlarm1().getType();
+			else if(item.getAlarmType() == AlarmType.ALERTA)
+				alarm = item.getPerfilAlarm2().getType();
+			else if(item.getAlarmType() == AlarmType.EVACUACAO)
+				alarm = item.getPerfilAlarm3().getType();
+			else
+				alarm = item.getAlarmType().toString();
 						
-			String key = "ALARME DE: <span style='color:red; font-size: 1.2em'>" + item.getAlarmType().toString() + "</span></b><br>" + 
+			String key = "ALARME DE: <span style='color:red; font-size: 1.2em'>" + alarm + "</span></b><br>" + 
 					"<h3>" + item.getCompany_name() + "</h3>" +
 					"Unidade: " + item.getUnit_name()  + "<br>" +
 					"Área: " + item.getArea_name() + areaLocal +

@@ -4,14 +4,19 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
+import br.com.eneeyes.main.model.state.PerfilAlarm;
 
 @Entity
 @Subselect("select * from queue_email_view")
@@ -55,6 +60,18 @@ public class QueueEmailView implements Serializable {
 	
 	@Column(name="UNIT_METER_SYMBOL")
 	private String unitMeterSymbol;
+	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="PERFIL_ALARM_ID1", nullable = false)
+	private PerfilAlarm perfilAlarm1;	
+		
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="PERFIL_ALARM_ID2", nullable = false)
+	private PerfilAlarm perfilAlarm2;
+		
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="PERFIL_ALARM_ID3", nullable = false)
+	private PerfilAlarm perfilAlarm3;
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -134,5 +151,17 @@ public class QueueEmailView implements Serializable {
 
 	public String getUnitMeterSymbol() {
 		return unitMeterSymbol;
+	}
+	
+	public PerfilAlarm getPerfilAlarm1() {
+		return perfilAlarm1;
+	}
+
+	public PerfilAlarm getPerfilAlarm2() {
+		return perfilAlarm2;
+	}
+
+	public PerfilAlarm getPerfilAlarm3() {
+		return perfilAlarm3;
 	}	
 }

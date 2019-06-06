@@ -43,13 +43,13 @@ public class GenericService implements IService<GenericDto> {
 		try {			
 			repository.delete(uid);
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Controladora/PLC Excluída.");
+			result.setMessage("Dispositivo Excluído.");
 			
 		} catch (Exception e) {
 			e.printStackTrace();			
 			result.setIsError(true);
 			result.setSystemMessage(e.getMessage());
-			result.setMessage("Controladora/PLC Não Pode Ser Excluída.");
+			result.setMessage("Dispositivo Não Pode Ser Excluído.");
 		}		
 		
 		return result;		
@@ -77,7 +77,7 @@ public class GenericService implements IService<GenericDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Compania.");
+				result.setMessage("Nenhum Dispositivo.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);
@@ -105,7 +105,7 @@ public class GenericService implements IService<GenericDto> {
 			} else {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
-				result.setMessage("Nenhuma Compania.");
+				result.setMessage("Nenhum Dispositivo.");
 			}
 		} catch (Exception e) {
 			result.setIsError(true);

@@ -305,7 +305,7 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	$scope.changeArea = function() { 
 		clearSteps(3);
 		if($scope.selectedArea == null) return;
-		$scope.searchCompanyDetector ($scope.selectedCompany, $scope.selectedUnit.unitId, $scope.selectedUnit.areaId);
+		$scope.searchCompanyDetector ($scope.selectedCompany, $scope.selectedUnit.unitId, $scope.selectedArea.areaId);
 	};
 
 	$scope.searchCompanyDetector = function(company, unitId, areaId) {

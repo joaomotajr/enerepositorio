@@ -4,7 +4,6 @@ import br.com.eneeyes.main.dto.register.GasDto;
 import br.com.eneeyes.main.dto.state.PerfilAlarmDto;
 import br.com.eneeyes.main.model.Alarm;
 import br.com.eneeyes.main.model.state.DeviceType;
-import br.com.eneeyes.main.model.state.PerfilAlarm;
 import br.com.eneeyes.main.model.state.UnitMeter;
 import br.com.eneeyes.main.model.views.CompanyView;
 

@@ -38,7 +38,7 @@
 		<link rel="stylesheet" href="/assets/plugins/datatables/select.dataTables.min.css">
 			   
 	    <!-- Font Awesome -->
-		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">	     -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">	    
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/v4-shims.css">
 	    	    
@@ -67,7 +67,7 @@
 	
 			<!-- Sidebar toggle button-->		
 			<a data-ng-controller="SiteController" href="#" class="sidebar-toggle" data-toggle="offcanvas" data-ng-click="showLogo();" role="button"> 
-				<span class="sr-only">Navegação</span>
+				<span class="sr-only">Navegaï¿½ï¿½o</span>
 			</a>
 			
 			<div class="navbar-custom-menu">

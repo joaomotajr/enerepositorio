@@ -11,10 +11,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
+import br.com.eneeyes.main.dto.register.UidDto;
 import br.com.eneeyes.main.model.enums.IntervalType;
-import br.com.eneeyes.main.model.historic.IHistoricGroup;
-import br.com.eneeyes.main.repository.historic.HistoricViewDayAllRepository;
+import br.com.eneeyes.main.model.historic.IHistoricHourGroup;
 import br.com.eneeyes.main.repository.historic.HistoricViewHour30Repository;
+import br.com.eneeyes.main.repository.historic.HistoricViewHourAllRepository;
 import br.com.eneeyes.main.repository.historic.HistoricViewHourRepository;
 import br.com.eneeyes.main.result.GroupResult;
 
@@ -28,39 +29,22 @@ public class HistoricViewHourService {
 	private HistoricViewHour30Repository repository30;
 
 	@Autowired
-	private HistoricViewDayAllRepository repositoryAll;
+	private HistoricViewHourAllRepository repositoryAll;
 	
 	public GroupResult<?> findByCompanyDeviceAndInterval(Long companyDeviceId, IntervalType intervalType, Integer currentPage, Integer lenPage) {
-		GroupResult<?> result = new GroupResult<IHistoricGroup>();
-
-		try {
-			
-			Date dataFim = new Date();			 
-			Date dataInicio  = new Date();
-			
-			if(intervalType ==  IntervalType.UM_MES) {
-				
-				dataInicio = addMonth(dataFim, -1);
-			}
-			else {
-				dataInicio = new Date(dataFim.getTime() - (1000 * 60 * 60 * intervalType.getValue()));
-			}
-
-			Page<IHistoricGroup> page = null;
-			page = repository.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dataInicio, dataFim, new PageRequest(currentPage, lenPage));
-			
-			result = getResults(page);
-			
-		} catch (Exception e) {
-			result.setIsError(true);
-			result.setMessage(e.getMessage());
-		}
+					
+		Date dataFim = new Date();			 
+		Date dataInicio  = new Date();
 		
-		return result;
+		if (intervalType ==  IntervalType.UM_MES) {				
+			dataInicio = addMonth(dataFim, -1);
+		} else {
+			dataInicio = new Date(dataFim.getTime() - (1000 * 60 * 60 * intervalType.getValue()));
+		}		
+		return findByCompanyDeviceAndIntervalHours(companyDeviceId, dataInicio, dataFim, currentPage, lenPage);			
 	}	
 	
-	private static Date addMonth(Date date, int qtde) {
-		
+	private static Date addMonth(Date date, int qtde) {		
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		c.add(Calendar.MONTH, qtde);			
@@ -68,20 +52,19 @@ public class HistoricViewHourService {
 		return c.getTime();		
 	}
 
-	public GroupResult<?> getResults(Page<IHistoricGroup> page) {
+	public GroupResult<?> getResults(Page<IHistoricHourGroup> page) {
 		
-		GroupResult<IHistoricGroup> result = new GroupResult<IHistoricGroup>();
+		GroupResult<IHistoricHourGroup> result = new GroupResult<IHistoricHourGroup>();
 		
 		if (page != null) {
 			
-			List<IHistoricGroup> lista = new ArrayList<IHistoricGroup>();
-			for (IHistoricGroup item : page) {
-				
+			List<IHistoricHourGroup> lista = new ArrayList<IHistoricHourGroup>();
+			for (IHistoricHourGroup item : page) {				
 				lista.add(item);					
 			}
 			
-			result.setFirstPage(page.isFirstPage());
-			result.setLastPage(page.isLastPage());
+			result.setFirstPage(page.isFirst());
+			result.setLastPage(page.isLast());
 			result.setTotalList(new Long(page.getTotalElements()).intValue());			
 			result.setCountPages(page.getTotalPages());
 			
@@ -101,31 +84,53 @@ public class HistoricViewHourService {
 	
 	public GroupResult<?> findByCompanyDeviceAndIntervalHours(Long companyDeviceId, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
 
-		GroupResult<?> result = new GroupResult<IHistoricGroup>();
+		GroupResult<?> result = new GroupResult<IHistoricHourGroup>();
 		
-		Date date = new Date();
-						
+		Date date = new Date();						
 		int diffDaysIn = (int) ((date.getTime() - dateIn.getTime()) / (1000 * 60 * 60 * 24));
 		int diffDaysOut = (int) ((date.getTime() - dateOut.getTime()) / (1000 * 60 * 60 * 24));
 			
 		try {
 			
-			Page<IHistoricGroup> page = null;
-			
+			Page<IHistoricHourGroup> page = null;			
 			if (diffDaysIn >= 30 && diffDaysOut >= 30) {
 				page = repository30.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
-			}
-			else if (diffDaysIn <= 30 && diffDaysOut <= 30) {
-		
+			} else if (diffDaysIn <= 30 && diffDaysOut <= 30) {		
 				page = repository.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
-			}
-			else
-			{
+			} else {
 				page = repositoryAll.findByCompanyDeviceIdAndLastUpdateBetweenPaginated(companyDeviceId, dateIn, dateOut, new PageRequest(currentPage, lenPage));
+			}			
+			result = getResults(page);			
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}
+		
+		return result;
+	}
+	
+	public GroupResult<?> findByCompanyDevicesInAndIntervalHours(UidDto ids, Date dateIn, Date dateOut, Integer currentPage, Integer lenPage) {
+
+		GroupResult<?> result = new GroupResult<IHistoricHourGroup>();		
+		Date date = new Date();						
+		int diffDaysIn = (int) ((date.getTime() - dateIn.getTime()) / (1000 * 60 * 60 * 24));
+		int diffDaysOut = (int) ((date.getTime() - dateOut.getTime()) / (1000 * 60 * 60 * 24));
+		
+		List<Long> companyDeviceIds = new ArrayList<>();
+		companyDeviceIds.addAll(ids.getListId());
+			
+		try {
+			
+			Page<IHistoricHourGroup> page = null;			
+			if (diffDaysIn >= 30 && diffDaysOut >= 30) {
+				page = repository30.findByCompanyDeviceInAndLastUpdateBetweenPaginated(companyDeviceIds, dateIn, dateOut, new PageRequest(currentPage, lenPage));
+			} else if (diffDaysIn <= 30 && diffDaysOut <= 30) {		
+				page = repository.findByCompanyDeviceInAndLastUpdateBetweenPaginated(companyDeviceIds, dateIn, dateOut, new PageRequest(currentPage, lenPage));
+			} else {
+				page = repositoryAll.findByCompanyDeviceInAndLastUpdateBetweenPaginated(companyDeviceIds, dateIn, dateOut, new PageRequest(currentPage, lenPage));
 			}
 			
-			result = getResults(page);
-			
+			result = getResults(page);			
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());

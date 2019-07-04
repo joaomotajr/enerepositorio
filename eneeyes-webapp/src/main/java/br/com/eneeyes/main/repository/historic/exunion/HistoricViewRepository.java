@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import br.com.eneeyes.main.model.historic.IHistoric;
-import br.com.eneeyes.main.model.historic.old.HistoricView;
+import br.com.eneeyes.main.model.historic.exunion.HistoricView;
 
 public interface HistoricViewRepository extends JpaRepository<HistoricView, Long> {
 	

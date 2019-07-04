@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import br.com.eneeyes.main.model.historic.IHistoricGroup;
-import br.com.eneeyes.main.model.historic.old.HistoricViewDayAll;
+import br.com.eneeyes.main.model.historic.exunion.HistoricViewDayAll;
 
 public interface HistoricViewDayAllRepository extends JpaRepository<HistoricViewDayAll, Long> {
 		

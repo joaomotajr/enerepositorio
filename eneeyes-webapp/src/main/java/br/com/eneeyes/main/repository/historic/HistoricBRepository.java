@@ -17,6 +17,6 @@ public interface HistoricBRepository extends JpaRepository<HistoricB, Long> {
 	public List<IHistoric> findByCompanyDeviceIdAndLastUpdateBetween(Long companyDeviceId, Date in, Date out);
 	
 	@Query("select h from HistoricB h where h.companyDeviceId = ?1 and h.lastUpdate between ?2 and ?3")
-	public Page<IHistoric> findByCompanyDeviceIdAndLastUpdateBetweenPaginated(Long companyDeviceId, Date in, Date out, Pageable pageable);
+	public Page<IHistoric> findByCompanyDeviceIdLastUpdateBetweenPaginated(Long companyDeviceId, Date in, Date out, Pageable pageable);
 	
 }

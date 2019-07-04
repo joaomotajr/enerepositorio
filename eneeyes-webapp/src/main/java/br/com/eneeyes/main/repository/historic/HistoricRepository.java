@@ -9,16 +9,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import br.com.eneeyes.main.model.historic.Historic;
+import br.com.eneeyes.main.model.historic.IHistoric;
 
 public interface HistoricRepository extends JpaRepository<Historic, Long> {
 			
-	public List<Historic> findByCompanyDeviceId(Long companyDeviceId);	
+	public List<IHistoric> findByCompanyDeviceId(Long companyDeviceId);	
 		
 	@Query("select h from Historic h where h.companyDeviceId = ?1 and h.lastUpdate between ?2 and ?3 ")
-	public List<Historic> findByCompanyDeviceIdAndAndLastUpdateBetween(Long companyDeviceId,  Date in, Date out);
+	public List<IHistoric> findByCompanyDeviceIdAndLastUpdateBetween(Long companyDeviceId,  Date in, Date out);
 	
 	@Query("select h from Historic h where h.companyDeviceId = ?1 and h.lastUpdate between ?2 and ?3 ")
-	public Page<Historic> findByCompanyDeviceIdAndAndLastUpdateBetweenPaginated(Long companyDeviceId,  Date in, Date out, Pageable pageable);
+	public Page<IHistoric> findByCompanyDeviceIdAndLastUpdateBetweenPaginated(Long companyDeviceId,  Date in, Date out, Pageable pageable);
 	
 		
 }

@@ -33,8 +33,7 @@ public class HistoricService implements IService<HistoricDto> {
 	
 	public Boolean saveByPositionUid(Long uid, String strValue) {
 		
-		BigDecimal value = new BigDecimal(strValue);
-		
+		BigDecimal value = new BigDecimal(strValue);		
 		value = value.divide(new BigDecimal(100000));
 		
 		Boolean ret = false;		
@@ -42,12 +41,10 @@ public class HistoricService implements IService<HistoricDto> {
 		
 		if(position != null ) {	
 			Historic historic = new Historic();
-
 			historic.setCompanyDeviceId(position.getCompanyDevice().getUid());
 			historic.setLastUpdate(new Date());
 			historic.setValue(value);
-			historic.setLogOrigem(LogOrigem.DEVICE);
-			
+			historic.setLogOrigem(LogOrigem.DEVICE);			
 			repository.save(historic);
 		
 			try {

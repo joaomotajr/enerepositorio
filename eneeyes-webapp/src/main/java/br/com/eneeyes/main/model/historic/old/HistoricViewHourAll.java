@@ -1,4 +1,4 @@
-package br.com.eneeyes.main.model.historic;
+package br.com.eneeyes.main.model.historic.old;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.Subselect;
+
+import br.com.eneeyes.main.model.historic.IHistoricGroup;
 
 @Entity
 @Subselect("select * from historic_view_hour_all")

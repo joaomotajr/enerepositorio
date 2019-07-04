@@ -1,4 +1,4 @@
-package br.com.eneeyes.main.model.historic;
+package br.com.eneeyes.main.model.historic.old;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,12 +10,13 @@ import javax.persistence.Id;
 import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.enums.LogOrigem;
+import br.com.eneeyes.main.model.historic.IHistoric;
 
 @Entity
-@Subselect("select * from historic_view_ha")
-public class HistoricViewHA implements IHistoric {
+@Subselect("select * from historic_view_habc")
+public class HistoricViewHABC implements IHistoric {
 
-    public HistoricViewHA() {
+    public HistoricViewHABC() {
     	
     }     
 
@@ -66,7 +67,7 @@ public class HistoricViewHA implements IHistoric {
 	public final void setCompanyDeviceId(Long companyDeviceId) {
 		this.companyDeviceId = companyDeviceId;
 	}
-	
+
 	public final LogOrigem getLogOrigem() {
 		return logOrigem;
 	}

@@ -15,10 +15,10 @@ import br.com.eneeyes.main.model.enums.IntervalType;
 import br.com.eneeyes.main.model.historic.IHistoric;
 import br.com.eneeyes.main.repository.historic.HistoricCRepository;
 import br.com.eneeyes.main.repository.historic.HistoricDRepository;
-import br.com.eneeyes.main.repository.historic.HistoricHABCRepository;
-import br.com.eneeyes.main.repository.historic.HistoricHABRepository;
-import br.com.eneeyes.main.repository.historic.HistoricHARepository;
-import br.com.eneeyes.main.repository.historic.HistoricViewRepository;
+import br.com.eneeyes.main.repository.historic.exunion.HistoricHABCRepository;
+import br.com.eneeyes.main.repository.historic.exunion.HistoricHABRepository;
+import br.com.eneeyes.main.repository.historic.exunion.HistoricHARepository;
+import br.com.eneeyes.main.repository.historic.exunion.HistoricViewRepository;
 import br.com.eneeyes.main.result.GroupResult;
 
 @Service

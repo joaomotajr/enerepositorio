@@ -1,4 +1,4 @@
-package br.com.eneeyes.main.model.historic;
+package br.com.eneeyes.main.model.historic.old;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -9,21 +9,23 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.Subselect;
 
-@Entity
-@Subselect("select * from historic_view_hour")
-public class HistoricViewHour implements IHistoricGroup {
+import br.com.eneeyes.main.model.historic.IHistoricGroup;
 
-    public HistoricViewHour() {
+@Entity
+@Subselect("select * from historic_view_day_30")
+public class HistoricViewDay30 implements IHistoricGroup {
+
+    public HistoricViewDay30() {
     	
     }     
 
-	@Id	
+    @Id	
 	@Column(name = "UID")	
 	private Long uid;	
 	
 	@Column(name="COMPANY_DEVICE_ID")
 	private Long companyDeviceId;
-
+		
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
 			

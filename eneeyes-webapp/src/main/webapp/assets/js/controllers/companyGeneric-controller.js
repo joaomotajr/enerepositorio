@@ -10,6 +10,7 @@ app.controller('companyGenericController', function ($scope, $interval, $rootSco
 		var companyGeneric = {
 			uid: $scope.selectedCompanyGeneric.uid == undefined ? 0 : $scope.selectedCompanyGeneric.uid,
 			name: $scope.selectedCompanyGeneric.name.toUpperCase(),
+			description: $scope.selectedCompanyGeneric.description,
 			companyDeviceDto: {uid : $scope.selectedCompanyDevice.uid},
 			genericDto: {uid: $scope.selectedCompanyGeneric.genericDto.uid},			
 			local: $scope.selectedCompanyGeneric.local,

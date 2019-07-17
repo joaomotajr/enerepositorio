@@ -25,6 +25,9 @@ app.factory('ViewService', function($resource){
         listAlarmCompanyDeviceView : $resource('/security/api/view/findAlarmCompanyDeviceViewByAlarmId/:alarmId/', {alarmId: '@alarmId'},{        
         	view : {method : 'GET'}
         }),
+        listAreaCompanyDeviceView : $resource('/security/api/view/findAreaCompanyDeviceViewByAreaId/:areaId/', {areaId: '@areaId'},{        
+        	view : {method : 'GET'}
+        }),
         listAllOffline : $resource('/security/api/view/offline/:interval/', {interval: '@interval'},{        
         	view : {method : 'GET'}
         }),                                            

@@ -13,7 +13,8 @@ public class CompanyGenericDto {
 	private Date date;
 	private String local;
 	private String serialNumber;
-	
+	private Double latitude;		
+	private Double longitude;
 	private CompanyDeviceDto companyDeviceDto;
 	private GenericDto genericDto;
 	
@@ -28,7 +29,9 @@ public class CompanyGenericDto {
     	this.description = e.getDescription();
        	this.date = e.getDate();
        	this.local = e.getLocal();
-       	this.serialNumber = e.getSerialNumber();       	
+       	this.serialNumber = e.getSerialNumber();
+       	this.latitude = e.getLatitude();
+       	this.longitude = e.getLongitude();
        	this.genericDto = new GenericDto(e.getGeneric());       	
        	this.companyDeviceDto = new CompanyDeviceDto(e.getCompanyDevice());       
 	}
@@ -79,7 +82,23 @@ public class CompanyGenericDto {
 	public final void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
 	}	
+	
+	public final Double getLatitude() {
+		return latitude;
+	}
+	
+	public final void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	
+	public final Double getLongitude() {
+		return longitude;
+	}
 
+	public final void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+	
 	public GenericDto getGenericDto() {
 		return genericDto;
 	}

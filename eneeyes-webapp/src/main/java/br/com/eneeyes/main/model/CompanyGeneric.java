@@ -53,7 +53,9 @@ public class CompanyGeneric {
     	this.description = dto.getDescription();    			
     	this.date = dto.getDate();    	  
     	this.local = dto.getLocal();
-    	this.serialNumber = dto.getSerialNumber();				
+    	this.serialNumber = dto.getSerialNumber();
+    	this.latitude = dto.getLatitude();
+		this.longitude = dto.getLongitude();
 				
 		if(dto.getGenericDto() != null)
 			this.generic = new Generic(dto.getGenericDto());
@@ -81,7 +83,13 @@ public class CompanyGeneric {
 	private Date date;  
 		
 	@Column(name = "LOCAL", nullable = true)		
-	private String local;	
+	private String local;
+	
+	@Column(name = "LATITUDE", nullable = true)		
+	private Double latitude;
+	
+	@Column(name = "LONGITUDE", nullable = true)		
+	private Double longitude;
   
 	@OneToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_DEVICE_ID", nullable = false)
@@ -140,6 +148,22 @@ public class CompanyGeneric {
 
 	public final void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
+	}
+	
+	public final Double getLatitude() {
+		return latitude;
+	}
+
+	public final void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	public final Double getLongitude() {
+		return longitude;
+	}
+
+	public final void setLongitude(Double longitude) {
+		this.longitude = longitude;
 	}
 		
 	public CompanyDevice getCompanyDevice() {

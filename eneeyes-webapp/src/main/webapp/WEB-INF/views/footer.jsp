@@ -105,7 +105,8 @@
 	<script src="/assets/js/controllers/unitMeter-controller.js"></script>
 	<script src="/assets/js/controllers/deviceType-controller.js"></script>
 	<script src="/assets/js/controllers/perfilAlarm-controller.js"></script>
-	<!-- <script src="/assets/js/controllers/logAnalytical-controller.js"></script> -->
+	<script src="/assets/js/controllers/logAnalytical-controller.js"></script>
+	<script src="/assets/js/controllers/logHistoricFast-controller.js"></script>
 				
 	<!-- PAGE LEVEL SERVICES -->
 	<script src="/assets/js/user-services.js"></script>
@@ -138,6 +139,7 @@
 	<script src="/assets/js/services/unitMeter-service.js"></script>
 	<script src="/assets/js/services/perfilAlarm-service.js"></script>
 	<script src="/assets/js/services/deviceType-service.js"></script>
+	<script src="/assets/js/services/logHistoricFast-viewer-service.js"></script>
 		
 	<!-- PAGE LEVEL FACTORIES -->	
 		

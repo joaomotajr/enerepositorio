@@ -119,7 +119,7 @@
 									<span class="info-box-text">Operacional</span>
 									<span class="info-box-number" data-ng-bind="sumary.normal.value"></span>
 									<div class="progress">
-										<div class="progress-bar" ng-style="{'width' : sumary.normal.percent + '%' }"></div>
+										<div class="progress-bar" data-ng-style="{'width' : sumary.normal.percent + '%' }"></div>
 									</div>
 									<span class="progress-description">
 										Em Funcionamento
@@ -135,10 +135,10 @@
 									<span class="info-box-text">N&Iacute;VEL I</span>
 									<span class="info-box-number" data-ng-bind="sumary.alarm1.value"></span>
 									<div class="progress">
-										<div class="progress-bar" ng-style="{'width' : sumary.alarm1.percent + '%' }"></div>
+										<div class="progress-bar" data-ng-style="{'width' : sumary.alarm1.percent + '%' }"></div>
 									</div>
 									<span class="progress-description">
-										Alarme Superior 1º Limite
+										Superior 1º Limite
 									</span>
 								</div>
 							</div>						
@@ -151,10 +151,10 @@
 										<span class="info-box-text">N&Iacute;VEL II</span>
 									<span class="info-box-number" data-ng-bind="sumary.alarm2.value"></span>
 									<div class="progress">
-										<div class="progress-bar" ng-style="{'width' : sumary.alarm2.percent + '%' }"></div>
+										<div class="progress-bar" data-ng-style="{'width' : sumary.alarm2.percent + '%' }"></div>
 									</div>
 									<span class="progress-description">
-										Alarme Superior 2º  Limite
+										Superior 2º Limite
 									</span>
 								</div>
 							</div>						
@@ -167,10 +167,10 @@
 										<span class="info-box-text">N&Iacute;VEL III</span>
 									<span class="info-box-number" data-ng-bind="sumary.alarm3.value"></span>
 									<div class="progress">
-										<div class="progress-bar" ng-style="{'width' : sumary.alarm3.percent + '%' }"></div>
+										<div class="progress-bar" data-ng-style="{'width' : sumary.alarm3.percent + '%' }"></div>
 									</div>
 									<span class="progress-description">
-											Alarme Superior 3º Limite
+											Superior 3º Limite
 									</span>
 								</div>
 							</div>						
@@ -183,7 +183,7 @@
 									<span class="info-box-text">Off Line</span>
 									<span class="info-box-number" data-ng-bind="sumary.offLine.value"></span>
 									<div class="progress">
-											<div class="progress-bar" ng-style="{'width' : sumary.offLine.percent + '%' }"></div>
+											<div class="progress-bar" data-ng-style="{'width' : sumary.offLine.percent + '%' }"></div>
 									</div>
 									<span class="progress-description">
 										Sem Comunica&ccedil;&atilde;o
@@ -277,7 +277,7 @@
 											<table class="table table-bordered" style="font-size:95%;">
 												<thead>
 													<tr>														
-														<th style="text-align:center; vertical-align: middle;">&nbsp;&nbsp;<i class="fa fa-tags"></i></i>&nbsp;&nbsp;</th>
+														<th style="text-align:center; vertical-align: middle;">&nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;</th>
 														<th>
 															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('companyName')">
 																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"

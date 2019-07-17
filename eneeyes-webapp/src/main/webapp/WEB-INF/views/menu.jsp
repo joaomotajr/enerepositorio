@@ -43,9 +43,10 @@
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">
-						<li><a href="#" data-ng-click="LoadAjaxContent('logHistoric.html', 'Log-Detectores')"><i class="fas fa-file-signature"></i> Log Dispositivos</a></li>			            	            
+						<li><a href="#" data-ng-click="LoadAjaxContent('logHistoric.html', 'Log-Detectores')"><i class="fas fa-file-signature"></i> Log Dispositivos</a></li>
+						<li><a href="#" data-ng-click="LoadAjaxContent('logHistoricFast.html', 'Log-Master')"><i class="fas fa-file-signature"></i> Log Dispositivos +</a></li>
 						<li><a href="#" data-ng-click="LoadAjaxContent('logHistoricAlarm.html', 'Log-Alarmes')"><i class="fas fa-file-audio"></i> Log Alarmes</a></li>
-						<!-- <li><a href="#" data-ng-click="LoadAjaxContent('logAnalytical.html', 'Analise-Comparativa')"><i class="fas fa-shekel-sign"></i> Análise Comparativa</a></li> -->
+						<li><a href="#" data-ng-click="LoadAjaxContent('logAnalytical.html', 'Analise-Comparativa')"><i class="fas fa-shekel-sign"></i> Análise Comparativa</a></li>
 	              	</ul>
 	            </li>	            
 	            <li class="treeview">

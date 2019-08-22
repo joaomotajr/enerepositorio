@@ -106,7 +106,7 @@
 						</div>
 						<div class="alert alert-danger passAlert" 
 							data-ng-show="!signinForm.password1.$error.required && (signinForm.password1.$error.minlength || signinForm.password1.$error.maxlength) && signinForm.password1.$dirty">																
-							<i class="fa fa-ban"></i><span > Senha precisar ter entre 8 and 20 digitos!</span>
+							<i class="fa fa-ban"></i><span > Senha precisa ter entre 8 and 20 digitos!</span>
 						</div>
 						<div class="alert alert-danger passAlert" 
 							data-ng-show="!signinForm.password1.$error.required && !signinForm.password1.$error.minlength && !signinForm.password1.$error.maxlength && signinForm.password1.$error.pattern && signinForm.password1.$dirty">
@@ -137,7 +137,7 @@
 			
 			<br>
 			<div class="login-logo">		 		
-		 		<img src="/assets/img/enesens1.png" style="pull-right; padding:5px; width: 43%;">
+		 		<img src="/assets/img/enesens1.png" style="padding:5px; width: 43%;">
 			</div>				
 			
 	    </div><!-- /.login-box -->

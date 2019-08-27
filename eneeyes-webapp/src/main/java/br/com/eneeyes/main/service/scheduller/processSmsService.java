@@ -3,6 +3,7 @@ package br.com.eneeyes.main.service.scheduller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -14,6 +15,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import br.com.eneeyes.archetype.services.SiteService;
+import br.com.eneeyes.main.model.AlarmMobile;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.views.QueueSmsView;
@@ -79,7 +81,15 @@ public class processSmsService {
 			if(item.getGas_name() != null &&  !item.getGas_name().equalsIgnoreCase("NONE")) {
 				msg += "\r\nGas: " + item.getGas_name();
 			}
-			Boolean ok = siteService.SendSms(item.getCelular(), msg) && item.getCelular1() == null ? true : siteService.SendSms(item.getCelular1(), msg) ;
+						
+			Boolean ok = true;
+			Iterator<AlarmMobile> itr = item.getAlarmMobiles().iterator();			
+			while (itr.hasNext()) {
+				if (!siteService.SendSms(itr.next().getMobile(), msg)) {
+					ok = false;
+					break;
+				}				
+			}
 			
 			if (ok)
 				positionAlarmService.updateSmsStatus(item.getUid(), SmsStatus.SENDED);

@@ -3,6 +3,8 @@ package br.com.eneeyes.main.model.views;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,10 +12,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Null;
 
 import org.hibernate.annotations.Subselect;
 
+import br.com.eneeyes.main.model.AlarmMobile;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.SmsStatus;
 import br.com.eneeyes.main.model.state.PerfilAlarm;
@@ -33,8 +38,7 @@ public class QueueSmsView implements Serializable {
 	@Column(name = "sms_status")
 	private SmsStatus smsStatus;
 	private String alarm_name;
-	private String celular;
-	private String celular1;
+	private String alarm_id;
 	private Long company_detector_id;
 	private String company_detector_name;
 	private String company_detector_local;
@@ -64,13 +68,23 @@ public class QueueSmsView implements Serializable {
 	private PerfilAlarm perfilAlarm1;	
 		
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="PERFIL_ALARM_ID2", nullable = false)
+	@JoinColumn(name="PERFIL_ALARM_ID2")
+	@Null
 	private PerfilAlarm perfilAlarm2;
 		
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="PERFIL_ALARM_ID3", nullable = false)
+	@JoinColumn(name="PERFIL_ALARM_ID3")
+	@Null
 	private PerfilAlarm perfilAlarm3;
 	
+	@OneToMany(targetEntity = AlarmMobile.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="alarm_id", referencedColumnName="alarm_id")
+	private Set<AlarmMobile> alarmMobiles = new HashSet<AlarmMobile>();
+		
+	public Set<AlarmMobile> getAlarmMobiles() {
+		return alarmMobiles;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -86,13 +100,9 @@ public class QueueSmsView implements Serializable {
 	public String getAlarm_name() {
 		return alarm_name;
 	}
-
-	public String getCelular() {
-		return celular;
-	}
-
-	public String getCelular1() {
-		return celular1;
+	
+	public String getAlarm_id() {
+		return alarm_id;
 	}
 
 	public Long getCompany_detector_id() {

@@ -79,7 +79,7 @@
 								<div class="col-md-6">										
 									<div class="panel panel-primary" data-ng-cloak data-ng-if="selectedCompanyGenericPosition.uid">
 										<div class="panel-heading">
-											<h3 class="panel-title" style="text-align:center;">{{selectedCompanyGeneric.genericDto.name}} - {{selectedCompanyGeneric.genericDto.model}}</h3>												
+											<h3 class="panel-title" style="text-align:center;"><Strong>DISPOSITIVO: </Strong>{{selectedCompanyGeneric.genericDto.name}} - {{selectedCompanyGeneric.genericDto.model}}</h3>												
 										</div>
 										<div class="panel-body" style="padding-bottom: 1px">						    																							
 											<ul class="list-group">													

@@ -79,7 +79,7 @@
 											<div class="panel panel-primary" data-ng-if="selectedCompanyDetectorPosition.uid">
 
 												<div class="panel-heading">
-													<h3 class="panel-title" style="text-align:center;">{{selectedCompanyDetector.detectorDto.name}} - {{selectedCompanyDetector.detectorDto.model}}</h3>												
+													<h3 class="panel-title" style="text-align:center;"><Strong>DISPOSITIVO: </Strong>{{selectedCompanyDetector.detectorDto.name}} - {{selectedCompanyDetector.detectorDto.model}}</h3>												
 												</div>	
 
 												<div class="panel-body" style="padding-bottom: 1px">						    

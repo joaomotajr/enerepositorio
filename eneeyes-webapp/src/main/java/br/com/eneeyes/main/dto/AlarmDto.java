@@ -1,8 +1,16 @@
 package br.com.eneeyes.main.dto;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import br.com.eneeyes.main.dto.register.GasDto;
 import br.com.eneeyes.main.dto.state.PerfilAlarmDto;
 import br.com.eneeyes.main.model.Alarm;
+import br.com.eneeyes.main.model.AlarmMobile;
+import br.com.eneeyes.main.model.AlarmEmail;
 import br.com.eneeyes.main.model.state.DeviceType;
 import br.com.eneeyes.main.model.state.UnitMeter;
 import br.com.eneeyes.main.model.views.CompanyView;
@@ -26,12 +34,8 @@ public class AlarmDto {
 	private Boolean alarmOffLineOn;
 	private Boolean alarmSigma;
 	private Boolean alarmSound;
-	private Boolean alarmEmail;	
-	private String email;
-	private String email1;	
+	private Boolean alarmEmail;
 	private Boolean alarmSms;
-	private String celular;
-	private String celular1;
 	private Boolean alarmAction;
 	private String action1;
 	private String action2;
@@ -40,7 +44,9 @@ public class AlarmDto {
 	private CompanyView companyDto;
 	private PerfilAlarmDto perfilAlarmDto1;	
 	private PerfilAlarmDto perfilAlarmDto2;	
-	private PerfilAlarmDto perfilAlarmDto3;	
+	private PerfilAlarmDto perfilAlarmDto3;
+	private List<AlarmEmailDto> alarmEmailsDto = new ArrayList<AlarmEmailDto>();
+	private List<AlarmMobileDto> alarmMobilesDto = new ArrayList<AlarmMobileDto>();
 
 	public AlarmDto() {
 		
@@ -69,11 +75,7 @@ public class AlarmDto {
 		this.alarmSigma = alarm.getAlarmSigma();
 		this.alarmSound = alarm.getAlarmSound();
 		this.alarmEmail = alarm.getAlarmEmail();
-		this.email = alarm.getEmail();
-		this.email1 = alarm.getEmail1();
-		this.alarmSms = alarm.getAlarmSms();
-		this.celular = alarm.getCelular();
-		this.celular1 = alarm.getCelular1();
+		this.alarmSms = alarm.getAlarmSms();		
 		this.alarmAction = alarm.getAlarmAction();
 		this.action1 = alarm.getAction1();
 		this.action2 = alarm.getAction2();
@@ -89,6 +91,46 @@ public class AlarmDto {
 		
 		if(alarm.getPerfilAlarm3() != null)
 			this.perfilAlarmDto3 = new PerfilAlarmDto(alarm.getPerfilAlarm3());
+		
+		if(alarm.getAlarmEmails() != null)
+			this.alarmEmailsDto = parseAlarmEmailsDto(alarm.getAlarmEmails());		
+		
+		if(alarm.getAlarmMobiles() != null)
+			this.alarmMobilesDto = parseAlarmMobilesDto(alarm.getAlarmMobiles());		
+	}
+	
+	private List<AlarmEmailDto> parseAlarmEmailsDto(Set<AlarmEmail> alarmEmails) {
+		List<AlarmEmailDto> lista = new ArrayList<AlarmEmailDto>();		
+		if(alarmEmails != null && !alarmEmails.isEmpty()) {
+			Iterator<AlarmEmail> itr = alarmEmails.iterator();			
+			while (itr.hasNext()) {
+				AlarmEmailDto dto = new AlarmEmailDto(itr.next());
+				lista.add(dto);
+			}
+		}
+		Collections.sort(lista);
+		return lista;
+	}
+	
+	public List<AlarmEmailDto> getAlarmEmailsDto() {
+		return alarmEmailsDto;
+	}
+	
+	private List<AlarmMobileDto> parseAlarmMobilesDto(Set<AlarmMobile> alarmMobiles) {
+		List<AlarmMobileDto> lista = new ArrayList<AlarmMobileDto>();		
+		if(alarmMobiles != null && !alarmMobiles.isEmpty()) {
+			Iterator<AlarmMobile> itr = alarmMobiles.iterator();			
+			while (itr.hasNext()) {
+				AlarmMobileDto dto = new AlarmMobileDto(itr.next());
+				lista.add(dto);
+			}
+		}
+		Collections.sort(lista);
+		return lista;
+	}
+	
+	public List<AlarmMobileDto> getAlarmMobilesDto() {
+		return alarmMobilesDto;
 	}
 	
 	public final Long getUid() {
@@ -235,54 +277,22 @@ public class AlarmDto {
 		this.companyDto = companyDto;
 	}
 	
-	public final Boolean getAlarmEmail() {
-		return alarmEmail;
-	}
-
-	public final void setAlarmEmail(Boolean alarmEmail) {
-		this.alarmEmail = alarmEmail;
-	}
-	
-	public final String getEmail1() {
-		return email1;
-	}
-
-	public final void setEmail1(String email1) {
-		this.email1 = email1;
-	}
-
-	public final String getEmail() {
-		return email;
-	}
-
-	public final void setEmail(String email) {
-		this.email = email;
-	}
-	
 	public Boolean getAlarmSms() {
 		return alarmSms;
 	}
 
 	public void setAlarmSms(Boolean alarmSms) {
 		this.alarmSms = alarmSms;
-	}
-
-	public String getCelular() {
-		return celular;
-	}
-
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
+	}	
 	
-	public final String getCelular1() {
-		return celular1;
+	public Boolean getAlarmEmail() {
+		return alarmEmail;
 	}
 
-	public final void setCelular1(String celular1) {
-		this.celular1 = celular1;
+	public void setAlarmEmail(Boolean alarmEmail) {
+		this.alarmEmail = alarmEmail;
 	}
-	
+
 	public final Boolean getAlarmAction() {
 		return alarmAction;
 	}

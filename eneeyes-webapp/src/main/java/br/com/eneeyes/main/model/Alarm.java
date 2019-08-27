@@ -1,5 +1,8 @@
 package br.com.eneeyes.main.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Null;
 
 import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.model.register.Gas;
@@ -23,12 +28,10 @@ import br.com.eneeyes.main.model.views.CompanyView;
 @Table(name = "alarm")
 public class Alarm {
 	
-	public Alarm() {
-		
+	public Alarm() {		
 	}
 	
-	public Alarm(AlarmDto dto) {
-		
+	public Alarm(AlarmDto dto) {		
 		this.uid = dto.getUid();
 		this.name = dto.getName();		
 		this.deviceType = dto.getDeviceType();
@@ -44,12 +47,8 @@ public class Alarm {
 		this.alarm22 = dto.getAlarm22();
 		this.alarm33 = dto.getAlarm33();
 		this.alarmSound = dto.getAlarmSound();
-		this.alarmEmail = dto.getAlarmEmail();				
-		this.email = dto.getEmail();
-		this.email1 = dto.getEmail1();
 		this.alarmSms = dto.getAlarmSms();
-		this.celular = dto.getCelular();
-		this.celular1 = dto.getCelular1();
+		this.alarmEmail = dto.getAlarmEmail();
 		this.alarmOn = dto.getAlarmOn();
 		this.alarm2On = dto.getAlarm2On();
 		this.alarm3On = dto.getAlarm3On();
@@ -69,11 +68,8 @@ public class Alarm {
 			this.perfilAlarm2 = new PerfilAlarm(dto.getPerfilAlarmDto2());
 		
 		if(dto.getPerfilAlarmDto3() != null)
-			this.perfilAlarm3 = new PerfilAlarm(dto.getPerfilAlarmDto3());
-		
-	
-		
-	}	
+			this.perfilAlarm3 = new PerfilAlarm(dto.getPerfilAlarmDto3());		
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -106,14 +102,16 @@ public class Alarm {
 	private Double alarm2;
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="PERFIL_ALARM_ID2", nullable = false)
+	@JoinColumn(name="PERFIL_ALARM_ID2")
+	@Null
 	private PerfilAlarm perfilAlarm2;
 	
 	@Column(name = "ALARM_3")		
 	private Double alarm3;
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="PERFIL_ALARM_ID3", nullable = false)
+	@JoinColumn(name="PERFIL_ALARM_ID3")
+	@Null
 	private PerfilAlarm perfilAlarm3;
 	
 	@Column(name = "ALARM_11", nullable = true)		
@@ -146,20 +144,8 @@ public class Alarm {
 	@Column(name = "ALARM_EMAIL", nullable = true, columnDefinition = "Boolean default false")		
 	private Boolean alarmEmail;
 	
-	@Column(name = "EMAIL", nullable = true)		
-	private String email;
-	
-	@Column(name = "EMAIL1", nullable = true)		
-	private String email1;
-	
 	@Column(name = "ALARM_SMS", nullable = true, columnDefinition = "Boolean default false")		
 	private Boolean alarmSms;
-	
-	@Column(name = "CELULAR", nullable = true)		
-	private String celular;
-	
-	@Column(name = "CELULAR1", nullable = true)		
-	private String celular1;
 	
 	@Column(name = "ALARM_ACTION", nullable = true)		
 	private Boolean alarmAction;
@@ -179,6 +165,12 @@ public class Alarm {
 	@ManyToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
 	@JoinColumn(name="COMPANY_ID", nullable = false)
 	private CompanyView company;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "alarm", cascade = CascadeType.ALL)
+	private Set<AlarmEmail> alarmEmails = new HashSet<AlarmEmail>();
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "alarm", cascade = CascadeType.ALL)
+	private Set<AlarmMobile> alarmMobiles = new HashSet<AlarmMobile>();
 		
 	public final Long getUid() {
 		return uid;
@@ -331,22 +323,6 @@ public class Alarm {
 	public final void setAlarmEmail(Boolean alarmEmail) {
 		this.alarmEmail = alarmEmail;
 	}
-
-	public final String getEmail() {
-		return email;
-	}
-
-	public final void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public final String getEmail1() {
-		return email1;
-	}
-
-	public final void setEmail1(String email1) {
-		this.email1 = email1;
-	}
 	
 	public Boolean getAlarmSms() {
 		return alarmSms;
@@ -354,22 +330,6 @@ public class Alarm {
 
 	public void setAlarmSms(Boolean alarmSms) {
 		this.alarmSms = alarmSms;
-	}
-	
-	public String getCelular() {
-		return celular;
-	}
-
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
-	
-	public final String getCelular1() {
-		return celular1;
-	}
-
-	public final void setCelular1(String celular1) {
-		this.celular1 = celular1;
 	}
 	
 	public final Boolean getAlarmAction() {
@@ -434,5 +394,13 @@ public class Alarm {
 
 	public void setPerfilAlarm3(PerfilAlarm perfilAlarm3) {
 		this.perfilAlarm3 = perfilAlarm3;
-	}	
+	}
+	
+	public Set<AlarmEmail> getAlarmEmails() {
+		return alarmEmails;
+	}
+	
+	public Set<AlarmMobile> getAlarmMobiles() {
+		return alarmMobiles;
+	}
 }

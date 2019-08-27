@@ -1,6 +1,7 @@
 package br.com.eneeyes.archetype.services;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class SiteService {
     @Autowired
     Session mailSession;
    
-    public Boolean SendEmail(String[] to, String subject, String body) {
+    public Boolean SendEmail(ArrayList<String> to, String subject, String body) {
  	   
 	   String from = "joao.junior@chipsat.com.br";            
        
@@ -43,17 +44,15 @@ public class SiteService {
 		   MimeMessage message = new MimeMessage(mailSession);  
 		   message.setSender(addressFrom);  
 		   message.setSubject(subject);  
-		   message.setContent(body, "text/html; charset=utf-8");    	   
+		   message.setContent(body, "text/html; charset=utf-8");
 		   
-		   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to[0]));  
+		   for (int i = 0; i < to.size(); i++) {			
+			   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to.get(i)));
+		   }
 		   
-		   if(to[1] != null && !to[1].equals(""))
-			   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to[1]));
-	
 		   transport.connect();  
 		   Transport.send(message);  
-		   transport.close();
-		   
+		   transport.close();		   
 		   return true;
 	   }
 	   catch (MessagingException e) {

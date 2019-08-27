@@ -24,6 +24,12 @@ public class AlarmService implements IService<AlarmDto> {
 	private AlarmRepository repository;
 	
 	@Autowired
+	private AlarmEmailService alarmEmailService;
+	
+	@Autowired
+	private AlarmMobileService alarmMobileService;
+	
+	@Autowired
 	private CompanyDeviceAlarmViewService companyDetectorAlarmViewService;
 	
 	@Autowired
@@ -63,7 +69,8 @@ public class AlarmService implements IService<AlarmDto> {
 		LogResult<AlarmDto> result = new LogResult<AlarmDto>(); 	
 		
 		try {			
-			
+			alarmEmailService.deleteByAlarmId(uid);
+			alarmMobileService.deleteByAlarmId(uid);
 			repository.delete(uid);
 			
 			result.setResultType( ResultMessageType.SUCCESS );

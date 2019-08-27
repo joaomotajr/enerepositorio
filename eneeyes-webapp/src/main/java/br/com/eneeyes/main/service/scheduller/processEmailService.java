@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -17,6 +18,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import br.com.eneeyes.archetype.services.SiteService;
+import br.com.eneeyes.main.model.AlarmEmail;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.views.QueueEmailView;
@@ -54,9 +56,7 @@ public class processEmailService {
 		List<QueueEmailView> queueLista = new ArrayList<QueueEmailView>();
 		queueLista = service.findAll();
 		
-		for (QueueEmailView item   : queueLista) {			
-			
-			String emails[] = {item.getEmail(), item.getEmail1()}  ;
+		for (QueueEmailView item   : queueLista) {
 			String areaLocal = (item.getArea_local() != null && !item.getArea_local().equals("")) ? " / " + item.getArea_local() : "/ Local não Informado";
 			String detectorLocal = (item.getCompany_detector_local() != null && !item.getCompany_detector_local().equals("")) ? item.getCompany_detector_local() : "Não Informado";
 			String medicao = (item.getAlarmType() == AlarmType.OFFLINE) ? " " : " - Medição: " + item.getLast_value() + " ";
@@ -93,18 +93,21 @@ public class processEmailService {
 			String urlTemplate = this.getClass().getClassLoader().getResource("/templates/alarme.html").toString().replace("file:", "");
 			String msg = "";
 			
-			try {
-				
-				 msg = FileUtils.readFileToString(new File(urlTemplate)).replace("{{ALERTA}}", key);
-				 
+			try {				
+				 msg = FileUtils.readFileToString(new File(urlTemplate)).replace("{{ALERTA}}", key);				 
 			} catch (IOException e) {
 				
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
+			ArrayList<String> emails = new ArrayList<String>();
+			Iterator<AlarmEmail> itr = item.getAlarmEmails().iterator();			
+			while (itr.hasNext()) {
+				 emails.add(itr.next().getEmail());				
+			}
 			
-			Boolean ok = siteService.SendEmail(emails, "Alerta de ALARME Detectado", msg);
-			
+			Boolean ok = siteService.SendEmail(emails, "Alerta de ALARME Detectado", msg);			
 			if (ok)
 				positionAlarmService.updateEmailStatus(item.getUid(), EmailStatus.SENDED);
 			else {

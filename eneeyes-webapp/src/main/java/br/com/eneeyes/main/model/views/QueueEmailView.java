@@ -3,6 +3,8 @@ package br.com.eneeyes.main.model.views;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,10 +12,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Null;
 
 import org.hibernate.annotations.Subselect;
 
+import br.com.eneeyes.main.model.AlarmEmail;
 import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.enums.EmailStatus;
 import br.com.eneeyes.main.model.state.PerfilAlarm;
@@ -34,9 +39,7 @@ public class QueueEmailView implements Serializable {
 	@Column(name = "email_status")
 	private EmailStatus emailStatus;
 
-	private String alarm_name;
-	private String email;
-	private String email1;
+	private String alarm_name;	
 	private Long company_detector_id;
 	private String company_detector_name;
 	private String company_detector_local;
@@ -66,12 +69,22 @@ public class QueueEmailView implements Serializable {
 	private PerfilAlarm perfilAlarm1;	
 		
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="PERFIL_ALARM_ID2", nullable = false)
+	@JoinColumn(name="PERFIL_ALARM_ID2")
+	@Null
 	private PerfilAlarm perfilAlarm2;
 		
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="PERFIL_ALARM_ID3", nullable = false)
+	@Null
+	@JoinColumn(name="PERFIL_ALARM_ID3")
 	private PerfilAlarm perfilAlarm3;
+	
+	@OneToMany(targetEntity = AlarmEmail.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="alarm_id")
+	private Set<AlarmEmail> alarmEmails = new HashSet<AlarmEmail>();
+		
+	public Set<AlarmEmail> getAlarmEmails() {
+		return alarmEmails;
+	}
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -87,14 +100,6 @@ public class QueueEmailView implements Serializable {
 
 	public String getAlarm_name() {
 		return alarm_name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public String getEmail1() {
-		return email1;
 	}
 
 	public Long getCompany_detector_id() {

@@ -126,6 +126,7 @@
 	<script src="/assets/js/services/companyGeneric-service.js"></script>
 	<script src="/assets/js/services/alarm-service.js"></script>
 	<script src="/assets/js/services/alarmEmail-service.js"></script>
+	<script src="/assets/js/services/alarmMobile-service.js"></script>
 	<script src="/assets/js/services/companyDetectorAlarm-service.js"></script>
 	<script src="/assets/js/services/position-service.js"></script>
 	<script src="/assets/js/services/historic-service.js"></script>	

@@ -37,7 +37,8 @@
 						</div>                                                       
 					</div>					
 					<div class="box-footer">						                                                                
-						<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-primary pull-right" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalAlarmEdit">Novo</button>
+						<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-primary pull-right" 
+							data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalAlarmEdit">Novo</button>
 					</div>
 				</div>
 				
@@ -103,10 +104,10 @@
 											<label class="control-label">Nome
 												<strong class="text-red pull-right" style="font-stretch: extra-condensed;" data-ng-show="userForm.username.$error.required && !userForm.username.$pristine">&nbsp[Obrigat&oacute;rio]</strong> 
 												<strong class="text-red pull-right" style="font-stretch: extra-condensed;" data-ng-show="userForm.username.$error.maxlength">&nbsp [M&aacute;ximo 12 caracteres]</strong>
-											</label>
-										
+											</label>										
 											<div data-ng-class="{'has-error': userForm.username.$dirty && userForm.username.$invalid}">
-												<input class="form-control inputProfile" placeholder="Nome do Alarme" data-ng-model="alarmName" data-ng-maxlength="15" name="username" required>
+												<input class="form-control inputProfile" style="text-transform:uppercase" placeholder="Nome do Alarme" 
+													data-ng-model="alarmName" data-ng-maxlength="15" name="username" required>
 											</div>
 										</div>										
 										<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">	
@@ -138,8 +139,7 @@
 					                									
 									<div class="row">    
 										<div class="col-md-12">                  
-					                       	<div class="box box-info" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">
-					                       	
+					                       	<div class="box box-info" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">					                       	
 								    			<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Limites do Alarme </strong> &nbsp&nbsp&nbsp&nbsp&nbsp
 													<div class="btn-group  pull-right">																
 														<button class="btn btn-xs" ng-click="update(true);" ng-class="(radioModel) ? 'btn-success' : 'btn-default'">ON</button>																
@@ -173,7 +173,8 @@
 																		<span class="text-red" style="font-stretch: extra-condensed;" data-ng-show="userForm.unitMeterName.$dirty && userForm.unitMeterName.$invalid"> [Obrigat&oacute;rio]</span>
 																	</label>
 																	<div data-ng-class="{'has-error': userForm.unitMeterName.$dirty && userForm.unitMeterName.$invalid}">
-																		<select name="unitMeterName" class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true" data-ng-change="unitMeterChange();"
+																		<select name="unitMeterName" class="form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true" 
+																			data-ng-change="unitMeterChange();"
 																			data-ng-options="item as item.description for item in unitMeters | orderBy: 'symbol' track by item.uid" 
 																			data-ng-model="unitMeter" required>
 																			<option value="">Selecione</option> 
@@ -282,34 +283,46 @@
 																		<label for="checkboxOfflineOnOff">Habilitar Alarme OFFLine?</label>
 																	</div>
 																</div>
-																<div class="col-md-6">					            				
+																<div class="col-md-3">
 																	<div class="checkbox3 checkbox-inline checkbox-check checkbox-round checkbox-light">												            			
 																		<input type="checkbox" id="checkboxSonoroOnOff" checked>
 																		<label for="checkboxSonoroOnOff">Emitir Alarme Sonoro?</label>
 																	</div>
+																</div>
+																<div class="col-md-3">																	
+																	<button type="button" class="btn btn-default pull-right" data-ng-disabled="!alarmUid" data-backdrop="static" 
+																		data-keyboard="false" data-toggle="modal" data-target="#modalAlarmFeedback"><i class="fas fa-sms"></i> SMS & <i class="fa fa-envelope" aria-hidden="true"></i> E-Mail</button>																												
 																</div>																	
 															</div>	
 														</div>			
-
+														<!--
 														<div class="row">
 															<div class="col-md-12">
 																<div class="col-md-2">										            									            				
 																	<div class="checkbox3 checkbox-inline checkbox-check checkbox-round checkbox-light">
-																		<input type="checkbox" 
-																		id="checkboxEmailOnOff" checked>
+																		<input type="checkbox" id="checkboxEmailOnOff" checked>
 																		<label for="checkboxEmailOnOff">Enviar E-MAIL? </label>
 																	</div>
 																</div>
 																
 																<div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important">
+																	<div data-ng-repeat="item in emails">	
+																		<div class="input-group">								                                        	
+																			<span class="input-group-addon">@</span>
+																			<input data-ng-model="item.email" type="text" class="form-control" placeholder="Email" readonly>
+																			<span data-ng-click="removeEmail($index);" class="input-group-addon text-red"><i class="fa fa-times-circle cursor"></i></span>
+																		</div>
+																	</div>
+
 																	<div data-ng-class="{'has-error': !emailValid}">	
 																		<div class="input-group">								                                        	
 																			<span class="input-group-addon" data-ng-show="emailValid">@</span>													                    														                    	
 																			<span class="input-group-addon text-red" data-ng-hide="emailValid">@</span>
-																			<input id="alarmEmail" data-ng-model="email" type="text" class="form-control" 
-																				placeholder="Email" data-ng-change="validEmail($event);">
+																			<input id="alarmEmail" data-ng-model="email" type="text" class="form-control" placeholder="Email" data-ng-change="validEmail($event);">
+																			<span data-ng-show="emailValid && email" data-ng-click="addEmail(email);" class="input-group-addon text-blue"><i class="fa fa-plus-square cursor"></i></span>
+																			<span data-ng-hide="emailValid && email" class="input-group-addon text-muted"><i class="fa fa-plus-square"></i></span>
 																		</div>
-																	</div>						                                         												            			
+																	</div>
 																</div>
 																
 																<div class="col-md-2">										            									            				
@@ -320,143 +333,28 @@
 																</div>
 																
 																<div class="col-md-4" style="padding-left: 5px !important;">
+																	<div data-ng-repeat="item in mobiles">	
+																		<div class="input-group">								                                        	
+																			<span class="input-group-addon">@</span>
+																			<input data-ng-model="item.mobile" type="text" class="form-control" readonly>
+																			<span data-ng-click="removeMobile($index);" class="input-group-addon text-red"><i class="fa fa-times-circle cursor"></i></span>
+																		</div>
+																	</div>
+
 																	<div data-ng-class="{'has-error': !mobileValid}">	
 																		<div class="input-group">
 																			<span class="input-group-addon" data-ng-show="mobileValid"><i class="fa fa-phone-square"></i></span>
-																			<span class="input-group-addon text-red" data-ng-hide="mobileValid"><i class="fa fa-phone-square"></i></span>
-																			
-																			<input class="form-control alarmCelularMask" 
-																				id="alarmCelular" data-ng-model="celular" 
-																				type="text" maxlength="15" placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />													                    	
-																		</div>
-																	</div>						                                         													            			
-																</div>														    	
-															
-															</div>
-														</div>														
-														
-														<div class="row">
-															<div class="col-md-12">
-																<div class="col-md-2"></div>																
-																<div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important">
-																	<div data-ng-class="{'has-error': !emailValid1}">	
-																		<div class="input-group">								                                        	
-																			<span class="input-group-addon" data-ng-show="emailValid1">@</span>													                    														                    	
-																			<span class="input-group-addon text-red" data-ng-hide="emailValid1">@</span>
-																			<input 
-																				id="alarmEmail1" 
-																				data-ng-model="email1" type="text" class="form-control" 
-																				placeholder="Email" 
-																				data-ng-change="validEmail($event);">
-																		</div>
-																	</div>						                                         												            			
-																</div>																
-																<div class="col-md-2"></div>																
-																<div class="col-md-4" style="padding-left: 5px !important;">
-																	<div data-ng-class="{'has-error': !mobileValid1}">	
-																		<div class="input-group">
-																			<span class="input-group-addon" data-ng-show="mobileValid1"><i class="fa fa-phone-square"></i></span>
-																			<span class="input-group-addon text-red" data-ng-hide="mobileValid1"><i class="fa fa-phone-square"></i></span>
-																			
-																			<input class="form-control alarmCelularMask" 
-																				id="alarmCelular1" 
-																				data-ng-model="celular1" 
-																				type="text" maxlength="15" placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />																																						
+																			<span class="input-group-addon text-red" data-ng-hide="mobileValid"><i class="fa fa-phone-square"></i></span>																			
+																			<input class="form-control alarmMobileMask" id="alarmMobile" data-ng-model="mobile" type="text" maxlength="15" 
+																				placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />
+																			<span data-ng-show="mobileValid && mobile" data-ng-click="addMobile(mobile);" class="input-group-addon text-blue"><i class="fa fa-plus-square cursor"></i></span>
+																			<span data-ng-hide="mobileValid && mobile" class="input-group-addon text-muted"><i class="fa fa-plus-square"></i></span>
 																		</div>
 																	</div>
 																</div>
 															</div>
-														</div>
-																									
-														<!-- 
-														<div class="row">
-															<div class="col-md-12">
-																<div class="col-md-2">										            									            				
-																	<div class="checkbox3 checkbox-round">
-																		<input type="checkbox" 
-																		id="checkboxEmailOnOff" checked>
-																		<label for="checkboxEmailOnOff">Enviar E-MAIL? </label>
-																	</div>
-																</div>
-																
-																<div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important">
-																	<div data-ng-class="{'has-error': !emailValid}">	
-																		<div class="input-group">								                                        	
-																			<span class="input-group-addon" data-ng-show="emailValid">@</span>													                    														                    	
-																			<span class="input-group-addon text-red" data-ng-hide="emailValid">@</span>
-																			<input 
-																				id="alarmEmail" 
-																				data-ng-model="email" type="text" class="form-control" 
-																				placeholder="Email" 
-																				data-ng-change="validEmail($event);">
-																		</div>
-																	</div>						                                         												            			
-																</div>			            			
-																
-																<div class="col-md-2">
-																	<div class="checkbox3 checkbox-muted checkbox-inline checkbox-check checkbox-light">
-																		<input class="checkboxEmail" type="checkbox" id="checkboxEmail1" checked disabled>
-																		<label for="checkboxEmail1">Alarme 1</label>
-																	</div>
-																</div>
-																<div class="col-md-2">
-																	<div class="checkbox3 checkbox-warning checkbox-inline checkbox-check checkbox-light">
-																		<input class="checkboxEmail" type="checkbox" id="checkboxEmail2" checked disabled>
-																		<label for="checkboxEmail2">Alarme 2</label>
-																	</div>
-																</div>
-																<div class="col-md-2">
-																	<div class="checkbox3 checkbox-danger checkbox-inline checkbox-check checkbox-light">
-																		<input class="checkboxEmail" type="checkbox" id="checkboxEmail3" checked disabled>
-																		<label for="checkboxEmail3">Alarme 3</label>
-																	</div>
-																</div>
-															</div>	
-														</div>	
-															
-														<div class="row">
-															<div class="col-md-12">
-																<div class="col-md-2">										            									            				
-																	<div class="checkbox3 checkbox-round">
-																		<input type="checkbox" id="checkboxSmsOnOff" checked>
-																		<label for="checkboxSmsOnOff">Enviar SMS? </label>
-																	</div>
-																</div>
-																
-																<div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important">
-																	<div data-ng-class="{'has-error': !mobileValid}">	
-																		<div class="input-group">
-																			<span class="input-group-addon" data-ng-show="mobileValid"><i class="fa fa-phone-square"></i></span>
-																			<span class="input-group-addon text-red" data-ng-hide="mobileValid"><i class="fa fa-phone-square"></i></span>
-																			<input class="form-control" 
-																				id="alarmCelular" 
-																				data-ng-model="celular" 
-																				type="text" maxlength="15" placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />													                    	
-																		</div>
-																	</div>						                                         													            			
-																</div>			            			
-																
-																<div class="col-md-2">
-																	<div class="checkbox3 checkbox-muted checkbox-inline checkbox-check checkbox-light" style="color:gray">
-																		<input class="checkboxSms" type="checkbox" id="checkboxSms1" checked disabled>
-																		<label for="checkboxSms1">Alarme 1</label>
-																	</div>
-																</div>
-																<div class="col-md-2">
-																	<div class="checkbox3 checkbox-warning checkbox-inline checkbox-check checkbox-light">
-																		<input class="checkboxSms" type="checkbox" id="checkboxSms2" checked disabled>
-																		<label for="checkboxSms2">Alarme 2</label>
-																	</div>
-																</div>
-																<div class="col-md-2">
-																	<div class="checkbox3 checkbox-danger checkbox-inline checkbox-check checkbox-light">
-																		<input class="checkboxSms" type="checkbox" id="checkboxSms3" checked disabled>
-																		<label for="checkboxSms3">Alarme 3</label>
-																	</div>
-																</div>
-															</div>	
-														</div>	
-															-->
+														</div>																												
+														-->
 														<hr style="margin-top: 8px !important; margin-bottom: 8px !important;">
 
 														<div class="row"  style="padding-bottom: 5px !important">
@@ -531,13 +429,93 @@
 				  	
 				  	<div class="modal-footer" style="padding-top: 1px">						
 						<button type="button" data-ng-click="clearFormAlarm(); userForm.$setPristine()" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                                                
-						<button type="button" data-ng-click="saveAlarm();" class="btn btn-primary" data-dismiss="modal"
-							data-ng-disabled="(emailValid && mobileValid && emailValid1 && mobileValid1 && userForm.$valid && !(errorAlarm1 || errorAlarm11 || errorAlarm2 || errorAlarm22 || errorAlarm3 || errorAlarm33 || errorPerfil1 || errorPerfil2 || errorPerfil3)) ? false : true">&nbsp;Salvar&nbsp;
+						<button type="button" data-ng-click="saveAlarm(); userForm.$setPristine();" class="btn btn-primary"
+							data-ng-disabled="(emailsValid && mobilesValid && alarmAlarm1 && userForm.$valid && !userForm.$pristine && 
+							!(errorAlarm1 || errorAlarm11 || errorAlarm2 || errorAlarm22 || errorAlarm3 || errorAlarm33 || errorPerfil1 || errorPerfil2 || errorPerfil3)) ? false : true">&nbsp;Salvar&nbsp;
 						</button>						                                
 				  	</div>				  	
 			  	</div>
 			</div>		
-		</div>				
+		</div>
+
+		<div id="modalAlarmFeedback" class="modal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">					
+					<div class="modal-content">                            
+						<div class="modal-body">							
+							<div class="box box-primary">
+								<div class="box-header">
+									<h3 class="box-title">ALARME FEEDBACK'S</h3>							
+									<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
+								</div>											
+								<div class="box-body">									
+									<div class="box-body">												
+										<div class="row">											
+											<div class="col-md-2"></div>
+											<div class="col-md-4">
+												<div class="checkbox3 checkbox-inline checkbox-check checkbox-round checkbox-light">
+													<input type="checkbox" id="checkboxEmailOnOff" checked>
+													<label for="checkboxEmailOnOff">Enviar E-MAIL? </label>
+												</div>
+											</div>
+											<div class="col-md-2"></div>
+											<div class="col-md-4">
+												<div class="checkbox3 checkbox-inline checkbox-check checkbox-round checkbox-light">
+													<input type="checkbox" id="checkboxSmsOnOff" checked>
+													<label for="checkboxSmsOnOff">Enviar SMS? </label>
+												</div>
+											</div>											
+										</div>
+										<div class="row">												
+											<div class="col-md-6" style="padding-left: 5px !important; padding-right: 5px !important">
+												<div data-ng-repeat="item in emails">	
+													<div class="input-group">								                                        	
+														<span class="input-group-addon">@</span>
+														<input data-ng-model="item.email" type="text" class="form-control" placeholder="Email" readonly>
+														<span data-ng-click="removeEmail($index);" class="input-group-addon text-red"><i class="fa fa-times-circle cursor"></i></span>
+													</div>
+												</div>
+												<div data-ng-class="{'has-error': !emailValid}">	
+													<div class="input-group">								                                        	
+														<span class="input-group-addon" data-ng-show="emailValid">@</span>													                    														                    	
+														<span class="input-group-addon text-red" data-ng-hide="emailValid">@</span>
+														<input id="alarmEmail" data-ng-model="email" type="text" class="form-control" placeholder="Email" data-ng-change="validEmail($event);">
+														<span data-ng-show="emailValid && email" data-ng-click="addEmail(email);" class="input-group-addon text-blue"><i class="fa fa-plus-square cursor"></i></span>
+														<span data-ng-hide="emailValid && email" class="input-group-addon text-muted"><i class="fa fa-plus-square"></i></span>
+													</div>
+												</div>
+											</div>											
+											<div class="col-md-6" style="padding-left: 5px !important;">
+												<div data-ng-repeat="item in mobiles">	
+													<div class="input-group">								                                        	
+														<span class="input-group-addon">@</span>
+														<input data-ng-model="item.mobile" type="text" class="form-control" readonly>
+														<span data-ng-click="removeMobile($index);" class="input-group-addon text-red"><i class="fa fa-times-circle cursor"></i></span>
+													</div>
+												</div>
+												<div data-ng-class="{'has-error': !mobileValid}">	
+													<div class="input-group">
+														<span class="input-group-addon" data-ng-show="mobileValid"><i class="fa fa-phone-square"></i></span>
+														<span class="input-group-addon text-red" data-ng-hide="mobileValid"><i class="fa fa-phone-square"></i></span>																			
+														<input class="form-control alarmMobileMask" id="alarmMobile" data-ng-model="mobile" type="text" maxlength="15" 
+															placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />
+														<span data-ng-show="mobileValid && mobile" data-ng-click="addMobile(mobile);" class="input-group-addon text-blue"><i class="fa fa-plus-square cursor"></i></span>
+														<span data-ng-hide="mobileValid && mobile" class="input-group-addon text-muted"><i class="fa fa-plus-square"></i></span>
+													</div>
+												</div>
+											</div>
+										<div>										
+									</div>									
+								</div>
+							</div>											
+						</div>						
+						<div class="modal-footer">							
+							<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out"></i></button>									                                
+						</div>						
+					</div>
+				</div>
+			</div>		
+		</div>
 	</div>
 
     

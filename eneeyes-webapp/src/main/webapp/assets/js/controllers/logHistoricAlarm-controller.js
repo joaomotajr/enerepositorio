@@ -21,8 +21,7 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	$scope.countHistoric = 0;
 	var companyDetectors = [];
 	
-	function printData()
-	{	
+	function printData() {	
 	   var divToPrint = document.getElementById("printTable");	   	   
 	   divToPrint.style.visibility = "visible";	   
 	   newWin= window.open("");
@@ -42,8 +41,8 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	});	
 	 	
 	$scope.buttonClick = function (s) { 
-		$scope.selectedButton = s 
-	}
+		$scope.selectedButton = s; 
+	};
 	
 	$scope.showInfo = function(msg) {
 		angular.element('body').removeClass('loading');            
@@ -140,12 +139,10 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 		}
 	};
 	
-	$scope.getHistoricsPreDefined = function(n) {
-				
+	$scope.getHistoricsPreDefined = function(n) {				
 		$scope.selectedPeriodo = setInterval($scope.interval);
 		$scope.selectedButton = $scope.interval;
-		$cookieStore.put("lenPage2", $scope.lenPage);
-				
+		$cookieStore.put("lenPage2", $scope.lenPage);				
 		$scope.listHistoricInterval = new HistoricAlarmService.listInterval();						
 		$scope.listHistoricInterval.$historicAlarm({_csrf : angular.element('#_csrf').val(), 
 			companyDeviceId: $scope.selectedCompanyDetector.companyDeviceId, 
@@ -262,8 +259,10 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 			}
 		});
 		if($scope.units.length==1) {
-			$scope.selectedUnit = $scope.units[0];
-			$scope.changeUnit();
+			$timeout(function () {
+				$scope.selectedUnit = $scope.units[0];
+				$scope.changeUnit();				
+			}, 500);
 		}
 	};
 
@@ -288,9 +287,11 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 				$scope.areas.push(i);
 			}
 		});
-		if($scope.areas.length==1) {
-			$scope.selectedArea = $scope.areas[0];
-			$scope.changeArea();
+		if ($scope.areas.length==1) {
+			$timeout(function () {
+				$scope.selectedArea = $scope.areas[0];
+				$scope.changeArea();
+			}, 500);
 		}
 	};
 
@@ -316,8 +317,10 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 			}
 		});	
 		if($scope.companyDetectors.length==1) {
-			$scope.selectedCompanyDetector = $scope.companyDetectors[0];
-			$scope.changeCompanyDetector();
+			$timeout(function () {				
+				$scope.selectedCompanyDetector = $scope.companyDetectors[0];
+				$scope.changeCompanyDetector();
+			}, 500);
 		}	
 	};
 
@@ -359,14 +362,12 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 		if(! loadGoogleCharts) {				
 			google.charts.load('current', { 'packages': ['corechart', 'line'] });				
 			loadGoogleCharts = true;
-		}
-		
-		google.charts.setOnLoadCallback(formatLineSensor);	
-		
+		}		
+		google.charts.setOnLoadCallback(formatLineSensor);		
 		$timeout(function () {
 			$('#modalGraficoHistorico').modal({ show: 'false' });
 		}, 500);
-	}
+	};
 	
 	function formatLineSensor() {
 		var value = $scope.listHistoricInterval.list;
@@ -382,9 +383,8 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	    var itens = new Array();	    	    
 	    for(var i in value) {
 	    	var itemDate = new Date( value[i].date );
-	    	changeDate = weekday[itemDate.getDay()] + ' ' + itemDate.toLocaleDateString() + ' as ' + itemDate.toLocaleTimeString();
-	    		    	
-	    	itens.push([changeDate, value[i].value]);	    	
+	    	changeDate = weekday[itemDate.getDay()] + ' ' + itemDate.toLocaleDateString() + ' as ' + itemDate.toLocaleTimeString();	    		    	
+	    	itens.push([changeDate, value[i].value]);
 		}
 	      
 	    data.addRows(itens);

@@ -64,36 +64,17 @@
 
 		<!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top" role="navigation">
-	
-			<!-- Sidebar toggle button-->		
 			<a data-ng-controller="SiteController" href="#" class="sidebar-toggle" data-toggle="offcanvas" data-ng-click="showLogo();" role="button"> 
-				<span class="sr-only">Navega��o</span>
+				<span class="sr-only">Navega&ccedil;&atilde;</span>
 			</a>
 			
 			<div class="navbar-custom-menu">
-				<ul class="nav navbar-nav">
-	
-					<!-- Messages: style can be found in dropdown.less-->
-					<li class="dropdown messages-menu">
-					
-					<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-envelope-o"></i> <span class="label label-success"></span>	</a>
-						<ul class="dropdown-menu">
-							<li class="header">Voce tem 0 Mensagem</li>
-							<li>								
-								<ul class="menu">
-									<li> <!-- start message -->	</li>	
-								</ul>
-							</li>
-							<li class="footer"><a href="#">Ver Todas Mensagens</a></li>
-						</ul>
-					</li>						
-					
-					<!-- Notifications: style can be found in dropdown.less -->
+				<ul class="nav navbar-nav">										
 					<li class="dropdown notifications-menu" data-ng-controller="monitorController">
 						<audio id="alarmSound" src="/assets/img/alert_01.mp3" preload="auto"></audio>
-						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-bell-o"></i> <span class="label label-warning" data-ng-bind="dashCompaniesAlarmResults.length"></span></a>						
+						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i style="font-size: 1.3em;" class="fa fa-bell-o"></i> <span class="label label-warning" data-ng-bind="dashCompaniesAlarmResults.length"></span></a>						
 						<ul class="dropdown-menu">
-							<li class="header text-center">Voc� tem <b data-ng-bind="dashCompaniesAlarm.length"></b> Alarmes Pendentes</li>
+							<li class="header text-center">Voc&ecirc; tem <b data-ng-bind="dashCompaniesAlarm.length"></b> Alarmes Pendentes</li>
 							<hr style="margin-top: 2px !important; margin-bottom: 2px !important;">
 							<li>
 								<div style="max-height: 250px; height:auto; overflow: auto">
@@ -117,22 +98,8 @@
 							<li class="footer text-center">
 								<a href="#" data-ng-click="LoadAjaxContent('monitor.html', 'Monitoramento')">Ver todos</a>
 							</li>
-						</ul>
-						
-					</li>					
-					
-					<li class="dropdown tasks-menu">
-						<a href="#"	class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-flag-o"></i> <span class="label label-danger"></span></a>
-						<ul class="dropdown-menu">
-							<li class="header">Sem Tarefas Pendentes</li>
-							<li>								
-								<ul class="menu">
-									<li>  <!-- Task item  -->	</li>									
-								</ul>
-							</li>
-							<li class="footer"><a href="#">Ver todas as Tarefas</a></li>
-						</ul>
-					</li>
+						</ul>						
+					</li>				
 	
 					<!-- User Account: style can be found in dropdown.less -->
 					<li class="dropdown user user-menu">
@@ -163,12 +130,8 @@
  					<li title="Configura&ccedil;&atilde;es"><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
 				</ul>
 			</div>
-		</nav>
-		
+		</nav>		
 	</header>
-
 	<jsp:include page="configuracoes.jsp"/>
-
     <div class="control-sidebar-bg"></div>	
-	
 </html>	

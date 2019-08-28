@@ -47,7 +47,7 @@
 									<li>
 										<a href="#step-3" class="disabled" data-ng-class="(selectedArea) ? 'selected' : 'disabled'" rel="3">
 											<span class="step_no">3</span>
-											<span class="step_descr">Selecione Área</span>
+											<span class="step_descr">Selecione ï¿½rea</span>
 										</a>
 									</li>
 									<li>
@@ -74,7 +74,7 @@
 					</div>
 					
 					<div class="row">      		           
-						<form class="form" name="userForm">
+						<form class="form" name="logForm">
 							<div class="col-md-12">									
 								<div class="col-md-2">
 									<jsp:include page="controls/companySelect.jsp"/>
@@ -156,18 +156,18 @@
 							
 								<div class="col-md-4">																															
 									<div class="col-md-3" style="padding-right: 2px !important;">	
-										<label style="margin-top: 5px !important;" title="Mostrando Máximo e Mí­nimo"><span class="icon fa fa-object-group"></span> Agrupar</label>
+										<label style="margin-top: 5px !important;" title="Mostrando Mï¿½ximo e Mï¿½ï¿½nimo"><span class="icon fa fa-object-group"></span> Agrupar</label>
 									</div>
 									<div class="col-md-9" style="padding-right: 5px; padding-left: 5px; background:gray; border-color:lightgray; border-radius: 2px 2px 2px 2px; color:white">
 											<div class="radio3 radio-check radio-success radio-inline">
 												<input type="radio" id="radio5" value="1" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(1)">
 												<label for="radio5">Nenhum</label>
 											</div>
-											<div class="radio3 radio-check radio-warning radio-inline" title="NOTE: Se houve mais de um tipo de alarme na HORA, apenas o maior será Exibido">
+											<div class="radio3 radio-check radio-warning radio-inline" title="NOTE: Se houve mais de um tipo de alarme na HORA, apenas o maior serï¿½ Exibido">
 												<input type="radio" id="radio6" value="2" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(2)">
 												<label for="radio6">Hora</label>
 											</div>
-											<div class="radio3 radio-check radio-default radio-inline" title="NOTE: Se houve mais de um tipo de alarme no DIA, apenas o maior será Exibido">
+											<div class="radio3 radio-check radio-default radio-inline" title="NOTE: Se houve mais de um tipo de alarme no DIA, apenas o maior serï¿½ Exibido">
 												<input type="radio" id="radio7" value="3" data-ng-model="tipoGrupo" data-ng-change="clearTipoGrupo(3)">
 												<label for="radio7">Dia</label>
 											</div>
@@ -178,7 +178,7 @@
 								
 								<div class="col-md-5" >									
 									<div class="col-md-3">
-										<label style="margin-top: 2px !important; padding-right: 5px !important;" title="Mostrando Máximo e Mínimo"><span class="icon fa fa-caret"></span>Exibir/Exportar</label>
+										<label style="margin-top: 2px !important; padding-right: 5px !important;" title="Mostrando Mï¿½ximo e Mï¿½nimo"><span class="icon fa fa-caret"></span>Exibir/Exportar</label>
 									</div>										        	
 									<div class="form-group">
 											<div class="col-md-3" style="padding-right: 5px !important;">
@@ -187,7 +187,7 @@
 											<span class="icon fa fa-file-text"></span> Relat&oacute;rio</button>
 										</div>
 										<div class="col-md-3" style="padding-right: 5px !important; padding-left: 5px !important;">
-											<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="Exportação Permitida até 500 Linhas" 
+											<button id="exportExcel" type="button" class="btn bg-olive btn-xs form-control" title="Exportaï¿½ï¿½o Permitida atï¿½ 500 Linhas" 
 												data-ng-class="((listHistoricInterval.list) && countHistoric <= 500) ? 'selected' : 'disabled'">
 											<span class="icon fa fa-file-excel-o"></span> Excel</button>
 										</div>
@@ -203,7 +203,7 @@
 							<hr style="margin-top: 5px !important; margin-bottom: 5px !important;">
 							
 							<div class="row">
-								<form class="form" name="userForm">						 		
+								<form class="form" name="logForm">						 		
 									
 									<div class="col-md-4">
 										<div class="form-group">
@@ -350,7 +350,7 @@
 													<th>Hora</th>	                      		
 													<th>M&aacute;ximo</th>
 													<th>Minimo</th>
-													<th>Média</th>
+													<th>Mï¿½dia</th>
 													<th>Soma</th>
 												</tr>
 											</thead>
@@ -482,11 +482,11 @@
 					<dd>{{findedCompanyDevice.alarmDto.name}} / {{findedCompanyDevice.alarmDto.unitMeter.symbol}}</dd>					
 				<dt>Range Max:</dt>
 					<dd><strong>{{selectedCompanyDetector.rangeMax}}</strong></dd>
-				<dt>Detecrição:</dt>
+				<dt>Detecriï¿½ï¿½o:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm1" class="alarm1"> {{findedCompanyDevice.alarmDto.alarm1}}</span></dd>							
 				<dt>Alerta:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm2" class="alarm2"> {{findedCompanyDevice.alarmDto.alarm2}}</span></dd>
-				<dt>Evacuação:</dt>
+				<dt>Evacuaï¿½ï¿½o:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm3" class="alarm3"> {{findedCompanyDevice.alarmDto.alarm3}}</span></dd>
 			</dl>		            
 			

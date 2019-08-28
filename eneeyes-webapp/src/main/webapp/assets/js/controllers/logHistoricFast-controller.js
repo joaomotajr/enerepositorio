@@ -4,11 +4,8 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 	$scope.countHistoric = 0;
 	var companyDetectors = [];
 	
-	function printData()
-	{
-	
-	   var divToPrint = document.getElementById("printTable");
-	   	   
+	function printData() {	
+	   var divToPrint = document.getElementById("printTable");	   	   
 	   divToPrint.style.visibility = "visible";	   
 	   newWin= window.open("");
 	   newWin.document.write(divToPrint.outerHTML);
@@ -71,10 +68,8 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 	});		
 
 	$scope.interval = $scope.enumInterval.UMA_HORA;
-
 	$scope.getHistorics = function(n) {
 		$scope.loading = true;
-
 		if($scope.interval == $scope.enumInterval.CUSTOM) {			
 			$scope.getHistoricInterval(n);
 		} else {			
@@ -85,8 +80,7 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 	$scope.getHistoricsPreDefined = function(n) {
 				
 		$scope.selectedPeriodo = setInterval($scope.interval);
-		$scope.selectedButton = $scope.interval;
-				
+		$scope.selectedButton = $scope.interval;				
 		if($scope.tipoGrupoF == 1)
 			$scope.listHistoricInterval = new HistoricFastViewerService.listInterval();
 		else if($scope.tipoGrupoF == 2)
@@ -97,9 +91,7 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDeviceId: $scope.selectedCompanyDetector.companyDeviceId, interval: $scope.interval
 		}, function(){
 			$timeout(function () {
-						
-			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list != null > 0 && $scope.listHistoricInterval.list.length > 0) {
-								
+			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list != null > 0 && $scope.listHistoricInterval.list.length > 0) {								
 				if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
 					$(function() { $('#btnSelDevice').click(); })  	
 			}			
@@ -111,10 +103,9 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 	$scope.getHistoricInterval = function(n) {		
 
 		var dataInicio = new Date($('#dateIn').data().DateTimePicker.date._d);
-		var dataFim = new Date($('#dateOut').data().DateTimePicker.date._d);		
-
+		var dataFim = new Date($('#dateOut').data().DateTimePicker.date._d);
 		if (dataFim < dataInicio) {			
-			$scope.daysDiff ="ATENï¿½ï¿½O! Data Final Precisa ser Maior que Inicial.";
+			$scope.daysDiff ="ATENÇÃO! Data Final Precisa ser Maior que Inicial.";
 			$("#snoAlertBox").fadeIn();			
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
 			daysExceed = true;
@@ -122,8 +113,7 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 		}
 
 		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' & ' + dataFim.toLocaleString();		
-		$scope.selectedButton = 100; 		
-		
+		$scope.selectedButton = 100;		
 		if($scope.tipoGrupoF == 1)			
 			$scope.listHistoricInterval = new HistoricFastViewerService.listIntervalDays();
 		else if($scope.tipoGrupoF == 2)
@@ -135,10 +125,8 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 			companyDeviceId: $scope.selectedCompanyDetector.companyDeviceId, 
 			dateIn: dataInicio,
 			dateOut: dataFim
-		}, function(){
-			
-			$scope.loading = false;			
-			
+		}, function() {			
+			$scope.loading = false;
 			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
 				$(function() { $('#btnSelDevice').click(); })     	
        });		
@@ -146,17 +134,17 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 		
 	function setInterval(interval) {		
 		if ( interval == $scope.enumInterval.UMA_HORA )
-			return  "ï¿½ltima Hora";
+			return  "Última Hora";
 		else if ( interval == $scope.enumInterval.SEIS_HORAS )
-			return "ï¿½ltimas Seis Horas";
+			return "Últimas Seis Horas";
 		else if ( interval == $scope.enumInterval.DOZE_HORAS )
-			return "ï¿½ltimas Doze Horas";
+			return "Últimas Doze Horas";
 		else if ( interval == $scope.enumInterval.DOIS_DIAS )
-			return "ï¿½ltimas Dois Dias";
+			return "Últimas Dois Dias";
 		else if ( interval == $scope.enumInterval.SETE_DIAS )
-			return "ï¿½ltimos Sete Dias";
+			return "Últimos Sete Dias";
 		else if ( interval == $scope.enumInterval.UM_MES )
-			return "ï¿½ltimo Mï¿½s";
+			return "Último Mês";
 		else 
 			return 'Desconhecido';				
 	}
@@ -201,8 +189,10 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 			}
 		});
 		if($scope.units.length==1) {
-			$scope.selectedUnit = $scope.units[0];
-			$scope.changeUnit();
+			$timeout(function () {
+				$scope.selectedUnit = $scope.units[0];
+				$scope.changeUnit();
+			}, 500);
 		}
 	};
 
@@ -228,8 +218,10 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 			}
 		});
 		if($scope.areas.length==1) {
-			$scope.selectedArea = $scope.areas[0];
-			$scope.changeArea();
+			$timeout(function () {				
+				$scope.selectedArea = $scope.areas[0];
+				$scope.changeArea();
+			}, 500);
 		}
 	};
 
@@ -255,8 +247,10 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 			}
 		});	
 		if($scope.companyDetectors.length==1) {
-			$scope.selectedCompanyDetector = $scope.companyDetectors[0];
-			$scope.changeCompanyDetector();
+			$timeout(function () {				
+				$scope.selectedCompanyDetector = $scope.companyDetectors[0];
+				$scope.changeCompanyDetector();
+			}, 500);
 		}	
 	};
 
@@ -293,13 +287,11 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 		$scope.count=0;
 	};
 	
-	$scope.showGrafico = function() {
-		
+	$scope.showGrafico = function() {		
 		if(! loadGoogleCharts) {				
 			google.charts.load('current', { 'packages': ['corechart', 'line'] });				
 			loadGoogleCharts = true;
-		}
-		
+		}		
 		google.charts.setOnLoadCallback(formatLineSensor);
 		$timeout(function () {
 			$('#modalGraficoHistorico').modal({ show: 'false' });
@@ -318,9 +310,9 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 			data.addColumn('number', 'Valor');
 		} else {
 			data.addColumn('string', 'Data');
-			data.addColumn('number', 'Mï¿½ximo');			
-			data.addColumn('number', 'Mï¿½nimo');
-			data.addColumn('number', 'Mï¿½dia');
+			data.addColumn('number', 'Máximo');			
+			data.addColumn('number', 'Mínimo');
+			data.addColumn('number', 'Média');
 			data.addColumn('number', 'Soma');
 		}
 
@@ -359,11 +351,11 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 	                      'fontSize': 9,
 	                  },
 		    		  ticks: [
-		    		          {v:0, f: 'Range Mï¿½ximo: 0' }, 
-		    		          {v: orange, f: 'Detecï¿½ï¿½o: ' + orange}, 
+		    		          {v:0, f: 'Range Máximo: 0' }, 
+		    		          {v: orange, f: 'Deteção: ' + orange}, 
 		    		          {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		          {v: red, f: 'Evacuaï¿½ï¿½o: ' + red}, 
-		    		          {v: $scope.selectedCompanyDetector.rangeMax, f: 'Range Mï¿½ximo: ' + $scope.selectedCompanyDetector.rangeMax}
+		    		          {v: red, f: 'Evacuação: ' + red}, 
+		    		          {v: $scope.selectedCompanyDetector.rangeMax, f: 'Range Máximo: ' + $scope.selectedCompanyDetector.rangeMax}
 		    		        ],
 		    	  },
 		    	  //curveType: 'function',

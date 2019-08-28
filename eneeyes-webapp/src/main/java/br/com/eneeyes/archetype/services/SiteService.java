@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * Created by JR on 24/04/17.
  */
@@ -78,6 +80,13 @@ public class SiteService {
 			String result = restTemplate.getForObject(url, String.class, params);
 			                                                 			
 			log.info(result.toString());
+			
+			SmsResult smsResult = new ObjectMapper().readValue(result, SmsResult.class);			
+			if (smsResult.getMessages().get(0).getStatus().getName().equalsIgnoreCase("REJECTED_NOT_ENOUGH_CREDITS")) {
+				log.warn("Falta de Credito");
+				throw new Exception("Falta de Credito");
+			}
+			
 			return true;
     	}
     	catch (Exception e) {

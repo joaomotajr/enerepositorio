@@ -30,8 +30,8 @@
 				<div class="box-body" style="padding-bottom: 0px; padding: 0px">
 					<div class="row">        		
 						<div class="col-md-12">
-							<div id="wizard" class="form_wizard wizard_horizontal">        		
-								<ul class="wizard_steps anchor">
+							<div id="wizard" class="form_wizard wizard_horizontal">								
+								<ul class="wizard_steps anchor" style="padding-inline-start:0px; margin-left: -15px;">									
 									<li>
 										<a href="#step-1" class="disabled" data-ng-class="(selectedCompany) ? 'selected' : 'disabled'" rel="1">
 											<span class="step_no">1</span>
@@ -53,13 +53,13 @@
 									<li>
 										<a href="#step-4" class="disabled" data-ng-class="(selectedCompanyDetector) ? 'selected' : 'disabled'" rel="4">
 											<span class="step_no">4</span>
-											<span class="step_descr">Selecione Detector</span>
+											<span class="step_descr">Selecione Dispositivo</span>
 										</a>
 									</li>
 									<li>
 										<a href="#step-5" class="disabled" data-ng-class="(selectedCompanyDetector) ? 'selected' : 'disabled'" rel="5">
 											<span class="step_no">5</span>
-											<span class="step_descr">Sensor/G&aacute;s</span>
+											<span class="step_descr">Tipo</span>
 										</a>
 									</li>
 									<li>
@@ -335,12 +335,10 @@
 							<div class="col-md-3">
 								<div class="row">
 									<div class="col-md-12">
-										<div class="box box-default">
-									
+										<div class="box box-default">									
 											<div class="box-header">
 												<strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{selectedCompanyDetector.detectorName}})
-											</div>
-											
+											</div>											
 											<div class="box-body">
 												<div class="col-md-12">
 													<div class="row">
@@ -348,12 +346,12 @@
 															
 															<div class="box-header with-border">
 																<i class="fa fa-bell-o"></i>
-																<h3 class="box-title">Sensor/Alarme:</h3>
+																<h3 class="box-title">Dispositivo/Alarme:</h3>
 															</div>
 															
 															<div class="box-body" style="border: darkgray; border-style: double;  background-color: transparent;">																																	
 																<dl class="dl-horizontal">
-																	<dt style="width: 90px">Sensor (nome):</dt>
+																	<dt style="width: 90px">Dispositivo (nome):</dt>
 																		<dd style="margin-left: 120px;">{{selectedCompanyDetector.sensorName}}</dd>
 																	<dt style="width: 90px">Alarme (nome):</dt>
 																		<dd style="margin-left: 120px;">{{findedCompanyDevice.alarmDto.name}}</dd>
@@ -484,11 +482,11 @@
 					<dd style="margin-left: 120px;"> {{findedCompanyDevice.alarmDto.unitMeter.symbol}}</dd>					
 				<dt>Range Max:</dt>
 					<dd><strong>{{selectedCompanyDetector.rangeMax}}</strong></dd>
-				<dt>Detecri&ccedil;&atilde;:</dt>
+				<dt>Alarme 1:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm1" class="alarm1"> {{findedCompanyDevice.alarmDto.alarm1}}</span></dd>							
-				<dt>Alerta:</dt>
+				<dt>Alarme 2:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm2" class="alarm2"> {{findedCompanyDevice.alarmDto.alarm2}}</span></dd>
-				<dt>Evacua&ccedil;&atilde;o:</dt>
+				<dt>Alarme 3:</dt>
 					<dd><span data-ng-show="ffindedCompanyDevice.alarmDto.alarm3" class="alarm3"> {{findedCompanyDevice.alarmDto.alarm3}}</span></dd>
 			</dl>			
 			<div class="panel-heading" style="text-align:center;font-size:1.5em"><strong>Dados do Per&iacute;odo:</strong> {{selectedPeriodo}}</div>			

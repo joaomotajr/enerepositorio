@@ -50,8 +50,8 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 		$scope.companyDetectors = '';
         $scope.findedCompanyDetector = '';
         $scope.listHistoricInterval = undefined;
-        $scope.dateIn = undefined;
-        $scope.dateOut = undefined;
+        $scope.dateInF = undefined;
+        $scope.dateOutF = undefined;
 		$scope.tipoGrupoF = 1;        			
 		$scope.countPages = 0;
 	};			
@@ -68,27 +68,28 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 	});		
 
 	$scope.interval = $scope.enumInterval.UMA_HORA;
-	$scope.getHistorics = function(n) {
+	$scope.getHistorics = function() {
 		$scope.loading = true;
 		if($scope.interval == $scope.enumInterval.CUSTOM) {			
-			$scope.getHistoricInterval(n);
+			$scope.getHistoricInterval();
 		} else {			
-			$scope.getHistoricsPreDefined(n);
+			$scope.getHistoricsPreDefined();
 		}
 	};
 	
-	$scope.getHistoricsPreDefined = function(n) {
-				
+	$scope.getHistoricsPreDefined = function() {				
 		$scope.selectedPeriodo = setInterval($scope.interval);
-		$scope.selectedButton = $scope.interval;				
+		$scope.selectedButton = $scope.interval;
 		if($scope.tipoGrupoF == 1)
-			$scope.listHistoricInterval = new HistoricFastViewerService.listInterval();
+			$scope.listHistoricInterval = new HistoricFastViewerService.listPreDefined();
 		else if($scope.tipoGrupoF == 2)
-			$scope.listHistoricInterval = new HistoricFastViewerService.listIntervalGroupHours();
+			$scope.listHistoricInterval = new HistoricFastViewerService.listPreDefinedGroupHours();
 		else if($scope.tipoGrupoF == 3)
-			$scope.listHistoricInterval = new HistoricFastViewerService.listIntervalGroupDays();		
+			$scope.listHistoricInterval = new HistoricFastViewerService.listPreDefinedGroupDays();		
 				
-		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), companyDeviceId: $scope.selectedCompanyDetector.companyDeviceId, interval: $scope.interval
+		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(), 
+			companyDeviceId: $scope.selectedCompanyDetector.companyDeviceId, 
+			interval: $scope.interval
 		}, function(){
 			$timeout(function () {
 			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list != null > 0 && $scope.listHistoricInterval.list.length > 0) {								
@@ -100,10 +101,9 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 		});		
 	};
 		
-	$scope.getHistoricInterval = function(n) {		
-
-		var dataInicio = new Date($('#dateIn').data().DateTimePicker.date._d);
-		var dataFim = new Date($('#dateOut').data().DateTimePicker.date._d);
+	$scope.getHistoricInterval = function() {
+		var dataInicio = new Date($('#dateInF').data().DateTimePicker.date._d);
+		var dataFim = new Date($('#dateOutF').data().DateTimePicker.date._d);
 		if (dataFim < dataInicio) {			
 			$scope.daysDiff ="ATENÇÃO! Data Final Precisa ser Maior que Inicial.";
 			$("#snoAlertBox").fadeIn();			
@@ -115,11 +115,11 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 		$scope.selectedPeriodo = dataInicio.toLocaleString() + ' & ' + dataFim.toLocaleString();		
 		$scope.selectedButton = 100;		
 		if($scope.tipoGrupoF == 1)			
-			$scope.listHistoricInterval = new HistoricFastViewerService.listIntervalDays();
+			$scope.listHistoricInterval = new HistoricFastViewerService.listInterval();
 		else if($scope.tipoGrupoF == 2)
-			$scope.listHistoricInterval = new HistoricFastViewerService.listIntervalDaysGroupHours();
+			$scope.listHistoricInterval = new HistoricFastViewerService.listIntervalGroupHours();
 		else if($scope.tipoGrupoF == 3)
-			$scope.listHistoricInterval = new HistoricFastViewerService.listIntervalDaysGroupDays();
+			$scope.listHistoricInterval = new HistoricFastViewerService.listIntervalGroupDays();
 				
 		$scope.listHistoricInterval.$historic({_csrf : angular.element('#_csrf').val(),			
 			companyDeviceId: $scope.selectedCompanyDetector.companyDeviceId, 
@@ -127,7 +127,7 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 			dateOut: dataFim
 		}, function() {			
 			$scope.loading = false;
-			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
+			if($scope.listHistoricInterval != null && $scope.listHistoricInterval.list && $scope.listHistoricInterval.list.length > 0 && ! $('#btnSelDevice').children('i').hasClass('fa-plus')) 
 				$(function() { $('#btnSelDevice').click(); })     	
        });		
 	};	
@@ -192,7 +192,7 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 			$timeout(function () {
 				$scope.selectedUnit = $scope.units[0];
 				$scope.changeUnit();
-			}, 500);
+			}, 200);
 		}
 	};
 
@@ -221,7 +221,7 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 			$timeout(function () {				
 				$scope.selectedArea = $scope.areas[0];
 				$scope.changeArea();
-			}, 500);
+			}, 200);
 		}
 	};
 
@@ -250,7 +250,7 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 			$timeout(function () {				
 				$scope.selectedCompanyDetector = $scope.companyDetectors[0];
 				$scope.changeCompanyDetector();
-			}, 500);
+			}, 200);
 		}	
 	};
 
@@ -294,8 +294,8 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 		}		
 		google.charts.setOnLoadCallback(formatLineSensor);
 		$timeout(function () {
-			$('#modalGraficoHistorico').modal({ show: 'false' });
-		}, 500);
+			$('#modalGraficoHistoricoF').modal({ show: 'false' });
+		}, 300);
 	};
 	
 	function formatLineSensor() {
@@ -401,46 +401,31 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
 	$scope.clearHistoric();
 	$scope.getCompanys();
 	$scope.getCompanyDetectors();
-	$scope.tipoGrupoF = 1;
-	
-	$scope.changeLenPage = function() {		
-		if($scope.lenPage < 0 || $scope.lenPage > 2000)
-			$scope.lenPageValid = false;
-		else
-			$scope.lenPageValid = true;
-		
-	};
-	
-	$scope.validLenPage = function(e) {
-		$scope.lenPage.replace(/[^\d].+/, "");		
-		if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-			e.preventDefault();
-	   }
-	}
+	$scope.tipoGrupoF = 1;	
 	
 	$timeout(function(){
 		angular.element('body').removeClass('loading');		
-		$('#dateIn').datetimepicker(
-				{ 	defaultDate: new Date(), 
-					format:'DD/MM/YYYY HH:mm:ss',
-					autoclose: true,
-		            language: 'br'
-				}
+		$('#dateInF').datetimepicker(
+			{ 	defaultDate: new Date(), 
+				format:'DD/MM/YYYY HH:mm:ss',
+				autoclose: false,
+				language: 'br'
+			}
 		);
-		$('#dateOut').datetimepicker(
+		$('#dateOutF').datetimepicker(
 			{ 	defaultDate: new Date(), 
 				format:'DD/MM/YYYY HH:mm:ss',
 				autoclose: true,
 	            language: 'br'
 			}
 		);		
-		$("#dateIn").on("dp.change",function (e) {
-	        $('#dateOut').data("DateTimePicker").setMinDate(e.date);
-	        $(this).data('DateTimePicker').hide();
+		$("#dateInF").on("dp.change",function (e) {
+	        $('#dateOutF').data("DateTimePicker").setMinDate(e.date);
+	        // $(this).data('DateTimePicker').hide();
 		});
-		$("#dateOut").on("dp.change",function (e) {
-	        $('#dateIn').data("DateTimePicker").setMaxDate(e.date);
-	        $(this).data('DateTimePicker').hide();
+		$("#dateOutF").on("dp.change",function (e) {
+	        $('#dateInF').data("DateTimePicker").setMaxDate(e.date);
+	        // $(this).data('DateTimePicker').hide();
 		});		
 	}, 500);	
 });

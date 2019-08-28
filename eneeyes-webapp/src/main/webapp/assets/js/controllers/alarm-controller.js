@@ -74,13 +74,13 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		$scope.inclusaoAlarm.$alarm({_csrf : angular.element('#_csrf').val()}, function() {         	
 			$timeout(function () {		
 				if (alarm.uid) {
-					$scope.clearFormAlarm();
-					$scope.getAlarms();
+					$scope.clearFormAlarm();					
 					angular.element('#modalAlarmEdit').modal('toggle');
-				} else {					
+				} else {
 					$scope.alarmUid	= $scope.inclusaoAlarm.t.uid;
-					$scope.changed = false;
+					$scope.changed = false;					
 				}
+				$scope.getAlarms();
 	            angular.element('body').removeClass('loading');				 
 	         }, 500);
 		});		 

@@ -38,8 +38,8 @@ public class QueueEmailView implements Serializable {
 
 	@Column(name = "email_status")
 	private EmailStatus emailStatus;
-
 	private String alarm_name;	
+	private String alarm_id;
 	private Long company_detector_id;
 	private String company_detector_name;
 	private String company_detector_local;
@@ -79,7 +79,7 @@ public class QueueEmailView implements Serializable {
 	private PerfilAlarm perfilAlarm3;
 	
 	@OneToMany(targetEntity = AlarmEmail.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="alarm_id")
+	@JoinColumn(name="alarm_id", referencedColumnName="alarm_id")
 	private Set<AlarmEmail> alarmEmails = new HashSet<AlarmEmail>();
 		
 	public Set<AlarmEmail> getAlarmEmails() {
@@ -102,6 +102,10 @@ public class QueueEmailView implements Serializable {
 		return alarm_name;
 	}
 
+	public String getAlarm_id() {
+		return alarm_id;
+	}
+	
 	public Long getCompany_detector_id() {
 		return company_detector_id;
 	}

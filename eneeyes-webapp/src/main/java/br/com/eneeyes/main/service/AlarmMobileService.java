@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
-import br.com.eneeyes.main.dto.AlarmEmailDto;
 import br.com.eneeyes.main.dto.AlarmMobileDto;
 import br.com.eneeyes.main.model.Alarm;
 import br.com.eneeyes.main.model.AlarmMobile;

@@ -22,28 +22,28 @@ public class HistoricViewerHourController {
 	@Autowired
 	HistoricHourViewerService service;	
 	
-	@RequestMapping(value = "/security/api/historicFastViewer/findByCompanyDeviceAndIntervalGroupHours/{companyDeviceId}/{intervalType}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/security/api/historicFastViewer/findByCompanyDevicePreDefinedGroupHours/{companyDeviceId}/{intervalType}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDeviceAndInterval(@PathVariable Long companyDeviceId,
+	public BasicResult<?> findByCompanyDevicePreDefined(@PathVariable Long companyDeviceId,
 			@PathVariable IntervalType intervalType) {
-		return service.findByCompanyDeviceAndInterval(companyDeviceId, intervalType);
+		return service.findByCompanyDevicePreDefined(companyDeviceId, intervalType);
 	}
 
-	@RequestMapping(value = "/security/api/historicFastViewer/findByCompanyDeviceAndIntervalDaysGroupHours/{companyDeviceId}/{dateIn}/{dateOut}", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/security/api/historicFastViewer/findByCompanyDeviceAndIntervalGroupHours/{companyDeviceId}/{dateIn}/{dateOut}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDeviceAndIntervalDays(@PathVariable Long companyDeviceId,
+	public BasicResult<?> findByCompanyDeviceAndIntervalGroupHours(@PathVariable Long companyDeviceId,
 			@PathVariable Date dateIn, @PathVariable Date dateOut) {
 
-		return service.findByCompanyDeviceAndIntervalhours(companyDeviceId, dateIn, dateOut);
+		return service.findByCompanyDeviceAndIntervalGroupHours(companyDeviceId, dateIn, dateOut);
 	}
 
 	@RequestMapping(value = "/security/api/historicFastViewer/findByCompanyDevicesInAndIntervalDaysGroupHours/{dateIn}/{dateOut}", 
 				method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDevicesInAndIntervalDays(@RequestBody UidDto companyDevices, @PathVariable Date dateIn, @PathVariable Date dateOut,
+	public BasicResult<?> findByCompanyDevicesInAndIntervalGroupHours(@RequestBody UidDto companyDevices, @PathVariable Date dateIn, @PathVariable Date dateOut,
 			@PathVariable Integer currentPage, @PathVariable Integer lenPage) {		
 		
-		return service.findByCompanyDevicesInAndIntervalHours(companyDevices, dateIn, dateOut);
+		return service.findByCompanyDevicesInAndIntervalGroupHours(companyDevices, dateIn, dateOut);
 
 	}	
 }

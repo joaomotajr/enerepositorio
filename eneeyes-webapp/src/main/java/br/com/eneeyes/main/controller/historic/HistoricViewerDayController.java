@@ -21,23 +21,22 @@ public class HistoricViewerDayController {
 	@Autowired
 	HistoricDayViewerService service;	
 
-	@RequestMapping(value="/security/api/historicFastViewer/findByCompanyDeviceAndIntervalGroupDays/{companyDeviceId}/{intervalType}",
+	@RequestMapping(value="/security/api/historicFastViewer/findByCompanyDevicePreDefinedGroupDays/{companyDeviceId}/{intervalType}",
 			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)                      
-	public BasicResult<?> findByCompanyDeviceAndInterval(		
+	public BasicResult<?> findByCompanyDevicePreDefined(		
 			@PathVariable Long companyDeviceId, 
 			@PathVariable IntervalType intervalType) {		
-		return service.findByCompanyDeviceAndInterval(companyDeviceId, intervalType);
+		return service.findByCompanyDevicePreDefined(companyDeviceId, intervalType);
 	}
 	
-	@RequestMapping(value="/security/api/historicFastViewer/findByCompanyDeviceAndIntervalDaysGroupDays/{companyDeviceId}/{dateIn}/{dateOut}", method=RequestMethod.GET, produces = "application/json")			
+	@RequestMapping(value="/security/api/historicFastViewer/findByCompanyDeviceAndIntervalGroupDays/{companyDeviceId}/{dateIn}/{dateOut}", method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)
-	public BasicResult<?> findByCompanyDeviceAndIntervalDays(		
+	public BasicResult<?> findByCompanyDeviceAndIntervalGroupDays(
 			@PathVariable Long companyDeviceId, 
 			@PathVariable Date dateIn, 
 			@PathVariable Date dateOut) {
 		
-		return service.findByCompanyDeviceAndIntervalDays(companyDeviceId, dateIn, dateOut);
+		return service.findByCompanyDeviceAndIntervalGroupDays(companyDeviceId, dateIn, dateOut);
 	}
-
 }

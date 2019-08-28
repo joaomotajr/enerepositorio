@@ -35,7 +35,7 @@ public class HistoricHourViewerService {
 	@Autowired
 	private HistoricDHourViewRepository repositoryD;
 	
-	public Result<?> findByCompanyDeviceAndInterval(Long companyDeviceId, IntervalType intervalType) {
+	public Result<?> findByCompanyDevicePreDefined(Long companyDeviceId, IntervalType intervalType) {
 		Result<IHistoricGroup> result = new Result<IHistoricGroup>();
 			
 		try {						
@@ -72,7 +72,7 @@ public class HistoricHourViewerService {
 	}
 
 	
-	public Result<?> findByCompanyDeviceAndIntervalhours(Long companyDeviceId, Date in, Date out) {
+	public Result<?> findByCompanyDeviceAndIntervalGroupHours(Long companyDeviceId, Date in, Date out) {
 		
 		Result<IHistoricGroup> result = new Result<IHistoricGroup>();
 		
@@ -107,8 +107,8 @@ public class HistoricHourViewerService {
 				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 				list.addAll(repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 				list.addAll(repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-			} else if(diffDaysIn <= 30) {
-				list = repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+//			} else if(diffDaysIn <= 30) {
+//				list = repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
 			} else {
 				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
 				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
@@ -116,6 +116,7 @@ public class HistoricHourViewerService {
 				list.addAll(repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));							
 				list.addAll(repositoryD.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 			}
+			result.setList(list);
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
@@ -124,9 +125,9 @@ public class HistoricHourViewerService {
 		return result;
 	}
 	
-	public Result<?> findByCompanyDevicesInAndIntervalHours(UidDto ids, Date in, Date out) {
+	public Result<?> findByCompanyDevicesInAndIntervalGroupHours(UidDto ids, Date in, Date out) {
 
-Result<IHistoricGroup> result = new Result<IHistoricGroup>();
+		Result<IHistoricGroup> result = new Result<IHistoricGroup>();
 		
 		try {
 		
@@ -162,8 +163,8 @@ Result<IHistoricGroup> result = new Result<IHistoricGroup>();
 				list.addAll(repositoryA.findByCompanyDeviceInAndLastUpdateBetween(companyDeviceIds, in, out));
 				list.addAll(repositoryB.findByCompanyDeviceInAndLastUpdateBetween(companyDeviceIds, in, out));
 				list.addAll(repositoryC.findByCompanyDeviceInAndLastUpdateBetween(companyDeviceIds, in, out));
-			} else if(diffDaysIn <= 30) {
-				list = repositoryC.findByCompanyDeviceInAndLastUpdateBetween(companyDeviceIds, in, out);
+//			} else if(diffDaysIn <= 30) {
+//				list = repositoryC.findByCompanyDeviceInAndLastUpdateBetween(companyDeviceIds, in, out);
 			} else {
 				list = repository.findByCompanyDeviceInAndLastUpdateBetween(companyDeviceIds, in, out);
 				list.addAll(repositoryA.findByCompanyDeviceInAndLastUpdateBetween(companyDeviceIds, in, out));
@@ -171,6 +172,7 @@ Result<IHistoricGroup> result = new Result<IHistoricGroup>();
 				list.addAll(repositoryC.findByCompanyDeviceInAndLastUpdateBetween(companyDeviceIds, in, out));							
 				list.addAll(repositoryD.findByCompanyDeviceInAndLastUpdateBetween(companyDeviceIds, in, out));
 			}
+			result.setList(list);
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());

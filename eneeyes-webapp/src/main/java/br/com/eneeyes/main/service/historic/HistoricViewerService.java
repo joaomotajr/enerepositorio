@@ -33,7 +33,7 @@ public class HistoricViewerService {
 	@Autowired
 	private HistoricDRepository repositoryD;
 	
-	public Result<?> findByCompanyDeviceAndInterval(Long companyDeviceId, IntervalType intervalType) {
+	public Result<?> findByCompanyDevicePreDefined(Long companyDeviceId, IntervalType intervalType) {
 		Result<IHistoric> result = new Result<IHistoric>();
 			
 		try {						
@@ -61,7 +61,7 @@ public class HistoricViewerService {
 				list.addAll(repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 				list.addAll(repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));				
 			}			
-			result.setList(list);			
+			result.setList(list);
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
@@ -70,7 +70,7 @@ public class HistoricViewerService {
 	}
 
 	
-	public Result<?> findByCompanyDeviceAndIntervalDays(Long companyDeviceId, Date in, Date out) {
+	public Result<?> findByCompanyDeviceAndInterval(Long companyDeviceId, Date in, Date out) {
 		
 		Result<IHistoric> result = new Result<IHistoric>();
 		
@@ -105,8 +105,8 @@ public class HistoricViewerService {
 				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 				list.addAll(repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 				list.addAll(repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-			} else if(diffDaysIn <= 30) {
-				list = repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+//			} else if(diffDaysIn <= 30) {
+//				list = repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
 			} else {
 				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
 				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
@@ -114,11 +114,11 @@ public class HistoricViewerService {
 				list.addAll(repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));							
 				list.addAll(repositoryD.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 			}
+			result.setList(list);
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
 		}		
-		
 		return result;
 	}
 

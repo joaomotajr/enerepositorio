@@ -12,6 +12,11 @@
 	.cursor {
 		cursor: pointer;
 	}	
+
+	.disableDiv {
+		pointer-events: none;
+		opacity: 0.8;
+	}
 </style>
 
 <div data-ng-controller="logHistoricFastController">
@@ -172,7 +177,7 @@
 									<div class="col-md-3">
 										<label style="margin-top: 2px !important; padding-right: 5px !important;" title="Mostrando Máximo e Mínimo"><span class="icon fa fa-caret"></span>Exibir/Exportar</label>
 									</div>										        	
-									<div class="form-group">
+									<div class="form-group" data-ng-class="{'disableDiv': selectedCompanyDetector.sensorName ? false : true}">
 											<div class="col-md-3" style="padding-right: 5px !important;">
 											<button id="exportRel" type="button" class="btn btn-default btn-xs form-control" 
 												data-ng-class="(listHistoricInterval.list) ? 'selected' : 'disabled'">
@@ -198,21 +203,21 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<label class="control-label">Buscar por Intervalos Pr&eacute;-Definidos: </label> <br />								
-											<div class="btn-group" role="group" aria-label="Basic example">
-													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 1}" 
-														data-ng-click="interval = enumInterval.UMA_HORA; getHistorics();" data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">1 hora</button>
-													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 6}" 
-														data-ng-click="interval = enumInterval.SEIS_HORAS; getHistorics();" data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">6h</button>
-													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 12}" 
-														data-ng-click="interval = enumInterval.DOZE_HORAS; getHistorics();"  data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true"> 12h</button>
-													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 24}" 
-														data-ng-click="interval = enumInterval.UM_DIA; getHistorics();"  data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">1 dia</button>
-													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 48}" 
-														data-ng-click="interval = enumInterval.DOIS_DIAS; getHistorics();"  data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">2d</button>
-													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 168}" 
-														data-ng-click="interval = enumInterval.SETE_DIAS; getHistorics();"  data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">7d</button>
-													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == 30}" 
-														data-ng-click="interval = enumInterval.UM_MES; getHistorics();" data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">30d</button>													
+											<div class="btn-group" role="group" aria-label="Basic example" data-ng-class="{'disableDiv': selectedCompanyDetector.sensorName ? false : true}">
+													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == enumInterval.UMA_HORA}" 
+														data-ng-click="interval = enumInterval.UMA_HORA; getHistorics();" data-ng-disabled="tipoGrupoF == 3">1 hora</button>
+													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == enumInterval.SEIS_HORAS}" 
+														data-ng-click="interval = enumInterval.SEIS_HORAS; getHistorics();" data-ng-disabled="tipoGrupoF == 3">6h</button>
+													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == enumInterval.DOZE_HORAS}" 
+														data-ng-click="interval = enumInterval.DOZE_HORAS; getHistorics();" data-ng-disabled="tipoGrupoF == 3"> 12h</button>
+													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == enumInterval.UM_DIA}" 
+														data-ng-click="interval = enumInterval.UM_DIA; getHistorics();" >1 dia</button>
+													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == enumInterval.DOIS_DIAS}" 
+														data-ng-click="interval = enumInterval.DOIS_DIAS; getHistorics();" >2d</button>
+													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == enumInterval.SETE_DIAS}" 
+														data-ng-click="interval = enumInterval.SETE_DIAS; getHistorics();" >7d</button>
+													<button type="button" class="btn btn-default" data-ng-class="{'btn-primary': selectedButton == enumInterval.UM_MES}" 
+														data-ng-click="interval = enumInterval.UM_MES; getHistorics();">30d</button>													
 											</div>
 										</div>
 									</div>
@@ -242,7 +247,7 @@
 									<div class="col-md-1">
 										<div class="form-group">
 											<label class="control-label">&nbsp;</label>
-											<button type="button" class="btn btn-default btn-sm form-control" data-ng-class="{'btn-primary': selectedButton == 100}" 
+											<button type="button" class="btn btn-default btn-sm form-control" data-ng-class="{'btn-primary': selectedButton == enumInterval.CUSTOM}" 
 												data-ng-click="interval = enumInterval.CUSTOM; getHistorics()" data-ng-disabled="(selectedCompanyDetector.sensorName) ? false : true">Buscar
 											</button>
 										</div>
@@ -304,7 +309,7 @@
 												</tr>
 											</thead>
 									</table>
-									<div style="max-height:420px; height:auto; overflow: auto">				
+									<div style="max-height:500px; height:auto; overflow: auto">				
 										<table data-ng-if="tipoGrupoF==1" class='zui-table' width="100%">							
 											<tbody>		
 												<div data-ng-show='loading' class="overlay"><i class="fa fa-refresh fa-spin"></i></div>												
@@ -349,7 +354,10 @@
 										</table>
 										<p data-ng-hide="listHistoricInterval == undefined || listHistoricInterval.list.length > 0 || loading" class="text-center">NENHUM REGISTRO</p>										
 									</div>                                                         	            
-								</div>								
+								</div>
+								<div class="col-md-2">
+									<span data-ng-show="listHistoricInterval.list && listHistoricInterval.list.length > 0"> Linhas: {{listHistoricInterval.list.length}} </span>
+								</div>
 							</div>
 																			
 						</div>

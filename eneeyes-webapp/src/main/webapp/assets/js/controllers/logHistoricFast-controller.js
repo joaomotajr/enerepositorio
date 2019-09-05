@@ -53,7 +53,7 @@ app.controller('logHistoricFastController', function ($scope, $timeout, CompanyS
         $scope.dateInF = undefined;
         $scope.dateOutF = undefined;
 		$scope.tipoGrupoF = 1;        			
-		$scope.countPages = 0;
+		$scope.selectedButton  = undefined;
 	};			
 
 	$scope.enumInterval = ({

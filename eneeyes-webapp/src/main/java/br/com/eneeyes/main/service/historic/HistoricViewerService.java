@@ -46,20 +46,20 @@ public class HistoricViewerService {
 				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
 			}
 			else if(intervalType ==  IntervalType.SEIS_HORAS || intervalType ==  IntervalType.DOZE_HORAS || intervalType ==  IntervalType.UM_DIA) {				
-				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
-				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+				list = repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 			}
 			else if(intervalType ==  IntervalType.DOIS_DIAS || intervalType ==  IntervalType.SETE_DIAS) {
-				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+				list = repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
 				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-				list.addAll(repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 			}
 			else if(intervalType ==  IntervalType.UM_MES) {																	
 				in = Util.addMonth(out, -1);
-				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
-				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+				list = repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
 				list.addAll(repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-				list.addAll(repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));				
+				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));				
 			}			
 			result.setList(list);
 		} catch (Exception e) {
@@ -85,34 +85,32 @@ public class HistoricViewerService {
 			
 			List<IHistoric> list = null;
 			if(diffHoursIn <= 24) {								
-				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
-				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));				
+				list = repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));				
 			} else if (diffDaysIn > 30 && diffDaysOut > 30) {
 				list = repositoryD.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);				
 			} else if (diffDaysIn <= 2 && diffDaysOut <= 2) {
-				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
-				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+				list = repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 			} else if (diffDaysIn <= 7 && diffDaysOut <= 7) {
-				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+				list = repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
 				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-				list.addAll(repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 			} else if(diffDaysIn <= 7) {
-				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+				list = repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
 				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-				list.addAll(repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 			} else if (diffDaysIn > 7 && diffDaysIn <= 30 && diffDaysOut > 7 && diffDaysOut <= 30) {
-				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
-				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+				list = repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
 				list.addAll(repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-				list.addAll(repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-//			} else if(diffDaysIn <= 30) {
-//				list = repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 			} else {
-				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
-				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+				list = repositoryD.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+				list.addAll(repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 				list.addAll(repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-				list.addAll(repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));							
-				list.addAll(repositoryD.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));							
+				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 			}
 			result.setList(list);
 		} catch (Exception e) {

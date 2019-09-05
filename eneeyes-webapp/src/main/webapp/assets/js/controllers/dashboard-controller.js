@@ -68,7 +68,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					value: $scope.sumary.normal.value,
 			    color: "#00a65a",
 			    highlight: "#00a65a",
-			    label: "Operação"
+			    label: "Operaï¿½ï¿½o"
 			  }, {
 					value: $scope.sumary.offLine.value,
 		      color: "#333",
@@ -78,7 +78,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					value: $scope.sumary.alarm3.value,
 		      color: "#dd4b39",
 		      highlight: "#dd4b39",
-		      label: "Evacução"
+		      label: "Evacuï¿½ï¿½o"
 		    }, {
 					value: $scope.sumary.alarm2.value,
 		      color: "#f39c12",
@@ -88,7 +88,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					value: $scope.sumary.alarm1.value,
 		      color: "#d2d6de",
 		      highlight: "#d2d6de",
-		      label: "Detecção"
+		      label: "Detecï¿½ï¿½o"
 		    }, {
 					value: $scope.sumary.turnOff.value,
 		      highlight: "#72afd2",
@@ -220,7 +220,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 	$interval(function() {
 		if($scope.$root == null) return;
 		
-		if($scope.$root.currentPage == "Dashboard" && $scope.$root.errorTimes <= 5) {
+		if($scope.$root.currentPage == "Dashboard" && $scope.$root.errorTimes <= 5 && !$scope.loading) {
 			$scope.getCompaniesPosition();  		
 		}
 	}, 10000);

@@ -11,10 +11,12 @@ import br.com.eneeyes.archetype.utils.Util;
 import br.com.eneeyes.main.dto.register.UidDto;
 import br.com.eneeyes.main.model.enums.IntervalType;
 import br.com.eneeyes.main.model.historic.IHistoricGroup;
+import br.com.eneeyes.main.model.historic.hour.HistoricHourView;
 import br.com.eneeyes.main.repository.historic.hour.HistoricAHourViewRepository;
 import br.com.eneeyes.main.repository.historic.hour.HistoricBHourViewRepository;
 import br.com.eneeyes.main.repository.historic.hour.HistoricCHourViewRepository;
 import br.com.eneeyes.main.repository.historic.hour.HistoricDHourViewRepository;
+import br.com.eneeyes.main.repository.historic.hour.HistoricGroupHourViewRepository;
 import br.com.eneeyes.main.repository.historic.hour.HistoricHourViewRepository;
 import br.com.eneeyes.main.result.Result;
 
@@ -35,34 +37,51 @@ public class HistoricHourViewerService {
 	@Autowired
 	private HistoricDHourViewRepository repositoryD;
 	
+	@Autowired
+	private HistoricGroupHourViewRepository repositoryGroup; 
+		
 	public Result<?> findByCompanyDevicePreDefined(Long companyDeviceId, IntervalType intervalType) {
-		Result<IHistoricGroup> result = new Result<IHistoricGroup>();
+		Result<HistoricHourView> result = new Result<HistoricHourView>();
 			
 		try {						
 			Date out = new Date(); 
 			Date in = new Date(out.getTime() - (1000 * 60 * 60 * intervalType.getValue()));								
 			
-			List<IHistoricGroup> list = null;
+			List<HistoricHourView> list = null;
 			
+//			if(intervalType ==  IntervalType.UMA_HORA) {				
+//				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+//			}
+//			else if(intervalType ==  IntervalType.SEIS_HORAS || intervalType ==  IntervalType.DOZE_HORAS || intervalType ==  IntervalType.UM_DIA) {
+//								
+//				list = repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+//				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+//			}
+//			else if(intervalType ==  IntervalType.DOIS_DIAS || intervalType ==  IntervalType.SETE_DIAS) {
+//				list = repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+//				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+//				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+//			}
+//			else if(intervalType ==  IntervalType.UM_MES) {																	
+//				in = Util.addMonth(out, -1);
+//				list = repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+//				list.addAll(repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+//				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+//				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));				
+//			}			
 			if(intervalType ==  IntervalType.UMA_HORA) {				
-				list = repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+				list = repositoryGroup.findByCompanyDeviceIdAndLastUpdateBetweenH(companyDeviceId, in, out);
 			}
-			else if(intervalType ==  IntervalType.SEIS_HORAS || intervalType ==  IntervalType.DOZE_HORAS || intervalType ==  IntervalType.UM_DIA) {				
-				list = repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
-				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+			else if(intervalType ==  IntervalType.SEIS_HORAS || intervalType ==  IntervalType.DOZE_HORAS || intervalType ==  IntervalType.UM_DIA) {								
+				list = repositoryGroup.findByCompanyDeviceIdAndLastUpdateBetweenHA(companyDeviceId, in, out);
 			}
 			else if(intervalType ==  IntervalType.DOIS_DIAS || intervalType ==  IntervalType.SETE_DIAS) {
-				list = repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
-				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+				list = repositoryGroup.findByCompanyDeviceIdAndLastUpdateBetweenHAB(companyDeviceId, in, out);
 			}
 			else if(intervalType ==  IntervalType.UM_MES) {																	
 				in = Util.addMonth(out, -1);
-				list = repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
-				list.addAll(repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));				
-			}			
+				list = repositoryGroup.findByCompanyDeviceIdAndLastUpdateBetweenHABC(companyDeviceId, in, out);								
+			}
 			result.setList(list);			
 		} catch (Exception e) {
 			result.setIsError(true);

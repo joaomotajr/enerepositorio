@@ -23,7 +23,7 @@ public class HistoricViewerController {
 	@RequestMapping(value="/security/api/historicFastViewer/findByCompanyDevicePreDefined/{companyDeviceId}/{intervalType}", 
 			method=RequestMethod.GET, produces = "application/json")			
 	@ResponseStatus(HttpStatus.OK)                      
-	public Result<?> findByCompanyDeviceAndInterval(
+	public Result<?> findByCompanyDevicePreDefined(
 			@PathVariable Long companyDeviceId, 
 			@PathVariable IntervalType intervalType) {		
 		return service.findByCompanyDevicePreDefined(companyDeviceId, intervalType);

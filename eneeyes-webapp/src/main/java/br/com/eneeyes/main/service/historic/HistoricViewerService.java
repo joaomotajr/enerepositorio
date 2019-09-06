@@ -84,23 +84,23 @@ public class HistoricViewerService {
 			int diffDaysOut = (int) ((date.getTime() - out.getTime()) / (1000 * 60 * 60 * 24));
 			
 			List<IHistoric> list = null;
-			if(diffHoursIn <= 24) {								
+			if (diffDaysIn <= 1 && diffDaysOut <= 1 && diffHoursIn <= 24) {
 				list = repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
 				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));				
 			} else if (diffDaysIn > 30 && diffDaysOut > 30) {
 				list = repositoryD.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);				
-			} else if (diffDaysIn <= 2 && diffDaysOut <= 2) {
-				list = repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
-				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+//			} else if (diffDaysIn <= 2 && diffDaysOut <= 2) {
+//				list = repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+//				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 			} else if (diffDaysIn <= 7 && diffDaysOut <= 7) {
 				list = repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
 				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-			} else if(diffDaysIn <= 7) {
-				list = repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
-				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
-			} else if (diffDaysIn > 7 && diffDaysIn <= 30 && diffDaysOut > 7 && diffDaysOut <= 30) {
+//			} else if(diffDaysIn <= 7) {
+//				list = repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
+//				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+//				list.addAll(repository.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
+			} else if (diffDaysIn <= 30 && diffDaysOut <= 30) {
 				list = repositoryC.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out);
 				list.addAll(repositoryB.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));
 				list.addAll(repositoryA.findByCompanyDeviceIdAndLastUpdateBetween(companyDeviceId, in, out));

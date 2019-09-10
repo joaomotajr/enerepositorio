@@ -274,9 +274,7 @@
 														<div class="box-body" style="border: darkgray; border-style: double;  background-color: transparent;">																																
 															<dl class="dl-horizontal">
 																<dt>Dipositivo (tipo):</dt>
-																	<dd>{{selectedCompanyDetector.sensorName}}</dd>
-																<dt>Identificação:</dt>
-																	<dd>{{selectedCompanyDetector.companyDeviceId}}</dd>
+																	<dd>{{selectedCompanyDetector.sensorName}}</dd>																
 																<dt>Alarme (nome):</dt>
 																	<dd>{{findedCompanyDevice.alarmDto.name}}</dd>
 																<dt>Unidade:</dt>

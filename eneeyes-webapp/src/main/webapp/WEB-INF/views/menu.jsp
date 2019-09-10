@@ -30,7 +30,7 @@
 	                	<i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">
-						<li><a href="#" data-ng-if="isFrom=='MASTER'" data-ng-click="LoadAjaxContent('logHistoric.html', 'Log-Detectores')"><i class="fas fa-file-signature"></i> Log Dispositivos (old)</a></li>
+						<!-- <li><a href="#" data-ng-if="isFrom=='MASTER'" data-ng-click="LoadAjaxContent('logHistoric.html', 'Log-Detectores')"><i class="fas fa-file-signature"></i> Log Dispositivos (old)</a></li> -->
 						<li><a href="#" data-ng-click="LoadAjaxContent('logHistoricFast.html', 'Log-Dispositivos')"><i class="fas fa-file-signature"></i><span> Log Dispositivos</span>
 							<span class="label label-success pull-right">Novo</span>
 						</a></li>

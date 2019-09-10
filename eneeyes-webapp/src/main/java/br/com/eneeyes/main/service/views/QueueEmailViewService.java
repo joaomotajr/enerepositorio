@@ -43,11 +43,9 @@ public class QueueEmailViewService {
 	}
 	
 	public List<QueueEmailView> findAll() {
-		List<QueueEmailView> lista = null;
-		
+		List<QueueEmailView> lista = null;		
 		try {
-			 lista = repository.findAll();	
-			
+			 lista = repository.findAllJoined();			
 		} catch (Exception e) {
 			
 			e.printStackTrace();

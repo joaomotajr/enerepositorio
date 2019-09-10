@@ -1,8 +1,11 @@
 package br.com.eneeyes.main.service.views;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
@@ -42,12 +45,29 @@ public class QueueSmsViewService {
 		
 	}
 	
-	public List<QueueSmsView> findAll() {
-		List<QueueSmsView> lista = null;
+	public List<QueueSmsView> findAllLimit() {
 		
+		List<QueueSmsView> lista = new ArrayList<>();		
 		try {
-			 lista = repository.findAll();	
+			Page<QueueSmsView> page = null;
+			page = repository.findAll(new PageRequest(1, 2));			 
+			if (page != null) {				 
+				for (QueueSmsView item : page) {
+					lista.add(item);
+				}
+			}			
+		} catch (Exception e) {
 			
+			e.printStackTrace();
+		}
+		
+		return lista;
+	}
+	
+	public List<QueueSmsView> findAll() {
+		List<QueueSmsView> lista = null;		
+		try {
+			 lista = repository.findAllJoined();			
 		} catch (Exception e) {
 			
 			e.printStackTrace();

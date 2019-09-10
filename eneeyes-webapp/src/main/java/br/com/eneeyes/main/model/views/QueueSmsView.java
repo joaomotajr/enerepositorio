@@ -3,7 +3,6 @@ package br.com.eneeyes.main.model.views;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,8 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Null;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Subselect;
 
 import br.com.eneeyes.main.model.AlarmMobile;
@@ -64,22 +64,21 @@ public class QueueSmsView implements Serializable {
 	private String unitMeterSymbol;
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="PERFIL_ALARM_ID1", nullable = false)
+	@JoinColumn(name="PERFIL_ALARM_ID1", nullable = false)	
 	private PerfilAlarm perfilAlarm1;	
 		
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="PERFIL_ALARM_ID2")
-	@Null
+	@JoinColumn(name="PERFIL_ALARM_ID2", nullable = true)	
 	private PerfilAlarm perfilAlarm2;
 		
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="PERFIL_ALARM_ID3")
-	@Null
+	@JoinColumn(name="PERFIL_ALARM_ID3", nullable = true)	
 	private PerfilAlarm perfilAlarm3;
 	
 	@OneToMany(targetEntity = AlarmMobile.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="alarm_id", referencedColumnName="alarm_id")
-	private Set<AlarmMobile> alarmMobiles = new HashSet<AlarmMobile>();
+	@Fetch(FetchMode.JOIN)
+	private Set<AlarmMobile> alarmMobiles;
 		
 	public Set<AlarmMobile> getAlarmMobiles() {
 		return alarmMobiles;

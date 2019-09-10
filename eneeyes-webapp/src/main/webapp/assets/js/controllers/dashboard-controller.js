@@ -18,6 +18,7 @@ app.filter('dashCompaniesPositionFilter', function () {
 app.controller('dashController', function ($scope, $timeout, $interval, $filter, ViewService, UserService) {
 
 	firstTime = true;
+	$scope.loading = undefined;
 	
 	$scope.orderOptions = "none";
 	$scope.row = "ASC";

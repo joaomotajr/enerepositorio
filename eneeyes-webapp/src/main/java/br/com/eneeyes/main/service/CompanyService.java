@@ -79,17 +79,12 @@ public class CompanyService implements IService<CompanyDto> {
 		
 		try {
 			List<Company> lista = repository.findAll();
-
-			if (lista != null) {
-				
-				List<CompanyDto> dto = new ArrayList<CompanyDto>();
-				
+			if (lista != null) {				
+				List<CompanyDto> dto = new ArrayList<CompanyDto>();				
 				for (Company company   : lista) {					
 					dto.add(new CompanyDto(company) );
-				}
-				
-				result.setList(dto);
-				
+				}				
+				result.setList(dto);				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
@@ -100,10 +95,8 @@ public class CompanyService implements IService<CompanyDto> {
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
-		}
-		
-		return result;	
-
+		}		
+		return result;
 	}
 	
 	public Result<?> listAllView() {
@@ -165,11 +158,8 @@ public class CompanyService implements IService<CompanyDto> {
 		
 		try {
 			Company item = repository.findOne(uid);
-
-			if (item != null) {
-				
-				result.setEntity(new CompanyDto(item));
-				
+			if (item != null) {				
+				result.setEntity(new CompanyDto(item));				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {

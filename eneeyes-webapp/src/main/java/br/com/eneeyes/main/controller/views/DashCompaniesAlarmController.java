@@ -21,12 +21,21 @@ public class DashCompaniesAlarmController {
 	@RequestMapping(value = "/security/api/view/allDashCompaniesAlarm", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public BasicResult<?> allDashCompaniesAlarm() {
-		User user = SigninUtils.principal();
-		
+		User user = SigninUtils.principal();		
 		if(user.getCompany()  == null)		
 			return service.listAll();
 		else
 			return service.listByCompanyId(user.getCompany().getUid());
+	}
+	
+	@RequestMapping(value = "/security/api/view/allDashCompaniesAlarmByAlarms", method = RequestMethod.GET, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> allDashCompaniesAlarmByAlarmStatus() {
+		User user = SigninUtils.principal();		
+		if(user.getCompany()  == null)		
+			return service.listByAlarms();
+		else
+			return service.listByCompanyIdAndAlarms(user.getCompany().getUid());
 	}
 
 }

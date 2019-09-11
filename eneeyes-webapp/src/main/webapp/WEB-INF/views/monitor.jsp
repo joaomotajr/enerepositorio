@@ -184,7 +184,7 @@
        		</div>       		       		
        		
     	</div>    
-    	
+    	<!--
     	<div class="row">					
 			
 			<div class="col-md-6" style="font-size: 8px !important;">
@@ -264,10 +264,8 @@
 						</div>						
 					</div>							
 				</div>
-			</div>
-				
-    	</div>
-    	
+			</div>				
+    	</div> -->
 		<div id="modalAction" class="modal">                
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">                            
@@ -317,15 +315,14 @@
 														</dd>
 													<dt>Data/Hora Ultima Medi&ccedil;&atilde;o: </dt>
 														<dd>
-															{{selectedPositionAlarm.last_update_full  | date:'yyyy-MM-dd HH:mm:ss'}}  
+															{{selectedPositionAlarm.last_update_full  | date:'yyyy-MM-dd HH:mm:ss'}} {{(selectedPositionAlarm.last_update)}} 
 														</dd>														
 													<dt>Artefato/Medi&ccedil;&atilde;o: </dt>															
 														<dd>															
-															<span data-ng-if="selectedPositionAlarm.deviceType.type!='DETECTOR'">{{selectedPositionAlarm.deviceType.description}}</span>
+															<span data-ng-if="selectedPositionAlarm.deviceType.type!='DETECTOR'">{{selectedPositionAlarm.deviceDescription}}</span>
 															<span data-ng-if="selectedPositionAlarm.deviceType.type=='DETECTOR'">Gás: {{selectedPositionAlarm.gasName}}</span>
-															<span data-ng-if="selectedPositionAlarm.last_value>0">
-																| Medi&ccedil;&atilde;o: {{selectedPositionAlarm.last_value}}
-																<span style="vertical-align:super;font-size:0.5em"> {{selectedPositionAlarm.unitMeter.symbol}}</span>																
+															<span> {{selectedPositionAlarm.last_value}}
+																<span style="vertical-align:super;font-size:0.5em"> {{selectedPositionAlarm.unitMeterSymbol}}</span>																
 															</span>
 														</dd>													
 							                  	</dl>								                	

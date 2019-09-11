@@ -21,7 +21,10 @@ app.factory('ViewService', function($resource){
         }),
         listAllDashCompaniesAlarm : $resource('/security/api/view/allDashCompaniesAlarm',{},{
         	view : {method : 'GET'}
-        }),               
+        }),
+        listAllDashCompaniesAlarmByAlarms : $resource('/security/api/view/allDashCompaniesAlarmByAlarms/', {},{
+        	view : {method : 'GET'}
+        }),
         listAlarmCompanyDeviceView : $resource('/security/api/view/findAlarmCompanyDeviceViewByAlarmId/:alarmId/', {alarmId: '@alarmId'},{        
         	view : {method : 'GET'}
         }),

@@ -216,7 +216,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 	$scope.refreshDashboard = function() { 
 		$scope.getCompaniesPosition();		
 		$scope.pesquisaUser();
-	}
+	};
 
 	$interval(function() {
 		if($scope.$root == null) return;

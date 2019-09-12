@@ -10,7 +10,7 @@ import br.com.eneeyes.main.model.views.DashCompaniesPosition;
 
 public interface DashCompaniesPositionRepository extends JpaRepository<DashCompaniesPosition, Long> {
 	
-	@Query("select d from DashCompaniesPosition d LEFT JOIN FETCH d.positionHistoricView")
+	@Query("select distinct d from DashCompaniesPosition d INNER JOIN FETCH d.positionHistoricView")
 	public List<DashCompaniesPosition> findAll();
 	
 	@Query("select d from DashCompaniesPosition d where d.companyId = ?1")

@@ -15,6 +15,6 @@ public interface QueueSmsViewRepository extends JpaRepository<QueueSmsView, Long
 
 	public Page<QueueSmsView> findAll(Pageable pageable);
 	
-	@Query("select q from QueueSmsView q LEFT JOIN FETCH q.alarmMobiles LEFT JOIN FETCH q.perfilAlarm1 LEFT JOIN FETCH q.perfilAlarm2 LEFT JOIN FETCH q.perfilAlarm3")
+	@Query("select DISTINCT q from QueueSmsView q LEFT JOIN FETCH q.alarmMobiles LEFT JOIN FETCH q.perfilAlarm1 LEFT JOIN FETCH q.perfilAlarm2 LEFT JOIN FETCH q.perfilAlarm3")
 	public List<QueueSmsView> findAllJoined();	
 }

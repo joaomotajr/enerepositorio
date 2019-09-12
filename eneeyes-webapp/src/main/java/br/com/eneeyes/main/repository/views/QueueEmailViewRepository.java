@@ -1,3 +1,4 @@
+
 package br.com.eneeyes.main.repository.views;
 
 import java.util.List;
@@ -13,6 +14,6 @@ public interface QueueEmailViewRepository extends JpaRepository<QueueEmailView, 
 	
 public Page<QueueEmailView> findAll(Pageable pageable);
 	
-	@Query("select q from QueueEmailView q LEFT JOIN FETCH q.alarmEmails LEFT JOIN FETCH q.perfilAlarm1 LEFT JOIN FETCH q.perfilAlarm2 LEFT JOIN FETCH q.perfilAlarm3")
+	@Query("select DISTINCT q from QueueEmailView q LEFT JOIN FETCH q.alarmEmails LEFT JOIN FETCH q.perfilAlarm1 LEFT JOIN FETCH q.perfilAlarm2 LEFT JOIN FETCH q.perfilAlarm3")
 	public List<QueueEmailView> findAllJoined();	
 }

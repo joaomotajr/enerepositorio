@@ -266,8 +266,9 @@
 								<div class="box-header with-border">
 									<label><strong>&Uacute;ltimas medi&ccedil;&otilde;es</strong></label>
 									<div class="box-tools pull-right">									
-										<label data-ng-show='loading'>Loading ...</label>		
-										<button class="btn btn-box-tool" data-ng-click="refreshDashboard();"><i title="Refresh" class="fa fa-refresh"></i></button>		
+										<label data-ng-show='loading'><i title="Atualizando" class="fa fa-refresh fa-spin"></i></label>
+										
+										<!-- <button class="btn btn-box-tool" data-ng-click="refreshDashboard();"><i title="Refresh" class="fa fa-refresh fa-spin"></i></button>		 -->
 										<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 									</div>
 								</div>								
@@ -277,7 +278,7 @@
 											<table class="table table-bordered" style="font-size:95%;">
 												<thead>
 													<tr>														
-														<th style="text-align:center; vertical-align: middle;">&nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;</th>
+														<th class="cursor" data-ng-click="refreshDashboard();" style="text-align:center; vertical-align: middle;">&nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;</th>
 														<th>ID</th>
 														<th>
 															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('companyName')">

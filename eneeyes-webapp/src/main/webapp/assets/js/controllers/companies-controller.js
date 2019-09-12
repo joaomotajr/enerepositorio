@@ -40,16 +40,14 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 	 }	
 		
 	$('#selCompany').on('change', function () {		
-		if ($(this).val() == null || $(this).val() == "" )
-		{
+		if ($(this).val() == null || $(this).val() == "" ) {
 			$scope.clearFormCompany();			
 		} else {			
 			$scope.getOneCompany($(this).val());
 		}	    		
 	});
 	
-	$scope.getOneCompany = function(companyId) {
-		 
+	$scope.getOneCompany = function(companyId) {		 
 		 $scope.listOne = new CompanyService.listOne();		 
 		 $scope.listOne.$company({_csrf : angular.element('#_csrf').val(), id : companyId}, function() {			 
 			 $scope.selectedCompany = $scope.listOne.t;			 
@@ -58,7 +56,7 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 			 $scope.companyDescription = $scope.selectedCompany.description;
 			 $scope.companyImage = ($scope.selectedCompany.image == null ? "/assets/img/cover.jpg" :  $scope.selectedCompany.image);
 	    });		 
-	}
+	};
 	
 	$scope.selCompany = function() {
 				
@@ -191,12 +189,10 @@ app.controller('companiesController', function ($scope, $timeout, $interval, $fi
 		return device;
 	 }
 	 
-	 $scope.getCompanys = function() {
-		 
+	 $scope.getCompanys = function() {		 
 		 if($scope.$root.isFrom != "MASTER") {		 
 			 $scope.getOneCompany($scope.$root.isFrom);
-		 }
-		 else {		
+		 } else {		
 			 $scope.resultCompanies = new CompanyService.listAllView();		 
 			 	$scope.resultCompanies.$company({_csrf : angular.element('#_csrf').val()}, function(){			
 				 $scope.companies = $scope.resultCompanies.list;

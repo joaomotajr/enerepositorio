@@ -17,11 +17,10 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
 			elementLoaded.play();
 	};
 	
-	$scope.getCompaniesAlarm = function() {
-		
+	$scope.getCompaniesAlarm = function() {		
 		$scope.loading = true;		                                                    
 		$scope.listAllDashCompaniesAlarm = new ViewService.listAllDashCompaniesAlarmByAlarms();		 
-		$scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function(){
+		$scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function() {
 			
 			if(!$scope.listAllDashCompaniesAlarm.list) {
 				$scope.loading = false;	
@@ -51,15 +50,13 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
 			positionAlarmDto: { uid: $scope.selectedPositionAlarm.uid },
 			userDto : {id : $scope.$root.userId}			
 		};
-
 		$scope.inclusaoPositionAlarmMessage = new PositionAlarmMessageService.save(positionAlarmMessage);
 		$scope.inclusaoPositionAlarmMessage.$positionAlarmMessage({_csrf : angular.element('#_csrf').val()}, function() {				
 			$scope.getCompaniesAlarm(); 
 		});
 	}
 	
-	$scope.getPositionAlarmMessage = function(positionAlarmId) {
-						 
+	$scope.getPositionAlarmMessage = function(positionAlarmId) {						 
 		$scope.inclusaoPositionAlarmMessage = new PositionAlarmMessageService.listByPositionAlarmId(positionAlarmId);
 		$scope.inclusaoPositionAlarmMessage.$positionAlarmMessage({_csrf : angular.element('#_csrf').val(), id : positionAlarmId }, function() {		
 			$scope.selectedPositionAlarm.messages = $scope.inclusaoPositionAlarmMessage.list;						 
@@ -96,19 +93,17 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
         }, 200);		
 	};
 	
-	$scope.updateAlarmStatus = function(status) {
-		
+	$scope.updateAlarmStatus = function(status) {		
 		$scope.updateStatus = new PositionAlarmService.updateStatus();				 
 		$scope.updateStatus.$positionAlarm({_csrf : angular.element('#_csrf').val(), alarmStatus : status, uid: $scope.selectedPositionAlarm.uid}, function() {
-			$scope.getCompaniesAlarm(); 
+			$scope.getCompaniesAlarm();
 		});		 
 	};
 			
 	$scope.getCompaniesAlarm();
 	    
     $interval(function() {
-    	if($scope.$root == null) return;
-    	
+    	if($scope.$root == null) return;    	
     	if($scope.$root.errorTimes <= 5 && !$scope.loading) {
     		$scope.getCompaniesAlarm();    		
     	}

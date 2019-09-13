@@ -35,7 +35,7 @@
 							<span class="label label-success pull-right">Novo</span>
 						</a></li>
 						<li><a href="#" data-ng-click="LoadAjaxContent('logHistoricAlarm.html', 'Log-Alarmes')"><i class="fas fa-file-audio"></i> Log Alarmes</a></li>
-						<li><a href="#" data-ng-click="LoadAjaxContent('logAnalytical.html', 'Analise-Comparativa')"><i class="fas fa-shekel-sign"></i> Análise Comparativa</a></li>
+						<li><a href="#" data-ng-click="LoadAjaxContent('logAnalytical.html', 'Analise-Comparativa')"><i class="fas fa-shekel-sign"></i> An&Aacute;lise Comparativa</a></li>
 	              	</ul>
 	            </li>	            
 	            <li class="treeview">
@@ -44,16 +44,16 @@
 	                <i class="fa fa-angle-left pull-right"></i>
 	              	</a>
 	            	<ul class="treeview-menu">
-		            	<li><a href="#" data-ng-click="LoadAjaxContent('monitor.html', 'Monitoramennto')"><i class="fa fa-eye text-yellow"></i><span>Monitoramento de Alarmes</span></a>
+		            	<li><a href="#" data-ng-click="LoadAjaxContent('monitor.html', 'Monitoramennto')"><i class="fa fa-eye text-yellow"></i><span>Alarmes</span></a>
 		            	</li>		            		
 		            	<li class="treeview" data-ng-if="isFrom=='MASTER'">
-			            	<a href="#" data-ng-click="LoadNewWindow('Analisador-Cen&aacute;rios')"><i class="fa fa-cog"></i><span>Analisador de Cen&aacute;rios</span></a>
+			            	<a href="#" data-ng-click="LoadNewWindow('Simulador')"><i class="fa fa-cog"></i><span>Simulador</span></a>
 			            </li>			            
 			            <li class="treeview">
 			            	<a href="#" data-ng-click="LoadAjaxContent('logAlarm.html', 'Alarmes-Reportados')"><i class="fa fa-list-alt text-blue"></i><span>Alarmes Reportados</span></a>
 						</li>
 						<li class="treeview">
-			            	<a href="#" data-ng-click="LoadAjaxContent('logAuditoria.html', 'Auditoria')"><i class="fa fa-arrows-alt text-blue"></i><span>Auditoria do Sistema</span></a>
+			            	<a href="#" data-ng-click="LoadAjaxContent('logAuditoria.html', 'Auditoria')"><i class="fa fa-arrows-alt text-blue"></i><span>Auditoria</span></a>
 	            		</li>
 	              	</ul>
 				</li>
@@ -83,8 +83,7 @@
 			            <li><a href="#" data-ng-click="LoadAjaxContent('alarms.html', 'Alarmes')"><i class="fa fa-bullhorn text-red"></i> Alarmes</a></li>
 			            <li><a href="#" data-ng-click="LoadAjaxContent('companyDetectorMaintenance.html', 'Detectores-Calibra&ccedil;&atilde;o')"><i class="fa fa-retweet text-muted"></i> Manuten&ccedil;&atilde;o</a></li>                		
 		     		</ul>
-            	</li>
-	            
+            	</li>	            
 	        </ul>
         </section>        
 	</aside>

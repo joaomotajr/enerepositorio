@@ -285,7 +285,13 @@
 																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
 																	data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'companyName' && orderOptions != '-companyName'}"></i>
 															</span>Empresa
-														</th>														
+														</th>
+														<th>
+															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('areaName')">
+																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
+																	data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'areaName' && orderOptions != '-areaName'}"></i>
+															</span>&Aacute;rea
+														</th>
 														<th>
 															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('companyDeviceName')">
 																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
@@ -309,8 +315,9 @@
 													<tr data-ng-repeat="item in dashCompaniesPositionFiltered = (dashCompaniesPosition | dashCompaniesPositionFilter: selectedStatusDashCompaniesPosition) | orderBy: orderOptions">
 														<td style="text-align:center; vertical-align: middle; color: #575757;">&nbsp;&nbsp;<i class="fa" data-ng-class="item.deviceSymbol" ></i>&nbsp;&nbsp;</td>
 														<td data-ng-bind="item.uid"></td>
-														<td><span data-truncate="12" data-value="{{item.companyName}}"></span></td>														
-														<td>{{item.companyDeviceName}}</td>														
+														<td><span data-truncate="12" data-value="{{item.companyName}}"></span></td>
+														<td><span data-truncate="12" data-value="{{item.areaName}}"></span></td>														
+														<td>{{item.companyDeviceName}}</td>
 														<td>
 															<jsp:include page="controls/reduzMeters.jsp"/>
 														</td>													
@@ -341,7 +348,6 @@
 									</div>									
 								</div>
 							</div>
-
 						</div>
 							
 						<div class="col-md-4">

@@ -19,7 +19,8 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
 	
 	$scope.getCompaniesAlarm = function() {
 		
-		$scope.loading = true;		                                                    
+		$scope.loading = true;
+		$scope.dashCompaniesAlarm = [];
 		$scope.listAllDashCompaniesAlarm = new ViewService.listAllDashCompaniesAlarmByAlarms();		 
 		$scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function(){
 			

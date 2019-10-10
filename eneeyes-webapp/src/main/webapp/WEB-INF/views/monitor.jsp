@@ -102,7 +102,6 @@
        		</div>
     	
     		<div class="col-md-6" style="font-size: 8px !important;">
-
 				<div class="box box-warning">
 					<div class="box-header with-border">
 						<h5 class="box-title">Alarmes Em An&aacute;lise</h5>

@@ -38,8 +38,7 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	public BasicResult<?> save(CompanyDetectorDto dto) {
 		LogResult<CompanyDetectorDto> result = new LogResult<CompanyDetectorDto>();		
 		
-		CompanyDevice companyDevice = companyDeviceRepository.findOne(dto.getCompanyDeviceDto().getUid());
-		
+		CompanyDevice companyDevice = companyDeviceRepository.findOne(dto.getCompanyDeviceDto().getUid());		
 		CompanyDetector companyDetector = new CompanyDetector(dto);
 		companyDetector.setCompanyDevice(companyDevice);				
 		companyDetector = repository.save(companyDetector);		
@@ -74,8 +73,7 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 
 	public BasicResult<?> delete(Long uid) {
 				
-		LogResult<CompanyDetectorDto> result = new LogResult<CompanyDetectorDto>(); 	
-				
+		LogResult<CompanyDetectorDto> result = new LogResult<CompanyDetectorDto>();				
 		try {		
 			repository.delete(uid);
 			
@@ -95,15 +93,13 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 
 	public Result<?> listAll() {
 		
-		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>(); 	
-		
+		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();		
 		try {
 			List<CompanyDetector> lista = repository.findAll();
 
 			if (lista != null) {
 				
-				List<CompanyDetectorDto> dto = new ArrayList<CompanyDetectorDto>();
-				
+				List<CompanyDetectorDto> dto = new ArrayList<CompanyDetectorDto>();				
 				for (CompanyDetector companyDetector   : lista) {					
 					dto.add(new CompanyDetectorDto(companyDetector));
 				}
@@ -127,8 +123,7 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 
 	public Result<?> findOne(Long uid) {
 		
-		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();
-		
+		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();		
 		try {
 			CompanyDetector item = repository.findOne(uid);
 
@@ -152,11 +147,9 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	
 	public Result<?> findByCompanyDevice(Long uid) {
 		
-	Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();;
-		
+		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();		
 		try {			
 			CompanyDetector item = repository.findByCompanyDeviceUid(uid);
-
 			if (item != null) {
 				result.setEntity(new CompanyDetectorDto(item));				
 				result.setResultType( ResultMessageType.SUCCESS );
@@ -189,22 +182,17 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 	
 	public BasicResult<?> findByArea(Long uid) {
 		
-		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>(); 	
-		
+		Result<CompanyDetectorDto> result = new Result<CompanyDetectorDto>();		
 		try {
 			
-			List<CompanyDevice> companyDevice = companyDeviceRepository.findCompanyDeviceByAreaId(uid);
-			
+			List<CompanyDevice> companyDevice = companyDeviceRepository.findCompanyDeviceByAreaId(uid);			
 			List<CompanyDetector> lista = repository.findByCompanyDeviceIn(companyDevice);
-
-			if (lista != null) {
-				
-				List<CompanyDetectorDto> dto = new ArrayList<CompanyDetectorDto>();
-				
+			
+			if (lista != null) {				
+				List<CompanyDetectorDto> dto = new ArrayList<CompanyDetectorDto>();				
 				for (CompanyDetector companyDetector   : lista) {					
 					dto.add(new CompanyDetectorDto(companyDetector));
-				}
-								
+				}								
 				result.setList(dto);
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
@@ -222,12 +210,8 @@ public class CompanyDetectorService implements IService<CompanyDetectorDto> {
 
 	}
 	
-	public List<CompanyDetector> findByAreaId(Long uid) {
-			
-		List<CompanyDevice> companyDevice = companyDeviceRepository.findCompanyDeviceByAreaId(uid);
-		
+	public List<CompanyDetector> findByAreaId(Long uid) {			
+		List<CompanyDevice> companyDevice = companyDeviceRepository.findCompanyDeviceByAreaId(uid);		
 		return repository.findByCompanyDeviceIn(companyDevice);
-
 	}
-
 }

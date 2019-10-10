@@ -1,11 +1,13 @@
 package br.com.eneeyes.main.service.views;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.eneeyes.archetype.web.result.ResultMessageType;
+import br.com.eneeyes.main.dto.views.AreaCompanyDeviceViewDto;
 import br.com.eneeyes.main.model.views.AreaCompanyDeviceView;
 import br.com.eneeyes.main.repository.views.AreaCompanyDeviceViewRepository;
 import br.com.eneeyes.main.result.Result;
@@ -17,12 +19,16 @@ public class AreaCompanyDeviceViewService {
 	private AreaCompanyDeviceViewRepository repository;
 	
 	public Result<?> listByAreaId(Long areaId) {		
-		Result<AreaCompanyDeviceView> result = new Result<AreaCompanyDeviceView>();		
+		Result<AreaCompanyDeviceViewDto> result = new Result<>();		
 		try {
 			List<AreaCompanyDeviceView> lista = repository.findByAreaId(areaId);
 
-			if (lista != null) {				
-				result.setList(lista);				
+			if (lista != null) {
+				List<AreaCompanyDeviceViewDto> dto = new ArrayList<>();				
+				for (AreaCompanyDeviceView areaCompanyDeviceView : lista) {					
+					dto.add(new AreaCompanyDeviceViewDto(areaCompanyDeviceView));
+				}				
+				result.setList(dto);				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {

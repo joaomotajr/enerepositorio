@@ -161,10 +161,10 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 		var itens;
 		var limit = 0;
 		$('.easy-marker').remove();		
-		if($scope.selectedArea.companyDevicesDto.length > 0) {			
+		if($scope.CompanyDevices.length > 0) {			
 	    	itens = getDetectorsCoordinates();	    	
 	    	$timeout(function () {	    		
-	    		limit = $scope.selectedCompanyDetectorsArea.length;
+	    		limit = $scope.CompanyDevices.length;
 	    	}, 300);
 	    	
 	    	$timeout(function () {           
@@ -187,7 +187,7 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 	
 	getDetectorsCoordinates = function() {				
 		var pinItensString = "";				
-		var item = $scope.selectedCompanyDetectorsArea;
+		var item = $scope.CompanyDevices;
 		for (var i = 0; i < item.length; i++) {	    				
 			var pinItem = ({
 					content: item[i].name,
@@ -216,21 +216,15 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 	   });
    	}
 
-	/* ------------------------------------- Inicio Processamento --------------------------------------------*/
-	
-	if($scope.$root.selecteds.unitIndex != undefined) {
-		
+	/* ------------------------------------- Inicio Processamento --------------------------------------------*/	
+	if($scope.$root.selecteds.unitIndex != undefined) {		
 		$scope.selectedUnit = {};
 		$scope.selectedArea = {};	
 		angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex], $scope.selectedUnit);
-		angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex], $scope.selectedArea);
-	
+		angular.copy($scope.$root.selectedCompany.unitsDto[$scope.$root.selecteds.unitIndex].areasDto[$scope.$root.selecteds.areaIndex], $scope.selectedArea);	
 		getCompanyDevices($scope.selectedArea.uid);
-		// $scope.getCompanyDetectorArea();
-
 		$scope.btnNewArea = true;
 		$scope.getDeviceTypes();
 		$scope.initializeArea();
-	}
-		
+	}		
 });

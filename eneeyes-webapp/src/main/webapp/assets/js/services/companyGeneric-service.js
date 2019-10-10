@@ -16,9 +16,6 @@ app.factory('CompanyGenericService', function($resource){
         }),   
 	    listPorCompanyDevice : $resource('/security/api/companyGeneric/obtemPorCompanyDevice/:id', {id: '@id'},{
 	    	companyGeneric : {method : 'GET'}
-	    }),    
-	    listPorAreaId : $resource('/security/api/companyGeneric/obtemPorAreaId/:id', {id: '@id'},{
-	    	companyGeneric : {method : 'GET'}
 	    }),
         save : $resource('/security/api/companyGeneric/save',{},{
         	companyGeneric : {method : 'POST'}

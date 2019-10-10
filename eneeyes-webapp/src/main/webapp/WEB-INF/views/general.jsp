@@ -184,20 +184,34 @@
 																	<br>	
 																	<ul class="list-group">																		
 																		<li class="list-group-item" style="padding: 3px 10px; font-size: 1.2em">
-																			<label>Alarme Associado:</label><span class="pull-right">{{item.alarmName}}</span><span class="pull-right" data-ng-if="!item.alarmOn">Nenhum</span>
+																			<label>Alarme Associado:</label>																			
+																			<span class="pull-right">{{item.alarmName}}</span>																			
+																			<span class="pull-right" data-ng-if="!item.alarmName">Nenhum</span>																			
 																		</li>
-																		<li class="list-group-item list-group-item-secondary" style="padding: 2px 10px;" title="{{item.perfilAlarm1.description}}">																			
+																		<li data-ng-if="item.alarm1" class="list-group-item list-group-item-secondary" style="padding: 2px 10px;" title="{{item.perfilAlarm1.description}}">																			
 																			<span class="badge" data-ng-if="item.alarm11 || item.alarm11==0"><i class="fa fa-angle-left"></i> {{item.alarm11}} {{item.unitMeter.symbol}}</span>
-																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm1}} {{item.unitMeter.symbol}}</span>
+																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm1}} {{item.unitMeter.symbol}}</span>																			
 																				<i data-ng-class="item.perfilAlarm1.symbol"></i> {{item.perfilAlarm1.type}}
-																		</li>
-																		<li class="list-group-item list-group-item-warning" style="padding: 2px 10px;" title="{{item.perfilAlarm2.description}}">
-																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm2}} {{item.unitMeter.symbol}}</span> 
+																		</li>																		
+																		<li data-ng-if="item.alarm2" class="list-group-item list-group-item-warning" style="padding: 2px 10px;" title="{{item.perfilAlarm2.description}}">
+																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm2}} {{item.unitMeter.symbol}}</span>
 																				<i data-ng-class="item.perfilAlarm2.symbol"></i> {{item.perfilAlarm2.type}}
-																		</li>
-																		<li class="list-group-item list-group-item-danger" style="padding: 2px 10px;" title="{{item.perfilAlarm3.description}}">
-																			<span class="badge"><i class="fa fa-angle-right"></i> {{item.alarm3}} {{item.unitMeter.symbol}}</span>
+																		</li>																		
+																		<li data-ng-if="item.alarm3" class="list-group-item list-group-item-danger" style="padding: 2px 10px;" title="{{item.perfilAlarm3.description}}">
+																				<i class="fa fa-angle-right"></i><span class="badge"> {{item.alarm3}} {{item.unitMeter.symbol}}</span>																			
 																				<i data-ng-class="item.perfilAlarm3.symbol"></i> {{item.perfilAlarm3.type}}
+																		</li>
+																		<li data-ng-if="!item.alarm1" class="list-group-item list-group-item-secondary" style="padding: 2px 10px;">
+																			<span class="badge">?</span>
+																				<i data-ng-class="item.perfilAlarm1.symbol"></i> Nivel I
+																		</li>
+																		<li data-ng-if="!item.alarm2" class="list-group-item list-group-item-warning" style="padding: 2px 10px;">
+																			<span class="badge">?</span>
+																				<i data-ng-class="item.perfilAlarm1.symbol"></i> Nivel II
+																		</li>
+																		<li data-ng-if="!item.alarm3" class="list-group-item list-group-item-danger" style="padding: 2px 10px;">
+																			<span class="badge">?</span>
+																				<i data-ng-class="item.perfilAlarm1.symbol"></i> Nivel III
 																		</li>
 																	</ul>
 																</div>

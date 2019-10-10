@@ -148,8 +148,8 @@
 							<div class="row">
 								<div class="col-md-2">								
 									<div class="box box-primary direct-chat direct-chat-primary">
-										<div class="direct-chat-msg right" ng-repeat="item in selectedCompanyDetectorsArea">			                      
-				                      		<img class="direct-chat-img" ng-src="{{item.detectorDto.image}}" style="width: auto ! important; height: 30px ! important ; max-height: 30px ! important;">
+										<div class="direct-chat-msg right" ng-repeat="item in CompanyDevices">			                      
+				                      		<img class="direct-chat-img" ng-src="{{item.image}}" style="width: auto ! important; height: 30px ! important ; max-height: 30px ! important;" >
 				                      		<div class="direct-chat-text" style="font-size: 0.7em; margin-right: 40px;"  >
 				                        		{{item.name}}
 				                      		</div>
@@ -174,7 +174,7 @@
 				       	
 				       	<div class="tab-pane" id="tabArea_3">				       					       					       		 
 				       		<div class="row">			       		 
-				       		 	<div ng-repeat="item in selectedCompanyDetectorsArea">										
+				       		 	<div ng-repeat="item in CompanyDevices">										
 					              	
 					            	  	<div class="col-md-3">
 							              	<div class="panel panel-primary">								                
@@ -183,17 +183,17 @@
 											   	</div>											   					               	
 								               	<div class="panel-body">							            					                 										                	
 													<div class="row">								                	
-														<img class="profile-user-img img-responsive imgDetector" style="margin: 0 auto" 
-														data-ng-src="{{item.detectorDto.image}}" onError="this.src='/assets/img/cover.jpg'">												
+														<img data-ng-if="item.image" class="profile-user-img img-responsive imgDetector" style="margin: 0 auto" data-ng-src="{{item.image}}" onError="this.src='/assets/img/cover.jpg'">
+														<img data-ng-if="!item.image" class="profile-user-img img-responsive imgDetector" style="margin: 0 auto" data-ng-src="/assets/img/cover.jpg">
 						                			</div>								                				                				                
 								                	<div class="row">							                    				                    				                    
 									                	<div>									                	
 									                    	<div class="description-block">																
-									                      		<h4 class="description-header"><i class="fa fa-bolt"></i> {{item.detectorDto.sensorDto.name}}</h4>
-									                      		<span class="description-text">Range: Min|Man: {{item.detectorDto.sensorDto.rangeMin}} | {{item.detectorDto.sensorDto.rangeMax}} </span>
+									                      		<h4 class="description-header"><i class="fa fa-bolt"></i> {{item.name}}</h4>
+									                      		<span class="description-text">Range: Min|Man: {{item.rangeMin}} | {{item.rangeMax}} </span>
 																<br>
-																G&aacute;s: <strong class="text-navy">{{item.detectorDto.sensorDto.gasDto.name}}</strong>																
-																<span style="vertical-align:super;font-size:0.6em;color:orange"> {{item.detectorDto.sensorDto.unitMeter.symbol}}</span>																
+																<!-- G&aacute;s: <strong class="text-navy">Gás</strong>																
+																<span style="vertical-align:super;font-size:0.6em;color:orange"> {{item.unitMeter.symbol}}</span>-->
 										                	</div>									                    					                    
 									                    </div>						                    					                    					                					                  			                  
 									                </div>					                

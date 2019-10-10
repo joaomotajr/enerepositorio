@@ -2,11 +2,18 @@ package br.com.eneeyes.main.model.views;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Subselect;
+
+import br.com.eneeyes.main.model.state.UnitMeter;
 
 @Entity
 @Subselect("select * from area_companydevice_view")
@@ -25,16 +32,15 @@ public class AreaCompanyDeviceView implements Serializable {
 	private Long areaId;
 	
 	@Column(name = "company_device_id")
-	private Long companyDeviceId;
-		
-	@Column(name = "company_device_name")
-	private String companyDetectorName;
+	private Long companyDeviceId;	
 	
-	@Column(name = "company_device_local")
-	private String companyDeviceLocal;
+	private String name;
+	
+	@Column(name = "local")
+	private String local;
 	
 	@Column(name = "device_name")
-	private String DeviceName;
+	private String deviceName;
 	
 	@Column(name = "range_max")
 	private Double rangeMax;
@@ -47,6 +53,14 @@ public class AreaCompanyDeviceView implements Serializable {
 	
 	@Column(name = "longitude")
 	private Double longitude;
+	
+	@Lob
+	@Column(name = "IMAGE", nullable = true)
+	byte[] image;
+	
+	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name="UNIT_METER_ID", nullable = false)
+	private UnitMeter unitMeter;
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -64,16 +78,16 @@ public class AreaCompanyDeviceView implements Serializable {
 		return companyDeviceId;
 	}
 
-	public String getCompanyDetectorName() {
-		return companyDetectorName;
+	public String getName() {
+		return name;
 	}
 
-	public String getCompanyDeviceLocal() {
-		return companyDeviceLocal;
+	public String getLocal() {
+		return local;
 	}
 
 	public String getDeviceName() {
-		return DeviceName;
+		return deviceName;
 	}
 
 	public Double getRangeMax() {
@@ -90,5 +104,13 @@ public class AreaCompanyDeviceView implements Serializable {
 
 	public Double getLongitude() {
 		return longitude;
-	}	
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public UnitMeter getUnitMeter() {
+		return unitMeter;
+	} 	
 }

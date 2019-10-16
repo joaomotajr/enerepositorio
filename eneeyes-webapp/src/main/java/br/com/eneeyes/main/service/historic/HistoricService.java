@@ -189,7 +189,7 @@ public ResultMessage saveByPositionRetroIOT(Long uid, String strValue, Long date
 			processAlarmService.Execute(historic);
 			
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Unidade Gravada com Sucesso.");
+			result.setMessage("Histórico Gravado com Sucesso.");
 			
 		} catch (Exception e) {
 			result.setResultType( ResultMessageType.ERROR );

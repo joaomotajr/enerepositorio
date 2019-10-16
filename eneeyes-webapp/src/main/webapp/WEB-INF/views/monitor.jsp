@@ -24,13 +24,11 @@
 				<div class="box box-danger">
 					<div class="box-header with-border">
 						<h5 class="box-title">Alarmes Pendentes</h5>
-						<div class="box-tools pull-right">						
-							
+						<div class="box-tools pull-right">							
 							<label data-ng-show='loading'>Loading ...</label>		
 							<button class="btn btn-box-tool" data-widget="collapse">
 								<i class="fa fa-minus"></i>
-							</button>
-							
+							</button>							
 						</div>
 					</div>									
 
@@ -229,7 +227,7 @@
 														</dd>
 													<dt>Data/Hora Ultima Medi&ccedil;&atilde;o: </dt>
 														<dd>
-															{{selectedPositionAlarm.last_update_full  | date:'yyyy-MM-dd HH:mm:ss'}} {{(selectedPositionAlarm.last_update)}} 
+															{{selectedPositionAlarm.last_update_full  | date:'yyyy-MM-dd HH:mm:ss'}} ({{ selectedPositionAlarm.last_update}})
 														</dd>														
 													<dt>Artefato/Medi&ccedil;&atilde;o: </dt>															
 														<dd>															

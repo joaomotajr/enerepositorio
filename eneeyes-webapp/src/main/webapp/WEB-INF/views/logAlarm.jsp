@@ -1,51 +1,40 @@
 <div data-ng-controller="logAlarmController">    
 	<div class="row">
-		<div class="col-md-12">
-		
+		<div class="col-md-12">		
 			<div class="box box-primary">						
-				<div class="box-header with-border"><strong style="font-size:1.4em">Logs de Alarmes</strong></div>
-				
+				<div class="box-header with-border"><strong style="font-size:1.4em">Logs de Alarmes</strong>
+				<a href="#" class="text-muted pull-right" data-ng-click="getCompaniesAlarm();"><i title="Refresh" class="fa fa-refresh"></i></a>
+				</div>
 				<div class="box-body">
-					<div class="col-md-12">
-					
+					<div class="col-md-12">					
 						<div id="tableExample">
 						    <div>						        
-						        <table id='idDatatable' data-datatable data-options="dataTableOptions" data-items="dashCompaniesAlarm"></table>
-						      						        
+						        <table id='idDatatable' data-datatable data-options="dataTableOptions" data-items="dashCompaniesAlarm"></table>						      						        
 						    </div>
-						</div>										
-						
-					</div>		
-				</div>		
-				
+						</div>
+					</div>
+				</div>				
 			</div>	
-	
 		</div>
-	</div>	
+	</div>
 	
 	<div id="modalShowMessages" class="modal">                
 		<div class="modal-dialog" role="document">
-			<div class="modal-content">                            
-				
+			<div class="modal-content">				
 					<div class="modal-content">                            
-					<div class="modal-body"style="padding-bottom: 0px; !important">
-					
+					<div class="modal-body"style="padding-bottom: 0px; !important">					
 						<div class="panel panel-default">
 							<div class="panel-heading" style="text-align:center;font-size:1.5em">
 								<strong>Historico do Alarme</strong>														
 							</div>														                                                                           
-						</div>
-											
-						<div class="box box-primary" style="padding-bottom: 8px !important; margin-bottom: 8px !important;">
-							
+						</div>											
+						<div class="box box-primary" style="padding-bottom: 8px !important; margin-bottom: 8px !important;">							
 							<div class="box-header">
 								<h3 class="box-title">Dados do Dispositivo e Alarme</h3>							
-								<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
-							</div>		
-										
+								<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>								
+							</div>										
 							<div class="box-body" style="padding-bottom: 0px !important">
-								<form class="form" name="userForm">		
-								
+								<form class="form" name="userForm">								
 									<div class="row">											
 										<div class="col-md-12">
 										
@@ -116,7 +105,13 @@
 														<dd>
 															<span data-ng-if="selectedPositionAlarm.action" style="color: gray" title="Aviso de SMS não Habilitado"> {{selectedPositionAlarm.action}}</span>
 														</dd>	
-																							
+													<dt>Status do Alarme: </dt>
+														<dd>
+															<span data-ng-if="selectedPositionAlarm.alarmStatus=='AUTO'" class="icon fa fa-bell" style="color: green" title="Alarme encerrado automaticamente"> AUTO (Encerrado após normalização)</span>
+															<span data-ng-if="selectedPositionAlarm.alarmStatus=='CREATED'" class="icon fa fa-bell-slash" style="color: red" title="Alarme não Tratado" >REPORTADO (Ainda não tratado)</span>
+															<span data-ng-if="selectedPositionAlarm.alarmStatus=='READED'" class="icon fa fa-exclamation" style="color: ORANGE" title="Alarme em Análise" >CHECADO (Em análise)</span>
+															<span data-ng-if="selectedPositionAlarm.alarmStatus=='SOLVED'" class="icon fa fa-bell" style="color: BLUE" title="Alarme Resolvido"> RESOLVIDO (Encerrado pelo Monitoramento)</span>
+														</dd>											
 							                  	</dl>								                	
 								            </div>
 								            

@@ -32,7 +32,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
 			for(var i = 0; i < $scope.listAllDashCompaniesAlarm.list.length; i++) {				
 				$scope.dashCompaniesAlarm[i] = $scope.listAllDashCompaniesAlarm.list[i];
 				$scope.dashCompaniesAlarm[i].last_update_full = $scope.listAllDashCompaniesAlarm.list[i].last_update;
-				$scope.dashCompaniesAlarm[i].last_update = timeSince($scope.listAllDashCompaniesAlarm.list[i].last_update);				 
+				$scope.dashCompaniesAlarm[i].last_update = timeSinceLocal($scope.listAllDashCompaniesAlarm.list[i].last_update);				 
 				$scope.dashCompaniesAlarm[i].last_value	 = Math.round($scope.listAllDashCompaniesAlarm.list[i].last_value * 100) / 100 ;
 				$scope.dashCompaniesAlarm[i].index = i; 
 			

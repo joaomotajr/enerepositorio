@@ -72,7 +72,7 @@ app.controller('logAlarmController', function ($scope, $timeout, $filter, ViewSe
 		
 			$scope.selectedPositionAlarmMessages = $scope.inclusaoPositionAlarmMessage.list;						 
 		});
-	}
+	};
    
    $scope.getCompaniesAlarm();
 

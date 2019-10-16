@@ -23,4 +23,16 @@ public interface AlarmRepository extends JpaRepository<Alarm, Long> {
 	@Query("select u from Alarm u where u.company.uid = ?1")
 	public List<Alarm> findByCompanyId(Long companyId);
 	
+	@Query("select DISTINCT a from Alarm a "
+			+ "LEFT JOIN FETCH a.alarmEmails "
+			+ "LEFT JOIN FETCH a.alarmMobiles "
+			+ "LEFT JOIN FETCH a.perfilAlarm1 "
+			+ "LEFT JOIN FETCH a.perfilAlarm2 "
+			+ "LEFT JOIN FETCH a.perfilAlarm3 "
+			+ "LEFT JOIN FETCH a.company "
+			+ "LEFT JOIN FETCH a.gas "
+			+ "LEFT JOIN FETCH a.deviceType "
+			+ "LEFT JOIN FETCH a.unitMeter ")
+	List<Alarm> findAll();
+	
 }

@@ -17,10 +17,11 @@ import br.com.eneeyes.main.model.enums.AlarmType;
 import br.com.eneeyes.main.model.historic.Historic;
 import br.com.eneeyes.main.model.views.PositionView;
 import br.com.eneeyes.main.repository.PositionAlarmRepository;
-import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.repository.singleton.AlarmSingletonRepository;
 import br.com.eneeyes.main.repository.views.PositionViewRepository;
 import br.com.eneeyes.main.service.HistoricAlarmService;
+import br.com.eneeyes.main.service.PositionAlarmService;
+import br.com.eneeyes.main.service.PositionService;
 import br.com.eneeyes.main.service.historic.HistoricService;
 import br.com.eneeyes.main.service.views.CompanyDeviceAlarmViewService;
 
@@ -32,10 +33,13 @@ import br.com.eneeyes.main.service.views.CompanyDeviceAlarmViewService;
 public class ProcessAlarmService {
 	
 	@Autowired
-	private PositionRepository positionRepository;
+	private PositionViewRepository positionViewRepository;
 	
 	@Autowired
-	private PositionViewRepository positionViewRepository;
+	private PositionAlarmService positionAlarmService;	
+	
+	@Autowired
+	private PositionService positionService;	
 	
 	@Autowired
 	private HistoricAlarmService historicAlarmService;
@@ -57,8 +61,7 @@ public class ProcessAlarmService {
 
 	public final void setHistoric(Historic historic) {
 		this.historic = historic;
-	}
-	
+	}	
 	
 	/**
 	 * @param position
@@ -96,19 +99,29 @@ public class ProcessAlarmService {
 	public void Execute(Historic historic) {
 		
 		AlarmDto alarmDto = getExistAlarm(historic.getCompanyDeviceId());
-
 		AlarmType alarmType = checkExistsAlarms(alarmDto, historic.getValue());
 		
-		updatePositionByHistoric(historic, alarmType);
+		PositionView positionView = positionViewRepository.findByCompanyDeviceId(historic.getCompanyDeviceId());		
+		if (positionView != null) {			
+			positionService.updatePositionById(alarmType, historic.getValue(), historic.getLastUpdate(), historic.getUid(), positionView.getUid());			
+		}		
 		
-		if(alarmType == AlarmType.NORMAL)
-			return;
-		else if(alarmType == AlarmType.WITHOUT)
+		if(alarmType == AlarmType.NORMAL && alarmDto.getAlarmAutoClose()) {			
+			if (positionView.getAlarmType() == AlarmType.OFFLINE || 
+					positionView.getAlarmType() == AlarmType.DETECCAO ||
+					positionView.getAlarmType() == AlarmType.ALERTA ||
+					positionView.getAlarmType() == AlarmType.EVACUACAO) {
+				positionAlarmService.updateAlarmStatusByCompanyDeviceId(historic.getCompanyDeviceId(), AlarmStatus.AUTO, positionView.getAlarmType());
+			} else {
+				return;
+			}
+		} else if(alarmType == AlarmType.NORMAL) {			 
+			return;			
+		} else if(alarmType == AlarmType.WITHOUT) {
 			updateAlarmsAndActions(alarmType, historic);
-		else {
+		} else {
 			updateAlarmsAndActions(alarmDto, alarmType, historic);
-		}
-		
+		}		
 	}
 	
 	private void updatePositionByHistoric(Historic historic, AlarmType alarmType) {
@@ -117,7 +130,7 @@ public class ProcessAlarmService {
 		
 		if (positionView != null) {
 			
-			positionRepository.updatePositionById(alarmType, historic.getValue(), historic.getLastUpdate(), historic.getUid(), positionView.getUid()); 
+			positionService.updatePositionById(alarmType, historic.getValue(), historic.getLastUpdate(), historic.getUid(), positionView.getUid()); 
 			
 		}
 	}
@@ -136,28 +149,20 @@ public class ProcessAlarmService {
 					
 	private AlarmType checkExistsAlarms(AlarmDto alarm, BigDecimal lastValue ) {	
 		AlarmType alarmType = AlarmType.NORMAL;
-
-		if(alarm != null) {
-						
+		if(alarm != null) {						
 			if( !alarm.getAlarmOn()) {
 				alarmType = AlarmType.OFF;
-			}				
-			else if(alarm.getAlarm3On() && lastValue.compareTo( new BigDecimal(alarm.getAlarm3())) > 0 ) {				
+			} else if(alarm.getAlarm3On() && lastValue.compareTo( new BigDecimal(alarm.getAlarm3())) > 0 ) {				
 				alarmType = AlarmType.EVACUACAO;							
-			}
-			else if(alarm.getAlarm2On() && lastValue.compareTo( new BigDecimal(alarm.getAlarm2())) > 0) {
+			} else if(alarm.getAlarm2On() && lastValue.compareTo( new BigDecimal(alarm.getAlarm2())) > 0) {
 				alarmType = AlarmType.ALERTA;
-			}
-			else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm1())) > 0 || 
-					(alarm.getAlarm11() != null && alarm.getAlarm11() != 0 && lastValue.compareTo( new BigDecimal(alarm.getAlarm11())) < 0 )
-				) {				
+			} else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm1())) > 0 || 
+					(alarm.getAlarm11() != null && alarm.getAlarm11() != 0 && lastValue.compareTo( new BigDecimal(alarm.getAlarm11())) < 0 )) {				
 				alarmType = AlarmType.DETECCAO;
-			}		
-		}
-		else {
+			}
+		} else {
 			alarmType = AlarmType.WITHOUT;
-		}
-		
+		}		
 		return alarmType;		
 	}
 	

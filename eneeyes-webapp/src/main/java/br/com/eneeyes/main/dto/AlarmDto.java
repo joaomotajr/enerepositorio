@@ -29,6 +29,7 @@ public class AlarmDto {
 	private Double alarm22;		
 	private Double alarm33;
 	private Boolean alarmOn;
+	private Boolean AutoClose;
 	private Boolean alarm2On;
 	private Boolean alarm3On;
 	private Boolean alarmOffLineOn;
@@ -37,6 +38,7 @@ public class AlarmDto {
 	private Boolean alarmEmail;
 	private Boolean alarmSms;
 	private Boolean alarmAction;
+	private Boolean alarmAutoClose;
 	private String action1;
 	private String action2;
 	private String action3;
@@ -69,6 +71,7 @@ public class AlarmDto {
 		this.alarm22 = alarm.getAlarm22();
 		this.alarm33 = alarm.getAlarm33();
 		this.alarmOn = alarm.getAlarmOn();
+		this.alarmAutoClose = alarm.getAlarmAutoClose();
 		this.alarm2On = alarm.getAlarm2On();
 		this.alarm3On = alarm.getAlarm3On();
 		this.alarmOffLineOn = alarm.getAlarmOffLineOn();
@@ -77,6 +80,7 @@ public class AlarmDto {
 		this.alarmEmail = alarm.getAlarmEmail();
 		this.alarmSms = alarm.getAlarmSms();		
 		this.alarmAction = alarm.getAlarmAction();
+		this.alarmAutoClose = alarm.getAlarmAutoClose();
 		this.action1 = alarm.getAction1();
 		this.action2 = alarm.getAction2();
 		this.action3 = alarm.getAction3();
@@ -299,6 +303,14 @@ public class AlarmDto {
 
 	public final void setAlarmAction(Boolean alarmAction) {
 		this.alarmAction = alarmAction;
+	} 
+
+	public Boolean getAlarmAutoClose() {
+		return alarmAutoClose;
+	}
+
+	public void setAlarmAutoClose(Boolean alarmAutoClose) {
+		this.alarmAutoClose = alarmAutoClose;
 	}
 
 	public final String getAction1() {
@@ -355,5 +367,13 @@ public class AlarmDto {
 
 	public void setPerfilAlarmDto3(PerfilAlarmDto perfilAlarmDto3) {
 		this.perfilAlarmDto3 = perfilAlarmDto3;
-	}			
+	}
+
+	public Boolean getAutoClose() {
+		return AutoClose;
+	}
+
+	public void setAutoClose(Boolean autoClose) {
+		AutoClose = autoClose;
+	} 			
 }

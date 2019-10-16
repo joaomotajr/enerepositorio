@@ -89,14 +89,16 @@
 		<div id="modalAlarmEdit" class="modal fade">
 			<div class="modal-dialog  modal-lg" role="document">
 				<div class="modal-content">                            
-					<div class="modal-body"style="padding-bottom: 0px; padding-top: 5px;">
-							
+					<div class="modal-body"style="padding-bottom: 0px; padding-top: 5px;">							
 						<div class="box box-primary">
 							<div class="box-header">
 								<h3 class="box-title">Cadastro / Edi&ccedil;&atilde;o de Alarmes</h3>
-								<span class="text-muted pull-right"><i class="fa fa-pencil-square-o"></i></span>
-							</div>
-												
+								<span class="pull-right">&nbsp&nbsp&nbsp&nbsp<i class="fas fa-power-off fa-2x" ng-class="(radioModel) ? 'text-green':'text-red'"></i></span>								
+								<div class="btn-group pull-right" style="font-size: 115%;">
+									<button class="btn btn-xs" ng-click="update(true);" ng-class="(radioModel) ? 'btn-success':'btn-default'">ON</button>
+									<button class="btn btn-xs" ng-click="update(false);" ng-class="(radioModel) ? 'btn-default':'btn-danger'">OFF</button>
+								</div>
+							</div>												
 							<div class="box-body" style="padding-bottom: 0px !important;">
 								<form class="form" name="userForm">								
 									<div class="row">
@@ -140,11 +142,12 @@
 									<div class="row">    
 										<div class="col-md-12">                  
 					                       	<div class="box box-info" style="padding-bottom: 0px !important; margin-bottom: 0px !important;">					                       	
-								    			<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Limites do Alarme </strong> &nbsp&nbsp&nbsp&nbsp&nbsp
-													<div class="btn-group  pull-right">																
-														<button class="btn btn-xs" ng-click="update(true);" ng-class="(radioModel) ? 'btn-success' : 'btn-default'">ON</button>																
-														<button class="btn btn-xs" ng-click="update(false);" ng-class="(radioModel) ? 'btn-default' : 'btn-danger'">OFF</button>													   
-													</div>															
+												<div class="box-header with-border"><strong><i class="fa fa-dashboard"></i> Limites do Alarme </strong> &nbsp&nbsp&nbsp&nbsp&nbsp
+													<label style="margin-left: 420px;"><i class="fa fa-eye"></i> Monitoramento: </label>													
+													<div class="btn-group pull-right">				
+														<button class="btn btn-xs" ng-click="update2(true);" ng-class="(radioModel2) ? 'btn-success' : 'btn-default'">AUTO</button>
+														<button class="btn btn-xs" ng-click="update2(false);" ng-class="(radioModel2) ? 'btn-default' : 'btn-danger'">MANUAL</button>														
+													</div>													
 								    			</div>								    								                	 
 							                    <div class="box-body" style="padding-bottom: 0px !important">						                            	
 													<div id="travar">
@@ -294,69 +297,8 @@
 																		data-keyboard="false" data-toggle="modal" data-target="#modalAlarmFeedback"><i class="fas fa-sms"></i> SMS & <i class="fa fa-envelope" aria-hidden="true"></i> E-Mail</button>																												
 																</div>																	
 															</div>	
-														</div>			
-														<!--
-														<div class="row">
-															<div class="col-md-12">
-																<div class="col-md-2">										            									            				
-																	<div class="checkbox3 checkbox-inline checkbox-check checkbox-round checkbox-light">
-																		<input type="checkbox" id="checkboxEmailOnOff" checked>
-																		<label for="checkboxEmailOnOff">Enviar E-MAIL? </label>
-																	</div>
-																</div>
-																
-																<div class="col-md-4" style="padding-left: 5px !important; padding-right: 5px !important">
-																	<div data-ng-repeat="item in emails">	
-																		<div class="input-group">								                                        	
-																			<span class="input-group-addon">@</span>
-																			<input data-ng-model="item.email" type="text" class="form-control" placeholder="Email" readonly>
-																			<span data-ng-click="removeEmail($index);" class="input-group-addon text-red"><i class="fa fa-times-circle cursor"></i></span>
-																		</div>
-																	</div>
-
-																	<div data-ng-class="{'has-error': !emailValid}">	
-																		<div class="input-group">								                                        	
-																			<span class="input-group-addon" data-ng-show="emailValid">@</span>													                    														                    	
-																			<span class="input-group-addon text-red" data-ng-hide="emailValid">@</span>
-																			<input id="alarmEmail" data-ng-model="email" type="text" class="form-control" placeholder="Email" data-ng-change="validEmail($event);">
-																			<span data-ng-show="emailValid && email" data-ng-click="addEmail(email);" class="input-group-addon text-blue"><i class="fa fa-plus-square cursor"></i></span>
-																			<span data-ng-hide="emailValid && email" class="input-group-addon text-muted"><i class="fa fa-plus-square"></i></span>
-																		</div>
-																	</div>
-																</div>
-																
-																<div class="col-md-2">										            									            				
-																	<div class="checkbox3 checkbox-inline checkbox-check checkbox-round checkbox-light">												            			
-																		<input type="checkbox" id="checkboxSmsOnOff" checked>
-																		<label for="checkboxSmsOnOff">Enviar SMS? </label>
-																	</div>
-																</div>
-																
-																<div class="col-md-4" style="padding-left: 5px !important;">
-																	<div data-ng-repeat="item in mobiles">	
-																		<div class="input-group">								                                        	
-																			<span class="input-group-addon">@</span>
-																			<input data-ng-model="item.mobile" type="text" class="form-control" readonly>
-																			<span data-ng-click="removeMobile($index);" class="input-group-addon text-red"><i class="fa fa-times-circle cursor"></i></span>
-																		</div>
-																	</div>
-
-																	<div data-ng-class="{'has-error': !mobileValid}">	
-																		<div class="input-group">
-																			<span class="input-group-addon" data-ng-show="mobileValid"><i class="fa fa-phone-square"></i></span>
-																			<span class="input-group-addon text-red" data-ng-hide="mobileValid"><i class="fa fa-phone-square"></i></span>																			
-																			<input class="form-control alarmMobileMask" id="alarmMobile" data-ng-model="mobile" type="text" maxlength="15" 
-																				placeholder="(XX) XXXXX-XXXX" data-ng-change="validMobile($event);" />
-																			<span data-ng-show="mobileValid && mobile" data-ng-click="addMobile(mobile);" class="input-group-addon text-blue"><i class="fa fa-plus-square cursor"></i></span>
-																			<span data-ng-hide="mobileValid && mobile" class="input-group-addon text-muted"><i class="fa fa-plus-square"></i></span>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>																												
-														-->
+														</div>														
 														<hr style="margin-top: 8px !important; margin-bottom: 8px !important;">
-
 														<div class="row"  style="padding-bottom: 5px !important">
 															<div class="col-md-12">
 																<div class="col-md-2">										            									            				
@@ -386,8 +328,7 @@
 																		</div>
 																	</div>                                        						                                        						                                         													            			
 																</div>							                                   
-															</div>
-															
+															</div>															
 															<div class="row">
 																<div class="col-md-12">
 																	<div class="col-md-2"></div>							                                        
@@ -398,8 +339,7 @@
 																		</div>
 																	</div>                                        						                                        						                                         													            			
 																</div>							                                   
-															</div>	
-																							
+															</div>																							
 															<div class="row">
 																<div class="col-md-12">
 																	<div class="col-md-2"></div>							                                        

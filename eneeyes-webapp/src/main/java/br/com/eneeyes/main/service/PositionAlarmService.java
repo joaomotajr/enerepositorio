@@ -149,20 +149,35 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		return repository.updateSmsStatus(smstatus, uid);		
 	}
 	
-	public BasicResult<?> updateAlarmStatus(Long uid, AlarmStatus alarmtatus) {
+	public BasicResult<?> updateAlarmStatus(Long uid, AlarmStatus alarmStatus) {
 		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
 		
 		try {
-			repository.updateAlarmStatus(alarmtatus, uid);
-			
+			repository.updateAlarmStatus(alarmStatus, uid);			
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Executado com sucesso.");
-			
+			result.setMessage("Executado com sucesso.");			
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
-		}
+		}		
+		return result;
+	}
+	
+	public BasicResult<?> updateAlarmStatusByCompanyDeviceId(Long companyDeviceId, AlarmStatus alarmStatus, AlarmType alarmType) {
+		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
 		
+		List<AlarmStatus> solvedOrCancelesAlarms = new ArrayList<AlarmStatus>();		
+		solvedOrCancelesAlarms.add(AlarmStatus.SOLVED);
+		solvedOrCancelesAlarms.add(AlarmStatus.CANCELED);
+		
+		try {
+			repository.updateAlarmStatusByCompanyDevice(alarmStatus, companyDeviceId, alarmType, solvedOrCancelesAlarms);			
+			result.setResultType( ResultMessageType.SUCCESS );
+			result.setMessage("Executado com sucesso.");			
+		} catch (Exception e) {
+			result.setIsError(true);
+			result.setMessage(e.getMessage());
+		}		
 		return result;
 	}
 	

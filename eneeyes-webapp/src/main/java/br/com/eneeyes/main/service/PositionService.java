@@ -14,7 +14,6 @@ import br.com.eneeyes.main.model.CompanyDetector;
 import br.com.eneeyes.main.model.CompanyDevice;
 import br.com.eneeyes.main.model.Position;
 import br.com.eneeyes.main.model.enums.AlarmType;
-import br.com.eneeyes.main.model.historic.Historic;
 import br.com.eneeyes.main.model.views.PositionView;
 import br.com.eneeyes.main.repository.PositionRepository;
 import br.com.eneeyes.main.repository.views.PositionViewRepository;
@@ -42,33 +41,36 @@ public class PositionService implements IService<PositionDto> {
 		return null;
 	}
 
-	/**
-	 * @param historic
-	 * @return
-	 * Atualiza posição do dispositivo, e delega checagem de limites
-	 * para possiveis providências.
-	 */
-	public BasicResult<?> updatePositionAndCheckAlarmByHistoric(Historic historic) {
+//	/**
+//	 * @param historic
+//	 * @return
+//	 * Atualiza posição do dispositivo, e delega checagem de limites
+//	 * para possiveis providências.
+//	 */
+//	public BasicResult<?> updatePositionAndCheckAlarmByHistoric(Historic historic) {
+//
+//		Result<PositionDto> result = new Result<PositionDto>();
+//		
+//		Position position = new Position();
+//		PositionView positionView = repositoryView.findByCompanyDeviceId(historic.getCompanyDeviceId());
+//		
+//		if (position != null) {			
+//			updatePositionById(positionView.getAlarmType(), positionView.getLastValue(), positionView.getLastUpdate(), historic.getUid(), positionView.getUid());						
+//			result.setResultType( ResultMessageType.SUCCESS );
+//			result.setMessage("Executado com sucesso.");
+//		}		
+//		
+//		return result;		
+//	}
 
-		Result<PositionDto> result = new Result<PositionDto>();
+//	public void updatePositionAlarmType(AlarmType alarmType, Long companyDetectorId) {
+//		
+//		repository.updateAlarmType(alarmType, companyDetectorId);
+//	}
+	
+	public void updatePositionById(AlarmType alarmType, BigDecimal value, Date lastUpdate, Long historicId,  Long uid) {
 		
-		Position position = new Position();
-		PositionView positionView = repositoryView.findByCompanyDeviceId(historic.getCompanyDeviceId());
-		
-		if (position != null) {		
-			
-			repository.updatePositionById(positionView.getAlarmType(), positionView.getLastValue(), positionView.getLastUpdate(), historic.getUid(), positionView.getUid()); 
-						
-			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Executado com sucesso.");
-		}		
-		
-		return result;		
-	}
-
-	public void updatePositionAlarmType(AlarmType alarmType, Long companyDetectorId) {
-		
-		repository.updateAlarmType(alarmType, companyDetectorId);
+		repository.updatePositionById(alarmType, value, lastUpdate, historicId, uid);
 	}
 	
 	public void createInitialPosition(CompanyDevice companyDevice) {
@@ -78,14 +80,11 @@ public class PositionService implements IService<PositionDto> {
 		}
 		
 		Position position = new Position();	
-		
 		position.setCompanyDevice(companyDevice);		
 		position.setLastUpdate(new Date());
 		position.setLastValue(BigDecimal.ZERO);
-		position.setAlarmType(AlarmType.WITHOUT);
-		
-		repository.save(position);	
-
+		position.setAlarmType(AlarmType.WITHOUT);		
+		repository.save(position);
 	}
 
 	@Override
@@ -104,11 +103,8 @@ public class PositionService implements IService<PositionDto> {
 		
 		try {
 			Position item = repository.findOne(uid);
-
-			if (item != null) {
-				
-				result.setEntity(new PositionDto(item));
-				
+			if (item != null) {				
+				result.setEntity(new PositionDto(item));				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
@@ -119,8 +115,7 @@ public class PositionService implements IService<PositionDto> {
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
-		}
-		
+		}		
 		return result;
 	}
 	
@@ -129,11 +124,8 @@ public class PositionService implements IService<PositionDto> {
 		
 		try {
 			
-			PositionView position = repositoryView.findByCompanyDeviceId(uid);
-			
-			
-			if (position != null) {			
-								
+			PositionView position = repositoryView.findByCompanyDeviceId(uid);			
+			if (position != null) {								
 				result.setEntity(position);
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
@@ -141,28 +133,22 @@ public class PositionService implements IService<PositionDto> {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
 				result.setMessage("Nenhuma Posição.");
-			}
-			
+			}			
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
-		}
-		
+		}		
 		return result;
 	}
 	
 	public BasicResult<?> findByAreaId(Long uid) {
 		Result<PositionDto> result = new Result<PositionDto>();
 		
-		List<CompanyDetector> lista = companyDetectorService.findByAreaId(uid);
-		
+		List<CompanyDetector> lista = companyDetectorService.findByAreaId(uid);		
 		try {
-			List<Position> postions = repository.findByCompanyDeviceIn(lista);
-			
-			if (lista != null) {
-				
-				List<PositionDto> dto = new ArrayList<PositionDto>();
-				
+			List<Position> postions = repository.findByCompanyDeviceIn(lista);			
+			if (lista != null) {				
+				List<PositionDto> dto = new ArrayList<PositionDto>();				
 				for (Position position   : postions) {					
 					dto.add(new PositionDto(position) );
 				}

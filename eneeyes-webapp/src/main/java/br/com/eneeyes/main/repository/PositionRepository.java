@@ -22,6 +22,7 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
 
 	public List<Position> findByCompanyDeviceIn(List<CompanyDetector> lista);
 	
+	@Query("select DISTINCT p from Position p INNER JOIN FETCH p.companyDevice cd WHERE p.lastUpdate < ?1 and p.alarmType not in ?2")
 	public List<Position> findByLastUpdateLessThanAndAlarmTypeNotIn(Date date, List<AlarmType> withoutOrOffAlarms);
 	
 	@Modifying

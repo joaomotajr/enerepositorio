@@ -27,6 +27,7 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 	
 	$scope.saveAlarm = function() {		
 		angular.element('body').addClass('loading');		
+		
 		if($scope.unitMeter.uid == 0) {
 			$scope.alarmAlarm1= $scope.deviceTypeDigital;
 		}
@@ -48,6 +49,7 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 			alarmOffLineOn: $("#checkboxOfflineOnOff").prop('checked'),
 			companyDto : $scope.selectedCompany,
 			alarmOn: $scope.radioModel,
+			alarmAutoClose: $scope.radioModel2,
 			alarm2On : $scope.enableAlarm2,
 			alarm3On : $scope.enableAlarm3,
 			alarmSigma:  $("#checkboxSigmaOnOff").prop('checked'),			
@@ -109,6 +111,7 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		$scope.action3 = '';
 		$scope.action4 = '';
 		$scope.radioModel = false;
+		$scope.radioModel2 = false;
 		$scope.enableAlarm2 = false;
 		$scope.enableAlarm3 = false;
 		$scope.email = '';
@@ -168,7 +171,6 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		$scope.showPerfilAlarm1 = false;
 		$scope.showPerfilAlarm2 = false;
 		$scope.showPerfilAlarm3 = false;
-
 		$scope.alarmUid = $scope.alarms[index].uid;
 		$scope.alarmGas = $scope.alarms[index].gasDto;
 		$scope.deviceType = $scope.alarms[index].deviceType;
@@ -201,6 +203,7 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		$("#checkboxSmsOnOff").prop('checked', $scope.alarms[index].alarmSms); 
 		
 		$scope.radioModel = $scope.alarms[index].alarmOn;
+		$scope.radioModel2 = $scope.alarms[index].alarmAutoClose;
 		$scope.enableAlarm2 = $scope.alarms[index].alarm2On;
 		$scope.enableAlarm3 = $scope.alarms[index].alarm3On;
 		$scope.perfilAlarm1 = $scope.alarms[index].perfilAlarmDto1;
@@ -482,6 +485,10 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 	 
 	$scope.update = function (val) {
 		$scope.radioModel = val;
+	};
+
+	$scope.update2 = function (val) {
+		$scope.radioModel2 = val;
 	};
 
 	$scope.getUnitMeters = function() {		 

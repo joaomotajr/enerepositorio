@@ -50,10 +50,12 @@ public class Alarm {
 		this.alarmSms = dto.getAlarmSms();
 		this.alarmEmail = dto.getAlarmEmail();
 		this.alarmOn = dto.getAlarmOn();
+		this.alarmAutoClose = dto.getAlarmAutoClose();
 		this.alarm2On = dto.getAlarm2On();
 		this.alarm3On = dto.getAlarm3On();
 		this.alarmOffLineOn = dto.getAlarmOffLineOn();
 		this.alarmSigma = dto.getAlarmSigma();
+		this.alarmAction = dto.getAlarmAction();
 		this.alarmAction = dto.getAlarmAction();
 		this.action1 = dto.getAction1();
 		this.action2 = dto.getAction2();
@@ -149,6 +151,9 @@ public class Alarm {
 	
 	@Column(name = "ALARM_ACTION", nullable = true)		
 	private Boolean alarmAction;
+	
+	@Column(name = "ALARM_AUTO_CLOSE", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarmAutoClose;
 	
 	@Column(name = "ACTION1", nullable = true, length=300)		
 	private String action1;
@@ -338,6 +343,14 @@ public class Alarm {
 
 	public final void setAlarmAction(Boolean alarmAction) {
 		this.alarmAction = alarmAction;
+	} 
+
+	public Boolean getAlarmAutoClose() {
+		return alarmAutoClose;
+	}
+
+	public void setAlarmAutoClose(Boolean alarmAutoClose) {
+		this.alarmAutoClose = alarmAutoClose;
 	}
 
 	public final String getAction1() {

@@ -91,9 +91,7 @@
 <div data-ng-controller="dashController">
 	<div class="row" style="font-family: Helvetica Neue, Arial;">
 		<div class="col-md-12">
-
-			<div class="box box-primary">
-				
+			<div class="box box-primary">				
 				<div class="box-body">
 					<div class="row">
 						<div class="col-lg-2 col-xs-6">
@@ -192,84 +190,17 @@
 							</div>						
 						</div>							
 					</div>
-					<!-- <div class="row">														
-						<div class="col-lg-2 col-xs-6">
-							<div class="small-box bg-aqua">
-								<div class="inner">
-									<h3 data-ng-bind="sumary.devices"></h3>
-									<p>Monitorados</p>									
-								</div>
-								<div class="icon"><i class="fa fa-tv"></i></div>
-								<a href="#" data-ng-class="{'all': selectedStatusDashCompaniesPosition == 'ALL' }" data-ng-click="filterStatus('ALL')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-							
-						<div class="col-lg-2 col-xs-6">
-							<div class="small-box bg-green">
-								<div class="inner">
-									<h3 data-ng-bind="sumary.normal.value"></h3>
-									<p>Operacional</p>
-								</div>
-								<div class="icon"><i class="fa fa-check"></i></div>
-								<a href="#" data-ng-class="{'normal': selectedStatusDashCompaniesPosition == 'NORMAL' }" data-ng-click="filterStatus('NORMAL')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-							
-						<div class="col-lg-2 col-xs-6">
-							<div class="small-box bg-gray">
-								<div class="inner">
-									<h3 data-ng-bind="sumary.alarm1.value"></h3>
-									<p>Detec&ccedil;&atilde;o</p>
-								</div>
-								<div class="icon"><i class="fa fa-battery-quarter"></i></div>
-								<a href="#" data-ng-class="{'deteccao': selectedStatusDashCompaniesPosition == 'DETECCAO' }" data-ng-click="filterStatus('DETECCAO')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-							
-						<div class="col-lg-2 col-xs-6">					
-							<div class="small-box bg-yellow">
-								<div class="inner">
-									<h3 data-ng-bind="sumary.alarm2.value"></h3>
-									<p>Alerta</p>
-								</div>
-								<div class="icon"><i class="fa fa-battery-half"></i></div>
-								<a href="#" data-ng-class="{'alerta': selectedStatusDashCompaniesPosition == 'ALERTA' }" data-ng-click="filterStatus('ALERTA')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-							
-						<div class="col-lg-2 col-xs-6">
-							<div class="small-box bg-red">
-								<div class="inner">
-									<h3 data-ng-bind="sumary.alarm3.value"></h3>
-									<p>Evacua&ccedil;&atilde;o</p>
-								</div>
-								<div class="icon"><i class="fa fa-battery-full"></i></div>
-								<a href="#" data-ng-class="{'evacuacao': selectedStatusDashCompaniesPosition == 'EVACUACAO' }" data-ng-click="filterStatus('EVACUACAO')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-							
-						<div class="col-lg-2 col-xs-6">	
-							<div class="small-box bg-black">
-								<div class="inner">
-									<h3 data-ng-bind="sumary.offLine.value"></h3>
-									<p>Off Line</p>
-								</div>
-								<div class="icon" style="color:white !important"><i class="fa fa-battery-empty"></i></div>
-								<a href="#" data-ng-class="{'off': selectedStatusDashCompaniesPosition == 'OFFLINE' }" data-ng-click="filterStatus('OFFLINE')" class="small-box-footer">Selecione <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>							
-					</div> -->
 					<br>
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-8" ng-class="(expanded) ? 'col-md-12':'col-md-8'">
 							<div class="box box-primary">
 								<div class="box-header with-border">
 									<label><strong>&Uacute;ltimas medi&ccedil;&otilde;es</strong></label>
 									<div class="box-tools pull-right">									
 										<label data-ng-show='loading'><i title="Atualizando" class="fa fa-refresh fa-spin"></i></label>
-										
-										<!-- <button class="btn btn-box-tool" data-ng-click="refreshDashboard();"><i title="Refresh" class="fa fa-refresh fa-spin"></i></button>		 -->
-										<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+										<!-- <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button> -->
+										<i class="fa fa-minus cursor" data-ng-show="expanded" data-ng-click="expanded=false;" title="Expandir Unidade"></i>
+										<i class="fa fa-square-o cursor" data-ng-show="!expanded" data-ng-model="expanded" data-ng-click="expanded=true;" title="Expandir Unidade"></i>
 									</div>
 								</div>								
 								<div class="box-body" style="padding: 4px !important;text-align: -webkit-center;">
@@ -279,14 +210,25 @@
 												<thead>
 													<tr>														
 														<th class="cursor" data-ng-click="refreshDashboard();" style="text-align:center; vertical-align: middle;">&nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;</th>
-														<th>ID</th>
+															<th>
+																<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('id')">
+																	<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
+																		data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'id' && orderOptions != '-id'}"></i>
+																</span>ID
+															</th>
 														<th>
 															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('companyName')">
 																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
 																	data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'companyName' && orderOptions != '-companyName'}"></i>
 															</span>Empresa
 														</th>
-														<th>
+														<th data-ng-show="expanded">
+															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('unitName')">
+																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
+																	data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'unitName' && orderOptions != '-unitName'}"></i>
+															</span>Unidade
+														</th>
+														<th data-ng-show="expanded">
 															<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('areaName')">
 																<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
 																	data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'areaName' && orderOptions != '-areaName'}"></i>
@@ -315,8 +257,9 @@
 													<tr data-ng-repeat="item in dashCompaniesPositionFiltered = (dashCompaniesPosition | dashCompaniesPositionFilter: selectedStatusDashCompaniesPosition) | orderBy: orderOptions">
 														<td style="text-align:center; vertical-align: middle; color: #575757;">&nbsp;&nbsp;<i class="fa" data-ng-class="item.deviceSymbol" ></i>&nbsp;&nbsp;</td>
 														<td data-ng-bind="item.uid"></td>
-														<td><span data-truncate="12" data-value="{{item.companyName}}"></span></td>
-														<td><span data-truncate="12" data-value="{{item.areaName}}"></span></td>														
+														<td><span data-truncate="expanded==true ? 22 : 12" data-value="{{item.companyName}}"></span></td>
+														<td data-ng-show="expanded"><span data-truncate="expanded==true ? 20 : 12" data-value="{{item.areaName}}"></span></td>
+														<td data-ng-show="expanded"><span data-truncate="expanded==true ? 20 : 12" data-value="{{item.unitName}}"></span></td>
 														<td>{{item.companyDeviceName}}</td>
 														<td>
 															<jsp:include page="controls/reduzMeters.jsp"/>
@@ -350,7 +293,7 @@
 							</div>
 						</div>
 							
-						<div class="col-md-4">
+						<div data-ng-show="!expanded" class="col-md-4">
 							<div class="row">
 								<div class="box box-primary">
 									<div class="box-header with-border">

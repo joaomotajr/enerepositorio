@@ -24,6 +24,7 @@ public class DashCompaniesPositionDto {
 		this.companyId = e.getCompanyId();
 		this.companyName = e.getCompanyName();
 		this.areaName = e.getAreaName();
+		this.unitName = e.getUnitName();
 		this.companyDeviceName = e.getCompanyDeviceName();	
 		this.deviceType = e.getDeviceType();
 		this.positionId = e.getPositionId();		

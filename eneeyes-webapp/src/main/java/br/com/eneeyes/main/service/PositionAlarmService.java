@@ -53,8 +53,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			AlarmSingletonRepository.populate(companyDetectorAlarmViewService.findAll());
 		}		
 		
-		AlarmDto alarmDto = AlarmSingletonRepository.findByCompanyDevice(companyDevice.getUid());
-		
+		AlarmDto alarmDto = AlarmSingletonRepository.findByCompanyDevice(companyDevice.getUid());		
 		AlarmType alarmType = AlarmType.NORMAL;
 		if(offLine)
 			alarmType = AlarmType.OFFLINE;
@@ -82,18 +81,14 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			
 			if( !alarm.getAlarmOn()) {
 				alarmType = AlarmType.OFF;
-			}				
-			else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm3())) > 0 ) {				
+			} else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm3())) > 0 ) {				
 				alarmType = AlarmType.EVACUACAO;							
-			}
-			else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm2())) > 0 ) {				
+			} else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm2())) > 0 ) {				
 				alarmType = AlarmType.ALERTA;
-			}
-			else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm1())) > 0 ) {				
+			} else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm1())) > 0 ) {				
 				alarmType = AlarmType.DETECCAO;
 			}		
-		}
-		else {
+		} else {
 			alarmType = AlarmType.OFF;
 		}
 		
@@ -111,13 +106,10 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		
 		solvedOrCancelesAlarms.add(AlarmStatus.SOLVED);
 		solvedOrCancelesAlarms.add(AlarmStatus.CANCELED);
-
-		PositionAlarm positionAlarm = repository.findByCompanyDeviceAndAlarmTypeAndAlarmStatusNotIn(companyDevice, alarmType, solvedOrCancelesAlarms);
-		
-		if(positionAlarm == null) {
-			
-			positionAlarm =  new PositionAlarm();
-			
+		solvedOrCancelesAlarms.add(AlarmStatus.AUTO);
+		PositionAlarm positionAlarm = repository.findByCompanyDeviceAndAlarmTypeAndAlarmStatusNotIn(companyDevice, alarmType, solvedOrCancelesAlarms);		
+		if(positionAlarm == null) {			
+			positionAlarm =  new PositionAlarm();			
 			positionAlarm.setCompanyDevice(companyDevice);
 			positionAlarm.setFirstUpdate(new Date());
 			positionAlarm.setLastValue(position.getLastValue());
@@ -129,29 +121,22 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 			positionAlarm.setAction(alarmParams.getAction());
 			positionAlarm.setSoundStatus(alarmParams.getSoundStatus());
 			positionAlarm.setSigmaStatus(alarmParams.getSigmaStatus());
-		}
-		else {
+		} else {
 			// TODO Verificar se haverá reenvio de Actions em casos de Reinscidência do mesmo alerta				
 			positionAlarm.setLastUpdate(new Date());
 			positionAlarm.setLastValue(position.getLastValue());				
-		}
-		
+		}		
 		repository.save(positionAlarm);			
 	}
 	
-	public int updateEmailStatus(Long uid, EmailStatus emailStatus) {
-		
-		return repository.updateEmailStatus(emailStatus, uid);		
-	}
+	public int updateEmailStatus(Long uid, EmailStatus emailStatus) {		
+		return repository.updateEmailStatus(emailStatus, uid);	}
 	
-	public int updateSmsStatus(Long uid, SmsStatus smstatus) {
-		
-		return repository.updateSmsStatus(smstatus, uid);		
-	}
+	public int updateSmsStatus(Long uid, SmsStatus smstatus) {		
+		return repository.updateSmsStatus(smstatus, uid);	}
 	
 	public BasicResult<?> updateAlarmStatus(Long uid, AlarmStatus alarmStatus) {
-		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
-		
+		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();		
 		try {
 			repository.updateAlarmStatus(alarmStatus, uid);			
 			result.setResultType( ResultMessageType.SUCCESS );
@@ -185,16 +170,13 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
 		
 		try {
-			repository.updateAlarmStatusAndSoundStatus(alarmStatus, SoundStatus.SILENT, uid);
-			
+			repository.updateAlarmStatusAndSoundStatus(alarmStatus, SoundStatus.SILENT, uid);			
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Executado com sucesso.");
-			
+			result.setMessage("Executado com sucesso.");			
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
-		}
-		
+		}		
 		return result;
 	}
 	
@@ -202,22 +184,18 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
 		
 		try {
-			repository.updateSoundStatus(soundStatus, uid);
-			
+			repository.updateSoundStatus(soundStatus, uid);			
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Executado com sucesso.");
-			
+			result.setMessage("Executado com sucesso.");			
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
-		}
-		
+		}		
 		return result;
 	}
 	
-	public int updateSigmaStatus(Long uid, SigmaStatus sigmatatus) {
-		
-		return repository.updateSigmaStatus(sigmatatus, uid);		
+	public int updateSigmaStatus(Long uid, SigmaStatus sigmatatus) {		
+		return repository.updateSigmaStatus(sigmatatus, uid);
 	}	
 
 	@Override
@@ -226,11 +204,8 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		
 		try {
 			PositionAlarm item = repository.findOne(uid);
-
-			if (item != null) {
-				
-				result.setEntity(new PositionAlarmDto(item));
-				
+			if (item != null) {				
+				result.setEntity(new PositionAlarmDto(item));				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
@@ -241,8 +216,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
-		}
-		
+		}		
 		return result;
 	}
 
@@ -259,8 +233,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 				List<PositionAlarmDto> dto = new ArrayList<PositionAlarmDto>();				
 				for (PositionAlarm positionAlarm   : lista) {					
 					dto.add(new PositionAlarmDto(positionAlarm) );
-				}
-								
+				}								
 				result.setList(dto);
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
@@ -268,13 +241,11 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 				result.setIsError(true);
 				result.setResultType( ResultMessageType.ERROR );
 				result.setMessage("Nenhuma Posição.");
-			}
-			
+			}			
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
-		}
-		
+		}		
 		return result;
 	}
 
@@ -285,13 +256,11 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		try {
 			List<PositionAlarm> lista = repository.findAll();
 
-			if (lista != null) {
-				
+			if (lista != null) {				
 				List<PositionAlarmDto> dto = new ArrayList<PositionAlarmDto>();				
 				for (PositionAlarm positionAlarm   : lista) {					
 					dto.add(new PositionAlarmDto(positionAlarm) );
-				}
-								
+				}								
 				result.setList(dto);
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
@@ -303,8 +272,7 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
-		}
-		
+		}		
 		return result;
 	}
 

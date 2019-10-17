@@ -198,6 +198,7 @@ public class ProcessAlarmService {
 		
 		solvedOrCancelesAlarms.add(AlarmStatus.SOLVED);
 		solvedOrCancelesAlarms.add(AlarmStatus.CANCELED);
+		solvedOrCancelesAlarms.add(AlarmStatus.AUTO);
 
 		PositionAlarm positionAlarm = positionAlarmRepository.findByCompanyDeviceAndAlarmTypeAndAlarmStatusNotIn(companyDevice, alarmType, solvedOrCancelesAlarms);
 		

@@ -104,12 +104,10 @@ public ResultMessage saveByPositionRetroIOT(Long uid, String strValue, Long date
 		
 		if (position != null ) {	
 			Historic historic = new Historic();
-
 			historic.setCompanyDeviceId(position.getCompanyDevice().getUid());
 			historic.setLastUpdate(new Date(date));
 			historic.setValue(value);
-			historic.setLogOrigem(LogOrigem.DEVICE);
-			
+			historic.setLogOrigem(LogOrigem.DEVICE);			
 			repository.save(historic);
 		
 			try {
@@ -128,18 +126,14 @@ public ResultMessage saveByPositionRetroIOT(Long uid, String strValue, Long date
 		
 	public Historic saveByPosition(Position position) {
 		
-		Historic historic = new Historic();
-		
+		Historic historic = new Historic();		
 		historic.setCompanyDeviceId(position.getCompanyDevice().getUid());
 		historic.setLastUpdate(new Date());
 		historic.setValue(position.getLastValue());
-		historic.setLogOrigem(LogOrigem.SYSTEM);
-		
-		historic = repository.save(historic);
-	
+		historic.setLogOrigem(LogOrigem.SYSTEM);		
+		historic = repository.save(historic);	
 		return historic;
 	}
-
 	
 	@Override
 	public BasicResult<?> delete(Long uid) {
@@ -154,10 +148,8 @@ public ResultMessage saveByPositionRetroIOT(Long uid, String strValue, Long date
 		try {
 			Historic item = repository.findOne(uid);
 
-			if (item != null) {
-				
-				result.setEntity(new HistoricDto(item));
-				
+			if (item != null) {				
+				result.setEntity(new HistoricDto(item));				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
@@ -168,8 +160,7 @@ public ResultMessage saveByPositionRetroIOT(Long uid, String strValue, Long date
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
-		}
-		
+		}		
 		return result;
 	}	
 
@@ -178,16 +169,13 @@ public ResultMessage saveByPositionRetroIOT(Long uid, String strValue, Long date
 		 Result<HistoricDto> result = new Result<HistoricDto>();
 				
 		Historic historic = new Historic(dto);
-		historic.setLastUpdate(new Date());
-		
-		historic = repository.save(historic);
-		
+		historic.setLastUpdate(new Date());		
+		historic = repository.save(historic);		
 		dto.setUid(historic.getUid());		
 		result.setEntity(dto);
 				
 		try {
-			processAlarmService.Execute(historic);
-			
+			processAlarmService.Execute(historic);			
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Histórico Gravado com Sucesso.");
 			
@@ -195,9 +183,7 @@ public ResultMessage saveByPositionRetroIOT(Long uid, String strValue, Long date
 			result.setResultType( ResultMessageType.ERROR );
 			result.setMessage("Erro ao gravar Historico.");				
 			e.printStackTrace();
-		}						
-		
+		}		
 		return result;
-	}
-	
+	}	
 }

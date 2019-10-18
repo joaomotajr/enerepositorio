@@ -111,7 +111,7 @@ public class ProcessAlarmService {
 					positionView.getAlarmType() == AlarmType.DETECCAO ||
 					positionView.getAlarmType() == AlarmType.ALERTA ||
 					positionView.getAlarmType() == AlarmType.EVACUACAO) {
-				positionAlarmService.updateAlarmStatusByCompanyDeviceId(historic.getCompanyDeviceId(), AlarmStatus.AUTO, positionView.getAlarmType());
+				positionAlarmService.updateAlarmsByCompanyDeviceId(historic.getCompanyDeviceId(), AlarmStatus.AUTO);
 			} else {
 				return;
 			}

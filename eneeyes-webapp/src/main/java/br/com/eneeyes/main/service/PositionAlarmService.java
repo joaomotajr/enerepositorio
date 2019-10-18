@@ -148,15 +148,35 @@ public class PositionAlarmService implements IService<PositionAlarmDto> {
 		return result;
 	}
 	
-	public BasicResult<?> updateAlarmStatusByCompanyDeviceId(Long companyDeviceId, AlarmStatus alarmStatus, AlarmType alarmType) {
+//	public BasicResult<?> updateAlarmStatusByCompanyDeviceIdAndAlarmType(Long companyDeviceId, AlarmStatus alarmStatus, AlarmType alarmType) {
+//		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
+//		
+//		List<AlarmStatus> solvedOrCancelesAlarms = new ArrayList<AlarmStatus>();		
+//		solvedOrCancelesAlarms.add(AlarmStatus.SOLVED);
+//		solvedOrCancelesAlarms.add(AlarmStatus.CANCELED);
+//		solvedOrCancelesAlarms.add(AlarmStatus.AUTO);
+//		
+//		try {
+//			repository.updateAlarmStatusByCompanyDeviceIdAndAlarmType(alarmStatus, companyDeviceId, alarmType, solvedOrCancelesAlarms);			
+//			result.setResultType( ResultMessageType.SUCCESS );
+//			result.setMessage("Executado com sucesso.");			
+//		} catch (Exception e) {
+//			result.setIsError(true);
+//			result.setMessage(e.getMessage());
+//		}		
+//		return result;
+//	}
+	
+	public BasicResult<?> updateAlarmsByCompanyDeviceId(Long companyDeviceId, AlarmStatus alarmStatus) {
 		Result<PositionAlarmDto> result = new Result<PositionAlarmDto>();
 		
 		List<AlarmStatus> solvedOrCancelesAlarms = new ArrayList<AlarmStatus>();		
 		solvedOrCancelesAlarms.add(AlarmStatus.SOLVED);
 		solvedOrCancelesAlarms.add(AlarmStatus.CANCELED);
+		solvedOrCancelesAlarms.add(AlarmStatus.AUTO);
 		
 		try {
-			repository.updateAlarmStatusByCompanyDevice(alarmStatus, companyDeviceId, alarmType, solvedOrCancelesAlarms);			
+			repository.updateAlarmsStatusByCompanyDeviceId(alarmStatus, companyDeviceId, solvedOrCancelesAlarms);			
 			result.setResultType( ResultMessageType.SUCCESS );
 			result.setMessage("Executado com sucesso.");			
 		} catch (Exception e) {

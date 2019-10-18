@@ -49,7 +49,12 @@ public interface PositionAlarmRepository extends JpaRepository<PositionAlarm, Lo
 	@Modifying
 	@Transactional
 	@Query("update PositionAlarm p set p.alarmStatus = ?1 where p.companyDevice.uid = ?2 and p.alarmType = ?3 and p.alarmStatus not in ?4")
-	int updateAlarmStatusByCompanyDevice(AlarmStatus alarmStatus, long companyDeviceId, AlarmType alarmType, List<AlarmStatus> solvedOrCancelesAlarms);
+	int updateAlarmStatusByCompanyDeviceIdAndAlarmType(AlarmStatus alarmStatus, long companyDeviceId, AlarmType alarmType, List<AlarmStatus> solvedOrCancelesAlarms);
+	
+	@Modifying
+	@Transactional
+	@Query("update PositionAlarm p set p.alarmStatus = ?1 where p.companyDevice.uid = ?2 and p.alarmStatus not in ?3")
+	int updateAlarmsStatusByCompanyDeviceId(AlarmStatus alarmStatus, long companyDeviceId, List<AlarmStatus> solvedOrCancelesAlarms);
 	
 	
 	@Modifying

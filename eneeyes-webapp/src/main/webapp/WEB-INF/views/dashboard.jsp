@@ -211,9 +211,9 @@
 													<tr>														
 														<th class="cursor" data-ng-click="refreshDashboard();" style="text-align:center; vertical-align: middle;">&nbsp;&nbsp;<i class="fa fa-tags"></i>&nbsp;&nbsp;</th>
 															<th>
-																<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('id')">
+																<span style="font-size: 1.1em !important; text-decoration: none !important" data-ng-click="toggleQuestao('uid')">
 																	<i class="fa fa-sort-alpha-asc cursor" aria-hidden="true"
-																		data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'id' && orderOptions != '-id'}"></i>
+																		data-ng-class="{'fa-sort-alpha-asc': row == 'ASC', 'fa-sort-alpha-desc': row == 'DESC', 'text-gray': orderOptions != 'uid' && orderOptions != '-uid'}"></i>
 																</span>ID
 															</th>
 														<th>
@@ -258,8 +258,8 @@
 														<td style="text-align:center; vertical-align: middle; color: #575757;">&nbsp;&nbsp;<i class="fa" data-ng-class="item.deviceSymbol" ></i>&nbsp;&nbsp;</td>
 														<td data-ng-bind="item.uid"></td>
 														<td><span data-truncate="expanded==true ? 22 : 12" data-value="{{item.companyName}}"></span></td>
-														<td data-ng-show="expanded"><span data-truncate="expanded==true ? 20 : 12" data-value="{{item.areaName}}"></span></td>
 														<td data-ng-show="expanded"><span data-truncate="expanded==true ? 20 : 12" data-value="{{item.unitName}}"></span></td>
+														<td data-ng-show="expanded"><span data-truncate="expanded==true ? 20 : 12" data-value="{{item.areaName}}"></span></td>
 														<td>{{item.companyDeviceName}}</td>
 														<td>
 															<jsp:include page="controls/reduzMeters.jsp"/>

@@ -15,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Null;
 
 import br.com.eneeyes.main.dto.AlarmDto;
 import br.com.eneeyes.main.model.register.Gas;
@@ -104,16 +103,14 @@ public class Alarm {
 	private Double alarm2;
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="PERFIL_ALARM_ID2")
-	@Null
+	@JoinColumn(name="PERFIL_ALARM_ID2", nullable = true)
 	private PerfilAlarm perfilAlarm2;
 	
 	@Column(name = "ALARM_3")		
 	private Double alarm3;
 	
 	@OneToOne(cascade=CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name="PERFIL_ALARM_ID3")
-	@Null
+	@JoinColumn(name="PERFIL_ALARM_ID3", nullable = true)
 	private PerfilAlarm perfilAlarm3;
 	
 	@Column(name = "ALARM_11", nullable = true)		

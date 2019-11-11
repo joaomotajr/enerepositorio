@@ -36,7 +36,7 @@ public class SiteService {
    
     public Boolean SendEmail(ArrayList<String> to, String subject, String body) {
  	   
-	   String from = "joao.junior@chipsat.com.br";            
+	   String from = "projetos@enesens.com.br";            
        
 	   try {
  

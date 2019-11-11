@@ -39,7 +39,7 @@ public class ApplicationConfig {
     public Session mailSession() {
     	
     	final String from = "projetos@enesens.com.br";
-  	   	final  String password = "enetecnologia2014";  	    
+  	   	final  String password = "enetec@2019";  	    
   	   	
 	    Properties props = new Properties();  
 	  

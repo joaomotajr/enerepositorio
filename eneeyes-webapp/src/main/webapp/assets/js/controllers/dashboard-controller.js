@@ -134,7 +134,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 		$scope.listAllDashCompaniesPosition = new ViewService.listAllDashCompaniesPosition();		 
 		$scope.listAllDashCompaniesPosition.$view({_csrf : angular.element('#_csrf').val()}, function(){
 		
-			if($scope.listAllDashCompaniesPosition != null) {
+			if($scope.listAllDashCompaniesPosition != null && $scope.listAllDashCompaniesPosition.list != null) {
 				for(var i = 0; i < $scope.listAllDashCompaniesPosition.list.length; i++) {				 
 					 
 					 $scope.dashCompaniesPosition[i] = $scope.listAllDashCompaniesPosition.list[i];

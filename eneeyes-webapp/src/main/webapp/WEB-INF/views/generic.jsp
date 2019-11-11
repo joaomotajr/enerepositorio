@@ -12,7 +12,7 @@
 							<tr>
 								<th>Simbolo</th>
 								<th>Nome</th>
-								<th>Modelo</th>                                                            
+								<th>Dispositivo</th>
 								<th>Editar</th>
 								<th>Excluir</th>						
 							</tr>
@@ -21,7 +21,7 @@
 							<tr data-ng-repeat="item in generics">										
 								<td>&nbsp;<i class="fa" data-ng-class="item.deviceType.symbol" style="font-size:125%;"></i>&nbsp;</td>
 								<td>{{item.name}}</td>
-								<td>{{item.model}}</td>															        
+								<td>{{item.deviceType.description}}</td>															        
 								<td><button type="button" class="btn btn-primary btn-xs"   data-ng-click="editGeneric($index)">editar</button></td>
 								<td>									
 									<a type="button" class="btn btn-danger btn-xs" data-popover=' do Dispositivo: [ {{item.name}} ]' data-confirm="deleteGeneric($index)" >excluir</a>

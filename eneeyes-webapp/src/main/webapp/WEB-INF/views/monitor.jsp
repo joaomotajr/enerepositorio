@@ -86,7 +86,7 @@
                                            		&nbsp;&nbsp; 
                                            	</td>
                                            	<td>
-                                           		<a href="#" data-ng-click="editActionCreated(item.index)" class="button fa fa-list-ol" style="font-size:1.6em;" title="A&ccedil;&otilde;es a serem Verificadas pelo Operador"></a>
+                                           		<a href="#" data-ng-click="editActionCreated(item.uid)" class="button fa fa-list-ol" style="font-size:1.6em;" title="A&ccedil;&otilde;es a serem Verificadas pelo Operador"></a>
                                             </td>                                        						
 										</tr>										
 									</tbody>
@@ -125,10 +125,8 @@
 											<th>Reportar</th>
 										</tr>
 									</thead>
-									<tbody>
-										
-										<tr data-ng-repeat="item in dashCompaniesAlarm | filter: {alarmStatus: 'READED' } track by item.uid">																
-												
+									<tbody>										
+										<tr data-ng-repeat="item in dashCompaniesAlarm | filter: {alarmStatus: 'READED' } track by item.uid">												
 											<td>{{item.company_name}}</td>
 											<td>{{item.company_detector_name}}</td>
 												<td style="padding-top: 13px ! important;"> 
@@ -142,9 +140,7 @@
 																{{item.alarmType}} 
 													</span>
 												</td>
-											<td>
-												{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}	
-											</td>
+											<td>{{item.last_update_full | date:'dd/MM/yyyy HH:mm'}}</td>
 											<td>
 												<span data-ng-if="item.sigmaStatus=='OFF'" class="icon fa fa-exchange" style="font-size:1.4em; color: gray" title="Sem Integra&ccedil;&atilde;o ao Sigma Habilitada"></span>
                                             	<span data-ng-if="item.sigmaStatus=='ERROR'" class="icon fa fa-exchange" style="font-size:1.4em; color: red" title="Falha ao Informar Sigma"></span>
@@ -166,10 +162,9 @@
                                            		&nbsp;&nbsp;
                                            	</td>
                                            	<td>
-                                           		<a href="#" data-ng-click="editActionReaded(item.index)" class="button fa fa-list-ol" style="font-size:1.6em;" title="A&ccedil;&otilde;es a serem Verificadas pelo Operador"></a>
+                                           		<a href="#" data-ng-click="editActionReaded(item.uid)" class="button fa fa-list-ol" style="font-size:1.6em;" title="A&ccedil;&otilde;es a serem Verificadas pelo Operador"></a>
                                             </td>        											
-										</tr>   																							
-										
+										</tr>										
 									</tbody>
 								</table>
 							</div>
@@ -253,7 +248,6 @@
 												<div class="box-header with-border"><i class="fa fa-envelope"></i> Hist&oacute;rico de Mensagens:
 												</div>
 												<div class="box-body" style="font-size: 0.8em">
-
 													<table class='rui-table' data-cellspacing="0" data-width="100%">
 														<thead>
 															<tr>	                
@@ -279,29 +273,23 @@
 													<input class="form-control inputProfile" data-ng-model="selectedPositionAlarm.feedback">                                                                       
 												</div>
 											</div>
-										</div>																		
-													  
-									</div>    
-																										
+										</div>													  
+									</div>																										
 								</form>
 							</div>
-						</div>
-										
+						</div>										
 					</div>
 					
 					<div class="modal-footer">						
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-						
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>						
 						<button data-ng-if="selectedPositionAlarm.alarmStatus=='READED'" type="button" data-ng-click="updateAlarmStatus('SOLVED')" class="btn btn-success" data-dismiss="modal"
 							title="Encerrar Alarme">Encerrar Alarme
-						</button>
-						                                                                
+						</button>						                                                                
 						<button type="button" data-ng-click="savePositionAlarmMessage();" class="btn btn-primary" data-dismiss="modal"
 							title="Salvar Nova Mensagem"
 							data-ng-disabled="(selectedPositionAlarm.feedback) ? false : true">Registrar Provid&ecirc;ncia 
 						</button>						                                
-					</div>
-					
+					</div>					
 				</div>
 			</div>		
 		</div>    	

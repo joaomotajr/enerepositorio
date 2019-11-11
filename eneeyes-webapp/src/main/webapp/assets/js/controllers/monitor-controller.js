@@ -3,8 +3,8 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
 
 	$scope.dashCompaniesAlarm = [];
 	
-	$scope.updateSound = function(index) {		
-		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarm[index];		
+	$scope.updateSound = function(uid) {				
+		$scope.selectedPositionAlarm = getSelectedItem(uid);
 		$scope.updateSoundStatus = new PositionAlarmService.updateSoundStatus();				 
 		$scope.updateSoundStatus.$positionAlarm({_csrf : angular.element('#_csrf').val(), soundStatus : 'SILENT', uid: $scope.selectedPositionAlarm.uid}, function() {
 			$scope.dashCompaniesAlarm[index].soundStatus = 'SILENT';
@@ -17,10 +17,8 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
 			elementLoaded.play();
 	};
 	
-	$scope.getCompaniesAlarm = function() {
-		
+	$scope.getCompaniesAlarm = function() {		
 		$scope.loading = true;
-		$scope.dashCompaniesAlarm = [];
 		$scope.listAllDashCompaniesAlarm = new ViewService.listAllDashCompaniesAlarmByAlarms();		 
 		$scope.listAllDashCompaniesAlarm.$view({_csrf : angular.element('#_csrf').val()}, function() {
 			
@@ -29,17 +27,39 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
 				return;
 			}
 
-			for(var i = 0; i < $scope.listAllDashCompaniesAlarm.list.length; i++) {				
-				$scope.dashCompaniesAlarm[i] = $scope.listAllDashCompaniesAlarm.list[i];
-				$scope.dashCompaniesAlarm[i].last_update_full = $scope.listAllDashCompaniesAlarm.list[i].last_update;
-				$scope.dashCompaniesAlarm[i].last_update = timeSinceLocal($scope.listAllDashCompaniesAlarm.list[i].last_update);				 
-				$scope.dashCompaniesAlarm[i].last_value	 = Math.round($scope.listAllDashCompaniesAlarm.list[i].last_value * 100) / 100 ;
-				$scope.dashCompaniesAlarm[i].index = i; 
-			
-				if ($scope.dashCompaniesAlarm[i].alarmStatus == "CREATED" && $scope.dashCompaniesAlarm[i].soundStatus == "ON") {
-					$scope.playSound();
+			$scope.listAllDashCompaniesAlarm.list.forEach(function(item, index)  {
+				var exists = $scope.dashCompaniesAlarm.find(function(e) {
+					return item.uid === e.uid;
+				});
+				if (!exists) {
+					var elem = {};
+					elem = item;
+					elem.last_update_full = $scope.listAllDashCompaniesAlarm.list[index].last_update;
+					elem.last_update = timeSinceLocal($scope.listAllDashCompaniesAlarm.list[index].last_update);				 
+					elem.last_value = Math.round($scope.listAllDashCompaniesAlarm.list[index].last_value * 100) / 100;
+					elem.index = index;
+					$scope.dashCompaniesAlarm.push(elem);
+				} else {
+					exists = item;
+					exists.last_update_full = $scope.listAllDashCompaniesAlarm.list[index].last_update;
+					exists.last_update = timeSinceLocal($scope.listAllDashCompaniesAlarm.list[index].last_update);				 
+					exists.last_value = Math.round($scope.listAllDashCompaniesAlarm.list[index].last_value * 100) / 100;
 				}
-			}				 
+			});
+
+			$scope.dashCompaniesAlarm.forEach(function(item, index)  {
+				var exists = $scope.listAllDashCompaniesAlarm.list.find(function(e) {
+					return item.uid === e.uid;
+				});
+				if (!exists) {
+					$scope.dashCompaniesAlarm.splice(index, 1);
+				} else {
+					if (exists.alarmStatus == "CREATED" && exists.soundStatus == "ON") {
+						$scope.playSound();
+					}
+				}
+			});
+						 
 			$scope.loading = undefined;         	         	
        });
 	 };	
@@ -54,7 +74,8 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
 		};
 		$scope.inclusaoPositionAlarmMessage = new PositionAlarmMessageService.save(positionAlarmMessage);
 		$scope.inclusaoPositionAlarmMessage.$positionAlarmMessage({_csrf : angular.element('#_csrf').val()}, function() {				
-			$scope.getCompaniesAlarm(); 
+			removeSelectedItem($scope.selectedPositionAlarm.uid);
+			$scope.getCompaniesAlarm();
 		});
 	}
 	
@@ -63,21 +84,36 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
 		$scope.inclusaoPositionAlarmMessage.$positionAlarmMessage({_csrf : angular.element('#_csrf').val(), id : positionAlarmId }, function() {		
 			$scope.selectedPositionAlarm.messages = $scope.inclusaoPositionAlarmMessage.list;						 
 		});
-	}
+	};
 	
-	$scope.editActionCreated = function(index) {		
+	$scope.editActionCreated = function(uid) {
 		$scope.onlyHistoric = false;
-		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarm[index];
-		$scope.getPositionAlarmMessage($scope.selectedPositionAlarm.uid);
-		
+		$scope.selectedPositionAlarm = getSelectedItem(uid);
+		$scope.getPositionAlarmMessage($scope.selectedPositionAlarm.uid);		
 		$timeout(function () {
             $('#modalAction').modal({ show: 'false' });                        
         }, 200);		
+	};
+
+	function getSelectedItem(uid) {
+		return $scope.dashCompaniesAlarm.find(function(e) {
+			return uid === e.uid;
+		});	
+	}
+
+	function removeSelectedItem(uid) {
+		 var index = $scope.dashCompaniesAlarm.find(function(e) {
+			return uid === e.uid;
+		});	
+
+		if (index) {
+			$scope.dashCompaniesAlarm.splice(index, 1);
+		}
 	}
 	
-	$scope.editActionReaded = function(index) {		
+	$scope.editActionReaded = function(uid) {		
 		$scope.onlyHistoric = false;
-		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarm[index];
+		$scope.selectedPositionAlarm = getSelectedItem(uid);
 		$scope.getPositionAlarmMessage($scope.selectedPositionAlarm.uid);
 		
 		$timeout(function () {
@@ -85,9 +121,9 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
         }, 200);		
 	};
 	
-	$scope.editActionSolved = function(index) {		
+	$scope.editActionSolved = function(uid) {		
 		$scope.onlyHistoric = true;
-		$scope.selectedPositionAlarm = $scope.dashCompaniesAlarm[index];
+		$scope.selectedPositionAlarm = getSelectedItem(uid);
 		$scope.getPositionAlarmMessage($scope.selectedPositionAlarm.uid);
 		
 		$timeout(function () {
@@ -98,6 +134,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
 	$scope.updateAlarmStatus = function(status) {		
 		$scope.updateStatus = new PositionAlarmService.updateStatus();				 
 		$scope.updateStatus.$positionAlarm({_csrf : angular.element('#_csrf').val(), alarmStatus : status, uid: $scope.selectedPositionAlarm.uid}, function() {
+			removeSelectedItem($scope.selectedPositionAlarm.uid);
 			$scope.getCompaniesAlarm();
 		});		 
 	};
@@ -109,7 +146,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
     	if($scope.$root.errorTimes <= 5 && !$scope.loading) {
     		$scope.getCompaniesAlarm();    		
     	}
-	}, 10000);
+	}, 30000);
 		
 	angular.element('body').removeClass('loading');
 });

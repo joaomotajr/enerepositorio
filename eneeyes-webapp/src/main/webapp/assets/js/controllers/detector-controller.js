@@ -27,8 +27,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 			 return;
 		}
 		
-		angular.element('body').addClass('loading'); 
-				
+		angular.element('body').addClass('loading');				
 		var detector = {
 			uid: $scope.detectorUid != undefined ? $scope.detectorUid : 0,
 			name: $scope.detectorName,
@@ -40,18 +39,15 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
     	}; 
 		 
 		$scope.inclusaoDetector = new DetectorService.save(detector);		 
-		$scope.inclusaoDetector.$detector({_csrf : angular.element('#_csrf').val()}, function()
-		{         	         	
-			
+		$scope.inclusaoDetector.$detector({_csrf : angular.element('#_csrf').val()}, function() {			
 			$timeout(function () {                    
 				$scope.clearFormDetector();
 	            $scope.getDetectors();
 	                     	
 	            angular.element('body').removeClass('loading');				 
-	         }, 500);			           
-
+	         }, 500);
 		});			 
-	 }
+	 };
 	 
 	$scope.clearFormDetector = function () {
 		
@@ -99,7 +95,7 @@ app.controller('detectorController', function ($scope, $timeout, $filter, Detect
 		    $scope.detectorImage = ($scope.detectors[index].image == null ? "/assets/img/cover.jpg" :  $scope.detectors[index].image);
 		    $scope.detectorTransmitter = $scope.detectors[index].transmitterDto;
 			$scope.detectorSensor = $scope.detectors[index].sensorDto;				
-			$scope.getExistDetector($scope.detectorUid) ;		    		    
+			$scope.getExistDetector($scope.detectorUid);
 		    $timeout(function () {
 		    	$scope.search = {manufacturer: $scope.detectorManufacturer};
 		    	$scope.searchSensor = {manufacturer: $scope.detectorManufacturer , sensors: $scope.detectorSensors};		    	

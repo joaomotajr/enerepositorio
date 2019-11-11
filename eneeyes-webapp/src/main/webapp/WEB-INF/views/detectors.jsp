@@ -132,8 +132,7 @@
 					                
 					                <div class="col-md-4" style="padding-right: 5px !important; padding-left: 5px !important">															
 						                <div class="box box-primary box-solid">
-						                    <div class="box-header with-border"><strong><i class="fa fa-expand"></i> Transmissor *</strong></div>
-						                	 
+						                    <div class="box-header with-border"><strong><i class="fa fa-expand"></i> Transmissor *</strong></div>						                	 
 						                    <div class="box-body">
 						                        <select class="form-control" data-live-search="true" 
 						                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
@@ -147,8 +146,7 @@
 
 									<div class="col-md-4" style="padding-right: 5px !important;">
 						                <div class="box box-danger box-solid">
-						                    <div class="box-header with-border"><strong><i class="fa fa-feed"></i> Sensor *</strong></div>
-						                	 
+						                    <div class="box-header with-border"><strong><i class="fa fa-feed"></i> Sensor *</strong></div>						                	 
 						                    <div class="box-body">
 						                        <select class="form-control" data-live-search="true" 
 						                            style="width: 100%;" tabindex="-1" aria-hidden="true"                              
@@ -161,20 +159,17 @@
 									</div>	
 								</div>								
 								<hr style="margin-top: 5px !important; margin-bottom: 5px !important;">												            			                  
-				            </form>
-							
+				            </form>							
 						</div>	
 					</div>									
 			  	</div>
 			  	
 			  	<div class="modal-footer" style="padding: 8px;">
 			  		<button type="button" data-ng-click="clearFormDetector()" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-
 					<button type="button" data-ng-click="saveDetector();" class="btn btn-primary" data-dismiss="modal"
 						data-ng-disabled="(detectorName && detectorModel && detectorManufacturer && detectorTransmitter && detectorSensor) ? false : true">Salvar
 					</button>					                               										
-			  	</div>
-			  	
+			  	</div>			  	
 		  	</div>
 		</div>		
 	</div> 

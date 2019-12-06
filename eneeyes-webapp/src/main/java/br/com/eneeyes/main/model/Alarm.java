@@ -46,8 +46,14 @@ public class Alarm {
 		this.alarm22 = dto.getAlarm22();
 		this.alarm33 = dto.getAlarm33();
 		this.alarmSound = dto.getAlarmSound();
-		this.alarmSms = dto.getAlarmSms();
-		this.alarmEmail = dto.getAlarmEmail();
+		this.alarmSms1 = dto.getAlarmSms1();
+		this.alarmSms2 = dto.getAlarmSms2();
+		this.alarmSms3 = dto.getAlarmSms3();
+		this.alarmEmail1 = dto.getAlarmEmail1();
+		this.alarmEmail2 = dto.getAlarmEmail2();
+		this.alarmEmail3 = dto.getAlarmEmail3();
+		this.alarmEmailOffline = dto.getAlarmEmailOffline();
+		this.alarmSmsOffline = dto.getAlarmSmsOffline();
 		this.alarmOn = dto.getAlarmOn();
 		this.alarmAutoClose = dto.getAlarmAutoClose();
 		this.alarm2On = dto.getAlarm2On();
@@ -61,6 +67,7 @@ public class Alarm {
 		this.action3 = dto.getAction3();
 		this.action4 = dto.getAction4();
 		this.company = dto.getCompanyDto();
+		this.alarmLatencia = dto.getAlarmLatencia();
 		
 		if(dto.getPerfilAlarmDto1() != null)
 			this.perfilAlarm1 = new PerfilAlarm(dto.getPerfilAlarmDto1());
@@ -140,16 +147,34 @@ public class Alarm {
 	@Column(name = "ALARM_SOUND", nullable = true, columnDefinition = "Boolean default false")		
 	private Boolean alarmSound;
 	
-	@Column(name = "ALARM_EMAIL", nullable = true, columnDefinition = "Boolean default false")		
-	private Boolean alarmEmail;
+	@Column(name = "ALARM_EMAIL1", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarmEmail1;
 	
-	@Column(name = "ALARM_SMS", nullable = true, columnDefinition = "Boolean default false")		
-	private Boolean alarmSms;
+	@Column(name = "ALARM_EMAIL2", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarmEmail2;
+	
+	@Column(name = "ALARM_EMAIL3", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarmEmail3;
+	
+	@Column(name = "ALARM_SMS1", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarmSms1;
+	
+	@Column(name = "ALARM_SMS2", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarmSms2;
+	
+	@Column(name = "ALARM_SMS3", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarmSms3;
+	
+	@Column(name = "ALARM_EMAIL_OFFLINE", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarmEmailOffline;
+	
+	@Column(name = "ALARM_SMS_OFFLINE", nullable = true, columnDefinition = "Boolean default false")		
+	private Boolean alarmSmsOffline;
 	
 	@Column(name = "ALARM_ACTION", nullable = true)		
 	private Boolean alarmAction;
 	
-	@Column(name = "ALARM_AUTO_CLOSE", nullable = true, columnDefinition = "Boolean default false")		
+	@Column(name = "ALARM_AUTO_CLOSE", nullable = true, columnDefinition = "Boolean default false")
 	private Boolean alarmAutoClose;
 	
 	@Column(name = "ACTION1", nullable = true, length=300)		
@@ -173,6 +198,9 @@ public class Alarm {
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "alarm", cascade = CascadeType.ALL)
 	private Set<AlarmMobile> alarmMobiles = new HashSet<AlarmMobile>();
+	
+	@Column(name = "ALARM_LATENCIA", nullable = true, columnDefinition = "Integer default 0")
+	private Integer alarmLatencia;
 		
 	public final Long getUid() {
 		return uid;
@@ -316,24 +344,72 @@ public class Alarm {
 
 	public final void setAlarmSound(Boolean alarmSound) {
 		this.alarmSound = alarmSound;
-	}
+	} 
 	
-	public final Boolean getAlarmEmail() {
-		return alarmEmail;
+	public Boolean getAlarmEmail1() {
+		return alarmEmail1;
 	}
 
-	public final void setAlarmEmail(Boolean alarmEmail) {
-		this.alarmEmail = alarmEmail;
-	}
-	
-	public Boolean getAlarmSms() {
-		return alarmSms;
+	public void setAlarmEmail1(Boolean alarmEmail1) {
+		this.alarmEmail1 = alarmEmail1;
 	}
 
-	public void setAlarmSms(Boolean alarmSms) {
-		this.alarmSms = alarmSms;
+	public Boolean getAlarmEmail2() {
+		return alarmEmail2;
 	}
-	
+
+	public void setAlarmEmail2(Boolean alarmEmail2) {
+		this.alarmEmail2 = alarmEmail2;
+	}
+
+	public Boolean getAlarmEmail3() {
+		return alarmEmail3;
+	}
+
+	public void setAlarmEmail3(Boolean alarmEmail3) {
+		this.alarmEmail3 = alarmEmail3;
+	}
+
+	public Boolean getAlarmSms1() {
+		return alarmSms1;
+	}
+
+	public void setAlarmSms1(Boolean alarmSms1) {
+		this.alarmSms1 = alarmSms1;
+	}
+
+	public Boolean getAlarmSms2() {
+		return alarmSms2;
+	}
+
+	public void setAlarmSms2(Boolean alarmSms2) {
+		this.alarmSms2 = alarmSms2;
+	}
+
+	public Boolean getAlarmSms3() {
+		return alarmSms3;
+	}
+
+	public void setAlarmSms3(Boolean alarmSms3) {
+		this.alarmSms3 = alarmSms3;
+	} 
+
+	public Boolean getAlarmEmailOffline() {
+		return alarmEmailOffline;
+	}
+
+	public void setAlarmEmailOffline(Boolean alarmEmailOffline) {
+		this.alarmEmailOffline = alarmEmailOffline;
+	} 
+
+	public Boolean getAlarmSmsOffline() {
+		return alarmSmsOffline;
+	}
+
+	public void setAlarmSmsOffline(Boolean alarmSmsOffline) {
+		this.alarmSmsOffline = alarmSmsOffline;
+	}
+
 	public final Boolean getAlarmAction() {
 		return alarmAction;
 	}
@@ -413,4 +489,12 @@ public class Alarm {
 	public Set<AlarmMobile> getAlarmMobiles() {
 		return alarmMobiles;
 	}
+
+	public Integer getAlarmLatencia() {
+		return alarmLatencia;
+	}
+
+	public void setAlarmLatencia(Integer alarmLatencia) {
+		this.alarmLatencia = alarmLatencia;
+	} 
 }

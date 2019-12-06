@@ -82,8 +82,7 @@ public class ProcessAlarmService {
 		
 		updatePositionByHistoric(historic, alarmType);			
 				
-		if(alarmDto != null) {
-			//Alarm de OffLine com feedback desabilitado
+		if(alarmDto != null) {		
 			if(alarmType == AlarmType.OFFLINE && !alarmDto.getAlarmOffLineOn())
 				updateAlarmsAndActions(alarmType, historic);
 			else
@@ -106,7 +105,7 @@ public class ProcessAlarmService {
 			positionService.updatePositionById(alarmType, historic.getValue(), historic.getLastUpdate(), historic.getUid(), positionView.getUid());			
 		}		
 		
-		if(alarmType == AlarmType.NORMAL && alarmDto.getAlarmAutoClose()) {			
+		if(alarmType == AlarmType.NORMAL && alarmDto.getAlarmAutoClose() != null && alarmDto.getAlarmAutoClose()) {			
 			if (positionView.getAlarmType() == AlarmType.OFFLINE || 
 					positionView.getAlarmType() == AlarmType.DETECCAO ||
 					positionView.getAlarmType() == AlarmType.ALERTA ||
@@ -126,25 +125,19 @@ public class ProcessAlarmService {
 	
 	private void updatePositionByHistoric(Historic historic, AlarmType alarmType) {
 
-		PositionView positionView = positionViewRepository.findByCompanyDeviceId(historic.getCompanyDeviceId());
-		
-		if (positionView != null) {
-			
-			positionService.updatePositionById(alarmType, historic.getValue(), historic.getLastUpdate(), historic.getUid(), positionView.getUid()); 
-			
+		PositionView positionView = positionViewRepository.findByCompanyDeviceId(historic.getCompanyDeviceId());		
+		if (positionView != null) {			
+			positionService.updatePositionById(alarmType, historic.getValue(), historic.getLastUpdate(), historic.getUid(), positionView.getUid());			
 		}
 	}
 	
 	private AlarmDto getExistAlarm(Long companyDeviceId) {
 		
-		CompanyDevice companyDevice = new CompanyDevice(companyDeviceId);
-		
+		CompanyDevice companyDevice = new CompanyDevice(companyDeviceId);		
 		if(AlarmSingletonRepository.init()) {			
 			AlarmSingletonRepository.populate(companyDeviceAlarmViewService.findAll());
-		}
-		
-		return AlarmSingletonRepository.findByCompanyDevice(companyDevice.getUid());
-		
+		}		
+		return AlarmSingletonRepository.findByCompanyDevice(companyDevice.getUid());		
 	}
 					
 	private AlarmType checkExistsAlarms(AlarmDto alarm, BigDecimal lastValue ) {	
@@ -171,16 +164,13 @@ public class ProcessAlarmService {
 		CompanyDevice companyDevice = new CompanyDevice(historic.getCompanyDeviceId());					
 		AlarmParams alarmParams = new AlarmParams(alarmDto, alarmType); 
 		
-		historicAlarmService.save(historic.getValue(), companyDevice.getUid(), historic.getUid(), alarmDto, alarmType, alarmParams);
-		
+		historicAlarmService.save(historic.getValue(), companyDevice.getUid(), historic.getUid(), alarmDto, alarmType, alarmParams);		
 		if (alarmType != AlarmType.OFF) {
 			updatePositionAlarm(historic, companyDevice, alarmType, alarmParams);
-		}
-		
+		}		
 	}
 	
-	private void updateAlarmsAndActions(AlarmType alarmType, Historic historic) {
-		
+	private void updateAlarmsAndActions(AlarmType alarmType, Historic historic) {		
 		CompanyDevice companyDevice = new CompanyDevice(historic.getCompanyDeviceId());
 		historicAlarmService.save(historic.getValue(), companyDevice.getUid(), historic.getUid(), alarmType);
 	}
@@ -194,16 +184,13 @@ public class ProcessAlarmService {
 		
 	private void updatePositionAlarm(Historic historic, CompanyDevice companyDevice, AlarmType alarmType, AlarmParams alarmParams) {		
 				
-		List<AlarmStatus> solvedOrCancelesAlarms = new ArrayList<AlarmStatus>();
-		
+		List<AlarmStatus> solvedOrCancelesAlarms = new ArrayList<AlarmStatus>();		
 		solvedOrCancelesAlarms.add(AlarmStatus.SOLVED);
 		solvedOrCancelesAlarms.add(AlarmStatus.CANCELED);
 		solvedOrCancelesAlarms.add(AlarmStatus.AUTO);
 
-		PositionAlarm positionAlarm = positionAlarmRepository.findByCompanyDeviceAndAlarmTypeAndAlarmStatusNotIn(companyDevice, alarmType, solvedOrCancelesAlarms);
-		
-		if(positionAlarm == null) {
-			
+		PositionAlarm positionAlarm = positionAlarmRepository.findByCompanyDeviceAndAlarmTypeAndAlarmStatusNotIn(companyDevice, alarmType, solvedOrCancelesAlarms);		
+		if(positionAlarm == null) {			
 			positionAlarm =  new PositionAlarm();
 			positionAlarm.setCompanyDevice(companyDevice);
 			positionAlarm.setFirstUpdate(new Date());

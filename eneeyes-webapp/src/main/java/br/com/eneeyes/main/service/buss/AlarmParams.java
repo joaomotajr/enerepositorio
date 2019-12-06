@@ -38,8 +38,7 @@ public class AlarmParams {
 
 	public final SigmaStatus getSigmaStatus() {
 		
-		SigmaStatus sigmaStatus = null;
-		
+		SigmaStatus sigmaStatus = null;		
 		if(this.alarm.getAlarmSigma() != null && this.alarm.getAlarmSigma())
 			sigmaStatus = SigmaStatus.ON;
 		else
@@ -53,13 +52,14 @@ public class AlarmParams {
 
 	public final EmailStatus getEmailStatus() {
 		
-		EmailStatus emailStatus = null;
-		
-		if(this.alarm.getAlarmEmail() != null && this.alarm.getAlarmEmail())
+		EmailStatus emailStatus = null;		
+		if (this.alarmType == AlarmType.DETECCAO && this.alarm.getAlarmEmail1() != null && this.alarm.getAlarmEmail1() ||
+				this.alarmType == AlarmType.ALERTA && this.alarm.getAlarmEmail2() != null && this.alarm.getAlarmEmail2() ||
+				this.alarmType == AlarmType.EVACUACAO && this.alarm.getAlarmEmail3() != null && this.alarm.getAlarmEmail3() ||
+				this.alarmType == AlarmType.OFFLINE && this.alarm.getAlarmEmailOffline() != null && this.alarm.getAlarmEmailOffline())
 			emailStatus = EmailStatus.PENDENT;
 		else
-			emailStatus = EmailStatus.OFF;
-		
+			emailStatus = EmailStatus.OFF;		
 		return emailStatus;
 	}
 	
@@ -67,28 +67,27 @@ public class AlarmParams {
 	public final SmsStatus getSmsStatus() {
 		
 		SmsStatus smsStatus = null;
-		if(this.alarm.getAlarmSms() != null && this.alarm.getAlarmSms())
+		if (this.alarmType == AlarmType.DETECCAO && this.alarm.getAlarmSms1() != null && this.alarm.getAlarmSms1() ||
+			this.alarmType == AlarmType.ALERTA && this.alarm.getAlarmSms2() != null && this.alarm.getAlarmSms2() ||
+			this.alarmType == AlarmType.EVACUACAO && this.alarm.getAlarmSms3() != null && this.alarm.getAlarmSms3() ||
+			this.alarmType == AlarmType.OFFLINE && this.alarm.getAlarmSmsOffline() != null && this.alarm.getAlarmSmsOffline())
 			smsStatus = SmsStatus.PENDENT;
 		else
-			smsStatus = SmsStatus.OFF;
-		
+			smsStatus = SmsStatus.OFF;		
 		return smsStatus;
-	}
-
+	}	
+	
 	public final SoundStatus getSoundStatus() {
 		
-		SoundStatus soundStatus = null;
-		
+		SoundStatus soundStatus = null;		
 		if(this.alarm.getAlarmSound())
 			soundStatus = SoundStatus.ON;
 		else
-			soundStatus = SoundStatus.OFF;
-		
+			soundStatus = SoundStatus.OFF;		
 		return soundStatus;
 	}
 
-	public final String getAction() {
-		
+	public final String getAction() {		
 		String action = null;
 		if(this.alarmType == AlarmType.DETECCAO)
 			action = alarm.getAction1();
@@ -97,9 +96,7 @@ public class AlarmParams {
 		else if(this.alarmType == AlarmType.EVACUACAO)
 			action = alarm.getAction3();
 		else if(this.alarmType == AlarmType.OFFLINE)
-			action = alarm.getAction4();
-		
+			action = alarm.getAction4();		
 		return action;
-	}
-	
+	}	
 }

@@ -1,5 +1,5 @@
 
-app.controller('alarmController', function ($scope, $timeout, DeviceTypeService, AlarmService, GasService, CompanyService,
+app.controller('alarmController', function ($scope, $rootScope, $timeout, DeviceTypeService, AlarmService, GasService, CompanyService,
 	ViewService, UnitMeterService, PerfilAlarmService, AlarmEmailService, AlarmMobileService) {
 
 	$('.modal')
@@ -24,11 +24,12 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 	$scope.emails = [];
 	$scope.mobiles = [];
 	$scope.changed = true;
+	$scope.alarmMessageError = [];
 	
 	$scope.saveAlarm = function() {		
 		angular.element('body').addClass('loading');		
 		
-		if($scope.unitMeter.uid == 0) {
+		if ($scope.unitMeter.uid == 0) {
 			$scope.alarmAlarm1= $scope.deviceTypeDigital;
 		}
 				
@@ -52,10 +53,16 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 			alarmAutoClose: $scope.radioModel2,
 			alarm2On : $scope.enableAlarm2,
 			alarm3On : $scope.enableAlarm3,
-			alarmSigma:  $("#checkboxSigmaOnOff").prop('checked'),			
-			alarmEmail:  $("#checkboxEmailOnOff").prop('checked'),
+			alarmSigma:  $("#checkboxSigmaOnOff").prop('checked'),
 			alarmSound:  $("#checkboxSonoroOnOff").prop('checked'),
-			alarmSms:  $("#checkboxSmsOnOff").prop('checked'),
+			alarmSms1: $scope.alarmSms1,
+			alarmSms2: $scope.alarmSms2,
+			alarmSms3: $scope.alarmSms3,
+			alarmEmail1: $scope.alarmEmail1,
+			alarmEmail2: $scope.alarmEmail2,
+			alarmEmail3: $scope.alarmEmail3,
+			alarmEmailOffline: $scope.alarmEmailOffline,
+			alarmSmsOffline: $scope.alarmSmsOffline,
 			alarmAction:  $scope.alarmAction,
 			action1 : $scope.action1,
 			action2 : $scope.action2,
@@ -65,10 +72,8 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 
 		if(!$scope.enableAlarm2) 
 		   alarm.perfilAlarmDto2=null;
-
-		if(!$scope.enableAlarm3) 
-		   alarm.perfilAlarmDto3=null;
-		
+		if(!$scope.enableAlarm3)
+		   alarm.perfilAlarmDto3=null;		
 		if($scope.alarmGas)
 			alarm.gasDto = $scope.alarmGas;
 		 
@@ -113,22 +118,22 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		$scope.radioModel = false;
 		$scope.radioModel2 = false;
 		$scope.enableAlarm2 = false;
-		$scope.enableAlarm3 = false;
-		$scope.email = '';
-		$scope.emailValid = true;
-		$scope.emailsValid = true;
-		$scope.mobile = '';
+		$scope.enableAlarm3 = false;		
+		$scope.alarmEmaill = false;
+		$scope.alarmEmail2 = false;
+		$scope.alarmEmail3 = false;		
+		$scope.alarmSmsl = false;
+		$scope.alarmSms2 = false;
+		$scope.alarmSms3 = false;
+		$scope.alarmEmailOffline = false;
+		$scope.alarmSmsOffline = false;
 		$scope.mobileValid = true;
-		$scope.mobilesValid = true;
 		$scope.emails = [];
 		$scope.mobiles = [];		
 		$("#checkboxSigmaOnOff").prop('checked', false);
 		$("#checkboxOfflineOnOff").prop('checked', true);
-		$("#checkboxSonoroOnOff").prop('checked', false);
-		$("#checkboxEmailOnOff").prop('checked', false);
-		$("#checkboxSmsOnOff").prop('checked', false);
+		$("#checkboxSonoroOnOff").prop('checked', false);		
 		$("#checkboxActionOff").prop('checked', false);
-
 		if($scope.$root.isFrom == "MASTER")
 			$scope.selectedCompany = '';
 		else
@@ -166,8 +171,7 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		}
 	};
 	
-	$scope.editAlarm = function (index) {
-		
+	$scope.editAlarm = function (index) {		
 		$scope.showPerfilAlarm1 = false;
 		$scope.showPerfilAlarm2 = false;
 		$scope.showPerfilAlarm3 = false;
@@ -177,7 +181,6 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		$scope.alarmName = $scope.alarms[index].name;		    
 		$scope.alarmAlarm1 = $scope.alarms[index].alarm1;
 		$scope.unitMeter = $scope.alarms[index].unitMeter;
-
 		if ($scope.unitMeter.uid == 0) {				
 			$scope.deviceTypeDigital = $scope.alarms[index].alarm1;
 		}
@@ -199,9 +202,15 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		$("#checkboxSigmaOnOff").prop('checked', $scope.alarms[index].alarmSigma);
 		$("#checkboxOfflineOnOff").prop('checked', $scope.alarms[index].alarmOffLineOn);				
 		$("#checkboxSonoroOnOff").prop('checked', $scope.alarms[index].alarmSound);		
-		$("#checkboxEmailOnOff").prop('checked', $scope.alarms[index].alarmEmail);		
-		$("#checkboxSmsOnOff").prop('checked', $scope.alarms[index].alarmSms); 
-		
+
+		$scope.alarmEmail1 = $scope.alarms[index].alarmEmail1;
+		$scope.alarmEmail2 = $scope.alarms[index].alarmEmail2;
+		$scope.alarmEmail3 = $scope.alarms[index].alarmEmail3;		
+		$scope.alarmSms1 = $scope.alarms[index].alarmSms1;
+		$scope.alarmSms2 = $scope.alarms[index].alarmSms2;
+		$scope.alarmSms3 = $scope.alarms[index].alarmSms3;
+		$scope.alarmEmailOffline = $scope.alarms[index].alarmEmailOffline;
+		$scope.alarmSmsOffline = $scope.alarms[index].alarmSmsOffline;
 		$scope.radioModel = $scope.alarms[index].alarmOn;
 		$scope.radioModel2 = $scope.alarms[index].alarmAutoClose;
 		$scope.enableAlarm2 = $scope.alarms[index].alarm2On;
@@ -211,9 +220,6 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		$scope.perfilAlarm3 = $scope.alarms[index].perfilAlarmDto3;
 		$scope.emails = $scope.alarms[index].alarmEmailsDto;
 		$scope.mobiles = $scope.alarms[index].alarmMobilesDto;
-		
-		showEmail($scope.alarms[index].alarmEmail);
-		showMobile($scope.alarms[index].alarmSms);
 		usedAlarms($scope.alarms[index].uid);								
 		angular.element('#modalAlarmEdit').modal('toggle');
 	 };
@@ -320,75 +326,23 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		if(!$scope.$$phase) 
 			$scope.$apply();
 	});
-		 
-	$("#checkboxEmailOnOff").click(function(e, parameters) {
-		$scope.userForm.$pristine = false;
-		showEmail($(this).prop("checked"));		
-    });	 
-	 
-	function showEmail (checked) {
-		$("#alarmEmail").prop('disabled', !checked );         
-		$("#alarmEmail").prop('readonly', !checked);		
-		$scope.alarmEmail = checked;
-		$scope.validEmail();
-	}
 
 	$scope.validEmail = function ($event) {
-		if ($("#checkboxEmailOnOff").prop('checked')) {			 
-			if ($scope.emails && $scope.emails.length > 0) {
-				$scope.emailsValid = true;
-			} else {
-				$scope.emailsValid = false;
-			}
-			if ( $scope.email == '' || $scope.email == null) {
-				$scope.emailValid = true;
-			} else if (!validateEmail($scope.email)) {
-				$scope.emailValid = false;
-			} else {
-				$scope.emailValid = true;
-			}
-		} else {			
-			$scope.emailValid = true;			
-		   	$scope.emailsValid = true;				
-		}				 
-		if(!$scope.$$phase) 
-			$scope.$apply();
+		if (!validateEmail($scope.email)) {
+			$scope.emailValid = false;
+		} else {
+			$scope.emailValid = true;
+		}
 	};
-
-	$("#checkboxSmsOnOff").click(function(e, parameters) {		 
-		showMobile($(this).prop("checked"));
-    });	
-
-	function showMobile(checked) {		
-		$("#alarmMobile").prop('disabled', !checked);
-		$("#alarmMobile").prop('readonly', !checked);
-		$scope.alarmMobile = checked;		 
-		$scope.validMobile();
-	}	
 
 	$scope.validMobile = function ($event) {	 
-		if  ($("#checkboxSmsOnOff").prop('checked')) {
-			if ($scope.mobiles && $scope.mobiles.length > 0) {
-				$scope.mobilesValid = true;
-			} else {
-				$scope.mobilesValid = false;
-			}
-			if ( $scope.mobile == '' || $scope.mobile == null) {
-				$scope.mobileValid = true;
-			} else if ($scope.mobile.length !== 15) {
-				$scope.mobileValid = false;
-			} else {
-				$scope.mobileValid = true;
-			}
+		if ($scope.mobile.length !== 15) {
+			$scope.mobileValid = false;
 		} else {
-			$scope.mobileValid = true;			
-		   	$scope.mobilesValid = true;
-		}			 
-		if(!$scope.$$phase) 
-			 $scope.$apply();					 
+			$scope.mobileValid = true;
+		}
 	};
 
-	$scope.alarmMessageError = [];
 	$scope.validAlarms = function ($event) {
 		var errors = [];	    	
 		$scope.errorAlarm1  = false;
@@ -402,63 +356,61 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		$scope.errorPerfil3 = false;
 
 		if( !$scope.alarmAlarm11 && !$scope.alarmAlarm1) {
-			errors.push("ALARME 1 Precisa de Uma valor [Maior Que] ou [Menor Que]");
+			errors.push("ALARME I Precisa de Uma valor [Maior Que] ou [Menor Que]");
 			$scope.errorAlarm1 = true ;
 			$scope.errorAlarm11 = true ;			
 		}
-
 		if( ($scope.alarmAlarm11 && $scope.alarmAlarm1) && (Number($scope.alarmAlarm11) > Number($scope.alarmAlarm1))) {
-			errors.push("ALARME 1 Precisa de Uma valor [Menor Que] Nï¿½O pode ser MAIOR");
+			errors.push("ALARME I Precisa de Uma valor [Menor Que] NÃO pode ser MAIOR");
 			$scope.errorAlarm1 = true ;
 			$scope.errorAlarm11 = true ;
 		}
-
 		if(!$scope.perfilAlarm1) {
-			errors.push("ALARME 1 Selecione um Perfil de Alerta");
+			errors.push("ALARME I Selecione um Perfil de Alerta");
 			$scope.errorPerfil1 = true ;
 		}
 
 		if($scope.enableAlarm2) {
 			if( ($scope.alarmAlarm1 && $scope.alarmAlarm2) && (Number($scope.alarmAlarm1) > Number($scope.alarmAlarm2) )) {
-				errors.push("[Alarme 2 <span class='text-black'> ({{alarmAlarm2}}) </span> Deve ser maior que o Alarme 1 <span class='text-black'> ({{alarmAlarm1}}) </span>]");
+				errors.push("[Alarme II <span class='text-black'> ({{alarmAlarm2}}) </span> Deve ser maior que o Alarme 1 <span class='text-black'> ({{alarmAlarm1}}) </span>]");
 				$scope.errorAlarm1 = true ;
 				$scope.errorAlarm2 = true ;
 		   }
 		   if( !$scope.alarmAlarm22 && !$scope.alarmAlarm2) {
-				errors.push("ALARME 2 Precisa de Uma valor [Maior Que] E/ou [Menor Que]");
+				errors.push("ALARME II Precisa de Uma valor [Maior Que] E/ou [Menor Que]");
 				$scope.errorAlarm2 = true ;
 				$scope.errorAlarm22 = true ;
 			}
 			if( ($scope.alarmAlarm22 && $scope.alarmAlarm2) && (Number($scope.alarmAlarm22) > Number($scope.alarmAlarm2))) {
-				errors.push("ALARME 2 Precisa de Uma valor [Menor Que] Nï¿½O pode ser MAIOR");
+				errors.push("ALARME II Precisa de Uma valor [Menor Que] NÃO pode ser MAIOR");
 				$scope.errorAlarm2 = true ;
 				$scope.errorAlarm22 = true ;
 			}
 			if(!$scope.perfilAlarm2) {
-				errors.push("ALARME 2 Selecione um Perfil de Alerta");
+				errors.push("ALARME II Selecione um Perfil de Alerta");
 				$scope.errorPerfil2 = true ;
 			}
 		}	
 
 		if($scope.enableAlarm3) {		
 			if( !$scope.alarmAlarm33 && !$scope.alarmAlarm3) {
-				errors.push("ALARME 3 Precisa de Uma valor [Maior Que] E/ou [Menor Que]");
+				errors.push("ALARME III Precisa de Uma valor [Maior Que] E/ou [Menor Que]");
 				$scope.erroralarm3 = true ;
 				$scope.errorAlarm33 = true ;
 			}
 			if( ($scope.alarmAlarm33 && $scope.alarmAlarm3) && (Number($scope.alarmAlarm33) > Number($scope.alarmAlarm3))) {
-				errors.push("ALARME 3 Precisa de Uma valor [Menor Que] Nï¿½O pode ser MAIOR");
+				errors.push("ALARME III Precisa de Uma valor [Menor Que] NÃO pode ser MAIOR");
 				$scope.errorAlarm3 = true ;
 				$scope.errorAlarm33 = true ;
 			}
 			if(!$scope.perfilAlarm3) {
-				errors.push("ALARME 3 Selecione um Perfil de Alerta");
+				errors.push("ALARME III Selecione um Perfil de Alerta");
 				$scope.errorPerfil3 = true ;
 			}
 		}
 
 		if($scope.enableAlarm2 && $scope.enableAlarm3) {
-			if( ($scope.alarmAlarm2 && $scope.alarmAlarm3) && (Number($scope.alarmAlarm2) > Number($scope.alarmAlarm3))) {
+			if (($scope.alarmAlarm2 && $scope.alarmAlarm3) && (Number($scope.alarmAlarm2) > Number($scope.alarmAlarm3))) {
 				errors.push("[Alarme 3 <span class='text-black'> ({{alarmAlarm3}}) </span> Deve ser maior que o Alarme 2 <span class='text-black'> ({{alarmAlarm2}}) </span>]");
 				$scope.errorAlarm3 = true ;
 				$scope.errorAlarm2 = true ;
@@ -477,14 +429,17 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		if(!checked)
 			$(".travarAction").addClass("disableDiv");
 		else
-			$(".travarAction").removeClass("disableDiv");
-		 
+			$(".travarAction").removeClass("disableDiv");		 
 		if(!$scope.$$phase) 
 			$scope.$apply();
-	 } 
+	 }
 	 
 	$scope.update = function (val) {
 		$scope.radioModel = val;
+
+		$scope.userForm.$pristine = false;
+		if(!$scope.$$phase) 
+			$scope.$apply();
 	};
 
 	$scope.update2 = function (val) {
@@ -534,6 +489,23 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		$scope.saveAlarmMobile(alarmMobile);
 	};
 
+	$scope.updateFeedbackAlarm = function(msg, on) {
+		$scope.updateAlarmFeedback = new AlarmService.updateFeedback();				 
+		$scope.updateAlarmFeedback.$alarm({_csrf : angular.element('#_csrf').val(), 
+			email1: $scope.alarmEmail1, 
+			email2 : $scope.alarmEmail2,
+			email3 : $scope.alarmEmail3,
+			emailOffline : $scope.alarmEmailOffline,
+			sms1 : $scope.alarmSms1,
+			sms2 : $scope.alarmSms2,
+			sms3 : $scope.alarmSms3, 
+			smsOffline : $scope.alarmSmsOffline,
+			uid: $scope.alarmUid
+		}, function() {
+			$rootScope.showGeneralMessage(msg, on == true ? 'SUCCESS' : 'DANGER');
+		});		
+	};
+
 	$scope.removeAlarmEmail = function(alarmEmail) {		 
 		$scope.deletarAlarmEmail = new AlarmEmailService.deletar(alarmEmail.uid);
 		$scope.deletarAlarmEmail.$alarmEmail({_csrf : angular.element('#_csrf').val(), id : alarmEmail.uid}, function()  {        				
@@ -542,9 +514,11 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 					$scope.emails.filter(function (f) {
 						return f.uid == alarmEmail.uid;
 					})[0]
-				), 1
-			);
-			$("#checkboxEmailOnOff").prop('checked', $scope.emails.length >0);
+				), 1);
+			if ($scope.emails.length <= 0) {
+				$scope.alarmEmail1 = $scope.alarmEmail2 = $scope.alarmEmail3 = $scope.alarmEmailOffline = false;
+				$scope.updateFeedbackAlarm("Nenhuma notificação de E-mail habilitada");
+			}
 		});
 	};
 
@@ -556,9 +530,11 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 					$scope.mobiles.filter(function (f) {
 						return f.uid == alarmMobile.uid;
 					})[0]
-				), 1
-			);			
-			$("#checkboxSmsOnOff").prop('checked', $scope.mobiles.length >0);
+				), 1);
+			if ($scope.mobiles.length <= 0) {
+				$scope.alarmSms1 = $scope.alarmSms2 = $scope.alarmSms3 = $scope.alarmSmsOffline = false;
+				$scope.updateFeedbackAlarm("Nenhuma notificação de SMS habilitada.");
+			}	
 		});
 	};
 
@@ -571,7 +547,7 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 	};
 
 	$scope.unitMeterChange = function() {
-		if($scope.unitMeter && $scope.unitMeter.uid==0) {
+		if ($scope.unitMeter && $scope.unitMeter.uid==0) {
 			$scope.genericRangeMin = 0;
 			$scope.genericRangeMax = 1;
 		}
@@ -593,6 +569,6 @@ app.controller('alarmController', function ($scope, $timeout, DeviceTypeService,
 		$scope.getPerfilAlarms();
 	};	 
 	 
-	 $scope.refreshAlarms(); 
-	 angular.element('body').removeClass('loading');		
+	$scope.refreshAlarms(); 
+	angular.element('body').removeClass('loading');		
 });

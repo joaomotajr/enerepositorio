@@ -70,4 +70,29 @@ public class AlarmController {
 		return service.findOne(uid);		
 	}
 
+	@RequestMapping(value="/security/api/alarm/updateAlarmFeedback/{email1}/{email2}/{email3}/{emailOffline}/{sms1}/{sms2}/{sms3}/{smsOffline}/{uid}", 
+			method=RequestMethod.PUT, produces = "application/json")			
+	@ResponseStatus(HttpStatus.OK)
+	public BasicResult<?> updateAlarmFeedback(
+		@PathVariable String email1, 
+		@PathVariable String email2,			
+		@PathVariable String email3,
+		@PathVariable String emailOffline,
+		@PathVariable String sms1,
+		@PathVariable String sms2,
+		@PathVariable String sms3,
+		@PathVariable String smsOffline,
+		@PathVariable Long uid) {		
+		return service.updateAlarmFeedback(
+			Boolean.parseBoolean(email1), 
+			Boolean.parseBoolean(email2), 
+			Boolean.parseBoolean(email3),
+			Boolean.parseBoolean(emailOffline),
+			Boolean.parseBoolean(sms1),
+			Boolean.parseBoolean(sms2),
+			Boolean.parseBoolean(sms3),
+			Boolean.parseBoolean(smsOffline),
+			uid);
+	}
+
 }

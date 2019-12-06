@@ -35,8 +35,14 @@ public class AlarmDto {
 	private Boolean alarmOffLineOn;
 	private Boolean alarmSigma;
 	private Boolean alarmSound;
-	private Boolean alarmEmail;
-	private Boolean alarmSms;
+	private Boolean alarmEmail1;
+	private Boolean alarmEmail2;
+	private Boolean alarmEmail3;
+	private Boolean alarmSms1;
+	private Boolean alarmSms2;
+	private Boolean alarmSms3;
+	private Boolean alarmEmailOffline;
+	private Boolean alarmSmsOffline;
 	private Boolean alarmAction;
 	private Boolean alarmAutoClose;
 	private String action1;
@@ -49,6 +55,7 @@ public class AlarmDto {
 	private PerfilAlarmDto perfilAlarmDto3;
 	private List<AlarmEmailDto> alarmEmailsDto = new ArrayList<AlarmEmailDto>();
 	private List<AlarmMobileDto> alarmMobilesDto = new ArrayList<AlarmMobileDto>();
+	private Integer alarmLatencia;
 
 	public AlarmDto() {
 		
@@ -77,8 +84,14 @@ public class AlarmDto {
 		this.alarmOffLineOn = alarm.getAlarmOffLineOn();
 		this.alarmSigma = alarm.getAlarmSigma();
 		this.alarmSound = alarm.getAlarmSound();
-		this.alarmEmail = alarm.getAlarmEmail();
-		this.alarmSms = alarm.getAlarmSms();		
+		this.alarmEmail1 = alarm.getAlarmEmail1();
+		this.alarmEmail2 = alarm.getAlarmEmail2();
+		this.alarmEmail3 = alarm.getAlarmEmail3();
+		this.alarmEmailOffline = alarm.getAlarmEmailOffline();
+		this.alarmSmsOffline = alarm.getAlarmSmsOffline();
+		this.alarmSms1 = alarm.getAlarmSms1();
+		this.alarmSms2 = alarm.getAlarmSms2();
+		this.alarmSms3 = alarm.getAlarmSms3();
 		this.alarmAction = alarm.getAlarmAction();
 		this.alarmAutoClose = alarm.getAlarmAutoClose();
 		this.action1 = alarm.getAction1();
@@ -86,6 +99,7 @@ public class AlarmDto {
 		this.action3 = alarm.getAction3();
 		this.action4 = alarm.getAction4();
 		this.companyDto = alarm.getCompany();
+		this.alarmLatencia = alarm.getAlarmLatencia();
 		
 		if(alarm.getPerfilAlarm1() != null)
 			this.perfilAlarmDto1 = new PerfilAlarmDto(alarm.getPerfilAlarm1());
@@ -279,22 +293,70 @@ public class AlarmDto {
 	
 	public void setCompanyDto(CompanyView companyDto) {
 		this.companyDto = companyDto;
-	}
+	} 	
 	
-	public Boolean getAlarmSms() {
-		return alarmSms;
+	public Boolean getAlarmSms1() {
+		return alarmSms1;
 	}
 
-	public void setAlarmSms(Boolean alarmSms) {
-		this.alarmSms = alarmSms;
-	}	
-	
-	public Boolean getAlarmEmail() {
-		return alarmEmail;
+	public void setAlarmSms1(Boolean alarmSms1) {
+		this.alarmSms1 = alarmSms1;
 	}
 
-	public void setAlarmEmail(Boolean alarmEmail) {
-		this.alarmEmail = alarmEmail;
+	public Boolean getAlarmSms2() {
+		return alarmSms2;
+	}
+
+	public void setAlarmSms2(Boolean alarmSms2) {
+		this.alarmSms2 = alarmSms2;
+	}
+
+	public Boolean getAlarmSms3() {
+		return alarmSms3;
+	}
+
+	public void setAlarmSms3(Boolean alarmSms3) {
+		this.alarmSms3 = alarmSms3;
+	} 
+
+	public Boolean getAlarmEmail1() {
+		return alarmEmail1;
+	}
+
+	public void setAlarmEmail1(Boolean alarmEmail1) {
+		this.alarmEmail1 = alarmEmail1;
+	}
+
+	public Boolean getAlarmEmail2() {
+		return alarmEmail2;
+	}
+
+	public void setAlarmEmail2(Boolean alarmEmail2) {
+		this.alarmEmail2 = alarmEmail2;
+	}
+
+	public Boolean getAlarmEmail3() {
+		return alarmEmail3;
+	}
+
+	public void setAlarmEmail3(Boolean alarmEmail3) {
+		this.alarmEmail3 = alarmEmail3;
+	} 
+
+	public Boolean getAlarmEmailOffline() {
+		return alarmEmailOffline;
+	}
+
+	public void setAlarmEmailOffline(Boolean alarmEmailOffline) {
+		this.alarmEmailOffline = alarmEmailOffline;
+	} 
+
+	public Boolean getAlarmSmsOffline() {
+		return alarmSmsOffline;
+	}
+
+	public void setAlarmSmsOffline(Boolean alarmSmsOffline) {
+		this.alarmSmsOffline = alarmSmsOffline;
 	}
 
 	public final Boolean getAlarmAction() {
@@ -375,5 +437,13 @@ public class AlarmDto {
 
 	public void setAutoClose(Boolean autoClose) {
 		AutoClose = autoClose;
-	} 			
+	}
+
+	public Integer getAlarmLatencia() {
+		return alarmLatencia;
+	}
+
+	public void setAlarmLatencia(Integer alarmLatencia) {
+		this.alarmLatencia = alarmLatencia;
+	} 
 }

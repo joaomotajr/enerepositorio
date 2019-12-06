@@ -71,43 +71,33 @@ public class AlarmService implements IService<AlarmDto> {
 		try {			
 			alarmEmailService.deleteByAlarmId(uid);
 			alarmMobileService.deleteByAlarmId(uid);
-			repository.delete(uid);
-			
+			repository.delete(uid);			
 			result.setResultType( ResultMessageType.SUCCESS );
-			result.setMessage("Alarme Excluído.");
-			
-			logAuditoriaService.save(this.toString(), ActionType.DELETE, result.toString());
-			
+			result.setMessage("Alarme Excluído.");			
+			logAuditoriaService.save(this.toString(), ActionType.DELETE, result.toString());			
 		} catch (Exception e) {
 			e.printStackTrace();			
 			result.setIsError(true);
 			result.setSystemMessage(e.getMessage());
 			result.setMessage("Alarme Não Pode Ser Excluído, talvez haja dispositivos associados.");
-		}		
-		
+		}
 		return result;		
 	}
 
-	public List<Alarm> findAll() {
-		
+	public List<Alarm> findAll() {		
 		return repository.findAll();		
 	}
 	
 	public Result<?> listAll() {
 		
-		Result<AlarmDto> result = new Result<AlarmDto>(); 	
-		
+		Result<AlarmDto> result = new Result<AlarmDto>();		
 		try {
 			List<Alarm> lista = repository.findAll();
-
-			if (lista != null) {
-				
-				List<AlarmDto> dto = new ArrayList<AlarmDto>();
-				
+			if (lista != null) {				
+				List<AlarmDto> dto = new ArrayList<AlarmDto>();				
 				for (Alarm alarm : lista) {					
 					dto.add(new AlarmDto(alarm) );
-				}
-				
+				}				
 				result.setList(dto);				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
@@ -127,19 +117,14 @@ public class AlarmService implements IService<AlarmDto> {
 	
 	public Result<?> listByCompanyId(Long companyId) {
 		
-		Result<AlarmDto> result = new Result<AlarmDto>(); 	
-		
+		Result<AlarmDto> result = new Result<AlarmDto>();		
 		try {
 			List<Alarm> lista = repository.findByCompanyId(companyId);
-
-			if (lista != null) {
-				
-				List<AlarmDto> dto = new ArrayList<AlarmDto>();
-				
+			if (lista != null) {				
+				List<AlarmDto> dto = new ArrayList<AlarmDto>();				
 				for (Alarm alarm : lista) {					
 					dto.add(new AlarmDto(alarm) );
-				}								
-				
+				}				
 				result.setList(dto);				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
@@ -151,23 +136,17 @@ public class AlarmService implements IService<AlarmDto> {
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
-		}
-		
-		return result;	
-
+		}		
+		return result;
 	}
 
 	public Result<?> findOne(Long uid) {
 		
-		Result<AlarmDto> result = new Result<AlarmDto>();
-		
+		Result<AlarmDto> result = new Result<AlarmDto>();		
 		try {
 			Alarm item = repository.findOne(uid);
-
-			if (item != null) {
-				
-				result.setEntity(new AlarmDto(item));
-				
+			if (item != null) {				
+				result.setEntity(new AlarmDto(item));				
 				result.setResultType( ResultMessageType.SUCCESS );
 				result.setMessage("Executado com sucesso.");
 			} else {
@@ -178,8 +157,21 @@ public class AlarmService implements IService<AlarmDto> {
 		} catch (Exception e) {
 			result.setIsError(true);
 			result.setMessage(e.getMessage());
-		}
-		
+		}		
 		return result;	
+	}
+	
+
+	public BasicResult<?> updateAlarmFeedback(Boolean email1, Boolean email2, Boolean email3, Boolean emailOffline, 
+			Boolean sms1, Boolean sms2, Boolean sms3, Boolean smsOffline, Long uid) {
+		
+		BasicResult<Boolean> result = new Result<>();
+		
+		repository.updateAlarmFeedback(email1, email2, email3, emailOffline, sms1, sms2, sms3, smsOffline, uid);		
+		result.setResultType( ResultMessageType.SUCCESS );
+		result.setMessage("Feedbacks Salvos com sucesso.");		
+		AlarmSingletonRepository.populate(companyDetectorAlarmViewService.findAll());
+		logAuditoriaService.save(this.getClass().getSimpleName(), ActionType.UPDATE, result.toString());		
+		return result;
 	}
 }

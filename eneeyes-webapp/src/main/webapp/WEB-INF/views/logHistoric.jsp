@@ -438,7 +438,7 @@
 			<h1>Empresa: {{selectedCompanyDetector.company}}</h1>
 			<h2>Unidade: {{selectedCompanyDetector.unit}} - &Aacute;rea: {{selectedCompanyDetector.area}} </h2>''
 			<hr>
-			<h3 class="box-title"><strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{selectedCompanyDetector.detectorName}})									
+			<h3 class="box-title"><strong>Dispositivo: </strong> {{selectedCompanyDetector.companyDetectorName}} ({{selectedCompanyDetector.detectorName}})</h3>									
 			<i class="fa fa-bell-o"></i> <h3 class="box-title">Detalhes do Dispositivo/alarme:</h3>																					
 			<dl class="dl-horizontal">
 				<dt>Dispositivo (nome):</dt>

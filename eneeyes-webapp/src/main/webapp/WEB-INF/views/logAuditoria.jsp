@@ -167,7 +167,7 @@
 												<hr>									
 											
 												<div class="row" style=" vertical-align: middle; text-align: center;">
-													<label data-ng-show='countAuditoria > 0'><span class="icon fa fa-text-width"> Total Itens da Pesquisa: {{countHistoric}}</span>
+													<label data-ng-show='countAuditoria > 0'><span class="icon fa fa-text-width"> Total Itens da Pesquisa: {{countHistoric}}</span></label>
 												</div>
 												<div class="row" style=" vertical-align: middle; display: inline-block; text-align: center;">										
 													<ul class="pagination inline">													

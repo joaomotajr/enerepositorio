@@ -88,6 +88,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
 	
 	$scope.editActionCreated = function(uid) {
 		$scope.onlyHistoric = false;
+		$scope.loading = true;
 		$scope.selectedPositionAlarm = getSelectedItem(uid);
 		$scope.getPositionAlarmMessage($scope.selectedPositionAlarm.uid);		
 		$timeout(function () {
@@ -109,17 +110,24 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
 		if (index) {
 			$scope.dashCompaniesAlarm.splice(index, 1);
 		}
+
+		$scope.selectedPositionAlarm = {};
 	}
 	
 	$scope.editActionReaded = function(uid) {		
 		$scope.onlyHistoric = false;
+		$scope.loading = true;
 		$scope.selectedPositionAlarm = getSelectedItem(uid);
 		$scope.getPositionAlarmMessage($scope.selectedPositionAlarm.uid);
 		
 		$timeout(function () {
             $('#modalAction').modal({ show: 'false' });                        
-        }, 200);		
+		}, 200);				
 	};
+
+	$('#modalAction').on('hidden.bs.modal', function () {
+		$scope.loading = false;
+	});
 	
 	$scope.editActionSolved = function(uid) {		
 		$scope.onlyHistoric = true;
@@ -146,7 +154,7 @@ app.controller('monitorController', function ($scope, $timeout, $interval, Posit
     	if($scope.$root.errorTimes <= 5 && !$scope.loading) {
     		$scope.getCompaniesAlarm();    		
     	}
-	}, 30000);
+	}, 15000);
 		
 	angular.element('body').removeClass('loading');
 });

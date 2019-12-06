@@ -78,7 +78,7 @@ app.controller('areaController', function ($scope, $rootScope, $interval, $timeo
 					 $scope.selectedCompanyDetectorsArea[i].longitude, 
 					 $scope.selectedCompanyDetectorsArea[i].uid);
 			}
-	    }
+	    }	
 	};
 	
 	$scope.updateCompanyDetectorLatitudeLongitude = function(latitude, longitude, id) {

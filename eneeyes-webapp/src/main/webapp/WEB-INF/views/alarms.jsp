@@ -120,7 +120,7 @@
 											</div>	
 										</div>
 										<div class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">															
-											<label class="control-label">Dispositivo
+											<label class="control-label">Artefato
 												<span class="text-red pull-right" style="font-stretch: extra-condensed;" data-ng-show="userForm.deviceType.$dirty && userForm.deviceType.$invalid">&nbsp[Obrigat&oacute;rio]</span>
 											</label>
 											<div data-ng-class="{'has-error': userForm.deviceType.$dirty && userForm.deviceType.$invalid}">										
@@ -132,8 +132,12 @@
 												</select>										
 											</div>
 										</div>
-										<div data-ng-class="{'disableDiv': !usedAlarms || usedAlarms.length <=0}" class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">
-											<label class="control-label">Dispositivos Associados: {{usedAlarms.length}} </label>
+										<div class="col-md-1" style="padding-left: 5px !important; padding-right: 5px !important;">
+											<label class="control-label" title="Tempo em Minutos"> ANALISE</label>
+											<input type="number" data-ng-model="ANALISE" title="Tempo em Minutos" class="form-control" />
+										</div>
+										<div class="col-md-2" data-ng-class="{'disableDiv': !usedAlarms || usedAlarms.length <=0}" class="col-md-3" style="padding-left: 5px !important; padding-right: 5px !important;">
+											<label class="control-label">Dispositivos: {{usedAlarms.length}} </label>
 											<a title="Ver Dispostivos associados a este Alarme" data-toggle="modal" href="#modalDevicesConn" class="form-control btn btn-primary"> Listar <i class="fa fa-eye"></i></a>
 										</div>										              
 					                </div>
@@ -167,7 +171,7 @@
 																</div>
 																<div class="col-md-3" data-ng-show="deviceType.type!='DETECTOR'" style="padding-right: 5px !important;">
 																	<label class="control-label"><i class="fa" data-ng-class="deviceType.symbol"> </i> {{deviceType.type}}</label>																	
-																	<input type="text"  class="form-control" data-ng-model="deviceType.description" disabled />																	
+																	<input type="text"  class="form-control" data-ng-model="deviceType.description" disabled />
 																</div>																																
 																<div class="col-md-3" style="padding-right: 5px !important;">
 																	<label class="control-label">
@@ -397,13 +401,13 @@
 														<span class="text-muted pull-right"><i class="fas fa-at"></i></span>
 													</div>
 													<div class="box-body" data-ng-class="{'disableDivOver': !emails.length}">
-														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme Nível I', alarmEmail1);" data-ng-model="alarmEmail1" />
+														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme Nï¿½vel I', alarmEmail1);" data-ng-model="alarmEmail1" />
 														<span style="font-stretch: condensed; font-weight: 800;">Alarme I</span>
 														&nbsp;&nbsp;&nbsp;
-														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme Nível II', alarmEmail2);" data-ng-model="alarmEmail2" />
+														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme Nï¿½vel II', alarmEmail2);" data-ng-model="alarmEmail2" />
 														<span style="font-stretch: condensed; font-weight: 800;">Alarme II</span>
 														&nbsp;&nbsp;&nbsp;
-														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme Nível III', alarmEmail3);" data-ng-model="alarmEmail3" />
+														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme Nï¿½vel III', alarmEmail3);" data-ng-model="alarmEmail3" />
 														<span style="font-stretch: condensed; font-weight: 800;">Alarme III</span>
 														&nbsp;&nbsp;&nbsp;
 														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme OFF-Line', alarmEmailOffline);" data-ng-model="alarmEmailOffline" />
@@ -419,13 +423,13 @@
 														<span class="text-muted pull-right"><i class="fa fa-phone-square"></i></span>
 													</div>
 													<div class="box-body" data-ng-class="{'disableDivOver': !mobiles.length}">
-														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme Nível I', alarmSms1);" data-ng-model="alarmSms1" />
+														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme Nï¿½vel I', alarmSms1);" data-ng-model="alarmSms1" />
 														<span style="font-stretch: condensed; font-weight: 800;">Alarme 1</span>
 														&nbsp;&nbsp;&nbsp;
-														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme Nível II', alarmSms2);" data-ng-model="alarmSms2" />
+														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme Nï¿½vel II', alarmSms2);" data-ng-model="alarmSms2" />
 														<span style="font-stretch: condensed; font-weight: 800;">Alarme 2</span>
 														&nbsp;&nbsp;&nbsp;
-														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme Nível III', alarmSms3);" data-ng-model="alarmSms3" />
+														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme Nï¿½vel III', alarmSms3);" data-ng-model="alarmSms3" />
 														<span style="font-stretch: condensed; font-weight: 800;">Alarme 3</span>
 														&nbsp;&nbsp;&nbsp;
 														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme Off-Line', alarmSmsOffline);" data-ng-model="alarmSmsOffline" />

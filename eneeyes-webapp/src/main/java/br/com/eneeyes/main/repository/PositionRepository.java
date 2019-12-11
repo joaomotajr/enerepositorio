@@ -32,7 +32,7 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
 	
 	@Modifying
 	@Transactional
-	@Query("update Position p set p.alarmType = ?1, p.lastValue = ?2, p.lastUpdate = ?3,  p.historicId = ?4  where p.uid = ?5")
-	int updatePositionById(AlarmType alarmType, BigDecimal value, Date lastUpdate, Long historicId,  Long uid);
+	@Query("update Position p set p.alarmType = ?1, p.lastValue = ?2, p.lastUpdate = ?3, p.lastUpdateLatencia = ?4,  p.historicId = ?5  where p.uid = ?6")
+	int updatePositionById(AlarmType alarmType, BigDecimal value, Date lastUpdate, Date lastUpdateLatencia, Long historicId,  Long uid);
 		
 }

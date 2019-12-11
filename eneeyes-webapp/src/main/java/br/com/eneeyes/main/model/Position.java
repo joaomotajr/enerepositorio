@@ -30,7 +30,8 @@ public class Position {
     
     public Position(PositionDto dto) {
     	this.uid = dto.getUid();
-    	this.lastUpdate = dto.getLastUpdate();    	
+    	this.lastUpdate = dto.getLastUpdate();
+    	this.lastUpdateLatencia = dto.getLastUpdateLatencia();
     	this.lastValue = dto.getLastValue();
     	this.companyDevice = new CompanyDevice(dto.getCompanyDeviceDto());
     	this.alarmType = dto.getAlarmType();   	    	
@@ -52,6 +53,9 @@ public class Position {
 	
 	@Column(name = "LAST_UPDATE", nullable = false)
 	private Date lastUpdate;
+	
+	@Column(name = "LAST_UPDATE_LATENCIA", nullable = true)
+	private Date lastUpdateLatencia;
 
 	@Column(name = "LAST_VALUE", nullable = true)
 	private BigDecimal lastValue;
@@ -117,5 +121,13 @@ public class Position {
 
 	public final void setHistoricId(Long historicId) {
 		this.historicId = historicId;
+	}
+
+	public Date getLastUpdateLatencia() {
+		return lastUpdateLatencia;
+	}
+
+	public void setLastUpdateLatencia(Date lastUpdateLatencia) {
+		this.lastUpdateLatencia = lastUpdateLatencia;
 	}	
 }

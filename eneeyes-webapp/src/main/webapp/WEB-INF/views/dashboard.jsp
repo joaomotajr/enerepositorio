@@ -53,6 +53,13 @@
     	border-color: black !important;
 	}		
 
+	.analise {
+		background: white !important;
+		color: darkolivegreen !important;
+		border-style: solid;
+    	border-color:darkolivegreen !important;
+	}
+
 	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
 		padding: 4px !important;
 	}
@@ -136,7 +143,7 @@
 										<div class="progress-bar" data-ng-style="{'width' : sumary.alarm1.percent + '%' }"></div>
 									</div>
 									<span class="progress-description">
-										Superior 1º Limite
+										1° Limite
 									</span>
 								</div>
 							</div>						
@@ -152,7 +159,7 @@
 										<div class="progress-bar" data-ng-style="{'width' : sumary.alarm2.percent + '%' }"></div>
 									</div>
 									<span class="progress-description">
-										Superior 2º Limite
+										2° Limite
 									</span>
 								</div>
 							</div>						
@@ -168,7 +175,7 @@
 										<div class="progress-bar" data-ng-style="{'width' : sumary.alarm3.percent + '%' }"></div>
 									</div>
 									<span class="progress-description">
-											Superior 3º Limite
+										3° Limite
 									</span>
 								</div>
 							</div>						
@@ -198,7 +205,6 @@
 									<label><strong>&Uacute;ltimas medi&ccedil;&otilde;es</strong></label>
 									<div class="box-tools pull-right">									
 										<label data-ng-show='loading'><i title="Atualizando" class="fa fa-refresh fa-spin"></i></label>
-										<!-- <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button> -->
 										<i class="fa fa-minus cursor" data-ng-show="expanded" data-ng-click="expanded=false;" title="Expandir Unidade"></i>
 										<i class="fa fa-square-o cursor" data-ng-show="!expanded" data-ng-model="expanded" data-ng-click="expanded=true;" title="Expandir Unidade"></i>
 									</div>
@@ -269,13 +275,13 @@
 																'label-primary' : item.alarmType=='WITHOUT', 
 																'label-info' : item.alarmType=='OFF',
 																'label-offline' : item.alarmType=='OFFLINE',
-																'label-success' : item.alarmType=='NORMAL', 
+																'label-success' : item.alarmType=='NORMAL' || item.alarmType=='ANALISE', 
 																'label-warning' : item.alarmType=='ALERTA', 
 																'label-default' : item.alarmType=='DETECCAO', 
 																'label-danger' : item.alarmType=='EVACUACAO'}">
 																<span data-ng-if="item.alarmType=='WITHOUT'">S/ ALARME</span>
 																<span data-ng-if="item.alarmType=='OFF'">ALARME OFF</span>
-																<span data-ng-if="item.alarmType!='WITHOUT' && item.alarmType!='OFF'">{{item.alarmType}}</span>																  
+																<span data-ng-if="item.alarmType!='WITHOUT' && item.alarmType!='OFF'">{{item.alarmType}} {{item.obs}}</span>																  
 															</span>
 														</td>
 														<td><label title="{{item.lastUpdateFull | date:'dd/MM/yyyy HH:mm'}}">&agrave; {{item.lastUpdate}}</label></td>

@@ -26,9 +26,12 @@ public class PositionView {
 	
 	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
+	
+	@Column(name = "LAST_UPDATE_LATENCIA", nullable = true)
+	private Date lastUpdateLatencia;
 
 	@Column(name = "LAST_VALUE")
-	private BigDecimal lastValue;    
+	private BigDecimal lastValue;
 	
 	@Column(name="COMPANY_DEVICE_ID", nullable = false)
 	private Long companyDeviceId;
@@ -50,6 +53,14 @@ public class PositionView {
 
 	public final Date getLastUpdate() {
 		return lastUpdate;
+	}  
+
+	public Date getLastUpdateLatencia() {
+		return lastUpdateLatencia;
+	} 	
+
+	public void setLastUpdateLatencia(Date lastUpdateLatencia) {
+		this.lastUpdateLatencia = lastUpdateLatencia;
 	}
 
 	public final BigDecimal getLastValue() {

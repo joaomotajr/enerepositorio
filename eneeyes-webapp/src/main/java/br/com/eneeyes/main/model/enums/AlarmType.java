@@ -1,7 +1,7 @@
 package br.com.eneeyes.main.model.enums;
 
 public enum AlarmType {
-	NORMAL(0), DETECCAO(1), ALERTA(2), EVACUACAO(3), OFF(4), OFFLINE(5), WITHOUT(6);
+	NORMAL(0), DETECCAO(1), ALERTA(2), EVACUACAO(3), OFF(4), OFFLINE(5), WITHOUT(6), ANALISE(7);
 	
 	private final int code;
 	

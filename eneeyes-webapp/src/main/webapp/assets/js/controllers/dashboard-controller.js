@@ -69,7 +69,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					value: $scope.sumary.normal.value,
 			    color: "#00a65a",
 			    highlight: "#00a65a",
-			    label: "Opera��o"
+			    label: "NORMAL"
 			  }, {
 					value: $scope.sumary.offLine.value,
 		      color: "#333",
@@ -79,17 +79,17 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					value: $scope.sumary.alarm3.value,
 		      color: "#dd4b39",
 		      highlight: "#dd4b39",
-		      label: "Evacu��o"
+		      label: "ALARM III"
 		    }, {
 					value: $scope.sumary.alarm2.value,
 		      color: "#f39c12",
 		      highlight: "#f39c12",
-		      label: "Alerta"
+		      label: "ALARM II"
 		    }, {
 					value: $scope.sumary.alarm1.value,
 		      color: "#d2d6de",
 		      highlight: "#d2d6de",
-		      label: "Detec��o"
+		      label: "ALARM I"
 		    }, {
 					value: $scope.sumary.turnOff.value,
 		      highlight: "#72afd2",
@@ -142,6 +142,10 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 					 $scope.dashCompaniesPosition[i].lastUpdate = timeSinceAbrev($scope.listAllDashCompaniesPosition.serverDate, $scope.dashCompaniesPosition[i].lastUpdate);				 
 					 $scope.dashCompaniesPosition[i].lastValue	= Math.round($scope.dashCompaniesPosition[i].lastValue * 100) / 100 ;
 					 $scope.dashCompaniesPosition[i].arrayValues = $scope.dashCompaniesPosition[i].arrayValues.substring(0, $scope.dashCompaniesPosition[i].arrayValues.lastIndexOf(","));				
+					 if($scope.dashCompaniesPosition[i].alarmType == 'ANALISE') {
+						$scope.dashCompaniesPosition[i].alarmType = 'NORMAL';
+						$scope.dashCompaniesPosition[i].obs = '*';
+					}
 				 }
 
 				$scope.sumary = 
@@ -166,7 +170,7 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
 						} else if ( e.alarmType == "OFFLINE" ) {							 
 							$scope.sumary.offLine.value ++;
 							$scope.sumary.offLine.percent = ($scope.sumary.offLine.value * 100) / $scope.sumary.devices;
-						}	else if ( e.alarmType == "NORMAL") {							 
+						}	else if ( e.alarmType == "NORMAL" || e.alarmType == "ANALISE" ) { 
 							$scope.sumary.normal.value ++;
 							$scope.sumary.normal.percent = ($scope.sumary.normal.value * 100) / $scope.sumary.devices;
 						} else if ( e.alarmType == "DETECCAO") {

@@ -14,6 +14,7 @@ public class PositionDto {
     private CompanyDeviceDto companyDeviceDto;
     private AlarmType alarmType;
     private Long historicId;
+    private Date lastUpdateLatencia;
 	
 	public PositionDto() {
 		
@@ -23,6 +24,7 @@ public class PositionDto {
 		
 		this.uid = position.getUid();
 		this.lastUpdate = position.getLastUpdate();
+		this.lastUpdateLatencia = position.getLastUpdateLatencia();
     	this.lastValue = position.getLastValue();
     	this.companyDeviceDto = new CompanyDeviceDto(position.getCompanyDevice());
     	this.alarmType = position.getAlarmType();    	
@@ -84,4 +86,12 @@ public class PositionDto {
 	public final void setHistoricId(Long historicId) {
 		this.historicId = historicId;
 	}
+
+	public Date getLastUpdateLatencia() {
+		return lastUpdateLatencia;
+	}
+
+	public void setLastUpdateLatencia(Date lastUpdateLatencia) {
+		this.lastUpdateLatencia = lastUpdateLatencia;
+	} 
 }

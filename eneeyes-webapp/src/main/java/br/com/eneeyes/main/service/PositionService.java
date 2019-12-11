@@ -40,37 +40,15 @@ public class PositionService implements IService<PositionDto> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-//	/**
-//	 * @param historic
-//	 * @return
-//	 * Atualiza posição do dispositivo, e delega checagem de limites
-//	 * para possiveis providências.
-//	 */
-//	public BasicResult<?> updatePositionAndCheckAlarmByHistoric(Historic historic) {
-//
-//		Result<PositionDto> result = new Result<PositionDto>();
-//		
-//		Position position = new Position();
-//		PositionView positionView = repositoryView.findByCompanyDeviceId(historic.getCompanyDeviceId());
-//		
-//		if (position != null) {			
-//			updatePositionById(positionView.getAlarmType(), positionView.getLastValue(), positionView.getLastUpdate(), historic.getUid(), positionView.getUid());						
-//			result.setResultType( ResultMessageType.SUCCESS );
-//			result.setMessage("Executado com sucesso.");
-//		}		
-//		
-//		return result;		
-//	}
-
-//	public void updatePositionAlarmType(AlarmType alarmType, Long companyDetectorId) {
-//		
-//		repository.updateAlarmType(alarmType, companyDetectorId);
-//	}
+	
+	public void updatePositionById(AlarmType alarmType, BigDecimal value, Date lastUpdate, Date lastUpdateLatencia, Long historicId,  Long uid) {
+		
+		repository.updatePositionById(alarmType, value, lastUpdate, lastUpdateLatencia, historicId, uid);
+	}
 	
 	public void updatePositionById(AlarmType alarmType, BigDecimal value, Date lastUpdate, Long historicId,  Long uid) {
 		
-		repository.updatePositionById(alarmType, value, lastUpdate, historicId, uid);
+		repository.updatePositionById(alarmType, value, lastUpdate, null, historicId, uid);
 	}
 	
 	public void createInitialPosition(CompanyDevice companyDevice) {

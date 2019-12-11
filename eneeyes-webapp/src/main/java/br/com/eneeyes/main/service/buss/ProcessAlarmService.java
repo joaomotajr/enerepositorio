@@ -98,15 +98,24 @@ public class ProcessAlarmService {
 	public void Execute(Historic historic) {
 		
 		AlarmDto alarmDto = getExistAlarm(historic.getCompanyDeviceId());
-		AlarmType alarmType = checkExistsAlarms(alarmDto, historic.getValue());
 		
-		PositionView positionView = positionViewRepository.findByCompanyDeviceId(historic.getCompanyDeviceId());		
+		PositionView positionView = positionViewRepository.findByCompanyDeviceId(historic.getCompanyDeviceId());
+		
+		AlarmType alarmType = checkExistsAlarms(alarmDto, historic.getValue(), positionView);		
+				
 		if (positionView != null) {			
-			positionService.updatePositionById(alarmType, historic.getValue(), historic.getLastUpdate(), historic.getUid(), positionView.getUid());			
+			positionService.updatePositionById(alarmType, 
+					historic.getValue(), 
+					historic.getLastUpdate(),
+					positionView.getLastUpdateLatencia(),
+					historic.getUid(), 
+					positionView.getUid()
+					);			
 		}		
 		
 		if(alarmType == AlarmType.NORMAL && alarmDto.getAlarmAutoClose() != null && alarmDto.getAlarmAutoClose()) {			
-			if (positionView.getAlarmType() == AlarmType.OFFLINE || 
+			if (positionView.getAlarmType() == AlarmType.ANALISE ||
+					positionView.getAlarmType() == AlarmType.OFFLINE || 
 					positionView.getAlarmType() == AlarmType.DETECCAO ||
 					positionView.getAlarmType() == AlarmType.ALERTA ||
 					positionView.getAlarmType() == AlarmType.EVACUACAO) {
@@ -114,7 +123,7 @@ public class ProcessAlarmService {
 			} else {
 				return;
 			}
-		} else if(alarmType == AlarmType.NORMAL) {			 
+		} else if(alarmType == AlarmType.NORMAL || alarmType == AlarmType.ANALISE) {			 
 			return;			
 		} else if(alarmType == AlarmType.WITHOUT) {
 			updateAlarmsAndActions(alarmType, historic);
@@ -140,11 +149,12 @@ public class ProcessAlarmService {
 		return AlarmSingletonRepository.findByCompanyDevice(companyDevice.getUid());		
 	}
 					
-	private AlarmType checkExistsAlarms(AlarmDto alarm, BigDecimal lastValue ) {	
-		AlarmType alarmType = AlarmType.NORMAL;
-		if(alarm != null) {						
-			if( !alarm.getAlarmOn()) {
-				alarmType = AlarmType.OFF;
+	private AlarmType checkExistsAlarms(AlarmDto alarm, BigDecimal lastValue, PositionView pw) {
+		
+		AlarmType alarmType = AlarmType.NORMAL;		
+		if(alarm != null) {
+			if( !alarm.getAlarmOn()) {			
+				alarmType = AlarmType.OFF;			
 			} else if(alarm.getAlarm3On() && lastValue.compareTo( new BigDecimal(alarm.getAlarm3())) > 0 ) {				
 				alarmType = AlarmType.EVACUACAO;							
 			} else if(alarm.getAlarm2On() && lastValue.compareTo( new BigDecimal(alarm.getAlarm2())) > 0) {
@@ -152,7 +162,26 @@ public class ProcessAlarmService {
 			} else if( lastValue.compareTo( new BigDecimal(alarm.getAlarm1())) > 0 || 
 					(alarm.getAlarm11() != null && alarm.getAlarm11() != 0 && lastValue.compareTo( new BigDecimal(alarm.getAlarm11())) < 0 )) {				
 				alarmType = AlarmType.DETECCAO;
+			}			
+			
+			if ((alarmType == AlarmType.DETECCAO || alarmType == AlarmType.ALERTA || alarmType == AlarmType.EVACUACAO) && 
+					(pw.getAlarmType() == AlarmType.ANALISE || alarm.getAlarmLatencia() > 0)) {
+				
+				Date now = new Date();
+				Date systemLatenciaTime = pw.getLastUpdateLatencia() == null ? now : pw.getLastUpdateLatencia();
+				
+				long latencia = ( now.getTime() - systemLatenciaTime.getTime()) / 1000;
+				
+				if (pw.getAlarmType() == AlarmType.ANALISE && alarm.getAlarmLatencia() * 60 > latencia) {
+					alarmType = AlarmType.ANALISE;
+				} else if (pw.getAlarmType() != AlarmType.ANALISE && alarm.getAlarmLatencia() * 60 > latencia) {
+					alarmType = AlarmType.ANALISE;
+				 	pw.setLastUpdateLatencia(now);
+				} 
+			} else {
+				pw.setLastUpdateLatencia(null);
 			}
+			
 		} else {
 			alarmType = AlarmType.WITHOUT;
 		}		
@@ -188,6 +217,8 @@ public class ProcessAlarmService {
 		solvedOrCancelesAlarms.add(AlarmStatus.SOLVED);
 		solvedOrCancelesAlarms.add(AlarmStatus.CANCELED);
 		solvedOrCancelesAlarms.add(AlarmStatus.AUTO);
+		
+		//alarmParams.getAlarm().getAlarmLatencia()
 
 		PositionAlarm positionAlarm = positionAlarmRepository.findByCompanyDeviceAndAlarmTypeAndAlarmStatusNotIn(companyDevice, alarmType, solvedOrCancelesAlarms);		
 		if(positionAlarm == null) {			

@@ -214,7 +214,8 @@ app.controller('dashController', function ($scope, $timeout, $interval, $filter,
     }
 	
 	$scope.filterStatus = function (filter) {
-        $scope.selectedStatusDashCompaniesPosition = filter;
+		$scope.selectedStatusDashCompaniesPosition = filter;
+		$scope.getCompaniesPosition();
     };
 		
 	$scope.refreshDashboard = function() { 

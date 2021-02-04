@@ -289,7 +289,7 @@
 															<label data-ng-if="item.alarmType=='OFFLINE'">-</label>
 															<label data-ng-if="item.alarmType!='OFFLINE'">{{item.lastValue}}</label>
 														</td>
-														<td class="col-md-2"><div class="sparkbar">{{item.arrayValues}}</div></td>
+														<td class="col-md-2 ng-cloak"><div class="sparkbar" data-ng-bind="item.arrayValues"></div></td>
 													</tr>
 												</tbody>
 											</table>

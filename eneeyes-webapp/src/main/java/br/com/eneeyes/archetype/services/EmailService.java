@@ -49,7 +49,7 @@ public class EmailService extends Thread {
     public void run() {
  	   
 	   String subject = "Enviando email com JavaMail";
-	   String from = "joao.junior@chipsat.com.br";            
+	   String from = "contato@enesens.com.br";            
        
        try {
   

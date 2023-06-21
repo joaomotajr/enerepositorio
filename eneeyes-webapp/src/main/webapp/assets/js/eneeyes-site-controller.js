@@ -153,7 +153,7 @@ app.controller('SiteController', function ($scope, $http, $filter, $interval, $t
         $scope.updatePass.$user({_csrf : angular.element('#_csrf').val()},function(){        	
         	angular.element('html').removeClass('loading');            
         	if($scope.updatePass.resultType == 'SUCCESS') {            	
-        		$scope.successMessage = $scope.updatePass.message + " Refa�a o Login";                      	
+        		$scope.successMessage = $scope.updatePass.message + " Refaça o Login";                      	
             	angular.element('#formSignin').css('display','none');            	
             	angular.element('#password-success').css('display','block');    			
             	$scope.forms.signexpired = [];            	

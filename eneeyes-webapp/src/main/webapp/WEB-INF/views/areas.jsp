@@ -44,7 +44,7 @@
 				       	<li class="active"><a href="#tabArea_1" id="stepTabArea_1" data-toggle="tab">Cadastro</a></li>
 				       	<li><a href="#tabArea_2" id="stepTabArea_2" data-toggle="tab">Local</a></li>
 				       	<li><a href="#tabArea_3" id="stepTabArea_3" data-toggle="tab">Dispositivos</a></li>
-				    	<li title="Trocar Imagem da �rea" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
+				    	<li title="Trocar Imagem da Área" class="pull-right"><a href="#" id="idBtnChooseFileArea"><i class="fa fa-file-image-o"></i></a></li>			    	
 				    </ul>
 					
 					<div class="tab-content">								    	
@@ -192,7 +192,7 @@
 									                      		<h4 class="description-header"><i class="fa fa-bolt"></i> {{item.name}}</h4>
 									                      		<span class="description-text">Range: Min|Man: {{item.rangeMin}} | {{item.rangeMax}} </span>
 																<br>
-																<!-- G&aacute;s: <strong class="text-navy">G�s</strong>																
+																<!-- G&aacute;s: <strong class="text-navy">Gás</strong>																
 																<span style="vertical-align:super;font-size:0.6em;color:orange"> {{item.unitMeter.symbol}}</span>-->
 										                	</div>									                    					                    
 									                    </div>						                    					                    					                					                  			                  

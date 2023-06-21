@@ -401,13 +401,13 @@
 														<span class="text-muted pull-right"><i class="fas fa-at"></i></span>
 													</div>
 													<div class="box-body" data-ng-class="{'disableDivOver': !emails.length}">
-														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme N�vel I', alarmEmail1);" data-ng-model="alarmEmail1" />
+														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme Nível I', alarmEmail1);" data-ng-model="alarmEmail1" />
 														<span style="font-stretch: condensed; font-weight: 800;">Alarme I</span>
 														&nbsp;&nbsp;&nbsp;
-														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme N�vel II', alarmEmail2);" data-ng-model="alarmEmail2" />
+														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme Nível II', alarmEmail2);" data-ng-model="alarmEmail2" />
 														<span style="font-stretch: condensed; font-weight: 800;">Alarme II</span>
 														&nbsp;&nbsp;&nbsp;
-														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme N�vel III', alarmEmail3);" data-ng-model="alarmEmail3" />
+														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme Nível III', alarmEmail3);" data-ng-model="alarmEmail3" />
 														<span style="font-stretch: condensed; font-weight: 800;">Alarme III</span>
 														&nbsp;&nbsp;&nbsp;
 														<input type="checkbox" data-ng-change="updateFeedbackAlarm('E-Mail para o Alarme OFF-Line', alarmEmailOffline);" data-ng-model="alarmEmailOffline" />
@@ -423,13 +423,13 @@
 														<span class="text-muted pull-right"><i class="fa fa-phone-square"></i></span>
 													</div>
 													<div class="box-body" data-ng-class="{'disableDivOver': !mobiles.length}">
-														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme N�vel I', alarmSms1);" data-ng-model="alarmSms1" />
+														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme Nível I', alarmSms1);" data-ng-model="alarmSms1" />
 														<span style="font-stretch: condensed; font-weight: 800;">Alarme 1</span>
 														&nbsp;&nbsp;&nbsp;
-														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme N�vel II', alarmSms2);" data-ng-model="alarmSms2" />
+														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme Nível II', alarmSms2);" data-ng-model="alarmSms2" />
 														<span style="font-stretch: condensed; font-weight: 800;">Alarme 2</span>
 														&nbsp;&nbsp;&nbsp;
-														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme N�vel III', alarmSms3);" data-ng-model="alarmSms3" />
+														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme Nível III', alarmSms3);" data-ng-model="alarmSms3" />
 														<span style="font-stretch: condensed; font-weight: 800;">Alarme 3</span>
 														&nbsp;&nbsp;&nbsp;
 														<input type="checkbox" data-ng-change="updateFeedbackAlarm('SMS para o Alarme Off-Line', alarmSmsOffline);" data-ng-model="alarmSmsOffline" />

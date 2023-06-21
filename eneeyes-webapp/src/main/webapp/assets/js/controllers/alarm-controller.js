@@ -364,7 +364,7 @@ app.controller('alarmController', function ($scope, $rootScope, $timeout, Device
 			$scope.errorAlarm11 = true ;			
 		}
 		if( ($scope.alarmAlarm11 && $scope.alarmAlarm1) && (Number($scope.alarmAlarm11) > Number($scope.alarmAlarm1))) {
-			errors.push("ALARME I Precisa de Uma valor [Menor Que] N�O pode ser MAIOR");
+			errors.push("ALARME I Precisa de Uma valor [Menor Que] NÃO pode ser MAIOR");
 			$scope.errorAlarm1 = true ;
 			$scope.errorAlarm11 = true ;
 		}
@@ -385,7 +385,7 @@ app.controller('alarmController', function ($scope, $rootScope, $timeout, Device
 				$scope.errorAlarm22 = true ;
 			}
 			if( ($scope.alarmAlarm22 && $scope.alarmAlarm2) && (Number($scope.alarmAlarm22) > Number($scope.alarmAlarm2))) {
-				errors.push("ALARME II Precisa de Uma valor [Menor Que] N�O pode ser MAIOR");
+				errors.push("ALARME II Precisa de Uma valor [Menor Que] NÃO pode ser MAIOR");
 				$scope.errorAlarm2 = true ;
 				$scope.errorAlarm22 = true ;
 			}
@@ -402,7 +402,7 @@ app.controller('alarmController', function ($scope, $rootScope, $timeout, Device
 				$scope.errorAlarm33 = true ;
 			}
 			if( ($scope.alarmAlarm33 && $scope.alarmAlarm3) && (Number($scope.alarmAlarm33) > Number($scope.alarmAlarm3))) {
-				errors.push("ALARME III Precisa de Uma valor [Menor Que] N�O pode ser MAIOR");
+				errors.push("ALARME III Precisa de Uma valor [Menor Que] NÃO pode ser MAIOR");
 				$scope.errorAlarm3 = true ;
 				$scope.errorAlarm33 = true ;
 			}
@@ -520,7 +520,7 @@ app.controller('alarmController', function ($scope, $rootScope, $timeout, Device
 				), 1);
 			if ($scope.emails.length <= 0) {
 				$scope.alarmEmail1 = $scope.alarmEmail2 = $scope.alarmEmail3 = $scope.alarmEmailOffline = false;
-				$scope.updateFeedbackAlarm("Nenhuma notifica��o de E-mail habilitada");
+				$scope.updateFeedbackAlarm("Nenhuma notificação de E-mail habilitada");
 			}
 		});
 	};
@@ -536,7 +536,7 @@ app.controller('alarmController', function ($scope, $rootScope, $timeout, Device
 				), 1);
 			if ($scope.mobiles.length <= 0) {
 				$scope.alarmSms1 = $scope.alarmSms2 = $scope.alarmSms3 = $scope.alarmSmsOffline = false;
-				$scope.updateFeedbackAlarm("Nenhuma notifica��o de SMS habilitada.");
+				$scope.updateFeedbackAlarm("Nenhuma notificação de SMS habilitada.");
 			}	
 		});
 	};

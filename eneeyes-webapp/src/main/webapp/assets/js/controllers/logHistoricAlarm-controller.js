@@ -120,7 +120,7 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	$scope.getHistorics = function(n) {
 
 		if (!$scope.lenPageValid) {			
-			$scope.daysDiff ="ATEN«√O! Quantidade de registros por p·gina Inv·lido.";
+			$scope.daysDiff ="ATEN√á√ÉO! Quantidade de registros por p√°gina Inv√°lido.";
 			$("#snoAlertBox").fadeIn();			
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
 			daysExceed = true;
@@ -170,7 +170,7 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 		var dataFim = new Date($('#dateOutA').data().DateTimePicker.date._d);		
 		
 		if (dataFim < dataInicio) {			
-			$scope.daysDiff ="ATEN«√O! Data Final Precisa ser Maior que Inicial.";
+			$scope.daysDiff ="ATEN√á√ÉO! Data Final Precisa ser Maior que Inicial.";
 			$("#snoAlertBox").fadeIn();			
 			window.setTimeout(function () { $("#snoAlertBox").fadeOut(300)}, 3000);			
 			daysExceed = true;
@@ -204,17 +204,17 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 		
 	function setInterval(interval) {		
 		if ( interval == $scope.enumInterval.UMA_HORA )
-			return  "⁄ltima Hora";
+			return  "√öltima Hora";
 		else if ( interval == $scope.enumInterval.SEIS_HORAS )
-			return "⁄ltimas Seis Horas";
+			return "√öltimas Seis Horas";
 		else if ( interval == $scope.enumInterval.DOZE_HORAS )
-			return "⁄ltimas Doze Horas";
+			return "√öltimas Doze Horas";
 		else if ( interval == $scope.enumInterval.DOIS_DIAS )
-			return "⁄ltimas Dois Dias";
+			return "√öltimas Dois Dias";
 		else if ( interval == $scope.enumInterval.SETE_DIAS )
-			return "⁄ltimos Sete Dias";
+			return "√öltimos Sete Dias";
 		else if ( interval == $scope.enumInterval.UM_MES )
-			return "⁄ltimo MÍs";
+			return "√öltimo M√™s";
 		else 
 			return 'Desconhecido';				
 	}
@@ -412,10 +412,10 @@ app.controller('logHistoricAlarmController', function ($scope, $timeout, $filter
 	                  },
 		    		  ticks: [
 		    		          {v:0, f: 'Range Minimo: 0' }, 
-		    		          {v: orange, f: 'DetecÁ„o: ' + orange}, 
+		    		          {v: orange, f: 'Detec√ß√£o: ' + orange}, 
 		    		          {v: yellow, f: 'Alerta: ' + yellow}, 
-		    		          {v: red, f: 'EvacuaÁ„o: ' + red}, 
-		    		          {v: $scope.selectedCompanyDetector.rangeMax, f: 'Range MÔøΩximo: ' + $scope.selectedCompanyDetector.rangeMax}
+		    		          {v: red, f: 'Evacua√ß√£o: ' + red}, 
+		    		          {v: $scope.selectedCompanyDetector.rangeMax, f: 'Range M√°ximo: ' + $scope.selectedCompanyDetector.rangeMax}
 		    		        ],
 		    	  },
 		    	  //curveType: 'function',

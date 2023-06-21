@@ -5,12 +5,11 @@
 	
 	<persistence-unit name="eneeyes.db.homologation" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>    	
-		<properties>		
-			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/enedb?autoReconnect=true"></property>
-			<property name="hibernate.connection.username" value="root"></property>
-			<property name="hibernate.connection.password" value="pass"></property>
-			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property>
-			
+		<properties>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/eneloga?autoReconnect=true"></property>
+            <property name="hibernate.connection.username" value="root"></property>
+            <property name="hibernate.connection.password" value="pass"></property>					
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"></property>			
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />

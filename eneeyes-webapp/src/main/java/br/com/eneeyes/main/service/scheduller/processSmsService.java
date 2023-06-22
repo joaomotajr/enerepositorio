@@ -85,7 +85,7 @@ public class processSmsService {
 			Boolean ok = true;
 			Iterator<AlarmMobile> itr = item.getAlarmMobiles().iterator();			
 			while (itr.hasNext()) {
-				if (!siteService.SendSms(itr.next().getMobile(), msg)) {
+				if (!siteService.SendZap(itr.next().getMobile(), msg)) {
 					ok = false;
 					break;
 				}				

@@ -18,10 +18,18 @@ import javax.mail.internet.MimeMessage;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 /**
  * Created by JR on 24/04/17.
@@ -38,7 +46,7 @@ public class SiteService {
    
     public Boolean SendEmail(ArrayList<String> to, String subject, String body) {
  	   
-	   final String from = "contato@enesens.com.br";            
+	   final String from = "enesensmonitoramento@gmail.com";            
 	          
 	   try {
 		   
@@ -46,9 +54,11 @@ public class SiteService {
 			Properties props = System.getProperties();
 			
 			props.put("mail.smtp.host", "smtp.gmail.com");
-			props.put("mail.smtp.socketFactory.port", "465");
-			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			//props.put("mail.smtp.socketFactory.port", "465");
+			//props.put("mail.smtp.starttls.enable", "true");
+			//props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.ssl.enable", "true");
 			props.put("mail.smtp.port", "465");
 			
 			// Get the Session object.// and pass 
@@ -56,10 +66,9 @@ public class SiteService {
 			
 			    protected PasswordAuthentication getPasswordAuthentication() {
 			
-			        return new PasswordAuthentication(from, "enetec2015");
+			        return new PasswordAuthentication(from, "pcmibdgoctyfubjm");
 			
-			    }
-			
+			    }			
 			});
 		     
 		   session.setDebug(true);
@@ -73,7 +82,7 @@ public class SiteService {
 			   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to.get(i)));
 		   }		   
 		     
-		   Transport.send(message); 
+		   Transport.send(message); 		   
 		   		   
 		   return true;
 	   }
@@ -108,6 +117,33 @@ public class SiteService {
 			}
 			
 			return true;
+    	}
+    	catch (Exception e) {
+						
+			log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Falha :: " + e.getMessage() + " " + new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
+			return false;
+		}
+    }
+    
+    public Boolean SendZap(String to, String text) {
+    	
+    	try {    		 
+
+	    	RestTemplate restTemplate = new RestTemplate();
+			
+		    HttpHeaders headers = new HttpHeaders();
+		    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		    headers.set("accept", "application/json");
+			headers.set("Authorization", "a5080208f49531aab323733e8c249e45");
+			 
+		    MultiValueMap<String,String> form = new LinkedMultiValueMap<>();
+		    form.add("number", to.replaceAll("\\D+",""));
+		    form.add("message", text);
+			 
+		    ResponseEntity<String> token = restTemplate.exchange("https://v5.chatpro.com.br/chatpro-94d47958d0/api/v1/send_message",
+		            HttpMethod.POST, new HttpEntity<>(form, headers), String.class);
+						
+			return token.hasBody();
     	}
     	catch (Exception e) {
 						

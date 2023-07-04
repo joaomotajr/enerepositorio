@@ -54,9 +54,6 @@ public class SiteService {
 			Properties props = System.getProperties();
 			
 			props.put("mail.smtp.host", "smtp.gmail.com");
-			//props.put("mail.smtp.socketFactory.port", "465");
-			//props.put("mail.smtp.starttls.enable", "true");
-			//props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 			props.put("mail.smtp.auth", "true");
 			props.put("mail.smtp.ssl.enable", "true");
 			props.put("mail.smtp.port", "465");
@@ -134,13 +131,13 @@ public class SiteService {
 		    HttpHeaders headers = new HttpHeaders();
 		    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		    headers.set("accept", "application/json");
-			headers.set("Authorization", "a5080208f49531aab323733e8c249e45");
+			headers.set("Authorization", "915fc7f9e4d526f1b5b06e03f20a8a10");
 			 
 		    MultiValueMap<String,String> form = new LinkedMultiValueMap<>();
 		    form.add("number", to.replaceAll("\\D+",""));
 		    form.add("message", text);
-			 
-		    ResponseEntity<String> token = restTemplate.exchange("https://v5.chatpro.com.br/chatpro-94d47958d0/api/v1/send_message",
+		                                                       
+		    ResponseEntity<String> token = restTemplate.exchange("https://v5.chatpro.com.br/chatpro-533e86773c/api/v1/send_message",
 		            HttpMethod.POST, new HttpEntity<>(form, headers), String.class);
 						
 			return token.hasBody();

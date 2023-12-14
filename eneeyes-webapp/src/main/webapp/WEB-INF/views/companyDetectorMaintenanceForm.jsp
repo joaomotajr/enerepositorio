@@ -3,13 +3,16 @@
 			<div class="col-md-3">											        	
 				<div class="form-group">
 					<label>Data de Entrega:</label>
-					<div class="input-group">                                                            
+
+					<div class='input-group date' id='datePicker1'>
 						<div class="input-group-addon">
-							<i class="fa fa-calendar" data-ng-hide='deliveryDateValid'></i>
-							<i class="fa fa-calendar-times-o" style="color:red" data-ng-show='deliveryDateValid' title="Data Inválida"></i>                                                                 
+							<i class="fa fa-calendar"></i>                                                                 
 						</div>
-						<input id="deliveryDate" data-ng-model="selectedCompanyDetector.deliveryDate"  type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" data-ng-keyup="validDeliveryDate($event);">															                                                            
-					</div>
+						<div class="">
+							<input type="text" class="form-control">
+						</div>
+					</div>	
+
 				</div>																															
 			</div>
 			<div class="col-md-3">
@@ -32,17 +35,18 @@
 		</div>						               		
 		
 		<div class="row">				    			
-			<div class="col-md-3">											        	
+			<div class="col-md-3">
 				<div class="form-group">
-					<label>Data de Instalação:</label>
-					<div class="input-group">                                                            
+					<label class="control-label">Data de Instalação:</label>							                	
+					<div class='input-group date' id='datePicker2'>
 						<div class="input-group-addon">
-							<i class="fa fa-calendar" data-ng-hide='installDateValid'></i>
-							<i class="fa fa-calendar-times-o" style="color:red" data-ng-show='installDateValid' title="Data Inválida"></i>                                                                 
+							<i class="fa fa-calendar"></i>                                                                
 						</div>
-						<input data-ng-model="selectedCompanyDetector.installDate"  type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" data-ng-keyup="validInstallDate($event);">															                                                            
-					</div>
-				</div>						                										        											        		
+						<div class="">
+							<input type="text" class="form-control">
+						</div>
+					</div>							                					                							                                                
+				</div>     			                										        											        		
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">								            

@@ -46,48 +46,52 @@ public class SiteService {
    
     public Boolean SendEmail(ArrayList<String> to, String subject, String body) {
  	   
-	   final String from = "enesensmonitoramento@gmail.com";            
+	   final String from = "enesensmonitoramento@gmail.com";
+	   
+
 	          
-	   try {
-		   
-		   // Get system properties
-			Properties props = System.getProperties();
-			
-			props.put("mail.smtp.host", "smtp.gmail.com");
-			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.ssl.enable", "true");
-			props.put("mail.smtp.port", "465");
-			
-			// Get the Session object.// and pass 
-			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-			
-			    protected PasswordAuthentication getPasswordAuthentication() {
-			
-			        return new PasswordAuthentication(from, "pcmibdgoctyfubjm");
-			
-			    }			
-			});
-		     
-		   session.setDebug(true);
-		   		   		   
-		   MimeMessage message = new MimeMessage(session);  
-		   message.setSender(new InternetAddress(from));  
-		   message.setSubject(subject);  
-		   message.setContent(body, "text/html; charset=utf-8");
-		   
-		   for (int i = 0; i < to.size(); i++) {			
-			   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to.get(i)));
-		   }		   
-		     
-		   Transport.send(message); 		   
-		   		   
-		   return true;
-	   }
-	   catch (MessagingException e) {
-			//e.printStackTrace();			
-			log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Falha :: " + e.getMessage() + " " + new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
-			return false;
-		} 
+		   try {
+			   
+			   // Get system properties
+				Properties props = System.getProperties();
+				
+				props.put("mail.smtp.host", "smtp.gmail.com");
+				props.put("mail.smtp.auth", "true");
+				props.put("mail.smtp.ssl.enable", "true");
+				props.put("mail.smtp.port", "465");
+				
+				// Get the Session object.// and pass 
+				Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+				
+				    protected PasswordAuthentication getPasswordAuthentication() {
+				
+				        return new PasswordAuthentication(from, "pcmibdgoctyfubjm");
+				
+				    }			
+				});
+			     
+			   String toTime;
+			   
+			   for (int i = 0; i < to.size(); i++) {
+				   toTime = to.get(i);
+				   session.setDebug(true);
+				   		   		   
+				   MimeMessage message = new MimeMessage(session);  
+				   message.setSender(new InternetAddress(from));  
+				   message.setSubject(subject);  
+				   message.setContent(body, "text/html; charset=utf-8");
+				   message.addRecipient(Message.RecipientType.TO, new InternetAddress(toTime));
+				     
+				   Transport.send(message); 		   
+			   }				   
+			   
+		   } catch (MessagingException e) {
+				//e.printStackTrace();			
+				log.info(this.getClass().getSimpleName().replaceAll("([a-z])([A-Z])", "$1 $2") + ": Falha :: " + e.getMessage() + " " + new SimpleDateFormat(timestampFormat).format(Calendar.getInstance().getTime()));
+				return false;						
+		   }		
+	   
+	   return true;
    }
     
     

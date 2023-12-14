@@ -26,10 +26,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			local: $scope.selectedCompanyDetector.local,
 			serialNumber: $scope.selectedCompanyDetector.serialNumber,
 			description: $scope.selectedCompanyDetector.description,
-			deliveryDate : getDate($('#deliveryDate').val()), 
+			deliveryDate : new Date($('#datePicker1').data("DateTimePicker").getDate()), 
 			garantyDays: $scope.selectedCompanyDetector.garantyDays,
 			descriptionDelivery: $scope.selectedCompanyDetector.descriptionDelivery,			
-			installDate : getDate($('#installDate').val()),
+			installDate : new Date($('#datePicker2').data("DateTimePicker").getDate()),
 			descriptionInstall : $scope.selectedCompanyDetector.descriptionInstall,
 			maintenanceInterval : $scope.selectedCompanyDetector.maintenanceInterval
 		 };
@@ -60,10 +60,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		    $scope.selectedCompanyDetector.local = '';
 		    $scope.selectedCompanyDetector.description = '';
 		    $scope.selectedCompanyDetector.serialNumber = 0;			
-		    $('#deliveryDate').val('');
+		    $('#datePicker1').val('');
 			$scope.selectedCompanyDetector.garantyDays = 0;
 			$scope.selectedCompanyDetector.descriptionDelivery = '';;			
-			$('#installDate').val('');
+			$('#datePicker2').val('');
 			$scope.selectedCompanyDetector.descriptionInstall = '';;
 			$scope.selectedCompanyDetector.maintenanceInterval = 0;
 		    
@@ -122,11 +122,9 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	};
 
 	$scope.selecionarDetector = function(item) {
-
 		if($scope.selectedCompanyDetector == undefined) {
 			$scope.selectedCompanyDetector = [];
 		}
-
 		$scope.selectedCompanyDetector.detectorDto = item;
 	};
 
@@ -138,7 +136,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			$scope.selectedCompanyDeviceAlarms = [];
 			$scope.selectedCompanyDeviceAlarms.push($scope.resultDevices.t);
 			$scope.selectedCompanyDeviceAlarm = $scope.resultDevices.t;		
-
 			$scope.selectedCompanyDeviceAlarm.dataSource = getGaugeInfo($scope.selectedCompanyDeviceAlarm);			 
 		});
 	};
@@ -251,53 +248,31 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	};
 	
 	function reloadDates() {
-		
+
 		if($scope.selectedCompanyDetector.deliveryDate != null) {
-			var dataAdm = new Date($scope.selectedCompanyDetector.deliveryDate);	
-	        $('#deliveryDate').val(dataAdm.getUTCDate() + "/" + (dataAdm.getUTCMonth() + 1) + "/" + dataAdm.getUTCFullYear());	
+			$('#datePicker1').datetimepicker(
+				{ 	defaultDate: new Date($scope.selectedCompanyDetector.deliveryDate), 
+					format: "DD/MM/YYYY",
+					autoclose: true,
+					language: 'br'
+				}
+			);
 		}		
 		if($scope.selectedCompanyDetector.installDate != null) {
-			var dataAdm = new Date($scope.selectedCompanyDetector.installDate);	
-	        $('#installDate').val(dataAdm.getUTCDate() + "/" + (dataAdm.getUTCMonth() + 1) + "/" + dataAdm.getUTCFullYear());	        
-		}	
+			$('#datePicker2').datetimepicker(
+				{ 	defaultDate: new Date($scope.selectedCompanyDetector.installDate), 
+					format: "DD/MM/YYYY",
+					autoclose: true,
+					language: 'br'
+				}
+			);
+		}
 	}
 
 	$scope.initializeDetector =  function()  {				
-		$("#datemask").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
-	    $("#datemask2").inputmask("mm/dd/yyyy", { "placeholder": "mm/dd/yyyy" });
-	    $("[data-mask]").inputmask();
-	    				 		 
 		$timeout(function () { initDatatable(); }, 500);
-		   
 		$("#stepTabDetector_1").trigger("click");
 	};	 
-	 
-	 	 
-	$scope.validDeliveryDate = function ($event) {
-
-        if ($('#deliveryDate').val().match(/[^0-9\/]/g) != null) {
-            $scope.deliveryDateValid = true;
-        }	        
-        else if ($('#deliveryDate').val() == '') {
-            $scope.deliveryDateValid = true;
-        }
-        else {
-            $scope.deliveryDateValid = false;
-        }
-    };
-	 
-	$scope.validInstallDate = function ($event) {
-
-        if ($('#installDate').val().match(/[^0-9\/]/g) != null) {
-            $scope.installDateValid = true;
-        }
-        else if ($('#installDate').val() == '') {
-            $scope.installDateValid = true;
-        }
-        else {
-            $scope.installDateValid = false;
-        }
-    };
 	 
 	function initDatatable() {
 	
@@ -391,6 +366,10 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			});
 		}
 	};	 
+
+	$timeout(function(){
+		angular.element('body').removeClass('loading');		
+	}, 500);
 	
 	$scope.getCompanyDetectorMaintenanceHistoric = function() {		 
 		

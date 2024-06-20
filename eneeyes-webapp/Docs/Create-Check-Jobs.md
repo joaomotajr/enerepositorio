@@ -19,6 +19,12 @@ CREATE EVENT job_move_to_a_by_20_minutes ON SCHEDULE
 		call move_to_a_by_minutes(1000, 20);
 ========================================================================================		
 
+CREATE EVENT job_clear_from_d_by_years ON SCHEDULE
+      EVERY 24 HOUR
+      STARTS CURRENT_TIMESTAMP + INTERVAL 1 minute
+    COMMENT 'Limpa tabela Historic_d, deixando apenas último ano'
+    DO
+    call clear_from_d_by_years(1000, 1);
 ------------------------------------------------------------------------	
 
 CREATE EVENT job_move_to_a_by_one_hour ON SCHEDULE

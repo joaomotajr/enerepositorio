@@ -40,7 +40,6 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 			//Se for um Company Detector novo ou nao associado a um Detector
 			if($scope.selectedCompanyDetector.uid == undefined) {
 				$scope.selectedCompanyDetector = $scope.inclusaoCompanyDetector.t;				
-
 				$scope.getOneCompany($scope.companyUid);
 			}		
 			
@@ -249,24 +248,24 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 	
 	function reloadDates() {
 
-		if($scope.selectedCompanyDetector.deliveryDate != null) {
-			$('#datePicker1').datetimepicker(
-				{ 	defaultDate: new Date($scope.selectedCompanyDetector.deliveryDate), 
-					format: "DD/MM/YYYY",
-					autoclose: true,
-					language: 'br'
-				}
-			);
-		}		
-		if($scope.selectedCompanyDetector.installDate != null) {
-			$('#datePicker2').datetimepicker(
-				{ 	defaultDate: new Date($scope.selectedCompanyDetector.installDate), 
-					format: "DD/MM/YYYY",
-					autoclose: true,
-					language: 'br'
-				}
-			);
-		}
+		$('#datePicker1').datetimepicker(
+			{ 	defaultDate: $scope.selectedCompanyDetector.deliveryDate != null ?
+					new Date($scope.selectedCompanyDetector.deliveryDate): '', 
+				format: "DD/MM/YYYY",
+				autoclose: true,
+				language: 'br'
+			}
+		);
+		
+		$('#datePicker2').datetimepicker(
+			{ 	defaultDate: $scope.selectedCompanyDetector.installDate != null ? 
+					new Date($scope.selectedCompanyDetector.installDate) : '', 
+				format: "DD/MM/YYYY",
+				autoclose: false,
+				language: 'br',
+				pickTime: false
+			}
+		);
 	}
 
 	$scope.initializeDetector =  function()  {				
@@ -365,7 +364,20 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 				}			
 			});
 		}
-	};	 
+	};
+	
+	$scope.validDeliveryDate = function ($event) {
+
+        if ($('#datePicker2').val().match(/[^0-9\/]/g) != null) {
+            $scope.deliveryDateValid = true;
+        }	        
+        else if ($('#datePicker2').val() == '') {
+            $scope.deliveryDateValid = true;
+        }
+        else {
+            $scope.deliveryDateValid = false;
+        }
+    };
 
 	$timeout(function(){
 		angular.element('body').removeClass('loading');		

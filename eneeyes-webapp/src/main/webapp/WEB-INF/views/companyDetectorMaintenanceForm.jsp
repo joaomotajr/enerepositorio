@@ -8,9 +8,7 @@
 						<div class="input-group-addon">
 							<i class="fa fa-calendar"></i>                                                                 
 						</div>
-						<div class="">
-							<input type="text" class="form-control">
-						</div>
+						<input type="text" class="form-control" readonly>
 					</div>	
 
 				</div>																															
@@ -42,9 +40,7 @@
 						<div class="input-group-addon">
 							<i class="fa fa-calendar"></i>                                                                
 						</div>
-						<div class="">
-							<input type="text" class="form-control">
-						</div>
+						<input type="text" class="form-control" readonly>
 					</div>							                					                							                                                
 				</div>     			                										        											        		
 			</div>

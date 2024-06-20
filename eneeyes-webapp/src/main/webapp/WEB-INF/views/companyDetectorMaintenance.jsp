@@ -8,7 +8,7 @@
 				
 				<div class="box box-primary">
 					<div class="box-header">
-						<h3 class="box-title">Cadastro / Edi&ccedil;&atilde;o</h3>
+						<h3 class="box-title">Cadastro / Edi&ccedil;&atilde;o</h3> <span data-ng-if="isFrom != 'MASTER'" style="font-size:1.2em; color:red"> (Acesso restrito apenas a usuário Master)</span>
 						<span class="text-muted pull-right"><i class="fa fa-fa-search"></i></span>
 					</div>					
 					<div class="box-body" style="padding-bottom: 0px !important;">
@@ -27,21 +27,62 @@
 									<option value="">Selecione</option> 
 								</select>
 							</div>
-							<div class="col-md-1">
-								<label class="control-label">Detalhes: </label>							
-								<button type="button" class="btn btn-default" data-toggle="modal" 
-									title="Ver Detalhes da Instalação" data-target="#modalMaintenanceDetail" 
-									data-ng-disabled="!selectedCompanyDetector || msgErroInfoHistoric"><i class="fa fa-eye"></i>
-								</button>							
-							</div>
-							<div class="col-md-5">
-								<div class="alert alert-warning" role="alert" data-ng-show="msgErroInfoHistoric" >
-					           		<button type="button" class="close" ><span data-ng-click="msgErroInfoHistoric='';">&times;</span></button>
-					           		<strong>Alerta! </strong>{{msgErroInfoHistoric}} 
-					       		</div>							
-							</div>
+							<div class="col-md-6">
+																    			
+								<div class="col-md-6">											        	
+									<div class="form-group">
+										<label>Data de Entrega:</label>
+					
+										<div class='input-group date'>
+											<div class="input-group-addon">
+												<i class="fa fa-calendar"></i>                                                                 
+											</div>
+											<input type="text" class="form-control" readonly id="deliveryDate">
+										</div>	
+					
+									</div>																															
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">								            
+										<label class="control-label">Garantia <span style="font-size: 80%">(Dias)</span></label>											                
+										<input class="form-control" type="number"
+											placeholder="Dias" 
+											data-ng-model="selectedCompanyDetector.garantyDays" name="garanty" 
+											title="Prazo de Garantia do Fabricante em Dias."
+											readonly>
+									</div>
+								</div>								
+							</div>						
 						</div>
 						
+						<div class="row">
+							<div class="col-md-6">
+							</div>	
+							<div class="col-md-6">	
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="control-label">Data de Instalação:</label>							                	
+										<div class='input-group date'>
+											<div class="input-group-addon">
+												<i class="fa fa-calendar"></i>                                                                
+											</div>											
+											<input type="text" class="form-control" readonly id="installDate">
+										</div>							                					                							                                                
+									</div>     			                										        											        		
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">								            
+										<label class="control-label">Calibração: <span style="font-size: 80%">(Dias)</span></label>
+										
+										<input class="form-control" type="number" style="background:azure" 
+											placeholder="Dias" 
+											data-ng-model="selectedCompanyDetector.maintenanceInterval" name="maintenanceInterval" 
+											title="Intervalo Recomendado de Manutenção/Calibração."
+										readonly>
+									</div>
+								</div>		
+							</div>	
+						</div>
 						<hr>
 				
 						<div class="row" data-ng-class="{'disableDivOver': !selectedCompanyDetector }">				
@@ -157,24 +198,7 @@
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<br />		
 		</div>
-		
-		<div id="modalMaintenanceDetail" class="modal">
-	    	<div class="modal-dialog modal-lg" role="document">
-	        	<div class="modal-content">
-	            	<div class="modal-header">
-	                	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	                	<h4 class="modal-title" align="center">Dados de Cadastro do Detector</h4>
-	            	</div>
-	            	
-	            	<div class="modal-body disableDiv">
-	            	
-	                	 <jsp:include page="companyDetectorMaintenanceForm.jsp"/>
-	                    
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-		
+
 	</div>
 		
 		

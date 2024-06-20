@@ -8,3 +8,7 @@ Estrutura do Sistema:
  
 * COMANDO PARA EXECUCAO DA APLICACAO
 mvn jetty:run -Dspring.profiles.active="dev" -P local
+
+
+Call API externa:
+http://192.168.15.86:8090/8090/api/historic/SaveByPositionUid2/118/898998

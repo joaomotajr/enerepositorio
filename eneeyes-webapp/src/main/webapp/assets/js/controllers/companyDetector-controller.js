@@ -398,7 +398,26 @@ app.controller('companyDetectorController', function ($scope, $interval, $rootSc
 		$scope.selectedCompanyDevice = angular.copy($scope.selectedArea.companyDevicesDto[$scope.$root.selecteds.CompanyDeviceIndex]);
 		
 		$scope.getDetectors();
-		$scope.getAlarms();		
+		$scope.getAlarms();
+
+		f(!$scope.selectedCompanyDevice.name) {
+			$('#datePicker1').datetimepicker(
+			   {
+				   format: "DD/MM/YYYY",
+				   autoclose: true,
+				   language: 'br',
+				   pickTime: false
+			   }
+		   )
+			$('#datePicker2').datetimepicker(
+			   {
+				   format: "DD/MM/YYYY",
+				   autoclose: true,
+				   language: 'br',
+				   pickTime: false
+			   }
+		   )
+	   }
 	}
 	
 	$scope.initializeDetector();		
